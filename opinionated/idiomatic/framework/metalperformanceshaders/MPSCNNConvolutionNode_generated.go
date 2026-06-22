@@ -46,31 +46,22 @@ func cNNConvolutionNodeAdopt(id objc.ID) *CNNConvolutionNode {
 	return x
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNConvolutionNode) WithLabel(label string) *CNNConvolutionNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (ccn *CNNConvolutionNode) WithLabel(label string) *CNNConvolutionNode {
+	objc.Send[objc.ID](objref.IDOf(ccn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ccn
 }
 
-// ConvolutionGradientState a node to represent a MPSCNNConvolutionGradientState object Use this if the convolution is mirrored by a convolution transpose node later on in the graph to make sure that the size of the image returned from the convolution transpose matches the size of the image passed in to this node.
-func (x *CNNConvolutionNode) ConvolutionGradientState() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolutionGradientState"))
+// ConvolutionGradientState returns a node to represent a MPSCNNConvolutionGradientState object Use this if the convolution is mirrored by a convolution transpose node later on in the graph to make sure that the size of the image returned from the convolution transpose matches the size of the image passed in to this node.
+func (ccn *CNNConvolutionNode) ConvolutionGradientState() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ccn), objc.RegisterName("convolutionGradientState"))
 	return obj.Wrap(_r)
 }
-
-// CNNConvolutionNodeable is the interface implemented by [CNNConvolutionNode], for mocking and DI.
-type CNNConvolutionNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNConvolutionNode
-	ConvolutionGradientState() obj.Object
-}
-
-var _ CNNConvolutionNodeable = (*CNNConvolutionNode)(nil)
 
 // isCNNConvolutionNode marks CNNConvolutionNode — and, by embedding promotion, its
 // subclasses — as a member of the CNNConvolutionNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CNNConvolutionNode) isCNNConvolutionNode() {}
+func (ccn *CNNConvolutionNode) isCNNConvolutionNode() {}
 
 var _ CNNConvolutionNodeProvider = (*CNNConvolutionNode)(nil)
 

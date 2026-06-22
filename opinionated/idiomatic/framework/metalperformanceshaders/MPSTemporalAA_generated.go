@@ -50,44 +50,27 @@ func NewTemporalAA() *TemporalAA {
 	return temporalAAAdopt(_id)
 }
 
-// WithBlendFactor how much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
-func (x *TemporalAA) WithBlendFactor(blendFactor float32) *TemporalAA {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendFactor:"), blendFactor)
-	return x
+// WithBlendFactor sets how much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
+func (ta *TemporalAA) WithBlendFactor(blendFactor float32) *TemporalAA {
+	objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("setBlendFactor:"), blendFactor)
+	return ta
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *TemporalAA) WithLabel(label string) *TemporalAA {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ta *TemporalAA) WithLabel(label string) *TemporalAA {
+	objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ta
 }
 
 // EncodeWithCoder wraps the corresponding Objective-C method.
-func (x *TemporalAA) EncodeWithCoder(coder obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
+func (ta *TemporalAA) EncodeWithCoder(coder obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ta), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }
 
-// BlendFactor how much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
-func (x *TemporalAA) BlendFactor() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("blendFactor"))
+// BlendFactor returns how much to blend the current frame with the previous frame during temporal antialiasing. The final value is given by current * blendFactor + previous * (1 - blendFactor). Must be between zero and one, inclusive. Defaults to 0.1.
+func (ta *TemporalAA) BlendFactor() float32 {
+	_r := objc.Send[float32](objref.IDOf(ta), objc.RegisterName("blendFactor"))
 	return _r
 }
-
-// SetBlendFactor wraps the corresponding Objective-C method.
-func (x *TemporalAA) SetBlendFactor(blendFactor float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendFactor:"), blendFactor)
-}
-
-// TemporalAAable is the interface implemented by [TemporalAA], for mocking and DI.
-type TemporalAAable interface {
-	obj.Object
-	WithBlendFactor(blendFactor float32) *TemporalAA
-	WithLabel(label string) *TemporalAA
-	EncodeWithCoder(coder obj.Object)
-	BlendFactor() float32
-	SetBlendFactor(blendFactor float32)
-}
-
-var _ TemporalAAable = (*TemporalAA)(nil)
 
 var _ KernelProvider = (*TemporalAA)(nil)

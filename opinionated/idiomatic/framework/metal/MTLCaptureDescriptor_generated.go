@@ -46,24 +46,24 @@ func captureDescriptorAdopt(id objc.ID) *CaptureDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *CaptureDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cd *CaptureDescriptor) Description() string {
+	return rt.Description(objref.IDOf(cd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cd *CaptureDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cd *CaptureDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptureDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cd *CaptureDescriptor) String() string {
+	return rt.Description(objref.IDOf(cd))
 }
 
 // NewCaptureDescriptor creates a new CaptureDescriptor.
@@ -72,69 +72,38 @@ func NewCaptureDescriptor() *CaptureDescriptor {
 	return captureDescriptorAdopt(_id)
 }
 
-// WithCaptureObject the instance whose contents should be captured.
-func (x *CaptureDescriptor) WithCaptureObject(captureObject obj.Object) *CaptureDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptureObject:"), objref.IDOf(captureObject))
-	return x
+// WithCaptureObject sets the instance whose contents should be captured.
+func (cd *CaptureDescriptor) WithCaptureObject(captureObject obj.Object) *CaptureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setCaptureObject:"), objref.IDOf(captureObject))
+	return cd
 }
 
-// WithDestination the destination for any captured command data.
-func (x *CaptureDescriptor) WithDestination(destination CaptureDestination) *CaptureDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), destination)
-	return x
+// WithDestination sets the destination for any captured command data.
+func (cd *CaptureDescriptor) WithDestination(destination CaptureDestination) *CaptureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setDestination:"), destination)
+	return cd
 }
 
-// WithOutputURL a URL for a file to write the capture data into.
-func (x *CaptureDescriptor) WithOutputURL(outputURL string) *CaptureDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputURL:"), rt.FileURL(outputURL))
-	return x
+// WithOutputURL sets a URL for a file to write the capture data into.
+func (cd *CaptureDescriptor) WithOutputURL(outputURL string) *CaptureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("setOutputURL:"), rt.FileURL(outputURL))
+	return cd
 }
 
-// CaptureObject the object that is captured. Must be one of the following: MTLDevice captures all command queues of the device. MTLCommandQueue captures a single command queue. MTLCaptureScope captures between the next begin and end of the scope.
-func (x *CaptureDescriptor) CaptureObject() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("captureObject"))
+// CaptureObject returns the object that is captured. Must be one of the following: MTLDevice captures all command queues of the device. MTLCommandQueue captures a single command queue. MTLCaptureScope captures between the next begin and end of the scope.
+func (cd *CaptureDescriptor) CaptureObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("captureObject"))
 	return obj.Wrap(_r)
 }
 
-// SetCaptureObject wraps the corresponding Objective-C method.
-func (x *CaptureDescriptor) SetCaptureObject(captureObject obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptureObject:"), objref.IDOf(captureObject))
-}
-
-// Destination the destination you want the GPU trace to be captured to.
-func (x *CaptureDescriptor) Destination() CaptureDestination {
-	_r := objc.Send[CaptureDestination](objref.IDOf(x), objc.RegisterName("destination"))
+// Destination returns the destination you want the GPU trace to be captured to.
+func (cd *CaptureDescriptor) Destination() CaptureDestination {
+	_r := objc.Send[CaptureDestination](objref.IDOf(cd), objc.RegisterName("destination"))
 	return _r
 }
 
-// SetDestination wraps the corresponding Objective-C method.
-func (x *CaptureDescriptor) SetDestination(destination CaptureDestination) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), destination)
-}
-
-// OutputURL URL the GPU Trace document will be captured to. Must be specified when destiation is MTLCaptureDestinationGPUTraceDocument.
-func (x *CaptureDescriptor) OutputURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputURL"))
+// OutputURL returns URL the GPU Trace document will be captured to. Must be specified when destiation is MTLCaptureDestinationGPUTraceDocument.
+func (cd *CaptureDescriptor) OutputURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cd), objc.RegisterName("outputURL"))
 	return obj.Wrap(_r)
 }
-
-// SetOutputURL wraps the corresponding Objective-C method.
-func (x *CaptureDescriptor) SetOutputURL(outputURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputURL:"), rt.FileURL(outputURL))
-}
-
-// CaptureDescriptorable is the interface implemented by [CaptureDescriptor], for mocking and DI.
-type CaptureDescriptorable interface {
-	obj.Object
-	WithCaptureObject(captureObject obj.Object) *CaptureDescriptor
-	WithDestination(destination CaptureDestination) *CaptureDescriptor
-	WithOutputURL(outputURL string) *CaptureDescriptor
-	CaptureObject() obj.Object
-	SetCaptureObject(captureObject obj.Object)
-	Destination() CaptureDestination
-	SetDestination(destination CaptureDestination)
-	OutputURL() obj.Object
-	SetOutputURL(outputURL string)
-}
-
-var _ CaptureDescriptorable = (*CaptureDescriptor)(nil)

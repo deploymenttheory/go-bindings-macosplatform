@@ -5,12 +5,13 @@
 package healthkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // AudiogramSampleWithSensitivityPointsStartDateEndDateMetadata creates a new audiogram sample.
@@ -153,13 +154,13 @@ func PrescriptionWithRightEyeSpecificationLeftEyeSpecificationDateIssuedExpirati
 	return GlassesPrescriptionFromID(_r)
 }
 
-// IsHealthDataAvailable returns a Boolean value that indicates whether HealthKit is available on this device.
+// IsHealthDataAvailable reports whether returns a Boolean value that indicates whether HealthKit is available on this device.
 func IsHealthDataAvailable() bool {
 	_r := objc.Send[bool](objc.ID(_class("HKHealthStore")), objc.RegisterName("isHealthDataAvailable"))
 	return _r
 }
 
-// MaximumCount the maximum number of heartbeats that can be added to an HKHeartbeatSeriesBuilder. Any calls to addHeartbeatWithTimeIntervalSinceSeriesStartDate:precededByGap:completion: once maximumCount has been reached will fail and an error will be returned in the completion handler.
+// MaximumCount returns the maximum number of heartbeats that can be added to an HKHeartbeatSeriesBuilder. Any calls to addHeartbeatWithTimeIntervalSinceSeriesStartDate:precededByGap:completion: once maximumCount has been reached will fail and an error will be returned in the completion handler.
 func MaximumCount() int {
 	_r := objc.Send[int](objc.ID(_class("HKHeartbeatSeriesBuilder")), objc.RegisterName("maximumCount"))
 	return _r

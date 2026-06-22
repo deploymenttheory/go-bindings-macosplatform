@@ -7,7 +7,6 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,31 +45,22 @@ func polylineAdopt(id objc.ID) *Polyline {
 	return x
 }
 
-// WithTitle the title of the shape annotation.
-func (x *Polyline) WithTitle(title string) *Polyline {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title of the shape annotation.
+func (p *Polyline) WithTitle(title string) *Polyline {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return p
 }
 
-// WithSubtitle the subtitle of the shape annotation.
-func (x *Polyline) WithSubtitle(subtitle string) *Polyline {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-	return x
+// WithSubtitle sets the subtitle of the shape annotation.
+func (p *Polyline) WithSubtitle(subtitle string) *Polyline {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	return p
 }
-
-// Polylineable is the interface implemented by [Polyline], for mocking and DI.
-type Polylineable interface {
-	obj.Object
-	WithTitle(title string) *Polyline
-	WithSubtitle(subtitle string) *Polyline
-}
-
-var _ Polylineable = (*Polyline)(nil)
 
 // isPolyline marks Polyline — and, by embedding promotion, its
 // subclasses — as a member of the Polyline hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Polyline) isPolyline() {}
+func (p *Polyline) isPolyline() {}
 
 var _ PolylineProvider = (*Polyline)(nil)
 

@@ -46,24 +46,24 @@ func tileRenderPipelineColorAttachmentDescriptorAdopt(id objc.ID) *TileRenderPip
 }
 
 // Description returns the object's -description text.
-func (x *TileRenderPipelineColorAttachmentDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (trpcad *TileRenderPipelineColorAttachmentDescriptor) Description() string {
+	return rt.Description(objref.IDOf(trpcad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TileRenderPipelineColorAttachmentDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (trpcad *TileRenderPipelineColorAttachmentDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(trpcad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TileRenderPipelineColorAttachmentDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (trpcad *TileRenderPipelineColorAttachmentDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(trpcad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TileRenderPipelineColorAttachmentDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (trpcad *TileRenderPipelineColorAttachmentDescriptor) String() string {
+	return rt.Description(objref.IDOf(trpcad))
 }
 
 // NewTileRenderPipelineColorAttachmentDescriptor creates a new TileRenderPipelineColorAttachmentDescriptor.
@@ -72,29 +72,14 @@ func NewTileRenderPipelineColorAttachmentDescriptor() *TileRenderPipelineColorAt
 	return tileRenderPipelineColorAttachmentDescriptorAdopt(_id)
 }
 
-// WithPixelFormat the pixel format associated with the tile shading render pipeline.
-func (x *TileRenderPipelineColorAttachmentDescriptor) WithPixelFormat(pixelFormat PixelFormat) *TileRenderPipelineColorAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelFormat:"), pixelFormat)
-	return x
+// WithPixelFormat sets the pixel format associated with the tile shading render pipeline.
+func (trpcad *TileRenderPipelineColorAttachmentDescriptor) WithPixelFormat(pixelFormat PixelFormat) *TileRenderPipelineColorAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(trpcad), objc.RegisterName("setPixelFormat:"), pixelFormat)
+	return trpcad
 }
 
 // PixelFormat wraps the corresponding Objective-C method.
-func (x *TileRenderPipelineColorAttachmentDescriptor) PixelFormat() PixelFormat {
-	_r := objc.Send[PixelFormat](objref.IDOf(x), objc.RegisterName("pixelFormat"))
+func (trpcad *TileRenderPipelineColorAttachmentDescriptor) PixelFormat() PixelFormat {
+	_r := objc.Send[PixelFormat](objref.IDOf(trpcad), objc.RegisterName("pixelFormat"))
 	return _r
 }
-
-// SetPixelFormat wraps the corresponding Objective-C method.
-func (x *TileRenderPipelineColorAttachmentDescriptor) SetPixelFormat(pixelFormat PixelFormat) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelFormat:"), pixelFormat)
-}
-
-// TileRenderPipelineColorAttachmentDescriptorable is the interface implemented by [TileRenderPipelineColorAttachmentDescriptor], for mocking and DI.
-type TileRenderPipelineColorAttachmentDescriptorable interface {
-	obj.Object
-	WithPixelFormat(pixelFormat PixelFormat) *TileRenderPipelineColorAttachmentDescriptor
-	PixelFormat() PixelFormat
-	SetPixelFormat(pixelFormat PixelFormat)
-}
-
-var _ TileRenderPipelineColorAttachmentDescriptorable = (*TileRenderPipelineColorAttachmentDescriptor)(nil)

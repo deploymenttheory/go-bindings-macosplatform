@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,85 +52,66 @@ func NewAudioPlayerNode() *AudioPlayerNode {
 }
 
 // ScheduleBufferCompletionHandler schedules the playing samples from an audio buffer.
-func (x *AudioPlayerNode) ScheduleBufferCompletionHandler(buffer *AudioPCMBuffer, completionHandler func()) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleBuffer:completionHandler:"), objref.IDOf(buffer), completionHandler)
+func (apn *AudioPlayerNode) ScheduleBufferCompletionHandler(buffer *AudioPCMBuffer, completionHandler func()) {
+	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleBuffer:completionHandler:"), objref.IDOf(buffer), completionHandler)
 }
 
 // ScheduleBufferAtTimeOptionsCompletionHandler schedules the playing samples from an audio buffer at the time and playback options you specify.
-func (x *AudioPlayerNode) ScheduleBufferAtTimeOptionsCompletionHandler(buffer *AudioPCMBuffer, when *AudioTime, options AudioPlayerNodeBufferOptions, completionHandler func()) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleBuffer:atTime:options:completionHandler:"), objref.IDOf(buffer), objref.IDOf(when), options, completionHandler)
+func (apn *AudioPlayerNode) ScheduleBufferAtTimeOptionsCompletionHandler(buffer *AudioPCMBuffer, when *AudioTime, options AudioPlayerNodeBufferOptions, completionHandler func()) {
+	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleBuffer:atTime:options:completionHandler:"), objref.IDOf(buffer), objref.IDOf(when), options, completionHandler)
 }
 
 // ScheduleFileAtTimeCompletionHandler schedules the playing of an entire audio file.
-func (x *AudioPlayerNode) ScheduleFileAtTimeCompletionHandler(file *AudioFile, when *AudioTime, completionHandler func()) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleFile:atTime:completionHandler:"), objref.IDOf(file), objref.IDOf(when), completionHandler)
+func (apn *AudioPlayerNode) ScheduleFileAtTimeCompletionHandler(file *AudioFile, when *AudioTime, completionHandler func()) {
+	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleFile:atTime:completionHandler:"), objref.IDOf(file), objref.IDOf(when), completionHandler)
 }
 
 // ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler schedules the playing of an audio file segment.
-func (x *AudioPlayerNode) ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler(file *AudioFile, startFrame int64, numberFrames uint32, when *AudioTime, completionHandler func()) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleSegment:startingFrame:frameCount:atTime:completionHandler:"), objref.IDOf(file), startFrame, numberFrames, objref.IDOf(when), completionHandler)
+func (apn *AudioPlayerNode) ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler(file *AudioFile, startFrame int64, numberFrames uint32, when *AudioTime, completionHandler func()) {
+	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("scheduleSegment:startingFrame:frameCount:atTime:completionHandler:"), objref.IDOf(file), startFrame, numberFrames, objref.IDOf(when), completionHandler)
 }
 
 // Stop clears all of the node’s events you schedule and stops playback.
-func (x *AudioPlayerNode) Stop() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
+func (apn *AudioPlayerNode) Stop() {
+	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("stop"))
 }
 
 // PrepareWithFrameCount prepares the file regions or buffers you schedule for playback.
-func (x *AudioPlayerNode) PrepareWithFrameCount(frameCount uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareWithFrameCount:"), frameCount)
+func (apn *AudioPlayerNode) PrepareWithFrameCount(frameCount uint32) {
+	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("prepareWithFrameCount:"), frameCount)
 }
 
 // Play starts or resumes playback immediately.
-func (x *AudioPlayerNode) Play() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("play"))
+func (apn *AudioPlayerNode) Play() {
+	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("play"))
 }
 
 // PlayAtTime starts or resumes playback at a time you specify.
-func (x *AudioPlayerNode) PlayAtTime(when *AudioTime) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playAtTime:"), objref.IDOf(when))
+func (apn *AudioPlayerNode) PlayAtTime(when *AudioTime) {
+	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("playAtTime:"), objref.IDOf(when))
 }
 
 // Pause pauses the node’s playback.
-func (x *AudioPlayerNode) Pause() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause"))
+func (apn *AudioPlayerNode) Pause() {
+	objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("pause"))
 }
 
 // NodeTimeForPlayerTime converts from player time to node time.
-func (x *AudioPlayerNode) NodeTimeForPlayerTime(playerTime *AudioTime) *AudioTime {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeTimeForPlayerTime:"), objref.IDOf(playerTime))
+func (apn *AudioPlayerNode) NodeTimeForPlayerTime(playerTime *AudioTime) *AudioTime {
+	_r := objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("nodeTimeForPlayerTime:"), objref.IDOf(playerTime))
 	return AudioTimeFromID(_r)
 }
 
 // PlayerTimeForNodeTime converts from node time to player time.
-func (x *AudioPlayerNode) PlayerTimeForNodeTime(nodeTime *AudioTime) *AudioTime {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerTimeForNodeTime:"), objref.IDOf(nodeTime))
+func (apn *AudioPlayerNode) PlayerTimeForNodeTime(nodeTime *AudioTime) *AudioTime {
+	_r := objc.Send[objc.ID](objref.IDOf(apn), objc.RegisterName("playerTimeForNodeTime:"), objref.IDOf(nodeTime))
 	return AudioTimeFromID(_r)
 }
 
 // IsPlaying wraps the corresponding Objective-C method.
-func (x *AudioPlayerNode) IsPlaying() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPlaying"))
+func (apn *AudioPlayerNode) IsPlaying() bool {
+	_r := objc.Send[bool](objref.IDOf(apn), objc.RegisterName("isPlaying"))
 	return _r
 }
-
-// AudioPlayerNodeable is the interface implemented by [AudioPlayerNode], for mocking and DI.
-type AudioPlayerNodeable interface {
-	obj.Object
-	ScheduleBufferCompletionHandler(buffer *AudioPCMBuffer, completionHandler func())
-	ScheduleBufferAtTimeOptionsCompletionHandler(buffer *AudioPCMBuffer, when *AudioTime, options AudioPlayerNodeBufferOptions, completionHandler func())
-	ScheduleFileAtTimeCompletionHandler(file *AudioFile, when *AudioTime, completionHandler func())
-	ScheduleSegmentStartingFrameFrameCountAtTimeCompletionHandler(file *AudioFile, startFrame int64, numberFrames uint32, when *AudioTime, completionHandler func())
-	Stop()
-	PrepareWithFrameCount(frameCount uint32)
-	Play()
-	PlayAtTime(when *AudioTime)
-	Pause()
-	NodeTimeForPlayerTime(playerTime *AudioTime) *AudioTime
-	PlayerTimeForNodeTime(nodeTime *AudioTime) *AudioTime
-	IsPlaying() bool
-}
-
-var _ AudioPlayerNodeable = (*AudioPlayerNode)(nil)
 
 var _ AudioNodeProvider = (*AudioPlayerNode)(nil)

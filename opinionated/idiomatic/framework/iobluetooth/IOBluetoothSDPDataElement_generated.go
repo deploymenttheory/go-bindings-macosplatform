@@ -46,24 +46,24 @@ func iOBluetoothSDPDataElementAdopt(id objc.ID) *IOBluetoothSDPDataElement {
 }
 
 // Description returns the object's -description text.
-func (x *IOBluetoothSDPDataElement) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ibsde *IOBluetoothSDPDataElement) Description() string {
+	return rt.Description(objref.IDOf(ibsde))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IOBluetoothSDPDataElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ibsde *IOBluetoothSDPDataElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ibsde), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IOBluetoothSDPDataElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ibsde *IOBluetoothSDPDataElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ibsde), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IOBluetoothSDPDataElement) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ibsde *IOBluetoothSDPDataElement) String() string {
+	return rt.Description(objref.IDOf(ibsde))
 }
 
 // NewIOBluetoothSDPDataElementWithElementValue initializes a new IOBluetoothSDPDataElement with the given value.
@@ -81,95 +81,76 @@ func NewIOBluetoothSDPDataElementWithTypeSizeDescriptorSizeValue(newType uint8, 
 }
 
 // GetSDPDataElementRef returns an IOBluetoothSDPDataElementRef representation of the target IOBluetoothSDPDataElement object.
-func (x *IOBluetoothSDPDataElement) GetSDPDataElementRef() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getSDPDataElementRef"))
+func (ibsde *IOBluetoothSDPDataElement) GetSDPDataElementRef() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibsde), objc.RegisterName("getSDPDataElementRef"))
 	return obj.Wrap(_r)
 }
 
 // GetTypeDescriptor returns the SDP spec defined data element type descriptor for the target data element.
-func (x *IOBluetoothSDPDataElement) GetTypeDescriptor() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("getTypeDescriptor"))
+func (ibsde *IOBluetoothSDPDataElement) GetTypeDescriptor() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(ibsde), objc.RegisterName("getTypeDescriptor"))
 	return _r
 }
 
 // GetSizeDescriptor returns the SDP spec defined data element size descriptor for the target data element.
-func (x *IOBluetoothSDPDataElement) GetSizeDescriptor() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("getSizeDescriptor"))
+func (ibsde *IOBluetoothSDPDataElement) GetSizeDescriptor() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(ibsde), objc.RegisterName("getSizeDescriptor"))
 	return _r
 }
 
 // GetSize returns the size in bytes of the target data element.
-func (x *IOBluetoothSDPDataElement) GetSize() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("getSize"))
+func (ibsde *IOBluetoothSDPDataElement) GetSize() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ibsde), objc.RegisterName("getSize"))
 	return _r
 }
 
-// GetNumberValue if the data element is represented by a number, it returns the value as an NSNumber.
-func (x *IOBluetoothSDPDataElement) GetNumberValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNumberValue"))
+// GetNumberValue returns if the data element is represented by a number, it returns the value as an NSNumber.
+func (ibsde *IOBluetoothSDPDataElement) GetNumberValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibsde), objc.RegisterName("getNumberValue"))
 	return obj.Wrap(_r)
 }
 
-// GetDataValue if the data element is represented by a data object, it returns the value as an NSData.
-func (x *IOBluetoothSDPDataElement) GetDataValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getDataValue"))
+// GetDataValue returns if the data element is represented by a data object, it returns the value as an NSData.
+func (ibsde *IOBluetoothSDPDataElement) GetDataValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibsde), objc.RegisterName("getDataValue"))
 	return obj.Wrap(_r)
 }
 
-// GetStringValue if the data element is represented by a string object, it returns the value as an NSString.
-func (x *IOBluetoothSDPDataElement) GetStringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getStringValue"))
+// GetStringValue returns if the data element is represented by a string object, it returns the value as an NSString.
+func (ibsde *IOBluetoothSDPDataElement) GetStringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ibsde), objc.RegisterName("getStringValue"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// GetArrayValue if the data element is represented by an array object, it returns the value as an NSArray.
-func (x *IOBluetoothSDPDataElement) GetArrayValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getArrayValue"))
+// GetArrayValue returns if the data element is represented by an array object, it returns the value as an NSArray.
+func (ibsde *IOBluetoothSDPDataElement) GetArrayValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibsde), objc.RegisterName("getArrayValue"))
 	return obj.Wrap(_r)
 }
 
-// GetUUIDValue if the data element is a UUID (type 3), it returns the value as an IOBluetoothSDPUUID.
-func (x *IOBluetoothSDPDataElement) GetUUIDValue() *IOBluetoothSDPUUID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getUUIDValue"))
+// GetUUIDValue returns if the data element is a UUID (type 3), it returns the value as an IOBluetoothSDPUUID.
+func (ibsde *IOBluetoothSDPDataElement) GetUUIDValue() *IOBluetoothSDPUUID {
+	_r := objc.Send[objc.ID](objref.IDOf(ibsde), objc.RegisterName("getUUIDValue"))
 	return IOBluetoothSDPUUIDFromID(_r)
 }
 
 // GetValue returns the object value of the data element.
-func (x *IOBluetoothSDPDataElement) GetValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getValue"))
+func (ibsde *IOBluetoothSDPDataElement) GetValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibsde), objc.RegisterName("getValue"))
 	return obj.Wrap(_r)
 }
 
 // ContainsDataElement checks to see if the target data element is the same as the dataElement parameter or if it contains the dataElement parameter (if its a sequence type).
-func (x *IOBluetoothSDPDataElement) ContainsDataElement(dataElement *IOBluetoothSDPDataElement) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsDataElement:"), objref.IDOf(dataElement))
+func (ibsde *IOBluetoothSDPDataElement) ContainsDataElement(dataElement *IOBluetoothSDPDataElement) bool {
+	_r := objc.Send[bool](objref.IDOf(ibsde), objc.RegisterName("containsDataElement:"), objref.IDOf(dataElement))
 	return _r
 }
 
 // ContainsValue checks to see if the target data element’s value is the same as the value parameter or if it contains the value parameter.
-func (x *IOBluetoothSDPDataElement) ContainsValue(cmpValue obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsValue:"), objref.IDOf(cmpValue))
+func (ibsde *IOBluetoothSDPDataElement) ContainsValue(cmpValue obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(ibsde), objc.RegisterName("containsValue:"), objref.IDOf(cmpValue))
 	return _r
 }
-
-// IOBluetoothSDPDataElementable is the interface implemented by [IOBluetoothSDPDataElement], for mocking and DI.
-type IOBluetoothSDPDataElementable interface {
-	obj.Object
-	GetSDPDataElementRef() obj.Object
-	GetTypeDescriptor() uint8
-	GetSizeDescriptor() uint8
-	GetSize() uint32
-	GetNumberValue() obj.Object
-	GetDataValue() obj.Object
-	GetStringValue() string
-	GetArrayValue() obj.Object
-	GetUUIDValue() *IOBluetoothSDPUUID
-	GetValue() obj.Object
-	ContainsDataElement(dataElement *IOBluetoothSDPDataElement) bool
-	ContainsValue(cmpValue obj.Object) bool
-}
-
-var _ IOBluetoothSDPDataElementable = (*IOBluetoothSDPDataElement)(nil)

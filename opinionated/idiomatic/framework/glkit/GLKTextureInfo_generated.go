@@ -46,24 +46,24 @@ func textureInfoAdopt(id objc.ID) *TextureInfo {
 }
 
 // Description returns the object's -description text.
-func (x *TextureInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ti *TextureInfo) Description() string {
+	return rt.Description(objref.IDOf(ti))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextureInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ti *TextureInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ti), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextureInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ti *TextureInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ti), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextureInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ti *TextureInfo) String() string {
+	return rt.Description(objref.IDOf(ti))
 }
 
 // NewTextureInfo creates a new TextureInfo.
@@ -73,78 +73,61 @@ func NewTextureInfo() *TextureInfo {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *TextureInfo) Name() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("name"))
+func (ti *TextureInfo) Name() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ti), objc.RegisterName("name"))
 	return _r
 }
 
 // Target wraps the corresponding Objective-C method.
-func (x *TextureInfo) Target() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("target"))
+func (ti *TextureInfo) Target() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ti), objc.RegisterName("target"))
 	return _r
 }
 
 // Width wraps the corresponding Objective-C method.
-func (x *TextureInfo) Width() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("width"))
+func (ti *TextureInfo) Width() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ti), objc.RegisterName("width"))
 	return _r
 }
 
 // Height wraps the corresponding Objective-C method.
-func (x *TextureInfo) Height() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("height"))
+func (ti *TextureInfo) Height() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ti), objc.RegisterName("height"))
 	return _r
 }
 
 // Depth wraps the corresponding Objective-C method.
-func (x *TextureInfo) Depth() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("depth"))
+func (ti *TextureInfo) Depth() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ti), objc.RegisterName("depth"))
 	return _r
 }
 
 // AlphaState wraps the corresponding Objective-C method.
-func (x *TextureInfo) AlphaState() TextureInfoAlphaState {
-	_r := objc.Send[TextureInfoAlphaState](objref.IDOf(x), objc.RegisterName("alphaState"))
+func (ti *TextureInfo) AlphaState() TextureInfoAlphaState {
+	_r := objc.Send[TextureInfoAlphaState](objref.IDOf(ti), objc.RegisterName("alphaState"))
 	return _r
 }
 
 // TextureOrigin wraps the corresponding Objective-C method.
-func (x *TextureInfo) TextureOrigin() TextureInfoOrigin {
-	_r := objc.Send[TextureInfoOrigin](objref.IDOf(x), objc.RegisterName("textureOrigin"))
+func (ti *TextureInfo) TextureOrigin() TextureInfoOrigin {
+	_r := objc.Send[TextureInfoOrigin](objref.IDOf(ti), objc.RegisterName("textureOrigin"))
 	return _r
 }
 
 // ContainsMipmaps wraps the corresponding Objective-C method.
-func (x *TextureInfo) ContainsMipmaps() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsMipmaps"))
+func (ti *TextureInfo) ContainsMipmaps() bool {
+	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("containsMipmaps"))
 	return _r
 }
 
 // MimapLevelCount wraps the corresponding Objective-C method.
-func (x *TextureInfo) MimapLevelCount() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("mimapLevelCount"))
+func (ti *TextureInfo) MimapLevelCount() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ti), objc.RegisterName("mimapLevelCount"))
 	return _r
 }
 
 // ArrayLength wraps the corresponding Objective-C method.
-func (x *TextureInfo) ArrayLength() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("arrayLength"))
+func (ti *TextureInfo) ArrayLength() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ti), objc.RegisterName("arrayLength"))
 	return _r
 }
-
-// TextureInfoable is the interface implemented by [TextureInfo], for mocking and DI.
-type TextureInfoable interface {
-	obj.Object
-	Name() uint32
-	Target() uint32
-	Width() uint32
-	Height() uint32
-	Depth() uint32
-	AlphaState() TextureInfoAlphaState
-	TextureOrigin() TextureInfoOrigin
-	ContainsMipmaps() bool
-	MimapLevelCount() uint32
-	ArrayLength() uint32
-}
-
-var _ TextureInfoable = (*TextureInfo)(nil)

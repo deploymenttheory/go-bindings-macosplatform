@@ -48,56 +48,41 @@ func nEFilterVerdictAdopt(id objc.ID) *NEFilterVerdict {
 }
 
 // Description returns the object's -description text.
-func (x *NEFilterVerdict) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nfv *NEFilterVerdict) Description() string {
+	return rt.Description(objref.IDOf(nfv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEFilterVerdict) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nfv *NEFilterVerdict) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nfv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEFilterVerdict) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nfv *NEFilterVerdict) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nfv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEFilterVerdict) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nfv *NEFilterVerdict) String() string {
+	return rt.Description(objref.IDOf(nfv))
 }
 
-// WithShouldReport a Boolean value that indicates whether to send a report to the control provider when processing this verdict.
-func (x *NEFilterVerdict) WithShouldReport(shouldReport bool) *NEFilterVerdict {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldReport:"), shouldReport)
-	return x
+// WithShouldReport sets a Boolean value that indicates whether to send a report to the control provider when processing this verdict.
+func (nfv *NEFilterVerdict) WithShouldReport(shouldReport bool) *NEFilterVerdict {
+	objc.Send[objc.ID](objref.IDOf(nfv), objc.RegisterName("setShouldReport:"), shouldReport)
+	return nfv
 }
 
 // ShouldReport wraps the corresponding Objective-C method.
-func (x *NEFilterVerdict) ShouldReport() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldReport"))
+func (nfv *NEFilterVerdict) ShouldReport() bool {
+	_r := objc.Send[bool](objref.IDOf(nfv), objc.RegisterName("shouldReport"))
 	return _r
 }
-
-// SetShouldReport wraps the corresponding Objective-C method.
-func (x *NEFilterVerdict) SetShouldReport(shouldReport bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldReport:"), shouldReport)
-}
-
-// NEFilterVerdictable is the interface implemented by [NEFilterVerdict], for mocking and DI.
-type NEFilterVerdictable interface {
-	obj.Object
-	WithShouldReport(shouldReport bool) *NEFilterVerdict
-	ShouldReport() bool
-	SetShouldReport(shouldReport bool)
-}
-
-var _ NEFilterVerdictable = (*NEFilterVerdict)(nil)
 
 // isNEFilterVerdict marks NEFilterVerdict — and, by embedding promotion, its
 // subclasses — as a member of the NEFilterVerdict hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NEFilterVerdict) isNEFilterVerdict() {}
+func (nfv *NEFilterVerdict) isNEFilterVerdict() {}
 
 var _ NEFilterVerdictProvider = (*NEFilterVerdict)(nil)

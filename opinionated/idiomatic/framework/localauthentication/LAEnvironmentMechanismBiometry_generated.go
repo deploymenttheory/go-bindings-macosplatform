@@ -50,46 +50,34 @@ func NewEnvironmentMechanismBiometry() *EnvironmentMechanismBiometry {
 	return environmentMechanismBiometryAdopt(_id)
 }
 
-// BiometryType type of biometry supported by the device. This property does not indicate whether biometry is available or not. It always reads the type of biometry supported by device hardware. You should check
-func (x *EnvironmentMechanismBiometry) BiometryType() BiometryType {
-	_r := objc.Send[BiometryType](objref.IDOf(x), objc.RegisterName("biometryType"))
+// BiometryType returns type of biometry supported by the device. This property does not indicate whether biometry is available or not. It always reads the type of biometry supported by device hardware. You should check
+func (emb *EnvironmentMechanismBiometry) BiometryType() BiometryType {
+	_r := objc.Send[BiometryType](objref.IDOf(emb), objc.RegisterName("biometryType"))
 	return _r
 }
 
-// IsEnrolled whether the user has enrolled this biometry. Even if biometry is enrolled, it does not necessarily mean that it can be used. You should check
-func (x *EnvironmentMechanismBiometry) IsEnrolled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnrolled"))
+// IsEnrolled reports whether the user has enrolled this biometry. Even if biometry is enrolled, it does not necessarily mean that it can be used. You should check
+func (emb *EnvironmentMechanismBiometry) IsEnrolled() bool {
+	_r := objc.Send[bool](objref.IDOf(emb), objc.RegisterName("isEnrolled"))
 	return _r
 }
 
-// IsLockedOut whether biometry is locked out. The system might lock the user out of biometry for various reasons. For example, with Face ID, the user is locked out after 5 failed match attempts in row. To recover from bio lockout, users need to enter their passcode (e.g. during device ulock).
-func (x *EnvironmentMechanismBiometry) IsLockedOut() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLockedOut"))
+// IsLockedOut reports whether biometry is locked out. The system might lock the user out of biometry for various reasons. For example, with Face ID, the user is locked out after 5 failed match attempts in row. To recover from bio lockout, users need to enter their passcode (e.g. during device ulock).
+func (emb *EnvironmentMechanismBiometry) IsLockedOut() bool {
+	_r := objc.Send[bool](objref.IDOf(emb), objc.RegisterName("isLockedOut"))
 	return _r
 }
 
-// StateHash the application specific state of the biometric enrollment as returned by This value represents the state of the enrollment and changes whenever the biometric enrollment is changed. It does not directly map to the enrolled templates, e.g. if a finger is added to Touch ID enrollment and then removed, the final state would be different. It also returns different values to different apps to prevent tracking of user identity.
-func (x *EnvironmentMechanismBiometry) StateHash() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateHash"))
+// StateHash returns the application specific state of the biometric enrollment as returned by This value represents the state of the enrollment and changes whenever the biometric enrollment is changed. It does not directly map to the enrolled templates, e.g. if a finger is added to Touch ID enrollment and then removed, the final state would be different. It also returns different values to different apps to prevent tracking of user identity.
+func (emb *EnvironmentMechanismBiometry) StateHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(emb), objc.RegisterName("stateHash"))
 	return obj.Wrap(_r)
 }
 
-// BuiltInSensorInaccessible whether the built in biometric sensor is inaccessible in the current configuration, preventing the use of biometry. Currently, the only example of this is a Clamshell Mode on macOS. The user will be not able to use Touch ID if the MacBook lid is closed while connected to external monitor and keyboard, unless the external keyboard has Touch ID.
-func (x *EnvironmentMechanismBiometry) BuiltInSensorInaccessible() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("builtInSensorInaccessible"))
+// BuiltInSensorInaccessible reports whether the built in biometric sensor is inaccessible in the current configuration, preventing the use of biometry. Currently, the only example of this is a Clamshell Mode on macOS. The user will be not able to use Touch ID if the MacBook lid is closed while connected to external monitor and keyboard, unless the external keyboard has Touch ID.
+func (emb *EnvironmentMechanismBiometry) BuiltInSensorInaccessible() bool {
+	_r := objc.Send[bool](objref.IDOf(emb), objc.RegisterName("builtInSensorInaccessible"))
 	return _r
 }
-
-// EnvironmentMechanismBiometryable is the interface implemented by [EnvironmentMechanismBiometry], for mocking and DI.
-type EnvironmentMechanismBiometryable interface {
-	obj.Object
-	BiometryType() BiometryType
-	IsEnrolled() bool
-	IsLockedOut() bool
-	StateHash() obj.Object
-	BuiltInSensorInaccessible() bool
-}
-
-var _ EnvironmentMechanismBiometryable = (*EnvironmentMechanismBiometry)(nil)
 
 var _ EnvironmentMechanismProvider = (*EnvironmentMechanismBiometry)(nil)

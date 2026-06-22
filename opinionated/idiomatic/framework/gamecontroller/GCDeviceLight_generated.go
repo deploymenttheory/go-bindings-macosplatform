@@ -46,24 +46,24 @@ func deviceLightAdopt(id objc.ID) *DeviceLight {
 }
 
 // Description returns the object's -description text.
-func (x *DeviceLight) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dl *DeviceLight) Description() string {
+	return rt.Description(objref.IDOf(dl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DeviceLight) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dl *DeviceLight) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DeviceLight) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dl *DeviceLight) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DeviceLight) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dl *DeviceLight) String() string {
+	return rt.Description(objref.IDOf(dl))
 }
 
 // NewDeviceLight creates a new DeviceLight.
@@ -72,29 +72,14 @@ func NewDeviceLight() *DeviceLight {
 	return deviceLightAdopt(_id)
 }
 
-// WithColor the color of a device’s light.
-func (x *DeviceLight) WithColor(color *Color) *DeviceLight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
-	return x
+// WithColor sets the color of a device’s light.
+func (dl *DeviceLight) WithColor(color *Color) *DeviceLight {
+	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("setColor:"), objref.IDOf(color))
+	return dl
 }
 
 // Color wraps the corresponding Objective-C method.
-func (x *DeviceLight) Color() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+func (dl *DeviceLight) Color() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("color"))
 	return ColorFromID(_r)
 }
-
-// SetColor wraps the corresponding Objective-C method.
-func (x *DeviceLight) SetColor(color *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
-}
-
-// DeviceLightable is the interface implemented by [DeviceLight], for mocking and DI.
-type DeviceLightable interface {
-	obj.Object
-	WithColor(color *Color) *DeviceLight
-	Color() *Color
-	SetColor(color *Color)
-}
-
-var _ DeviceLightable = (*DeviceLight)(nil)

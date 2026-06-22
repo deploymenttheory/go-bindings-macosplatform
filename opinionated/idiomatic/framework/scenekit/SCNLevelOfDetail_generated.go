@@ -46,24 +46,24 @@ func levelOfDetailAdopt(id objc.ID) *LevelOfDetail {
 }
 
 // Description returns the object's -description text.
-func (x *LevelOfDetail) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lod *LevelOfDetail) Description() string {
+	return rt.Description(objref.IDOf(lod))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LevelOfDetail) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lod *LevelOfDetail) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lod), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LevelOfDetail) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lod *LevelOfDetail) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lod), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LevelOfDetail) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lod *LevelOfDetail) String() string {
+	return rt.Description(objref.IDOf(lod))
 }
 
 // NewLevelOfDetail creates a new LevelOfDetail.
@@ -73,29 +73,19 @@ func NewLevelOfDetail() *LevelOfDetail {
 }
 
 // Geometry returns the geometry of the receiver.
-func (x *LevelOfDetail) Geometry() *Geometry {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("geometry"))
+func (lod *LevelOfDetail) Geometry() *Geometry {
+	_r := objc.Send[objc.ID](objref.IDOf(lod), objc.RegisterName("geometry"))
 	return GeometryFromID(_r)
 }
 
 // ScreenSpaceRadius returns the screen space radius of the receiver if any, 0 otherwise.
-func (x *LevelOfDetail) ScreenSpaceRadius() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("screenSpaceRadius"))
+func (lod *LevelOfDetail) ScreenSpaceRadius() float64 {
+	_r := objc.Send[float64](objref.IDOf(lod), objc.RegisterName("screenSpaceRadius"))
 	return _r
 }
 
 // WorldSpaceDistance returns the world space distance of the receiver if any, 0 otherwise.
-func (x *LevelOfDetail) WorldSpaceDistance() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("worldSpaceDistance"))
+func (lod *LevelOfDetail) WorldSpaceDistance() float64 {
+	_r := objc.Send[float64](objref.IDOf(lod), objc.RegisterName("worldSpaceDistance"))
 	return _r
 }
-
-// LevelOfDetailable is the interface implemented by [LevelOfDetail], for mocking and DI.
-type LevelOfDetailable interface {
-	obj.Object
-	Geometry() *Geometry
-	ScreenSpaceRadius() float64
-	WorldSpaceDistance() float64
-}
-
-var _ LevelOfDetailable = (*LevelOfDetail)(nil)

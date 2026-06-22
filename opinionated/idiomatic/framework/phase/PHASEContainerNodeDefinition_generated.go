@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,17 +59,9 @@ func NewContainerNodeDefinitionWithIdentifier(identifier string) *ContainerNodeD
 }
 
 // AddSubtree adds a sound event node as a child.
-func (x *ContainerNodeDefinition) AddSubtree(subtree *SoundEventNodeDefinition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSubtree:"), objref.IDOf(subtree))
+func (cnd *ContainerNodeDefinition) AddSubtree(subtree *SoundEventNodeDefinition) {
+	objc.Send[objc.ID](objref.IDOf(cnd), objc.RegisterName("addSubtree:"), objref.IDOf(subtree))
 }
-
-// ContainerNodeDefinitionable is the interface implemented by [ContainerNodeDefinition], for mocking and DI.
-type ContainerNodeDefinitionable interface {
-	obj.Object
-	AddSubtree(subtree *SoundEventNodeDefinition)
-}
-
-var _ ContainerNodeDefinitionable = (*ContainerNodeDefinition)(nil)
 
 var _ SoundEventNodeDefinitionProvider = (*ContainerNodeDefinition)(nil)
 

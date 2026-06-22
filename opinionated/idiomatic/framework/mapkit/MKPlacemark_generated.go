@@ -46,24 +46,24 @@ func placemarkAdopt(id objc.ID) *Placemark {
 }
 
 // Description returns the object's -description text.
-func (x *Placemark) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Placemark) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Placemark) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Placemark) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Placemark) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Placemark) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Placemark) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Placemark) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // NewPlacemark creates a new Placemark.
@@ -73,18 +73,10 @@ func NewPlacemark() *Placemark {
 }
 
 // CountryCode wraps the corresponding Objective-C method.
-func (x *Placemark) CountryCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("countryCode"))
+func (p *Placemark) CountryCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("countryCode"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Placemarkable is the interface implemented by [Placemark], for mocking and DI.
-type Placemarkable interface {
-	obj.Object
-	CountryCode() string
-}
-
-var _ Placemarkable = (*Placemark)(nil)

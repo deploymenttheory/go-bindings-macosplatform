@@ -46,24 +46,24 @@ func nEFlowMetaDataAdopt(id objc.ID) *NEFlowMetaData {
 }
 
 // Description returns the object's -description text.
-func (x *NEFlowMetaData) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nfmd *NEFlowMetaData) Description() string {
+	return rt.Description(objref.IDOf(nfmd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEFlowMetaData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nfmd *NEFlowMetaData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nfmd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEFlowMetaData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nfmd *NEFlowMetaData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nfmd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEFlowMetaData) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nfmd *NEFlowMetaData) String() string {
+	return rt.Description(objref.IDOf(nfmd))
 }
 
 // NewNEFlowMetaData creates a new NEFlowMetaData.
@@ -72,40 +72,29 @@ func NewNEFlowMetaData() *NEFlowMetaData {
 	return nEFlowMetaDataAdopt(_id)
 }
 
-// SourceAppUniqueIdentifier a byte string that uniquely identifies the binary for each build of the source application of the flow. The data object may be empty in cases where the flow originates from a system process.
-func (x *NEFlowMetaData) SourceAppUniqueIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceAppUniqueIdentifier"))
+// SourceAppUniqueIdentifier returns a byte string that uniquely identifies the binary for each build of the source application of the flow. The data object may be empty in cases where the flow originates from a system process.
+func (nfmd *NEFlowMetaData) SourceAppUniqueIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nfmd), objc.RegisterName("sourceAppUniqueIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// SourceAppSigningIdentifier a string containing the signing identifier (almost always equivalent to the bundle identifier) of the source app of the flow. The string may be empty in cases where the flow originates from a system process.
-func (x *NEFlowMetaData) SourceAppSigningIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceAppSigningIdentifier"))
+// SourceAppSigningIdentifier returns a string containing the signing identifier (almost always equivalent to the bundle identifier) of the source app of the flow. The string may be empty in cases where the flow originates from a system process.
+func (nfmd *NEFlowMetaData) SourceAppSigningIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nfmd), objc.RegisterName("sourceAppSigningIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SourceAppAuditToken audit token of the source application of the flow.
-func (x *NEFlowMetaData) SourceAppAuditToken() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceAppAuditToken"))
+// SourceAppAuditToken returns audit token of the source application of the flow.
+func (nfmd *NEFlowMetaData) SourceAppAuditToken() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nfmd), objc.RegisterName("sourceAppAuditToken"))
 	return obj.Wrap(_r)
 }
 
-// FilterFlowIdentifier the identifier of the content filter flow corresponding to this flow.
-func (x *NEFlowMetaData) FilterFlowIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterFlowIdentifier"))
+// FilterFlowIdentifier returns the identifier of the content filter flow corresponding to this flow.
+func (nfmd *NEFlowMetaData) FilterFlowIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nfmd), objc.RegisterName("filterFlowIdentifier"))
 	return obj.Wrap(_r)
 }
-
-// NEFlowMetaDataable is the interface implemented by [NEFlowMetaData], for mocking and DI.
-type NEFlowMetaDataable interface {
-	obj.Object
-	SourceAppUniqueIdentifier() obj.Object
-	SourceAppSigningIdentifier() string
-	SourceAppAuditToken() obj.Object
-	FilterFlowIdentifier() obj.Object
-}
-
-var _ NEFlowMetaDataable = (*NEFlowMetaData)(nil)

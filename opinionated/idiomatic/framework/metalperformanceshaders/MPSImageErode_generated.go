@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,33 +53,23 @@ func NewImageErode() *ImageErode {
 	return imageErodeAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageErode) WithOffset(offset mpscore.MPSOffset) *ImageErode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (ie *ImageErode) WithOffset(offset mpscore.MPSOffset) *ImageErode {
+	objc.Send[objc.ID](objref.IDOf(ie), objc.RegisterName("setOffset:"), offset)
+	return ie
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageErode) WithClipRect(clipRect metal.MTLRegion) *ImageErode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (ie *ImageErode) WithClipRect(clipRect metal.MTLRegion) *ImageErode {
+	objc.Send[objc.ID](objref.IDOf(ie), objc.RegisterName("setClipRect:"), clipRect)
+	return ie
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageErode) WithLabel(label string) *ImageErode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ie *ImageErode) WithLabel(label string) *ImageErode {
+	objc.Send[objc.ID](objref.IDOf(ie), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ie
 }
-
-// ImageErodeable is the interface implemented by [ImageErode], for mocking and DI.
-type ImageErodeable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageErode
-	WithClipRect(clipRect metal.MTLRegion) *ImageErode
-	WithLabel(label string) *ImageErode
-}
-
-var _ ImageErodeable = (*ImageErode)(nil)
 
 var _ ImageDilateProvider = (*ImageErode)(nil)
 

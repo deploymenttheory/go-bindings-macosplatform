@@ -59,72 +59,56 @@ func NewMTRClusterOnOffSwitchConfigurationWithDeviceEndpointQueue(device *MTRDev
 }
 
 // ReadAttributeSwitchTypeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeSwitchTypeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSwitchTypeWithParams:"), objref.IDOf(params))
+func (mcoosc *MTRClusterOnOffSwitchConfiguration) ReadAttributeSwitchTypeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcoosc), objc.RegisterName("readAttributeSwitchTypeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeSwitchActionsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeSwitchActionsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSwitchActionsWithParams:"), objref.IDOf(params))
+func (mcoosc *MTRClusterOnOffSwitchConfiguration) ReadAttributeSwitchActionsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcoosc), objc.RegisterName("readAttributeSwitchActionsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeSwitchActionsWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterOnOffSwitchConfiguration) WriteAttributeSwitchActionsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSwitchActionsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcoosc *MTRClusterOnOffSwitchConfiguration) WriteAttributeSwitchActionsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcoosc), objc.RegisterName("writeAttributeSwitchActionsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeSwitchActionsWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOnOffSwitchConfiguration) WriteAttributeSwitchActionsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSwitchActionsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcoosc *MTRClusterOnOffSwitchConfiguration) WriteAttributeSwitchActionsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcoosc), objc.RegisterName("writeAttributeSwitchActionsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mcoosc *MTRClusterOnOffSwitchConfiguration) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcoosc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mcoosc *MTRClusterOnOffSwitchConfiguration) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcoosc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mcoosc *MTRClusterOnOffSwitchConfiguration) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcoosc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mcoosc *MTRClusterOnOffSwitchConfiguration) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcoosc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOnOffSwitchConfiguration) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mcoosc *MTRClusterOnOffSwitchConfiguration) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcoosc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
-
-// MTRClusterOnOffSwitchConfigurationable is the interface implemented by [MTRClusterOnOffSwitchConfiguration], for mocking and DI.
-type MTRClusterOnOffSwitchConfigurationable interface {
-	obj.Object
-	ReadAttributeSwitchTypeWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeSwitchActionsWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeSwitchActionsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeSwitchActionsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-}
-
-var _ MTRClusterOnOffSwitchConfigurationable = (*MTRClusterOnOffSwitchConfiguration)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterOnOffSwitchConfiguration)(nil)
 

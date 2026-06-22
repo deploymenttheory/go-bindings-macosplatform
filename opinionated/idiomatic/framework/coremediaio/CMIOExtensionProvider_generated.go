@@ -5,13 +5,14 @@
 package coremediaio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // ExtensionProvider is an idiomatic wrapper over the Objective-C class CMIOExtensionProvider.
@@ -48,24 +49,24 @@ func extensionProviderAdopt(id objc.ID) *ExtensionProvider {
 }
 
 // Description returns the object's -description text.
-func (x *ExtensionProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ep *ExtensionProvider) Description() string {
+	return rt.Description(objref.IDOf(ep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExtensionProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ep *ExtensionProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExtensionProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ep *ExtensionProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExtensionProvider) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ep *ExtensionProvider) String() string {
+	return rt.Description(objref.IDOf(ep))
 }
 
 // NewExtensionProvider creates a new ExtensionProvider.
@@ -75,9 +76,9 @@ func NewExtensionProvider() *ExtensionProvider {
 }
 
 // AddDevice adds a device to a provider.
-func (x *ExtensionProvider) AddDevice(device *ExtensionDevice) error {
+func (ep *ExtensionProvider) AddDevice(device *ExtensionDevice) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addDevice:error:"), objref.IDOf(device), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(ep), objc.RegisterName("addDevice:error:"), objref.IDOf(device), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -85,9 +86,9 @@ func (x *ExtensionProvider) AddDevice(device *ExtensionDevice) error {
 }
 
 // RemoveDevice removes a device from a provider.
-func (x *ExtensionProvider) RemoveDevice(device *ExtensionDevice) error {
+func (ep *ExtensionProvider) RemoveDevice(device *ExtensionDevice) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeDevice:error:"), objref.IDOf(device), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(ep), objc.RegisterName("removeDevice:error:"), objref.IDOf(device), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -95,41 +96,28 @@ func (x *ExtensionProvider) RemoveDevice(device *ExtensionDevice) error {
 }
 
 // NotifyPropertiesChanged notifies connected clients of device property changes.
-func (x *ExtensionProvider) NotifyPropertiesChanged(propertyStates obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notifyPropertiesChanged:"), objref.IDOf(propertyStates))
+func (ep *ExtensionProvider) NotifyPropertiesChanged(propertyStates obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ep), objc.RegisterName("notifyPropertiesChanged:"), objref.IDOf(propertyStates))
 }
 
-// ClientQueue the dispatch queue on which source methods from the provider/device/stream will be called.
-func (x *ExtensionProvider) ClientQueue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientQueue"))
+// ClientQueue returns the dispatch queue on which source methods from the provider/device/stream will be called.
+func (ep *ExtensionProvider) ClientQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ep), objc.RegisterName("clientQueue"))
 	return obj.Wrap(_r)
 }
 
-// ConnectedClients the array of connected clients. This property is key-value observable.
+// ConnectedClients returns the array of connected clients. This property is key-value observable.
 //
 // ConnectedClients returns the collection as a Go slice.
-func (x *ExtensionProvider) ConnectedClients() []*ExtensionClient {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectedClients"))
+func (ep *ExtensionProvider) ConnectedClients() []*ExtensionClient {
+	_arr := objc.Send[objc.ID](objref.IDOf(ep), objc.RegisterName("connectedClients"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExtensionClient { return ExtensionClientFromID(_id) })
 }
 
-// Devices the devices array of the provider. This property is not key-value observable.
+// Devices returns the devices array of the provider. This property is not key-value observable.
 //
 // Devices returns the collection as a Go slice.
-func (x *ExtensionProvider) Devices() []*ExtensionDevice {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("devices"))
+func (ep *ExtensionProvider) Devices() []*ExtensionDevice {
+	_arr := objc.Send[objc.ID](objref.IDOf(ep), objc.RegisterName("devices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExtensionDevice { return ExtensionDeviceFromID(_id) })
 }
-
-// ExtensionProviderable is the interface implemented by [ExtensionProvider], for mocking and DI.
-type ExtensionProviderable interface {
-	obj.Object
-	AddDevice(device *ExtensionDevice) error
-	RemoveDevice(device *ExtensionDevice) error
-	NotifyPropertiesChanged(propertyStates obj.Object)
-	ClientQueue() obj.Object
-	ConnectedClients() []*ExtensionClient
-	Devices() []*ExtensionDevice
-}
-
-var _ ExtensionProviderable = (*ExtensionProvider)(nil)

@@ -46,24 +46,24 @@ func webFrameViewAdopt(id objc.ID) *WebFrameView {
 }
 
 // Description returns the object's -description text.
-func (x *WebFrameView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wfv *WebFrameView) Description() string {
+	return rt.Description(objref.IDOf(wfv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WebFrameView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wfv *WebFrameView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wfv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WebFrameView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wfv *WebFrameView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wfv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WebFrameView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wfv *WebFrameView) String() string {
+	return rt.Description(objref.IDOf(wfv))
 }
 
 // NewWebFrameView creates a new WebFrameView.
@@ -72,70 +72,49 @@ func NewWebFrameView() *WebFrameView {
 	return webFrameViewAdopt(_id)
 }
 
-// WithAllowsScrolling a Boolean that indicates whether the frame view should allow users to scroll.
-func (x *WebFrameView) WithAllowsScrolling(allowsScrolling bool) *WebFrameView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsScrolling:"), allowsScrolling)
-	return x
+// WithAllowsScrolling sets a Boolean that indicates whether the frame view should allow users to scroll.
+func (wfv *WebFrameView) WithAllowsScrolling(allowsScrolling bool) *WebFrameView {
+	objc.Send[objc.ID](objref.IDOf(wfv), objc.RegisterName("setAllowsScrolling:"), allowsScrolling)
+	return wfv
 }
 
 // PrintOperationWithPrintInfo returns a print operation object to print this frame.
-func (x *WebFrameView) PrintOperationWithPrintInfo(printInfo obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printOperationWithPrintInfo:"), objref.IDOf(printInfo))
+func (wfv *WebFrameView) PrintOperationWithPrintInfo(printInfo obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wfv), objc.RegisterName("printOperationWithPrintInfo:"), objref.IDOf(printInfo))
 	return obj.Wrap(_r)
 }
 
 // PrintDocumentView prints the receiver.
-func (x *WebFrameView) PrintDocumentView() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printDocumentView"))
+func (wfv *WebFrameView) PrintDocumentView() {
+	objc.Send[objc.ID](objref.IDOf(wfv), objc.RegisterName("printDocumentView"))
 }
 
-// WebFrame the WebFrame associated with this WebFrameView
-func (x *WebFrameView) WebFrame() *WebFrame {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webFrame"))
+// WebFrame returns the WebFrame associated with this WebFrameView
+func (wfv *WebFrameView) WebFrame() *WebFrame {
+	_r := objc.Send[objc.ID](objref.IDOf(wfv), objc.RegisterName("webFrame"))
 	return WebFrameFromID(_r)
 }
 
-// DocumentView the WebFrameView's document subview The subview that renders the WebFrameView's contents
-func (x *WebFrameView) DocumentView() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentView"))
+// DocumentView returns the WebFrameView's document subview The subview that renders the WebFrameView's contents
+func (wfv *WebFrameView) DocumentView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wfv), objc.RegisterName("documentView"))
 	return obj.Wrap(_r)
 }
 
-// AllowsScrolling whether the WebFrameView allows its document to be scrolled
-func (x *WebFrameView) AllowsScrolling() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsScrolling"))
+// AllowsScrolling reports whether the WebFrameView allows its document to be scrolled
+func (wfv *WebFrameView) AllowsScrolling() bool {
+	_r := objc.Send[bool](objref.IDOf(wfv), objc.RegisterName("allowsScrolling"))
 	return _r
 }
 
-// SetAllowsScrolling wraps the corresponding Objective-C method.
-func (x *WebFrameView) SetAllowsScrolling(allowsScrolling bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsScrolling:"), allowsScrolling)
-}
-
-// CanPrintHeadersAndFooters whether this frame can print headers and footers
-func (x *WebFrameView) CanPrintHeadersAndFooters() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canPrintHeadersAndFooters"))
+// CanPrintHeadersAndFooters reports whether this frame can print headers and footers
+func (wfv *WebFrameView) CanPrintHeadersAndFooters() bool {
+	_r := objc.Send[bool](objref.IDOf(wfv), objc.RegisterName("canPrintHeadersAndFooters"))
 	return _r
 }
 
-// DocumentViewShouldHandlePrint called by the host application before it initializes and runs a print operation. If NO is returned, the host application will abort its print operation and call -printDocumentView on the WebFrameView.  The document view is then expected to run its own print operation.  If YES is returned, the host application's print operation will continue as normal.
-func (x *WebFrameView) DocumentViewShouldHandlePrint() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("documentViewShouldHandlePrint"))
+// DocumentViewShouldHandlePrint reports whether called by the host application before it initializes and runs a print operation. If false is returned, the host application will abort its print operation and call -printDocumentView on the WebFrameView. The document view is then expected to run its own print operation. If true is returned, the host application's print operation will continue as normal.
+func (wfv *WebFrameView) DocumentViewShouldHandlePrint() bool {
+	_r := objc.Send[bool](objref.IDOf(wfv), objc.RegisterName("documentViewShouldHandlePrint"))
 	return _r
 }
-
-// WebFrameViewable is the interface implemented by [WebFrameView], for mocking and DI.
-type WebFrameViewable interface {
-	obj.Object
-	WithAllowsScrolling(allowsScrolling bool) *WebFrameView
-	PrintOperationWithPrintInfo(printInfo obj.Object) obj.Object
-	PrintDocumentView()
-	WebFrame() *WebFrame
-	DocumentView() obj.Object
-	AllowsScrolling() bool
-	SetAllowsScrolling(allowsScrolling bool)
-	CanPrintHeadersAndFooters() bool
-	DocumentViewShouldHandlePrint() bool
-}
-
-var _ WebFrameViewable = (*WebFrameView)(nil)

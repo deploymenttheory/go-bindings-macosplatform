@@ -53,290 +53,140 @@ func NewMutableURLRequest() *MutableURLRequest {
 	return mutableURLRequestAdopt(_id)
 }
 
-// WithURL the URL being requested.
-func (x *MutableURLRequest) WithURL(uRL string) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-	return x
+// WithURL sets the URL being requested.
+func (mur *MutableURLRequest) WithURL(uRL string) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+	return mur
 }
 
-// WithCachePolicy the request’s cache policy.
-func (x *MutableURLRequest) WithCachePolicy(cachePolicy URLRequestCachePolicy) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCachePolicy:"), cachePolicy)
-	return x
+// WithCachePolicy sets the request’s cache policy.
+func (mur *MutableURLRequest) WithCachePolicy(cachePolicy URLRequestCachePolicy) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setCachePolicy:"), cachePolicy)
+	return mur
 }
 
-// WithTimeoutInterval the request’s timeout interval, in seconds.
-func (x *MutableURLRequest) WithTimeoutInterval(timeoutInterval float64) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutInterval:"), timeoutInterval)
-	return x
+// WithTimeoutInterval sets the request’s timeout interval, in seconds.
+func (mur *MutableURLRequest) WithTimeoutInterval(timeoutInterval float64) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setTimeoutInterval:"), timeoutInterval)
+	return mur
 }
 
-// WithMainDocumentURL the main document URL.
-func (x *MutableURLRequest) WithMainDocumentURL(mainDocumentURL string) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMainDocumentURL:"), rt.FileURL(mainDocumentURL))
-	return x
+// WithMainDocumentURL sets the main document URL.
+func (mur *MutableURLRequest) WithMainDocumentURL(mainDocumentURL string) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setMainDocumentURL:"), rt.FileURL(mainDocumentURL))
+	return mur
 }
 
-// WithNetworkServiceType the network service type of the connection.
-func (x *MutableURLRequest) WithNetworkServiceType(networkServiceType URLRequestNetworkServiceType) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkServiceType:"), networkServiceType)
-	return x
+// WithNetworkServiceType sets the network service type of the connection.
+func (mur *MutableURLRequest) WithNetworkServiceType(networkServiceType URLRequestNetworkServiceType) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setNetworkServiceType:"), networkServiceType)
+	return mur
 }
 
-// WithAllowsCellularAccess a Boolean value that indicates whether a connection can use the device’s cellular network (if present).
-func (x *MutableURLRequest) WithAllowsCellularAccess(allowsCellularAccess bool) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
-	return x
+// WithAllowsCellularAccess sets a Boolean value that indicates whether a connection can use the device’s cellular network (if present).
+func (mur *MutableURLRequest) WithAllowsCellularAccess(allowsCellularAccess bool) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
+	return mur
 }
 
-// WithAllowsExpensiveNetworkAccess a Boolean value that indicates whether connections may use a network interface that the system considers expensive.
-func (x *MutableURLRequest) WithAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpensiveNetworkAccess:"), allowsExpensiveNetworkAccess)
-	return x
+// WithAllowsExpensiveNetworkAccess sets a Boolean value that indicates whether connections may use a network interface that the system considers expensive.
+func (mur *MutableURLRequest) WithAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setAllowsExpensiveNetworkAccess:"), allowsExpensiveNetworkAccess)
+	return mur
 }
 
-// WithAllowsConstrainedNetworkAccess a Boolean value that indicates whether connections may use the network when the user has specified Low Data Mode.
-func (x *MutableURLRequest) WithAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsConstrainedNetworkAccess:"), allowsConstrainedNetworkAccess)
-	return x
+// WithAllowsConstrainedNetworkAccess sets a Boolean value that indicates whether connections may use the network when the user has specified Low Data Mode.
+func (mur *MutableURLRequest) WithAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setAllowsConstrainedNetworkAccess:"), allowsConstrainedNetworkAccess)
+	return mur
 }
 
-// WithAllowsUltraConstrainedNetworkAccess a Boolean value that indicates whether a connection created with this request is allowed to use network interfaces which have been marked as ultra constrained.
-func (x *MutableURLRequest) WithAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUltraConstrainedNetworkAccess:"), allowsUltraConstrainedNetworkAccess)
-	return x
+// WithAllowsUltraConstrainedNetworkAccess sets a Boolean value that indicates whether a connection created with this request is allowed to use network interfaces which have been marked as ultra constrained.
+func (mur *MutableURLRequest) WithAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setAllowsUltraConstrainedNetworkAccess:"), allowsUltraConstrainedNetworkAccess)
+	return mur
 }
 
-// WithAssumesHTTP3Capable a Boolean value that indicates whether the server is assumed to support HTTP/3.
-func (x *MutableURLRequest) WithAssumesHTTP3Capable(assumesHTTP3Capable bool) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssumesHTTP3Capable:"), assumesHTTP3Capable)
-	return x
+// WithAssumesHTTP3Capable sets a Boolean value that indicates whether the server is assumed to support HTTP/3.
+func (mur *MutableURLRequest) WithAssumesHTTP3Capable(assumesHTTP3Capable bool) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setAssumesHTTP3Capable:"), assumesHTTP3Capable)
+	return mur
 }
 
-// WithAttribution the entity that initiates the network request.
-func (x *MutableURLRequest) WithAttribution(attribution URLRequestAttribution) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttribution:"), attribution)
-	return x
+// WithAttribution sets the entity that initiates the network request.
+func (mur *MutableURLRequest) WithAttribution(attribution URLRequestAttribution) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setAttribution:"), attribution)
+	return mur
 }
 
-// WithRequiresDNSSECValidation a Boolean value that indicates whether a request requires DNSSEC validation during DNS lookup.
-func (x *MutableURLRequest) WithRequiresDNSSECValidation(requiresDNSSECValidation bool) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresDNSSECValidation:"), requiresDNSSECValidation)
-	return x
+// WithRequiresDNSSECValidation sets a Boolean value that indicates whether a request requires DNSSEC validation during DNS lookup.
+func (mur *MutableURLRequest) WithRequiresDNSSECValidation(requiresDNSSECValidation bool) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setRequiresDNSSECValidation:"), requiresDNSSECValidation)
+	return mur
 }
 
-// WithAllowsPersistentDNS a Boolean value that indicates whether storing and usage of DNS answers in a persistent per-process cache is allowed.
-func (x *MutableURLRequest) WithAllowsPersistentDNS(allowsPersistentDNS bool) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsPersistentDNS:"), allowsPersistentDNS)
-	return x
+// WithAllowsPersistentDNS sets a Boolean value that indicates whether storing and usage of DNS answers in a persistent per-process cache is allowed.
+func (mur *MutableURLRequest) WithAllowsPersistentDNS(allowsPersistentDNS bool) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setAllowsPersistentDNS:"), allowsPersistentDNS)
+	return mur
 }
 
 // WithCookiePartitionIdentifier sets the property and returns the receiver so calls can be chained.
-func (x *MutableURLRequest) WithCookiePartitionIdentifier(cookiePartitionIdentifier StringProvider) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookiePartitionIdentifier:"), objref.IDOf(cookiePartitionIdentifier))
-	return x
+func (mur *MutableURLRequest) WithCookiePartitionIdentifier(cookiePartitionIdentifier StringProvider) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setCookiePartitionIdentifier:"), objref.IDOf(cookiePartitionIdentifier))
+	return mur
 }
 
-// WithHTTPMethod the HTTP request method.
-func (x *MutableURLRequest) WithHTTPMethod(hTTPMethod StringProvider) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPMethod:"), objref.IDOf(hTTPMethod))
-	return x
+// WithHTTPMethod sets the HTTP request method.
+func (mur *MutableURLRequest) WithHTTPMethod(hTTPMethod StringProvider) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setHTTPMethod:"), objref.IDOf(hTTPMethod))
+	return mur
 }
 
-// WithAllHTTPHeaderFields a dictionary containing all of the HTTP header fields for a request.
-func (x *MutableURLRequest) WithAllHTTPHeaderFields(allHTTPHeaderFields obj.Object) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllHTTPHeaderFields:"), objref.IDOf(allHTTPHeaderFields))
-	return x
+// WithAllHTTPHeaderFields sets a dictionary containing all of the HTTP header fields for a request.
+func (mur *MutableURLRequest) WithAllHTTPHeaderFields(allHTTPHeaderFields obj.Object) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setAllHTTPHeaderFields:"), objref.IDOf(allHTTPHeaderFields))
+	return mur
 }
 
-// WithHTTPBody the request body.
-func (x *MutableURLRequest) WithHTTPBody(hTTPBody DataProvider) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPBody:"), objref.IDOf(hTTPBody))
-	return x
+// WithHTTPBody sets the request body.
+func (mur *MutableURLRequest) WithHTTPBody(hTTPBody DataProvider) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setHTTPBody:"), objref.IDOf(hTTPBody))
+	return mur
 }
 
-// WithHTTPBodyStream the request body as an input stream.
-func (x *MutableURLRequest) WithHTTPBodyStream(hTTPBodyStream *InputStream) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPBodyStream:"), objref.IDOf(hTTPBodyStream))
-	return x
+// WithHTTPBodyStream sets the request body as an input stream.
+func (mur *MutableURLRequest) WithHTTPBodyStream(hTTPBodyStream *InputStream) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setHTTPBodyStream:"), objref.IDOf(hTTPBodyStream))
+	return mur
 }
 
-// WithHTTPShouldHandleCookies a Boolean value that indicates whether the request should use the default cookie handling for the request.
-func (x *MutableURLRequest) WithHTTPShouldHandleCookies(hTTPShouldHandleCookies bool) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPShouldHandleCookies:"), hTTPShouldHandleCookies)
-	return x
+// WithHTTPShouldHandleCookies sets a Boolean value that indicates whether the request should use the default cookie handling for the request.
+func (mur *MutableURLRequest) WithHTTPShouldHandleCookies(hTTPShouldHandleCookies bool) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setHTTPShouldHandleCookies:"), hTTPShouldHandleCookies)
+	return mur
 }
 
-// WithHTTPShouldUsePipelining a Boolean value that indicates whether the request can continue transmitting data before receiving a response from an earlier transmission.
-func (x *MutableURLRequest) WithHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPShouldUsePipelining:"), hTTPShouldUsePipelining)
-	return x
+// WithHTTPShouldUsePipelining sets a Boolean value that indicates whether the request can continue transmitting data before receiving a response from an earlier transmission.
+func (mur *MutableURLRequest) WithHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setHTTPShouldUsePipelining:"), hTTPShouldUsePipelining)
+	return mur
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *MutableURLRequest) WithScriptingProperties(scriptingProperties obj.Object) *MutableURLRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
-}
-
-// SetURL wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetURL(uRL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-}
-
-// SetCachePolicy wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetCachePolicy(cachePolicy URLRequestCachePolicy) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCachePolicy:"), cachePolicy)
-}
-
-// SetTimeoutInterval wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetTimeoutInterval(timeoutInterval float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutInterval:"), timeoutInterval)
-}
-
-// SetMainDocumentURL wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetMainDocumentURL(mainDocumentURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMainDocumentURL:"), rt.FileURL(mainDocumentURL))
-}
-
-// SetNetworkServiceType wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetNetworkServiceType(networkServiceType URLRequestNetworkServiceType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkServiceType:"), networkServiceType)
-}
-
-// SetAllowsCellularAccess wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetAllowsCellularAccess(allowsCellularAccess bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
-}
-
-// SetAllowsExpensiveNetworkAccess wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpensiveNetworkAccess:"), allowsExpensiveNetworkAccess)
-}
-
-// SetAllowsConstrainedNetworkAccess wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsConstrainedNetworkAccess:"), allowsConstrainedNetworkAccess)
-}
-
-// SetAllowsUltraConstrainedNetworkAccess wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUltraConstrainedNetworkAccess:"), allowsUltraConstrainedNetworkAccess)
-}
-
-// SetAssumesHTTP3Capable wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetAssumesHTTP3Capable(assumesHTTP3Capable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssumesHTTP3Capable:"), assumesHTTP3Capable)
-}
-
-// SetAttribution wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetAttribution(attribution URLRequestAttribution) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttribution:"), attribution)
-}
-
-// SetRequiresDNSSECValidation wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetRequiresDNSSECValidation(requiresDNSSECValidation bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresDNSSECValidation:"), requiresDNSSECValidation)
-}
-
-// SetAllowsPersistentDNS wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetAllowsPersistentDNS(allowsPersistentDNS bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsPersistentDNS:"), allowsPersistentDNS)
-}
-
-// SetCookiePartitionIdentifier wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetCookiePartitionIdentifier(cookiePartitionIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCookiePartitionIdentifier:"), purego.NSString(cookiePartitionIdentifier))
+func (mur *MutableURLRequest) WithScriptingProperties(scriptingProperties obj.Object) *MutableURLRequest {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return mur
 }
 
 // SetValueForHTTPHeaderField sets a value for the header field.
-func (x *MutableURLRequest) SetValueForHTTPHeaderField(value string, field string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:forHTTPHeaderField:"), purego.NSString(value), purego.NSString(field))
+func (mur *MutableURLRequest) SetValueForHTTPHeaderField(value string, field string) {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("setValue:forHTTPHeaderField:"), purego.NSString(value), purego.NSString(field))
 }
 
 // AddValueForHTTPHeaderField adds a value to the header field.
-func (x *MutableURLRequest) AddValueForHTTPHeaderField(value string, field string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addValue:forHTTPHeaderField:"), purego.NSString(value), purego.NSString(field))
+func (mur *MutableURLRequest) AddValueForHTTPHeaderField(value string, field string) {
+	objc.Send[objc.ID](objref.IDOf(mur), objc.RegisterName("addValue:forHTTPHeaderField:"), purego.NSString(value), purego.NSString(field))
 }
-
-// SetHTTPMethod wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetHTTPMethod(hTTPMethod string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPMethod:"), purego.NSString(hTTPMethod))
-}
-
-// SetAllHTTPHeaderFields wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetAllHTTPHeaderFields(allHTTPHeaderFields obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllHTTPHeaderFields:"), objref.IDOf(allHTTPHeaderFields))
-}
-
-// SetHTTPBody wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetHTTPBody(hTTPBody *Data) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPBody:"), objref.IDOf(hTTPBody))
-}
-
-// SetHTTPBodyStream wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetHTTPBodyStream(hTTPBodyStream *InputStream) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPBodyStream:"), objref.IDOf(hTTPBodyStream))
-}
-
-// SetHTTPShouldHandleCookies wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetHTTPShouldHandleCookies(hTTPShouldHandleCookies bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPShouldHandleCookies:"), hTTPShouldHandleCookies)
-}
-
-// SetHTTPShouldUsePipelining wraps the corresponding Objective-C method.
-func (x *MutableURLRequest) SetHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPShouldUsePipelining:"), hTTPShouldUsePipelining)
-}
-
-// MutableURLRequestable is the interface implemented by [MutableURLRequest], for mocking and DI.
-type MutableURLRequestable interface {
-	obj.Object
-	WithURL(uRL string) *MutableURLRequest
-	WithCachePolicy(cachePolicy URLRequestCachePolicy) *MutableURLRequest
-	WithTimeoutInterval(timeoutInterval float64) *MutableURLRequest
-	WithMainDocumentURL(mainDocumentURL string) *MutableURLRequest
-	WithNetworkServiceType(networkServiceType URLRequestNetworkServiceType) *MutableURLRequest
-	WithAllowsCellularAccess(allowsCellularAccess bool) *MutableURLRequest
-	WithAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool) *MutableURLRequest
-	WithAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool) *MutableURLRequest
-	WithAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool) *MutableURLRequest
-	WithAssumesHTTP3Capable(assumesHTTP3Capable bool) *MutableURLRequest
-	WithAttribution(attribution URLRequestAttribution) *MutableURLRequest
-	WithRequiresDNSSECValidation(requiresDNSSECValidation bool) *MutableURLRequest
-	WithAllowsPersistentDNS(allowsPersistentDNS bool) *MutableURLRequest
-	WithCookiePartitionIdentifier(cookiePartitionIdentifier StringProvider) *MutableURLRequest
-	WithHTTPMethod(hTTPMethod StringProvider) *MutableURLRequest
-	WithAllHTTPHeaderFields(allHTTPHeaderFields obj.Object) *MutableURLRequest
-	WithHTTPBody(hTTPBody DataProvider) *MutableURLRequest
-	WithHTTPBodyStream(hTTPBodyStream *InputStream) *MutableURLRequest
-	WithHTTPShouldHandleCookies(hTTPShouldHandleCookies bool) *MutableURLRequest
-	WithHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) *MutableURLRequest
-	WithScriptingProperties(scriptingProperties obj.Object) *MutableURLRequest
-	SetURL(uRL string)
-	SetCachePolicy(cachePolicy URLRequestCachePolicy)
-	SetTimeoutInterval(timeoutInterval float64)
-	SetMainDocumentURL(mainDocumentURL string)
-	SetNetworkServiceType(networkServiceType URLRequestNetworkServiceType)
-	SetAllowsCellularAccess(allowsCellularAccess bool)
-	SetAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool)
-	SetAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool)
-	SetAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool)
-	SetAssumesHTTP3Capable(assumesHTTP3Capable bool)
-	SetAttribution(attribution URLRequestAttribution)
-	SetRequiresDNSSECValidation(requiresDNSSECValidation bool)
-	SetAllowsPersistentDNS(allowsPersistentDNS bool)
-	SetCookiePartitionIdentifier(cookiePartitionIdentifier string)
-	SetValueForHTTPHeaderField(value string, field string)
-	AddValueForHTTPHeaderField(value string, field string)
-	SetHTTPMethod(hTTPMethod string)
-	SetAllHTTPHeaderFields(allHTTPHeaderFields obj.Object)
-	SetHTTPBody(hTTPBody *Data)
-	SetHTTPBodyStream(hTTPBodyStream *InputStream)
-	SetHTTPShouldHandleCookies(hTTPShouldHandleCookies bool)
-	SetHTTPShouldUsePipelining(hTTPShouldUsePipelining bool)
-}
-
-var _ MutableURLRequestable = (*MutableURLRequest)(nil)
 
 var _ URLRequestProvider = (*MutableURLRequest)(nil)

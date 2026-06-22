@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewLengthResolutionResult() *LengthResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INLengthResolutionResult")), objc.RegisterName("new"))
 	return lengthResolutionResultAdopt(_id)
 }
-
-// LengthResolutionResultable is the interface implemented by [LengthResolutionResult], for mocking and DI.
-type LengthResolutionResultable interface {
-	obj.Object
-}
-
-var _ LengthResolutionResultable = (*LengthResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*LengthResolutionResult)(nil)

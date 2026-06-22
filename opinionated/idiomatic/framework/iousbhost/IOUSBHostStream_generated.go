@@ -5,12 +5,13 @@
 package iousbhost
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // HostStream is an idiomatic wrapper over the Objective-C class IOUSBHostStream.
@@ -55,9 +56,9 @@ func NewHostStream() *HostStream {
 }
 
 // AbortWithOption aborts pending input/output requests.
-func (x *HostStream) AbortWithOption(option HostAbortOption) error {
+func (hs *HostStream) AbortWithOption(option HostAbortOption) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("abortWithOption:error:"), option, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(hs), objc.RegisterName("abortWithOption:error:"), option, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -67,9 +68,9 @@ func (x *HostStream) AbortWithOption(option HostAbortOption) error {
 // Abort aborts pending input/output requests synchronously.
 //
 // Abort returns an error if the operation did not succeed.
-func (x *HostStream) Abort() error {
+func (hs *HostStream) Abort() error {
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("abortWithError:"), unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(hs), objc.RegisterName("abortWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -77,10 +78,10 @@ func (x *HostStream) Abort() error {
 }
 
 // SendIORequestWithDataBytesTransferred sends an input/output request on the stream.
-func (x *HostStream) SendIORequestWithDataBytesTransferred(data obj.Object) (bytesTransferred int, err error) {
+func (hs *HostStream) SendIORequestWithDataBytesTransferred(data obj.Object) (bytesTransferred int, err error) {
 	var _out0 int
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendIORequestWithData:bytesTransferred:error:"), objref.IDOf(data), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(hs), objc.RegisterName("sendIORequestWithData:bytesTransferred:error:"), objref.IDOf(data), unsafe.Pointer(&_out0), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -88,27 +89,15 @@ func (x *HostStream) SendIORequestWithDataBytesTransferred(data obj.Object) (byt
 }
 
 // HostPipe returns the IOUSBHostPipe this stream was created from
-func (x *HostStream) HostPipe() *HostPipe {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hostPipe"))
+func (hs *HostStream) HostPipe() *HostPipe {
+	_r := objc.Send[objc.ID](objref.IDOf(hs), objc.RegisterName("hostPipe"))
 	return HostPipeFromID(_r)
 }
 
 // StreamID returns streamID associated with this IOUSBHostStream.
-func (x *HostStream) StreamID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("streamID"))
+func (hs *HostStream) StreamID() int {
+	_r := objc.Send[int](objref.IDOf(hs), objc.RegisterName("streamID"))
 	return _r
 }
-
-// HostStreamable is the interface implemented by [HostStream], for mocking and DI.
-type HostStreamable interface {
-	obj.Object
-	AbortWithOption(option HostAbortOption) error
-	Abort() error
-	SendIORequestWithDataBytesTransferred(data obj.Object) (bytesTransferred int, err error)
-	HostPipe() *HostPipe
-	StreamID() int
-}
-
-var _ HostStreamable = (*HostStream)(nil)
 
 var _ HostIOSourceProvider = (*HostStream)(nil)

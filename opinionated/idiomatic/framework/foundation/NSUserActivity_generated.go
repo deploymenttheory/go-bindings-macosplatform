@@ -46,24 +46,24 @@ func userActivityAdopt(id objc.ID) *UserActivity {
 }
 
 // Description returns the object's -description text.
-func (x *UserActivity) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ua *UserActivity) Description() string {
+	return rt.Description(objref.IDOf(ua))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UserActivity) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ua *UserActivity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ua), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UserActivity) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ua *UserActivity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ua), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *UserActivity) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ua *UserActivity) String() string {
+	return rt.Description(objref.IDOf(ua))
 }
 
 // NewUserActivity creates a new UserActivity.
@@ -79,119 +79,119 @@ func NewUserActivityWithActivityType(activityType string) *UserActivity {
 	return userActivityAdopt(_id)
 }
 
-// WithTitle an optional, user-visible title for this activity, such as a document name or web page title.
-func (x *UserActivity) WithTitle(title StringProvider) *UserActivity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), objref.IDOf(title))
-	return x
+// WithTitle sets an optional, user-visible title for this activity, such as a document name or web page title.
+func (ua *UserActivity) WithTitle(title StringProvider) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setTitle:"), objref.IDOf(title))
+	return ua
 }
 
-// WithUserInfo a dictionary containing app-specific state information needed to continue an activity on another device.
-func (x *UserActivity) WithUserInfo(userInfo obj.Object) *UserActivity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
-	return x
+// WithUserInfo sets a dictionary containing app-specific state information needed to continue an activity on another device.
+func (ua *UserActivity) WithUserInfo(userInfo obj.Object) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
+	return ua
 }
 
-// WithRequiredUserInfoKeys a set of keys that represent the minimal information about the activity that should be stored for later restoration.
-func (x *UserActivity) WithRequiredUserInfoKeys(requiredUserInfoKeys obj.Object) *UserActivity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredUserInfoKeys:"), objref.IDOf(requiredUserInfoKeys))
-	return x
+// WithRequiredUserInfoKeys sets a set of keys that represent the minimal information about the activity that should be stored for later restoration.
+func (ua *UserActivity) WithRequiredUserInfoKeys(requiredUserInfoKeys obj.Object) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setRequiredUserInfoKeys:"), objref.IDOf(requiredUserInfoKeys))
+	return ua
 }
 
-// WithNeedsSave a Boolean value that indicates whether the state of the activity needs to be updated.
-func (x *UserActivity) WithNeedsSave(needsSave bool) *UserActivity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsSave:"), needsSave)
-	return x
+// WithNeedsSave sets a Boolean value that indicates whether the state of the activity needs to be updated.
+func (ua *UserActivity) WithNeedsSave(needsSave bool) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setNeedsSave:"), needsSave)
+	return ua
 }
 
-// WithWebpageURL the URL of the webpage to load in a browser to continue the activity.
-func (x *UserActivity) WithWebpageURL(webpageURL string) *UserActivity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWebpageURL:"), rt.FileURL(webpageURL))
-	return x
+// WithWebpageURL sets the URL of the webpage to load in a browser to continue the activity.
+func (ua *UserActivity) WithWebpageURL(webpageURL string) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setWebpageURL:"), rt.FileURL(webpageURL))
+	return ua
 }
 
-// WithReferrerURL the URL of the webpage that linked to the webpage URL.
-func (x *UserActivity) WithReferrerURL(referrerURL string) *UserActivity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReferrerURL:"), rt.FileURL(referrerURL))
-	return x
+// WithReferrerURL sets the URL of the webpage that linked to the webpage URL.
+func (ua *UserActivity) WithReferrerURL(referrerURL string) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setReferrerURL:"), rt.FileURL(referrerURL))
+	return ua
 }
 
-// WithExpirationDate the date after which the activity is no longer eligible for Handoff or indexing.
-func (x *UserActivity) WithExpirationDate(expirationDate DateProvider) *UserActivity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
-	return x
+// WithExpirationDate sets the date after which the activity is no longer eligible for Handoff or indexing.
+func (ua *UserActivity) WithExpirationDate(expirationDate DateProvider) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
+	return ua
 }
 
-// WithKeywords a set of localized keywords that can help users find the activity in search results.
-func (x *UserActivity) WithKeywords(keywords obj.Object) *UserActivity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeywords:"), objref.IDOf(keywords))
-	return x
+// WithKeywords sets a set of localized keywords that can help users find the activity in search results.
+func (ua *UserActivity) WithKeywords(keywords obj.Object) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setKeywords:"), objref.IDOf(keywords))
+	return ua
 }
 
-// WithSupportsContinuationStreams a Boolean value that determines whether the continuing app can request streams to be opened back to the originating app.
-func (x *UserActivity) WithSupportsContinuationStreams(supportsContinuationStreams bool) *UserActivity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsContinuationStreams:"), supportsContinuationStreams)
-	return x
+// WithSupportsContinuationStreams sets a Boolean value that determines whether the continuing app can request streams to be opened back to the originating app.
+func (ua *UserActivity) WithSupportsContinuationStreams(supportsContinuationStreams bool) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setSupportsContinuationStreams:"), supportsContinuationStreams)
+	return ua
 }
 
-// WithTargetContentIdentifier a string that identifies the user activity’s content.
-func (x *UserActivity) WithTargetContentIdentifier(targetContentIdentifier StringProvider) *UserActivity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetContentIdentifier:"), objref.IDOf(targetContentIdentifier))
-	return x
+// WithTargetContentIdentifier sets a string that identifies the user activity’s content.
+func (ua *UserActivity) WithTargetContentIdentifier(targetContentIdentifier StringProvider) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setTargetContentIdentifier:"), objref.IDOf(targetContentIdentifier))
+	return ua
 }
 
-// WithEligibleForHandoff a Boolean value that indicates whether the activity can continue on another device using Handoff.
-func (x *UserActivity) WithEligibleForHandoff(eligibleForHandoff bool) *UserActivity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEligibleForHandoff:"), eligibleForHandoff)
-	return x
+// WithEligibleForHandoff sets a Boolean value that indicates whether the activity can continue on another device using Handoff.
+func (ua *UserActivity) WithEligibleForHandoff(eligibleForHandoff bool) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setEligibleForHandoff:"), eligibleForHandoff)
+	return ua
 }
 
-// WithEligibleForSearch a Boolean value that indicates whether to add the activity to the on-device index.
-func (x *UserActivity) WithEligibleForSearch(eligibleForSearch bool) *UserActivity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEligibleForSearch:"), eligibleForSearch)
-	return x
+// WithEligibleForSearch sets a Boolean value that indicates whether to add the activity to the on-device index.
+func (ua *UserActivity) WithEligibleForSearch(eligibleForSearch bool) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setEligibleForSearch:"), eligibleForSearch)
+	return ua
 }
 
-// WithEligibleForPublicIndexing a Boolean value that indicates whether the activity is publicly accessible by all iOS users.
-func (x *UserActivity) WithEligibleForPublicIndexing(eligibleForPublicIndexing bool) *UserActivity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEligibleForPublicIndexing:"), eligibleForPublicIndexing)
-	return x
+// WithEligibleForPublicIndexing sets a Boolean value that indicates whether the activity is publicly accessible by all iOS users.
+func (ua *UserActivity) WithEligibleForPublicIndexing(eligibleForPublicIndexing bool) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setEligibleForPublicIndexing:"), eligibleForPublicIndexing)
+	return ua
 }
 
-// WithPersistentIdentifier a unique and persistent value you use to identify the activity.
-func (x *UserActivity) WithPersistentIdentifier(persistentIdentifier StringProvider) *UserActivity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPersistentIdentifier:"), objref.IDOf(persistentIdentifier))
-	return x
+// WithPersistentIdentifier sets a unique and persistent value you use to identify the activity.
+func (ua *UserActivity) WithPersistentIdentifier(persistentIdentifier StringProvider) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setPersistentIdentifier:"), objref.IDOf(persistentIdentifier))
+	return ua
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UserActivity) WithScriptingProperties(scriptingProperties obj.Object) *UserActivity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ua *UserActivity) WithScriptingProperties(scriptingProperties obj.Object) *UserActivity {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ua
 }
 
 // AddUserInfoEntriesFromDictionary adds the contents of the specified dictionary to the user info dictionary.
-func (x *UserActivity) AddUserInfoEntriesFromDictionary(otherDictionary obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addUserInfoEntriesFromDictionary:"), objref.IDOf(otherDictionary))
+func (ua *UserActivity) AddUserInfoEntriesFromDictionary(otherDictionary obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("addUserInfoEntriesFromDictionary:"), objref.IDOf(otherDictionary))
 }
 
 // BecomeCurrent marks the activity as currently in use by the user.
-func (x *UserActivity) BecomeCurrent() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("becomeCurrent"))
+func (ua *UserActivity) BecomeCurrent() {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("becomeCurrent"))
 }
 
 // ResignCurrent marks this activity object as inactive without invalidating it.
-func (x *UserActivity) ResignCurrent() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resignCurrent"))
+func (ua *UserActivity) ResignCurrent() {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("resignCurrent"))
 }
 
 // Invalidate invalidates an activity and marks it as no longer eligible for continuation.
-func (x *UserActivity) Invalidate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
+func (ua *UserActivity) Invalidate() {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("invalidate"))
 }
 
 // ActivityType wraps the corresponding Objective-C method.
-func (x *UserActivity) ActivityType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activityType"))
+func (ua *UserActivity) ActivityType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("activityType"))
 	if _r == 0 {
 		return ""
 	}
@@ -199,216 +199,91 @@ func (x *UserActivity) ActivityType() string {
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *UserActivity) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (ua *UserActivity) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetTitle wraps the corresponding Objective-C method.
-func (x *UserActivity) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
 // UserInfo wraps the corresponding Objective-C method.
-func (x *UserActivity) UserInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+func (ua *UserActivity) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
-}
-
-// SetUserInfo wraps the corresponding Objective-C method.
-func (x *UserActivity) SetUserInfo(userInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
 }
 
 // RequiredUserInfoKeys wraps the corresponding Objective-C method.
-func (x *UserActivity) RequiredUserInfoKeys() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requiredUserInfoKeys"))
+func (ua *UserActivity) RequiredUserInfoKeys() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("requiredUserInfoKeys"))
 	return obj.Wrap(_r)
-}
-
-// SetRequiredUserInfoKeys wraps the corresponding Objective-C method.
-func (x *UserActivity) SetRequiredUserInfoKeys(requiredUserInfoKeys obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredUserInfoKeys:"), objref.IDOf(requiredUserInfoKeys))
 }
 
 // NeedsSave wraps the corresponding Objective-C method.
-func (x *UserActivity) NeedsSave() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsSave"))
+func (ua *UserActivity) NeedsSave() bool {
+	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("needsSave"))
 	return _r
-}
-
-// SetNeedsSave wraps the corresponding Objective-C method.
-func (x *UserActivity) SetNeedsSave(needsSave bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsSave:"), needsSave)
 }
 
 // WebpageURL wraps the corresponding Objective-C method.
-func (x *UserActivity) WebpageURL() *URL {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webpageURL"))
+func (ua *UserActivity) WebpageURL() *URL {
+	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("webpageURL"))
 	return URLFromID(_r)
-}
-
-// SetWebpageURL wraps the corresponding Objective-C method.
-func (x *UserActivity) SetWebpageURL(webpageURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWebpageURL:"), rt.FileURL(webpageURL))
 }
 
 // ReferrerURL wraps the corresponding Objective-C method.
-func (x *UserActivity) ReferrerURL() *URL {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("referrerURL"))
+func (ua *UserActivity) ReferrerURL() *URL {
+	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("referrerURL"))
 	return URLFromID(_r)
 }
 
-// SetReferrerURL wraps the corresponding Objective-C method.
-func (x *UserActivity) SetReferrerURL(referrerURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReferrerURL:"), rt.FileURL(referrerURL))
-}
-
 // ExpirationDate wraps the corresponding Objective-C method.
-func (x *UserActivity) ExpirationDate() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expirationDate"))
+func (ua *UserActivity) ExpirationDate() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("expirationDate"))
 	return DateFromID(_r)
 }
 
-// SetExpirationDate wraps the corresponding Objective-C method.
-func (x *UserActivity) SetExpirationDate(expirationDate *Date) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpirationDate:"), objref.IDOf(expirationDate))
-}
-
 // Keywords wraps the corresponding Objective-C method.
-func (x *UserActivity) Keywords() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keywords"))
+func (ua *UserActivity) Keywords() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("keywords"))
 	return obj.Wrap(_r)
 }
 
-// SetKeywords wraps the corresponding Objective-C method.
-func (x *UserActivity) SetKeywords(keywords obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeywords:"), objref.IDOf(keywords))
-}
-
 // SupportsContinuationStreams wraps the corresponding Objective-C method.
-func (x *UserActivity) SupportsContinuationStreams() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsContinuationStreams"))
+func (ua *UserActivity) SupportsContinuationStreams() bool {
+	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("supportsContinuationStreams"))
 	return _r
 }
 
-// SetSupportsContinuationStreams wraps the corresponding Objective-C method.
-func (x *UserActivity) SetSupportsContinuationStreams(supportsContinuationStreams bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsContinuationStreams:"), supportsContinuationStreams)
-}
-
 // TargetContentIdentifier wraps the corresponding Objective-C method.
-func (x *UserActivity) TargetContentIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetContentIdentifier"))
+func (ua *UserActivity) TargetContentIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("targetContentIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetTargetContentIdentifier wraps the corresponding Objective-C method.
-func (x *UserActivity) SetTargetContentIdentifier(targetContentIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetContentIdentifier:"), purego.NSString(targetContentIdentifier))
-}
-
 // IsEligibleForHandoff wraps the corresponding Objective-C method.
-func (x *UserActivity) IsEligibleForHandoff() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEligibleForHandoff"))
+func (ua *UserActivity) IsEligibleForHandoff() bool {
+	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("isEligibleForHandoff"))
 	return _r
-}
-
-// SetEligibleForHandoff wraps the corresponding Objective-C method.
-func (x *UserActivity) SetEligibleForHandoff(eligibleForHandoff bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEligibleForHandoff:"), eligibleForHandoff)
 }
 
 // IsEligibleForSearch wraps the corresponding Objective-C method.
-func (x *UserActivity) IsEligibleForSearch() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEligibleForSearch"))
+func (ua *UserActivity) IsEligibleForSearch() bool {
+	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("isEligibleForSearch"))
 	return _r
-}
-
-// SetEligibleForSearch wraps the corresponding Objective-C method.
-func (x *UserActivity) SetEligibleForSearch(eligibleForSearch bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEligibleForSearch:"), eligibleForSearch)
 }
 
 // IsEligibleForPublicIndexing wraps the corresponding Objective-C method.
-func (x *UserActivity) IsEligibleForPublicIndexing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEligibleForPublicIndexing"))
+func (ua *UserActivity) IsEligibleForPublicIndexing() bool {
+	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("isEligibleForPublicIndexing"))
 	return _r
 }
 
-// SetEligibleForPublicIndexing wraps the corresponding Objective-C method.
-func (x *UserActivity) SetEligibleForPublicIndexing(eligibleForPublicIndexing bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEligibleForPublicIndexing:"), eligibleForPublicIndexing)
-}
-
 // PersistentIdentifier wraps the corresponding Objective-C method.
-func (x *UserActivity) PersistentIdentifier() *String {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentIdentifier"))
+func (ua *UserActivity) PersistentIdentifier() *String {
+	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("persistentIdentifier"))
 	return StringFromID(_r)
 }
-
-// SetPersistentIdentifier wraps the corresponding Objective-C method.
-func (x *UserActivity) SetPersistentIdentifier(persistentIdentifier *String) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPersistentIdentifier:"), objref.IDOf(persistentIdentifier))
-}
-
-// UserActivityable is the interface implemented by [UserActivity], for mocking and DI.
-type UserActivityable interface {
-	obj.Object
-	WithTitle(title StringProvider) *UserActivity
-	WithUserInfo(userInfo obj.Object) *UserActivity
-	WithRequiredUserInfoKeys(requiredUserInfoKeys obj.Object) *UserActivity
-	WithNeedsSave(needsSave bool) *UserActivity
-	WithWebpageURL(webpageURL string) *UserActivity
-	WithReferrerURL(referrerURL string) *UserActivity
-	WithExpirationDate(expirationDate DateProvider) *UserActivity
-	WithKeywords(keywords obj.Object) *UserActivity
-	WithSupportsContinuationStreams(supportsContinuationStreams bool) *UserActivity
-	WithTargetContentIdentifier(targetContentIdentifier StringProvider) *UserActivity
-	WithEligibleForHandoff(eligibleForHandoff bool) *UserActivity
-	WithEligibleForSearch(eligibleForSearch bool) *UserActivity
-	WithEligibleForPublicIndexing(eligibleForPublicIndexing bool) *UserActivity
-	WithPersistentIdentifier(persistentIdentifier StringProvider) *UserActivity
-	WithScriptingProperties(scriptingProperties obj.Object) *UserActivity
-	AddUserInfoEntriesFromDictionary(otherDictionary obj.Object)
-	BecomeCurrent()
-	ResignCurrent()
-	Invalidate()
-	ActivityType() string
-	Title() string
-	SetTitle(title string)
-	UserInfo() obj.Object
-	SetUserInfo(userInfo obj.Object)
-	RequiredUserInfoKeys() obj.Object
-	SetRequiredUserInfoKeys(requiredUserInfoKeys obj.Object)
-	NeedsSave() bool
-	SetNeedsSave(needsSave bool)
-	WebpageURL() *URL
-	SetWebpageURL(webpageURL string)
-	ReferrerURL() *URL
-	SetReferrerURL(referrerURL string)
-	ExpirationDate() *Date
-	SetExpirationDate(expirationDate *Date)
-	Keywords() obj.Object
-	SetKeywords(keywords obj.Object)
-	SupportsContinuationStreams() bool
-	SetSupportsContinuationStreams(supportsContinuationStreams bool)
-	TargetContentIdentifier() string
-	SetTargetContentIdentifier(targetContentIdentifier string)
-	IsEligibleForHandoff() bool
-	SetEligibleForHandoff(eligibleForHandoff bool)
-	IsEligibleForSearch() bool
-	SetEligibleForSearch(eligibleForSearch bool)
-	IsEligibleForPublicIndexing() bool
-	SetEligibleForPublicIndexing(eligibleForPublicIndexing bool)
-	PersistentIdentifier() *String
-	SetPersistentIdentifier(persistentIdentifier *String)
-}
-
-var _ UserActivityable = (*UserActivity)(nil)

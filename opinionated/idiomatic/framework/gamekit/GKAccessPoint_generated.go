@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func accessPointAdopt(id objc.ID) *AccessPoint {
 }
 
 // Description returns the object's -description text.
-func (x *AccessPoint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ap *AccessPoint) Description() string {
+	return rt.Description(objref.IDOf(ap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccessPoint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ap *AccessPoint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccessPoint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ap *AccessPoint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AccessPoint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ap *AccessPoint) String() string {
+	return rt.Description(objref.IDOf(ap))
 }
 
 // NewAccessPoint creates a new AccessPoint.
@@ -74,39 +75,39 @@ func NewAccessPoint() *AccessPoint {
 	return accessPointAdopt(_id)
 }
 
-// WithActive a Boolean value that determines whether to display the access point.
-func (x *AccessPoint) WithActive(active bool) *AccessPoint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActive:"), active)
-	return x
+// WithActive sets a Boolean value that determines whether to display the access point.
+func (ap *AccessPoint) WithActive(active bool) *AccessPoint {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setActive:"), active)
+	return ap
 }
 
-// WithShowHighlights a Boolean value that indicates whether to display highlights for achievements and current ranks for leaderboards.
-func (x *AccessPoint) WithShowHighlights(showHighlights bool) *AccessPoint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowHighlights:"), showHighlights)
-	return x
+// WithShowHighlights sets a Boolean value that indicates whether to display highlights for achievements and current ranks for leaderboards.
+func (ap *AccessPoint) WithShowHighlights(showHighlights bool) *AccessPoint {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setShowHighlights:"), showHighlights)
+	return ap
 }
 
-// WithLocation the corner of the screen to display the access point.
-func (x *AccessPoint) WithLocation(location AccessPointLocation) *AccessPoint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocation:"), location)
-	return x
+// WithLocation sets the corner of the screen to display the access point.
+func (ap *AccessPoint) WithLocation(location AccessPointLocation) *AccessPoint {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setLocation:"), location)
+	return ap
 }
 
-// WithParentWindow the window that contains the access point.
-func (x *AccessPoint) WithParentWindow(parentWindow obj.Object) *AccessPoint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
-	return x
+// WithParentWindow sets the window that contains the access point.
+func (ap *AccessPoint) WithParentWindow(parentWindow obj.Object) *AccessPoint {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
+	return ap
 }
 
 // TriggerAccessPointWithHandler displays the Game Center dashboard as if the player taps or presses the access point.
 //
 // TriggerAccessPointWithHandler blocks until the operation completes or ctx is cancelled.
-func (x *AccessPoint) TriggerAccessPointWithHandler(ctx context.Context) error {
+func (ap *AccessPoint) TriggerAccessPointWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triggerAccessPointWithHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("triggerAccessPointWithHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -118,12 +119,12 @@ func (x *AccessPoint) TriggerAccessPointWithHandler(ctx context.Context) error {
 // TriggerAccessPointWithStateHandler displays the Game Center dashboard in the specified state as if the player taps or presses the access point.
 //
 // TriggerAccessPointWithStateHandler blocks until the operation completes or ctx is cancelled.
-func (x *AccessPoint) TriggerAccessPointWithStateHandler(ctx context.Context, state GameCenterViewControllerState) error {
+func (ap *AccessPoint) TriggerAccessPointWithStateHandler(ctx context.Context, state GameCenterViewControllerState) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triggerAccessPointWithState:handler:"), state, _block)
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("triggerAccessPointWithState:handler:"), state, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -135,12 +136,12 @@ func (x *AccessPoint) TriggerAccessPointWithStateHandler(ctx context.Context, st
 // TriggerAccessPointWithAchievementIDHandler displays the Game Center dashboard in a state that shows a specific achievement.
 //
 // TriggerAccessPointWithAchievementIDHandler blocks until the operation completes or ctx is cancelled.
-func (x *AccessPoint) TriggerAccessPointWithAchievementIDHandler(ctx context.Context, achievementID string) error {
+func (ap *AccessPoint) TriggerAccessPointWithAchievementIDHandler(ctx context.Context, achievementID string) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triggerAccessPointWithAchievementID:handler:"), purego.NSString(achievementID), _block)
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("triggerAccessPointWithAchievementID:handler:"), purego.NSString(achievementID), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -152,12 +153,12 @@ func (x *AccessPoint) TriggerAccessPointWithAchievementIDHandler(ctx context.Con
 // TriggerAccessPointWithLeaderboardSetIDHandler displays the Game Center dashboard in a state that shows a specific leaderboard set.
 //
 // TriggerAccessPointWithLeaderboardSetIDHandler blocks until the operation completes or ctx is cancelled.
-func (x *AccessPoint) TriggerAccessPointWithLeaderboardSetIDHandler(ctx context.Context, leaderboardSetID string) error {
+func (ap *AccessPoint) TriggerAccessPointWithLeaderboardSetIDHandler(ctx context.Context, leaderboardSetID string) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triggerAccessPointWithLeaderboardSetID:handler:"), purego.NSString(leaderboardSetID), _block)
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("triggerAccessPointWithLeaderboardSetID:handler:"), purego.NSString(leaderboardSetID), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -169,12 +170,12 @@ func (x *AccessPoint) TriggerAccessPointWithLeaderboardSetIDHandler(ctx context.
 // TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler displays the Game Center dashboard in a state that shows a specific leaderboard.
 //
 // TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler blocks until the operation completes or ctx is cancelled.
-func (x *AccessPoint) TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler(ctx context.Context, leaderboardID string, playerScope LeaderboardPlayerScope, timeScope LeaderboardTimeScope) error {
+func (ap *AccessPoint) TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler(ctx context.Context, leaderboardID string, playerScope LeaderboardPlayerScope, timeScope LeaderboardTimeScope) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triggerAccessPointWithLeaderboardID:playerScope:timeScope:handler:"), purego.NSString(leaderboardID), playerScope, timeScope, _block)
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("triggerAccessPointWithLeaderboardID:playerScope:timeScope:handler:"), purego.NSString(leaderboardID), playerScope, timeScope, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -186,12 +187,12 @@ func (x *AccessPoint) TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHan
 // TriggerAccessPointWithPlayerHandler displays the Game Center dashboard in a state that shows a player profile.
 //
 // TriggerAccessPointWithPlayerHandler blocks until the operation completes or ctx is cancelled.
-func (x *AccessPoint) TriggerAccessPointWithPlayerHandler(ctx context.Context, player *Player) error {
+func (ap *AccessPoint) TriggerAccessPointWithPlayerHandler(ctx context.Context, player *Player) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triggerAccessPointWithPlayer:handler:"), objref.IDOf(player), _block)
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("triggerAccessPointWithPlayer:handler:"), objref.IDOf(player), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -203,12 +204,12 @@ func (x *AccessPoint) TriggerAccessPointWithPlayerHandler(ctx context.Context, p
 // TriggerAccessPointForPlayTogetherWithHandler displays the view that allows players to engage each other with activities and challenges.
 //
 // TriggerAccessPointForPlayTogetherWithHandler blocks until the operation completes or ctx is cancelled.
-func (x *AccessPoint) TriggerAccessPointForPlayTogetherWithHandler(ctx context.Context) error {
+func (ap *AccessPoint) TriggerAccessPointForPlayTogetherWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triggerAccessPointForPlayTogetherWithHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("triggerAccessPointForPlayTogetherWithHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -220,12 +221,12 @@ func (x *AccessPoint) TriggerAccessPointForPlayTogetherWithHandler(ctx context.C
 // TriggerAccessPointForChallengesWithHandler displays the view that allows players to engage each other with challenges.
 //
 // TriggerAccessPointForChallengesWithHandler blocks until the operation completes or ctx is cancelled.
-func (x *AccessPoint) TriggerAccessPointForChallengesWithHandler(ctx context.Context) error {
+func (ap *AccessPoint) TriggerAccessPointForChallengesWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triggerAccessPointForChallengesWithHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("triggerAccessPointForChallengesWithHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -237,12 +238,12 @@ func (x *AccessPoint) TriggerAccessPointForChallengesWithHandler(ctx context.Con
 // TriggerAccessPointWithChallengeDefinitionIDHandler displays the challenge creation view for the provided challenge definition ID.
 //
 // TriggerAccessPointWithChallengeDefinitionIDHandler blocks until the operation completes or ctx is cancelled.
-func (x *AccessPoint) TriggerAccessPointWithChallengeDefinitionIDHandler(ctx context.Context, challengeDefinitionID string) error {
+func (ap *AccessPoint) TriggerAccessPointWithChallengeDefinitionIDHandler(ctx context.Context, challengeDefinitionID string) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triggerAccessPointWithChallengeDefinitionID:handler:"), purego.NSString(challengeDefinitionID), _block)
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("triggerAccessPointWithChallengeDefinitionID:handler:"), purego.NSString(challengeDefinitionID), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -254,12 +255,12 @@ func (x *AccessPoint) TriggerAccessPointWithChallengeDefinitionIDHandler(ctx con
 // TriggerAccessPointWithGameActivityDefinitionIDHandler displays the game activity creation view for the provided activity definition ID.
 //
 // TriggerAccessPointWithGameActivityDefinitionIDHandler blocks until the operation completes or ctx is cancelled.
-func (x *AccessPoint) TriggerAccessPointWithGameActivityDefinitionIDHandler(ctx context.Context, gameActivityDefinitionID string) error {
+func (ap *AccessPoint) TriggerAccessPointWithGameActivityDefinitionIDHandler(ctx context.Context, gameActivityDefinitionID string) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triggerAccessPointWithGameActivityDefinitionID:handler:"), purego.NSString(gameActivityDefinitionID), _block)
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("triggerAccessPointWithGameActivityDefinitionID:handler:"), purego.NSString(gameActivityDefinitionID), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -271,12 +272,12 @@ func (x *AccessPoint) TriggerAccessPointWithGameActivityDefinitionIDHandler(ctx 
 // TriggerAccessPointWithGameActivityHandler displays the game activity view for the provided activity instance.
 //
 // TriggerAccessPointWithGameActivityHandler blocks until the operation completes or ctx is cancelled.
-func (x *AccessPoint) TriggerAccessPointWithGameActivityHandler(ctx context.Context, gameActivity *GameActivity) error {
+func (ap *AccessPoint) TriggerAccessPointWithGameActivityHandler(ctx context.Context, gameActivity *GameActivity) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triggerAccessPointWithGameActivity:handler:"), objref.IDOf(gameActivity), _block)
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("triggerAccessPointWithGameActivity:handler:"), objref.IDOf(gameActivity), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -288,12 +289,12 @@ func (x *AccessPoint) TriggerAccessPointWithGameActivityHandler(ctx context.Cont
 // TriggerAccessPointForFriendingWithHandler brings up the invite friends view.
 //
 // TriggerAccessPointForFriendingWithHandler blocks until the operation completes or ctx is cancelled.
-func (x *AccessPoint) TriggerAccessPointForFriendingWithHandler(ctx context.Context) error {
+func (ap *AccessPoint) TriggerAccessPointForFriendingWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triggerAccessPointForFriendingWithHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("triggerAccessPointForFriendingWithHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -305,12 +306,12 @@ func (x *AccessPoint) TriggerAccessPointForFriendingWithHandler(ctx context.Cont
 // TriggerAccessPointForArcadeWithHandler brings up the Arcade dashboard.
 //
 // TriggerAccessPointForArcadeWithHandler blocks until the operation completes or ctx is cancelled.
-func (x *AccessPoint) TriggerAccessPointForArcadeWithHandler(ctx context.Context) error {
+func (ap *AccessPoint) TriggerAccessPointForArcadeWithHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triggerAccessPointForArcadeWithHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("triggerAccessPointForArcadeWithHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -319,85 +320,32 @@ func (x *AccessPoint) TriggerAccessPointForArcadeWithHandler(ctx context.Context
 	}
 }
 
-// IsActive set this true to enable access point in your app.  Setting this will cause the access point to appear after the notification banner is presented.  If it already was presented it will appear immediately
-func (x *AccessPoint) IsActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+// IsActive reports whether set this true to enable access point in your app. Setting this will cause the access point to appear after the notification banner is presented. If it already was presented it will appear immediately
+func (ap *AccessPoint) IsActive() bool {
+	_r := objc.Send[bool](objref.IDOf(ap), objc.RegisterName("isActive"))
 	return _r
 }
 
-// SetActive wraps the corresponding Objective-C method.
-func (x *AccessPoint) SetActive(active bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActive:"), active)
-}
-
-// ShowHighlights set this property to true if you wish to show the highlights for most recent achievement, current rank on default leaderboard, etc
-func (x *AccessPoint) ShowHighlights() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showHighlights"))
+// ShowHighlights reports whether set this property to true if you wish to show the highlights for most recent achievement, current rank on default leaderboard, etc
+func (ap *AccessPoint) ShowHighlights() bool {
+	_r := objc.Send[bool](objref.IDOf(ap), objc.RegisterName("showHighlights"))
 	return _r
 }
 
-// SetShowHighlights wraps the corresponding Objective-C method.
-func (x *AccessPoint) SetShowHighlights(showHighlights bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowHighlights:"), showHighlights)
-}
-
-// Location these properties control the placement of the widget
-func (x *AccessPoint) Location() AccessPointLocation {
-	_r := objc.Send[AccessPointLocation](objref.IDOf(x), objc.RegisterName("location"))
+// Location returns these properties control the placement of the widget
+func (ap *AccessPoint) Location() AccessPointLocation {
+	_r := objc.Send[AccessPointLocation](objref.IDOf(ap), objc.RegisterName("location"))
 	return _r
 }
 
-// SetLocation wraps the corresponding Objective-C method.
-func (x *AccessPoint) SetLocation(location AccessPointLocation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocation:"), location)
-}
-
-// FrameInScreenCoordinates observable property that contains the current frame needed to display the widget
-func (x *AccessPoint) FrameInScreenCoordinates() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frameInScreenCoordinates"))
+// FrameInScreenCoordinates returns observable property that contains the current frame needed to display the widget
+func (ap *AccessPoint) FrameInScreenCoordinates() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(ap), objc.RegisterName("frameInScreenCoordinates"))
 	return _r
 }
 
-// ParentWindow the following is a platform specific window that you wish to have the access point in.  If not set then a best attempt will be made to choose the main window of the app.
-func (x *AccessPoint) ParentWindow() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentWindow"))
+// ParentWindow returns the following is a platform specific window that you wish to have the access point in.  If not set then a best attempt will be made to choose the main window of the app.
+func (ap *AccessPoint) ParentWindow() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("parentWindow"))
 	return obj.Wrap(_r)
 }
-
-// SetParentWindow wraps the corresponding Objective-C method.
-func (x *AccessPoint) SetParentWindow(parentWindow obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentWindow:"), objref.IDOf(parentWindow))
-}
-
-// AccessPointable is the interface implemented by [AccessPoint], for mocking and DI.
-type AccessPointable interface {
-	obj.Object
-	WithActive(active bool) *AccessPoint
-	WithShowHighlights(showHighlights bool) *AccessPoint
-	WithLocation(location AccessPointLocation) *AccessPoint
-	WithParentWindow(parentWindow obj.Object) *AccessPoint
-	TriggerAccessPointWithHandler(ctx context.Context) error
-	TriggerAccessPointWithStateHandler(ctx context.Context, state GameCenterViewControllerState) error
-	TriggerAccessPointWithAchievementIDHandler(ctx context.Context, achievementID string) error
-	TriggerAccessPointWithLeaderboardSetIDHandler(ctx context.Context, leaderboardSetID string) error
-	TriggerAccessPointWithLeaderboardIDPlayerScopeTimeScopeHandler(ctx context.Context, leaderboardID string, playerScope LeaderboardPlayerScope, timeScope LeaderboardTimeScope) error
-	TriggerAccessPointWithPlayerHandler(ctx context.Context, player *Player) error
-	TriggerAccessPointForPlayTogetherWithHandler(ctx context.Context) error
-	TriggerAccessPointForChallengesWithHandler(ctx context.Context) error
-	TriggerAccessPointWithChallengeDefinitionIDHandler(ctx context.Context, challengeDefinitionID string) error
-	TriggerAccessPointWithGameActivityDefinitionIDHandler(ctx context.Context, gameActivityDefinitionID string) error
-	TriggerAccessPointWithGameActivityHandler(ctx context.Context, gameActivity *GameActivity) error
-	TriggerAccessPointForFriendingWithHandler(ctx context.Context) error
-	TriggerAccessPointForArcadeWithHandler(ctx context.Context) error
-	IsActive() bool
-	SetActive(active bool)
-	ShowHighlights() bool
-	SetShowHighlights(showHighlights bool)
-	Location() AccessPointLocation
-	SetLocation(location AccessPointLocation)
-	FrameInScreenCoordinates() corefoundation.CGRect
-	ParentWindow() obj.Object
-	SetParentWindow(parentWindow obj.Object)
-}
-
-var _ AccessPointable = (*AccessPoint)(nil)

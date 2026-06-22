@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,39 +52,28 @@ func NewRectangleFeature() *RectangleFeature {
 	return rectangleFeatureAdopt(_id)
 }
 
-// TopLeft the image coordinate of the upper-left corner of the detected rectangle.
-func (x *RectangleFeature) TopLeft() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("topLeft"))
+// TopLeft returns the image coordinate of the upper-left corner of the detected rectangle.
+func (rf *RectangleFeature) TopLeft() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(rf), objc.RegisterName("topLeft"))
 	return _r
 }
 
-// TopRight the image coordinate of the upper-right corner of the detected rectangle.
-func (x *RectangleFeature) TopRight() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("topRight"))
+// TopRight returns the image coordinate of the upper-right corner of the detected rectangle.
+func (rf *RectangleFeature) TopRight() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(rf), objc.RegisterName("topRight"))
 	return _r
 }
 
-// BottomLeft the image coordinate of the lower-left corner of the detected rectangle.
-func (x *RectangleFeature) BottomLeft() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("bottomLeft"))
+// BottomLeft returns the image coordinate of the lower-left corner of the detected rectangle.
+func (rf *RectangleFeature) BottomLeft() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(rf), objc.RegisterName("bottomLeft"))
 	return _r
 }
 
-// BottomRight the image coordinate of the lower-right corner of the detected rectangle.
-func (x *RectangleFeature) BottomRight() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("bottomRight"))
+// BottomRight returns the image coordinate of the lower-right corner of the detected rectangle.
+func (rf *RectangleFeature) BottomRight() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(rf), objc.RegisterName("bottomRight"))
 	return _r
 }
-
-// RectangleFeatureable is the interface implemented by [RectangleFeature], for mocking and DI.
-type RectangleFeatureable interface {
-	obj.Object
-	TopLeft() corefoundation.CGPoint
-	TopRight() corefoundation.CGPoint
-	BottomLeft() corefoundation.CGPoint
-	BottomRight() corefoundation.CGPoint
-}
-
-var _ RectangleFeatureable = (*RectangleFeature)(nil)
 
 var _ FeatureProvider = (*RectangleFeature)(nil)

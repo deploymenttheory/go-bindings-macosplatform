@@ -46,24 +46,24 @@ func cIDeviceInfoAdopt(id objc.ID) *CIDeviceInfo {
 }
 
 // Description returns the object's -description text.
-func (x *CIDeviceInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cdi *CIDeviceInfo) Description() string {
+	return rt.Description(objref.IDOf(cdi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CIDeviceInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cdi *CIDeviceInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cdi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CIDeviceInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cdi *CIDeviceInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cdi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CIDeviceInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cdi *CIDeviceInfo) String() string {
+	return rt.Description(objref.IDOf(cdi))
 }
 
 // NewCIDeviceInfoWithDestinationManufacturerFamilyModelRevision creates a new device information instance.
@@ -74,43 +74,31 @@ func NewCIDeviceInfoWithDestinationManufacturerFamilyModelRevision(midiDestinati
 }
 
 // ManufacturerID wraps the corresponding Objective-C method.
-func (x *CIDeviceInfo) ManufacturerID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manufacturerID"))
+func (cdi *CIDeviceInfo) ManufacturerID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("manufacturerID"))
 	return obj.Wrap(_r)
 }
 
 // Family wraps the corresponding Objective-C method.
-func (x *CIDeviceInfo) Family() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("family"))
+func (cdi *CIDeviceInfo) Family() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("family"))
 	return obj.Wrap(_r)
 }
 
 // ModelNumber wraps the corresponding Objective-C method.
-func (x *CIDeviceInfo) ModelNumber() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modelNumber"))
+func (cdi *CIDeviceInfo) ModelNumber() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("modelNumber"))
 	return obj.Wrap(_r)
 }
 
 // RevisionLevel wraps the corresponding Objective-C method.
-func (x *CIDeviceInfo) RevisionLevel() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("revisionLevel"))
+func (cdi *CIDeviceInfo) RevisionLevel() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cdi), objc.RegisterName("revisionLevel"))
 	return obj.Wrap(_r)
 }
 
 // MidiDestination wraps the corresponding Objective-C method.
-func (x *CIDeviceInfo) MidiDestination() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("midiDestination"))
+func (cdi *CIDeviceInfo) MidiDestination() int {
+	_r := objc.Send[int](objref.IDOf(cdi), objc.RegisterName("midiDestination"))
 	return _r
 }
-
-// CIDeviceInfoable is the interface implemented by [CIDeviceInfo], for mocking and DI.
-type CIDeviceInfoable interface {
-	obj.Object
-	ManufacturerID() obj.Object
-	Family() obj.Object
-	ModelNumber() obj.Object
-	RevisionLevel() obj.Object
-	MidiDestination() int
-}
-
-var _ CIDeviceInfoable = (*CIDeviceInfo)(nil)

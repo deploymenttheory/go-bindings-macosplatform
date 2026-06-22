@@ -46,24 +46,24 @@ func sessionAdopt(id objc.ID) *Session {
 }
 
 // Description returns the object's -description text.
-func (x *Session) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Session) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Session) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Session) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Session) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Session) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Session) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Session) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewSession creates a new Session.
@@ -80,27 +80,17 @@ func NewSessionWithCatalog(catalog *Catalog) *Session {
 }
 
 // MatchStreamingBufferAtTime converts the audio in the buffer to a signature, and searches the reference signatures in the session catalog.
-func (x *Session) MatchStreamingBufferAtTime(buffer obj.Object, time_ obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchStreamingBuffer:atTime:"), objref.IDOf(buffer), objref.IDOf(time_))
+func (s *Session) MatchStreamingBufferAtTime(buffer obj.Object, time_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("matchStreamingBuffer:atTime:"), objref.IDOf(buffer), objref.IDOf(time_))
 }
 
 // MatchSignature searches for the query signature in the reference signatures that the session catalog contains.
-func (x *Session) MatchSignature(signature *Signature) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchSignature:"), objref.IDOf(signature))
+func (s *Session) MatchSignature(signature *Signature) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("matchSignature:"), objref.IDOf(signature))
 }
 
-// Catalog the catalog object containing the reference signatures and their associated metadata that the session uses to perform matches.
-func (x *Session) Catalog() *Catalog {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("catalog"))
+// Catalog returns the catalog object containing the reference signatures and their associated metadata that the session uses to perform matches.
+func (s *Session) Catalog() *Catalog {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("catalog"))
 	return CatalogFromID(_r)
 }
-
-// Sessionable is the interface implemented by [Session], for mocking and DI.
-type Sessionable interface {
-	obj.Object
-	MatchStreamingBufferAtTime(buffer obj.Object, time_ obj.Object)
-	MatchSignature(signature *Signature)
-	Catalog() *Catalog
-}
-
-var _ Sessionable = (*Session)(nil)

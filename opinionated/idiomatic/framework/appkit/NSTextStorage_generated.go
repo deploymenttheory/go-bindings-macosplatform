@@ -47,24 +47,24 @@ func textStorageAdopt(id objc.ID) *TextStorage {
 }
 
 // Description returns the object's -description text.
-func (x *TextStorage) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ts *TextStorage) Description() string {
+	return rt.Description(objref.IDOf(ts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextStorage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ts *TextStorage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextStorage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ts *TextStorage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextStorage) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ts *TextStorage) String() string {
+	return rt.Description(objref.IDOf(ts))
 }
 
 // NewTextStorage creates a new TextStorage.
@@ -73,214 +73,148 @@ func NewTextStorage() *TextStorage {
 	return textStorageAdopt(_id)
 }
 
-// WithAttributeRuns the text storage contents as an array of attribute runs.
-func (x *TextStorage) WithAttributeRuns(items ...*TextStorage) *TextStorage {
+// WithAttributeRuns sets the text storage contents as an array of attribute runs.
+func (ts *TextStorage) WithAttributeRuns(items ...*TextStorage) *TextStorage {
 	_arr := purego.SliceToNSArray(items, func(_v *TextStorage) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeRuns:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setAttributeRuns:"), _arr)
+	return ts
 }
 
-// WithParagraphs the text storage contents as an array of paragraphs.
-func (x *TextStorage) WithParagraphs(items ...*TextStorage) *TextStorage {
+// WithParagraphs sets the text storage contents as an array of paragraphs.
+func (ts *TextStorage) WithParagraphs(items ...*TextStorage) *TextStorage {
 	_arr := purego.SliceToNSArray(items, func(_v *TextStorage) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParagraphs:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setParagraphs:"), _arr)
+	return ts
 }
 
-// WithWords the text storage contents as an array of words.
-func (x *TextStorage) WithWords(items ...*TextStorage) *TextStorage {
+// WithWords sets the text storage contents as an array of words.
+func (ts *TextStorage) WithWords(items ...*TextStorage) *TextStorage {
 	_arr := purego.SliceToNSArray(items, func(_v *TextStorage) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWords:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setWords:"), _arr)
+	return ts
 }
 
-// WithCharacters the text storage contents as an array of characters.
-func (x *TextStorage) WithCharacters(items ...*TextStorage) *TextStorage {
+// WithCharacters sets the text storage contents as an array of characters.
+func (ts *TextStorage) WithCharacters(items ...*TextStorage) *TextStorage {
 	_arr := purego.SliceToNSArray(items, func(_v *TextStorage) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharacters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setCharacters:"), _arr)
+	return ts
 }
 
-// WithFont the font for the text storage.
-func (x *TextStorage) WithFont(font *Font) *TextStorage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font for the text storage.
+func (ts *TextStorage) WithFont(font *Font) *TextStorage {
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return ts
 }
 
-// WithForegroundColor the color for the text.
-func (x *TextStorage) WithForegroundColor(foregroundColor *Color) *TextStorage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForegroundColor:"), objref.IDOf(foregroundColor))
-	return x
+// WithForegroundColor sets the color for the text.
+func (ts *TextStorage) WithForegroundColor(foregroundColor *Color) *TextStorage {
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("setForegroundColor:"), objref.IDOf(foregroundColor))
+	return ts
 }
 
 // AddLayoutManager adds a layout manager to the text storage object’s set of layout managers.
-func (x *TextStorage) AddLayoutManager(aLayoutManager *LayoutManager) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addLayoutManager:"), objref.IDOf(aLayoutManager))
+func (ts *TextStorage) AddLayoutManager(aLayoutManager *LayoutManager) {
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("addLayoutManager:"), objref.IDOf(aLayoutManager))
 }
 
 // RemoveLayoutManager removes a layout manager from the text storage object’s set of layout managers.
-func (x *TextStorage) RemoveLayoutManager(aLayoutManager *LayoutManager) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeLayoutManager:"), objref.IDOf(aLayoutManager))
+func (ts *TextStorage) RemoveLayoutManager(aLayoutManager *LayoutManager) {
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("removeLayoutManager:"), objref.IDOf(aLayoutManager))
 }
 
 // EditedRangeChangeInLength tracks changes made to the text storage object, allowing the text storage to record the full extent of changes.
-func (x *TextStorage) EditedRangeChangeInLength(editedMask TextStorageEditActions, editedRange foundation.NSRange, delta int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("edited:range:changeInLength:"), editedMask, editedRange, delta)
+func (ts *TextStorage) EditedRangeChangeInLength(editedMask TextStorageEditActions, editedRange foundation.NSRange, delta int) {
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("edited:range:changeInLength:"), editedMask, editedRange, delta)
 }
 
 // ProcessEditing cleans up changes to the text storage object and notifies its delegate and layout managers of changes.
-func (x *TextStorage) ProcessEditing() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processEditing"))
+func (ts *TextStorage) ProcessEditing() {
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("processEditing"))
 }
 
 // InvalidateAttributesInRange invalidates attributes in the specified range.
-func (x *TextStorage) InvalidateAttributesInRange(range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateAttributesInRange:"), range_)
+func (ts *TextStorage) InvalidateAttributesInRange(range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("invalidateAttributesInRange:"), range_)
 }
 
 // EnsureAttributesAreFixedInRange ensures that attribute fixing occurs in the specified range.
-func (x *TextStorage) EnsureAttributesAreFixedInRange(range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ensureAttributesAreFixedInRange:"), range_)
+func (ts *TextStorage) EnsureAttributesAreFixedInRange(range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("ensureAttributesAreFixedInRange:"), range_)
 }
 
 // LayoutManagers wraps the corresponding Objective-C method.
 //
 // LayoutManagers returns the collection as a Go slice.
-func (x *TextStorage) LayoutManagers() []*LayoutManager {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutManagers"))
+func (ts *TextStorage) LayoutManagers() []*LayoutManager {
+	_arr := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("layoutManagers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LayoutManager { return LayoutManagerFromID(_id) })
 }
 
 // EditedMask wraps the corresponding Objective-C method.
-func (x *TextStorage) EditedMask() TextStorageEditActions {
-	_r := objc.Send[TextStorageEditActions](objref.IDOf(x), objc.RegisterName("editedMask"))
+func (ts *TextStorage) EditedMask() TextStorageEditActions {
+	_r := objc.Send[TextStorageEditActions](objref.IDOf(ts), objc.RegisterName("editedMask"))
 	return _r
 }
 
 // EditedRange wraps the corresponding Objective-C method.
-func (x *TextStorage) EditedRange() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("editedRange"))
+func (ts *TextStorage) EditedRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(ts), objc.RegisterName("editedRange"))
 	return _r
 }
 
 // ChangeInLength wraps the corresponding Objective-C method.
-func (x *TextStorage) ChangeInLength() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("changeInLength"))
+func (ts *TextStorage) ChangeInLength() int {
+	_r := objc.Send[int](objref.IDOf(ts), objc.RegisterName("changeInLength"))
 	return _r
 }
 
 // FixesAttributesLazily wraps the corresponding Objective-C method.
-func (x *TextStorage) FixesAttributesLazily() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("fixesAttributesLazily"))
+func (ts *TextStorage) FixesAttributesLazily() bool {
+	_r := objc.Send[bool](objref.IDOf(ts), objc.RegisterName("fixesAttributesLazily"))
 	return _r
 }
 
 // AttributeRuns wraps the corresponding Objective-C method.
 //
 // AttributeRuns returns the collection as a Go slice.
-func (x *TextStorage) AttributeRuns() []*TextStorage {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeRuns"))
+func (ts *TextStorage) AttributeRuns() []*TextStorage {
+	_arr := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("attributeRuns"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextStorage { return TextStorageFromID(_id) })
-}
-
-// SetAttributeRuns wraps the corresponding Objective-C method.
-func (x *TextStorage) SetAttributeRuns(attributeRuns []*TextStorage) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeRuns:"), purego.SliceToNSArray(attributeRuns, func(_v *TextStorage) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Paragraphs wraps the corresponding Objective-C method.
 //
 // Paragraphs returns the collection as a Go slice.
-func (x *TextStorage) Paragraphs() []*TextStorage {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paragraphs"))
+func (ts *TextStorage) Paragraphs() []*TextStorage {
+	_arr := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("paragraphs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextStorage { return TextStorageFromID(_id) })
-}
-
-// SetParagraphs wraps the corresponding Objective-C method.
-func (x *TextStorage) SetParagraphs(paragraphs []*TextStorage) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParagraphs:"), purego.SliceToNSArray(paragraphs, func(_v *TextStorage) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Words wraps the corresponding Objective-C method.
 //
 // Words returns the collection as a Go slice.
-func (x *TextStorage) Words() []*TextStorage {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("words"))
+func (ts *TextStorage) Words() []*TextStorage {
+	_arr := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("words"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextStorage { return TextStorageFromID(_id) })
-}
-
-// SetWords wraps the corresponding Objective-C method.
-func (x *TextStorage) SetWords(words []*TextStorage) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWords:"), purego.SliceToNSArray(words, func(_v *TextStorage) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Characters wraps the corresponding Objective-C method.
 //
 // Characters returns the collection as a Go slice.
-func (x *TextStorage) Characters() []*TextStorage {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("characters"))
+func (ts *TextStorage) Characters() []*TextStorage {
+	_arr := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("characters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextStorage { return TextStorageFromID(_id) })
 }
 
-// SetCharacters wraps the corresponding Objective-C method.
-func (x *TextStorage) SetCharacters(characters []*TextStorage) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharacters:"), purego.SliceToNSArray(characters, func(_v *TextStorage) objc.ID { return objref.IDOf(_v) }))
-}
-
 // Font wraps the corresponding Objective-C method.
-func (x *TextStorage) Font() *Font {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("font"))
+func (ts *TextStorage) Font() *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("font"))
 	return FontFromID(_r)
 }
 
-// SetFont wraps the corresponding Objective-C method.
-func (x *TextStorage) SetFont(font *Font) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-}
-
 // ForegroundColor wraps the corresponding Objective-C method.
-func (x *TextStorage) ForegroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("foregroundColor"))
+func (ts *TextStorage) ForegroundColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(ts), objc.RegisterName("foregroundColor"))
 	return ColorFromID(_r)
 }
-
-// SetForegroundColor wraps the corresponding Objective-C method.
-func (x *TextStorage) SetForegroundColor(foregroundColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setForegroundColor:"), objref.IDOf(foregroundColor))
-}
-
-// TextStorageable is the interface implemented by [TextStorage], for mocking and DI.
-type TextStorageable interface {
-	obj.Object
-	WithAttributeRuns(items ...*TextStorage) *TextStorage
-	WithParagraphs(items ...*TextStorage) *TextStorage
-	WithWords(items ...*TextStorage) *TextStorage
-	WithCharacters(items ...*TextStorage) *TextStorage
-	WithFont(font *Font) *TextStorage
-	WithForegroundColor(foregroundColor *Color) *TextStorage
-	AddLayoutManager(aLayoutManager *LayoutManager)
-	RemoveLayoutManager(aLayoutManager *LayoutManager)
-	EditedRangeChangeInLength(editedMask TextStorageEditActions, editedRange foundation.NSRange, delta int)
-	ProcessEditing()
-	InvalidateAttributesInRange(range_ foundation.NSRange)
-	EnsureAttributesAreFixedInRange(range_ foundation.NSRange)
-	LayoutManagers() []*LayoutManager
-	EditedMask() TextStorageEditActions
-	EditedRange() foundation.NSRange
-	ChangeInLength() int
-	FixesAttributesLazily() bool
-	AttributeRuns() []*TextStorage
-	SetAttributeRuns(attributeRuns []*TextStorage)
-	Paragraphs() []*TextStorage
-	SetParagraphs(paragraphs []*TextStorage)
-	Words() []*TextStorage
-	SetWords(words []*TextStorage)
-	Characters() []*TextStorage
-	SetCharacters(characters []*TextStorage)
-	Font() *Font
-	SetFont(font *Font)
-	ForegroundColor() *Color
-	SetForegroundColor(foregroundColor *Color)
-}
-
-var _ TextStorageable = (*TextStorage)(nil)

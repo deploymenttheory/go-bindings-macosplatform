@@ -46,24 +46,24 @@ func accountTypeAdopt(id objc.ID) *AccountType {
 }
 
 // Description returns the object's -description text.
-func (x *AccountType) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (at *AccountType) Description() string {
+	return rt.Description(objref.IDOf(at))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccountType) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (at *AccountType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(at), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccountType) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (at *AccountType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(at), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AccountType) String() string {
-	return rt.Description(objref.IDOf(x))
+func (at *AccountType) String() string {
+	return rt.Description(objref.IDOf(at))
 }
 
 // NewAccountType creates a new AccountType.
@@ -73,8 +73,8 @@ func NewAccountType() *AccountType {
 }
 
 // AccountTypeDescription wraps the corresponding Objective-C method.
-func (x *AccountType) AccountTypeDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountTypeDescription"))
+func (at *AccountType) AccountTypeDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("accountTypeDescription"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,8 +82,8 @@ func (x *AccountType) AccountTypeDescription() string {
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *AccountType) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (at *AccountType) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(at), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -91,17 +91,7 @@ func (x *AccountType) Identifier() string {
 }
 
 // AccessGranted wraps the corresponding Objective-C method.
-func (x *AccountType) AccessGranted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("accessGranted"))
+func (at *AccountType) AccessGranted() bool {
+	_r := objc.Send[bool](objref.IDOf(at), objc.RegisterName("accessGranted"))
 	return _r
 }
-
-// AccountTypeable is the interface implemented by [AccountType], for mocking and DI.
-type AccountTypeable interface {
-	obj.Object
-	AccountTypeDescription() string
-	Identifier() string
-	AccessGranted() bool
-}
-
-var _ AccountTypeable = (*AccountType)(nil)

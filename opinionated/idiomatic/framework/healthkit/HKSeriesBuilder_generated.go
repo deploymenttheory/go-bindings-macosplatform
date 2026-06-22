@@ -48,42 +48,34 @@ func seriesBuilderAdopt(id objc.ID) *SeriesBuilder {
 }
 
 // Description returns the object's -description text.
-func (x *SeriesBuilder) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sb *SeriesBuilder) Description() string {
+	return rt.Description(objref.IDOf(sb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SeriesBuilder) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sb *SeriesBuilder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SeriesBuilder) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sb *SeriesBuilder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SeriesBuilder) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sb *SeriesBuilder) String() string {
+	return rt.Description(objref.IDOf(sb))
 }
 
 // Discard invalidates the builder and discards the collected data.
-func (x *SeriesBuilder) Discard() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discard"))
+func (sb *SeriesBuilder) Discard() {
+	objc.Send[objc.ID](objref.IDOf(sb), objc.RegisterName("discard"))
 }
-
-// SeriesBuilderable is the interface implemented by [SeriesBuilder], for mocking and DI.
-type SeriesBuilderable interface {
-	obj.Object
-	Discard()
-}
-
-var _ SeriesBuilderable = (*SeriesBuilder)(nil)
 
 // isSeriesBuilder marks SeriesBuilder — and, by embedding promotion, its
 // subclasses — as a member of the SeriesBuilder hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *SeriesBuilder) isSeriesBuilder() {}
+func (sb *SeriesBuilder) isSeriesBuilder() {}
 
 var _ SeriesBuilderProvider = (*SeriesBuilder)(nil)

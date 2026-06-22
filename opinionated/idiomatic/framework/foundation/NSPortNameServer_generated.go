@@ -48,71 +48,59 @@ func portNameServerAdopt(id objc.ID) *PortNameServer {
 }
 
 // Description returns the object's -description text.
-func (x *PortNameServer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pns *PortNameServer) Description() string {
+	return rt.Description(objref.IDOf(pns))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PortNameServer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pns *PortNameServer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pns), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PortNameServer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pns *PortNameServer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pns), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PortNameServer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pns *PortNameServer) String() string {
+	return rt.Description(objref.IDOf(pns))
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *PortNameServer) WithScriptingProperties(scriptingProperties obj.Object) *PortNameServer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (pns *PortNameServer) WithScriptingProperties(scriptingProperties obj.Object) *PortNameServer {
+	objc.Send[objc.ID](objref.IDOf(pns), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return pns
 }
 
 // PortForName looks up and returns the port registered under the specified name on the local host.
-func (x *PortNameServer) PortForName(name string) *Port {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("portForName:"), purego.NSString(name))
+func (pns *PortNameServer) PortForName(name string) *Port {
+	_r := objc.Send[objc.ID](objref.IDOf(pns), objc.RegisterName("portForName:"), purego.NSString(name))
 	return PortFromID(_r)
 }
 
 // PortForNameHost looks up and returns the port registered under the specified name on a specified host.
-func (x *PortNameServer) PortForNameHost(name string, host string) *Port {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("portForName:host:"), purego.NSString(name), purego.NSString(host))
+func (pns *PortNameServer) PortForNameHost(name string, host string) *Port {
+	_r := objc.Send[objc.ID](objref.IDOf(pns), objc.RegisterName("portForName:host:"), purego.NSString(name), purego.NSString(host))
 	return PortFromID(_r)
 }
 
 // RegisterPortName makes a given port available on the network under a specified name.
-func (x *PortNameServer) RegisterPortName(port *Port, name string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerPort:name:"), objref.IDOf(port), purego.NSString(name))
+func (pns *PortNameServer) RegisterPortName(port *Port, name string) bool {
+	_r := objc.Send[bool](objref.IDOf(pns), objc.RegisterName("registerPort:name:"), objref.IDOf(port), purego.NSString(name))
 	return _r
 }
 
 // RemovePortForName unregisters the port for a given name on the local host.
-func (x *PortNameServer) RemovePortForName(name string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removePortForName:"), purego.NSString(name))
+func (pns *PortNameServer) RemovePortForName(name string) bool {
+	_r := objc.Send[bool](objref.IDOf(pns), objc.RegisterName("removePortForName:"), purego.NSString(name))
 	return _r
 }
-
-// PortNameServerable is the interface implemented by [PortNameServer], for mocking and DI.
-type PortNameServerable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *PortNameServer
-	PortForName(name string) *Port
-	PortForNameHost(name string, host string) *Port
-	RegisterPortName(port *Port, name string) bool
-	RemovePortForName(name string) bool
-}
-
-var _ PortNameServerable = (*PortNameServer)(nil)
 
 // isPortNameServer marks PortNameServer — and, by embedding promotion, its
 // subclasses — as a member of the PortNameServer hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PortNameServer) isPortNameServer() {}
+func (pns *PortNameServer) isPortNameServer() {}
 
 var _ PortNameServerProvider = (*PortNameServer)(nil)

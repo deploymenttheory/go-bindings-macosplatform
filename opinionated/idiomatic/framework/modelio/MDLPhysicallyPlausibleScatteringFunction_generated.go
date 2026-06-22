@@ -7,7 +7,6 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,95 +51,76 @@ func NewPhysicallyPlausibleScatteringFunction() *PhysicallyPlausibleScatteringFu
 	return physicallyPlausibleScatteringFunctionAdopt(_id)
 }
 
-// WithName a descriptive name for the scattering function.
-func (x *PhysicallyPlausibleScatteringFunction) WithName(name string) *PhysicallyPlausibleScatteringFunction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets a descriptive name for the scattering function.
+func (ppsf *PhysicallyPlausibleScatteringFunction) WithName(name string) *PhysicallyPlausibleScatteringFunction {
+	objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("setName:"), purego.NSString(name))
+	return ppsf
 }
 
 // Subsurface wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleScatteringFunction) Subsurface() *MaterialProperty {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subsurface"))
+func (ppsf *PhysicallyPlausibleScatteringFunction) Subsurface() *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("subsurface"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Metallic wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleScatteringFunction) Metallic() *MaterialProperty {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metallic"))
+func (ppsf *PhysicallyPlausibleScatteringFunction) Metallic() *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("metallic"))
 	return MaterialPropertyFromID(_r)
 }
 
 // SpecularAmount wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleScatteringFunction) SpecularAmount() *MaterialProperty {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("specularAmount"))
+func (ppsf *PhysicallyPlausibleScatteringFunction) SpecularAmount() *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("specularAmount"))
 	return MaterialPropertyFromID(_r)
 }
 
 // SpecularTint wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleScatteringFunction) SpecularTint() *MaterialProperty {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("specularTint"))
+func (ppsf *PhysicallyPlausibleScatteringFunction) SpecularTint() *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("specularTint"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Roughness wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleScatteringFunction) Roughness() *MaterialProperty {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("roughness"))
+func (ppsf *PhysicallyPlausibleScatteringFunction) Roughness() *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("roughness"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Anisotropic wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleScatteringFunction) Anisotropic() *MaterialProperty {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anisotropic"))
+func (ppsf *PhysicallyPlausibleScatteringFunction) Anisotropic() *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("anisotropic"))
 	return MaterialPropertyFromID(_r)
 }
 
 // AnisotropicRotation wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleScatteringFunction) AnisotropicRotation() *MaterialProperty {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anisotropicRotation"))
+func (ppsf *PhysicallyPlausibleScatteringFunction) AnisotropicRotation() *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("anisotropicRotation"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Sheen wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleScatteringFunction) Sheen() *MaterialProperty {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sheen"))
+func (ppsf *PhysicallyPlausibleScatteringFunction) Sheen() *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("sheen"))
 	return MaterialPropertyFromID(_r)
 }
 
 // SheenTint wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleScatteringFunction) SheenTint() *MaterialProperty {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sheenTint"))
+func (ppsf *PhysicallyPlausibleScatteringFunction) SheenTint() *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("sheenTint"))
 	return MaterialPropertyFromID(_r)
 }
 
 // Clearcoat wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleScatteringFunction) Clearcoat() *MaterialProperty {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearcoat"))
+func (ppsf *PhysicallyPlausibleScatteringFunction) Clearcoat() *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("clearcoat"))
 	return MaterialPropertyFromID(_r)
 }
 
 // ClearcoatGloss wraps the corresponding Objective-C method.
-func (x *PhysicallyPlausibleScatteringFunction) ClearcoatGloss() *MaterialProperty {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearcoatGloss"))
+func (ppsf *PhysicallyPlausibleScatteringFunction) ClearcoatGloss() *MaterialProperty {
+	_r := objc.Send[objc.ID](objref.IDOf(ppsf), objc.RegisterName("clearcoatGloss"))
 	return MaterialPropertyFromID(_r)
 }
-
-// PhysicallyPlausibleScatteringFunctionable is the interface implemented by [PhysicallyPlausibleScatteringFunction], for mocking and DI.
-type PhysicallyPlausibleScatteringFunctionable interface {
-	obj.Object
-	WithName(name string) *PhysicallyPlausibleScatteringFunction
-	Subsurface() *MaterialProperty
-	Metallic() *MaterialProperty
-	SpecularAmount() *MaterialProperty
-	SpecularTint() *MaterialProperty
-	Roughness() *MaterialProperty
-	Anisotropic() *MaterialProperty
-	AnisotropicRotation() *MaterialProperty
-	Sheen() *MaterialProperty
-	SheenTint() *MaterialProperty
-	Clearcoat() *MaterialProperty
-	ClearcoatGloss() *MaterialProperty
-}
-
-var _ PhysicallyPlausibleScatteringFunctionable = (*PhysicallyPlausibleScatteringFunction)(nil)
 
 var _ ScatteringFunctionProvider = (*PhysicallyPlausibleScatteringFunction)(nil)

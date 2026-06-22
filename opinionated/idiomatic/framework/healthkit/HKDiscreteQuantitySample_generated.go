@@ -52,47 +52,35 @@ func NewDiscreteQuantitySample() *DiscreteQuantitySample {
 	return discreteQuantitySampleAdopt(_id)
 }
 
-// MinimumQuantity the minimum of the receiver's quantities
-func (x *DiscreteQuantitySample) MinimumQuantity() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minimumQuantity"))
+// MinimumQuantity returns the minimum of the receiver's quantities
+func (dqs *DiscreteQuantitySample) MinimumQuantity() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(dqs), objc.RegisterName("minimumQuantity"))
 	return QuantityFromID(_r)
 }
 
-// AverageQuantity the average of the receiver's quantities
-func (x *DiscreteQuantitySample) AverageQuantity() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("averageQuantity"))
+// AverageQuantity returns the average of the receiver's quantities
+func (dqs *DiscreteQuantitySample) AverageQuantity() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(dqs), objc.RegisterName("averageQuantity"))
 	return QuantityFromID(_r)
 }
 
-// MaximumQuantity the maximum of the receiver's quantities
-func (x *DiscreteQuantitySample) MaximumQuantity() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumQuantity"))
+// MaximumQuantity returns the maximum of the receiver's quantities
+func (dqs *DiscreteQuantitySample) MaximumQuantity() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(dqs), objc.RegisterName("maximumQuantity"))
 	return QuantityFromID(_r)
 }
 
-// MostRecentQuantity the receiver's quantity with most recent date interval
-func (x *DiscreteQuantitySample) MostRecentQuantity() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mostRecentQuantity"))
+// MostRecentQuantity returns the receiver's quantity with most recent date interval
+func (dqs *DiscreteQuantitySample) MostRecentQuantity() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(dqs), objc.RegisterName("mostRecentQuantity"))
 	return QuantityFromID(_r)
 }
 
-// MostRecentQuantityDateInterval the date interval for the receiver's most recent quantity
-func (x *DiscreteQuantitySample) MostRecentQuantityDateInterval() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mostRecentQuantityDateInterval"))
+// MostRecentQuantityDateInterval returns the date interval for the receiver's most recent quantity
+func (dqs *DiscreteQuantitySample) MostRecentQuantityDateInterval() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dqs), objc.RegisterName("mostRecentQuantityDateInterval"))
 	return obj.Wrap(_r)
 }
-
-// DiscreteQuantitySampleable is the interface implemented by [DiscreteQuantitySample], for mocking and DI.
-type DiscreteQuantitySampleable interface {
-	obj.Object
-	MinimumQuantity() *Quantity
-	AverageQuantity() *Quantity
-	MaximumQuantity() *Quantity
-	MostRecentQuantity() *Quantity
-	MostRecentQuantityDateInterval() obj.Object
-}
-
-var _ DiscreteQuantitySampleable = (*DiscreteQuantitySample)(nil)
 
 var _ QuantitySampleProvider = (*DiscreteQuantitySample)(nil)
 

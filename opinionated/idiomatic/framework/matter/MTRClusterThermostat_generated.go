@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -63,7 +64,7 @@ func NewMTRClusterThermostatWithDeviceEndpointQueue(device *MTRDevice, endpoint 
 // GetWeeklyScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // GetWeeklyScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterThermostat) GetWeeklyScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRThermostatClusterGetWeeklyScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRThermostatClusterGetWeeklyScheduleResponseParams, err error) {
+func (mct *MTRClusterThermostat) GetWeeklyScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRThermostatClusterGetWeeklyScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRThermostatClusterGetWeeklyScheduleResponseParams, err error) {
 	type _result struct {
 		val *MTRThermostatClusterGetWeeklyScheduleResponseParams
 		err error
@@ -75,7 +76,7 @@ func (x *MTRClusterThermostat) GetWeeklyScheduleWithParamsExpectedValuesExpected
 		_o.val = MTRThermostatClusterGetWeeklyScheduleResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getWeeklyScheduleWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("getWeeklyScheduleWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -88,7 +89,7 @@ func (x *MTRClusterThermostat) GetWeeklyScheduleWithParamsExpectedValuesExpected
 // AtomicRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // AtomicRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterThermostat) AtomicRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRThermostatClusterAtomicRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRThermostatClusterAtomicResponseParams, err error) {
+func (mct *MTRClusterThermostat) AtomicRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRThermostatClusterAtomicRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRThermostatClusterAtomicResponseParams, err error) {
 	type _result struct {
 		val *MTRThermostatClusterAtomicResponseParams
 		err error
@@ -100,7 +101,7 @@ func (x *MTRClusterThermostat) AtomicRequestWithParamsExpectedValuesExpectedValu
 		_o.val = MTRThermostatClusterAtomicResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("atomicRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("atomicRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -111,689 +112,689 @@ func (x *MTRClusterThermostat) AtomicRequestWithParamsExpectedValuesExpectedValu
 }
 
 // ReadAttributeLocalTemperatureWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeLocalTemperatureWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLocalTemperatureWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeLocalTemperatureWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeLocalTemperatureWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeOutdoorTemperatureWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeOutdoorTemperatureWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOutdoorTemperatureWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeOutdoorTemperatureWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeOutdoorTemperatureWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeOccupancyWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeOccupancyWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOccupancyWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeOccupancyWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeOccupancyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAbsMinHeatSetpointLimitWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeAbsMinHeatSetpointLimitWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAbsMinHeatSetpointLimitWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeAbsMinHeatSetpointLimitWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeAbsMinHeatSetpointLimitWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAbsMaxHeatSetpointLimitWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeAbsMaxHeatSetpointLimitWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAbsMaxHeatSetpointLimitWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeAbsMaxHeatSetpointLimitWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeAbsMaxHeatSetpointLimitWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAbsMinCoolSetpointLimitWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeAbsMinCoolSetpointLimitWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAbsMinCoolSetpointLimitWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeAbsMinCoolSetpointLimitWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeAbsMinCoolSetpointLimitWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAbsMaxCoolSetpointLimitWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeAbsMaxCoolSetpointLimitWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAbsMaxCoolSetpointLimitWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeAbsMaxCoolSetpointLimitWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeAbsMaxCoolSetpointLimitWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributePICoolingDemandWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributePICoolingDemandWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePICoolingDemandWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributePICoolingDemandWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributePICoolingDemandWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributePIHeatingDemandWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributePIHeatingDemandWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePIHeatingDemandWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributePIHeatingDemandWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributePIHeatingDemandWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeHVACSystemTypeConfigurationWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeHVACSystemTypeConfigurationWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHVACSystemTypeConfigurationWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeHVACSystemTypeConfigurationWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeHVACSystemTypeConfigurationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeHVACSystemTypeConfigurationWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeHVACSystemTypeConfigurationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeHVACSystemTypeConfigurationWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeHVACSystemTypeConfigurationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeHVACSystemTypeConfigurationWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeHVACSystemTypeConfigurationWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeHVACSystemTypeConfigurationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeHVACSystemTypeConfigurationWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeHVACSystemTypeConfigurationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeHVACSystemTypeConfigurationWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeLocalTemperatureCalibrationWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeLocalTemperatureCalibrationWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLocalTemperatureCalibrationWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeLocalTemperatureCalibrationWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeLocalTemperatureCalibrationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeLocalTemperatureCalibrationWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeLocalTemperatureCalibrationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLocalTemperatureCalibrationWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeLocalTemperatureCalibrationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeLocalTemperatureCalibrationWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeLocalTemperatureCalibrationWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeLocalTemperatureCalibrationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLocalTemperatureCalibrationWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeLocalTemperatureCalibrationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeLocalTemperatureCalibrationWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOccupiedCoolingSetpointWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeOccupiedCoolingSetpointWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOccupiedCoolingSetpointWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeOccupiedCoolingSetpointWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeOccupiedCoolingSetpointWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeOccupiedCoolingSetpointWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeOccupiedCoolingSetpointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOccupiedCoolingSetpointWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeOccupiedCoolingSetpointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeOccupiedCoolingSetpointWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOccupiedCoolingSetpointWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeOccupiedCoolingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOccupiedCoolingSetpointWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeOccupiedCoolingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeOccupiedCoolingSetpointWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOccupiedHeatingSetpointWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeOccupiedHeatingSetpointWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOccupiedHeatingSetpointWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeOccupiedHeatingSetpointWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeOccupiedHeatingSetpointWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeOccupiedHeatingSetpointWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeOccupiedHeatingSetpointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOccupiedHeatingSetpointWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeOccupiedHeatingSetpointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeOccupiedHeatingSetpointWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOccupiedHeatingSetpointWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeOccupiedHeatingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOccupiedHeatingSetpointWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeOccupiedHeatingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeOccupiedHeatingSetpointWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeUnoccupiedCoolingSetpointWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeUnoccupiedCoolingSetpointWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUnoccupiedCoolingSetpointWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeUnoccupiedCoolingSetpointWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeUnoccupiedCoolingSetpointWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeUnoccupiedCoolingSetpointWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeUnoccupiedCoolingSetpointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeUnoccupiedCoolingSetpointWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeUnoccupiedCoolingSetpointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeUnoccupiedCoolingSetpointWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeUnoccupiedCoolingSetpointWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeUnoccupiedCoolingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeUnoccupiedCoolingSetpointWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeUnoccupiedCoolingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeUnoccupiedCoolingSetpointWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeUnoccupiedHeatingSetpointWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeUnoccupiedHeatingSetpointWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUnoccupiedHeatingSetpointWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeUnoccupiedHeatingSetpointWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeUnoccupiedHeatingSetpointWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeUnoccupiedHeatingSetpointWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeUnoccupiedHeatingSetpointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeUnoccupiedHeatingSetpointWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeUnoccupiedHeatingSetpointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeUnoccupiedHeatingSetpointWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeUnoccupiedHeatingSetpointWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeUnoccupiedHeatingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeUnoccupiedHeatingSetpointWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeUnoccupiedHeatingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeUnoccupiedHeatingSetpointWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeMinHeatSetpointLimitWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeMinHeatSetpointLimitWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinHeatSetpointLimitWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeMinHeatSetpointLimitWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeMinHeatSetpointLimitWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeMinHeatSetpointLimitWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeMinHeatSetpointLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeMinHeatSetpointLimitWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeMinHeatSetpointLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMinHeatSetpointLimitWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeMinHeatSetpointLimitWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeMinHeatSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeMinHeatSetpointLimitWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeMinHeatSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMinHeatSetpointLimitWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeMaxHeatSetpointLimitWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeMaxHeatSetpointLimitWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxHeatSetpointLimitWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeMaxHeatSetpointLimitWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeMaxHeatSetpointLimitWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeMaxHeatSetpointLimitWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeMaxHeatSetpointLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeMaxHeatSetpointLimitWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeMaxHeatSetpointLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMaxHeatSetpointLimitWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeMaxHeatSetpointLimitWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeMaxHeatSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeMaxHeatSetpointLimitWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeMaxHeatSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMaxHeatSetpointLimitWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeMinCoolSetpointLimitWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeMinCoolSetpointLimitWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinCoolSetpointLimitWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeMinCoolSetpointLimitWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeMinCoolSetpointLimitWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeMinCoolSetpointLimitWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeMinCoolSetpointLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeMinCoolSetpointLimitWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeMinCoolSetpointLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMinCoolSetpointLimitWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeMinCoolSetpointLimitWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeMinCoolSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeMinCoolSetpointLimitWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeMinCoolSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMinCoolSetpointLimitWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeMaxCoolSetpointLimitWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeMaxCoolSetpointLimitWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxCoolSetpointLimitWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeMaxCoolSetpointLimitWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeMaxCoolSetpointLimitWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeMaxCoolSetpointLimitWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeMaxCoolSetpointLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeMaxCoolSetpointLimitWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeMaxCoolSetpointLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMaxCoolSetpointLimitWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeMaxCoolSetpointLimitWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeMaxCoolSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeMaxCoolSetpointLimitWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeMaxCoolSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMaxCoolSetpointLimitWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeMinSetpointDeadBandWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeMinSetpointDeadBandWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinSetpointDeadBandWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeMinSetpointDeadBandWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeMinSetpointDeadBandWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeMinSetpointDeadBandWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeMinSetpointDeadBandWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeMinSetpointDeadBandWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeMinSetpointDeadBandWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMinSetpointDeadBandWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeMinSetpointDeadBandWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeMinSetpointDeadBandWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeMinSetpointDeadBandWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeMinSetpointDeadBandWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeMinSetpointDeadBandWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeRemoteSensingWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeRemoteSensingWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRemoteSensingWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeRemoteSensingWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeRemoteSensingWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeRemoteSensingWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeRemoteSensingWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRemoteSensingWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeRemoteSensingWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeRemoteSensingWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeRemoteSensingWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeRemoteSensingWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRemoteSensingWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeRemoteSensingWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeRemoteSensingWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeControlSequenceOfOperationWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeControlSequenceOfOperationWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeControlSequenceOfOperationWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeControlSequenceOfOperationWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeControlSequenceOfOperationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeControlSequenceOfOperationWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeControlSequenceOfOperationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeControlSequenceOfOperationWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeControlSequenceOfOperationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeControlSequenceOfOperationWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeControlSequenceOfOperationWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeControlSequenceOfOperationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeControlSequenceOfOperationWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeControlSequenceOfOperationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeControlSequenceOfOperationWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeSystemModeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeSystemModeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSystemModeWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeSystemModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeSystemModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeSystemModeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeSystemModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSystemModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeSystemModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeSystemModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeSystemModeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeSystemModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSystemModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeSystemModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeSystemModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeThermostatRunningModeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeThermostatRunningModeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeThermostatRunningModeWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeThermostatRunningModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeThermostatRunningModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeStartOfWeekWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeStartOfWeekWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStartOfWeekWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeStartOfWeekWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeStartOfWeekWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeNumberOfWeeklyTransitionsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeNumberOfWeeklyTransitionsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfWeeklyTransitionsWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeNumberOfWeeklyTransitionsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeNumberOfWeeklyTransitionsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeNumberOfDailyTransitionsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeNumberOfDailyTransitionsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfDailyTransitionsWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeNumberOfDailyTransitionsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeNumberOfDailyTransitionsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeTemperatureSetpointHoldWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeTemperatureSetpointHoldWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTemperatureSetpointHoldWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeTemperatureSetpointHoldWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeTemperatureSetpointHoldWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeTemperatureSetpointHoldWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeTemperatureSetpointHoldWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeTemperatureSetpointHoldWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeTemperatureSetpointHoldWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeTemperatureSetpointHoldWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeTemperatureSetpointHoldWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeTemperatureSetpointHoldWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeTemperatureSetpointHoldWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeTemperatureSetpointHoldWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeTemperatureSetpointHoldWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeTemperatureSetpointHoldDurationWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeTemperatureSetpointHoldDurationWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTemperatureSetpointHoldDurationWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeTemperatureSetpointHoldDurationWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeTemperatureSetpointHoldDurationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeTemperatureSetpointHoldDurationWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeTemperatureSetpointHoldDurationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeTemperatureSetpointHoldDurationWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeTemperatureSetpointHoldDurationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeTemperatureSetpointHoldDurationWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeTemperatureSetpointHoldDurationWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeTemperatureSetpointHoldDurationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeTemperatureSetpointHoldDurationWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeTemperatureSetpointHoldDurationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeTemperatureSetpointHoldDurationWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeThermostatProgrammingOperationModeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeThermostatProgrammingOperationModeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeThermostatProgrammingOperationModeWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeThermostatProgrammingOperationModeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeThermostatProgrammingOperationModeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeThermostatProgrammingOperationModeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeThermostatProgrammingOperationModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeThermostatProgrammingOperationModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeThermostatProgrammingOperationModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeThermostatProgrammingOperationModeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeThermostatProgrammingOperationModeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeThermostatProgrammingOperationModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeThermostatProgrammingOperationModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeThermostatProgrammingOperationModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeThermostatProgrammingOperationModeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeThermostatRunningStateWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeThermostatRunningStateWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeThermostatRunningStateWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeThermostatRunningStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeThermostatRunningStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeSetpointChangeSourceWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeSetpointChangeSourceWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSetpointChangeSourceWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeSetpointChangeSourceWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeSetpointChangeSourceWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeSetpointChangeAmountWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeSetpointChangeAmountWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSetpointChangeAmountWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeSetpointChangeAmountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeSetpointChangeAmountWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeSetpointChangeSourceTimestampWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeSetpointChangeSourceTimestampWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSetpointChangeSourceTimestampWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeSetpointChangeSourceTimestampWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeSetpointChangeSourceTimestampWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeOccupiedSetbackWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeOccupiedSetbackWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOccupiedSetbackWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeOccupiedSetbackWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeOccupiedSetbackWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeOccupiedSetbackWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeOccupiedSetbackWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOccupiedSetbackWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeOccupiedSetbackWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeOccupiedSetbackWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOccupiedSetbackWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeOccupiedSetbackWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOccupiedSetbackWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeOccupiedSetbackWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeOccupiedSetbackWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOccupiedSetbackMinWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeOccupiedSetbackMinWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOccupiedSetbackMinWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeOccupiedSetbackMinWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeOccupiedSetbackMinWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeOccupiedSetbackMaxWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeOccupiedSetbackMaxWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOccupiedSetbackMaxWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeOccupiedSetbackMaxWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeOccupiedSetbackMaxWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeUnoccupiedSetbackWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeUnoccupiedSetbackWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUnoccupiedSetbackWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeUnoccupiedSetbackWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeUnoccupiedSetbackWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeUnoccupiedSetbackWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeUnoccupiedSetbackWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeUnoccupiedSetbackWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeUnoccupiedSetbackWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeUnoccupiedSetbackWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeUnoccupiedSetbackWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeUnoccupiedSetbackWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeUnoccupiedSetbackWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeUnoccupiedSetbackWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeUnoccupiedSetbackWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeUnoccupiedSetbackMinWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeUnoccupiedSetbackMinWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUnoccupiedSetbackMinWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeUnoccupiedSetbackMinWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeUnoccupiedSetbackMinWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeUnoccupiedSetbackMaxWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeUnoccupiedSetbackMaxWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUnoccupiedSetbackMaxWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeUnoccupiedSetbackMaxWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeUnoccupiedSetbackMaxWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeEmergencyHeatDeltaWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeEmergencyHeatDeltaWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEmergencyHeatDeltaWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeEmergencyHeatDeltaWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeEmergencyHeatDeltaWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeEmergencyHeatDeltaWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeEmergencyHeatDeltaWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEmergencyHeatDeltaWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeEmergencyHeatDeltaWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeEmergencyHeatDeltaWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeEmergencyHeatDeltaWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeEmergencyHeatDeltaWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEmergencyHeatDeltaWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeEmergencyHeatDeltaWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeEmergencyHeatDeltaWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeACTypeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeACTypeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeACTypeWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeACTypeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeACTypeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeACTypeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeACTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeACTypeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeACTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACTypeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeACTypeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeACTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeACTypeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeACTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACTypeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeACCapacityWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeACCapacityWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeACCapacityWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeACCapacityWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeACCapacityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeACCapacityWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeACCapacityWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeACCapacityWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeACCapacityWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACCapacityWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeACCapacityWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeACCapacityWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeACCapacityWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeACCapacityWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACCapacityWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeACRefrigerantTypeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeACRefrigerantTypeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeACRefrigerantTypeWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeACRefrigerantTypeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeACRefrigerantTypeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeACRefrigerantTypeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeACRefrigerantTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeACRefrigerantTypeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeACRefrigerantTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACRefrigerantTypeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeACRefrigerantTypeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeACRefrigerantTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeACRefrigerantTypeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeACRefrigerantTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACRefrigerantTypeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeACCompressorTypeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeACCompressorTypeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeACCompressorTypeWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeACCompressorTypeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeACCompressorTypeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeACCompressorTypeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeACCompressorTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeACCompressorTypeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeACCompressorTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACCompressorTypeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeACCompressorTypeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeACCompressorTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeACCompressorTypeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeACCompressorTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACCompressorTypeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeACErrorCodeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeACErrorCodeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeACErrorCodeWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeACErrorCodeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeACErrorCodeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeACErrorCodeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeACErrorCodeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeACErrorCodeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeACErrorCodeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACErrorCodeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeACErrorCodeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeACErrorCodeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeACErrorCodeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeACErrorCodeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACErrorCodeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeACLouverPositionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeACLouverPositionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeACLouverPositionWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeACLouverPositionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeACLouverPositionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeACLouverPositionWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeACLouverPositionWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeACLouverPositionWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeACLouverPositionWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACLouverPositionWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeACLouverPositionWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeACLouverPositionWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeACLouverPositionWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeACLouverPositionWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACLouverPositionWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeACCoilTemperatureWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeACCoilTemperatureWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeACCoilTemperatureWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeACCoilTemperatureWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeACCoilTemperatureWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeACCapacityformatWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeACCapacityformatWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeACCapacityformatWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeACCapacityformatWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeACCapacityformatWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeACCapacityformatWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeACCapacityformatWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeACCapacityformatWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeACCapacityformatWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACCapacityformatWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeACCapacityformatWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeACCapacityformatWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeACCapacityformatWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeACCapacityformatWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeACCapacityformatWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributePresetTypesWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributePresetTypesWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePresetTypesWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributePresetTypesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributePresetTypesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeScheduleTypesWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeScheduleTypesWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeScheduleTypesWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeScheduleTypesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeScheduleTypesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeNumberOfPresetsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeNumberOfPresetsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfPresetsWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeNumberOfPresetsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeNumberOfPresetsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeNumberOfSchedulesWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeNumberOfSchedulesWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfSchedulesWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeNumberOfSchedulesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeNumberOfSchedulesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeNumberOfScheduleTransitionsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeNumberOfScheduleTransitionsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfScheduleTransitionsWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeNumberOfScheduleTransitionsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeNumberOfScheduleTransitionsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeNumberOfScheduleTransitionPerDayWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeNumberOfScheduleTransitionPerDayWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfScheduleTransitionPerDayWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeNumberOfScheduleTransitionPerDayWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeNumberOfScheduleTransitionPerDayWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeActivePresetHandleWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeActivePresetHandleWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActivePresetHandleWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeActivePresetHandleWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeActivePresetHandleWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeActiveScheduleHandleWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeActiveScheduleHandleWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveScheduleHandleWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeActiveScheduleHandleWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeActiveScheduleHandleWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributePresetsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributePresetsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePresetsWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributePresetsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributePresetsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributePresetsWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributePresetsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePresetsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributePresetsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributePresetsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributePresetsWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributePresetsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePresetsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributePresetsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributePresetsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeSchedulesWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeSchedulesWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSchedulesWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeSchedulesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeSchedulesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeSchedulesWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeSchedulesWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSchedulesWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mct *MTRClusterThermostat) WriteAttributeSchedulesWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeSchedulesWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeSchedulesWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) WriteAttributeSchedulesWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeSchedulesWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mct *MTRClusterThermostat) WriteAttributeSchedulesWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("writeAttributeSchedulesWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeSetpointHoldExpiryTimestampWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeSetpointHoldExpiryTimestampWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSetpointHoldExpiryTimestampWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeSetpointHoldExpiryTimestampWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeSetpointHoldExpiryTimestampWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterThermostat) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mct *MTRClusterThermostat) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // GetWeeklyScheduleWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // GetWeeklyScheduleWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterThermostat) GetWeeklyScheduleWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRThermostatClusterGetWeeklyScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRThermostatClusterGetWeeklyScheduleResponseParams, err error) {
+func (mct *MTRClusterThermostat) GetWeeklyScheduleWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRThermostatClusterGetWeeklyScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRThermostatClusterGetWeeklyScheduleResponseParams, err error) {
 	type _result struct {
 		val *MTRThermostatClusterGetWeeklyScheduleResponseParams
 		err error
@@ -805,7 +806,7 @@ func (x *MTRClusterThermostat) GetWeeklyScheduleWithParamsExpectedValuesExpected
 		_o.val = MTRThermostatClusterGetWeeklyScheduleResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getWeeklyScheduleWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mct), objc.RegisterName("getWeeklyScheduleWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -814,139 +815,6 @@ func (x *MTRClusterThermostat) GetWeeklyScheduleWithParamsExpectedValuesExpected
 		return _zero, ctx.Err()
 	}
 }
-
-// MTRClusterThermostatable is the interface implemented by [MTRClusterThermostat], for mocking and DI.
-type MTRClusterThermostatable interface {
-	obj.Object
-	GetWeeklyScheduleWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRThermostatClusterGetWeeklyScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRThermostatClusterGetWeeklyScheduleResponseParams, error)
-	AtomicRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRThermostatClusterAtomicRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRThermostatClusterAtomicResponseParams, error)
-	ReadAttributeLocalTemperatureWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeOutdoorTemperatureWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeOccupancyWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAbsMinHeatSetpointLimitWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAbsMaxHeatSetpointLimitWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAbsMinCoolSetpointLimitWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAbsMaxCoolSetpointLimitWithParams(params *MTRReadParams) obj.Object
-	ReadAttributePICoolingDemandWithParams(params *MTRReadParams) obj.Object
-	ReadAttributePIHeatingDemandWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeHVACSystemTypeConfigurationWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeHVACSystemTypeConfigurationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeHVACSystemTypeConfigurationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeLocalTemperatureCalibrationWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeLocalTemperatureCalibrationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeLocalTemperatureCalibrationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeOccupiedCoolingSetpointWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeOccupiedCoolingSetpointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeOccupiedCoolingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeOccupiedHeatingSetpointWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeOccupiedHeatingSetpointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeOccupiedHeatingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeUnoccupiedCoolingSetpointWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeUnoccupiedCoolingSetpointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeUnoccupiedCoolingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeUnoccupiedHeatingSetpointWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeUnoccupiedHeatingSetpointWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeUnoccupiedHeatingSetpointWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeMinHeatSetpointLimitWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeMinHeatSetpointLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeMinHeatSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeMaxHeatSetpointLimitWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeMaxHeatSetpointLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeMaxHeatSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeMinCoolSetpointLimitWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeMinCoolSetpointLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeMinCoolSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeMaxCoolSetpointLimitWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeMaxCoolSetpointLimitWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeMaxCoolSetpointLimitWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeMinSetpointDeadBandWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeMinSetpointDeadBandWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeMinSetpointDeadBandWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeRemoteSensingWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeRemoteSensingWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeRemoteSensingWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeControlSequenceOfOperationWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeControlSequenceOfOperationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeControlSequenceOfOperationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeSystemModeWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeSystemModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeSystemModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeThermostatRunningModeWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeStartOfWeekWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeNumberOfWeeklyTransitionsWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeNumberOfDailyTransitionsWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeTemperatureSetpointHoldWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeTemperatureSetpointHoldWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeTemperatureSetpointHoldWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeTemperatureSetpointHoldDurationWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeTemperatureSetpointHoldDurationWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeTemperatureSetpointHoldDurationWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeThermostatProgrammingOperationModeWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeThermostatProgrammingOperationModeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeThermostatProgrammingOperationModeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeThermostatRunningStateWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeSetpointChangeSourceWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeSetpointChangeAmountWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeSetpointChangeSourceTimestampWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeOccupiedSetbackWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeOccupiedSetbackWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeOccupiedSetbackWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeOccupiedSetbackMinWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeOccupiedSetbackMaxWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeUnoccupiedSetbackWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeUnoccupiedSetbackWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeUnoccupiedSetbackWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeUnoccupiedSetbackMinWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeUnoccupiedSetbackMaxWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeEmergencyHeatDeltaWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeEmergencyHeatDeltaWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeEmergencyHeatDeltaWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeACTypeWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeACTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeACTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeACCapacityWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeACCapacityWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeACCapacityWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeACRefrigerantTypeWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeACRefrigerantTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeACRefrigerantTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeACCompressorTypeWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeACCompressorTypeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeACCompressorTypeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeACErrorCodeWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeACErrorCodeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeACErrorCodeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeACLouverPositionWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeACLouverPositionWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeACLouverPositionWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeACCoilTemperatureWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeACCapacityformatWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeACCapacityformatWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeACCapacityformatWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributePresetTypesWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeScheduleTypesWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeNumberOfPresetsWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeNumberOfSchedulesWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeNumberOfScheduleTransitionsWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeNumberOfScheduleTransitionPerDayWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeActivePresetHandleWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeActiveScheduleHandleWithParams(params *MTRReadParams) obj.Object
-	ReadAttributePresetsWithParams(params *MTRReadParams) obj.Object
-	WriteAttributePresetsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributePresetsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeSchedulesWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeSchedulesWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeSchedulesWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeSetpointHoldExpiryTimestampWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-	GetWeeklyScheduleWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRThermostatClusterGetWeeklyScheduleParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRThermostatClusterGetWeeklyScheduleResponseParams, error)
-}
-
-var _ MTRClusterThermostatable = (*MTRClusterThermostat)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterThermostat)(nil)
 

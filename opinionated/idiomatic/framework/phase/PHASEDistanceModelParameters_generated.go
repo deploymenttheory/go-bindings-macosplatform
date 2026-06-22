@@ -48,56 +48,41 @@ func distanceModelParametersAdopt(id objc.ID) *DistanceModelParameters {
 }
 
 // Description returns the object's -description text.
-func (x *DistanceModelParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dmp *DistanceModelParameters) Description() string {
+	return rt.Description(objref.IDOf(dmp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DistanceModelParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dmp *DistanceModelParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dmp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DistanceModelParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dmp *DistanceModelParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dmp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DistanceModelParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dmp *DistanceModelParameters) String() string {
+	return rt.Description(objref.IDOf(dmp))
 }
 
-// WithFadeOutParameters a distance over which the framework fades out the mixer’s sound.
-func (x *DistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *DistanceModelParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFadeOutParameters:"), objref.IDOf(fadeOutParameters))
-	return x
+// WithFadeOutParameters sets a distance over which the framework fades out the mixer’s sound.
+func (dmp *DistanceModelParameters) WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *DistanceModelParameters {
+	objc.Send[objc.ID](objref.IDOf(dmp), objc.RegisterName("setFadeOutParameters:"), objref.IDOf(fadeOutParameters))
+	return dmp
 }
 
 // FadeOutParameters wraps the corresponding Objective-C method.
-func (x *DistanceModelParameters) FadeOutParameters() *DistanceModelFadeOutParameters {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fadeOutParameters"))
+func (dmp *DistanceModelParameters) FadeOutParameters() *DistanceModelFadeOutParameters {
+	_r := objc.Send[objc.ID](objref.IDOf(dmp), objc.RegisterName("fadeOutParameters"))
 	return DistanceModelFadeOutParametersFromID(_r)
 }
-
-// SetFadeOutParameters wraps the corresponding Objective-C method.
-func (x *DistanceModelParameters) SetFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFadeOutParameters:"), objref.IDOf(fadeOutParameters))
-}
-
-// DistanceModelParametersable is the interface implemented by [DistanceModelParameters], for mocking and DI.
-type DistanceModelParametersable interface {
-	obj.Object
-	WithFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters) *DistanceModelParameters
-	FadeOutParameters() *DistanceModelFadeOutParameters
-	SetFadeOutParameters(fadeOutParameters *DistanceModelFadeOutParameters)
-}
-
-var _ DistanceModelParametersable = (*DistanceModelParameters)(nil)
 
 // isDistanceModelParameters marks DistanceModelParameters — and, by embedding promotion, its
 // subclasses — as a member of the DistanceModelParameters hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DistanceModelParameters) isDistanceModelParameters() {}
+func (dmp *DistanceModelParameters) isDistanceModelParameters() {}
 
 var _ DistanceModelParametersProvider = (*DistanceModelParameters)(nil)

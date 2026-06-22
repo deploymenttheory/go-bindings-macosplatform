@@ -46,24 +46,24 @@ func tileRenderPipelineColorAttachmentDescriptorArrayAdopt(id objc.ID) *TileRend
 }
 
 // Description returns the object's -description text.
-func (x *TileRenderPipelineColorAttachmentDescriptorArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (trpcada *TileRenderPipelineColorAttachmentDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(trpcada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TileRenderPipelineColorAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (trpcada *TileRenderPipelineColorAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(trpcada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TileRenderPipelineColorAttachmentDescriptorArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (trpcada *TileRenderPipelineColorAttachmentDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(trpcada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TileRenderPipelineColorAttachmentDescriptorArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (trpcada *TileRenderPipelineColorAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(trpcada))
 }
 
 // NewTileRenderPipelineColorAttachmentDescriptorArray creates a new TileRenderPipelineColorAttachmentDescriptorArray.
@@ -73,21 +73,12 @@ func NewTileRenderPipelineColorAttachmentDescriptorArray() *TileRenderPipelineCo
 }
 
 // ObjectAtIndexedSubscript returns the render pipeline state for the specified color attachment.
-func (x *TileRenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *TileRenderPipelineColorAttachmentDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
+func (trpcada *TileRenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *TileRenderPipelineColorAttachmentDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(trpcada), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return TileRenderPipelineColorAttachmentDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets the render pipeline state for a specified color attachment.
-func (x *TileRenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *TileRenderPipelineColorAttachmentDescriptor, attachmentIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
+func (trpcada *TileRenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *TileRenderPipelineColorAttachmentDescriptor, attachmentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(trpcada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
-
-// TileRenderPipelineColorAttachmentDescriptorArrayable is the interface implemented by [TileRenderPipelineColorAttachmentDescriptorArray], for mocking and DI.
-type TileRenderPipelineColorAttachmentDescriptorArrayable interface {
-	obj.Object
-	ObjectAtIndexedSubscript(attachmentIndex int) *TileRenderPipelineColorAttachmentDescriptor
-	SetObjectAtIndexedSubscript(attachment *TileRenderPipelineColorAttachmentDescriptor, attachmentIndex int)
-}
-
-var _ TileRenderPipelineColorAttachmentDescriptorArrayable = (*TileRenderPipelineColorAttachmentDescriptorArray)(nil)

@@ -46,24 +46,24 @@ func persistentCloudKitContainerOptionsAdopt(id objc.ID) *PersistentCloudKitCont
 }
 
 // Description returns the object's -description text.
-func (x *PersistentCloudKitContainerOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pckco *PersistentCloudKitContainerOptions) Description() string {
+	return rt.Description(objref.IDOf(pckco))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersistentCloudKitContainerOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pckco *PersistentCloudKitContainerOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pckco), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersistentCloudKitContainerOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pckco *PersistentCloudKitContainerOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pckco), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PersistentCloudKitContainerOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pckco *PersistentCloudKitContainerOptions) String() string {
+	return rt.Description(objref.IDOf(pckco))
 }
 
 // NewPersistentCloudKitContainerOptionsWithContainerIdentifier initializes container options using the given CloudKit container identifier.
@@ -73,15 +73,15 @@ func NewPersistentCloudKitContainerOptionsWithContainerIdentifier(containerIdent
 	return persistentCloudKitContainerOptionsAdopt(_id)
 }
 
-// WithDatabaseScope the database scope — public, private, or shared — to use for a specified store in a persistent CloudKit container.
-func (x *PersistentCloudKitContainerOptions) WithDatabaseScope(databaseScope obj.Object) *PersistentCloudKitContainerOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabaseScope:"), objref.IDOf(databaseScope))
-	return x
+// WithDatabaseScope sets the database scope — public, private, or shared — to use for a specified store in a persistent CloudKit container.
+func (pckco *PersistentCloudKitContainerOptions) WithDatabaseScope(databaseScope obj.Object) *PersistentCloudKitContainerOptions {
+	objc.Send[objc.ID](objref.IDOf(pckco), objc.RegisterName("setDatabaseScope:"), objref.IDOf(databaseScope))
+	return pckco
 }
 
-// ContainerIdentifier the container identifier of the CKContainer to use with a given instance of NSPersistentStoreDescription
-func (x *PersistentCloudKitContainerOptions) ContainerIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerIdentifier"))
+// ContainerIdentifier returns the container identifier of the CKContainer to use with a given instance of NSPersistentStoreDescription
+func (pckco *PersistentCloudKitContainerOptions) ContainerIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pckco), objc.RegisterName("containerIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -89,23 +89,7 @@ func (x *PersistentCloudKitContainerOptions) ContainerIdentifier() string {
 }
 
 // DatabaseScope wraps the corresponding Objective-C method.
-func (x *PersistentCloudKitContainerOptions) DatabaseScope() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("databaseScope"))
+func (pckco *PersistentCloudKitContainerOptions) DatabaseScope() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pckco), objc.RegisterName("databaseScope"))
 	return obj.Wrap(_r)
 }
-
-// SetDatabaseScope wraps the corresponding Objective-C method.
-func (x *PersistentCloudKitContainerOptions) SetDatabaseScope(databaseScope obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabaseScope:"), objref.IDOf(databaseScope))
-}
-
-// PersistentCloudKitContainerOptionsable is the interface implemented by [PersistentCloudKitContainerOptions], for mocking and DI.
-type PersistentCloudKitContainerOptionsable interface {
-	obj.Object
-	WithDatabaseScope(databaseScope obj.Object) *PersistentCloudKitContainerOptions
-	ContainerIdentifier() string
-	DatabaseScope() obj.Object
-	SetDatabaseScope(databaseScope obj.Object)
-}
-
-var _ PersistentCloudKitContainerOptionsable = (*PersistentCloudKitContainerOptions)(nil)

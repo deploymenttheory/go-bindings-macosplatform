@@ -7,7 +7,6 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,12 +48,5 @@ func NewMTRBasicClusterShutDownEvent() *MTRBasicClusterShutDownEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRBasicClusterShutDownEvent")), objc.RegisterName("new"))
 	return mTRBasicClusterShutDownEventAdopt(_id)
 }
-
-// MTRBasicClusterShutDownEventable is the interface implemented by [MTRBasicClusterShutDownEvent], for mocking and DI.
-type MTRBasicClusterShutDownEventable interface {
-	obj.Object
-}
-
-var _ MTRBasicClusterShutDownEventable = (*MTRBasicClusterShutDownEvent)(nil)
 
 var _ MTRBasicInformationClusterShutDownEventProvider = (*MTRBasicClusterShutDownEvent)(nil)

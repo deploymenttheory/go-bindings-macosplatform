@@ -46,24 +46,24 @@ func histogramAdopt(id objc.ID) *Histogram {
 }
 
 // Description returns the object's -description text.
-func (x *Histogram) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (h *Histogram) Description() string {
+	return rt.Description(objref.IDOf(h))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Histogram) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (h *Histogram) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(h), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Histogram) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (h *Histogram) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(h), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Histogram) String() string {
-	return rt.Description(objref.IDOf(x))
+func (h *Histogram) String() string {
+	return rt.Description(objref.IDOf(h))
 }
 
 // NewHistogram creates a new Histogram.
@@ -72,23 +72,14 @@ func NewHistogram() *Histogram {
 	return histogramAdopt(_id)
 }
 
-// TotalBucketCount the number of buckets contained within this histogram. This value can never be negative.
-func (x *Histogram) TotalBucketCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalBucketCount"))
+// TotalBucketCount returns the number of buckets contained within this histogram. This value can never be negative.
+func (h *Histogram) TotalBucketCount() int {
+	_r := objc.Send[int](objref.IDOf(h), objc.RegisterName("totalBucketCount"))
 	return _r
 }
 
-// BucketEnumerator an NSEnumerator that can be used to enumerate the buckets of this histogram.
-func (x *Histogram) BucketEnumerator() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bucketEnumerator"))
+// BucketEnumerator returns an NSEnumerator that can be used to enumerate the buckets of this histogram.
+func (h *Histogram) BucketEnumerator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(h), objc.RegisterName("bucketEnumerator"))
 	return obj.Wrap(_r)
 }
-
-// Histogramable is the interface implemented by [Histogram], for mocking and DI.
-type Histogramable interface {
-	obj.Object
-	TotalBucketCount() int
-	BucketEnumerator() obj.Object
-}
-
-var _ Histogramable = (*Histogram)(nil)

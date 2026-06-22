@@ -54,701 +54,646 @@ func NewSlider() *Slider {
 	return sliderAdopt(_id)
 }
 
-// WithSliderType the type of the slider, such as vertical or circular.
-func (x *Slider) WithSliderType(sliderType SliderType) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSliderType:"), sliderType)
-	return x
+// WithSliderType sets the type of the slider, such as vertical or circular.
+func (s *Slider) WithSliderType(sliderType SliderType) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSliderType:"), sliderType)
+	return s
 }
 
-// WithMinValue the minimum value the slider can send to its target.
-func (x *Slider) WithMinValue(minValue float64) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinValue:"), minValue)
-	return x
+// WithMinValue sets the minimum value the slider can send to its target.
+func (s *Slider) WithMinValue(minValue float64) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setMinValue:"), minValue)
+	return s
 }
 
-// WithMaxValue the maximum value the slider can send to its target.
-func (x *Slider) WithMaxValue(maxValue float64) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxValue:"), maxValue)
-	return x
+// WithMaxValue sets the maximum value the slider can send to its target.
+func (s *Slider) WithMaxValue(maxValue float64) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setMaxValue:"), maxValue)
+	return s
 }
 
-// WithNeutralValue the value this slider will be filled from. This slider will be filled from its neutralValue to its current value. If neutralValue has not been explicitly set before, access to neutralValue will return minValue.
-func (x *Slider) WithNeutralValue(neutralValue float64) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeutralValue:"), neutralValue)
-	return x
+// WithNeutralValue sets the value this slider will be filled from. This slider will be filled from its neutralValue to its current value. If neutralValue has not been explicitly set before, access to neutralValue will return minValue.
+func (s *Slider) WithNeutralValue(neutralValue float64) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeutralValue:"), neutralValue)
+	return s
 }
 
-// WithAltIncrementValue the amount by which the slider changes its value when the user Option-drags the slider knob.
-func (x *Slider) WithAltIncrementValue(altIncrementValue float64) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAltIncrementValue:"), altIncrementValue)
-	return x
+// WithAltIncrementValue sets the amount by which the slider changes its value when the user Option-drags the slider knob.
+func (s *Slider) WithAltIncrementValue(altIncrementValue float64) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAltIncrementValue:"), altIncrementValue)
+	return s
 }
 
-// WithKnobThickness the knob’s thickness, in pixels.
-func (x *Slider) WithKnobThickness(knobThickness float64) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKnobThickness:"), knobThickness)
-	return x
+// WithKnobThickness sets the knob’s thickness, in pixels.
+func (s *Slider) WithKnobThickness(knobThickness float64) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setKnobThickness:"), knobThickness)
+	return s
 }
 
-// WithVertical an integer indicating the orientation (horizontal or vertical) of the slider.
-func (x *Slider) WithVertical(vertical bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertical:"), vertical)
-	return x
+// WithVertical sets an integer indicating the orientation (horizontal or vertical) of the slider.
+func (s *Slider) WithVertical(vertical bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setVertical:"), vertical)
+	return s
 }
 
-// WithTrackFillColor the color of the filled portion of the slider track, in appearances that support it.
-func (x *Slider) WithTrackFillColor(trackFillColor *Color) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackFillColor:"), objref.IDOf(trackFillColor))
-	return x
+// WithTrackFillColor sets the color of the filled portion of the slider track, in appearances that support it.
+func (s *Slider) WithTrackFillColor(trackFillColor *Color) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTrackFillColor:"), objref.IDOf(trackFillColor))
+	return s
 }
 
-// WithTintProminence the tint prominence of the slider. The automatic behavior for a regular slider tints its track fill, while a slider with tick marks is untinted. Setting the tint prominence will override this default behavior and choose an explicit track fill tint behavior. See NSTintProminence for a list of possible values.
-func (x *Slider) WithTintProminence(tintProminence TintProminence) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTintProminence:"), tintProminence)
-	return x
+// WithTintProminence sets the tint prominence of the slider. The automatic behavior for a regular slider tints its track fill, while a slider with tick marks is untinted. Setting the tint prominence will override this default behavior and choose an explicit track fill tint behavior. See NSTintProminence for a list of possible values.
+func (s *Slider) WithTintProminence(tintProminence TintProminence) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTintProminence:"), tintProminence)
+	return s
 }
 
-// WithNumberOfTickMarks the number of tick marks associated with the slider.
-func (x *Slider) WithNumberOfTickMarks(numberOfTickMarks int) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTickMarks:"), numberOfTickMarks)
-	return x
+// WithNumberOfTickMarks sets the number of tick marks associated with the slider.
+func (s *Slider) WithNumberOfTickMarks(numberOfTickMarks int) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNumberOfTickMarks:"), numberOfTickMarks)
+	return s
 }
 
-// WithTickMarkPosition determines where the slider’s tick marks are displayed.
-func (x *Slider) WithTickMarkPosition(tickMarkPosition TickMarkPosition) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTickMarkPosition:"), tickMarkPosition)
-	return x
+// WithTickMarkPosition sets determines where the slider’s tick marks are displayed.
+func (s *Slider) WithTickMarkPosition(tickMarkPosition TickMarkPosition) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTickMarkPosition:"), tickMarkPosition)
+	return s
 }
 
-// WithAllowsTickMarkValuesOnly a Boolean value that indicates whether the slider fixes its values to those values represented by its tick marks.
-func (x *Slider) WithAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsTickMarkValuesOnly:"), allowsTickMarkValuesOnly)
-	return x
+// WithAllowsTickMarkValuesOnly sets a Boolean value that indicates whether the slider fixes its values to those values represented by its tick marks.
+func (s *Slider) WithAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAllowsTickMarkValuesOnly:"), allowsTickMarkValuesOnly)
+	return s
 }
 
-// WithTarget the target object that receives action messages from the cell.
-func (x *Slider) WithTarget(target obj.Object) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the target object that receives action messages from the cell.
+func (s *Slider) WithTarget(target obj.Object) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return s
 }
 
-// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
-func (x *Slider) WithTag(tag int) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
+func (s *Slider) WithTag(tag int) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTag:"), tag)
+	return s
 }
 
-// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-func (x *Slider) WithIgnoresMultiClick(ignoresMultiClick bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
-	return x
+// WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+func (s *Slider) WithIgnoresMultiClick(ignoresMultiClick bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	return s
 }
 
-// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-func (x *Slider) WithContinuous(continuous bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+func (s *Slider) WithContinuous(continuous bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setContinuous:"), continuous)
+	return s
 }
 
-// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
-func (x *Slider) WithEnabled(enabled bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
+func (s *Slider) WithEnabled(enabled bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setEnabled:"), enabled)
+	return s
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
-func (x *Slider) WithRefusesFirstResponder(refusesFirstResponder bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
+func (s *Slider) WithRefusesFirstResponder(refusesFirstResponder bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return s
 }
 
-// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
-func (x *Slider) WithHighlighted(highlighted bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
+func (s *Slider) WithHighlighted(highlighted bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHighlighted:"), highlighted)
+	return s
 }
 
-// WithControlSize the size of the control.
-func (x *Slider) WithControlSize(controlSize ControlSize) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the control.
+func (s *Slider) WithControlSize(controlSize ControlSize) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setControlSize:"), controlSize)
+	return s
 }
 
-// WithFormatter the receiver’s formatter.
-func (x *Slider) WithFormatter(formatter obj.Object) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the receiver’s formatter.
+func (s *Slider) WithFormatter(formatter obj.Object) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return s
 }
 
-// WithObjectValue the value of the receiver’s cell as an Objective-C object.
-func (x *Slider) WithObjectValue(objectValue obj.Object) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
+func (s *Slider) WithObjectValue(objectValue obj.Object) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return s
 }
 
-// WithStringValue the value of the receiver’s cell as an NSString object.
-func (x *Slider) WithStringValue(stringValue string) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the value of the receiver’s cell as an NSString object.
+func (s *Slider) WithStringValue(stringValue string) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return s
 }
 
-// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
-func (x *Slider) WithAttributedStringValue(attributedStringValue obj.Object) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
+func (s *Slider) WithAttributedStringValue(attributedStringValue obj.Object) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return s
 }
 
-// WithIntValue the value of the receiver’s cell as an integer.
-func (x *Slider) WithIntValue(intValue int) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the value of the receiver’s cell as an integer.
+func (s *Slider) WithIntValue(intValue int) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIntValue:"), intValue)
+	return s
 }
 
-// WithIntegerValue the value of the receiver’s cell as an integer value.
-func (x *Slider) WithIntegerValue(integerValue int) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the value of the receiver’s cell as an integer value.
+func (s *Slider) WithIntegerValue(integerValue int) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setIntegerValue:"), integerValue)
+	return s
 }
 
-// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
-func (x *Slider) WithFloatValue(floatValue float32) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
+func (s *Slider) WithFloatValue(floatValue float32) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFloatValue:"), floatValue)
+	return s
 }
 
-// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
-func (x *Slider) WithDoubleValue(doubleValue float64) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
+func (s *Slider) WithDoubleValue(doubleValue float64) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return s
 }
 
-// WithFont the font used to draw text in the receiver’s cell.
-func (x *Slider) WithFont(font *Font) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font used to draw text in the receiver’s cell.
+func (s *Slider) WithFont(font *Font) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return s
 }
 
-// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
-func (x *Slider) WithUsesSingleLineMode(usesSingleLineMode bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
+func (s *Slider) WithUsesSingleLineMode(usesSingleLineMode bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return s
 }
 
-// WithLineBreakMode the line break mode to use for text in the control’s cell.
-func (x *Slider) WithLineBreakMode(lineBreakMode LineBreakMode) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use for text in the control’s cell.
+func (s *Slider) WithLineBreakMode(lineBreakMode LineBreakMode) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return s
 }
 
-// WithAlignment the alignment mode of the text in the receiver’s cell.
-func (x *Slider) WithAlignment(alignment TextAlignment) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment mode of the text in the receiver’s cell.
+func (s *Slider) WithAlignment(alignment TextAlignment) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlignment:"), alignment)
+	return s
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *Slider) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (s *Slider) WithBaseWritingDirection(baseWritingDirection WritingDirection) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return s
 }
 
-// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-func (x *Slider) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
-	return x
+// WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+func (s *Slider) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	return s
 }
 
 // WithCell sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithCell(cell CellProvider) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
-	return x
+func (s *Slider) WithCell(cell CellProvider) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	return s
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithSubviews(items ...ViewProvider) *Slider {
+func (s *Slider) WithSubviews(items ...ViewProvider) *Slider {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSubviews:"), _arr)
+	return s
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithHidden(hidden bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (s *Slider) WithHidden(hidden bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHidden:"), hidden)
+	return s
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (s *Slider) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return s
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithAutoresizesSubviews(autoresizesSubviews bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (s *Slider) WithAutoresizesSubviews(autoresizesSubviews bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return s
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (s *Slider) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return s
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *Slider) WithFrame(frame corefoundation.CGRect) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (s *Slider) WithFrame(frame corefoundation.CGRect) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrame:"), frame)
+	return s
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithFrameRotation(frameRotation float64) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (s *Slider) WithFrameRotation(frameRotation float64) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return s
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithFrameCenterRotation(frameCenterRotation float64) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (s *Slider) WithFrameCenterRotation(frameCenterRotation float64) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return s
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithBoundsRotation(boundsRotation float64) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (s *Slider) WithBoundsRotation(boundsRotation float64) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return s
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *Slider) WithBounds(bounds corefoundation.CGRect) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (s *Slider) WithBounds(bounds corefoundation.CGRect) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBounds:"), bounds)
+	return s
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithCanDrawConcurrently(canDrawConcurrently bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (s *Slider) WithCanDrawConcurrently(canDrawConcurrently bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return s
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *Slider) WithNeedsDisplay(needsDisplay bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (s *Slider) WithNeedsDisplay(needsDisplay bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return s
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (s *Slider) WithAcceptsTouchEvents(acceptsTouchEvents bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return s
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithWantsRestingTouches(wantsRestingTouches bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (s *Slider) WithWantsRestingTouches(wantsRestingTouches bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return s
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (s *Slider) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return s
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (s *Slider) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return s
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithWantsLayer(wantsLayer bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (s *Slider) WithWantsLayer(wantsLayer bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return s
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithLayer(layer obj.Object) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (s *Slider) WithLayer(layer obj.Object) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return s
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (s *Slider) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return s
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithNeedsLayout(needsLayout bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (s *Slider) WithNeedsLayout(needsLayout bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return s
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithAlphaValue(alphaValue float64) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (s *Slider) WithAlphaValue(alphaValue float64) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return s
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (s *Slider) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return s
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithBackgroundFilters(items ...obj.Object) *Slider {
+func (s *Slider) WithBackgroundFilters(items ...obj.Object) *Slider {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return s
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithCompositingFilter(compositingFilter obj.Object) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (s *Slider) WithCompositingFilter(compositingFilter obj.Object) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return s
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithContentFilters(items ...obj.Object) *Slider {
+func (s *Slider) WithContentFilters(items ...obj.Object) *Slider {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setContentFilters:"), _arr)
+	return s
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithShadow(shadow *Shadow) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (s *Slider) WithShadow(shadow *Shadow) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return s
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithClipsToBounds(clipsToBounds bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (s *Slider) WithClipsToBounds(clipsToBounds bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return s
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (s *Slider) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return s
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithToolTip(toolTip string) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (s *Slider) WithToolTip(toolTip string) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return s
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (s *Slider) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return s
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (s *Slider) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return s
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithNextKeyView(nextKeyView ViewProvider) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (s *Slider) WithNextKeyView(nextKeyView ViewProvider) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return s
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithFocusRingType(focusRingType FocusRingType) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (s *Slider) WithFocusRingType(focusRingType FocusRingType) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return s
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithGestureRecognizers(items ...GestureRecognizerProvider) *Slider {
+func (s *Slider) WithGestureRecognizers(items ...GestureRecognizerProvider) *Slider {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return s
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (s *Slider) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return s
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (s *Slider) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return s
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *Slider) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (s *Slider) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return s
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (s *Slider) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return s
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (s *Slider) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return s
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (s *Slider) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return s
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (s *Slider) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return s
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (s *Slider) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return s
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (s *Slider) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return s
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (s *Slider) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return s
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *Slider) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (s *Slider) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return s
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *Slider) WithNextResponder(nextResponder ResponderProvider) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (s *Slider) WithNextResponder(nextResponder ResponderProvider) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return s
 }
 
-// WithMenu returns the responder’s menu.
-func (x *Slider) WithMenu(menu *Menu) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (s *Slider) WithMenu(menu *Menu) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return s
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *Slider) WithUserActivity(userActivity obj.Object) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (s *Slider) WithUserActivity(userActivity obj.Object) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return s
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *Slider) WithTouchBar(touchBar *TouchBar) *Slider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (s *Slider) WithTouchBar(touchBar *TouchBar) *Slider {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return s
 }
 
 // SliderType wraps the corresponding Objective-C method.
-func (x *Slider) SliderType() SliderType {
-	_r := objc.Send[SliderType](objref.IDOf(x), objc.RegisterName("sliderType"))
+func (s *Slider) SliderType() SliderType {
+	_r := objc.Send[SliderType](objref.IDOf(s), objc.RegisterName("sliderType"))
 	return _r
-}
-
-// SetSliderType wraps the corresponding Objective-C method.
-func (x *Slider) SetSliderType(sliderType SliderType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSliderType:"), sliderType)
 }
 
 // MinValue wraps the corresponding Objective-C method.
-func (x *Slider) MinValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minValue"))
+func (s *Slider) MinValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("minValue"))
 	return _r
-}
-
-// SetMinValue wraps the corresponding Objective-C method.
-func (x *Slider) SetMinValue(minValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinValue:"), minValue)
 }
 
 // MaxValue wraps the corresponding Objective-C method.
-func (x *Slider) MaxValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxValue"))
+func (s *Slider) MaxValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("maxValue"))
 	return _r
 }
 
-// SetMaxValue wraps the corresponding Objective-C method.
-func (x *Slider) SetMaxValue(maxValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxValue:"), maxValue)
-}
-
-// NeutralValue the value this slider will be filled from. This slider will be filled from its `neutralValue` to its current value. If `neutralValue` has not been explicitly set before, access to `neutralValue` will return `minValue`.
-func (x *Slider) NeutralValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("neutralValue"))
+// NeutralValue returns the value this slider will be filled from. This slider will be filled from its `neutralValue` to its current value. If `neutralValue` has not been explicitly set before, access to `neutralValue` will return `minValue`.
+func (s *Slider) NeutralValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("neutralValue"))
 	return _r
-}
-
-// SetNeutralValue the value this slider will be filled from. This slider will be filled from its `neutralValue` to its current value. If `neutralValue` has not been explicitly set before, access to `neutralValue` will return `minValue`.
-func (x *Slider) SetNeutralValue(neutralValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeutralValue:"), neutralValue)
 }
 
 // AltIncrementValue wraps the corresponding Objective-C method.
-func (x *Slider) AltIncrementValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("altIncrementValue"))
+func (s *Slider) AltIncrementValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("altIncrementValue"))
 	return _r
 }
 
-// SetAltIncrementValue wraps the corresponding Objective-C method.
-func (x *Slider) SetAltIncrementValue(altIncrementValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAltIncrementValue:"), altIncrementValue)
-}
-
 // KnobThickness wraps the corresponding Objective-C method.
-func (x *Slider) KnobThickness() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("knobThickness"))
+func (s *Slider) KnobThickness() float64 {
+	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("knobThickness"))
 	return _r
 }
 
 // IsVertical wraps the corresponding Objective-C method.
-func (x *Slider) IsVertical() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVertical"))
+func (s *Slider) IsVertical() bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isVertical"))
 	return _r
-}
-
-// SetVertical wraps the corresponding Objective-C method.
-func (x *Slider) SetVertical(vertical bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertical:"), vertical)
 }
 
 // TrackFillColor wraps the corresponding Objective-C method.
-func (x *Slider) TrackFillColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackFillColor"))
+func (s *Slider) TrackFillColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("trackFillColor"))
 	return ColorFromID(_r)
 }
 
-// SetTrackFillColor wraps the corresponding Objective-C method.
-func (x *Slider) SetTrackFillColor(trackFillColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackFillColor:"), objref.IDOf(trackFillColor))
-}
-
-// TintProminence the tint prominence of the slider. The automatic behavior for a regular slider tints its track fill, while a slider with tick marks is untinted. Setting the tint prominence will override this default behavior and choose an explicit track fill tint behavior. See “NSTintProminence“ for a list of possible values.
-func (x *Slider) TintProminence() TintProminence {
-	_r := objc.Send[TintProminence](objref.IDOf(x), objc.RegisterName("tintProminence"))
+// TintProminence returns the tint prominence of the slider. The automatic behavior for a regular slider tints its track fill, while a slider with tick marks is untinted. Setting the tint prominence will override this default behavior and choose an explicit track fill tint behavior. See “NSTintProminence“ for a list of possible values.
+func (s *Slider) TintProminence() TintProminence {
+	_r := objc.Send[TintProminence](objref.IDOf(s), objc.RegisterName("tintProminence"))
 	return _r
 }
 
-// SetTintProminence the tint prominence of the slider. The automatic behavior for a regular slider tints its track fill, while a slider with tick marks is untinted. Setting the tint prominence will override this default behavior and choose an explicit track fill tint behavior. See “NSTintProminence“ for a list of possible values.
-func (x *Slider) SetTintProminence(tintProminence TintProminence) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTintProminence:"), tintProminence)
-}
-
 // TickMarkValueAtIndex returns the slider’s value represented by the tick mark at the specified index.
-func (x *Slider) TickMarkValueAtIndex(index int) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("tickMarkValueAtIndex:"), index)
+func (s *Slider) TickMarkValueAtIndex(index int) float64 {
+	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("tickMarkValueAtIndex:"), index)
 	return _r
 }
 
 // RectOfTickMarkAtIndex returns the bounding rectangle of the tick mark at the given index.
-func (x *Slider) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectOfTickMarkAtIndex:"), index)
+func (s *Slider) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(s), objc.RegisterName("rectOfTickMarkAtIndex:"), index)
 	return _r
 }
 
 // IndexOfTickMarkAtPoint returns the index of the tick mark closest to the location of the slider represented by the given point.
-func (x *Slider) IndexOfTickMarkAtPoint(point corefoundation.CGPoint) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfTickMarkAtPoint:"), point)
+func (s *Slider) IndexOfTickMarkAtPoint(point corefoundation.CGPoint) int {
+	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("indexOfTickMarkAtPoint:"), point)
 	return _r
 }
 
 // ClosestTickMarkValueToValue returns the value of the tick mark closest to the specified value.
-func (x *Slider) ClosestTickMarkValueToValue(value float64) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("closestTickMarkValueToValue:"), value)
+func (s *Slider) ClosestTickMarkValueToValue(value float64) float64 {
+	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("closestTickMarkValueToValue:"), value)
 	return _r
 }
 
 // NumberOfTickMarks wraps the corresponding Objective-C method.
-func (x *Slider) NumberOfTickMarks() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfTickMarks"))
+func (s *Slider) NumberOfTickMarks() int {
+	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("numberOfTickMarks"))
 	return _r
-}
-
-// SetNumberOfTickMarks wraps the corresponding Objective-C method.
-func (x *Slider) SetNumberOfTickMarks(numberOfTickMarks int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTickMarks:"), numberOfTickMarks)
 }
 
 // TickMarkPosition wraps the corresponding Objective-C method.
-func (x *Slider) TickMarkPosition() TickMarkPosition {
-	_r := objc.Send[TickMarkPosition](objref.IDOf(x), objc.RegisterName("tickMarkPosition"))
+func (s *Slider) TickMarkPosition() TickMarkPosition {
+	_r := objc.Send[TickMarkPosition](objref.IDOf(s), objc.RegisterName("tickMarkPosition"))
 	return _r
-}
-
-// SetTickMarkPosition wraps the corresponding Objective-C method.
-func (x *Slider) SetTickMarkPosition(tickMarkPosition TickMarkPosition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTickMarkPosition:"), tickMarkPosition)
 }
 
 // AllowsTickMarkValuesOnly wraps the corresponding Objective-C method.
-func (x *Slider) AllowsTickMarkValuesOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsTickMarkValuesOnly"))
+func (s *Slider) AllowsTickMarkValuesOnly() bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("allowsTickMarkValuesOnly"))
 	return _r
 }
 
-// SetAllowsTickMarkValuesOnly wraps the corresponding Objective-C method.
-func (x *Slider) SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsTickMarkValuesOnly:"), allowsTickMarkValuesOnly)
-}
-
 // SetTitleCell sets the cell used to draw the slider’s title.
-func (x *Slider) SetTitleCell(cell *Cell) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleCell:"), objref.IDOf(cell))
+func (s *Slider) SetTitleCell(cell *Cell) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTitleCell:"), objref.IDOf(cell))
 }
 
-// TitleCell this method has been deprecated. Returns nil.
-func (x *Slider) TitleCell() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("titleCell"))
+// TitleCell returns this method has been deprecated. Returns nil.
+func (s *Slider) TitleCell() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("titleCell"))
 	return obj.Wrap(_r)
 }
 
 // SetTitleColor sets the color used to draw the slider’s title.
-func (x *Slider) SetTitleColor(newColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleColor:"), objref.IDOf(newColor))
+func (s *Slider) SetTitleColor(newColor *Color) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTitleColor:"), objref.IDOf(newColor))
 }
 
-// TitleColor this method has been deprecated. Returns nil.
-func (x *Slider) TitleColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("titleColor"))
+// TitleColor returns this method has been deprecated. Returns nil.
+func (s *Slider) TitleColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("titleColor"))
 	return ColorFromID(_r)
 }
 
 // SetTitleFont sets the font used to draw the slider’s title.
-func (x *Slider) SetTitleFont(fontObj *Font) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitleFont:"), objref.IDOf(fontObj))
+func (s *Slider) SetTitleFont(fontObj *Font) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTitleFont:"), objref.IDOf(fontObj))
 }
 
-// TitleFont this method has been deprecated. Returns nil.
-func (x *Slider) TitleFont() *Font {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("titleFont"))
+// TitleFont returns this method has been deprecated. Returns nil.
+func (s *Slider) TitleFont() *Font {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("titleFont"))
 	return FontFromID(_r)
 }
 
 // Title returns the slider’s title.
-func (x *Slider) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (s *Slider) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
@@ -756,154 +701,20 @@ func (x *Slider) Title() string {
 }
 
 // SetTitle sets the title the slider displays in the bar behind its knob.
-func (x *Slider) SetTitle(string_ string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(string_))
-}
-
-// SetKnobThickness wraps the corresponding Objective-C method.
-func (x *Slider) SetKnobThickness(thickness float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKnobThickness:"), thickness)
+func (s *Slider) SetTitle(string_ string) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setTitle:"), purego.NSString(string_))
 }
 
 // SetImage sets the image the slider displays in the bar behind its knob.
-func (x *Slider) SetImage(backgroundImage *Image) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(backgroundImage))
+func (s *Slider) SetImage(backgroundImage *Image) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setImage:"), objref.IDOf(backgroundImage))
 }
 
 // Image returns nil.
-func (x *Slider) Image() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+func (s *Slider) Image() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
-
-// Sliderable is the interface implemented by [Slider], for mocking and DI.
-type Sliderable interface {
-	obj.Object
-	WithSliderType(sliderType SliderType) *Slider
-	WithMinValue(minValue float64) *Slider
-	WithMaxValue(maxValue float64) *Slider
-	WithNeutralValue(neutralValue float64) *Slider
-	WithAltIncrementValue(altIncrementValue float64) *Slider
-	WithKnobThickness(knobThickness float64) *Slider
-	WithVertical(vertical bool) *Slider
-	WithTrackFillColor(trackFillColor *Color) *Slider
-	WithTintProminence(tintProminence TintProminence) *Slider
-	WithNumberOfTickMarks(numberOfTickMarks int) *Slider
-	WithTickMarkPosition(tickMarkPosition TickMarkPosition) *Slider
-	WithAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool) *Slider
-	WithTarget(target obj.Object) *Slider
-	WithTag(tag int) *Slider
-	WithIgnoresMultiClick(ignoresMultiClick bool) *Slider
-	WithContinuous(continuous bool) *Slider
-	WithEnabled(enabled bool) *Slider
-	WithRefusesFirstResponder(refusesFirstResponder bool) *Slider
-	WithHighlighted(highlighted bool) *Slider
-	WithControlSize(controlSize ControlSize) *Slider
-	WithFormatter(formatter obj.Object) *Slider
-	WithObjectValue(objectValue obj.Object) *Slider
-	WithStringValue(stringValue string) *Slider
-	WithAttributedStringValue(attributedStringValue obj.Object) *Slider
-	WithIntValue(intValue int) *Slider
-	WithIntegerValue(integerValue int) *Slider
-	WithFloatValue(floatValue float32) *Slider
-	WithDoubleValue(doubleValue float64) *Slider
-	WithFont(font *Font) *Slider
-	WithUsesSingleLineMode(usesSingleLineMode bool) *Slider
-	WithLineBreakMode(lineBreakMode LineBreakMode) *Slider
-	WithAlignment(alignment TextAlignment) *Slider
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *Slider
-	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *Slider
-	WithCell(cell CellProvider) *Slider
-	WithSubviews(items ...ViewProvider) *Slider
-	WithHidden(hidden bool) *Slider
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *Slider
-	WithAutoresizesSubviews(autoresizesSubviews bool) *Slider
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *Slider
-	WithFrame(frame corefoundation.CGRect) *Slider
-	WithFrameRotation(frameRotation float64) *Slider
-	WithFrameCenterRotation(frameCenterRotation float64) *Slider
-	WithBoundsRotation(boundsRotation float64) *Slider
-	WithBounds(bounds corefoundation.CGRect) *Slider
-	WithCanDrawConcurrently(canDrawConcurrently bool) *Slider
-	WithNeedsDisplay(needsDisplay bool) *Slider
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *Slider
-	WithWantsRestingTouches(wantsRestingTouches bool) *Slider
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *Slider
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *Slider
-	WithWantsLayer(wantsLayer bool) *Slider
-	WithLayer(layer obj.Object) *Slider
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *Slider
-	WithNeedsLayout(needsLayout bool) *Slider
-	WithAlphaValue(alphaValue float64) *Slider
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *Slider
-	WithBackgroundFilters(items ...obj.Object) *Slider
-	WithCompositingFilter(compositingFilter obj.Object) *Slider
-	WithContentFilters(items ...obj.Object) *Slider
-	WithShadow(shadow *Shadow) *Slider
-	WithClipsToBounds(clipsToBounds bool) *Slider
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *Slider
-	WithToolTip(toolTip string) *Slider
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *Slider
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *Slider
-	WithNextKeyView(nextKeyView ViewProvider) *Slider
-	WithFocusRingType(focusRingType FocusRingType) *Slider
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *Slider
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *Slider
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *Slider
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *Slider
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *Slider
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *Slider
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *Slider
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *Slider
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *Slider
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *Slider
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *Slider
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *Slider
-	WithNextResponder(nextResponder ResponderProvider) *Slider
-	WithMenu(menu *Menu) *Slider
-	WithUserActivity(userActivity obj.Object) *Slider
-	WithTouchBar(touchBar *TouchBar) *Slider
-	SliderType() SliderType
-	SetSliderType(sliderType SliderType)
-	MinValue() float64
-	SetMinValue(minValue float64)
-	MaxValue() float64
-	SetMaxValue(maxValue float64)
-	NeutralValue() float64
-	SetNeutralValue(neutralValue float64)
-	AltIncrementValue() float64
-	SetAltIncrementValue(altIncrementValue float64)
-	KnobThickness() float64
-	IsVertical() bool
-	SetVertical(vertical bool)
-	TrackFillColor() *Color
-	SetTrackFillColor(trackFillColor *Color)
-	TintProminence() TintProminence
-	SetTintProminence(tintProminence TintProminence)
-	TickMarkValueAtIndex(index int) float64
-	RectOfTickMarkAtIndex(index int) corefoundation.CGRect
-	IndexOfTickMarkAtPoint(point corefoundation.CGPoint) int
-	ClosestTickMarkValueToValue(value float64) float64
-	NumberOfTickMarks() int
-	SetNumberOfTickMarks(numberOfTickMarks int)
-	TickMarkPosition() TickMarkPosition
-	SetTickMarkPosition(tickMarkPosition TickMarkPosition)
-	AllowsTickMarkValuesOnly() bool
-	SetAllowsTickMarkValuesOnly(allowsTickMarkValuesOnly bool)
-	SetTitleCell(cell *Cell)
-	TitleCell() obj.Object
-	SetTitleColor(newColor *Color)
-	TitleColor() *Color
-	SetTitleFont(fontObj *Font)
-	TitleFont() *Font
-	Title() string
-	SetTitle(string_ string)
-	SetKnobThickness(thickness float64)
-	SetImage(backgroundImage *Image)
-	Image() *Image
-}
-
-var _ Sliderable = (*Slider)(nil)
 
 var _ ControlProvider = (*Slider)(nil)
 

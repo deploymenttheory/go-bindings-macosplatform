@@ -7,7 +7,6 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,232 +51,173 @@ func NewStereoscopicCamera() *StereoscopicCamera {
 	return stereoscopicCameraAdopt(_id)
 }
 
-// WithInterPupillaryDistance the distance, in millimeters, between the stereoscopic camera’s two viewpoints.
-func (x *StereoscopicCamera) WithInterPupillaryDistance(interPupillaryDistance float32) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterPupillaryDistance:"), interPupillaryDistance)
-	return x
+// WithInterPupillaryDistance sets the distance, in millimeters, between the stereoscopic camera’s two viewpoints.
+func (sc *StereoscopicCamera) WithInterPupillaryDistance(interPupillaryDistance float32) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setInterPupillaryDistance:"), interPupillaryDistance)
+	return sc
 }
 
-// WithLeftVergence the angle, in degrees, at which the camera’s left viewpoint faces toward a central focal point.
-func (x *StereoscopicCamera) WithLeftVergence(leftVergence float32) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeftVergence:"), leftVergence)
-	return x
+// WithLeftVergence sets the angle, in degrees, at which the camera’s left viewpoint faces toward a central focal point.
+func (sc *StereoscopicCamera) WithLeftVergence(leftVergence float32) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setLeftVergence:"), leftVergence)
+	return sc
 }
 
-// WithRightVergence the angle, in degrees, at which the camera’s right viewpoint faces toward a central focal point.
-func (x *StereoscopicCamera) WithRightVergence(rightVergence float32) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightVergence:"), rightVergence)
-	return x
+// WithRightVergence sets the angle, in degrees, at which the camera’s right viewpoint faces toward a central focal point.
+func (sc *StereoscopicCamera) WithRightVergence(rightVergence float32) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setRightVergence:"), rightVergence)
+	return sc
 }
 
-// WithOverlap the amount, as a fraction of image width, by which the images from the camera’s two viewpoints overlap.
-func (x *StereoscopicCamera) WithOverlap(overlap float32) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverlap:"), overlap)
-	return x
+// WithOverlap sets the amount, as a fraction of image width, by which the images from the camera’s two viewpoints overlap.
+func (sc *StereoscopicCamera) WithOverlap(overlap float32) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setOverlap:"), overlap)
+	return sc
 }
 
-// WithProjection the style of projection transform used by the camera.
-func (x *StereoscopicCamera) WithProjection(projection CameraProjection) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProjection:"), projection)
-	return x
+// WithProjection sets the style of projection transform used by the camera.
+func (sc *StereoscopicCamera) WithProjection(projection CameraProjection) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setProjection:"), projection)
+	return sc
 }
 
-// WithNearVisibilityDistance the camera’s near depth limit.
-func (x *StereoscopicCamera) WithNearVisibilityDistance(nearVisibilityDistance float32) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNearVisibilityDistance:"), nearVisibilityDistance)
-	return x
+// WithNearVisibilityDistance sets the camera’s near depth limit.
+func (sc *StereoscopicCamera) WithNearVisibilityDistance(nearVisibilityDistance float32) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setNearVisibilityDistance:"), nearVisibilityDistance)
+	return sc
 }
 
-// WithFarVisibilityDistance the camera’s far depth limit.
-func (x *StereoscopicCamera) WithFarVisibilityDistance(farVisibilityDistance float32) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFarVisibilityDistance:"), farVisibilityDistance)
-	return x
+// WithFarVisibilityDistance sets the camera’s far depth limit.
+func (sc *StereoscopicCamera) WithFarVisibilityDistance(farVisibilityDistance float32) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFarVisibilityDistance:"), farVisibilityDistance)
+	return sc
 }
 
-// WithWorldToMetersConversionScale the scale factor to meters from the world coordinate system containing the camera.
-func (x *StereoscopicCamera) WithWorldToMetersConversionScale(worldToMetersConversionScale float32) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWorldToMetersConversionScale:"), worldToMetersConversionScale)
-	return x
+// WithWorldToMetersConversionScale sets the scale factor to meters from the world coordinate system containing the camera.
+func (sc *StereoscopicCamera) WithWorldToMetersConversionScale(worldToMetersConversionScale float32) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setWorldToMetersConversionScale:"), worldToMetersConversionScale)
+	return sc
 }
 
-// WithBarrelDistortion the first coefficient for determining the radial distortion applied to pixels rendered using the camera.
-func (x *StereoscopicCamera) WithBarrelDistortion(barrelDistortion float32) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBarrelDistortion:"), barrelDistortion)
-	return x
+// WithBarrelDistortion sets the first coefficient for determining the radial distortion applied to pixels rendered using the camera.
+func (sc *StereoscopicCamera) WithBarrelDistortion(barrelDistortion float32) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setBarrelDistortion:"), barrelDistortion)
+	return sc
 }
 
-// WithFisheyeDistortion the second coefficient for determining the radial distortion applied to pixels rendered using the camera.
-func (x *StereoscopicCamera) WithFisheyeDistortion(fisheyeDistortion float32) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFisheyeDistortion:"), fisheyeDistortion)
-	return x
+// WithFisheyeDistortion sets the second coefficient for determining the radial distortion applied to pixels rendered using the camera.
+func (sc *StereoscopicCamera) WithFisheyeDistortion(fisheyeDistortion float32) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFisheyeDistortion:"), fisheyeDistortion)
+	return sc
 }
 
-// WithOpticalVignetting the amount of radial light attenuation around the edges of an image rendered using the camera.
-func (x *StereoscopicCamera) WithOpticalVignetting(opticalVignetting float32) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpticalVignetting:"), opticalVignetting)
-	return x
+// WithOpticalVignetting sets the amount of radial light attenuation around the edges of an image rendered using the camera.
+func (sc *StereoscopicCamera) WithOpticalVignetting(opticalVignetting float32) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setOpticalVignetting:"), opticalVignetting)
+	return sc
 }
 
-// WithChromaticAberration the amount of radial color shift around the edges of an image rendered using the camera.
-func (x *StereoscopicCamera) WithChromaticAberration(chromaticAberration float32) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChromaticAberration:"), chromaticAberration)
-	return x
+// WithChromaticAberration sets the amount of radial color shift around the edges of an image rendered using the camera.
+func (sc *StereoscopicCamera) WithChromaticAberration(chromaticAberration float32) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setChromaticAberration:"), chromaticAberration)
+	return sc
 }
 
-// WithFocalLength the focal length, in millimeters, of the camera’s simulated lens.
-func (x *StereoscopicCamera) WithFocalLength(focalLength float32) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocalLength:"), focalLength)
-	return x
+// WithFocalLength sets the focal length, in millimeters, of the camera’s simulated lens.
+func (sc *StereoscopicCamera) WithFocalLength(focalLength float32) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFocalLength:"), focalLength)
+	return sc
 }
 
-// WithFocusDistance the distance, in meters, at which the lens is focused.
-func (x *StereoscopicCamera) WithFocusDistance(focusDistance float32) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusDistance:"), focusDistance)
-	return x
+// WithFocusDistance sets the distance, in meters, at which the lens is focused.
+func (sc *StereoscopicCamera) WithFocusDistance(focusDistance float32) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFocusDistance:"), focusDistance)
+	return sc
 }
 
-// WithFieldOfView the camera’s field of view, in degrees.
-func (x *StereoscopicCamera) WithFieldOfView(fieldOfView float32) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldOfView:"), fieldOfView)
-	return x
+// WithFieldOfView sets the camera’s field of view, in degrees.
+func (sc *StereoscopicCamera) WithFieldOfView(fieldOfView float32) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFieldOfView:"), fieldOfView)
+	return sc
 }
 
-// WithFStop the relative aperture ratio of the camera’s simulated lens.
-func (x *StereoscopicCamera) WithFStop(fStop float32) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFStop:"), fStop)
-	return x
+// WithFStop sets the relative aperture ratio of the camera’s simulated lens.
+func (sc *StereoscopicCamera) WithFStop(fStop float32) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setFStop:"), fStop)
+	return sc
 }
 
-// WithApertureBladeCount the number of blades in the camera’s simulated aperture.
-func (x *StereoscopicCamera) WithApertureBladeCount(apertureBladeCount int) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApertureBladeCount:"), apertureBladeCount)
-	return x
+// WithApertureBladeCount sets the number of blades in the camera’s simulated aperture.
+func (sc *StereoscopicCamera) WithApertureBladeCount(apertureBladeCount int) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setApertureBladeCount:"), apertureBladeCount)
+	return sc
 }
 
-// WithMaximumCircleOfConfusion the maximum diameter, in millimeters on the imaging plane, at which light from a point source should appear in an image rendered using the camera.
-func (x *StereoscopicCamera) WithMaximumCircleOfConfusion(maximumCircleOfConfusion float32) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumCircleOfConfusion:"), maximumCircleOfConfusion)
-	return x
+// WithMaximumCircleOfConfusion sets the maximum diameter, in millimeters on the imaging plane, at which light from a point source should appear in an image rendered using the camera.
+func (sc *StereoscopicCamera) WithMaximumCircleOfConfusion(maximumCircleOfConfusion float32) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setMaximumCircleOfConfusion:"), maximumCircleOfConfusion)
+	return sc
 }
 
-// WithShutterOpenInterval the duration, in seconds, for which the camera’s simulated shutter is open during each frame.
-func (x *StereoscopicCamera) WithShutterOpenInterval(shutterOpenInterval float64) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShutterOpenInterval:"), shutterOpenInterval)
-	return x
+// WithShutterOpenInterval sets the duration, in seconds, for which the camera’s simulated shutter is open during each frame.
+func (sc *StereoscopicCamera) WithShutterOpenInterval(shutterOpenInterval float64) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setShutterOpenInterval:"), shutterOpenInterval)
+	return sc
 }
 
-// WithSensorVerticalAperture the height, in millimeters, of the camera’s simulated imaging surface.
-func (x *StereoscopicCamera) WithSensorVerticalAperture(sensorVerticalAperture float32) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensorVerticalAperture:"), sensorVerticalAperture)
-	return x
+// WithSensorVerticalAperture sets the height, in millimeters, of the camera’s simulated imaging surface.
+func (sc *StereoscopicCamera) WithSensorVerticalAperture(sensorVerticalAperture float32) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSensorVerticalAperture:"), sensorVerticalAperture)
+	return sc
 }
 
-// WithSensorAspect the ratio of width to height for the camera’s simulated imaging surface.
-func (x *StereoscopicCamera) WithSensorAspect(sensorAspect float32) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensorAspect:"), sensorAspect)
-	return x
+// WithSensorAspect sets the ratio of width to height for the camera’s simulated imaging surface.
+func (sc *StereoscopicCamera) WithSensorAspect(sensorAspect float32) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setSensorAspect:"), sensorAspect)
+	return sc
 }
 
-// WithParent the parent object that contains this object.
-func (x *StereoscopicCamera) WithParent(parent ObjectProvider) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
-	return x
+// WithParent sets the parent object that contains this object.
+func (sc *StereoscopicCamera) WithParent(parent ObjectProvider) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setParent:"), objref.IDOf(parent))
+	return sc
 }
 
-// WithInstance the primary object, if applicable, of which this object is an instance.
-func (x *StereoscopicCamera) WithInstance(instance ObjectProvider) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
-	return x
+// WithInstance sets the primary object, if applicable, of which this object is an instance.
+func (sc *StereoscopicCamera) WithInstance(instance ObjectProvider) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setInstance:"), objref.IDOf(instance))
+	return sc
 }
 
-// WithHidden a Boolean value indicating whether this object should be used in rendering.
-func (x *StereoscopicCamera) WithHidden(hidden bool) *StereoscopicCamera {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value indicating whether this object should be used in rendering.
+func (sc *StereoscopicCamera) WithHidden(hidden bool) *StereoscopicCamera {
+	objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("setHidden:"), hidden)
+	return sc
 }
 
-// InterPupillaryDistance inter-pupillary distance in mm. Default is 63mm.
-func (x *StereoscopicCamera) InterPupillaryDistance() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("interPupillaryDistance"))
+// InterPupillaryDistance returns inter-pupillary distance in mm. Default is 63mm.
+func (sc *StereoscopicCamera) InterPupillaryDistance() float32 {
+	_r := objc.Send[float32](objref.IDOf(sc), objc.RegisterName("interPupillaryDistance"))
 	return _r
-}
-
-// SetInterPupillaryDistance wraps the corresponding Objective-C method.
-func (x *StereoscopicCamera) SetInterPupillaryDistance(interPupillaryDistance float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterPupillaryDistance:"), interPupillaryDistance)
 }
 
 // LeftVergence wraps the corresponding Objective-C method.
-func (x *StereoscopicCamera) LeftVergence() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("leftVergence"))
+func (sc *StereoscopicCamera) LeftVergence() float32 {
+	_r := objc.Send[float32](objref.IDOf(sc), objc.RegisterName("leftVergence"))
 	return _r
-}
-
-// SetLeftVergence wraps the corresponding Objective-C method.
-func (x *StereoscopicCamera) SetLeftVergence(leftVergence float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeftVergence:"), leftVergence)
 }
 
 // RightVergence wraps the corresponding Objective-C method.
-func (x *StereoscopicCamera) RightVergence() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rightVergence"))
+func (sc *StereoscopicCamera) RightVergence() float32 {
+	_r := objc.Send[float32](objref.IDOf(sc), objc.RegisterName("rightVergence"))
 	return _r
 }
 
-// SetRightVergence wraps the corresponding Objective-C method.
-func (x *StereoscopicCamera) SetRightVergence(rightVergence float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRightVergence:"), rightVergence)
-}
-
-// Overlap the amount, as a percentage of image width to offset an image towards the other camera. This value is used in a stereo grade to enhance or reduce the intensity of the stereoscopic effect
-func (x *StereoscopicCamera) Overlap() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("overlap"))
+// Overlap returns the amount, as a percentage of image width to offset an image towards the other camera. This value is used in a stereo grade to enhance or reduce the intensity of the stereoscopic effect
+func (sc *StereoscopicCamera) Overlap() float32 {
+	_r := objc.Send[float32](objref.IDOf(sc), objc.RegisterName("overlap"))
 	return _r
 }
-
-// SetOverlap wraps the corresponding Objective-C method.
-func (x *StereoscopicCamera) SetOverlap(overlap float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverlap:"), overlap)
-}
-
-// StereoscopicCameraable is the interface implemented by [StereoscopicCamera], for mocking and DI.
-type StereoscopicCameraable interface {
-	obj.Object
-	WithInterPupillaryDistance(interPupillaryDistance float32) *StereoscopicCamera
-	WithLeftVergence(leftVergence float32) *StereoscopicCamera
-	WithRightVergence(rightVergence float32) *StereoscopicCamera
-	WithOverlap(overlap float32) *StereoscopicCamera
-	WithProjection(projection CameraProjection) *StereoscopicCamera
-	WithNearVisibilityDistance(nearVisibilityDistance float32) *StereoscopicCamera
-	WithFarVisibilityDistance(farVisibilityDistance float32) *StereoscopicCamera
-	WithWorldToMetersConversionScale(worldToMetersConversionScale float32) *StereoscopicCamera
-	WithBarrelDistortion(barrelDistortion float32) *StereoscopicCamera
-	WithFisheyeDistortion(fisheyeDistortion float32) *StereoscopicCamera
-	WithOpticalVignetting(opticalVignetting float32) *StereoscopicCamera
-	WithChromaticAberration(chromaticAberration float32) *StereoscopicCamera
-	WithFocalLength(focalLength float32) *StereoscopicCamera
-	WithFocusDistance(focusDistance float32) *StereoscopicCamera
-	WithFieldOfView(fieldOfView float32) *StereoscopicCamera
-	WithFStop(fStop float32) *StereoscopicCamera
-	WithApertureBladeCount(apertureBladeCount int) *StereoscopicCamera
-	WithMaximumCircleOfConfusion(maximumCircleOfConfusion float32) *StereoscopicCamera
-	WithShutterOpenInterval(shutterOpenInterval float64) *StereoscopicCamera
-	WithSensorVerticalAperture(sensorVerticalAperture float32) *StereoscopicCamera
-	WithSensorAspect(sensorAspect float32) *StereoscopicCamera
-	WithParent(parent ObjectProvider) *StereoscopicCamera
-	WithInstance(instance ObjectProvider) *StereoscopicCamera
-	WithHidden(hidden bool) *StereoscopicCamera
-	InterPupillaryDistance() float32
-	SetInterPupillaryDistance(interPupillaryDistance float32)
-	LeftVergence() float32
-	SetLeftVergence(leftVergence float32)
-	RightVergence() float32
-	SetRightVergence(rightVergence float32)
-	Overlap() float32
-	SetOverlap(overlap float32)
-}
-
-var _ StereoscopicCameraable = (*StereoscopicCamera)(nil)
 
 var _ CameraProvider = (*StereoscopicCamera)(nil)
 

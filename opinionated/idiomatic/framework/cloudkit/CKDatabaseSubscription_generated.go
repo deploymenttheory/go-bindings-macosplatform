@@ -66,38 +66,22 @@ func NewDatabaseSubscriptionWithCoder(aDecoder obj.Object) *DatabaseSubscription
 	return databaseSubscriptionAdopt(_id)
 }
 
-// WithRecordType the type of record that the subscription queries.
-func (x *DatabaseSubscription) WithRecordType(recordType obj.Object) *DatabaseSubscription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordType:"), objref.IDOf(recordType))
-	return x
+// WithRecordType sets the type of record that the subscription queries.
+func (ds *DatabaseSubscription) WithRecordType(recordType obj.Object) *DatabaseSubscription {
+	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("setRecordType:"), objref.IDOf(recordType))
+	return ds
 }
 
-// WithNotificationInfo the configuration for a subscription’s push notifications.
-func (x *DatabaseSubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *DatabaseSubscription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
-	return x
+// WithNotificationInfo sets the configuration for a subscription’s push notifications.
+func (ds *DatabaseSubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *DatabaseSubscription {
+	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
+	return ds
 }
 
 // RecordType wraps the corresponding Objective-C method.
-func (x *DatabaseSubscription) RecordType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordType"))
+func (ds *DatabaseSubscription) RecordType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("recordType"))
 	return obj.Wrap(_r)
 }
-
-// SetRecordType wraps the corresponding Objective-C method.
-func (x *DatabaseSubscription) SetRecordType(recordType obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordType:"), objref.IDOf(recordType))
-}
-
-// DatabaseSubscriptionable is the interface implemented by [DatabaseSubscription], for mocking and DI.
-type DatabaseSubscriptionable interface {
-	obj.Object
-	WithRecordType(recordType obj.Object) *DatabaseSubscription
-	WithNotificationInfo(notificationInfo *NotificationInfo) *DatabaseSubscription
-	RecordType() obj.Object
-	SetRecordType(recordType obj.Object)
-}
-
-var _ DatabaseSubscriptionable = (*DatabaseSubscription)(nil)
 
 var _ SubscriptionProvider = (*DatabaseSubscription)(nil)

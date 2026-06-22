@@ -7,7 +7,6 @@ package contacts
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,27 +52,18 @@ func NewChangeHistoryAddContactEvent() *ChangeHistoryAddContactEvent {
 }
 
 // Contact wraps the corresponding Objective-C method.
-func (x *ChangeHistoryAddContactEvent) Contact() *Contact {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contact"))
+func (chace *ChangeHistoryAddContactEvent) Contact() *Contact {
+	_r := objc.Send[objc.ID](objref.IDOf(chace), objc.RegisterName("contact"))
 	return ContactFromID(_r)
 }
 
 // ContainerIdentifier wraps the corresponding Objective-C method.
-func (x *ChangeHistoryAddContactEvent) ContainerIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerIdentifier"))
+func (chace *ChangeHistoryAddContactEvent) ContainerIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(chace), objc.RegisterName("containerIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ChangeHistoryAddContactEventable is the interface implemented by [ChangeHistoryAddContactEvent], for mocking and DI.
-type ChangeHistoryAddContactEventable interface {
-	obj.Object
-	Contact() *Contact
-	ContainerIdentifier() string
-}
-
-var _ ChangeHistoryAddContactEventable = (*ChangeHistoryAddContactEvent)(nil)
 
 var _ ChangeHistoryEventProvider = (*ChangeHistoryAddContactEvent)(nil)

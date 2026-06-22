@@ -53,196 +53,142 @@ func NewScannerFunctionalUnitDocumentFeeder() *ScannerFunctionalUnitDocumentFeed
 	return scannerFunctionalUnitDocumentFeederAdopt(_id)
 }
 
-// WithDocumentType ￼Current document type. This will always be one of the supported document types.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithDocumentType(documentType ScannerDocumentType) *ScannerFunctionalUnitDocumentFeeder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentType:"), documentType)
-	return x
+// WithDocumentType sets ￼Current document type. This will always be one of the supported document types.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) WithDocumentType(documentType ScannerDocumentType) *ScannerFunctionalUnitDocumentFeeder {
+	objc.Send[objc.ID](objref.IDOf(sfudf), objc.RegisterName("setDocumentType:"), documentType)
+	return sfudf
 }
 
-// WithDuplexScanningEnabled ￼Indicates whether duplex scanning is enabled.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithDuplexScanningEnabled(duplexScanningEnabled bool) *ScannerFunctionalUnitDocumentFeeder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuplexScanningEnabled:"), duplexScanningEnabled)
-	return x
+// WithDuplexScanningEnabled sets ￼Indicates whether duplex scanning is enabled.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) WithDuplexScanningEnabled(duplexScanningEnabled bool) *ScannerFunctionalUnitDocumentFeeder {
+	objc.Send[objc.ID](objref.IDOf(sfudf), objc.RegisterName("setDuplexScanningEnabled:"), duplexScanningEnabled)
+	return sfudf
 }
 
-// WithOddPageOrientation ￼Desired orientation of the odd pages of the scanned document. This property is set to ICEXIFOrientation1 initially.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithOddPageOrientation(oddPageOrientation EXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOddPageOrientation:"), oddPageOrientation)
-	return x
+// WithOddPageOrientation sets ￼Desired orientation of the odd pages of the scanned document. This property is set to ICEXIFOrientation1 initially.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) WithOddPageOrientation(oddPageOrientation EXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder {
+	objc.Send[objc.ID](objref.IDOf(sfudf), objc.RegisterName("setOddPageOrientation:"), oddPageOrientation)
+	return sfudf
 }
 
-// WithEvenPageOrientation ￼Desired orientation of the even pages of the scanned document. This property is set to ICEXIFOrientation1 initially.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithEvenPageOrientation(evenPageOrientation EXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvenPageOrientation:"), evenPageOrientation)
-	return x
+// WithEvenPageOrientation sets ￼Desired orientation of the even pages of the scanned document. This property is set to ICEXIFOrientation1 initially.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) WithEvenPageOrientation(evenPageOrientation EXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder {
+	objc.Send[objc.ID](objref.IDOf(sfudf), objc.RegisterName("setEvenPageOrientation:"), evenPageOrientation)
+	return sfudf
 }
 
-// WithPixelDataType ￼The pixel data type.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithPixelDataType(pixelDataType ScannerPixelDataType) *ScannerFunctionalUnitDocumentFeeder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelDataType:"), pixelDataType)
-	return x
+// WithPixelDataType sets ￼The pixel data type.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) WithPixelDataType(pixelDataType ScannerPixelDataType) *ScannerFunctionalUnitDocumentFeeder {
+	objc.Send[objc.ID](objref.IDOf(sfudf), objc.RegisterName("setPixelDataType:"), pixelDataType)
+	return sfudf
 }
 
-// WithBitDepth ￼The bit depth to use when performing the final scan. This will always be one of the supported bit depths.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithBitDepth(bitDepth ScannerBitDepth) *ScannerFunctionalUnitDocumentFeeder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitDepth:"), bitDepth)
-	return x
+// WithBitDepth sets ￼The bit depth to use when performing the final scan. This will always be one of the supported bit depths.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) WithBitDepth(bitDepth ScannerBitDepth) *ScannerFunctionalUnitDocumentFeeder {
+	objc.Send[objc.ID](objref.IDOf(sfudf), objc.RegisterName("setBitDepth:"), bitDepth)
+	return sfudf
 }
 
-// WithMeasurementUnit ￼Current measurement unit. This will always be one of the supported measurement units.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithMeasurementUnit(measurementUnit ScannerMeasurementUnit) *ScannerFunctionalUnitDocumentFeeder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeasurementUnit:"), measurementUnit)
-	return x
+// WithMeasurementUnit sets ￼Current measurement unit. This will always be one of the supported measurement units.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) WithMeasurementUnit(measurementUnit ScannerMeasurementUnit) *ScannerFunctionalUnitDocumentFeeder {
+	objc.Send[objc.ID](objref.IDOf(sfudf), objc.RegisterName("setMeasurementUnit:"), measurementUnit)
+	return sfudf
 }
 
-// WithResolution ￼Current scan resolution. This will always be one of the supported resolution values.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithResolution(resolution int) *ScannerFunctionalUnitDocumentFeeder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolution:"), resolution)
-	return x
+// WithResolution sets ￼Current scan resolution. This will always be one of the supported resolution values.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) WithResolution(resolution int) *ScannerFunctionalUnitDocumentFeeder {
+	objc.Send[objc.ID](objref.IDOf(sfudf), objc.RegisterName("setResolution:"), resolution)
+	return sfudf
 }
 
-// WithScaleFactor ￼Current scale factor. This will always be one of the supported scale factor values.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithScaleFactor(scaleFactor int) *ScannerFunctionalUnitDocumentFeeder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleFactor:"), scaleFactor)
-	return x
+// WithScaleFactor sets ￼Current scale factor. This will always be one of the supported scale factor values.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) WithScaleFactor(scaleFactor int) *ScannerFunctionalUnitDocumentFeeder {
+	objc.Send[objc.ID](objref.IDOf(sfudf), objc.RegisterName("setScaleFactor:"), scaleFactor)
+	return sfudf
 }
 
-// WithScanArea ￼This property along with scanAreaOrientation describes the area to be scanned.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnitDocumentFeeder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanArea:"), scanArea)
-	return x
+// WithScanArea sets ￼This property along with scanAreaOrientation describes the area to be scanned.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnitDocumentFeeder {
+	objc.Send[objc.ID](objref.IDOf(sfudf), objc.RegisterName("setScanArea:"), scanArea)
+	return sfudf
 }
 
-// WithScanAreaOrientation ￼Desired orientation of the scan area. This property along with scanArea describes the area to be scanned. This property is set to ICEXIFOrientation1 initially. This property is not used by the ICScannerFunctionalUnitDocumentFeeder subclass.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithScanAreaOrientation(scanAreaOrientation EXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanAreaOrientation:"), scanAreaOrientation)
-	return x
+// WithScanAreaOrientation sets ￼Desired orientation of the scan area. This property along with scanArea describes the area to be scanned. This property is set to ICEXIFOrientation1 initially. This property is not used by the ICScannerFunctionalUnitDocumentFeeder subclass.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) WithScanAreaOrientation(scanAreaOrientation EXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder {
+	objc.Send[objc.ID](objref.IDOf(sfudf), objc.RegisterName("setScanAreaOrientation:"), scanAreaOrientation)
+	return sfudf
 }
 
-// WithUsesThresholdForBlackAndWhiteScanning ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnitDocumentFeeder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesThresholdForBlackAndWhiteScanning:"), usesThresholdForBlackAndWhiteScanning)
-	return x
+// WithUsesThresholdForBlackAndWhiteScanning sets ￼Indicates if this functional unit uses threshold value to be used when performing a scan in black & white.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnitDocumentFeeder {
+	objc.Send[objc.ID](objref.IDOf(sfudf), objc.RegisterName("setUsesThresholdForBlackAndWhiteScanning:"), usesThresholdForBlackAndWhiteScanning)
+	return sfudf
 }
 
-// WithThresholdForBlackAndWhiteScanning ￼Threshold value to be used when performing a scan in black & white. This value should be from 0 to 255.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnitDocumentFeeder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThresholdForBlackAndWhiteScanning:"), thresholdForBlackAndWhiteScanning)
-	return x
+// WithThresholdForBlackAndWhiteScanning sets ￼Threshold value to be used when performing a scan in black & white. This value should be from 0 to 255.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnitDocumentFeeder {
+	objc.Send[objc.ID](objref.IDOf(sfudf), objc.RegisterName("setThresholdForBlackAndWhiteScanning:"), thresholdForBlackAndWhiteScanning)
+	return sfudf
 }
 
-// WithOverviewResolution ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.
-func (x *ScannerFunctionalUnitDocumentFeeder) WithOverviewResolution(overviewResolution int) *ScannerFunctionalUnitDocumentFeeder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOverviewResolution:"), overviewResolution)
-	return x
+// WithOverviewResolution sets ￼Overview image resolution. Value assigned to this will be contrained by resolutions allowed by the device.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) WithOverviewResolution(overviewResolution int) *ScannerFunctionalUnitDocumentFeeder {
+	objc.Send[objc.ID](objref.IDOf(sfudf), objc.RegisterName("setOverviewResolution:"), overviewResolution)
+	return sfudf
 }
 
-// SupportedDocumentTypes ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
-func (x *ScannerFunctionalUnitDocumentFeeder) SupportedDocumentTypes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedDocumentTypes"))
+// SupportedDocumentTypes returns ￼Supported document types. The values in this set are valid values defined by ICScannerDocumentType.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) SupportedDocumentTypes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sfudf), objc.RegisterName("supportedDocumentTypes"))
 	return obj.Wrap(_r)
 }
 
-// DocumentType ￼Current document type. This will always be one of the supported document types.
-func (x *ScannerFunctionalUnitDocumentFeeder) DocumentType() ScannerDocumentType {
-	_r := objc.Send[ScannerDocumentType](objref.IDOf(x), objc.RegisterName("documentType"))
+// DocumentType returns ￼Current document type. This will always be one of the supported document types.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) DocumentType() ScannerDocumentType {
+	_r := objc.Send[ScannerDocumentType](objref.IDOf(sfudf), objc.RegisterName("documentType"))
 	return _r
 }
 
-// SetDocumentType wraps the corresponding Objective-C method.
-func (x *ScannerFunctionalUnitDocumentFeeder) SetDocumentType(documentType ScannerDocumentType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentType:"), documentType)
-}
-
-// DocumentSize ￼Document size of the current document type expressed in current measurement unit.
-func (x *ScannerFunctionalUnitDocumentFeeder) DocumentSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("documentSize"))
+// DocumentSize returns ￼Document size of the current document type expressed in current measurement unit.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) DocumentSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(sfudf), objc.RegisterName("documentSize"))
 	return _r
 }
 
-// SupportsDuplexScanning ￼Indicates whether duplex scanning is supported.
-func (x *ScannerFunctionalUnitDocumentFeeder) SupportsDuplexScanning() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsDuplexScanning"))
+// SupportsDuplexScanning reports whether ￼Indicates whether duplex scanning is supported.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) SupportsDuplexScanning() bool {
+	_r := objc.Send[bool](objref.IDOf(sfudf), objc.RegisterName("supportsDuplexScanning"))
 	return _r
 }
 
-// DuplexScanningEnabled ￼Indicates whether duplex scanning is enabled.
-func (x *ScannerFunctionalUnitDocumentFeeder) DuplexScanningEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("duplexScanningEnabled"))
+// DuplexScanningEnabled reports whether ￼Indicates whether duplex scanning is enabled.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) DuplexScanningEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(sfudf), objc.RegisterName("duplexScanningEnabled"))
 	return _r
 }
 
-// SetDuplexScanningEnabled wraps the corresponding Objective-C method.
-func (x *ScannerFunctionalUnitDocumentFeeder) SetDuplexScanningEnabled(duplexScanningEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuplexScanningEnabled:"), duplexScanningEnabled)
-}
-
-// DocumentLoaded ￼Indicates whether the feeder has documents to scan. This value will change when the document is loaded or removed from the feeder, if the scanner module has the capability to detect this state.
-func (x *ScannerFunctionalUnitDocumentFeeder) DocumentLoaded() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("documentLoaded"))
+// DocumentLoaded reports whether ￼Indicates whether the feeder has documents to scan. This value will change when the document is loaded or removed from the feeder, if the scanner module has the capability to detect this state.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) DocumentLoaded() bool {
+	_r := objc.Send[bool](objref.IDOf(sfudf), objc.RegisterName("documentLoaded"))
 	return _r
 }
 
-// OddPageOrientation ￼Desired orientation of the odd pages of the scanned document. This property is set to ICEXIFOrientation1 initially.
-func (x *ScannerFunctionalUnitDocumentFeeder) OddPageOrientation() EXIFOrientationType {
-	_r := objc.Send[EXIFOrientationType](objref.IDOf(x), objc.RegisterName("oddPageOrientation"))
+// OddPageOrientation returns ￼Desired orientation of the odd pages of the scanned document. This property is set to ICEXIFOrientation1 initially.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) OddPageOrientation() EXIFOrientationType {
+	_r := objc.Send[EXIFOrientationType](objref.IDOf(sfudf), objc.RegisterName("oddPageOrientation"))
 	return _r
 }
 
-// SetOddPageOrientation wraps the corresponding Objective-C method.
-func (x *ScannerFunctionalUnitDocumentFeeder) SetOddPageOrientation(oddPageOrientation EXIFOrientationType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOddPageOrientation:"), oddPageOrientation)
-}
-
-// EvenPageOrientation ￼Desired orientation of the even pages of the scanned document. This property is set to ICEXIFOrientation1 initially.
-func (x *ScannerFunctionalUnitDocumentFeeder) EvenPageOrientation() EXIFOrientationType {
-	_r := objc.Send[EXIFOrientationType](objref.IDOf(x), objc.RegisterName("evenPageOrientation"))
+// EvenPageOrientation returns ￼Desired orientation of the even pages of the scanned document. This property is set to ICEXIFOrientation1 initially.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) EvenPageOrientation() EXIFOrientationType {
+	_r := objc.Send[EXIFOrientationType](objref.IDOf(sfudf), objc.RegisterName("evenPageOrientation"))
 	return _r
 }
 
-// SetEvenPageOrientation wraps the corresponding Objective-C method.
-func (x *ScannerFunctionalUnitDocumentFeeder) SetEvenPageOrientation(evenPageOrientation EXIFOrientationType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvenPageOrientation:"), evenPageOrientation)
-}
-
-// ReverseFeederPageOrder ￼Indicates whether the document feeder reads pages from back to front.
-func (x *ScannerFunctionalUnitDocumentFeeder) ReverseFeederPageOrder() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reverseFeederPageOrder"))
+// ReverseFeederPageOrder reports whether ￼Indicates whether the document feeder reads pages from back to front.
+func (sfudf *ScannerFunctionalUnitDocumentFeeder) ReverseFeederPageOrder() bool {
+	_r := objc.Send[bool](objref.IDOf(sfudf), objc.RegisterName("reverseFeederPageOrder"))
 	return _r
 }
-
-// ScannerFunctionalUnitDocumentFeederable is the interface implemented by [ScannerFunctionalUnitDocumentFeeder], for mocking and DI.
-type ScannerFunctionalUnitDocumentFeederable interface {
-	obj.Object
-	WithDocumentType(documentType ScannerDocumentType) *ScannerFunctionalUnitDocumentFeeder
-	WithDuplexScanningEnabled(duplexScanningEnabled bool) *ScannerFunctionalUnitDocumentFeeder
-	WithOddPageOrientation(oddPageOrientation EXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder
-	WithEvenPageOrientation(evenPageOrientation EXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder
-	WithPixelDataType(pixelDataType ScannerPixelDataType) *ScannerFunctionalUnitDocumentFeeder
-	WithBitDepth(bitDepth ScannerBitDepth) *ScannerFunctionalUnitDocumentFeeder
-	WithMeasurementUnit(measurementUnit ScannerMeasurementUnit) *ScannerFunctionalUnitDocumentFeeder
-	WithResolution(resolution int) *ScannerFunctionalUnitDocumentFeeder
-	WithScaleFactor(scaleFactor int) *ScannerFunctionalUnitDocumentFeeder
-	WithScanArea(scanArea corefoundation.CGRect) *ScannerFunctionalUnitDocumentFeeder
-	WithScanAreaOrientation(scanAreaOrientation EXIFOrientationType) *ScannerFunctionalUnitDocumentFeeder
-	WithUsesThresholdForBlackAndWhiteScanning(usesThresholdForBlackAndWhiteScanning bool) *ScannerFunctionalUnitDocumentFeeder
-	WithThresholdForBlackAndWhiteScanning(thresholdForBlackAndWhiteScanning uint8) *ScannerFunctionalUnitDocumentFeeder
-	WithOverviewResolution(overviewResolution int) *ScannerFunctionalUnitDocumentFeeder
-	SupportedDocumentTypes() obj.Object
-	DocumentType() ScannerDocumentType
-	SetDocumentType(documentType ScannerDocumentType)
-	DocumentSize() corefoundation.CGSize
-	SupportsDuplexScanning() bool
-	DuplexScanningEnabled() bool
-	SetDuplexScanningEnabled(duplexScanningEnabled bool)
-	DocumentLoaded() bool
-	OddPageOrientation() EXIFOrientationType
-	SetOddPageOrientation(oddPageOrientation EXIFOrientationType)
-	EvenPageOrientation() EXIFOrientationType
-	SetEvenPageOrientation(evenPageOrientation EXIFOrientationType)
-	ReverseFeederPageOrder() bool
-}
-
-var _ ScannerFunctionalUnitDocumentFeederable = (*ScannerFunctionalUnitDocumentFeeder)(nil)
 
 var _ ScannerFunctionalUnitProvider = (*ScannerFunctionalUnitDocumentFeeder)(nil)

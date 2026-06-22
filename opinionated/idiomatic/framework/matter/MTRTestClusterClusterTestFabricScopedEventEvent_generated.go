@@ -51,17 +51,9 @@ func NewMTRTestClusterClusterTestFabricScopedEventEvent() *MTRTestClusterCluster
 }
 
 // WithFabricIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestFabricScopedEventEvent) WithFabricIndex(fabricIndex obj.Object) *MTRTestClusterClusterTestFabricScopedEventEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-	return x
+func (mtcctfsee *MTRTestClusterClusterTestFabricScopedEventEvent) WithFabricIndex(fabricIndex obj.Object) *MTRTestClusterClusterTestFabricScopedEventEvent {
+	objc.Send[objc.ID](objref.IDOf(mtcctfsee), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return mtcctfsee
 }
-
-// MTRTestClusterClusterTestFabricScopedEventEventable is the interface implemented by [MTRTestClusterClusterTestFabricScopedEventEvent], for mocking and DI.
-type MTRTestClusterClusterTestFabricScopedEventEventable interface {
-	obj.Object
-	WithFabricIndex(fabricIndex obj.Object) *MTRTestClusterClusterTestFabricScopedEventEvent
-}
-
-var _ MTRTestClusterClusterTestFabricScopedEventEventable = (*MTRTestClusterClusterTestFabricScopedEventEvent)(nil)
 
 var _ MTRUnitTestingClusterTestFabricScopedEventEventProvider = (*MTRTestClusterClusterTestFabricScopedEventEvent)(nil)

@@ -46,24 +46,24 @@ func pageLayoutAdopt(id objc.ID) *PageLayout {
 }
 
 // Description returns the object's -description text.
-func (x *PageLayout) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pl *PageLayout) Description() string {
+	return rt.Description(objref.IDOf(pl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PageLayout) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pl *PageLayout) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PageLayout) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pl *PageLayout) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PageLayout) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pl *PageLayout) String() string {
+	return rt.Description(objref.IDOf(pl))
 }
 
 // NewPageLayout creates a new PageLayout.
@@ -73,75 +73,58 @@ func NewPageLayout() *PageLayout {
 }
 
 // AddAccessoryController adds the specified controller of an accessory view to be presented in the page setup panel.
-func (x *PageLayout) AddAccessoryController(accessoryController *ViewController) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAccessoryController:"), objref.IDOf(accessoryController))
+func (pl *PageLayout) AddAccessoryController(accessoryController *ViewController) {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("addAccessoryController:"), objref.IDOf(accessoryController))
 }
 
 // RemoveAccessoryController removes the specified controller of an accessory view.
-func (x *PageLayout) RemoveAccessoryController(accessoryController *ViewController) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAccessoryController:"), objref.IDOf(accessoryController))
+func (pl *PageLayout) RemoveAccessoryController(accessoryController *ViewController) {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("removeAccessoryController:"), objref.IDOf(accessoryController))
 }
 
 // RunModalWithPrintInfo displays the page layout panel and begins the modal loop using the specified print info object.
-func (x *PageLayout) RunModalWithPrintInfo(printInfo *PrintInfo) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalWithPrintInfo:"), objref.IDOf(printInfo))
+func (pl *PageLayout) RunModalWithPrintInfo(printInfo *PrintInfo) int {
+	_r := objc.Send[int](objref.IDOf(pl), objc.RegisterName("runModalWithPrintInfo:"), objref.IDOf(printInfo))
 	return _r
 }
 
-// RunModal displays the page layout panel and begins the modal loop using the shared print info object.
-func (x *PageLayout) RunModal() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModal"))
+// RunModal returns displays the page layout panel and begins the modal loop using the shared print info object.
+func (pl *PageLayout) RunModal() int {
+	_r := objc.Send[int](objref.IDOf(pl), objc.RegisterName("runModal"))
 	return _r
 }
 
 // AccessoryControllers wraps the corresponding Objective-C method.
 //
 // AccessoryControllers returns the collection as a Go slice.
-func (x *PageLayout) AccessoryControllers() []*ViewController {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryControllers"))
+func (pl *PageLayout) AccessoryControllers() []*ViewController {
+	_arr := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("accessoryControllers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ViewController { return ViewControllerFromID(_id) })
 }
 
 // PrintInfo wraps the corresponding Objective-C method.
-func (x *PageLayout) PrintInfo() *PrintInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printInfo"))
+func (pl *PageLayout) PrintInfo() *PrintInfo {
+	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("printInfo"))
 	return PrintInfoFromID(_r)
 }
 
 // SetAccessoryView adds a view object to the page layout panel.
-func (x *PageLayout) SetAccessoryView(accessoryView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
+func (pl *PageLayout) SetAccessoryView(accessoryView *View) {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 }
 
 // AccessoryView returns the page layout panel’s accessory view.
-func (x *PageLayout) AccessoryView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryView"))
+func (pl *PageLayout) AccessoryView() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("accessoryView"))
 	return ViewFromID(_r)
 }
 
 // ReadPrintInfo sets the page layout’s values to those stored in the print info object used when the page layout panel is run.
-func (x *PageLayout) ReadPrintInfo() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readPrintInfo"))
+func (pl *PageLayout) ReadPrintInfo() {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("readPrintInfo"))
 }
 
 // WritePrintInfo writes the page layout’s values to the print info object used when the page layout panel is run.
-func (x *PageLayout) WritePrintInfo() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writePrintInfo"))
+func (pl *PageLayout) WritePrintInfo() {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("writePrintInfo"))
 }
-
-// PageLayoutable is the interface implemented by [PageLayout], for mocking and DI.
-type PageLayoutable interface {
-	obj.Object
-	AddAccessoryController(accessoryController *ViewController)
-	RemoveAccessoryController(accessoryController *ViewController)
-	RunModalWithPrintInfo(printInfo *PrintInfo) int
-	RunModal() int
-	AccessoryControllers() []*ViewController
-	PrintInfo() *PrintInfo
-	SetAccessoryView(accessoryView *View)
-	AccessoryView() *View
-	ReadPrintInfo()
-	WritePrintInfo()
-}
-
-var _ PageLayoutable = (*PageLayout)(nil)

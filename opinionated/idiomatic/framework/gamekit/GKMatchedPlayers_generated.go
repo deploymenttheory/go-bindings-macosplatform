@@ -46,24 +46,24 @@ func matchedPlayersAdopt(id objc.ID) *MatchedPlayers {
 }
 
 // Description returns the object's -description text.
-func (x *MatchedPlayers) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mp *MatchedPlayers) Description() string {
+	return rt.Description(objref.IDOf(mp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatchedPlayers) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mp *MatchedPlayers) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatchedPlayers) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mp *MatchedPlayers) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MatchedPlayers) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mp *MatchedPlayers) String() string {
+	return rt.Description(objref.IDOf(mp))
 }
 
 // NewMatchedPlayers creates a new MatchedPlayers.
@@ -75,22 +75,13 @@ func NewMatchedPlayers() *MatchedPlayers {
 // Players wraps the corresponding Objective-C method.
 //
 // Players returns the collection as a Go slice.
-func (x *MatchedPlayers) Players() []*Player {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("players"))
+func (mp *MatchedPlayers) Players() []*Player {
+	_arr := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("players"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Player { return PlayerFromID(_id) })
 }
 
 // PlayerProperties wraps the corresponding Objective-C method.
-func (x *MatchedPlayers) PlayerProperties() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerProperties"))
+func (mp *MatchedPlayers) PlayerProperties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("playerProperties"))
 	return obj.Wrap(_r)
 }
-
-// MatchedPlayersable is the interface implemented by [MatchedPlayers], for mocking and DI.
-type MatchedPlayersable interface {
-	obj.Object
-	Players() []*Player
-	PlayerProperties() obj.Object
-}
-
-var _ MatchedPlayersable = (*MatchedPlayers)(nil)

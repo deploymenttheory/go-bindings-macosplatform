@@ -50,148 +50,114 @@ func textBlockAdopt(id objc.ID) *TextBlock {
 }
 
 // Description returns the object's -description text.
-func (x *TextBlock) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tb *TextBlock) Description() string {
+	return rt.Description(objref.IDOf(tb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextBlock) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tb *TextBlock) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextBlock) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tb *TextBlock) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextBlock) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tb *TextBlock) String() string {
+	return rt.Description(objref.IDOf(tb))
 }
 
-// WithVerticalAlignment the vertical alignment of the text block.
-func (x *TextBlock) WithVerticalAlignment(verticalAlignment TextBlockVerticalAlignment) *TextBlock {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalAlignment:"), verticalAlignment)
-	return x
+// WithVerticalAlignment sets the vertical alignment of the text block.
+func (tb *TextBlock) WithVerticalAlignment(verticalAlignment TextBlockVerticalAlignment) *TextBlock {
+	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setVerticalAlignment:"), verticalAlignment)
+	return tb
 }
 
-// WithBackgroundColor the background color of the text block.
-func (x *TextBlock) WithBackgroundColor(backgroundColor *Color) *TextBlock {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the background color of the text block.
+func (tb *TextBlock) WithBackgroundColor(backgroundColor *Color) *TextBlock {
+	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return tb
 }
 
 // SetValueTypeForDimension sets a dimension of the text block.
-func (x *TextBlock) SetValueTypeForDimension(val float64, type_ TextBlockValueType, dimension TextBlockDimension) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:type:forDimension:"), val, type_, dimension)
+func (tb *TextBlock) SetValueTypeForDimension(val float64, type_ TextBlockValueType, dimension TextBlockDimension) {
+	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setValue:type:forDimension:"), val, type_, dimension)
 }
 
 // ValueForDimension returns the value of the specified text block dimension.
-func (x *TextBlock) ValueForDimension(dimension TextBlockDimension) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("valueForDimension:"), dimension)
+func (tb *TextBlock) ValueForDimension(dimension TextBlockDimension) float64 {
+	_r := objc.Send[float64](objref.IDOf(tb), objc.RegisterName("valueForDimension:"), dimension)
 	return _r
 }
 
 // ValueTypeForDimension returns the value type of the specified text block dimension.
-func (x *TextBlock) ValueTypeForDimension(dimension TextBlockDimension) TextBlockValueType {
-	_r := objc.Send[TextBlockValueType](objref.IDOf(x), objc.RegisterName("valueTypeForDimension:"), dimension)
+func (tb *TextBlock) ValueTypeForDimension(dimension TextBlockDimension) TextBlockValueType {
+	_r := objc.Send[TextBlockValueType](objref.IDOf(tb), objc.RegisterName("valueTypeForDimension:"), dimension)
 	return _r
 }
 
 // SetContentWidthType sets the width of the text block.
-func (x *TextBlock) SetContentWidthType(val float64, type_ TextBlockValueType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentWidth:type:"), val, type_)
+func (tb *TextBlock) SetContentWidthType(val float64, type_ TextBlockValueType) {
+	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setContentWidth:type:"), val, type_)
 }
 
 // SetWidthTypeForLayer sets the width of all edges of a specified layer of the text block.
-func (x *TextBlock) SetWidthTypeForLayer(val float64, type_ TextBlockValueType, layer TextBlockLayer) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:type:forLayer:"), val, type_, layer)
+func (tb *TextBlock) SetWidthTypeForLayer(val float64, type_ TextBlockValueType, layer TextBlockLayer) {
+	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setWidth:type:forLayer:"), val, type_, layer)
 }
 
 // SetBorderColor sets the color of all borders of the text block.
-func (x *TextBlock) SetBorderColor(color *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(color))
+func (tb *TextBlock) SetBorderColor(color *Color) {
+	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("setBorderColor:"), objref.IDOf(color))
 }
 
 // RectForLayoutAtPointInRectTextContainerCharacterRange returns the rectangle within which glyphs should be laid out for the specified arguments.
-func (x *TextBlock) RectForLayoutAtPointInRectTextContainerCharacterRange(startingPoint corefoundation.CGPoint, rect corefoundation.CGRect, textContainer *TextContainer, charRange foundation.NSRange) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectForLayoutAtPoint:inRect:textContainer:characterRange:"), startingPoint, rect, objref.IDOf(textContainer), charRange)
+func (tb *TextBlock) RectForLayoutAtPointInRectTextContainerCharacterRange(startingPoint corefoundation.CGPoint, rect corefoundation.CGRect, textContainer *TextContainer, charRange foundation.NSRange) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tb), objc.RegisterName("rectForLayoutAtPoint:inRect:textContainer:characterRange:"), startingPoint, rect, objref.IDOf(textContainer), charRange)
 	return _r
 }
 
 // BoundsRectForContentRectInRectTextContainerCharacterRange returns the rectangle the text in the block actually occupies, including padding, borders, and margins.
-func (x *TextBlock) BoundsRectForContentRectInRectTextContainerCharacterRange(contentRect corefoundation.CGRect, rect corefoundation.CGRect, textContainer *TextContainer, charRange foundation.NSRange) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("boundsRectForContentRect:inRect:textContainer:characterRange:"), contentRect, rect, objref.IDOf(textContainer), charRange)
+func (tb *TextBlock) BoundsRectForContentRectInRectTextContainerCharacterRange(contentRect corefoundation.CGRect, rect corefoundation.CGRect, textContainer *TextContainer, charRange foundation.NSRange) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tb), objc.RegisterName("boundsRectForContentRect:inRect:textContainer:characterRange:"), contentRect, rect, objref.IDOf(textContainer), charRange)
 	return _r
 }
 
 // DrawBackgroundWithFrameInViewCharacterRangeLayoutManager called by the layout manager to draw any colors and other decorations before the text is drawn.
-func (x *TextBlock) DrawBackgroundWithFrameInViewCharacterRangeLayoutManager(frameRect corefoundation.CGRect, controlView *View, charRange foundation.NSRange, layoutManager *LayoutManager) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawBackgroundWithFrame:inView:characterRange:layoutManager:"), frameRect, objref.IDOf(controlView), charRange, objref.IDOf(layoutManager))
+func (tb *TextBlock) DrawBackgroundWithFrameInViewCharacterRangeLayoutManager(frameRect corefoundation.CGRect, controlView *View, charRange foundation.NSRange, layoutManager *LayoutManager) {
+	objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("drawBackgroundWithFrame:inView:characterRange:layoutManager:"), frameRect, objref.IDOf(controlView), charRange, objref.IDOf(layoutManager))
 }
 
 // ContentWidth wraps the corresponding Objective-C method.
-func (x *TextBlock) ContentWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("contentWidth"))
+func (tb *TextBlock) ContentWidth() float64 {
+	_r := objc.Send[float64](objref.IDOf(tb), objc.RegisterName("contentWidth"))
 	return _r
 }
 
 // ContentWidthValueType wraps the corresponding Objective-C method.
-func (x *TextBlock) ContentWidthValueType() TextBlockValueType {
-	_r := objc.Send[TextBlockValueType](objref.IDOf(x), objc.RegisterName("contentWidthValueType"))
+func (tb *TextBlock) ContentWidthValueType() TextBlockValueType {
+	_r := objc.Send[TextBlockValueType](objref.IDOf(tb), objc.RegisterName("contentWidthValueType"))
 	return _r
 }
 
 // VerticalAlignment wraps the corresponding Objective-C method.
-func (x *TextBlock) VerticalAlignment() TextBlockVerticalAlignment {
-	_r := objc.Send[TextBlockVerticalAlignment](objref.IDOf(x), objc.RegisterName("verticalAlignment"))
+func (tb *TextBlock) VerticalAlignment() TextBlockVerticalAlignment {
+	_r := objc.Send[TextBlockVerticalAlignment](objref.IDOf(tb), objc.RegisterName("verticalAlignment"))
 	return _r
 }
 
-// SetVerticalAlignment wraps the corresponding Objective-C method.
-func (x *TextBlock) SetVerticalAlignment(verticalAlignment TextBlockVerticalAlignment) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalAlignment:"), verticalAlignment)
-}
-
 // BackgroundColor wraps the corresponding Objective-C method.
-func (x *TextBlock) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+func (tb *TextBlock) BackgroundColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(tb), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
-
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *TextBlock) SetBackgroundColor(backgroundColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-}
-
-// TextBlockable is the interface implemented by [TextBlock], for mocking and DI.
-type TextBlockable interface {
-	obj.Object
-	WithVerticalAlignment(verticalAlignment TextBlockVerticalAlignment) *TextBlock
-	WithBackgroundColor(backgroundColor *Color) *TextBlock
-	SetValueTypeForDimension(val float64, type_ TextBlockValueType, dimension TextBlockDimension)
-	ValueForDimension(dimension TextBlockDimension) float64
-	ValueTypeForDimension(dimension TextBlockDimension) TextBlockValueType
-	SetContentWidthType(val float64, type_ TextBlockValueType)
-	SetWidthTypeForLayer(val float64, type_ TextBlockValueType, layer TextBlockLayer)
-	SetBorderColor(color *Color)
-	RectForLayoutAtPointInRectTextContainerCharacterRange(startingPoint corefoundation.CGPoint, rect corefoundation.CGRect, textContainer *TextContainer, charRange foundation.NSRange) corefoundation.CGRect
-	BoundsRectForContentRectInRectTextContainerCharacterRange(contentRect corefoundation.CGRect, rect corefoundation.CGRect, textContainer *TextContainer, charRange foundation.NSRange) corefoundation.CGRect
-	DrawBackgroundWithFrameInViewCharacterRangeLayoutManager(frameRect corefoundation.CGRect, controlView *View, charRange foundation.NSRange, layoutManager *LayoutManager)
-	ContentWidth() float64
-	ContentWidthValueType() TextBlockValueType
-	VerticalAlignment() TextBlockVerticalAlignment
-	SetVerticalAlignment(verticalAlignment TextBlockVerticalAlignment)
-	BackgroundColor() *Color
-	SetBackgroundColor(backgroundColor *Color)
-}
-
-var _ TextBlockable = (*TextBlock)(nil)
 
 // isTextBlock marks TextBlock — and, by embedding promotion, its
 // subclasses — as a member of the TextBlock hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *TextBlock) isTextBlock() {}
+func (tb *TextBlock) isTextBlock() {}
 
 var _ TextBlockProvider = (*TextBlock)(nil)

@@ -52,53 +52,35 @@ func NewAssetCollectionChangeRequest() *AssetCollectionChangeRequest {
 	return assetCollectionChangeRequestAdopt(_id)
 }
 
-// WithTitle the displayed name of the asset collection.
-func (x *AssetCollectionChangeRequest) WithTitle(title string) *AssetCollectionChangeRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the displayed name of the asset collection.
+func (accr *AssetCollectionChangeRequest) WithTitle(title string) *AssetCollectionChangeRequest {
+	objc.Send[objc.ID](objref.IDOf(accr), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return accr
 }
 
 // RemoveAssetsAtIndexes removes the assets at the specified indexes from the asset collection.
-func (x *AssetCollectionChangeRequest) RemoveAssetsAtIndexes(indexes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAssetsAtIndexes:"), objref.IDOf(indexes))
+func (accr *AssetCollectionChangeRequest) RemoveAssetsAtIndexes(indexes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(accr), objc.RegisterName("removeAssetsAtIndexes:"), objref.IDOf(indexes))
 }
 
 // MoveAssetsAtIndexesToIndex moves the assets at the specified indexes in the asset collection to a new index.
-func (x *AssetCollectionChangeRequest) MoveAssetsAtIndexesToIndex(fromIndexes obj.Object, toIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveAssetsAtIndexes:toIndex:"), objref.IDOf(fromIndexes), toIndex)
+func (accr *AssetCollectionChangeRequest) MoveAssetsAtIndexesToIndex(fromIndexes obj.Object, toIndex int) {
+	objc.Send[objc.ID](objref.IDOf(accr), objc.RegisterName("moveAssetsAtIndexes:toIndex:"), objref.IDOf(fromIndexes), toIndex)
 }
 
 // PlaceholderForCreatedAssetCollection wraps the corresponding Objective-C method.
-func (x *AssetCollectionChangeRequest) PlaceholderForCreatedAssetCollection() *ObjectPlaceholder {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderForCreatedAssetCollection"))
+func (accr *AssetCollectionChangeRequest) PlaceholderForCreatedAssetCollection() *ObjectPlaceholder {
+	_r := objc.Send[objc.ID](objref.IDOf(accr), objc.RegisterName("placeholderForCreatedAssetCollection"))
 	return ObjectPlaceholderFromID(_r)
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *AssetCollectionChangeRequest) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (accr *AssetCollectionChangeRequest) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(accr), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetTitle wraps the corresponding Objective-C method.
-func (x *AssetCollectionChangeRequest) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-}
-
-// AssetCollectionChangeRequestable is the interface implemented by [AssetCollectionChangeRequest], for mocking and DI.
-type AssetCollectionChangeRequestable interface {
-	obj.Object
-	WithTitle(title string) *AssetCollectionChangeRequest
-	RemoveAssetsAtIndexes(indexes obj.Object)
-	MoveAssetsAtIndexesToIndex(fromIndexes obj.Object, toIndex int)
-	PlaceholderForCreatedAssetCollection() *ObjectPlaceholder
-	Title() string
-	SetTitle(title string)
-}
-
-var _ AssetCollectionChangeRequestable = (*AssetCollectionChangeRequest)(nil)
 
 var _ ChangeRequestProvider = (*AssetCollectionChangeRequest)(nil)

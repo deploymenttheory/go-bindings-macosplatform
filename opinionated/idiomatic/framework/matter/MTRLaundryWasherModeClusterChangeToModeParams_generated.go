@@ -44,24 +44,24 @@ func mTRLaundryWasherModeClusterChangeToModeParamsAdopt(id objc.ID) *MTRLaundryW
 }
 
 // Description returns the object's -description text.
-func (x *MTRLaundryWasherModeClusterChangeToModeParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mlwmcctmp *MTRLaundryWasherModeClusterChangeToModeParams) Description() string {
+	return rt.Description(objref.IDOf(mlwmcctmp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRLaundryWasherModeClusterChangeToModeParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mlwmcctmp *MTRLaundryWasherModeClusterChangeToModeParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mlwmcctmp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRLaundryWasherModeClusterChangeToModeParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mlwmcctmp *MTRLaundryWasherModeClusterChangeToModeParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mlwmcctmp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRLaundryWasherModeClusterChangeToModeParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mlwmcctmp *MTRLaundryWasherModeClusterChangeToModeParams) String() string {
+	return rt.Description(objref.IDOf(mlwmcctmp))
 }
 
 // NewMTRLaundryWasherModeClusterChangeToModeParams creates a new MTRLaundryWasherModeClusterChangeToModeParams.
@@ -71,68 +71,37 @@ func NewMTRLaundryWasherModeClusterChangeToModeParams() *MTRLaundryWasherModeClu
 }
 
 // WithNewMode sets the property and returns the receiver so calls can be chained.
-func (x *MTRLaundryWasherModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTRLaundryWasherModeClusterChangeToModeParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
-	return x
+func (mlwmcctmp *MTRLaundryWasherModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTRLaundryWasherModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(mlwmcctmp), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
+	return mlwmcctmp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRLaundryWasherModeClusterChangeToModeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLaundryWasherModeClusterChangeToModeParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mlwmcctmp *MTRLaundryWasherModeClusterChangeToModeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLaundryWasherModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(mlwmcctmp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mlwmcctmp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRLaundryWasherModeClusterChangeToModeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLaundryWasherModeClusterChangeToModeParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mlwmcctmp *MTRLaundryWasherModeClusterChangeToModeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLaundryWasherModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(mlwmcctmp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mlwmcctmp
 }
 
 // GetNewMode wraps the corresponding Objective-C method.
-func (x *MTRLaundryWasherModeClusterChangeToModeParams) GetNewMode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewMode"))
+func (mlwmcctmp *MTRLaundryWasherModeClusterChangeToModeParams) GetNewMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlwmcctmp), objc.RegisterName("getNewMode"))
 	return obj.Wrap(_r)
 }
 
-// SetNewMode wraps the corresponding Objective-C method.
-func (x *MTRLaundryWasherModeClusterChangeToModeParams) SetNewMode(newMode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRLaundryWasherModeClusterChangeToModeParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mlwmcctmp *MTRLaundryWasherModeClusterChangeToModeParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlwmcctmp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRLaundryWasherModeClusterChangeToModeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRLaundryWasherModeClusterChangeToModeParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mlwmcctmp *MTRLaundryWasherModeClusterChangeToModeParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mlwmcctmp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRLaundryWasherModeClusterChangeToModeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRLaundryWasherModeClusterChangeToModeParamsable is the interface implemented by [MTRLaundryWasherModeClusterChangeToModeParams], for mocking and DI.
-type MTRLaundryWasherModeClusterChangeToModeParamsable interface {
-	obj.Object
-	WithNewMode(newMode obj.Object) *MTRLaundryWasherModeClusterChangeToModeParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRLaundryWasherModeClusterChangeToModeParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRLaundryWasherModeClusterChangeToModeParams
-	GetNewMode() obj.Object
-	SetNewMode(newMode obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRLaundryWasherModeClusterChangeToModeParamsable = (*MTRLaundryWasherModeClusterChangeToModeParams)(nil)

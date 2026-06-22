@@ -46,24 +46,24 @@ func fetchIndexElementDescriptionAdopt(id objc.ID) *FetchIndexElementDescription
 }
 
 // Description returns the object's -description text.
-func (x *FetchIndexElementDescription) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fied *FetchIndexElementDescription) Description() string {
+	return rt.Description(objref.IDOf(fied))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FetchIndexElementDescription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fied *FetchIndexElementDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fied), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FetchIndexElementDescription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fied *FetchIndexElementDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fied), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FetchIndexElementDescription) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fied *FetchIndexElementDescription) String() string {
+	return rt.Description(objref.IDOf(fied))
 }
 
 // NewFetchIndexElementDescriptionWithPropertyCollationType creates an index element description using the specified property description and collation type.
@@ -73,27 +73,27 @@ func NewFetchIndexElementDescriptionWithPropertyCollationType(property *Property
 	return fetchIndexElementDescriptionAdopt(_id)
 }
 
-// WithCollationType the type of collation that the index element uses, either binary or R-tree.
-func (x *FetchIndexElementDescription) WithCollationType(collationType FetchIndexElementType) *FetchIndexElementDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollationType:"), collationType)
-	return x
+// WithCollationType sets the type of collation that the index element uses, either binary or R-tree.
+func (fied *FetchIndexElementDescription) WithCollationType(collationType FetchIndexElementType) *FetchIndexElementDescription {
+	objc.Send[objc.ID](objref.IDOf(fied), objc.RegisterName("setCollationType:"), collationType)
+	return fied
 }
 
-// WithAscending a Boolean value that controls whether an index that supports direction is an ascending or descending index.
-func (x *FetchIndexElementDescription) WithAscending(ascending bool) *FetchIndexElementDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAscending:"), ascending)
-	return x
+// WithAscending sets a Boolean value that controls whether an index that supports direction is an ascending or descending index.
+func (fied *FetchIndexElementDescription) WithAscending(ascending bool) *FetchIndexElementDescription {
+	objc.Send[objc.ID](objref.IDOf(fied), objc.RegisterName("setAscending:"), ascending)
+	return fied
 }
 
 // Property wraps the corresponding Objective-C method.
-func (x *FetchIndexElementDescription) Property() *PropertyDescription {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("property"))
+func (fied *FetchIndexElementDescription) Property() *PropertyDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(fied), objc.RegisterName("property"))
 	return PropertyDescriptionFromID(_r)
 }
 
 // PropertyName wraps the corresponding Objective-C method.
-func (x *FetchIndexElementDescription) PropertyName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyName"))
+func (fied *FetchIndexElementDescription) PropertyName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(fied), objc.RegisterName("propertyName"))
 	if _r == 0 {
 		return ""
 	}
@@ -101,45 +101,19 @@ func (x *FetchIndexElementDescription) PropertyName() string {
 }
 
 // CollationType wraps the corresponding Objective-C method.
-func (x *FetchIndexElementDescription) CollationType() FetchIndexElementType {
-	_r := objc.Send[FetchIndexElementType](objref.IDOf(x), objc.RegisterName("collationType"))
+func (fied *FetchIndexElementDescription) CollationType() FetchIndexElementType {
+	_r := objc.Send[FetchIndexElementType](objref.IDOf(fied), objc.RegisterName("collationType"))
 	return _r
-}
-
-// SetCollationType wraps the corresponding Objective-C method.
-func (x *FetchIndexElementDescription) SetCollationType(collationType FetchIndexElementType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollationType:"), collationType)
 }
 
 // IsAscending wraps the corresponding Objective-C method.
-func (x *FetchIndexElementDescription) IsAscending() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAscending"))
+func (fied *FetchIndexElementDescription) IsAscending() bool {
+	_r := objc.Send[bool](objref.IDOf(fied), objc.RegisterName("isAscending"))
 	return _r
 }
 
-// SetAscending wraps the corresponding Objective-C method.
-func (x *FetchIndexElementDescription) SetAscending(ascending bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAscending:"), ascending)
-}
-
 // IndexDescription wraps the corresponding Objective-C method.
-func (x *FetchIndexElementDescription) IndexDescription() *FetchIndexDescription {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexDescription"))
+func (fied *FetchIndexElementDescription) IndexDescription() *FetchIndexDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(fied), objc.RegisterName("indexDescription"))
 	return FetchIndexDescriptionFromID(_r)
 }
-
-// FetchIndexElementDescriptionable is the interface implemented by [FetchIndexElementDescription], for mocking and DI.
-type FetchIndexElementDescriptionable interface {
-	obj.Object
-	WithCollationType(collationType FetchIndexElementType) *FetchIndexElementDescription
-	WithAscending(ascending bool) *FetchIndexElementDescription
-	Property() *PropertyDescription
-	PropertyName() string
-	CollationType() FetchIndexElementType
-	SetCollationType(collationType FetchIndexElementType)
-	IsAscending() bool
-	SetAscending(ascending bool)
-	IndexDescription() *FetchIndexDescription
-}
-
-var _ FetchIndexElementDescriptionable = (*FetchIndexElementDescription)(nil)

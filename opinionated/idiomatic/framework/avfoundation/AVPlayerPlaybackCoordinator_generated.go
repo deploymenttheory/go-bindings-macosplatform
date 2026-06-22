@@ -5,12 +5,13 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // PlayerPlaybackCoordinator is an idiomatic wrapper over the Objective-C class AVPlayerPlaybackCoordinator.
@@ -54,29 +55,29 @@ func NewPlayerPlaybackCoordinator() *PlayerPlaybackCoordinator {
 	return playerPlaybackCoordinatorAdopt(_id)
 }
 
-// WithSuspensionReasonsThatTriggerWaiting the reasons that cause a coordinator to suspend playback.
-func (x *PlayerPlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...obj.Object) *PlayerPlaybackCoordinator {
+// WithSuspensionReasonsThatTriggerWaiting sets the reasons that cause a coordinator to suspend playback.
+func (ppc *PlayerPlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...obj.Object) *PlayerPlaybackCoordinator {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionReasonsThatTriggerWaiting:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("setSuspensionReasonsThatTriggerWaiting:"), _arr)
+	return ppc
 }
 
-// WithPauseSnapsToMediaTimeOfOriginator a Boolean value that indicates whether participants mirror the originator’s stop time when they pause.
-func (x *PlayerPlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *PlayerPlaybackCoordinator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPauseSnapsToMediaTimeOfOriginator:"), pauseSnapsToMediaTimeOfOriginator)
-	return x
+// WithPauseSnapsToMediaTimeOfOriginator sets a Boolean value that indicates whether participants mirror the originator’s stop time when they pause.
+func (ppc *PlayerPlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *PlayerPlaybackCoordinator {
+	objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("setPauseSnapsToMediaTimeOfOriginator:"), pauseSnapsToMediaTimeOfOriginator)
+	return ppc
 }
 
-// Player the AVPlayer this coordinator is controlling.
-func (x *PlayerPlaybackCoordinator) Player() *Player {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
+// Player returns the AVPlayer this coordinator is controlling.
+func (ppc *PlayerPlaybackCoordinator) Player() *Player {
+	_r := objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
 // CoordinateUsingCoordinationMedium connects the playback coordinator to the coordination medium
-func (x *PlayerPlaybackCoordinator) CoordinateUsingCoordinationMedium(coordinationMedium *PlaybackCoordinationMedium) error {
+func (ppc *PlayerPlaybackCoordinator) CoordinateUsingCoordinationMedium(coordinationMedium *PlaybackCoordinationMedium) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("coordinateUsingCoordinationMedium:error:"), objref.IDOf(coordinationMedium), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(ppc), objc.RegisterName("coordinateUsingCoordinationMedium:error:"), objref.IDOf(coordinationMedium), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -84,21 +85,9 @@ func (x *PlayerPlaybackCoordinator) CoordinateUsingCoordinationMedium(coordinati
 }
 
 // PlaybackCoordinationMedium wraps the corresponding Objective-C method.
-func (x *PlayerPlaybackCoordinator) PlaybackCoordinationMedium() *PlaybackCoordinationMedium {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playbackCoordinationMedium"))
+func (ppc *PlayerPlaybackCoordinator) PlaybackCoordinationMedium() *PlaybackCoordinationMedium {
+	_r := objc.Send[objc.ID](objref.IDOf(ppc), objc.RegisterName("playbackCoordinationMedium"))
 	return PlaybackCoordinationMediumFromID(_r)
 }
-
-// PlayerPlaybackCoordinatorable is the interface implemented by [PlayerPlaybackCoordinator], for mocking and DI.
-type PlayerPlaybackCoordinatorable interface {
-	obj.Object
-	WithSuspensionReasonsThatTriggerWaiting(items ...obj.Object) *PlayerPlaybackCoordinator
-	WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *PlayerPlaybackCoordinator
-	Player() *Player
-	CoordinateUsingCoordinationMedium(coordinationMedium *PlaybackCoordinationMedium) error
-	PlaybackCoordinationMedium() *PlaybackCoordinationMedium
-}
-
-var _ PlayerPlaybackCoordinatorable = (*PlayerPlaybackCoordinator)(nil)
 
 var _ PlaybackCoordinatorProvider = (*PlayerPlaybackCoordinator)(nil)

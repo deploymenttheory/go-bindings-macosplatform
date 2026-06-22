@@ -44,24 +44,24 @@ func mTRServiceAreaClusterAreaStructAdopt(id objc.ID) *MTRServiceAreaClusterArea
 }
 
 // Description returns the object's -description text.
-func (x *MTRServiceAreaClusterAreaStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (msacas *MTRServiceAreaClusterAreaStruct) Description() string {
+	return rt.Description(objref.IDOf(msacas))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRServiceAreaClusterAreaStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (msacas *MTRServiceAreaClusterAreaStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(msacas), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRServiceAreaClusterAreaStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (msacas *MTRServiceAreaClusterAreaStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(msacas), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRServiceAreaClusterAreaStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (msacas *MTRServiceAreaClusterAreaStruct) String() string {
+	return rt.Description(objref.IDOf(msacas))
 }
 
 // NewMTRServiceAreaClusterAreaStruct creates a new MTRServiceAreaClusterAreaStruct.
@@ -71,68 +71,37 @@ func NewMTRServiceAreaClusterAreaStruct() *MTRServiceAreaClusterAreaStruct {
 }
 
 // WithAreaID sets the property and returns the receiver so calls can be chained.
-func (x *MTRServiceAreaClusterAreaStruct) WithAreaID(areaID obj.Object) *MTRServiceAreaClusterAreaStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaID:"), objref.IDOf(areaID))
-	return x
+func (msacas *MTRServiceAreaClusterAreaStruct) WithAreaID(areaID obj.Object) *MTRServiceAreaClusterAreaStruct {
+	objc.Send[objc.ID](objref.IDOf(msacas), objc.RegisterName("setAreaID:"), objref.IDOf(areaID))
+	return msacas
 }
 
 // WithMapID sets the property and returns the receiver so calls can be chained.
-func (x *MTRServiceAreaClusterAreaStruct) WithMapID(mapID obj.Object) *MTRServiceAreaClusterAreaStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapID:"), objref.IDOf(mapID))
-	return x
+func (msacas *MTRServiceAreaClusterAreaStruct) WithMapID(mapID obj.Object) *MTRServiceAreaClusterAreaStruct {
+	objc.Send[objc.ID](objref.IDOf(msacas), objc.RegisterName("setMapID:"), objref.IDOf(mapID))
+	return msacas
 }
 
 // WithAreaInfo sets the property and returns the receiver so calls can be chained.
-func (x *MTRServiceAreaClusterAreaStruct) WithAreaInfo(areaInfo *MTRServiceAreaClusterAreaInfoStruct) *MTRServiceAreaClusterAreaStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaInfo:"), objref.IDOf(areaInfo))
-	return x
+func (msacas *MTRServiceAreaClusterAreaStruct) WithAreaInfo(areaInfo *MTRServiceAreaClusterAreaInfoStruct) *MTRServiceAreaClusterAreaStruct {
+	objc.Send[objc.ID](objref.IDOf(msacas), objc.RegisterName("setAreaInfo:"), objref.IDOf(areaInfo))
+	return msacas
 }
 
 // AreaID wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterAreaStruct) AreaID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("areaID"))
+func (msacas *MTRServiceAreaClusterAreaStruct) AreaID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msacas), objc.RegisterName("areaID"))
 	return obj.Wrap(_r)
-}
-
-// SetAreaID wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterAreaStruct) SetAreaID(areaID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaID:"), objref.IDOf(areaID))
 }
 
 // MapID wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterAreaStruct) MapID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapID"))
+func (msacas *MTRServiceAreaClusterAreaStruct) MapID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msacas), objc.RegisterName("mapID"))
 	return obj.Wrap(_r)
 }
 
-// SetMapID wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterAreaStruct) SetMapID(mapID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapID:"), objref.IDOf(mapID))
-}
-
 // AreaInfo wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterAreaStruct) AreaInfo() *MTRServiceAreaClusterAreaInfoStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("areaInfo"))
+func (msacas *MTRServiceAreaClusterAreaStruct) AreaInfo() *MTRServiceAreaClusterAreaInfoStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(msacas), objc.RegisterName("areaInfo"))
 	return MTRServiceAreaClusterAreaInfoStructFromID(_r)
 }
-
-// SetAreaInfo wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterAreaStruct) SetAreaInfo(areaInfo *MTRServiceAreaClusterAreaInfoStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaInfo:"), objref.IDOf(areaInfo))
-}
-
-// MTRServiceAreaClusterAreaStructable is the interface implemented by [MTRServiceAreaClusterAreaStruct], for mocking and DI.
-type MTRServiceAreaClusterAreaStructable interface {
-	obj.Object
-	WithAreaID(areaID obj.Object) *MTRServiceAreaClusterAreaStruct
-	WithMapID(mapID obj.Object) *MTRServiceAreaClusterAreaStruct
-	WithAreaInfo(areaInfo *MTRServiceAreaClusterAreaInfoStruct) *MTRServiceAreaClusterAreaStruct
-	AreaID() obj.Object
-	SetAreaID(areaID obj.Object)
-	MapID() obj.Object
-	SetMapID(mapID obj.Object)
-	AreaInfo() *MTRServiceAreaClusterAreaInfoStruct
-	SetAreaInfo(areaInfo *MTRServiceAreaClusterAreaInfoStruct)
-}
-
-var _ MTRServiceAreaClusterAreaStructable = (*MTRServiceAreaClusterAreaStruct)(nil)

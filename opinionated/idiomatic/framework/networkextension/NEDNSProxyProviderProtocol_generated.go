@@ -52,152 +52,115 @@ func NewNEDNSProxyProviderProtocol() *NEDNSProxyProviderProtocol {
 	return nEDNSProxyProviderProtocolAdopt(_id)
 }
 
-// WithProviderConfiguration a dictionary containing vendor-specific configuration parameters for a proxy provider.
-func (x *NEDNSProxyProviderProtocol) WithProviderConfiguration(providerConfiguration obj.Object) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderConfiguration:"), objref.IDOf(providerConfiguration))
-	return x
+// WithProviderConfiguration sets a dictionary containing vendor-specific configuration parameters for a proxy provider.
+func (nppp *NEDNSProxyProviderProtocol) WithProviderConfiguration(providerConfiguration obj.Object) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setProviderConfiguration:"), objref.IDOf(providerConfiguration))
+	return nppp
 }
 
-// WithProviderBundleIdentifier a string containing the bundle identifier of the proxy provider to be used by this configuration.
-func (x *NEDNSProxyProviderProtocol) WithProviderBundleIdentifier(providerBundleIdentifier string) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderBundleIdentifier:"), purego.NSString(providerBundleIdentifier))
-	return x
+// WithProviderBundleIdentifier sets a string containing the bundle identifier of the proxy provider to be used by this configuration.
+func (nppp *NEDNSProxyProviderProtocol) WithProviderBundleIdentifier(providerBundleIdentifier string) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setProviderBundleIdentifier:"), purego.NSString(providerBundleIdentifier))
+	return nppp
 }
 
-// WithServerAddress the address of the VPN server.
-func (x *NEDNSProxyProviderProtocol) WithServerAddress(serverAddress string) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerAddress:"), purego.NSString(serverAddress))
-	return x
+// WithServerAddress sets the address of the VPN server.
+func (nppp *NEDNSProxyProviderProtocol) WithServerAddress(serverAddress string) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setServerAddress:"), purego.NSString(serverAddress))
+	return nppp
 }
 
-// WithUsername the user name component of the tunneling protocol authentication credential.
-func (x *NEDNSProxyProviderProtocol) WithUsername(username string) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsername:"), purego.NSString(username))
-	return x
+// WithUsername sets the user name component of the tunneling protocol authentication credential.
+func (nppp *NEDNSProxyProviderProtocol) WithUsername(username string) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setUsername:"), purego.NSString(username))
+	return nppp
 }
 
-// WithPasswordReference a persistent keychain reference to a keychain item containing the password component of the tunneling protocol authentication credential.
-func (x *NEDNSProxyProviderProtocol) WithPasswordReference(passwordReference obj.Object) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPasswordReference:"), objref.IDOf(passwordReference))
-	return x
+// WithPasswordReference sets a persistent keychain reference to a keychain item containing the password component of the tunneling protocol authentication credential.
+func (nppp *NEDNSProxyProviderProtocol) WithPasswordReference(passwordReference obj.Object) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setPasswordReference:"), objref.IDOf(passwordReference))
+	return nppp
 }
 
-// WithIdentityReference a persistent keychain reference to a keychain item containing the certificate and private key components of the tunneling protocol authentication credential.
-func (x *NEDNSProxyProviderProtocol) WithIdentityReference(identityReference obj.Object) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
-	return x
+// WithIdentityReference sets a persistent keychain reference to a keychain item containing the certificate and private key components of the tunneling protocol authentication credential.
+func (nppp *NEDNSProxyProviderProtocol) WithIdentityReference(identityReference obj.Object) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
+	return nppp
 }
 
-// WithIdentityData the certificate and private key components of the tunneling protocol authentication credential, in PKCS12 format.
-func (x *NEDNSProxyProviderProtocol) WithIdentityData(identityData obj.Object) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityData:"), objref.IDOf(identityData))
-	return x
+// WithIdentityData sets the certificate and private key components of the tunneling protocol authentication credential, in PKCS12 format.
+func (nppp *NEDNSProxyProviderProtocol) WithIdentityData(identityData obj.Object) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setIdentityData:"), objref.IDOf(identityData))
+	return nppp
 }
 
-// WithIdentityDataPassword the password for the PKCS12 tunneling protocol authentication credentials.
-func (x *NEDNSProxyProviderProtocol) WithIdentityDataPassword(identityDataPassword string) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityDataPassword:"), purego.NSString(identityDataPassword))
-	return x
+// WithIdentityDataPassword sets the password for the PKCS12 tunneling protocol authentication credentials.
+func (nppp *NEDNSProxyProviderProtocol) WithIdentityDataPassword(identityDataPassword string) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setIdentityDataPassword:"), purego.NSString(identityDataPassword))
+	return nppp
 }
 
-// WithDisconnectOnSleep a Boolean value that indicates whether the VPN disconnects when the device sleeps.
-func (x *NEDNSProxyProviderProtocol) WithDisconnectOnSleep(disconnectOnSleep bool) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisconnectOnSleep:"), disconnectOnSleep)
-	return x
+// WithDisconnectOnSleep sets a Boolean value that indicates whether the VPN disconnects when the device sleeps.
+func (nppp *NEDNSProxyProviderProtocol) WithDisconnectOnSleep(disconnectOnSleep bool) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setDisconnectOnSleep:"), disconnectOnSleep)
+	return nppp
 }
 
-// WithProxySettings the proxy settings to use for HTTP and HTTPS connections that route through the VPN.
-func (x *NEDNSProxyProviderProtocol) WithProxySettings(proxySettings *NEProxySettings) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
-	return x
+// WithProxySettings sets the proxy settings to use for HTTP and HTTPS connections that route through the VPN.
+func (nppp *NEDNSProxyProviderProtocol) WithProxySettings(proxySettings *NEProxySettings) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setProxySettings:"), objref.IDOf(proxySettings))
+	return nppp
 }
 
-// WithIncludeAllNetworks a Boolean value that indicates whether the system sends most network traffic over the tunnel.
-func (x *NEDNSProxyProviderProtocol) WithIncludeAllNetworks(includeAllNetworks bool) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeAllNetworks:"), includeAllNetworks)
-	return x
+// WithIncludeAllNetworks sets a Boolean value that indicates whether the system sends most network traffic over the tunnel.
+func (nppp *NEDNSProxyProviderProtocol) WithIncludeAllNetworks(includeAllNetworks bool) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setIncludeAllNetworks:"), includeAllNetworks)
+	return nppp
 }
 
-// WithExcludeLocalNetworks a Boolean value that indicates whether the system excludes all traffic destined for local networks from the tunnel.
-func (x *NEDNSProxyProviderProtocol) WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeLocalNetworks:"), excludeLocalNetworks)
-	return x
+// WithExcludeLocalNetworks sets a Boolean value that indicates whether the system excludes all traffic destined for local networks from the tunnel.
+func (nppp *NEDNSProxyProviderProtocol) WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setExcludeLocalNetworks:"), excludeLocalNetworks)
+	return nppp
 }
 
-// WithExcludeCellularServices a Boolean value that indicates whether the system excludes all cellular services network traffic from the tunnel.
-func (x *NEDNSProxyProviderProtocol) WithExcludeCellularServices(excludeCellularServices bool) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeCellularServices:"), excludeCellularServices)
-	return x
+// WithExcludeCellularServices sets a Boolean value that indicates whether the system excludes all cellular services network traffic from the tunnel.
+func (nppp *NEDNSProxyProviderProtocol) WithExcludeCellularServices(excludeCellularServices bool) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setExcludeCellularServices:"), excludeCellularServices)
+	return nppp
 }
 
-// WithExcludeAPNs a Boolean value that indicates whether the system excludes all APNs network traffic from the tunnel.
-func (x *NEDNSProxyProviderProtocol) WithExcludeAPNs(excludeAPNs bool) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeAPNs:"), excludeAPNs)
-	return x
+// WithExcludeAPNs sets a Boolean value that indicates whether the system excludes all APNs network traffic from the tunnel.
+func (nppp *NEDNSProxyProviderProtocol) WithExcludeAPNs(excludeAPNs bool) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setExcludeAPNs:"), excludeAPNs)
+	return nppp
 }
 
-// WithExcludeDeviceCommunication if includeAllNetworks is set to YES and this property is set to YES, then network traffic used for communicating with devices connected via USB or Wi-Fi is excluded from the tunnel. For example, Xcode uses a network tunnel to communicate with connected development devices like iPhone, iPad and TV. The default value of this property is YES.
-func (x *NEDNSProxyProviderProtocol) WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludeDeviceCommunication:"), excludeDeviceCommunication)
-	return x
+// WithExcludeDeviceCommunication sets if includeAllNetworks is set to YES and this property is set to YES, then network traffic used for communicating with devices connected via USB or Wi-Fi is excluded from the tunnel. For example, Xcode uses a network tunnel to communicate with connected development devices like iPhone, iPad and TV. The default value of this property is YES.
+func (nppp *NEDNSProxyProviderProtocol) WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setExcludeDeviceCommunication:"), excludeDeviceCommunication)
+	return nppp
 }
 
-// WithEnforceRoutes a Boolean value that indicates whether route rules for the tunnel take precedence over any locally defined routes.
-func (x *NEDNSProxyProviderProtocol) WithEnforceRoutes(enforceRoutes bool) *NEDNSProxyProviderProtocol {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnforceRoutes:"), enforceRoutes)
-	return x
+// WithEnforceRoutes sets a Boolean value that indicates whether route rules for the tunnel take precedence over any locally defined routes.
+func (nppp *NEDNSProxyProviderProtocol) WithEnforceRoutes(enforceRoutes bool) *NEDNSProxyProviderProtocol {
+	objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("setEnforceRoutes:"), enforceRoutes)
+	return nppp
 }
 
-// ProviderConfiguration a dictionary containing NEDNSProxyProvider vendor-specific configuration parameters. This dictionary is passed as-is to NEDNSProxyProviders when a DNS proxy is started.
-func (x *NEDNSProxyProviderProtocol) ProviderConfiguration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("providerConfiguration"))
+// ProviderConfiguration returns a dictionary containing NEDNSProxyProvider vendor-specific configuration parameters. This dictionary is passed as-is to NEDNSProxyProviders when a DNS proxy is started.
+func (nppp *NEDNSProxyProviderProtocol) ProviderConfiguration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("providerConfiguration"))
 	return obj.Wrap(_r)
 }
 
-// SetProviderConfiguration wraps the corresponding Objective-C method.
-func (x *NEDNSProxyProviderProtocol) SetProviderConfiguration(providerConfiguration obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderConfiguration:"), objref.IDOf(providerConfiguration))
-}
-
-// ProviderBundleIdentifier a string containing the bundle identifier of the NEDNSProxyProvider to be used by this configuration.
-func (x *NEDNSProxyProviderProtocol) ProviderBundleIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("providerBundleIdentifier"))
+// ProviderBundleIdentifier returns a string containing the bundle identifier of the NEDNSProxyProvider to be used by this configuration.
+func (nppp *NEDNSProxyProviderProtocol) ProviderBundleIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nppp), objc.RegisterName("providerBundleIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetProviderBundleIdentifier wraps the corresponding Objective-C method.
-func (x *NEDNSProxyProviderProtocol) SetProviderBundleIdentifier(providerBundleIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProviderBundleIdentifier:"), purego.NSString(providerBundleIdentifier))
-}
-
-// NEDNSProxyProviderProtocolable is the interface implemented by [NEDNSProxyProviderProtocol], for mocking and DI.
-type NEDNSProxyProviderProtocolable interface {
-	obj.Object
-	WithProviderConfiguration(providerConfiguration obj.Object) *NEDNSProxyProviderProtocol
-	WithProviderBundleIdentifier(providerBundleIdentifier string) *NEDNSProxyProviderProtocol
-	WithServerAddress(serverAddress string) *NEDNSProxyProviderProtocol
-	WithUsername(username string) *NEDNSProxyProviderProtocol
-	WithPasswordReference(passwordReference obj.Object) *NEDNSProxyProviderProtocol
-	WithIdentityReference(identityReference obj.Object) *NEDNSProxyProviderProtocol
-	WithIdentityData(identityData obj.Object) *NEDNSProxyProviderProtocol
-	WithIdentityDataPassword(identityDataPassword string) *NEDNSProxyProviderProtocol
-	WithDisconnectOnSleep(disconnectOnSleep bool) *NEDNSProxyProviderProtocol
-	WithProxySettings(proxySettings *NEProxySettings) *NEDNSProxyProviderProtocol
-	WithIncludeAllNetworks(includeAllNetworks bool) *NEDNSProxyProviderProtocol
-	WithExcludeLocalNetworks(excludeLocalNetworks bool) *NEDNSProxyProviderProtocol
-	WithExcludeCellularServices(excludeCellularServices bool) *NEDNSProxyProviderProtocol
-	WithExcludeAPNs(excludeAPNs bool) *NEDNSProxyProviderProtocol
-	WithExcludeDeviceCommunication(excludeDeviceCommunication bool) *NEDNSProxyProviderProtocol
-	WithEnforceRoutes(enforceRoutes bool) *NEDNSProxyProviderProtocol
-	ProviderConfiguration() obj.Object
-	SetProviderConfiguration(providerConfiguration obj.Object)
-	ProviderBundleIdentifier() string
-	SetProviderBundleIdentifier(providerBundleIdentifier string)
-}
-
-var _ NEDNSProxyProviderProtocolable = (*NEDNSProxyProviderProtocol)(nil)
 
 var _ NEVPNProtocolProvider = (*NEDNSProxyProviderProtocol)(nil)

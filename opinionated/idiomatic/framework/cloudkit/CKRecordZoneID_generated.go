@@ -46,24 +46,24 @@ func recordZoneIDAdopt(id objc.ID) *RecordZoneID {
 }
 
 // Description returns the object's -description text.
-func (x *RecordZoneID) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rzi *RecordZoneID) Description() string {
+	return rt.Description(objref.IDOf(rzi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecordZoneID) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rzi *RecordZoneID) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rzi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecordZoneID) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rzi *RecordZoneID) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rzi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RecordZoneID) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rzi *RecordZoneID) String() string {
+	return rt.Description(objref.IDOf(rzi))
 }
 
 // NewRecordZoneIDWithZoneNameOwnerName creates a record zone ID with the specified name and owner.
@@ -73,29 +73,20 @@ func NewRecordZoneIDWithZoneNameOwnerName(zoneName string, ownerName string) *Re
 	return recordZoneIDAdopt(_id)
 }
 
-// ZoneName the unique name of the record zone.
-func (x *RecordZoneID) ZoneName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneName"))
+// ZoneName returns the unique name of the record zone.
+func (rzi *RecordZoneID) ZoneName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(rzi), objc.RegisterName("zoneName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// OwnerName the ID of the user who owns the record zone.
-func (x *RecordZoneID) OwnerName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerName"))
+// OwnerName returns the ID of the user who owns the record zone.
+func (rzi *RecordZoneID) OwnerName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(rzi), objc.RegisterName("ownerName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// RecordZoneIDable is the interface implemented by [RecordZoneID], for mocking and DI.
-type RecordZoneIDable interface {
-	obj.Object
-	ZoneName() string
-	OwnerName() string
-}
-
-var _ RecordZoneIDable = (*RecordZoneID)(nil)

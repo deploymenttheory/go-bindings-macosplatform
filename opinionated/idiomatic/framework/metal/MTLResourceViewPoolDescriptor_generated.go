@@ -46,24 +46,24 @@ func resourceViewPoolDescriptorAdopt(id objc.ID) *ResourceViewPoolDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *ResourceViewPoolDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rvpd *ResourceViewPoolDescriptor) Description() string {
+	return rt.Description(objref.IDOf(rvpd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ResourceViewPoolDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rvpd *ResourceViewPoolDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rvpd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ResourceViewPoolDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rvpd *ResourceViewPoolDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rvpd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ResourceViewPoolDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rvpd *ResourceViewPoolDescriptor) String() string {
+	return rt.Description(objref.IDOf(rvpd))
 }
 
 // NewResourceViewPoolDescriptor creates a new ResourceViewPoolDescriptor.
@@ -72,52 +72,29 @@ func NewResourceViewPoolDescriptor() *ResourceViewPoolDescriptor {
 	return resourceViewPoolDescriptorAdopt(_id)
 }
 
-// WithResourceViewCount configures the number of resource views with which Metal creates the resource view pool.
-func (x *ResourceViewPoolDescriptor) WithResourceViewCount(resourceViewCount int) *ResourceViewPoolDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResourceViewCount:"), resourceViewCount)
-	return x
+// WithResourceViewCount sets configures the number of resource views with which Metal creates the resource view pool.
+func (rvpd *ResourceViewPoolDescriptor) WithResourceViewCount(resourceViewCount int) *ResourceViewPoolDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rvpd), objc.RegisterName("setResourceViewCount:"), resourceViewCount)
+	return rvpd
 }
 
-// WithLabel assigns an optional label you to the resource view pool for debugging purposes.
-func (x *ResourceViewPoolDescriptor) WithLabel(label string) *ResourceViewPoolDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets assigns an optional label you to the resource view pool for debugging purposes.
+func (rvpd *ResourceViewPoolDescriptor) WithLabel(label string) *ResourceViewPoolDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rvpd), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return rvpd
 }
 
-// ResourceViewCount configures the number of resource views with which Metal creates the resource view pool.
-func (x *ResourceViewPoolDescriptor) ResourceViewCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resourceViewCount"))
+// ResourceViewCount returns configures the number of resource views with which Metal creates the resource view pool.
+func (rvpd *ResourceViewPoolDescriptor) ResourceViewCount() int {
+	_r := objc.Send[int](objref.IDOf(rvpd), objc.RegisterName("resourceViewCount"))
 	return _r
 }
 
-// SetResourceViewCount wraps the corresponding Objective-C method.
-func (x *ResourceViewPoolDescriptor) SetResourceViewCount(resourceViewCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResourceViewCount:"), resourceViewCount)
-}
-
-// Label assigns an optional label you to the resource view pool for debugging purposes.
-func (x *ResourceViewPoolDescriptor) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns assigns an optional label you to the resource view pool for debugging purposes.
+func (rvpd *ResourceViewPoolDescriptor) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(rvpd), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetLabel wraps the corresponding Objective-C method.
-func (x *ResourceViewPoolDescriptor) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// ResourceViewPoolDescriptorable is the interface implemented by [ResourceViewPoolDescriptor], for mocking and DI.
-type ResourceViewPoolDescriptorable interface {
-	obj.Object
-	WithResourceViewCount(resourceViewCount int) *ResourceViewPoolDescriptor
-	WithLabel(label string) *ResourceViewPoolDescriptor
-	ResourceViewCount() int
-	SetResourceViewCount(resourceViewCount int)
-	Label() string
-	SetLabel(label string)
-}
-
-var _ ResourceViewPoolDescriptorable = (*ResourceViewPoolDescriptor)(nil)

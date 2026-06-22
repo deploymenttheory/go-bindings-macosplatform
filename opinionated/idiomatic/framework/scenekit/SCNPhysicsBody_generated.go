@@ -46,24 +46,24 @@ func physicsBodyAdopt(id objc.ID) *PhysicsBody {
 }
 
 // Description returns the object's -description text.
-func (x *PhysicsBody) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pb *PhysicsBody) Description() string {
+	return rt.Description(objref.IDOf(pb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PhysicsBody) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pb *PhysicsBody) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PhysicsBody) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pb *PhysicsBody) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PhysicsBody) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pb *PhysicsBody) String() string {
+	return rt.Description(objref.IDOf(pb))
 }
 
 // NewPhysicsBody creates a new PhysicsBody.
@@ -72,394 +72,239 @@ func NewPhysicsBody() *PhysicsBody {
 	return physicsBodyAdopt(_id)
 }
 
-// WithType a constant that determines how the physics body responds to forces and collisions.
-func (x *PhysicsBody) WithType(type_ PhysicsBodyType) *PhysicsBody {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets a constant that determines how the physics body responds to forces and collisions.
+func (pb *PhysicsBody) WithType(type_ PhysicsBodyType) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setType:"), type_)
+	return pb
 }
 
-// WithMass the mass of the body, in kilograms.
-func (x *PhysicsBody) WithMass(mass float64) *PhysicsBody {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMass:"), mass)
-	return x
+// WithMass sets the mass of the body, in kilograms.
+func (pb *PhysicsBody) WithMass(mass float64) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setMass:"), mass)
+	return pb
 }
 
-// WithUsesDefaultMomentOfInertia a Boolean value that determines whether SceneKit automatically calculates the body’s moment of inertia or allows setting a custom value.
-func (x *PhysicsBody) WithUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia bool) *PhysicsBody {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesDefaultMomentOfInertia:"), usesDefaultMomentOfInertia)
-	return x
+// WithUsesDefaultMomentOfInertia sets a Boolean value that determines whether SceneKit automatically calculates the body’s moment of inertia or allows setting a custom value.
+func (pb *PhysicsBody) WithUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia bool) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setUsesDefaultMomentOfInertia:"), usesDefaultMomentOfInertia)
+	return pb
 }
 
-// WithCharge the electric charge of the body, in coulombs.
-func (x *PhysicsBody) WithCharge(charge float64) *PhysicsBody {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharge:"), charge)
-	return x
+// WithCharge sets the electric charge of the body, in coulombs.
+func (pb *PhysicsBody) WithCharge(charge float64) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setCharge:"), charge)
+	return pb
 }
 
-// WithFriction the body’s resistance to sliding motion.
-func (x *PhysicsBody) WithFriction(friction float64) *PhysicsBody {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFriction:"), friction)
-	return x
+// WithFriction sets the body’s resistance to sliding motion.
+func (pb *PhysicsBody) WithFriction(friction float64) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setFriction:"), friction)
+	return pb
 }
 
-// WithRestitution a factor that determines how much kinetic energy the body loses or gains in collisions.
-func (x *PhysicsBody) WithRestitution(restitution float64) *PhysicsBody {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestitution:"), restitution)
-	return x
+// WithRestitution sets a factor that determines how much kinetic energy the body loses or gains in collisions.
+func (pb *PhysicsBody) WithRestitution(restitution float64) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setRestitution:"), restitution)
+	return pb
 }
 
-// WithRollingFriction the body’s resistance to rolling motion.
-func (x *PhysicsBody) WithRollingFriction(rollingFriction float64) *PhysicsBody {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRollingFriction:"), rollingFriction)
-	return x
+// WithRollingFriction sets the body’s resistance to rolling motion.
+func (pb *PhysicsBody) WithRollingFriction(rollingFriction float64) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setRollingFriction:"), rollingFriction)
+	return pb
 }
 
-// WithPhysicsShape an object that defines the solid volume of the physics body for use in collision detection.
-func (x *PhysicsBody) WithPhysicsShape(physicsShape *PhysicsShape) *PhysicsBody {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsShape:"), objref.IDOf(physicsShape))
-	return x
+// WithPhysicsShape sets an object that defines the solid volume of the physics body for use in collision detection.
+func (pb *PhysicsBody) WithPhysicsShape(physicsShape *PhysicsShape) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setPhysicsShape:"), objref.IDOf(physicsShape))
+	return pb
 }
 
-// WithAllowsResting a Boolean value that specifies whether SceneKit can automatically mark the physics body at rest.
-func (x *PhysicsBody) WithAllowsResting(allowsResting bool) *PhysicsBody {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsResting:"), allowsResting)
-	return x
+// WithAllowsResting sets a Boolean value that specifies whether SceneKit can automatically mark the physics body at rest.
+func (pb *PhysicsBody) WithAllowsResting(allowsResting bool) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setAllowsResting:"), allowsResting)
+	return pb
 }
 
-// WithDamping a factor that reduces the body’s linear velocity.
-func (x *PhysicsBody) WithDamping(damping float64) *PhysicsBody {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDamping:"), damping)
-	return x
+// WithDamping sets a factor that reduces the body’s linear velocity.
+func (pb *PhysicsBody) WithDamping(damping float64) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setDamping:"), damping)
+	return pb
 }
 
-// WithAngularDamping a factor that reduces the body’s angular velocity.
-func (x *PhysicsBody) WithAngularDamping(angularDamping float64) *PhysicsBody {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAngularDamping:"), angularDamping)
-	return x
+// WithAngularDamping sets a factor that reduces the body’s angular velocity.
+func (pb *PhysicsBody) WithAngularDamping(angularDamping float64) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setAngularDamping:"), angularDamping)
+	return pb
 }
 
-// WithCategoryBitMask a mask that defines which categories this physics body belongs to.
-func (x *PhysicsBody) WithCategoryBitMask(categoryBitMask int) *PhysicsBody {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
-	return x
+// WithCategoryBitMask sets a mask that defines which categories this physics body belongs to.
+func (pb *PhysicsBody) WithCategoryBitMask(categoryBitMask int) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
+	return pb
 }
 
-// WithCollisionBitMask a mask that defines which categories of physics bodies can collide with this physics body.
-func (x *PhysicsBody) WithCollisionBitMask(collisionBitMask int) *PhysicsBody {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollisionBitMask:"), collisionBitMask)
-	return x
+// WithCollisionBitMask sets a mask that defines which categories of physics bodies can collide with this physics body.
+func (pb *PhysicsBody) WithCollisionBitMask(collisionBitMask int) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setCollisionBitMask:"), collisionBitMask)
+	return pb
 }
 
-// WithContactTestBitMask a mask that defines which categories of bodies cause intersection notifications with this physics body.
-func (x *PhysicsBody) WithContactTestBitMask(contactTestBitMask int) *PhysicsBody {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactTestBitMask:"), contactTestBitMask)
-	return x
+// WithContactTestBitMask sets a mask that defines which categories of bodies cause intersection notifications with this physics body.
+func (pb *PhysicsBody) WithContactTestBitMask(contactTestBitMask int) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setContactTestBitMask:"), contactTestBitMask)
+	return pb
 }
 
-// WithAffectedByGravity a Boolean value that determines whether the constant gravity of a scene accelerates the body.
-func (x *PhysicsBody) WithAffectedByGravity(affectedByGravity bool) *PhysicsBody {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedByGravity:"), affectedByGravity)
-	return x
+// WithAffectedByGravity sets a Boolean value that determines whether the constant gravity of a scene accelerates the body.
+func (pb *PhysicsBody) WithAffectedByGravity(affectedByGravity bool) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setAffectedByGravity:"), affectedByGravity)
+	return pb
 }
 
-// WithContinuousCollisionDetectionThreshold the minimum distance the body must travel for SceneKit to apply a more precise (but more costly) algorithm to detect contacts with other bodies.
-func (x *PhysicsBody) WithContinuousCollisionDetectionThreshold(continuousCollisionDetectionThreshold float64) *PhysicsBody {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuousCollisionDetectionThreshold:"), continuousCollisionDetectionThreshold)
-	return x
+// WithContinuousCollisionDetectionThreshold sets the minimum distance the body must travel for SceneKit to apply a more precise (but more costly) algorithm to detect contacts with other bodies.
+func (pb *PhysicsBody) WithContinuousCollisionDetectionThreshold(continuousCollisionDetectionThreshold float64) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setContinuousCollisionDetectionThreshold:"), continuousCollisionDetectionThreshold)
+	return pb
 }
 
 // WithLinearRestingThreshold sets the property and returns the receiver so calls can be chained.
-func (x *PhysicsBody) WithLinearRestingThreshold(linearRestingThreshold float64) *PhysicsBody {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinearRestingThreshold:"), linearRestingThreshold)
-	return x
+func (pb *PhysicsBody) WithLinearRestingThreshold(linearRestingThreshold float64) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setLinearRestingThreshold:"), linearRestingThreshold)
+	return pb
 }
 
 // WithAngularRestingThreshold sets the property and returns the receiver so calls can be chained.
-func (x *PhysicsBody) WithAngularRestingThreshold(angularRestingThreshold float64) *PhysicsBody {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAngularRestingThreshold:"), angularRestingThreshold)
-	return x
+func (pb *PhysicsBody) WithAngularRestingThreshold(angularRestingThreshold float64) *PhysicsBody {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setAngularRestingThreshold:"), angularRestingThreshold)
+	return pb
 }
 
 // ClearAllForces cancels all continuous forces and torques acting on the physics body during the current simulation step.
-func (x *PhysicsBody) ClearAllForces() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearAllForces"))
+func (pb *PhysicsBody) ClearAllForces() {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("clearAllForces"))
 }
 
 // ResetTransform updates the position and orientation of a body in the physics simulation to match that of the node to which the body is attached.
-func (x *PhysicsBody) ResetTransform() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetTransform"))
+func (pb *PhysicsBody) ResetTransform() {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("resetTransform"))
 }
 
 // SetResting tells SceneKit whether to treat the body as currently being in motion.
-func (x *PhysicsBody) SetResting(resting bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResting:"), resting)
+func (pb *PhysicsBody) SetResting(resting bool) {
+	objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("setResting:"), resting)
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *PhysicsBody) Type() PhysicsBodyType {
-	_r := objc.Send[PhysicsBodyType](objref.IDOf(x), objc.RegisterName("type"))
+func (pb *PhysicsBody) Type() PhysicsBodyType {
+	_r := objc.Send[PhysicsBodyType](objref.IDOf(pb), objc.RegisterName("type"))
 	return _r
-}
-
-// SetType wraps the corresponding Objective-C method.
-func (x *PhysicsBody) SetType(type_ PhysicsBodyType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 }
 
 // Mass wraps the corresponding Objective-C method.
-func (x *PhysicsBody) Mass() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("mass"))
+func (pb *PhysicsBody) Mass() float64 {
+	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("mass"))
 	return _r
-}
-
-// SetMass wraps the corresponding Objective-C method.
-func (x *PhysicsBody) SetMass(mass float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMass:"), mass)
 }
 
 // UsesDefaultMomentOfInertia wraps the corresponding Objective-C method.
-func (x *PhysicsBody) UsesDefaultMomentOfInertia() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesDefaultMomentOfInertia"))
+func (pb *PhysicsBody) UsesDefaultMomentOfInertia() bool {
+	_r := objc.Send[bool](objref.IDOf(pb), objc.RegisterName("usesDefaultMomentOfInertia"))
 	return _r
-}
-
-// SetUsesDefaultMomentOfInertia wraps the corresponding Objective-C method.
-func (x *PhysicsBody) SetUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesDefaultMomentOfInertia:"), usesDefaultMomentOfInertia)
 }
 
 // Charge wraps the corresponding Objective-C method.
-func (x *PhysicsBody) Charge() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("charge"))
+func (pb *PhysicsBody) Charge() float64 {
+	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("charge"))
 	return _r
-}
-
-// SetCharge wraps the corresponding Objective-C method.
-func (x *PhysicsBody) SetCharge(charge float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharge:"), charge)
 }
 
 // Friction wraps the corresponding Objective-C method.
-func (x *PhysicsBody) Friction() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("friction"))
+func (pb *PhysicsBody) Friction() float64 {
+	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("friction"))
 	return _r
-}
-
-// SetFriction wraps the corresponding Objective-C method.
-func (x *PhysicsBody) SetFriction(friction float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFriction:"), friction)
 }
 
 // Restitution wraps the corresponding Objective-C method.
-func (x *PhysicsBody) Restitution() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("restitution"))
+func (pb *PhysicsBody) Restitution() float64 {
+	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("restitution"))
 	return _r
-}
-
-// SetRestitution wraps the corresponding Objective-C method.
-func (x *PhysicsBody) SetRestitution(restitution float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestitution:"), restitution)
 }
 
 // RollingFriction wraps the corresponding Objective-C method.
-func (x *PhysicsBody) RollingFriction() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rollingFriction"))
+func (pb *PhysicsBody) RollingFriction() float64 {
+	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("rollingFriction"))
 	return _r
 }
 
-// SetRollingFriction wraps the corresponding Objective-C method.
-func (x *PhysicsBody) SetRollingFriction(rollingFriction float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRollingFriction:"), rollingFriction)
-}
-
 // PhysicsShape wraps the corresponding Objective-C method.
-func (x *PhysicsBody) PhysicsShape() *PhysicsShape {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("physicsShape"))
+func (pb *PhysicsBody) PhysicsShape() *PhysicsShape {
+	_r := objc.Send[objc.ID](objref.IDOf(pb), objc.RegisterName("physicsShape"))
 	return PhysicsShapeFromID(_r)
 }
 
-// SetPhysicsShape wraps the corresponding Objective-C method.
-func (x *PhysicsBody) SetPhysicsShape(physicsShape *PhysicsShape) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsShape:"), objref.IDOf(physicsShape))
-}
-
 // IsResting wraps the corresponding Objective-C method.
-func (x *PhysicsBody) IsResting() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isResting"))
+func (pb *PhysicsBody) IsResting() bool {
+	_r := objc.Send[bool](objref.IDOf(pb), objc.RegisterName("isResting"))
 	return _r
 }
 
 // AllowsResting wraps the corresponding Objective-C method.
-func (x *PhysicsBody) AllowsResting() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsResting"))
+func (pb *PhysicsBody) AllowsResting() bool {
+	_r := objc.Send[bool](objref.IDOf(pb), objc.RegisterName("allowsResting"))
 	return _r
-}
-
-// SetAllowsResting wraps the corresponding Objective-C method.
-func (x *PhysicsBody) SetAllowsResting(allowsResting bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsResting:"), allowsResting)
 }
 
 // Damping wraps the corresponding Objective-C method.
-func (x *PhysicsBody) Damping() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("damping"))
+func (pb *PhysicsBody) Damping() float64 {
+	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("damping"))
 	return _r
-}
-
-// SetDamping wraps the corresponding Objective-C method.
-func (x *PhysicsBody) SetDamping(damping float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDamping:"), damping)
 }
 
 // AngularDamping wraps the corresponding Objective-C method.
-func (x *PhysicsBody) AngularDamping() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("angularDamping"))
+func (pb *PhysicsBody) AngularDamping() float64 {
+	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("angularDamping"))
 	return _r
-}
-
-// SetAngularDamping wraps the corresponding Objective-C method.
-func (x *PhysicsBody) SetAngularDamping(angularDamping float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAngularDamping:"), angularDamping)
 }
 
 // CategoryBitMask wraps the corresponding Objective-C method.
-func (x *PhysicsBody) CategoryBitMask() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("categoryBitMask"))
+func (pb *PhysicsBody) CategoryBitMask() int {
+	_r := objc.Send[int](objref.IDOf(pb), objc.RegisterName("categoryBitMask"))
 	return _r
-}
-
-// SetCategoryBitMask wraps the corresponding Objective-C method.
-func (x *PhysicsBody) SetCategoryBitMask(categoryBitMask int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategoryBitMask:"), categoryBitMask)
 }
 
 // CollisionBitMask wraps the corresponding Objective-C method.
-func (x *PhysicsBody) CollisionBitMask() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("collisionBitMask"))
+func (pb *PhysicsBody) CollisionBitMask() int {
+	_r := objc.Send[int](objref.IDOf(pb), objc.RegisterName("collisionBitMask"))
 	return _r
-}
-
-// SetCollisionBitMask wraps the corresponding Objective-C method.
-func (x *PhysicsBody) SetCollisionBitMask(collisionBitMask int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollisionBitMask:"), collisionBitMask)
 }
 
 // ContactTestBitMask wraps the corresponding Objective-C method.
-func (x *PhysicsBody) ContactTestBitMask() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("contactTestBitMask"))
+func (pb *PhysicsBody) ContactTestBitMask() int {
+	_r := objc.Send[int](objref.IDOf(pb), objc.RegisterName("contactTestBitMask"))
 	return _r
-}
-
-// SetContactTestBitMask wraps the corresponding Objective-C method.
-func (x *PhysicsBody) SetContactTestBitMask(contactTestBitMask int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactTestBitMask:"), contactTestBitMask)
 }
 
 // IsAffectedByGravity wraps the corresponding Objective-C method.
-func (x *PhysicsBody) IsAffectedByGravity() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAffectedByGravity"))
+func (pb *PhysicsBody) IsAffectedByGravity() bool {
+	_r := objc.Send[bool](objref.IDOf(pb), objc.RegisterName("isAffectedByGravity"))
 	return _r
-}
-
-// SetAffectedByGravity wraps the corresponding Objective-C method.
-func (x *PhysicsBody) SetAffectedByGravity(affectedByGravity bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedByGravity:"), affectedByGravity)
 }
 
 // ContinuousCollisionDetectionThreshold wraps the corresponding Objective-C method.
-func (x *PhysicsBody) ContinuousCollisionDetectionThreshold() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("continuousCollisionDetectionThreshold"))
+func (pb *PhysicsBody) ContinuousCollisionDetectionThreshold() float64 {
+	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("continuousCollisionDetectionThreshold"))
 	return _r
-}
-
-// SetContinuousCollisionDetectionThreshold wraps the corresponding Objective-C method.
-func (x *PhysicsBody) SetContinuousCollisionDetectionThreshold(continuousCollisionDetectionThreshold float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuousCollisionDetectionThreshold:"), continuousCollisionDetectionThreshold)
 }
 
 // LinearRestingThreshold wraps the corresponding Objective-C method.
-func (x *PhysicsBody) LinearRestingThreshold() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("linearRestingThreshold"))
+func (pb *PhysicsBody) LinearRestingThreshold() float64 {
+	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("linearRestingThreshold"))
 	return _r
-}
-
-// SetLinearRestingThreshold wraps the corresponding Objective-C method.
-func (x *PhysicsBody) SetLinearRestingThreshold(linearRestingThreshold float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLinearRestingThreshold:"), linearRestingThreshold)
 }
 
 // AngularRestingThreshold wraps the corresponding Objective-C method.
-func (x *PhysicsBody) AngularRestingThreshold() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("angularRestingThreshold"))
+func (pb *PhysicsBody) AngularRestingThreshold() float64 {
+	_r := objc.Send[float64](objref.IDOf(pb), objc.RegisterName("angularRestingThreshold"))
 	return _r
 }
-
-// SetAngularRestingThreshold wraps the corresponding Objective-C method.
-func (x *PhysicsBody) SetAngularRestingThreshold(angularRestingThreshold float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAngularRestingThreshold:"), angularRestingThreshold)
-}
-
-// PhysicsBodyable is the interface implemented by [PhysicsBody], for mocking and DI.
-type PhysicsBodyable interface {
-	obj.Object
-	WithType(type_ PhysicsBodyType) *PhysicsBody
-	WithMass(mass float64) *PhysicsBody
-	WithUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia bool) *PhysicsBody
-	WithCharge(charge float64) *PhysicsBody
-	WithFriction(friction float64) *PhysicsBody
-	WithRestitution(restitution float64) *PhysicsBody
-	WithRollingFriction(rollingFriction float64) *PhysicsBody
-	WithPhysicsShape(physicsShape *PhysicsShape) *PhysicsBody
-	WithAllowsResting(allowsResting bool) *PhysicsBody
-	WithDamping(damping float64) *PhysicsBody
-	WithAngularDamping(angularDamping float64) *PhysicsBody
-	WithCategoryBitMask(categoryBitMask int) *PhysicsBody
-	WithCollisionBitMask(collisionBitMask int) *PhysicsBody
-	WithContactTestBitMask(contactTestBitMask int) *PhysicsBody
-	WithAffectedByGravity(affectedByGravity bool) *PhysicsBody
-	WithContinuousCollisionDetectionThreshold(continuousCollisionDetectionThreshold float64) *PhysicsBody
-	WithLinearRestingThreshold(linearRestingThreshold float64) *PhysicsBody
-	WithAngularRestingThreshold(angularRestingThreshold float64) *PhysicsBody
-	ClearAllForces()
-	ResetTransform()
-	SetResting(resting bool)
-	Type() PhysicsBodyType
-	SetType(type_ PhysicsBodyType)
-	Mass() float64
-	SetMass(mass float64)
-	UsesDefaultMomentOfInertia() bool
-	SetUsesDefaultMomentOfInertia(usesDefaultMomentOfInertia bool)
-	Charge() float64
-	SetCharge(charge float64)
-	Friction() float64
-	SetFriction(friction float64)
-	Restitution() float64
-	SetRestitution(restitution float64)
-	RollingFriction() float64
-	SetRollingFriction(rollingFriction float64)
-	PhysicsShape() *PhysicsShape
-	SetPhysicsShape(physicsShape *PhysicsShape)
-	IsResting() bool
-	AllowsResting() bool
-	SetAllowsResting(allowsResting bool)
-	Damping() float64
-	SetDamping(damping float64)
-	AngularDamping() float64
-	SetAngularDamping(angularDamping float64)
-	CategoryBitMask() int
-	SetCategoryBitMask(categoryBitMask int)
-	CollisionBitMask() int
-	SetCollisionBitMask(collisionBitMask int)
-	ContactTestBitMask() int
-	SetContactTestBitMask(contactTestBitMask int)
-	IsAffectedByGravity() bool
-	SetAffectedByGravity(affectedByGravity bool)
-	ContinuousCollisionDetectionThreshold() float64
-	SetContinuousCollisionDetectionThreshold(continuousCollisionDetectionThreshold float64)
-	LinearRestingThreshold() float64
-	SetLinearRestingThreshold(linearRestingThreshold float64)
-	AngularRestingThreshold() float64
-	SetAngularRestingThreshold(angularRestingThreshold float64)
-}
-
-var _ PhysicsBodyable = (*PhysicsBody)(nil)

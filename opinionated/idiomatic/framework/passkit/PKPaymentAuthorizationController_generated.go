@@ -6,6 +6,7 @@ package passkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func paymentAuthorizationControllerAdopt(id objc.ID) *PaymentAuthorizationContro
 }
 
 // Description returns the object's -description text.
-func (x *PaymentAuthorizationController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pac *PaymentAuthorizationController) Description() string {
+	return rt.Description(objref.IDOf(pac))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PaymentAuthorizationController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pac *PaymentAuthorizationController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pac), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PaymentAuthorizationController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pac *PaymentAuthorizationController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pac), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PaymentAuthorizationController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pac *PaymentAuthorizationController) String() string {
+	return rt.Description(objref.IDOf(pac))
 }
 
 // NewPaymentAuthorizationControllerWithPaymentRequest initializes and returns a payment authorization controller.
@@ -82,19 +83,19 @@ func NewPaymentAuthorizationControllerWithDisbursementRequest(request *Disbursem
 }
 
 // PresentWithCompletion presents the payment sheet modally over your app.
-func (x *PaymentAuthorizationController) PresentWithCompletion(completion func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
+func (pac *PaymentAuthorizationController) PresentWithCompletion(completion func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(pac), objc.RegisterName("presentWithCompletion:"), objc.NewBlock(func(_ objc.Block, _b0 bool) { completion(_b0) }))
 }
 
 // DismissWithCompletion dismisses the payment sheet.
 //
 // DismissWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *PaymentAuthorizationController) DismissWithCompletion(ctx context.Context) error {
+func (pac *PaymentAuthorizationController) DismissWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dismissWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(pac), objc.RegisterName("dismissWithCompletion:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -102,12 +103,3 @@ func (x *PaymentAuthorizationController) DismissWithCompletion(ctx context.Conte
 		return ctx.Err()
 	}
 }
-
-// PaymentAuthorizationControllerable is the interface implemented by [PaymentAuthorizationController], for mocking and DI.
-type PaymentAuthorizationControllerable interface {
-	obj.Object
-	PresentWithCompletion(completion func(bool))
-	DismissWithCompletion(ctx context.Context) error
-}
-
-var _ PaymentAuthorizationControllerable = (*PaymentAuthorizationController)(nil)

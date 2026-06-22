@@ -48,52 +48,52 @@ func webScriptObjectAdopt(id objc.ID) *WebScriptObject {
 }
 
 // Description returns the object's -description text.
-func (x *WebScriptObject) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wso *WebScriptObject) Description() string {
+	return rt.Description(objref.IDOf(wso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WebScriptObject) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wso *WebScriptObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WebScriptObject) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wso *WebScriptObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WebScriptObject) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wso *WebScriptObject) String() string {
+	return rt.Description(objref.IDOf(wso))
 }
 
 // JSObject returns the JavaScript object corresponding to the receiver.
-func (x *WebScriptObject) JSObject() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSObject"))
+func (wso *WebScriptObject) JSObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("JSObject"))
 	return obj.Wrap(_r)
 }
 
 // CallWebScriptMethodWithArguments returns the result of executing a method in the scripting environment.
-func (x *WebScriptObject) CallWebScriptMethodWithArguments(name string, arguments obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callWebScriptMethod:withArguments:"), purego.NSString(name), objref.IDOf(arguments))
+func (wso *WebScriptObject) CallWebScriptMethodWithArguments(name string, arguments obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("callWebScriptMethod:withArguments:"), purego.NSString(name), objref.IDOf(arguments))
 	return obj.Wrap(_r)
 }
 
 // EvaluateWebScript returns the result of evaluating a script in the scripting environment.
-func (x *WebScriptObject) EvaluateWebScript(script string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("evaluateWebScript:"), purego.NSString(script))
+func (wso *WebScriptObject) EvaluateWebScript(script string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("evaluateWebScript:"), purego.NSString(script))
 	return obj.Wrap(_r)
 }
 
 // RemoveWebScriptKey removes a property from a scripting environment.
-func (x *WebScriptObject) RemoveWebScriptKey(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeWebScriptKey:"), purego.NSString(name))
+func (wso *WebScriptObject) RemoveWebScriptKey(name string) {
+	objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("removeWebScriptKey:"), purego.NSString(name))
 }
 
 // StringRepresentation returns a string representation of the receiver.
-func (x *WebScriptObject) StringRepresentation() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringRepresentation"))
+func (wso *WebScriptObject) StringRepresentation() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("stringRepresentation"))
 	if _r == 0 {
 		return ""
 	}
@@ -101,46 +101,30 @@ func (x *WebScriptObject) StringRepresentation() string {
 }
 
 // WebScriptValueAtIndex returns the value of a property at the specified index.
-func (x *WebScriptObject) WebScriptValueAtIndex(index int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webScriptValueAtIndex:"), index)
+func (wso *WebScriptObject) WebScriptValueAtIndex(index int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("webScriptValueAtIndex:"), index)
 	return obj.Wrap(_r)
 }
 
 // SetWebScriptValueAtIndexValue sets the value of a property at the specified index.
-func (x *WebScriptObject) SetWebScriptValueAtIndexValue(index int, value obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWebScriptValueAtIndex:value:"), index, objref.IDOf(value))
+func (wso *WebScriptObject) SetWebScriptValueAtIndexValue(index int, value obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("setWebScriptValueAtIndex:value:"), index, objref.IDOf(value))
 }
 
 // SetException raises a scripting environment exception in the context of the current object.
-func (x *WebScriptObject) SetException(description string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setException:"), purego.NSString(description))
+func (wso *WebScriptObject) SetException(description string) {
+	objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("setException:"), purego.NSString(description))
 }
 
-// JSValue use this method to bridge between the WebScriptObject and JavaScriptCore Objective-C APIs.
-func (x *WebScriptObject) JSValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSValue"))
+// JSValue returns use this method to bridge between the WebScriptObject and JavaScriptCore Objective-C APIs.
+func (wso *WebScriptObject) JSValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wso), objc.RegisterName("JSValue"))
 	return obj.Wrap(_r)
 }
-
-// WebScriptObjectable is the interface implemented by [WebScriptObject], for mocking and DI.
-type WebScriptObjectable interface {
-	obj.Object
-	JSObject() obj.Object
-	CallWebScriptMethodWithArguments(name string, arguments obj.Object) obj.Object
-	EvaluateWebScript(script string) obj.Object
-	RemoveWebScriptKey(name string)
-	StringRepresentation() string
-	WebScriptValueAtIndex(index int) obj.Object
-	SetWebScriptValueAtIndexValue(index int, value obj.Object)
-	SetException(description string)
-	JSValue() obj.Object
-}
-
-var _ WebScriptObjectable = (*WebScriptObject)(nil)
 
 // isWebScriptObject marks WebScriptObject — and, by embedding promotion, its
 // subclasses — as a member of the WebScriptObject hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *WebScriptObject) isWebScriptObject() {}
+func (wso *WebScriptObject) isWebScriptObject() {}
 
 var _ WebScriptObjectProvider = (*WebScriptObject)(nil)

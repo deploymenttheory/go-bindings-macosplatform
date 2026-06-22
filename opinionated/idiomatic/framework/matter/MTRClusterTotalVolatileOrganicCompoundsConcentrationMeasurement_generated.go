@@ -52,123 +52,100 @@ func NewMTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementWithDevic
 }
 
 // ReadAttributeMeasuredValueWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMeasuredValueWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasuredValueWithParams:"), objref.IDOf(params))
+func (mctvoccm *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mctvoccm), objc.RegisterName("readAttributeMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeMinMeasuredValueWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinMeasuredValueWithParams:"), objref.IDOf(params))
+func (mctvoccm *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mctvoccm), objc.RegisterName("readAttributeMinMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeMaxMeasuredValueWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxMeasuredValueWithParams:"), objref.IDOf(params))
+func (mctvoccm *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mctvoccm), objc.RegisterName("readAttributeMaxMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributePeakMeasuredValueWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributePeakMeasuredValueWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePeakMeasuredValueWithParams:"), objref.IDOf(params))
+func (mctvoccm *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributePeakMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mctvoccm), objc.RegisterName("readAttributePeakMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributePeakMeasuredValueWindowWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributePeakMeasuredValueWindowWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePeakMeasuredValueWindowWithParams:"), objref.IDOf(params))
+func (mctvoccm *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributePeakMeasuredValueWindowWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mctvoccm), objc.RegisterName("readAttributePeakMeasuredValueWindowWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAverageMeasuredValueWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeAverageMeasuredValueWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageMeasuredValueWithParams:"), objref.IDOf(params))
+func (mctvoccm *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeAverageMeasuredValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mctvoccm), objc.RegisterName("readAttributeAverageMeasuredValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAverageMeasuredValueWindowWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeAverageMeasuredValueWindowWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAverageMeasuredValueWindowWithParams:"), objref.IDOf(params))
+func (mctvoccm *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeAverageMeasuredValueWindowWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mctvoccm), objc.RegisterName("readAttributeAverageMeasuredValueWindowWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeUncertaintyWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeUncertaintyWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUncertaintyWithParams:"), objref.IDOf(params))
+func (mctvoccm *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeUncertaintyWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mctvoccm), objc.RegisterName("readAttributeUncertaintyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeMeasurementUnitWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMeasurementUnitWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasurementUnitWithParams:"), objref.IDOf(params))
+func (mctvoccm *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMeasurementUnitWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mctvoccm), objc.RegisterName("readAttributeMeasurementUnitWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeMeasurementMediumWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMeasurementMediumWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeasurementMediumWithParams:"), objref.IDOf(params))
+func (mctvoccm *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeMeasurementMediumWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mctvoccm), objc.RegisterName("readAttributeMeasurementMediumWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeLevelValueWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeLevelValueWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLevelValueWithParams:"), objref.IDOf(params))
+func (mctvoccm *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeLevelValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mctvoccm), objc.RegisterName("readAttributeLevelValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mctvoccm *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mctvoccm), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mctvoccm *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mctvoccm), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mctvoccm *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mctvoccm), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mctvoccm *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mctvoccm), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mctvoccm *MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mctvoccm), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
-
-// MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementable is the interface implemented by [MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement], for mocking and DI.
-type MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementable interface {
-	obj.Object
-	ReadAttributeMeasuredValueWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeMinMeasuredValueWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeMaxMeasuredValueWithParams(params *MTRReadParams) obj.Object
-	ReadAttributePeakMeasuredValueWithParams(params *MTRReadParams) obj.Object
-	ReadAttributePeakMeasuredValueWindowWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAverageMeasuredValueWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAverageMeasuredValueWindowWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeUncertaintyWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeMeasurementUnitWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeMeasurementMediumWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeLevelValueWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-}
-
-var _ MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurementable = (*MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterTotalVolatileOrganicCompoundsConcentrationMeasurement)(nil)
 

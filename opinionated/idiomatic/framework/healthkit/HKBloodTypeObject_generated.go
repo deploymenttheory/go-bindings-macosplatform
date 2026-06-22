@@ -46,24 +46,24 @@ func bloodTypeObjectAdopt(id objc.ID) *BloodTypeObject {
 }
 
 // Description returns the object's -description text.
-func (x *BloodTypeObject) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bto *BloodTypeObject) Description() string {
+	return rt.Description(objref.IDOf(bto))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BloodTypeObject) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bto *BloodTypeObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bto), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BloodTypeObject) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bto *BloodTypeObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bto), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BloodTypeObject) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bto *BloodTypeObject) String() string {
+	return rt.Description(objref.IDOf(bto))
 }
 
 // NewBloodTypeObject creates a new BloodTypeObject.
@@ -73,15 +73,7 @@ func NewBloodTypeObject() *BloodTypeObject {
 }
 
 // BloodType wraps the corresponding Objective-C method.
-func (x *BloodTypeObject) BloodType() BloodType {
-	_r := objc.Send[BloodType](objref.IDOf(x), objc.RegisterName("bloodType"))
+func (bto *BloodTypeObject) BloodType() BloodType {
+	_r := objc.Send[BloodType](objref.IDOf(bto), objc.RegisterName("bloodType"))
 	return _r
 }
-
-// BloodTypeObjectable is the interface implemented by [BloodTypeObject], for mocking and DI.
-type BloodTypeObjectable interface {
-	obj.Object
-	BloodType() BloodType
-}
-
-var _ BloodTypeObjectable = (*BloodTypeObject)(nil)

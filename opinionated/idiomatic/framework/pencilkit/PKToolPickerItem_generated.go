@@ -48,53 +48,44 @@ func toolPickerItemAdopt(id objc.ID) *ToolPickerItem {
 }
 
 // Description returns the object's -description text.
-func (x *ToolPickerItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tpi *ToolPickerItem) Description() string {
+	return rt.Description(objref.IDOf(tpi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ToolPickerItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tpi *ToolPickerItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tpi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ToolPickerItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tpi *ToolPickerItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tpi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ToolPickerItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tpi *ToolPickerItem) String() string {
+	return rt.Description(objref.IDOf(tpi))
 }
 
-// Identifier a string that identifies the item in the picker. For example, com.example.myapp.toolpicker.pencil. If multiple items with the same identifier are used to create the picker, only the first instance is used.
-func (x *ToolPickerItem) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns a string that identifies the item in the picker. For example, com.example.myapp.toolpicker.pencil. If multiple items with the same identifier are used to create the picker, only the first instance is used.
+func (tpi *ToolPickerItem) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tpi), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Tool the `PKTool` this tool picker item represents.
-func (x *ToolPickerItem) Tool() *Tool {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tool"))
+// Tool returns the `PKTool` this tool picker item represents.
+func (tpi *ToolPickerItem) Tool() *Tool {
+	_r := objc.Send[objc.ID](objref.IDOf(tpi), objc.RegisterName("tool"))
 	return ToolFromID(_r)
 }
-
-// ToolPickerItemable is the interface implemented by [ToolPickerItem], for mocking and DI.
-type ToolPickerItemable interface {
-	obj.Object
-	Identifier() string
-	Tool() *Tool
-}
-
-var _ ToolPickerItemable = (*ToolPickerItem)(nil)
 
 // isToolPickerItem marks ToolPickerItem — and, by embedding promotion, its
 // subclasses — as a member of the ToolPickerItem hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ToolPickerItem) isToolPickerItem() {}
+func (tpi *ToolPickerItem) isToolPickerItem() {}
 
 var _ ToolPickerItemProvider = (*ToolPickerItem)(nil)

@@ -46,24 +46,24 @@ func highlightMembershipEventAdopt(id objc.ID) *HighlightMembershipEvent {
 }
 
 // Description returns the object's -description text.
-func (x *HighlightMembershipEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hme *HighlightMembershipEvent) Description() string {
+	return rt.Description(objref.IDOf(hme))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HighlightMembershipEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hme *HighlightMembershipEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hme), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HighlightMembershipEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hme *HighlightMembershipEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hme), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HighlightMembershipEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hme *HighlightMembershipEvent) String() string {
+	return rt.Description(objref.IDOf(hme))
 }
 
 // NewHighlightMembershipEventWithHighlightTrigger creates and initializes a membership event.
@@ -73,16 +73,8 @@ func NewHighlightMembershipEventWithHighlightTrigger(highlight *Highlight, trigg
 	return highlightMembershipEventAdopt(_id)
 }
 
-// MembershipEventTrigger the type of membership event for the highlight.
-func (x *HighlightMembershipEvent) MembershipEventTrigger() HighlightMembershipEventTrigger {
-	_r := objc.Send[HighlightMembershipEventTrigger](objref.IDOf(x), objc.RegisterName("membershipEventTrigger"))
+// MembershipEventTrigger returns the type of membership event for the highlight.
+func (hme *HighlightMembershipEvent) MembershipEventTrigger() HighlightMembershipEventTrigger {
+	_r := objc.Send[HighlightMembershipEventTrigger](objref.IDOf(hme), objc.RegisterName("membershipEventTrigger"))
 	return _r
 }
-
-// HighlightMembershipEventable is the interface implemented by [HighlightMembershipEvent], for mocking and DI.
-type HighlightMembershipEventable interface {
-	obj.Object
-	MembershipEventTrigger() HighlightMembershipEventTrigger
-}
-
-var _ HighlightMembershipEventable = (*HighlightMembershipEvent)(nil)

@@ -44,24 +44,24 @@ func rNNRecurrentImageStateAdopt(id objc.ID) *RNNRecurrentImageState {
 }
 
 // Description returns the object's -description text.
-func (x *RNNRecurrentImageState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rris *RNNRecurrentImageState) Description() string {
+	return rt.Description(objref.IDOf(rris))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RNNRecurrentImageState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rris *RNNRecurrentImageState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rris), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RNNRecurrentImageState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rris *RNNRecurrentImageState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rris), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RNNRecurrentImageState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rris *RNNRecurrentImageState) String() string {
+	return rt.Description(objref.IDOf(rris))
 }
 
 // NewRNNRecurrentImageState creates a new RNNRecurrentImageState.
@@ -71,22 +71,13 @@ func NewRNNRecurrentImageState() *RNNRecurrentImageState {
 }
 
 // GetRecurrentOutputImageForLayerIndex access the stored recurrent image data.
-func (x *RNNRecurrentImageState) GetRecurrentOutputImageForLayerIndex(layerIndex int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getRecurrentOutputImageForLayerIndex:"), layerIndex)
+func (rris *RNNRecurrentImageState) GetRecurrentOutputImageForLayerIndex(layerIndex int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rris), objc.RegisterName("getRecurrentOutputImageForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)
 }
 
 // GetMemoryCellImageForLayerIndex access the stored memory cell image data (if present).
-func (x *RNNRecurrentImageState) GetMemoryCellImageForLayerIndex(layerIndex int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getMemoryCellImageForLayerIndex:"), layerIndex)
+func (rris *RNNRecurrentImageState) GetMemoryCellImageForLayerIndex(layerIndex int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rris), objc.RegisterName("getMemoryCellImageForLayerIndex:"), layerIndex)
 	return obj.Wrap(_r)
 }
-
-// RNNRecurrentImageStateable is the interface implemented by [RNNRecurrentImageState], for mocking and DI.
-type RNNRecurrentImageStateable interface {
-	obj.Object
-	GetRecurrentOutputImageForLayerIndex(layerIndex int) obj.Object
-	GetMemoryCellImageForLayerIndex(layerIndex int) obj.Object
-}
-
-var _ RNNRecurrentImageStateable = (*RNNRecurrentImageState)(nil)

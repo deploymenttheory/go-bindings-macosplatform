@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,40 +51,29 @@ func NewCNNDropoutGradientNodeWithSourceGradientSourceImageGradientStateKeepProb
 	return cNNDropoutGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNDropoutGradientNode) WithLabel(label string) *CNNDropoutGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cdgn *CNNDropoutGradientNode) WithLabel(label string) *CNNDropoutGradientNode {
+	objc.Send[objc.ID](objref.IDOf(cdgn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cdgn
 }
 
 // KeepProbability wraps the corresponding Objective-C method.
-func (x *CNNDropoutGradientNode) KeepProbability() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("keepProbability"))
+func (cdgn *CNNDropoutGradientNode) KeepProbability() float32 {
+	_r := objc.Send[float32](objref.IDOf(cdgn), objc.RegisterName("keepProbability"))
 	return _r
 }
 
 // Seed wraps the corresponding Objective-C method.
-func (x *CNNDropoutGradientNode) Seed() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("seed"))
+func (cdgn *CNNDropoutGradientNode) Seed() int {
+	_r := objc.Send[int](objref.IDOf(cdgn), objc.RegisterName("seed"))
 	return _r
 }
 
 // MaskStrideInPixels wraps the corresponding Objective-C method.
-func (x *CNNDropoutGradientNode) MaskStrideInPixels() metal.MTLSize {
-	_r := objc.Send[metal.MTLSize](objref.IDOf(x), objc.RegisterName("maskStrideInPixels"))
+func (cdgn *CNNDropoutGradientNode) MaskStrideInPixels() metal.MTLSize {
+	_r := objc.Send[metal.MTLSize](objref.IDOf(cdgn), objc.RegisterName("maskStrideInPixels"))
 	return _r
 }
-
-// CNNDropoutGradientNodeable is the interface implemented by [CNNDropoutGradientNode], for mocking and DI.
-type CNNDropoutGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNDropoutGradientNode
-	KeepProbability() float32
-	Seed() int
-	MaskStrideInPixels() metal.MTLSize
-}
-
-var _ CNNDropoutGradientNodeable = (*CNNDropoutGradientNode)(nil)
 
 var _ NNGradientFilterNodeProvider = (*CNNDropoutGradientNode)(nil)
 

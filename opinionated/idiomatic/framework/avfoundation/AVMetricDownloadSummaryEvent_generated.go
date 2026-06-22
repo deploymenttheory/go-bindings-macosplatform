@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,54 +52,41 @@ func NewMetricDownloadSummaryEvent() *MetricDownloadSummaryEvent {
 }
 
 // ErrorEvent returns the error event if any. If no value is available, returns nil.
-func (x *MetricDownloadSummaryEvent) ErrorEvent() *MetricErrorEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorEvent"))
+func (mdse *MetricDownloadSummaryEvent) ErrorEvent() *MetricErrorEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(mdse), objc.RegisterName("errorEvent"))
 	return MetricErrorEventFromID(_r)
 }
 
 // RecoverableErrorCount returns the total count of recoverable errors encountered during the download. If no errors were encountered, returns 0. Error counts may not be consistent across OS versions. Comparisons should be made within a given OS version, as error reporting is subject to change with OS updates.
-func (x *MetricDownloadSummaryEvent) RecoverableErrorCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("recoverableErrorCount"))
+func (mdse *MetricDownloadSummaryEvent) RecoverableErrorCount() int {
+	_r := objc.Send[int](objref.IDOf(mdse), objc.RegisterName("recoverableErrorCount"))
 	return _r
 }
 
 // MediaResourceRequestCount returns the total number of media requests performed by the download task. This includes playlist requests, media segment requests, and content key requests.
-func (x *MetricDownloadSummaryEvent) MediaResourceRequestCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mediaResourceRequestCount"))
+func (mdse *MetricDownloadSummaryEvent) MediaResourceRequestCount() int {
+	_r := objc.Send[int](objref.IDOf(mdse), objc.RegisterName("mediaResourceRequestCount"))
 	return _r
 }
 
 // BytesDownloadedCount returns the total number of bytes downloaded by the download task.
-func (x *MetricDownloadSummaryEvent) BytesDownloadedCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesDownloadedCount"))
+func (mdse *MetricDownloadSummaryEvent) BytesDownloadedCount() int {
+	_r := objc.Send[int](objref.IDOf(mdse), objc.RegisterName("bytesDownloadedCount"))
 	return _r
 }
 
 // DownloadDuration returns the total duration of the download in seconds.
-func (x *MetricDownloadSummaryEvent) DownloadDuration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("downloadDuration"))
+func (mdse *MetricDownloadSummaryEvent) DownloadDuration() float64 {
+	_r := objc.Send[float64](objref.IDOf(mdse), objc.RegisterName("downloadDuration"))
 	return _r
 }
 
 // Variants returns the variants that were downloaded.
 //
 // Variants returns the collection as a Go slice.
-func (x *MetricDownloadSummaryEvent) Variants() []*AssetVariant {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variants"))
+func (mdse *MetricDownloadSummaryEvent) Variants() []*AssetVariant {
+	_arr := objc.Send[objc.ID](objref.IDOf(mdse), objc.RegisterName("variants"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetVariant { return AssetVariantFromID(_id) })
 }
-
-// MetricDownloadSummaryEventable is the interface implemented by [MetricDownloadSummaryEvent], for mocking and DI.
-type MetricDownloadSummaryEventable interface {
-	obj.Object
-	ErrorEvent() *MetricErrorEvent
-	RecoverableErrorCount() int
-	MediaResourceRequestCount() int
-	BytesDownloadedCount() int
-	DownloadDuration() float64
-	Variants() []*AssetVariant
-}
-
-var _ MetricDownloadSummaryEventable = (*MetricDownloadSummaryEvent)(nil)
 
 var _ MetricEventProvider = (*MetricDownloadSummaryEvent)(nil)

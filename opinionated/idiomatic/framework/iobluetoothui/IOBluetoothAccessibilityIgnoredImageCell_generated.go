@@ -44,24 +44,24 @@ func bluetoothAccessibilityIgnoredImageCellAdopt(id objc.ID) *BluetoothAccessibi
 }
 
 // Description returns the object's -description text.
-func (x *BluetoothAccessibilityIgnoredImageCell) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (baiic *BluetoothAccessibilityIgnoredImageCell) Description() string {
+	return rt.Description(objref.IDOf(baiic))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BluetoothAccessibilityIgnoredImageCell) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (baiic *BluetoothAccessibilityIgnoredImageCell) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(baiic), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BluetoothAccessibilityIgnoredImageCell) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (baiic *BluetoothAccessibilityIgnoredImageCell) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(baiic), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BluetoothAccessibilityIgnoredImageCell) String() string {
-	return rt.Description(objref.IDOf(x))
+func (baiic *BluetoothAccessibilityIgnoredImageCell) String() string {
+	return rt.Description(objref.IDOf(baiic))
 }
 
 // NewBluetoothAccessibilityIgnoredImageCell creates a new BluetoothAccessibilityIgnoredImageCell.
@@ -69,10 +69,3 @@ func NewBluetoothAccessibilityIgnoredImageCell() *BluetoothAccessibilityIgnoredI
 	_id := objc.Send[objc.ID](objc.ID(_class("IOBluetoothAccessibilityIgnoredImageCell")), objc.RegisterName("new"))
 	return bluetoothAccessibilityIgnoredImageCellAdopt(_id)
 }
-
-// BluetoothAccessibilityIgnoredImageCellable is the interface implemented by [BluetoothAccessibilityIgnoredImageCell], for mocking and DI.
-type BluetoothAccessibilityIgnoredImageCellable interface {
-	obj.Object
-}
-
-var _ BluetoothAccessibilityIgnoredImageCellable = (*BluetoothAccessibilityIgnoredImageCell)(nil)

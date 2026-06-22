@@ -48,36 +48,29 @@ func directivityModelParametersAdopt(id objc.ID) *DirectivityModelParameters {
 }
 
 // Description returns the object's -description text.
-func (x *DirectivityModelParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dmp *DirectivityModelParameters) Description() string {
+	return rt.Description(objref.IDOf(dmp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DirectivityModelParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dmp *DirectivityModelParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dmp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DirectivityModelParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dmp *DirectivityModelParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dmp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DirectivityModelParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dmp *DirectivityModelParameters) String() string {
+	return rt.Description(objref.IDOf(dmp))
 }
-
-// DirectivityModelParametersable is the interface implemented by [DirectivityModelParameters], for mocking and DI.
-type DirectivityModelParametersable interface {
-	obj.Object
-}
-
-var _ DirectivityModelParametersable = (*DirectivityModelParameters)(nil)
 
 // isDirectivityModelParameters marks DirectivityModelParameters — and, by embedding promotion, its
 // subclasses — as a member of the DirectivityModelParameters hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DirectivityModelParameters) isDirectivityModelParameters() {}
+func (dmp *DirectivityModelParameters) isDirectivityModelParameters() {}
 
 var _ DirectivityModelParametersProvider = (*DirectivityModelParameters)(nil)

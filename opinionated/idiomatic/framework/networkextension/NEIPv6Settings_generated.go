@@ -46,24 +46,24 @@ func nEIPv6SettingsAdopt(id objc.ID) *NEIPv6Settings {
 }
 
 // Description returns the object's -description text.
-func (x *NEIPv6Settings) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nps *NEIPv6Settings) Description() string {
+	return rt.Description(objref.IDOf(nps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEIPv6Settings) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nps *NEIPv6Settings) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEIPv6Settings) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nps *NEIPv6Settings) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEIPv6Settings) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nps *NEIPv6Settings) String() string {
+	return rt.Description(objref.IDOf(nps))
 }
 
 // NewNEIPv6SettingsWithAddressesNetworkPrefixLengths initializes the IPv6 settings object.
@@ -73,73 +73,48 @@ func NewNEIPv6SettingsWithAddressesNetworkPrefixLengths(addresses []string, netw
 	return nEIPv6SettingsAdopt(_id)
 }
 
-// WithIncludedRoutes the IPv6 network traffic that the system routes to the TUN interface.
-func (x *NEIPv6Settings) WithIncludedRoutes(items ...*NEIPv6Route) *NEIPv6Settings {
+// WithIncludedRoutes sets the IPv6 network traffic that the system routes to the TUN interface.
+func (nps *NEIPv6Settings) WithIncludedRoutes(items ...*NEIPv6Route) *NEIPv6Settings {
 	_arr := purego.SliceToNSArray(items, func(_v *NEIPv6Route) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludedRoutes:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("setIncludedRoutes:"), _arr)
+	return nps
 }
 
-// WithExcludedRoutes the IPv6 network traffic that the system routes to the primary physical interface, not the TUN interface.
-func (x *NEIPv6Settings) WithExcludedRoutes(items ...*NEIPv6Route) *NEIPv6Settings {
+// WithExcludedRoutes sets the IPv6 network traffic that the system routes to the primary physical interface, not the TUN interface.
+func (nps *NEIPv6Settings) WithExcludedRoutes(items ...*NEIPv6Route) *NEIPv6Settings {
 	_arr := purego.SliceToNSArray(items, func(_v *NEIPv6Route) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedRoutes:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("setExcludedRoutes:"), _arr)
+	return nps
 }
 
-// Addresses an array of IPv6 addresses represented strings. These addresses will be set on the virtual interface used by the VPN tunnel.
+// Addresses returns an array of IPv6 addresses represented strings. These addresses will be set on the virtual interface used by the VPN tunnel.
 //
 // Addresses returns the collection as a Go slice.
-func (x *NEIPv6Settings) Addresses() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addresses"))
+func (nps *NEIPv6Settings) Addresses() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("addresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// NetworkPrefixLengths an array of NSNumber objects each representing the length in bits of the network prefix of the corresponding address in the addresses property.
+// NetworkPrefixLengths returns an array of NSNumber objects each representing the length in bits of the network prefix of the corresponding address in the addresses property.
 //
 // NetworkPrefixLengths returns the collection as a Go slice.
-func (x *NEIPv6Settings) NetworkPrefixLengths() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkPrefixLengths"))
+func (nps *NEIPv6Settings) NetworkPrefixLengths() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("networkPrefixLengths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// IncludedRoutes an array of NEIPv6Route objects. Traffic matching these routes will be routed through the virtual interface used by the VPN tunnel.
+// IncludedRoutes returns an array of NEIPv6Route objects. Traffic matching these routes will be routed through the virtual interface used by the VPN tunnel.
 //
 // IncludedRoutes returns the collection as a Go slice.
-func (x *NEIPv6Settings) IncludedRoutes() []*NEIPv6Route {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("includedRoutes"))
+func (nps *NEIPv6Settings) IncludedRoutes() []*NEIPv6Route {
+	_arr := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("includedRoutes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEIPv6Route { return NEIPv6RouteFromID(_id) })
 }
 
-// SetIncludedRoutes wraps the corresponding Objective-C method.
-func (x *NEIPv6Settings) SetIncludedRoutes(includedRoutes []*NEIPv6Route) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludedRoutes:"), purego.SliceToNSArray(includedRoutes, func(_v *NEIPv6Route) objc.ID { return objref.IDOf(_v) }))
-}
-
-// ExcludedRoutes an array of NEIPv6Route objects. Traffic matching these routes will be routed through the current primary physical interface of the device.
+// ExcludedRoutes returns an array of NEIPv6Route objects. Traffic matching these routes will be routed through the current primary physical interface of the device.
 //
 // ExcludedRoutes returns the collection as a Go slice.
-func (x *NEIPv6Settings) ExcludedRoutes() []*NEIPv6Route {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("excludedRoutes"))
+func (nps *NEIPv6Settings) ExcludedRoutes() []*NEIPv6Route {
+	_arr := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("excludedRoutes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NEIPv6Route { return NEIPv6RouteFromID(_id) })
 }
-
-// SetExcludedRoutes wraps the corresponding Objective-C method.
-func (x *NEIPv6Settings) SetExcludedRoutes(excludedRoutes []*NEIPv6Route) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedRoutes:"), purego.SliceToNSArray(excludedRoutes, func(_v *NEIPv6Route) objc.ID { return objref.IDOf(_v) }))
-}
-
-// NEIPv6Settingsable is the interface implemented by [NEIPv6Settings], for mocking and DI.
-type NEIPv6Settingsable interface {
-	obj.Object
-	WithIncludedRoutes(items ...*NEIPv6Route) *NEIPv6Settings
-	WithExcludedRoutes(items ...*NEIPv6Route) *NEIPv6Settings
-	Addresses() []string
-	NetworkPrefixLengths() []obj.Object
-	IncludedRoutes() []*NEIPv6Route
-	SetIncludedRoutes(includedRoutes []*NEIPv6Route)
-	ExcludedRoutes() []*NEIPv6Route
-	SetExcludedRoutes(excludedRoutes []*NEIPv6Route)
-}
-
-var _ NEIPv6Settingsable = (*NEIPv6Settings)(nil)

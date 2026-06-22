@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,31 +53,21 @@ func NewHorizonObservation() *HorizonObservation {
 }
 
 // TransformForImageWidthHeight creates an affine transform for the specified image width and height.
-func (x *HorizonObservation) TransformForImageWidthHeight(width int, height int) corefoundation.CGAffineTransform {
-	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("transformForImageWidth:height:"), width, height)
+func (ho *HorizonObservation) TransformForImageWidthHeight(width int, height int) corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(ho), objc.RegisterName("transformForImageWidth:height:"), width, height)
 	return _r
 }
 
-// Transform transform applied to the detected horizon in image coordinates. This is the transform in image coordinates and not a normalized transform.
-func (x *HorizonObservation) Transform() corefoundation.CGAffineTransform {
-	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("transform"))
+// Transform returns transform applied to the detected horizon in image coordinates. This is the transform in image coordinates and not a normalized transform.
+func (ho *HorizonObservation) Transform() corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(ho), objc.RegisterName("transform"))
 	return _r
 }
 
-// Angle angle of the observed horizon.
-func (x *HorizonObservation) Angle() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("angle"))
+// Angle returns angle of the observed horizon.
+func (ho *HorizonObservation) Angle() float64 {
+	_r := objc.Send[float64](objref.IDOf(ho), objc.RegisterName("angle"))
 	return _r
 }
-
-// HorizonObservationable is the interface implemented by [HorizonObservation], for mocking and DI.
-type HorizonObservationable interface {
-	obj.Object
-	TransformForImageWidthHeight(width int, height int) corefoundation.CGAffineTransform
-	Transform() corefoundation.CGAffineTransform
-	Angle() float64
-}
-
-var _ HorizonObservationable = (*HorizonObservation)(nil)
 
 var _ ObservationProvider = (*HorizonObservation)(nil)

@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,88 +51,70 @@ func NewBatchNormalizationLayer() *BatchNormalizationLayer {
 	return batchNormalizationLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *BatchNormalizationLayer) WithLabel(label string) *BatchNormalizationLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (bnl *BatchNormalizationLayer) WithLabel(label string) *BatchNormalizationLayer {
+	objc.Send[objc.ID](objref.IDOf(bnl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return bnl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *BatchNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *BatchNormalizationLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (bnl *BatchNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *BatchNormalizationLayer {
+	objc.Send[objc.ID](objref.IDOf(bnl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return bnl
 }
 
-// FeatureChannelCount the number of feature channels
-func (x *BatchNormalizationLayer) FeatureChannelCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("featureChannelCount"))
+// FeatureChannelCount returns the number of feature channels
+func (bnl *BatchNormalizationLayer) FeatureChannelCount() int {
+	_r := objc.Send[int](objref.IDOf(bnl), objc.RegisterName("featureChannelCount"))
 	return _r
 }
 
-// Mean the mean tensor
-func (x *BatchNormalizationLayer) Mean() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mean"))
+// Mean returns the mean tensor
+func (bnl *BatchNormalizationLayer) Mean() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(bnl), objc.RegisterName("mean"))
 	return TensorFromID(_r)
 }
 
-// Variance the variance tensor
-func (x *BatchNormalizationLayer) Variance() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variance"))
+// Variance returns the variance tensor
+func (bnl *BatchNormalizationLayer) Variance() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(bnl), objc.RegisterName("variance"))
 	return TensorFromID(_r)
 }
 
-// Beta the beta tensor
-func (x *BatchNormalizationLayer) Beta() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beta"))
+// Beta returns the beta tensor
+func (bnl *BatchNormalizationLayer) Beta() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(bnl), objc.RegisterName("beta"))
 	return TensorFromID(_r)
 }
 
-// Gamma the gamma tensor
-func (x *BatchNormalizationLayer) Gamma() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gamma"))
+// Gamma returns the gamma tensor
+func (bnl *BatchNormalizationLayer) Gamma() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(bnl), objc.RegisterName("gamma"))
 	return TensorFromID(_r)
 }
 
-// BetaParameter the beta tensor parameter used for optimizer update
-func (x *BatchNormalizationLayer) BetaParameter() *TensorParameter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("betaParameter"))
+// BetaParameter returns the beta tensor parameter used for optimizer update
+func (bnl *BatchNormalizationLayer) BetaParameter() *TensorParameter {
+	_r := objc.Send[objc.ID](objref.IDOf(bnl), objc.RegisterName("betaParameter"))
 	return TensorParameterFromID(_r)
 }
 
-// GammaParameter the gamma tensor parameter used for optimizer update
-func (x *BatchNormalizationLayer) GammaParameter() *TensorParameter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gammaParameter"))
+// GammaParameter returns the gamma tensor parameter used for optimizer update
+func (bnl *BatchNormalizationLayer) GammaParameter() *TensorParameter {
+	_r := objc.Send[objc.ID](objref.IDOf(bnl), objc.RegisterName("gammaParameter"))
 	return TensorParameterFromID(_r)
 }
 
-// VarianceEpsilon a value used for numerical stability
-func (x *BatchNormalizationLayer) VarianceEpsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("varianceEpsilon"))
+// VarianceEpsilon returns a value used for numerical stability
+func (bnl *BatchNormalizationLayer) VarianceEpsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(bnl), objc.RegisterName("varianceEpsilon"))
 	return _r
 }
 
-// Momentum the value used for the running mean and variance computation The default is 0.99f.
-func (x *BatchNormalizationLayer) Momentum() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("momentum"))
+// Momentum returns the value used for the running mean and variance computation The default is 0.99f.
+func (bnl *BatchNormalizationLayer) Momentum() float32 {
+	_r := objc.Send[float32](objref.IDOf(bnl), objc.RegisterName("momentum"))
 	return _r
 }
-
-// BatchNormalizationLayerable is the interface implemented by [BatchNormalizationLayer], for mocking and DI.
-type BatchNormalizationLayerable interface {
-	obj.Object
-	WithLabel(label string) *BatchNormalizationLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *BatchNormalizationLayer
-	FeatureChannelCount() int
-	Mean() *Tensor
-	Variance() *Tensor
-	Beta() *Tensor
-	Gamma() *Tensor
-	BetaParameter() *TensorParameter
-	GammaParameter() *TensorParameter
-	VarianceEpsilon() float32
-	Momentum() float32
-}
-
-var _ BatchNormalizationLayerable = (*BatchNormalizationLayer)(nil)
 
 var _ LayerProvider = (*BatchNormalizationLayer)(nil)

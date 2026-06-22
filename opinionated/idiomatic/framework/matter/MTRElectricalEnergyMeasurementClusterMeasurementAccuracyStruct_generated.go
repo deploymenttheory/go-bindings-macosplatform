@@ -44,24 +44,24 @@ func mTRElectricalEnergyMeasurementClusterMeasurementAccuracyStructAdopt(id objc
 }
 
 // Description returns the object's -description text.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) Description() string {
+	return rt.Description(objref.IDOf(meemcmas))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(meemcmas), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(meemcmas), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) String() string {
+	return rt.Description(objref.IDOf(meemcmas))
 }
 
 // NewMTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct creates a new MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct.
@@ -71,101 +71,60 @@ func NewMTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct() *MTREle
 }
 
 // WithMeasurementType sets the property and returns the receiver so calls can be chained.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) WithMeasurementType(measurementType obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeasurementType:"), objref.IDOf(measurementType))
-	return x
+func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) WithMeasurementType(measurementType obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct {
+	objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("setMeasurementType:"), objref.IDOf(measurementType))
+	return meemcmas
 }
 
 // WithMeasured sets the property and returns the receiver so calls can be chained.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) WithMeasured(measured obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeasured:"), objref.IDOf(measured))
-	return x
+func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) WithMeasured(measured obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct {
+	objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("setMeasured:"), objref.IDOf(measured))
+	return meemcmas
 }
 
 // WithMinMeasuredValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) WithMinMeasuredValue(minMeasuredValue obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinMeasuredValue:"), objref.IDOf(minMeasuredValue))
-	return x
+func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) WithMinMeasuredValue(minMeasuredValue obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct {
+	objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("setMinMeasuredValue:"), objref.IDOf(minMeasuredValue))
+	return meemcmas
 }
 
 // WithMaxMeasuredValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) WithMaxMeasuredValue(maxMeasuredValue obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxMeasuredValue:"), objref.IDOf(maxMeasuredValue))
-	return x
+func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) WithMaxMeasuredValue(maxMeasuredValue obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct {
+	objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("setMaxMeasuredValue:"), objref.IDOf(maxMeasuredValue))
+	return meemcmas
 }
 
 // MeasurementType wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) MeasurementType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("measurementType"))
+func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) MeasurementType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("measurementType"))
 	return obj.Wrap(_r)
-}
-
-// SetMeasurementType wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) SetMeasurementType(measurementType obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeasurementType:"), objref.IDOf(measurementType))
 }
 
 // Measured wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) Measured() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("measured"))
+func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) Measured() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("measured"))
 	return obj.Wrap(_r)
-}
-
-// SetMeasured wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) SetMeasured(measured obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeasured:"), objref.IDOf(measured))
 }
 
 // MinMeasuredValue wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) MinMeasuredValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minMeasuredValue"))
+func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) MinMeasuredValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("minMeasuredValue"))
 	return obj.Wrap(_r)
-}
-
-// SetMinMeasuredValue wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) SetMinMeasuredValue(minMeasuredValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinMeasuredValue:"), objref.IDOf(minMeasuredValue))
 }
 
 // MaxMeasuredValue wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) MaxMeasuredValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maxMeasuredValue"))
+func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) MaxMeasuredValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("maxMeasuredValue"))
 	return obj.Wrap(_r)
 }
 
-// SetMaxMeasuredValue wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) SetMaxMeasuredValue(maxMeasuredValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxMeasuredValue:"), objref.IDOf(maxMeasuredValue))
-}
-
 // AccuracyRanges wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) AccuracyRanges() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accuracyRanges"))
+func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) AccuracyRanges() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("accuracyRanges"))
 	return obj.Wrap(_r)
 }
 
 // SetAccuracyRanges wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) SetAccuracyRanges(accuracyRanges obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccuracyRanges:"), objref.IDOf(accuracyRanges))
+func (meemcmas *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct) SetAccuracyRanges(accuracyRanges obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(meemcmas), objc.RegisterName("setAccuracyRanges:"), objref.IDOf(accuracyRanges))
 }
-
-// MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStructable is the interface implemented by [MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct], for mocking and DI.
-type MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStructable interface {
-	obj.Object
-	WithMeasurementType(measurementType obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct
-	WithMeasured(measured obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct
-	WithMinMeasuredValue(minMeasuredValue obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct
-	WithMaxMeasuredValue(maxMeasuredValue obj.Object) *MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct
-	MeasurementType() obj.Object
-	SetMeasurementType(measurementType obj.Object)
-	Measured() obj.Object
-	SetMeasured(measured obj.Object)
-	MinMeasuredValue() obj.Object
-	SetMinMeasuredValue(minMeasuredValue obj.Object)
-	MaxMeasuredValue() obj.Object
-	SetMaxMeasuredValue(maxMeasuredValue obj.Object)
-	AccuracyRanges() obj.Object
-	SetAccuracyRanges(accuracyRanges obj.Object)
-}
-
-var _ MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStructable = (*MTRElectricalEnergyMeasurementClusterMeasurementAccuracyStruct)(nil)

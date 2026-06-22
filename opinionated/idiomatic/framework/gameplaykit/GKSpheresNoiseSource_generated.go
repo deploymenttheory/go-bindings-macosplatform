@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,31 +52,16 @@ func NewSpheresNoiseSourceWithFrequency(frequency float64) *SpheresNoiseSource {
 	return spheresNoiseSourceAdopt(_id)
 }
 
-// WithFrequency a value that determines the size and spacing of concentric spheres.
-func (x *SpheresNoiseSource) WithFrequency(frequency float64) *SpheresNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
-	return x
+// WithFrequency sets a value that determines the size and spacing of concentric spheres.
+func (sns *SpheresNoiseSource) WithFrequency(frequency float64) *SpheresNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(sns), objc.RegisterName("setFrequency:"), frequency)
+	return sns
 }
 
 // Frequency wraps the corresponding Objective-C method.
-func (x *SpheresNoiseSource) Frequency() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frequency"))
+func (sns *SpheresNoiseSource) Frequency() float64 {
+	_r := objc.Send[float64](objref.IDOf(sns), objc.RegisterName("frequency"))
 	return _r
 }
-
-// SetFrequency wraps the corresponding Objective-C method.
-func (x *SpheresNoiseSource) SetFrequency(frequency float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
-}
-
-// SpheresNoiseSourceable is the interface implemented by [SpheresNoiseSource], for mocking and DI.
-type SpheresNoiseSourceable interface {
-	obj.Object
-	WithFrequency(frequency float64) *SpheresNoiseSource
-	Frequency() float64
-	SetFrequency(frequency float64)
-}
-
-var _ SpheresNoiseSourceable = (*SpheresNoiseSource)(nil)
 
 var _ NoiseSourceProvider = (*SpheresNoiseSource)(nil)

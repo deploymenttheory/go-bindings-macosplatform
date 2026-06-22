@@ -44,24 +44,24 @@ func pathAssetResolverAdopt(id objc.ID) *PathAssetResolver {
 }
 
 // Description returns the object's -description text.
-func (x *PathAssetResolver) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (par *PathAssetResolver) Description() string {
+	return rt.Description(objref.IDOf(par))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PathAssetResolver) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (par *PathAssetResolver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(par), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PathAssetResolver) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (par *PathAssetResolver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(par), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PathAssetResolver) String() string {
-	return rt.Description(objref.IDOf(x))
+func (par *PathAssetResolver) String() string {
+	return rt.Description(objref.IDOf(par))
 }
 
 // NewPathAssetResolverWithPath creates a new PathAssetResolver.
@@ -72,31 +72,16 @@ func NewPathAssetResolverWithPath(path string) *PathAssetResolver {
 }
 
 // WithPath sets the property and returns the receiver so calls can be chained.
-func (x *PathAssetResolver) WithPath(path string) *PathAssetResolver {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), purego.NSString(path))
-	return x
+func (par *PathAssetResolver) WithPath(path string) *PathAssetResolver {
+	objc.Send[objc.ID](objref.IDOf(par), objc.RegisterName("setPath:"), purego.NSString(path))
+	return par
 }
 
 // Path wraps the corresponding Objective-C method.
-func (x *PathAssetResolver) Path() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+func (par *PathAssetResolver) Path() string {
+	_r := objc.Send[objc.ID](objref.IDOf(par), objc.RegisterName("path"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetPath wraps the corresponding Objective-C method.
-func (x *PathAssetResolver) SetPath(path string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), purego.NSString(path))
-}
-
-// PathAssetResolverable is the interface implemented by [PathAssetResolver], for mocking and DI.
-type PathAssetResolverable interface {
-	obj.Object
-	WithPath(path string) *PathAssetResolver
-	Path() string
-	SetPath(path string)
-}
-
-var _ PathAssetResolverable = (*PathAssetResolver)(nil)

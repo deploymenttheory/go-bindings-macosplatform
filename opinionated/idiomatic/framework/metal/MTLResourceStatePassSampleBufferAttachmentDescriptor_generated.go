@@ -46,24 +46,24 @@ func resourceStatePassSampleBufferAttachmentDescriptorAdopt(id objc.ID) *Resourc
 }
 
 // Description returns the object's -description text.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rspsbad *ResourceStatePassSampleBufferAttachmentDescriptor) Description() string {
+	return rt.Description(objref.IDOf(rspsbad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rspsbad *ResourceStatePassSampleBufferAttachmentDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rspsbad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rspsbad *ResourceStatePassSampleBufferAttachmentDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rspsbad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rspsbad *ResourceStatePassSampleBufferAttachmentDescriptor) String() string {
+	return rt.Description(objref.IDOf(rspsbad))
 }
 
 // NewResourceStatePassSampleBufferAttachmentDescriptor creates a new ResourceStatePassSampleBufferAttachmentDescriptor.
@@ -72,49 +72,26 @@ func NewResourceStatePassSampleBufferAttachmentDescriptor() *ResourceStatePassSa
 	return resourceStatePassSampleBufferAttachmentDescriptorAdopt(_id)
 }
 
-// WithStartOfEncoderSampleIndex the index the Metal device object should use to store GPU counters when starting the resource state pass.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptor) WithStartOfEncoderSampleIndex(startOfEncoderSampleIndex int) *ResourceStatePassSampleBufferAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartOfEncoderSampleIndex:"), startOfEncoderSampleIndex)
-	return x
+// WithStartOfEncoderSampleIndex sets the index the Metal device object should use to store GPU counters when starting the resource state pass.
+func (rspsbad *ResourceStatePassSampleBufferAttachmentDescriptor) WithStartOfEncoderSampleIndex(startOfEncoderSampleIndex int) *ResourceStatePassSampleBufferAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rspsbad), objc.RegisterName("setStartOfEncoderSampleIndex:"), startOfEncoderSampleIndex)
+	return rspsbad
 }
 
-// WithEndOfEncoderSampleIndex the index the Metal device object should use to store GPU counters when ending the resource state pass.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptor) WithEndOfEncoderSampleIndex(endOfEncoderSampleIndex int) *ResourceStatePassSampleBufferAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndOfEncoderSampleIndex:"), endOfEncoderSampleIndex)
-	return x
+// WithEndOfEncoderSampleIndex sets the index the Metal device object should use to store GPU counters when ending the resource state pass.
+func (rspsbad *ResourceStatePassSampleBufferAttachmentDescriptor) WithEndOfEncoderSampleIndex(endOfEncoderSampleIndex int) *ResourceStatePassSampleBufferAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rspsbad), objc.RegisterName("setEndOfEncoderSampleIndex:"), endOfEncoderSampleIndex)
+	return rspsbad
 }
 
-// StartOfEncoderSampleIndex the sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a resourceState pass will fail.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptor) StartOfEncoderSampleIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startOfEncoderSampleIndex"))
+// StartOfEncoderSampleIndex returns the sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a resourceState pass will fail.
+func (rspsbad *ResourceStatePassSampleBufferAttachmentDescriptor) StartOfEncoderSampleIndex() int {
+	_r := objc.Send[int](objref.IDOf(rspsbad), objc.RegisterName("startOfEncoderSampleIndex"))
 	return _r
 }
 
-// SetStartOfEncoderSampleIndex wraps the corresponding Objective-C method.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptor) SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartOfEncoderSampleIndex:"), startOfEncoderSampleIndex)
-}
-
-// EndOfEncoderSampleIndex the sample index to use to store the sample taken at the end of Command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a resourceState pass will fail.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptor) EndOfEncoderSampleIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("endOfEncoderSampleIndex"))
+// EndOfEncoderSampleIndex returns the sample index to use to store the sample taken at the end of Command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of a resourceState pass will fail.
+func (rspsbad *ResourceStatePassSampleBufferAttachmentDescriptor) EndOfEncoderSampleIndex() int {
+	_r := objc.Send[int](objref.IDOf(rspsbad), objc.RegisterName("endOfEncoderSampleIndex"))
 	return _r
 }
-
-// SetEndOfEncoderSampleIndex wraps the corresponding Objective-C method.
-func (x *ResourceStatePassSampleBufferAttachmentDescriptor) SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndOfEncoderSampleIndex:"), endOfEncoderSampleIndex)
-}
-
-// ResourceStatePassSampleBufferAttachmentDescriptorable is the interface implemented by [ResourceStatePassSampleBufferAttachmentDescriptor], for mocking and DI.
-type ResourceStatePassSampleBufferAttachmentDescriptorable interface {
-	obj.Object
-	WithStartOfEncoderSampleIndex(startOfEncoderSampleIndex int) *ResourceStatePassSampleBufferAttachmentDescriptor
-	WithEndOfEncoderSampleIndex(endOfEncoderSampleIndex int) *ResourceStatePassSampleBufferAttachmentDescriptor
-	StartOfEncoderSampleIndex() int
-	SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex int)
-	EndOfEncoderSampleIndex() int
-	SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex int)
-}
-
-var _ ResourceStatePassSampleBufferAttachmentDescriptorable = (*ResourceStatePassSampleBufferAttachmentDescriptor)(nil)

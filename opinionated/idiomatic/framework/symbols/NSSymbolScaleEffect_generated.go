@@ -7,7 +7,6 @@ package symbols
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewSymbolScaleEffect() *SymbolScaleEffect {
 	return symbolScaleEffectAdopt(_id)
 }
 
-// EffectWithByLayer an effect that scales each layer separately.
-func (x *SymbolScaleEffect) EffectWithByLayer() *SymbolScaleEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+// EffectWithByLayer returns an effect that scales each layer separately.
+func (sse *SymbolScaleEffect) EffectWithByLayer() *SymbolScaleEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sse), objc.RegisterName("effectWithByLayer"))
 	return SymbolScaleEffectFromID(_r)
 }
 
-// EffectWithWholeSymbol an effect that scales all layers simultaneously.
-func (x *SymbolScaleEffect) EffectWithWholeSymbol() *SymbolScaleEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+// EffectWithWholeSymbol returns an effect that scales all layers simultaneously.
+func (sse *SymbolScaleEffect) EffectWithWholeSymbol() *SymbolScaleEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sse), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolScaleEffectFromID(_r)
 }
-
-// SymbolScaleEffectable is the interface implemented by [SymbolScaleEffect], for mocking and DI.
-type SymbolScaleEffectable interface {
-	obj.Object
-	EffectWithByLayer() *SymbolScaleEffect
-	EffectWithWholeSymbol() *SymbolScaleEffect
-}
-
-var _ SymbolScaleEffectable = (*SymbolScaleEffect)(nil)
 
 var _ SymbolEffectProvider = (*SymbolScaleEffect)(nil)

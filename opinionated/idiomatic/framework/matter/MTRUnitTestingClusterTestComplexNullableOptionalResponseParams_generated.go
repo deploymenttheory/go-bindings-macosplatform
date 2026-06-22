@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRUnitTestingClusterTestComplexNullableOptionalResponseParams is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterTestComplexNullableOptionalResponseParams.
@@ -48,24 +49,24 @@ func mTRUnitTestingClusterTestComplexNullableOptionalResponseParamsAdopt(id objc
 }
 
 // Description returns the object's -description text.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) Description() string {
+	return rt.Description(objref.IDOf(mutctcnorp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mutctcnorp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mutctcnorp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) String() string {
+	return rt.Description(objref.IDOf(mutctcnorp))
 }
 
 // NewMTRUnitTestingClusterTestComplexNullableOptionalResponseParamsWithResponseValueError initialize an MTRUnitTestingClusterTestComplexNullableOptionalResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
@@ -80,584 +81,363 @@ func NewMTRUnitTestingClusterTestComplexNullableOptionalResponseParamsWithRespon
 }
 
 // WithNullableIntWasNull sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableIntWasNull(nullableIntWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableIntWasNull:"), objref.IDOf(nullableIntWasNull))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableIntWasNull(nullableIntWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableIntWasNull:"), objref.IDOf(nullableIntWasNull))
+	return mutctcnorp
 }
 
 // WithNullableIntValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableIntValue(nullableIntValue obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableIntValue:"), objref.IDOf(nullableIntValue))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableIntValue(nullableIntValue obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableIntValue:"), objref.IDOf(nullableIntValue))
+	return mutctcnorp
 }
 
 // WithOptionalIntWasPresent sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithOptionalIntWasPresent(optionalIntWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalIntWasPresent:"), objref.IDOf(optionalIntWasPresent))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithOptionalIntWasPresent(optionalIntWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setOptionalIntWasPresent:"), objref.IDOf(optionalIntWasPresent))
+	return mutctcnorp
 }
 
 // WithOptionalIntValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithOptionalIntValue(optionalIntValue obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalIntValue:"), objref.IDOf(optionalIntValue))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithOptionalIntValue(optionalIntValue obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setOptionalIntValue:"), objref.IDOf(optionalIntValue))
+	return mutctcnorp
 }
 
 // WithNullableOptionalIntWasPresent sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalIntWasPresent(nullableOptionalIntWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalIntWasPresent:"), objref.IDOf(nullableOptionalIntWasPresent))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalIntWasPresent(nullableOptionalIntWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableOptionalIntWasPresent:"), objref.IDOf(nullableOptionalIntWasPresent))
+	return mutctcnorp
 }
 
 // WithNullableOptionalIntWasNull sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalIntWasNull(nullableOptionalIntWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalIntWasNull:"), objref.IDOf(nullableOptionalIntWasNull))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalIntWasNull(nullableOptionalIntWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableOptionalIntWasNull:"), objref.IDOf(nullableOptionalIntWasNull))
+	return mutctcnorp
 }
 
 // WithNullableOptionalIntValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalIntValue(nullableOptionalIntValue obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalIntValue:"), objref.IDOf(nullableOptionalIntValue))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalIntValue(nullableOptionalIntValue obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableOptionalIntValue:"), objref.IDOf(nullableOptionalIntValue))
+	return mutctcnorp
 }
 
 // WithNullableStringWasNull sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableStringWasNull(nullableStringWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableStringWasNull:"), objref.IDOf(nullableStringWasNull))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableStringWasNull(nullableStringWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableStringWasNull:"), objref.IDOf(nullableStringWasNull))
+	return mutctcnorp
 }
 
 // WithNullableStringValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableStringValue(nullableStringValue string) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableStringValue:"), purego.NSString(nullableStringValue))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableStringValue(nullableStringValue string) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableStringValue:"), purego.NSString(nullableStringValue))
+	return mutctcnorp
 }
 
 // WithOptionalStringWasPresent sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithOptionalStringWasPresent(optionalStringWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalStringWasPresent:"), objref.IDOf(optionalStringWasPresent))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithOptionalStringWasPresent(optionalStringWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setOptionalStringWasPresent:"), objref.IDOf(optionalStringWasPresent))
+	return mutctcnorp
 }
 
 // WithOptionalStringValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithOptionalStringValue(optionalStringValue string) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalStringValue:"), purego.NSString(optionalStringValue))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithOptionalStringValue(optionalStringValue string) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setOptionalStringValue:"), purego.NSString(optionalStringValue))
+	return mutctcnorp
 }
 
 // WithNullableOptionalStringWasPresent sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalStringWasPresent(nullableOptionalStringWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalStringWasPresent:"), objref.IDOf(nullableOptionalStringWasPresent))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalStringWasPresent(nullableOptionalStringWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableOptionalStringWasPresent:"), objref.IDOf(nullableOptionalStringWasPresent))
+	return mutctcnorp
 }
 
 // WithNullableOptionalStringWasNull sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalStringWasNull(nullableOptionalStringWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalStringWasNull:"), objref.IDOf(nullableOptionalStringWasNull))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalStringWasNull(nullableOptionalStringWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableOptionalStringWasNull:"), objref.IDOf(nullableOptionalStringWasNull))
+	return mutctcnorp
 }
 
 // WithNullableOptionalStringValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalStringValue(nullableOptionalStringValue string) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalStringValue:"), purego.NSString(nullableOptionalStringValue))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalStringValue(nullableOptionalStringValue string) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableOptionalStringValue:"), purego.NSString(nullableOptionalStringValue))
+	return mutctcnorp
 }
 
 // WithNullableStructWasNull sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableStructWasNull(nullableStructWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableStructWasNull:"), objref.IDOf(nullableStructWasNull))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableStructWasNull(nullableStructWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableStructWasNull:"), objref.IDOf(nullableStructWasNull))
+	return mutctcnorp
 }
 
 // WithNullableStructValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableStructValue(nullableStructValue MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableStructValue:"), objref.IDOf(nullableStructValue))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableStructValue(nullableStructValue MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableStructValue:"), objref.IDOf(nullableStructValue))
+	return mutctcnorp
 }
 
 // WithOptionalStructWasPresent sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithOptionalStructWasPresent(optionalStructWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalStructWasPresent:"), objref.IDOf(optionalStructWasPresent))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithOptionalStructWasPresent(optionalStructWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setOptionalStructWasPresent:"), objref.IDOf(optionalStructWasPresent))
+	return mutctcnorp
 }
 
 // WithOptionalStructValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithOptionalStructValue(optionalStructValue MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalStructValue:"), objref.IDOf(optionalStructValue))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithOptionalStructValue(optionalStructValue MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setOptionalStructValue:"), objref.IDOf(optionalStructValue))
+	return mutctcnorp
 }
 
 // WithNullableOptionalStructWasPresent sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalStructWasPresent(nullableOptionalStructWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalStructWasPresent:"), objref.IDOf(nullableOptionalStructWasPresent))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalStructWasPresent(nullableOptionalStructWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableOptionalStructWasPresent:"), objref.IDOf(nullableOptionalStructWasPresent))
+	return mutctcnorp
 }
 
 // WithNullableOptionalStructWasNull sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalStructWasNull(nullableOptionalStructWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalStructWasNull:"), objref.IDOf(nullableOptionalStructWasNull))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalStructWasNull(nullableOptionalStructWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableOptionalStructWasNull:"), objref.IDOf(nullableOptionalStructWasNull))
+	return mutctcnorp
 }
 
 // WithNullableOptionalStructValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalStructValue(nullableOptionalStructValue MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalStructValue:"), objref.IDOf(nullableOptionalStructValue))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalStructValue(nullableOptionalStructValue MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableOptionalStructValue:"), objref.IDOf(nullableOptionalStructValue))
+	return mutctcnorp
 }
 
 // WithNullableListWasNull sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableListWasNull(nullableListWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableListWasNull:"), objref.IDOf(nullableListWasNull))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableListWasNull(nullableListWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableListWasNull:"), objref.IDOf(nullableListWasNull))
+	return mutctcnorp
 }
 
 // WithOptionalListWasPresent sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithOptionalListWasPresent(optionalListWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalListWasPresent:"), objref.IDOf(optionalListWasPresent))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithOptionalListWasPresent(optionalListWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setOptionalListWasPresent:"), objref.IDOf(optionalListWasPresent))
+	return mutctcnorp
 }
 
 // WithNullableOptionalListWasPresent sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalListWasPresent(nullableOptionalListWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalListWasPresent:"), objref.IDOf(nullableOptionalListWasPresent))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalListWasPresent(nullableOptionalListWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableOptionalListWasPresent:"), objref.IDOf(nullableOptionalListWasPresent))
+	return mutctcnorp
 }
 
 // WithNullableOptionalListWasNull sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalListWasNull(nullableOptionalListWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalListWasNull:"), objref.IDOf(nullableOptionalListWasNull))
-	return x
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithNullableOptionalListWasNull(nullableOptionalListWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableOptionalListWasNull:"), objref.IDOf(nullableOptionalListWasNull))
+	return mutctcnorp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mutctcnorp
 }
 
 // NullableIntWasNull wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableIntWasNull() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableIntWasNull"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableIntWasNull() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableIntWasNull"))
 	return obj.Wrap(_r)
-}
-
-// SetNullableIntWasNull wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableIntWasNull(nullableIntWasNull obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableIntWasNull:"), objref.IDOf(nullableIntWasNull))
 }
 
 // NullableIntValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableIntValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableIntValue"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableIntValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableIntValue"))
 	return obj.Wrap(_r)
-}
-
-// SetNullableIntValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableIntValue(nullableIntValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableIntValue:"), objref.IDOf(nullableIntValue))
 }
 
 // OptionalIntWasPresent wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalIntWasPresent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalIntWasPresent"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalIntWasPresent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("optionalIntWasPresent"))
 	return obj.Wrap(_r)
-}
-
-// SetOptionalIntWasPresent wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetOptionalIntWasPresent(optionalIntWasPresent obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalIntWasPresent:"), objref.IDOf(optionalIntWasPresent))
 }
 
 // OptionalIntValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalIntValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalIntValue"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalIntValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("optionalIntValue"))
 	return obj.Wrap(_r)
-}
-
-// SetOptionalIntValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetOptionalIntValue(optionalIntValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalIntValue:"), objref.IDOf(optionalIntValue))
 }
 
 // NullableOptionalIntWasPresent wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalIntWasPresent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalIntWasPresent"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalIntWasPresent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableOptionalIntWasPresent"))
 	return obj.Wrap(_r)
-}
-
-// SetNullableOptionalIntWasPresent wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableOptionalIntWasPresent(nullableOptionalIntWasPresent obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalIntWasPresent:"), objref.IDOf(nullableOptionalIntWasPresent))
 }
 
 // NullableOptionalIntWasNull wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalIntWasNull() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalIntWasNull"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalIntWasNull() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableOptionalIntWasNull"))
 	return obj.Wrap(_r)
-}
-
-// SetNullableOptionalIntWasNull wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableOptionalIntWasNull(nullableOptionalIntWasNull obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalIntWasNull:"), objref.IDOf(nullableOptionalIntWasNull))
 }
 
 // NullableOptionalIntValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalIntValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalIntValue"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalIntValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableOptionalIntValue"))
 	return obj.Wrap(_r)
-}
-
-// SetNullableOptionalIntValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableOptionalIntValue(nullableOptionalIntValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalIntValue:"), objref.IDOf(nullableOptionalIntValue))
 }
 
 // NullableStringWasNull wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableStringWasNull() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableStringWasNull"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableStringWasNull() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableStringWasNull"))
 	return obj.Wrap(_r)
-}
-
-// SetNullableStringWasNull wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableStringWasNull(nullableStringWasNull obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableStringWasNull:"), objref.IDOf(nullableStringWasNull))
 }
 
 // NullableStringValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableStringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableStringValue"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableStringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableStringValue"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetNullableStringValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableStringValue(nullableStringValue string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableStringValue:"), purego.NSString(nullableStringValue))
 }
 
 // OptionalStringWasPresent wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalStringWasPresent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalStringWasPresent"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalStringWasPresent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("optionalStringWasPresent"))
 	return obj.Wrap(_r)
-}
-
-// SetOptionalStringWasPresent wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetOptionalStringWasPresent(optionalStringWasPresent obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalStringWasPresent:"), objref.IDOf(optionalStringWasPresent))
 }
 
 // OptionalStringValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalStringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalStringValue"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalStringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("optionalStringValue"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetOptionalStringValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetOptionalStringValue(optionalStringValue string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalStringValue:"), purego.NSString(optionalStringValue))
 }
 
 // NullableOptionalStringWasPresent wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalStringWasPresent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalStringWasPresent"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalStringWasPresent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableOptionalStringWasPresent"))
 	return obj.Wrap(_r)
-}
-
-// SetNullableOptionalStringWasPresent wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableOptionalStringWasPresent(nullableOptionalStringWasPresent obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalStringWasPresent:"), objref.IDOf(nullableOptionalStringWasPresent))
 }
 
 // NullableOptionalStringWasNull wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalStringWasNull() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalStringWasNull"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalStringWasNull() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableOptionalStringWasNull"))
 	return obj.Wrap(_r)
 }
 
-// SetNullableOptionalStringWasNull wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableOptionalStringWasNull(nullableOptionalStringWasNull obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalStringWasNull:"), objref.IDOf(nullableOptionalStringWasNull))
-}
-
 // NullableOptionalStringValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalStringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalStringValue"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalStringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableOptionalStringValue"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetNullableOptionalStringValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableOptionalStringValue(nullableOptionalStringValue string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalStringValue:"), purego.NSString(nullableOptionalStringValue))
-}
-
 // NullableStructWasNull wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableStructWasNull() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableStructWasNull"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableStructWasNull() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableStructWasNull"))
 	return obj.Wrap(_r)
-}
-
-// SetNullableStructWasNull wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableStructWasNull(nullableStructWasNull obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableStructWasNull:"), objref.IDOf(nullableStructWasNull))
 }
 
 // NullableStructValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableStructValue() *MTRUnitTestingClusterSimpleStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableStructValue"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableStructValue() *MTRUnitTestingClusterSimpleStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableStructValue"))
 	return MTRUnitTestingClusterSimpleStructFromID(_r)
-}
-
-// SetNullableStructValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableStructValue(nullableStructValue *MTRUnitTestingClusterSimpleStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableStructValue:"), objref.IDOf(nullableStructValue))
 }
 
 // OptionalStructWasPresent wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalStructWasPresent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalStructWasPresent"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalStructWasPresent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("optionalStructWasPresent"))
 	return obj.Wrap(_r)
-}
-
-// SetOptionalStructWasPresent wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetOptionalStructWasPresent(optionalStructWasPresent obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalStructWasPresent:"), objref.IDOf(optionalStructWasPresent))
 }
 
 // OptionalStructValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalStructValue() *MTRUnitTestingClusterSimpleStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalStructValue"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalStructValue() *MTRUnitTestingClusterSimpleStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("optionalStructValue"))
 	return MTRUnitTestingClusterSimpleStructFromID(_r)
-}
-
-// SetOptionalStructValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetOptionalStructValue(optionalStructValue *MTRUnitTestingClusterSimpleStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalStructValue:"), objref.IDOf(optionalStructValue))
 }
 
 // NullableOptionalStructWasPresent wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalStructWasPresent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalStructWasPresent"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalStructWasPresent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableOptionalStructWasPresent"))
 	return obj.Wrap(_r)
-}
-
-// SetNullableOptionalStructWasPresent wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableOptionalStructWasPresent(nullableOptionalStructWasPresent obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalStructWasPresent:"), objref.IDOf(nullableOptionalStructWasPresent))
 }
 
 // NullableOptionalStructWasNull wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalStructWasNull() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalStructWasNull"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalStructWasNull() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableOptionalStructWasNull"))
 	return obj.Wrap(_r)
-}
-
-// SetNullableOptionalStructWasNull wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableOptionalStructWasNull(nullableOptionalStructWasNull obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalStructWasNull:"), objref.IDOf(nullableOptionalStructWasNull))
 }
 
 // NullableOptionalStructValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalStructValue() *MTRUnitTestingClusterSimpleStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalStructValue"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalStructValue() *MTRUnitTestingClusterSimpleStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableOptionalStructValue"))
 	return MTRUnitTestingClusterSimpleStructFromID(_r)
 }
 
-// SetNullableOptionalStructValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableOptionalStructValue(nullableOptionalStructValue *MTRUnitTestingClusterSimpleStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalStructValue:"), objref.IDOf(nullableOptionalStructValue))
-}
-
 // NullableListWasNull wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableListWasNull() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableListWasNull"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableListWasNull() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableListWasNull"))
 	return obj.Wrap(_r)
 }
 
-// SetNullableListWasNull wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableListWasNull(nullableListWasNull obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableListWasNull:"), objref.IDOf(nullableListWasNull))
-}
-
 // NullableListValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableListValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableListValue"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableListValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableListValue"))
 	return obj.Wrap(_r)
 }
 
 // SetNullableListValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableListValue(nullableListValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableListValue:"), objref.IDOf(nullableListValue))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableListValue(nullableListValue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableListValue:"), objref.IDOf(nullableListValue))
 }
 
 // OptionalListWasPresent wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalListWasPresent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalListWasPresent"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalListWasPresent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("optionalListWasPresent"))
 	return obj.Wrap(_r)
 }
 
-// SetOptionalListWasPresent wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetOptionalListWasPresent(optionalListWasPresent obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalListWasPresent:"), objref.IDOf(optionalListWasPresent))
-}
-
 // OptionalListValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalListValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalListValue"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) OptionalListValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("optionalListValue"))
 	return obj.Wrap(_r)
 }
 
 // SetOptionalListValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetOptionalListValue(optionalListValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionalListValue:"), objref.IDOf(optionalListValue))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetOptionalListValue(optionalListValue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setOptionalListValue:"), objref.IDOf(optionalListValue))
 }
 
 // NullableOptionalListWasPresent wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalListWasPresent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalListWasPresent"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalListWasPresent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableOptionalListWasPresent"))
 	return obj.Wrap(_r)
-}
-
-// SetNullableOptionalListWasPresent wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableOptionalListWasPresent(nullableOptionalListWasPresent obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalListWasPresent:"), objref.IDOf(nullableOptionalListWasPresent))
 }
 
 // NullableOptionalListWasNull wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalListWasNull() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalListWasNull"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalListWasNull() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableOptionalListWasNull"))
 	return obj.Wrap(_r)
 }
 
-// SetNullableOptionalListWasNull wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableOptionalListWasNull(nullableOptionalListWasNull obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalListWasNull:"), objref.IDOf(nullableOptionalListWasNull))
-}
-
 // NullableOptionalListValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalListValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nullableOptionalListValue"))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) NullableOptionalListValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("nullableOptionalListValue"))
 	return obj.Wrap(_r)
 }
 
 // SetNullableOptionalListValue wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableOptionalListValue(nullableOptionalListValue obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNullableOptionalListValue:"), objref.IDOf(nullableOptionalListValue))
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetNullableOptionalListValue(nullableOptionalListValue obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("setNullableOptionalListValue:"), objref.IDOf(nullableOptionalListValue))
 }
 
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctcnorp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
-
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsable is the interface implemented by [MTRUnitTestingClusterTestComplexNullableOptionalResponseParams], for mocking and DI.
-type MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsable interface {
-	obj.Object
-	WithNullableIntWasNull(nullableIntWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithNullableIntValue(nullableIntValue obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithOptionalIntWasPresent(optionalIntWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithOptionalIntValue(optionalIntValue obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithNullableOptionalIntWasPresent(nullableOptionalIntWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithNullableOptionalIntWasNull(nullableOptionalIntWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithNullableOptionalIntValue(nullableOptionalIntValue obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithNullableStringWasNull(nullableStringWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithNullableStringValue(nullableStringValue string) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithOptionalStringWasPresent(optionalStringWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithOptionalStringValue(optionalStringValue string) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithNullableOptionalStringWasPresent(nullableOptionalStringWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithNullableOptionalStringWasNull(nullableOptionalStringWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithNullableOptionalStringValue(nullableOptionalStringValue string) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithNullableStructWasNull(nullableStructWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithNullableStructValue(nullableStructValue MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithOptionalStructWasPresent(optionalStructWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithOptionalStructValue(optionalStructValue MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithNullableOptionalStructWasPresent(nullableOptionalStructWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithNullableOptionalStructWasNull(nullableOptionalStructWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithNullableOptionalStructValue(nullableOptionalStructValue MTRUnitTestingClusterSimpleStructProvider) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithNullableListWasNull(nullableListWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithOptionalListWasPresent(optionalListWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithNullableOptionalListWasPresent(nullableOptionalListWasPresent obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithNullableOptionalListWasNull(nullableOptionalListWasNull obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
-	NullableIntWasNull() obj.Object
-	SetNullableIntWasNull(nullableIntWasNull obj.Object)
-	NullableIntValue() obj.Object
-	SetNullableIntValue(nullableIntValue obj.Object)
-	OptionalIntWasPresent() obj.Object
-	SetOptionalIntWasPresent(optionalIntWasPresent obj.Object)
-	OptionalIntValue() obj.Object
-	SetOptionalIntValue(optionalIntValue obj.Object)
-	NullableOptionalIntWasPresent() obj.Object
-	SetNullableOptionalIntWasPresent(nullableOptionalIntWasPresent obj.Object)
-	NullableOptionalIntWasNull() obj.Object
-	SetNullableOptionalIntWasNull(nullableOptionalIntWasNull obj.Object)
-	NullableOptionalIntValue() obj.Object
-	SetNullableOptionalIntValue(nullableOptionalIntValue obj.Object)
-	NullableStringWasNull() obj.Object
-	SetNullableStringWasNull(nullableStringWasNull obj.Object)
-	NullableStringValue() string
-	SetNullableStringValue(nullableStringValue string)
-	OptionalStringWasPresent() obj.Object
-	SetOptionalStringWasPresent(optionalStringWasPresent obj.Object)
-	OptionalStringValue() string
-	SetOptionalStringValue(optionalStringValue string)
-	NullableOptionalStringWasPresent() obj.Object
-	SetNullableOptionalStringWasPresent(nullableOptionalStringWasPresent obj.Object)
-	NullableOptionalStringWasNull() obj.Object
-	SetNullableOptionalStringWasNull(nullableOptionalStringWasNull obj.Object)
-	NullableOptionalStringValue() string
-	SetNullableOptionalStringValue(nullableOptionalStringValue string)
-	NullableStructWasNull() obj.Object
-	SetNullableStructWasNull(nullableStructWasNull obj.Object)
-	NullableStructValue() *MTRUnitTestingClusterSimpleStruct
-	SetNullableStructValue(nullableStructValue *MTRUnitTestingClusterSimpleStruct)
-	OptionalStructWasPresent() obj.Object
-	SetOptionalStructWasPresent(optionalStructWasPresent obj.Object)
-	OptionalStructValue() *MTRUnitTestingClusterSimpleStruct
-	SetOptionalStructValue(optionalStructValue *MTRUnitTestingClusterSimpleStruct)
-	NullableOptionalStructWasPresent() obj.Object
-	SetNullableOptionalStructWasPresent(nullableOptionalStructWasPresent obj.Object)
-	NullableOptionalStructWasNull() obj.Object
-	SetNullableOptionalStructWasNull(nullableOptionalStructWasNull obj.Object)
-	NullableOptionalStructValue() *MTRUnitTestingClusterSimpleStruct
-	SetNullableOptionalStructValue(nullableOptionalStructValue *MTRUnitTestingClusterSimpleStruct)
-	NullableListWasNull() obj.Object
-	SetNullableListWasNull(nullableListWasNull obj.Object)
-	NullableListValue() obj.Object
-	SetNullableListValue(nullableListValue obj.Object)
-	OptionalListWasPresent() obj.Object
-	SetOptionalListWasPresent(optionalListWasPresent obj.Object)
-	OptionalListValue() obj.Object
-	SetOptionalListValue(optionalListValue obj.Object)
-	NullableOptionalListWasPresent() obj.Object
-	SetNullableOptionalListWasPresent(nullableOptionalListWasPresent obj.Object)
-	NullableOptionalListWasNull() obj.Object
-	SetNullableOptionalListWasNull(nullableOptionalListWasNull obj.Object)
-	NullableOptionalListValue() obj.Object
-	SetNullableOptionalListValue(nullableOptionalListValue obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-}
-
-var _ MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsable = (*MTRUnitTestingClusterTestComplexNullableOptionalResponseParams)(nil)
 
 // isMTRUnitTestingClusterTestComplexNullableOptionalResponseParams marks MTRUnitTestingClusterTestComplexNullableOptionalResponseParams — and, by embedding promotion, its
 // subclasses — as a member of the MTRUnitTestingClusterTestComplexNullableOptionalResponseParams hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) isMTRUnitTestingClusterTestComplexNullableOptionalResponseParams() {
+func (mutctcnorp *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams) isMTRUnitTestingClusterTestComplexNullableOptionalResponseParams() {
 }
 
 var _ MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsProvider = (*MTRUnitTestingClusterTestComplexNullableOptionalResponseParams)(nil)

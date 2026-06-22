@@ -48,54 +48,45 @@ func delegatingPlaybackCoordinatorPlaybackControlCommandAdopt(id objc.ID) *Deleg
 }
 
 // Description returns the object's -description text.
-func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dpcpcc *DelegatingPlaybackCoordinatorPlaybackControlCommand) Description() string {
+	return rt.Description(objref.IDOf(dpcpcc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dpcpcc *DelegatingPlaybackCoordinatorPlaybackControlCommand) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dpcpcc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dpcpcc *DelegatingPlaybackCoordinatorPlaybackControlCommand) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dpcpcc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dpcpcc *DelegatingPlaybackCoordinatorPlaybackControlCommand) String() string {
+	return rt.Description(objref.IDOf(dpcpcc))
 }
 
-// Originator the participant causing this command to be issued. Only commands issued on behalf of another participant will contain an originator. Commands caused by local requests, e.g., requests to coordinate a rate change, will not contain an originator. Similarly, re-application of older commands, e.g., in response to a call to [AVDelegatingPlaybackCoordinator reapplyCurrentItemStateToPlaybackControlDelegate], will not contain an originator. If the originator is non-nil, it may be appropriate to show UI indicating someone else's action.
-func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) Originator() *CoordinatedPlaybackParticipant {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originator"))
+// Originator returns the participant causing this command to be issued. Only commands issued on behalf of another participant will contain an originator. Commands caused by local requests, e.g., requests to coordinate a rate change, will not contain an originator. Similarly, re-application of older commands, e.g., in response to a call to [AVDelegatingPlaybackCoordinator reapplyCurrentItemStateToPlaybackControlDelegate], will not contain an originator. If the originator is non-nil, it may be appropriate to show UI indicating someone else's action.
+func (dpcpcc *DelegatingPlaybackCoordinatorPlaybackControlCommand) Originator() *CoordinatedPlaybackParticipant {
+	_r := objc.Send[objc.ID](objref.IDOf(dpcpcc), objc.RegisterName("originator"))
 	return CoordinatedPlaybackParticipantFromID(_r)
 }
 
 // ExpectedCurrentItemIdentifier indicates the item this command was issued for. Commands are always meant for the current item. A command handler should verify that the identifier of its current item matches this identifier. If it doesn't this command is obsolete and should be ignored. Note that any completion handler of the delegate method issuing the command must still be invoked.
-func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) ExpectedCurrentItemIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expectedCurrentItemIdentifier"))
+func (dpcpcc *DelegatingPlaybackCoordinatorPlaybackControlCommand) ExpectedCurrentItemIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dpcpcc), objc.RegisterName("expectedCurrentItemIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// DelegatingPlaybackCoordinatorPlaybackControlCommandable is the interface implemented by [DelegatingPlaybackCoordinatorPlaybackControlCommand], for mocking and DI.
-type DelegatingPlaybackCoordinatorPlaybackControlCommandable interface {
-	obj.Object
-	Originator() *CoordinatedPlaybackParticipant
-	ExpectedCurrentItemIdentifier() string
-}
-
-var _ DelegatingPlaybackCoordinatorPlaybackControlCommandable = (*DelegatingPlaybackCoordinatorPlaybackControlCommand)(nil)
-
 // isDelegatingPlaybackCoordinatorPlaybackControlCommand marks DelegatingPlaybackCoordinatorPlaybackControlCommand — and, by embedding promotion, its
 // subclasses — as a member of the DelegatingPlaybackCoordinatorPlaybackControlCommand hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DelegatingPlaybackCoordinatorPlaybackControlCommand) isDelegatingPlaybackCoordinatorPlaybackControlCommand() {
+func (dpcpcc *DelegatingPlaybackCoordinatorPlaybackControlCommand) isDelegatingPlaybackCoordinatorPlaybackControlCommand() {
 }
 
 var _ DelegatingPlaybackCoordinatorPlaybackControlCommandProvider = (*DelegatingPlaybackCoordinatorPlaybackControlCommand)(nil)

@@ -46,24 +46,24 @@ func conditionAdopt(id objc.ID) *Condition {
 }
 
 // Description returns the object's -description text.
-func (x *Condition) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Condition) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Condition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Condition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Condition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Condition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Condition) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Condition) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewCondition creates a new Condition.
@@ -72,64 +72,44 @@ func NewCondition() *Condition {
 	return conditionAdopt(_id)
 }
 
-// WithName the name of the condition.
-func (x *Condition) WithName(name StringProvider) *Condition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
-	return x
+// WithName sets the name of the condition.
+func (c *Condition) WithName(name StringProvider) *Condition {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setName:"), objref.IDOf(name))
+	return c
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Condition) WithScriptingProperties(scriptingProperties obj.Object) *Condition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (c *Condition) WithScriptingProperties(scriptingProperties obj.Object) *Condition {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return c
 }
 
 // Wait blocks the current thread until the condition is signaled.
-func (x *Condition) Wait() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wait"))
+func (c *Condition) Wait() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("wait"))
 }
 
 // WaitUntilDate blocks the current thread until the condition is signaled or the specified time limit is reached.
-func (x *Condition) WaitUntilDate(limit *Date) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("waitUntilDate:"), objref.IDOf(limit))
+func (c *Condition) WaitUntilDate(limit *Date) bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("waitUntilDate:"), objref.IDOf(limit))
 	return _r
 }
 
 // Signal signals the condition, waking up one thread waiting on it.
-func (x *Condition) Signal() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signal"))
+func (c *Condition) Signal() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("signal"))
 }
 
 // Broadcast signals the condition, waking up all threads waiting on it.
-func (x *Condition) Broadcast() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("broadcast"))
+func (c *Condition) Broadcast() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("broadcast"))
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Condition) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (c *Condition) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetName wraps the corresponding Objective-C method.
-func (x *Condition) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// Conditionable is the interface implemented by [Condition], for mocking and DI.
-type Conditionable interface {
-	obj.Object
-	WithName(name StringProvider) *Condition
-	WithScriptingProperties(scriptingProperties obj.Object) *Condition
-	Wait()
-	WaitUntilDate(limit *Date) bool
-	Signal()
-	Broadcast()
-	Name() string
-	SetName(name string)
-}
-
-var _ Conditionable = (*Condition)(nil)

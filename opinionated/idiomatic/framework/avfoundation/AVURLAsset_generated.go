@@ -55,81 +55,65 @@ func NewURLAssetWithURLOptions(uRL string, options obj.Object) *URLAsset {
 }
 
 // URL indicates the URL with which the instance of AVURLAsset was initialized.
-func (x *URLAsset) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (ua *URLAsset) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// HttpSessionIdentifier provides the identifier that's automatically included in any HTTP request issued on behalf of this asset in the HTTP header field "X-Playback-Session-Id". The value is an NSUUID from which the UUID string can be obtained. Note that copies of an AVURLAsset vend an equivalent httpSessionIdentifier.
-func (x *URLAsset) HttpSessionIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("httpSessionIdentifier"))
+// HTTPSessionIdentifier provides the identifier that's automatically included in any HTTP request issued on behalf of this asset in the HTTP header field "X-Playback-Session-Id". The value is an NSUUID from which the UUID string can be obtained. Note that copies of an AVURLAsset vend an equivalent httpSessionIdentifier.
+func (ua *URLAsset) HTTPSessionIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("httpSessionIdentifier"))
 	return obj.Wrap(_r)
 }
 
 // ResourceLoader wraps the corresponding Objective-C method.
-func (x *URLAsset) ResourceLoader() *AssetResourceLoader {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resourceLoader"))
+func (ua *URLAsset) ResourceLoader() *AssetResourceLoader {
+	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("resourceLoader"))
 	return AssetResourceLoaderFromID(_r)
 }
 
 // AssetCache wraps the corresponding Objective-C method.
-func (x *URLAsset) AssetCache() *AssetCache {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetCache"))
+func (ua *URLAsset) AssetCache() *AssetCache {
+	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("assetCache"))
 	return AssetCacheFromID(_r)
 }
 
 // CompatibleTrackForCompositionTrack returns an asset track from which you can insert any time range into a given composition track.
-func (x *URLAsset) CompatibleTrackForCompositionTrack(compositionTrack *CompositionTrack) *AssetTrack {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compatibleTrackForCompositionTrack:"), objref.IDOf(compositionTrack))
+func (ua *URLAsset) CompatibleTrackForCompositionTrack(compositionTrack *CompositionTrack) *AssetTrack {
+	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("compatibleTrackForCompositionTrack:"), objref.IDOf(compositionTrack))
 	return AssetTrackFromID(_r)
 }
 
 // Variants provides an array of AVAssetVariants contained in the asset Some variants may not be playable according to the current device configuration.
 //
 // Variants returns the collection as a Go slice.
-func (x *URLAsset) Variants() []*AssetVariant {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variants"))
+func (ua *URLAsset) Variants() []*AssetVariant {
+	_arr := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("variants"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetVariant { return AssetVariantFromID(_id) })
 }
 
-// MediaExtensionProperties the properties of the MediaExtension format reader for the asset. If the asset is being decoded using a MediaExtension format reader, this property will return a AVMediaExtensionProperties object describing the extension. If the asset is not being decoded with a MediaExtension format reader, this property will return nil.
-func (x *URLAsset) MediaExtensionProperties() *MediaExtensionProperties {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaExtensionProperties"))
+// MediaExtensionProperties returns the properties of the MediaExtension format reader for the asset. If the asset is being decoded using a MediaExtension format reader, this property will return a AVMediaExtensionProperties object describing the extension. If the asset is not being decoded with a MediaExtension format reader, this property will return nil.
+func (ua *URLAsset) MediaExtensionProperties() *MediaExtensionProperties {
+	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("mediaExtensionProperties"))
 	return MediaExtensionPropertiesFromID(_r)
 }
 
-// SidecarURL the sidecar URL used by the MediaExtension. The sidecar URL is returned only if the MediaExtension format reader supports sidecar files, and implements this property [MEFileInfo setSidecarFilename:]. Will return nil otherwise.
-func (x *URLAsset) SidecarURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sidecarURL"))
+// SidecarURL returns the sidecar URL used by the MediaExtension. The sidecar URL is returned only if the MediaExtension format reader supports sidecar files, and implements this property [MEFileInfo setSidecarFilename:]. Will return nil otherwise.
+func (ua *URLAsset) SidecarURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("sidecarURL"))
 	return obj.Wrap(_r)
 }
 
 // MayRequireContentKeysForMediaDataProcessing wraps the corresponding Objective-C method.
-func (x *URLAsset) MayRequireContentKeysForMediaDataProcessing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mayRequireContentKeysForMediaDataProcessing"))
+func (ua *URLAsset) MayRequireContentKeysForMediaDataProcessing() bool {
+	_r := objc.Send[bool](objref.IDOf(ua), objc.RegisterName("mayRequireContentKeysForMediaDataProcessing"))
 	return _r
 }
-
-// URLAssetable is the interface implemented by [URLAsset], for mocking and DI.
-type URLAssetable interface {
-	obj.Object
-	URL() obj.Object
-	HttpSessionIdentifier() obj.Object
-	ResourceLoader() *AssetResourceLoader
-	AssetCache() *AssetCache
-	CompatibleTrackForCompositionTrack(compositionTrack *CompositionTrack) *AssetTrack
-	Variants() []*AssetVariant
-	MediaExtensionProperties() *MediaExtensionProperties
-	SidecarURL() obj.Object
-	MayRequireContentKeysForMediaDataProcessing() bool
-}
-
-var _ URLAssetable = (*URLAsset)(nil)
 
 // isURLAsset marks URLAsset — and, by embedding promotion, its
 // subclasses — as a member of the URLAsset hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *URLAsset) isURLAsset() {}
+func (ua *URLAsset) isURLAsset() {}
 
 var _ URLAssetProvider = (*URLAsset)(nil)
 

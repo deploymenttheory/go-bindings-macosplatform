@@ -7,7 +7,6 @@ package networkextension
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,19 +51,11 @@ func NewNETransparentProxyProvider() *NETransparentProxyProvider {
 	return nETransparentProxyProviderAdopt(_id)
 }
 
-// WithReasserting indicate to the system that the tunnel is being re-established.
-func (x *NETransparentProxyProvider) WithReasserting(reasserting bool) *NETransparentProxyProvider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReasserting:"), reasserting)
-	return x
+// WithReasserting sets indicate to the system that the tunnel is being re-established.
+func (ntpp *NETransparentProxyProvider) WithReasserting(reasserting bool) *NETransparentProxyProvider {
+	objc.Send[objc.ID](objref.IDOf(ntpp), objc.RegisterName("setReasserting:"), reasserting)
+	return ntpp
 }
-
-// NETransparentProxyProviderable is the interface implemented by [NETransparentProxyProvider], for mocking and DI.
-type NETransparentProxyProviderable interface {
-	obj.Object
-	WithReasserting(reasserting bool) *NETransparentProxyProvider
-}
-
-var _ NETransparentProxyProviderable = (*NETransparentProxyProvider)(nil)
 
 var _ NEAppProxyProviderProvider = (*NETransparentProxyProvider)(nil)
 

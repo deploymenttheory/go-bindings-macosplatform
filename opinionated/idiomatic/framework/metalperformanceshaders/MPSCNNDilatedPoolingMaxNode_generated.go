@@ -67,32 +67,22 @@ func NewCNNDilatedPoolingMaxNodeWithSourceFilterSize(sourceNode obj.Object, size
 	return cNNDilatedPoolingMaxNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNDilatedPoolingMaxNode) WithLabel(label string) *CNNDilatedPoolingMaxNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cdpmn *CNNDilatedPoolingMaxNode) WithLabel(label string) *CNNDilatedPoolingMaxNode {
+	objc.Send[objc.ID](objref.IDOf(cdpmn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cdpmn
 }
 
 // DilationRateX wraps the corresponding Objective-C method.
-func (x *CNNDilatedPoolingMaxNode) DilationRateX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateX"))
+func (cdpmn *CNNDilatedPoolingMaxNode) DilationRateX() int {
+	_r := objc.Send[int](objref.IDOf(cdpmn), objc.RegisterName("dilationRateX"))
 	return _r
 }
 
 // DilationRateY wraps the corresponding Objective-C method.
-func (x *CNNDilatedPoolingMaxNode) DilationRateY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateY"))
+func (cdpmn *CNNDilatedPoolingMaxNode) DilationRateY() int {
+	_r := objc.Send[int](objref.IDOf(cdpmn), objc.RegisterName("dilationRateY"))
 	return _r
 }
-
-// CNNDilatedPoolingMaxNodeable is the interface implemented by [CNNDilatedPoolingMaxNode], for mocking and DI.
-type CNNDilatedPoolingMaxNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNDilatedPoolingMaxNode
-	DilationRateX() int
-	DilationRateY() int
-}
-
-var _ CNNDilatedPoolingMaxNodeable = (*CNNDilatedPoolingMaxNode)(nil)
 
 var _ NNFilterNodeProvider = (*CNNDilatedPoolingMaxNode)(nil)

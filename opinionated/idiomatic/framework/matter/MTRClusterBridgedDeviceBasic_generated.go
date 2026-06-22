@@ -51,13 +51,6 @@ func NewMTRClusterBridgedDeviceBasicWithDeviceEndpointQueue(device *MTRDevice, e
 	return mTRClusterBridgedDeviceBasicAdopt(_id)
 }
 
-// MTRClusterBridgedDeviceBasicable is the interface implemented by [MTRClusterBridgedDeviceBasic], for mocking and DI.
-type MTRClusterBridgedDeviceBasicable interface {
-	obj.Object
-}
-
-var _ MTRClusterBridgedDeviceBasicable = (*MTRClusterBridgedDeviceBasic)(nil)
-
 var _ MTRClusterBridgedDeviceBasicInformationProvider = (*MTRClusterBridgedDeviceBasic)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterBridgedDeviceBasic)(nil)

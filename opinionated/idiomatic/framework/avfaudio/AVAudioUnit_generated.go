@@ -5,13 +5,14 @@
 package avfaudio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // AudioUnit is an idiomatic wrapper over the Objective-C class AVAudioUnit.
@@ -50,54 +51,43 @@ func audioUnitAdopt(id objc.ID) *AudioUnit {
 }
 
 // LoadAudioUnitPresetAtURL loads an audio unit using a specified preset.
-func (x *AudioUnit) LoadAudioUnitPresetAtURL(url string) error {
+func (au *AudioUnit) LoadAudioUnitPresetAtURL(url string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadAudioUnitPresetAtURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(au), objc.RegisterName("loadAudioUnitPresetAtURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// AudioComponentDescription audioComponentDescription of the underlying audio unit.
-func (x *AudioUnit) AudioComponentDescription() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioComponentDescription"))
+// AudioComponentDescription returns audioComponentDescription of the underlying audio unit.
+func (au *AudioUnit) AudioComponentDescription() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("audioComponentDescription"))
 	return obj.Wrap(_r)
 }
 
-// Name name of the audio unit.
-func (x *AudioUnit) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns name of the audio unit.
+func (au *AudioUnit) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ManufacturerName manufacturer name of the audio unit.
-func (x *AudioUnit) ManufacturerName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manufacturerName"))
+// ManufacturerName returns manufacturer name of the audio unit.
+func (au *AudioUnit) ManufacturerName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(au), objc.RegisterName("manufacturerName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// AudioUnitable is the interface implemented by [AudioUnit], for mocking and DI.
-type AudioUnitable interface {
-	obj.Object
-	LoadAudioUnitPresetAtURL(url string) error
-	AudioComponentDescription() obj.Object
-	Name() string
-	ManufacturerName() string
-}
-
-var _ AudioUnitable = (*AudioUnit)(nil)
 
 // isAudioUnit marks AudioUnit — and, by embedding promotion, its
 // subclasses — as a member of the AudioUnit hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AudioUnit) isAudioUnit() {}
+func (au *AudioUnit) isAudioUnit() {}
 
 var _ AudioUnitProvider = (*AudioUnit)(nil)
 

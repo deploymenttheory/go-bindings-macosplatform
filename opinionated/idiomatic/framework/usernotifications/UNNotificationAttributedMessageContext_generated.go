@@ -44,24 +44,24 @@ func notificationAttributedMessageContextAdopt(id objc.ID) *NotificationAttribut
 }
 
 // Description returns the object's -description text.
-func (x *NotificationAttributedMessageContext) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (namc *NotificationAttributedMessageContext) Description() string {
+	return rt.Description(objref.IDOf(namc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NotificationAttributedMessageContext) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (namc *NotificationAttributedMessageContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(namc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NotificationAttributedMessageContext) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (namc *NotificationAttributedMessageContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(namc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NotificationAttributedMessageContext) String() string {
-	return rt.Description(objref.IDOf(x))
+func (namc *NotificationAttributedMessageContext) String() string {
+	return rt.Description(objref.IDOf(namc))
 }
 
 // NewNotificationAttributedMessageContext creates a new NotificationAttributedMessageContext.
@@ -69,10 +69,3 @@ func NewNotificationAttributedMessageContext() *NotificationAttributedMessageCon
 	_id := objc.Send[objc.ID](objc.ID(_class("UNNotificationAttributedMessageContext")), objc.RegisterName("new"))
 	return notificationAttributedMessageContextAdopt(_id)
 }
-
-// NotificationAttributedMessageContextable is the interface implemented by [NotificationAttributedMessageContext], for mocking and DI.
-type NotificationAttributedMessageContextable interface {
-	obj.Object
-}
-
-var _ NotificationAttributedMessageContextable = (*NotificationAttributedMessageContext)(nil)

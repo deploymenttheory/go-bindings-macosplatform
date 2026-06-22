@@ -46,24 +46,24 @@ func blitPassDescriptorAdopt(id objc.ID) *BlitPassDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *BlitPassDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bpd *BlitPassDescriptor) Description() string {
+	return rt.Description(objref.IDOf(bpd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BlitPassDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bpd *BlitPassDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bpd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BlitPassDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bpd *BlitPassDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bpd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BlitPassDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bpd *BlitPassDescriptor) String() string {
+	return rt.Description(objref.IDOf(bpd))
 }
 
 // NewBlitPassDescriptor creates a new BlitPassDescriptor.
@@ -73,15 +73,7 @@ func NewBlitPassDescriptor() *BlitPassDescriptor {
 }
 
 // SampleBufferAttachments wraps the corresponding Objective-C method.
-func (x *BlitPassDescriptor) SampleBufferAttachments() *BlitPassSampleBufferAttachmentDescriptorArray {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferAttachments"))
+func (bpd *BlitPassDescriptor) SampleBufferAttachments() *BlitPassSampleBufferAttachmentDescriptorArray {
+	_r := objc.Send[objc.ID](objref.IDOf(bpd), objc.RegisterName("sampleBufferAttachments"))
 	return BlitPassSampleBufferAttachmentDescriptorArrayFromID(_r)
 }
-
-// BlitPassDescriptorable is the interface implemented by [BlitPassDescriptor], for mocking and DI.
-type BlitPassDescriptorable interface {
-	obj.Object
-	SampleBufferAttachments() *BlitPassSampleBufferAttachmentDescriptorArray
-}
-
-var _ BlitPassDescriptorable = (*BlitPassDescriptor)(nil)

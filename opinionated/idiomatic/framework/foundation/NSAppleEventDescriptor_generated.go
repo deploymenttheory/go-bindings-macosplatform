@@ -5,13 +5,14 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // AppleEventDescriptor is an idiomatic wrapper over the Objective-C class NSAppleEventDescriptor.
@@ -48,24 +49,24 @@ func appleEventDescriptorAdopt(id objc.ID) *AppleEventDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *AppleEventDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aed *AppleEventDescriptor) Description() string {
+	return rt.Description(objref.IDOf(aed))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AppleEventDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aed *AppleEventDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aed), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AppleEventDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aed *AppleEventDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aed), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AppleEventDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aed *AppleEventDescriptor) String() string {
+	return rt.Description(objref.IDOf(aed))
 }
 
 // NewAppleEventDescriptor creates a new AppleEventDescriptor.
@@ -89,42 +90,42 @@ func NewAppleEventDescriptorWithEventClassEventIDTargetDescriptorReturnIDTransac
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *AppleEventDescriptor) WithScriptingProperties(scriptingProperties obj.Object) *AppleEventDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (aed *AppleEventDescriptor) WithScriptingProperties(scriptingProperties obj.Object) *AppleEventDescriptor {
+	objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return aed
 }
 
 // SetParamDescriptorForKeyword adds a descriptor to the receiver as an Apple event parameter identified by the specified keyword.
-func (x *AppleEventDescriptor) SetParamDescriptorForKeyword(descriptor *AppleEventDescriptor, keyword int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParamDescriptor:forKeyword:"), objref.IDOf(descriptor), keyword)
+func (aed *AppleEventDescriptor) SetParamDescriptorForKeyword(descriptor *AppleEventDescriptor, keyword int) {
+	objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("setParamDescriptor:forKeyword:"), objref.IDOf(descriptor), keyword)
 }
 
 // ParamDescriptorForKeyword returns a descriptor for the receiver’s Apple event parameter identified by the specified keyword.
-func (x *AppleEventDescriptor) ParamDescriptorForKeyword(keyword int) *AppleEventDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paramDescriptorForKeyword:"), keyword)
+func (aed *AppleEventDescriptor) ParamDescriptorForKeyword(keyword int) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("paramDescriptorForKeyword:"), keyword)
 	return AppleEventDescriptorFromID(_r)
 }
 
 // RemoveParamDescriptorWithKeyword removes the receiver’s parameter descriptor identified by the specified keyword.
-func (x *AppleEventDescriptor) RemoveParamDescriptorWithKeyword(keyword int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeParamDescriptorWithKeyword:"), keyword)
+func (aed *AppleEventDescriptor) RemoveParamDescriptorWithKeyword(keyword int) {
+	objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("removeParamDescriptorWithKeyword:"), keyword)
 }
 
 // SetAttributeDescriptorForKeyword adds a descriptor to the receiver as an attribute identified by the specified keyword.
-func (x *AppleEventDescriptor) SetAttributeDescriptorForKeyword(descriptor *AppleEventDescriptor, keyword int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeDescriptor:forKeyword:"), objref.IDOf(descriptor), keyword)
+func (aed *AppleEventDescriptor) SetAttributeDescriptorForKeyword(descriptor *AppleEventDescriptor, keyword int) {
+	objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("setAttributeDescriptor:forKeyword:"), objref.IDOf(descriptor), keyword)
 }
 
 // AttributeDescriptorForKeyword returns a descriptor for the receiver’s Apple event attribute identified by the specified keyword.
-func (x *AppleEventDescriptor) AttributeDescriptorForKeyword(keyword int) *AppleEventDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeDescriptorForKeyword:"), keyword)
+func (aed *AppleEventDescriptor) AttributeDescriptorForKeyword(keyword int) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("attributeDescriptorForKeyword:"), keyword)
 	return AppleEventDescriptorFromID(_r)
 }
 
 // SendEventWithOptionsTimeoutError sends an Apple event.
-func (x *AppleEventDescriptor) SendEventWithOptionsTimeoutError(sendOptions AppleEventSendOptions, timeoutInSeconds float64) (result *AppleEventDescriptor, err error) {
+func (aed *AppleEventDescriptor) SendEventWithOptionsTimeoutError(sendOptions AppleEventSendOptions, timeoutInSeconds float64) (result *AppleEventDescriptor, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendEventWithOptions:timeout:error:"), sendOptions, timeoutInSeconds, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("sendEventWithOptions:timeout:error:"), sendOptions, timeoutInSeconds, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -132,94 +133,94 @@ func (x *AppleEventDescriptor) SendEventWithOptionsTimeoutError(sendOptions Appl
 }
 
 // InsertDescriptorAtIndex inserts a descriptor at the specified (one-based) position in the receiving descriptor list, replacing the existing descriptor, if any, at that position.
-func (x *AppleEventDescriptor) InsertDescriptorAtIndex(descriptor *AppleEventDescriptor, index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertDescriptor:atIndex:"), objref.IDOf(descriptor), index)
+func (aed *AppleEventDescriptor) InsertDescriptorAtIndex(descriptor *AppleEventDescriptor, index int) {
+	objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("insertDescriptor:atIndex:"), objref.IDOf(descriptor), index)
 }
 
 // DescriptorAtIndex returns the descriptor at the specified (one-based) position in the receiving descriptor list.
-func (x *AppleEventDescriptor) DescriptorAtIndex(index int) *AppleEventDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptorAtIndex:"), index)
+func (aed *AppleEventDescriptor) DescriptorAtIndex(index int) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("descriptorAtIndex:"), index)
 	return AppleEventDescriptorFromID(_r)
 }
 
 // RemoveDescriptorAtIndex removes the descriptor at the specified (one-based) position in the receiving descriptor list.
-func (x *AppleEventDescriptor) RemoveDescriptorAtIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeDescriptorAtIndex:"), index)
+func (aed *AppleEventDescriptor) RemoveDescriptorAtIndex(index int) {
+	objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("removeDescriptorAtIndex:"), index)
 }
 
 // SetDescriptorForKeyword adds a descriptor, identified by a keyword, to the receiver.
-func (x *AppleEventDescriptor) SetDescriptorForKeyword(descriptor *AppleEventDescriptor, keyword int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDescriptor:forKeyword:"), objref.IDOf(descriptor), keyword)
+func (aed *AppleEventDescriptor) SetDescriptorForKeyword(descriptor *AppleEventDescriptor, keyword int) {
+	objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("setDescriptor:forKeyword:"), objref.IDOf(descriptor), keyword)
 }
 
 // DescriptorForKeyword returns the receiver’s descriptor for the specified keyword.
-func (x *AppleEventDescriptor) DescriptorForKeyword(keyword int) *AppleEventDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptorForKeyword:"), keyword)
+func (aed *AppleEventDescriptor) DescriptorForKeyword(keyword int) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("descriptorForKeyword:"), keyword)
 	return AppleEventDescriptorFromID(_r)
 }
 
 // RemoveDescriptorWithKeyword removes the receiver’s descriptor identified by the specified keyword.
-func (x *AppleEventDescriptor) RemoveDescriptorWithKeyword(keyword int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeDescriptorWithKeyword:"), keyword)
+func (aed *AppleEventDescriptor) RemoveDescriptorWithKeyword(keyword int) {
+	objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("removeDescriptorWithKeyword:"), keyword)
 }
 
 // KeywordForDescriptorAtIndex returns the keyword for the descriptor at the specified (one-based) position in the receiver.
-func (x *AppleEventDescriptor) KeywordForDescriptorAtIndex(index int) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("keywordForDescriptorAtIndex:"), index)
+func (aed *AppleEventDescriptor) KeywordForDescriptorAtIndex(index int) int {
+	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("keywordForDescriptorAtIndex:"), index)
 	return _r
 }
 
 // CoerceToDescriptorType returns a descriptor obtained by coercing the receiver to the specified type.
-func (x *AppleEventDescriptor) CoerceToDescriptorType(descriptorType int) *AppleEventDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coerceToDescriptorType:"), descriptorType)
+func (aed *AppleEventDescriptor) CoerceToDescriptorType(descriptorType int) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("coerceToDescriptorType:"), descriptorType)
 	return AppleEventDescriptorFromID(_r)
 }
 
 // DescriptorType wraps the corresponding Objective-C method.
-func (x *AppleEventDescriptor) DescriptorType() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("descriptorType"))
+func (aed *AppleEventDescriptor) DescriptorType() int {
+	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("descriptorType"))
 	return _r
 }
 
 // Data wraps the corresponding Objective-C method.
-func (x *AppleEventDescriptor) Data() *Data {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+func (aed *AppleEventDescriptor) Data() *Data {
+	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("data"))
 	return DataFromID(_r)
 }
 
 // BooleanValue wraps the corresponding Objective-C method.
-func (x *AppleEventDescriptor) BooleanValue() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("booleanValue"))
+func (aed *AppleEventDescriptor) BooleanValue() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(aed), objc.RegisterName("booleanValue"))
 	return _r
 }
 
 // EnumCodeValue wraps the corresponding Objective-C method.
-func (x *AppleEventDescriptor) EnumCodeValue() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("enumCodeValue"))
+func (aed *AppleEventDescriptor) EnumCodeValue() int {
+	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("enumCodeValue"))
 	return _r
 }
 
 // Int32Value wraps the corresponding Objective-C method.
-func (x *AppleEventDescriptor) Int32Value() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("int32Value"))
+func (aed *AppleEventDescriptor) Int32Value() int {
+	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("int32Value"))
 	return _r
 }
 
 // DoubleValue wraps the corresponding Objective-C method.
-func (x *AppleEventDescriptor) DoubleValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleValue"))
+func (aed *AppleEventDescriptor) DoubleValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(aed), objc.RegisterName("doubleValue"))
 	return _r
 }
 
 // TypeCodeValue wraps the corresponding Objective-C method.
-func (x *AppleEventDescriptor) TypeCodeValue() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("typeCodeValue"))
+func (aed *AppleEventDescriptor) TypeCodeValue() int {
+	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("typeCodeValue"))
 	return _r
 }
 
 // StringValue wraps the corresponding Objective-C method.
-func (x *AppleEventDescriptor) StringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+func (aed *AppleEventDescriptor) StringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
 	}
@@ -227,87 +228,49 @@ func (x *AppleEventDescriptor) StringValue() string {
 }
 
 // DateValue wraps the corresponding Objective-C method.
-func (x *AppleEventDescriptor) DateValue() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateValue"))
+func (aed *AppleEventDescriptor) DateValue() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("dateValue"))
 	return DateFromID(_r)
 }
 
 // FileURLValue wraps the corresponding Objective-C method.
-func (x *AppleEventDescriptor) FileURLValue() *URL {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileURLValue"))
+func (aed *AppleEventDescriptor) FileURLValue() *URL {
+	_r := objc.Send[objc.ID](objref.IDOf(aed), objc.RegisterName("fileURLValue"))
 	return URLFromID(_r)
 }
 
 // EventClass wraps the corresponding Objective-C method.
-func (x *AppleEventDescriptor) EventClass() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("eventClass"))
+func (aed *AppleEventDescriptor) EventClass() int {
+	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("eventClass"))
 	return _r
 }
 
 // EventID wraps the corresponding Objective-C method.
-func (x *AppleEventDescriptor) EventID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("eventID"))
+func (aed *AppleEventDescriptor) EventID() int {
+	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("eventID"))
 	return _r
 }
 
 // ReturnID wraps the corresponding Objective-C method.
-func (x *AppleEventDescriptor) ReturnID() int16 {
-	_r := objc.Send[int16](objref.IDOf(x), objc.RegisterName("returnID"))
+func (aed *AppleEventDescriptor) ReturnID() int16 {
+	_r := objc.Send[int16](objref.IDOf(aed), objc.RegisterName("returnID"))
 	return _r
 }
 
 // TransactionID wraps the corresponding Objective-C method.
-func (x *AppleEventDescriptor) TransactionID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("transactionID"))
+func (aed *AppleEventDescriptor) TransactionID() int {
+	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("transactionID"))
 	return _r
 }
 
 // IsRecordDescriptor wraps the corresponding Objective-C method.
-func (x *AppleEventDescriptor) IsRecordDescriptor() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRecordDescriptor"))
+func (aed *AppleEventDescriptor) IsRecordDescriptor() bool {
+	_r := objc.Send[bool](objref.IDOf(aed), objc.RegisterName("isRecordDescriptor"))
 	return _r
 }
 
 // NumberOfItems wraps the corresponding Objective-C method.
-func (x *AppleEventDescriptor) NumberOfItems() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfItems"))
+func (aed *AppleEventDescriptor) NumberOfItems() int {
+	_r := objc.Send[int](objref.IDOf(aed), objc.RegisterName("numberOfItems"))
 	return _r
 }
-
-// AppleEventDescriptorable is the interface implemented by [AppleEventDescriptor], for mocking and DI.
-type AppleEventDescriptorable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *AppleEventDescriptor
-	SetParamDescriptorForKeyword(descriptor *AppleEventDescriptor, keyword int)
-	ParamDescriptorForKeyword(keyword int) *AppleEventDescriptor
-	RemoveParamDescriptorWithKeyword(keyword int)
-	SetAttributeDescriptorForKeyword(descriptor *AppleEventDescriptor, keyword int)
-	AttributeDescriptorForKeyword(keyword int) *AppleEventDescriptor
-	SendEventWithOptionsTimeoutError(sendOptions AppleEventSendOptions, timeoutInSeconds float64) (result *AppleEventDescriptor, err error)
-	InsertDescriptorAtIndex(descriptor *AppleEventDescriptor, index int)
-	DescriptorAtIndex(index int) *AppleEventDescriptor
-	RemoveDescriptorAtIndex(index int)
-	SetDescriptorForKeyword(descriptor *AppleEventDescriptor, keyword int)
-	DescriptorForKeyword(keyword int) *AppleEventDescriptor
-	RemoveDescriptorWithKeyword(keyword int)
-	KeywordForDescriptorAtIndex(index int) int
-	CoerceToDescriptorType(descriptorType int) *AppleEventDescriptor
-	DescriptorType() int
-	Data() *Data
-	BooleanValue() uint8
-	EnumCodeValue() int
-	Int32Value() int
-	DoubleValue() float64
-	TypeCodeValue() int
-	StringValue() string
-	DateValue() *Date
-	FileURLValue() *URL
-	EventClass() int
-	EventID() int
-	ReturnID() int16
-	TransactionID() int
-	IsRecordDescriptor() bool
-	NumberOfItems() int
-}
-
-var _ AppleEventDescriptorable = (*AppleEventDescriptor)(nil)

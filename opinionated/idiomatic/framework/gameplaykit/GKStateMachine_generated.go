@@ -46,24 +46,24 @@ func stateMachineAdopt(id objc.ID) *StateMachine {
 }
 
 // Description returns the object's -description text.
-func (x *StateMachine) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sm *StateMachine) Description() string {
+	return rt.Description(objref.IDOf(sm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StateMachine) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sm *StateMachine) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StateMachine) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sm *StateMachine) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StateMachine) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sm *StateMachine) String() string {
+	return rt.Description(objref.IDOf(sm))
 }
 
 // NewStateMachineWithStates initializes a state machine with the specified states.
@@ -74,21 +74,12 @@ func NewStateMachineWithStates(states []*State) *StateMachine {
 }
 
 // UpdateWithDeltaTime tells the current state object to perform per-frame updates.
-func (x *StateMachine) UpdateWithDeltaTime(sec float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithDeltaTime:"), sec)
+func (sm *StateMachine) UpdateWithDeltaTime(sec float64) {
+	objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("updateWithDeltaTime:"), sec)
 }
 
-// CurrentState the current state that the state machine is in. Prior to the first called to enterState this is equal to nil.
-func (x *StateMachine) CurrentState() *State {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentState"))
+// CurrentState returns the current state that the state machine is in. Prior to the first called to enterState this is equal to nil.
+func (sm *StateMachine) CurrentState() *State {
+	_r := objc.Send[objc.ID](objref.IDOf(sm), objc.RegisterName("currentState"))
 	return StateFromID(_r)
 }
-
-// StateMachineable is the interface implemented by [StateMachine], for mocking and DI.
-type StateMachineable interface {
-	obj.Object
-	UpdateWithDeltaTime(sec float64)
-	CurrentState() *State
-}
-
-var _ StateMachineable = (*StateMachine)(nil)

@@ -46,24 +46,24 @@ func dDDeviceEventAdopt(id objc.ID) *DDDeviceEvent {
 }
 
 // Description returns the object's -description text.
-func (x *DDDeviceEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dde *DDDeviceEvent) Description() string {
+	return rt.Description(objref.IDOf(dde))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DDDeviceEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dde *DDDeviceEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dde), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DDDeviceEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dde *DDDeviceEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dde), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DDDeviceEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dde *DDDeviceEvent) String() string {
+	return rt.Description(objref.IDOf(dde))
 }
 
 // NewDDDeviceEventWithEventTypeDevice creates an event object that conveys status for a discovered device of interest.
@@ -73,23 +73,14 @@ func NewDDDeviceEventWithEventTypeDevice(type_ DDEventType, device *DDDevice) *D
 	return dDDeviceEventAdopt(_id)
 }
 
-// Device device found or lost.
-func (x *DDDeviceEvent) Device() *DDDevice {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+// Device returns device found or lost.
+func (dde *DDDeviceEvent) Device() *DDDevice {
+	_r := objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("device"))
 	return DDDeviceFromID(_r)
 }
 
-// EventType type of event.
-func (x *DDDeviceEvent) EventType() DDEventType {
-	_r := objc.Send[DDEventType](objref.IDOf(x), objc.RegisterName("eventType"))
+// EventType returns type of event.
+func (dde *DDDeviceEvent) EventType() DDEventType {
+	_r := objc.Send[DDEventType](objref.IDOf(dde), objc.RegisterName("eventType"))
 	return _r
 }
-
-// DDDeviceEventable is the interface implemented by [DDDeviceEvent], for mocking and DI.
-type DDDeviceEventable interface {
-	obj.Object
-	Device() *DDDevice
-	EventType() DDEventType
-}
-
-var _ DDDeviceEventable = (*DDDeviceEvent)(nil)

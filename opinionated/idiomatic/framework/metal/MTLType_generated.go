@@ -48,43 +48,35 @@ func typeAdopt(id objc.ID) *Type {
 }
 
 // Description returns the object's -description text.
-func (x *Type) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Type) Description() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Type) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (t *Type) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Type) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (t *Type) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Type) String() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Type) String() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // DataType wraps the corresponding Objective-C method.
-func (x *Type) DataType() DataType {
-	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("dataType"))
+func (t *Type) DataType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(t), objc.RegisterName("dataType"))
 	return _r
 }
-
-// Typeable is the interface implemented by [Type], for mocking and DI.
-type Typeable interface {
-	obj.Object
-	DataType() DataType
-}
-
-var _ Typeable = (*Type)(nil)
 
 // isType marks Type — and, by embedding promotion, its
 // subclasses — as a member of the Type hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Type) isType() {}
+func (t *Type) isType() {}
 
 var _ TypeProvider = (*Type)(nil)

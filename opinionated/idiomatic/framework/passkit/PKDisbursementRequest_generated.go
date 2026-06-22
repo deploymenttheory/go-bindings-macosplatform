@@ -46,24 +46,24 @@ func disbursementRequestAdopt(id objc.ID) *DisbursementRequest {
 }
 
 // Description returns the object's -description text.
-func (x *DisbursementRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dr *DisbursementRequest) Description() string {
+	return rt.Description(objref.IDOf(dr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DisbursementRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dr *DisbursementRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DisbursementRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dr *DisbursementRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DisbursementRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dr *DisbursementRequest) String() string {
+	return rt.Description(objref.IDOf(dr))
 }
 
 // NewDisbursementRequestWithMerchantIdentifierCurrencyCodeRegionCodeSupportedNetworksMerchantCapabilitiesSummaryItems creates a new instance of a disbursement request with the merchant identifier, currency and region codes, and other parameters you specify.
@@ -73,250 +73,155 @@ func NewDisbursementRequestWithMerchantIdentifierCurrencyCodeRegionCodeSupported
 	return disbursementRequestAdopt(_id)
 }
 
-// WithMerchantIdentifier a string that identifies the merchant.
-func (x *DisbursementRequest) WithMerchantIdentifier(merchantIdentifier string) *DisbursementRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMerchantIdentifier:"), purego.NSString(merchantIdentifier))
-	return x
+// WithMerchantIdentifier sets a string that identifies the merchant.
+func (dr *DisbursementRequest) WithMerchantIdentifier(merchantIdentifier string) *DisbursementRequest {
+	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setMerchantIdentifier:"), purego.NSString(merchantIdentifier))
+	return dr
 }
 
-// WithRegionCode the merchant’s country code string.
-func (x *DisbursementRequest) WithRegionCode(regionCode string) *DisbursementRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionCode:"), purego.NSString(regionCode))
-	return x
+// WithRegionCode sets the merchant’s country code string.
+func (dr *DisbursementRequest) WithRegionCode(regionCode string) *DisbursementRequest {
+	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setRegionCode:"), purego.NSString(regionCode))
+	return dr
 }
 
-// WithSupportedNetworks an array of payment networks the merchant supports.
-func (x *DisbursementRequest) WithSupportedNetworks(items ...obj.Object) *DisbursementRequest {
+// WithSupportedNetworks sets an array of payment networks the merchant supports.
+func (dr *DisbursementRequest) WithSupportedNetworks(items ...obj.Object) *DisbursementRequest {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedNetworks:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setSupportedNetworks:"), _arr)
+	return dr
 }
 
-// WithMerchantCapabilities a value that represents the payment-processing capabilities of the merchant.
-func (x *DisbursementRequest) WithMerchantCapabilities(merchantCapabilities MerchantCapability) *DisbursementRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMerchantCapabilities:"), merchantCapabilities)
-	return x
+// WithMerchantCapabilities sets a value that represents the payment-processing capabilities of the merchant.
+func (dr *DisbursementRequest) WithMerchantCapabilities(merchantCapabilities MerchantCapability) *DisbursementRequest {
+	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setMerchantCapabilities:"), merchantCapabilities)
+	return dr
 }
 
-// WithSummaryItems an array of payment summary item objects that the framework presents to people.
-func (x *DisbursementRequest) WithSummaryItems(items ...PaymentSummaryItemProvider) *DisbursementRequest {
+// WithSummaryItems sets an array of payment summary item objects that the framework presents to people.
+func (dr *DisbursementRequest) WithSummaryItems(items ...PaymentSummaryItemProvider) *DisbursementRequest {
 	_arr := purego.SliceToNSArray(items, func(_v PaymentSummaryItemProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSummaryItems:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setSummaryItems:"), _arr)
+	return dr
 }
 
-// WithCurrencyCode the currency code string for this disbursement.
-func (x *DisbursementRequest) WithCurrencyCode(currencyCode string) *DisbursementRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrencyCode:"), purego.NSString(currencyCode))
-	return x
+// WithCurrencyCode sets the currency code string for this disbursement.
+func (dr *DisbursementRequest) WithCurrencyCode(currencyCode string) *DisbursementRequest {
+	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setCurrencyCode:"), purego.NSString(currencyCode))
+	return dr
 }
 
-// WithRequiredRecipientContactFields an array that indicates which of the recipient’s contact details the merchant requires in order to process a disbursement.
-func (x *DisbursementRequest) WithRequiredRecipientContactFields(items ...obj.Object) *DisbursementRequest {
+// WithRequiredRecipientContactFields sets an array that indicates which of the recipient’s contact details the merchant requires in order to process a disbursement.
+func (dr *DisbursementRequest) WithRequiredRecipientContactFields(items ...obj.Object) *DisbursementRequest {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredRecipientContactFields:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setRequiredRecipientContactFields:"), _arr)
+	return dr
 }
 
-// WithRecipientContact a contact object that describes the recipient.
-func (x *DisbursementRequest) WithRecipientContact(recipientContact *Contact) *DisbursementRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecipientContact:"), objref.IDOf(recipientContact))
-	return x
+// WithRecipientContact sets a contact object that describes the recipient.
+func (dr *DisbursementRequest) WithRecipientContact(recipientContact *Contact) *DisbursementRequest {
+	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setRecipientContact:"), objref.IDOf(recipientContact))
+	return dr
 }
 
-// WithSupportedRegions an array of two-letter region codes that describes the regions to support.
-func (x *DisbursementRequest) WithSupportedRegions(items ...obj.Object) *DisbursementRequest {
+// WithSupportedRegions sets an array of two-letter region codes that describes the regions to support.
+func (dr *DisbursementRequest) WithSupportedRegions(items ...obj.Object) *DisbursementRequest {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedRegions:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setSupportedRegions:"), _arr)
+	return dr
 }
 
-// WithApplicationData optional merchant-supplied information about the disbursement request.
-func (x *DisbursementRequest) WithApplicationData(applicationData obj.Object) *DisbursementRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationData:"), objref.IDOf(applicationData))
-	return x
+// WithApplicationData sets optional merchant-supplied information about the disbursement request.
+func (dr *DisbursementRequest) WithApplicationData(applicationData obj.Object) *DisbursementRequest {
+	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setApplicationData:"), objref.IDOf(applicationData))
+	return dr
 }
 
-// WithIsDelegatedRequest a Boolean value that indicates whether this disbursement request is being made by a delegated entity on behalf of a merchant.
-func (x *DisbursementRequest) WithIsDelegatedRequest(isDelegatedRequest bool) *DisbursementRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDelegatedRequest:"), isDelegatedRequest)
-	return x
+// WithIsDelegatedRequest sets a Boolean value that indicates whether this disbursement request is being made by a delegated entity on behalf of a merchant.
+func (dr *DisbursementRequest) WithIsDelegatedRequest(isDelegatedRequest bool) *DisbursementRequest {
+	objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("setIsDelegatedRequest:"), isDelegatedRequest)
+	return dr
 }
 
 // MerchantIdentifier wraps the corresponding Objective-C method.
-func (x *DisbursementRequest) MerchantIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("merchantIdentifier"))
+func (dr *DisbursementRequest) MerchantIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("merchantIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetMerchantIdentifier wraps the corresponding Objective-C method.
-func (x *DisbursementRequest) SetMerchantIdentifier(merchantIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMerchantIdentifier:"), purego.NSString(merchantIdentifier))
 }
 
 // RegionCode wraps the corresponding Objective-C method.
-func (x *DisbursementRequest) RegionCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionCode"))
+func (dr *DisbursementRequest) RegionCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("regionCode"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetRegionCode wraps the corresponding Objective-C method.
-func (x *DisbursementRequest) SetRegionCode(regionCode string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionCode:"), purego.NSString(regionCode))
 }
 
 // SupportedNetworks wraps the corresponding Objective-C method.
 //
 // SupportedNetworks returns the collection as a Go slice.
-func (x *DisbursementRequest) SupportedNetworks() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedNetworks"))
+func (dr *DisbursementRequest) SupportedNetworks() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("supportedNetworks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetSupportedNetworks wraps the corresponding Objective-C method.
-func (x *DisbursementRequest) SetSupportedNetworks(supportedNetworks []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedNetworks:"), purego.SliceToNSArray(supportedNetworks, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
 // MerchantCapabilities wraps the corresponding Objective-C method.
-func (x *DisbursementRequest) MerchantCapabilities() MerchantCapability {
-	_r := objc.Send[MerchantCapability](objref.IDOf(x), objc.RegisterName("merchantCapabilities"))
+func (dr *DisbursementRequest) MerchantCapabilities() MerchantCapability {
+	_r := objc.Send[MerchantCapability](objref.IDOf(dr), objc.RegisterName("merchantCapabilities"))
 	return _r
-}
-
-// SetMerchantCapabilities wraps the corresponding Objective-C method.
-func (x *DisbursementRequest) SetMerchantCapabilities(merchantCapabilities MerchantCapability) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMerchantCapabilities:"), merchantCapabilities)
 }
 
 // SummaryItems wraps the corresponding Objective-C method.
 //
 // SummaryItems returns the collection as a Go slice.
-func (x *DisbursementRequest) SummaryItems() []*PaymentSummaryItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("summaryItems"))
+func (dr *DisbursementRequest) SummaryItems() []*PaymentSummaryItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("summaryItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PaymentSummaryItem { return PaymentSummaryItemFromID(_id) })
 }
 
-// SetSummaryItems wraps the corresponding Objective-C method.
-func (x *DisbursementRequest) SetSummaryItems(summaryItems []*PaymentSummaryItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSummaryItems:"), purego.SliceToNSArray(summaryItems, func(_v *PaymentSummaryItem) objc.ID { return objref.IDOf(_v) }))
-}
-
 // CurrencyCode wraps the corresponding Objective-C method.
-func (x *DisbursementRequest) CurrencyCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currencyCode"))
+func (dr *DisbursementRequest) CurrencyCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("currencyCode"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetCurrencyCode wraps the corresponding Objective-C method.
-func (x *DisbursementRequest) SetCurrencyCode(currencyCode string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrencyCode:"), purego.NSString(currencyCode))
-}
-
 // RequiredRecipientContactFields wraps the corresponding Objective-C method.
 //
 // RequiredRecipientContactFields returns the collection as a Go slice.
-func (x *DisbursementRequest) RequiredRecipientContactFields() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requiredRecipientContactFields"))
+func (dr *DisbursementRequest) RequiredRecipientContactFields() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("requiredRecipientContactFields"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetRequiredRecipientContactFields wraps the corresponding Objective-C method.
-func (x *DisbursementRequest) SetRequiredRecipientContactFields(requiredRecipientContactFields []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiredRecipientContactFields:"), purego.SliceToNSArray(requiredRecipientContactFields, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
 // RecipientContact wraps the corresponding Objective-C method.
-func (x *DisbursementRequest) RecipientContact() *Contact {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recipientContact"))
+func (dr *DisbursementRequest) RecipientContact() *Contact {
+	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("recipientContact"))
 	return ContactFromID(_r)
-}
-
-// SetRecipientContact wraps the corresponding Objective-C method.
-func (x *DisbursementRequest) SetRecipientContact(recipientContact *Contact) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecipientContact:"), objref.IDOf(recipientContact))
 }
 
 // SupportedRegions wraps the corresponding Objective-C method.
 //
 // SupportedRegions returns the collection as a Go slice.
-func (x *DisbursementRequest) SupportedRegions() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedRegions"))
+func (dr *DisbursementRequest) SupportedRegions() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("supportedRegions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetSupportedRegions wraps the corresponding Objective-C method.
-func (x *DisbursementRequest) SetSupportedRegions(supportedRegions []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedRegions:"), purego.SliceToNSArray(supportedRegions, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
 // ApplicationData wraps the corresponding Objective-C method.
-func (x *DisbursementRequest) ApplicationData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationData"))
+func (dr *DisbursementRequest) ApplicationData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("applicationData"))
 	return obj.Wrap(_r)
 }
 
-// SetApplicationData wraps the corresponding Objective-C method.
-func (x *DisbursementRequest) SetApplicationData(applicationData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationData:"), objref.IDOf(applicationData))
-}
-
-// IsDelegatedRequest a Boolean value that indicates whether this disbursement request is being made by a delegated entity on behalf of a merchant. Set this property to YES when your application is acting as an Apple Pay delegate and presenting the payment sheet on behalf of another merchant. The default value is NO.
-func (x *DisbursementRequest) IsDelegatedRequest() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDelegatedRequest"))
+// IsDelegatedRequest reports whether this disbursement request is being made by a delegated entity on behalf of a merchant. Set this property to true when your application is acting as an Apple Pay delegate and presenting the payment sheet on behalf of another merchant. The default value is false.
+func (dr *DisbursementRequest) IsDelegatedRequest() bool {
+	_r := objc.Send[bool](objref.IDOf(dr), objc.RegisterName("isDelegatedRequest"))
 	return _r
 }
-
-// SetIsDelegatedRequest wraps the corresponding Objective-C method.
-func (x *DisbursementRequest) SetIsDelegatedRequest(isDelegatedRequest bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDelegatedRequest:"), isDelegatedRequest)
-}
-
-// DisbursementRequestable is the interface implemented by [DisbursementRequest], for mocking and DI.
-type DisbursementRequestable interface {
-	obj.Object
-	WithMerchantIdentifier(merchantIdentifier string) *DisbursementRequest
-	WithRegionCode(regionCode string) *DisbursementRequest
-	WithSupportedNetworks(items ...obj.Object) *DisbursementRequest
-	WithMerchantCapabilities(merchantCapabilities MerchantCapability) *DisbursementRequest
-	WithSummaryItems(items ...PaymentSummaryItemProvider) *DisbursementRequest
-	WithCurrencyCode(currencyCode string) *DisbursementRequest
-	WithRequiredRecipientContactFields(items ...obj.Object) *DisbursementRequest
-	WithRecipientContact(recipientContact *Contact) *DisbursementRequest
-	WithSupportedRegions(items ...obj.Object) *DisbursementRequest
-	WithApplicationData(applicationData obj.Object) *DisbursementRequest
-	WithIsDelegatedRequest(isDelegatedRequest bool) *DisbursementRequest
-	MerchantIdentifier() string
-	SetMerchantIdentifier(merchantIdentifier string)
-	RegionCode() string
-	SetRegionCode(regionCode string)
-	SupportedNetworks() []obj.Object
-	SetSupportedNetworks(supportedNetworks []obj.Object)
-	MerchantCapabilities() MerchantCapability
-	SetMerchantCapabilities(merchantCapabilities MerchantCapability)
-	SummaryItems() []*PaymentSummaryItem
-	SetSummaryItems(summaryItems []*PaymentSummaryItem)
-	CurrencyCode() string
-	SetCurrencyCode(currencyCode string)
-	RequiredRecipientContactFields() []obj.Object
-	SetRequiredRecipientContactFields(requiredRecipientContactFields []obj.Object)
-	RecipientContact() *Contact
-	SetRecipientContact(recipientContact *Contact)
-	SupportedRegions() []string
-	SetSupportedRegions(supportedRegions []string)
-	ApplicationData() obj.Object
-	SetApplicationData(applicationData obj.Object)
-	IsDelegatedRequest() bool
-	SetIsDelegatedRequest(isDelegatedRequest bool)
-}
-
-var _ DisbursementRequestable = (*DisbursementRequest)(nil)

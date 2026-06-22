@@ -44,24 +44,24 @@ func shareBlockedIdentityAdopt(id objc.ID) *ShareBlockedIdentity {
 }
 
 // Description returns the object's -description text.
-func (x *ShareBlockedIdentity) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sbi *ShareBlockedIdentity) Description() string {
+	return rt.Description(objref.IDOf(sbi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ShareBlockedIdentity) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sbi *ShareBlockedIdentity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sbi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ShareBlockedIdentity) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sbi *ShareBlockedIdentity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sbi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ShareBlockedIdentity) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sbi *ShareBlockedIdentity) String() string {
+	return rt.Description(objref.IDOf(sbi))
 }
 
 // NewShareBlockedIdentity creates a new ShareBlockedIdentity.
@@ -70,23 +70,14 @@ func NewShareBlockedIdentity() *ShareBlockedIdentity {
 	return shareBlockedIdentityAdopt(_id)
 }
 
-// UserIdentity the identity of the user who has been blocked from requesting access to the share.
-func (x *ShareBlockedIdentity) UserIdentity() *UserIdentity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIdentity"))
+// UserIdentity returns the identity of the user who has been blocked from requesting access to the share.
+func (sbi *ShareBlockedIdentity) UserIdentity() *UserIdentity {
+	_r := objc.Send[objc.ID](objref.IDOf(sbi), objc.RegisterName("userIdentity"))
 	return UserIdentityFromID(_r)
 }
 
-// Contact a displayable CNContact representing the blocked user. If the blocked identity does not exist in the user's contacts or is not accessible, returns a newly created `CNContact`. This provides formatted blocked identity information suitable for display in the application's UI.
-func (x *ShareBlockedIdentity) Contact() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contact"))
+// Contact returns a displayable CNContact representing the blocked user. If the blocked identity does not exist in the user's contacts or is not accessible, returns a newly created `CNContact`. This provides formatted blocked identity information suitable for display in the application's UI.
+func (sbi *ShareBlockedIdentity) Contact() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sbi), objc.RegisterName("contact"))
 	return obj.Wrap(_r)
 }
-
-// ShareBlockedIdentityable is the interface implemented by [ShareBlockedIdentity], for mocking and DI.
-type ShareBlockedIdentityable interface {
-	obj.Object
-	UserIdentity() *UserIdentity
-	Contact() obj.Object
-}
-
-var _ ShareBlockedIdentityable = (*ShareBlockedIdentity)(nil)

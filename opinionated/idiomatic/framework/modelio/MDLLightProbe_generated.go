@@ -53,81 +53,64 @@ func NewLightProbeWithReflectiveTextureIrradianceTexture(reflectiveTexture *Text
 	return lightProbeAdopt(_id)
 }
 
-// WithLightType the type of the light.
-func (x *LightProbe) WithLightType(lightType LightType) *LightProbe {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightType:"), lightType)
-	return x
+// WithLightType sets the type of the light.
+func (lp *LightProbe) WithLightType(lightType LightType) *LightProbe {
+	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("setLightType:"), lightType)
+	return lp
 }
 
-// WithColorSpace the name of the Core Graphics color space to be used for interpreting the light’s color information.
-func (x *LightProbe) WithColorSpace(colorSpace string) *LightProbe {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
-	return x
+// WithColorSpace sets the name of the Core Graphics color space to be used for interpreting the light’s color information.
+func (lp *LightProbe) WithColorSpace(colorSpace string) *LightProbe {
+	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
+	return lp
 }
 
-// WithParent the parent object that contains this object.
-func (x *LightProbe) WithParent(parent ObjectProvider) *LightProbe {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
-	return x
+// WithParent sets the parent object that contains this object.
+func (lp *LightProbe) WithParent(parent ObjectProvider) *LightProbe {
+	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("setParent:"), objref.IDOf(parent))
+	return lp
 }
 
-// WithInstance the primary object, if applicable, of which this object is an instance.
-func (x *LightProbe) WithInstance(instance ObjectProvider) *LightProbe {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
-	return x
+// WithInstance sets the primary object, if applicable, of which this object is an instance.
+func (lp *LightProbe) WithInstance(instance ObjectProvider) *LightProbe {
+	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("setInstance:"), objref.IDOf(instance))
+	return lp
 }
 
-// WithHidden a Boolean value indicating whether this object should be used in rendering.
-func (x *LightProbe) WithHidden(hidden bool) *LightProbe {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value indicating whether this object should be used in rendering.
+func (lp *LightProbe) WithHidden(hidden bool) *LightProbe {
+	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("setHidden:"), hidden)
+	return lp
 }
 
 // GenerateSphericalHarmonicsFromIrradiance generates spherical harmonics information based on the light probe’s irradiance texture.
-func (x *LightProbe) GenerateSphericalHarmonicsFromIrradiance(sphericalHarmonicsLevel int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("generateSphericalHarmonicsFromIrradiance:"), sphericalHarmonicsLevel)
+func (lp *LightProbe) GenerateSphericalHarmonicsFromIrradiance(sphericalHarmonicsLevel int) {
+	objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("generateSphericalHarmonicsFromIrradiance:"), sphericalHarmonicsLevel)
 }
 
 // ReflectiveTexture wraps the corresponding Objective-C method.
-func (x *LightProbe) ReflectiveTexture() *Texture {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reflectiveTexture"))
+func (lp *LightProbe) ReflectiveTexture() *Texture {
+	_r := objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("reflectiveTexture"))
 	return TextureFromID(_r)
 }
 
 // IrradianceTexture wraps the corresponding Objective-C method.
-func (x *LightProbe) IrradianceTexture() *Texture {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("irradianceTexture"))
+func (lp *LightProbe) IrradianceTexture() *Texture {
+	_r := objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("irradianceTexture"))
 	return TextureFromID(_r)
 }
 
 // SphericalHarmonicsLevel wraps the corresponding Objective-C method.
-func (x *LightProbe) SphericalHarmonicsLevel() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sphericalHarmonicsLevel"))
+func (lp *LightProbe) SphericalHarmonicsLevel() int {
+	_r := objc.Send[int](objref.IDOf(lp), objc.RegisterName("sphericalHarmonicsLevel"))
 	return _r
 }
 
 // SphericalHarmonicsCoefficients wraps the corresponding Objective-C method.
-func (x *LightProbe) SphericalHarmonicsCoefficients() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sphericalHarmonicsCoefficients"))
+func (lp *LightProbe) SphericalHarmonicsCoefficients() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lp), objc.RegisterName("sphericalHarmonicsCoefficients"))
 	return obj.Wrap(_r)
 }
-
-// LightProbeable is the interface implemented by [LightProbe], for mocking and DI.
-type LightProbeable interface {
-	obj.Object
-	WithLightType(lightType LightType) *LightProbe
-	WithColorSpace(colorSpace string) *LightProbe
-	WithParent(parent ObjectProvider) *LightProbe
-	WithInstance(instance ObjectProvider) *LightProbe
-	WithHidden(hidden bool) *LightProbe
-	GenerateSphericalHarmonicsFromIrradiance(sphericalHarmonicsLevel int)
-	ReflectiveTexture() *Texture
-	IrradianceTexture() *Texture
-	SphericalHarmonicsLevel() int
-	SphericalHarmonicsCoefficients() obj.Object
-}
-
-var _ LightProbeable = (*LightProbe)(nil)
 
 var _ LightProvider = (*LightProbe)(nil)
 

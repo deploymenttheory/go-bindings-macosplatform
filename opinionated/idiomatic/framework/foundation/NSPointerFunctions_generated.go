@@ -46,24 +46,24 @@ func pointerFunctionsAdopt(id objc.ID) *PointerFunctions {
 }
 
 // Description returns the object's -description text.
-func (x *PointerFunctions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pf *PointerFunctions) Description() string {
+	return rt.Description(objref.IDOf(pf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PointerFunctions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pf *PointerFunctions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PointerFunctions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pf *PointerFunctions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PointerFunctions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pf *PointerFunctions) String() string {
+	return rt.Description(objref.IDOf(pf))
 }
 
 // NewPointerFunctionsWithOptions returns an NSPointerFunctions object initialized with the given options.
@@ -73,56 +73,32 @@ func NewPointerFunctionsWithOptions(options PointerFunctionsOptions) *PointerFun
 	return pointerFunctionsAdopt(_id)
 }
 
-// WithUsesStrongWriteBarrier specifies whether, in a garbage collected environment, pointers should be assigned using a strong write barrier.
-func (x *PointerFunctions) WithUsesStrongWriteBarrier(usesStrongWriteBarrier bool) *PointerFunctions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesStrongWriteBarrier:"), usesStrongWriteBarrier)
-	return x
+// WithUsesStrongWriteBarrier sets specifies whether, in a garbage collected environment, pointers should be assigned using a strong write barrier.
+func (pf *PointerFunctions) WithUsesStrongWriteBarrier(usesStrongWriteBarrier bool) *PointerFunctions {
+	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setUsesStrongWriteBarrier:"), usesStrongWriteBarrier)
+	return pf
 }
 
-// WithUsesWeakReadAndWriteBarriers specifies whether, in a garbage collected environment, pointers should use weak read and write barriers.
-func (x *PointerFunctions) WithUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers bool) *PointerFunctions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesWeakReadAndWriteBarriers:"), usesWeakReadAndWriteBarriers)
-	return x
+// WithUsesWeakReadAndWriteBarriers sets specifies whether, in a garbage collected environment, pointers should use weak read and write barriers.
+func (pf *PointerFunctions) WithUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers bool) *PointerFunctions {
+	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setUsesWeakReadAndWriteBarriers:"), usesWeakReadAndWriteBarriers)
+	return pf
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *PointerFunctions) WithScriptingProperties(scriptingProperties obj.Object) *PointerFunctions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (pf *PointerFunctions) WithScriptingProperties(scriptingProperties obj.Object) *PointerFunctions {
+	objc.Send[objc.ID](objref.IDOf(pf), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return pf
 }
 
 // UsesStrongWriteBarrier wraps the corresponding Objective-C method.
-func (x *PointerFunctions) UsesStrongWriteBarrier() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesStrongWriteBarrier"))
+func (pf *PointerFunctions) UsesStrongWriteBarrier() bool {
+	_r := objc.Send[bool](objref.IDOf(pf), objc.RegisterName("usesStrongWriteBarrier"))
 	return _r
-}
-
-// SetUsesStrongWriteBarrier wraps the corresponding Objective-C method.
-func (x *PointerFunctions) SetUsesStrongWriteBarrier(usesStrongWriteBarrier bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesStrongWriteBarrier:"), usesStrongWriteBarrier)
 }
 
 // UsesWeakReadAndWriteBarriers wraps the corresponding Objective-C method.
-func (x *PointerFunctions) UsesWeakReadAndWriteBarriers() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesWeakReadAndWriteBarriers"))
+func (pf *PointerFunctions) UsesWeakReadAndWriteBarriers() bool {
+	_r := objc.Send[bool](objref.IDOf(pf), objc.RegisterName("usesWeakReadAndWriteBarriers"))
 	return _r
 }
-
-// SetUsesWeakReadAndWriteBarriers wraps the corresponding Objective-C method.
-func (x *PointerFunctions) SetUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesWeakReadAndWriteBarriers:"), usesWeakReadAndWriteBarriers)
-}
-
-// PointerFunctionsable is the interface implemented by [PointerFunctions], for mocking and DI.
-type PointerFunctionsable interface {
-	obj.Object
-	WithUsesStrongWriteBarrier(usesStrongWriteBarrier bool) *PointerFunctions
-	WithUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers bool) *PointerFunctions
-	WithScriptingProperties(scriptingProperties obj.Object) *PointerFunctions
-	UsesStrongWriteBarrier() bool
-	SetUsesStrongWriteBarrier(usesStrongWriteBarrier bool)
-	UsesWeakReadAndWriteBarriers() bool
-	SetUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers bool)
-}
-
-var _ PointerFunctionsable = (*PointerFunctions)(nil)

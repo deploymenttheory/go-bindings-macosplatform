@@ -46,24 +46,24 @@ func modelStructureAdopt(id objc.ID) *ModelStructure {
 }
 
 // Description returns the object's -description text.
-func (x *ModelStructure) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ms *ModelStructure) Description() string {
+	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ModelStructure) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ms *ModelStructure) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ModelStructure) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ms *ModelStructure) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ModelStructure) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ms *ModelStructure) String() string {
+	return rt.Description(objref.IDOf(ms))
 }
 
 // NewModelStructure creates a new ModelStructure.
@@ -72,30 +72,20 @@ func NewModelStructure() *ModelStructure {
 	return modelStructureAdopt(_id)
 }
 
-// NeuralNetwork if the model is of NeuralNetwork type then it is the structure of the NeuralNetwork otherwise `nil`.
-func (x *ModelStructure) NeuralNetwork() *ModelStructureNeuralNetwork {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("neuralNetwork"))
+// NeuralNetwork returns if the model is of NeuralNetwork type then it is the structure of the NeuralNetwork otherwise `nil`.
+func (ms *ModelStructure) NeuralNetwork() *ModelStructureNeuralNetwork {
+	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("neuralNetwork"))
 	return ModelStructureNeuralNetworkFromID(_r)
 }
 
-// Program if the model is of ML Program type then it is the structure of the ML Program otherwise `nil`.
-func (x *ModelStructure) Program() *ModelStructureProgram {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("program"))
+// Program returns if the model is of ML Program type then it is the structure of the ML Program otherwise `nil`.
+func (ms *ModelStructure) Program() *ModelStructureProgram {
+	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("program"))
 	return ModelStructureProgramFromID(_r)
 }
 
-// Pipeline if the model is of Pipeline type then it is the structure of the Pipeline otherwise `nil`.
-func (x *ModelStructure) Pipeline() *ModelStructurePipeline {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pipeline"))
+// Pipeline returns if the model is of Pipeline type then it is the structure of the Pipeline otherwise `nil`.
+func (ms *ModelStructure) Pipeline() *ModelStructurePipeline {
+	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("pipeline"))
 	return ModelStructurePipelineFromID(_r)
 }
-
-// ModelStructureable is the interface implemented by [ModelStructure], for mocking and DI.
-type ModelStructureable interface {
-	obj.Object
-	NeuralNetwork() *ModelStructureNeuralNetwork
-	Program() *ModelStructureProgram
-	Pipeline() *ModelStructurePipeline
-}
-
-var _ ModelStructureable = (*ModelStructure)(nil)

@@ -7,7 +7,6 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,17 +52,9 @@ func NewSkipIntervalCommandEvent() *SkipIntervalCommandEvent {
 }
 
 // Interval wraps the corresponding Objective-C method.
-func (x *SkipIntervalCommandEvent) Interval() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("interval"))
+func (sice *SkipIntervalCommandEvent) Interval() float64 {
+	_r := objc.Send[float64](objref.IDOf(sice), objc.RegisterName("interval"))
 	return _r
 }
-
-// SkipIntervalCommandEventable is the interface implemented by [SkipIntervalCommandEvent], for mocking and DI.
-type SkipIntervalCommandEventable interface {
-	obj.Object
-	Interval() float64
-}
-
-var _ SkipIntervalCommandEventable = (*SkipIntervalCommandEvent)(nil)
 
 var _ RemoteCommandEventProvider = (*SkipIntervalCommandEvent)(nil)

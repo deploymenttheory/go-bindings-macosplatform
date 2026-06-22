@@ -51,24 +51,15 @@ func NewMTRContentLauncherClusterParameter() *MTRContentLauncherClusterParameter
 }
 
 // WithType sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterParameter) WithType(type_ obj.Object) *MTRContentLauncherClusterParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
-	return x
+func (mclcp *MTRContentLauncherClusterParameter) WithType(type_ obj.Object) *MTRContentLauncherClusterParameter {
+	objc.Send[objc.ID](objref.IDOf(mclcp), objc.RegisterName("setType:"), objref.IDOf(type_))
+	return mclcp
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterParameter) WithValue(value string) *MTRContentLauncherClusterParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
-	return x
+func (mclcp *MTRContentLauncherClusterParameter) WithValue(value string) *MTRContentLauncherClusterParameter {
+	objc.Send[objc.ID](objref.IDOf(mclcp), objc.RegisterName("setValue:"), purego.NSString(value))
+	return mclcp
 }
-
-// MTRContentLauncherClusterParameterable is the interface implemented by [MTRContentLauncherClusterParameter], for mocking and DI.
-type MTRContentLauncherClusterParameterable interface {
-	obj.Object
-	WithType(type_ obj.Object) *MTRContentLauncherClusterParameter
-	WithValue(value string) *MTRContentLauncherClusterParameter
-}
-
-var _ MTRContentLauncherClusterParameterable = (*MTRContentLauncherClusterParameter)(nil)
 
 var _ MTRContentLauncherClusterParameterStructProvider = (*MTRContentLauncherClusterParameter)(nil)

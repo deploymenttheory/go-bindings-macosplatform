@@ -46,24 +46,24 @@ func speechRecognitionResultAdopt(id objc.ID) *SpeechRecognitionResult {
 }
 
 // Description returns the object's -description text.
-func (x *SpeechRecognitionResult) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (srr *SpeechRecognitionResult) Description() string {
+	return rt.Description(objref.IDOf(srr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpeechRecognitionResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (srr *SpeechRecognitionResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(srr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpeechRecognitionResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (srr *SpeechRecognitionResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(srr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SpeechRecognitionResult) String() string {
-	return rt.Description(objref.IDOf(x))
+func (srr *SpeechRecognitionResult) String() string {
+	return rt.Description(objref.IDOf(srr))
 }
 
 // NewSpeechRecognitionResult creates a new SpeechRecognitionResult.
@@ -72,39 +72,28 @@ func NewSpeechRecognitionResult() *SpeechRecognitionResult {
 	return speechRecognitionResultAdopt(_id)
 }
 
-// BestTranscription the transcription with the highest confidence level.
-func (x *SpeechRecognitionResult) BestTranscription() *Transcription {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bestTranscription"))
+// BestTranscription returns the transcription with the highest confidence level.
+func (srr *SpeechRecognitionResult) BestTranscription() *Transcription {
+	_r := objc.Send[objc.ID](objref.IDOf(srr), objc.RegisterName("bestTranscription"))
 	return TranscriptionFromID(_r)
 }
 
-// Transcriptions an array of potential transcriptions, sorted in descending order of confidence. All transcriptions correspond to the same utterance, which can be a partial or final result of the overall request. The first transcription in the array has the highest confidence rating, followed by transcriptions with decreasing confidence ratings.
+// Transcriptions returns an array of potential transcriptions, sorted in descending order of confidence. All transcriptions correspond to the same utterance, which can be a partial or final result of the overall request. The first transcription in the array has the highest confidence rating, followed by transcriptions with decreasing confidence ratings.
 //
 // Transcriptions returns the collection as a Go slice.
-func (x *SpeechRecognitionResult) Transcriptions() []*Transcription {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transcriptions"))
+func (srr *SpeechRecognitionResult) Transcriptions() []*Transcription {
+	_arr := objc.Send[objc.ID](objref.IDOf(srr), objc.RegisterName("transcriptions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Transcription { return TranscriptionFromID(_id) })
 }
 
-// IsFinal a Boolean value that indicates whether speech recognition is complete and whether the transcriptions are final. When a speech recognition request is final, its transcriptions don't change.
-func (x *SpeechRecognitionResult) IsFinal() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFinal"))
+// IsFinal reports whether speech recognition is complete and whether the transcriptions are final. When a speech recognition request is final, its transcriptions don't change.
+func (srr *SpeechRecognitionResult) IsFinal() bool {
+	_r := objc.Send[bool](objref.IDOf(srr), objc.RegisterName("isFinal"))
 	return _r
 }
 
-// SpeechRecognitionMetadata an object that contains the metadata results for a speech recognition request.
-func (x *SpeechRecognitionResult) SpeechRecognitionMetadata() *SpeechRecognitionMetadata {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("speechRecognitionMetadata"))
+// SpeechRecognitionMetadata returns an object that contains the metadata results for a speech recognition request.
+func (srr *SpeechRecognitionResult) SpeechRecognitionMetadata() *SpeechRecognitionMetadata {
+	_r := objc.Send[objc.ID](objref.IDOf(srr), objc.RegisterName("speechRecognitionMetadata"))
 	return SpeechRecognitionMetadataFromID(_r)
 }
-
-// SpeechRecognitionResultable is the interface implemented by [SpeechRecognitionResult], for mocking and DI.
-type SpeechRecognitionResultable interface {
-	obj.Object
-	BestTranscription() *Transcription
-	Transcriptions() []*Transcription
-	IsFinal() bool
-	SpeechRecognitionMetadata() *SpeechRecognitionMetadata
-}
-
-var _ SpeechRecognitionResultable = (*SpeechRecognitionResult)(nil)

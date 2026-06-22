@@ -46,24 +46,24 @@ func monitoringRecordAdopt(id objc.ID) *MonitoringRecord {
 }
 
 // Description returns the object's -description text.
-func (x *MonitoringRecord) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mr *MonitoringRecord) Description() string {
+	return rt.Description(objref.IDOf(mr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MonitoringRecord) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mr *MonitoringRecord) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MonitoringRecord) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mr *MonitoringRecord) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MonitoringRecord) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mr *MonitoringRecord) String() string {
+	return rt.Description(objref.IDOf(mr))
 }
 
 // NewMonitoringRecord creates a new MonitoringRecord.
@@ -73,22 +73,13 @@ func NewMonitoringRecord() *MonitoringRecord {
 }
 
 // Condition wraps the corresponding Objective-C method.
-func (x *MonitoringRecord) Condition() *Condition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("condition"))
+func (mr *MonitoringRecord) Condition() *Condition {
+	_r := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("condition"))
 	return ConditionFromID(_r)
 }
 
 // LastEvent wraps the corresponding Objective-C method.
-func (x *MonitoringRecord) LastEvent() *MonitoringEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastEvent"))
+func (mr *MonitoringRecord) LastEvent() *MonitoringEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("lastEvent"))
 	return MonitoringEventFromID(_r)
 }
-
-// MonitoringRecordable is the interface implemented by [MonitoringRecord], for mocking and DI.
-type MonitoringRecordable interface {
-	obj.Object
-	Condition() *Condition
-	LastEvent() *MonitoringEvent
-}
-
-var _ MonitoringRecordable = (*MonitoringRecord)(nil)

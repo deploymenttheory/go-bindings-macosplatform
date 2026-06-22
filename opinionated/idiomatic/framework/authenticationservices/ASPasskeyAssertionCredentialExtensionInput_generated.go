@@ -46,24 +46,24 @@ func passkeyAssertionCredentialExtensionInputAdopt(id objc.ID) *PasskeyAssertion
 }
 
 // Description returns the object's -description text.
-func (x *PasskeyAssertionCredentialExtensionInput) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pacei *PasskeyAssertionCredentialExtensionInput) Description() string {
+	return rt.Description(objref.IDOf(pacei))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PasskeyAssertionCredentialExtensionInput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pacei *PasskeyAssertionCredentialExtensionInput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pacei), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PasskeyAssertionCredentialExtensionInput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pacei *PasskeyAssertionCredentialExtensionInput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pacei), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PasskeyAssertionCredentialExtensionInput) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pacei *PasskeyAssertionCredentialExtensionInput) String() string {
+	return rt.Description(objref.IDOf(pacei))
 }
 
 // NewPasskeyAssertionCredentialExtensionInput creates a new PasskeyAssertionCredentialExtensionInput.
@@ -73,15 +73,7 @@ func NewPasskeyAssertionCredentialExtensionInput() *PasskeyAssertionCredentialEx
 }
 
 // LargeBlob wraps the corresponding Objective-C method.
-func (x *PasskeyAssertionCredentialExtensionInput) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("largeBlob"))
+func (pacei *PasskeyAssertionCredentialExtensionInput) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionInput {
+	_r := objc.Send[objc.ID](objref.IDOf(pacei), objc.RegisterName("largeBlob"))
 	return AuthorizationPublicKeyCredentialLargeBlobAssertionInputFromID(_r)
 }
-
-// PasskeyAssertionCredentialExtensionInputable is the interface implemented by [PasskeyAssertionCredentialExtensionInput], for mocking and DI.
-type PasskeyAssertionCredentialExtensionInputable interface {
-	obj.Object
-	LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobAssertionInput
-}
-
-var _ PasskeyAssertionCredentialExtensionInputable = (*PasskeyAssertionCredentialExtensionInput)(nil)

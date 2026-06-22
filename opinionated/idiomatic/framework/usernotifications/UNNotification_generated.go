@@ -46,24 +46,24 @@ func notificationAdopt(id objc.ID) *Notification {
 }
 
 // Description returns the object's -description text.
-func (x *Notification) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (n *Notification) Description() string {
+	return rt.Description(objref.IDOf(n))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Notification) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (n *Notification) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(n), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Notification) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (n *Notification) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(n), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Notification) String() string {
-	return rt.Description(objref.IDOf(x))
+func (n *Notification) String() string {
+	return rt.Description(objref.IDOf(n))
 }
 
 // NewNotification creates a new Notification.
@@ -73,22 +73,13 @@ func NewNotification() *Notification {
 }
 
 // Date wraps the corresponding Objective-C method.
-func (x *Notification) Date() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+func (n *Notification) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
 // Request wraps the corresponding Objective-C method.
-func (x *Notification) Request() *NotificationRequest {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("request"))
+func (n *Notification) Request() *NotificationRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("request"))
 	return NotificationRequestFromID(_r)
 }
-
-// Notificationable is the interface implemented by [Notification], for mocking and DI.
-type Notificationable interface {
-	obj.Object
-	Date() obj.Object
-	Request() *NotificationRequest
-}
-
-var _ Notificationable = (*Notification)(nil)

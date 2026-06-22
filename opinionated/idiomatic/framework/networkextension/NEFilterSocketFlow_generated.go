@@ -52,56 +52,43 @@ func NewNEFilterSocketFlow() *NEFilterSocketFlow {
 	return nEFilterSocketFlowAdopt(_id)
 }
 
-// RemoteFlowEndpoint the flow's remote endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data. In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
-func (x *NEFilterSocketFlow) RemoteFlowEndpoint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remoteFlowEndpoint"))
+// RemoteFlowEndpoint returns the flow's remote endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data. In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
+func (nfsf *NEFilterSocketFlow) RemoteFlowEndpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nfsf), objc.RegisterName("remoteFlowEndpoint"))
 	return obj.Wrap(_r)
 }
 
-// RemoteHostname the flow's remote hostname. This property is only non-nil if the flow was created using Network.framework or NSURLSession.
-func (x *NEFilterSocketFlow) RemoteHostname() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remoteHostname"))
+// RemoteHostname returns the flow's remote hostname. This property is only non-nil if the flow was created using Network.framework or NSURLSession.
+func (nfsf *NEFilterSocketFlow) RemoteHostname() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nfsf), objc.RegisterName("remoteHostname"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// LocalFlowEndpoint the flow's local endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data. In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
-func (x *NEFilterSocketFlow) LocalFlowEndpoint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localFlowEndpoint"))
+// LocalFlowEndpoint returns the flow's local endpoint. This endpoint object may be nil when [NEFilterDataProvider handleNewFlow:] is invoked and if so will be populated upon receiving network data. In such a case, filtering on the flow may still be performed based on its socket type, socket family or socket protocol.
+func (nfsf *NEFilterSocketFlow) LocalFlowEndpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nfsf), objc.RegisterName("localFlowEndpoint"))
 	return obj.Wrap(_r)
 }
 
-// SocketFamily socket family of the socket flow, such as PF_INET.
-func (x *NEFilterSocketFlow) SocketFamily() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("socketFamily"))
+// SocketFamily returns socket family of the socket flow, such as PF_INET.
+func (nfsf *NEFilterSocketFlow) SocketFamily() int {
+	_r := objc.Send[int](objref.IDOf(nfsf), objc.RegisterName("socketFamily"))
 	return _r
 }
 
-// SocketType socket type of the socket flow, such as SOCK_STREAM.
-func (x *NEFilterSocketFlow) SocketType() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("socketType"))
+// SocketType returns socket type of the socket flow, such as SOCK_STREAM.
+func (nfsf *NEFilterSocketFlow) SocketType() int {
+	_r := objc.Send[int](objref.IDOf(nfsf), objc.RegisterName("socketType"))
 	return _r
 }
 
-// SocketProtocol socket protocol of the socket flow, such as IPPROTO_TCP.
-func (x *NEFilterSocketFlow) SocketProtocol() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("socketProtocol"))
+// SocketProtocol returns socket protocol of the socket flow, such as IPPROTO_TCP.
+func (nfsf *NEFilterSocketFlow) SocketProtocol() int {
+	_r := objc.Send[int](objref.IDOf(nfsf), objc.RegisterName("socketProtocol"))
 	return _r
 }
-
-// NEFilterSocketFlowable is the interface implemented by [NEFilterSocketFlow], for mocking and DI.
-type NEFilterSocketFlowable interface {
-	obj.Object
-	RemoteFlowEndpoint() obj.Object
-	RemoteHostname() string
-	LocalFlowEndpoint() obj.Object
-	SocketFamily() int
-	SocketType() int
-	SocketProtocol() int
-}
-
-var _ NEFilterSocketFlowable = (*NEFilterSocketFlow)(nil)
 
 var _ NEFilterFlowProvider = (*NEFilterSocketFlow)(nil)

@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,33 +53,23 @@ func NewImageConversion() *ImageConversion {
 	return imageConversionAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageConversion) WithOffset(offset mpscore.MPSOffset) *ImageConversion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (ic *ImageConversion) WithOffset(offset mpscore.MPSOffset) *ImageConversion {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setOffset:"), offset)
+	return ic
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageConversion) WithClipRect(clipRect metal.MTLRegion) *ImageConversion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (ic *ImageConversion) WithClipRect(clipRect metal.MTLRegion) *ImageConversion {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setClipRect:"), clipRect)
+	return ic
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageConversion) WithLabel(label string) *ImageConversion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ic *ImageConversion) WithLabel(label string) *ImageConversion {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ic
 }
-
-// ImageConversionable is the interface implemented by [ImageConversion], for mocking and DI.
-type ImageConversionable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageConversion
-	WithClipRect(clipRect metal.MTLRegion) *ImageConversion
-	WithLabel(label string) *ImageConversion
-}
-
-var _ ImageConversionable = (*ImageConversion)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageConversion)(nil)
 

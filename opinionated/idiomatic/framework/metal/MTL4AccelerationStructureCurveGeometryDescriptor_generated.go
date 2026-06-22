@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,273 +51,172 @@ func NewMTL4AccelerationStructureCurveGeometryDescriptor() *MTL4AccelerationStru
 	return mTL4AccelerationStructureCurveGeometryDescriptorAdopt(_id)
 }
 
-// WithControlPointCount declares the number of control points in the control point buffer.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithControlPointCount(controlPointCount int) *MTL4AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlPointCount:"), controlPointCount)
-	return x
+// WithControlPointCount sets declares the number of control points in the control point buffer.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) WithControlPointCount(controlPointCount int) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mascgd), objc.RegisterName("setControlPointCount:"), controlPointCount)
+	return mascgd
 }
 
-// WithControlPointStride sets the stride, in bytes, between control points in the control point buffer the control point buffer references.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithControlPointStride(controlPointStride int) *MTL4AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlPointStride:"), controlPointStride)
-	return x
+// WithControlPointStride sets sets the stride, in bytes, between control points in the control point buffer the control point buffer references.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) WithControlPointStride(controlPointStride int) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mascgd), objc.RegisterName("setControlPointStride:"), controlPointStride)
+	return mascgd
 }
 
-// WithControlPointFormat declares the format of the control points the control point buffer references.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithControlPointFormat(controlPointFormat AttributeFormat) *MTL4AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlPointFormat:"), controlPointFormat)
-	return x
+// WithControlPointFormat sets declares the format of the control points the control point buffer references.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) WithControlPointFormat(controlPointFormat AttributeFormat) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mascgd), objc.RegisterName("setControlPointFormat:"), controlPointFormat)
+	return mascgd
 }
 
-// WithRadiusFormat declares the format of the radii in the radius buffer.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithRadiusFormat(radiusFormat AttributeFormat) *MTL4AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadiusFormat:"), radiusFormat)
-	return x
+// WithRadiusFormat sets declares the format of the radii in the radius buffer.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) WithRadiusFormat(radiusFormat AttributeFormat) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mascgd), objc.RegisterName("setRadiusFormat:"), radiusFormat)
+	return mascgd
 }
 
-// WithRadiusStride configures the stride, in bytes, between radii in the radius buffer.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithRadiusStride(radiusStride int) *MTL4AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadiusStride:"), radiusStride)
-	return x
+// WithRadiusStride sets configures the stride, in bytes, between radii in the radius buffer.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) WithRadiusStride(radiusStride int) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mascgd), objc.RegisterName("setRadiusStride:"), radiusStride)
+	return mascgd
 }
 
-// WithIndexType specifies the size of the indices the indexBuffer contains, which is typically either 16 or 32-bits for each index.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithIndexType(indexType IndexType) *MTL4AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexType:"), indexType)
-	return x
+// WithIndexType sets specifies the size of the indices the indexBuffer contains, which is typically either 16 or 32-bits for each index.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) WithIndexType(indexType IndexType) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mascgd), objc.RegisterName("setIndexType:"), indexType)
+	return mascgd
 }
 
-// WithSegmentCount declares the number of curve segments.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithSegmentCount(segmentCount int) *MTL4AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentCount:"), segmentCount)
-	return x
+// WithSegmentCount sets declares the number of curve segments.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) WithSegmentCount(segmentCount int) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mascgd), objc.RegisterName("setSegmentCount:"), segmentCount)
+	return mascgd
 }
 
-// WithSegmentControlPointCount declares the number of control points per curve segment.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithSegmentControlPointCount(segmentControlPointCount int) *MTL4AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentControlPointCount:"), segmentControlPointCount)
-	return x
+// WithSegmentControlPointCount sets declares the number of control points per curve segment.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) WithSegmentControlPointCount(segmentControlPointCount int) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mascgd), objc.RegisterName("setSegmentControlPointCount:"), segmentControlPointCount)
+	return mascgd
 }
 
-// WithCurveType controls the curve type.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithCurveType(curveType CurveType) *MTL4AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurveType:"), curveType)
-	return x
+// WithCurveType sets controls the curve type.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) WithCurveType(curveType CurveType) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mascgd), objc.RegisterName("setCurveType:"), curveType)
+	return mascgd
 }
 
-// WithCurveBasis controls the curve basis function, determining how Metal interpolates the control points.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithCurveBasis(curveBasis CurveBasis) *MTL4AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurveBasis:"), curveBasis)
-	return x
+// WithCurveBasis sets controls the curve basis function, determining how Metal interpolates the control points.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) WithCurveBasis(curveBasis CurveBasis) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mascgd), objc.RegisterName("setCurveBasis:"), curveBasis)
+	return mascgd
 }
 
-// WithCurveEndCaps sets the type of curve end caps.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithCurveEndCaps(curveEndCaps CurveEndCaps) *MTL4AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurveEndCaps:"), curveEndCaps)
-	return x
+// WithCurveEndCaps sets sets the type of curve end caps.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) WithCurveEndCaps(curveEndCaps CurveEndCaps) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mascgd), objc.RegisterName("setCurveEndCaps:"), curveEndCaps)
+	return mascgd
 }
 
-// WithIntersectionFunctionTableOffset sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *MTL4AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntersectionFunctionTableOffset:"), intersectionFunctionTableOffset)
-	return x
+// WithIntersectionFunctionTableOffset sets sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mascgd), objc.RegisterName("setIntersectionFunctionTableOffset:"), intersectionFunctionTableOffset)
+	return mascgd
 }
 
-// WithOpaque provides a hint to Metal that this geometry is opaque, potentially accelerating the ray/primitive intersection process.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithOpaque(opaque bool) *MTL4AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets provides a hint to Metal that this geometry is opaque, potentially accelerating the ray/primitive intersection process.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) WithOpaque(opaque bool) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mascgd), objc.RegisterName("setOpaque:"), opaque)
+	return mascgd
 }
 
-// WithAllowDuplicateIntersectionFunctionInvocation a boolean value that indicates whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:"), allowDuplicateIntersectionFunctionInvocation)
-	return x
+// WithAllowDuplicateIntersectionFunctionInvocation sets a boolean value that indicates whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mascgd), objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:"), allowDuplicateIntersectionFunctionInvocation)
+	return mascgd
 }
 
-// WithLabel assigns an optional label you can assign to this geometry for debugging purposes.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithLabel(label string) *MTL4AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets assigns an optional label you can assign to this geometry for debugging purposes.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) WithLabel(label string) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mascgd), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mascgd
 }
 
-// WithPrimitiveDataStride defines the stride, in bytes, between each primitive’s data in the primitive data buffer primitiveDataBuffer references.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *MTL4AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
-	return x
+// WithPrimitiveDataStride sets defines the stride, in bytes, between each primitive’s data in the primitive data buffer primitiveDataBuffer references.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mascgd), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
+	return mascgd
 }
 
-// WithPrimitiveDataElementSize sets the size, in bytes, of the data for each primitive in the primitive data buffer primitiveDataBuffer references.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *MTL4AccelerationStructureCurveGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
-	return x
+// WithPrimitiveDataElementSize sets sets the size, in bytes, of the data for each primitive in the primitive data buffer primitiveDataBuffer references.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *MTL4AccelerationStructureCurveGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mascgd), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
+	return mascgd
 }
 
-// ControlPointCount declares the number of control points in the control point buffer.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) ControlPointCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("controlPointCount"))
+// ControlPointCount returns declares the number of control points in the control point buffer.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) ControlPointCount() int {
+	_r := objc.Send[int](objref.IDOf(mascgd), objc.RegisterName("controlPointCount"))
 	return _r
-}
-
-// SetControlPointCount wraps the corresponding Objective-C method.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) SetControlPointCount(controlPointCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlPointCount:"), controlPointCount)
 }
 
 // ControlPointStride sets the stride, in bytes, between control points in the control point buffer the control point buffer references. You are responsible for ensuring this stride is a multiple of the control point format's element size, and at a minimum exactly the control point format's size. This property defaults to `0`, indicating that the control points are tightly-packed.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) ControlPointStride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("controlPointStride"))
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) ControlPointStride() int {
+	_r := objc.Send[int](objref.IDOf(mascgd), objc.RegisterName("controlPointStride"))
 	return _r
 }
 
-// SetControlPointStride wraps the corresponding Objective-C method.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) SetControlPointStride(controlPointStride int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlPointStride:"), controlPointStride)
-}
-
-// ControlPointFormat declares the format of the control points the control point buffer references. Defaults to `MTLAttributeFormatFloat3`, representing 3 floating point values tightly packed.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) ControlPointFormat() AttributeFormat {
-	_r := objc.Send[AttributeFormat](objref.IDOf(x), objc.RegisterName("controlPointFormat"))
+// ControlPointFormat returns declares the format of the control points the control point buffer references. Defaults to `MTLAttributeFormatFloat3`, representing 3 floating point values tightly packed.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) ControlPointFormat() AttributeFormat {
+	_r := objc.Send[AttributeFormat](objref.IDOf(mascgd), objc.RegisterName("controlPointFormat"))
 	return _r
 }
 
-// SetControlPointFormat wraps the corresponding Objective-C method.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) SetControlPointFormat(controlPointFormat AttributeFormat) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlPointFormat:"), controlPointFormat)
-}
-
-// RadiusFormat declares the format of the radii in the radius buffer. Defaults to  `MTLAttributeFormatFloat`.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) RadiusFormat() AttributeFormat {
-	_r := objc.Send[AttributeFormat](objref.IDOf(x), objc.RegisterName("radiusFormat"))
+// RadiusFormat returns declares the format of the radii in the radius buffer. Defaults to  `MTLAttributeFormatFloat`.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) RadiusFormat() AttributeFormat {
+	_r := objc.Send[AttributeFormat](objref.IDOf(mascgd), objc.RegisterName("radiusFormat"))
 	return _r
 }
 
-// SetRadiusFormat wraps the corresponding Objective-C method.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) SetRadiusFormat(radiusFormat AttributeFormat) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadiusFormat:"), radiusFormat)
-}
-
-// RadiusStride configures the stride, in bytes, between radii in the radius buffer. You are responsible for ensuring this property is set to a multiple of the size corresponding to the “radiusFormat“. This property defaults to `0` bytes, indicating that the radii are tightly packed.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) RadiusStride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("radiusStride"))
+// RadiusStride returns configures the stride, in bytes, between radii in the radius buffer. You are responsible for ensuring this property is set to a multiple of the size corresponding to the “radiusFormat“. This property defaults to `0` bytes, indicating that the radii are tightly packed.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) RadiusStride() int {
+	_r := objc.Send[int](objref.IDOf(mascgd), objc.RegisterName("radiusStride"))
 	return _r
-}
-
-// SetRadiusStride wraps the corresponding Objective-C method.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) SetRadiusStride(radiusStride int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadiusStride:"), radiusStride)
 }
 
 // IndexType specifies the size of the indices the `indexBuffer` contains, which is typically either 16 or 32-bits for each index.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) IndexType() IndexType {
-	_r := objc.Send[IndexType](objref.IDOf(x), objc.RegisterName("indexType"))
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) IndexType() IndexType {
+	_r := objc.Send[IndexType](objref.IDOf(mascgd), objc.RegisterName("indexType"))
 	return _r
 }
 
-// SetIndexType wraps the corresponding Objective-C method.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) SetIndexType(indexType IndexType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexType:"), indexType)
-}
-
-// SegmentCount declares the number of curve segments.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) SegmentCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("segmentCount"))
+// SegmentCount returns declares the number of curve segments.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) SegmentCount() int {
+	_r := objc.Send[int](objref.IDOf(mascgd), objc.RegisterName("segmentCount"))
 	return _r
 }
 
-// SetSegmentCount wraps the corresponding Objective-C method.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) SetSegmentCount(segmentCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentCount:"), segmentCount)
-}
-
-// SegmentControlPointCount declares the number of control points per curve segment. Valid values for this property are `2`, `3`, or `4`.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) SegmentControlPointCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("segmentControlPointCount"))
+// SegmentControlPointCount returns declares the number of control points per curve segment. Valid values for this property are `2`, `3`, or `4`.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) SegmentControlPointCount() int {
+	_r := objc.Send[int](objref.IDOf(mascgd), objc.RegisterName("segmentControlPointCount"))
 	return _r
 }
 
-// SetSegmentControlPointCount wraps the corresponding Objective-C method.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) SetSegmentControlPointCount(segmentControlPointCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSegmentControlPointCount:"), segmentControlPointCount)
-}
-
-// CurveType controls the curve type. Defaults to `MTLCurveTypeRound`.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) CurveType() CurveType {
-	_r := objc.Send[CurveType](objref.IDOf(x), objc.RegisterName("curveType"))
+// CurveType returns controls the curve type. Defaults to `MTLCurveTypeRound`.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) CurveType() CurveType {
+	_r := objc.Send[CurveType](objref.IDOf(mascgd), objc.RegisterName("curveType"))
 	return _r
 }
 
-// SetCurveType wraps the corresponding Objective-C method.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) SetCurveType(curveType CurveType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurveType:"), curveType)
-}
-
-// CurveBasis controls the curve basis function, determining how Metal interpolates the control points. Defaults to `MTLCurveBasisBSpline`.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) CurveBasis() CurveBasis {
-	_r := objc.Send[CurveBasis](objref.IDOf(x), objc.RegisterName("curveBasis"))
+// CurveBasis returns controls the curve basis function, determining how Metal interpolates the control points. Defaults to `MTLCurveBasisBSpline`.
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) CurveBasis() CurveBasis {
+	_r := objc.Send[CurveBasis](objref.IDOf(mascgd), objc.RegisterName("curveBasis"))
 	return _r
-}
-
-// SetCurveBasis wraps the corresponding Objective-C method.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) SetCurveBasis(curveBasis CurveBasis) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurveBasis:"), curveBasis)
 }
 
 // CurveEndCaps sets the type of curve end caps. Defaults to `MTLCurveEndCapsNone`.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) CurveEndCaps() CurveEndCaps {
-	_r := objc.Send[CurveEndCaps](objref.IDOf(x), objc.RegisterName("curveEndCaps"))
+func (mascgd *MTL4AccelerationStructureCurveGeometryDescriptor) CurveEndCaps() CurveEndCaps {
+	_r := objc.Send[CurveEndCaps](objref.IDOf(mascgd), objc.RegisterName("curveEndCaps"))
 	return _r
 }
-
-// SetCurveEndCaps wraps the corresponding Objective-C method.
-func (x *MTL4AccelerationStructureCurveGeometryDescriptor) SetCurveEndCaps(curveEndCaps CurveEndCaps) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurveEndCaps:"), curveEndCaps)
-}
-
-// MTL4AccelerationStructureCurveGeometryDescriptorable is the interface implemented by [MTL4AccelerationStructureCurveGeometryDescriptor], for mocking and DI.
-type MTL4AccelerationStructureCurveGeometryDescriptorable interface {
-	obj.Object
-	WithControlPointCount(controlPointCount int) *MTL4AccelerationStructureCurveGeometryDescriptor
-	WithControlPointStride(controlPointStride int) *MTL4AccelerationStructureCurveGeometryDescriptor
-	WithControlPointFormat(controlPointFormat AttributeFormat) *MTL4AccelerationStructureCurveGeometryDescriptor
-	WithRadiusFormat(radiusFormat AttributeFormat) *MTL4AccelerationStructureCurveGeometryDescriptor
-	WithRadiusStride(radiusStride int) *MTL4AccelerationStructureCurveGeometryDescriptor
-	WithIndexType(indexType IndexType) *MTL4AccelerationStructureCurveGeometryDescriptor
-	WithSegmentCount(segmentCount int) *MTL4AccelerationStructureCurveGeometryDescriptor
-	WithSegmentControlPointCount(segmentControlPointCount int) *MTL4AccelerationStructureCurveGeometryDescriptor
-	WithCurveType(curveType CurveType) *MTL4AccelerationStructureCurveGeometryDescriptor
-	WithCurveBasis(curveBasis CurveBasis) *MTL4AccelerationStructureCurveGeometryDescriptor
-	WithCurveEndCaps(curveEndCaps CurveEndCaps) *MTL4AccelerationStructureCurveGeometryDescriptor
-	WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *MTL4AccelerationStructureCurveGeometryDescriptor
-	WithOpaque(opaque bool) *MTL4AccelerationStructureCurveGeometryDescriptor
-	WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureCurveGeometryDescriptor
-	WithLabel(label string) *MTL4AccelerationStructureCurveGeometryDescriptor
-	WithPrimitiveDataStride(primitiveDataStride int) *MTL4AccelerationStructureCurveGeometryDescriptor
-	WithPrimitiveDataElementSize(primitiveDataElementSize int) *MTL4AccelerationStructureCurveGeometryDescriptor
-	ControlPointCount() int
-	SetControlPointCount(controlPointCount int)
-	ControlPointStride() int
-	SetControlPointStride(controlPointStride int)
-	ControlPointFormat() AttributeFormat
-	SetControlPointFormat(controlPointFormat AttributeFormat)
-	RadiusFormat() AttributeFormat
-	SetRadiusFormat(radiusFormat AttributeFormat)
-	RadiusStride() int
-	SetRadiusStride(radiusStride int)
-	IndexType() IndexType
-	SetIndexType(indexType IndexType)
-	SegmentCount() int
-	SetSegmentCount(segmentCount int)
-	SegmentControlPointCount() int
-	SetSegmentControlPointCount(segmentControlPointCount int)
-	CurveType() CurveType
-	SetCurveType(curveType CurveType)
-	CurveBasis() CurveBasis
-	SetCurveBasis(curveBasis CurveBasis)
-	CurveEndCaps() CurveEndCaps
-	SetCurveEndCaps(curveEndCaps CurveEndCaps)
-}
-
-var _ MTL4AccelerationStructureCurveGeometryDescriptorable = (*MTL4AccelerationStructureCurveGeometryDescriptor)(nil)
 
 var _ MTL4AccelerationStructureGeometryDescriptorProvider = (*MTL4AccelerationStructureCurveGeometryDescriptor)(nil)

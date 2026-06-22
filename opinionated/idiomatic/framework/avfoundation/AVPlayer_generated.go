@@ -48,24 +48,24 @@ func playerAdopt(id objc.ID) *Player {
 }
 
 // Description returns the object's -description text.
-func (x *Player) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Player) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Player) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Player) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Player) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Player) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Player) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Player) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // NewPlayerWithURL creates a new player to play a single audiovisual resource referenced by a given URL.
@@ -82,502 +82,332 @@ func NewPlayerWithPlayerItem(item *PlayerItem) *Player {
 	return playerAdopt(_id)
 }
 
-// WithRate the current playback rate.
-func (x *Player) WithRate(rate float32) *Player {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
-	return x
+// WithRate sets the current playback rate.
+func (p *Player) WithRate(rate float32) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setRate:"), rate)
+	return p
 }
 
-// WithDefaultRate a default rate at which to begin playback.
-func (x *Player) WithDefaultRate(defaultRate float32) *Player {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultRate:"), defaultRate)
-	return x
+// WithDefaultRate sets a default rate at which to begin playback.
+func (p *Player) WithDefaultRate(defaultRate float32) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setDefaultRate:"), defaultRate)
+	return p
 }
 
-// WithActionAtItemEnd the action to perform when the current player item has finished playing.
-func (x *Player) WithActionAtItemEnd(actionAtItemEnd PlayerActionAtItemEnd) *Player {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionAtItemEnd:"), actionAtItemEnd)
-	return x
+// WithActionAtItemEnd sets the action to perform when the current player item has finished playing.
+func (p *Player) WithActionAtItemEnd(actionAtItemEnd PlayerActionAtItemEnd) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setActionAtItemEnd:"), actionAtItemEnd)
+	return p
 }
 
-// WithAutomaticallyWaitsToMinimizeStalling a Boolean value that indicates whether the player should automatically delay playback in order to minimize stalling.
-func (x *Player) WithAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling bool) *Player {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyWaitsToMinimizeStalling:"), automaticallyWaitsToMinimizeStalling)
-	return x
+// WithAutomaticallyWaitsToMinimizeStalling sets a Boolean value that indicates whether the player should automatically delay playback in order to minimize stalling.
+func (p *Player) WithAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling bool) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAutomaticallyWaitsToMinimizeStalling:"), automaticallyWaitsToMinimizeStalling)
+	return p
 }
 
-// WithSourceClock a clock the player uses for item time bases.
-func (x *Player) WithSourceClock(sourceClock obj.Object) *Player {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceClock:"), objref.IDOf(sourceClock))
-	return x
+// WithSourceClock sets a clock the player uses for item time bases.
+func (p *Player) WithSourceClock(sourceClock obj.Object) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setSourceClock:"), objref.IDOf(sourceClock))
+	return p
 }
 
-// WithVolume the audio playback volume for the player.
-func (x *Player) WithVolume(volume float32) *Player {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
-	return x
+// WithVolume sets the audio playback volume for the player.
+func (p *Player) WithVolume(volume float32) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setVolume:"), volume)
+	return p
 }
 
-// WithMuted a Boolean value that indicates whether the audio output of the player is muted.
-func (x *Player) WithMuted(muted bool) *Player {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMuted:"), muted)
-	return x
+// WithMuted sets a Boolean value that indicates whether the audio output of the player is muted.
+func (p *Player) WithMuted(muted bool) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setMuted:"), muted)
+	return p
 }
 
-// WithAppliesMediaSelectionCriteriaAutomatically a Boolean value that indicates whether the receiver should apply the current selection criteria automatically to player items.
-func (x *Player) WithAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically bool) *Player {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesMediaSelectionCriteriaAutomatically:"), appliesMediaSelectionCriteriaAutomatically)
-	return x
+// WithAppliesMediaSelectionCriteriaAutomatically sets a Boolean value that indicates whether the receiver should apply the current selection criteria automatically to player items.
+func (p *Player) WithAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically bool) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAppliesMediaSelectionCriteriaAutomatically:"), appliesMediaSelectionCriteriaAutomatically)
+	return p
 }
 
-// WithAudioOutputDeviceUniqueID specifies the unique ID of the Core Audio output device used to play audio.
-func (x *Player) WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) *Player {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioOutputDeviceUniqueID:"), purego.NSString(audioOutputDeviceUniqueID))
-	return x
+// WithAudioOutputDeviceUniqueID sets specifies the unique ID of the Core Audio output device used to play audio.
+func (p *Player) WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAudioOutputDeviceUniqueID:"), purego.NSString(audioOutputDeviceUniqueID))
+	return p
 }
 
-// WithAllowsExternalPlayback a Boolean value that indicates whether the player allows switching to external playback mode.
-func (x *Player) WithAllowsExternalPlayback(allowsExternalPlayback bool) *Player {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExternalPlayback:"), allowsExternalPlayback)
-	return x
+// WithAllowsExternalPlayback sets a Boolean value that indicates whether the player allows switching to external playback mode.
+func (p *Player) WithAllowsExternalPlayback(allowsExternalPlayback bool) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAllowsExternalPlayback:"), allowsExternalPlayback)
+	return p
 }
 
-// WithPreferredVideoDecoderGPURegistryID the registry identifier for the GPU used for video decoding.
-func (x *Player) WithPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64) *Player {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredVideoDecoderGPURegistryID:"), preferredVideoDecoderGPURegistryID)
-	return x
+// WithPreferredVideoDecoderGPURegistryID sets the registry identifier for the GPU used for video decoding.
+func (p *Player) WithPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setPreferredVideoDecoderGPURegistryID:"), preferredVideoDecoderGPURegistryID)
+	return p
 }
 
-// WithPreventsDisplaySleepDuringVideoPlayback a Boolean value that indicates whether video playback prevents display and device sleep.
-func (x *Player) WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *Player {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreventsDisplaySleepDuringVideoPlayback:"), preventsDisplaySleepDuringVideoPlayback)
-	return x
+// WithPreventsDisplaySleepDuringVideoPlayback sets a Boolean value that indicates whether video playback prevents display and device sleep.
+func (p *Player) WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setPreventsDisplaySleepDuringVideoPlayback:"), preventsDisplaySleepDuringVideoPlayback)
+	return p
 }
 
-// WithAudiovisualBackgroundPlaybackPolicy a policy that determines how playback of audiovisual media continues when the app transitions to the background.
-func (x *Player) WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy PlayerAudiovisualBackgroundPlaybackPolicy) *Player {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudiovisualBackgroundPlaybackPolicy:"), audiovisualBackgroundPlaybackPolicy)
-	return x
+// WithAudiovisualBackgroundPlaybackPolicy sets a policy that determines how playback of audiovisual media continues when the app transitions to the background.
+func (p *Player) WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy PlayerAudiovisualBackgroundPlaybackPolicy) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAudiovisualBackgroundPlaybackPolicy:"), audiovisualBackgroundPlaybackPolicy)
+	return p
 }
 
-// WithVideoOutput the video output for this player.
-func (x *Player) WithVideoOutput(videoOutput *PlayerVideoOutput) *Player {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoOutput:"), objref.IDOf(videoOutput))
-	return x
+// WithVideoOutput sets the video output for this player.
+func (p *Player) WithVideoOutput(videoOutput *PlayerVideoOutput) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setVideoOutput:"), objref.IDOf(videoOutput))
+	return p
 }
 
-// WithNetworkResourcePriority indicates the priority of this player for network bandwidth resource distribution.
-func (x *Player) WithNetworkResourcePriority(networkResourcePriority PlayerNetworkResourcePriority) *Player {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkResourcePriority:"), networkResourcePriority)
-	return x
+// WithNetworkResourcePriority sets indicates the priority of this player for network bandwidth resource distribution.
+func (p *Player) WithNetworkResourcePriority(networkResourcePriority PlayerNetworkResourcePriority) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setNetworkResourcePriority:"), networkResourcePriority)
+	return p
 }
 
-// WithAllowsCaptureOfClearKeyVideo indicates whether the video output of ClearKey Encrypted Video can be captured
-func (x *Player) WithAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) *Player {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCaptureOfClearKeyVideo:"), allowsCaptureOfClearKeyVideo)
-	return x
+// WithAllowsCaptureOfClearKeyVideo sets indicates whether the video output of ClearKey Encrypted Video can be captured
+func (p *Player) WithAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setAllowsCaptureOfClearKeyVideo:"), allowsCaptureOfClearKeyVideo)
+	return p
 }
 
-// WithClosedCaptionDisplayEnabled a Boolean value that indicates whether the player uses closed captioning.
-func (x *Player) WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool) *Player {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClosedCaptionDisplayEnabled:"), closedCaptionDisplayEnabled)
-	return x
+// WithClosedCaptionDisplayEnabled sets a Boolean value that indicates whether the player uses closed captioning.
+func (p *Player) WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setClosedCaptionDisplayEnabled:"), closedCaptionDisplayEnabled)
+	return p
 }
 
-// WithMasterClock the host clock for item time bases.
-func (x *Player) WithMasterClock(masterClock obj.Object) *Player {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasterClock:"), objref.IDOf(masterClock))
-	return x
+// WithMasterClock sets the host clock for item time bases.
+func (p *Player) WithMasterClock(masterClock obj.Object) *Player {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setMasterClock:"), objref.IDOf(masterClock))
+	return p
 }
 
-// Status the ability of the receiver to be used for playback. The value of this property is an AVPlayerStatus that indicates whether the receiver can be used for playback. When the value of this property is AVPlayerStatusFailed, the receiver can no longer be used for playback and a new instance needs to be created in its place. When this happens, clients can check the value of the error property to determine the nature of the failure. This property is key value observable.
-func (x *Player) Status() PlayerStatus {
-	_r := objc.Send[PlayerStatus](objref.IDOf(x), objc.RegisterName("status"))
+// Status returns the ability of the receiver to be used for playback. The value of this property is an AVPlayerStatus that indicates whether the receiver can be used for playback. When the value of this property is AVPlayerStatusFailed, the receiver can no longer be used for playback and a new instance needs to be created in its place. When this happens, clients can check the value of the error property to determine the nature of the failure. This property is key value observable.
+func (p *Player) Status() PlayerStatus {
+	_r := objc.Send[PlayerStatus](objref.IDOf(p), objc.RegisterName("status"))
 	return _r
 }
 
 // Play begins playback of the current item.
-func (x *Player) Play() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("play"))
+func (p *Player) Play() {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("play"))
 }
 
 // Pause pauses playback of the current item.
-func (x *Player) Pause() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pause"))
+func (p *Player) Pause() {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("pause"))
 }
 
 // PlayImmediatelyAtRate plays the available media data immediately, at the specified rate.
-func (x *Player) PlayImmediatelyAtRate(rate float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playImmediatelyAtRate:"), rate)
+func (p *Player) PlayImmediatelyAtRate(rate float32) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("playImmediatelyAtRate:"), rate)
 }
 
 // Rate indicates the desired rate of playback; 0.0 means "paused", 1.0 indicates a desire to play at the natural rate of the current item. Setting the value of rate to 0.0 pauses playback, causing the value of timeControlStatus to change to AVPlayerTimeControlStatusPaused. Setting the rate to a non-zero value causes the value of timeControlStatus to become either AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate or AVPlayerTimeControlStatusPlaying, depending on whether sufficient media data has been buffered for playback to occur and whether the player's default behavior of waiting in order to minimize stalling is permitted. See discussion of AVPlayerTimeControlStatus for more details. AVPlayer can reset the desired rate to 0.0 when a change in overall state requires playback to be halted, such as when an interruption occurs on iOS, as announced by AVAudioSession, or when the playback buffer becomes empty and playback stalls while automaticallyWaitsToMinimizeStalling is NO. The effective rate of playback may differ from the desired rate even while timeControlStatus is AVPlayerTimeControlStatusPlaying, if the processing algorithm in use for managing audio pitch requires quantization of playback rate. For information about quantization of rates for audio processing, see AVAudioProcessingSettings.h. You can always obtain the effective rate of playback from the currentItem's timebase; see the timebase property of AVPlayerItem. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
-func (x *Player) Rate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
+func (p *Player) Rate() float32 {
+	_r := objc.Send[float32](objref.IDOf(p), objc.RegisterName("rate"))
 	return _r
-}
-
-// SetRate wraps the corresponding Objective-C method.
-func (x *Player) SetRate(rate float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
 }
 
 // DefaultRate indicates the rate at which to start playback when play is called; defaults to 1.0. Setting this property does not imply playback starts automatically at this rate. Clients still have to kick off playback using `play`. Note that using setRate to start playback will skip using the value in this property nor would it update this property. Therefore, `setRate:1.0` is no longer recommended as a means to start playback. Use `play` instead. Use `setRate` for operations like scanning where the rate is to be updated instantaneously. Invoking `play` again would restore playback at the rate set in this property. The effective rate of playback may still differ from the default rate subject to restrictions imposed by the system. See documentation for the rate property for a discussion on when the desired rate does not translate to effective rate.
-func (x *Player) DefaultRate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("defaultRate"))
+func (p *Player) DefaultRate() float32 {
+	_r := objc.Send[float32](objref.IDOf(p), objc.RegisterName("defaultRate"))
 	return _r
 }
 
-// SetDefaultRate wraps the corresponding Objective-C method.
-func (x *Player) SetDefaultRate(defaultRate float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultRate:"), defaultRate)
-}
-
 // TimeControlStatus indicates whether playback is currently paused indefinitely, suspended while waiting for appropriate conditions, or in progress. For possible values and discussion, see AVPlayerTimeControlStatus. When automaticallyWaitsToMinimizeStalling is YES, absent intervention in the form of invocations of -setRate: or -pause or, on iOS, an interruption that requires user intervention before playback can resume, the value of the property timeControlStatus automatically changes between AVPlayerTimeControlStatusPlaying and AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate depending on whether sufficient media data is available to continue playback. This property is key value observable.
-func (x *Player) TimeControlStatus() PlayerTimeControlStatus {
-	_r := objc.Send[PlayerTimeControlStatus](objref.IDOf(x), objc.RegisterName("timeControlStatus"))
+func (p *Player) TimeControlStatus() PlayerTimeControlStatus {
+	_r := objc.Send[PlayerTimeControlStatus](objref.IDOf(p), objc.RegisterName("timeControlStatus"))
 	return _r
 }
 
 // ReasonForWaitingToPlay indicates the reason for waiting when the value of timeControlStatus is AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate When the value of timeControlStatus is AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate, this property describes why the player is currently waiting. It is nil otherwise. You can use the value of reasonForWaitingToPlay to show UI indicating the player's waiting state conditionally. This property is key value observable. Possible values are AVPlayerWaitingWithNoItemToPlayReason, AVPlayerWaitingWhileEvaluatingBufferingRateReason, and AVPlayerWaitingToMinimizeStallsReason.
-func (x *Player) ReasonForWaitingToPlay() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reasonForWaitingToPlay"))
+func (p *Player) ReasonForWaitingToPlay() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("reasonForWaitingToPlay"))
 	return obj.Wrap(_r)
 }
 
 // ReplaceCurrentItemWithPlayerItem replaces the current item with a new item.
-func (x *Player) ReplaceCurrentItemWithPlayerItem(item *PlayerItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceCurrentItemWithPlayerItem:"), objref.IDOf(item))
+func (p *Player) ReplaceCurrentItemWithPlayerItem(item *PlayerItem) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("replaceCurrentItemWithPlayerItem:"), objref.IDOf(item))
 }
 
 // CurrentItem indicates the current item of the player
-func (x *Player) CurrentItem() *PlayerItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentItem"))
+func (p *Player) CurrentItem() *PlayerItem {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("currentItem"))
 	return PlayerItemFromID(_r)
 }
 
 // ActionAtItemEnd indicates the action that the player should perform when playback of an item reaches its end time. This property throws an exception if set to AVPlayerActionAtItemEndAdvance on an AVPlayer which is not an AVQueuePlayer.
-func (x *Player) ActionAtItemEnd() PlayerActionAtItemEnd {
-	_r := objc.Send[PlayerActionAtItemEnd](objref.IDOf(x), objc.RegisterName("actionAtItemEnd"))
+func (p *Player) ActionAtItemEnd() PlayerActionAtItemEnd {
+	_r := objc.Send[PlayerActionAtItemEnd](objref.IDOf(p), objc.RegisterName("actionAtItemEnd"))
 	return _r
-}
-
-// SetActionAtItemEnd wraps the corresponding Objective-C method.
-func (x *Player) SetActionAtItemEnd(actionAtItemEnd PlayerActionAtItemEnd) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionAtItemEnd:"), actionAtItemEnd)
 }
 
 // SeekToDate requests that the player seek to a specified date.
-func (x *Player) SeekToDate(date obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seekToDate:"), objref.IDOf(date))
+func (p *Player) SeekToDate(date obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("seekToDate:"), objref.IDOf(date))
 }
 
 // SeekToDateCompletionHandler requests that the player seek to a specified date, and to notify you when the seek is complete.
-func (x *Player) SeekToDateCompletionHandler(date obj.Object, completionHandler func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seekToDate:completionHandler:"), objref.IDOf(date), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+func (p *Player) SeekToDateCompletionHandler(date obj.Object, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("seekToDate:completionHandler:"), objref.IDOf(date), objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // PrerollAtRateCompletionHandler begins loading media data to prime the media pipelines for playback.
-func (x *Player) PrerollAtRateCompletionHandler(rate float32, completionHandler func(bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prerollAtRate:completionHandler:"), rate, objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
+func (p *Player) PrerollAtRateCompletionHandler(rate float32, completionHandler func(bool)) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("prerollAtRate:completionHandler:"), rate, objc.NewBlock(func(_ objc.Block, _b0 bool) { completionHandler(_b0) }))
 }
 
 // CancelPendingPrerolls cancels any pending preroll requests and invokes the corresponding completion handlers, if present.
-func (x *Player) CancelPendingPrerolls() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelPendingPrerolls"))
+func (p *Player) CancelPendingPrerolls() {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("cancelPendingPrerolls"))
 }
 
-// AutomaticallyWaitsToMinimizeStalling indicates that the player is allowed to delay playback at the specified rate in order to minimize stalling When this property is YES, whenever 1) the rate is set from zero to non-zero or 2) the playback buffer becomes empty and playback stalls, the player will attempt to determine if, at the specified rate, its currentItem will play to the end without interruptions. Should it determine that such interruptions would occur and these interruptions can be avoided by delaying the start or resumption of playback, the value of timeControlStatus will become AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate and playback will start automatically when the likelihood of stalling has been minimized. You may want to set this property to NO when you need precise control over playback start times, e.g., when synchronizing multiple instances of AVPlayer, and you should set it to NO if you use an AVAssetResourceLoader delegate to load media data (more on this below). If the value of this property is NO, reasonForWaitingToPlay cannot assume a value of AVPlayerWaitingToMinimizeStallsReason. This implies that setting rate to a non-zero value in AVPlayerTimeControlStatusPaused will cause playback to start immediately as long as the playback buffer is not empty. When the playback buffer becomes empty during AVPlayerTimeControlStatusPlaying and playback stalls, playback state will switch to AVPlayerTimeControlStatusPaused and the rate will become 0.0. Changing the value of this property to NO while the value of timeControlStatus is AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate with a reasonForWaitingToPlay of AVPlayerWaitingToMinimizeStallsReason will cause the player to attempt playback at the specified rate immediately. For clients linked against iOS 10.0 and running on that version or later or linked against macOS 10.12 and running on that version or later, the default value of this property is YES. In versions of iOS prior to iOS 10.0 and versions of macOS prior to 10.12, this property is unavailable, and the behavior of the AVPlayer corresponds to the type of content being played. For streaming content, including HTTP Live Streaming, the AVPlayer acts as if automaticallyWaitsToMinimizeStalling is YES. For file-based content, including file-based content accessed via progressive http download, the AVPlayer acts as if automaticallyWaitsToMinimizeStalling is NO. If you employ an AVAssetResourceLoader delegate that loads media data for playback, you should set the value of your AVPlayer’s automaticallyWaitsToMinimizeStalling property to NO. Allowing the value of automaticallyWaitsToMinimizeStalling to remain YES when an AVAssetResourceLoader delegate is used for the loading of media data can result in poor start-up times for playback and poor recovery from stalls, because the behaviors provided by AVPlayer when automaticallyWaitsToMinimizeStalling has a value of YES depend on predictions of the future availability of media data that that do not function as expected when data is loaded via a client-controlled means, using the AVAssetResourceLoader delegate interface. You can allow the value of automaticallyWaitsToMinimizeStalling to remain YES if you use an AVAssetResourceLoader delegate to manage content keys for FairPlay Streaming, to provide dynamically-generated master playlists for HTTP Live Streaming, or to respond to authentication challenges, but not to load media data for playback. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
-func (x *Player) AutomaticallyWaitsToMinimizeStalling() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyWaitsToMinimizeStalling"))
+// AutomaticallyWaitsToMinimizeStalling reports whether indicates that the player is allowed to delay playback at the specified rate in order to minimize stalling When this property is true, whenever 1) the rate is set from zero to non-zero or 2) the playback buffer becomes empty and playback stalls, the player will attempt to determine if, at the specified rate, its currentItem will play to the end without interruptions. Should it determine that such interruptions would occur and these interruptions can be avoided by delaying the start or resumption of playback, the value of timeControlStatus will become AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate and playback will start automatically when the likelihood of stalling has been minimized. You may want to set this property to false when you need precise control over playback start times, e.g., when synchronizing multiple instances of AVPlayer, and you should set it to false if you use an AVAssetResourceLoader delegate to load media data (more on this below). If the value of this property is false, reasonForWaitingToPlay cannot assume a value of AVPlayerWaitingToMinimizeStallsReason. This implies that setting rate to a non-zero value in AVPlayerTimeControlStatusPaused will cause playback to start immediately as long as the playback buffer is not empty. When the playback buffer becomes empty during AVPlayerTimeControlStatusPlaying and playback stalls, playback state will switch to AVPlayerTimeControlStatusPaused and the rate will become 0.0. Changing the value of this property to false while the value of timeControlStatus is AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate with a reasonForWaitingToPlay of AVPlayerWaitingToMinimizeStallsReason will cause the player to attempt playback at the specified rate immediately. For clients linked against iOS 10.0 and running on that version or later or linked against macOS 10.12 and running on that version or later, the default value of this property is true. In versions of iOS prior to iOS 10.0 and versions of macOS prior to 10.12, this property is unavailable, and the behavior of the AVPlayer corresponds to the type of content being played. For streaming content, including HTTP Live Streaming, the AVPlayer acts as if automaticallyWaitsToMinimizeStalling is true. For file-based content, including file-based content accessed via progressive http download, the AVPlayer acts as if automaticallyWaitsToMinimizeStalling is false. If you employ an AVAssetResourceLoader delegate that loads media data for playback, you should set the value of your AVPlayer’s automaticallyWaitsToMinimizeStalling property to false. Allowing the value of automaticallyWaitsToMinimizeStalling to remain true when an AVAssetResourceLoader delegate is used for the loading of media data can result in poor start-up times for playback and poor recovery from stalls, because the behaviors provided by AVPlayer when automaticallyWaitsToMinimizeStalling has a value of true depend on predictions of the future availability of media data that that do not function as expected when data is loaded via a client-controlled means, using the AVAssetResourceLoader delegate interface. You can allow the value of automaticallyWaitsToMinimizeStalling to remain true if you use an AVAssetResourceLoader delegate to manage content keys for FairPlay Streaming, to provide dynamically-generated master playlists for HTTP Live Streaming, or to respond to authentication challenges, but not to load media data for playback. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+func (p *Player) AutomaticallyWaitsToMinimizeStalling() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("automaticallyWaitsToMinimizeStalling"))
 	return _r
 }
 
-// SetAutomaticallyWaitsToMinimizeStalling indicates that the player is allowed to delay playback at the specified rate in order to minimize stalling When this property is YES, whenever 1) the rate is set from zero to non-zero or 2) the playback buffer becomes empty and playback stalls, the player will attempt to determine if, at the specified rate, its currentItem will play to the end without interruptions. Should it determine that such interruptions would occur and these interruptions can be avoided by delaying the start or resumption of playback, the value of timeControlStatus will become AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate and playback will start automatically when the likelihood of stalling has been minimized. You may want to set this property to NO when you need precise control over playback start times, e.g., when synchronizing multiple instances of AVPlayer, and you should set it to NO if you use an AVAssetResourceLoader delegate to load media data (more on this below). If the value of this property is NO, reasonForWaitingToPlay cannot assume a value of AVPlayerWaitingToMinimizeStallsReason. This implies that setting rate to a non-zero value in AVPlayerTimeControlStatusPaused will cause playback to start immediately as long as the playback buffer is not empty. When the playback buffer becomes empty during AVPlayerTimeControlStatusPlaying and playback stalls, playback state will switch to AVPlayerTimeControlStatusPaused and the rate will become 0.0. Changing the value of this property to NO while the value of timeControlStatus is AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate with a reasonForWaitingToPlay of AVPlayerWaitingToMinimizeStallsReason will cause the player to attempt playback at the specified rate immediately. For clients linked against iOS 10.0 and running on that version or later or linked against macOS 10.12 and running on that version or later, the default value of this property is YES. In versions of iOS prior to iOS 10.0 and versions of macOS prior to 10.12, this property is unavailable, and the behavior of the AVPlayer corresponds to the type of content being played. For streaming content, including HTTP Live Streaming, the AVPlayer acts as if automaticallyWaitsToMinimizeStalling is YES. For file-based content, including file-based content accessed via progressive http download, the AVPlayer acts as if automaticallyWaitsToMinimizeStalling is NO. If you employ an AVAssetResourceLoader delegate that loads media data for playback, you should set the value of your AVPlayer’s automaticallyWaitsToMinimizeStalling property to NO. Allowing the value of automaticallyWaitsToMinimizeStalling to remain YES when an AVAssetResourceLoader delegate is used for the loading of media data can result in poor start-up times for playback and poor recovery from stalls, because the behaviors provided by AVPlayer when automaticallyWaitsToMinimizeStalling has a value of YES depend on predictions of the future availability of media data that that do not function as expected when data is loaded via a client-controlled means, using the AVAssetResourceLoader delegate interface. You can allow the value of automaticallyWaitsToMinimizeStalling to remain YES if you use an AVAssetResourceLoader delegate to manage content keys for FairPlay Streaming, to provide dynamically-generated master playlists for HTTP Live Streaming, or to respond to authentication challenges, but not to load media data for playback. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
-func (x *Player) SetAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyWaitsToMinimizeStalling:"), automaticallyWaitsToMinimizeStalling)
-}
-
 // SourceClock set to override the automatic choice of source clock for item timebases. NULL by default. This is most useful for synchronizing video-only movies with audio played via other means. IMPORTANT NOTE: If you specify a source clock other than the appropriate audio device clock, audio may drift out of sync.
-func (x *Player) SourceClock() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceClock"))
+func (p *Player) SourceClock() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("sourceClock"))
 	return obj.Wrap(_r)
 }
 
-// SetSourceClock wraps the corresponding Objective-C method.
-func (x *Player) SetSourceClock(sourceClock obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceClock:"), objref.IDOf(sourceClock))
-}
-
 // AddBoundaryTimeObserverForTimesQueueUsing requests the invocation of a block when specified times are traversed during normal playback.
-func (x *Player) AddBoundaryTimeObserverForTimesQueueUsing(times []obj.Object, queue obj.Object, block func()) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addBoundaryTimeObserverForTimes:queue:usingBlock:"), purego.SliceToNSArray(times, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block) { block() }))
+func (p *Player) AddBoundaryTimeObserverForTimesQueueUsing(times []obj.Object, queue obj.Object, block func()) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("addBoundaryTimeObserverForTimes:queue:usingBlock:"), purego.SliceToNSArray(times, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(queue), objc.NewBlock(func(_ objc.Block) { block() }))
 	return obj.Wrap(_r)
 }
 
 // RemoveTimeObserver cancels a previously registered periodic or boundary time observer.
-func (x *Player) RemoveTimeObserver(observer obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTimeObserver:"), objref.IDOf(observer))
+func (p *Player) RemoveTimeObserver(observer obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("removeTimeObserver:"), objref.IDOf(observer))
 }
 
 // Volume indicates the current audio volume of the player; 0.0 means "silence all audio", 1.0 means "play at the full volume of the current item". iOS note: Do not use this property to implement a volume slider for media playback. For that purpose, use MPVolumeView, which is customizable in appearance and provides standard media playback behaviors that users expect. This property is most useful on iOS to control the volume of the AVPlayer relative to other audio output, not for volume control by end users.
-func (x *Player) Volume() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("volume"))
+func (p *Player) Volume() float32 {
+	_r := objc.Send[float32](objref.IDOf(p), objc.RegisterName("volume"))
 	return _r
 }
 
-// SetVolume wraps the corresponding Objective-C method.
-func (x *Player) SetVolume(volume float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
-}
-
-// IsMuted indicates whether or not audio output of the player is muted. Only affects audio muting for the player instance and not for the device.
-func (x *Player) IsMuted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMuted"))
+// IsMuted reports whether audio output of the player is muted. Only affects audio muting for the player instance and not for the device.
+func (p *Player) IsMuted() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isMuted"))
 	return _r
-}
-
-// SetMuted wraps the corresponding Objective-C method.
-func (x *Player) SetMuted(muted bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMuted:"), muted)
 }
 
 // SetMediaSelectionCriteriaForMediaCharacteristic applies automatic selection criteria for media that has the specified media characteristic.
-func (x *Player) SetMediaSelectionCriteriaForMediaCharacteristic(criteria *PlayerMediaSelectionCriteria, mediaCharacteristic obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaSelectionCriteria:forMediaCharacteristic:"), objref.IDOf(criteria), objref.IDOf(mediaCharacteristic))
+func (p *Player) SetMediaSelectionCriteriaForMediaCharacteristic(criteria *PlayerMediaSelectionCriteria, mediaCharacteristic obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setMediaSelectionCriteria:forMediaCharacteristic:"), objref.IDOf(criteria), objref.IDOf(mediaCharacteristic))
 }
 
 // MediaSelectionCriteriaForMediaCharacteristic returns the automatic selection criteria for media items with the specified media characteristic.
-func (x *Player) MediaSelectionCriteriaForMediaCharacteristic(mediaCharacteristic obj.Object) *PlayerMediaSelectionCriteria {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSelectionCriteriaForMediaCharacteristic:"), objref.IDOf(mediaCharacteristic))
+func (p *Player) MediaSelectionCriteriaForMediaCharacteristic(mediaCharacteristic obj.Object) *PlayerMediaSelectionCriteria {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("mediaSelectionCriteriaForMediaCharacteristic:"), objref.IDOf(mediaCharacteristic))
 	return PlayerMediaSelectionCriteriaFromID(_r)
 }
 
-// AppliesMediaSelectionCriteriaAutomatically indicates whether the receiver should apply the current selection criteria automatically to AVPlayerItems. For clients linked against the iOS 7 SDK or later or against the macOS 10.9 SDK or later, the default is YES. For all others, the default is NO. By default, AVPlayer applies selection criteria based on system preferences. To override the default criteria for any media selection group, use -[AVPlayer setMediaSelectionCriteria:forMediaCharacteristic:].
-func (x *Player) AppliesMediaSelectionCriteriaAutomatically() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("appliesMediaSelectionCriteriaAutomatically"))
+// AppliesMediaSelectionCriteriaAutomatically reports whether the receiver should apply the current selection criteria automatically to AVPlayerItems. For clients linked against the iOS 7 SDK or later or against the macOS 10.9 SDK or later, the default is true. For all others, the default is false. By default, AVPlayer applies selection criteria based on system preferences. To override the default criteria for any media selection group, use -[AVPlayer setMediaSelectionCriteria:forMediaCharacteristic:].
+func (p *Player) AppliesMediaSelectionCriteriaAutomatically() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("appliesMediaSelectionCriteriaAutomatically"))
 	return _r
 }
 
-// SetAppliesMediaSelectionCriteriaAutomatically wraps the corresponding Objective-C method.
-func (x *Player) SetAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppliesMediaSelectionCriteriaAutomatically:"), appliesMediaSelectionCriteriaAutomatically)
-}
-
 // AudioOutputDeviceUniqueID wraps the corresponding Objective-C method.
-func (x *Player) AudioOutputDeviceUniqueID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioOutputDeviceUniqueID"))
+func (p *Player) AudioOutputDeviceUniqueID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("audioOutputDeviceUniqueID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetAudioOutputDeviceUniqueID wraps the corresponding Objective-C method.
-func (x *Player) SetAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioOutputDeviceUniqueID:"), purego.NSString(audioOutputDeviceUniqueID))
-}
-
-// AllowsExternalPlayback indicates whether the player allows switching to "external playback" mode. The default value is YES.
-func (x *Player) AllowsExternalPlayback() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsExternalPlayback"))
+// AllowsExternalPlayback reports whether the player allows switching to "external playback" mode. The default value is true.
+func (p *Player) AllowsExternalPlayback() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("allowsExternalPlayback"))
 	return _r
 }
 
-// SetAllowsExternalPlayback wraps the corresponding Objective-C method.
-func (x *Player) SetAllowsExternalPlayback(allowsExternalPlayback bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExternalPlayback:"), allowsExternalPlayback)
-}
-
-// IsExternalPlaybackActive indicates whether the player is currently playing video in "external playback" mode.
-func (x *Player) IsExternalPlaybackActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExternalPlaybackActive"))
+// IsExternalPlaybackActive reports whether the player is currently playing video in "external playback" mode.
+func (p *Player) IsExternalPlaybackActive() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isExternalPlaybackActive"))
 	return _r
 }
 
 // OutputObscuredDueToInsufficientExternalProtection wraps the corresponding Objective-C method.
-func (x *Player) OutputObscuredDueToInsufficientExternalProtection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("outputObscuredDueToInsufficientExternalProtection"))
+func (p *Player) OutputObscuredDueToInsufficientExternalProtection() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("outputObscuredDueToInsufficientExternalProtection"))
 	return _r
 }
 
 // PreferredVideoDecoderGPURegistryID wraps the corresponding Objective-C method.
-func (x *Player) PreferredVideoDecoderGPURegistryID() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("preferredVideoDecoderGPURegistryID"))
+func (p *Player) PreferredVideoDecoderGPURegistryID() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(p), objc.RegisterName("preferredVideoDecoderGPURegistryID"))
 	return _r
 }
 
-// SetPreferredVideoDecoderGPURegistryID wraps the corresponding Objective-C method.
-func (x *Player) SetPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredVideoDecoderGPURegistryID:"), preferredVideoDecoderGPURegistryID)
-}
-
-// PreventsDisplaySleepDuringVideoPlayback indicates whether video playback prevents display and device sleep. Default is YES on iOS, tvOS and in Mac Catalyst apps. Default is NO on macOS. Setting this property to NO does not force the display to sleep, it simply stops preventing display sleep. Other apps or frameworks within your app may still be preventing display sleep for various reasons. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
-func (x *Player) PreventsDisplaySleepDuringVideoPlayback() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preventsDisplaySleepDuringVideoPlayback"))
+// PreventsDisplaySleepDuringVideoPlayback reports whether video playback prevents display and device sleep. Default is true on iOS, tvOS and in Mac Catalyst apps. Default is false on macOS. Setting this property to false does not force the display to sleep, it simply stops preventing display sleep. Other apps or frameworks within your app may still be preventing display sleep for various reasons. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
+func (p *Player) PreventsDisplaySleepDuringVideoPlayback() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("preventsDisplaySleepDuringVideoPlayback"))
 	return _r
-}
-
-// SetPreventsDisplaySleepDuringVideoPlayback indicates whether video playback prevents display and device sleep. Default is YES on iOS, tvOS and in Mac Catalyst apps. Default is NO on macOS. Setting this property to NO does not force the display to sleep, it simply stops preventing display sleep. Other apps or frameworks within your app may still be preventing display sleep for various reasons. Before macOS 13, iOS 16, tvOS 16, and watchOS 9, this property must be accessed on the main thread/queue.
-func (x *Player) SetPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreventsDisplaySleepDuringVideoPlayback:"), preventsDisplaySleepDuringVideoPlayback)
 }
 
 // AudiovisualBackgroundPlaybackPolicy wraps the corresponding Objective-C method.
-func (x *Player) AudiovisualBackgroundPlaybackPolicy() PlayerAudiovisualBackgroundPlaybackPolicy {
-	_r := objc.Send[PlayerAudiovisualBackgroundPlaybackPolicy](objref.IDOf(x), objc.RegisterName("audiovisualBackgroundPlaybackPolicy"))
+func (p *Player) AudiovisualBackgroundPlaybackPolicy() PlayerAudiovisualBackgroundPlaybackPolicy {
+	_r := objc.Send[PlayerAudiovisualBackgroundPlaybackPolicy](objref.IDOf(p), objc.RegisterName("audiovisualBackgroundPlaybackPolicy"))
 	return _r
 }
 
-// SetAudiovisualBackgroundPlaybackPolicy wraps the corresponding Objective-C method.
-func (x *Player) SetAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy PlayerAudiovisualBackgroundPlaybackPolicy) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudiovisualBackgroundPlaybackPolicy:"), audiovisualBackgroundPlaybackPolicy)
-}
-
-// PlaybackCoordinator the playback coordinator for this player. If the playback coordinator is connected to other participants, rate changes and seeks on the current item will be automatically mirrored to all connected participants. Depending on policies, the coordinator may also intercept rate changes to non-zero to coordinate playback start with the rest of the group. Use [AVPlayer playImmediatelyAtRate:] to override the coordinated startup behavior and start playback immediately. This is useful to give users an opportunity to override waiting caused by other participants' suspensions. Player configuration other than rate and seeks are not communicated to other participants and can be configured independently by each participant. A player with a connected playbackCoordinator will change behavior in situations that require the player to pause for internal reasons, such as a route change or a stall. When resuming after these events, the player will not resume at the stop time. Instead, it will attempt to rejoin the group, potentially seeking to match the other participant's progress. It is left to the owner of the AVPlayer to ensure that all participants are playing the same item. See the discussion of AVPlaybackCoordinator for considerations about item transitions.
-func (x *Player) PlaybackCoordinator() *PlayerPlaybackCoordinator {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playbackCoordinator"))
+// PlaybackCoordinator returns the playback coordinator for this player. If the playback coordinator is connected to other participants, rate changes and seeks on the current item will be automatically mirrored to all connected participants. Depending on policies, the coordinator may also intercept rate changes to non-zero to coordinate playback start with the rest of the group. Use [AVPlayer playImmediatelyAtRate:] to override the coordinated startup behavior and start playback immediately. This is useful to give users an opportunity to override waiting caused by other participants' suspensions. Player configuration other than rate and seeks are not communicated to other participants and can be configured independently by each participant. A player with a connected playbackCoordinator will change behavior in situations that require the player to pause for internal reasons, such as a route change or a stall. When resuming after these events, the player will not resume at the stop time. Instead, it will attempt to rejoin the group, potentially seeking to match the other participant's progress. It is left to the owner of the AVPlayer to ensure that all participants are playing the same item. See the discussion of AVPlaybackCoordinator for considerations about item transitions.
+func (p *Player) PlaybackCoordinator() *PlayerPlaybackCoordinator {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("playbackCoordinator"))
 	return PlayerPlaybackCoordinatorFromID(_r)
 }
 
 // VideoOutput wraps the corresponding Objective-C method.
-func (x *Player) VideoOutput() *PlayerVideoOutput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoOutput"))
+func (p *Player) VideoOutput() *PlayerVideoOutput {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("videoOutput"))
 	return PlayerVideoOutputFromID(_r)
 }
 
-// SetVideoOutput wraps the corresponding Objective-C method.
-func (x *Player) SetVideoOutput(videoOutput *PlayerVideoOutput) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoOutput:"), objref.IDOf(videoOutput))
-}
-
 // NetworkResourcePriority wraps the corresponding Objective-C method.
-func (x *Player) NetworkResourcePriority() PlayerNetworkResourcePriority {
-	_r := objc.Send[PlayerNetworkResourcePriority](objref.IDOf(x), objc.RegisterName("networkResourcePriority"))
+func (p *Player) NetworkResourcePriority() PlayerNetworkResourcePriority {
+	_r := objc.Send[PlayerNetworkResourcePriority](objref.IDOf(p), objc.RegisterName("networkResourcePriority"))
 	return _r
-}
-
-// SetNetworkResourcePriority wraps the corresponding Objective-C method.
-func (x *Player) SetNetworkResourcePriority(networkResourcePriority PlayerNetworkResourcePriority) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkResourcePriority:"), networkResourcePriority)
 }
 
 // AllowsCaptureOfClearKeyVideo wraps the corresponding Objective-C method.
-func (x *Player) AllowsCaptureOfClearKeyVideo() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCaptureOfClearKeyVideo"))
+func (p *Player) AllowsCaptureOfClearKeyVideo() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("allowsCaptureOfClearKeyVideo"))
 	return _r
 }
 
-// SetAllowsCaptureOfClearKeyVideo wraps the corresponding Objective-C method.
-func (x *Player) SetAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCaptureOfClearKeyVideo:"), allowsCaptureOfClearKeyVideo)
-}
-
-// IsClosedCaptionDisplayEnabled indicates whether display of closed captions is enabled. This property is deprecated. When the value of appliesMediaSelectionCriteriaAutomatically is YES, the receiver will enable closed captions automatically either according to user preferences or, if you provide them, according to AVPlayerMediaSelectionCriteria for the media characteristic AVMediaCharacteristicLegible. If you want to determine whether closed captions may be available for a given AVPlayerItem, you can examine the AVMediaSelectionOptions in the AVMediaSelectionGroup for the characteristic AVMediaCharacteristicLegible, as vended by -[AVAsset mediaSelectionGroupForMediaCharacteristic:]. See AVMediaCharacteristicTranscribesSpokenDialogForAccessibility and AVMediaCharacteristicDescribesMusicAndSoundForAccessibility as documented in AVMediaFormat.h for information about how to identify legible media selection options that offer the features of closed captions for accessibility purposes. You can select or deselect a specific AVMediaSelectionOption via -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:]. For further information about Media Accessibility preferences, see MediaAccessibility framework documentation.
-func (x *Player) IsClosedCaptionDisplayEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isClosedCaptionDisplayEnabled"))
+// IsClosedCaptionDisplayEnabled reports whether display of closed captions is enabled. This property is deprecated. When the value of appliesMediaSelectionCriteriaAutomatically is true, the receiver will enable closed captions automatically either according to user preferences or, if you provide them, according to AVPlayerMediaSelectionCriteria for the media characteristic AVMediaCharacteristicLegible. If you want to determine whether closed captions may be available for a given AVPlayerItem, you can examine the AVMediaSelectionOptions in the AVMediaSelectionGroup for the characteristic AVMediaCharacteristicLegible, as vended by -[AVAsset mediaSelectionGroupForMediaCharacteristic:]. See AVMediaCharacteristicTranscribesSpokenDialogForAccessibility and AVMediaCharacteristicDescribesMusicAndSoundForAccessibility as documented in AVMediaFormat.h for information about how to identify legible media selection options that offer the features of closed captions for accessibility purposes. You can select or deselect a specific AVMediaSelectionOption via -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:]. For further information about Media Accessibility preferences, see MediaAccessibility framework documentation.
+func (p *Player) IsClosedCaptionDisplayEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isClosedCaptionDisplayEnabled"))
 	return _r
 }
 
-// SetClosedCaptionDisplayEnabled wraps the corresponding Objective-C method.
-func (x *Player) SetClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClosedCaptionDisplayEnabled:"), closedCaptionDisplayEnabled)
-}
-
-// MasterClock use sourceClock instead.
-func (x *Player) MasterClock() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("masterClock"))
+// MasterClock returns use sourceClock instead.
+func (p *Player) MasterClock() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("masterClock"))
 	return obj.Wrap(_r)
 }
-
-// SetMasterClock wraps the corresponding Objective-C method.
-func (x *Player) SetMasterClock(masterClock obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasterClock:"), objref.IDOf(masterClock))
-}
-
-// Playerable is the interface implemented by [Player], for mocking and DI.
-type Playerable interface {
-	obj.Object
-	WithRate(rate float32) *Player
-	WithDefaultRate(defaultRate float32) *Player
-	WithActionAtItemEnd(actionAtItemEnd PlayerActionAtItemEnd) *Player
-	WithAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling bool) *Player
-	WithSourceClock(sourceClock obj.Object) *Player
-	WithVolume(volume float32) *Player
-	WithMuted(muted bool) *Player
-	WithAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically bool) *Player
-	WithAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string) *Player
-	WithAllowsExternalPlayback(allowsExternalPlayback bool) *Player
-	WithPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64) *Player
-	WithPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool) *Player
-	WithAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy PlayerAudiovisualBackgroundPlaybackPolicy) *Player
-	WithVideoOutput(videoOutput *PlayerVideoOutput) *Player
-	WithNetworkResourcePriority(networkResourcePriority PlayerNetworkResourcePriority) *Player
-	WithAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool) *Player
-	WithClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool) *Player
-	WithMasterClock(masterClock obj.Object) *Player
-	Status() PlayerStatus
-	Play()
-	Pause()
-	PlayImmediatelyAtRate(rate float32)
-	Rate() float32
-	SetRate(rate float32)
-	DefaultRate() float32
-	SetDefaultRate(defaultRate float32)
-	TimeControlStatus() PlayerTimeControlStatus
-	ReasonForWaitingToPlay() obj.Object
-	ReplaceCurrentItemWithPlayerItem(item *PlayerItem)
-	CurrentItem() *PlayerItem
-	ActionAtItemEnd() PlayerActionAtItemEnd
-	SetActionAtItemEnd(actionAtItemEnd PlayerActionAtItemEnd)
-	SeekToDate(date obj.Object)
-	SeekToDateCompletionHandler(date obj.Object, completionHandler func(bool))
-	PrerollAtRateCompletionHandler(rate float32, completionHandler func(bool))
-	CancelPendingPrerolls()
-	AutomaticallyWaitsToMinimizeStalling() bool
-	SetAutomaticallyWaitsToMinimizeStalling(automaticallyWaitsToMinimizeStalling bool)
-	SourceClock() obj.Object
-	SetSourceClock(sourceClock obj.Object)
-	AddBoundaryTimeObserverForTimesQueueUsing(times []obj.Object, queue obj.Object, block func()) obj.Object
-	RemoveTimeObserver(observer obj.Object)
-	Volume() float32
-	SetVolume(volume float32)
-	IsMuted() bool
-	SetMuted(muted bool)
-	SetMediaSelectionCriteriaForMediaCharacteristic(criteria *PlayerMediaSelectionCriteria, mediaCharacteristic obj.Object)
-	MediaSelectionCriteriaForMediaCharacteristic(mediaCharacteristic obj.Object) *PlayerMediaSelectionCriteria
-	AppliesMediaSelectionCriteriaAutomatically() bool
-	SetAppliesMediaSelectionCriteriaAutomatically(appliesMediaSelectionCriteriaAutomatically bool)
-	AudioOutputDeviceUniqueID() string
-	SetAudioOutputDeviceUniqueID(audioOutputDeviceUniqueID string)
-	AllowsExternalPlayback() bool
-	SetAllowsExternalPlayback(allowsExternalPlayback bool)
-	IsExternalPlaybackActive() bool
-	OutputObscuredDueToInsufficientExternalProtection() bool
-	PreferredVideoDecoderGPURegistryID() uint64
-	SetPreferredVideoDecoderGPURegistryID(preferredVideoDecoderGPURegistryID uint64)
-	PreventsDisplaySleepDuringVideoPlayback() bool
-	SetPreventsDisplaySleepDuringVideoPlayback(preventsDisplaySleepDuringVideoPlayback bool)
-	AudiovisualBackgroundPlaybackPolicy() PlayerAudiovisualBackgroundPlaybackPolicy
-	SetAudiovisualBackgroundPlaybackPolicy(audiovisualBackgroundPlaybackPolicy PlayerAudiovisualBackgroundPlaybackPolicy)
-	PlaybackCoordinator() *PlayerPlaybackCoordinator
-	VideoOutput() *PlayerVideoOutput
-	SetVideoOutput(videoOutput *PlayerVideoOutput)
-	NetworkResourcePriority() PlayerNetworkResourcePriority
-	SetNetworkResourcePriority(networkResourcePriority PlayerNetworkResourcePriority)
-	AllowsCaptureOfClearKeyVideo() bool
-	SetAllowsCaptureOfClearKeyVideo(allowsCaptureOfClearKeyVideo bool)
-	IsClosedCaptionDisplayEnabled() bool
-	SetClosedCaptionDisplayEnabled(closedCaptionDisplayEnabled bool)
-	MasterClock() obj.Object
-	SetMasterClock(masterClock obj.Object)
-}
-
-var _ Playerable = (*Player)(nil)
 
 // isPlayer marks Player — and, by embedding promotion, its
 // subclasses — as a member of the Player hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Player) isPlayer() {}
+func (p *Player) isPlayer() {}
 
 var _ PlayerProvider = (*Player)(nil)

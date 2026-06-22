@@ -46,24 +46,24 @@ func wKBackForwardListAdopt(id objc.ID) *WKBackForwardList {
 }
 
 // Description returns the object's -description text.
-func (x *WKBackForwardList) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wbfl *WKBackForwardList) Description() string {
+	return rt.Description(objref.IDOf(wbfl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKBackForwardList) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wbfl *WKBackForwardList) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wbfl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKBackForwardList) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wbfl *WKBackForwardList) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wbfl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKBackForwardList) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wbfl *WKBackForwardList) String() string {
+	return rt.Description(objref.IDOf(wbfl))
 }
 
 // NewWKBackForwardList creates a new WKBackForwardList.
@@ -73,54 +73,41 @@ func NewWKBackForwardList() *WKBackForwardList {
 }
 
 // ItemAtIndex returns the item at the relative offset from the current item.
-func (x *WKBackForwardList) ItemAtIndex(index int) *WKBackForwardListItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemAtIndex:"), index)
+func (wbfl *WKBackForwardList) ItemAtIndex(index int) *WKBackForwardListItem {
+	_r := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("itemAtIndex:"), index)
 	return WKBackForwardListItemFromID(_r)
 }
 
-// CurrentItem the current item.
-func (x *WKBackForwardList) CurrentItem() *WKBackForwardListItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentItem"))
+// CurrentItem returns the current item.
+func (wbfl *WKBackForwardList) CurrentItem() *WKBackForwardListItem {
+	_r := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("currentItem"))
 	return WKBackForwardListItemFromID(_r)
 }
 
-// BackItem the item immediately preceding the current item, or nil if there isn't one.
-func (x *WKBackForwardList) BackItem() *WKBackForwardListItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backItem"))
+// BackItem returns the item immediately preceding the current item, or nil if there isn't one.
+func (wbfl *WKBackForwardList) BackItem() *WKBackForwardListItem {
+	_r := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("backItem"))
 	return WKBackForwardListItemFromID(_r)
 }
 
-// ForwardItem the item immediately following the current item, or nil if there isn't one.
-func (x *WKBackForwardList) ForwardItem() *WKBackForwardListItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("forwardItem"))
+// ForwardItem returns the item immediately following the current item, or nil if there isn't one.
+func (wbfl *WKBackForwardList) ForwardItem() *WKBackForwardListItem {
+	_r := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("forwardItem"))
 	return WKBackForwardListItemFromID(_r)
 }
 
-// BackList the portion of the list preceding the current item. The items are in the order in which they were originally visited.
+// BackList returns the portion of the list preceding the current item. The items are in the order in which they were originally visited.
 //
 // BackList returns the collection as a Go slice.
-func (x *WKBackForwardList) BackList() []*WKBackForwardListItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backList"))
+func (wbfl *WKBackForwardList) BackList() []*WKBackForwardListItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("backList"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WKBackForwardListItem { return WKBackForwardListItemFromID(_id) })
 }
 
-// ForwardList the portion of the list following the current item. The items are in the order in which they were originally visited.
+// ForwardList returns the portion of the list following the current item. The items are in the order in which they were originally visited.
 //
 // ForwardList returns the collection as a Go slice.
-func (x *WKBackForwardList) ForwardList() []*WKBackForwardListItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("forwardList"))
+func (wbfl *WKBackForwardList) ForwardList() []*WKBackForwardListItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(wbfl), objc.RegisterName("forwardList"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WKBackForwardListItem { return WKBackForwardListItemFromID(_id) })
 }
-
-// WKBackForwardListable is the interface implemented by [WKBackForwardList], for mocking and DI.
-type WKBackForwardListable interface {
-	obj.Object
-	ItemAtIndex(index int) *WKBackForwardListItem
-	CurrentItem() *WKBackForwardListItem
-	BackItem() *WKBackForwardListItem
-	ForwardItem() *WKBackForwardListItem
-	BackList() []*WKBackForwardListItem
-	ForwardList() []*WKBackForwardListItem
-}
-
-var _ WKBackForwardListable = (*WKBackForwardList)(nil)

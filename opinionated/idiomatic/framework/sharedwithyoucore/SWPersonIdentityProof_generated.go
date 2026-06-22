@@ -46,59 +46,49 @@ func personIdentityProofAdopt(id objc.ID) *PersonIdentityProof {
 }
 
 // Description returns the object's -description text.
-func (x *PersonIdentityProof) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pip *PersonIdentityProof) Description() string {
+	return rt.Description(objref.IDOf(pip))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersonIdentityProof) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pip *PersonIdentityProof) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pip), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersonIdentityProof) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pip *PersonIdentityProof) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pip), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PersonIdentityProof) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pip *PersonIdentityProof) String() string {
+	return rt.Description(objref.IDOf(pip))
 }
 
-// InclusionHashes hashes of missing Merkle tree nodes that can provide proof of inclusion. The data contains an array of SHA256 hash of the user's combined public identities.
+// InclusionHashes returns hashes of missing Merkle tree nodes that can provide proof of inclusion. The data contains an array of SHA256 hash of the user's combined public identities.
 //
 // InclusionHashes returns the collection as a Go slice.
-func (x *PersonIdentityProof) InclusionHashes() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inclusionHashes"))
+func (pip *PersonIdentityProof) InclusionHashes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("inclusionHashes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// PublicKey public key of local device
-func (x *PersonIdentityProof) PublicKey() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicKey"))
+// PublicKey returns public key of local device
+func (pip *PersonIdentityProof) PublicKey() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pip), objc.RegisterName("publicKey"))
 	return obj.Wrap(_r)
 }
 
-// PublicKeyIndex index of local public key in the Merkle tree This data can be used to determine if the node is the left or the right child
-func (x *PersonIdentityProof) PublicKeyIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("publicKeyIndex"))
+// PublicKeyIndex returns index of local public key in the Merkle tree This data can be used to determine if the node is the left or the right child
+func (pip *PersonIdentityProof) PublicKeyIndex() int {
+	_r := objc.Send[int](objref.IDOf(pip), objc.RegisterName("publicKeyIndex"))
 	return _r
 }
-
-// PersonIdentityProofable is the interface implemented by [PersonIdentityProof], for mocking and DI.
-type PersonIdentityProofable interface {
-	obj.Object
-	InclusionHashes() []obj.Object
-	PublicKey() obj.Object
-	PublicKeyIndex() int
-}
-
-var _ PersonIdentityProofable = (*PersonIdentityProof)(nil)
 
 // isPersonIdentityProof marks PersonIdentityProof — and, by embedding promotion, its
 // subclasses — as a member of the PersonIdentityProof hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PersonIdentityProof) isPersonIdentityProof() {}
+func (pip *PersonIdentityProof) isPersonIdentityProof() {}
 
 var _ PersonIdentityProofProvider = (*PersonIdentityProof)(nil)

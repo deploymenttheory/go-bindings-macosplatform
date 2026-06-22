@@ -49,128 +49,109 @@ func assetInfoAdopt(id objc.ID) *AssetInfo {
 }
 
 // Description returns the object's -description text.
-func (x *AssetInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ai *AssetInfo) Description() string {
+	return rt.Description(objref.IDOf(ai))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ai *AssetInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ai), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ai *AssetInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ai), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ai *AssetInfo) String() string {
+	return rt.Description(objref.IDOf(ai))
 }
 
 // Asset wraps the corresponding Objective-C method.
-func (x *AssetInfo) Asset() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("asset"))
+func (ai *AssetInfo) Asset() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("asset"))
 	return obj.Wrap(_r)
 }
 
 // AllCinematicTracks wraps the corresponding Objective-C method.
 //
 // AllCinematicTracks returns the collection as a Go slice.
-func (x *AssetInfo) AllCinematicTracks() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allCinematicTracks"))
+func (ai *AssetInfo) AllCinematicTracks() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("allCinematicTracks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // CinematicVideoTrack wraps the corresponding Objective-C method.
-func (x *AssetInfo) CinematicVideoTrack() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cinematicVideoTrack"))
+func (ai *AssetInfo) CinematicVideoTrack() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("cinematicVideoTrack"))
 	return obj.Wrap(_r)
 }
 
 // CinematicDisparityTrack wraps the corresponding Objective-C method.
-func (x *AssetInfo) CinematicDisparityTrack() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cinematicDisparityTrack"))
+func (ai *AssetInfo) CinematicDisparityTrack() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("cinematicDisparityTrack"))
 	return obj.Wrap(_r)
 }
 
 // CinematicMetadataTrack wraps the corresponding Objective-C method.
-func (x *AssetInfo) CinematicMetadataTrack() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cinematicMetadataTrack"))
+func (ai *AssetInfo) CinematicMetadataTrack() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("cinematicMetadataTrack"))
 	return obj.Wrap(_r)
 }
 
-// NaturalSize natural size at which cinematic video would be rendered
-func (x *AssetInfo) NaturalSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("naturalSize"))
+// NaturalSize returns natural size at which cinematic video would be rendered
+func (ai *AssetInfo) NaturalSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ai), objc.RegisterName("naturalSize"))
 	return _r
 }
 
-// PreferredSize natural size at which cinematic video would be displayed. Same as naturalSize with preferredTransform applied.
-func (x *AssetInfo) PreferredSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("preferredSize"))
+// PreferredSize returns natural size at which cinematic video would be displayed. Same as naturalSize with preferredTransform applied.
+func (ai *AssetInfo) PreferredSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ai), objc.RegisterName("preferredSize"))
 	return _r
 }
 
-// PreferredTransform the preferred transform of the rendered image for display purposes. Always the identity transform or a multiple of a 90º rotation with no scaling.
-func (x *AssetInfo) PreferredTransform() corefoundation.CGAffineTransform {
-	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("preferredTransform"))
+// PreferredTransform returns the preferred transform of the rendered image for display purposes. Always the identity transform or a multiple of a 90º rotation with no scaling.
+func (ai *AssetInfo) PreferredTransform() corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(ai), objc.RegisterName("preferredTransform"))
 	return _r
 }
 
-// FrameTimingTrack track to be used for frame timing
-func (x *AssetInfo) FrameTimingTrack() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frameTimingTrack"))
+// FrameTimingTrack returns track to be used for frame timing
+func (ai *AssetInfo) FrameTimingTrack() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("frameTimingTrack"))
 	return obj.Wrap(_r)
 }
 
-// VideoCompositionTracks tracks required to construct AVAssetReaderVideoCompositionOutput.
+// VideoCompositionTracks returns tracks required to construct AVAssetReaderVideoCompositionOutput.
 //
 // VideoCompositionTracks returns the collection as a Go slice.
-func (x *AssetInfo) VideoCompositionTracks() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoCompositionTracks"))
+func (ai *AssetInfo) VideoCompositionTracks() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("videoCompositionTracks"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// VideoCompositionTrackIDs source video track IDs required to implement AVVideoCompositionInstruction protocol
+// VideoCompositionTrackIDs returns source video track IDs required to implement AVVideoCompositionInstruction protocol
 //
 // VideoCompositionTrackIDs returns the collection as a Go slice.
-func (x *AssetInfo) VideoCompositionTrackIDs() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoCompositionTrackIDs"))
+func (ai *AssetInfo) VideoCompositionTrackIDs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("videoCompositionTrackIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SampleDataTrackIDs source metadata track IDs required to implement AVVideoCompositionInstruction protocol
+// SampleDataTrackIDs returns source metadata track IDs required to implement AVVideoCompositionInstruction protocol
 //
 // SampleDataTrackIDs returns the collection as a Go slice.
-func (x *AssetInfo) SampleDataTrackIDs() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleDataTrackIDs"))
+func (ai *AssetInfo) SampleDataTrackIDs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ai), objc.RegisterName("sampleDataTrackIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// AssetInfoable is the interface implemented by [AssetInfo], for mocking and DI.
-type AssetInfoable interface {
-	obj.Object
-	Asset() obj.Object
-	AllCinematicTracks() []obj.Object
-	CinematicVideoTrack() obj.Object
-	CinematicDisparityTrack() obj.Object
-	CinematicMetadataTrack() obj.Object
-	NaturalSize() corefoundation.CGSize
-	PreferredSize() corefoundation.CGSize
-	PreferredTransform() corefoundation.CGAffineTransform
-	FrameTimingTrack() obj.Object
-	VideoCompositionTracks() []obj.Object
-	VideoCompositionTrackIDs() []obj.Object
-	SampleDataTrackIDs() []obj.Object
-}
-
-var _ AssetInfoable = (*AssetInfo)(nil)
 
 // isAssetInfo marks AssetInfo — and, by embedding promotion, its
 // subclasses — as a member of the AssetInfo hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AssetInfo) isAssetInfo() {}
+func (ai *AssetInfo) isAssetInfo() {}
 
 var _ AssetInfoProvider = (*AssetInfo)(nil)

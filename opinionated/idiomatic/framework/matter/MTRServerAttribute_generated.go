@@ -44,24 +44,24 @@ func mTRServerAttributeAdopt(id objc.ID) *MTRServerAttribute {
 }
 
 // Description returns the object's -description text.
-func (x *MTRServerAttribute) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (msa *MTRServerAttribute) Description() string {
+	return rt.Description(objref.IDOf(msa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRServerAttribute) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (msa *MTRServerAttribute) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(msa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRServerAttribute) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (msa *MTRServerAttribute) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(msa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRServerAttribute) String() string {
-	return rt.Description(objref.IDOf(x))
+func (msa *MTRServerAttribute) String() string {
+	return rt.Description(objref.IDOf(msa))
 }
 
 // NewMTRServerAttributeReadonlyAttributeWithIDInitialValueRequiredPrivilege initialize as a readonly attribute.  The value is a data-value as documented in MTRBaseDevice.h. Will fail if the attribute ID is not valid per the Matter specification or the attribute value is not a valid data-value. requiredPrivilege is the privilege required to read the attribute. This initializer may fail if the provided attributeID is a global attribute and the provided requiredPrivilege value is not correct for that attribute ID.
@@ -72,50 +72,31 @@ func NewMTRServerAttributeReadonlyAttributeWithIDInitialValueRequiredPrivilege(a
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRServerAttribute) WithValue(value obj.Object) *MTRServerAttribute {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
-}
-
-// SetValue change the value of the attribute to a new value.  The value is a data-value as documented in MTRBaseDevice.h. Will fail if the attribute is not a valid data-value.
-func (x *MTRServerAttribute) SetValue(value obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return _r
+func (msa *MTRServerAttribute) WithValue(value obj.Object) *MTRServerAttribute {
+	objc.Send[objc.ID](objref.IDOf(msa), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return msa
 }
 
 // AttributeID wraps the corresponding Objective-C method.
-func (x *MTRServerAttribute) AttributeID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeID"))
+func (msa *MTRServerAttribute) AttributeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msa), objc.RegisterName("attributeID"))
 	return obj.Wrap(_r)
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *MTRServerAttribute) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (msa *MTRServerAttribute) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msa), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
 
-// RequiredReadPrivilege the privilege level necessary to read this attribute.
-func (x *MTRServerAttribute) RequiredReadPrivilege() MTRAccessControlEntryPrivilege {
-	_r := objc.Send[MTRAccessControlEntryPrivilege](objref.IDOf(x), objc.RegisterName("requiredReadPrivilege"))
+// RequiredReadPrivilege returns the privilege level necessary to read this attribute.
+func (msa *MTRServerAttribute) RequiredReadPrivilege() MTRAccessControlEntryPrivilege {
+	_r := objc.Send[MTRAccessControlEntryPrivilege](objref.IDOf(msa), objc.RegisterName("requiredReadPrivilege"))
 	return _r
 }
 
 // IsWritable wraps the corresponding Objective-C method.
-func (x *MTRServerAttribute) IsWritable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWritable"))
+func (msa *MTRServerAttribute) IsWritable() bool {
+	_r := objc.Send[bool](objref.IDOf(msa), objc.RegisterName("isWritable"))
 	return _r
 }
-
-// MTRServerAttributeable is the interface implemented by [MTRServerAttribute], for mocking and DI.
-type MTRServerAttributeable interface {
-	obj.Object
-	WithValue(value obj.Object) *MTRServerAttribute
-	SetValue(value obj.Object) bool
-	AttributeID() obj.Object
-	Value() obj.Object
-	RequiredReadPrivilege() MTRAccessControlEntryPrivilege
-	IsWritable() bool
-}
-
-var _ MTRServerAttributeable = (*MTRServerAttribute)(nil)

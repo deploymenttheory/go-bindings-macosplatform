@@ -46,24 +46,24 @@ func pipelineBufferDescriptorArrayAdopt(id objc.ID) *PipelineBufferDescriptorArr
 }
 
 // Description returns the object's -description text.
-func (x *PipelineBufferDescriptorArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pbda *PipelineBufferDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(pbda))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PipelineBufferDescriptorArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pbda *PipelineBufferDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pbda), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PipelineBufferDescriptorArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pbda *PipelineBufferDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pbda), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PipelineBufferDescriptorArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pbda *PipelineBufferDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(pbda))
 }
 
 // NewPipelineBufferDescriptorArray creates a new PipelineBufferDescriptorArray.
@@ -73,21 +73,12 @@ func NewPipelineBufferDescriptorArray() *PipelineBufferDescriptorArray {
 }
 
 // ObjectAtIndexedSubscript returns the pipeline buffer descriptor at the specified array index.
-func (x *PipelineBufferDescriptorArray) ObjectAtIndexedSubscript(bufferIndex int) *PipelineBufferDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), bufferIndex)
+func (pbda *PipelineBufferDescriptorArray) ObjectAtIndexedSubscript(bufferIndex int) *PipelineBufferDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(pbda), objc.RegisterName("objectAtIndexedSubscript:"), bufferIndex)
 	return PipelineBufferDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets a pipeline buffer descriptor at the specified array index.
-func (x *PipelineBufferDescriptorArray) SetObjectAtIndexedSubscript(buffer *PipelineBufferDescriptor, bufferIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(buffer), bufferIndex)
+func (pbda *PipelineBufferDescriptorArray) SetObjectAtIndexedSubscript(buffer *PipelineBufferDescriptor, bufferIndex int) {
+	objc.Send[objc.ID](objref.IDOf(pbda), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(buffer), bufferIndex)
 }
-
-// PipelineBufferDescriptorArrayable is the interface implemented by [PipelineBufferDescriptorArray], for mocking and DI.
-type PipelineBufferDescriptorArrayable interface {
-	obj.Object
-	ObjectAtIndexedSubscript(bufferIndex int) *PipelineBufferDescriptor
-	SetObjectAtIndexedSubscript(buffer *PipelineBufferDescriptor, bufferIndex int)
-}
-
-var _ PipelineBufferDescriptorArrayable = (*PipelineBufferDescriptorArray)(nil)

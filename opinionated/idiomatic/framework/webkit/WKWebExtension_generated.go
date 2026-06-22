@@ -47,24 +47,24 @@ func wKWebExtensionAdopt(id objc.ID) *WKWebExtension {
 }
 
 // Description returns the object's -description text.
-func (x *WKWebExtension) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wwe *WKWebExtension) Description() string {
+	return rt.Description(objref.IDOf(wwe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKWebExtension) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wwe *WKWebExtension) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wwe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKWebExtension) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wwe *WKWebExtension) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wwe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKWebExtension) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wwe *WKWebExtension) String() string {
+	return rt.Description(objref.IDOf(wwe))
 }
 
 // NewWKWebExtension creates a new WKWebExtension.
@@ -74,191 +74,160 @@ func NewWKWebExtension() *WKWebExtension {
 }
 
 // SupportsManifestVersion checks if a manifest version is supported by the extension.
-func (x *WKWebExtension) SupportsManifestVersion(manifestVersion float64) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsManifestVersion:"), manifestVersion)
+func (wwe *WKWebExtension) SupportsManifestVersion(manifestVersion float64) bool {
+	_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("supportsManifestVersion:"), manifestVersion)
 	return _r
 }
 
 // IconForSize returns the extension’s icon image for the specified size.
-func (x *WKWebExtension) IconForSize(size corefoundation.CGSize) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconForSize:"), size)
+func (wwe *WKWebExtension) IconForSize(size corefoundation.CGSize) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("iconForSize:"), size)
 	return obj.Wrap(_r)
 }
 
 // ActionIconForSize returns the default action icon for the specified size.
-func (x *WKWebExtension) ActionIconForSize(size corefoundation.CGSize) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actionIconForSize:"), size)
+func (wwe *WKWebExtension) ActionIconForSize(size corefoundation.CGSize) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("actionIconForSize:"), size)
 	return obj.Wrap(_r)
 }
 
-// Errors an array of all errors that occurred during the processing of the extension. Provides an array of all parse-time errors for the extension, with repeat errors consolidated into a single entry for the original occurrence only. If no errors occurred, an empty array is returned.
-func (x *WKWebExtension) Errors() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errors"))
+// Errors returns an array of all errors that occurred during the processing of the extension. Provides an array of all parse-time errors for the extension, with repeat errors consolidated into a single entry for the original occurrence only. If no errors occurred, an empty array is returned.
+func (wwe *WKWebExtension) Errors() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("errors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Manifest the parsed manifest as a dictionary.
-func (x *WKWebExtension) Manifest() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manifest"))
+// Manifest returns the parsed manifest as a dictionary.
+func (wwe *WKWebExtension) Manifest() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("manifest"))
 	return obj.Wrap(_r)
 }
 
-// ManifestVersion the parsed manifest version, or `0` if there is no version specified in the manifest.
-func (x *WKWebExtension) ManifestVersion() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("manifestVersion"))
+// ManifestVersion returns the parsed manifest version, or `0` if there is no version specified in the manifest.
+func (wwe *WKWebExtension) ManifestVersion() float64 {
+	_r := objc.Send[float64](objref.IDOf(wwe), objc.RegisterName("manifestVersion"))
 	return _r
 }
 
-// DefaultLocale the default locale for the extension. Returns `nil` if there was no default locale specified.
-func (x *WKWebExtension) DefaultLocale() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultLocale"))
+// DefaultLocale returns the default locale for the extension. Returns `nil` if there was no default locale specified.
+func (wwe *WKWebExtension) DefaultLocale() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("defaultLocale"))
 	return obj.Wrap(_r)
 }
 
-// DisplayName the localized extension name. Returns `nil` if there was no name specified.
-func (x *WKWebExtension) DisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+// DisplayName returns the localized extension name. Returns `nil` if there was no name specified.
+func (wwe *WKWebExtension) DisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// DisplayShortName the localized extension short name. Returns `nil` if there was no short name specified.
-func (x *WKWebExtension) DisplayShortName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayShortName"))
+// DisplayShortName returns the localized extension short name. Returns `nil` if there was no short name specified.
+func (wwe *WKWebExtension) DisplayShortName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("displayShortName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// DisplayVersion the localized extension display version. Returns `nil` if there was no display version specified.
-func (x *WKWebExtension) DisplayVersion() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayVersion"))
+// DisplayVersion returns the localized extension display version. Returns `nil` if there was no display version specified.
+func (wwe *WKWebExtension) DisplayVersion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("displayVersion"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// DisplayDescription the localized extension description. Returns `nil` if there was no description specified.
-func (x *WKWebExtension) DisplayDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayDescription"))
+// DisplayDescription returns the localized extension description. Returns `nil` if there was no description specified.
+func (wwe *WKWebExtension) DisplayDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("displayDescription"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// DisplayActionLabel the default localized extension action label. Returns `nil` if there was no default action label specified. This label serves as a default and should be used to represent the extension in contexts like action sheets or toolbars prior to the extension being loaded into an extension context. Once the extension is loaded, use the “actionForTab:“ API to get the tab-specific label.
-func (x *WKWebExtension) DisplayActionLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayActionLabel"))
+// DisplayActionLabel returns the default localized extension action label. Returns `nil` if there was no default action label specified. This label serves as a default and should be used to represent the extension in contexts like action sheets or toolbars prior to the extension being loaded into an extension context. Once the extension is loaded, use the “actionForTab:“ API to get the tab-specific label.
+func (wwe *WKWebExtension) DisplayActionLabel() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("displayActionLabel"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// RequestedPermissions the set of permissions that the extension requires for its base functionality.
-func (x *WKWebExtension) RequestedPermissions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestedPermissions"))
+// RequestedPermissions returns the set of permissions that the extension requires for its base functionality.
+func (wwe *WKWebExtension) RequestedPermissions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("requestedPermissions"))
 	return obj.Wrap(_r)
 }
 
-// OptionalPermissions the set of permissions that the extension may need for optional functionality. These permissions can be requested by the extension at a later time.
-func (x *WKWebExtension) OptionalPermissions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalPermissions"))
+// OptionalPermissions returns the set of permissions that the extension may need for optional functionality. These permissions can be requested by the extension at a later time.
+func (wwe *WKWebExtension) OptionalPermissions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("optionalPermissions"))
 	return obj.Wrap(_r)
 }
 
-// RequestedPermissionMatchPatterns the set of websites that the extension requires access to for its base functionality.
-func (x *WKWebExtension) RequestedPermissionMatchPatterns() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestedPermissionMatchPatterns"))
+// RequestedPermissionMatchPatterns returns the set of websites that the extension requires access to for its base functionality.
+func (wwe *WKWebExtension) RequestedPermissionMatchPatterns() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("requestedPermissionMatchPatterns"))
 	return obj.Wrap(_r)
 }
 
-// OptionalPermissionMatchPatterns the set of websites that the extension may need access to for optional functionality. These match patterns can be requested by the extension at a later time.
-func (x *WKWebExtension) OptionalPermissionMatchPatterns() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionalPermissionMatchPatterns"))
+// OptionalPermissionMatchPatterns returns the set of websites that the extension may need access to for optional functionality. These match patterns can be requested by the extension at a later time.
+func (wwe *WKWebExtension) OptionalPermissionMatchPatterns() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("optionalPermissionMatchPatterns"))
 	return obj.Wrap(_r)
 }
 
-// AllRequestedMatchPatterns the set of websites that the extension requires access to for injected content and for receiving messages from websites.
-func (x *WKWebExtension) AllRequestedMatchPatterns() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allRequestedMatchPatterns"))
+// AllRequestedMatchPatterns returns the set of websites that the extension requires access to for injected content and for receiving messages from websites.
+func (wwe *WKWebExtension) AllRequestedMatchPatterns() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wwe), objc.RegisterName("allRequestedMatchPatterns"))
 	return obj.Wrap(_r)
 }
 
-// HasBackgroundContent a Boolean value indicating whether the extension has background content that can run when needed. If this property is `YES`, the extension can run in the background even when no webpages are open.
-func (x *WKWebExtension) HasBackgroundContent() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasBackgroundContent"))
+// HasBackgroundContent reports whether the extension has background content that can run when needed. If this property is `YES`, the extension can run in the background even when no webpages are open.
+func (wwe *WKWebExtension) HasBackgroundContent() bool {
+	_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasBackgroundContent"))
 	return _r
 }
 
-// HasPersistentBackgroundContent a Boolean value indicating whether the extension has background content that stays in memory as long as the extension is loaded.
-func (x *WKWebExtension) HasPersistentBackgroundContent() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasPersistentBackgroundContent"))
+// HasPersistentBackgroundContent reports whether the extension has background content that stays in memory as long as the extension is loaded.
+func (wwe *WKWebExtension) HasPersistentBackgroundContent() bool {
+	_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasPersistentBackgroundContent"))
 	return _r
 }
 
-// HasInjectedContent a Boolean value indicating whether the extension has script or stylesheet content that can be injected into webpages. If this property is `YES`, the extension has content that can be injected by matching against the extension's requested match patterns.
-func (x *WKWebExtension) HasInjectedContent() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasInjectedContent"))
+// HasInjectedContent reports whether the extension has script or stylesheet content that can be injected into webpages. If this property is `YES`, the extension has content that can be injected by matching against the extension's requested match patterns.
+func (wwe *WKWebExtension) HasInjectedContent() bool {
+	_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasInjectedContent"))
 	return _r
 }
 
-// HasOptionsPage a Boolean value indicating whether the extension has an options page. If this property is `YES`, the extension includes a dedicated options page where users can customize settings. The app should provide access to this page through a user interface element, which can be accessed via “optionsPageURL“ on an extension context.
-func (x *WKWebExtension) HasOptionsPage() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasOptionsPage"))
+// HasOptionsPage reports whether the extension has an options page. If this property is `YES`, the extension includes a dedicated options page where users can customize settings. The app should provide access to this page through a user interface element, which can be accessed via “optionsPageURL“ on an extension context.
+func (wwe *WKWebExtension) HasOptionsPage() bool {
+	_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasOptionsPage"))
 	return _r
 }
 
-// HasOverrideNewTabPage a Boolean value indicating whether the extension provides an alternative to the default new tab page. If this property is `YES`, the extension can specify a custom page that can be displayed when a new tab is opened in the app, instead of the default new tab page. The app should prompt the user for permission to use the extension's new tab page as the default, which can be accessed via “overrideNewTabPageURL“ on an extension context.
-func (x *WKWebExtension) HasOverrideNewTabPage() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasOverrideNewTabPage"))
+// HasOverrideNewTabPage reports whether the extension provides an alternative to the default new tab page. If this property is `YES`, the extension can specify a custom page that can be displayed when a new tab is opened in the app, instead of the default new tab page. The app should prompt the user for permission to use the extension's new tab page as the default, which can be accessed via “overrideNewTabPageURL“ on an extension context.
+func (wwe *WKWebExtension) HasOverrideNewTabPage() bool {
+	_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasOverrideNewTabPage"))
 	return _r
 }
 
-// HasCommands a Boolean value indicating whether the extension includes commands that users can invoke. If this property is `YES`, the extension contains one or more commands that can be performed by the user. These commands should be accessible via keyboard shortcuts, menu items, or other user interface elements provided by the app. The list of commands can be accessed via “commands“ on an extension context, and invoked via “performCommand:“.
-func (x *WKWebExtension) HasCommands() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasCommands"))
+// HasCommands reports whether the extension includes commands that users can invoke. If this property is `YES`, the extension contains one or more commands that can be performed by the user. These commands should be accessible via keyboard shortcuts, menu items, or other user interface elements provided by the app. The list of commands can be accessed via “commands“ on an extension context, and invoked via “performCommand:“.
+func (wwe *WKWebExtension) HasCommands() bool {
+	_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasCommands"))
 	return _r
 }
 
-// HasContentModificationRules a boolean value indicating whether the extension includes rules used for content modification or blocking.
-func (x *WKWebExtension) HasContentModificationRules() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasContentModificationRules"))
+// HasContentModificationRules reports whether the extension includes rules used for content modification or blocking.
+func (wwe *WKWebExtension) HasContentModificationRules() bool {
+	_r := objc.Send[bool](objref.IDOf(wwe), objc.RegisterName("hasContentModificationRules"))
 	return _r
 }
-
-// WKWebExtensionable is the interface implemented by [WKWebExtension], for mocking and DI.
-type WKWebExtensionable interface {
-	obj.Object
-	SupportsManifestVersion(manifestVersion float64) bool
-	IconForSize(size corefoundation.CGSize) obj.Object
-	ActionIconForSize(size corefoundation.CGSize) obj.Object
-	Errors() []obj.Object
-	Manifest() obj.Object
-	ManifestVersion() float64
-	DefaultLocale() obj.Object
-	DisplayName() string
-	DisplayShortName() string
-	DisplayVersion() string
-	DisplayDescription() string
-	DisplayActionLabel() string
-	RequestedPermissions() obj.Object
-	OptionalPermissions() obj.Object
-	RequestedPermissionMatchPatterns() obj.Object
-	OptionalPermissionMatchPatterns() obj.Object
-	AllRequestedMatchPatterns() obj.Object
-	HasBackgroundContent() bool
-	HasPersistentBackgroundContent() bool
-	HasInjectedContent() bool
-	HasOptionsPage() bool
-	HasOverrideNewTabPage() bool
-	HasCommands() bool
-	HasContentModificationRules() bool
-}
-
-var _ WKWebExtensionable = (*WKWebExtension)(nil)

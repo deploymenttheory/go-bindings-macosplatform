@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,26 +52,17 @@ func NewStructType() *StructType {
 }
 
 // MemberByName provides a representation of a struct member.
-func (x *StructType) MemberByName(name string) *StructMember {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("memberByName:"), purego.NSString(name))
+func (st *StructType) MemberByName(name string) *StructMember {
+	_r := objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("memberByName:"), purego.NSString(name))
 	return StructMemberFromID(_r)
 }
 
 // Members wraps the corresponding Objective-C method.
 //
 // Members returns the collection as a Go slice.
-func (x *StructType) Members() []*StructMember {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("members"))
+func (st *StructType) Members() []*StructMember {
+	_arr := objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("members"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *StructMember { return StructMemberFromID(_id) })
 }
-
-// StructTypeable is the interface implemented by [StructType], for mocking and DI.
-type StructTypeable interface {
-	obj.Object
-	MemberByName(name string) *StructMember
-	Members() []*StructMember
-}
-
-var _ StructTypeable = (*StructType)(nil)
 
 var _ TypeProvider = (*StructType)(nil)

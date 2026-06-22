@@ -5,13 +5,14 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Morphology is an idiomatic wrapper over the Objective-C class NSMorphology.
@@ -48,24 +49,24 @@ func morphologyAdopt(id objc.ID) *Morphology {
 }
 
 // Description returns the object's -description text.
-func (x *Morphology) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Morphology) Description() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Morphology) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (m *Morphology) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Morphology) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (m *Morphology) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Morphology) String() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Morphology) String() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // NewMorphology creates a new Morphology.
@@ -74,158 +75,118 @@ func NewMorphology() *Morphology {
 	return morphologyAdopt(_id)
 }
 
-// WithGrammaticalGender the grammatical gender used for inflecting strings with this morphology.
-func (x *Morphology) WithGrammaticalGender(grammaticalGender GrammaticalGender) *Morphology {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGrammaticalGender:"), grammaticalGender)
-	return x
+// WithGrammaticalGender sets the grammatical gender used for inflecting strings with this morphology.
+func (m *Morphology) WithGrammaticalGender(grammaticalGender GrammaticalGender) *Morphology {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setGrammaticalGender:"), grammaticalGender)
+	return m
 }
 
-// WithPartOfSpeech the grammatical part of speech used for inflecting strings with this morphology.
-func (x *Morphology) WithPartOfSpeech(partOfSpeech GrammaticalPartOfSpeech) *Morphology {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPartOfSpeech:"), partOfSpeech)
-	return x
+// WithPartOfSpeech sets the grammatical part of speech used for inflecting strings with this morphology.
+func (m *Morphology) WithPartOfSpeech(partOfSpeech GrammaticalPartOfSpeech) *Morphology {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setPartOfSpeech:"), partOfSpeech)
+	return m
 }
 
-// WithNumber the grammatical number used for inflecting strings with this morphology.
-func (x *Morphology) WithNumber(number GrammaticalNumber) *Morphology {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumber:"), number)
-	return x
+// WithNumber sets the grammatical number used for inflecting strings with this morphology.
+func (m *Morphology) WithNumber(number GrammaticalNumber) *Morphology {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setNumber:"), number)
+	return m
 }
 
 // WithGrammaticalCase sets the property and returns the receiver so calls can be chained.
-func (x *Morphology) WithGrammaticalCase(grammaticalCase GrammaticalCase) *Morphology {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGrammaticalCase:"), grammaticalCase)
-	return x
+func (m *Morphology) WithGrammaticalCase(grammaticalCase GrammaticalCase) *Morphology {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setGrammaticalCase:"), grammaticalCase)
+	return m
 }
 
 // WithDetermination sets the property and returns the receiver so calls can be chained.
-func (x *Morphology) WithDetermination(determination GrammaticalDetermination) *Morphology {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetermination:"), determination)
-	return x
+func (m *Morphology) WithDetermination(determination GrammaticalDetermination) *Morphology {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setDetermination:"), determination)
+	return m
 }
 
 // WithGrammaticalPerson sets the property and returns the receiver so calls can be chained.
-func (x *Morphology) WithGrammaticalPerson(grammaticalPerson GrammaticalPerson) *Morphology {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGrammaticalPerson:"), grammaticalPerson)
-	return x
+func (m *Morphology) WithGrammaticalPerson(grammaticalPerson GrammaticalPerson) *Morphology {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setGrammaticalPerson:"), grammaticalPerson)
+	return m
 }
 
 // WithPronounType sets the property and returns the receiver so calls can be chained.
-func (x *Morphology) WithPronounType(pronounType GrammaticalPronounType) *Morphology {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPronounType:"), pronounType)
-	return x
+func (m *Morphology) WithPronounType(pronounType GrammaticalPronounType) *Morphology {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setPronounType:"), pronounType)
+	return m
 }
 
 // WithDefiniteness sets the property and returns the receiver so calls can be chained.
-func (x *Morphology) WithDefiniteness(definiteness GrammaticalDefiniteness) *Morphology {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefiniteness:"), definiteness)
-	return x
+func (m *Morphology) WithDefiniteness(definiteness GrammaticalDefiniteness) *Morphology {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setDefiniteness:"), definiteness)
+	return m
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Morphology) WithScriptingProperties(scriptingProperties obj.Object) *Morphology {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (m *Morphology) WithScriptingProperties(scriptingProperties obj.Object) *Morphology {
+	objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return m
 }
 
 // GrammaticalGender wraps the corresponding Objective-C method.
-func (x *Morphology) GrammaticalGender() GrammaticalGender {
-	_r := objc.Send[GrammaticalGender](objref.IDOf(x), objc.RegisterName("grammaticalGender"))
+func (m *Morphology) GrammaticalGender() GrammaticalGender {
+	_r := objc.Send[GrammaticalGender](objref.IDOf(m), objc.RegisterName("grammaticalGender"))
 	return _r
-}
-
-// SetGrammaticalGender wraps the corresponding Objective-C method.
-func (x *Morphology) SetGrammaticalGender(grammaticalGender GrammaticalGender) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGrammaticalGender:"), grammaticalGender)
 }
 
 // PartOfSpeech wraps the corresponding Objective-C method.
-func (x *Morphology) PartOfSpeech() GrammaticalPartOfSpeech {
-	_r := objc.Send[GrammaticalPartOfSpeech](objref.IDOf(x), objc.RegisterName("partOfSpeech"))
+func (m *Morphology) PartOfSpeech() GrammaticalPartOfSpeech {
+	_r := objc.Send[GrammaticalPartOfSpeech](objref.IDOf(m), objc.RegisterName("partOfSpeech"))
 	return _r
-}
-
-// SetPartOfSpeech wraps the corresponding Objective-C method.
-func (x *Morphology) SetPartOfSpeech(partOfSpeech GrammaticalPartOfSpeech) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPartOfSpeech:"), partOfSpeech)
 }
 
 // Number wraps the corresponding Objective-C method.
-func (x *Morphology) Number() GrammaticalNumber {
-	_r := objc.Send[GrammaticalNumber](objref.IDOf(x), objc.RegisterName("number"))
+func (m *Morphology) Number() GrammaticalNumber {
+	_r := objc.Send[GrammaticalNumber](objref.IDOf(m), objc.RegisterName("number"))
 	return _r
-}
-
-// SetNumber wraps the corresponding Objective-C method.
-func (x *Morphology) SetNumber(number GrammaticalNumber) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumber:"), number)
 }
 
 // GrammaticalCase wraps the corresponding Objective-C method.
-func (x *Morphology) GrammaticalCase() GrammaticalCase {
-	_r := objc.Send[GrammaticalCase](objref.IDOf(x), objc.RegisterName("grammaticalCase"))
+func (m *Morphology) GrammaticalCase() GrammaticalCase {
+	_r := objc.Send[GrammaticalCase](objref.IDOf(m), objc.RegisterName("grammaticalCase"))
 	return _r
-}
-
-// SetGrammaticalCase wraps the corresponding Objective-C method.
-func (x *Morphology) SetGrammaticalCase(grammaticalCase GrammaticalCase) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGrammaticalCase:"), grammaticalCase)
 }
 
 // Determination wraps the corresponding Objective-C method.
-func (x *Morphology) Determination() GrammaticalDetermination {
-	_r := objc.Send[GrammaticalDetermination](objref.IDOf(x), objc.RegisterName("determination"))
+func (m *Morphology) Determination() GrammaticalDetermination {
+	_r := objc.Send[GrammaticalDetermination](objref.IDOf(m), objc.RegisterName("determination"))
 	return _r
-}
-
-// SetDetermination wraps the corresponding Objective-C method.
-func (x *Morphology) SetDetermination(determination GrammaticalDetermination) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetermination:"), determination)
 }
 
 // GrammaticalPerson wraps the corresponding Objective-C method.
-func (x *Morphology) GrammaticalPerson() GrammaticalPerson {
-	_r := objc.Send[GrammaticalPerson](objref.IDOf(x), objc.RegisterName("grammaticalPerson"))
+func (m *Morphology) GrammaticalPerson() GrammaticalPerson {
+	_r := objc.Send[GrammaticalPerson](objref.IDOf(m), objc.RegisterName("grammaticalPerson"))
 	return _r
-}
-
-// SetGrammaticalPerson wraps the corresponding Objective-C method.
-func (x *Morphology) SetGrammaticalPerson(grammaticalPerson GrammaticalPerson) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGrammaticalPerson:"), grammaticalPerson)
 }
 
 // PronounType wraps the corresponding Objective-C method.
-func (x *Morphology) PronounType() GrammaticalPronounType {
-	_r := objc.Send[GrammaticalPronounType](objref.IDOf(x), objc.RegisterName("pronounType"))
+func (m *Morphology) PronounType() GrammaticalPronounType {
+	_r := objc.Send[GrammaticalPronounType](objref.IDOf(m), objc.RegisterName("pronounType"))
 	return _r
-}
-
-// SetPronounType wraps the corresponding Objective-C method.
-func (x *Morphology) SetPronounType(pronounType GrammaticalPronounType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPronounType:"), pronounType)
 }
 
 // Definiteness wraps the corresponding Objective-C method.
-func (x *Morphology) Definiteness() GrammaticalDefiniteness {
-	_r := objc.Send[GrammaticalDefiniteness](objref.IDOf(x), objc.RegisterName("definiteness"))
+func (m *Morphology) Definiteness() GrammaticalDefiniteness {
+	_r := objc.Send[GrammaticalDefiniteness](objref.IDOf(m), objc.RegisterName("definiteness"))
 	return _r
 }
 
-// SetDefiniteness wraps the corresponding Objective-C method.
-func (x *Morphology) SetDefiniteness(definiteness GrammaticalDefiniteness) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefiniteness:"), definiteness)
-}
-
 // CustomPronounForLanguage returns any custom pronoun behavior this morphology applies to the given language.
-func (x *Morphology) CustomPronounForLanguage(language string) *MorphologyCustomPronoun {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customPronounForLanguage:"), purego.NSString(language))
+func (m *Morphology) CustomPronounForLanguage(language string) *MorphologyCustomPronoun {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("customPronounForLanguage:"), purego.NSString(language))
 	return MorphologyCustomPronounFromID(_r)
 }
 
 // SetCustomPronounForLanguage sets a custom pronoun behavior for this morphology to apply to the given language.
-func (x *Morphology) SetCustomPronounForLanguage(features *MorphologyCustomPronoun, language string) error {
+func (m *Morphology) SetCustomPronounForLanguage(features *MorphologyCustomPronoun, language string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setCustomPronoun:forLanguage:error:"), objref.IDOf(features), purego.NSString(language), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(m), objc.RegisterName("setCustomPronoun:forLanguage:error:"), objref.IDOf(features), purego.NSString(language), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -233,42 +194,7 @@ func (x *Morphology) SetCustomPronounForLanguage(features *MorphologyCustomProno
 }
 
 // IsUnspecified wraps the corresponding Objective-C method.
-func (x *Morphology) IsUnspecified() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUnspecified"))
+func (m *Morphology) IsUnspecified() bool {
+	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("isUnspecified"))
 	return _r
 }
-
-// Morphologyable is the interface implemented by [Morphology], for mocking and DI.
-type Morphologyable interface {
-	obj.Object
-	WithGrammaticalGender(grammaticalGender GrammaticalGender) *Morphology
-	WithPartOfSpeech(partOfSpeech GrammaticalPartOfSpeech) *Morphology
-	WithNumber(number GrammaticalNumber) *Morphology
-	WithGrammaticalCase(grammaticalCase GrammaticalCase) *Morphology
-	WithDetermination(determination GrammaticalDetermination) *Morphology
-	WithGrammaticalPerson(grammaticalPerson GrammaticalPerson) *Morphology
-	WithPronounType(pronounType GrammaticalPronounType) *Morphology
-	WithDefiniteness(definiteness GrammaticalDefiniteness) *Morphology
-	WithScriptingProperties(scriptingProperties obj.Object) *Morphology
-	GrammaticalGender() GrammaticalGender
-	SetGrammaticalGender(grammaticalGender GrammaticalGender)
-	PartOfSpeech() GrammaticalPartOfSpeech
-	SetPartOfSpeech(partOfSpeech GrammaticalPartOfSpeech)
-	Number() GrammaticalNumber
-	SetNumber(number GrammaticalNumber)
-	GrammaticalCase() GrammaticalCase
-	SetGrammaticalCase(grammaticalCase GrammaticalCase)
-	Determination() GrammaticalDetermination
-	SetDetermination(determination GrammaticalDetermination)
-	GrammaticalPerson() GrammaticalPerson
-	SetGrammaticalPerson(grammaticalPerson GrammaticalPerson)
-	PronounType() GrammaticalPronounType
-	SetPronounType(pronounType GrammaticalPronounType)
-	Definiteness() GrammaticalDefiniteness
-	SetDefiniteness(definiteness GrammaticalDefiniteness)
-	CustomPronounForLanguage(language string) *MorphologyCustomPronoun
-	SetCustomPronounForLanguage(features *MorphologyCustomPronoun, language string) error
-	IsUnspecified() bool
-}
-
-var _ Morphologyable = (*Morphology)(nil)

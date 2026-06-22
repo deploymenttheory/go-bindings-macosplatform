@@ -44,24 +44,24 @@ func mTRValveConfigurationAndControlClusterValveFaultEventAdopt(id objc.ID) *MTR
 }
 
 // Description returns the object's -description text.
-func (x *MTRValveConfigurationAndControlClusterValveFaultEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mvcaccvfe *MTRValveConfigurationAndControlClusterValveFaultEvent) Description() string {
+	return rt.Description(objref.IDOf(mvcaccvfe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRValveConfigurationAndControlClusterValveFaultEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mvcaccvfe *MTRValveConfigurationAndControlClusterValveFaultEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mvcaccvfe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRValveConfigurationAndControlClusterValveFaultEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mvcaccvfe *MTRValveConfigurationAndControlClusterValveFaultEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mvcaccvfe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRValveConfigurationAndControlClusterValveFaultEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mvcaccvfe *MTRValveConfigurationAndControlClusterValveFaultEvent) String() string {
+	return rt.Description(objref.IDOf(mvcaccvfe))
 }
 
 // NewMTRValveConfigurationAndControlClusterValveFaultEvent creates a new MTRValveConfigurationAndControlClusterValveFaultEvent.
@@ -71,28 +71,13 @@ func NewMTRValveConfigurationAndControlClusterValveFaultEvent() *MTRValveConfigu
 }
 
 // WithValveFault sets the property and returns the receiver so calls can be chained.
-func (x *MTRValveConfigurationAndControlClusterValveFaultEvent) WithValveFault(valveFault obj.Object) *MTRValveConfigurationAndControlClusterValveFaultEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValveFault:"), objref.IDOf(valveFault))
-	return x
+func (mvcaccvfe *MTRValveConfigurationAndControlClusterValveFaultEvent) WithValveFault(valveFault obj.Object) *MTRValveConfigurationAndControlClusterValveFaultEvent {
+	objc.Send[objc.ID](objref.IDOf(mvcaccvfe), objc.RegisterName("setValveFault:"), objref.IDOf(valveFault))
+	return mvcaccvfe
 }
 
 // ValveFault wraps the corresponding Objective-C method.
-func (x *MTRValveConfigurationAndControlClusterValveFaultEvent) ValveFault() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valveFault"))
+func (mvcaccvfe *MTRValveConfigurationAndControlClusterValveFaultEvent) ValveFault() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mvcaccvfe), objc.RegisterName("valveFault"))
 	return obj.Wrap(_r)
 }
-
-// SetValveFault wraps the corresponding Objective-C method.
-func (x *MTRValveConfigurationAndControlClusterValveFaultEvent) SetValveFault(valveFault obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValveFault:"), objref.IDOf(valveFault))
-}
-
-// MTRValveConfigurationAndControlClusterValveFaultEventable is the interface implemented by [MTRValveConfigurationAndControlClusterValveFaultEvent], for mocking and DI.
-type MTRValveConfigurationAndControlClusterValveFaultEventable interface {
-	obj.Object
-	WithValveFault(valveFault obj.Object) *MTRValveConfigurationAndControlClusterValveFaultEvent
-	ValveFault() obj.Object
-	SetValveFault(valveFault obj.Object)
-}
-
-var _ MTRValveConfigurationAndControlClusterValveFaultEventable = (*MTRValveConfigurationAndControlClusterValveFaultEvent)(nil)

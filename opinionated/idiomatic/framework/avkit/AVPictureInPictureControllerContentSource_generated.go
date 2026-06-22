@@ -46,24 +46,24 @@ func pictureInPictureControllerContentSourceAdopt(id objc.ID) *PictureInPictureC
 }
 
 // Description returns the object's -description text.
-func (x *PictureInPictureControllerContentSource) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pipccs *PictureInPictureControllerContentSource) Description() string {
+	return rt.Description(objref.IDOf(pipccs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PictureInPictureControllerContentSource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pipccs *PictureInPictureControllerContentSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pipccs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PictureInPictureControllerContentSource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pipccs *PictureInPictureControllerContentSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pipccs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PictureInPictureControllerContentSource) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pipccs *PictureInPictureControllerContentSource) String() string {
+	return rt.Description(objref.IDOf(pipccs))
 }
 
 // NewPictureInPictureControllerContentSourceWithPlayerLayer use this initializer for a content source with a player layer.
@@ -74,22 +74,13 @@ func NewPictureInPictureControllerContentSourceWithPlayerLayer(playerLayer obj.O
 }
 
 // PlayerLayer wraps the corresponding Objective-C method.
-func (x *PictureInPictureControllerContentSource) PlayerLayer() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerLayer"))
+func (pipccs *PictureInPictureControllerContentSource) PlayerLayer() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pipccs), objc.RegisterName("playerLayer"))
 	return obj.Wrap(_r)
 }
 
-// SampleBufferDisplayLayer the receiver's sample buffer display layer.
-func (x *PictureInPictureControllerContentSource) SampleBufferDisplayLayer() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferDisplayLayer"))
+// SampleBufferDisplayLayer returns the receiver's sample buffer display layer.
+func (pipccs *PictureInPictureControllerContentSource) SampleBufferDisplayLayer() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pipccs), objc.RegisterName("sampleBufferDisplayLayer"))
 	return obj.Wrap(_r)
 }
-
-// PictureInPictureControllerContentSourceable is the interface implemented by [PictureInPictureControllerContentSource], for mocking and DI.
-type PictureInPictureControllerContentSourceable interface {
-	obj.Object
-	PlayerLayer() obj.Object
-	SampleBufferDisplayLayer() obj.Object
-}
-
-var _ PictureInPictureControllerContentSourceable = (*PictureInPictureControllerContentSource)(nil)

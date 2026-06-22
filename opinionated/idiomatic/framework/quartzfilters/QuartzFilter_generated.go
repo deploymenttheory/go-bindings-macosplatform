@@ -44,24 +44,24 @@ func quartzFilterAdopt(id objc.ID) *QuartzFilter {
 }
 
 // Description returns the object's -description text.
-func (x *QuartzFilter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (qf *QuartzFilter) Description() string {
+	return rt.Description(objref.IDOf(qf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QuartzFilter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (qf *QuartzFilter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(qf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QuartzFilter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (qf *QuartzFilter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(qf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *QuartzFilter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (qf *QuartzFilter) String() string {
+	return rt.Description(objref.IDOf(qf))
 }
 
 // NewQuartzFilter creates a new QuartzFilter.
@@ -71,20 +71,20 @@ func NewQuartzFilter() *QuartzFilter {
 }
 
 // Properties wraps the corresponding Objective-C method.
-func (x *QuartzFilter) Properties() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("properties"))
+func (qf *QuartzFilter) Properties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qf), objc.RegisterName("properties"))
 	return obj.Wrap(_r)
 }
 
-// Url wraps the corresponding Objective-C method.
-func (x *QuartzFilter) Url() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+// URL wraps the corresponding Objective-C method.
+func (qf *QuartzFilter) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qf), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
 // LocalizedName wraps the corresponding Objective-C method.
-func (x *QuartzFilter) LocalizedName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+func (qf *QuartzFilter) LocalizedName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(qf), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
 	}
@@ -92,24 +92,12 @@ func (x *QuartzFilter) LocalizedName() string {
 }
 
 // ApplyToContext wraps the corresponding Objective-C method.
-func (x *QuartzFilter) ApplyToContext(aContext obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("applyToContext:"), objref.IDOf(aContext))
+func (qf *QuartzFilter) ApplyToContext(aContext obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(qf), objc.RegisterName("applyToContext:"), objref.IDOf(aContext))
 	return _r
 }
 
 // RemoveFromContext wraps the corresponding Objective-C method.
-func (x *QuartzFilter) RemoveFromContext(aContext obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromContext:"), objref.IDOf(aContext))
+func (qf *QuartzFilter) RemoveFromContext(aContext obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(qf), objc.RegisterName("removeFromContext:"), objref.IDOf(aContext))
 }
-
-// QuartzFilterable is the interface implemented by [QuartzFilter], for mocking and DI.
-type QuartzFilterable interface {
-	obj.Object
-	Properties() obj.Object
-	Url() obj.Object
-	LocalizedName() string
-	ApplyToContext(aContext obj.Object) bool
-	RemoveFromContext(aContext obj.Object)
-}
-
-var _ QuartzFilterable = (*QuartzFilter)(nil)

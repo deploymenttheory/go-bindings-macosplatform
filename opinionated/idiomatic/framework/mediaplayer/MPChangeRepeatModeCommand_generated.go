@@ -7,7 +7,6 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,38 +51,22 @@ func NewChangeRepeatModeCommand() *ChangeRepeatModeCommand {
 	return changeRepeatModeCommandAdopt(_id)
 }
 
-// WithCurrentRepeatType the current repeat option for a media item.
-func (x *ChangeRepeatModeCommand) WithCurrentRepeatType(currentRepeatType RepeatType) *ChangeRepeatModeCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentRepeatType:"), currentRepeatType)
-	return x
+// WithCurrentRepeatType sets the current repeat option for a media item.
+func (crmc *ChangeRepeatModeCommand) WithCurrentRepeatType(currentRepeatType RepeatType) *ChangeRepeatModeCommand {
+	objc.Send[objc.ID](objref.IDOf(crmc), objc.RegisterName("setCurrentRepeatType:"), currentRepeatType)
+	return crmc
 }
 
-// WithEnabled a Boolean value that indicates whether a user can interact with the displayed element.
-func (x *ChangeRepeatModeCommand) WithEnabled(enabled bool) *ChangeRepeatModeCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether a user can interact with the displayed element.
+func (crmc *ChangeRepeatModeCommand) WithEnabled(enabled bool) *ChangeRepeatModeCommand {
+	objc.Send[objc.ID](objref.IDOf(crmc), objc.RegisterName("setEnabled:"), enabled)
+	return crmc
 }
 
 // CurrentRepeatType wraps the corresponding Objective-C method.
-func (x *ChangeRepeatModeCommand) CurrentRepeatType() RepeatType {
-	_r := objc.Send[RepeatType](objref.IDOf(x), objc.RegisterName("currentRepeatType"))
+func (crmc *ChangeRepeatModeCommand) CurrentRepeatType() RepeatType {
+	_r := objc.Send[RepeatType](objref.IDOf(crmc), objc.RegisterName("currentRepeatType"))
 	return _r
 }
-
-// SetCurrentRepeatType wraps the corresponding Objective-C method.
-func (x *ChangeRepeatModeCommand) SetCurrentRepeatType(currentRepeatType RepeatType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentRepeatType:"), currentRepeatType)
-}
-
-// ChangeRepeatModeCommandable is the interface implemented by [ChangeRepeatModeCommand], for mocking and DI.
-type ChangeRepeatModeCommandable interface {
-	obj.Object
-	WithCurrentRepeatType(currentRepeatType RepeatType) *ChangeRepeatModeCommand
-	WithEnabled(enabled bool) *ChangeRepeatModeCommand
-	CurrentRepeatType() RepeatType
-	SetCurrentRepeatType(currentRepeatType RepeatType)
-}
-
-var _ ChangeRepeatModeCommandable = (*ChangeRepeatModeCommand)(nil)
 
 var _ RemoteCommandProvider = (*ChangeRepeatModeCommand)(nil)

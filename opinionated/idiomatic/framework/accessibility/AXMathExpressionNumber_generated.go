@@ -7,7 +7,6 @@ package accessibility
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,20 +51,12 @@ func NewMathExpressionNumberWithContent(content string) *MathExpressionNumber {
 }
 
 // Content wraps the corresponding Objective-C method.
-func (x *MathExpressionNumber) Content() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("content"))
+func (men *MathExpressionNumber) Content() string {
+	_r := objc.Send[objc.ID](objref.IDOf(men), objc.RegisterName("content"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// MathExpressionNumberable is the interface implemented by [MathExpressionNumber], for mocking and DI.
-type MathExpressionNumberable interface {
-	obj.Object
-	Content() string
-}
-
-var _ MathExpressionNumberable = (*MathExpressionNumber)(nil)
 
 var _ MathExpressionProvider = (*MathExpressionNumber)(nil)

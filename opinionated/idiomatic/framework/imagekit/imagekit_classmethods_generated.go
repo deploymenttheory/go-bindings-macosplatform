@@ -36,7 +36,7 @@ func IKPictureTakerPictureTaker() *PictureTaker {
 	return PictureTakerFromID(_r)
 }
 
-// SharedSlideshow shared instance of the IKSlideshow.
+// SharedSlideshow returns shared instance of the IKSlideshow.
 func SharedSlideshow() *Slideshow {
 	_r := objc.Send[objc.ID](objc.ID(_class("IKSlideshow")), objc.RegisterName("sharedSlideshow"))
 	return SlideshowFromID(_r)

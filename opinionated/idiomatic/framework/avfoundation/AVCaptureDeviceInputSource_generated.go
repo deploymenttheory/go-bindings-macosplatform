@@ -46,24 +46,24 @@ func captureDeviceInputSourceAdopt(id objc.ID) *CaptureDeviceInputSource {
 }
 
 // Description returns the object's -description text.
-func (x *CaptureDeviceInputSource) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cdis *CaptureDeviceInputSource) Description() string {
+	return rt.Description(objref.IDOf(cdis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureDeviceInputSource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cdis *CaptureDeviceInputSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cdis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureDeviceInputSource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cdis *CaptureDeviceInputSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cdis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptureDeviceInputSource) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cdis *CaptureDeviceInputSource) String() string {
+	return rt.Description(objref.IDOf(cdis))
 }
 
 // NewCaptureDeviceInputSource creates a new CaptureDeviceInputSource.
@@ -72,29 +72,20 @@ func NewCaptureDeviceInputSource() *CaptureDeviceInputSource {
 	return captureDeviceInputSourceAdopt(_id)
 }
 
-// InputSourceID an ID unique among the inputSources exposed by a given AVCaptureDevice. An AVCaptureDevice's inputSources array must contain AVCaptureInputSource objects with unique inputSourceIDs.
-func (x *CaptureDeviceInputSource) InputSourceID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputSourceID"))
+// InputSourceID returns an ID unique among the inputSources exposed by a given AVCaptureDevice. An AVCaptureDevice's inputSources array must contain AVCaptureInputSource objects with unique inputSourceIDs.
+func (cdis *CaptureDeviceInputSource) InputSourceID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cdis), objc.RegisterName("inputSourceID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// LocalizedName a localized human-readable name for the receiver. This property can be used for displaying the name of the capture device input source in a user interface.
-func (x *CaptureDeviceInputSource) LocalizedName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+// LocalizedName returns a localized human-readable name for the receiver. This property can be used for displaying the name of the capture device input source in a user interface.
+func (cdis *CaptureDeviceInputSource) LocalizedName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cdis), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// CaptureDeviceInputSourceable is the interface implemented by [CaptureDeviceInputSource], for mocking and DI.
-type CaptureDeviceInputSourceable interface {
-	obj.Object
-	InputSourceID() string
-	LocalizedName() string
-}
-
-var _ CaptureDeviceInputSourceable = (*CaptureDeviceInputSource)(nil)

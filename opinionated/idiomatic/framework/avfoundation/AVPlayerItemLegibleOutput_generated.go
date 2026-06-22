@@ -53,65 +53,40 @@ func NewPlayerItemLegibleOutputWithMediaSubtypesForNativeRepresentation(subtypes
 	return playerItemLegibleOutputAdopt(_id)
 }
 
-// WithAdvanceIntervalForDelegateInvocation the time interval, in seconds, that a player item legible output object messages its delegate earlier than normal.
-func (x *PlayerItemLegibleOutput) WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemLegibleOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdvanceIntervalForDelegateInvocation:"), advanceIntervalForDelegateInvocation)
-	return x
+// WithAdvanceIntervalForDelegateInvocation sets the time interval, in seconds, that a player item legible output object messages its delegate earlier than normal.
+func (pilo *PlayerItemLegibleOutput) WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemLegibleOutput {
+	objc.Send[objc.ID](objref.IDOf(pilo), objc.RegisterName("setAdvanceIntervalForDelegateInvocation:"), advanceIntervalForDelegateInvocation)
+	return pilo
 }
 
-// WithTextStylingResolution a string identifier indicating the degree of text styling to be applied to attributed strings vended by the object.
-func (x *PlayerItemLegibleOutput) WithTextStylingResolution(textStylingResolution obj.Object) *PlayerItemLegibleOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextStylingResolution:"), objref.IDOf(textStylingResolution))
-	return x
+// WithTextStylingResolution sets a string identifier indicating the degree of text styling to be applied to attributed strings vended by the object.
+func (pilo *PlayerItemLegibleOutput) WithTextStylingResolution(textStylingResolution obj.Object) *PlayerItemLegibleOutput {
+	objc.Send[objc.ID](objref.IDOf(pilo), objc.RegisterName("setTextStylingResolution:"), objref.IDOf(textStylingResolution))
+	return pilo
 }
 
-// WithSuppressesPlayerRendering a Boolean value that indicates whether the player object renders the receiver’s output.
-func (x *PlayerItemLegibleOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemLegibleOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
-	return x
+// WithSuppressesPlayerRendering sets a Boolean value that indicates whether the player object renders the receiver’s output.
+func (pilo *PlayerItemLegibleOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemLegibleOutput {
+	objc.Send[objc.ID](objref.IDOf(pilo), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
+	return pilo
 }
 
-// DelegateQueue the dispatch queue where the delegate is messaged. This property is not key-value observable.
-func (x *PlayerItemLegibleOutput) DelegateQueue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateQueue"))
+// DelegateQueue returns the dispatch queue where the delegate is messaged. This property is not key-value observable.
+func (pilo *PlayerItemLegibleOutput) DelegateQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pilo), objc.RegisterName("delegateQueue"))
 	return obj.Wrap(_r)
 }
 
-// AdvanceIntervalForDelegateInvocation permits advance invocation of the associated delegate, if any. If it is possible, an AVPlayerItemLegibleOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemLegibleOutput is prepared to act on them, the delegate will be invoked as soon as possible.
-func (x *PlayerItemLegibleOutput) AdvanceIntervalForDelegateInvocation() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("advanceIntervalForDelegateInvocation"))
+// AdvanceIntervalForDelegateInvocation returns permits advance invocation of the associated delegate, if any. If it is possible, an AVPlayerItemLegibleOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemLegibleOutput is prepared to act on them, the delegate will be invoked as soon as possible.
+func (pilo *PlayerItemLegibleOutput) AdvanceIntervalForDelegateInvocation() float64 {
+	_r := objc.Send[float64](objref.IDOf(pilo), objc.RegisterName("advanceIntervalForDelegateInvocation"))
 	return _r
 }
 
-// SetAdvanceIntervalForDelegateInvocation wraps the corresponding Objective-C method.
-func (x *PlayerItemLegibleOutput) SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdvanceIntervalForDelegateInvocation:"), advanceIntervalForDelegateInvocation)
-}
-
 // TextStylingResolution wraps the corresponding Objective-C method.
-func (x *PlayerItemLegibleOutput) TextStylingResolution() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textStylingResolution"))
+func (pilo *PlayerItemLegibleOutput) TextStylingResolution() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pilo), objc.RegisterName("textStylingResolution"))
 	return obj.Wrap(_r)
 }
-
-// SetTextStylingResolution wraps the corresponding Objective-C method.
-func (x *PlayerItemLegibleOutput) SetTextStylingResolution(textStylingResolution obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextStylingResolution:"), objref.IDOf(textStylingResolution))
-}
-
-// PlayerItemLegibleOutputable is the interface implemented by [PlayerItemLegibleOutput], for mocking and DI.
-type PlayerItemLegibleOutputable interface {
-	obj.Object
-	WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemLegibleOutput
-	WithTextStylingResolution(textStylingResolution obj.Object) *PlayerItemLegibleOutput
-	WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemLegibleOutput
-	DelegateQueue() obj.Object
-	AdvanceIntervalForDelegateInvocation() float64
-	SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64)
-	TextStylingResolution() obj.Object
-	SetTextStylingResolution(textStylingResolution obj.Object)
-}
-
-var _ PlayerItemLegibleOutputable = (*PlayerItemLegibleOutput)(nil)
 
 var _ PlayerItemOutputProvider = (*PlayerItemLegibleOutput)(nil)

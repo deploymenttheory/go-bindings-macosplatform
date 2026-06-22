@@ -48,86 +48,68 @@ func rAWProcessingParameterAdopt(id objc.ID) *RAWProcessingParameter {
 }
 
 // Description returns the object's -description text.
-func (x *RAWProcessingParameter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rpp *RAWProcessingParameter) Description() string {
+	return rt.Description(objref.IDOf(rpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RAWProcessingParameter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rpp *RAWProcessingParameter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RAWProcessingParameter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rpp *RAWProcessingParameter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RAWProcessingParameter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rpp *RAWProcessingParameter) String() string {
+	return rt.Description(objref.IDOf(rpp))
 }
 
-// WithEnabled a Boolean value that indicates whether the extension enables the parameter.
-func (x *RAWProcessingParameter) WithEnabled(enabled bool) *RAWProcessingParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the extension enables the parameter.
+func (rpp *RAWProcessingParameter) WithEnabled(enabled bool) *RAWProcessingParameter {
+	objc.Send[objc.ID](objref.IDOf(rpp), objc.RegisterName("setEnabled:"), enabled)
+	return rpp
 }
 
-// Name a localized human-readable name for the parameter, suitable for displaying in application UI.
-func (x *RAWProcessingParameter) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns a localized human-readable name for the parameter, suitable for displaying in application UI.
+func (rpp *RAWProcessingParameter) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(rpp), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Key a unique key string identifying this parameter.
-func (x *RAWProcessingParameter) Key() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
+// Key returns a unique key string identifying this parameter.
+func (rpp *RAWProcessingParameter) Key() string {
+	_r := objc.Send[objc.ID](objref.IDOf(rpp), objc.RegisterName("key"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// LongDescription a localized description of the parameter, suitable for displaying in a tool tip or similar explanatory UI.
-func (x *RAWProcessingParameter) LongDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("longDescription"))
+// LongDescription returns a localized description of the parameter, suitable for displaying in a tool tip or similar explanatory UI.
+func (rpp *RAWProcessingParameter) LongDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(rpp), objc.RegisterName("longDescription"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Enabled indicates whether the parameter is enabled or disabled by the extension. This parameter can only be modified by the extension.  From the application-facing interface, VTRAWProcessingSession, this is a read-only value which indicates whether the parameter should be greyed out and disabled in any UI being generated.
-func (x *RAWProcessingParameter) Enabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enabled"))
+// Enabled reports whether the parameter is enabled or disabled by the extension. This parameter can only be modified by the extension. From the application-facing interface, VTRAWProcessingSession, this is a read-only value which indicates whether the parameter should be greyed out and disabled in any UI being generated.
+func (rpp *RAWProcessingParameter) Enabled() bool {
+	_r := objc.Send[bool](objref.IDOf(rpp), objc.RegisterName("enabled"))
 	return _r
 }
-
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *RAWProcessingParameter) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-}
-
-// RAWProcessingParameterable is the interface implemented by [RAWProcessingParameter], for mocking and DI.
-type RAWProcessingParameterable interface {
-	obj.Object
-	WithEnabled(enabled bool) *RAWProcessingParameter
-	Name() string
-	Key() string
-	LongDescription() string
-	Enabled() bool
-	SetEnabled(enabled bool)
-}
-
-var _ RAWProcessingParameterable = (*RAWProcessingParameter)(nil)
 
 // isRAWProcessingParameter marks RAWProcessingParameter — and, by embedding promotion, its
 // subclasses — as a member of the RAWProcessingParameter hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *RAWProcessingParameter) isRAWProcessingParameter() {}
+func (rpp *RAWProcessingParameter) isRAWProcessingParameter() {}
 
 var _ RAWProcessingParameterProvider = (*RAWProcessingParameter)(nil)

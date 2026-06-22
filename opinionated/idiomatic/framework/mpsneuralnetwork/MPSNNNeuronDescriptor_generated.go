@@ -44,24 +44,24 @@ func nNNeuronDescriptorAdopt(id objc.ID) *NNNeuronDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *NNNeuronDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nnd *NNNeuronDescriptor) Description() string {
+	return rt.Description(objref.IDOf(nnd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNNeuronDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nnd *NNNeuronDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nnd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNNeuronDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nnd *NNNeuronDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nnd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NNNeuronDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nnd *NNNeuronDescriptor) String() string {
+	return rt.Description(objref.IDOf(nnd))
 }
 
 // NewNNNeuronDescriptor creates a new NNNeuronDescriptor.
@@ -71,108 +71,61 @@ func NewNNNeuronDescriptor() *NNNeuronDescriptor {
 }
 
 // WithNeuronType sets the property and returns the receiver so calls can be chained.
-func (x *NNNeuronDescriptor) WithNeuronType(neuronType CNNNeuronType) *NNNeuronDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeuronType:"), neuronType)
-	return x
+func (nnd *NNNeuronDescriptor) WithNeuronType(neuronType CNNNeuronType) *NNNeuronDescriptor {
+	objc.Send[objc.ID](objref.IDOf(nnd), objc.RegisterName("setNeuronType:"), neuronType)
+	return nnd
 }
 
 // WithA sets the property and returns the receiver so calls can be chained.
-func (x *NNNeuronDescriptor) WithA(a float32) *NNNeuronDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setA:"), a)
-	return x
+func (nnd *NNNeuronDescriptor) WithA(a float32) *NNNeuronDescriptor {
+	objc.Send[objc.ID](objref.IDOf(nnd), objc.RegisterName("setA:"), a)
+	return nnd
 }
 
 // WithB sets the property and returns the receiver so calls can be chained.
-func (x *NNNeuronDescriptor) WithB(b float32) *NNNeuronDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setB:"), b)
-	return x
+func (nnd *NNNeuronDescriptor) WithB(b float32) *NNNeuronDescriptor {
+	objc.Send[objc.ID](objref.IDOf(nnd), objc.RegisterName("setB:"), b)
+	return nnd
 }
 
 // WithC sets the property and returns the receiver so calls can be chained.
-func (x *NNNeuronDescriptor) WithC(c float32) *NNNeuronDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setC:"), c)
-	return x
+func (nnd *NNNeuronDescriptor) WithC(c float32) *NNNeuronDescriptor {
+	objc.Send[objc.ID](objref.IDOf(nnd), objc.RegisterName("setC:"), c)
+	return nnd
 }
 
 // WithData sets the property and returns the receiver so calls can be chained.
-func (x *NNNeuronDescriptor) WithData(data obj.Object) *NNNeuronDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
-	return x
+func (nnd *NNNeuronDescriptor) WithData(data obj.Object) *NNNeuronDescriptor {
+	objc.Send[objc.ID](objref.IDOf(nnd), objc.RegisterName("setData:"), objref.IDOf(data))
+	return nnd
 }
 
 // NeuronType wraps the corresponding Objective-C method.
-func (x *NNNeuronDescriptor) NeuronType() CNNNeuronType {
-	_r := objc.Send[CNNNeuronType](objref.IDOf(x), objc.RegisterName("neuronType"))
+func (nnd *NNNeuronDescriptor) NeuronType() CNNNeuronType {
+	_r := objc.Send[CNNNeuronType](objref.IDOf(nnd), objc.RegisterName("neuronType"))
 	return _r
-}
-
-// SetNeuronType wraps the corresponding Objective-C method.
-func (x *NNNeuronDescriptor) SetNeuronType(neuronType CNNNeuronType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeuronType:"), neuronType)
 }
 
 // A wraps the corresponding Objective-C method.
-func (x *NNNeuronDescriptor) A() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("a"))
+func (nnd *NNNeuronDescriptor) A() float32 {
+	_r := objc.Send[float32](objref.IDOf(nnd), objc.RegisterName("a"))
 	return _r
-}
-
-// SetA wraps the corresponding Objective-C method.
-func (x *NNNeuronDescriptor) SetA(a float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setA:"), a)
 }
 
 // B wraps the corresponding Objective-C method.
-func (x *NNNeuronDescriptor) B() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("b"))
+func (nnd *NNNeuronDescriptor) B() float32 {
+	_r := objc.Send[float32](objref.IDOf(nnd), objc.RegisterName("b"))
 	return _r
-}
-
-// SetB wraps the corresponding Objective-C method.
-func (x *NNNeuronDescriptor) SetB(b float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setB:"), b)
 }
 
 // C wraps the corresponding Objective-C method.
-func (x *NNNeuronDescriptor) C() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("c"))
+func (nnd *NNNeuronDescriptor) C() float32 {
+	_r := objc.Send[float32](objref.IDOf(nnd), objc.RegisterName("c"))
 	return _r
 }
 
-// SetC wraps the corresponding Objective-C method.
-func (x *NNNeuronDescriptor) SetC(c float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setC:"), c)
-}
-
 // Data wraps the corresponding Objective-C method.
-func (x *NNNeuronDescriptor) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+func (nnd *NNNeuronDescriptor) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nnd), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
-
-// SetData wraps the corresponding Objective-C method.
-func (x *NNNeuronDescriptor) SetData(data obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
-}
-
-// NNNeuronDescriptorable is the interface implemented by [NNNeuronDescriptor], for mocking and DI.
-type NNNeuronDescriptorable interface {
-	obj.Object
-	WithNeuronType(neuronType CNNNeuronType) *NNNeuronDescriptor
-	WithA(a float32) *NNNeuronDescriptor
-	WithB(b float32) *NNNeuronDescriptor
-	WithC(c float32) *NNNeuronDescriptor
-	WithData(data obj.Object) *NNNeuronDescriptor
-	NeuronType() CNNNeuronType
-	SetNeuronType(neuronType CNNNeuronType)
-	A() float32
-	SetA(a float32)
-	B() float32
-	SetB(b float32)
-	C() float32
-	SetC(c float32)
-	Data() obj.Object
-	SetData(data obj.Object)
-}
-
-var _ NNNeuronDescriptorable = (*NNNeuronDescriptor)(nil)

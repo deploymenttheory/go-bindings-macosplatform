@@ -46,24 +46,24 @@ func fileProviderKnownFolderLocationsAdopt(id objc.ID) *FileProviderKnownFolderL
 }
 
 // Description returns the object's -description text.
-func (x *FileProviderKnownFolderLocations) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fpkfl *FileProviderKnownFolderLocations) Description() string {
+	return rt.Description(objref.IDOf(fpkfl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FileProviderKnownFolderLocations) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fpkfl *FileProviderKnownFolderLocations) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fpkfl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FileProviderKnownFolderLocations) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fpkfl *FileProviderKnownFolderLocations) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fpkfl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FileProviderKnownFolderLocations) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fpkfl *FileProviderKnownFolderLocations) String() string {
+	return rt.Description(objref.IDOf(fpkfl))
 }
 
 // NewFileProviderKnownFolderLocations creates a new FileProviderKnownFolderLocations.
@@ -72,69 +72,38 @@ func NewFileProviderKnownFolderLocations() *FileProviderKnownFolderLocations {
 	return fileProviderKnownFolderLocationsAdopt(_id)
 }
 
-// WithShouldCreateBinaryCompatibilitySymlink specify whether the system should create a binary compatibility symlink folders. If YES, the system creates a symlink from the logical location of the folder in the domain sync root to the known folder location. This symlink allows any app that would have hardcoded the previous location of the folder to still work after enabling the feature. Default value is YES.
-func (x *FileProviderKnownFolderLocations) WithShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink bool) *FileProviderKnownFolderLocations {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCreateBinaryCompatibilitySymlink:"), shouldCreateBinaryCompatibilitySymlink)
-	return x
+// WithShouldCreateBinaryCompatibilitySymlink sets specify whether the system should create a binary compatibility symlink folders. If YES, the system creates a symlink from the logical location of the folder in the domain sync root to the known folder location. This symlink allows any app that would have hardcoded the previous location of the folder to still work after enabling the feature. Default value is YES.
+func (fpkfl *FileProviderKnownFolderLocations) WithShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink bool) *FileProviderKnownFolderLocations {
+	objc.Send[objc.ID](objref.IDOf(fpkfl), objc.RegisterName("setShouldCreateBinaryCompatibilitySymlink:"), shouldCreateBinaryCompatibilitySymlink)
+	return fpkfl
 }
 
-// WithDesktopLocation candidate item for ~/Desktop For user experience reasons, it is strongly recommended to name the target folder "Desktop".
-func (x *FileProviderKnownFolderLocations) WithDesktopLocation(desktopLocation *FileProviderKnownFolderLocation) *FileProviderKnownFolderLocations {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesktopLocation:"), objref.IDOf(desktopLocation))
-	return x
+// WithDesktopLocation sets candidate item for ~/Desktop For user experience reasons, it is strongly recommended to name the target folder "Desktop".
+func (fpkfl *FileProviderKnownFolderLocations) WithDesktopLocation(desktopLocation *FileProviderKnownFolderLocation) *FileProviderKnownFolderLocations {
+	objc.Send[objc.ID](objref.IDOf(fpkfl), objc.RegisterName("setDesktopLocation:"), objref.IDOf(desktopLocation))
+	return fpkfl
 }
 
-// WithDocumentsLocation candidate item for ~/Documents For user experience reasons, it is strongly recommended to name the target folder "Documents".
-func (x *FileProviderKnownFolderLocations) WithDocumentsLocation(documentsLocation *FileProviderKnownFolderLocation) *FileProviderKnownFolderLocations {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentsLocation:"), objref.IDOf(documentsLocation))
-	return x
+// WithDocumentsLocation sets candidate item for ~/Documents For user experience reasons, it is strongly recommended to name the target folder "Documents".
+func (fpkfl *FileProviderKnownFolderLocations) WithDocumentsLocation(documentsLocation *FileProviderKnownFolderLocation) *FileProviderKnownFolderLocations {
+	objc.Send[objc.ID](objref.IDOf(fpkfl), objc.RegisterName("setDocumentsLocation:"), objref.IDOf(documentsLocation))
+	return fpkfl
 }
 
-// ShouldCreateBinaryCompatibilitySymlink specify whether the system should create a binary compatibility symlink folders. If YES, the system creates a symlink from the logical location of the folder in the domain sync root to the known folder location. This symlink allows any app that would have hardcoded the previous location of the folder to still work after enabling the feature. Default value is YES.
-func (x *FileProviderKnownFolderLocations) ShouldCreateBinaryCompatibilitySymlink() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldCreateBinaryCompatibilitySymlink"))
+// ShouldCreateBinaryCompatibilitySymlink reports whether specify whether the system should create a binary compatibility symlink folders. If true, the system creates a symlink from the logical location of the folder in the domain sync root to the known folder location. This symlink allows any app that would have hardcoded the previous location of the folder to still work after enabling the feature. Default value is true.
+func (fpkfl *FileProviderKnownFolderLocations) ShouldCreateBinaryCompatibilitySymlink() bool {
+	_r := objc.Send[bool](objref.IDOf(fpkfl), objc.RegisterName("shouldCreateBinaryCompatibilitySymlink"))
 	return _r
 }
 
-// SetShouldCreateBinaryCompatibilitySymlink wraps the corresponding Objective-C method.
-func (x *FileProviderKnownFolderLocations) SetShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCreateBinaryCompatibilitySymlink:"), shouldCreateBinaryCompatibilitySymlink)
-}
-
-// DesktopLocation candidate item for ~/Desktop For user experience reasons, it is strongly recommended to name the target folder "Desktop".
-func (x *FileProviderKnownFolderLocations) DesktopLocation() *FileProviderKnownFolderLocation {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("desktopLocation"))
+// DesktopLocation returns candidate item for ~/Desktop For user experience reasons, it is strongly recommended to name the target folder "Desktop".
+func (fpkfl *FileProviderKnownFolderLocations) DesktopLocation() *FileProviderKnownFolderLocation {
+	_r := objc.Send[objc.ID](objref.IDOf(fpkfl), objc.RegisterName("desktopLocation"))
 	return FileProviderKnownFolderLocationFromID(_r)
 }
 
-// SetDesktopLocation wraps the corresponding Objective-C method.
-func (x *FileProviderKnownFolderLocations) SetDesktopLocation(desktopLocation *FileProviderKnownFolderLocation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesktopLocation:"), objref.IDOf(desktopLocation))
-}
-
-// DocumentsLocation candidate item for ~/Documents For user experience reasons, it is strongly recommended to name the target folder "Documents".
-func (x *FileProviderKnownFolderLocations) DocumentsLocation() *FileProviderKnownFolderLocation {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentsLocation"))
+// DocumentsLocation returns candidate item for ~/Documents For user experience reasons, it is strongly recommended to name the target folder "Documents".
+func (fpkfl *FileProviderKnownFolderLocations) DocumentsLocation() *FileProviderKnownFolderLocation {
+	_r := objc.Send[objc.ID](objref.IDOf(fpkfl), objc.RegisterName("documentsLocation"))
 	return FileProviderKnownFolderLocationFromID(_r)
 }
-
-// SetDocumentsLocation wraps the corresponding Objective-C method.
-func (x *FileProviderKnownFolderLocations) SetDocumentsLocation(documentsLocation *FileProviderKnownFolderLocation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentsLocation:"), objref.IDOf(documentsLocation))
-}
-
-// FileProviderKnownFolderLocationsable is the interface implemented by [FileProviderKnownFolderLocations], for mocking and DI.
-type FileProviderKnownFolderLocationsable interface {
-	obj.Object
-	WithShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink bool) *FileProviderKnownFolderLocations
-	WithDesktopLocation(desktopLocation *FileProviderKnownFolderLocation) *FileProviderKnownFolderLocations
-	WithDocumentsLocation(documentsLocation *FileProviderKnownFolderLocation) *FileProviderKnownFolderLocations
-	ShouldCreateBinaryCompatibilitySymlink() bool
-	SetShouldCreateBinaryCompatibilitySymlink(shouldCreateBinaryCompatibilitySymlink bool)
-	DesktopLocation() *FileProviderKnownFolderLocation
-	SetDesktopLocation(desktopLocation *FileProviderKnownFolderLocation)
-	DocumentsLocation() *FileProviderKnownFolderLocation
-	SetDocumentsLocation(documentsLocation *FileProviderKnownFolderLocation)
-}
-
-var _ FileProviderKnownFolderLocationsable = (*FileProviderKnownFolderLocations)(nil)

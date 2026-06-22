@@ -7,7 +7,6 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,24 +52,15 @@ func NewTileOverlayRendererWithTileOverlay(overlay *TileOverlay) *TileOverlayRen
 	return tileOverlayRendererAdopt(_id)
 }
 
-// WithAlpha the amount of transparency to apply to the overlay.
-func (x *TileOverlayRenderer) WithAlpha(alpha float64) *TileOverlayRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the amount of transparency to apply to the overlay.
+func (tor *TileOverlayRenderer) WithAlpha(alpha float64) *TileOverlayRenderer {
+	objc.Send[objc.ID](objref.IDOf(tor), objc.RegisterName("setAlpha:"), alpha)
+	return tor
 }
 
 // ReloadData forces the tile overlay renderer to reload and redisplay the tiles.
-func (x *TileOverlayRenderer) ReloadData() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadData"))
+func (tor *TileOverlayRenderer) ReloadData() {
+	objc.Send[objc.ID](objref.IDOf(tor), objc.RegisterName("reloadData"))
 }
-
-// TileOverlayRendererable is the interface implemented by [TileOverlayRenderer], for mocking and DI.
-type TileOverlayRendererable interface {
-	obj.Object
-	WithAlpha(alpha float64) *TileOverlayRenderer
-	ReloadData()
-}
-
-var _ TileOverlayRendererable = (*TileOverlayRenderer)(nil)
 
 var _ OverlayRendererProvider = (*TileOverlayRenderer)(nil)

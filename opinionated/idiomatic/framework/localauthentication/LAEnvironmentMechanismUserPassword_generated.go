@@ -7,7 +7,6 @@ package localauthentication
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,17 +50,9 @@ func NewEnvironmentMechanismUserPassword() *EnvironmentMechanismUserPassword {
 }
 
 // IsSet wraps the corresponding Objective-C method.
-func (x *EnvironmentMechanismUserPassword) IsSet() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSet"))
+func (emup *EnvironmentMechanismUserPassword) IsSet() bool {
+	_r := objc.Send[bool](objref.IDOf(emup), objc.RegisterName("isSet"))
 	return _r
 }
-
-// EnvironmentMechanismUserPasswordable is the interface implemented by [EnvironmentMechanismUserPassword], for mocking and DI.
-type EnvironmentMechanismUserPasswordable interface {
-	obj.Object
-	IsSet() bool
-}
-
-var _ EnvironmentMechanismUserPasswordable = (*EnvironmentMechanismUserPassword)(nil)
 
 var _ EnvironmentMechanismProvider = (*EnvironmentMechanismUserPassword)(nil)

@@ -46,24 +46,24 @@ func accountCredentialAdopt(id objc.ID) *AccountCredential {
 }
 
 // Description returns the object's -description text.
-func (x *AccountCredential) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ac *AccountCredential) Description() string {
+	return rt.Description(objref.IDOf(ac))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccountCredential) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ac *AccountCredential) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ac), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccountCredential) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ac *AccountCredential) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ac), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AccountCredential) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ac *AccountCredential) String() string {
+	return rt.Description(objref.IDOf(ac))
 }
 
 // NewAccountCredentialWithOAuthTokenTokenSecret initializes an account credential using OAuth.
@@ -80,32 +80,17 @@ func NewAccountCredentialWithOAuth2TokenRefreshTokenExpiryDate(token string, ref
 	return accountCredentialAdopt(_id)
 }
 
-// WithOauthToken the token used for the credential.
-func (x *AccountCredential) WithOauthToken(oauthToken string) *AccountCredential {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOauthToken:"), purego.NSString(oauthToken))
-	return x
+// WithOauthToken sets the token used for the credential.
+func (ac *AccountCredential) WithOauthToken(oauthToken string) *AccountCredential {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setOauthToken:"), purego.NSString(oauthToken))
+	return ac
 }
 
 // OauthToken wraps the corresponding Objective-C method.
-func (x *AccountCredential) OauthToken() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("oauthToken"))
+func (ac *AccountCredential) OauthToken() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("oauthToken"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetOauthToken wraps the corresponding Objective-C method.
-func (x *AccountCredential) SetOauthToken(oauthToken string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOauthToken:"), purego.NSString(oauthToken))
-}
-
-// AccountCredentialable is the interface implemented by [AccountCredential], for mocking and DI.
-type AccountCredentialable interface {
-	obj.Object
-	WithOauthToken(oauthToken string) *AccountCredential
-	OauthToken() string
-	SetOauthToken(oauthToken string)
-}
-
-var _ AccountCredentialable = (*AccountCredential)(nil)

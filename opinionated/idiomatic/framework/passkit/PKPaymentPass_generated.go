@@ -7,7 +7,6 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,18 +52,10 @@ func NewPaymentPass() *PaymentPass {
 }
 
 // ActivationState wraps the corresponding Objective-C method.
-func (x *PaymentPass) ActivationState() PaymentPassActivationState {
-	_r := objc.Send[PaymentPassActivationState](objref.IDOf(x), objc.RegisterName("activationState"))
+func (pp *PaymentPass) ActivationState() PaymentPassActivationState {
+	_r := objc.Send[PaymentPassActivationState](objref.IDOf(pp), objc.RegisterName("activationState"))
 	return _r
 }
-
-// PaymentPassable is the interface implemented by [PaymentPass], for mocking and DI.
-type PaymentPassable interface {
-	obj.Object
-	ActivationState() PaymentPassActivationState
-}
-
-var _ PaymentPassable = (*PaymentPass)(nil)
 
 var _ SecureElementPassProvider = (*PaymentPass)(nil)
 

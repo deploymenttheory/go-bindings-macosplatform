@@ -46,24 +46,24 @@ func uRLDownloadAdopt(id objc.ID) *URLDownload {
 }
 
 // Description returns the object's -description text.
-func (x *URLDownload) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ud *URLDownload) Description() string {
+	return rt.Description(objref.IDOf(ud))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *URLDownload) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ud *URLDownload) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ud), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *URLDownload) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ud *URLDownload) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ud), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *URLDownload) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ud *URLDownload) String() string {
+	return rt.Description(objref.IDOf(ud))
 }
 
 // NewURLDownload creates a new URLDownload.
@@ -72,62 +72,42 @@ func NewURLDownload() *URLDownload {
 	return uRLDownloadAdopt(_id)
 }
 
-// WithDeletesFileUponFailure returns whether the receiver deletes partially downloaded files when a download stops prematurely.
-func (x *URLDownload) WithDeletesFileUponFailure(deletesFileUponFailure bool) *URLDownload {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeletesFileUponFailure:"), deletesFileUponFailure)
-	return x
+// WithDeletesFileUponFailure sets returns whether the receiver deletes partially downloaded files when a download stops prematurely.
+func (ud *URLDownload) WithDeletesFileUponFailure(deletesFileUponFailure bool) *URLDownload {
+	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setDeletesFileUponFailure:"), deletesFileUponFailure)
+	return ud
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *URLDownload) WithScriptingProperties(scriptingProperties obj.Object) *URLDownload {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ud *URLDownload) WithScriptingProperties(scriptingProperties obj.Object) *URLDownload {
+	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ud
 }
 
 // Cancel cancels the receiver’s download and deletes the downloaded file.
-func (x *URLDownload) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (ud *URLDownload) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("cancel"))
 }
 
 // SetDestinationAllowOverwrite sets the destination path of the downloaded file.
-func (x *URLDownload) SetDestinationAllowOverwrite(path string, allowOverwrite bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:allowOverwrite:"), purego.NSString(path), allowOverwrite)
+func (ud *URLDownload) SetDestinationAllowOverwrite(path string, allowOverwrite bool) {
+	objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("setDestination:allowOverwrite:"), purego.NSString(path), allowOverwrite)
 }
 
 // Request returns the request of the download.
-func (x *URLDownload) Request() *URLRequest {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("request"))
+func (ud *URLDownload) Request() *URLRequest {
+	_r := objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("request"))
 	return URLRequestFromID(_r)
 }
 
 // ResumeData returns the resume data of a download that is incomplete.
-func (x *URLDownload) ResumeData() *Data {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeData"))
+func (ud *URLDownload) ResumeData() *Data {
+	_r := objc.Send[objc.ID](objref.IDOf(ud), objc.RegisterName("resumeData"))
 	return DataFromID(_r)
 }
 
-// DeletesFileUponFailure sets whether or not the downloaded file should be deleted upon failure. 1
-func (x *URLDownload) DeletesFileUponFailure() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("deletesFileUponFailure"))
+// DeletesFileUponFailure reports whether sets whether or not the downloaded file should be deleted upon failure. 1
+func (ud *URLDownload) DeletesFileUponFailure() bool {
+	_r := objc.Send[bool](objref.IDOf(ud), objc.RegisterName("deletesFileUponFailure"))
 	return _r
 }
-
-// SetDeletesFileUponFailure wraps the corresponding Objective-C method.
-func (x *URLDownload) SetDeletesFileUponFailure(deletesFileUponFailure bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeletesFileUponFailure:"), deletesFileUponFailure)
-}
-
-// URLDownloadable is the interface implemented by [URLDownload], for mocking and DI.
-type URLDownloadable interface {
-	obj.Object
-	WithDeletesFileUponFailure(deletesFileUponFailure bool) *URLDownload
-	WithScriptingProperties(scriptingProperties obj.Object) *URLDownload
-	Cancel()
-	SetDestinationAllowOverwrite(path string, allowOverwrite bool)
-	Request() *URLRequest
-	ResumeData() *Data
-	DeletesFileUponFailure() bool
-	SetDeletesFileUponFailure(deletesFileUponFailure bool)
-}
-
-var _ URLDownloadable = (*URLDownload)(nil)

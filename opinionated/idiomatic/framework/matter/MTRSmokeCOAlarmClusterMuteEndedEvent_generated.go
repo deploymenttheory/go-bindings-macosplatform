@@ -44,24 +44,24 @@ func mTRSmokeCOAlarmClusterMuteEndedEventAdopt(id objc.ID) *MTRSmokeCOAlarmClust
 }
 
 // Description returns the object's -description text.
-func (x *MTRSmokeCOAlarmClusterMuteEndedEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mscacmee *MTRSmokeCOAlarmClusterMuteEndedEvent) Description() string {
+	return rt.Description(objref.IDOf(mscacmee))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRSmokeCOAlarmClusterMuteEndedEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mscacmee *MTRSmokeCOAlarmClusterMuteEndedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mscacmee), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRSmokeCOAlarmClusterMuteEndedEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mscacmee *MTRSmokeCOAlarmClusterMuteEndedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mscacmee), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRSmokeCOAlarmClusterMuteEndedEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mscacmee *MTRSmokeCOAlarmClusterMuteEndedEvent) String() string {
+	return rt.Description(objref.IDOf(mscacmee))
 }
 
 // NewMTRSmokeCOAlarmClusterMuteEndedEvent creates a new MTRSmokeCOAlarmClusterMuteEndedEvent.
@@ -69,10 +69,3 @@ func NewMTRSmokeCOAlarmClusterMuteEndedEvent() *MTRSmokeCOAlarmClusterMuteEndedE
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRSmokeCOAlarmClusterMuteEndedEvent")), objc.RegisterName("new"))
 	return mTRSmokeCOAlarmClusterMuteEndedEventAdopt(_id)
 }
-
-// MTRSmokeCOAlarmClusterMuteEndedEventable is the interface implemented by [MTRSmokeCOAlarmClusterMuteEndedEvent], for mocking and DI.
-type MTRSmokeCOAlarmClusterMuteEndedEventable interface {
-	obj.Object
-}
-
-var _ MTRSmokeCOAlarmClusterMuteEndedEventable = (*MTRSmokeCOAlarmClusterMuteEndedEvent)(nil)

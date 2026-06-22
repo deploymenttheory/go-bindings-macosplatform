@@ -46,24 +46,24 @@ func scannerBandDataAdopt(id objc.ID) *ScannerBandData {
 }
 
 // Description returns the object's -description text.
-func (x *ScannerBandData) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sbd *ScannerBandData) Description() string {
+	return rt.Description(objref.IDOf(sbd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScannerBandData) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sbd *ScannerBandData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sbd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScannerBandData) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sbd *ScannerBandData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sbd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ScannerBandData) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sbd *ScannerBandData) String() string {
+	return rt.Description(objref.IDOf(sbd))
 }
 
 // NewScannerBandData creates a new ScannerBandData.
@@ -73,85 +73,67 @@ func NewScannerBandData() *ScannerBandData {
 }
 
 // FullImageWidth describes the full image width of the banded image.
-func (x *ScannerBandData) FullImageWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fullImageWidth"))
+func (sbd *ScannerBandData) FullImageWidth() int {
+	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("fullImageWidth"))
 	return _r
 }
 
 // FullImageHeight describes the full image height of the banded image.
-func (x *ScannerBandData) FullImageHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fullImageHeight"))
+func (sbd *ScannerBandData) FullImageHeight() int {
+	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("fullImageHeight"))
 	return _r
 }
 
 // BitsPerPixel describes the number of bits per pixel for banded the image.
-func (x *ScannerBandData) BitsPerPixel() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bitsPerPixel"))
+func (sbd *ScannerBandData) BitsPerPixel() int {
+	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("bitsPerPixel"))
 	return _r
 }
 
 // BitsPerComponent describes the number of bits per component for the banded image.
-func (x *ScannerBandData) BitsPerComponent() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bitsPerComponent"))
+func (sbd *ScannerBandData) BitsPerComponent() int {
+	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("bitsPerComponent"))
 	return _r
 }
 
 // NumComponents describes how many components are contained within the banded image.
-func (x *ScannerBandData) NumComponents() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numComponents"))
+func (sbd *ScannerBandData) NumComponents() int {
+	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("numComponents"))
 	return _r
 }
 
-// IsBigEndian describes if the banded image data is reported in big endian.
-func (x *ScannerBandData) IsBigEndian() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBigEndian"))
+// IsBigEndian reports whether describes if the banded image data is reported in big endian.
+func (sbd *ScannerBandData) IsBigEndian() bool {
+	_r := objc.Send[bool](objref.IDOf(sbd), objc.RegisterName("isBigEndian"))
 	return _r
 }
 
-// PixelDataType type of pixel data that is contained in the band.
-func (x *ScannerBandData) PixelDataType() ScannerPixelDataType {
-	_r := objc.Send[ScannerPixelDataType](objref.IDOf(x), objc.RegisterName("pixelDataType"))
+// PixelDataType returns type of pixel data that is contained in the band.
+func (sbd *ScannerBandData) PixelDataType() ScannerPixelDataType {
+	_r := objc.Send[ScannerPixelDataType](objref.IDOf(sbd), objc.RegisterName("pixelDataType"))
 	return _r
 }
 
-// BytesPerRow descries how many bytes are in each image band row.
-func (x *ScannerBandData) BytesPerRow() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesPerRow"))
+// BytesPerRow returns descries how many bytes are in each image band row.
+func (sbd *ScannerBandData) BytesPerRow() int {
+	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("bytesPerRow"))
 	return _r
 }
 
 // DataStartRow describes the start row of the image band.
-func (x *ScannerBandData) DataStartRow() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataStartRow"))
+func (sbd *ScannerBandData) DataStartRow() int {
+	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("dataStartRow"))
 	return _r
 }
 
 // DataNumRows describes the number of rows contained in the image band.
-func (x *ScannerBandData) DataNumRows() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataNumRows"))
+func (sbd *ScannerBandData) DataNumRows() int {
+	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("dataNumRows"))
 	return _r
 }
 
 // DataSize describes the actual data size of the image band buffer.
-func (x *ScannerBandData) DataSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataSize"))
+func (sbd *ScannerBandData) DataSize() int {
+	_r := objc.Send[int](objref.IDOf(sbd), objc.RegisterName("dataSize"))
 	return _r
 }
-
-// ScannerBandDataable is the interface implemented by [ScannerBandData], for mocking and DI.
-type ScannerBandDataable interface {
-	obj.Object
-	FullImageWidth() int
-	FullImageHeight() int
-	BitsPerPixel() int
-	BitsPerComponent() int
-	NumComponents() int
-	IsBigEndian() bool
-	PixelDataType() ScannerPixelDataType
-	BytesPerRow() int
-	DataStartRow() int
-	DataNumRows() int
-	DataSize() int
-}
-
-var _ ScannerBandDataable = (*ScannerBandData)(nil)

@@ -53,47 +53,35 @@ func NewTextListElementWithParentElementTextListContentsMarkerAttributesChildEle
 	return textListElementAdopt(_id)
 }
 
-// WithTextContentManager the value that represents the current content manager.
-func (x *TextListElement) WithTextContentManager(textContentManager TextContentManagerProvider) *TextListElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContentManager:"), objref.IDOf(textContentManager))
-	return x
+// WithTextContentManager sets the value that represents the current content manager.
+func (tle *TextListElement) WithTextContentManager(textContentManager TextContentManagerProvider) *TextListElement {
+	objc.Send[objc.ID](objref.IDOf(tle), objc.RegisterName("setTextContentManager:"), objref.IDOf(textContentManager))
+	return tle
 }
 
-// WithElementRange a range value that represents the range of the element inside the document.
-func (x *TextListElement) WithElementRange(elementRange *TextRange) *TextListElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElementRange:"), objref.IDOf(elementRange))
-	return x
+// WithElementRange sets a range value that represents the range of the element inside the document.
+func (tle *TextListElement) WithElementRange(elementRange *TextRange) *TextListElement {
+	objc.Send[objc.ID](objref.IDOf(tle), objc.RegisterName("setElementRange:"), objref.IDOf(elementRange))
+	return tle
 }
 
 // TextList wraps the corresponding Objective-C method.
-func (x *TextListElement) TextList() *TextList {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textList"))
+func (tle *TextListElement) TextList() *TextList {
+	_r := objc.Send[objc.ID](objref.IDOf(tle), objc.RegisterName("textList"))
 	return TextListFromID(_r)
 }
 
 // Contents wraps the corresponding Objective-C method.
-func (x *TextListElement) Contents() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contents"))
+func (tle *TextListElement) Contents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tle), objc.RegisterName("contents"))
 	return obj.Wrap(_r)
 }
 
 // MarkerAttributes wraps the corresponding Objective-C method.
-func (x *TextListElement) MarkerAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markerAttributes"))
+func (tle *TextListElement) MarkerAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tle), objc.RegisterName("markerAttributes"))
 	return obj.Wrap(_r)
 }
-
-// TextListElementable is the interface implemented by [TextListElement], for mocking and DI.
-type TextListElementable interface {
-	obj.Object
-	WithTextContentManager(textContentManager TextContentManagerProvider) *TextListElement
-	WithElementRange(elementRange *TextRange) *TextListElement
-	TextList() *TextList
-	Contents() obj.Object
-	MarkerAttributes() obj.Object
-}
-
-var _ TextListElementable = (*TextListElement)(nil)
 
 var _ TextParagraphProvider = (*TextListElement)(nil)
 

@@ -46,24 +46,24 @@ func wKProcessPoolAdopt(id objc.ID) *WKProcessPool {
 }
 
 // Description returns the object's -description text.
-func (x *WKProcessPool) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wpp *WKProcessPool) Description() string {
+	return rt.Description(objref.IDOf(wpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKProcessPool) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wpp *WKProcessPool) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKProcessPool) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wpp *WKProcessPool) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKProcessPool) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wpp *WKProcessPool) String() string {
+	return rt.Description(objref.IDOf(wpp))
 }
 
 // NewWKProcessPool creates a new WKProcessPool.
@@ -71,10 +71,3 @@ func NewWKProcessPool() *WKProcessPool {
 	_id := objc.Send[objc.ID](objc.ID(_class("WKProcessPool")), objc.RegisterName("new"))
 	return wKProcessPoolAdopt(_id)
 }
-
-// WKProcessPoolable is the interface implemented by [WKProcessPool], for mocking and DI.
-type WKProcessPoolable interface {
-	obj.Object
-}
-
-var _ WKProcessPoolable = (*WKProcessPool)(nil)

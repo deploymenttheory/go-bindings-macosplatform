@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,18 +53,10 @@ func NewImageTranslationAlignmentObservation() *ImageTranslationAlignmentObserva
 }
 
 // AlignmentTransform wraps the corresponding Objective-C method.
-func (x *ImageTranslationAlignmentObservation) AlignmentTransform() corefoundation.CGAffineTransform {
-	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(x), objc.RegisterName("alignmentTransform"))
+func (itao *ImageTranslationAlignmentObservation) AlignmentTransform() corefoundation.CGAffineTransform {
+	_r := objc.Send[corefoundation.CGAffineTransform](objref.IDOf(itao), objc.RegisterName("alignmentTransform"))
 	return _r
 }
-
-// ImageTranslationAlignmentObservationable is the interface implemented by [ImageTranslationAlignmentObservation], for mocking and DI.
-type ImageTranslationAlignmentObservationable interface {
-	obj.Object
-	AlignmentTransform() corefoundation.CGAffineTransform
-}
-
-var _ ImageTranslationAlignmentObservationable = (*ImageTranslationAlignmentObservation)(nil)
 
 var _ ImageAlignmentObservationProvider = (*ImageTranslationAlignmentObservation)(nil)
 

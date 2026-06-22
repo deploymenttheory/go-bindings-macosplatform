@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,32 +51,22 @@ func NewPoolingLayer() *PoolingLayer {
 	return poolingLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *PoolingLayer) WithLabel(label string) *PoolingLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (pl *PoolingLayer) WithLabel(label string) *PoolingLayer {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return pl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *PoolingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *PoolingLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (pl *PoolingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *PoolingLayer {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return pl
 }
 
-// Descriptor the pooling descriptor
-func (x *PoolingLayer) Descriptor() *PoolingDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+// Descriptor returns the pooling descriptor
+func (pl *PoolingLayer) Descriptor() *PoolingDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("descriptor"))
 	return PoolingDescriptorFromID(_r)
 }
-
-// PoolingLayerable is the interface implemented by [PoolingLayer], for mocking and DI.
-type PoolingLayerable interface {
-	obj.Object
-	WithLabel(label string) *PoolingLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *PoolingLayer
-	Descriptor() *PoolingDescriptor
-}
-
-var _ PoolingLayerable = (*PoolingLayer)(nil)
 
 var _ LayerProvider = (*PoolingLayer)(nil)

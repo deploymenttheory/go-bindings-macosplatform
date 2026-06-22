@@ -46,24 +46,24 @@ func vertexDescriptorAdopt(id objc.ID) *VertexDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *VertexDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vd *VertexDescriptor) Description() string {
+	return rt.Description(objref.IDOf(vd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VertexDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vd *VertexDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VertexDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vd *VertexDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VertexDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vd *VertexDescriptor) String() string {
+	return rt.Description(objref.IDOf(vd))
 }
 
 // NewVertexDescriptor creates a new VertexDescriptor.
@@ -73,28 +73,18 @@ func NewVertexDescriptor() *VertexDescriptor {
 }
 
 // Reset resets the default state for the vertex descriptor.
-func (x *VertexDescriptor) Reset() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
+func (vd *VertexDescriptor) Reset() {
+	objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("reset"))
 }
 
 // Layouts wraps the corresponding Objective-C method.
-func (x *VertexDescriptor) Layouts() *VertexBufferLayoutDescriptorArray {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layouts"))
+func (vd *VertexDescriptor) Layouts() *VertexBufferLayoutDescriptorArray {
+	_r := objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("layouts"))
 	return VertexBufferLayoutDescriptorArrayFromID(_r)
 }
 
 // Attributes wraps the corresponding Objective-C method.
-func (x *VertexDescriptor) Attributes() *VertexAttributeDescriptorArray {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+func (vd *VertexDescriptor) Attributes() *VertexAttributeDescriptorArray {
+	_r := objc.Send[objc.ID](objref.IDOf(vd), objc.RegisterName("attributes"))
 	return VertexAttributeDescriptorArrayFromID(_r)
 }
-
-// VertexDescriptorable is the interface implemented by [VertexDescriptor], for mocking and DI.
-type VertexDescriptorable interface {
-	obj.Object
-	Reset()
-	Layouts() *VertexBufferLayoutDescriptorArray
-	Attributes() *VertexAttributeDescriptorArray
-}
-
-var _ VertexDescriptorable = (*VertexDescriptor)(nil)

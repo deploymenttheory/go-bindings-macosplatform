@@ -44,24 +44,24 @@ func mTRActivatedCarbonFilterMonitoringClusterReplacementProductStructAdopt(id o
 }
 
 // Description returns the object's -description text.
-func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (macfmcrps *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) Description() string {
+	return rt.Description(objref.IDOf(macfmcrps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (macfmcrps *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(macfmcrps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (macfmcrps *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(macfmcrps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (macfmcrps *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) String() string {
+	return rt.Description(objref.IDOf(macfmcrps))
 }
 
 // NewMTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct creates a new MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct.
@@ -71,51 +71,28 @@ func NewMTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct() *MTR
 }
 
 // WithProductIdentifierType sets the property and returns the receiver so calls can be chained.
-func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) WithProductIdentifierType(productIdentifierType obj.Object) *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifierType:"), objref.IDOf(productIdentifierType))
-	return x
+func (macfmcrps *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) WithProductIdentifierType(productIdentifierType obj.Object) *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct {
+	objc.Send[objc.ID](objref.IDOf(macfmcrps), objc.RegisterName("setProductIdentifierType:"), objref.IDOf(productIdentifierType))
+	return macfmcrps
 }
 
 // WithProductIdentifierValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) WithProductIdentifierValue(productIdentifierValue string) *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifierValue:"), purego.NSString(productIdentifierValue))
-	return x
+func (macfmcrps *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) WithProductIdentifierValue(productIdentifierValue string) *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct {
+	objc.Send[objc.ID](objref.IDOf(macfmcrps), objc.RegisterName("setProductIdentifierValue:"), purego.NSString(productIdentifierValue))
+	return macfmcrps
 }
 
 // ProductIdentifierType wraps the corresponding Objective-C method.
-func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) ProductIdentifierType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentifierType"))
+func (macfmcrps *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) ProductIdentifierType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(macfmcrps), objc.RegisterName("productIdentifierType"))
 	return obj.Wrap(_r)
 }
 
-// SetProductIdentifierType wraps the corresponding Objective-C method.
-func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) SetProductIdentifierType(productIdentifierType obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifierType:"), objref.IDOf(productIdentifierType))
-}
-
 // ProductIdentifierValue wraps the corresponding Objective-C method.
-func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) ProductIdentifierValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentifierValue"))
+func (macfmcrps *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) ProductIdentifierValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(macfmcrps), objc.RegisterName("productIdentifierValue"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetProductIdentifierValue wraps the corresponding Objective-C method.
-func (x *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct) SetProductIdentifierValue(productIdentifierValue string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifierValue:"), purego.NSString(productIdentifierValue))
-}
-
-// MTRActivatedCarbonFilterMonitoringClusterReplacementProductStructable is the interface implemented by [MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct], for mocking and DI.
-type MTRActivatedCarbonFilterMonitoringClusterReplacementProductStructable interface {
-	obj.Object
-	WithProductIdentifierType(productIdentifierType obj.Object) *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct
-	WithProductIdentifierValue(productIdentifierValue string) *MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct
-	ProductIdentifierType() obj.Object
-	SetProductIdentifierType(productIdentifierType obj.Object)
-	ProductIdentifierValue() string
-	SetProductIdentifierValue(productIdentifierValue string)
-}
-
-var _ MTRActivatedCarbonFilterMonitoringClusterReplacementProductStructable = (*MTRActivatedCarbonFilterMonitoringClusterReplacementProductStruct)(nil)

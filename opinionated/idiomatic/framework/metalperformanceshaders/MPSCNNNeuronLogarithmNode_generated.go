@@ -60,19 +60,11 @@ func NewCNNNeuronLogarithmNodeWithSource(sourceNode obj.Object) *CNNNeuronLogari
 	return cNNNeuronLogarithmNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNNeuronLogarithmNode) WithLabel(label string) *CNNNeuronLogarithmNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cnln *CNNNeuronLogarithmNode) WithLabel(label string) *CNNNeuronLogarithmNode {
+	objc.Send[objc.ID](objref.IDOf(cnln), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cnln
 }
-
-// CNNNeuronLogarithmNodeable is the interface implemented by [CNNNeuronLogarithmNode], for mocking and DI.
-type CNNNeuronLogarithmNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNNeuronLogarithmNode
-}
-
-var _ CNNNeuronLogarithmNodeable = (*CNNNeuronLogarithmNode)(nil)
 
 var _ CNNNeuronNodeProvider = (*CNNNeuronLogarithmNode)(nil)
 

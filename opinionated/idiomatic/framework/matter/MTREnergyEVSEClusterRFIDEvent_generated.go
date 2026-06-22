@@ -44,24 +44,24 @@ func mTREnergyEVSEClusterRFIDEventAdopt(id objc.ID) *MTREnergyEVSEClusterRFIDEve
 }
 
 // Description returns the object's -description text.
-func (x *MTREnergyEVSEClusterRFIDEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (meecre *MTREnergyEVSEClusterRFIDEvent) Description() string {
+	return rt.Description(objref.IDOf(meecre))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTREnergyEVSEClusterRFIDEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (meecre *MTREnergyEVSEClusterRFIDEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(meecre), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTREnergyEVSEClusterRFIDEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (meecre *MTREnergyEVSEClusterRFIDEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(meecre), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTREnergyEVSEClusterRFIDEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (meecre *MTREnergyEVSEClusterRFIDEvent) String() string {
+	return rt.Description(objref.IDOf(meecre))
 }
 
 // NewMTREnergyEVSEClusterRFIDEvent creates a new MTREnergyEVSEClusterRFIDEvent.
@@ -70,29 +70,14 @@ func NewMTREnergyEVSEClusterRFIDEvent() *MTREnergyEVSEClusterRFIDEvent {
 	return mTREnergyEVSEClusterRFIDEventAdopt(_id)
 }
 
-// WithUid sets the property and returns the receiver so calls can be chained.
-func (x *MTREnergyEVSEClusterRFIDEvent) WithUid(uid obj.Object) *MTREnergyEVSEClusterRFIDEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUid:"), objref.IDOf(uid))
-	return x
+// WithUID sets the property and returns the receiver so calls can be chained.
+func (meecre *MTREnergyEVSEClusterRFIDEvent) WithUID(uid obj.Object) *MTREnergyEVSEClusterRFIDEvent {
+	objc.Send[objc.ID](objref.IDOf(meecre), objc.RegisterName("setUid:"), objref.IDOf(uid))
+	return meecre
 }
 
-// Uid wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterRFIDEvent) Uid() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uid"))
+// UID wraps the corresponding Objective-C method.
+func (meecre *MTREnergyEVSEClusterRFIDEvent) UID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meecre), objc.RegisterName("uid"))
 	return obj.Wrap(_r)
 }
-
-// SetUid wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterRFIDEvent) SetUid(uid obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUid:"), objref.IDOf(uid))
-}
-
-// MTREnergyEVSEClusterRFIDEventable is the interface implemented by [MTREnergyEVSEClusterRFIDEvent], for mocking and DI.
-type MTREnergyEVSEClusterRFIDEventable interface {
-	obj.Object
-	WithUid(uid obj.Object) *MTREnergyEVSEClusterRFIDEvent
-	Uid() obj.Object
-	SetUid(uid obj.Object)
-}
-
-var _ MTREnergyEVSEClusterRFIDEventable = (*MTREnergyEVSEClusterRFIDEvent)(nil)

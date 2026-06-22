@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -63,7 +64,7 @@ func NewMTRClusterNetworkCommissioningWithDeviceEndpointQueue(device *MTRDevice,
 // ScanNetworksWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // ScanNetworksWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterNetworkCommissioning) ScanNetworksWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterScanNetworksParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterScanNetworksResponseParams, err error) {
+func (mcnc *MTRClusterNetworkCommissioning) ScanNetworksWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterScanNetworksParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterScanNetworksResponseParams, err error) {
 	type _result struct {
 		val *MTRNetworkCommissioningClusterScanNetworksResponseParams
 		err error
@@ -75,7 +76,7 @@ func (x *MTRClusterNetworkCommissioning) ScanNetworksWithParamsExpectedValuesExp
 		_o.val = MTRNetworkCommissioningClusterScanNetworksResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scanNetworksWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("scanNetworksWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -88,7 +89,7 @@ func (x *MTRClusterNetworkCommissioning) ScanNetworksWithParamsExpectedValuesExp
 // ScanNetworksWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // ScanNetworksWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterNetworkCommissioning) ScanNetworksWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterScanNetworksResponseParams, err error) {
+func (mcnc *MTRClusterNetworkCommissioning) ScanNetworksWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterScanNetworksResponseParams, err error) {
 	type _result struct {
 		val *MTRNetworkCommissioningClusterScanNetworksResponseParams
 		err error
@@ -100,7 +101,7 @@ func (x *MTRClusterNetworkCommissioning) ScanNetworksWithExpectedValuesExpectedV
 		_o.val = MTRNetworkCommissioningClusterScanNetworksResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scanNetworksWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("scanNetworksWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -113,7 +114,7 @@ func (x *MTRClusterNetworkCommissioning) ScanNetworksWithExpectedValuesExpectedV
 // AddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // AddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
+func (mcnc *MTRClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
 	type _result struct {
 		val *MTRNetworkCommissioningClusterNetworkConfigResponseParams
 		err error
@@ -125,7 +126,7 @@ func (x *MTRClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParamsExpecte
 		_o.val = MTRNetworkCommissioningClusterNetworkConfigResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOrUpdateWiFiNetworkWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("addOrUpdateWiFiNetworkWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -138,7 +139,7 @@ func (x *MTRClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParamsExpecte
 // AddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // AddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
+func (mcnc *MTRClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
 	type _result struct {
 		val *MTRNetworkCommissioningClusterNetworkConfigResponseParams
 		err error
@@ -150,7 +151,7 @@ func (x *MTRClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParamsExpec
 		_o.val = MTRNetworkCommissioningClusterNetworkConfigResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOrUpdateThreadNetworkWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("addOrUpdateThreadNetworkWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +164,7 @@ func (x *MTRClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParamsExpec
 // RemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // RemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterNetworkCommissioning) RemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterRemoveNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
+func (mcnc *MTRClusterNetworkCommissioning) RemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterRemoveNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
 	type _result struct {
 		val *MTRNetworkCommissioningClusterNetworkConfigResponseParams
 		err error
@@ -175,7 +176,7 @@ func (x *MTRClusterNetworkCommissioning) RemoveNetworkWithParamsExpectedValuesEx
 		_o.val = MTRNetworkCommissioningClusterNetworkConfigResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeNetworkWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("removeNetworkWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -188,7 +189,7 @@ func (x *MTRClusterNetworkCommissioning) RemoveNetworkWithParamsExpectedValuesEx
 // ConnectNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // ConnectNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterNetworkCommissioning) ConnectNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterConnectNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterConnectNetworkResponseParams, err error) {
+func (mcnc *MTRClusterNetworkCommissioning) ConnectNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterConnectNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterConnectNetworkResponseParams, err error) {
 	type _result struct {
 		val *MTRNetworkCommissioningClusterConnectNetworkResponseParams
 		err error
@@ -200,7 +201,7 @@ func (x *MTRClusterNetworkCommissioning) ConnectNetworkWithParamsExpectedValuesE
 		_o.val = MTRNetworkCommissioningClusterConnectNetworkResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectNetworkWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("connectNetworkWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -213,7 +214,7 @@ func (x *MTRClusterNetworkCommissioning) ConnectNetworkWithParamsExpectedValuesE
 // ReorderNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // ReorderNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterNetworkCommissioning) ReorderNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterReorderNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
+func (mcnc *MTRClusterNetworkCommissioning) ReorderNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterReorderNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
 	type _result struct {
 		val *MTRNetworkCommissioningClusterNetworkConfigResponseParams
 		err error
@@ -225,7 +226,7 @@ func (x *MTRClusterNetworkCommissioning) ReorderNetworkWithParamsExpectedValuesE
 		_o.val = MTRNetworkCommissioningClusterNetworkConfigResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reorderNetworkWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("reorderNetworkWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -236,115 +237,115 @@ func (x *MTRClusterNetworkCommissioning) ReorderNetworkWithParamsExpectedValuesE
 }
 
 // ReadAttributeMaxNetworksWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterNetworkCommissioning) ReadAttributeMaxNetworksWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxNetworksWithParams:"), objref.IDOf(params))
+func (mcnc *MTRClusterNetworkCommissioning) ReadAttributeMaxNetworksWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("readAttributeMaxNetworksWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeNetworksWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterNetworkCommissioning) ReadAttributeNetworksWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNetworksWithParams:"), objref.IDOf(params))
+func (mcnc *MTRClusterNetworkCommissioning) ReadAttributeNetworksWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("readAttributeNetworksWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeScanMaxTimeSecondsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterNetworkCommissioning) ReadAttributeScanMaxTimeSecondsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeScanMaxTimeSecondsWithParams:"), objref.IDOf(params))
+func (mcnc *MTRClusterNetworkCommissioning) ReadAttributeScanMaxTimeSecondsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("readAttributeScanMaxTimeSecondsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeConnectMaxTimeSecondsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterNetworkCommissioning) ReadAttributeConnectMaxTimeSecondsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeConnectMaxTimeSecondsWithParams:"), objref.IDOf(params))
+func (mcnc *MTRClusterNetworkCommissioning) ReadAttributeConnectMaxTimeSecondsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("readAttributeConnectMaxTimeSecondsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeInterfaceEnabledWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterNetworkCommissioning) ReadAttributeInterfaceEnabledWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInterfaceEnabledWithParams:"), objref.IDOf(params))
+func (mcnc *MTRClusterNetworkCommissioning) ReadAttributeInterfaceEnabledWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("readAttributeInterfaceEnabledWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeInterfaceEnabledWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterNetworkCommissioning) WriteAttributeInterfaceEnabledWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInterfaceEnabledWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcnc *MTRClusterNetworkCommissioning) WriteAttributeInterfaceEnabledWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("writeAttributeInterfaceEnabledWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeInterfaceEnabledWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterNetworkCommissioning) WriteAttributeInterfaceEnabledWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInterfaceEnabledWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcnc *MTRClusterNetworkCommissioning) WriteAttributeInterfaceEnabledWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("writeAttributeInterfaceEnabledWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeLastNetworkingStatusWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterNetworkCommissioning) ReadAttributeLastNetworkingStatusWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLastNetworkingStatusWithParams:"), objref.IDOf(params))
+func (mcnc *MTRClusterNetworkCommissioning) ReadAttributeLastNetworkingStatusWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("readAttributeLastNetworkingStatusWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeLastNetworkIDWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterNetworkCommissioning) ReadAttributeLastNetworkIDWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLastNetworkIDWithParams:"), objref.IDOf(params))
+func (mcnc *MTRClusterNetworkCommissioning) ReadAttributeLastNetworkIDWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("readAttributeLastNetworkIDWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeLastConnectErrorValueWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterNetworkCommissioning) ReadAttributeLastConnectErrorValueWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLastConnectErrorValueWithParams:"), objref.IDOf(params))
+func (mcnc *MTRClusterNetworkCommissioning) ReadAttributeLastConnectErrorValueWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("readAttributeLastConnectErrorValueWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeSupportedWiFiBandsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterNetworkCommissioning) ReadAttributeSupportedWiFiBandsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedWiFiBandsWithParams:"), objref.IDOf(params))
+func (mcnc *MTRClusterNetworkCommissioning) ReadAttributeSupportedWiFiBandsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("readAttributeSupportedWiFiBandsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeSupportedThreadFeaturesWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterNetworkCommissioning) ReadAttributeSupportedThreadFeaturesWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedThreadFeaturesWithParams:"), objref.IDOf(params))
+func (mcnc *MTRClusterNetworkCommissioning) ReadAttributeSupportedThreadFeaturesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("readAttributeSupportedThreadFeaturesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeThreadVersionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterNetworkCommissioning) ReadAttributeThreadVersionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeThreadVersionWithParams:"), objref.IDOf(params))
+func (mcnc *MTRClusterNetworkCommissioning) ReadAttributeThreadVersionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("readAttributeThreadVersionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterNetworkCommissioning) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mcnc *MTRClusterNetworkCommissioning) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterNetworkCommissioning) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mcnc *MTRClusterNetworkCommissioning) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterNetworkCommissioning) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mcnc *MTRClusterNetworkCommissioning) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterNetworkCommissioning) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mcnc *MTRClusterNetworkCommissioning) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterNetworkCommissioning) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mcnc *MTRClusterNetworkCommissioning) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ScanNetworksWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // ScanNetworksWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterNetworkCommissioning) ScanNetworksWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRNetworkCommissioningClusterScanNetworksParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterScanNetworksResponseParams, err error) {
+func (mcnc *MTRClusterNetworkCommissioning) ScanNetworksWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRNetworkCommissioningClusterScanNetworksParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterScanNetworksResponseParams, err error) {
 	type _result struct {
 		val *MTRNetworkCommissioningClusterScanNetworksResponseParams
 		err error
@@ -356,7 +357,7 @@ func (x *MTRClusterNetworkCommissioning) ScanNetworksWithParamsExpectedValuesExp
 		_o.val = MTRNetworkCommissioningClusterScanNetworksResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scanNetworksWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("scanNetworksWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -369,7 +370,7 @@ func (x *MTRClusterNetworkCommissioning) ScanNetworksWithParamsExpectedValuesExp
 // AddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // AddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
+func (mcnc *MTRClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
 	type _result struct {
 		val *MTRNetworkCommissioningClusterNetworkConfigResponseParams
 		err error
@@ -381,7 +382,7 @@ func (x *MTRClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParamsExpecte
 		_o.val = MTRNetworkCommissioningClusterNetworkConfigResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOrUpdateWiFiNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("addOrUpdateWiFiNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -394,7 +395,7 @@ func (x *MTRClusterNetworkCommissioning) AddOrUpdateWiFiNetworkWithParamsExpecte
 // AddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // AddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
+func (mcnc *MTRClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
 	type _result struct {
 		val *MTRNetworkCommissioningClusterNetworkConfigResponseParams
 		err error
@@ -406,7 +407,7 @@ func (x *MTRClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParamsExpec
 		_o.val = MTRNetworkCommissioningClusterNetworkConfigResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOrUpdateThreadNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("addOrUpdateThreadNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -419,7 +420,7 @@ func (x *MTRClusterNetworkCommissioning) AddOrUpdateThreadNetworkWithParamsExpec
 // RemoveNetworkWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // RemoveNetworkWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterNetworkCommissioning) RemoveNetworkWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRNetworkCommissioningClusterRemoveNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
+func (mcnc *MTRClusterNetworkCommissioning) RemoveNetworkWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRNetworkCommissioningClusterRemoveNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
 	type _result struct {
 		val *MTRNetworkCommissioningClusterNetworkConfigResponseParams
 		err error
@@ -431,7 +432,7 @@ func (x *MTRClusterNetworkCommissioning) RemoveNetworkWithParamsExpectedValuesEx
 		_o.val = MTRNetworkCommissioningClusterNetworkConfigResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("removeNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -444,7 +445,7 @@ func (x *MTRClusterNetworkCommissioning) RemoveNetworkWithParamsExpectedValuesEx
 // ConnectNetworkWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // ConnectNetworkWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterNetworkCommissioning) ConnectNetworkWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRNetworkCommissioningClusterConnectNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterConnectNetworkResponseParams, err error) {
+func (mcnc *MTRClusterNetworkCommissioning) ConnectNetworkWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRNetworkCommissioningClusterConnectNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterConnectNetworkResponseParams, err error) {
 	type _result struct {
 		val *MTRNetworkCommissioningClusterConnectNetworkResponseParams
 		err error
@@ -456,7 +457,7 @@ func (x *MTRClusterNetworkCommissioning) ConnectNetworkWithParamsExpectedValuesE
 		_o.val = MTRNetworkCommissioningClusterConnectNetworkResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("connectNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -469,7 +470,7 @@ func (x *MTRClusterNetworkCommissioning) ConnectNetworkWithParamsExpectedValuesE
 // ReorderNetworkWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // ReorderNetworkWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterNetworkCommissioning) ReorderNetworkWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRNetworkCommissioningClusterReorderNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
+func (mcnc *MTRClusterNetworkCommissioning) ReorderNetworkWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRNetworkCommissioningClusterReorderNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRNetworkCommissioningClusterNetworkConfigResponseParams, err error) {
 	type _result struct {
 		val *MTRNetworkCommissioningClusterNetworkConfigResponseParams
 		err error
@@ -481,7 +482,7 @@ func (x *MTRClusterNetworkCommissioning) ReorderNetworkWithParamsExpectedValuesE
 		_o.val = MTRNetworkCommissioningClusterNetworkConfigResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reorderNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcnc), objc.RegisterName("reorderNetworkWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -490,44 +491,6 @@ func (x *MTRClusterNetworkCommissioning) ReorderNetworkWithParamsExpectedValuesE
 		return _zero, ctx.Err()
 	}
 }
-
-// MTRClusterNetworkCommissioningable is the interface implemented by [MTRClusterNetworkCommissioning], for mocking and DI.
-type MTRClusterNetworkCommissioningable interface {
-	obj.Object
-	ScanNetworksWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterScanNetworksParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRNetworkCommissioningClusterScanNetworksResponseParams, error)
-	ScanNetworksWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRNetworkCommissioningClusterScanNetworksResponseParams, error)
-	AddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRNetworkCommissioningClusterNetworkConfigResponseParams, error)
-	AddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRNetworkCommissioningClusterNetworkConfigResponseParams, error)
-	RemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterRemoveNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRNetworkCommissioningClusterNetworkConfigResponseParams, error)
-	ConnectNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterConnectNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRNetworkCommissioningClusterConnectNetworkResponseParams, error)
-	ReorderNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRNetworkCommissioningClusterReorderNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRNetworkCommissioningClusterNetworkConfigResponseParams, error)
-	ReadAttributeMaxNetworksWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeNetworksWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeScanMaxTimeSecondsWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeConnectMaxTimeSecondsWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeInterfaceEnabledWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeInterfaceEnabledWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeInterfaceEnabledWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeLastNetworkingStatusWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeLastNetworkIDWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeLastConnectErrorValueWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeSupportedWiFiBandsWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeSupportedThreadFeaturesWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeThreadVersionWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-	ScanNetworksWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRNetworkCommissioningClusterScanNetworksParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRNetworkCommissioningClusterScanNetworksResponseParams, error)
-	AddOrUpdateWiFiNetworkWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateWiFiNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRNetworkCommissioningClusterNetworkConfigResponseParams, error)
-	AddOrUpdateThreadNetworkWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRNetworkCommissioningClusterAddOrUpdateThreadNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRNetworkCommissioningClusterNetworkConfigResponseParams, error)
-	RemoveNetworkWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRNetworkCommissioningClusterRemoveNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRNetworkCommissioningClusterNetworkConfigResponseParams, error)
-	ConnectNetworkWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRNetworkCommissioningClusterConnectNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRNetworkCommissioningClusterConnectNetworkResponseParams, error)
-	ReorderNetworkWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRNetworkCommissioningClusterReorderNetworkParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRNetworkCommissioningClusterNetworkConfigResponseParams, error)
-}
-
-var _ MTRClusterNetworkCommissioningable = (*MTRClusterNetworkCommissioning)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterNetworkCommissioning)(nil)
 

@@ -48,24 +48,24 @@ func controllerAdopt(id objc.ID) *Controller {
 }
 
 // Description returns the object's -description text.
-func (x *Controller) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Controller) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Controller) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Controller) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Controller) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Controller) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Controller) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Controller) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewControllerWithCoder creates a new Controller.
@@ -76,35 +76,25 @@ func NewControllerWithCoder(coder obj.Object) *Controller {
 }
 
 // DiscardEditing discards any pending changes by registered editors.
-func (x *Controller) DiscardEditing() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discardEditing"))
+func (c *Controller) DiscardEditing() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("discardEditing"))
 }
 
-// CommitEditing attempts to commit any pending edits.
-func (x *Controller) CommitEditing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("commitEditing"))
+// CommitEditing reports whether attempts to commit any pending edits.
+func (c *Controller) CommitEditing() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("commitEditing"))
 	return _r
 }
 
 // IsEditing wraps the corresponding Objective-C method.
-func (x *Controller) IsEditing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditing"))
+func (c *Controller) IsEditing() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isEditing"))
 	return _r
 }
-
-// Controllerable is the interface implemented by [Controller], for mocking and DI.
-type Controllerable interface {
-	obj.Object
-	DiscardEditing()
-	CommitEditing() bool
-	IsEditing() bool
-}
-
-var _ Controllerable = (*Controller)(nil)
 
 // isController marks Controller — and, by embedding promotion, its
 // subclasses — as a member of the Controller hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Controller) isController() {}
+func (c *Controller) isController() {}
 
 var _ ControllerProvider = (*Controller)(nil)

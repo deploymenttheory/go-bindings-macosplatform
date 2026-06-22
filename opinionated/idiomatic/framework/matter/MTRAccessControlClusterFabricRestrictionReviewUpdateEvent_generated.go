@@ -44,24 +44,24 @@ func mTRAccessControlClusterFabricRestrictionReviewUpdateEventAdopt(id objc.ID) 
 }
 
 // Description returns the object's -description text.
-func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Description() string {
+	return rt.Description(objref.IDOf(maccfrrue))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(maccfrrue), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(maccfrrue), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) String() string {
+	return rt.Description(objref.IDOf(maccfrrue))
 }
 
 // NewMTRAccessControlClusterFabricRestrictionReviewUpdateEvent creates a new MTRAccessControlClusterFabricRestrictionReviewUpdateEvent.
@@ -71,71 +71,40 @@ func NewMTRAccessControlClusterFabricRestrictionReviewUpdateEvent() *MTRAccessCo
 }
 
 // WithToken sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) WithToken(token obj.Object) *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToken:"), objref.IDOf(token))
-	return x
+func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) WithToken(token obj.Object) *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent {
+	objc.Send[objc.ID](objref.IDOf(maccfrrue), objc.RegisterName("setToken:"), objref.IDOf(token))
+	return maccfrrue
 }
 
 // WithInstruction sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) WithInstruction(instruction string) *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstruction:"), purego.NSString(instruction))
-	return x
+func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) WithInstruction(instruction string) *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent {
+	objc.Send[objc.ID](objref.IDOf(maccfrrue), objc.RegisterName("setInstruction:"), purego.NSString(instruction))
+	return maccfrrue
 }
 
 // WithFabricIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-	return x
+func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent {
+	objc.Send[objc.ID](objref.IDOf(maccfrrue), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return maccfrrue
 }
 
 // Token wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Token() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("token"))
+func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Token() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccfrrue), objc.RegisterName("token"))
 	return obj.Wrap(_r)
 }
 
-// SetToken wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) SetToken(token obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToken:"), objref.IDOf(token))
-}
-
 // Instruction wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Instruction() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instruction"))
+func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) Instruction() string {
+	_r := objc.Send[objc.ID](objref.IDOf(maccfrrue), objc.RegisterName("instruction"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetInstruction wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) SetInstruction(instruction string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstruction:"), purego.NSString(instruction))
-}
-
 // FabricIndex wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) FabricIndex() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+func (maccfrrue *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccfrrue), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
-
-// SetFabricIndex wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent) SetFabricIndex(fabricIndex obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-}
-
-// MTRAccessControlClusterFabricRestrictionReviewUpdateEventable is the interface implemented by [MTRAccessControlClusterFabricRestrictionReviewUpdateEvent], for mocking and DI.
-type MTRAccessControlClusterFabricRestrictionReviewUpdateEventable interface {
-	obj.Object
-	WithToken(token obj.Object) *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent
-	WithInstruction(instruction string) *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent
-	WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterFabricRestrictionReviewUpdateEvent
-	Token() obj.Object
-	SetToken(token obj.Object)
-	Instruction() string
-	SetInstruction(instruction string)
-	FabricIndex() obj.Object
-	SetFabricIndex(fabricIndex obj.Object)
-}
-
-var _ MTRAccessControlClusterFabricRestrictionReviewUpdateEventable = (*MTRAccessControlClusterFabricRestrictionReviewUpdateEvent)(nil)

@@ -5,12 +5,13 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // DataDetector is an idiomatic wrapper over the Objective-C class NSDataDetector.
@@ -60,24 +61,15 @@ func NewDataDetectorWithTypesError(checkingTypes uint64) (result *DataDetector, 
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *DataDetector) WithScriptingProperties(scriptingProperties obj.Object) *DataDetector {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (dd *DataDetector) WithScriptingProperties(scriptingProperties obj.Object) *DataDetector {
+	objc.Send[objc.ID](objref.IDOf(dd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return dd
 }
 
 // CheckingTypes wraps the corresponding Objective-C method.
-func (x *DataDetector) CheckingTypes() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("checkingTypes"))
+func (dd *DataDetector) CheckingTypes() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(dd), objc.RegisterName("checkingTypes"))
 	return _r
 }
-
-// DataDetectorable is the interface implemented by [DataDetector], for mocking and DI.
-type DataDetectorable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *DataDetector
-	CheckingTypes() uint64
-}
-
-var _ DataDetectorable = (*DataDetector)(nil)
 
 var _ RegularExpressionProvider = (*DataDetector)(nil)

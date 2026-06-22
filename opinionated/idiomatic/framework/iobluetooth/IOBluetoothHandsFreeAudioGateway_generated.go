@@ -53,76 +53,59 @@ func NewIOBluetoothHandsFreeAudioGatewayWithDeviceDelegate(device *IOBluetoothDe
 	return iOBluetoothHandsFreeAudioGatewayAdopt(_id)
 }
 
-// WithSupportedFeatures set the supported features
-func (x *IOBluetoothHandsFreeAudioGateway) WithSupportedFeatures(supportedFeatures uint32) *IOBluetoothHandsFreeAudioGateway {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedFeatures:"), supportedFeatures)
-	return x
+// WithSupportedFeatures sets set the supported features
+func (ibhfag *IOBluetoothHandsFreeAudioGateway) WithSupportedFeatures(supportedFeatures uint32) *IOBluetoothHandsFreeAudioGateway {
+	objc.Send[objc.ID](objref.IDOf(ibhfag), objc.RegisterName("setSupportedFeatures:"), supportedFeatures)
+	return ibhfag
 }
 
-// WithInputVolume return the input volume
-func (x *IOBluetoothHandsFreeAudioGateway) WithInputVolume(inputVolume float32) *IOBluetoothHandsFreeAudioGateway {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputVolume:"), inputVolume)
-	return x
+// WithInputVolume sets return the input volume
+func (ibhfag *IOBluetoothHandsFreeAudioGateway) WithInputVolume(inputVolume float32) *IOBluetoothHandsFreeAudioGateway {
+	objc.Send[objc.ID](objref.IDOf(ibhfag), objc.RegisterName("setInputVolume:"), inputVolume)
+	return ibhfag
 }
 
-// WithInputMuted return the input mute state.
-func (x *IOBluetoothHandsFreeAudioGateway) WithInputMuted(inputMuted bool) *IOBluetoothHandsFreeAudioGateway {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputMuted:"), inputMuted)
-	return x
+// WithInputMuted sets return the input mute state.
+func (ibhfag *IOBluetoothHandsFreeAudioGateway) WithInputMuted(inputMuted bool) *IOBluetoothHandsFreeAudioGateway {
+	objc.Send[objc.ID](objref.IDOf(ibhfag), objc.RegisterName("setInputMuted:"), inputMuted)
+	return ibhfag
 }
 
-// WithOutputVolume return the output volume
-func (x *IOBluetoothHandsFreeAudioGateway) WithOutputVolume(outputVolume float32) *IOBluetoothHandsFreeAudioGateway {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputVolume:"), outputVolume)
-	return x
+// WithOutputVolume sets return the output volume
+func (ibhfag *IOBluetoothHandsFreeAudioGateway) WithOutputVolume(outputVolume float32) *IOBluetoothHandsFreeAudioGateway {
+	objc.Send[objc.ID](objref.IDOf(ibhfag), objc.RegisterName("setOutputVolume:"), outputVolume)
+	return ibhfag
 }
 
-// WithOutputMuted return the output mute state.
-func (x *IOBluetoothHandsFreeAudioGateway) WithOutputMuted(outputMuted bool) *IOBluetoothHandsFreeAudioGateway {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputMuted:"), outputMuted)
-	return x
+// WithOutputMuted sets return the output mute state.
+func (ibhfag *IOBluetoothHandsFreeAudioGateway) WithOutputMuted(outputMuted bool) *IOBluetoothHandsFreeAudioGateway {
+	objc.Send[objc.ID](objref.IDOf(ibhfag), objc.RegisterName("setOutputMuted:"), outputMuted)
+	return ibhfag
 }
 
 // CreateIndicatorMinMaxCurrentValue sends a request to the Bluetooth device to show or update a status indicator.
-func (x *IOBluetoothHandsFreeAudioGateway) CreateIndicatorMinMaxCurrentValue(indicatorName string, minValue int, maxValue int, currentValue int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createIndicator:min:max:currentValue:"), purego.NSString(indicatorName), minValue, maxValue, currentValue)
+func (ibhfag *IOBluetoothHandsFreeAudioGateway) CreateIndicatorMinMaxCurrentValue(indicatorName string, minValue int, maxValue int, currentValue int) {
+	objc.Send[objc.ID](objref.IDOf(ibhfag), objc.RegisterName("createIndicator:min:max:currentValue:"), purego.NSString(indicatorName), minValue, maxValue, currentValue)
 }
 
 // ProcessATCommand processes a command from a connected Bluetooth hands-free phone or headset.
-func (x *IOBluetoothHandsFreeAudioGateway) ProcessATCommand(atCommand string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processATCommand:"), purego.NSString(atCommand))
+func (ibhfag *IOBluetoothHandsFreeAudioGateway) ProcessATCommand(atCommand string) {
+	objc.Send[objc.ID](objref.IDOf(ibhfag), objc.RegisterName("processATCommand:"), purego.NSString(atCommand))
 }
 
 // SendOKResponse sends a success message to a connected Bluetooth hands-free phone or headset.
-func (x *IOBluetoothHandsFreeAudioGateway) SendOKResponse() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendOKResponse"))
+func (ibhfag *IOBluetoothHandsFreeAudioGateway) SendOKResponse() {
+	objc.Send[objc.ID](objref.IDOf(ibhfag), objc.RegisterName("sendOKResponse"))
 }
 
 // SendResponse sends data followed by a success message to a connected Bluetooth hands-free phone or headset.
-func (x *IOBluetoothHandsFreeAudioGateway) SendResponse(response string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendResponse:"), purego.NSString(response))
+func (ibhfag *IOBluetoothHandsFreeAudioGateway) SendResponse(response string) {
+	objc.Send[objc.ID](objref.IDOf(ibhfag), objc.RegisterName("sendResponse:"), purego.NSString(response))
 }
 
 // SendResponseWithOK sends data followed by an optional success message to a connected Bluetooth hands-free phone or headset.
-func (x *IOBluetoothHandsFreeAudioGateway) SendResponseWithOK(response string, withOK bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendResponse:withOK:"), purego.NSString(response), withOK)
+func (ibhfag *IOBluetoothHandsFreeAudioGateway) SendResponseWithOK(response string, withOK bool) {
+	objc.Send[objc.ID](objref.IDOf(ibhfag), objc.RegisterName("sendResponse:withOK:"), purego.NSString(response), withOK)
 }
-
-// IOBluetoothHandsFreeAudioGatewayable is the interface implemented by [IOBluetoothHandsFreeAudioGateway], for mocking and DI.
-type IOBluetoothHandsFreeAudioGatewayable interface {
-	obj.Object
-	WithSupportedFeatures(supportedFeatures uint32) *IOBluetoothHandsFreeAudioGateway
-	WithInputVolume(inputVolume float32) *IOBluetoothHandsFreeAudioGateway
-	WithInputMuted(inputMuted bool) *IOBluetoothHandsFreeAudioGateway
-	WithOutputVolume(outputVolume float32) *IOBluetoothHandsFreeAudioGateway
-	WithOutputMuted(outputMuted bool) *IOBluetoothHandsFreeAudioGateway
-	CreateIndicatorMinMaxCurrentValue(indicatorName string, minValue int, maxValue int, currentValue int)
-	ProcessATCommand(atCommand string)
-	SendOKResponse()
-	SendResponse(response string)
-	SendResponseWithOK(response string, withOK bool)
-}
-
-var _ IOBluetoothHandsFreeAudioGatewayable = (*IOBluetoothHandsFreeAudioGateway)(nil)
 
 var _ IOBluetoothHandsFreeProvider = (*IOBluetoothHandsFreeAudioGateway)(nil)

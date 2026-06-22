@@ -7,7 +7,6 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,34 +52,24 @@ func NewMultiPolygonWithPolygons(polygons []*Polygon) *MultiPolygon {
 	return multiPolygonAdopt(_id)
 }
 
-// WithTitle the title of the shape annotation.
-func (x *MultiPolygon) WithTitle(title string) *MultiPolygon {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title of the shape annotation.
+func (mp *MultiPolygon) WithTitle(title string) *MultiPolygon {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return mp
 }
 
-// WithSubtitle the subtitle of the shape annotation.
-func (x *MultiPolygon) WithSubtitle(subtitle string) *MultiPolygon {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-	return x
+// WithSubtitle sets the subtitle of the shape annotation.
+func (mp *MultiPolygon) WithSubtitle(subtitle string) *MultiPolygon {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	return mp
 }
 
 // Polygons wraps the corresponding Objective-C method.
 //
 // Polygons returns the collection as a Go slice.
-func (x *MultiPolygon) Polygons() []*Polygon {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("polygons"))
+func (mp *MultiPolygon) Polygons() []*Polygon {
+	_arr := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("polygons"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Polygon { return PolygonFromID(_id) })
 }
-
-// MultiPolygonable is the interface implemented by [MultiPolygon], for mocking and DI.
-type MultiPolygonable interface {
-	obj.Object
-	WithTitle(title string) *MultiPolygon
-	WithSubtitle(subtitle string) *MultiPolygon
-	Polygons() []*Polygon
-}
-
-var _ MultiPolygonable = (*MultiPolygon)(nil)
 
 var _ ShapeProvider = (*MultiPolygon)(nil)

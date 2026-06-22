@@ -46,24 +46,24 @@ func portraitEffectsMatteAdopt(id objc.ID) *PortraitEffectsMatte {
 }
 
 // Description returns the object's -description text.
-func (x *PortraitEffectsMatte) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pem *PortraitEffectsMatte) Description() string {
+	return rt.Description(objref.IDOf(pem))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PortraitEffectsMatte) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pem *PortraitEffectsMatte) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pem), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PortraitEffectsMatte) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pem *PortraitEffectsMatte) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pem), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PortraitEffectsMatte) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pem *PortraitEffectsMatte) String() string {
+	return rt.Description(objref.IDOf(pem))
 }
 
 // NewPortraitEffectsMatte creates a new PortraitEffectsMatte.
@@ -73,22 +73,13 @@ func NewPortraitEffectsMatte() *PortraitEffectsMatte {
 }
 
 // DictionaryRepresentationForAuxiliaryDataType a dictionary of primitive map information used for writing an image file with a portrait effects matte.
-func (x *PortraitEffectsMatte) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentationForAuxiliaryDataType:"), purego.NSString(outAuxDataType))
+func (pem *PortraitEffectsMatte) DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pem), objc.RegisterName("dictionaryRepresentationForAuxiliaryDataType:"), purego.NSString(outAuxDataType))
 	return obj.Wrap(_r)
 }
 
 // PixelFormatType specifies the pixel format type of this object's internal matting image. Currently the only supported CV pixel format type for the matting image is kCVPixelFormatType_OneComponent8.
-func (x *PortraitEffectsMatte) PixelFormatType() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelFormatType"))
+func (pem *PortraitEffectsMatte) PixelFormatType() int {
+	_r := objc.Send[int](objref.IDOf(pem), objc.RegisterName("pixelFormatType"))
 	return _r
 }
-
-// PortraitEffectsMatteable is the interface implemented by [PortraitEffectsMatte], for mocking and DI.
-type PortraitEffectsMatteable interface {
-	obj.Object
-	DictionaryRepresentationForAuxiliaryDataType(outAuxDataType string) obj.Object
-	PixelFormatType() int
-}
-
-var _ PortraitEffectsMatteable = (*PortraitEffectsMatte)(nil)

@@ -44,24 +44,24 @@ func mTRPumpConfigurationAndControlClusterPumpBlockedEventAdopt(id objc.ID) *MTR
 }
 
 // Description returns the object's -description text.
-func (x *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccpbe *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) Description() string {
+	return rt.Description(objref.IDOf(mpcaccpbe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpcaccpbe *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpcaccpbe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpcaccpbe *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpcaccpbe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccpbe *MTRPumpConfigurationAndControlClusterPumpBlockedEvent) String() string {
+	return rt.Description(objref.IDOf(mpcaccpbe))
 }
 
 // NewMTRPumpConfigurationAndControlClusterPumpBlockedEvent creates a new MTRPumpConfigurationAndControlClusterPumpBlockedEvent.
@@ -69,10 +69,3 @@ func NewMTRPumpConfigurationAndControlClusterPumpBlockedEvent() *MTRPumpConfigur
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterPumpBlockedEvent")), objc.RegisterName("new"))
 	return mTRPumpConfigurationAndControlClusterPumpBlockedEventAdopt(_id)
 }
-
-// MTRPumpConfigurationAndControlClusterPumpBlockedEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterPumpBlockedEvent], for mocking and DI.
-type MTRPumpConfigurationAndControlClusterPumpBlockedEventable interface {
-	obj.Object
-}
-
-var _ MTRPumpConfigurationAndControlClusterPumpBlockedEventable = (*MTRPumpConfigurationAndControlClusterPumpBlockedEvent)(nil)

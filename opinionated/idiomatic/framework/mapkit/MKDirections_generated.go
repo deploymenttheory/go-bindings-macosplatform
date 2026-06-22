@@ -46,24 +46,24 @@ func directionsAdopt(id objc.ID) *Directions {
 }
 
 // Description returns the object's -description text.
-func (x *Directions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Directions) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Directions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Directions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Directions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Directions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Directions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Directions) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // NewDirectionsWithRequest creates and returns a directions object using the specified request.
@@ -74,21 +74,12 @@ func NewDirectionsWithRequest(request *DirectionsRequest) *Directions {
 }
 
 // Cancel cancels a pending request.
-func (x *Directions) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (d *Directions) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("cancel"))
 }
 
 // IsCalculating wraps the corresponding Objective-C method.
-func (x *Directions) IsCalculating() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCalculating"))
+func (d *Directions) IsCalculating() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isCalculating"))
 	return _r
 }
-
-// Directionsable is the interface implemented by [Directions], for mocking and DI.
-type Directionsable interface {
-	obj.Object
-	Cancel()
-	IsCalculating() bool
-}
-
-var _ Directionsable = (*Directions)(nil)

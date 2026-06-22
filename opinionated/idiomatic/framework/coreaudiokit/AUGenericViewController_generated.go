@@ -44,24 +44,24 @@ func aUGenericViewControllerAdopt(id objc.ID) *AUGenericViewController {
 }
 
 // Description returns the object's -description text.
-func (x *AUGenericViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (agvc *AUGenericViewController) Description() string {
+	return rt.Description(objref.IDOf(agvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AUGenericViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (agvc *AUGenericViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(agvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AUGenericViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (agvc *AUGenericViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(agvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AUGenericViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (agvc *AUGenericViewController) String() string {
+	return rt.Description(objref.IDOf(agvc))
 }
 
 // NewAUGenericViewController creates a new AUGenericViewController.
@@ -71,28 +71,13 @@ func NewAUGenericViewController() *AUGenericViewController {
 }
 
 // WithAuAudioUnit sets the property and returns the receiver so calls can be chained.
-func (x *AUGenericViewController) WithAuAudioUnit(auAudioUnit obj.Object) *AUGenericViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuAudioUnit:"), objref.IDOf(auAudioUnit))
-	return x
+func (agvc *AUGenericViewController) WithAuAudioUnit(auAudioUnit obj.Object) *AUGenericViewController {
+	objc.Send[objc.ID](objref.IDOf(agvc), objc.RegisterName("setAuAudioUnit:"), objref.IDOf(auAudioUnit))
+	return agvc
 }
 
 // AuAudioUnit wraps the corresponding Objective-C method.
-func (x *AUGenericViewController) AuAudioUnit() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("auAudioUnit"))
+func (agvc *AUGenericViewController) AuAudioUnit() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(agvc), objc.RegisterName("auAudioUnit"))
 	return obj.Wrap(_r)
 }
-
-// SetAuAudioUnit wraps the corresponding Objective-C method.
-func (x *AUGenericViewController) SetAuAudioUnit(auAudioUnit obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuAudioUnit:"), objref.IDOf(auAudioUnit))
-}
-
-// AUGenericViewControllerable is the interface implemented by [AUGenericViewController], for mocking and DI.
-type AUGenericViewControllerable interface {
-	obj.Object
-	WithAuAudioUnit(auAudioUnit obj.Object) *AUGenericViewController
-	AuAudioUnit() obj.Object
-	SetAuAudioUnit(auAudioUnit obj.Object)
-}
-
-var _ AUGenericViewControllerable = (*AUGenericViewController)(nil)

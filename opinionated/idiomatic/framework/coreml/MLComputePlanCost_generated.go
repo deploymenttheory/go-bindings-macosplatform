@@ -46,24 +46,24 @@ func computePlanCostAdopt(id objc.ID) *ComputePlanCost {
 }
 
 // Description returns the object's -description text.
-func (x *ComputePlanCost) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cpc *ComputePlanCost) Description() string {
+	return rt.Description(objref.IDOf(cpc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ComputePlanCost) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cpc *ComputePlanCost) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cpc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ComputePlanCost) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cpc *ComputePlanCost) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cpc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ComputePlanCost) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cpc *ComputePlanCost) String() string {
+	return rt.Description(objref.IDOf(cpc))
 }
 
 // NewComputePlanCost creates a new ComputePlanCost.
@@ -73,15 +73,7 @@ func NewComputePlanCost() *ComputePlanCost {
 }
 
 // Weight wraps the corresponding Objective-C method.
-func (x *ComputePlanCost) Weight() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("weight"))
+func (cpc *ComputePlanCost) Weight() float64 {
+	_r := objc.Send[float64](objref.IDOf(cpc), objc.RegisterName("weight"))
 	return _r
 }
-
-// ComputePlanCostable is the interface implemented by [ComputePlanCost], for mocking and DI.
-type ComputePlanCostable interface {
-	obj.Object
-	Weight() float64
-}
-
-var _ ComputePlanCostable = (*ComputePlanCost)(nil)

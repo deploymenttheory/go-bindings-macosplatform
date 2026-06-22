@@ -44,24 +44,24 @@ func mTRServerClusterAdopt(id objc.ID) *MTRServerCluster {
 }
 
 // Description returns the object's -description text.
-func (x *MTRServerCluster) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (msc *MTRServerCluster) Description() string {
+	return rt.Description(objref.IDOf(msc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRServerCluster) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (msc *MTRServerCluster) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(msc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRServerCluster) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (msc *MTRServerCluster) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(msc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRServerCluster) String() string {
-	return rt.Description(objref.IDOf(x))
+func (msc *MTRServerCluster) String() string {
+	return rt.Description(objref.IDOf(msc))
 }
 
 // NewMTRServerClusterWithClusterIDRevision the provided clusterID must not be MTRClusterIDTypeDescriptorID; see newDescriptorCluster. Otherwise, it must be a valid cluster identifier.  That means: * In the range 0-0x7FFF for standard clusters. * In the range 0xVVVVFC00-0xVVVVFFFE for vendor-specific clusters, where VVVV is the vendor identifier. The provided revision must be in the range 1-65535.
@@ -72,59 +72,45 @@ func NewMTRServerClusterWithClusterIDRevision(clusterID obj.Object, revision obj
 }
 
 // AddAccessGrant add an access grant to the cluster.  If the same access grant is added multiple times, it will be treated as if it were added once (and removing it once will remove it).
-func (x *MTRServerCluster) AddAccessGrant(accessGrant *MTRAccessGrant) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAccessGrant:"), objref.IDOf(accessGrant))
+func (msc *MTRServerCluster) AddAccessGrant(accessGrant *MTRAccessGrant) {
+	objc.Send[objc.ID](objref.IDOf(msc), objc.RegisterName("addAccessGrant:"), objref.IDOf(accessGrant))
 }
 
 // RemoveAccessGrant remove an access grant from the cluster.
-func (x *MTRServerCluster) RemoveAccessGrant(accessGrant *MTRAccessGrant) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAccessGrant:"), objref.IDOf(accessGrant))
+func (msc *MTRServerCluster) RemoveAccessGrant(accessGrant *MTRAccessGrant) {
+	objc.Send[objc.ID](objref.IDOf(msc), objc.RegisterName("removeAccessGrant:"), objref.IDOf(accessGrant))
 }
 
 // AddAttribute add an attribute to the cluster.  This can only be done before the endpoint the cluster is a part of has been added to a controller. The attribute must not have the same attribute ID as another attribute in this cluster. The attribute must not already be added to another cluster. If this cluster is the Descriptor cluster (id MTRClusterIDTypeDescriptorID), it must not define any values for DeviceTypeList, ServerList, ClientList, PartsList; those values will be determined automatically. For all clusters, the global AttributeList, AcceptedCommandList, GeneratedCommandList attributes will be determined automatically and must not be included in the attributes added on the cluster. For all clusters, the FeatureMap attribute will be assumed to be 0 unless otherwise specified and may be omitted from the attributes added to the cluster. For all clusters, ClusterRevision will be determined automatically based on this object's clusterRevision property, and must not be explicitly added to the cluster.
-func (x *MTRServerCluster) AddAttribute(attribute *MTRServerAttribute) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addAttribute:"), objref.IDOf(attribute))
+func (msc *MTRServerCluster) AddAttribute(attribute *MTRServerAttribute) bool {
+	_r := objc.Send[bool](objref.IDOf(msc), objc.RegisterName("addAttribute:"), objref.IDOf(attribute))
 	return _r
 }
 
 // ClusterID wraps the corresponding Objective-C method.
-func (x *MTRServerCluster) ClusterID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clusterID"))
+func (msc *MTRServerCluster) ClusterID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msc), objc.RegisterName("clusterID"))
 	return obj.Wrap(_r)
 }
 
 // ClusterRevision wraps the corresponding Objective-C method.
-func (x *MTRServerCluster) ClusterRevision() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clusterRevision"))
+func (msc *MTRServerCluster) ClusterRevision() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msc), objc.RegisterName("clusterRevision"))
 	return obj.Wrap(_r)
 }
 
-// AccessGrants the list of entities that are allowed to access this cluster instance.  This list is in addition to any endpoint-wide access grants that exist. Defaults to empty list, which means no additional access grants.
+// AccessGrants returns the list of entities that are allowed to access this cluster instance.  This list is in addition to any endpoint-wide access grants that exist. Defaults to empty list, which means no additional access grants.
 //
 // AccessGrants returns the collection as a Go slice.
-func (x *MTRServerCluster) AccessGrants() []*MTRAccessGrant {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessGrants"))
+func (msc *MTRServerCluster) AccessGrants() []*MTRAccessGrant {
+	_arr := objc.Send[objc.ID](objref.IDOf(msc), objc.RegisterName("accessGrants"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRAccessGrant { return MTRAccessGrantFromID(_id) })
 }
 
-// Attributes the list of attributes supported by the cluster.
+// Attributes returns the list of attributes supported by the cluster.
 //
 // Attributes returns the collection as a Go slice.
-func (x *MTRServerCluster) Attributes() []*MTRServerAttribute {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+func (msc *MTRServerCluster) Attributes() []*MTRServerAttribute {
+	_arr := objc.Send[objc.ID](objref.IDOf(msc), objc.RegisterName("attributes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MTRServerAttribute { return MTRServerAttributeFromID(_id) })
 }
-
-// MTRServerClusterable is the interface implemented by [MTRServerCluster], for mocking and DI.
-type MTRServerClusterable interface {
-	obj.Object
-	AddAccessGrant(accessGrant *MTRAccessGrant)
-	RemoveAccessGrant(accessGrant *MTRAccessGrant)
-	AddAttribute(attribute *MTRServerAttribute) bool
-	ClusterID() obj.Object
-	ClusterRevision() obj.Object
-	AccessGrants() []*MTRAccessGrant
-	Attributes() []*MTRServerAttribute
-}
-
-var _ MTRServerClusterable = (*MTRServerCluster)(nil)

@@ -48,36 +48,29 @@ func bootLoaderAdopt(id objc.ID) *BootLoader {
 }
 
 // Description returns the object's -description text.
-func (x *BootLoader) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bl *BootLoader) Description() string {
+	return rt.Description(objref.IDOf(bl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BootLoader) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bl *BootLoader) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BootLoader) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bl *BootLoader) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BootLoader) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bl *BootLoader) String() string {
+	return rt.Description(objref.IDOf(bl))
 }
-
-// BootLoaderable is the interface implemented by [BootLoader], for mocking and DI.
-type BootLoaderable interface {
-	obj.Object
-}
-
-var _ BootLoaderable = (*BootLoader)(nil)
 
 // isBootLoader marks BootLoader — and, by embedding promotion, its
 // subclasses — as a member of the BootLoader hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *BootLoader) isBootLoader() {}
+func (bl *BootLoader) isBootLoader() {}
 
 var _ BootLoaderProvider = (*BootLoader)(nil)

@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,39 +50,28 @@ func NewDOMComment() *DOMComment {
 }
 
 // WithData sets the property and returns the receiver so calls can be chained.
-func (x *DOMComment) WithData(data string) *DOMComment {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
-	return x
+func (dc *DOMComment) WithData(data string) *DOMComment {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setData:"), purego.NSString(data))
+	return dc
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMComment) WithNodeValue(nodeValue string) *DOMComment {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (dc *DOMComment) WithNodeValue(nodeValue string) *DOMComment {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return dc
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMComment) WithPrefix(prefix string) *DOMComment {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (dc *DOMComment) WithPrefix(prefix string) *DOMComment {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return dc
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMComment) WithTextContent(textContent string) *DOMComment {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (dc *DOMComment) WithTextContent(textContent string) *DOMComment {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return dc
 }
-
-// DOMCommentable is the interface implemented by [DOMComment], for mocking and DI.
-type DOMCommentable interface {
-	obj.Object
-	WithData(data string) *DOMComment
-	WithNodeValue(nodeValue string) *DOMComment
-	WithPrefix(prefix string) *DOMComment
-	WithTextContent(textContent string) *DOMComment
-}
-
-var _ DOMCommentable = (*DOMComment)(nil)
 
 var _ DOMCharacterDataProvider = (*DOMComment)(nil)
 

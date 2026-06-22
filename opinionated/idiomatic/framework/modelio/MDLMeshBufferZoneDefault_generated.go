@@ -46,24 +46,24 @@ func meshBufferZoneDefaultAdopt(id objc.ID) *MeshBufferZoneDefault {
 }
 
 // Description returns the object's -description text.
-func (x *MeshBufferZoneDefault) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbzd *MeshBufferZoneDefault) Description() string {
+	return rt.Description(objref.IDOf(mbzd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MeshBufferZoneDefault) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbzd *MeshBufferZoneDefault) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbzd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MeshBufferZoneDefault) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbzd *MeshBufferZoneDefault) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbzd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MeshBufferZoneDefault) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbzd *MeshBufferZoneDefault) String() string {
+	return rt.Description(objref.IDOf(mbzd))
 }
 
 // NewMeshBufferZoneDefault creates a new MeshBufferZoneDefault.
@@ -73,15 +73,7 @@ func NewMeshBufferZoneDefault() *MeshBufferZoneDefault {
 }
 
 // Capacity wraps the corresponding Objective-C method.
-func (x *MeshBufferZoneDefault) Capacity() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("capacity"))
+func (mbzd *MeshBufferZoneDefault) Capacity() int {
+	_r := objc.Send[int](objref.IDOf(mbzd), objc.RegisterName("capacity"))
 	return _r
 }
-
-// MeshBufferZoneDefaultable is the interface implemented by [MeshBufferZoneDefault], for mocking and DI.
-type MeshBufferZoneDefaultable interface {
-	obj.Object
-	Capacity() int
-}
-
-var _ MeshBufferZoneDefaultable = (*MeshBufferZoneDefault)(nil)

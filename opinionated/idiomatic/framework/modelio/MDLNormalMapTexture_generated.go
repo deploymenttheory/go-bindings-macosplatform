@@ -7,7 +7,6 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,25 +52,16 @@ func NewNormalMapTextureByGeneratingNormalMapWithTextureNameSmoothnessContrast(s
 	return normalMapTextureAdopt(_id)
 }
 
-// WithIsCube a Boolean value that indicates whether the texture is a cube textures.
-func (x *NormalMapTexture) WithIsCube(isCube bool) *NormalMapTexture {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCube:"), isCube)
-	return x
+// WithIsCube sets a Boolean value that indicates whether the texture is a cube textures.
+func (nmt *NormalMapTexture) WithIsCube(isCube bool) *NormalMapTexture {
+	objc.Send[objc.ID](objref.IDOf(nmt), objc.RegisterName("setIsCube:"), isCube)
+	return nmt
 }
 
-// WithHasAlphaValues hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
-func (x *NormalMapTexture) WithHasAlphaValues(hasAlphaValues bool) *NormalMapTexture {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
-	return x
+// WithHasAlphaValues sets hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
+func (nmt *NormalMapTexture) WithHasAlphaValues(hasAlphaValues bool) *NormalMapTexture {
+	objc.Send[objc.ID](objref.IDOf(nmt), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
+	return nmt
 }
-
-// NormalMapTextureable is the interface implemented by [NormalMapTexture], for mocking and DI.
-type NormalMapTextureable interface {
-	obj.Object
-	WithIsCube(isCube bool) *NormalMapTexture
-	WithHasAlphaValues(hasAlphaValues bool) *NormalMapTexture
-}
-
-var _ NormalMapTextureable = (*NormalMapTexture)(nil)
 
 var _ TextureProvider = (*NormalMapTexture)(nil)

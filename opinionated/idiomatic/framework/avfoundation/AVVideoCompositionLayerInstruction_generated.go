@@ -48,36 +48,29 @@ func videoCompositionLayerInstructionAdopt(id objc.ID) *VideoCompositionLayerIns
 }
 
 // Description returns the object's -description text.
-func (x *VideoCompositionLayerInstruction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vcli *VideoCompositionLayerInstruction) Description() string {
+	return rt.Description(objref.IDOf(vcli))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VideoCompositionLayerInstruction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vcli *VideoCompositionLayerInstruction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vcli), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VideoCompositionLayerInstruction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vcli *VideoCompositionLayerInstruction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vcli), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VideoCompositionLayerInstruction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vcli *VideoCompositionLayerInstruction) String() string {
+	return rt.Description(objref.IDOf(vcli))
 }
-
-// VideoCompositionLayerInstructionable is the interface implemented by [VideoCompositionLayerInstruction], for mocking and DI.
-type VideoCompositionLayerInstructionable interface {
-	obj.Object
-}
-
-var _ VideoCompositionLayerInstructionable = (*VideoCompositionLayerInstruction)(nil)
 
 // isVideoCompositionLayerInstruction marks VideoCompositionLayerInstruction — and, by embedding promotion, its
 // subclasses — as a member of the VideoCompositionLayerInstruction hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *VideoCompositionLayerInstruction) isVideoCompositionLayerInstruction() {}
+func (vcli *VideoCompositionLayerInstruction) isVideoCompositionLayerInstruction() {}
 
 var _ VideoCompositionLayerInstructionProvider = (*VideoCompositionLayerInstruction)(nil)

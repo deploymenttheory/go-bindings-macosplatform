@@ -46,24 +46,24 @@ func octreeAdopt(id objc.ID) *Octree {
 }
 
 // Description returns the object's -description text.
-func (x *Octree) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Octree) Description() string {
+	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Octree) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (o *Octree) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Octree) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (o *Octree) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Octree) String() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Octree) String() string {
+	return rt.Description(objref.IDOf(o))
 }
 
 // NewOctree creates a new Octree.
@@ -73,22 +73,13 @@ func NewOctree() *Octree {
 }
 
 // RemoveElement searches for the specified object and removes it from the tree.
-func (x *Octree) RemoveElement(element obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeElement:"), objref.IDOf(element))
+func (o *Octree) RemoveElement(element obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("removeElement:"), objref.IDOf(element))
 	return _r
 }
 
 // RemoveElementWithNode removes the specified object from the tree, using a reference to its containing node.
-func (x *Octree) RemoveElementWithNode(element obj.Object, node *OctreeNode) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeElement:withNode:"), objref.IDOf(element), objref.IDOf(node))
+func (o *Octree) RemoveElementWithNode(element obj.Object, node *OctreeNode) bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("removeElement:withNode:"), objref.IDOf(element), objref.IDOf(node))
 	return _r
 }
-
-// Octreeable is the interface implemented by [Octree], for mocking and DI.
-type Octreeable interface {
-	obj.Object
-	RemoveElement(element obj.Object) bool
-	RemoveElementWithNode(element obj.Object, node *OctreeNode) bool
-}
-
-var _ Octreeable = (*Octree)(nil)

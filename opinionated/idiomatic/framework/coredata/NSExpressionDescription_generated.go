@@ -52,114 +52,82 @@ func NewExpressionDescription() *ExpressionDescription {
 	return expressionDescriptionAdopt(_id)
 }
 
-// WithExpression the expression to evaluate.
-func (x *ExpressionDescription) WithExpression(expression obj.Object) *ExpressionDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpression:"), objref.IDOf(expression))
-	return x
+// WithExpression sets the expression to evaluate.
+func (ed *ExpressionDescription) WithExpression(expression obj.Object) *ExpressionDescription {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setExpression:"), objref.IDOf(expression))
+	return ed
 }
 
-// WithExpressionResultType the attribute type of the expression’s result.
-func (x *ExpressionDescription) WithExpressionResultType(expressionResultType AttributeType) *ExpressionDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpressionResultType:"), expressionResultType)
-	return x
+// WithExpressionResultType sets the attribute type of the expression’s result.
+func (ed *ExpressionDescription) WithExpressionResultType(expressionResultType AttributeType) *ExpressionDescription {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setExpressionResultType:"), expressionResultType)
+	return ed
 }
 
-// WithName the name of the receiver.
-func (x *ExpressionDescription) WithName(name string) *ExpressionDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the receiver.
+func (ed *ExpressionDescription) WithName(name string) *ExpressionDescription {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setName:"), purego.NSString(name))
+	return ed
 }
 
-// WithOptional a Boolean value that indicates whether the receiver is optional.
-func (x *ExpressionDescription) WithOptional(optional bool) *ExpressionDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptional:"), optional)
-	return x
+// WithOptional sets a Boolean value that indicates whether the receiver is optional.
+func (ed *ExpressionDescription) WithOptional(optional bool) *ExpressionDescription {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setOptional:"), optional)
+	return ed
 }
 
-// WithTransient a Boolean value that indicates whether the receiver is transient.
-func (x *ExpressionDescription) WithTransient(transient bool) *ExpressionDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransient:"), transient)
-	return x
+// WithTransient sets a Boolean value that indicates whether the receiver is transient.
+func (ed *ExpressionDescription) WithTransient(transient bool) *ExpressionDescription {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setTransient:"), transient)
+	return ed
 }
 
-// WithUserInfo the user info dictionary of the receiver.
-func (x *ExpressionDescription) WithUserInfo(userInfo obj.Object) *ExpressionDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
-	return x
+// WithUserInfo sets the user info dictionary of the receiver.
+func (ed *ExpressionDescription) WithUserInfo(userInfo obj.Object) *ExpressionDescription {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
+	return ed
 }
 
-// WithIndexed a Boolean value that indicates whether the receiver should be indexed for searching.
-func (x *ExpressionDescription) WithIndexed(indexed bool) *ExpressionDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexed:"), indexed)
-	return x
+// WithIndexed sets a Boolean value that indicates whether the receiver should be indexed for searching.
+func (ed *ExpressionDescription) WithIndexed(indexed bool) *ExpressionDescription {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setIndexed:"), indexed)
+	return ed
 }
 
-// WithVersionHashModifier the version hash modifier for the receiver.
-func (x *ExpressionDescription) WithVersionHashModifier(versionHashModifier string) *ExpressionDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
-	return x
+// WithVersionHashModifier sets the version hash modifier for the receiver.
+func (ed *ExpressionDescription) WithVersionHashModifier(versionHashModifier string) *ExpressionDescription {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setVersionHashModifier:"), purego.NSString(versionHashModifier))
+	return ed
 }
 
-// WithIndexedBySpotlight a Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
-func (x *ExpressionDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *ExpressionDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexedBySpotlight:"), indexedBySpotlight)
-	return x
+// WithIndexedBySpotlight sets a Boolean value that indicates whether Core Data adds the property’s value to the Core Spotlight index.
+func (ed *ExpressionDescription) WithIndexedBySpotlight(indexedBySpotlight bool) *ExpressionDescription {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setIndexedBySpotlight:"), indexedBySpotlight)
+	return ed
 }
 
-// WithStoredInExternalRecord a Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
-func (x *ExpressionDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *ExpressionDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoredInExternalRecord:"), storedInExternalRecord)
-	return x
+// WithStoredInExternalRecord sets a Boolean value that indicates whether to write the property’s data in an external record file that corresponds to the managed object.
+func (ed *ExpressionDescription) WithStoredInExternalRecord(storedInExternalRecord bool) *ExpressionDescription {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setStoredInExternalRecord:"), storedInExternalRecord)
+	return ed
 }
 
-// WithRenamingIdentifier the renaming identifier for the receiver.
-func (x *ExpressionDescription) WithRenamingIdentifier(renamingIdentifier string) *ExpressionDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
-	return x
+// WithRenamingIdentifier sets the renaming identifier for the receiver.
+func (ed *ExpressionDescription) WithRenamingIdentifier(renamingIdentifier string) *ExpressionDescription {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("setRenamingIdentifier:"), purego.NSString(renamingIdentifier))
+	return ed
 }
 
 // Expression wraps the corresponding Objective-C method.
-func (x *ExpressionDescription) Expression() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expression"))
+func (ed *ExpressionDescription) Expression() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("expression"))
 	return obj.Wrap(_r)
 }
 
-// SetExpression wraps the corresponding Objective-C method.
-func (x *ExpressionDescription) SetExpression(expression obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpression:"), objref.IDOf(expression))
-}
-
 // ExpressionResultType wraps the corresponding Objective-C method.
-func (x *ExpressionDescription) ExpressionResultType() AttributeType {
-	_r := objc.Send[AttributeType](objref.IDOf(x), objc.RegisterName("expressionResultType"))
+func (ed *ExpressionDescription) ExpressionResultType() AttributeType {
+	_r := objc.Send[AttributeType](objref.IDOf(ed), objc.RegisterName("expressionResultType"))
 	return _r
 }
-
-// SetExpressionResultType wraps the corresponding Objective-C method.
-func (x *ExpressionDescription) SetExpressionResultType(expressionResultType AttributeType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExpressionResultType:"), expressionResultType)
-}
-
-// ExpressionDescriptionable is the interface implemented by [ExpressionDescription], for mocking and DI.
-type ExpressionDescriptionable interface {
-	obj.Object
-	WithExpression(expression obj.Object) *ExpressionDescription
-	WithExpressionResultType(expressionResultType AttributeType) *ExpressionDescription
-	WithName(name string) *ExpressionDescription
-	WithOptional(optional bool) *ExpressionDescription
-	WithTransient(transient bool) *ExpressionDescription
-	WithUserInfo(userInfo obj.Object) *ExpressionDescription
-	WithIndexed(indexed bool) *ExpressionDescription
-	WithVersionHashModifier(versionHashModifier string) *ExpressionDescription
-	WithIndexedBySpotlight(indexedBySpotlight bool) *ExpressionDescription
-	WithStoredInExternalRecord(storedInExternalRecord bool) *ExpressionDescription
-	WithRenamingIdentifier(renamingIdentifier string) *ExpressionDescription
-	Expression() obj.Object
-	SetExpression(expression obj.Object)
-	ExpressionResultType() AttributeType
-	SetExpressionResultType(expressionResultType AttributeType)
-}
-
-var _ ExpressionDescriptionable = (*ExpressionDescription)(nil)
 
 var _ PropertyDescriptionProvider = (*ExpressionDescription)(nil)

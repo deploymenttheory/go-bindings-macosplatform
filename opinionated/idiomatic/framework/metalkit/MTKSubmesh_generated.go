@@ -46,24 +46,24 @@ func submeshAdopt(id objc.ID) *Submesh {
 }
 
 // Description returns the object's -description text.
-func (x *Submesh) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Submesh) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Submesh) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Submesh) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Submesh) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Submesh) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Submesh) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Submesh) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewSubmesh creates a new Submesh.
@@ -72,53 +72,35 @@ func NewSubmesh() *Submesh {
 	return submeshAdopt(_id)
 }
 
-// WithName the name of the submesh.
-func (x *Submesh) WithName(name string) *Submesh {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the submesh.
+func (s *Submesh) WithName(name string) *Submesh {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setName:"), purego.NSString(name))
+	return s
 }
 
-// IndexBuffer indexBuffer (including indexCount) to render the object. The MTLBuffer to use for indexBuffer parameter in a [MTLRenderCommandEncoder drawIndexedPrimitives] call.
-func (x *Submesh) IndexBuffer() *MeshBuffer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexBuffer"))
+// IndexBuffer returns indexBuffer (including indexCount) to render the object. The MTLBuffer to use for indexBuffer parameter in a [MTLRenderCommandEncoder drawIndexedPrimitives] call.
+func (s *Submesh) IndexBuffer() *MeshBuffer {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("indexBuffer"))
 	return MeshBufferFromID(_r)
 }
 
-// IndexCount number of indicies in indexBuffer. Value to use for indexCount parameter in a [MTLRenderCommandEncoder drawIndexedPrimitives] call.
-func (x *Submesh) IndexCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexCount"))
+// IndexCount returns number of indicies in indexBuffer. Value to use for indexCount parameter in a [MTLRenderCommandEncoder drawIndexedPrimitives] call.
+func (s *Submesh) IndexCount() int {
+	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("indexCount"))
 	return _r
 }
 
-// Mesh parent MTKMesh object containing vertex data of this object. The buffer of this parent mesh should be set in the encoder before a drawIndexedPrimitives call is made.
-func (x *Submesh) Mesh() *Mesh {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mesh"))
+// Mesh returns parent MTKMesh object containing vertex data of this object. The buffer of this parent mesh should be set in the encoder before a drawIndexedPrimitives call is made.
+func (s *Submesh) Mesh() *Mesh {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("mesh"))
 	return MeshFromID(_r)
 }
 
-// Name name from the original MDLSubmesh object. Although not directly used by this object, the application may use this to identify the submesh in the renderer/scene/world.
-func (x *Submesh) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns name from the original MDLSubmesh object. Although not directly used by this object, the application may use this to identify the submesh in the renderer/scene/world.
+func (s *Submesh) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetName wraps the corresponding Objective-C method.
-func (x *Submesh) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// Submeshable is the interface implemented by [Submesh], for mocking and DI.
-type Submeshable interface {
-	obj.Object
-	WithName(name string) *Submesh
-	IndexBuffer() *MeshBuffer
-	IndexCount() int
-	Mesh() *Mesh
-	Name() string
-	SetName(name string)
-}
-
-var _ Submeshable = (*Submesh)(nil)

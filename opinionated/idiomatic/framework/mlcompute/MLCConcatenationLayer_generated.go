@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,32 +51,22 @@ func NewConcatenationLayer() *ConcatenationLayer {
 	return concatenationLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *ConcatenationLayer) WithLabel(label string) *ConcatenationLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (cl *ConcatenationLayer) WithLabel(label string) *ConcatenationLayer {
+	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *ConcatenationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ConcatenationLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (cl *ConcatenationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ConcatenationLayer {
+	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return cl
 }
 
-// Dimension the dimension (or axis) along which to concatenate tensors The default value is 1 (which typically represents features channels)
-func (x *ConcatenationLayer) Dimension() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimension"))
+// Dimension returns the dimension (or axis) along which to concatenate tensors The default value is 1 (which typically represents features channels)
+func (cl *ConcatenationLayer) Dimension() int {
+	_r := objc.Send[int](objref.IDOf(cl), objc.RegisterName("dimension"))
 	return _r
 }
-
-// ConcatenationLayerable is the interface implemented by [ConcatenationLayer], for mocking and DI.
-type ConcatenationLayerable interface {
-	obj.Object
-	WithLabel(label string) *ConcatenationLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ConcatenationLayer
-	Dimension() int
-}
-
-var _ ConcatenationLayerable = (*ConcatenationLayer)(nil)
 
 var _ LayerProvider = (*ConcatenationLayer)(nil)

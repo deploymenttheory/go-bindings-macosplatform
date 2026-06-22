@@ -46,24 +46,24 @@ func projectSectionAdopt(id objc.ID) *ProjectSection {
 }
 
 // Description returns the object's -description text.
-func (x *ProjectSection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ps *ProjectSection) Description() string {
+	return rt.Description(objref.IDOf(ps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ProjectSection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ps *ProjectSection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ProjectSection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ps *ProjectSection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ProjectSection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ps *ProjectSection) String() string {
+	return rt.Description(objref.IDOf(ps))
 }
 
 // NewProjectSection creates a new ProjectSection.
@@ -72,35 +72,25 @@ func NewProjectSection() *ProjectSection {
 	return projectSectionAdopt(_id)
 }
 
-// SectionContents array containing one or more PHProjectSectionContent objects. Ordered by number of elements from least to most. Projects should only present one level of content to the user at a time as assets will be reused within individual content objects.
+// SectionContents returns array containing one or more PHProjectSectionContent objects. Ordered by number of elements from least to most. Projects should only present one level of content to the user at a time as assets will be reused within individual content objects.
 //
 // SectionContents returns the collection as a Go slice.
-func (x *ProjectSection) SectionContents() []*ProjectSectionContent {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sectionContents"))
+func (ps *ProjectSection) SectionContents() []*ProjectSectionContent {
+	_arr := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("sectionContents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ProjectSectionContent { return ProjectSectionContentFromID(_id) })
 }
 
-// SectionType the intended usage of the section (e.g., cover, content, auxiliary)
-func (x *ProjectSection) SectionType() ProjectSectionType {
-	_r := objc.Send[ProjectSectionType](objref.IDOf(x), objc.RegisterName("sectionType"))
+// SectionType returns the intended usage of the section (e.g., cover, content, auxiliary)
+func (ps *ProjectSection) SectionType() ProjectSectionType {
+	_r := objc.Send[ProjectSectionType](objref.IDOf(ps), objc.RegisterName("sectionType"))
 	return _r
 }
 
-// Title title for the section (e.g., a Moment name or a general geographical location), might be an empty string.
-func (x *ProjectSection) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+// Title returns title for the section (e.g., a Moment name or a general geographical location), might be an empty string.
+func (ps *ProjectSection) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ProjectSectionable is the interface implemented by [ProjectSection], for mocking and DI.
-type ProjectSectionable interface {
-	obj.Object
-	SectionContents() []*ProjectSectionContent
-	SectionType() ProjectSectionType
-	Title() string
-}
-
-var _ ProjectSectionable = (*ProjectSection)(nil)

@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,39 +50,28 @@ func NewDOMHTMLCollection() *DOMHTMLCollection {
 }
 
 // Item wraps the corresponding Objective-C method.
-func (x *DOMHTMLCollection) Item(index int) *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
+func (dc *DOMHTMLCollection) Item(index int) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("item:"), index)
 	return DOMNodeFromID(_r)
 }
 
 // NamedItem wraps the corresponding Objective-C method.
-func (x *DOMHTMLCollection) NamedItem(name string) *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("namedItem:"), purego.NSString(name))
+func (dc *DOMHTMLCollection) NamedItem(name string) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("namedItem:"), purego.NSString(name))
 	return DOMNodeFromID(_r)
 }
 
 // Tags wraps the corresponding Objective-C method.
-func (x *DOMHTMLCollection) Tags(name string) *DOMNodeList {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tags:"), purego.NSString(name))
+func (dc *DOMHTMLCollection) Tags(name string) *DOMNodeList {
+	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("tags:"), purego.NSString(name))
 	return DOMNodeListFromID(_r)
 }
 
 // Length wraps the corresponding Objective-C method.
-func (x *DOMHTMLCollection) Length() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+func (dc *DOMHTMLCollection) Length() int {
+	_r := objc.Send[int](objref.IDOf(dc), objc.RegisterName("length"))
 	return _r
 }
-
-// DOMHTMLCollectionable is the interface implemented by [DOMHTMLCollection], for mocking and DI.
-type DOMHTMLCollectionable interface {
-	obj.Object
-	Item(index int) *DOMNode
-	NamedItem(name string) *DOMNode
-	Tags(name string) *DOMNodeList
-	Length() int
-}
-
-var _ DOMHTMLCollectionable = (*DOMHTMLCollection)(nil)
 
 var _ DOMObjectProvider = (*DOMHTMLCollection)(nil)
 

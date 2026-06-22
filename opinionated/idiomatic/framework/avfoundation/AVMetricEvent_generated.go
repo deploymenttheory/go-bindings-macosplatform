@@ -48,53 +48,44 @@ func metricEventAdopt(id objc.ID) *MetricEvent {
 }
 
 // Description returns the object's -description text.
-func (x *MetricEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (me *MetricEvent) Description() string {
+	return rt.Description(objref.IDOf(me))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetricEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (me *MetricEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(me), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetricEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (me *MetricEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(me), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MetricEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (me *MetricEvent) String() string {
+	return rt.Description(objref.IDOf(me))
 }
 
 // Date returns the date when the event occurred.
-func (x *MetricEvent) Date() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+func (me *MetricEvent) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
-// SessionID a GUID that identifies the media session. If not available, value is nil.
-func (x *MetricEvent) SessionID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionID"))
+// SessionID returns a GUID that identifies the media session. If not available, value is nil.
+func (me *MetricEvent) SessionID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(me), objc.RegisterName("sessionID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// MetricEventable is the interface implemented by [MetricEvent], for mocking and DI.
-type MetricEventable interface {
-	obj.Object
-	Date() obj.Object
-	SessionID() string
-}
-
-var _ MetricEventable = (*MetricEvent)(nil)
-
 // isMetricEvent marks MetricEvent — and, by embedding promotion, its
 // subclasses — as a member of the MetricEvent hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MetricEvent) isMetricEvent() {}
+func (me *MetricEvent) isMetricEvent() {}
 
 var _ MetricEventProvider = (*MetricEvent)(nil)

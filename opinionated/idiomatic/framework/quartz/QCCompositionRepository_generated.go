@@ -46,24 +46,24 @@ func qCCompositionRepositoryAdopt(id objc.ID) *QCCompositionRepository {
 }
 
 // Description returns the object's -description text.
-func (x *QCCompositionRepository) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (qcr *QCCompositionRepository) Description() string {
+	return rt.Description(objref.IDOf(qcr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QCCompositionRepository) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (qcr *QCCompositionRepository) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(qcr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QCCompositionRepository) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (qcr *QCCompositionRepository) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(qcr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *QCCompositionRepository) String() string {
-	return rt.Description(objref.IDOf(x))
+func (qcr *QCCompositionRepository) String() string {
+	return rt.Description(objref.IDOf(qcr))
 }
 
 // NewQCCompositionRepository creates a new QCCompositionRepository.
@@ -73,29 +73,19 @@ func NewQCCompositionRepository() *QCCompositionRepository {
 }
 
 // CompositionWithIdentifier returns the composition that corresponds to the identifier.
-func (x *QCCompositionRepository) CompositionWithIdentifier(identifier string) *QCComposition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionWithIdentifier:"), purego.NSString(identifier))
+func (qcr *QCCompositionRepository) CompositionWithIdentifier(identifier string) *QCComposition {
+	_r := objc.Send[objc.ID](objref.IDOf(qcr), objc.RegisterName("compositionWithIdentifier:"), purego.NSString(identifier))
 	return QCCompositionFromID(_r)
 }
 
 // CompositionsWithProtocolsAndAttributes returns an array of compositions that match a set of criteria.
-func (x *QCCompositionRepository) CompositionsWithProtocolsAndAttributes(protocols obj.Object, attributes obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compositionsWithProtocols:andAttributes:"), objref.IDOf(protocols), objref.IDOf(attributes))
+func (qcr *QCCompositionRepository) CompositionsWithProtocolsAndAttributes(protocols obj.Object, attributes obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qcr), objc.RegisterName("compositionsWithProtocols:andAttributes:"), objref.IDOf(protocols), objref.IDOf(attributes))
 	return obj.Wrap(_r)
 }
 
 // AllCompositions returns an array that contains all compositions currently in the composition repository.
-func (x *QCCompositionRepository) AllCompositions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allCompositions"))
+func (qcr *QCCompositionRepository) AllCompositions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qcr), objc.RegisterName("allCompositions"))
 	return obj.Wrap(_r)
 }
-
-// QCCompositionRepositoryable is the interface implemented by [QCCompositionRepository], for mocking and DI.
-type QCCompositionRepositoryable interface {
-	obj.Object
-	CompositionWithIdentifier(identifier string) *QCComposition
-	CompositionsWithProtocolsAndAttributes(protocols obj.Object, attributes obj.Object) obj.Object
-	AllCompositions() obj.Object
-}
-
-var _ QCCompositionRepositoryable = (*QCCompositionRepository)(nil)

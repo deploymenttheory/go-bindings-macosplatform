@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,53 +53,35 @@ func NewImageStatisticsMinAndMax() *ImageStatisticsMinAndMax {
 	return imageStatisticsMinAndMaxAdopt(_id)
 }
 
-// WithClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
-func (x *ImageStatisticsMinAndMax) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMinAndMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
+func (ismam *ImageStatisticsMinAndMax) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMinAndMax {
+	objc.Send[objc.ID](objref.IDOf(ismam), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return ismam
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageStatisticsMinAndMax) WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMinAndMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (ismam *ImageStatisticsMinAndMax) WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMinAndMax {
+	objc.Send[objc.ID](objref.IDOf(ismam), objc.RegisterName("setOffset:"), offset)
+	return ismam
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageStatisticsMinAndMax) WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMinAndMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (ismam *ImageStatisticsMinAndMax) WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMinAndMax {
+	objc.Send[objc.ID](objref.IDOf(ismam), objc.RegisterName("setClipRect:"), clipRect)
+	return ismam
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageStatisticsMinAndMax) WithLabel(label string) *ImageStatisticsMinAndMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ismam *ImageStatisticsMinAndMax) WithLabel(label string) *ImageStatisticsMinAndMax {
+	objc.Send[objc.ID](objref.IDOf(ismam), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ismam
 }
 
-// ClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
-func (x *ImageStatisticsMinAndMax) ClipRectSource() metal.MTLRegion {
-	_r := objc.Send[metal.MTLRegion](objref.IDOf(x), objc.RegisterName("clipRectSource"))
+// ClipRectSource returns the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
+func (ismam *ImageStatisticsMinAndMax) ClipRectSource() metal.MTLRegion {
+	_r := objc.Send[metal.MTLRegion](objref.IDOf(ismam), objc.RegisterName("clipRectSource"))
 	return _r
 }
-
-// SetClipRectSource wraps the corresponding Objective-C method.
-func (x *ImageStatisticsMinAndMax) SetClipRectSource(clipRectSource metal.MTLRegion) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-}
-
-// ImageStatisticsMinAndMaxable is the interface implemented by [ImageStatisticsMinAndMax], for mocking and DI.
-type ImageStatisticsMinAndMaxable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageStatisticsMinAndMax
-	WithOffset(offset mpscore.MPSOffset) *ImageStatisticsMinAndMax
-	WithClipRect(clipRect metal.MTLRegion) *ImageStatisticsMinAndMax
-	WithLabel(label string) *ImageStatisticsMinAndMax
-	ClipRectSource() metal.MTLRegion
-	SetClipRectSource(clipRectSource metal.MTLRegion)
-}
-
-var _ ImageStatisticsMinAndMaxable = (*ImageStatisticsMinAndMax)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageStatisticsMinAndMax)(nil)
 

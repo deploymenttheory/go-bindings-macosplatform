@@ -7,7 +7,6 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,17 +53,9 @@ func NewVideoProcessorTimeIntervalCadenceWithTimeInterval(timeInterval float64) 
 }
 
 // TimeInterval wraps the corresponding Objective-C method.
-func (x *VideoProcessorTimeIntervalCadence) TimeInterval() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeInterval"))
+func (vptic *VideoProcessorTimeIntervalCadence) TimeInterval() float64 {
+	_r := objc.Send[float64](objref.IDOf(vptic), objc.RegisterName("timeInterval"))
 	return _r
 }
-
-// VideoProcessorTimeIntervalCadenceable is the interface implemented by [VideoProcessorTimeIntervalCadence], for mocking and DI.
-type VideoProcessorTimeIntervalCadenceable interface {
-	obj.Object
-	TimeInterval() float64
-}
-
-var _ VideoProcessorTimeIntervalCadenceable = (*VideoProcessorTimeIntervalCadence)(nil)
 
 var _ VideoProcessorCadenceProvider = (*VideoProcessorTimeIntervalCadence)(nil)

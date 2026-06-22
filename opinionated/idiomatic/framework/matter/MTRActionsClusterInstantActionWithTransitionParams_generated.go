@@ -44,24 +44,24 @@ func mTRActionsClusterInstantActionWithTransitionParamsAdopt(id objc.ID) *MTRAct
 }
 
 // Description returns the object's -description text.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) Description() string {
+	return rt.Description(objref.IDOf(maciawtp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(maciawtp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(maciawtp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) String() string {
+	return rt.Description(objref.IDOf(maciawtp))
 }
 
 // NewMTRActionsClusterInstantActionWithTransitionParams creates a new MTRActionsClusterInstantActionWithTransitionParams.
@@ -71,108 +71,61 @@ func NewMTRActionsClusterInstantActionWithTransitionParams() *MTRActionsClusterI
 }
 
 // WithActionID sets the property and returns the receiver so calls can be chained.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) WithActionID(actionID obj.Object) *MTRActionsClusterInstantActionWithTransitionParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
-	return x
+func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) WithActionID(actionID obj.Object) *MTRActionsClusterInstantActionWithTransitionParams {
+	objc.Send[objc.ID](objref.IDOf(maciawtp), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
+	return maciawtp
 }
 
 // WithInvokeID sets the property and returns the receiver so calls can be chained.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) WithInvokeID(invokeID obj.Object) *MTRActionsClusterInstantActionWithTransitionParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
-	return x
+func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) WithInvokeID(invokeID obj.Object) *MTRActionsClusterInstantActionWithTransitionParams {
+	objc.Send[objc.ID](objref.IDOf(maciawtp), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
+	return maciawtp
 }
 
 // WithTransitionTime sets the property and returns the receiver so calls can be chained.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) WithTransitionTime(transitionTime obj.Object) *MTRActionsClusterInstantActionWithTransitionParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
-	return x
+func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) WithTransitionTime(transitionTime obj.Object) *MTRActionsClusterInstantActionWithTransitionParams {
+	objc.Send[objc.ID](objref.IDOf(maciawtp), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
+	return maciawtp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRActionsClusterInstantActionWithTransitionParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRActionsClusterInstantActionWithTransitionParams {
+	objc.Send[objc.ID](objref.IDOf(maciawtp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return maciawtp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRActionsClusterInstantActionWithTransitionParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRActionsClusterInstantActionWithTransitionParams {
+	objc.Send[objc.ID](objref.IDOf(maciawtp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return maciawtp
 }
 
 // ActionID wraps the corresponding Objective-C method.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) ActionID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actionID"))
+func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) ActionID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maciawtp), objc.RegisterName("actionID"))
 	return obj.Wrap(_r)
-}
-
-// SetActionID wraps the corresponding Objective-C method.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) SetActionID(actionID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 }
 
 // InvokeID wraps the corresponding Objective-C method.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) InvokeID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invokeID"))
+func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) InvokeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maciawtp), objc.RegisterName("invokeID"))
 	return obj.Wrap(_r)
-}
-
-// SetInvokeID wraps the corresponding Objective-C method.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) SetInvokeID(invokeID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 }
 
 // TransitionTime wraps the corresponding Objective-C method.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) TransitionTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionTime"))
+func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) TransitionTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maciawtp), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
 }
 
-// SetTransitionTime wraps the corresponding Objective-C method.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) SetTransitionTime(transitionTime obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maciawtp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (maciawtp *MTRActionsClusterInstantActionWithTransitionParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maciawtp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRActionsClusterInstantActionWithTransitionParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRActionsClusterInstantActionWithTransitionParamsable is the interface implemented by [MTRActionsClusterInstantActionWithTransitionParams], for mocking and DI.
-type MTRActionsClusterInstantActionWithTransitionParamsable interface {
-	obj.Object
-	WithActionID(actionID obj.Object) *MTRActionsClusterInstantActionWithTransitionParams
-	WithInvokeID(invokeID obj.Object) *MTRActionsClusterInstantActionWithTransitionParams
-	WithTransitionTime(transitionTime obj.Object) *MTRActionsClusterInstantActionWithTransitionParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRActionsClusterInstantActionWithTransitionParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRActionsClusterInstantActionWithTransitionParams
-	ActionID() obj.Object
-	SetActionID(actionID obj.Object)
-	InvokeID() obj.Object
-	SetInvokeID(invokeID obj.Object)
-	TransitionTime() obj.Object
-	SetTransitionTime(transitionTime obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRActionsClusterInstantActionWithTransitionParamsable = (*MTRActionsClusterInstantActionWithTransitionParams)(nil)

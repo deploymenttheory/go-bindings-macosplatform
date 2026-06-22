@@ -46,24 +46,24 @@ func workoutEventAdopt(id objc.ID) *WorkoutEvent {
 }
 
 // Description returns the object's -description text.
-func (x *WorkoutEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (we *WorkoutEvent) Description() string {
+	return rt.Description(objref.IDOf(we))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WorkoutEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (we *WorkoutEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(we), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WorkoutEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (we *WorkoutEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(we), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WorkoutEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (we *WorkoutEvent) String() string {
+	return rt.Description(objref.IDOf(we))
 }
 
 // NewWorkoutEvent creates a new WorkoutEvent.
@@ -73,36 +73,25 @@ func NewWorkoutEvent() *WorkoutEvent {
 }
 
 // Type represents the type of event that occurred during a workout.
-func (x *WorkoutEvent) Type() WorkoutEventType {
-	_r := objc.Send[WorkoutEventType](objref.IDOf(x), objc.RegisterName("type"))
+func (we *WorkoutEvent) Type() WorkoutEventType {
+	_r := objc.Send[WorkoutEventType](objref.IDOf(we), objc.RegisterName("type"))
 	return _r
 }
 
 // Date wraps the corresponding Objective-C method.
-func (x *WorkoutEvent) Date() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+func (we *WorkoutEvent) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(we), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
-// DateInterval date interval representing the time period for which the event is valid. Most event types only support date intervals with zero duration. Events of type HKWorkoutEventTypeLap and HKWorkoutEventTypeSegment are currently the only events that support a nonzero duration.
-func (x *WorkoutEvent) DateInterval() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateInterval"))
+// DateInterval returns date interval representing the time period for which the event is valid. Most event types only support date intervals with zero duration. Events of type HKWorkoutEventTypeLap and HKWorkoutEventTypeSegment are currently the only events that support a nonzero duration.
+func (we *WorkoutEvent) DateInterval() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(we), objc.RegisterName("dateInterval"))
 	return obj.Wrap(_r)
 }
 
-// Metadata extra information describing properties of the receiver. Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
-func (x *WorkoutEvent) Metadata() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+// Metadata returns extra information describing properties of the receiver. Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
+func (we *WorkoutEvent) Metadata() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(we), objc.RegisterName("metadata"))
 	return obj.Wrap(_r)
 }
-
-// WorkoutEventable is the interface implemented by [WorkoutEvent], for mocking and DI.
-type WorkoutEventable interface {
-	obj.Object
-	Type() WorkoutEventType
-	Date() obj.Object
-	DateInterval() obj.Object
-	Metadata() obj.Object
-}
-
-var _ WorkoutEventable = (*WorkoutEvent)(nil)

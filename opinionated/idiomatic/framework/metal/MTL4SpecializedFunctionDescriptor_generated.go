@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,74 +51,43 @@ func NewMTL4SpecializedFunctionDescriptor() *MTL4SpecializedFunctionDescriptor {
 	return mTL4SpecializedFunctionDescriptorAdopt(_id)
 }
 
-// WithFunctionDescriptor provides a descriptor that corresponds to a base function that the specialization applies to.
-func (x *MTL4SpecializedFunctionDescriptor) WithFunctionDescriptor(functionDescriptor MTL4FunctionDescriptorProvider) *MTL4SpecializedFunctionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionDescriptor:"), objref.IDOf(functionDescriptor))
-	return x
+// WithFunctionDescriptor sets provides a descriptor that corresponds to a base function that the specialization applies to.
+func (msfd *MTL4SpecializedFunctionDescriptor) WithFunctionDescriptor(functionDescriptor MTL4FunctionDescriptorProvider) *MTL4SpecializedFunctionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(msfd), objc.RegisterName("setFunctionDescriptor:"), objref.IDOf(functionDescriptor))
+	return msfd
 }
 
-// WithSpecializedName assigns an optional name to the specialized function.
-func (x *MTL4SpecializedFunctionDescriptor) WithSpecializedName(specializedName string) *MTL4SpecializedFunctionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpecializedName:"), purego.NSString(specializedName))
-	return x
+// WithSpecializedName sets assigns an optional name to the specialized function.
+func (msfd *MTL4SpecializedFunctionDescriptor) WithSpecializedName(specializedName string) *MTL4SpecializedFunctionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(msfd), objc.RegisterName("setSpecializedName:"), purego.NSString(specializedName))
+	return msfd
 }
 
-// WithConstantValues configures optional function constant values to associate with the function.
-func (x *MTL4SpecializedFunctionDescriptor) WithConstantValues(constantValues *FunctionConstantValues) *MTL4SpecializedFunctionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantValues:"), objref.IDOf(constantValues))
-	return x
+// WithConstantValues sets configures optional function constant values to associate with the function.
+func (msfd *MTL4SpecializedFunctionDescriptor) WithConstantValues(constantValues *FunctionConstantValues) *MTL4SpecializedFunctionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(msfd), objc.RegisterName("setConstantValues:"), objref.IDOf(constantValues))
+	return msfd
 }
 
 // FunctionDescriptor provides a descriptor that corresponds to a base function that the specialization applies to.
-func (x *MTL4SpecializedFunctionDescriptor) FunctionDescriptor() *MTL4FunctionDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("functionDescriptor"))
+func (msfd *MTL4SpecializedFunctionDescriptor) FunctionDescriptor() *MTL4FunctionDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(msfd), objc.RegisterName("functionDescriptor"))
 	return MTL4FunctionDescriptorFromID(_r)
 }
 
-// SetFunctionDescriptor wraps the corresponding Objective-C method.
-func (x *MTL4SpecializedFunctionDescriptor) SetFunctionDescriptor(functionDescriptor *MTL4FunctionDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionDescriptor:"), objref.IDOf(functionDescriptor))
-}
-
-// SpecializedName assigns an optional name to the specialized function.
-func (x *MTL4SpecializedFunctionDescriptor) SpecializedName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("specializedName"))
+// SpecializedName returns assigns an optional name to the specialized function.
+func (msfd *MTL4SpecializedFunctionDescriptor) SpecializedName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(msfd), objc.RegisterName("specializedName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetSpecializedName wraps the corresponding Objective-C method.
-func (x *MTL4SpecializedFunctionDescriptor) SetSpecializedName(specializedName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpecializedName:"), purego.NSString(specializedName))
-}
-
-// ConstantValues configures optional function constant values to associate with the function.
-func (x *MTL4SpecializedFunctionDescriptor) ConstantValues() *FunctionConstantValues {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constantValues"))
+// ConstantValues returns configures optional function constant values to associate with the function.
+func (msfd *MTL4SpecializedFunctionDescriptor) ConstantValues() *FunctionConstantValues {
+	_r := objc.Send[objc.ID](objref.IDOf(msfd), objc.RegisterName("constantValues"))
 	return FunctionConstantValuesFromID(_r)
 }
-
-// SetConstantValues wraps the corresponding Objective-C method.
-func (x *MTL4SpecializedFunctionDescriptor) SetConstantValues(constantValues *FunctionConstantValues) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstantValues:"), objref.IDOf(constantValues))
-}
-
-// MTL4SpecializedFunctionDescriptorable is the interface implemented by [MTL4SpecializedFunctionDescriptor], for mocking and DI.
-type MTL4SpecializedFunctionDescriptorable interface {
-	obj.Object
-	WithFunctionDescriptor(functionDescriptor MTL4FunctionDescriptorProvider) *MTL4SpecializedFunctionDescriptor
-	WithSpecializedName(specializedName string) *MTL4SpecializedFunctionDescriptor
-	WithConstantValues(constantValues *FunctionConstantValues) *MTL4SpecializedFunctionDescriptor
-	FunctionDescriptor() *MTL4FunctionDescriptor
-	SetFunctionDescriptor(functionDescriptor *MTL4FunctionDescriptor)
-	SpecializedName() string
-	SetSpecializedName(specializedName string)
-	ConstantValues() *FunctionConstantValues
-	SetConstantValues(constantValues *FunctionConstantValues)
-}
-
-var _ MTL4SpecializedFunctionDescriptorable = (*MTL4SpecializedFunctionDescriptor)(nil)
 
 var _ MTL4FunctionDescriptorProvider = (*MTL4SpecializedFunctionDescriptor)(nil)

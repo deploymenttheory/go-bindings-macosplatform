@@ -46,24 +46,24 @@ func syncEngineFetchChangesScopeAdopt(id objc.ID) *SyncEngineFetchChangesScope {
 }
 
 // Description returns the object's -description text.
-func (x *SyncEngineFetchChangesScope) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sefcs *SyncEngineFetchChangesScope) Description() string {
+	return rt.Description(objref.IDOf(sefcs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEngineFetchChangesScope) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sefcs *SyncEngineFetchChangesScope) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sefcs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEngineFetchChangesScope) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sefcs *SyncEngineFetchChangesScope) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sefcs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SyncEngineFetchChangesScope) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sefcs *SyncEngineFetchChangesScope) String() string {
+	return rt.Description(objref.IDOf(sefcs))
 }
 
 // NewSyncEngineFetchChangesScopeWithZoneIDs creates a scope that includes only the specified set of zones.
@@ -81,29 +81,19 @@ func NewSyncEngineFetchChangesScopeWithExcludedZoneIDs(zoneIDs obj.Object) *Sync
 }
 
 // ContainsZoneID returns true if the specified zone ID is included in this scope.
-func (x *SyncEngineFetchChangesScope) ContainsZoneID(zoneID *RecordZoneID) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsZoneID:"), objref.IDOf(zoneID))
+func (sefcs *SyncEngineFetchChangesScope) ContainsZoneID(zoneID *RecordZoneID) bool {
+	_r := objc.Send[bool](objref.IDOf(sefcs), objc.RegisterName("containsZoneID:"), objref.IDOf(zoneID))
 	return _r
 }
 
-// ZoneIDs a specific set of zone IDs to include in the scope. For example, if you want to fetch changes for a specific set of zones, you can specify them here. If `nil`, this scope includes all zones except those in `excludedZoneIDs`.
-func (x *SyncEngineFetchChangesScope) ZoneIDs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneIDs"))
+// ZoneIDs returns a specific set of zone IDs to include in the scope. For example, if you want to fetch changes for a specific set of zones, you can specify them here. If `nil`, this scope includes all zones except those in `excludedZoneIDs`.
+func (sefcs *SyncEngineFetchChangesScope) ZoneIDs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sefcs), objc.RegisterName("zoneIDs"))
 	return obj.Wrap(_r)
 }
 
-// ExcludedZoneIDs a specific set of zone IDs to exclude from this scope. If you know that you don't want to fetch changes for a particular set of zones, you can set those zones here.
-func (x *SyncEngineFetchChangesScope) ExcludedZoneIDs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("excludedZoneIDs"))
+// ExcludedZoneIDs returns a specific set of zone IDs to exclude from this scope. If you know that you don't want to fetch changes for a particular set of zones, you can set those zones here.
+func (sefcs *SyncEngineFetchChangesScope) ExcludedZoneIDs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sefcs), objc.RegisterName("excludedZoneIDs"))
 	return obj.Wrap(_r)
 }
-
-// SyncEngineFetchChangesScopeable is the interface implemented by [SyncEngineFetchChangesScope], for mocking and DI.
-type SyncEngineFetchChangesScopeable interface {
-	obj.Object
-	ContainsZoneID(zoneID *RecordZoneID) bool
-	ZoneIDs() obj.Object
-	ExcludedZoneIDs() obj.Object
-}
-
-var _ SyncEngineFetchChangesScopeable = (*SyncEngineFetchChangesScope)(nil)

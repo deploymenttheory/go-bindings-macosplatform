@@ -5,13 +5,14 @@
 package shazamkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Signature is an idiomatic wrapper over the Objective-C class SHSignature.
@@ -48,24 +49,24 @@ func signatureAdopt(id objc.ID) *Signature {
 }
 
 // Description returns the object's -description text.
-func (x *Signature) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Signature) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Signature) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Signature) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Signature) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Signature) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Signature) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Signature) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewSignatureWithDataRepresentationError creates a signature object from raw data.
@@ -79,23 +80,14 @@ func NewSignatureWithDataRepresentationError(dataRepresentation obj.Object) (res
 	return signatureAdopt(_id), nil
 }
 
-// Duration the duration of the audio you use to generate the signature. Audio that contains periods of silence may result in a duration value that's shorter than the full duration of the original audio track.
-func (x *Signature) Duration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+// Duration returns the duration of the audio you use to generate the signature. Audio that contains periods of silence may result in a duration value that's shorter than the full duration of the original audio track.
+func (s *Signature) Duration() float64 {
+	_r := objc.Send[float64](objref.IDOf(s), objc.RegisterName("duration"))
 	return _r
 }
 
-// DataRepresentation the raw data for the signature.
-func (x *Signature) DataRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
+// DataRepresentation returns the raw data for the signature.
+func (s *Signature) DataRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("dataRepresentation"))
 	return obj.Wrap(_r)
 }
-
-// Signatureable is the interface implemented by [Signature], for mocking and DI.
-type Signatureable interface {
-	obj.Object
-	Duration() float64
-	DataRepresentation() obj.Object
-}
-
-var _ Signatureable = (*Signature)(nil)

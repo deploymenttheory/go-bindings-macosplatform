@@ -46,24 +46,24 @@ func scriptCommandDescriptionAdopt(id objc.ID) *ScriptCommandDescription {
 }
 
 // Description returns the object's -description text.
-func (x *ScriptCommandDescription) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (scd *ScriptCommandDescription) Description() string {
+	return rt.Description(objref.IDOf(scd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ScriptCommandDescription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (scd *ScriptCommandDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(scd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ScriptCommandDescription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (scd *ScriptCommandDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(scd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ScriptCommandDescription) String() string {
-	return rt.Description(objref.IDOf(x))
+func (scd *ScriptCommandDescription) String() string {
+	return rt.Description(objref.IDOf(scd))
 }
 
 // NewScriptCommandDescriptionWithSuiteNameCommandNameDictionary initializes and returns a newly allocated instance of NSScriptCommandDescription.
@@ -81,14 +81,14 @@ func NewScriptCommandDescriptionWithCoder(inCoder *Coder) *ScriptCommandDescript
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *ScriptCommandDescription) WithScriptingProperties(scriptingProperties obj.Object) *ScriptCommandDescription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (scd *ScriptCommandDescription) WithScriptingProperties(scriptingProperties obj.Object) *ScriptCommandDescription {
+	objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return scd
 }
 
 // TypeForArgumentWithName returns the type of the command argument identified by the specified key.
-func (x *ScriptCommandDescription) TypeForArgumentWithName(argumentName string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typeForArgumentWithName:"), purego.NSString(argumentName))
+func (scd *ScriptCommandDescription) TypeForArgumentWithName(argumentName string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("typeForArgumentWithName:"), purego.NSString(argumentName))
 	if _r == 0 {
 		return ""
 	}
@@ -96,26 +96,26 @@ func (x *ScriptCommandDescription) TypeForArgumentWithName(argumentName string) 
 }
 
 // AppleEventCodeForArgumentWithName returns the Apple event code for the specified command argument of the receiver.
-func (x *ScriptCommandDescription) AppleEventCodeForArgumentWithName(argumentName string) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("appleEventCodeForArgumentWithName:"), purego.NSString(argumentName))
+func (scd *ScriptCommandDescription) AppleEventCodeForArgumentWithName(argumentName string) int {
+	_r := objc.Send[int](objref.IDOf(scd), objc.RegisterName("appleEventCodeForArgumentWithName:"), purego.NSString(argumentName))
 	return _r
 }
 
 // IsOptionalArgumentWithName returns a Boolean value that indicates whether the command argument identified by the specified argument key is an optional argument.
-func (x *ScriptCommandDescription) IsOptionalArgumentWithName(argumentName string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOptionalArgumentWithName:"), purego.NSString(argumentName))
+func (scd *ScriptCommandDescription) IsOptionalArgumentWithName(argumentName string) bool {
+	_r := objc.Send[bool](objref.IDOf(scd), objc.RegisterName("isOptionalArgumentWithName:"), purego.NSString(argumentName))
 	return _r
 }
 
 // CreateCommandInstance creates and returns an instance of the command object described by the receiver.
-func (x *ScriptCommandDescription) CreateCommandInstance() *ScriptCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createCommandInstance"))
+func (scd *ScriptCommandDescription) CreateCommandInstance() *ScriptCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("createCommandInstance"))
 	return ScriptCommandFromID(_r)
 }
 
 // SuiteName wraps the corresponding Objective-C method.
-func (x *ScriptCommandDescription) SuiteName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suiteName"))
+func (scd *ScriptCommandDescription) SuiteName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("suiteName"))
 	if _r == 0 {
 		return ""
 	}
@@ -123,8 +123,8 @@ func (x *ScriptCommandDescription) SuiteName() string {
 }
 
 // CommandName wraps the corresponding Objective-C method.
-func (x *ScriptCommandDescription) CommandName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commandName"))
+func (scd *ScriptCommandDescription) CommandName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("commandName"))
 	if _r == 0 {
 		return ""
 	}
@@ -132,20 +132,20 @@ func (x *ScriptCommandDescription) CommandName() string {
 }
 
 // AppleEventClassCode wraps the corresponding Objective-C method.
-func (x *ScriptCommandDescription) AppleEventClassCode() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("appleEventClassCode"))
+func (scd *ScriptCommandDescription) AppleEventClassCode() int {
+	_r := objc.Send[int](objref.IDOf(scd), objc.RegisterName("appleEventClassCode"))
 	return _r
 }
 
 // AppleEventCode wraps the corresponding Objective-C method.
-func (x *ScriptCommandDescription) AppleEventCode() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("appleEventCode"))
+func (scd *ScriptCommandDescription) AppleEventCode() int {
+	_r := objc.Send[int](objref.IDOf(scd), objc.RegisterName("appleEventCode"))
 	return _r
 }
 
 // CommandClassName wraps the corresponding Objective-C method.
-func (x *ScriptCommandDescription) CommandClassName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commandClassName"))
+func (scd *ScriptCommandDescription) CommandClassName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("commandClassName"))
 	if _r == 0 {
 		return ""
 	}
@@ -153,8 +153,8 @@ func (x *ScriptCommandDescription) CommandClassName() string {
 }
 
 // ReturnType wraps the corresponding Objective-C method.
-func (x *ScriptCommandDescription) ReturnType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("returnType"))
+func (scd *ScriptCommandDescription) ReturnType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("returnType"))
 	if _r == 0 {
 		return ""
 	}
@@ -162,35 +162,15 @@ func (x *ScriptCommandDescription) ReturnType() string {
 }
 
 // AppleEventCodeForReturnType wraps the corresponding Objective-C method.
-func (x *ScriptCommandDescription) AppleEventCodeForReturnType() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("appleEventCodeForReturnType"))
+func (scd *ScriptCommandDescription) AppleEventCodeForReturnType() int {
+	_r := objc.Send[int](objref.IDOf(scd), objc.RegisterName("appleEventCodeForReturnType"))
 	return _r
 }
 
 // ArgumentNames wraps the corresponding Objective-C method.
 //
 // ArgumentNames returns the collection as a Go slice.
-func (x *ScriptCommandDescription) ArgumentNames() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("argumentNames"))
+func (scd *ScriptCommandDescription) ArgumentNames() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(scd), objc.RegisterName("argumentNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// ScriptCommandDescriptionable is the interface implemented by [ScriptCommandDescription], for mocking and DI.
-type ScriptCommandDescriptionable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *ScriptCommandDescription
-	TypeForArgumentWithName(argumentName string) string
-	AppleEventCodeForArgumentWithName(argumentName string) int
-	IsOptionalArgumentWithName(argumentName string) bool
-	CreateCommandInstance() *ScriptCommand
-	SuiteName() string
-	CommandName() string
-	AppleEventClassCode() int
-	AppleEventCode() int
-	CommandClassName() string
-	ReturnType() string
-	AppleEventCodeForReturnType() int
-	ArgumentNames() []string
-}
-
-var _ ScriptCommandDescriptionable = (*ScriptCommandDescription)(nil)

@@ -7,7 +7,6 @@ package coreimage
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewWarpKernel() *WarpKernel {
 	_id := objc.Send[objc.ID](objc.ID(_class("CIWarpKernel")), objc.RegisterName("new"))
 	return warpKernelAdopt(_id)
 }
-
-// WarpKernelable is the interface implemented by [WarpKernel], for mocking and DI.
-type WarpKernelable interface {
-	obj.Object
-}
-
-var _ WarpKernelable = (*WarpKernel)(nil)
 
 var _ KernelProvider = (*WarpKernel)(nil)

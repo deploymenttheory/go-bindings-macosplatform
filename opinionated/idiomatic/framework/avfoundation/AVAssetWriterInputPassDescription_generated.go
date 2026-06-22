@@ -46,24 +46,24 @@ func assetWriterInputPassDescriptionAdopt(id objc.ID) *AssetWriterInputPassDescr
 }
 
 // Description returns the object's -description text.
-func (x *AssetWriterInputPassDescription) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (awipd *AssetWriterInputPassDescription) Description() string {
+	return rt.Description(objref.IDOf(awipd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetWriterInputPassDescription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (awipd *AssetWriterInputPassDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(awipd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetWriterInputPassDescription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (awipd *AssetWriterInputPassDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(awipd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetWriterInputPassDescription) String() string {
-	return rt.Description(objref.IDOf(x))
+func (awipd *AssetWriterInputPassDescription) String() string {
+	return rt.Description(objref.IDOf(awipd))
 }
 
 // NewAssetWriterInputPassDescription creates a new AssetWriterInputPassDescription.
@@ -75,15 +75,7 @@ func NewAssetWriterInputPassDescription() *AssetWriterInputPassDescription {
 // SourceTimeRanges wraps the corresponding Objective-C method.
 //
 // SourceTimeRanges returns the collection as a Go slice.
-func (x *AssetWriterInputPassDescription) SourceTimeRanges() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceTimeRanges"))
+func (awipd *AssetWriterInputPassDescription) SourceTimeRanges() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(awipd), objc.RegisterName("sourceTimeRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// AssetWriterInputPassDescriptionable is the interface implemented by [AssetWriterInputPassDescription], for mocking and DI.
-type AssetWriterInputPassDescriptionable interface {
-	obj.Object
-	SourceTimeRanges() []obj.Object
-}
-
-var _ AssetWriterInputPassDescriptionable = (*AssetWriterInputPassDescription)(nil)

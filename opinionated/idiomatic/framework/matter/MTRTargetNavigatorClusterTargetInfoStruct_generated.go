@@ -46,79 +46,57 @@ func mTRTargetNavigatorClusterTargetInfoStructAdopt(id objc.ID) *MTRTargetNaviga
 }
 
 // Description returns the object's -description text.
-func (x *MTRTargetNavigatorClusterTargetInfoStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) Description() string {
+	return rt.Description(objref.IDOf(mtnctis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRTargetNavigatorClusterTargetInfoStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtnctis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRTargetNavigatorClusterTargetInfoStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtnctis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRTargetNavigatorClusterTargetInfoStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) String() string {
+	return rt.Description(objref.IDOf(mtnctis))
 }
 
 // WithIdentifier sets the property and returns the receiver so calls can be chained.
-func (x *MTRTargetNavigatorClusterTargetInfoStruct) WithIdentifier(identifier obj.Object) *MTRTargetNavigatorClusterTargetInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
-	return x
+func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) WithIdentifier(identifier obj.Object) *MTRTargetNavigatorClusterTargetInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(mtnctis), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
+	return mtnctis
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *MTRTargetNavigatorClusterTargetInfoStruct) WithName(name string) *MTRTargetNavigatorClusterTargetInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) WithName(name string) *MTRTargetNavigatorClusterTargetInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(mtnctis), objc.RegisterName("setName:"), purego.NSString(name))
+	return mtnctis
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *MTRTargetNavigatorClusterTargetInfoStruct) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtnctis), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
 
-// SetIdentifier wraps the corresponding Objective-C method.
-func (x *MTRTargetNavigatorClusterTargetInfoStruct) SetIdentifier(identifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
-}
-
 // Name wraps the corresponding Objective-C method.
-func (x *MTRTargetNavigatorClusterTargetInfoStruct) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mtnctis), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *MTRTargetNavigatorClusterTargetInfoStruct) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// MTRTargetNavigatorClusterTargetInfoStructable is the interface implemented by [MTRTargetNavigatorClusterTargetInfoStruct], for mocking and DI.
-type MTRTargetNavigatorClusterTargetInfoStructable interface {
-	obj.Object
-	WithIdentifier(identifier obj.Object) *MTRTargetNavigatorClusterTargetInfoStruct
-	WithName(name string) *MTRTargetNavigatorClusterTargetInfoStruct
-	Identifier() obj.Object
-	SetIdentifier(identifier obj.Object)
-	Name() string
-	SetName(name string)
-}
-
-var _ MTRTargetNavigatorClusterTargetInfoStructable = (*MTRTargetNavigatorClusterTargetInfoStruct)(nil)
-
 // isMTRTargetNavigatorClusterTargetInfoStruct marks MTRTargetNavigatorClusterTargetInfoStruct — and, by embedding promotion, its
 // subclasses — as a member of the MTRTargetNavigatorClusterTargetInfoStruct hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRTargetNavigatorClusterTargetInfoStruct) isMTRTargetNavigatorClusterTargetInfoStruct() {}
+func (mtnctis *MTRTargetNavigatorClusterTargetInfoStruct) isMTRTargetNavigatorClusterTargetInfoStruct() {
+}
 
 var _ MTRTargetNavigatorClusterTargetInfoStructProvider = (*MTRTargetNavigatorClusterTargetInfoStruct)(nil)

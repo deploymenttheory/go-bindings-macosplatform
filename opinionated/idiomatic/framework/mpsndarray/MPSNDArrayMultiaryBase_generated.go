@@ -46,56 +46,46 @@ func arrayMultiaryBaseAdopt(id objc.ID) *ArrayMultiaryBase {
 }
 
 // Description returns the object's -description text.
-func (x *ArrayMultiaryBase) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (amb *ArrayMultiaryBase) Description() string {
+	return rt.Description(objref.IDOf(amb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ArrayMultiaryBase) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (amb *ArrayMultiaryBase) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(amb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ArrayMultiaryBase) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (amb *ArrayMultiaryBase) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(amb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ArrayMultiaryBase) String() string {
-	return rt.Description(objref.IDOf(x))
+func (amb *ArrayMultiaryBase) String() string {
+	return rt.Description(objref.IDOf(amb))
 }
 
 // EncodeWithCoder initialize a MPSNDArrayMultiaryKernel from a NSCoder
-func (x *ArrayMultiaryBase) EncodeWithCoder(coder obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
+func (amb *ArrayMultiaryBase) EncodeWithCoder(coder obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(amb), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }
 
 // ResultStateForSourceArraysSourceStatesDestinationArray wraps the corresponding Objective-C method.
-func (x *ArrayMultiaryBase) ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays []obj.Object, sourceStates []obj.Object, destinationArray obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultStateForSourceArrays:sourceStates:destinationArray:"), purego.SliceToNSArray(sourceArrays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationArray))
+func (amb *ArrayMultiaryBase) ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays []obj.Object, sourceStates []obj.Object, destinationArray obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(amb), objc.RegisterName("resultStateForSourceArrays:sourceStates:destinationArray:"), purego.SliceToNSArray(sourceArrays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationArray))
 	return obj.Wrap(_r)
 }
 
 // DestinationArrayDescriptorForSourceArraysSourceState return a descriptor suitable for allocating a NSArray to receive the result The object properties (kernelSize, offsets, edgeMode, etc.) should be properly configured as if the -encode call was about to be made, before this method is called. Those properties may affect the results.
-func (x *ArrayMultiaryBase) DestinationArrayDescriptorForSourceArraysSourceState(sources []obj.Object, state obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationArrayDescriptorForSourceArrays:sourceState:"), purego.SliceToNSArray(sources, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(state))
+func (amb *ArrayMultiaryBase) DestinationArrayDescriptorForSourceArraysSourceState(sources []obj.Object, state obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(amb), objc.RegisterName("destinationArrayDescriptorForSourceArrays:sourceState:"), purego.SliceToNSArray(sources, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(state))
 	return obj.Wrap(_r)
 }
-
-// ArrayMultiaryBaseable is the interface implemented by [ArrayMultiaryBase], for mocking and DI.
-type ArrayMultiaryBaseable interface {
-	obj.Object
-	EncodeWithCoder(coder obj.Object)
-	ResultStateForSourceArraysSourceStatesDestinationArray(sourceArrays []obj.Object, sourceStates []obj.Object, destinationArray obj.Object) obj.Object
-	DestinationArrayDescriptorForSourceArraysSourceState(sources []obj.Object, state obj.Object) obj.Object
-}
-
-var _ ArrayMultiaryBaseable = (*ArrayMultiaryBase)(nil)
 
 // isArrayMultiaryBase marks ArrayMultiaryBase — and, by embedding promotion, its
 // subclasses — as a member of the ArrayMultiaryBase hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ArrayMultiaryBase) isArrayMultiaryBase() {}
+func (amb *ArrayMultiaryBase) isArrayMultiaryBase() {}
 
 var _ ArrayMultiaryBaseProvider = (*ArrayMultiaryBase)(nil)

@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -74,35 +73,35 @@ func NewSendMessageIntentWithRecipientsOutgoingMessageTypeContentSpeakableGroupN
 	return sendMessageIntentAdopt(_id)
 }
 
-// WithSuggestedInvocationPhrase the intent’s display name.
-func (x *SendMessageIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *SendMessageIntent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
-	return x
+// WithSuggestedInvocationPhrase sets the intent’s display name.
+func (smi *SendMessageIntent) WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *SendMessageIntent {
+	objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("setSuggestedInvocationPhrase:"), purego.NSString(suggestedInvocationPhrase))
+	return smi
 }
 
 // WithDonationMetadata sets the property and returns the receiver so calls can be chained.
-func (x *SendMessageIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *SendMessageIntent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
-	return x
+func (smi *SendMessageIntent) WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *SendMessageIntent {
+	objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("setDonationMetadata:"), objref.IDOf(donationMetadata))
+	return smi
 }
 
 // Recipients wraps the corresponding Objective-C method.
 //
 // Recipients returns the collection as a Go slice.
-func (x *SendMessageIntent) Recipients() []*Person {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recipients"))
+func (smi *SendMessageIntent) Recipients() []*Person {
+	_arr := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("recipients"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Person { return PersonFromID(_id) })
 }
 
 // OutgoingMessageType wraps the corresponding Objective-C method.
-func (x *SendMessageIntent) OutgoingMessageType() OutgoingMessageType {
-	_r := objc.Send[OutgoingMessageType](objref.IDOf(x), objc.RegisterName("outgoingMessageType"))
+func (smi *SendMessageIntent) OutgoingMessageType() OutgoingMessageType {
+	_r := objc.Send[OutgoingMessageType](objref.IDOf(smi), objc.RegisterName("outgoingMessageType"))
 	return _r
 }
 
 // Content wraps the corresponding Objective-C method.
-func (x *SendMessageIntent) Content() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("content"))
+func (smi *SendMessageIntent) Content() string {
+	_r := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("content"))
 	if _r == 0 {
 		return ""
 	}
@@ -110,14 +109,14 @@ func (x *SendMessageIntent) Content() string {
 }
 
 // SpeakableGroupName wraps the corresponding Objective-C method.
-func (x *SendMessageIntent) SpeakableGroupName() *SpeakableString {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("speakableGroupName"))
+func (smi *SendMessageIntent) SpeakableGroupName() *SpeakableString {
+	_r := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("speakableGroupName"))
 	return SpeakableStringFromID(_r)
 }
 
 // ConversationIdentifier wraps the corresponding Objective-C method.
-func (x *SendMessageIntent) ConversationIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("conversationIdentifier"))
+func (smi *SendMessageIntent) ConversationIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("conversationIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -125,8 +124,8 @@ func (x *SendMessageIntent) ConversationIdentifier() string {
 }
 
 // ServiceName wraps the corresponding Objective-C method.
-func (x *SendMessageIntent) ServiceName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceName"))
+func (smi *SendMessageIntent) ServiceName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("serviceName"))
 	if _r == 0 {
 		return ""
 	}
@@ -134,44 +133,26 @@ func (x *SendMessageIntent) ServiceName() string {
 }
 
 // Sender wraps the corresponding Objective-C method.
-func (x *SendMessageIntent) Sender() *Person {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sender"))
+func (smi *SendMessageIntent) Sender() *Person {
+	_r := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("sender"))
 	return PersonFromID(_r)
 }
 
 // Attachments wraps the corresponding Objective-C method.
 //
 // Attachments returns the collection as a Go slice.
-func (x *SendMessageIntent) Attachments() []*SendMessageAttachment {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachments"))
+func (smi *SendMessageIntent) Attachments() []*SendMessageAttachment {
+	_arr := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("attachments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SendMessageAttachment { return SendMessageAttachmentFromID(_id) })
 }
 
 // GroupName wraps the corresponding Objective-C method.
-func (x *SendMessageIntent) GroupName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupName"))
+func (smi *SendMessageIntent) GroupName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(smi), objc.RegisterName("groupName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SendMessageIntentable is the interface implemented by [SendMessageIntent], for mocking and DI.
-type SendMessageIntentable interface {
-	obj.Object
-	WithSuggestedInvocationPhrase(suggestedInvocationPhrase string) *SendMessageIntent
-	WithDonationMetadata(donationMetadata IntentDonationMetadataProvider) *SendMessageIntent
-	Recipients() []*Person
-	OutgoingMessageType() OutgoingMessageType
-	Content() string
-	SpeakableGroupName() *SpeakableString
-	ConversationIdentifier() string
-	ServiceName() string
-	Sender() *Person
-	Attachments() []*SendMessageAttachment
-	GroupName() string
-}
-
-var _ SendMessageIntentable = (*SendMessageIntent)(nil)
 
 var _ IntentProvider = (*SendMessageIntent)(nil)

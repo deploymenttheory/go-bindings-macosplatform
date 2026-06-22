@@ -61,595 +61,489 @@ func NewMenuItemCellWithCoder(coder obj.Object) *MenuItemCell {
 	return menuItemCellAdopt(_id)
 }
 
-// WithMenuItem the menu item object associated with the cell.
-func (x *MenuItemCell) WithMenuItem(menuItem *MenuItem) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuItem:"), objref.IDOf(menuItem))
-	return x
+// WithMenuItem sets the menu item object associated with the cell.
+func (mic *MenuItemCell) WithMenuItem(menuItem *MenuItem) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setMenuItem:"), objref.IDOf(menuItem))
+	return mic
 }
 
-// WithNeedsSizing a Boolean value indicating whether the size of the menu needs to be calculated.
-func (x *MenuItemCell) WithNeedsSizing(needsSizing bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsSizing:"), needsSizing)
-	return x
+// WithNeedsSizing sets a Boolean value indicating whether the size of the menu needs to be calculated.
+func (mic *MenuItemCell) WithNeedsSizing(needsSizing bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setNeedsSizing:"), needsSizing)
+	return mic
 }
 
-// WithNeedsDisplay a Boolean value indicating whether the menu item needs to be displayed.
-func (x *MenuItemCell) WithNeedsDisplay(needsDisplay bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value indicating whether the menu item needs to be displayed.
+func (mic *MenuItemCell) WithNeedsDisplay(needsDisplay bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return mic
 }
 
-// WithBezelStyle the appearance of the button’s border, if it has one.
-func (x *MenuItemCell) WithBezelStyle(bezelStyle BezelStyle) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
-	return x
+// WithBezelStyle sets the appearance of the button’s border, if it has one.
+func (mic *MenuItemCell) WithBezelStyle(bezelStyle BezelStyle) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	return mic
 }
 
-// WithHighlightsBy a set of flags that indicate how the button highlights when it receives a mouse-down event (that is, when the button is pressed).
-func (x *MenuItemCell) WithHighlightsBy(highlightsBy CellStyleMask) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlightsBy:"), highlightsBy)
-	return x
+// WithHighlightsBy sets a set of flags that indicate how the button highlights when it receives a mouse-down event (that is, when the button is pressed).
+func (mic *MenuItemCell) WithHighlightsBy(highlightsBy CellStyleMask) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setHighlightsBy:"), highlightsBy)
+	return mic
 }
 
-// WithShowsStateBy the flags that indicate how the button cell shows its alternate state.
-func (x *MenuItemCell) WithShowsStateBy(showsStateBy CellStyleMask) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsStateBy:"), showsStateBy)
-	return x
+// WithShowsStateBy sets the flags that indicate how the button cell shows its alternate state.
+func (mic *MenuItemCell) WithShowsStateBy(showsStateBy CellStyleMask) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setShowsStateBy:"), showsStateBy)
+	return mic
 }
 
-// WithAttributedTitle the title displayed by the button when it’s in its normal state as an attributed string.
-func (x *MenuItemCell) WithAttributedTitle(attributedTitle obj.Object) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
-	return x
+// WithAttributedTitle sets the title displayed by the button when it’s in its normal state as an attributed string.
+func (mic *MenuItemCell) WithAttributedTitle(attributedTitle obj.Object) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
+	return mic
 }
 
-// WithAlternateTitle the string displayed by the button when it’s in its alternate state.
-func (x *MenuItemCell) WithAlternateTitle(alternateTitle string) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateTitle:"), purego.NSString(alternateTitle))
-	return x
+// WithAlternateTitle sets the string displayed by the button when it’s in its alternate state.
+func (mic *MenuItemCell) WithAlternateTitle(alternateTitle string) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAlternateTitle:"), purego.NSString(alternateTitle))
+	return mic
 }
 
-// WithAttributedAlternateTitle the title displayed by the button when it’s in its alternate state, as an attributed string.
-func (x *MenuItemCell) WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
-	return x
+// WithAttributedAlternateTitle sets the title displayed by the button when it’s in its alternate state, as an attributed string.
+func (mic *MenuItemCell) WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
+	return mic
 }
 
-// WithAlternateImage the image the button displays in its alternate state.
-func (x *MenuItemCell) WithAlternateImage(alternateImage *Image) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
-	return x
+// WithAlternateImage sets the image the button displays in its alternate state.
+func (mic *MenuItemCell) WithAlternateImage(alternateImage *Image) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
+	return mic
 }
 
-// WithImagePosition the position of the button’s image relative to its title.
-func (x *MenuItemCell) WithImagePosition(imagePosition CellImagePosition) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImagePosition:"), imagePosition)
-	return x
+// WithImagePosition sets the position of the button’s image relative to its title.
+func (mic *MenuItemCell) WithImagePosition(imagePosition CellImagePosition) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setImagePosition:"), imagePosition)
+	return mic
 }
 
-// WithImageScaling the scale factor for the button’s image.
-func (x *MenuItemCell) WithImageScaling(imageScaling ImageScaling) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageScaling:"), imageScaling)
-	return x
+// WithImageScaling sets the scale factor for the button’s image.
+func (mic *MenuItemCell) WithImageScaling(imageScaling ImageScaling) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setImageScaling:"), imageScaling)
+	return mic
 }
 
-// WithKeyEquivalent the button’s key-equivalent character.
-func (x *MenuItemCell) WithKeyEquivalent(keyEquivalent string) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalent:"), purego.NSString(keyEquivalent))
-	return x
+// WithKeyEquivalent sets the button’s key-equivalent character.
+func (mic *MenuItemCell) WithKeyEquivalent(keyEquivalent string) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setKeyEquivalent:"), purego.NSString(keyEquivalent))
+	return mic
 }
 
-// WithKeyEquivalentModifierMask the mask that identifies the modifier keys for the button’s key equivalent.
-func (x *MenuItemCell) WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalentModifierMask:"), keyEquivalentModifierMask)
-	return x
+// WithKeyEquivalentModifierMask sets the mask that identifies the modifier keys for the button’s key equivalent.
+func (mic *MenuItemCell) WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setKeyEquivalentModifierMask:"), keyEquivalentModifierMask)
+	return mic
 }
 
-// WithTransparent a Boolean value that indicates if the button is transparent.
-func (x *MenuItemCell) WithTransparent(transparent bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransparent:"), transparent)
-	return x
+// WithTransparent sets a Boolean value that indicates if the button is transparent.
+func (mic *MenuItemCell) WithTransparent(transparent bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setTransparent:"), transparent)
+	return mic
 }
 
-// WithImageDimsWhenDisabled a Boolean value that indicates if the button’s image and text appear “dim” when the button is disabled.
-func (x *MenuItemCell) WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageDimsWhenDisabled:"), imageDimsWhenDisabled)
-	return x
+// WithImageDimsWhenDisabled sets a Boolean value that indicates if the button’s image and text appear “dim” when the button is disabled.
+func (mic *MenuItemCell) WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setImageDimsWhenDisabled:"), imageDimsWhenDisabled)
+	return mic
 }
 
-// WithShowsBorderOnlyWhileMouseInside a Boolean value that indicates if the button displays its border only when the pointer is over it.
-func (x *MenuItemCell) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsBorderOnlyWhileMouseInside:"), showsBorderOnlyWhileMouseInside)
-	return x
+// WithShowsBorderOnlyWhileMouseInside sets a Boolean value that indicates if the button displays its border only when the pointer is over it.
+func (mic *MenuItemCell) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setShowsBorderOnlyWhileMouseInside:"), showsBorderOnlyWhileMouseInside)
+	return mic
 }
 
-// WithSound the sound that’s played when the user presses the button (that is during a mouse-down event).
-func (x *MenuItemCell) WithSound(sound *Sound) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSound:"), objref.IDOf(sound))
-	return x
+// WithSound sets the sound that’s played when the user presses the button (that is during a mouse-down event).
+func (mic *MenuItemCell) WithSound(sound *Sound) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setSound:"), objref.IDOf(sound))
+	return mic
 }
 
-// WithBackgroundColor the background color of the button.
-func (x *MenuItemCell) WithBackgroundColor(backgroundColor *Color) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the background color of the button.
+func (mic *MenuItemCell) WithBackgroundColor(backgroundColor *Color) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return mic
 }
 
-// WithGradientType the gradient of the button’s border.
-func (x *MenuItemCell) WithGradientType(gradientType GradientType) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGradientType:"), gradientType)
-	return x
+// WithGradientType sets the gradient of the button’s border.
+func (mic *MenuItemCell) WithGradientType(gradientType GradientType) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setGradientType:"), gradientType)
+	return mic
 }
 
-// WithKeyEquivalentFont the font used to draw the button’s key equivalent.
-func (x *MenuItemCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalentFont:"), objref.IDOf(keyEquivalentFont))
-	return x
+// WithKeyEquivalentFont sets the font used to draw the button’s key equivalent.
+func (mic *MenuItemCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setKeyEquivalentFont:"), objref.IDOf(keyEquivalentFont))
+	return mic
 }
 
-// WithControlView the view associated with the cell.
-func (x *MenuItemCell) WithControlView(controlView ViewProvider) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
-	return x
+// WithControlView sets the view associated with the cell.
+func (mic *MenuItemCell) WithControlView(controlView ViewProvider) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	return mic
 }
 
-// WithType the type of the cell.
-func (x *MenuItemCell) WithType(type_ CellType) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the type of the cell.
+func (mic *MenuItemCell) WithType(type_ CellType) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setType:"), type_)
+	return mic
 }
 
-// WithState the cell’s current state.
-func (x *MenuItemCell) WithState(state int) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the cell’s current state.
+func (mic *MenuItemCell) WithState(state int) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setState:"), state)
+	return mic
 }
 
-// WithTarget the object that receives the cell’s action messages.
-func (x *MenuItemCell) WithTarget(target obj.Object) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that receives the cell’s action messages.
+func (mic *MenuItemCell) WithTarget(target obj.Object) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return mic
 }
 
-// WithTag a tag for identifying the cell.
-func (x *MenuItemCell) WithTag(tag int) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets a tag for identifying the cell.
+func (mic *MenuItemCell) WithTag(tag int) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setTag:"), tag)
+	return mic
 }
 
-// WithTitle the cell’s title text.
-func (x *MenuItemCell) WithTitle(title string) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the cell’s title text.
+func (mic *MenuItemCell) WithTitle(title string) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return mic
 }
 
-// WithEnabled a Boolean value indicating whether the cell is currently enabled.
-func (x *MenuItemCell) WithEnabled(enabled bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
+func (mic *MenuItemCell) WithEnabled(enabled bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setEnabled:"), enabled)
+	return mic
 }
 
-// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-func (x *MenuItemCell) WithContinuous(continuous bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+func (mic *MenuItemCell) WithContinuous(continuous bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setContinuous:"), continuous)
+	return mic
 }
 
-// WithEditable a Boolean value indicating whether the cell is editable.
-func (x *MenuItemCell) WithEditable(editable bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets a Boolean value indicating whether the cell is editable.
+func (mic *MenuItemCell) WithEditable(editable bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setEditable:"), editable)
+	return mic
 }
 
-// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
-func (x *MenuItemCell) WithSelectable(selectable bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
-	return x
+// WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
+func (mic *MenuItemCell) WithSelectable(selectable bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setSelectable:"), selectable)
+	return mic
 }
 
-// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
-func (x *MenuItemCell) WithBordered(bordered bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
-	return x
+// WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
+func (mic *MenuItemCell) WithBordered(bordered bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBordered:"), bordered)
+	return mic
 }
 
-// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
-func (x *MenuItemCell) WithBezeled(bezeled bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
-	return x
+// WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
+func (mic *MenuItemCell) WithBezeled(bezeled bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBezeled:"), bezeled)
+	return mic
 }
 
-// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
-func (x *MenuItemCell) WithScrollable(scrollable bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
-	return x
+// WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
+func (mic *MenuItemCell) WithScrollable(scrollable bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setScrollable:"), scrollable)
+	return mic
 }
 
-// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
-func (x *MenuItemCell) WithHighlighted(highlighted bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
+func (mic *MenuItemCell) WithHighlighted(highlighted bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setHighlighted:"), highlighted)
+	return mic
 }
 
-// WithAlignment the alignment of the cell’s text.
-func (x *MenuItemCell) WithAlignment(alignment TextAlignment) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment of the cell’s text.
+func (mic *MenuItemCell) WithAlignment(alignment TextAlignment) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAlignment:"), alignment)
+	return mic
 }
 
-// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-func (x *MenuItemCell) WithWraps(wraps bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
-	return x
+// WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+func (mic *MenuItemCell) WithWraps(wraps bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setWraps:"), wraps)
+	return mic
 }
 
-// WithFont the font that the cell uses to display text.
-func (x *MenuItemCell) WithFont(font *Font) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font that the cell uses to display text.
+func (mic *MenuItemCell) WithFont(font *Font) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return mic
 }
 
-// WithFormatter the cell’s formatter object.
-func (x *MenuItemCell) WithFormatter(formatter obj.Object) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the cell’s formatter object.
+func (mic *MenuItemCell) WithFormatter(formatter obj.Object) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return mic
 }
 
-// WithObjectValue the cell’s value as an Objective-C object.
-func (x *MenuItemCell) WithObjectValue(objectValue obj.Object) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the cell’s value as an Objective-C object.
+func (mic *MenuItemCell) WithObjectValue(objectValue obj.Object) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return mic
 }
 
-// WithStringValue the cell’s value as a string.
-func (x *MenuItemCell) WithStringValue(stringValue string) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the cell’s value as a string.
+func (mic *MenuItemCell) WithStringValue(stringValue string) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return mic
 }
 
-// WithIntValue the cell’s value as an integer.
-func (x *MenuItemCell) WithIntValue(intValue int) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the cell’s value as an integer.
+func (mic *MenuItemCell) WithIntValue(intValue int) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setIntValue:"), intValue)
+	return mic
 }
 
-// WithFloatValue the cell’s value as a single-precision floating-point number.
-func (x *MenuItemCell) WithFloatValue(floatValue float32) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the cell’s value as a single-precision floating-point number.
+func (mic *MenuItemCell) WithFloatValue(floatValue float32) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setFloatValue:"), floatValue)
+	return mic
 }
 
-// WithDoubleValue the cell’s value as a double-precision floating-point number.
-func (x *MenuItemCell) WithDoubleValue(doubleValue float64) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the cell’s value as a double-precision floating-point number.
+func (mic *MenuItemCell) WithDoubleValue(doubleValue float64) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return mic
 }
 
-// WithIntegerValue the cell’s value as an integer value.
-func (x *MenuItemCell) WithIntegerValue(integerValue int) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the cell’s value as an integer value.
+func (mic *MenuItemCell) WithIntegerValue(integerValue int) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setIntegerValue:"), integerValue)
+	return mic
 }
 
-// WithImage the image displayed by the cell, if any.
-func (x *MenuItemCell) WithImage(image *Image) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+// WithImage sets the image displayed by the cell, if any.
+func (mic *MenuItemCell) WithImage(image *Image) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return mic
 }
 
-// WithControlSize the size of the cell.
-func (x *MenuItemCell) WithControlSize(controlSize ControlSize) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the cell.
+func (mic *MenuItemCell) WithControlSize(controlSize ControlSize) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setControlSize:"), controlSize)
+	return mic
 }
 
-// WithRepresentedObject the object represented by the cell.
-func (x *MenuItemCell) WithRepresentedObject(representedObject obj.Object) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
-	return x
+// WithRepresentedObject sets the object represented by the cell.
+func (mic *MenuItemCell) WithRepresentedObject(representedObject obj.Object) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	return mic
 }
 
-// WithMenu the cell’s contextual menu.
-func (x *MenuItemCell) WithMenu(menu *Menu) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets the cell’s contextual menu.
+func (mic *MenuItemCell) WithMenu(menu *Menu) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return mic
 }
 
-// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-func (x *MenuItemCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
-	return x
+// WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+func (mic *MenuItemCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	return mic
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *MenuItemCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (mic *MenuItemCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return mic
 }
 
-// WithLineBreakMode the line break mode to use when drawing text in the cell.
-func (x *MenuItemCell) WithLineBreakMode(lineBreakMode LineBreakMode) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use when drawing text in the cell.
+func (mic *MenuItemCell) WithLineBreakMode(lineBreakMode LineBreakMode) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return mic
 }
 
-// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
-func (x *MenuItemCell) WithAllowsUndo(allowsUndo bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
-	return x
+// WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
+func (mic *MenuItemCell) WithAllowsUndo(allowsUndo bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	return mic
 }
 
-// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-func (x *MenuItemCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
-	return x
+// WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+func (mic *MenuItemCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	return mic
 }
 
-// WithUserInterfaceLayoutDirection the layout direction of the user interface.
-func (x *MenuItemCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+// WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
+func (mic *MenuItemCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return mic
 }
 
-// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-func (x *MenuItemCell) WithUsesSingleLineMode(usesSingleLineMode bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+func (mic *MenuItemCell) WithUsesSingleLineMode(usesSingleLineMode bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return mic
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
-func (x *MenuItemCell) WithRefusesFirstResponder(refusesFirstResponder bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
+func (mic *MenuItemCell) WithRefusesFirstResponder(refusesFirstResponder bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return mic
 }
 
-// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-func (x *MenuItemCell) WithShowsFirstResponder(showsFirstResponder bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
-	return x
+// WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+func (mic *MenuItemCell) WithShowsFirstResponder(showsFirstResponder bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	return mic
 }
 
-// WithFocusRingType the type of focus ring to use with the associated view.
-func (x *MenuItemCell) WithFocusRingType(focusRingType FocusRingType) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+// WithFocusRingType sets the type of focus ring to use with the associated view.
+func (mic *MenuItemCell) WithFocusRingType(focusRingType FocusRingType) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return mic
 }
 
-// WithAttributedStringValue the cell’s value as an attributed string.
-func (x *MenuItemCell) WithAttributedStringValue(attributedStringValue obj.Object) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the cell’s value as an attributed string.
+func (mic *MenuItemCell) WithAttributedStringValue(attributedStringValue obj.Object) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return mic
 }
 
-// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-func (x *MenuItemCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
-	return x
+// WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+func (mic *MenuItemCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	return mic
 }
 
-// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
-func (x *MenuItemCell) WithImportsGraphics(importsGraphics bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
-	return x
+// WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
+func (mic *MenuItemCell) WithImportsGraphics(importsGraphics bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	return mic
 }
 
-// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
-func (x *MenuItemCell) WithAllowsMixedState(allowsMixedState bool) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
-	return x
+// WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
+func (mic *MenuItemCell) WithAllowsMixedState(allowsMixedState bool) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	return mic
 }
 
-// WithBackgroundStyle the cell’s background style.
-func (x *MenuItemCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
-	return x
+// WithBackgroundStyle sets the cell’s background style.
+func (mic *MenuItemCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	return mic
 }
 
-// WithControlTint the cell’s control tint.
-func (x *MenuItemCell) WithControlTint(controlTint ControlTint) *MenuItemCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
-	return x
+// WithControlTint sets the cell’s control tint.
+func (mic *MenuItemCell) WithControlTint(controlTint ControlTint) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("setControlTint:"), controlTint)
+	return mic
 }
 
 // CalcSize calculates the minimum required width and height of the receiver’s menu item.
-func (x *MenuItemCell) CalcSize() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calcSize"))
+func (mic *MenuItemCell) CalcSize() {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("calcSize"))
 }
 
 // StateImageRectForBounds returns the rectangle into which the menu item’s state image should be drawn.
-func (x *MenuItemCell) StateImageRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("stateImageRectForBounds:"), cellFrame)
+func (mic *MenuItemCell) StateImageRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(mic), objc.RegisterName("stateImageRectForBounds:"), cellFrame)
 	return _r
 }
 
 // KeyEquivalentRectForBounds returns the rectangle into which the menu item’s key equivalent should be drawn.
-func (x *MenuItemCell) KeyEquivalentRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("keyEquivalentRectForBounds:"), cellFrame)
+func (mic *MenuItemCell) KeyEquivalentRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(mic), objc.RegisterName("keyEquivalentRectForBounds:"), cellFrame)
 	return _r
 }
 
 // DrawSeparatorItemWithFrameInView draws a menu item separator.
-func (x *MenuItemCell) DrawSeparatorItemWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawSeparatorItemWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+func (mic *MenuItemCell) DrawSeparatorItemWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawSeparatorItemWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
 }
 
 // DrawStateImageWithFrameInView draws the state image associated with the menu item.
-func (x *MenuItemCell) DrawStateImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawStateImageWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+func (mic *MenuItemCell) DrawStateImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawStateImageWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
 }
 
 // DrawImageWithFrameInView draws the image associated with the menu item.
-func (x *MenuItemCell) DrawImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawImageWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+func (mic *MenuItemCell) DrawImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawImageWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
 }
 
 // DrawTitleWithFrameInView draws the title associated with the menu item.
-func (x *MenuItemCell) DrawTitleWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawTitleWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+func (mic *MenuItemCell) DrawTitleWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawTitleWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
 }
 
 // DrawKeyEquivalentWithFrameInView draws the key equivalent associated with the menu item.
-func (x *MenuItemCell) DrawKeyEquivalentWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawKeyEquivalentWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+func (mic *MenuItemCell) DrawKeyEquivalentWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawKeyEquivalentWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
 }
 
 // DrawBorderAndBackgroundWithFrameInView draws the borders and background associated with the receiver’s menu item (if any).
-func (x *MenuItemCell) DrawBorderAndBackgroundWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawBorderAndBackgroundWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
+func (mic *MenuItemCell) DrawBorderAndBackgroundWithFrameInView(cellFrame corefoundation.CGRect, controlView *View) {
+	objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("drawBorderAndBackgroundWithFrame:inView:"), cellFrame, objref.IDOf(controlView))
 }
 
 // MenuItem wraps the corresponding Objective-C method.
-func (x *MenuItemCell) MenuItem() *MenuItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuItem"))
+func (mic *MenuItemCell) MenuItem() *MenuItem {
+	_r := objc.Send[objc.ID](objref.IDOf(mic), objc.RegisterName("menuItem"))
 	return MenuItemFromID(_r)
 }
 
-// SetMenuItem wraps the corresponding Objective-C method.
-func (x *MenuItemCell) SetMenuItem(menuItem *MenuItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuItem:"), objref.IDOf(menuItem))
-}
-
 // NeedsSizing wraps the corresponding Objective-C method.
-func (x *MenuItemCell) NeedsSizing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsSizing"))
+func (mic *MenuItemCell) NeedsSizing() bool {
+	_r := objc.Send[bool](objref.IDOf(mic), objc.RegisterName("needsSizing"))
 	return _r
-}
-
-// SetNeedsSizing wraps the corresponding Objective-C method.
-func (x *MenuItemCell) SetNeedsSizing(needsSizing bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsSizing:"), needsSizing)
 }
 
 // NeedsDisplay wraps the corresponding Objective-C method.
-func (x *MenuItemCell) NeedsDisplay() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsDisplay"))
+func (mic *MenuItemCell) NeedsDisplay() bool {
+	_r := objc.Send[bool](objref.IDOf(mic), objc.RegisterName("needsDisplay"))
 	return _r
 }
 
-// SetNeedsDisplay wraps the corresponding Objective-C method.
-func (x *MenuItemCell) SetNeedsDisplay(needsDisplay bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-}
-
 // StateImageWidth wraps the corresponding Objective-C method.
-func (x *MenuItemCell) StateImageWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("stateImageWidth"))
+func (mic *MenuItemCell) StateImageWidth() float64 {
+	_r := objc.Send[float64](objref.IDOf(mic), objc.RegisterName("stateImageWidth"))
 	return _r
 }
 
 // ImageWidth wraps the corresponding Objective-C method.
-func (x *MenuItemCell) ImageWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("imageWidth"))
+func (mic *MenuItemCell) ImageWidth() float64 {
+	_r := objc.Send[float64](objref.IDOf(mic), objc.RegisterName("imageWidth"))
 	return _r
 }
 
 // TitleWidth wraps the corresponding Objective-C method.
-func (x *MenuItemCell) TitleWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("titleWidth"))
+func (mic *MenuItemCell) TitleWidth() float64 {
+	_r := objc.Send[float64](objref.IDOf(mic), objc.RegisterName("titleWidth"))
 	return _r
 }
 
 // KeyEquivalentWidth wraps the corresponding Objective-C method.
-func (x *MenuItemCell) KeyEquivalentWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("keyEquivalentWidth"))
+func (mic *MenuItemCell) KeyEquivalentWidth() float64 {
+	_r := objc.Send[float64](objref.IDOf(mic), objc.RegisterName("keyEquivalentWidth"))
 	return _r
 }
-
-// MenuItemCellable is the interface implemented by [MenuItemCell], for mocking and DI.
-type MenuItemCellable interface {
-	obj.Object
-	WithMenuItem(menuItem *MenuItem) *MenuItemCell
-	WithNeedsSizing(needsSizing bool) *MenuItemCell
-	WithNeedsDisplay(needsDisplay bool) *MenuItemCell
-	WithBezelStyle(bezelStyle BezelStyle) *MenuItemCell
-	WithHighlightsBy(highlightsBy CellStyleMask) *MenuItemCell
-	WithShowsStateBy(showsStateBy CellStyleMask) *MenuItemCell
-	WithAttributedTitle(attributedTitle obj.Object) *MenuItemCell
-	WithAlternateTitle(alternateTitle string) *MenuItemCell
-	WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *MenuItemCell
-	WithAlternateImage(alternateImage *Image) *MenuItemCell
-	WithImagePosition(imagePosition CellImagePosition) *MenuItemCell
-	WithImageScaling(imageScaling ImageScaling) *MenuItemCell
-	WithKeyEquivalent(keyEquivalent string) *MenuItemCell
-	WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) *MenuItemCell
-	WithTransparent(transparent bool) *MenuItemCell
-	WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *MenuItemCell
-	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *MenuItemCell
-	WithSound(sound *Sound) *MenuItemCell
-	WithBackgroundColor(backgroundColor *Color) *MenuItemCell
-	WithGradientType(gradientType GradientType) *MenuItemCell
-	WithKeyEquivalentFont(keyEquivalentFont *Font) *MenuItemCell
-	WithControlView(controlView ViewProvider) *MenuItemCell
-	WithType(type_ CellType) *MenuItemCell
-	WithState(state int) *MenuItemCell
-	WithTarget(target obj.Object) *MenuItemCell
-	WithTag(tag int) *MenuItemCell
-	WithTitle(title string) *MenuItemCell
-	WithEnabled(enabled bool) *MenuItemCell
-	WithContinuous(continuous bool) *MenuItemCell
-	WithEditable(editable bool) *MenuItemCell
-	WithSelectable(selectable bool) *MenuItemCell
-	WithBordered(bordered bool) *MenuItemCell
-	WithBezeled(bezeled bool) *MenuItemCell
-	WithScrollable(scrollable bool) *MenuItemCell
-	WithHighlighted(highlighted bool) *MenuItemCell
-	WithAlignment(alignment TextAlignment) *MenuItemCell
-	WithWraps(wraps bool) *MenuItemCell
-	WithFont(font *Font) *MenuItemCell
-	WithFormatter(formatter obj.Object) *MenuItemCell
-	WithObjectValue(objectValue obj.Object) *MenuItemCell
-	WithStringValue(stringValue string) *MenuItemCell
-	WithIntValue(intValue int) *MenuItemCell
-	WithFloatValue(floatValue float32) *MenuItemCell
-	WithDoubleValue(doubleValue float64) *MenuItemCell
-	WithIntegerValue(integerValue int) *MenuItemCell
-	WithImage(image *Image) *MenuItemCell
-	WithControlSize(controlSize ControlSize) *MenuItemCell
-	WithRepresentedObject(representedObject obj.Object) *MenuItemCell
-	WithMenu(menu *Menu) *MenuItemCell
-	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *MenuItemCell
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *MenuItemCell
-	WithLineBreakMode(lineBreakMode LineBreakMode) *MenuItemCell
-	WithAllowsUndo(allowsUndo bool) *MenuItemCell
-	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *MenuItemCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *MenuItemCell
-	WithUsesSingleLineMode(usesSingleLineMode bool) *MenuItemCell
-	WithRefusesFirstResponder(refusesFirstResponder bool) *MenuItemCell
-	WithShowsFirstResponder(showsFirstResponder bool) *MenuItemCell
-	WithFocusRingType(focusRingType FocusRingType) *MenuItemCell
-	WithAttributedStringValue(attributedStringValue obj.Object) *MenuItemCell
-	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *MenuItemCell
-	WithImportsGraphics(importsGraphics bool) *MenuItemCell
-	WithAllowsMixedState(allowsMixedState bool) *MenuItemCell
-	WithBackgroundStyle(backgroundStyle BackgroundStyle) *MenuItemCell
-	WithControlTint(controlTint ControlTint) *MenuItemCell
-	CalcSize()
-	StateImageRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect
-	KeyEquivalentRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect
-	DrawSeparatorItemWithFrameInView(cellFrame corefoundation.CGRect, controlView *View)
-	DrawStateImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *View)
-	DrawImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *View)
-	DrawTitleWithFrameInView(cellFrame corefoundation.CGRect, controlView *View)
-	DrawKeyEquivalentWithFrameInView(cellFrame corefoundation.CGRect, controlView *View)
-	DrawBorderAndBackgroundWithFrameInView(cellFrame corefoundation.CGRect, controlView *View)
-	MenuItem() *MenuItem
-	SetMenuItem(menuItem *MenuItem)
-	NeedsSizing() bool
-	SetNeedsSizing(needsSizing bool)
-	NeedsDisplay() bool
-	SetNeedsDisplay(needsDisplay bool)
-	StateImageWidth() float64
-	ImageWidth() float64
-	TitleWidth() float64
-	KeyEquivalentWidth() float64
-}
-
-var _ MenuItemCellable = (*MenuItemCell)(nil)
 
 // isMenuItemCell marks MenuItemCell — and, by embedding promotion, its
 // subclasses — as a member of the MenuItemCell hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MenuItemCell) isMenuItemCell() {}
+func (mic *MenuItemCell) isMenuItemCell() {}
 
 var _ MenuItemCellProvider = (*MenuItemCell)(nil)
 

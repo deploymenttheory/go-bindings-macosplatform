@@ -46,24 +46,24 @@ func medicationConceptAdopt(id objc.ID) *MedicationConcept {
 }
 
 // Description returns the object's -description text.
-func (x *MedicationConcept) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mc *MedicationConcept) Description() string {
+	return rt.Description(objref.IDOf(mc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MedicationConcept) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mc *MedicationConcept) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MedicationConcept) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mc *MedicationConcept) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MedicationConcept) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mc *MedicationConcept) String() string {
+	return rt.Description(objref.IDOf(mc))
 }
 
 // NewMedicationConcept creates a new MedicationConcept.
@@ -72,40 +72,29 @@ func NewMedicationConcept() *MedicationConcept {
 	return medicationConceptAdopt(_id)
 }
 
-// Identifier the unique identifier for the specific medication concept. Each concept has one stable identifier that stays the same across devices. You can use this identifier to directly compare medications, for example, to check whether two objects represent the same medication.
-func (x *MedicationConcept) Identifier() *HealthConceptIdentifier {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns the unique identifier for the specific medication concept. Each concept has one stable identifier that stays the same across devices. You can use this identifier to directly compare medications, for example, to check whether two objects represent the same medication.
+func (mc *MedicationConcept) Identifier() *HealthConceptIdentifier {
+	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("identifier"))
 	return HealthConceptIdentifierFromID(_r)
 }
 
-// DisplayText the display name for this medication. The name of the medication a person enters or selects during medication onboarding.
-func (x *MedicationConcept) DisplayText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayText"))
+// DisplayText returns the display name for this medication. The name of the medication a person enters or selects during medication onboarding.
+func (mc *MedicationConcept) DisplayText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("displayText"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// GeneralForm the general form the medication is manufactured in. A general manufactured dose form for the specific medication. This value tells you the manufactured form of the medication, such as tablet, capsule, cream, injection, or inhaler.
-func (x *MedicationConcept) GeneralForm() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("generalForm"))
+// GeneralForm returns the general form the medication is manufactured in. A general manufactured dose form for the specific medication. This value tells you the manufactured form of the medication, such as tablet, capsule, cream, injection, or inhaler.
+func (mc *MedicationConcept) GeneralForm() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("generalForm"))
 	return obj.Wrap(_r)
 }
 
-// RelatedCodings the set of related clinical codings for the medication. Each coding links the medication to an external medical terminology system, such as RxNorm.
-func (x *MedicationConcept) RelatedCodings() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relatedCodings"))
+// RelatedCodings returns the set of related clinical codings for the medication. Each coding links the medication to an external medical terminology system, such as RxNorm.
+func (mc *MedicationConcept) RelatedCodings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("relatedCodings"))
 	return obj.Wrap(_r)
 }
-
-// MedicationConceptable is the interface implemented by [MedicationConcept], for mocking and DI.
-type MedicationConceptable interface {
-	obj.Object
-	Identifier() *HealthConceptIdentifier
-	DisplayText() string
-	GeneralForm() obj.Object
-	RelatedCodings() obj.Object
-}
-
-var _ MedicationConceptable = (*MedicationConcept)(nil)

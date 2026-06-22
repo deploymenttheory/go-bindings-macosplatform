@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -75,49 +74,36 @@ func NewBlendNodeDefinitionDistanceBlendWithSpatialMixerDefinition(spatialMixerD
 }
 
 // AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree adds a child node that blends below a given value.
-func (x *BlendNodeDefinition) AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType CurveType, subtree *SoundEventNodeDefinition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRangeForInputValuesBelow:fullGainAtValue:fadeCurveType:subtree:"), value, fullGainAtValue, fadeCurveType, objref.IDOf(subtree))
+func (bnd *BlendNodeDefinition) AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType CurveType, subtree *SoundEventNodeDefinition) {
+	objc.Send[objc.ID](objref.IDOf(bnd), objc.RegisterName("addRangeForInputValuesBelow:fullGainAtValue:fadeCurveType:subtree:"), value, fullGainAtValue, fadeCurveType, objref.IDOf(subtree))
 }
 
 // AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree adds a child node that blends between a given high and low value.
-func (x *BlendNodeDefinition) AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree(lowValue float64, highValue float64, fullGainAtLowValue float64, fullGainAtHighValue float64, lowFadeCurveType CurveType, highFadeCurveType CurveType, subtree *SoundEventNodeDefinition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRangeForInputValuesBetween:highValue:fullGainAtLowValue:fullGainAtHighValue:lowFadeCurveType:highFadeCurveType:subtree:"), lowValue, highValue, fullGainAtLowValue, fullGainAtHighValue, lowFadeCurveType, highFadeCurveType, objref.IDOf(subtree))
+func (bnd *BlendNodeDefinition) AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree(lowValue float64, highValue float64, fullGainAtLowValue float64, fullGainAtHighValue float64, lowFadeCurveType CurveType, highFadeCurveType CurveType, subtree *SoundEventNodeDefinition) {
+	objc.Send[objc.ID](objref.IDOf(bnd), objc.RegisterName("addRangeForInputValuesBetween:highValue:fullGainAtLowValue:fullGainAtHighValue:lowFadeCurveType:highFadeCurveType:subtree:"), lowValue, highValue, fullGainAtLowValue, fullGainAtHighValue, lowFadeCurveType, highFadeCurveType, objref.IDOf(subtree))
 }
 
 // AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree adds a child node that blends above a given value.
-func (x *BlendNodeDefinition) AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType CurveType, subtree *SoundEventNodeDefinition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRangeForInputValuesAbove:fullGainAtValue:fadeCurveType:subtree:"), value, fullGainAtValue, fadeCurveType, objref.IDOf(subtree))
+func (bnd *BlendNodeDefinition) AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType CurveType, subtree *SoundEventNodeDefinition) {
+	objc.Send[objc.ID](objref.IDOf(bnd), objc.RegisterName("addRangeForInputValuesAbove:fullGainAtValue:fadeCurveType:subtree:"), value, fullGainAtValue, fadeCurveType, objref.IDOf(subtree))
 }
 
 // AddRangeWithEnvelopeSubtree adds a child node with an envelope.
-func (x *BlendNodeDefinition) AddRangeWithEnvelopeSubtree(envelope *Envelope, subtree *SoundEventNodeDefinition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRangeWithEnvelope:subtree:"), objref.IDOf(envelope), objref.IDOf(subtree))
+func (bnd *BlendNodeDefinition) AddRangeWithEnvelopeSubtree(envelope *Envelope, subtree *SoundEventNodeDefinition) {
+	objc.Send[objc.ID](objref.IDOf(bnd), objc.RegisterName("addRangeWithEnvelope:subtree:"), objref.IDOf(envelope), objref.IDOf(subtree))
 }
 
 // BlendParameterDefinition wraps the corresponding Objective-C method.
-func (x *BlendNodeDefinition) BlendParameterDefinition() *NumberMetaParameterDefinition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("blendParameterDefinition"))
+func (bnd *BlendNodeDefinition) BlendParameterDefinition() *NumberMetaParameterDefinition {
+	_r := objc.Send[objc.ID](objref.IDOf(bnd), objc.RegisterName("blendParameterDefinition"))
 	return NumberMetaParameterDefinitionFromID(_r)
 }
 
 // SpatialMixerDefinitionForDistance wraps the corresponding Objective-C method.
-func (x *BlendNodeDefinition) SpatialMixerDefinitionForDistance() *SpatialMixerDefinition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("spatialMixerDefinitionForDistance"))
+func (bnd *BlendNodeDefinition) SpatialMixerDefinitionForDistance() *SpatialMixerDefinition {
+	_r := objc.Send[objc.ID](objref.IDOf(bnd), objc.RegisterName("spatialMixerDefinitionForDistance"))
 	return SpatialMixerDefinitionFromID(_r)
 }
-
-// BlendNodeDefinitionable is the interface implemented by [BlendNodeDefinition], for mocking and DI.
-type BlendNodeDefinitionable interface {
-	obj.Object
-	AddRangeForInputValuesBelowFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType CurveType, subtree *SoundEventNodeDefinition)
-	AddRangeForInputValuesBetweenHighValueFullGainAtLowValueFullGainAtHighValueLowFadeCurveTypeHighFadeCurveTypeSubtree(lowValue float64, highValue float64, fullGainAtLowValue float64, fullGainAtHighValue float64, lowFadeCurveType CurveType, highFadeCurveType CurveType, subtree *SoundEventNodeDefinition)
-	AddRangeForInputValuesAboveFullGainAtValueFadeCurveTypeSubtree(value float64, fullGainAtValue float64, fadeCurveType CurveType, subtree *SoundEventNodeDefinition)
-	AddRangeWithEnvelopeSubtree(envelope *Envelope, subtree *SoundEventNodeDefinition)
-	BlendParameterDefinition() *NumberMetaParameterDefinition
-	SpatialMixerDefinitionForDistance() *SpatialMixerDefinition
-}
-
-var _ BlendNodeDefinitionable = (*BlendNodeDefinition)(nil)
 
 var _ SoundEventNodeDefinitionProvider = (*BlendNodeDefinition)(nil)
 

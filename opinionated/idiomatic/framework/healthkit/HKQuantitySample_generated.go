@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,37 +46,27 @@ func quantitySampleAdopt(id objc.ID) *QuantitySample {
 }
 
 // QuantityType wraps the corresponding Objective-C method.
-func (x *QuantitySample) QuantityType() *QuantityType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quantityType"))
+func (qs *QuantitySample) QuantityType() *QuantityType {
+	_r := objc.Send[objc.ID](objref.IDOf(qs), objc.RegisterName("quantityType"))
 	return QuantityTypeFromID(_r)
 }
 
 // Quantity wraps the corresponding Objective-C method.
-func (x *QuantitySample) Quantity() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quantity"))
+func (qs *QuantitySample) Quantity() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(qs), objc.RegisterName("quantity"))
 	return QuantityFromID(_r)
 }
 
-// Count the number of individual values making up the receiver's quantity. Requests for the individual series quantities can be made using HKQuantitySeriesSampleQuery.
-func (x *QuantitySample) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+// Count returns the number of individual values making up the receiver's quantity. Requests for the individual series quantities can be made using HKQuantitySeriesSampleQuery.
+func (qs *QuantitySample) Count() int {
+	_r := objc.Send[int](objref.IDOf(qs), objc.RegisterName("count"))
 	return _r
 }
-
-// QuantitySampleable is the interface implemented by [QuantitySample], for mocking and DI.
-type QuantitySampleable interface {
-	obj.Object
-	QuantityType() *QuantityType
-	Quantity() *Quantity
-	Count() int
-}
-
-var _ QuantitySampleable = (*QuantitySample)(nil)
 
 // isQuantitySample marks QuantitySample — and, by embedding promotion, its
 // subclasses — as a member of the QuantitySample hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *QuantitySample) isQuantitySample() {}
+func (qs *QuantitySample) isQuantitySample() {}
 
 var _ QuantitySampleProvider = (*QuantitySample)(nil)
 

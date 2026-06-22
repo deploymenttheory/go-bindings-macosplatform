@@ -46,24 +46,24 @@ func stateConstraintAdopt(id objc.ID) *StateConstraint {
 }
 
 // Description returns the object's -description text.
-func (x *StateConstraint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sc *StateConstraint) Description() string {
+	return rt.Description(objref.IDOf(sc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StateConstraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sc *StateConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StateConstraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sc *StateConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StateConstraint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sc *StateConstraint) String() string {
+	return rt.Description(objref.IDOf(sc))
 }
 
 // NewStateConstraint creates a new StateConstraint.
@@ -72,25 +72,16 @@ func NewStateConstraint() *StateConstraint {
 	return stateConstraintAdopt(_id)
 }
 
-// BufferShape the shape of the state buffer.
+// BufferShape returns the shape of the state buffer.
 //
 // BufferShape returns the collection as a Go slice.
-func (x *StateConstraint) BufferShape() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bufferShape"))
+func (sc *StateConstraint) BufferShape() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("bufferShape"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// DataType the data type of scalars in the state buffer.
-func (x *StateConstraint) DataType() MultiArrayDataType {
-	_r := objc.Send[MultiArrayDataType](objref.IDOf(x), objc.RegisterName("dataType"))
+// DataType returns the data type of scalars in the state buffer.
+func (sc *StateConstraint) DataType() MultiArrayDataType {
+	_r := objc.Send[MultiArrayDataType](objref.IDOf(sc), objc.RegisterName("dataType"))
 	return _r
 }
-
-// StateConstraintable is the interface implemented by [StateConstraint], for mocking and DI.
-type StateConstraintable interface {
-	obj.Object
-	BufferShape() []obj.Object
-	DataType() MultiArrayDataType
-}
-
-var _ StateConstraintable = (*StateConstraint)(nil)

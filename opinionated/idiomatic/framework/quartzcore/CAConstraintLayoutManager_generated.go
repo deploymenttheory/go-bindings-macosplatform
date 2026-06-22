@@ -46,24 +46,24 @@ func constraintLayoutManagerAdopt(id objc.ID) *ConstraintLayoutManager {
 }
 
 // Description returns the object's -description text.
-func (x *ConstraintLayoutManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (clm *ConstraintLayoutManager) Description() string {
+	return rt.Description(objref.IDOf(clm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ConstraintLayoutManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (clm *ConstraintLayoutManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(clm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ConstraintLayoutManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (clm *ConstraintLayoutManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(clm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ConstraintLayoutManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (clm *ConstraintLayoutManager) String() string {
+	return rt.Description(objref.IDOf(clm))
 }
 
 // NewConstraintLayoutManager creates a new ConstraintLayoutManager.
@@ -71,10 +71,3 @@ func NewConstraintLayoutManager() *ConstraintLayoutManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("CAConstraintLayoutManager")), objc.RegisterName("new"))
 	return constraintLayoutManagerAdopt(_id)
 }
-
-// ConstraintLayoutManagerable is the interface implemented by [ConstraintLayoutManager], for mocking and DI.
-type ConstraintLayoutManagerable interface {
-	obj.Object
-}
-
-var _ ConstraintLayoutManagerable = (*ConstraintLayoutManager)(nil)

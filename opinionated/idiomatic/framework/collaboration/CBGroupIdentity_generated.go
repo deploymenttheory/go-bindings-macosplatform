@@ -53,33 +53,23 @@ func NewGroupIdentity() *GroupIdentity {
 }
 
 // PosixGID returns the POSIX GID of the identity. The POSIX GID is an integer that can identify a group within an identity authority. GIDs are not guaranteed to be unique within an identity authority. - Returns: The POSIX GID of the group identity.
-func (x *GroupIdentity) PosixGID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("posixGID"))
+func (gi *GroupIdentity) PosixGID() int {
+	_r := objc.Send[int](objref.IDOf(gi), objc.RegisterName("posixGID"))
 	return _r
 }
 
 // Members returns the members of the group. This method only returns direct members of a group, it does not return members of members. Both user and group identities can be members of a group, but a group cannot be a member of itself. You also cannot have “circular” membership, i.e. a group be a member of another group that is a member of the first group. - Returns: An array of `CBIdentity` objects each representing a member of the group identity.
-func (x *GroupIdentity) Members() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("members"))
+func (gi *GroupIdentity) Members() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(gi), objc.RegisterName("members"))
 	return obj.Wrap(_r)
 }
 
 // MemberIdentities wraps the corresponding Objective-C method.
 //
 // MemberIdentities returns the collection as a Go slice.
-func (x *GroupIdentity) MemberIdentities() []*Identity {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("memberIdentities"))
+func (gi *GroupIdentity) MemberIdentities() []*Identity {
+	_arr := objc.Send[objc.ID](objref.IDOf(gi), objc.RegisterName("memberIdentities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Identity { return IdentityFromID(_id) })
 }
-
-// GroupIdentityable is the interface implemented by [GroupIdentity], for mocking and DI.
-type GroupIdentityable interface {
-	obj.Object
-	PosixGID() int
-	Members() obj.Object
-	MemberIdentities() []*Identity
-}
-
-var _ GroupIdentityable = (*GroupIdentity)(nil)
 
 var _ IdentityProvider = (*GroupIdentity)(nil)

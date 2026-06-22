@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,77 +50,50 @@ func NewDOMHTMLOptionsCollection() *DOMHTMLOptionsCollection {
 }
 
 // WithSelectedIndex sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLOptionsCollection) WithSelectedIndex(selectedIndex int) *DOMHTMLOptionsCollection {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedIndex:"), selectedIndex)
-	return x
+func (doc *DOMHTMLOptionsCollection) WithSelectedIndex(selectedIndex int) *DOMHTMLOptionsCollection {
+	objc.Send[objc.ID](objref.IDOf(doc), objc.RegisterName("setSelectedIndex:"), selectedIndex)
+	return doc
 }
 
 // WithLength sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLOptionsCollection) WithLength(length int) *DOMHTMLOptionsCollection {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
-	return x
+func (doc *DOMHTMLOptionsCollection) WithLength(length int) *DOMHTMLOptionsCollection {
+	objc.Send[objc.ID](objref.IDOf(doc), objc.RegisterName("setLength:"), length)
+	return doc
 }
 
 // NamedItem wraps the corresponding Objective-C method.
-func (x *DOMHTMLOptionsCollection) NamedItem(name string) *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("namedItem:"), purego.NSString(name))
+func (doc *DOMHTMLOptionsCollection) NamedItem(name string) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(doc), objc.RegisterName("namedItem:"), purego.NSString(name))
 	return DOMNodeFromID(_r)
 }
 
 // AddIndex wraps the corresponding Objective-C method.
-func (x *DOMHTMLOptionsCollection) AddIndex(option *DOMHTMLOptionElement, index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("add:index:"), objref.IDOf(option), index)
+func (doc *DOMHTMLOptionsCollection) AddIndex(option *DOMHTMLOptionElement, index int) {
+	objc.Send[objc.ID](objref.IDOf(doc), objc.RegisterName("add:index:"), objref.IDOf(option), index)
 }
 
 // Remove wraps the corresponding Objective-C method.
-func (x *DOMHTMLOptionsCollection) Remove(index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remove:"), index)
+func (doc *DOMHTMLOptionsCollection) Remove(index int) {
+	objc.Send[objc.ID](objref.IDOf(doc), objc.RegisterName("remove:"), index)
 }
 
 // Item wraps the corresponding Objective-C method.
-func (x *DOMHTMLOptionsCollection) Item(index int) *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
+func (doc *DOMHTMLOptionsCollection) Item(index int) *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(doc), objc.RegisterName("item:"), index)
 	return DOMNodeFromID(_r)
 }
 
 // SelectedIndex wraps the corresponding Objective-C method.
-func (x *DOMHTMLOptionsCollection) SelectedIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("selectedIndex"))
+func (doc *DOMHTMLOptionsCollection) SelectedIndex() int {
+	_r := objc.Send[int](objref.IDOf(doc), objc.RegisterName("selectedIndex"))
 	return _r
-}
-
-// SetSelectedIndex wraps the corresponding Objective-C method.
-func (x *DOMHTMLOptionsCollection) SetSelectedIndex(selectedIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedIndex:"), selectedIndex)
 }
 
 // Length wraps the corresponding Objective-C method.
-func (x *DOMHTMLOptionsCollection) Length() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+func (doc *DOMHTMLOptionsCollection) Length() int {
+	_r := objc.Send[int](objref.IDOf(doc), objc.RegisterName("length"))
 	return _r
 }
-
-// SetLength wraps the corresponding Objective-C method.
-func (x *DOMHTMLOptionsCollection) SetLength(length int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
-}
-
-// DOMHTMLOptionsCollectionable is the interface implemented by [DOMHTMLOptionsCollection], for mocking and DI.
-type DOMHTMLOptionsCollectionable interface {
-	obj.Object
-	WithSelectedIndex(selectedIndex int) *DOMHTMLOptionsCollection
-	WithLength(length int) *DOMHTMLOptionsCollection
-	NamedItem(name string) *DOMNode
-	AddIndex(option *DOMHTMLOptionElement, index int)
-	Remove(index int)
-	Item(index int) *DOMNode
-	SelectedIndex() int
-	SetSelectedIndex(selectedIndex int)
-	Length() int
-	SetLength(length int)
-}
-
-var _ DOMHTMLOptionsCollectionable = (*DOMHTMLOptionsCollection)(nil)
 
 var _ DOMObjectProvider = (*DOMHTMLOptionsCollection)(nil)
 

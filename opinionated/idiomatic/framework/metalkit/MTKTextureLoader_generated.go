@@ -5,13 +5,14 @@
 package metalkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // TextureLoader is an idiomatic wrapper over the Objective-C class MTKTextureLoader.
@@ -48,24 +49,24 @@ func textureLoaderAdopt(id objc.ID) *TextureLoader {
 }
 
 // Description returns the object's -description text.
-func (x *TextureLoader) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tl *TextureLoader) Description() string {
+	return rt.Description(objref.IDOf(tl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextureLoader) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tl *TextureLoader) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextureLoader) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tl *TextureLoader) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextureLoader) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tl *TextureLoader) String() string {
+	return rt.Description(objref.IDOf(tl))
 }
 
 // NewTextureLoader creates a new TextureLoader.
@@ -75,19 +76,11 @@ func NewTextureLoader() *TextureLoader {
 }
 
 // NewTexturesWithContentsOfURLsOptionsError synchronously loads image data and creates new Metal textures from the specified list of URLs.
-func (x *TextureLoader) NewTexturesWithContentsOfURLsOptionsError(uRLs []obj.Object, options obj.Object) (result []obj.Object, err error) {
+func (tl *TextureLoader) NewTexturesWithContentsOfURLsOptionsError(uRLs []obj.Object, options obj.Object) (result []obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("newTexturesWithContentsOfURLs:options:error:"), purego.SliceToNSArray(uRLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("newTexturesWithContentsOfURLs:options:error:"), purego.SliceToNSArray(uRLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
-
-// TextureLoaderable is the interface implemented by [TextureLoader], for mocking and DI.
-type TextureLoaderable interface {
-	obj.Object
-	NewTexturesWithContentsOfURLsOptionsError(uRLs []obj.Object, options obj.Object) (result []obj.Object, err error)
-}
-
-var _ TextureLoaderable = (*TextureLoader)(nil)

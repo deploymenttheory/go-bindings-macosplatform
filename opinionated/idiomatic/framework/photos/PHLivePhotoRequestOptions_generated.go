@@ -46,24 +46,24 @@ func livePhotoRequestOptionsAdopt(id objc.ID) *LivePhotoRequestOptions {
 }
 
 // Description returns the object's -description text.
-func (x *LivePhotoRequestOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lpro *LivePhotoRequestOptions) Description() string {
+	return rt.Description(objref.IDOf(lpro))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LivePhotoRequestOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lpro *LivePhotoRequestOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lpro), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LivePhotoRequestOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lpro *LivePhotoRequestOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lpro), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LivePhotoRequestOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lpro *LivePhotoRequestOptions) String() string {
+	return rt.Description(objref.IDOf(lpro))
 }
 
 // NewLivePhotoRequestOptions creates a new LivePhotoRequestOptions.
@@ -72,49 +72,26 @@ func NewLivePhotoRequestOptions() *LivePhotoRequestOptions {
 	return livePhotoRequestOptionsAdopt(_id)
 }
 
-// WithDeliveryMode the requested Live Photo quality and delivery priority.
-func (x *LivePhotoRequestOptions) WithDeliveryMode(deliveryMode ImageRequestOptionsDeliveryMode) *LivePhotoRequestOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryMode:"), deliveryMode)
-	return x
+// WithDeliveryMode sets the requested Live Photo quality and delivery priority.
+func (lpro *LivePhotoRequestOptions) WithDeliveryMode(deliveryMode ImageRequestOptionsDeliveryMode) *LivePhotoRequestOptions {
+	objc.Send[objc.ID](objref.IDOf(lpro), objc.RegisterName("setDeliveryMode:"), deliveryMode)
+	return lpro
 }
 
-// WithNetworkAccessAllowed a Boolean value that specifies whether Photos can download the requested Live Photo data from iCloud.
-func (x *LivePhotoRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *LivePhotoRequestOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
-	return x
+// WithNetworkAccessAllowed sets a Boolean value that specifies whether Photos can download the requested Live Photo data from iCloud.
+func (lpro *LivePhotoRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *LivePhotoRequestOptions {
+	objc.Send[objc.ID](objref.IDOf(lpro), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
+	return lpro
 }
 
 // DeliveryMode wraps the corresponding Objective-C method.
-func (x *LivePhotoRequestOptions) DeliveryMode() ImageRequestOptionsDeliveryMode {
-	_r := objc.Send[ImageRequestOptionsDeliveryMode](objref.IDOf(x), objc.RegisterName("deliveryMode"))
+func (lpro *LivePhotoRequestOptions) DeliveryMode() ImageRequestOptionsDeliveryMode {
+	_r := objc.Send[ImageRequestOptionsDeliveryMode](objref.IDOf(lpro), objc.RegisterName("deliveryMode"))
 	return _r
-}
-
-// SetDeliveryMode wraps the corresponding Objective-C method.
-func (x *LivePhotoRequestOptions) SetDeliveryMode(deliveryMode ImageRequestOptionsDeliveryMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryMode:"), deliveryMode)
 }
 
 // IsNetworkAccessAllowed wraps the corresponding Objective-C method.
-func (x *LivePhotoRequestOptions) IsNetworkAccessAllowed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNetworkAccessAllowed"))
+func (lpro *LivePhotoRequestOptions) IsNetworkAccessAllowed() bool {
+	_r := objc.Send[bool](objref.IDOf(lpro), objc.RegisterName("isNetworkAccessAllowed"))
 	return _r
 }
-
-// SetNetworkAccessAllowed wraps the corresponding Objective-C method.
-func (x *LivePhotoRequestOptions) SetNetworkAccessAllowed(networkAccessAllowed bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
-}
-
-// LivePhotoRequestOptionsable is the interface implemented by [LivePhotoRequestOptions], for mocking and DI.
-type LivePhotoRequestOptionsable interface {
-	obj.Object
-	WithDeliveryMode(deliveryMode ImageRequestOptionsDeliveryMode) *LivePhotoRequestOptions
-	WithNetworkAccessAllowed(networkAccessAllowed bool) *LivePhotoRequestOptions
-	DeliveryMode() ImageRequestOptionsDeliveryMode
-	SetDeliveryMode(deliveryMode ImageRequestOptionsDeliveryMode)
-	IsNetworkAccessAllowed() bool
-	SetNetworkAccessAllowed(networkAccessAllowed bool)
-}
-
-var _ LivePhotoRequestOptionsable = (*LivePhotoRequestOptions)(nil)

@@ -47,24 +47,24 @@ func iKFilterUIViewAdopt(id objc.ID) *IKFilterUIView {
 }
 
 // Description returns the object's -description text.
-func (x *IKFilterUIView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ifuv *IKFilterUIView) Description() string {
+	return rt.Description(objref.IDOf(ifuv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IKFilterUIView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ifuv *IKFilterUIView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ifuv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IKFilterUIView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ifuv *IKFilterUIView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ifuv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IKFilterUIView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ifuv *IKFilterUIView) String() string {
+	return rt.Description(objref.IDOf(ifuv))
 }
 
 // NewIKFilterUIViewWithFrameFilter initializes a view that contains controls for the input parameters of a filter.
@@ -75,22 +75,13 @@ func NewIKFilterUIViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter 
 }
 
 // Filter returns the Core Image filter associated with the view.
-func (x *IKFilterUIView) Filter() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filter"))
+func (ifuv *IKFilterUIView) Filter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ifuv), objc.RegisterName("filter"))
 	return obj.Wrap(_r)
 }
 
 // ObjectController returns the object controller for the bindings between the filter and its view.
-func (x *IKFilterUIView) ObjectController() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectController"))
+func (ifuv *IKFilterUIView) ObjectController() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ifuv), objc.RegisterName("objectController"))
 	return obj.Wrap(_r)
 }
-
-// IKFilterUIViewable is the interface implemented by [IKFilterUIView], for mocking and DI.
-type IKFilterUIViewable interface {
-	obj.Object
-	Filter() obj.Object
-	ObjectController() obj.Object
-}
-
-var _ IKFilterUIViewable = (*IKFilterUIView)(nil)

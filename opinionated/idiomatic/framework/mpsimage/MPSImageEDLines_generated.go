@@ -45,24 +45,24 @@ func imageEDLinesAdopt(id objc.ID) *ImageEDLines {
 }
 
 // Description returns the object's -description text.
-func (x *ImageEDLines) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (iel *ImageEDLines) Description() string {
+	return rt.Description(objref.IDOf(iel))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageEDLines) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (iel *ImageEDLines) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(iel), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageEDLines) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (iel *ImageEDLines) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(iel), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ImageEDLines) String() string {
-	return rt.Description(objref.IDOf(x))
+func (iel *ImageEDLines) String() string {
+	return rt.Description(objref.IDOf(iel))
 }
 
 // NewImageEDLines creates a new ImageEDLines.
@@ -71,156 +71,92 @@ func NewImageEDLines() *ImageEDLines {
 	return imageEDLinesAdopt(_id)
 }
 
-// WithClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
-func (x *ImageEDLines) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageEDLines {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
+func (iel *ImageEDLines) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageEDLines {
+	objc.Send[objc.ID](objref.IDOf(iel), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return iel
 }
 
-// WithMinLineLength read-write value used to set the minimum length of a line segment. Default is 32
-func (x *ImageEDLines) WithMinLineLength(minLineLength uint16) *ImageEDLines {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinLineLength:"), minLineLength)
-	return x
+// WithMinLineLength sets read-write value used to set the minimum length of a line segment. Default is 32
+func (iel *ImageEDLines) WithMinLineLength(minLineLength uint16) *ImageEDLines {
+	objc.Send[objc.ID](objref.IDOf(iel), objc.RegisterName("setMinLineLength:"), minLineLength)
+	return iel
 }
 
-// WithMaxLines read-write value used to set the max number of line segments to be written out. The endpointBuffer at encode must be >= maxLines * 4 * sizeof(unsigned short) + sizeof(uint32_t). Default is 256
-func (x *ImageEDLines) WithMaxLines(maxLines int) *ImageEDLines {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxLines:"), maxLines)
-	return x
+// WithMaxLines sets read-write value used to set the max number of line segments to be written out. The endpointBuffer at encode must be >= maxLines * 4 * sizeof(unsigned short) + sizeof(uint32_t). Default is 256
+func (iel *ImageEDLines) WithMaxLines(maxLines int) *ImageEDLines {
+	objc.Send[objc.ID](objref.IDOf(iel), objc.RegisterName("setMaxLines:"), maxLines)
+	return iel
 }
 
-// WithDetailRatio read-write value used to set the detailRatio to use in the EDLines algorithm Default is 32
-func (x *ImageEDLines) WithDetailRatio(detailRatio uint16) *ImageEDLines {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetailRatio:"), detailRatio)
-	return x
+// WithDetailRatio sets read-write value used to set the detailRatio to use in the EDLines algorithm Default is 32
+func (iel *ImageEDLines) WithDetailRatio(detailRatio uint16) *ImageEDLines {
+	objc.Send[objc.ID](objref.IDOf(iel), objc.RegisterName("setDetailRatio:"), detailRatio)
+	return iel
 }
 
-// WithGradientThreshold read-write value used to set the threshold for a pixel to be considered an edge Default is 0.2
-func (x *ImageEDLines) WithGradientThreshold(gradientThreshold float32) *ImageEDLines {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGradientThreshold:"), gradientThreshold)
-	return x
+// WithGradientThreshold sets read-write value used to set the threshold for a pixel to be considered an edge Default is 0.2
+func (iel *ImageEDLines) WithGradientThreshold(gradientThreshold float32) *ImageEDLines {
+	objc.Send[objc.ID](objref.IDOf(iel), objc.RegisterName("setGradientThreshold:"), gradientThreshold)
+	return iel
 }
 
-// WithLineErrorThreshold read-write value used to set the limit on error for a line segment relative to the edge it fits Default is 0.05
-func (x *ImageEDLines) WithLineErrorThreshold(lineErrorThreshold float32) *ImageEDLines {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineErrorThreshold:"), lineErrorThreshold)
-	return x
+// WithLineErrorThreshold sets read-write value used to set the limit on error for a line segment relative to the edge it fits Default is 0.05
+func (iel *ImageEDLines) WithLineErrorThreshold(lineErrorThreshold float32) *ImageEDLines {
+	objc.Send[objc.ID](objref.IDOf(iel), objc.RegisterName("setLineErrorThreshold:"), lineErrorThreshold)
+	return iel
 }
 
-// WithMergeLocalityThreshold read-write value used to set how many pixels apart two lines can deviate spatially and still be merged. Default is 0.0025
-func (x *ImageEDLines) WithMergeLocalityThreshold(mergeLocalityThreshold float32) *ImageEDLines {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMergeLocalityThreshold:"), mergeLocalityThreshold)
-	return x
+// WithMergeLocalityThreshold sets read-write value used to set how many pixels apart two lines can deviate spatially and still be merged. Default is 0.0025
+func (iel *ImageEDLines) WithMergeLocalityThreshold(mergeLocalityThreshold float32) *ImageEDLines {
+	objc.Send[objc.ID](objref.IDOf(iel), objc.RegisterName("setMergeLocalityThreshold:"), mergeLocalityThreshold)
+	return iel
 }
 
-// ClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
-func (x *ImageEDLines) ClipRectSource() metal.MTLRegion {
-	_r := objc.Send[metal.MTLRegion](objref.IDOf(x), objc.RegisterName("clipRectSource"))
+// ClipRectSource returns the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
+func (iel *ImageEDLines) ClipRectSource() metal.MTLRegion {
+	_r := objc.Send[metal.MTLRegion](objref.IDOf(iel), objc.RegisterName("clipRectSource"))
 	return _r
 }
 
-// SetClipRectSource wraps the corresponding Objective-C method.
-func (x *ImageEDLines) SetClipRectSource(clipRectSource metal.MTLRegion) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-}
-
-// GaussianSigma read-only sigma value used in performing Gaussian blur of the image. Default is 2.0
-func (x *ImageEDLines) GaussianSigma() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gaussianSigma"))
+// GaussianSigma returns read-only sigma value used in performing Gaussian blur of the image. Default is 2.0
+func (iel *ImageEDLines) GaussianSigma() float32 {
+	_r := objc.Send[float32](objref.IDOf(iel), objc.RegisterName("gaussianSigma"))
 	return _r
 }
 
-// MinLineLength read-write value used to set the minimum length of a line segment. Default is 32
-func (x *ImageEDLines) MinLineLength() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("minLineLength"))
+// MinLineLength returns read-write value used to set the minimum length of a line segment. Default is 32
+func (iel *ImageEDLines) MinLineLength() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(iel), objc.RegisterName("minLineLength"))
 	return _r
 }
 
-// SetMinLineLength wraps the corresponding Objective-C method.
-func (x *ImageEDLines) SetMinLineLength(minLineLength uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinLineLength:"), minLineLength)
-}
-
-// MaxLines read-write value used to set the max number of line segments to be written out. The endpointBuffer at encode must be >= maxLines * 4 * sizeof(unsigned short) + sizeof(uint32_t). Default is 256
-func (x *ImageEDLines) MaxLines() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxLines"))
+// MaxLines returns read-write value used to set the max number of line segments to be written out. The endpointBuffer at encode must be >= maxLines * 4 * sizeof(unsigned short) + sizeof(uint32_t). Default is 256
+func (iel *ImageEDLines) MaxLines() int {
+	_r := objc.Send[int](objref.IDOf(iel), objc.RegisterName("maxLines"))
 	return _r
 }
 
-// SetMaxLines wraps the corresponding Objective-C method.
-func (x *ImageEDLines) SetMaxLines(maxLines int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxLines:"), maxLines)
-}
-
-// DetailRatio read-write value used to set the detailRatio to use in the EDLines algorithm Default is 32
-func (x *ImageEDLines) DetailRatio() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("detailRatio"))
+// DetailRatio returns read-write value used to set the detailRatio to use in the EDLines algorithm Default is 32
+func (iel *ImageEDLines) DetailRatio() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(iel), objc.RegisterName("detailRatio"))
 	return _r
 }
 
-// SetDetailRatio wraps the corresponding Objective-C method.
-func (x *ImageEDLines) SetDetailRatio(detailRatio uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetailRatio:"), detailRatio)
-}
-
-// GradientThreshold read-write value used to set the threshold for a pixel to be considered an edge Default is 0.2
-func (x *ImageEDLines) GradientThreshold() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientThreshold"))
+// GradientThreshold returns read-write value used to set the threshold for a pixel to be considered an edge Default is 0.2
+func (iel *ImageEDLines) GradientThreshold() float32 {
+	_r := objc.Send[float32](objref.IDOf(iel), objc.RegisterName("gradientThreshold"))
 	return _r
 }
 
-// SetGradientThreshold wraps the corresponding Objective-C method.
-func (x *ImageEDLines) SetGradientThreshold(gradientThreshold float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGradientThreshold:"), gradientThreshold)
-}
-
-// LineErrorThreshold read-write value used to set the limit on error for a line segment relative to the edge it fits Default is 0.05
-func (x *ImageEDLines) LineErrorThreshold() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("lineErrorThreshold"))
+// LineErrorThreshold returns read-write value used to set the limit on error for a line segment relative to the edge it fits Default is 0.05
+func (iel *ImageEDLines) LineErrorThreshold() float32 {
+	_r := objc.Send[float32](objref.IDOf(iel), objc.RegisterName("lineErrorThreshold"))
 	return _r
 }
 
-// SetLineErrorThreshold wraps the corresponding Objective-C method.
-func (x *ImageEDLines) SetLineErrorThreshold(lineErrorThreshold float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineErrorThreshold:"), lineErrorThreshold)
-}
-
-// MergeLocalityThreshold read-write value used to set how many pixels apart two lines can deviate spatially and still be merged. Default is 0.0025
-func (x *ImageEDLines) MergeLocalityThreshold() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("mergeLocalityThreshold"))
+// MergeLocalityThreshold returns read-write value used to set how many pixels apart two lines can deviate spatially and still be merged. Default is 0.0025
+func (iel *ImageEDLines) MergeLocalityThreshold() float32 {
+	_r := objc.Send[float32](objref.IDOf(iel), objc.RegisterName("mergeLocalityThreshold"))
 	return _r
 }
-
-// SetMergeLocalityThreshold wraps the corresponding Objective-C method.
-func (x *ImageEDLines) SetMergeLocalityThreshold(mergeLocalityThreshold float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMergeLocalityThreshold:"), mergeLocalityThreshold)
-}
-
-// ImageEDLinesable is the interface implemented by [ImageEDLines], for mocking and DI.
-type ImageEDLinesable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageEDLines
-	WithMinLineLength(minLineLength uint16) *ImageEDLines
-	WithMaxLines(maxLines int) *ImageEDLines
-	WithDetailRatio(detailRatio uint16) *ImageEDLines
-	WithGradientThreshold(gradientThreshold float32) *ImageEDLines
-	WithLineErrorThreshold(lineErrorThreshold float32) *ImageEDLines
-	WithMergeLocalityThreshold(mergeLocalityThreshold float32) *ImageEDLines
-	ClipRectSource() metal.MTLRegion
-	SetClipRectSource(clipRectSource metal.MTLRegion)
-	GaussianSigma() float32
-	MinLineLength() uint16
-	SetMinLineLength(minLineLength uint16)
-	MaxLines() int
-	SetMaxLines(maxLines int)
-	DetailRatio() uint16
-	SetDetailRatio(detailRatio uint16)
-	GradientThreshold() float32
-	SetGradientThreshold(gradientThreshold float32)
-	LineErrorThreshold() float32
-	SetLineErrorThreshold(lineErrorThreshold float32)
-	MergeLocalityThreshold() float32
-	SetMergeLocalityThreshold(mergeLocalityThreshold float32)
-}
-
-var _ ImageEDLinesable = (*ImageEDLines)(nil)

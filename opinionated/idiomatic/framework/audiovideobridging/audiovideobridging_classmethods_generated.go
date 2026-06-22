@@ -22,13 +22,13 @@ func ACMPInterfaceWithInterfaceNamed(anInterfaceName string) *AVB17221ACMPInterf
 	return AVB17221ACMPInterfaceFromID(_r)
 }
 
-// CommandMessage this method returns an AVB17221AECPAEMMessage instance setup as an AEM command.
+// CommandMessage returns this method returns an AVB17221AECPAEMMessage instance setup as an AEM command.
 func CommandMessage() *AVB17221AECPAEMMessage {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPAEMMessage")), objc.RegisterName("commandMessage"))
 	return AVB17221AECPAEMMessageFromID(_r)
 }
 
-// ResponseMessage this method returns an AVB17221AECPAEMMessage instance setup as an AEM response.
+// ResponseMessage returns this method returns an AVB17221AECPAEMMessage instance setup as an AEM response.
 func ResponseMessage() *AVB17221AECPAEMMessage {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPAEMMessage")), objc.RegisterName("responseMessage"))
 	return AVB17221AECPAEMMessageFromID(_r)
@@ -40,13 +40,13 @@ func ResponseMessageFromCommandMessage(commandMessage *AVB17221AECPAEMMessage) *
 	return AVB17221AECPAEMMessageFromID(_r)
 }
 
-// AVB17221AECPAddressAccessMessageCommandMessage this method returns an AVB17221AECPAddressAccessMessage instance setup as an Address Access command.
+// AVB17221AECPAddressAccessMessageCommandMessage returns this method returns an AVB17221AECPAddressAccessMessage instance setup as an Address Access command.
 func AVB17221AECPAddressAccessMessageCommandMessage() *AVB17221AECPAddressAccessMessage {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPAddressAccessMessage")), objc.RegisterName("commandMessage"))
 	return AVB17221AECPAddressAccessMessageFromID(_r)
 }
 
-// AVB17221AECPAddressAccessMessageResponseMessage this method returns an AVB17221AECPAEMMessage instance setup as an Address Access response.
+// AVB17221AECPAddressAccessMessageResponseMessage returns this method returns an AVB17221AECPAEMMessage instance setup as an Address Access response.
 func AVB17221AECPAddressAccessMessageResponseMessage() *AVB17221AECPAddressAccessMessage {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVB17221AECPAddressAccessMessage")), objc.RegisterName("responseMessage"))
 	return AVB17221AECPAddressAccessMessageFromID(_r)
@@ -64,7 +64,7 @@ func AECPInterfaceWithInterfaceNamed(anInterfaceName string) *AVB17221AECPInterf
 	return AVB17221AECPInterfaceFromID(_r)
 }
 
-// NextAvailableDynamicEntityID this method is used to allocate a dynamic Entity ID . The entity ID allocated by this call can be used for both publishing an Entity with the AVB17221EntityDiscovery class or as a controllerID for the AVB17221ACMPMessage and AVB17221AECPMessage.
+// NextAvailableDynamicEntityID returns this method is used to allocate a dynamic Entity ID . The entity ID allocated by this call can be used for both publishing an Entity with the AVB17221EntityDiscovery class or as a controllerID for the AVB17221ACMPMessage and AVB17221AECPMessage.
 func NextAvailableDynamicEntityID() uint64 {
 	_r := objc.Send[uint64](objc.ID(_class("AVBCentralManager")), objc.RegisterName("nextAvailableDynamicEntityID"))
 	return _r
@@ -75,7 +75,7 @@ func ReleaseDynamicEntityID(entityID uint64) {
 	objc.Send[objc.ID](objc.ID(_class("AVBCentralManager")), objc.RegisterName("releaseDynamicEntityID:"), entityID)
 }
 
-// NextAvailableDynamicEntityModelID this method is used to allocate a dynamic Entity Model ID . The entity model ID allocated by this call can be used for publishing an Entity with the AVB17221EntityDiscovery class when using a dynamically generated or modified model.
+// NextAvailableDynamicEntityModelID returns this method is used to allocate a dynamic Entity Model ID . The entity model ID allocated by this call can be used for publishing an Entity with the AVB17221EntityDiscovery class when using a dynamically generated or modified model.
 func NextAvailableDynamicEntityModelID() uint64 {
 	_r := objc.Send[uint64](objc.ID(_class("AVBCentralManager")), objc.RegisterName("nextAvailableDynamicEntityModelID"))
 	return _r
@@ -92,7 +92,7 @@ func MacAddressForInterfaceNamed(anInterfaceName string) *MACAddress {
 	return MACAddressFromID(_r)
 }
 
-// SupportedInterfaces this method returns an array of BSD interface names of interfaces supporting AVB. An interface is included in this list if it claims it supports AVB.
+// SupportedInterfaces returns this method returns an array of BSD interface names of interfaces supporting AVB. An interface is included in this list if it claims it supports AVB.
 //
 // SupportedInterfaces returns the collection as a Go slice.
 func SupportedInterfaces() []string {
@@ -112,7 +112,7 @@ func IsAVBCapableInterfaceNamed(anInterfaceName string) bool {
 	return _r
 }
 
-// MyEntityID this method returns the EntityID which is used by the built-in controller functionality of Mac OS X. This is either the FireWire GUID or an EUI64 based on the first found ethernet type interface (may be an ethernet port, USB ethernet adapter, PCI Express adapter or the AirPort card).
+// MyEntityID returns this method returns the EntityID which is used by the built-in controller functionality of Mac OS X. This is either the FireWire GUID or an EUI64 based on the first found ethernet type interface (may be an ethernet port, USB ethernet adapter, PCI Express adapter or the AirPort card).
 func MyEntityID() uint64 {
 	_r := objc.Send[uint64](objc.ID(_class("AVBInterface")), objc.RegisterName("myEntityID"))
 	return _r

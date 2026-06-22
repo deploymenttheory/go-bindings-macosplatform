@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,19 +51,11 @@ func NewCNNBinaryFullyConnectedNode() *CNNBinaryFullyConnectedNode {
 	return cNNBinaryFullyConnectedNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNBinaryFullyConnectedNode) WithLabel(label string) *CNNBinaryFullyConnectedNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cbfcn *CNNBinaryFullyConnectedNode) WithLabel(label string) *CNNBinaryFullyConnectedNode {
+	objc.Send[objc.ID](objref.IDOf(cbfcn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cbfcn
 }
-
-// CNNBinaryFullyConnectedNodeable is the interface implemented by [CNNBinaryFullyConnectedNode], for mocking and DI.
-type CNNBinaryFullyConnectedNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNBinaryFullyConnectedNode
-}
-
-var _ CNNBinaryFullyConnectedNodeable = (*CNNBinaryFullyConnectedNode)(nil)
 
 var _ CNNBinaryConvolutionNodeProvider = (*CNNBinaryFullyConnectedNode)(nil)
 

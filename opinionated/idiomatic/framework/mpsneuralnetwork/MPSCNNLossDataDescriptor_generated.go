@@ -45,24 +45,24 @@ func cNNLossDataDescriptorAdopt(id objc.ID) *CNNLossDataDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *CNNLossDataDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cldd *CNNLossDataDescriptor) Description() string {
+	return rt.Description(objref.IDOf(cldd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CNNLossDataDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cldd *CNNLossDataDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cldd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CNNLossDataDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cldd *CNNLossDataDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cldd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CNNLossDataDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cldd *CNNLossDataDescriptor) String() string {
+	return rt.Description(objref.IDOf(cldd))
 }
 
 // NewCNNLossDataDescriptor creates a new CNNLossDataDescriptor.
@@ -71,56 +71,32 @@ func NewCNNLossDataDescriptor() *CNNLossDataDescriptor {
 	return cNNLossDataDescriptorAdopt(_id)
 }
 
-// WithBytesPerRow row bytes of loss data. This parameter specifies the row bytes of loss data.
-func (x *CNNLossDataDescriptor) WithBytesPerRow(bytesPerRow int) *CNNLossDataDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBytesPerRow:"), bytesPerRow)
-	return x
+// WithBytesPerRow sets row bytes of loss data. This parameter specifies the row bytes of loss data.
+func (cldd *CNNLossDataDescriptor) WithBytesPerRow(bytesPerRow int) *CNNLossDataDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cldd), objc.RegisterName("setBytesPerRow:"), bytesPerRow)
+	return cldd
 }
 
-// WithBytesPerImage slice bytes of loss data. This parameter specifies the slice bytes of loss data.
-func (x *CNNLossDataDescriptor) WithBytesPerImage(bytesPerImage int) *CNNLossDataDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBytesPerImage:"), bytesPerImage)
-	return x
+// WithBytesPerImage sets slice bytes of loss data. This parameter specifies the slice bytes of loss data.
+func (cldd *CNNLossDataDescriptor) WithBytesPerImage(bytesPerImage int) *CNNLossDataDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cldd), objc.RegisterName("setBytesPerImage:"), bytesPerImage)
+	return cldd
 }
 
-// Size size of loss data: (width, height, feature channels}. This parameter specifies the size of loss data.
-func (x *CNNLossDataDescriptor) Size() metal.MTLSize {
-	_r := objc.Send[metal.MTLSize](objref.IDOf(x), objc.RegisterName("size"))
+// Size returns size of loss data: (width, height, feature channels}. This parameter specifies the size of loss data.
+func (cldd *CNNLossDataDescriptor) Size() metal.MTLSize {
+	_r := objc.Send[metal.MTLSize](objref.IDOf(cldd), objc.RegisterName("size"))
 	return _r
 }
 
-// BytesPerRow row bytes of loss data. This parameter specifies the row bytes of loss data.
-func (x *CNNLossDataDescriptor) BytesPerRow() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesPerRow"))
+// BytesPerRow returns row bytes of loss data. This parameter specifies the row bytes of loss data.
+func (cldd *CNNLossDataDescriptor) BytesPerRow() int {
+	_r := objc.Send[int](objref.IDOf(cldd), objc.RegisterName("bytesPerRow"))
 	return _r
 }
 
-// SetBytesPerRow wraps the corresponding Objective-C method.
-func (x *CNNLossDataDescriptor) SetBytesPerRow(bytesPerRow int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBytesPerRow:"), bytesPerRow)
-}
-
-// BytesPerImage slice bytes of loss data. This parameter specifies the slice bytes of loss data.
-func (x *CNNLossDataDescriptor) BytesPerImage() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesPerImage"))
+// BytesPerImage returns slice bytes of loss data. This parameter specifies the slice bytes of loss data.
+func (cldd *CNNLossDataDescriptor) BytesPerImage() int {
+	_r := objc.Send[int](objref.IDOf(cldd), objc.RegisterName("bytesPerImage"))
 	return _r
 }
-
-// SetBytesPerImage wraps the corresponding Objective-C method.
-func (x *CNNLossDataDescriptor) SetBytesPerImage(bytesPerImage int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBytesPerImage:"), bytesPerImage)
-}
-
-// CNNLossDataDescriptorable is the interface implemented by [CNNLossDataDescriptor], for mocking and DI.
-type CNNLossDataDescriptorable interface {
-	obj.Object
-	WithBytesPerRow(bytesPerRow int) *CNNLossDataDescriptor
-	WithBytesPerImage(bytesPerImage int) *CNNLossDataDescriptor
-	Size() metal.MTLSize
-	BytesPerRow() int
-	SetBytesPerRow(bytesPerRow int)
-	BytesPerImage() int
-	SetBytesPerImage(bytesPerImage int)
-}
-
-var _ CNNLossDataDescriptorable = (*CNNLossDataDescriptor)(nil)

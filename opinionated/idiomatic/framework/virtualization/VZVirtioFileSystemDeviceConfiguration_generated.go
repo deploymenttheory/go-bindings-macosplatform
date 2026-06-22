@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,54 +52,31 @@ func NewVirtioFileSystemDeviceConfigurationWithTag(tag string) *VirtioFileSystem
 	return virtioFileSystemDeviceConfigurationAdopt(_id)
 }
 
-// WithTag a label that identifies this device in the guest VM.
-func (x *VirtioFileSystemDeviceConfiguration) WithTag(tag string) *VirtioFileSystemDeviceConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), purego.NSString(tag))
-	return x
+// WithTag sets a label that identifies this device in the guest VM.
+func (vfsdc *VirtioFileSystemDeviceConfiguration) WithTag(tag string) *VirtioFileSystemDeviceConfiguration {
+	objc.Send[objc.ID](objref.IDOf(vfsdc), objc.RegisterName("setTag:"), purego.NSString(tag))
+	return vfsdc
 }
 
-// WithShare a value that defines how the host exposes resources to the guest virtual machine.
-func (x *VirtioFileSystemDeviceConfiguration) WithShare(share DirectoryShareProvider) *VirtioFileSystemDeviceConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShare:"), objref.IDOf(share))
-	return x
+// WithShare sets a value that defines how the host exposes resources to the guest virtual machine.
+func (vfsdc *VirtioFileSystemDeviceConfiguration) WithShare(share DirectoryShareProvider) *VirtioFileSystemDeviceConfiguration {
+	objc.Send[objc.ID](objref.IDOf(vfsdc), objc.RegisterName("setShare:"), objref.IDOf(share))
+	return vfsdc
 }
 
-// Tag the tag is a string identifying the device. The tag is presented as a label in the guest identifying this device for mounting. The tag must be valid, which can be checked with +[VZVirtioFileSystemDeviceConfiguration validateTag:error:].
-func (x *VirtioFileSystemDeviceConfiguration) Tag() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tag"))
+// Tag returns the tag is a string identifying the device. The tag is presented as a label in the guest identifying this device for mounting. The tag must be valid, which can be checked with +[VZVirtioFileSystemDeviceConfiguration validateTag:error:].
+func (vfsdc *VirtioFileSystemDeviceConfiguration) Tag() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vfsdc), objc.RegisterName("tag"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetTag wraps the corresponding Objective-C method.
-func (x *VirtioFileSystemDeviceConfiguration) SetTag(tag string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), purego.NSString(tag))
-}
-
-// Share directory share. Defines how host resources are exposed to the guest virtual machine.
-func (x *VirtioFileSystemDeviceConfiguration) Share() *DirectoryShare {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("share"))
+// Share returns directory share. Defines how host resources are exposed to the guest virtual machine.
+func (vfsdc *VirtioFileSystemDeviceConfiguration) Share() *DirectoryShare {
+	_r := objc.Send[objc.ID](objref.IDOf(vfsdc), objc.RegisterName("share"))
 	return DirectoryShareFromID(_r)
 }
-
-// SetShare wraps the corresponding Objective-C method.
-func (x *VirtioFileSystemDeviceConfiguration) SetShare(share *DirectoryShare) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShare:"), objref.IDOf(share))
-}
-
-// VirtioFileSystemDeviceConfigurationable is the interface implemented by [VirtioFileSystemDeviceConfiguration], for mocking and DI.
-type VirtioFileSystemDeviceConfigurationable interface {
-	obj.Object
-	WithTag(tag string) *VirtioFileSystemDeviceConfiguration
-	WithShare(share DirectoryShareProvider) *VirtioFileSystemDeviceConfiguration
-	Tag() string
-	SetTag(tag string)
-	Share() *DirectoryShare
-	SetShare(share *DirectoryShare)
-}
-
-var _ VirtioFileSystemDeviceConfigurationable = (*VirtioFileSystemDeviceConfiguration)(nil)
 
 var _ DirectorySharingDeviceConfigurationProvider = (*VirtioFileSystemDeviceConfiguration)(nil)

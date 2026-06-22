@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTROperationalCredentialsClusterCertificateChainResponseParams is an idiomatic wrapper over the Objective-C class MTROperationalCredentialsClusterCertificateChainResponseParams.
@@ -46,24 +47,24 @@ func mTROperationalCredentialsClusterCertificateChainResponseParamsAdopt(id objc
 }
 
 // Description returns the object's -description text.
-func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (moccccrp *MTROperationalCredentialsClusterCertificateChainResponseParams) Description() string {
+	return rt.Description(objref.IDOf(moccccrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (moccccrp *MTROperationalCredentialsClusterCertificateChainResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(moccccrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (moccccrp *MTROperationalCredentialsClusterCertificateChainResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(moccccrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (moccccrp *MTROperationalCredentialsClusterCertificateChainResponseParams) String() string {
+	return rt.Description(objref.IDOf(moccccrp))
 }
 
 // NewMTROperationalCredentialsClusterCertificateChainResponseParamsWithResponseValueError initialize an MTROperationalCredentialsClusterCertificateChainResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
@@ -78,48 +79,25 @@ func NewMTROperationalCredentialsClusterCertificateChainResponseParamsWithRespon
 }
 
 // WithCertificate sets the property and returns the receiver so calls can be chained.
-func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) WithCertificate(certificate obj.Object) *MTROperationalCredentialsClusterCertificateChainResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificate:"), objref.IDOf(certificate))
-	return x
+func (moccccrp *MTROperationalCredentialsClusterCertificateChainResponseParams) WithCertificate(certificate obj.Object) *MTROperationalCredentialsClusterCertificateChainResponseParams {
+	objc.Send[objc.ID](objref.IDOf(moccccrp), objc.RegisterName("setCertificate:"), objref.IDOf(certificate))
+	return moccccrp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterCertificateChainResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (moccccrp *MTROperationalCredentialsClusterCertificateChainResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterCertificateChainResponseParams {
+	objc.Send[objc.ID](objref.IDOf(moccccrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return moccccrp
 }
 
 // Certificate wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) Certificate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificate"))
+func (moccccrp *MTROperationalCredentialsClusterCertificateChainResponseParams) Certificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moccccrp), objc.RegisterName("certificate"))
 	return obj.Wrap(_r)
 }
 
-// SetCertificate wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) SetCertificate(certificate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificate:"), objref.IDOf(certificate))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (moccccrp *MTROperationalCredentialsClusterCertificateChainResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moccccrp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
-
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterCertificateChainResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// MTROperationalCredentialsClusterCertificateChainResponseParamsable is the interface implemented by [MTROperationalCredentialsClusterCertificateChainResponseParams], for mocking and DI.
-type MTROperationalCredentialsClusterCertificateChainResponseParamsable interface {
-	obj.Object
-	WithCertificate(certificate obj.Object) *MTROperationalCredentialsClusterCertificateChainResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterCertificateChainResponseParams
-	Certificate() obj.Object
-	SetCertificate(certificate obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-}
-
-var _ MTROperationalCredentialsClusterCertificateChainResponseParamsable = (*MTROperationalCredentialsClusterCertificateChainResponseParams)(nil)

@@ -54,25 +54,16 @@ func NewPathURLResourceWithURLWritable(uRL string, writable bool) *PathURLResour
 	return pathURLResourceAdopt(_id)
 }
 
-// Url the URL represented by the resource.
-func (x *PathURLResource) Url() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+// URL returns the URL represented by the resource.
+func (pur *PathURLResource) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pur), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
 // IsWritable wraps the corresponding Objective-C method.
-func (x *PathURLResource) IsWritable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWritable"))
+func (pur *PathURLResource) IsWritable() bool {
+	_r := objc.Send[bool](objref.IDOf(pur), objc.RegisterName("isWritable"))
 	return _r
 }
-
-// PathURLResourceable is the interface implemented by [PathURLResource], for mocking and DI.
-type PathURLResourceable interface {
-	obj.Object
-	Url() obj.Object
-	IsWritable() bool
-}
-
-var _ PathURLResourceable = (*PathURLResource)(nil)
 
 var _ ResourceProvider = (*PathURLResource)(nil)

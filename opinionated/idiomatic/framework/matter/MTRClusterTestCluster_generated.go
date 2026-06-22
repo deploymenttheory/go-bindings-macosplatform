@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -56,7 +57,7 @@ func NewMTRClusterTestClusterWithDeviceEndpointQueue(device *MTRDevice, endpoint
 // TestSpecificWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // TestSpecificWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestSpecificWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestSpecificParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestSpecificResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) TestSpecificWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestSpecificParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestSpecificResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestSpecificResponseParams
 		err error
@@ -68,7 +69,7 @@ func (x *MTRClusterTestCluster) TestSpecificWithParamsExpectedValuesExpectedValu
 		_o.val = MTRTestClusterClusterTestSpecificResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testSpecificWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testSpecificWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -81,7 +82,7 @@ func (x *MTRClusterTestCluster) TestSpecificWithParamsExpectedValuesExpectedValu
 // TestSpecificWithExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // TestSpecificWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestSpecificWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestSpecificResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) TestSpecificWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestSpecificResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestSpecificResponseParams
 		err error
@@ -93,7 +94,7 @@ func (x *MTRClusterTestCluster) TestSpecificWithExpectedValuesExpectedValueInter
 		_o.val = MTRTestClusterClusterTestSpecificResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testSpecificWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testSpecificWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -106,7 +107,7 @@ func (x *MTRClusterTestCluster) TestSpecificWithExpectedValuesExpectedValueInter
 // TestAddArgumentsWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // TestAddArgumentsWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestAddArgumentsWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestAddArgumentsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestAddArgumentsResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) TestAddArgumentsWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestAddArgumentsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestAddArgumentsResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestAddArgumentsResponseParams
 		err error
@@ -118,7 +119,7 @@ func (x *MTRClusterTestCluster) TestAddArgumentsWithParamsExpectedValuesExpected
 		_o.val = MTRTestClusterClusterTestAddArgumentsResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testAddArgumentsWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testAddArgumentsWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -131,7 +132,7 @@ func (x *MTRClusterTestCluster) TestAddArgumentsWithParamsExpectedValuesExpected
 // TestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // TestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestSimpleArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestSimpleArgumentResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) TestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestSimpleArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestSimpleArgumentResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestSimpleArgumentResponseParams
 		err error
@@ -143,7 +144,7 @@ func (x *MTRClusterTestCluster) TestSimpleArgumentRequestWithParamsExpectedValue
 		_o.val = MTRTestClusterClusterTestSimpleArgumentResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testSimpleArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testSimpleArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -156,7 +157,7 @@ func (x *MTRClusterTestCluster) TestSimpleArgumentRequestWithParamsExpectedValue
 // TestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // TestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestStructArrayArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestStructArrayArgumentResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) TestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestStructArrayArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestStructArrayArgumentResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestStructArrayArgumentResponseParams
 		err error
@@ -168,7 +169,7 @@ func (x *MTRClusterTestCluster) TestStructArrayArgumentRequestWithParamsExpected
 		_o.val = MTRTestClusterClusterTestStructArrayArgumentResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testStructArrayArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testStructArrayArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -181,7 +182,7 @@ func (x *MTRClusterTestCluster) TestStructArrayArgumentRequestWithParamsExpected
 // TestStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // TestStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) TestStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -193,7 +194,7 @@ func (x *MTRClusterTestCluster) TestStructArgumentRequestWithParamsExpectedValue
 		_o.val = MTRTestClusterClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testStructArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testStructArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -206,7 +207,7 @@ func (x *MTRClusterTestCluster) TestStructArgumentRequestWithParamsExpectedValue
 // TestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // TestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestNestedStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) TestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestNestedStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -218,7 +219,7 @@ func (x *MTRClusterTestCluster) TestNestedStructArgumentRequestWithParamsExpecte
 		_o.val = MTRTestClusterClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testNestedStructArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testNestedStructArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -231,7 +232,7 @@ func (x *MTRClusterTestCluster) TestNestedStructArgumentRequestWithParamsExpecte
 // TestListStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // TestListStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestListStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) TestListStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -243,7 +244,7 @@ func (x *MTRClusterTestCluster) TestListStructArgumentRequestWithParamsExpectedV
 		_o.val = MTRTestClusterClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testListStructArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testListStructArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -256,7 +257,7 @@ func (x *MTRClusterTestCluster) TestListStructArgumentRequestWithParamsExpectedV
 // TestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // TestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListInt8UArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) TestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListInt8UArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -268,7 +269,7 @@ func (x *MTRClusterTestCluster) TestListInt8UArgumentRequestWithParamsExpectedVa
 		_o.val = MTRTestClusterClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testListInt8UArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testListInt8UArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -281,7 +282,7 @@ func (x *MTRClusterTestCluster) TestListInt8UArgumentRequestWithParamsExpectedVa
 // TestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // TestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestNestedStructListArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) TestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestNestedStructListArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -293,7 +294,7 @@ func (x *MTRClusterTestCluster) TestNestedStructListArgumentRequestWithParamsExp
 		_o.val = MTRTestClusterClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testNestedStructListArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testNestedStructListArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -306,7 +307,7 @@ func (x *MTRClusterTestCluster) TestNestedStructListArgumentRequestWithParamsExp
 // TestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // TestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListNestedStructListArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) TestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListNestedStructListArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterBooleanResponseParams
 		err error
@@ -318,7 +319,7 @@ func (x *MTRClusterTestCluster) TestListNestedStructListArgumentRequestWithParam
 		_o.val = MTRTestClusterClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testListNestedStructListArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testListNestedStructListArgumentRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -331,7 +332,7 @@ func (x *MTRClusterTestCluster) TestListNestedStructListArgumentRequestWithParam
 // TestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // TestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListInt8UReverseRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestListInt8UReverseResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) TestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListInt8UReverseRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestListInt8UReverseResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestListInt8UReverseResponseParams
 		err error
@@ -343,7 +344,7 @@ func (x *MTRClusterTestCluster) TestListInt8UReverseRequestWithParamsExpectedVal
 		_o.val = MTRTestClusterClusterTestListInt8UReverseResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testListInt8UReverseRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testListInt8UReverseRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -356,7 +357,7 @@ func (x *MTRClusterTestCluster) TestListInt8UReverseRequestWithParamsExpectedVal
 // TestEnumsRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // TestEnumsRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestEnumsRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestEnumsRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestEnumsResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) TestEnumsRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestEnumsRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestEnumsResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestEnumsResponseParams
 		err error
@@ -368,7 +369,7 @@ func (x *MTRClusterTestCluster) TestEnumsRequestWithParamsExpectedValuesExpected
 		_o.val = MTRTestClusterClusterTestEnumsResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testEnumsRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testEnumsRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -381,7 +382,7 @@ func (x *MTRClusterTestCluster) TestEnumsRequestWithParamsExpectedValuesExpected
 // TestNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // TestNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestNullableOptionalRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestNullableOptionalResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) TestNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestNullableOptionalRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestNullableOptionalResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestNullableOptionalResponseParams
 		err error
@@ -393,7 +394,7 @@ func (x *MTRClusterTestCluster) TestNullableOptionalRequestWithParamsExpectedVal
 		_o.val = MTRTestClusterClusterTestNullableOptionalResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testNullableOptionalRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testNullableOptionalRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -406,7 +407,7 @@ func (x *MTRClusterTestCluster) TestNullableOptionalRequestWithParamsExpectedVal
 // TestNullableOptionalRequestWithExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // TestNullableOptionalRequestWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestNullableOptionalRequestWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestNullableOptionalResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) TestNullableOptionalRequestWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestNullableOptionalResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestNullableOptionalResponseParams
 		err error
@@ -418,7 +419,7 @@ func (x *MTRClusterTestCluster) TestNullableOptionalRequestWithExpectedValuesExp
 		_o.val = MTRTestClusterClusterTestNullableOptionalResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testNullableOptionalRequestWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testNullableOptionalRequestWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -431,7 +432,7 @@ func (x *MTRClusterTestCluster) TestNullableOptionalRequestWithExpectedValuesExp
 // TestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // TestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestComplexNullableOptionalRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestComplexNullableOptionalResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) TestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestComplexNullableOptionalRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestComplexNullableOptionalResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestComplexNullableOptionalResponseParams
 		err error
@@ -443,7 +444,7 @@ func (x *MTRClusterTestCluster) TestComplexNullableOptionalRequestWithParamsExpe
 		_o.val = MTRTestClusterClusterTestComplexNullableOptionalResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testComplexNullableOptionalRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testComplexNullableOptionalRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -456,7 +457,7 @@ func (x *MTRClusterTestCluster) TestComplexNullableOptionalRequestWithParamsExpe
 // SimpleStructEchoRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // SimpleStructEchoRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) SimpleStructEchoRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterSimpleStructEchoRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterSimpleStructResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) SimpleStructEchoRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterSimpleStructEchoRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterSimpleStructResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterSimpleStructResponseParams
 		err error
@@ -468,7 +469,7 @@ func (x *MTRClusterTestCluster) SimpleStructEchoRequestWithParamsExpectedValuesE
 		_o.val = MTRTestClusterClusterSimpleStructResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("simpleStructEchoRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("simpleStructEchoRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -481,7 +482,7 @@ func (x *MTRClusterTestCluster) SimpleStructEchoRequestWithParamsExpectedValuesE
 // TestEmitTestEventRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // TestEmitTestEventRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestEmitTestEventRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestEmitTestEventRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestEmitTestEventResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) TestEmitTestEventRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestEmitTestEventRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestEmitTestEventResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestEmitTestEventResponseParams
 		err error
@@ -493,7 +494,7 @@ func (x *MTRClusterTestCluster) TestEmitTestEventRequestWithParamsExpectedValues
 		_o.val = MTRTestClusterClusterTestEmitTestEventResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testEmitTestEventRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testEmitTestEventRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -506,7 +507,7 @@ func (x *MTRClusterTestCluster) TestEmitTestEventRequestWithParamsExpectedValues
 // TestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // TestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterTestCluster) TestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams, err error) {
+func (mctc *MTRClusterTestCluster) TestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams, err error) {
 	type _result struct {
 		val *MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams
 		err error
@@ -518,7 +519,7 @@ func (x *MTRClusterTestCluster) TestEmitTestFabricScopedEventRequestWithParamsEx
 		_o.val = MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testEmitTestFabricScopedEventRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mctc), objc.RegisterName("testEmitTestFabricScopedEventRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -527,32 +528,6 @@ func (x *MTRClusterTestCluster) TestEmitTestFabricScopedEventRequestWithParamsEx
 		return _zero, ctx.Err()
 	}
 }
-
-// MTRClusterTestClusterable is the interface implemented by [MTRClusterTestCluster], for mocking and DI.
-type MTRClusterTestClusterable interface {
-	obj.Object
-	TestSpecificWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestSpecificParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestSpecificResponseParams, error)
-	TestSpecificWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestSpecificResponseParams, error)
-	TestAddArgumentsWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestAddArgumentsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestAddArgumentsResponseParams, error)
-	TestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestSimpleArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestSimpleArgumentResponseParams, error)
-	TestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestStructArrayArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestStructArrayArgumentResponseParams, error)
-	TestStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterBooleanResponseParams, error)
-	TestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestNestedStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterBooleanResponseParams, error)
-	TestListStructArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterBooleanResponseParams, error)
-	TestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListInt8UArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterBooleanResponseParams, error)
-	TestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestNestedStructListArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterBooleanResponseParams, error)
-	TestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListNestedStructListArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterBooleanResponseParams, error)
-	TestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestListInt8UReverseRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestListInt8UReverseResponseParams, error)
-	TestEnumsRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestEnumsRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestEnumsResponseParams, error)
-	TestNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestNullableOptionalRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestNullableOptionalResponseParams, error)
-	TestNullableOptionalRequestWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestNullableOptionalResponseParams, error)
-	TestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestComplexNullableOptionalRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestComplexNullableOptionalResponseParams, error)
-	SimpleStructEchoRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterSimpleStructEchoRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterSimpleStructResponseParams, error)
-	TestEmitTestEventRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestEmitTestEventRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestEmitTestEventResponseParams, error)
-	TestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRTestClusterClusterTestEmitTestFabricScopedEventRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRTestClusterClusterTestEmitTestFabricScopedEventResponseParams, error)
-}
-
-var _ MTRClusterTestClusterable = (*MTRClusterTestCluster)(nil)
 
 var _ MTRClusterUnitTestingProvider = (*MTRClusterTestCluster)(nil)
 

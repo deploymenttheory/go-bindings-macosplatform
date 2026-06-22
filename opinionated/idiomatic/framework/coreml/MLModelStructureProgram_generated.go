@@ -46,24 +46,24 @@ func modelStructureProgramAdopt(id objc.ID) *ModelStructureProgram {
 }
 
 // Description returns the object's -description text.
-func (x *ModelStructureProgram) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (msp *ModelStructureProgram) Description() string {
+	return rt.Description(objref.IDOf(msp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ModelStructureProgram) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (msp *ModelStructureProgram) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(msp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ModelStructureProgram) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (msp *ModelStructureProgram) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(msp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ModelStructureProgram) String() string {
-	return rt.Description(objref.IDOf(x))
+func (msp *ModelStructureProgram) String() string {
+	return rt.Description(objref.IDOf(msp))
 }
 
 // NewModelStructureProgram creates a new ModelStructureProgram.
@@ -73,15 +73,7 @@ func NewModelStructureProgram() *ModelStructureProgram {
 }
 
 // Functions wraps the corresponding Objective-C method.
-func (x *ModelStructureProgram) Functions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("functions"))
+func (msp *ModelStructureProgram) Functions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msp), objc.RegisterName("functions"))
 	return obj.Wrap(_r)
 }
-
-// ModelStructureProgramable is the interface implemented by [ModelStructureProgram], for mocking and DI.
-type ModelStructureProgramable interface {
-	obj.Object
-	Functions() obj.Object
-}
-
-var _ ModelStructureProgramable = (*ModelStructureProgram)(nil)

@@ -5,12 +5,12 @@
 package virtualization
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // LinuxRosettaUnixSocketCachingOptions is an idiomatic wrapper over the Objective-C class VZLinuxRosettaUnixSocketCachingOptions.
@@ -65,21 +65,13 @@ func NewLinuxRosettaUnixSocketCachingOptionsWithPathError(path string) (result *
 	return linuxRosettaUnixSocketCachingOptionsAdopt(_id), nil
 }
 
-// Path path set by initWithPath. This is the path of the Unix Domain Socket to be used by Rosetta.
-func (x *LinuxRosettaUnixSocketCachingOptions) Path() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+// Path returns path set by initWithPath. This is the path of the Unix Domain Socket to be used by Rosetta.
+func (lrusco *LinuxRosettaUnixSocketCachingOptions) Path() string {
+	_r := objc.Send[objc.ID](objref.IDOf(lrusco), objc.RegisterName("path"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// LinuxRosettaUnixSocketCachingOptionsable is the interface implemented by [LinuxRosettaUnixSocketCachingOptions], for mocking and DI.
-type LinuxRosettaUnixSocketCachingOptionsable interface {
-	obj.Object
-	Path() string
-}
-
-var _ LinuxRosettaUnixSocketCachingOptionsable = (*LinuxRosettaUnixSocketCachingOptions)(nil)
 
 var _ LinuxRosettaCachingOptionsProvider = (*LinuxRosettaUnixSocketCachingOptions)(nil)

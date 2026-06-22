@@ -53,166 +53,134 @@ func NewIOBluetoothHandsFreeDeviceWithDeviceDelegate(device *IOBluetoothDevice, 
 	return iOBluetoothHandsFreeDeviceAdopt(_id)
 }
 
-// WithSupportedFeatures set the supported features
-func (x *IOBluetoothHandsFreeDevice) WithSupportedFeatures(supportedFeatures uint32) *IOBluetoothHandsFreeDevice {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedFeatures:"), supportedFeatures)
-	return x
+// WithSupportedFeatures sets set the supported features
+func (ibhfd *IOBluetoothHandsFreeDevice) WithSupportedFeatures(supportedFeatures uint32) *IOBluetoothHandsFreeDevice {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("setSupportedFeatures:"), supportedFeatures)
+	return ibhfd
 }
 
-// WithInputVolume return the input volume
-func (x *IOBluetoothHandsFreeDevice) WithInputVolume(inputVolume float32) *IOBluetoothHandsFreeDevice {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputVolume:"), inputVolume)
-	return x
+// WithInputVolume sets return the input volume
+func (ibhfd *IOBluetoothHandsFreeDevice) WithInputVolume(inputVolume float32) *IOBluetoothHandsFreeDevice {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("setInputVolume:"), inputVolume)
+	return ibhfd
 }
 
-// WithInputMuted return the input mute state.
-func (x *IOBluetoothHandsFreeDevice) WithInputMuted(inputMuted bool) *IOBluetoothHandsFreeDevice {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputMuted:"), inputMuted)
-	return x
+// WithInputMuted sets return the input mute state.
+func (ibhfd *IOBluetoothHandsFreeDevice) WithInputMuted(inputMuted bool) *IOBluetoothHandsFreeDevice {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("setInputMuted:"), inputMuted)
+	return ibhfd
 }
 
-// WithOutputVolume return the output volume
-func (x *IOBluetoothHandsFreeDevice) WithOutputVolume(outputVolume float32) *IOBluetoothHandsFreeDevice {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputVolume:"), outputVolume)
-	return x
+// WithOutputVolume sets return the output volume
+func (ibhfd *IOBluetoothHandsFreeDevice) WithOutputVolume(outputVolume float32) *IOBluetoothHandsFreeDevice {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("setOutputVolume:"), outputVolume)
+	return ibhfd
 }
 
-// WithOutputMuted return the output mute state.
-func (x *IOBluetoothHandsFreeDevice) WithOutputMuted(outputMuted bool) *IOBluetoothHandsFreeDevice {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputMuted:"), outputMuted)
-	return x
+// WithOutputMuted sets return the output mute state.
+func (ibhfd *IOBluetoothHandsFreeDevice) WithOutputMuted(outputMuted bool) *IOBluetoothHandsFreeDevice {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("setOutputMuted:"), outputMuted)
+	return ibhfd
 }
 
 // DialNumber calls the phone number on a hands-free phone or headset.
-func (x *IOBluetoothHandsFreeDevice) DialNumber(aNumber string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dialNumber:"), purego.NSString(aNumber))
+func (ibhfd *IOBluetoothHandsFreeDevice) DialNumber(aNumber string) {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("dialNumber:"), purego.NSString(aNumber))
 }
 
 // MemoryDial calls the phone number stored in a speed dial or memory slot of the hands-free phone or headset.
-func (x *IOBluetoothHandsFreeDevice) MemoryDial(memoryLocation int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("memoryDial:"), memoryLocation)
+func (ibhfd *IOBluetoothHandsFreeDevice) MemoryDial(memoryLocation int) {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("memoryDial:"), memoryLocation)
 }
 
 // Redial calls the number stored on the hands-free phone or headset again.
-func (x *IOBluetoothHandsFreeDevice) Redial() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("redial"))
+func (ibhfd *IOBluetoothHandsFreeDevice) Redial() {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("redial"))
 }
 
 // EndCall ends the current call or refuses an incoming call.
-func (x *IOBluetoothHandsFreeDevice) EndCall() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endCall"))
+func (ibhfd *IOBluetoothHandsFreeDevice) EndCall() {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("endCall"))
 }
 
 // AcceptCall accepts an incoming call.
-func (x *IOBluetoothHandsFreeDevice) AcceptCall() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acceptCall"))
+func (ibhfd *IOBluetoothHandsFreeDevice) AcceptCall() {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("acceptCall"))
 }
 
 // AcceptCallOnPhone accepts an incoming call and transfers the audio to the managed hands-free phone or headset.
-func (x *IOBluetoothHandsFreeDevice) AcceptCallOnPhone() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acceptCallOnPhone"))
+func (ibhfd *IOBluetoothHandsFreeDevice) AcceptCallOnPhone() {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("acceptCallOnPhone"))
 }
 
 // SendDTMF sends the tone associated with a phone key to the hands-free Bluetooth device.
-func (x *IOBluetoothHandsFreeDevice) SendDTMF(character string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendDTMF:"), purego.NSString(character))
+func (ibhfd *IOBluetoothHandsFreeDevice) SendDTMF(character string) {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("sendDTMF:"), purego.NSString(character))
 }
 
 // SubscriberNumber requests that the Bluetooth audio gateway send the subscriber number to the delegate.
-func (x *IOBluetoothHandsFreeDevice) SubscriberNumber() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriberNumber"))
+func (ibhfd *IOBluetoothHandsFreeDevice) SubscriberNumber() {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("subscriberNumber"))
 }
 
 // CurrentCallList requests that the Bluetooth audio gateway send the delegate a list of calls that are active, on hold, or being set up.
-func (x *IOBluetoothHandsFreeDevice) CurrentCallList() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentCallList"))
+func (ibhfd *IOBluetoothHandsFreeDevice) CurrentCallList() {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("currentCallList"))
 }
 
 // ReleaseHeldCalls ends all calls that are on hold or returns a busy signal for a waiting call.
-func (x *IOBluetoothHandsFreeDevice) ReleaseHeldCalls() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseHeldCalls"))
+func (ibhfd *IOBluetoothHandsFreeDevice) ReleaseHeldCalls() {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("releaseHeldCalls"))
 }
 
 // ReleaseActiveCalls ends all active calls and accepts a held or waiting call.
-func (x *IOBluetoothHandsFreeDevice) ReleaseActiveCalls() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseActiveCalls"))
+func (ibhfd *IOBluetoothHandsFreeDevice) ReleaseActiveCalls() {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("releaseActiveCalls"))
 }
 
 // ReleaseCall ends the call with the specified index.
-func (x *IOBluetoothHandsFreeDevice) ReleaseCall(index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseCall:"), index)
+func (ibhfd *IOBluetoothHandsFreeDevice) ReleaseCall(index int) {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("releaseCall:"), index)
 }
 
 // HoldCall places all active calls on hold and accepts a held or waiting call.
-func (x *IOBluetoothHandsFreeDevice) HoldCall() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("holdCall"))
+func (ibhfd *IOBluetoothHandsFreeDevice) HoldCall() {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("holdCall"))
 }
 
 // PlaceAllOthersOnHold places all calls except the call with the specified index on hold.
-func (x *IOBluetoothHandsFreeDevice) PlaceAllOthersOnHold(index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeAllOthersOnHold:"), index)
+func (ibhfd *IOBluetoothHandsFreeDevice) PlaceAllOthersOnHold(index int) {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("placeAllOthersOnHold:"), index)
 }
 
 // AddHeldCall adds held calls to the current conversation.
-func (x *IOBluetoothHandsFreeDevice) AddHeldCall() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addHeldCall"))
+func (ibhfd *IOBluetoothHandsFreeDevice) AddHeldCall() {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("addHeldCall"))
 }
 
 // CallTransfer ends all calls that are active or on hold, and accepts any waiting calls.
-func (x *IOBluetoothHandsFreeDevice) CallTransfer() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callTransfer"))
+func (ibhfd *IOBluetoothHandsFreeDevice) CallTransfer() {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("callTransfer"))
 }
 
 // TransferAudioToComputer moves the audio for current and future calls to a Mac.
-func (x *IOBluetoothHandsFreeDevice) TransferAudioToComputer() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transferAudioToComputer"))
+func (ibhfd *IOBluetoothHandsFreeDevice) TransferAudioToComputer() {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("transferAudioToComputer"))
 }
 
 // TransferAudioToPhone moves the audio for current or future calls to a phone.
-func (x *IOBluetoothHandsFreeDevice) TransferAudioToPhone() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transferAudioToPhone"))
+func (ibhfd *IOBluetoothHandsFreeDevice) TransferAudioToPhone() {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("transferAudioToPhone"))
 }
 
 // SendSMSMessage sends a text message to a phone number.
-func (x *IOBluetoothHandsFreeDevice) SendSMSMessage(aNumber string, aMessage string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendSMS:message:"), purego.NSString(aNumber), purego.NSString(aMessage))
+func (ibhfd *IOBluetoothHandsFreeDevice) SendSMSMessage(aNumber string, aMessage string) {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("sendSMS:message:"), purego.NSString(aNumber), purego.NSString(aMessage))
 }
 
 // SendATCommand sends an AT command to the Bluetooth audio gateway.
-func (x *IOBluetoothHandsFreeDevice) SendATCommand(atCommand string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendATCommand:"), purego.NSString(atCommand))
+func (ibhfd *IOBluetoothHandsFreeDevice) SendATCommand(atCommand string) {
+	objc.Send[objc.ID](objref.IDOf(ibhfd), objc.RegisterName("sendATCommand:"), purego.NSString(atCommand))
 }
-
-// IOBluetoothHandsFreeDeviceable is the interface implemented by [IOBluetoothHandsFreeDevice], for mocking and DI.
-type IOBluetoothHandsFreeDeviceable interface {
-	obj.Object
-	WithSupportedFeatures(supportedFeatures uint32) *IOBluetoothHandsFreeDevice
-	WithInputVolume(inputVolume float32) *IOBluetoothHandsFreeDevice
-	WithInputMuted(inputMuted bool) *IOBluetoothHandsFreeDevice
-	WithOutputVolume(outputVolume float32) *IOBluetoothHandsFreeDevice
-	WithOutputMuted(outputMuted bool) *IOBluetoothHandsFreeDevice
-	DialNumber(aNumber string)
-	MemoryDial(memoryLocation int)
-	Redial()
-	EndCall()
-	AcceptCall()
-	AcceptCallOnPhone()
-	SendDTMF(character string)
-	SubscriberNumber()
-	CurrentCallList()
-	ReleaseHeldCalls()
-	ReleaseActiveCalls()
-	ReleaseCall(index int)
-	HoldCall()
-	PlaceAllOthersOnHold(index int)
-	AddHeldCall()
-	CallTransfer()
-	TransferAudioToComputer()
-	TransferAudioToPhone()
-	SendSMSMessage(aNumber string, aMessage string)
-	SendATCommand(atCommand string)
-}
-
-var _ IOBluetoothHandsFreeDeviceable = (*IOBluetoothHandsFreeDevice)(nil)
 
 var _ IOBluetoothHandsFreeProvider = (*IOBluetoothHandsFreeDevice)(nil)

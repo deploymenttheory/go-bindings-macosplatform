@@ -7,7 +7,6 @@ package accessibility
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,14 +53,14 @@ func NewMathExpressionFencedWithExpressionsOpenStringCloseString(expressions []*
 // Expressions wraps the corresponding Objective-C method.
 //
 // Expressions returns the collection as a Go slice.
-func (x *MathExpressionFenced) Expressions() []*MathExpression {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expressions"))
+func (mef *MathExpressionFenced) Expressions() []*MathExpression {
+	_arr := objc.Send[objc.ID](objref.IDOf(mef), objc.RegisterName("expressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
 
 // OpenString wraps the corresponding Objective-C method.
-func (x *MathExpressionFenced) OpenString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openString"))
+func (mef *MathExpressionFenced) OpenString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mef), objc.RegisterName("openString"))
 	if _r == 0 {
 		return ""
 	}
@@ -69,22 +68,12 @@ func (x *MathExpressionFenced) OpenString() string {
 }
 
 // CloseString wraps the corresponding Objective-C method.
-func (x *MathExpressionFenced) CloseString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("closeString"))
+func (mef *MathExpressionFenced) CloseString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mef), objc.RegisterName("closeString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// MathExpressionFencedable is the interface implemented by [MathExpressionFenced], for mocking and DI.
-type MathExpressionFencedable interface {
-	obj.Object
-	Expressions() []*MathExpression
-	OpenString() string
-	CloseString() string
-}
-
-var _ MathExpressionFencedable = (*MathExpressionFenced)(nil)
 
 var _ MathExpressionProvider = (*MathExpressionFenced)(nil)

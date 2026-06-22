@@ -5,12 +5,13 @@
 package coredata
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // FetchRequest is an idiomatic wrapper over the Objective-C class NSFetchRequest.
@@ -61,109 +62,109 @@ func NewFetchRequestWithEntityName(entityName string) *FetchRequest {
 	return fetchRequestAdopt(_id)
 }
 
-// WithEntity the entity specified for the fetch request.
-func (x *FetchRequest) WithEntity(entity *EntityDescription) *FetchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntity:"), objref.IDOf(entity))
-	return x
+// WithEntity sets the entity specified for the fetch request.
+func (fr *FetchRequest) WithEntity(entity *EntityDescription) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setEntity:"), objref.IDOf(entity))
+	return fr
 }
 
-// WithPredicate the predicate of the fetch request.
-func (x *FetchRequest) WithPredicate(predicate obj.Object) *FetchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
-	return x
+// WithPredicate sets the predicate of the fetch request.
+func (fr *FetchRequest) WithPredicate(predicate obj.Object) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
+	return fr
 }
 
-// WithSortDescriptors the sort descriptors of the fetch request.
-func (x *FetchRequest) WithSortDescriptors(items ...obj.Object) *FetchRequest {
+// WithSortDescriptors sets the sort descriptors of the fetch request.
+func (fr *FetchRequest) WithSortDescriptors(items ...obj.Object) *FetchRequest {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setSortDescriptors:"), _arr)
+	return fr
 }
 
-// WithFetchLimit the fetch limit of the fetch request.
-func (x *FetchRequest) WithFetchLimit(fetchLimit int) *FetchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchLimit:"), fetchLimit)
-	return x
+// WithFetchLimit sets the fetch limit of the fetch request.
+func (fr *FetchRequest) WithFetchLimit(fetchLimit int) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setFetchLimit:"), fetchLimit)
+	return fr
 }
 
-// WithResultType the result type of the fetch request.
-func (x *FetchRequest) WithResultType(resultType FetchRequestResultType) *FetchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
-	return x
+// WithResultType sets the result type of the fetch request.
+func (fr *FetchRequest) WithResultType(resultType FetchRequestResultType) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setResultType:"), resultType)
+	return fr
 }
 
-// WithIncludesSubentities a Boolean value that indicates whether the fetch request includes subentities in the results.
-func (x *FetchRequest) WithIncludesSubentities(includesSubentities bool) *FetchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesSubentities:"), includesSubentities)
-	return x
+// WithIncludesSubentities sets a Boolean value that indicates whether the fetch request includes subentities in the results.
+func (fr *FetchRequest) WithIncludesSubentities(includesSubentities bool) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setIncludesSubentities:"), includesSubentities)
+	return fr
 }
 
-// WithIncludesPropertyValues a Boolean value that indicates whether, when the fetch is executed, property data is obtained from the persistent store.
-func (x *FetchRequest) WithIncludesPropertyValues(includesPropertyValues bool) *FetchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesPropertyValues:"), includesPropertyValues)
-	return x
+// WithIncludesPropertyValues sets a Boolean value that indicates whether, when the fetch is executed, property data is obtained from the persistent store.
+func (fr *FetchRequest) WithIncludesPropertyValues(includesPropertyValues bool) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setIncludesPropertyValues:"), includesPropertyValues)
+	return fr
 }
 
-// WithReturnsObjectsAsFaults a Boolean value that indicates whether the objects resulting from a fetch request are faults.
-func (x *FetchRequest) WithReturnsObjectsAsFaults(returnsObjectsAsFaults bool) *FetchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnsObjectsAsFaults:"), returnsObjectsAsFaults)
-	return x
+// WithReturnsObjectsAsFaults sets a Boolean value that indicates whether the objects resulting from a fetch request are faults.
+func (fr *FetchRequest) WithReturnsObjectsAsFaults(returnsObjectsAsFaults bool) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setReturnsObjectsAsFaults:"), returnsObjectsAsFaults)
+	return fr
 }
 
-// WithRelationshipKeyPathsForPrefetching the relationship key paths to prefetch along with the entity for the request.
-func (x *FetchRequest) WithRelationshipKeyPathsForPrefetching(items ...obj.Object) *FetchRequest {
+// WithRelationshipKeyPathsForPrefetching sets the relationship key paths to prefetch along with the entity for the request.
+func (fr *FetchRequest) WithRelationshipKeyPathsForPrefetching(items ...obj.Object) *FetchRequest {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelationshipKeyPathsForPrefetching:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setRelationshipKeyPathsForPrefetching:"), _arr)
+	return fr
 }
 
-// WithIncludesPendingChanges a Boolean value that indicates whether, when the fetch is executed, it matches against currently unsaved changes in the managed object context.
-func (x *FetchRequest) WithIncludesPendingChanges(includesPendingChanges bool) *FetchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesPendingChanges:"), includesPendingChanges)
-	return x
+// WithIncludesPendingChanges sets a Boolean value that indicates whether, when the fetch is executed, it matches against currently unsaved changes in the managed object context.
+func (fr *FetchRequest) WithIncludesPendingChanges(includesPendingChanges bool) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setIncludesPendingChanges:"), includesPendingChanges)
+	return fr
 }
 
-// WithReturnsDistinctResults a Boolean value that indicates whether the fetch request returns only distinct values for the fields specified by propertiesToFetch.
-func (x *FetchRequest) WithReturnsDistinctResults(returnsDistinctResults bool) *FetchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnsDistinctResults:"), returnsDistinctResults)
-	return x
+// WithReturnsDistinctResults sets a Boolean value that indicates whether the fetch request returns only distinct values for the fields specified by propertiesToFetch.
+func (fr *FetchRequest) WithReturnsDistinctResults(returnsDistinctResults bool) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setReturnsDistinctResults:"), returnsDistinctResults)
+	return fr
 }
 
-// WithFetchOffset the fetch offset of the fetch request.
-func (x *FetchRequest) WithFetchOffset(fetchOffset int) *FetchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchOffset:"), fetchOffset)
-	return x
+// WithFetchOffset sets the fetch offset of the fetch request.
+func (fr *FetchRequest) WithFetchOffset(fetchOffset int) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setFetchOffset:"), fetchOffset)
+	return fr
 }
 
-// WithFetchBatchSize the batch size of the objects specified in the fetch request.
-func (x *FetchRequest) WithFetchBatchSize(fetchBatchSize int) *FetchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchBatchSize:"), fetchBatchSize)
-	return x
+// WithFetchBatchSize sets the batch size of the objects specified in the fetch request.
+func (fr *FetchRequest) WithFetchBatchSize(fetchBatchSize int) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setFetchBatchSize:"), fetchBatchSize)
+	return fr
 }
 
-// WithShouldRefreshRefetchedObjects a Boolean value that indicates whether the property values of fetched objects will be updated with the current values in the persistent store.
-func (x *FetchRequest) WithShouldRefreshRefetchedObjects(shouldRefreshRefetchedObjects bool) *FetchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRefreshRefetchedObjects:"), shouldRefreshRefetchedObjects)
-	return x
+// WithShouldRefreshRefetchedObjects sets a Boolean value that indicates whether the property values of fetched objects will be updated with the current values in the persistent store.
+func (fr *FetchRequest) WithShouldRefreshRefetchedObjects(shouldRefreshRefetchedObjects bool) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setShouldRefreshRefetchedObjects:"), shouldRefreshRefetchedObjects)
+	return fr
 }
 
-// WithHavingPredicate the predicate used to filter rows being returned by a query containing a GROUP BY directive.
-func (x *FetchRequest) WithHavingPredicate(havingPredicate obj.Object) *FetchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHavingPredicate:"), objref.IDOf(havingPredicate))
-	return x
+// WithHavingPredicate sets the predicate used to filter rows being returned by a query containing a GROUP BY directive.
+func (fr *FetchRequest) WithHavingPredicate(havingPredicate obj.Object) *FetchRequest {
+	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setHavingPredicate:"), objref.IDOf(havingPredicate))
+	return fr
 }
 
-// WithAffectedStores the stores the request should be sent to.
-func (x *FetchRequest) WithAffectedStores(items ...PersistentStoreProvider) *FetchRequest {
+// WithAffectedStores sets the stores the request should be sent to.
+func (fr *FetchRequest) WithAffectedStores(items ...PersistentStoreProvider) *FetchRequest {
 	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setAffectedStores:"), _arr)
+	return fr
 }
 
 // Execute executes the fetch request against the managed object context that is associated with the current queue.
-func (x *FetchRequest) Execute() (result []obj.Object, err error) {
+func (fr *FetchRequest) Execute() (result []obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("execute:"), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("execute:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -171,19 +172,14 @@ func (x *FetchRequest) Execute() (result []obj.Object, err error) {
 }
 
 // Entity wraps the corresponding Objective-C method.
-func (x *FetchRequest) Entity() *EntityDescription {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entity"))
+func (fr *FetchRequest) Entity() *EntityDescription {
+	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("entity"))
 	return EntityDescriptionFromID(_r)
 }
 
-// SetEntity wraps the corresponding Objective-C method.
-func (x *FetchRequest) SetEntity(entity *EntityDescription) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEntity:"), objref.IDOf(entity))
-}
-
 // EntityName wraps the corresponding Objective-C method.
-func (x *FetchRequest) EntityName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entityName"))
+func (fr *FetchRequest) EntityName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("entityName"))
 	if _r == 0 {
 		return ""
 	}
@@ -191,242 +187,113 @@ func (x *FetchRequest) EntityName() string {
 }
 
 // Predicate wraps the corresponding Objective-C method.
-func (x *FetchRequest) Predicate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
+func (fr *FetchRequest) Predicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("predicate"))
 	return obj.Wrap(_r)
-}
-
-// SetPredicate wraps the corresponding Objective-C method.
-func (x *FetchRequest) SetPredicate(predicate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPredicate:"), objref.IDOf(predicate))
 }
 
 // SortDescriptors wraps the corresponding Objective-C method.
 //
 // SortDescriptors returns the collection as a Go slice.
-func (x *FetchRequest) SortDescriptors() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortDescriptors"))
+func (fr *FetchRequest) SortDescriptors() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("sortDescriptors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetSortDescriptors wraps the corresponding Objective-C method.
-func (x *FetchRequest) SetSortDescriptors(sortDescriptors []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
 // FetchLimit wraps the corresponding Objective-C method.
-func (x *FetchRequest) FetchLimit() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fetchLimit"))
+func (fr *FetchRequest) FetchLimit() int {
+	_r := objc.Send[int](objref.IDOf(fr), objc.RegisterName("fetchLimit"))
 	return _r
-}
-
-// SetFetchLimit wraps the corresponding Objective-C method.
-func (x *FetchRequest) SetFetchLimit(fetchLimit int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchLimit:"), fetchLimit)
 }
 
 // ResultType wraps the corresponding Objective-C method.
-func (x *FetchRequest) ResultType() FetchRequestResultType {
-	_r := objc.Send[FetchRequestResultType](objref.IDOf(x), objc.RegisterName("resultType"))
+func (fr *FetchRequest) ResultType() FetchRequestResultType {
+	_r := objc.Send[FetchRequestResultType](objref.IDOf(fr), objc.RegisterName("resultType"))
 	return _r
-}
-
-// SetResultType wraps the corresponding Objective-C method.
-func (x *FetchRequest) SetResultType(resultType FetchRequestResultType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultType:"), resultType)
 }
 
 // IncludesSubentities wraps the corresponding Objective-C method.
-func (x *FetchRequest) IncludesSubentities() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesSubentities"))
+func (fr *FetchRequest) IncludesSubentities() bool {
+	_r := objc.Send[bool](objref.IDOf(fr), objc.RegisterName("includesSubentities"))
 	return _r
-}
-
-// SetIncludesSubentities wraps the corresponding Objective-C method.
-func (x *FetchRequest) SetIncludesSubentities(includesSubentities bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesSubentities:"), includesSubentities)
 }
 
 // IncludesPropertyValues wraps the corresponding Objective-C method.
-func (x *FetchRequest) IncludesPropertyValues() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesPropertyValues"))
+func (fr *FetchRequest) IncludesPropertyValues() bool {
+	_r := objc.Send[bool](objref.IDOf(fr), objc.RegisterName("includesPropertyValues"))
 	return _r
-}
-
-// SetIncludesPropertyValues wraps the corresponding Objective-C method.
-func (x *FetchRequest) SetIncludesPropertyValues(includesPropertyValues bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesPropertyValues:"), includesPropertyValues)
 }
 
 // ReturnsObjectsAsFaults wraps the corresponding Objective-C method.
-func (x *FetchRequest) ReturnsObjectsAsFaults() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("returnsObjectsAsFaults"))
+func (fr *FetchRequest) ReturnsObjectsAsFaults() bool {
+	_r := objc.Send[bool](objref.IDOf(fr), objc.RegisterName("returnsObjectsAsFaults"))
 	return _r
-}
-
-// SetReturnsObjectsAsFaults wraps the corresponding Objective-C method.
-func (x *FetchRequest) SetReturnsObjectsAsFaults(returnsObjectsAsFaults bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnsObjectsAsFaults:"), returnsObjectsAsFaults)
 }
 
 // RelationshipKeyPathsForPrefetching wraps the corresponding Objective-C method.
 //
 // RelationshipKeyPathsForPrefetching returns the collection as a Go slice.
-func (x *FetchRequest) RelationshipKeyPathsForPrefetching() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relationshipKeyPathsForPrefetching"))
+func (fr *FetchRequest) RelationshipKeyPathsForPrefetching() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("relationshipKeyPathsForPrefetching"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetRelationshipKeyPathsForPrefetching wraps the corresponding Objective-C method.
-func (x *FetchRequest) SetRelationshipKeyPathsForPrefetching(relationshipKeyPathsForPrefetching []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelationshipKeyPathsForPrefetching:"), purego.SliceToNSArray(relationshipKeyPathsForPrefetching, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
 // IncludesPendingChanges wraps the corresponding Objective-C method.
-func (x *FetchRequest) IncludesPendingChanges() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesPendingChanges"))
+func (fr *FetchRequest) IncludesPendingChanges() bool {
+	_r := objc.Send[bool](objref.IDOf(fr), objc.RegisterName("includesPendingChanges"))
 	return _r
-}
-
-// SetIncludesPendingChanges wraps the corresponding Objective-C method.
-func (x *FetchRequest) SetIncludesPendingChanges(includesPendingChanges bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesPendingChanges:"), includesPendingChanges)
 }
 
 // ReturnsDistinctResults wraps the corresponding Objective-C method.
-func (x *FetchRequest) ReturnsDistinctResults() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("returnsDistinctResults"))
+func (fr *FetchRequest) ReturnsDistinctResults() bool {
+	_r := objc.Send[bool](objref.IDOf(fr), objc.RegisterName("returnsDistinctResults"))
 	return _r
 }
 
-// SetReturnsDistinctResults wraps the corresponding Objective-C method.
-func (x *FetchRequest) SetReturnsDistinctResults(returnsDistinctResults bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnsDistinctResults:"), returnsDistinctResults)
-}
-
 // PropertiesToFetch wraps the corresponding Objective-C method.
-func (x *FetchRequest) PropertiesToFetch() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertiesToFetch"))
+func (fr *FetchRequest) PropertiesToFetch() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("propertiesToFetch"))
 	return obj.Wrap(_r)
 }
 
 // SetPropertiesToFetch wraps the corresponding Objective-C method.
-func (x *FetchRequest) SetPropertiesToFetch(propertiesToFetch obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertiesToFetch:"), objref.IDOf(propertiesToFetch))
+func (fr *FetchRequest) SetPropertiesToFetch(propertiesToFetch obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setPropertiesToFetch:"), objref.IDOf(propertiesToFetch))
 }
 
 // FetchOffset wraps the corresponding Objective-C method.
-func (x *FetchRequest) FetchOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fetchOffset"))
+func (fr *FetchRequest) FetchOffset() int {
+	_r := objc.Send[int](objref.IDOf(fr), objc.RegisterName("fetchOffset"))
 	return _r
-}
-
-// SetFetchOffset wraps the corresponding Objective-C method.
-func (x *FetchRequest) SetFetchOffset(fetchOffset int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchOffset:"), fetchOffset)
 }
 
 // FetchBatchSize wraps the corresponding Objective-C method.
-func (x *FetchRequest) FetchBatchSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fetchBatchSize"))
+func (fr *FetchRequest) FetchBatchSize() int {
+	_r := objc.Send[int](objref.IDOf(fr), objc.RegisterName("fetchBatchSize"))
 	return _r
-}
-
-// SetFetchBatchSize wraps the corresponding Objective-C method.
-func (x *FetchRequest) SetFetchBatchSize(fetchBatchSize int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchBatchSize:"), fetchBatchSize)
 }
 
 // ShouldRefreshRefetchedObjects wraps the corresponding Objective-C method.
-func (x *FetchRequest) ShouldRefreshRefetchedObjects() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldRefreshRefetchedObjects"))
+func (fr *FetchRequest) ShouldRefreshRefetchedObjects() bool {
+	_r := objc.Send[bool](objref.IDOf(fr), objc.RegisterName("shouldRefreshRefetchedObjects"))
 	return _r
 }
 
-// SetShouldRefreshRefetchedObjects wraps the corresponding Objective-C method.
-func (x *FetchRequest) SetShouldRefreshRefetchedObjects(shouldRefreshRefetchedObjects bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRefreshRefetchedObjects:"), shouldRefreshRefetchedObjects)
-}
-
 // PropertiesToGroupBy wraps the corresponding Objective-C method.
-func (x *FetchRequest) PropertiesToGroupBy() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertiesToGroupBy"))
+func (fr *FetchRequest) PropertiesToGroupBy() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("propertiesToGroupBy"))
 	return obj.Wrap(_r)
 }
 
 // SetPropertiesToGroupBy wraps the corresponding Objective-C method.
-func (x *FetchRequest) SetPropertiesToGroupBy(propertiesToGroupBy obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropertiesToGroupBy:"), objref.IDOf(propertiesToGroupBy))
+func (fr *FetchRequest) SetPropertiesToGroupBy(propertiesToGroupBy obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("setPropertiesToGroupBy:"), objref.IDOf(propertiesToGroupBy))
 }
 
 // HavingPredicate wraps the corresponding Objective-C method.
-func (x *FetchRequest) HavingPredicate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("havingPredicate"))
+func (fr *FetchRequest) HavingPredicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("havingPredicate"))
 	return obj.Wrap(_r)
 }
-
-// SetHavingPredicate wraps the corresponding Objective-C method.
-func (x *FetchRequest) SetHavingPredicate(havingPredicate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHavingPredicate:"), objref.IDOf(havingPredicate))
-}
-
-// FetchRequestable is the interface implemented by [FetchRequest], for mocking and DI.
-type FetchRequestable interface {
-	obj.Object
-	WithEntity(entity *EntityDescription) *FetchRequest
-	WithPredicate(predicate obj.Object) *FetchRequest
-	WithSortDescriptors(items ...obj.Object) *FetchRequest
-	WithFetchLimit(fetchLimit int) *FetchRequest
-	WithResultType(resultType FetchRequestResultType) *FetchRequest
-	WithIncludesSubentities(includesSubentities bool) *FetchRequest
-	WithIncludesPropertyValues(includesPropertyValues bool) *FetchRequest
-	WithReturnsObjectsAsFaults(returnsObjectsAsFaults bool) *FetchRequest
-	WithRelationshipKeyPathsForPrefetching(items ...obj.Object) *FetchRequest
-	WithIncludesPendingChanges(includesPendingChanges bool) *FetchRequest
-	WithReturnsDistinctResults(returnsDistinctResults bool) *FetchRequest
-	WithFetchOffset(fetchOffset int) *FetchRequest
-	WithFetchBatchSize(fetchBatchSize int) *FetchRequest
-	WithShouldRefreshRefetchedObjects(shouldRefreshRefetchedObjects bool) *FetchRequest
-	WithHavingPredicate(havingPredicate obj.Object) *FetchRequest
-	WithAffectedStores(items ...PersistentStoreProvider) *FetchRequest
-	Execute() (result []obj.Object, err error)
-	Entity() *EntityDescription
-	SetEntity(entity *EntityDescription)
-	EntityName() string
-	Predicate() obj.Object
-	SetPredicate(predicate obj.Object)
-	SortDescriptors() []obj.Object
-	SetSortDescriptors(sortDescriptors []obj.Object)
-	FetchLimit() int
-	SetFetchLimit(fetchLimit int)
-	ResultType() FetchRequestResultType
-	SetResultType(resultType FetchRequestResultType)
-	IncludesSubentities() bool
-	SetIncludesSubentities(includesSubentities bool)
-	IncludesPropertyValues() bool
-	SetIncludesPropertyValues(includesPropertyValues bool)
-	ReturnsObjectsAsFaults() bool
-	SetReturnsObjectsAsFaults(returnsObjectsAsFaults bool)
-	RelationshipKeyPathsForPrefetching() []string
-	SetRelationshipKeyPathsForPrefetching(relationshipKeyPathsForPrefetching []string)
-	IncludesPendingChanges() bool
-	SetIncludesPendingChanges(includesPendingChanges bool)
-	ReturnsDistinctResults() bool
-	SetReturnsDistinctResults(returnsDistinctResults bool)
-	PropertiesToFetch() obj.Object
-	SetPropertiesToFetch(propertiesToFetch obj.Object)
-	FetchOffset() int
-	SetFetchOffset(fetchOffset int)
-	FetchBatchSize() int
-	SetFetchBatchSize(fetchBatchSize int)
-	ShouldRefreshRefetchedObjects() bool
-	SetShouldRefreshRefetchedObjects(shouldRefreshRefetchedObjects bool)
-	PropertiesToGroupBy() obj.Object
-	SetPropertiesToGroupBy(propertiesToGroupBy obj.Object)
-	HavingPredicate() obj.Object
-	SetHavingPredicate(havingPredicate obj.Object)
-}
-
-var _ FetchRequestable = (*FetchRequest)(nil)
 
 var _ PersistentStoreRequestProvider = (*FetchRequest)(nil)

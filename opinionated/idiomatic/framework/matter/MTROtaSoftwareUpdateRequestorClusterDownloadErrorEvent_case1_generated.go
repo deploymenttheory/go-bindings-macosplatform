@@ -51,38 +51,27 @@ func NewMTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent() *MTROtaSoftware
 }
 
 // WithSoftwareVersion sets the property and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
-	return x
+func (mosurcdee *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(mosurcdee), objc.RegisterName("setSoftwareVersion:"), objref.IDOf(softwareVersion))
+	return mosurcdee
 }
 
 // WithBytesDownloaded sets the property and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithBytesDownloaded(bytesDownloaded obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBytesDownloaded:"), objref.IDOf(bytesDownloaded))
-	return x
+func (mosurcdee *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithBytesDownloaded(bytesDownloaded obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(mosurcdee), objc.RegisterName("setBytesDownloaded:"), objref.IDOf(bytesDownloaded))
+	return mosurcdee
 }
 
 // WithProgressPercent sets the property and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithProgressPercent(progressPercent obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressPercent:"), objref.IDOf(progressPercent))
-	return x
+func (mosurcdee *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithProgressPercent(progressPercent obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(mosurcdee), objc.RegisterName("setProgressPercent:"), objref.IDOf(progressPercent))
+	return mosurcdee
 }
 
 // WithPlatformCode sets the property and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithPlatformCode(platformCode obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlatformCode:"), objref.IDOf(platformCode))
-	return x
+func (mosurcdee *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent) WithPlatformCode(platformCode obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(mosurcdee), objc.RegisterName("setPlatformCode:"), objref.IDOf(platformCode))
+	return mosurcdee
 }
-
-// MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent], for mocking and DI.
-type MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventable interface {
-	obj.Object
-	WithSoftwareVersion(softwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
-	WithBytesDownloaded(bytesDownloaded obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
-	WithProgressPercent(progressPercent obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
-	WithPlatformCode(platformCode obj.Object) *MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent
-}
-
-var _ MTROtaSoftwareUpdateRequestorClusterDownloadErrorEventable = (*MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent)(nil)
 
 var _ MTROTASoftwareUpdateRequestorClusterDownloadErrorEventProvider = (*MTROtaSoftwareUpdateRequestorClusterDownloadErrorEvent)(nil)

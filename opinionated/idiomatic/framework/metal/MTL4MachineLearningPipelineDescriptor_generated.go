@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,70 +52,49 @@ func NewMTL4MachineLearningPipelineDescriptor() *MTL4MachineLearningPipelineDesc
 	return mTL4MachineLearningPipelineDescriptorAdopt(_id)
 }
 
-// WithMachineLearningFunctionDescriptor assigns the function that the machine learning pipeline you create from this descriptor executes.
-func (x *MTL4MachineLearningPipelineDescriptor) WithMachineLearningFunctionDescriptor(machineLearningFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4MachineLearningPipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMachineLearningFunctionDescriptor:"), objref.IDOf(machineLearningFunctionDescriptor))
-	return x
+// WithMachineLearningFunctionDescriptor sets assigns the function that the machine learning pipeline you create from this descriptor executes.
+func (mmlpd *MTL4MachineLearningPipelineDescriptor) WithMachineLearningFunctionDescriptor(machineLearningFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4MachineLearningPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mmlpd), objc.RegisterName("setMachineLearningFunctionDescriptor:"), objref.IDOf(machineLearningFunctionDescriptor))
+	return mmlpd
 }
 
-// WithLabel assigns an optional string that uniquely identifies a pipeline descriptor.
-func (x *MTL4MachineLearningPipelineDescriptor) WithLabel(label string) *MTL4MachineLearningPipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets assigns an optional string that uniquely identifies a pipeline descriptor.
+func (mmlpd *MTL4MachineLearningPipelineDescriptor) WithLabel(label string) *MTL4MachineLearningPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mmlpd), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mmlpd
 }
 
-// WithOptions provides compile-time options when you build the pipeline.
-func (x *MTL4MachineLearningPipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4MachineLearningPipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), objref.IDOf(options))
-	return x
+// WithOptions sets provides compile-time options when you build the pipeline.
+func (mmlpd *MTL4MachineLearningPipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4MachineLearningPipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mmlpd), objc.RegisterName("setOptions:"), objref.IDOf(options))
+	return mmlpd
 }
 
 // SetInputDimensionsAtBufferIndex sets the dimension of an input tensor at a buffer index.
-func (x *MTL4MachineLearningPipelineDescriptor) SetInputDimensionsAtBufferIndex(dimensions *TensorExtents, bufferIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputDimensions:atBufferIndex:"), objref.IDOf(dimensions), bufferIndex)
+func (mmlpd *MTL4MachineLearningPipelineDescriptor) SetInputDimensionsAtBufferIndex(dimensions *TensorExtents, bufferIndex int) {
+	objc.Send[objc.ID](objref.IDOf(mmlpd), objc.RegisterName("setInputDimensions:atBufferIndex:"), objref.IDOf(dimensions), bufferIndex)
 }
 
 // SetInputDimensionsWithRange sets the dimensions of multiple input tensors on a range of buffer bindings.
-func (x *MTL4MachineLearningPipelineDescriptor) SetInputDimensionsWithRange(dimensions []*TensorExtents, range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputDimensions:withRange:"), purego.SliceToNSArray(dimensions, func(_v *TensorExtents) objc.ID { return objref.IDOf(_v) }), range_)
+func (mmlpd *MTL4MachineLearningPipelineDescriptor) SetInputDimensionsWithRange(dimensions []*TensorExtents, range_ foundation.NSRange) {
+	objc.Send[objc.ID](objref.IDOf(mmlpd), objc.RegisterName("setInputDimensions:withRange:"), purego.SliceToNSArray(dimensions, func(_v *TensorExtents) objc.ID { return objref.IDOf(_v) }), range_)
 }
 
 // InputDimensionsAtBufferIndex obtains the dimensions of the input tensor at bufferIndex if set, nil otherwise.
-func (x *MTL4MachineLearningPipelineDescriptor) InputDimensionsAtBufferIndex(bufferIndex int) *TensorExtents {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputDimensionsAtBufferIndex:"), bufferIndex)
+func (mmlpd *MTL4MachineLearningPipelineDescriptor) InputDimensionsAtBufferIndex(bufferIndex int) *TensorExtents {
+	_r := objc.Send[objc.ID](objref.IDOf(mmlpd), objc.RegisterName("inputDimensionsAtBufferIndex:"), bufferIndex)
 	return TensorExtentsFromID(_r)
 }
 
 // Reset resets the descriptor to its default values.
-func (x *MTL4MachineLearningPipelineDescriptor) Reset() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
+func (mmlpd *MTL4MachineLearningPipelineDescriptor) Reset() {
+	objc.Send[objc.ID](objref.IDOf(mmlpd), objc.RegisterName("reset"))
 }
 
-// MachineLearningFunctionDescriptor assigns the function that the machine learning pipeline you create from this descriptor executes.
-func (x *MTL4MachineLearningPipelineDescriptor) MachineLearningFunctionDescriptor() *MTL4FunctionDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("machineLearningFunctionDescriptor"))
+// MachineLearningFunctionDescriptor returns assigns the function that the machine learning pipeline you create from this descriptor executes.
+func (mmlpd *MTL4MachineLearningPipelineDescriptor) MachineLearningFunctionDescriptor() *MTL4FunctionDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(mmlpd), objc.RegisterName("machineLearningFunctionDescriptor"))
 	return MTL4FunctionDescriptorFromID(_r)
 }
-
-// SetMachineLearningFunctionDescriptor wraps the corresponding Objective-C method.
-func (x *MTL4MachineLearningPipelineDescriptor) SetMachineLearningFunctionDescriptor(machineLearningFunctionDescriptor *MTL4FunctionDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMachineLearningFunctionDescriptor:"), objref.IDOf(machineLearningFunctionDescriptor))
-}
-
-// MTL4MachineLearningPipelineDescriptorable is the interface implemented by [MTL4MachineLearningPipelineDescriptor], for mocking and DI.
-type MTL4MachineLearningPipelineDescriptorable interface {
-	obj.Object
-	WithMachineLearningFunctionDescriptor(machineLearningFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4MachineLearningPipelineDescriptor
-	WithLabel(label string) *MTL4MachineLearningPipelineDescriptor
-	WithOptions(options *MTL4PipelineOptions) *MTL4MachineLearningPipelineDescriptor
-	SetInputDimensionsAtBufferIndex(dimensions *TensorExtents, bufferIndex int)
-	SetInputDimensionsWithRange(dimensions []*TensorExtents, range_ foundation.NSRange)
-	InputDimensionsAtBufferIndex(bufferIndex int) *TensorExtents
-	Reset()
-	MachineLearningFunctionDescriptor() *MTL4FunctionDescriptor
-	SetMachineLearningFunctionDescriptor(machineLearningFunctionDescriptor *MTL4FunctionDescriptor)
-}
-
-var _ MTL4MachineLearningPipelineDescriptorable = (*MTL4MachineLearningPipelineDescriptor)(nil)
 
 var _ MTL4PipelineDescriptorProvider = (*MTL4MachineLearningPipelineDescriptor)(nil)

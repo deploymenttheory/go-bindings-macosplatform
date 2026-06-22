@@ -46,24 +46,24 @@ func treeNodeAdopt(id objc.ID) *TreeNode {
 }
 
 // Description returns the object's -description text.
-func (x *TreeNode) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tn *TreeNode) Description() string {
+	return rt.Description(objref.IDOf(tn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TreeNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tn *TreeNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TreeNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tn *TreeNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TreeNode) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tn *TreeNode) String() string {
+	return rt.Description(objref.IDOf(tn))
 }
 
 // NewTreeNodeWithRepresentedObject initializes a newly allocated tree node that represents the specified object.
@@ -74,67 +74,52 @@ func NewTreeNodeWithRepresentedObject(modelObject obj.Object) *TreeNode {
 }
 
 // DescendantNodeAtIndexPath returns the receiver’s descendant at the specified index path.
-func (x *TreeNode) DescendantNodeAtIndexPath(indexPath obj.Object) *TreeNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descendantNodeAtIndexPath:"), objref.IDOf(indexPath))
+func (tn *TreeNode) DescendantNodeAtIndexPath(indexPath obj.Object) *TreeNode {
+	_r := objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("descendantNodeAtIndexPath:"), objref.IDOf(indexPath))
 	return TreeNodeFromID(_r)
 }
 
 // SortWithSortDescriptorsRecursively sorts the receiver’s subtree using the values of the represented objects with the specified sort descriptors.
-func (x *TreeNode) SortWithSortDescriptorsRecursively(sortDescriptors []obj.Object, recursively bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortWithSortDescriptors:recursively:"), purego.SliceToNSArray(sortDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), recursively)
+func (tn *TreeNode) SortWithSortDescriptorsRecursively(sortDescriptors []obj.Object, recursively bool) {
+	objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("sortWithSortDescriptors:recursively:"), purego.SliceToNSArray(sortDescriptors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), recursively)
 }
 
 // RepresentedObject wraps the corresponding Objective-C method.
-func (x *TreeNode) RepresentedObject() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("representedObject"))
+func (tn *TreeNode) RepresentedObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("representedObject"))
 	return obj.Wrap(_r)
 }
 
 // IndexPath wraps the corresponding Objective-C method.
-func (x *TreeNode) IndexPath() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPath"))
+func (tn *TreeNode) IndexPath() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("indexPath"))
 	return obj.Wrap(_r)
 }
 
 // IsLeaf wraps the corresponding Objective-C method.
-func (x *TreeNode) IsLeaf() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLeaf"))
+func (tn *TreeNode) IsLeaf() bool {
+	_r := objc.Send[bool](objref.IDOf(tn), objc.RegisterName("isLeaf"))
 	return _r
 }
 
 // ChildNodes wraps the corresponding Objective-C method.
 //
 // ChildNodes returns the collection as a Go slice.
-func (x *TreeNode) ChildNodes() []*TreeNode {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childNodes"))
+func (tn *TreeNode) ChildNodes() []*TreeNode {
+	_arr := objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("childNodes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TreeNode { return TreeNodeFromID(_id) })
 }
 
 // MutableChildNodes wraps the corresponding Objective-C method.
 //
 // MutableChildNodes returns the collection as a Go slice.
-func (x *TreeNode) MutableChildNodes() []*TreeNode {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mutableChildNodes"))
+func (tn *TreeNode) MutableChildNodes() []*TreeNode {
+	_arr := objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("mutableChildNodes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TreeNode { return TreeNodeFromID(_id) })
 }
 
 // ParentNode wraps the corresponding Objective-C method.
-func (x *TreeNode) ParentNode() *TreeNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentNode"))
+func (tn *TreeNode) ParentNode() *TreeNode {
+	_r := objc.Send[objc.ID](objref.IDOf(tn), objc.RegisterName("parentNode"))
 	return TreeNodeFromID(_r)
 }
-
-// TreeNodeable is the interface implemented by [TreeNode], for mocking and DI.
-type TreeNodeable interface {
-	obj.Object
-	DescendantNodeAtIndexPath(indexPath obj.Object) *TreeNode
-	SortWithSortDescriptorsRecursively(sortDescriptors []obj.Object, recursively bool)
-	RepresentedObject() obj.Object
-	IndexPath() obj.Object
-	IsLeaf() bool
-	ChildNodes() []*TreeNode
-	MutableChildNodes() []*TreeNode
-	ParentNode() *TreeNode
-}
-
-var _ TreeNodeable = (*TreeNode)(nil)

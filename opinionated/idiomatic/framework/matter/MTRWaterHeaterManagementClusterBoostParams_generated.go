@@ -44,24 +44,24 @@ func mTRWaterHeaterManagementClusterBoostParamsAdopt(id objc.ID) *MTRWaterHeater
 }
 
 // Description returns the object's -description text.
-func (x *MTRWaterHeaterManagementClusterBoostParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mwhmcbp *MTRWaterHeaterManagementClusterBoostParams) Description() string {
+	return rt.Description(objref.IDOf(mwhmcbp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRWaterHeaterManagementClusterBoostParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mwhmcbp *MTRWaterHeaterManagementClusterBoostParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mwhmcbp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRWaterHeaterManagementClusterBoostParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mwhmcbp *MTRWaterHeaterManagementClusterBoostParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mwhmcbp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRWaterHeaterManagementClusterBoostParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mwhmcbp *MTRWaterHeaterManagementClusterBoostParams) String() string {
+	return rt.Description(objref.IDOf(mwhmcbp))
 }
 
 // NewMTRWaterHeaterManagementClusterBoostParams creates a new MTRWaterHeaterManagementClusterBoostParams.
@@ -71,68 +71,37 @@ func NewMTRWaterHeaterManagementClusterBoostParams() *MTRWaterHeaterManagementCl
 }
 
 // WithBoostInfo sets the property and returns the receiver so calls can be chained.
-func (x *MTRWaterHeaterManagementClusterBoostParams) WithBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoostInfo:"), objref.IDOf(boostInfo))
-	return x
+func (mwhmcbp *MTRWaterHeaterManagementClusterBoostParams) WithBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostParams {
+	objc.Send[objc.ID](objref.IDOf(mwhmcbp), objc.RegisterName("setBoostInfo:"), objref.IDOf(boostInfo))
+	return mwhmcbp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRWaterHeaterManagementClusterBoostParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRWaterHeaterManagementClusterBoostParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mwhmcbp *MTRWaterHeaterManagementClusterBoostParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRWaterHeaterManagementClusterBoostParams {
+	objc.Send[objc.ID](objref.IDOf(mwhmcbp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mwhmcbp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRWaterHeaterManagementClusterBoostParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRWaterHeaterManagementClusterBoostParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mwhmcbp *MTRWaterHeaterManagementClusterBoostParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRWaterHeaterManagementClusterBoostParams {
+	objc.Send[objc.ID](objref.IDOf(mwhmcbp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mwhmcbp
 }
 
 // BoostInfo wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterManagementClusterBoostParams) BoostInfo() *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boostInfo"))
+func (mwhmcbp *MTRWaterHeaterManagementClusterBoostParams) BoostInfo() *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(mwhmcbp), objc.RegisterName("boostInfo"))
 	return MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructFromID(_r)
 }
 
-// SetBoostInfo wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterManagementClusterBoostParams) SetBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoostInfo:"), objref.IDOf(boostInfo))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRWaterHeaterManagementClusterBoostParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mwhmcbp *MTRWaterHeaterManagementClusterBoostParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwhmcbp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterManagementClusterBoostParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRWaterHeaterManagementClusterBoostParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mwhmcbp *MTRWaterHeaterManagementClusterBoostParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwhmcbp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterManagementClusterBoostParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRWaterHeaterManagementClusterBoostParamsable is the interface implemented by [MTRWaterHeaterManagementClusterBoostParams], for mocking and DI.
-type MTRWaterHeaterManagementClusterBoostParamsable interface {
-	obj.Object
-	WithBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRWaterHeaterManagementClusterBoostParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRWaterHeaterManagementClusterBoostParams
-	BoostInfo() *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct
-	SetBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRWaterHeaterManagementClusterBoostParamsable = (*MTRWaterHeaterManagementClusterBoostParams)(nil)

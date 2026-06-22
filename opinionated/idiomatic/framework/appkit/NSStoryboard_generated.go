@@ -46,24 +46,24 @@ func storyboardAdopt(id objc.ID) *Storyboard {
 }
 
 // Description returns the object's -description text.
-func (x *Storyboard) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Storyboard) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Storyboard) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Storyboard) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Storyboard) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Storyboard) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Storyboard) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Storyboard) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewStoryboard creates a new Storyboard.
@@ -73,22 +73,13 @@ func NewStoryboard() *Storyboard {
 }
 
 // InstantiateInitialController creates the initial view controller or window controller from a storyboard.
-func (x *Storyboard) InstantiateInitialController() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instantiateInitialController"))
+func (s *Storyboard) InstantiateInitialController() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("instantiateInitialController"))
 	return obj.Wrap(_r)
 }
 
 // InstantiateControllerWithIdentifier instantiates a specified view controller or window controller from a storyboard.
-func (x *Storyboard) InstantiateControllerWithIdentifier(identifier obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instantiateControllerWithIdentifier:"), objref.IDOf(identifier))
+func (s *Storyboard) InstantiateControllerWithIdentifier(identifier obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("instantiateControllerWithIdentifier:"), objref.IDOf(identifier))
 	return obj.Wrap(_r)
 }
-
-// Storyboardable is the interface implemented by [Storyboard], for mocking and DI.
-type Storyboardable interface {
-	obj.Object
-	InstantiateInitialController() obj.Object
-	InstantiateControllerWithIdentifier(identifier obj.Object) obj.Object
-}
-
-var _ Storyboardable = (*Storyboard)(nil)

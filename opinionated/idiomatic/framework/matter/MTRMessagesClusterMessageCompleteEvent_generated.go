@@ -44,24 +44,24 @@ func mTRMessagesClusterMessageCompleteEventAdopt(id objc.ID) *MTRMessagesCluster
 }
 
 // Description returns the object's -description text.
-func (x *MTRMessagesClusterMessageCompleteEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmcmce *MTRMessagesClusterMessageCompleteEvent) Description() string {
+	return rt.Description(objref.IDOf(mmcmce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRMessagesClusterMessageCompleteEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmcmce *MTRMessagesClusterMessageCompleteEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmcmce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRMessagesClusterMessageCompleteEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmcmce *MTRMessagesClusterMessageCompleteEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmcmce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRMessagesClusterMessageCompleteEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmcmce *MTRMessagesClusterMessageCompleteEvent) String() string {
+	return rt.Description(objref.IDOf(mmcmce))
 }
 
 // NewMTRMessagesClusterMessageCompleteEvent creates a new MTRMessagesClusterMessageCompleteEvent.
@@ -71,91 +71,52 @@ func NewMTRMessagesClusterMessageCompleteEvent() *MTRMessagesClusterMessageCompl
 }
 
 // WithMessageID sets the property and returns the receiver so calls can be chained.
-func (x *MTRMessagesClusterMessageCompleteEvent) WithMessageID(messageID obj.Object) *MTRMessagesClusterMessageCompleteEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
-	return x
+func (mmcmce *MTRMessagesClusterMessageCompleteEvent) WithMessageID(messageID obj.Object) *MTRMessagesClusterMessageCompleteEvent {
+	objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
+	return mmcmce
 }
 
 // WithResponseID sets the property and returns the receiver so calls can be chained.
-func (x *MTRMessagesClusterMessageCompleteEvent) WithResponseID(responseID obj.Object) *MTRMessagesClusterMessageCompleteEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResponseID:"), objref.IDOf(responseID))
-	return x
+func (mmcmce *MTRMessagesClusterMessageCompleteEvent) WithResponseID(responseID obj.Object) *MTRMessagesClusterMessageCompleteEvent {
+	objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("setResponseID:"), objref.IDOf(responseID))
+	return mmcmce
 }
 
 // WithReply sets the property and returns the receiver so calls can be chained.
-func (x *MTRMessagesClusterMessageCompleteEvent) WithReply(reply string) *MTRMessagesClusterMessageCompleteEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReply:"), purego.NSString(reply))
-	return x
+func (mmcmce *MTRMessagesClusterMessageCompleteEvent) WithReply(reply string) *MTRMessagesClusterMessageCompleteEvent {
+	objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("setReply:"), purego.NSString(reply))
+	return mmcmce
 }
 
 // WithFutureMessagesPreference sets the property and returns the receiver so calls can be chained.
-func (x *MTRMessagesClusterMessageCompleteEvent) WithFutureMessagesPreference(futureMessagesPreference obj.Object) *MTRMessagesClusterMessageCompleteEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFutureMessagesPreference:"), objref.IDOf(futureMessagesPreference))
-	return x
+func (mmcmce *MTRMessagesClusterMessageCompleteEvent) WithFutureMessagesPreference(futureMessagesPreference obj.Object) *MTRMessagesClusterMessageCompleteEvent {
+	objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("setFutureMessagesPreference:"), objref.IDOf(futureMessagesPreference))
+	return mmcmce
 }
 
 // MessageID wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterMessageCompleteEvent) MessageID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("messageID"))
+func (mmcmce *MTRMessagesClusterMessageCompleteEvent) MessageID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("messageID"))
 	return obj.Wrap(_r)
-}
-
-// SetMessageID wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterMessageCompleteEvent) SetMessageID(messageID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageID:"), objref.IDOf(messageID))
 }
 
 // ResponseID wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterMessageCompleteEvent) ResponseID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("responseID"))
+func (mmcmce *MTRMessagesClusterMessageCompleteEvent) ResponseID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("responseID"))
 	return obj.Wrap(_r)
 }
 
-// SetResponseID wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterMessageCompleteEvent) SetResponseID(responseID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResponseID:"), objref.IDOf(responseID))
-}
-
 // Reply wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterMessageCompleteEvent) Reply() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reply"))
+func (mmcmce *MTRMessagesClusterMessageCompleteEvent) Reply() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("reply"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetReply wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterMessageCompleteEvent) SetReply(reply string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReply:"), purego.NSString(reply))
-}
-
 // FutureMessagesPreference wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterMessageCompleteEvent) FutureMessagesPreference() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("futureMessagesPreference"))
+func (mmcmce *MTRMessagesClusterMessageCompleteEvent) FutureMessagesPreference() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmcmce), objc.RegisterName("futureMessagesPreference"))
 	return obj.Wrap(_r)
 }
-
-// SetFutureMessagesPreference wraps the corresponding Objective-C method.
-func (x *MTRMessagesClusterMessageCompleteEvent) SetFutureMessagesPreference(futureMessagesPreference obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFutureMessagesPreference:"), objref.IDOf(futureMessagesPreference))
-}
-
-// MTRMessagesClusterMessageCompleteEventable is the interface implemented by [MTRMessagesClusterMessageCompleteEvent], for mocking and DI.
-type MTRMessagesClusterMessageCompleteEventable interface {
-	obj.Object
-	WithMessageID(messageID obj.Object) *MTRMessagesClusterMessageCompleteEvent
-	WithResponseID(responseID obj.Object) *MTRMessagesClusterMessageCompleteEvent
-	WithReply(reply string) *MTRMessagesClusterMessageCompleteEvent
-	WithFutureMessagesPreference(futureMessagesPreference obj.Object) *MTRMessagesClusterMessageCompleteEvent
-	MessageID() obj.Object
-	SetMessageID(messageID obj.Object)
-	ResponseID() obj.Object
-	SetResponseID(responseID obj.Object)
-	Reply() string
-	SetReply(reply string)
-	FutureMessagesPreference() obj.Object
-	SetFutureMessagesPreference(futureMessagesPreference obj.Object)
-}
-
-var _ MTRMessagesClusterMessageCompleteEventable = (*MTRMessagesClusterMessageCompleteEvent)(nil)

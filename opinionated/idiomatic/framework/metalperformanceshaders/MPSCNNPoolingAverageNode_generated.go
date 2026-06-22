@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,19 +51,11 @@ func NewCNNPoolingAverageNode() *CNNPoolingAverageNode {
 	return cNNPoolingAverageNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNPoolingAverageNode) WithLabel(label string) *CNNPoolingAverageNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cpan *CNNPoolingAverageNode) WithLabel(label string) *CNNPoolingAverageNode {
+	objc.Send[objc.ID](objref.IDOf(cpan), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cpan
 }
-
-// CNNPoolingAverageNodeable is the interface implemented by [CNNPoolingAverageNode], for mocking and DI.
-type CNNPoolingAverageNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNPoolingAverageNode
-}
-
-var _ CNNPoolingAverageNodeable = (*CNNPoolingAverageNode)(nil)
 
 var _ CNNPoolingNodeProvider = (*CNNPoolingAverageNode)(nil)
 

@@ -46,24 +46,24 @@ func videoProcessorRequestProcessingOptionsAdopt(id objc.ID) *VideoProcessorRequ
 }
 
 // Description returns the object's -description text.
-func (x *VideoProcessorRequestProcessingOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vprpo *VideoProcessorRequestProcessingOptions) Description() string {
+	return rt.Description(objref.IDOf(vprpo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VideoProcessorRequestProcessingOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vprpo *VideoProcessorRequestProcessingOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vprpo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VideoProcessorRequestProcessingOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vprpo *VideoProcessorRequestProcessingOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vprpo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VideoProcessorRequestProcessingOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vprpo *VideoProcessorRequestProcessingOptions) String() string {
+	return rt.Description(objref.IDOf(vprpo))
 }
 
 // NewVideoProcessorRequestProcessingOptions creates a new VideoProcessorRequestProcessingOptions.
@@ -72,29 +72,14 @@ func NewVideoProcessorRequestProcessingOptions() *VideoProcessorRequestProcessin
 	return videoProcessorRequestProcessingOptionsAdopt(_id)
 }
 
-// WithCadence the cadence at which the request should be performed. If this property is not defined, then every frame will be processed.
-func (x *VideoProcessorRequestProcessingOptions) WithCadence(cadence VideoProcessorCadenceProvider) *VideoProcessorRequestProcessingOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCadence:"), objref.IDOf(cadence))
-	return x
+// WithCadence sets the cadence at which the request should be performed. If this property is not defined, then every frame will be processed.
+func (vprpo *VideoProcessorRequestProcessingOptions) WithCadence(cadence VideoProcessorCadenceProvider) *VideoProcessorRequestProcessingOptions {
+	objc.Send[objc.ID](objref.IDOf(vprpo), objc.RegisterName("setCadence:"), objref.IDOf(cadence))
+	return vprpo
 }
 
 // Cadence wraps the corresponding Objective-C method.
-func (x *VideoProcessorRequestProcessingOptions) Cadence() *VideoProcessorCadence {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cadence"))
+func (vprpo *VideoProcessorRequestProcessingOptions) Cadence() *VideoProcessorCadence {
+	_r := objc.Send[objc.ID](objref.IDOf(vprpo), objc.RegisterName("cadence"))
 	return VideoProcessorCadenceFromID(_r)
 }
-
-// SetCadence wraps the corresponding Objective-C method.
-func (x *VideoProcessorRequestProcessingOptions) SetCadence(cadence *VideoProcessorCadence) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCadence:"), objref.IDOf(cadence))
-}
-
-// VideoProcessorRequestProcessingOptionsable is the interface implemented by [VideoProcessorRequestProcessingOptions], for mocking and DI.
-type VideoProcessorRequestProcessingOptionsable interface {
-	obj.Object
-	WithCadence(cadence VideoProcessorCadenceProvider) *VideoProcessorRequestProcessingOptions
-	Cadence() *VideoProcessorCadence
-	SetCadence(cadence *VideoProcessorCadence)
-}
-
-var _ VideoProcessorRequestProcessingOptionsable = (*VideoProcessorRequestProcessingOptions)(nil)

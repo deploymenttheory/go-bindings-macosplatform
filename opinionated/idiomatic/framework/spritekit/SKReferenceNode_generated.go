@@ -69,199 +69,165 @@ func NewReferenceNodeWithCoder(aDecoder obj.Object) *ReferenceNode {
 	return referenceNodeAdopt(_id)
 }
 
-// WithPosition the position of the node in its parent’s coordinate system.
-func (x *ReferenceNode) WithPosition(position corefoundation.CGPoint) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
-	return x
+// WithPosition sets the position of the node in its parent’s coordinate system.
+func (rn *ReferenceNode) WithPosition(position corefoundation.CGPoint) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setPosition:"), position)
+	return rn
 }
 
-// WithZPosition the height of the node relative to its parent.
-func (x *ReferenceNode) WithZPosition(zPosition float64) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
-	return x
+// WithZPosition sets the height of the node relative to its parent.
+func (rn *ReferenceNode) WithZPosition(zPosition float64) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setZPosition:"), zPosition)
+	return rn
 }
 
-// WithZRotation the Euler rotation about the z axis (in radians).
-func (x *ReferenceNode) WithZRotation(zRotation float64) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
-	return x
+// WithZRotation sets the Euler rotation about the z axis (in radians).
+func (rn *ReferenceNode) WithZRotation(zRotation float64) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setZRotation:"), zRotation)
+	return rn
 }
 
-// WithXScale a scaling factor that multiplies the width of a node and its children.
-func (x *ReferenceNode) WithXScale(xScale float64) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
-	return x
+// WithXScale sets a scaling factor that multiplies the width of a node and its children.
+func (rn *ReferenceNode) WithXScale(xScale float64) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setXScale:"), xScale)
+	return rn
 }
 
-// WithYScale a scaling factor that multiplies the height of a node and its children.
-func (x *ReferenceNode) WithYScale(yScale float64) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
-	return x
+// WithYScale sets a scaling factor that multiplies the height of a node and its children.
+func (rn *ReferenceNode) WithYScale(yScale float64) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setYScale:"), yScale)
+	return rn
 }
 
-// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
-func (x *ReferenceNode) WithSpeed(speed float64) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
-	return x
+// WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
+func (rn *ReferenceNode) WithSpeed(speed float64) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setSpeed:"), speed)
+	return rn
 }
 
-// WithAlpha the transparency value applied to the node’s contents.
-func (x *ReferenceNode) WithAlpha(alpha float64) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the transparency value applied to the node’s contents.
+func (rn *ReferenceNode) WithAlpha(alpha float64) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAlpha:"), alpha)
+	return rn
 }
 
-// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
-func (x *ReferenceNode) WithPaused(paused bool) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
-	return x
+// WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
+func (rn *ReferenceNode) WithPaused(paused bool) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setPaused:"), paused)
+	return rn
 }
 
-// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
-func (x *ReferenceNode) WithHidden(hidden bool) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
+func (rn *ReferenceNode) WithHidden(hidden bool) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setHidden:"), hidden)
+	return rn
 }
 
-// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
-func (x *ReferenceNode) WithUserInteractionEnabled(userInteractionEnabled bool) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
-	return x
+// WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
+func (rn *ReferenceNode) WithUserInteractionEnabled(userInteractionEnabled bool) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	return rn
 }
 
-// WithName the node’s assignable name.
-func (x *ReferenceNode) WithName(name string) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the node’s assignable name.
+func (rn *ReferenceNode) WithName(name string) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setName:"), purego.NSString(name))
+	return rn
 }
 
-// WithPhysicsBody the physics body associated with the node.
-func (x *ReferenceNode) WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
-	return x
+// WithPhysicsBody sets the physics body associated with the node.
+func (rn *ReferenceNode) WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	return rn
 }
 
-// WithUserData a dictionary containing arbitrary data.
-func (x *ReferenceNode) WithUserData(userData obj.Object) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
-	return x
+// WithUserData sets a dictionary containing arbitrary data.
+func (rn *ReferenceNode) WithUserData(userData obj.Object) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	return rn
 }
 
-// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
-func (x *ReferenceNode) WithReachConstraints(reachConstraints *ReachConstraints) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
-	return x
+// WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
+func (rn *ReferenceNode) WithReachConstraints(reachConstraints *ReachConstraints) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	return rn
 }
 
-// WithConstraints a list of constraints to apply to the node.
-func (x *ReferenceNode) WithConstraints(items ...*Constraint) *ReferenceNode {
+// WithConstraints sets a list of constraints to apply to the node.
+func (rn *ReferenceNode) WithConstraints(items ...*Constraint) *ReferenceNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setConstraints:"), _arr)
+	return rn
 }
 
-// WithAttributeValues the values of each attribute associated with the node’s attached shader.
-func (x *ReferenceNode) WithAttributeValues(attributeValues obj.Object) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
-	return x
+// WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
+func (rn *ReferenceNode) WithAttributeValues(attributeValues obj.Object) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	return rn
 }
 
-// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-func (x *ReferenceNode) WithAccessibilityElement(accessibilityElement bool) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
-	return x
+// WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+func (rn *ReferenceNode) WithAccessibilityElement(accessibilityElement bool) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	return rn
 }
 
-// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
-func (x *ReferenceNode) WithAccessibilityRole(accessibilityRole string) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
-	return x
+// WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
+func (rn *ReferenceNode) WithAccessibilityRole(accessibilityRole string) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	return rn
 }
 
-// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
-func (x *ReferenceNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
-	return x
+// WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
+func (rn *ReferenceNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	return rn
 }
 
-// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
-func (x *ReferenceNode) WithAccessibilitySubrole(accessibilitySubrole string) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
-	return x
+// WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
+func (rn *ReferenceNode) WithAccessibilitySubrole(accessibilitySubrole string) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	return rn
 }
 
-// WithAccessibilityFrame the size of this user interface element, in screen points.
-func (x *ReferenceNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
-	return x
+// WithAccessibilityFrame sets the size of this user interface element, in screen points.
+func (rn *ReferenceNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	return rn
 }
 
-// WithAccessibilityParent the user interface element that contains this element.
-func (x *ReferenceNode) WithAccessibilityParent(accessibilityParent obj.Object) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
-	return x
+// WithAccessibilityParent sets the user interface element that contains this element.
+func (rn *ReferenceNode) WithAccessibilityParent(accessibilityParent obj.Object) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	return rn
 }
 
-// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
-func (x *ReferenceNode) WithAccessibilityHelp(accessibilityHelp string) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
-	return x
+// WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
+func (rn *ReferenceNode) WithAccessibilityHelp(accessibilityHelp string) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	return rn
 }
 
-// WithAccessibilityLabel a short description of this user interface element.
-func (x *ReferenceNode) WithAccessibilityLabel(accessibilityLabel string) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
-	return x
+// WithAccessibilityLabel sets a short description of this user interface element.
+func (rn *ReferenceNode) WithAccessibilityLabel(accessibilityLabel string) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	return rn
 }
 
-// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
-func (x *ReferenceNode) WithAccessibilityEnabled(accessibilityEnabled bool) *ReferenceNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
-	return x
+// WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
+func (rn *ReferenceNode) WithAccessibilityEnabled(accessibilityEnabled bool) *ReferenceNode {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	return rn
 }
 
 // DidLoadReferenceNode a method called by SpriteKit after the reference node’s contents are loaded.
-func (x *ReferenceNode) DidLoadReferenceNode(node *Node) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didLoadReferenceNode:"), objref.IDOf(node))
+func (rn *ReferenceNode) DidLoadReferenceNode(node *Node) {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("didLoadReferenceNode:"), objref.IDOf(node))
 }
 
 // ResolveReferenceNode loads the reference node’s content and adds it as a new child node.
-func (x *ReferenceNode) ResolveReferenceNode() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolveReferenceNode"))
+func (rn *ReferenceNode) ResolveReferenceNode() {
+	objc.Send[objc.ID](objref.IDOf(rn), objc.RegisterName("resolveReferenceNode"))
 }
-
-// ReferenceNodeable is the interface implemented by [ReferenceNode], for mocking and DI.
-type ReferenceNodeable interface {
-	obj.Object
-	WithPosition(position corefoundation.CGPoint) *ReferenceNode
-	WithZPosition(zPosition float64) *ReferenceNode
-	WithZRotation(zRotation float64) *ReferenceNode
-	WithXScale(xScale float64) *ReferenceNode
-	WithYScale(yScale float64) *ReferenceNode
-	WithSpeed(speed float64) *ReferenceNode
-	WithAlpha(alpha float64) *ReferenceNode
-	WithPaused(paused bool) *ReferenceNode
-	WithHidden(hidden bool) *ReferenceNode
-	WithUserInteractionEnabled(userInteractionEnabled bool) *ReferenceNode
-	WithName(name string) *ReferenceNode
-	WithPhysicsBody(physicsBody *PhysicsBody) *ReferenceNode
-	WithUserData(userData obj.Object) *ReferenceNode
-	WithReachConstraints(reachConstraints *ReachConstraints) *ReferenceNode
-	WithConstraints(items ...*Constraint) *ReferenceNode
-	WithAttributeValues(attributeValues obj.Object) *ReferenceNode
-	WithAccessibilityElement(accessibilityElement bool) *ReferenceNode
-	WithAccessibilityRole(accessibilityRole string) *ReferenceNode
-	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *ReferenceNode
-	WithAccessibilitySubrole(accessibilitySubrole string) *ReferenceNode
-	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *ReferenceNode
-	WithAccessibilityParent(accessibilityParent obj.Object) *ReferenceNode
-	WithAccessibilityHelp(accessibilityHelp string) *ReferenceNode
-	WithAccessibilityLabel(accessibilityLabel string) *ReferenceNode
-	WithAccessibilityEnabled(accessibilityEnabled bool) *ReferenceNode
-	DidLoadReferenceNode(node *Node)
-	ResolveReferenceNode()
-}
-
-var _ ReferenceNodeable = (*ReferenceNode)(nil)
 
 var _ NodeProvider = (*ReferenceNode)(nil)

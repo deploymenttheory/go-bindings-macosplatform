@@ -68,25 +68,16 @@ func NewCountedSetWithSet(set obj.Object) *CountedSet {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *CountedSet) WithScriptingProperties(scriptingProperties obj.Object) *CountedSet {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (cs *CountedSet) WithScriptingProperties(scriptingProperties obj.Object) *CountedSet {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return cs
 }
 
 // CountForObject returns the count associated with a given object in the set.
-func (x *CountedSet) CountForObject(object obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("countForObject:"), objref.IDOf(object))
+func (cs *CountedSet) CountForObject(object obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(cs), objc.RegisterName("countForObject:"), objref.IDOf(object))
 	return _r
 }
-
-// CountedSetable is the interface implemented by [CountedSet], for mocking and DI.
-type CountedSetable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *CountedSet
-	CountForObject(object obj.Object) int
-}
-
-var _ CountedSetable = (*CountedSet)(nil)
 
 var _ MutableSetProvider = (*CountedSet)(nil)
 

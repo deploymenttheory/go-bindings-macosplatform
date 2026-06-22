@@ -44,24 +44,24 @@ func mTRDataTypeLocationDescriptorStructAdopt(id objc.ID) *MTRDataTypeLocationDe
 }
 
 // Description returns the object's -description text.
-func (x *MTRDataTypeLocationDescriptorStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdtlds *MTRDataTypeLocationDescriptorStruct) Description() string {
+	return rt.Description(objref.IDOf(mdtlds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDataTypeLocationDescriptorStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdtlds *MTRDataTypeLocationDescriptorStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdtlds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDataTypeLocationDescriptorStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdtlds *MTRDataTypeLocationDescriptorStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdtlds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDataTypeLocationDescriptorStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdtlds *MTRDataTypeLocationDescriptorStruct) String() string {
+	return rt.Description(objref.IDOf(mdtlds))
 }
 
 // NewMTRDataTypeLocationDescriptorStruct creates a new MTRDataTypeLocationDescriptorStruct.
@@ -71,71 +71,40 @@ func NewMTRDataTypeLocationDescriptorStruct() *MTRDataTypeLocationDescriptorStru
 }
 
 // WithLocationName sets the property and returns the receiver so calls can be chained.
-func (x *MTRDataTypeLocationDescriptorStruct) WithLocationName(locationName string) *MTRDataTypeLocationDescriptorStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocationName:"), purego.NSString(locationName))
-	return x
+func (mdtlds *MTRDataTypeLocationDescriptorStruct) WithLocationName(locationName string) *MTRDataTypeLocationDescriptorStruct {
+	objc.Send[objc.ID](objref.IDOf(mdtlds), objc.RegisterName("setLocationName:"), purego.NSString(locationName))
+	return mdtlds
 }
 
 // WithFloorNumber sets the property and returns the receiver so calls can be chained.
-func (x *MTRDataTypeLocationDescriptorStruct) WithFloorNumber(floorNumber obj.Object) *MTRDataTypeLocationDescriptorStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloorNumber:"), objref.IDOf(floorNumber))
-	return x
+func (mdtlds *MTRDataTypeLocationDescriptorStruct) WithFloorNumber(floorNumber obj.Object) *MTRDataTypeLocationDescriptorStruct {
+	objc.Send[objc.ID](objref.IDOf(mdtlds), objc.RegisterName("setFloorNumber:"), objref.IDOf(floorNumber))
+	return mdtlds
 }
 
 // WithAreaType sets the property and returns the receiver so calls can be chained.
-func (x *MTRDataTypeLocationDescriptorStruct) WithAreaType(areaType obj.Object) *MTRDataTypeLocationDescriptorStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaType:"), objref.IDOf(areaType))
-	return x
+func (mdtlds *MTRDataTypeLocationDescriptorStruct) WithAreaType(areaType obj.Object) *MTRDataTypeLocationDescriptorStruct {
+	objc.Send[objc.ID](objref.IDOf(mdtlds), objc.RegisterName("setAreaType:"), objref.IDOf(areaType))
+	return mdtlds
 }
 
 // LocationName wraps the corresponding Objective-C method.
-func (x *MTRDataTypeLocationDescriptorStruct) LocationName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locationName"))
+func (mdtlds *MTRDataTypeLocationDescriptorStruct) LocationName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mdtlds), objc.RegisterName("locationName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLocationName wraps the corresponding Objective-C method.
-func (x *MTRDataTypeLocationDescriptorStruct) SetLocationName(locationName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocationName:"), purego.NSString(locationName))
-}
-
 // FloorNumber wraps the corresponding Objective-C method.
-func (x *MTRDataTypeLocationDescriptorStruct) FloorNumber() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("floorNumber"))
+func (mdtlds *MTRDataTypeLocationDescriptorStruct) FloorNumber() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdtlds), objc.RegisterName("floorNumber"))
 	return obj.Wrap(_r)
-}
-
-// SetFloorNumber wraps the corresponding Objective-C method.
-func (x *MTRDataTypeLocationDescriptorStruct) SetFloorNumber(floorNumber obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloorNumber:"), objref.IDOf(floorNumber))
 }
 
 // AreaType wraps the corresponding Objective-C method.
-func (x *MTRDataTypeLocationDescriptorStruct) AreaType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("areaType"))
+func (mdtlds *MTRDataTypeLocationDescriptorStruct) AreaType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdtlds), objc.RegisterName("areaType"))
 	return obj.Wrap(_r)
 }
-
-// SetAreaType wraps the corresponding Objective-C method.
-func (x *MTRDataTypeLocationDescriptorStruct) SetAreaType(areaType obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAreaType:"), objref.IDOf(areaType))
-}
-
-// MTRDataTypeLocationDescriptorStructable is the interface implemented by [MTRDataTypeLocationDescriptorStruct], for mocking and DI.
-type MTRDataTypeLocationDescriptorStructable interface {
-	obj.Object
-	WithLocationName(locationName string) *MTRDataTypeLocationDescriptorStruct
-	WithFloorNumber(floorNumber obj.Object) *MTRDataTypeLocationDescriptorStruct
-	WithAreaType(areaType obj.Object) *MTRDataTypeLocationDescriptorStruct
-	LocationName() string
-	SetLocationName(locationName string)
-	FloorNumber() obj.Object
-	SetFloorNumber(floorNumber obj.Object)
-	AreaType() obj.Object
-	SetAreaType(areaType obj.Object)
-}
-
-var _ MTRDataTypeLocationDescriptorStructable = (*MTRDataTypeLocationDescriptorStruct)(nil)

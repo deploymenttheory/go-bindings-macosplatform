@@ -47,24 +47,24 @@ func renderedCaptionImageAdopt(id objc.ID) *RenderedCaptionImage {
 }
 
 // Description returns the object's -description text.
-func (x *RenderedCaptionImage) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rci *RenderedCaptionImage) Description() string {
+	return rt.Description(objref.IDOf(rci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RenderedCaptionImage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rci *RenderedCaptionImage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RenderedCaptionImage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rci *RenderedCaptionImage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RenderedCaptionImage) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rci *RenderedCaptionImage) String() string {
+	return rt.Description(objref.IDOf(rci))
 }
 
 // NewRenderedCaptionImage creates a new RenderedCaptionImage.
@@ -73,16 +73,8 @@ func NewRenderedCaptionImage() *RenderedCaptionImage {
 	return renderedCaptionImageAdopt(_id)
 }
 
-// Position a CGPoint that defines the position (in pixels) of the rendered caption image relative to the video frame To place the caption image correcly, the size of pixel buffer can be extracted from CVPixelBufferGetWidth and CVPixelBufferGetHeight. Origin is assumed at upper-left. So, a caption image is rendered to the right and bottom of the origin point.
-func (x *RenderedCaptionImage) Position() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("position"))
+// Position returns a CGPoint that defines the position (in pixels) of the rendered caption image relative to the video frame To place the caption image correcly, the size of pixel buffer can be extracted from CVPixelBufferGetWidth and CVPixelBufferGetHeight. Origin is assumed at upper-left. So, a caption image is rendered to the right and bottom of the origin point.
+func (rci *RenderedCaptionImage) Position() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(rci), objc.RegisterName("position"))
 	return _r
 }
-
-// RenderedCaptionImageable is the interface implemented by [RenderedCaptionImage], for mocking and DI.
-type RenderedCaptionImageable interface {
-	obj.Object
-	Position() corefoundation.CGPoint
-}
-
-var _ RenderedCaptionImageable = (*RenderedCaptionImage)(nil)

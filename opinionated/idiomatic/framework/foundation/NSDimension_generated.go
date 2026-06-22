@@ -54,30 +54,21 @@ func NewDimensionWithSymbolConverter(symbol string, converter *UnitConverter) *D
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Dimension) WithScriptingProperties(scriptingProperties obj.Object) *Dimension {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (d *Dimension) WithScriptingProperties(scriptingProperties obj.Object) *Dimension {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return d
 }
 
 // Converter wraps the corresponding Objective-C method.
-func (x *Dimension) Converter() *UnitConverter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("converter"))
+func (d *Dimension) Converter() *UnitConverter {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("converter"))
 	return UnitConverterFromID(_r)
 }
-
-// Dimensionable is the interface implemented by [Dimension], for mocking and DI.
-type Dimensionable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Dimension
-	Converter() *UnitConverter
-}
-
-var _ Dimensionable = (*Dimension)(nil)
 
 // isDimension marks Dimension — and, by embedding promotion, its
 // subclasses — as a member of the Dimension hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Dimension) isDimension() {}
+func (d *Dimension) isDimension() {}
 
 var _ DimensionProvider = (*Dimension)(nil)
 

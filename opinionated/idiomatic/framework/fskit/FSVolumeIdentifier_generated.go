@@ -50,25 +50,16 @@ func NewVolumeIdentifier() *VolumeIdentifier {
 	return volumeIdentifierAdopt(_id)
 }
 
-// WithUuid a UUID to uniquely identify this entity.
-func (x *VolumeIdentifier) WithUuid(uuid obj.Object) *VolumeIdentifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUuid:"), objref.IDOf(uuid))
-	return x
+// WithUUID sets a UUID to uniquely identify this entity.
+func (vi *VolumeIdentifier) WithUUID(uuid obj.Object) *VolumeIdentifier {
+	objc.Send[objc.ID](objref.IDOf(vi), objc.RegisterName("setUuid:"), objref.IDOf(uuid))
+	return vi
 }
 
-// WithQualifier an optional piece of data to distinguish entities that otherwise share the same UUID.
-func (x *VolumeIdentifier) WithQualifier(qualifier obj.Object) *VolumeIdentifier {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualifier:"), objref.IDOf(qualifier))
-	return x
+// WithQualifier sets an optional piece of data to distinguish entities that otherwise share the same UUID.
+func (vi *VolumeIdentifier) WithQualifier(qualifier obj.Object) *VolumeIdentifier {
+	objc.Send[objc.ID](objref.IDOf(vi), objc.RegisterName("setQualifier:"), objref.IDOf(qualifier))
+	return vi
 }
-
-// VolumeIdentifierable is the interface implemented by [VolumeIdentifier], for mocking and DI.
-type VolumeIdentifierable interface {
-	obj.Object
-	WithUuid(uuid obj.Object) *VolumeIdentifier
-	WithQualifier(qualifier obj.Object) *VolumeIdentifier
-}
-
-var _ VolumeIdentifierable = (*VolumeIdentifier)(nil)
 
 var _ EntityIdentifierProvider = (*VolumeIdentifier)(nil)

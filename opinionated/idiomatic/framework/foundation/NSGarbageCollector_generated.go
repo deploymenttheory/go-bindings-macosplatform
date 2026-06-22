@@ -46,24 +46,24 @@ func garbageCollectorAdopt(id objc.ID) *GarbageCollector {
 }
 
 // Description returns the object's -description text.
-func (x *GarbageCollector) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (gc *GarbageCollector) Description() string {
+	return rt.Description(objref.IDOf(gc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GarbageCollector) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (gc *GarbageCollector) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(gc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GarbageCollector) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (gc *GarbageCollector) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(gc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GarbageCollector) String() string {
-	return rt.Description(objref.IDOf(x))
+func (gc *GarbageCollector) String() string {
+	return rt.Description(objref.IDOf(gc))
 }
 
 // NewGarbageCollector creates a new GarbageCollector.
@@ -73,53 +73,39 @@ func NewGarbageCollector() *GarbageCollector {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *GarbageCollector) WithScriptingProperties(scriptingProperties obj.Object) *GarbageCollector {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (gc *GarbageCollector) WithScriptingProperties(scriptingProperties obj.Object) *GarbageCollector {
+	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return gc
 }
 
-// IsCollecting returns a Boolean value that indicates whether a collection is currently in progress.
-func (x *GarbageCollector) IsCollecting() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCollecting"))
+// IsCollecting reports whether returns a Boolean value that indicates whether a collection is currently in progress.
+func (gc *GarbageCollector) IsCollecting() bool {
+	_r := objc.Send[bool](objref.IDOf(gc), objc.RegisterName("isCollecting"))
 	return _r
 }
 
 // Disable temporarily disables collections.
-func (x *GarbageCollector) Disable() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disable"))
+func (gc *GarbageCollector) Disable() {
+	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("disable"))
 }
 
 // Enable enables collection after collection has been disabled.
-func (x *GarbageCollector) Enable() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enable"))
+func (gc *GarbageCollector) Enable() {
+	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("enable"))
 }
 
-// IsEnabled returns a Boolean value that indicates whether garbage collection is currently enabled for the current process.
-func (x *GarbageCollector) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+// IsEnabled reports whether returns a Boolean value that indicates whether garbage collection is currently enabled for the current process.
+func (gc *GarbageCollector) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(gc), objc.RegisterName("isEnabled"))
 	return _r
 }
 
 // CollectIfNeeded tells the receiver to collect if memory consumption thresholds have been exceeded.
-func (x *GarbageCollector) CollectIfNeeded() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collectIfNeeded"))
+func (gc *GarbageCollector) CollectIfNeeded() {
+	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("collectIfNeeded"))
 }
 
 // CollectExhaustively tells the receiver to collect iteratively.
-func (x *GarbageCollector) CollectExhaustively() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collectExhaustively"))
+func (gc *GarbageCollector) CollectExhaustively() {
+	objc.Send[objc.ID](objref.IDOf(gc), objc.RegisterName("collectExhaustively"))
 }
-
-// GarbageCollectorable is the interface implemented by [GarbageCollector], for mocking and DI.
-type GarbageCollectorable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *GarbageCollector
-	IsCollecting() bool
-	Disable()
-	Enable()
-	IsEnabled() bool
-	CollectIfNeeded()
-	CollectExhaustively()
-}
-
-var _ GarbageCollectorable = (*GarbageCollector)(nil)

@@ -46,24 +46,24 @@ func octreeNodeAdopt(id objc.ID) *OctreeNode {
 }
 
 // Description returns the object's -description text.
-func (x *OctreeNode) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (on *OctreeNode) Description() string {
+	return rt.Description(objref.IDOf(on))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OctreeNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (on *OctreeNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(on), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OctreeNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (on *OctreeNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(on), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *OctreeNode) String() string {
-	return rt.Description(objref.IDOf(x))
+func (on *OctreeNode) String() string {
+	return rt.Description(objref.IDOf(on))
 }
 
 // NewOctreeNode creates a new OctreeNode.
@@ -71,10 +71,3 @@ func NewOctreeNode() *OctreeNode {
 	_id := objc.Send[objc.ID](objc.ID(_class("GKOctreeNode")), objc.RegisterName("new"))
 	return octreeNodeAdopt(_id)
 }
-
-// OctreeNodeable is the interface implemented by [OctreeNode], for mocking and DI.
-type OctreeNodeable interface {
-	obj.Object
-}
-
-var _ OctreeNodeable = (*OctreeNode)(nil)

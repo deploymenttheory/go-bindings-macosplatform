@@ -7,7 +7,6 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,17 +43,10 @@ func mTRGenericBaseClusterAdopt(id objc.ID) *MTRGenericBaseCluster {
 	return x
 }
 
-// MTRGenericBaseClusterable is the interface implemented by [MTRGenericBaseCluster], for mocking and DI.
-type MTRGenericBaseClusterable interface {
-	obj.Object
-}
-
-var _ MTRGenericBaseClusterable = (*MTRGenericBaseCluster)(nil)
-
 // isMTRGenericBaseCluster marks MTRGenericBaseCluster — and, by embedding promotion, its
 // subclasses — as a member of the MTRGenericBaseCluster hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRGenericBaseCluster) isMTRGenericBaseCluster() {}
+func (mgbc *MTRGenericBaseCluster) isMTRGenericBaseCluster() {}
 
 var _ MTRGenericBaseClusterProvider = (*MTRGenericBaseCluster)(nil)
 

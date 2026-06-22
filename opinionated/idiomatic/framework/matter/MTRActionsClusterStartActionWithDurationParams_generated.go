@@ -44,24 +44,24 @@ func mTRActionsClusterStartActionWithDurationParamsAdopt(id objc.ID) *MTRActions
 }
 
 // Description returns the object's -description text.
-func (x *MTRActionsClusterStartActionWithDurationParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (macsawdp *MTRActionsClusterStartActionWithDurationParams) Description() string {
+	return rt.Description(objref.IDOf(macsawdp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRActionsClusterStartActionWithDurationParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (macsawdp *MTRActionsClusterStartActionWithDurationParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(macsawdp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRActionsClusterStartActionWithDurationParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (macsawdp *MTRActionsClusterStartActionWithDurationParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(macsawdp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRActionsClusterStartActionWithDurationParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (macsawdp *MTRActionsClusterStartActionWithDurationParams) String() string {
+	return rt.Description(objref.IDOf(macsawdp))
 }
 
 // NewMTRActionsClusterStartActionWithDurationParams creates a new MTRActionsClusterStartActionWithDurationParams.
@@ -71,108 +71,61 @@ func NewMTRActionsClusterStartActionWithDurationParams() *MTRActionsClusterStart
 }
 
 // WithActionID sets the property and returns the receiver so calls can be chained.
-func (x *MTRActionsClusterStartActionWithDurationParams) WithActionID(actionID obj.Object) *MTRActionsClusterStartActionWithDurationParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
-	return x
+func (macsawdp *MTRActionsClusterStartActionWithDurationParams) WithActionID(actionID obj.Object) *MTRActionsClusterStartActionWithDurationParams {
+	objc.Send[objc.ID](objref.IDOf(macsawdp), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
+	return macsawdp
 }
 
 // WithInvokeID sets the property and returns the receiver so calls can be chained.
-func (x *MTRActionsClusterStartActionWithDurationParams) WithInvokeID(invokeID obj.Object) *MTRActionsClusterStartActionWithDurationParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
-	return x
+func (macsawdp *MTRActionsClusterStartActionWithDurationParams) WithInvokeID(invokeID obj.Object) *MTRActionsClusterStartActionWithDurationParams {
+	objc.Send[objc.ID](objref.IDOf(macsawdp), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
+	return macsawdp
 }
 
 // WithDuration sets the property and returns the receiver so calls can be chained.
-func (x *MTRActionsClusterStartActionWithDurationParams) WithDuration(duration obj.Object) *MTRActionsClusterStartActionWithDurationParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
-	return x
+func (macsawdp *MTRActionsClusterStartActionWithDurationParams) WithDuration(duration obj.Object) *MTRActionsClusterStartActionWithDurationParams {
+	objc.Send[objc.ID](objref.IDOf(macsawdp), objc.RegisterName("setDuration:"), objref.IDOf(duration))
+	return macsawdp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRActionsClusterStartActionWithDurationParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRActionsClusterStartActionWithDurationParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (macsawdp *MTRActionsClusterStartActionWithDurationParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRActionsClusterStartActionWithDurationParams {
+	objc.Send[objc.ID](objref.IDOf(macsawdp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return macsawdp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRActionsClusterStartActionWithDurationParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRActionsClusterStartActionWithDurationParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (macsawdp *MTRActionsClusterStartActionWithDurationParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRActionsClusterStartActionWithDurationParams {
+	objc.Send[objc.ID](objref.IDOf(macsawdp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return macsawdp
 }
 
 // ActionID wraps the corresponding Objective-C method.
-func (x *MTRActionsClusterStartActionWithDurationParams) ActionID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actionID"))
+func (macsawdp *MTRActionsClusterStartActionWithDurationParams) ActionID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(macsawdp), objc.RegisterName("actionID"))
 	return obj.Wrap(_r)
-}
-
-// SetActionID wraps the corresponding Objective-C method.
-func (x *MTRActionsClusterStartActionWithDurationParams) SetActionID(actionID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 }
 
 // InvokeID wraps the corresponding Objective-C method.
-func (x *MTRActionsClusterStartActionWithDurationParams) InvokeID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invokeID"))
+func (macsawdp *MTRActionsClusterStartActionWithDurationParams) InvokeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(macsawdp), objc.RegisterName("invokeID"))
 	return obj.Wrap(_r)
-}
-
-// SetInvokeID wraps the corresponding Objective-C method.
-func (x *MTRActionsClusterStartActionWithDurationParams) SetInvokeID(invokeID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 }
 
 // Duration wraps the corresponding Objective-C method.
-func (x *MTRActionsClusterStartActionWithDurationParams) Duration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
+func (macsawdp *MTRActionsClusterStartActionWithDurationParams) Duration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(macsawdp), objc.RegisterName("duration"))
 	return obj.Wrap(_r)
 }
 
-// SetDuration wraps the corresponding Objective-C method.
-func (x *MTRActionsClusterStartActionWithDurationParams) SetDuration(duration obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRActionsClusterStartActionWithDurationParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (macsawdp *MTRActionsClusterStartActionWithDurationParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(macsawdp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRActionsClusterStartActionWithDurationParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRActionsClusterStartActionWithDurationParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (macsawdp *MTRActionsClusterStartActionWithDurationParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(macsawdp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRActionsClusterStartActionWithDurationParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRActionsClusterStartActionWithDurationParamsable is the interface implemented by [MTRActionsClusterStartActionWithDurationParams], for mocking and DI.
-type MTRActionsClusterStartActionWithDurationParamsable interface {
-	obj.Object
-	WithActionID(actionID obj.Object) *MTRActionsClusterStartActionWithDurationParams
-	WithInvokeID(invokeID obj.Object) *MTRActionsClusterStartActionWithDurationParams
-	WithDuration(duration obj.Object) *MTRActionsClusterStartActionWithDurationParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRActionsClusterStartActionWithDurationParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRActionsClusterStartActionWithDurationParams
-	ActionID() obj.Object
-	SetActionID(actionID obj.Object)
-	InvokeID() obj.Object
-	SetInvokeID(invokeID obj.Object)
-	Duration() obj.Object
-	SetDuration(duration obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRActionsClusterStartActionWithDurationParamsable = (*MTRActionsClusterStartActionWithDurationParams)(nil)

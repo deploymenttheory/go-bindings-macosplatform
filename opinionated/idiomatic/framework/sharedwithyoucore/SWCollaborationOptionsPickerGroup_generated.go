@@ -7,7 +7,6 @@ package sharedwithyoucore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,56 +51,38 @@ func NewCollaborationOptionsPickerGroup() *CollaborationOptionsPickerGroup {
 	return collaborationOptionsPickerGroupAdopt(_id)
 }
 
-// WithSelectedOptionIdentifier the identifier of the selected option in the group.
-func (x *CollaborationOptionsPickerGroup) WithSelectedOptionIdentifier(selectedOptionIdentifier string) *CollaborationOptionsPickerGroup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedOptionIdentifier:"), purego.NSString(selectedOptionIdentifier))
-	return x
+// WithSelectedOptionIdentifier sets the identifier of the selected option in the group.
+func (copg *CollaborationOptionsPickerGroup) WithSelectedOptionIdentifier(selectedOptionIdentifier string) *CollaborationOptionsPickerGroup {
+	objc.Send[objc.ID](objref.IDOf(copg), objc.RegisterName("setSelectedOptionIdentifier:"), purego.NSString(selectedOptionIdentifier))
+	return copg
 }
 
-// WithTitle a localized string the system displays as the title of the group section.
-func (x *CollaborationOptionsPickerGroup) WithTitle(title string) *CollaborationOptionsPickerGroup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets a localized string the system displays as the title of the group section.
+func (copg *CollaborationOptionsPickerGroup) WithTitle(title string) *CollaborationOptionsPickerGroup {
+	objc.Send[objc.ID](objref.IDOf(copg), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return copg
 }
 
-// WithFooter a localized string that provides additional information for the group of options.
-func (x *CollaborationOptionsPickerGroup) WithFooter(footer string) *CollaborationOptionsPickerGroup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFooter:"), purego.NSString(footer))
-	return x
+// WithFooter sets a localized string that provides additional information for the group of options.
+func (copg *CollaborationOptionsPickerGroup) WithFooter(footer string) *CollaborationOptionsPickerGroup {
+	objc.Send[objc.ID](objref.IDOf(copg), objc.RegisterName("setFooter:"), purego.NSString(footer))
+	return copg
 }
 
-// WithOptions an array of collaboration options the system displays as a group.
-func (x *CollaborationOptionsPickerGroup) WithOptions(items ...*CollaborationOption) *CollaborationOptionsPickerGroup {
+// WithOptions sets an array of collaboration options the system displays as a group.
+func (copg *CollaborationOptionsPickerGroup) WithOptions(items ...*CollaborationOption) *CollaborationOptionsPickerGroup {
 	_arr := purego.SliceToNSArray(items, func(_v *CollaborationOption) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(copg), objc.RegisterName("setOptions:"), _arr)
+	return copg
 }
 
 // SelectedOptionIdentifier wraps the corresponding Objective-C method.
-func (x *CollaborationOptionsPickerGroup) SelectedOptionIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedOptionIdentifier"))
+func (copg *CollaborationOptionsPickerGroup) SelectedOptionIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(copg), objc.RegisterName("selectedOptionIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetSelectedOptionIdentifier wraps the corresponding Objective-C method.
-func (x *CollaborationOptionsPickerGroup) SetSelectedOptionIdentifier(selectedOptionIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedOptionIdentifier:"), purego.NSString(selectedOptionIdentifier))
-}
-
-// CollaborationOptionsPickerGroupable is the interface implemented by [CollaborationOptionsPickerGroup], for mocking and DI.
-type CollaborationOptionsPickerGroupable interface {
-	obj.Object
-	WithSelectedOptionIdentifier(selectedOptionIdentifier string) *CollaborationOptionsPickerGroup
-	WithTitle(title string) *CollaborationOptionsPickerGroup
-	WithFooter(footer string) *CollaborationOptionsPickerGroup
-	WithOptions(items ...*CollaborationOption) *CollaborationOptionsPickerGroup
-	SelectedOptionIdentifier() string
-	SetSelectedOptionIdentifier(selectedOptionIdentifier string)
-}
-
-var _ CollaborationOptionsPickerGroupable = (*CollaborationOptionsPickerGroup)(nil)
 
 var _ CollaborationOptionsGroupProvider = (*CollaborationOptionsPickerGroup)(nil)

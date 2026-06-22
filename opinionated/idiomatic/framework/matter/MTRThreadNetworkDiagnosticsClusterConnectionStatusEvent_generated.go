@@ -44,24 +44,24 @@ func mTRThreadNetworkDiagnosticsClusterConnectionStatusEventAdopt(id objc.ID) *M
 }
 
 // Description returns the object's -description text.
-func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtndccse *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) Description() string {
+	return rt.Description(objref.IDOf(mtndccse))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtndccse *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtndccse), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtndccse *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtndccse), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtndccse *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) String() string {
+	return rt.Description(objref.IDOf(mtndccse))
 }
 
 // NewMTRThreadNetworkDiagnosticsClusterConnectionStatusEvent creates a new MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent.
@@ -71,28 +71,13 @@ func NewMTRThreadNetworkDiagnosticsClusterConnectionStatusEvent() *MTRThreadNetw
 }
 
 // WithConnectionStatus sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) WithConnectionStatus(connectionStatus obj.Object) *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionStatus:"), objref.IDOf(connectionStatus))
-	return x
+func (mtndccse *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) WithConnectionStatus(connectionStatus obj.Object) *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent {
+	objc.Send[objc.ID](objref.IDOf(mtndccse), objc.RegisterName("setConnectionStatus:"), objref.IDOf(connectionStatus))
+	return mtndccse
 }
 
 // ConnectionStatus wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectionStatus"))
+func (mtndccse *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndccse), objc.RegisterName("connectionStatus"))
 	return obj.Wrap(_r)
 }
-
-// SetConnectionStatus wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent) SetConnectionStatus(connectionStatus obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionStatus:"), objref.IDOf(connectionStatus))
-}
-
-// MTRThreadNetworkDiagnosticsClusterConnectionStatusEventable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent], for mocking and DI.
-type MTRThreadNetworkDiagnosticsClusterConnectionStatusEventable interface {
-	obj.Object
-	WithConnectionStatus(connectionStatus obj.Object) *MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent
-	ConnectionStatus() obj.Object
-	SetConnectionStatus(connectionStatus obj.Object)
-}
-
-var _ MTRThreadNetworkDiagnosticsClusterConnectionStatusEventable = (*MTRThreadNetworkDiagnosticsClusterConnectionStatusEvent)(nil)

@@ -44,24 +44,24 @@ func recordMapAdopt(id objc.ID) *RecordMap {
 }
 
 // Description returns the object's -description text.
-func (x *RecordMap) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rm *RecordMap) Description() string {
+	return rt.Description(objref.IDOf(rm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecordMap) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rm *RecordMap) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecordMap) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rm *RecordMap) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RecordMap) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rm *RecordMap) String() string {
+	return rt.Description(objref.IDOf(rm))
 }
 
 // NewRecordMap creates a new RecordMap.
@@ -71,78 +71,51 @@ func NewRecordMap() *RecordMap {
 }
 
 // WithNative sets the property and returns the receiver so calls can be chained.
-func (x *RecordMap) WithNative(native string) *RecordMap {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNative:"), purego.NSString(native))
-	return x
+func (rm *RecordMap) WithNative(native string) *RecordMap {
+	objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("setNative:"), purego.NSString(native))
+	return rm
 }
 
 // WithOdPredicate sets the property and returns the receiver so calls can be chained.
-func (x *RecordMap) WithOdPredicate(odPredicate obj.Object) *RecordMap {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOdPredicate:"), objref.IDOf(odPredicate))
-	return x
+func (rm *RecordMap) WithOdPredicate(odPredicate obj.Object) *RecordMap {
+	objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("setOdPredicate:"), objref.IDOf(odPredicate))
+	return rm
 }
 
 // AttributeMapForStandardAttribute returns an ODAttributeMap object for the given OD standard attribute. Returns an ODAttributeMap object for the given OD standard attribute.
-func (x *RecordMap) AttributeMapForStandardAttribute(standardAttribute string) *AttributeMap {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeMapForStandardAttribute:"), purego.NSString(standardAttribute))
+func (rm *RecordMap) AttributeMapForStandardAttribute(standardAttribute string) *AttributeMap {
+	_r := objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("attributeMapForStandardAttribute:"), purego.NSString(standardAttribute))
 	return AttributeMapFromID(_r)
 }
 
 // SetAttributeMapForStandardAttribute sets an ODAttributeMap object for a given OD standard attribute. Sets an ODAttributeMap object for a given OD standard attribute.
-func (x *RecordMap) SetAttributeMapForStandardAttribute(attributeMap *AttributeMap, standardAttribute string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeMap:forStandardAttribute:"), objref.IDOf(attributeMap), purego.NSString(standardAttribute))
+func (rm *RecordMap) SetAttributeMapForStandardAttribute(attributeMap *AttributeMap, standardAttribute string) {
+	objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("setAttributeMap:forStandardAttribute:"), objref.IDOf(attributeMap), purego.NSString(standardAttribute))
 }
 
 // Native wraps the corresponding Objective-C method.
-func (x *RecordMap) Native() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("native"))
+func (rm *RecordMap) Native() string {
+	_r := objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("native"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetNative wraps the corresponding Objective-C method.
-func (x *RecordMap) SetNative(native string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNative:"), purego.NSString(native))
-}
-
 // OdPredicate wraps the corresponding Objective-C method.
-func (x *RecordMap) OdPredicate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("odPredicate"))
+func (rm *RecordMap) OdPredicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("odPredicate"))
 	return obj.Wrap(_r)
 }
 
-// SetOdPredicate wraps the corresponding Objective-C method.
-func (x *RecordMap) SetOdPredicate(odPredicate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOdPredicate:"), objref.IDOf(odPredicate))
-}
-
 // Attributes wraps the corresponding Objective-C method.
-func (x *RecordMap) Attributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+func (rm *RecordMap) Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
 // StandardAttributeTypes wraps the corresponding Objective-C method.
-func (x *RecordMap) StandardAttributeTypes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardAttributeTypes"))
+func (rm *RecordMap) StandardAttributeTypes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rm), objc.RegisterName("standardAttributeTypes"))
 	return obj.Wrap(_r)
 }
-
-// RecordMapable is the interface implemented by [RecordMap], for mocking and DI.
-type RecordMapable interface {
-	obj.Object
-	WithNative(native string) *RecordMap
-	WithOdPredicate(odPredicate obj.Object) *RecordMap
-	AttributeMapForStandardAttribute(standardAttribute string) *AttributeMap
-	SetAttributeMapForStandardAttribute(attributeMap *AttributeMap, standardAttribute string)
-	Native() string
-	SetNative(native string)
-	OdPredicate() obj.Object
-	SetOdPredicate(odPredicate obj.Object)
-	Attributes() obj.Object
-	StandardAttributeTypes() obj.Object
-}
-
-var _ RecordMapable = (*RecordMap)(nil)

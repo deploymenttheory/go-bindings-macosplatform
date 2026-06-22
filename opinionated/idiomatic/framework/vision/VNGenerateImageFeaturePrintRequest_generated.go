@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,60 +52,41 @@ func NewGenerateImageFeaturePrintRequest() *GenerateImageFeaturePrintRequest {
 	return generateImageFeaturePrintRequestAdopt(_id)
 }
 
-// WithImageCropAndScaleOption an optional setting that tells the algorithm how to scale an input image before generating the feature print.
-func (x *GenerateImageFeaturePrintRequest) WithImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) *GenerateImageFeaturePrintRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageCropAndScaleOption:"), imageCropAndScaleOption)
-	return x
+// WithImageCropAndScaleOption sets an optional setting that tells the algorithm how to scale an input image before generating the feature print.
+func (gifpr *GenerateImageFeaturePrintRequest) WithImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) *GenerateImageFeaturePrintRequest {
+	objc.Send[objc.ID](objref.IDOf(gifpr), objc.RegisterName("setImageCropAndScaleOption:"), imageCropAndScaleOption)
+	return gifpr
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *GenerateImageFeaturePrintRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateImageFeaturePrintRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (gifpr *GenerateImageFeaturePrintRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateImageFeaturePrintRequest {
+	objc.Send[objc.ID](objref.IDOf(gifpr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return gifpr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *GenerateImageFeaturePrintRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateImageFeaturePrintRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (gifpr *GenerateImageFeaturePrintRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateImageFeaturePrintRequest {
+	objc.Send[objc.ID](objref.IDOf(gifpr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return gifpr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *GenerateImageFeaturePrintRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateImageFeaturePrintRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (gifpr *GenerateImageFeaturePrintRequest) WithUsesCPUOnly(usesCPUOnly bool) *GenerateImageFeaturePrintRequest {
+	objc.Send[objc.ID](objref.IDOf(gifpr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return gifpr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *GenerateImageFeaturePrintRequest) WithRevision(revision int) *GenerateImageFeaturePrintRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (gifpr *GenerateImageFeaturePrintRequest) WithRevision(revision int) *GenerateImageFeaturePrintRequest {
+	objc.Send[objc.ID](objref.IDOf(gifpr), objc.RegisterName("setRevision:"), revision)
+	return gifpr
 }
 
 // ImageCropAndScaleOption determine what type of croping and scaling action should be applied to the image before generating the feature print. The default value for this property is `VNImageCropAndScaleOptionScaleFill`.
-func (x *GenerateImageFeaturePrintRequest) ImageCropAndScaleOption() ImageCropAndScaleOption {
-	_r := objc.Send[ImageCropAndScaleOption](objref.IDOf(x), objc.RegisterName("imageCropAndScaleOption"))
+func (gifpr *GenerateImageFeaturePrintRequest) ImageCropAndScaleOption() ImageCropAndScaleOption {
+	_r := objc.Send[ImageCropAndScaleOption](objref.IDOf(gifpr), objc.RegisterName("imageCropAndScaleOption"))
 	return _r
 }
-
-// SetImageCropAndScaleOption wraps the corresponding Objective-C method.
-func (x *GenerateImageFeaturePrintRequest) SetImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageCropAndScaleOption:"), imageCropAndScaleOption)
-}
-
-// GenerateImageFeaturePrintRequestable is the interface implemented by [GenerateImageFeaturePrintRequest], for mocking and DI.
-type GenerateImageFeaturePrintRequestable interface {
-	obj.Object
-	WithImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption) *GenerateImageFeaturePrintRequest
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GenerateImageFeaturePrintRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GenerateImageFeaturePrintRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *GenerateImageFeaturePrintRequest
-	WithRevision(revision int) *GenerateImageFeaturePrintRequest
-	ImageCropAndScaleOption() ImageCropAndScaleOption
-	SetImageCropAndScaleOption(imageCropAndScaleOption ImageCropAndScaleOption)
-}
-
-var _ GenerateImageFeaturePrintRequestable = (*GenerateImageFeaturePrintRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*GenerateImageFeaturePrintRequest)(nil)
 

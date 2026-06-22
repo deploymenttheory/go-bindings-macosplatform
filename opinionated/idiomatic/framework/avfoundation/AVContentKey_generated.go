@@ -46,24 +46,24 @@ func contentKeyAdopt(id objc.ID) *ContentKey {
 }
 
 // Description returns the object's -description text.
-func (x *ContentKey) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ck *ContentKey) Description() string {
+	return rt.Description(objref.IDOf(ck))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContentKey) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ck *ContentKey) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ck), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContentKey) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ck *ContentKey) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ck), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ContentKey) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ck *ContentKey) String() string {
+	return rt.Description(objref.IDOf(ck))
 }
 
 // NewContentKey creates a new ContentKey.
@@ -73,28 +73,18 @@ func NewContentKey() *ContentKey {
 }
 
 // Revoke revokes the decryption context of the content key, and removes it from its associated AVContentKeySession. Once revoked, the AVContentKey is no longer eligible to be used with any media. If the key is required again, or if the key is requested to be loaded by the application, a new AVContentKeyRequest will be dispatched to the delegate. If there is media playback occurring which is dependent on the content key it will fail and may result in an error being generated with the playback halting.
-func (x *ContentKey) Revoke() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("revoke"))
+func (ck *ContentKey) Revoke() {
+	objc.Send[objc.ID](objref.IDOf(ck), objc.RegisterName("revoke"))
 }
 
 // ContentKeySpecifier specifies the content key.
-func (x *ContentKey) ContentKeySpecifier() *ContentKeySpecifier {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentKeySpecifier"))
+func (ck *ContentKey) ContentKeySpecifier() *ContentKeySpecifier {
+	_r := objc.Send[objc.ID](objref.IDOf(ck), objc.RegisterName("contentKeySpecifier"))
 	return ContentKeySpecifierFromID(_r)
 }
 
-// ExternalContentProtectionStatus the external protection status for the AVContentKey based on all attached displays. This property is not key-value observable, instead the contentKeySession:externalProtectionStatusDidChangeForContentKey: delegate method should be used.
-func (x *ContentKey) ExternalContentProtectionStatus() ExternalContentProtectionStatus {
-	_r := objc.Send[ExternalContentProtectionStatus](objref.IDOf(x), objc.RegisterName("externalContentProtectionStatus"))
+// ExternalContentProtectionStatus returns the external protection status for the AVContentKey based on all attached displays. This property is not key-value observable, instead the contentKeySession:externalProtectionStatusDidChangeForContentKey: delegate method should be used.
+func (ck *ContentKey) ExternalContentProtectionStatus() ExternalContentProtectionStatus {
+	_r := objc.Send[ExternalContentProtectionStatus](objref.IDOf(ck), objc.RegisterName("externalContentProtectionStatus"))
 	return _r
 }
-
-// ContentKeyable is the interface implemented by [ContentKey], for mocking and DI.
-type ContentKeyable interface {
-	obj.Object
-	Revoke()
-	ContentKeySpecifier() *ContentKeySpecifier
-	ExternalContentProtectionStatus() ExternalContentProtectionStatus
-}
-
-var _ ContentKeyable = (*ContentKey)(nil)

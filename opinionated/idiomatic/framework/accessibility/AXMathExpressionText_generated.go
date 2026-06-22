@@ -7,7 +7,6 @@ package accessibility
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,20 +51,12 @@ func NewMathExpressionTextWithContent(content string) *MathExpressionText {
 }
 
 // Content wraps the corresponding Objective-C method.
-func (x *MathExpressionText) Content() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("content"))
+func (met *MathExpressionText) Content() string {
+	_r := objc.Send[objc.ID](objref.IDOf(met), objc.RegisterName("content"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// MathExpressionTextable is the interface implemented by [MathExpressionText], for mocking and DI.
-type MathExpressionTextable interface {
-	obj.Object
-	Content() string
-}
-
-var _ MathExpressionTextable = (*MathExpressionText)(nil)
 
 var _ MathExpressionProvider = (*MathExpressionText)(nil)

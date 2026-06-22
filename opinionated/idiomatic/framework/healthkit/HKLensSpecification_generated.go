@@ -48,64 +48,53 @@ func lensSpecificationAdopt(id objc.ID) *LensSpecification {
 }
 
 // Description returns the object's -description text.
-func (x *LensSpecification) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ls *LensSpecification) Description() string {
+	return rt.Description(objref.IDOf(ls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LensSpecification) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ls *LensSpecification) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LensSpecification) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ls *LensSpecification) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LensSpecification) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ls *LensSpecification) String() string {
+	return rt.Description(objref.IDOf(ls))
 }
 
-// Sphere the lens power to correct nearsightedness or farsightedness. (-) means nearsighted while (+) farsighted.
-func (x *LensSpecification) Sphere() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sphere"))
+// Sphere returns the lens power to correct nearsightedness or farsightedness. (-) means nearsighted while (+) farsighted.
+func (ls *LensSpecification) Sphere() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("sphere"))
 	return QuantityFromID(_r)
 }
 
-// Cylinder the lens power required to correct astigmatism. Can be positive or negative.
-func (x *LensSpecification) Cylinder() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cylinder"))
+// Cylinder returns the lens power required to correct astigmatism. Can be positive or negative.
+func (ls *LensSpecification) Cylinder() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("cylinder"))
 	return QuantityFromID(_r)
 }
 
-// Axis the angle along which cylindrical power should be positioned to correct astigmatism
-func (x *LensSpecification) Axis() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("axis"))
+// Axis returns the angle along which cylindrical power should be positioned to correct astigmatism
+func (ls *LensSpecification) Axis() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("axis"))
 	return QuantityFromID(_r)
 }
 
-// AddPower the power adjustment applied to a multifocal lens to correct presbyopia
-func (x *LensSpecification) AddPower() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addPower"))
+// AddPower returns the power adjustment applied to a multifocal lens to correct presbyopia
+func (ls *LensSpecification) AddPower() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("addPower"))
 	return QuantityFromID(_r)
 }
-
-// LensSpecificationable is the interface implemented by [LensSpecification], for mocking and DI.
-type LensSpecificationable interface {
-	obj.Object
-	Sphere() *Quantity
-	Cylinder() *Quantity
-	Axis() *Quantity
-	AddPower() *Quantity
-}
-
-var _ LensSpecificationable = (*LensSpecification)(nil)
 
 // isLensSpecification marks LensSpecification — and, by embedding promotion, its
 // subclasses — as a member of the LensSpecification hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *LensSpecification) isLensSpecification() {}
+func (ls *LensSpecification) isLensSpecification() {}
 
 var _ LensSpecificationProvider = (*LensSpecification)(nil)

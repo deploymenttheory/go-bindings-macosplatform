@@ -5,13 +5,14 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // UserScriptTask is an idiomatic wrapper over the Objective-C class NSUserScriptTask.
@@ -50,24 +51,24 @@ func userScriptTaskAdopt(id objc.ID) *UserScriptTask {
 }
 
 // Description returns the object's -description text.
-func (x *UserScriptTask) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ust *UserScriptTask) Description() string {
+	return rt.Description(objref.IDOf(ust))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UserScriptTask) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ust *UserScriptTask) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ust), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UserScriptTask) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ust *UserScriptTask) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ust), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *UserScriptTask) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ust *UserScriptTask) String() string {
+	return rt.Description(objref.IDOf(ust))
 }
 
 // NewUserScriptTaskWithURLError return a user script task instance given a URL for a script file.
@@ -82,29 +83,20 @@ func NewUserScriptTaskWithURLError(url string) (result *UserScriptTask, err erro
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UserScriptTask) WithScriptingProperties(scriptingProperties obj.Object) *UserScriptTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ust *UserScriptTask) WithScriptingProperties(scriptingProperties obj.Object) *UserScriptTask {
+	objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ust
 }
 
 // ScriptURL wraps the corresponding Objective-C method.
-func (x *UserScriptTask) ScriptURL() *URL {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scriptURL"))
+func (ust *UserScriptTask) ScriptURL() *URL {
+	_r := objc.Send[objc.ID](objref.IDOf(ust), objc.RegisterName("scriptURL"))
 	return URLFromID(_r)
 }
-
-// UserScriptTaskable is the interface implemented by [UserScriptTask], for mocking and DI.
-type UserScriptTaskable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UserScriptTask
-	ScriptURL() *URL
-}
-
-var _ UserScriptTaskable = (*UserScriptTask)(nil)
 
 // isUserScriptTask marks UserScriptTask — and, by embedding promotion, its
 // subclasses — as a member of the UserScriptTask hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *UserScriptTask) isUserScriptTask() {}
+func (ust *UserScriptTask) isUserScriptTask() {}
 
 var _ UserScriptTaskProvider = (*UserScriptTask)(nil)

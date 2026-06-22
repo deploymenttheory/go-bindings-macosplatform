@@ -46,24 +46,24 @@ func playerItemErrorLogAdopt(id objc.ID) *PlayerItemErrorLog {
 }
 
 // Description returns the object's -description text.
-func (x *PlayerItemErrorLog) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (piel *PlayerItemErrorLog) Description() string {
+	return rt.Description(objref.IDOf(piel))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlayerItemErrorLog) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (piel *PlayerItemErrorLog) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(piel), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlayerItemErrorLog) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (piel *PlayerItemErrorLog) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(piel), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PlayerItemErrorLog) String() string {
-	return rt.Description(objref.IDOf(x))
+func (piel *PlayerItemErrorLog) String() string {
+	return rt.Description(objref.IDOf(piel))
 }
 
 // NewPlayerItemErrorLog creates a new PlayerItemErrorLog.
@@ -73,31 +73,21 @@ func NewPlayerItemErrorLog() *PlayerItemErrorLog {
 }
 
 // ExtendedLogData returns a serialized representation of the error log in the Extended Log File Format.
-func (x *PlayerItemErrorLog) ExtendedLogData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedLogData"))
+func (piel *PlayerItemErrorLog) ExtendedLogData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(piel), objc.RegisterName("extendedLogData"))
 	return obj.Wrap(_r)
 }
 
 // ExtendedLogDataStringEncoding returns the NSStringEncoding for extendedLogData, see above. A string suitable for console output is obtainable by: [[NSString alloc] initWithData:[myLog extendedLogData] encoding:[myLog extendedLogDataStringEncoding]]
-func (x *PlayerItemErrorLog) ExtendedLogDataStringEncoding() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("extendedLogDataStringEncoding"))
+func (piel *PlayerItemErrorLog) ExtendedLogDataStringEncoding() int {
+	_r := objc.Send[int](objref.IDOf(piel), objc.RegisterName("extendedLogDataStringEncoding"))
 	return _r
 }
 
-// Events an ordered collection of AVPlayerItemErrorLogEvent instances. An ordered collection of AVPlayerItemErrorLogEvent instances that represent the chronological sequence of events contained in the error log. This property is not observable.
+// Events returns an ordered collection of AVPlayerItemErrorLogEvent instances. An ordered collection of AVPlayerItemErrorLogEvent instances that represent the chronological sequence of events contained in the error log. This property is not observable.
 //
 // Events returns the collection as a Go slice.
-func (x *PlayerItemErrorLog) Events() []*PlayerItemErrorLogEvent {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("events"))
+func (piel *PlayerItemErrorLog) Events() []*PlayerItemErrorLogEvent {
+	_arr := objc.Send[objc.ID](objref.IDOf(piel), objc.RegisterName("events"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PlayerItemErrorLogEvent { return PlayerItemErrorLogEventFromID(_id) })
 }
-
-// PlayerItemErrorLogable is the interface implemented by [PlayerItemErrorLog], for mocking and DI.
-type PlayerItemErrorLogable interface {
-	obj.Object
-	ExtendedLogData() obj.Object
-	ExtendedLogDataStringEncoding() int
-	Events() []*PlayerItemErrorLogEvent
-}
-
-var _ PlayerItemErrorLogable = (*PlayerItemErrorLog)(nil)

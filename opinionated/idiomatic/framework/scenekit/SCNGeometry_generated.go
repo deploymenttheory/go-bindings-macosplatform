@@ -48,298 +48,209 @@ func geometryAdopt(id objc.ID) *Geometry {
 }
 
 // Description returns the object's -description text.
-func (x *Geometry) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (g *Geometry) Description() string {
+	return rt.Description(objref.IDOf(g))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Geometry) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (g *Geometry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(g), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Geometry) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (g *Geometry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(g), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Geometry) String() string {
-	return rt.Description(objref.IDOf(x))
+func (g *Geometry) String() string {
+	return rt.Description(objref.IDOf(g))
 }
 
-// WithName a name associated with the geometry object.
-func (x *Geometry) WithName(name string) *Geometry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets a name associated with the geometry object.
+func (g *Geometry) WithName(name string) *Geometry {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setName:"), purego.NSString(name))
+	return g
 }
 
-// WithMaterials an array of SCNMaterial objects that determine the geometry’s appearance when rendered.
-func (x *Geometry) WithMaterials(items ...*Material) *Geometry {
+// WithMaterials sets an array of SCNMaterial objects that determine the geometry’s appearance when rendered.
+func (g *Geometry) WithMaterials(items ...*Material) *Geometry {
 	_arr := purego.SliceToNSArray(items, func(_v *Material) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterials:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setMaterials:"), _arr)
+	return g
 }
 
-// WithFirstMaterial the first material attached to the geometry.
-func (x *Geometry) WithFirstMaterial(firstMaterial *Material) *Geometry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
-	return x
+// WithFirstMaterial sets the first material attached to the geometry.
+func (g *Geometry) WithFirstMaterial(firstMaterial *Material) *Geometry {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
+	return g
 }
 
-// WithLevelsOfDetail an array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
-func (x *Geometry) WithLevelsOfDetail(items ...*LevelOfDetail) *Geometry {
+// WithLevelsOfDetail sets an array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
+func (g *Geometry) WithLevelsOfDetail(items ...*LevelOfDetail) *Geometry {
 	_arr := purego.SliceToNSArray(items, func(_v *LevelOfDetail) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetail:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setLevelsOfDetail:"), _arr)
+	return g
 }
 
 // WithTessellator sets the property and returns the receiver so calls can be chained.
-func (x *Geometry) WithTessellator(tessellator *GeometryTessellator) *Geometry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
-	return x
+func (g *Geometry) WithTessellator(tessellator *GeometryTessellator) *Geometry {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
+	return g
 }
 
-// WithSubdivisionLevel the number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
-func (x *Geometry) WithSubdivisionLevel(subdivisionLevel int) *Geometry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
-	return x
+// WithSubdivisionLevel sets the number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
+func (g *Geometry) WithSubdivisionLevel(subdivisionLevel int) *Geometry {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
+	return g
 }
 
-// WithWantsAdaptiveSubdivision specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
-func (x *Geometry) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Geometry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
-	return x
+// WithWantsAdaptiveSubdivision sets specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+func (g *Geometry) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Geometry {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
+	return g
 }
 
-// WithEdgeCreasesElement the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
-func (x *Geometry) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Geometry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
-	return x
+// WithEdgeCreasesElement sets the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
+func (g *Geometry) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Geometry {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
+	return g
 }
 
-// WithEdgeCreasesSource the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
-func (x *Geometry) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Geometry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
-	return x
+// WithEdgeCreasesSource sets the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
+func (g *Geometry) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Geometry {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
+	return g
 }
 
 // InsertMaterialAtIndex attaches a material to the geometry at the specified index.
-func (x *Geometry) InsertMaterialAtIndex(material *Material, index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertMaterial:atIndex:"), objref.IDOf(material), index)
+func (g *Geometry) InsertMaterialAtIndex(material *Material, index int) {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("insertMaterial:atIndex:"), objref.IDOf(material), index)
 }
 
 // RemoveMaterialAtIndex removes a material attached to the geometry.
-func (x *Geometry) RemoveMaterialAtIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeMaterialAtIndex:"), index)
+func (g *Geometry) RemoveMaterialAtIndex(index int) {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("removeMaterialAtIndex:"), index)
 }
 
 // ReplaceMaterialAtIndexWithMaterial replaces a material attached to the geometry with another.
-func (x *Geometry) ReplaceMaterialAtIndexWithMaterial(index int, material *Material) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceMaterialAtIndex:withMaterial:"), index, objref.IDOf(material))
+func (g *Geometry) ReplaceMaterialAtIndexWithMaterial(index int, material *Material) {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("replaceMaterialAtIndex:withMaterial:"), index, objref.IDOf(material))
 }
 
 // MaterialWithName returns the first material attached to the geometry with the specified name.
-func (x *Geometry) MaterialWithName(name string) *Material {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("materialWithName:"), purego.NSString(name))
+func (g *Geometry) MaterialWithName(name string) *Material {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("materialWithName:"), purego.NSString(name))
 	return MaterialFromID(_r)
 }
 
 // GeometrySourcesForSemantic returns the geometry sources for a specified semantic.
-func (x *Geometry) GeometrySourcesForSemantic(semantic obj.Object) []*GeometrySource {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("geometrySourcesForSemantic:"), objref.IDOf(semantic))
+func (g *Geometry) GeometrySourcesForSemantic(semantic obj.Object) []*GeometrySource {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("geometrySourcesForSemantic:"), objref.IDOf(semantic))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GeometrySource { return GeometrySourceFromID(_id) })
 }
 
 // GeometryElementAtIndex returns the geometry element at a specified index.
-func (x *Geometry) GeometryElementAtIndex(elementIndex int) *GeometryElement {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("geometryElementAtIndex:"), elementIndex)
+func (g *Geometry) GeometryElementAtIndex(elementIndex int) *GeometryElement {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("geometryElementAtIndex:"), elementIndex)
 	return GeometryElementFromID(_r)
 }
 
 // Name determines the name of the receiver.
-func (x *Geometry) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (g *Geometry) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *Geometry) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
 // Materials specifies the receiver's materials array. Each geometry element can be rendered using a different material. The index of the material used for a geometry element is equal to the index of that element modulo the number of materials.
 //
 // Materials returns the collection as a Go slice.
-func (x *Geometry) Materials() []*Material {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("materials"))
+func (g *Geometry) Materials() []*Material {
+	_arr := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("materials"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Material { return MaterialFromID(_id) })
 }
 
-// SetMaterials wraps the corresponding Objective-C method.
-func (x *Geometry) SetMaterials(materials []*Material) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterials:"), purego.SliceToNSArray(materials, func(_v *Material) objc.ID { return objref.IDOf(_v) }))
-}
-
 // FirstMaterial determines the first material of the geometry. Returns nil if the geometry has no material. This method is here for convenience. It is equivalent to the first object in the "materials" array above.
-func (x *Geometry) FirstMaterial() *Material {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("firstMaterial"))
+func (g *Geometry) FirstMaterial() *Material {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("firstMaterial"))
 	return MaterialFromID(_r)
 }
 
-// SetFirstMaterial wraps the corresponding Objective-C method.
-func (x *Geometry) SetFirstMaterial(firstMaterial *Material) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
-}
-
-// GeometrySources the array of geometry sources of the receiver.
+// GeometrySources returns the array of geometry sources of the receiver.
 //
 // GeometrySources returns the collection as a Go slice.
-func (x *Geometry) GeometrySources() []*GeometrySource {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("geometrySources"))
+func (g *Geometry) GeometrySources() []*GeometrySource {
+	_arr := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("geometrySources"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GeometrySource { return GeometrySourceFromID(_id) })
 }
 
-// GeometryElements the array of geometry elements of the receiver.
+// GeometryElements returns the array of geometry elements of the receiver.
 //
 // GeometryElements returns the collection as a Go slice.
-func (x *Geometry) GeometryElements() []*GeometryElement {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("geometryElements"))
+func (g *Geometry) GeometryElements() []*GeometryElement {
+	_arr := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("geometryElements"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GeometryElement { return GeometryElementFromID(_id) })
 }
 
 // GeometryElementCount returns the number of geometry elements owned by the geometry.
-func (x *Geometry) GeometryElementCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("geometryElementCount"))
+func (g *Geometry) GeometryElementCount() int {
+	_r := objc.Send[int](objref.IDOf(g), objc.RegisterName("geometryElementCount"))
 	return _r
 }
 
-// GeometrySourceChannels an array of indices that describes, for each geometry source, which channel of the geometry elements to use.
+// GeometrySourceChannels returns an array of indices that describes, for each geometry source, which channel of the geometry elements to use.
 //
 // GeometrySourceChannels returns the collection as a Go slice.
-func (x *Geometry) GeometrySourceChannels() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("geometrySourceChannels"))
+func (g *Geometry) GeometrySourceChannels() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("geometrySourceChannels"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // LevelsOfDetail determines the receiver's levels of detail. Defaults to nil.
 //
 // LevelsOfDetail returns the collection as a Go slice.
-func (x *Geometry) LevelsOfDetail() []*LevelOfDetail {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("levelsOfDetail"))
+func (g *Geometry) LevelsOfDetail() []*LevelOfDetail {
+	_arr := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("levelsOfDetail"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LevelOfDetail { return LevelOfDetailFromID(_id) })
 }
 
-// SetLevelsOfDetail wraps the corresponding Objective-C method.
-func (x *Geometry) SetLevelsOfDetail(levelsOfDetail []*LevelOfDetail) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetail:"), purego.SliceToNSArray(levelsOfDetail, func(_v *LevelOfDetail) objc.ID { return objref.IDOf(_v) }))
-}
-
 // Tessellator wraps the corresponding Objective-C method.
-func (x *Geometry) Tessellator() *GeometryTessellator {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tessellator"))
+func (g *Geometry) Tessellator() *GeometryTessellator {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("tessellator"))
 	return GeometryTessellatorFromID(_r)
 }
 
-// SetTessellator wraps the corresponding Objective-C method.
-func (x *Geometry) SetTessellator(tessellator *GeometryTessellator) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
-}
-
 // SubdivisionLevel specifies the subdivision level of the receiver. Defaults to 0. A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
-func (x *Geometry) SubdivisionLevel() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("subdivisionLevel"))
+func (g *Geometry) SubdivisionLevel() int {
+	_r := objc.Send[int](objref.IDOf(g), objc.RegisterName("subdivisionLevel"))
 	return _r
 }
 
-// SetSubdivisionLevel wraps the corresponding Objective-C method.
-func (x *Geometry) SetSubdivisionLevel(subdivisionLevel int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
-}
-
-// WantsAdaptiveSubdivision specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
-func (x *Geometry) WantsAdaptiveSubdivision() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsAdaptiveSubdivision"))
+// WantsAdaptiveSubdivision reports whether specifies if the subdivision is adaptive or uniform. Defaults to true. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+func (g *Geometry) WantsAdaptiveSubdivision() bool {
+	_r := objc.Send[bool](objref.IDOf(g), objc.RegisterName("wantsAdaptiveSubdivision"))
 	return _r
-}
-
-// SetWantsAdaptiveSubdivision wraps the corresponding Objective-C method.
-func (x *Geometry) SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
 }
 
 // EdgeCreasesElement specifies the edges creases that control the subdivision. Defaults to nil. The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesSource below to specify sharpness of the creases.
-func (x *Geometry) EdgeCreasesElement() *GeometryElement {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("edgeCreasesElement"))
+func (g *Geometry) EdgeCreasesElement() *GeometryElement {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("edgeCreasesElement"))
 	return GeometryElementFromID(_r)
 }
 
-// SetEdgeCreasesElement wraps the corresponding Objective-C method.
-func (x *Geometry) SetEdgeCreasesElement(edgeCreasesElement *GeometryElement) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
-}
-
 // EdgeCreasesSource specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil. The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
-func (x *Geometry) EdgeCreasesSource() *GeometrySource {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("edgeCreasesSource"))
+func (g *Geometry) EdgeCreasesSource() *GeometrySource {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("edgeCreasesSource"))
 	return GeometrySourceFromID(_r)
 }
-
-// SetEdgeCreasesSource wraps the corresponding Objective-C method.
-func (x *Geometry) SetEdgeCreasesSource(edgeCreasesSource *GeometrySource) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
-}
-
-// Geometryable is the interface implemented by [Geometry], for mocking and DI.
-type Geometryable interface {
-	obj.Object
-	WithName(name string) *Geometry
-	WithMaterials(items ...*Material) *Geometry
-	WithFirstMaterial(firstMaterial *Material) *Geometry
-	WithLevelsOfDetail(items ...*LevelOfDetail) *Geometry
-	WithTessellator(tessellator *GeometryTessellator) *Geometry
-	WithSubdivisionLevel(subdivisionLevel int) *Geometry
-	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Geometry
-	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Geometry
-	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Geometry
-	InsertMaterialAtIndex(material *Material, index int)
-	RemoveMaterialAtIndex(index int)
-	ReplaceMaterialAtIndexWithMaterial(index int, material *Material)
-	MaterialWithName(name string) *Material
-	GeometrySourcesForSemantic(semantic obj.Object) []*GeometrySource
-	GeometryElementAtIndex(elementIndex int) *GeometryElement
-	Name() string
-	SetName(name string)
-	Materials() []*Material
-	SetMaterials(materials []*Material)
-	FirstMaterial() *Material
-	SetFirstMaterial(firstMaterial *Material)
-	GeometrySources() []*GeometrySource
-	GeometryElements() []*GeometryElement
-	GeometryElementCount() int
-	GeometrySourceChannels() []obj.Object
-	LevelsOfDetail() []*LevelOfDetail
-	SetLevelsOfDetail(levelsOfDetail []*LevelOfDetail)
-	Tessellator() *GeometryTessellator
-	SetTessellator(tessellator *GeometryTessellator)
-	SubdivisionLevel() int
-	SetSubdivisionLevel(subdivisionLevel int)
-	WantsAdaptiveSubdivision() bool
-	SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool)
-	EdgeCreasesElement() *GeometryElement
-	SetEdgeCreasesElement(edgeCreasesElement *GeometryElement)
-	EdgeCreasesSource() *GeometrySource
-	SetEdgeCreasesSource(edgeCreasesSource *GeometrySource)
-}
-
-var _ Geometryable = (*Geometry)(nil)
 
 // isGeometry marks Geometry — and, by embedding promotion, its
 // subclasses — as a member of the Geometry hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Geometry) isGeometry() {}
+func (g *Geometry) isGeometry() {}
 
 var _ GeometryProvider = (*Geometry)(nil)

@@ -53,18 +53,10 @@ func NewUnitPower() *UnitPower {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitPower) WithScriptingProperties(scriptingProperties obj.Object) *UnitPower {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (up *UnitPower) WithScriptingProperties(scriptingProperties obj.Object) *UnitPower {
+	objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return up
 }
-
-// UnitPowerable is the interface implemented by [UnitPower], for mocking and DI.
-type UnitPowerable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitPower
-}
-
-var _ UnitPowerable = (*UnitPower)(nil)
 
 var _ DimensionProvider = (*UnitPower)(nil)
 

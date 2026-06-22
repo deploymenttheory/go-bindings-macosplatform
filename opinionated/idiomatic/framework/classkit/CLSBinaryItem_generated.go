@@ -7,7 +7,6 @@ package classkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,46 +52,29 @@ func NewBinaryItemWithIdentifierTitleType(identifier string, title string, value
 	return binaryItemAdopt(_id)
 }
 
-// WithValue the value that the binary activity item takes.
-func (x *BinaryItem) WithValue(value bool) *BinaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-	return x
+// WithValue sets the value that the binary activity item takes.
+func (bi *BinaryItem) WithValue(value bool) *BinaryItem {
+	objc.Send[objc.ID](objref.IDOf(bi), objc.RegisterName("setValue:"), value)
+	return bi
 }
 
-// WithTitle a human readable name for the activity item.
-func (x *BinaryItem) WithTitle(title string) *BinaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets a human readable name for the activity item.
+func (bi *BinaryItem) WithTitle(title string) *BinaryItem {
+	objc.Send[objc.ID](objref.IDOf(bi), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return bi
 }
 
-// Value true or false value.
-func (x *BinaryItem) Value() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("value"))
+// Value reports whether true or false value.
+func (bi *BinaryItem) Value() bool {
+	_r := objc.Send[bool](objref.IDOf(bi), objc.RegisterName("value"))
 	return _r
 }
 
-// SetValue wraps the corresponding Objective-C method.
-func (x *BinaryItem) SetValue(value bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-}
-
-// ValueType value type of this CLSBinaryItem. The type that best describes this CLSBinaryItem value.
-func (x *BinaryItem) ValueType() BinaryValueType {
-	_r := objc.Send[BinaryValueType](objref.IDOf(x), objc.RegisterName("valueType"))
+// ValueType returns value type of this CLSBinaryItem. The type that best describes this CLSBinaryItem value.
+func (bi *BinaryItem) ValueType() BinaryValueType {
+	_r := objc.Send[BinaryValueType](objref.IDOf(bi), objc.RegisterName("valueType"))
 	return _r
 }
-
-// BinaryItemable is the interface implemented by [BinaryItem], for mocking and DI.
-type BinaryItemable interface {
-	obj.Object
-	WithValue(value bool) *BinaryItem
-	WithTitle(title string) *BinaryItem
-	Value() bool
-	SetValue(value bool)
-	ValueType() BinaryValueType
-}
-
-var _ BinaryItemable = (*BinaryItem)(nil)
 
 var _ ActivityItemProvider = (*BinaryItem)(nil)
 

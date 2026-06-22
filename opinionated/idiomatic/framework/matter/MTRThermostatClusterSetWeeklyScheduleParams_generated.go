@@ -44,24 +44,24 @@ func mTRThermostatClusterSetWeeklyScheduleParamsAdopt(id objc.ID) *MTRThermostat
 }
 
 // Description returns the object's -description text.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) Description() string {
+	return rt.Description(objref.IDOf(mtcswsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtcswsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtcswsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) String() string {
+	return rt.Description(objref.IDOf(mtcswsp))
 }
 
 // NewMTRThermostatClusterSetWeeklyScheduleParams creates a new MTRThermostatClusterSetWeeklyScheduleParams.
@@ -71,121 +71,72 @@ func NewMTRThermostatClusterSetWeeklyScheduleParams() *MTRThermostatClusterSetWe
 }
 
 // WithNumberOfTransitionsForSequence sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) WithNumberOfTransitionsForSequence(numberOfTransitionsForSequence obj.Object) *MTRThermostatClusterSetWeeklyScheduleParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTransitionsForSequence:"), objref.IDOf(numberOfTransitionsForSequence))
-	return x
+func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) WithNumberOfTransitionsForSequence(numberOfTransitionsForSequence obj.Object) *MTRThermostatClusterSetWeeklyScheduleParams {
+	objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("setNumberOfTransitionsForSequence:"), objref.IDOf(numberOfTransitionsForSequence))
+	return mtcswsp
 }
 
 // WithDayOfWeekForSequence sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) WithDayOfWeekForSequence(dayOfWeekForSequence obj.Object) *MTRThermostatClusterSetWeeklyScheduleParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDayOfWeekForSequence:"), objref.IDOf(dayOfWeekForSequence))
-	return x
+func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) WithDayOfWeekForSequence(dayOfWeekForSequence obj.Object) *MTRThermostatClusterSetWeeklyScheduleParams {
+	objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("setDayOfWeekForSequence:"), objref.IDOf(dayOfWeekForSequence))
+	return mtcswsp
 }
 
 // WithModeForSequence sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) WithModeForSequence(modeForSequence obj.Object) *MTRThermostatClusterSetWeeklyScheduleParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeForSequence:"), objref.IDOf(modeForSequence))
-	return x
+func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) WithModeForSequence(modeForSequence obj.Object) *MTRThermostatClusterSetWeeklyScheduleParams {
+	objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("setModeForSequence:"), objref.IDOf(modeForSequence))
+	return mtcswsp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterSetWeeklyScheduleParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterSetWeeklyScheduleParams {
+	objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mtcswsp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThermostatClusterSetWeeklyScheduleParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThermostatClusterSetWeeklyScheduleParams {
+	objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mtcswsp
 }
 
 // NumberOfTransitionsForSequence wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) NumberOfTransitionsForSequence() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberOfTransitionsForSequence"))
+func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) NumberOfTransitionsForSequence() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("numberOfTransitionsForSequence"))
 	return obj.Wrap(_r)
-}
-
-// SetNumberOfTransitionsForSequence wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) SetNumberOfTransitionsForSequence(numberOfTransitionsForSequence obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTransitionsForSequence:"), objref.IDOf(numberOfTransitionsForSequence))
 }
 
 // DayOfWeekForSequence wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) DayOfWeekForSequence() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dayOfWeekForSequence"))
+func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) DayOfWeekForSequence() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("dayOfWeekForSequence"))
 	return obj.Wrap(_r)
-}
-
-// SetDayOfWeekForSequence wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) SetDayOfWeekForSequence(dayOfWeekForSequence obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDayOfWeekForSequence:"), objref.IDOf(dayOfWeekForSequence))
 }
 
 // ModeForSequence wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) ModeForSequence() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modeForSequence"))
+func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) ModeForSequence() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("modeForSequence"))
 	return obj.Wrap(_r)
 }
 
-// SetModeForSequence wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) SetModeForSequence(modeForSequence obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeForSequence:"), objref.IDOf(modeForSequence))
-}
-
 // Transitions wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) Transitions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitions"))
+func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) Transitions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("transitions"))
 	return obj.Wrap(_r)
 }
 
 // SetTransitions wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) SetTransitions(transitions obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitions:"), objref.IDOf(transitions))
+func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) SetTransitions(transitions obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("setTransitions:"), objref.IDOf(transitions))
 }
 
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mtcswsp *MTRThermostatClusterSetWeeklyScheduleParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcswsp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterSetWeeklyScheduleParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRThermostatClusterSetWeeklyScheduleParamsable is the interface implemented by [MTRThermostatClusterSetWeeklyScheduleParams], for mocking and DI.
-type MTRThermostatClusterSetWeeklyScheduleParamsable interface {
-	obj.Object
-	WithNumberOfTransitionsForSequence(numberOfTransitionsForSequence obj.Object) *MTRThermostatClusterSetWeeklyScheduleParams
-	WithDayOfWeekForSequence(dayOfWeekForSequence obj.Object) *MTRThermostatClusterSetWeeklyScheduleParams
-	WithModeForSequence(modeForSequence obj.Object) *MTRThermostatClusterSetWeeklyScheduleParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterSetWeeklyScheduleParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThermostatClusterSetWeeklyScheduleParams
-	NumberOfTransitionsForSequence() obj.Object
-	SetNumberOfTransitionsForSequence(numberOfTransitionsForSequence obj.Object)
-	DayOfWeekForSequence() obj.Object
-	SetDayOfWeekForSequence(dayOfWeekForSequence obj.Object)
-	ModeForSequence() obj.Object
-	SetModeForSequence(modeForSequence obj.Object)
-	Transitions() obj.Object
-	SetTransitions(transitions obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRThermostatClusterSetWeeklyScheduleParamsable = (*MTRThermostatClusterSetWeeklyScheduleParams)(nil)

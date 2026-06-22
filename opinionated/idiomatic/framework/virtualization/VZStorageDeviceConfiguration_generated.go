@@ -48,43 +48,35 @@ func storageDeviceConfigurationAdopt(id objc.ID) *StorageDeviceConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *StorageDeviceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sdc *StorageDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(sdc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StorageDeviceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sdc *StorageDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sdc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StorageDeviceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sdc *StorageDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sdc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StorageDeviceConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sdc *StorageDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(sdc))
 }
 
 // Attachment wraps the corresponding Objective-C method.
-func (x *StorageDeviceConfiguration) Attachment() *StorageDeviceAttachment {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachment"))
+func (sdc *StorageDeviceConfiguration) Attachment() *StorageDeviceAttachment {
+	_r := objc.Send[objc.ID](objref.IDOf(sdc), objc.RegisterName("attachment"))
 	return StorageDeviceAttachmentFromID(_r)
 }
-
-// StorageDeviceConfigurationable is the interface implemented by [StorageDeviceConfiguration], for mocking and DI.
-type StorageDeviceConfigurationable interface {
-	obj.Object
-	Attachment() *StorageDeviceAttachment
-}
-
-var _ StorageDeviceConfigurationable = (*StorageDeviceConfiguration)(nil)
 
 // isStorageDeviceConfiguration marks StorageDeviceConfiguration — and, by embedding promotion, its
 // subclasses — as a member of the StorageDeviceConfiguration hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *StorageDeviceConfiguration) isStorageDeviceConfiguration() {}
+func (sdc *StorageDeviceConfiguration) isStorageDeviceConfiguration() {}
 
 var _ StorageDeviceConfigurationProvider = (*StorageDeviceConfiguration)(nil)

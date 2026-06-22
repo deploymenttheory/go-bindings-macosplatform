@@ -46,24 +46,24 @@ func sourceAdopt(id objc.ID) *Source {
 }
 
 // Description returns the object's -description text.
-func (x *Source) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Source) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Source) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Source) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Source) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Source) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Source) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Source) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewSource creates a new Source.
@@ -72,29 +72,20 @@ func NewSource() *Source {
 	return sourceAdopt(_id)
 }
 
-// Name the name of the source represented by the receiver.  If the source is an app, then the name is the localized name of the app.
-func (x *Source) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns the name of the source represented by the receiver.  If the source is an app, then the name is the localized name of the app.
+func (s *Source) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// BundleIdentifier the bundle identifier of the source represented by the receiver.
-func (x *Source) BundleIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
+// BundleIdentifier returns the bundle identifier of the source represented by the receiver.
+func (s *Source) BundleIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Sourceable is the interface implemented by [Source], for mocking and DI.
-type Sourceable interface {
-	obj.Object
-	Name() string
-	BundleIdentifier() string
-}
-
-var _ Sourceable = (*Source)(nil)

@@ -46,24 +46,24 @@ func expressionAdopt(id objc.ID) *Expression {
 }
 
 // Description returns the object's -description text.
-func (x *Expression) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Expression) Description() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Expression) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (e *Expression) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Expression) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (e *Expression) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Expression) String() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Expression) String() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // NewExpressionWithExpressionType creates the expression with the specified expression type.
@@ -81,37 +81,37 @@ func NewExpressionWithCoder(coder *Coder) *Expression {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Expression) WithScriptingProperties(scriptingProperties obj.Object) *Expression {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (e *Expression) WithScriptingProperties(scriptingProperties obj.Object) *Expression {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return e
 }
 
 // ExpressionValueWithObjectContext evaluates an expression using a specified object and context.
-func (x *Expression) ExpressionValueWithObjectContext(object obj.Object, context_ obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expressionValueWithObject:context:"), objref.IDOf(object), objref.IDOf(context_))
+func (e *Expression) ExpressionValueWithObjectContext(object obj.Object, context_ obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("expressionValueWithObject:context:"), objref.IDOf(object), objref.IDOf(context_))
 	return obj.Wrap(_r)
 }
 
 // AllowEvaluation forces a securely decoded expression to allow evaluation.
-func (x *Expression) AllowEvaluation() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowEvaluation"))
+func (e *Expression) AllowEvaluation() {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("allowEvaluation"))
 }
 
 // ExpressionType wraps the corresponding Objective-C method.
-func (x *Expression) ExpressionType() ExpressionType {
-	_r := objc.Send[ExpressionType](objref.IDOf(x), objc.RegisterName("expressionType"))
+func (e *Expression) ExpressionType() ExpressionType {
+	_r := objc.Send[ExpressionType](objref.IDOf(e), objc.RegisterName("expressionType"))
 	return _r
 }
 
 // ConstantValue wraps the corresponding Objective-C method.
-func (x *Expression) ConstantValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constantValue"))
+func (e *Expression) ConstantValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("constantValue"))
 	return obj.Wrap(_r)
 }
 
 // KeyPath wraps the corresponding Objective-C method.
-func (x *Expression) KeyPath() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyPath"))
+func (e *Expression) KeyPath() string {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("keyPath"))
 	if _r == 0 {
 		return ""
 	}
@@ -119,8 +119,8 @@ func (x *Expression) KeyPath() string {
 }
 
 // Function wraps the corresponding Objective-C method.
-func (x *Expression) Function() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("function"))
+func (e *Expression) Function() string {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("function"))
 	if _r == 0 {
 		return ""
 	}
@@ -128,8 +128,8 @@ func (x *Expression) Function() string {
 }
 
 // Variable wraps the corresponding Objective-C method.
-func (x *Expression) Variable() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variable"))
+func (e *Expression) Variable() string {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("variable"))
 	if _r == 0 {
 		return ""
 	}
@@ -137,74 +137,51 @@ func (x *Expression) Variable() string {
 }
 
 // Operand wraps the corresponding Objective-C method.
-func (x *Expression) Operand() *Expression {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operand"))
+func (e *Expression) Operand() *Expression {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("operand"))
 	return ExpressionFromID(_r)
 }
 
 // Arguments wraps the corresponding Objective-C method.
 //
 // Arguments returns the collection as a Go slice.
-func (x *Expression) Arguments() []*Expression {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arguments"))
+func (e *Expression) Arguments() []*Expression {
+	_arr := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("arguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Expression { return ExpressionFromID(_id) })
 }
 
 // Collection wraps the corresponding Objective-C method.
-func (x *Expression) Collection() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collection"))
+func (e *Expression) Collection() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("collection"))
 	return obj.Wrap(_r)
 }
 
 // Predicate wraps the corresponding Objective-C method.
-func (x *Expression) Predicate() *Predicate {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
+func (e *Expression) Predicate() *Predicate {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("predicate"))
 	return PredicateFromID(_r)
 }
 
 // LeftExpression wraps the corresponding Objective-C method.
-func (x *Expression) LeftExpression() *Expression {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftExpression"))
+func (e *Expression) LeftExpression() *Expression {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("leftExpression"))
 	return ExpressionFromID(_r)
 }
 
 // RightExpression wraps the corresponding Objective-C method.
-func (x *Expression) RightExpression() *Expression {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightExpression"))
+func (e *Expression) RightExpression() *Expression {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("rightExpression"))
 	return ExpressionFromID(_r)
 }
 
 // TrueExpression wraps the corresponding Objective-C method.
-func (x *Expression) TrueExpression() *Expression {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trueExpression"))
+func (e *Expression) TrueExpression() *Expression {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("trueExpression"))
 	return ExpressionFromID(_r)
 }
 
 // FalseExpression wraps the corresponding Objective-C method.
-func (x *Expression) FalseExpression() *Expression {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("falseExpression"))
+func (e *Expression) FalseExpression() *Expression {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("falseExpression"))
 	return ExpressionFromID(_r)
 }
-
-// Expressionable is the interface implemented by [Expression], for mocking and DI.
-type Expressionable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Expression
-	ExpressionValueWithObjectContext(object obj.Object, context_ obj.Object) obj.Object
-	AllowEvaluation()
-	ExpressionType() ExpressionType
-	ConstantValue() obj.Object
-	KeyPath() string
-	Function() string
-	Variable() string
-	Operand() *Expression
-	Arguments() []*Expression
-	Collection() obj.Object
-	Predicate() *Predicate
-	LeftExpression() *Expression
-	RightExpression() *Expression
-	TrueExpression() *Expression
-	FalseExpression() *Expression
-}
-
-var _ Expressionable = (*Expression)(nil)

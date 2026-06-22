@@ -7,7 +7,6 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,34 +52,24 @@ func NewMultiPolylineWithPolylines(polylines []*Polyline) *MultiPolyline {
 	return multiPolylineAdopt(_id)
 }
 
-// WithTitle the title of the shape annotation.
-func (x *MultiPolyline) WithTitle(title string) *MultiPolyline {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title of the shape annotation.
+func (mp *MultiPolyline) WithTitle(title string) *MultiPolyline {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return mp
 }
 
-// WithSubtitle the subtitle of the shape annotation.
-func (x *MultiPolyline) WithSubtitle(subtitle string) *MultiPolyline {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
-	return x
+// WithSubtitle sets the subtitle of the shape annotation.
+func (mp *MultiPolyline) WithSubtitle(subtitle string) *MultiPolyline {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setSubtitle:"), purego.NSString(subtitle))
+	return mp
 }
 
 // Polylines wraps the corresponding Objective-C method.
 //
 // Polylines returns the collection as a Go slice.
-func (x *MultiPolyline) Polylines() []*Polyline {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("polylines"))
+func (mp *MultiPolyline) Polylines() []*Polyline {
+	_arr := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("polylines"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Polyline { return PolylineFromID(_id) })
 }
-
-// MultiPolylineable is the interface implemented by [MultiPolyline], for mocking and DI.
-type MultiPolylineable interface {
-	obj.Object
-	WithTitle(title string) *MultiPolyline
-	WithSubtitle(subtitle string) *MultiPolyline
-	Polylines() []*Polyline
-}
-
-var _ MultiPolylineable = (*MultiPolyline)(nil)
 
 var _ ShapeProvider = (*MultiPolyline)(nil)

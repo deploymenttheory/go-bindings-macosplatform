@@ -46,97 +46,66 @@ func mTRThermostatClusterWeeklyScheduleTransitionStructAdopt(id objc.ID) *MTRThe
 }
 
 // Description returns the object's -description text.
-func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) Description() string {
+	return rt.Description(objref.IDOf(mtcwsts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtcwsts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtcwsts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) String() string {
+	return rt.Description(objref.IDOf(mtcwsts))
 }
 
 // WithTransitionTime sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) WithTransitionTime(transitionTime obj.Object) *MTRThermostatClusterWeeklyScheduleTransitionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
-	return x
+func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) WithTransitionTime(transitionTime obj.Object) *MTRThermostatClusterWeeklyScheduleTransitionStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcwsts), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
+	return mtcwsts
 }
 
 // WithHeatSetpoint sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) WithHeatSetpoint(heatSetpoint obj.Object) *MTRThermostatClusterWeeklyScheduleTransitionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeatSetpoint:"), objref.IDOf(heatSetpoint))
-	return x
+func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) WithHeatSetpoint(heatSetpoint obj.Object) *MTRThermostatClusterWeeklyScheduleTransitionStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcwsts), objc.RegisterName("setHeatSetpoint:"), objref.IDOf(heatSetpoint))
+	return mtcwsts
 }
 
 // WithCoolSetpoint sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) WithCoolSetpoint(coolSetpoint obj.Object) *MTRThermostatClusterWeeklyScheduleTransitionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCoolSetpoint:"), objref.IDOf(coolSetpoint))
-	return x
+func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) WithCoolSetpoint(coolSetpoint obj.Object) *MTRThermostatClusterWeeklyScheduleTransitionStruct {
+	objc.Send[objc.ID](objref.IDOf(mtcwsts), objc.RegisterName("setCoolSetpoint:"), objref.IDOf(coolSetpoint))
+	return mtcwsts
 }
 
 // TransitionTime wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) TransitionTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionTime"))
+func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) TransitionTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcwsts), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
-}
-
-// SetTransitionTime wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) SetTransitionTime(transitionTime obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 }
 
 // HeatSetpoint wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) HeatSetpoint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("heatSetpoint"))
+func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) HeatSetpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcwsts), objc.RegisterName("heatSetpoint"))
 	return obj.Wrap(_r)
-}
-
-// SetHeatSetpoint wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) SetHeatSetpoint(heatSetpoint obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeatSetpoint:"), objref.IDOf(heatSetpoint))
 }
 
 // CoolSetpoint wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) CoolSetpoint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coolSetpoint"))
+func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) CoolSetpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcwsts), objc.RegisterName("coolSetpoint"))
 	return obj.Wrap(_r)
 }
-
-// SetCoolSetpoint wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) SetCoolSetpoint(coolSetpoint obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCoolSetpoint:"), objref.IDOf(coolSetpoint))
-}
-
-// MTRThermostatClusterWeeklyScheduleTransitionStructable is the interface implemented by [MTRThermostatClusterWeeklyScheduleTransitionStruct], for mocking and DI.
-type MTRThermostatClusterWeeklyScheduleTransitionStructable interface {
-	obj.Object
-	WithTransitionTime(transitionTime obj.Object) *MTRThermostatClusterWeeklyScheduleTransitionStruct
-	WithHeatSetpoint(heatSetpoint obj.Object) *MTRThermostatClusterWeeklyScheduleTransitionStruct
-	WithCoolSetpoint(coolSetpoint obj.Object) *MTRThermostatClusterWeeklyScheduleTransitionStruct
-	TransitionTime() obj.Object
-	SetTransitionTime(transitionTime obj.Object)
-	HeatSetpoint() obj.Object
-	SetHeatSetpoint(heatSetpoint obj.Object)
-	CoolSetpoint() obj.Object
-	SetCoolSetpoint(coolSetpoint obj.Object)
-}
-
-var _ MTRThermostatClusterWeeklyScheduleTransitionStructable = (*MTRThermostatClusterWeeklyScheduleTransitionStruct)(nil)
 
 // isMTRThermostatClusterWeeklyScheduleTransitionStruct marks MTRThermostatClusterWeeklyScheduleTransitionStruct — and, by embedding promotion, its
 // subclasses — as a member of the MTRThermostatClusterWeeklyScheduleTransitionStruct hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRThermostatClusterWeeklyScheduleTransitionStruct) isMTRThermostatClusterWeeklyScheduleTransitionStruct() {
+func (mtcwsts *MTRThermostatClusterWeeklyScheduleTransitionStruct) isMTRThermostatClusterWeeklyScheduleTransitionStruct() {
 }
 
 var _ MTRThermostatClusterWeeklyScheduleTransitionStructProvider = (*MTRThermostatClusterWeeklyScheduleTransitionStruct)(nil)

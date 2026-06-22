@@ -46,24 +46,24 @@ func airportAdopt(id objc.ID) *Airport {
 }
 
 // Description returns the object's -description text.
-func (x *Airport) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Airport) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Airport) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Airport) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Airport) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Airport) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Airport) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Airport) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewAirportWithNameIataCodeIcaoCode creates a new airport object with the specified contents and attributes.
@@ -74,8 +74,8 @@ func NewAirportWithNameIataCodeIcaoCode(name string, iataCode string, icaoCode s
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Airport) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (a *Airport) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -83,8 +83,8 @@ func (x *Airport) Name() string {
 }
 
 // IataCode wraps the corresponding Objective-C method.
-func (x *Airport) IataCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iataCode"))
+func (a *Airport) IataCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("iataCode"))
 	if _r == 0 {
 		return ""
 	}
@@ -92,20 +92,10 @@ func (x *Airport) IataCode() string {
 }
 
 // IcaoCode wraps the corresponding Objective-C method.
-func (x *Airport) IcaoCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icaoCode"))
+func (a *Airport) IcaoCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("icaoCode"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Airportable is the interface implemented by [Airport], for mocking and DI.
-type Airportable interface {
-	obj.Object
-	Name() string
-	IataCode() string
-	IcaoCode() string
-}
-
-var _ Airportable = (*Airport)(nil)

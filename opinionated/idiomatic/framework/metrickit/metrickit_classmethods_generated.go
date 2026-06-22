@@ -16,7 +16,7 @@ func MakeLogHandleWithCategory(category string) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// SharedManager singleton instance of MXMetricManager.
+// SharedManager returns singleton instance of MXMetricManager.
 func SharedManager() *MetricManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("MXMetricManager")), objc.RegisterName("sharedManager"))
 	return MetricManagerFromID(_r)

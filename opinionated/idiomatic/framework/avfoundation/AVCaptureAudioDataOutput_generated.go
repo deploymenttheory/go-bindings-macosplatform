@@ -52,72 +52,46 @@ func NewCaptureAudioDataOutput() *CaptureAudioDataOutput {
 	return captureAudioDataOutputAdopt(_id)
 }
 
-// WithAudioSettings the settings used to decode or re-encode audio before it’s output.
-func (x *CaptureAudioDataOutput) WithAudioSettings(audioSettings obj.Object) *CaptureAudioDataOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioSettings:"), objref.IDOf(audioSettings))
-	return x
+// WithAudioSettings sets the settings used to decode or re-encode audio before it’s output.
+func (cado *CaptureAudioDataOutput) WithAudioSettings(audioSettings obj.Object) *CaptureAudioDataOutput {
+	objc.Send[objc.ID](objref.IDOf(cado), objc.RegisterName("setAudioSettings:"), objref.IDOf(audioSettings))
+	return cado
 }
 
-// WithSpatialAudioChannelLayoutTag the audio channel layout tag of the audio sample buffers produced by the audio data output.
-func (x *CaptureAudioDataOutput) WithSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag int) *CaptureAudioDataOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpatialAudioChannelLayoutTag:"), spatialAudioChannelLayoutTag)
-	return x
+// WithSpatialAudioChannelLayoutTag sets the audio channel layout tag of the audio sample buffers produced by the audio data output.
+func (cado *CaptureAudioDataOutput) WithSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag int) *CaptureAudioDataOutput {
+	objc.Send[objc.ID](objref.IDOf(cado), objc.RegisterName("setSpatialAudioChannelLayoutTag:"), spatialAudioChannelLayoutTag)
+	return cado
 }
 
-// WithDeferredStartEnabled a Boolean value that indicates whether to defer starting this capture output.
-func (x *CaptureAudioDataOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioDataOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
-	return x
+// WithDeferredStartEnabled sets a Boolean value that indicates whether to defer starting this capture output.
+func (cado *CaptureAudioDataOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioDataOutput {
+	objc.Send[objc.ID](objref.IDOf(cado), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
+	return cado
 }
 
 // RecommendedAudioSettingsForAssetWriterWithOutputFileType specifies the recommended settings for use with an AVAssetWriterInput.
-func (x *CaptureAudioDataOutput) RecommendedAudioSettingsForAssetWriterWithOutputFileType(outputFileType obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recommendedAudioSettingsForAssetWriterWithOutputFileType:"), objref.IDOf(outputFileType))
+func (cado *CaptureAudioDataOutput) RecommendedAudioSettingsForAssetWriterWithOutputFileType(outputFileType obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cado), objc.RegisterName("recommendedAudioSettingsForAssetWriterWithOutputFileType:"), objref.IDOf(outputFileType))
 	return obj.Wrap(_r)
 }
 
-// SampleBufferCallbackQueue the dispatch queue on which all sample buffer delegate methods will be called. The value of this property is a dispatch_queue_t. The queue is set using the setSampleBufferDelegate:queue: method.
-func (x *CaptureAudioDataOutput) SampleBufferCallbackQueue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferCallbackQueue"))
+// SampleBufferCallbackQueue returns the dispatch queue on which all sample buffer delegate methods will be called. The value of this property is a dispatch_queue_t. The queue is set using the setSampleBufferDelegate:queue: method.
+func (cado *CaptureAudioDataOutput) SampleBufferCallbackQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cado), objc.RegisterName("sampleBufferCallbackQueue"))
 	return obj.Wrap(_r)
 }
 
 // AudioSettings specifies the settings used to decode or re-encode audio before it is output by the receiver. The value of this property is an NSDictionary containing values for audio settings keys defined in AVAudioSettings.h. When audioSettings is set to nil, the AVCaptureAudioDataOutput vends samples in their device native format.
-func (x *CaptureAudioDataOutput) AudioSettings() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioSettings"))
+func (cado *CaptureAudioDataOutput) AudioSettings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cado), objc.RegisterName("audioSettings"))
 	return obj.Wrap(_r)
 }
 
-// SetAudioSettings wraps the corresponding Objective-C method.
-func (x *CaptureAudioDataOutput) SetAudioSettings(audioSettings obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioSettings:"), objref.IDOf(audioSettings))
-}
-
-// SpatialAudioChannelLayoutTag the audio channel layout tag of the audio sample buffers produced by the audio data output. When you set your audio data output's associated “AVCaptureDeviceInput/multichannelAudioMode“ property to “AVCaptureMultichannelAudioModeFirstOrderAmbisonics“, the “AVCaptureSession“ allows up to two “AVCaptureAudioDataOutput“ instances to be connected to the First-order Ambisonsics (FOA) input. If you connect a single “AVCaptureAudioDataOutput“ instance, you must configure its “AVCaptureAudioDataOutput/spatialAudioChannelLayoutTag“ property to produce either four channels of FOA audio or two channels of Stereo audio. If you connect two “AVCaptureAudioDataOutput“ instances, you must configure one to output four channels of FOA audio and the other to output two channels of Stereo audio. Thus, when you set your associated “AVCaptureDeviceInput/multichannelAudioMode“ property to “AVCaptureMultichannelAudioModeFirstOrderAmbisonics“, you must set your connected “AVCaptureAudioDataOutput“ instance's “AVCaptureAudioDataOutput/spatialAudioChannelLayoutTag“ property to either `kAudioChannelLayoutTag_Stereo` for stereo, or `(kAudioChannelLayoutTag_HOA_ACN_SN3D | 4)` for FOA (see <doc://com.apple.documentation/documentation/coreaudiotypes/audiochannellayouttag>). When you set your associated “AVCaptureDeviceInput/multichannelAudioMode“ to any other value, the “AVCaptureSession“ only supports one “AVCaptureAudioDataOutput“, and you may only set “AVCaptureAudioDataOutput/spatialAudioChannelLayoutTag“ to `kAudioChannelLayoutTag_Unknown` (the default value). Your “AVCaptureSession“ validates your app's adherence to the the above rules when you call “AVCaptureSession/startRunning:“ or “AVCaptureSession/commitConfiguration“ and throws a `NSInvalidArgumentException` if necessary.
-func (x *CaptureAudioDataOutput) SpatialAudioChannelLayoutTag() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("spatialAudioChannelLayoutTag"))
+// SpatialAudioChannelLayoutTag returns the audio channel layout tag of the audio sample buffers produced by the audio data output. When you set your audio data output's associated “AVCaptureDeviceInput/multichannelAudioMode“ property to “AVCaptureMultichannelAudioModeFirstOrderAmbisonics“, the “AVCaptureSession“ allows up to two “AVCaptureAudioDataOutput“ instances to be connected to the First-order Ambisonsics (FOA) input. If you connect a single “AVCaptureAudioDataOutput“ instance, you must configure its “AVCaptureAudioDataOutput/spatialAudioChannelLayoutTag“ property to produce either four channels of FOA audio or two channels of Stereo audio. If you connect two “AVCaptureAudioDataOutput“ instances, you must configure one to output four channels of FOA audio and the other to output two channels of Stereo audio. Thus, when you set your associated “AVCaptureDeviceInput/multichannelAudioMode“ property to “AVCaptureMultichannelAudioModeFirstOrderAmbisonics“, you must set your connected “AVCaptureAudioDataOutput“ instance's “AVCaptureAudioDataOutput/spatialAudioChannelLayoutTag“ property to either `kAudioChannelLayoutTag_Stereo` for stereo, or `(kAudioChannelLayoutTag_HOA_ACN_SN3D | 4)` for FOA (see <doc://com.apple.documentation/documentation/coreaudiotypes/audiochannellayouttag>). When you set your associated “AVCaptureDeviceInput/multichannelAudioMode“ to any other value, the “AVCaptureSession“ only supports one “AVCaptureAudioDataOutput“, and you may only set “AVCaptureAudioDataOutput/spatialAudioChannelLayoutTag“ to `kAudioChannelLayoutTag_Unknown` (the default value). Your “AVCaptureSession“ validates your app's adherence to the the above rules when you call “AVCaptureSession/startRunning:“ or “AVCaptureSession/commitConfiguration“ and throws a `NSInvalidArgumentException` if necessary.
+func (cado *CaptureAudioDataOutput) SpatialAudioChannelLayoutTag() int {
+	_r := objc.Send[int](objref.IDOf(cado), objc.RegisterName("spatialAudioChannelLayoutTag"))
 	return _r
 }
-
-// SetSpatialAudioChannelLayoutTag wraps the corresponding Objective-C method.
-func (x *CaptureAudioDataOutput) SetSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpatialAudioChannelLayoutTag:"), spatialAudioChannelLayoutTag)
-}
-
-// CaptureAudioDataOutputable is the interface implemented by [CaptureAudioDataOutput], for mocking and DI.
-type CaptureAudioDataOutputable interface {
-	obj.Object
-	WithAudioSettings(audioSettings obj.Object) *CaptureAudioDataOutput
-	WithSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag int) *CaptureAudioDataOutput
-	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureAudioDataOutput
-	RecommendedAudioSettingsForAssetWriterWithOutputFileType(outputFileType obj.Object) obj.Object
-	SampleBufferCallbackQueue() obj.Object
-	AudioSettings() obj.Object
-	SetAudioSettings(audioSettings obj.Object)
-	SpatialAudioChannelLayoutTag() int
-	SetSpatialAudioChannelLayoutTag(spatialAudioChannelLayoutTag int)
-}
-
-var _ CaptureAudioDataOutputable = (*CaptureAudioDataOutput)(nil)
 
 var _ CaptureOutputProvider = (*CaptureAudioDataOutput)(nil)

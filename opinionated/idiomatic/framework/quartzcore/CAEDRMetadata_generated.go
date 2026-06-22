@@ -46,24 +46,24 @@ func eDRMetadataAdopt(id objc.ID) *EDRMetadata {
 }
 
 // Description returns the object's -description text.
-func (x *EDRMetadata) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (em *EDRMetadata) Description() string {
+	return rt.Description(objref.IDOf(em))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EDRMetadata) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (em *EDRMetadata) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(em), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EDRMetadata) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (em *EDRMetadata) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(em), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *EDRMetadata) String() string {
-	return rt.Description(objref.IDOf(x))
+func (em *EDRMetadata) String() string {
+	return rt.Description(objref.IDOf(em))
 }
 
 // NewEDRMetadata creates a new EDRMetadata.
@@ -71,10 +71,3 @@ func NewEDRMetadata() *EDRMetadata {
 	_id := objc.Send[objc.ID](objc.ID(_class("CAEDRMetadata")), objc.RegisterName("new"))
 	return eDRMetadataAdopt(_id)
 }
-
-// EDRMetadataable is the interface implemented by [EDRMetadata], for mocking and DI.
-type EDRMetadataable interface {
-	obj.Object
-}
-
-var _ EDRMetadataable = (*EDRMetadata)(nil)

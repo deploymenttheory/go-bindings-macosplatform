@@ -5,12 +5,13 @@
 package virtualization
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // DiskBlockDeviceStorageDeviceAttachment is an idiomatic wrapper over the Objective-C class VZDiskBlockDeviceStorageDeviceAttachment.
@@ -59,32 +60,22 @@ func NewDiskBlockDeviceStorageDeviceAttachmentWithFileHandleReadOnlySynchronizat
 	return diskBlockDeviceStorageDeviceAttachmentAdopt(_id), nil
 }
 
-// FileHandle file handle to the underlying disk used for storage by the attachment.
-func (x *DiskBlockDeviceStorageDeviceAttachment) FileHandle() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileHandle"))
+// FileHandle returns file handle to the underlying disk used for storage by the attachment.
+func (dbdsda *DiskBlockDeviceStorageDeviceAttachment) FileHandle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dbdsda), objc.RegisterName("fileHandle"))
 	return obj.Wrap(_r)
 }
 
-// IsReadOnly whether the underlying disk attachment is read-only.
-func (x *DiskBlockDeviceStorageDeviceAttachment) IsReadOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isReadOnly"))
+// IsReadOnly reports whether the underlying disk attachment is read-only.
+func (dbdsda *DiskBlockDeviceStorageDeviceAttachment) IsReadOnly() bool {
+	_r := objc.Send[bool](objref.IDOf(dbdsda), objc.RegisterName("isReadOnly"))
 	return _r
 }
 
-// SynchronizationMode the mode in which the disk image synchronizes data with the underlying storage device.
-func (x *DiskBlockDeviceStorageDeviceAttachment) SynchronizationMode() DiskSynchronizationMode {
-	_r := objc.Send[DiskSynchronizationMode](objref.IDOf(x), objc.RegisterName("synchronizationMode"))
+// SynchronizationMode returns the mode in which the disk image synchronizes data with the underlying storage device.
+func (dbdsda *DiskBlockDeviceStorageDeviceAttachment) SynchronizationMode() DiskSynchronizationMode {
+	_r := objc.Send[DiskSynchronizationMode](objref.IDOf(dbdsda), objc.RegisterName("synchronizationMode"))
 	return _r
 }
-
-// DiskBlockDeviceStorageDeviceAttachmentable is the interface implemented by [DiskBlockDeviceStorageDeviceAttachment], for mocking and DI.
-type DiskBlockDeviceStorageDeviceAttachmentable interface {
-	obj.Object
-	FileHandle() obj.Object
-	IsReadOnly() bool
-	SynchronizationMode() DiskSynchronizationMode
-}
-
-var _ DiskBlockDeviceStorageDeviceAttachmentable = (*DiskBlockDeviceStorageDeviceAttachment)(nil)
 
 var _ StorageDeviceAttachmentProvider = (*DiskBlockDeviceStorageDeviceAttachment)(nil)

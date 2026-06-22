@@ -53,19 +53,11 @@ func NewCNNNeuronPReLUNodeWithSourceAData(sourceNode *NNImageNode, aData obj.Obj
 	return cNNNeuronPReLUNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNNeuronPReLUNode) WithLabel(label string) *CNNNeuronPReLUNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cnprln *CNNNeuronPReLUNode) WithLabel(label string) *CNNNeuronPReLUNode {
+	objc.Send[objc.ID](objref.IDOf(cnprln), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cnprln
 }
-
-// CNNNeuronPReLUNodeable is the interface implemented by [CNNNeuronPReLUNode], for mocking and DI.
-type CNNNeuronPReLUNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNNeuronPReLUNode
-}
-
-var _ CNNNeuronPReLUNodeable = (*CNNNeuronPReLUNode)(nil)
 
 var _ CNNNeuronNodeProvider = (*CNNNeuronPReLUNode)(nil)
 

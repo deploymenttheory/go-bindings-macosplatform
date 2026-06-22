@@ -60,11 +60,4 @@ func NewBERTLVRecordWithTagRecords(tag uint64, records []*TLVRecord) *BERTLVReco
 	return bERTLVRecordAdopt(_id)
 }
 
-// BERTLVRecordable is the interface implemented by [BERTLVRecord], for mocking and DI.
-type BERTLVRecordable interface {
-	obj.Object
-}
-
-var _ BERTLVRecordable = (*BERTLVRecord)(nil)
-
 var _ TLVRecordProvider = (*BERTLVRecord)(nil)

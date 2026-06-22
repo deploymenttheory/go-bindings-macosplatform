@@ -46,24 +46,24 @@ func trainTripAdopt(id objc.ID) *TrainTrip {
 }
 
 // Description returns the object's -description text.
-func (x *TrainTrip) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tt *TrainTrip) Description() string {
+	return rt.Description(objref.IDOf(tt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TrainTrip) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tt *TrainTrip) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TrainTrip) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tt *TrainTrip) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TrainTrip) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tt *TrainTrip) String() string {
+	return rt.Description(objref.IDOf(tt))
 }
 
 // NewTrainTripWithProviderTrainNameTrainNumberTripDurationDepartureStationLocationDeparturePlatformArrivalStationLocationArrivalPlatform creates a new train trip with the specified contents and attributes.
@@ -74,8 +74,8 @@ func NewTrainTripWithProviderTrainNameTrainNumberTripDurationDepartureStationLoc
 }
 
 // Provider wraps the corresponding Objective-C method.
-func (x *TrainTrip) Provider() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provider"))
+func (tt *TrainTrip) Provider() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("provider"))
 	if _r == 0 {
 		return ""
 	}
@@ -83,8 +83,8 @@ func (x *TrainTrip) Provider() string {
 }
 
 // TrainName wraps the corresponding Objective-C method.
-func (x *TrainTrip) TrainName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trainName"))
+func (tt *TrainTrip) TrainName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("trainName"))
 	if _r == 0 {
 		return ""
 	}
@@ -92,8 +92,8 @@ func (x *TrainTrip) TrainName() string {
 }
 
 // TrainNumber wraps the corresponding Objective-C method.
-func (x *TrainTrip) TrainNumber() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trainNumber"))
+func (tt *TrainTrip) TrainNumber() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("trainNumber"))
 	if _r == 0 {
 		return ""
 	}
@@ -101,20 +101,20 @@ func (x *TrainTrip) TrainNumber() string {
 }
 
 // TripDuration wraps the corresponding Objective-C method.
-func (x *TrainTrip) TripDuration() *DateComponentsRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tripDuration"))
+func (tt *TrainTrip) TripDuration() *DateComponentsRange {
+	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("tripDuration"))
 	return DateComponentsRangeFromID(_r)
 }
 
 // DepartureStationLocation wraps the corresponding Objective-C method.
-func (x *TrainTrip) DepartureStationLocation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departureStationLocation"))
+func (tt *TrainTrip) DepartureStationLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("departureStationLocation"))
 	return obj.Wrap(_r)
 }
 
 // DeparturePlatform wraps the corresponding Objective-C method.
-func (x *TrainTrip) DeparturePlatform() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("departurePlatform"))
+func (tt *TrainTrip) DeparturePlatform() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("departurePlatform"))
 	if _r == 0 {
 		return ""
 	}
@@ -122,31 +122,16 @@ func (x *TrainTrip) DeparturePlatform() string {
 }
 
 // ArrivalStationLocation wraps the corresponding Objective-C method.
-func (x *TrainTrip) ArrivalStationLocation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalStationLocation"))
+func (tt *TrainTrip) ArrivalStationLocation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("arrivalStationLocation"))
 	return obj.Wrap(_r)
 }
 
 // ArrivalPlatform wraps the corresponding Objective-C method.
-func (x *TrainTrip) ArrivalPlatform() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrivalPlatform"))
+func (tt *TrainTrip) ArrivalPlatform() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("arrivalPlatform"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// TrainTripable is the interface implemented by [TrainTrip], for mocking and DI.
-type TrainTripable interface {
-	obj.Object
-	Provider() string
-	TrainName() string
-	TrainNumber() string
-	TripDuration() *DateComponentsRange
-	DepartureStationLocation() obj.Object
-	DeparturePlatform() string
-	ArrivalStationLocation() obj.Object
-	ArrivalPlatform() string
-}
-
-var _ TrainTripable = (*TrainTrip)(nil)

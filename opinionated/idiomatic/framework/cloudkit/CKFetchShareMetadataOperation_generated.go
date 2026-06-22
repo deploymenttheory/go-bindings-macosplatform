@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -61,122 +62,107 @@ func NewFetchShareMetadataOperationWithShareURLs(shareURLs []obj.Object) *FetchS
 	return fetchShareMetadataOperationAdopt(_id)
 }
 
-// WithShareURLs the URLs of the shares to fetch.
-func (x *FetchShareMetadataOperation) WithShareURLs(items ...obj.Object) *FetchShareMetadataOperation {
+// WithShareURLs sets the URLs of the shares to fetch.
+func (fsmo *FetchShareMetadataOperation) WithShareURLs(items ...obj.Object) *FetchShareMetadataOperation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShareURLs:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setShareURLs:"), _arr)
+	return fsmo
 }
 
-// WithShouldFetchRootRecord a Boolean value that indicates whether to retrieve the root record.
-func (x *FetchShareMetadataOperation) WithShouldFetchRootRecord(shouldFetchRootRecord bool) *FetchShareMetadataOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldFetchRootRecord:"), shouldFetchRootRecord)
-	return x
+// WithShouldFetchRootRecord sets a Boolean value that indicates whether to retrieve the root record.
+func (fsmo *FetchShareMetadataOperation) WithShouldFetchRootRecord(shouldFetchRootRecord bool) *FetchShareMetadataOperation {
+	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setShouldFetchRootRecord:"), shouldFetchRootRecord)
+	return fsmo
 }
 
-// WithRootRecordDesiredKeys the fields to return when fetching the root record.
-func (x *FetchShareMetadataOperation) WithRootRecordDesiredKeys(items ...obj.Object) *FetchShareMetadataOperation {
+// WithRootRecordDesiredKeys sets the fields to return when fetching the root record.
+func (fsmo *FetchShareMetadataOperation) WithRootRecordDesiredKeys(items ...obj.Object) *FetchShareMetadataOperation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootRecordDesiredKeys:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setRootRecordDesiredKeys:"), _arr)
+	return fsmo
 }
 
-// WithConfiguration the operation’s configuration.
-func (x *FetchShareMetadataOperation) WithConfiguration(configuration *OperationConfiguration) *FetchShareMetadataOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
-	return x
+// WithConfiguration sets the operation’s configuration.
+func (fsmo *FetchShareMetadataOperation) WithConfiguration(configuration *OperationConfiguration) *FetchShareMetadataOperation {
+	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
+	return fsmo
 }
 
-// WithGroup the operation’s group.
-func (x *FetchShareMetadataOperation) WithGroup(group *OperationGroup) *FetchShareMetadataOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
-	return x
+// WithGroup sets the operation’s group.
+func (fsmo *FetchShareMetadataOperation) WithGroup(group *OperationGroup) *FetchShareMetadataOperation {
+	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setGroup:"), objref.IDOf(group))
+	return fsmo
 }
 
-// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
-func (x *FetchShareMetadataOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchShareMetadataOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
-	return x
+// WithLongLivedOperationWasPersistedBlock sets the closure to execute when the server begins to store callbacks for the long-lived operation.
+func (fsmo *FetchShareMetadataOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchShareMetadataOperation {
+	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
+	return fsmo
 }
 
-// WithContainer the operation's container.
-func (x *FetchShareMetadataOperation) WithContainer(container *Container) *FetchShareMetadataOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
-	return x
+// WithContainer sets the operation's container.
+func (fsmo *FetchShareMetadataOperation) WithContainer(container *Container) *FetchShareMetadataOperation {
+	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setContainer:"), objref.IDOf(container))
+	return fsmo
 }
 
-// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
-func (x *FetchShareMetadataOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchShareMetadataOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
-	return x
+// WithAllowsCellularAccess sets a Boolean value that indicates whether the operation can send data over the cellular network.
+func (fsmo *FetchShareMetadataOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchShareMetadataOperation {
+	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
+	return fsmo
 }
 
-// WithLongLived a Boolean value that indicates whether the operation is long-lived.
-func (x *FetchShareMetadataOperation) WithLongLived(longLived bool) *FetchShareMetadataOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
-	return x
+// WithLongLived sets a Boolean value that indicates whether the operation is long-lived.
+func (fsmo *FetchShareMetadataOperation) WithLongLived(longLived bool) *FetchShareMetadataOperation {
+	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setLongLived:"), longLived)
+	return fsmo
 }
 
-// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
-func (x *FetchShareMetadataOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchShareMetadataOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
-	return x
+// WithTimeoutIntervalForRequest sets the timeout interval when waiting for additional data.
+func (fsmo *FetchShareMetadataOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchShareMetadataOperation {
+	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
+	return fsmo
 }
 
-// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
-func (x *FetchShareMetadataOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchShareMetadataOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
-	return x
+// WithTimeoutIntervalForResource sets the maximum amount of time that a resource request can use.
+func (fsmo *FetchShareMetadataOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchShareMetadataOperation {
+	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
+	return fsmo
 }
 
-// ShareURLs the URLs of the shares to fetch. Use this property to view or change the URLs of the shares to fetch. If you intend to specify or change this property's value, do so before you execute the operation or submit it to a queue.
+// ShareURLs returns the URLs of the shares to fetch. Use this property to view or change the URLs of the shares to fetch. If you intend to specify or change this property's value, do so before you execute the operation or submit it to a queue.
 //
 // ShareURLs returns the collection as a Go slice.
-func (x *FetchShareMetadataOperation) ShareURLs() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shareURLs"))
+func (fsmo *FetchShareMetadataOperation) ShareURLs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("shareURLs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetShareURLs wraps the corresponding Objective-C method.
-func (x *FetchShareMetadataOperation) SetShareURLs(shareURLs []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShareURLs:"), purego.SliceToNSArray(shareURLs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// ShouldFetchRootRecord a Boolean value that indicates whether to retrieve the root record. For a shared record hierarchy, set this property to <doc://com.apple.documentation/documentation/swift/true> to include the root record in the fetched share metadata. CloudKit ignores this property for a shared record zone because, unlike a shared record hierarchy, it doesn't have a nominated root record. The default value is <doc://com.apple.documentation/documentation/swift/false>.
-func (x *FetchShareMetadataOperation) ShouldFetchRootRecord() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldFetchRootRecord"))
+// ShouldFetchRootRecord reports whether to retrieve the root record. For a shared record hierarchy, set this property to <doc://com.apple.documentation/documentation/swift/true> to include the root record in the fetched share metadata. CloudKit ignores this property for a shared record zone because, unlike a shared record hierarchy, it doesn't have a nominated root record. The default value is <doc://com.apple.documentation/documentation/swift/false>.
+func (fsmo *FetchShareMetadataOperation) ShouldFetchRootRecord() bool {
+	_r := objc.Send[bool](objref.IDOf(fsmo), objc.RegisterName("shouldFetchRootRecord"))
 	return _r
 }
 
-// SetShouldFetchRootRecord wraps the corresponding Objective-C method.
-func (x *FetchShareMetadataOperation) SetShouldFetchRootRecord(shouldFetchRootRecord bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldFetchRootRecord:"), shouldFetchRootRecord)
-}
-
-// RootRecordDesiredKeys the fields to return when fetching the root record. For a shared record hierarchy, and when “CKFetchShareMetadataOperation/shouldFetchRootRecord“ is <doc://com.apple.documentation/documentation/swift/true>, set this property to specify which of the root record's fields the operation fetches. Use `nil` to fetch the entire record. CloudKit ignores this property for a shared record zone because, unlike a hierarchy, it doesn't have a nominated root record. The default value is `nil`.
+// RootRecordDesiredKeys returns the fields to return when fetching the root record. For a shared record hierarchy, and when “CKFetchShareMetadataOperation/shouldFetchRootRecord“ is <doc://com.apple.documentation/documentation/swift/true>, set this property to specify which of the root record's fields the operation fetches. Use `nil` to fetch the entire record. CloudKit ignores this property for a shared record zone because, unlike a hierarchy, it doesn't have a nominated root record. The default value is `nil`.
 //
 // RootRecordDesiredKeys returns the collection as a Go slice.
-func (x *FetchShareMetadataOperation) RootRecordDesiredKeys() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootRecordDesiredKeys"))
+func (fsmo *FetchShareMetadataOperation) RootRecordDesiredKeys() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("rootRecordDesiredKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
-}
-
-// SetRootRecordDesiredKeys wraps the corresponding Objective-C method.
-func (x *FetchShareMetadataOperation) SetRootRecordDesiredKeys(rootRecordDesiredKeys []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootRecordDesiredKeys:"), purego.SliceToNSArray(rootRecordDesiredKeys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SetFetchShareMetadataCompletionBlock wraps the corresponding Objective-C method.
 //
 // SetFetchShareMetadataCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchShareMetadataOperation) SetFetchShareMetadataCompletionBlock(ctx context.Context) error {
+func (fsmo *FetchShareMetadataOperation) SetFetchShareMetadataCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchShareMetadataCompletionBlock:"), _block)
+	objc.Send[objc.ID](objref.IDOf(fsmo), objc.RegisterName("setFetchShareMetadataCompletionBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -184,30 +170,5 @@ func (x *FetchShareMetadataOperation) SetFetchShareMetadataCompletionBlock(ctx c
 		return ctx.Err()
 	}
 }
-
-// FetchShareMetadataOperationable is the interface implemented by [FetchShareMetadataOperation], for mocking and DI.
-type FetchShareMetadataOperationable interface {
-	obj.Object
-	WithShareURLs(items ...obj.Object) *FetchShareMetadataOperation
-	WithShouldFetchRootRecord(shouldFetchRootRecord bool) *FetchShareMetadataOperation
-	WithRootRecordDesiredKeys(items ...obj.Object) *FetchShareMetadataOperation
-	WithConfiguration(configuration *OperationConfiguration) *FetchShareMetadataOperation
-	WithGroup(group *OperationGroup) *FetchShareMetadataOperation
-	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchShareMetadataOperation
-	WithContainer(container *Container) *FetchShareMetadataOperation
-	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchShareMetadataOperation
-	WithLongLived(longLived bool) *FetchShareMetadataOperation
-	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchShareMetadataOperation
-	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchShareMetadataOperation
-	ShareURLs() []obj.Object
-	SetShareURLs(shareURLs []obj.Object)
-	ShouldFetchRootRecord() bool
-	SetShouldFetchRootRecord(shouldFetchRootRecord bool)
-	RootRecordDesiredKeys() []obj.Object
-	SetRootRecordDesiredKeys(rootRecordDesiredKeys []obj.Object)
-	SetFetchShareMetadataCompletionBlock(ctx context.Context) error
-}
-
-var _ FetchShareMetadataOperationable = (*FetchShareMetadataOperation)(nil)
 
 var _ OperationProvider = (*FetchShareMetadataOperation)(nil)

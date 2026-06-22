@@ -46,24 +46,24 @@ func cardioidDirectivityModelSubbandParametersAdopt(id objc.ID) *CardioidDirecti
 }
 
 // Description returns the object's -description text.
-func (x *CardioidDirectivityModelSubbandParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cdmsp *CardioidDirectivityModelSubbandParameters) Description() string {
+	return rt.Description(objref.IDOf(cdmsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CardioidDirectivityModelSubbandParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cdmsp *CardioidDirectivityModelSubbandParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cdmsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CardioidDirectivityModelSubbandParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cdmsp *CardioidDirectivityModelSubbandParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cdmsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CardioidDirectivityModelSubbandParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cdmsp *CardioidDirectivityModelSubbandParameters) String() string {
+	return rt.Description(objref.IDOf(cdmsp))
 }
 
 // NewCardioidDirectivityModelSubbandParameters creates a new CardioidDirectivityModelSubbandParameters.
@@ -72,69 +72,38 @@ func NewCardioidDirectivityModelSubbandParameters() *CardioidDirectivityModelSub
 	return cardioidDirectivityModelSubbandParametersAdopt(_id)
 }
 
-// WithFrequency a frequency in the audio spectrum where the pattern and sharpness resonate most.
-func (x *CardioidDirectivityModelSubbandParameters) WithFrequency(frequency float64) *CardioidDirectivityModelSubbandParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
-	return x
+// WithFrequency sets a frequency in the audio spectrum where the pattern and sharpness resonate most.
+func (cdmsp *CardioidDirectivityModelSubbandParameters) WithFrequency(frequency float64) *CardioidDirectivityModelSubbandParameters {
+	objc.Send[objc.ID](objref.IDOf(cdmsp), objc.RegisterName("setFrequency:"), frequency)
+	return cdmsp
 }
 
-// WithPattern a shape that determines the direction of sound.
-func (x *CardioidDirectivityModelSubbandParameters) WithPattern(pattern float64) *CardioidDirectivityModelSubbandParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPattern:"), pattern)
-	return x
+// WithPattern sets a shape that determines the direction of sound.
+func (cdmsp *CardioidDirectivityModelSubbandParameters) WithPattern(pattern float64) *CardioidDirectivityModelSubbandParameters {
+	objc.Send[objc.ID](objref.IDOf(cdmsp), objc.RegisterName("setPattern:"), pattern)
+	return cdmsp
 }
 
-// WithSharpness the amount that the shape overlaps with bordering subbands.
-func (x *CardioidDirectivityModelSubbandParameters) WithSharpness(sharpness float64) *CardioidDirectivityModelSubbandParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharpness:"), sharpness)
-	return x
+// WithSharpness sets the amount that the shape overlaps with bordering subbands.
+func (cdmsp *CardioidDirectivityModelSubbandParameters) WithSharpness(sharpness float64) *CardioidDirectivityModelSubbandParameters {
+	objc.Send[objc.ID](objref.IDOf(cdmsp), objc.RegisterName("setSharpness:"), sharpness)
+	return cdmsp
 }
 
-// Frequency the frequency of the subband, in hertz.
-func (x *CardioidDirectivityModelSubbandParameters) Frequency() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frequency"))
+// Frequency returns the frequency of the subband, in hertz.
+func (cdmsp *CardioidDirectivityModelSubbandParameters) Frequency() float64 {
+	_r := objc.Send[float64](objref.IDOf(cdmsp), objc.RegisterName("frequency"))
 	return _r
 }
 
-// SetFrequency wraps the corresponding Objective-C method.
-func (x *CardioidDirectivityModelSubbandParameters) SetFrequency(frequency float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
-}
-
-// Pattern the directivity pattern.
-func (x *CardioidDirectivityModelSubbandParameters) Pattern() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("pattern"))
+// Pattern returns the directivity pattern.
+func (cdmsp *CardioidDirectivityModelSubbandParameters) Pattern() float64 {
+	_r := objc.Send[float64](objref.IDOf(cdmsp), objc.RegisterName("pattern"))
 	return _r
 }
 
-// SetPattern wraps the corresponding Objective-C method.
-func (x *CardioidDirectivityModelSubbandParameters) SetPattern(pattern float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPattern:"), pattern)
-}
-
-// Sharpness the sharpness of the directivity pattern.
-func (x *CardioidDirectivityModelSubbandParameters) Sharpness() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("sharpness"))
+// Sharpness returns the sharpness of the directivity pattern.
+func (cdmsp *CardioidDirectivityModelSubbandParameters) Sharpness() float64 {
+	_r := objc.Send[float64](objref.IDOf(cdmsp), objc.RegisterName("sharpness"))
 	return _r
 }
-
-// SetSharpness wraps the corresponding Objective-C method.
-func (x *CardioidDirectivityModelSubbandParameters) SetSharpness(sharpness float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharpness:"), sharpness)
-}
-
-// CardioidDirectivityModelSubbandParametersable is the interface implemented by [CardioidDirectivityModelSubbandParameters], for mocking and DI.
-type CardioidDirectivityModelSubbandParametersable interface {
-	obj.Object
-	WithFrequency(frequency float64) *CardioidDirectivityModelSubbandParameters
-	WithPattern(pattern float64) *CardioidDirectivityModelSubbandParameters
-	WithSharpness(sharpness float64) *CardioidDirectivityModelSubbandParameters
-	Frequency() float64
-	SetFrequency(frequency float64)
-	Pattern() float64
-	SetPattern(pattern float64)
-	Sharpness() float64
-	SetSharpness(sharpness float64)
-}
-
-var _ CardioidDirectivityModelSubbandParametersable = (*CardioidDirectivityModelSubbandParameters)(nil)

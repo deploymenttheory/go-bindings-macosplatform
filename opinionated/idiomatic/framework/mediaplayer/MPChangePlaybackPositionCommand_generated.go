@@ -7,7 +7,6 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,18 +51,10 @@ func NewChangePlaybackPositionCommand() *ChangePlaybackPositionCommand {
 	return changePlaybackPositionCommandAdopt(_id)
 }
 
-// WithEnabled a Boolean value that indicates whether a user can interact with the displayed element.
-func (x *ChangePlaybackPositionCommand) WithEnabled(enabled bool) *ChangePlaybackPositionCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether a user can interact with the displayed element.
+func (cppc *ChangePlaybackPositionCommand) WithEnabled(enabled bool) *ChangePlaybackPositionCommand {
+	objc.Send[objc.ID](objref.IDOf(cppc), objc.RegisterName("setEnabled:"), enabled)
+	return cppc
 }
-
-// ChangePlaybackPositionCommandable is the interface implemented by [ChangePlaybackPositionCommand], for mocking and DI.
-type ChangePlaybackPositionCommandable interface {
-	obj.Object
-	WithEnabled(enabled bool) *ChangePlaybackPositionCommand
-}
-
-var _ ChangePlaybackPositionCommandable = (*ChangePlaybackPositionCommand)(nil)
 
 var _ RemoteCommandProvider = (*ChangePlaybackPositionCommand)(nil)

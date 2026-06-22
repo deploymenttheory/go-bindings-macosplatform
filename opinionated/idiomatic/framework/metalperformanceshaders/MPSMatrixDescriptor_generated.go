@@ -46,24 +46,24 @@ func matrixDescriptorAdopt(id objc.ID) *MatrixDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *MatrixDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (md *MatrixDescriptor) Description() string {
+	return rt.Description(objref.IDOf(md))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (md *MatrixDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(md), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (md *MatrixDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(md), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MatrixDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (md *MatrixDescriptor) String() string {
+	return rt.Description(objref.IDOf(md))
 }
 
 // NewMatrixDescriptor creates a new MatrixDescriptor.
@@ -72,83 +72,50 @@ func NewMatrixDescriptor() *MatrixDescriptor {
 	return matrixDescriptorAdopt(_id)
 }
 
-// WithRows the number of rows in the matrix.
-func (x *MatrixDescriptor) WithRows(rows int) *MatrixDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRows:"), rows)
-	return x
+// WithRows sets the number of rows in the matrix.
+func (md *MatrixDescriptor) WithRows(rows int) *MatrixDescriptor {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setRows:"), rows)
+	return md
 }
 
-// WithColumns the number of columns in the matrix.
-func (x *MatrixDescriptor) WithColumns(columns int) *MatrixDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColumns:"), columns)
-	return x
+// WithColumns sets the number of columns in the matrix.
+func (md *MatrixDescriptor) WithColumns(columns int) *MatrixDescriptor {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setColumns:"), columns)
+	return md
 }
 
-// WithRowBytes the stride, in bytes, between corresponding elements of consecutive rows in the matrix.
-func (x *MatrixDescriptor) WithRowBytes(rowBytes int) *MatrixDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowBytes:"), rowBytes)
-	return x
+// WithRowBytes sets the stride, in bytes, between corresponding elements of consecutive rows in the matrix.
+func (md *MatrixDescriptor) WithRowBytes(rowBytes int) *MatrixDescriptor {
+	objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("setRowBytes:"), rowBytes)
+	return md
 }
 
-// Rows the number of rows in a matrix.
-func (x *MatrixDescriptor) Rows() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rows"))
+// Rows returns the number of rows in a matrix.
+func (md *MatrixDescriptor) Rows() int {
+	_r := objc.Send[int](objref.IDOf(md), objc.RegisterName("rows"))
 	return _r
 }
 
-// SetRows wraps the corresponding Objective-C method.
-func (x *MatrixDescriptor) SetRows(rows int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRows:"), rows)
-}
-
-// Columns the number of columns in a matrix.
-func (x *MatrixDescriptor) Columns() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columns"))
+// Columns returns the number of columns in a matrix.
+func (md *MatrixDescriptor) Columns() int {
+	_r := objc.Send[int](objref.IDOf(md), objc.RegisterName("columns"))
 	return _r
 }
 
-// SetColumns wraps the corresponding Objective-C method.
-func (x *MatrixDescriptor) SetColumns(columns int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColumns:"), columns)
-}
-
-// Matrices the number of matrices.
-func (x *MatrixDescriptor) Matrices() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("matrices"))
+// Matrices returns the number of matrices.
+func (md *MatrixDescriptor) Matrices() int {
+	_r := objc.Send[int](objref.IDOf(md), objc.RegisterName("matrices"))
 	return _r
 }
 
-// RowBytes the stride, in bytes, between corresponding elements of consecutive rows.  Must be a multiple of the element size.
-func (x *MatrixDescriptor) RowBytes() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowBytes"))
+// RowBytes returns the stride, in bytes, between corresponding elements of consecutive rows.  Must be a multiple of the element size.
+func (md *MatrixDescriptor) RowBytes() int {
+	_r := objc.Send[int](objref.IDOf(md), objc.RegisterName("rowBytes"))
 	return _r
 }
 
-// SetRowBytes wraps the corresponding Objective-C method.
-func (x *MatrixDescriptor) SetRowBytes(rowBytes int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowBytes:"), rowBytes)
-}
-
-// MatrixBytes the stride, in bytes, between corresponding elements of consecutive matrices.  Must be a multiple of rowBytes.
-func (x *MatrixDescriptor) MatrixBytes() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("matrixBytes"))
+// MatrixBytes returns the stride, in bytes, between corresponding elements of consecutive matrices.  Must be a multiple of rowBytes.
+func (md *MatrixDescriptor) MatrixBytes() int {
+	_r := objc.Send[int](objref.IDOf(md), objc.RegisterName("matrixBytes"))
 	return _r
 }
-
-// MatrixDescriptorable is the interface implemented by [MatrixDescriptor], for mocking and DI.
-type MatrixDescriptorable interface {
-	obj.Object
-	WithRows(rows int) *MatrixDescriptor
-	WithColumns(columns int) *MatrixDescriptor
-	WithRowBytes(rowBytes int) *MatrixDescriptor
-	Rows() int
-	SetRows(rows int)
-	Columns() int
-	SetColumns(columns int)
-	Matrices() int
-	RowBytes() int
-	SetRowBytes(rowBytes int)
-	MatrixBytes() int
-}
-
-var _ MatrixDescriptorable = (*MatrixDescriptor)(nil)

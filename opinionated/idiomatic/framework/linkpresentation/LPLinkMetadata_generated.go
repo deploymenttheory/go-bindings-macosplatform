@@ -46,24 +46,24 @@ func linkMetadataAdopt(id objc.ID) *LinkMetadata {
 }
 
 // Description returns the object's -description text.
-func (x *LinkMetadata) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lm *LinkMetadata) Description() string {
+	return rt.Description(objref.IDOf(lm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LinkMetadata) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lm *LinkMetadata) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LinkMetadata) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lm *LinkMetadata) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LinkMetadata) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lm *LinkMetadata) String() string {
+	return rt.Description(objref.IDOf(lm))
 }
 
 // NewLinkMetadata creates a new LinkMetadata.
@@ -72,152 +72,89 @@ func NewLinkMetadata() *LinkMetadata {
 	return linkMetadataAdopt(_id)
 }
 
-// WithOriginalURL the original URL of the metadata request.
-func (x *LinkMetadata) WithOriginalURL(originalURL string) *LinkMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOriginalURL:"), rt.FileURL(originalURL))
-	return x
+// WithOriginalURL sets the original URL of the metadata request.
+func (lm *LinkMetadata) WithOriginalURL(originalURL string) *LinkMetadata {
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setOriginalURL:"), rt.FileURL(originalURL))
+	return lm
 }
 
-// WithURL the URL that returned the metadata, taking server-side redirects into account.
-func (x *LinkMetadata) WithURL(uRL string) *LinkMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-	return x
+// WithURL sets the URL that returned the metadata, taking server-side redirects into account.
+func (lm *LinkMetadata) WithURL(uRL string) *LinkMetadata {
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+	return lm
 }
 
-// WithTitle a representative title for the URL.
-func (x *LinkMetadata) WithTitle(title string) *LinkMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets a representative title for the URL.
+func (lm *LinkMetadata) WithTitle(title string) *LinkMetadata {
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return lm
 }
 
-// WithIconProvider an object that retrieves data corresponding to a representative icon for the URL.
-func (x *LinkMetadata) WithIconProvider(iconProvider obj.Object) *LinkMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIconProvider:"), objref.IDOf(iconProvider))
-	return x
+// WithIconProvider sets an object that retrieves data corresponding to a representative icon for the URL.
+func (lm *LinkMetadata) WithIconProvider(iconProvider obj.Object) *LinkMetadata {
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setIconProvider:"), objref.IDOf(iconProvider))
+	return lm
 }
 
-// WithImageProvider an object that retrieves data corresponding to a representative image for the URL.
-func (x *LinkMetadata) WithImageProvider(imageProvider obj.Object) *LinkMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageProvider:"), objref.IDOf(imageProvider))
-	return x
+// WithImageProvider sets an object that retrieves data corresponding to a representative image for the URL.
+func (lm *LinkMetadata) WithImageProvider(imageProvider obj.Object) *LinkMetadata {
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setImageProvider:"), objref.IDOf(imageProvider))
+	return lm
 }
 
-// WithVideoProvider an object that retrieves data corresponding to a representative video for the URL.
-func (x *LinkMetadata) WithVideoProvider(videoProvider obj.Object) *LinkMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoProvider:"), objref.IDOf(videoProvider))
-	return x
+// WithVideoProvider sets an object that retrieves data corresponding to a representative video for the URL.
+func (lm *LinkMetadata) WithVideoProvider(videoProvider obj.Object) *LinkMetadata {
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setVideoProvider:"), objref.IDOf(videoProvider))
+	return lm
 }
 
-// WithRemoteVideoURL a remote URL corresponding to a representative video for the URL.
-func (x *LinkMetadata) WithRemoteVideoURL(remoteVideoURL string) *LinkMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemoteVideoURL:"), rt.FileURL(remoteVideoURL))
-	return x
+// WithRemoteVideoURL sets a remote URL corresponding to a representative video for the URL.
+func (lm *LinkMetadata) WithRemoteVideoURL(remoteVideoURL string) *LinkMetadata {
+	objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("setRemoteVideoURL:"), rt.FileURL(remoteVideoURL))
+	return lm
 }
 
-// OriginalURL the original URL of the metadata request.
-func (x *LinkMetadata) OriginalURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalURL"))
+// OriginalURL returns the original URL of the metadata request.
+func (lm *LinkMetadata) OriginalURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("originalURL"))
 	return obj.Wrap(_r)
 }
 
-// SetOriginalURL wraps the corresponding Objective-C method.
-func (x *LinkMetadata) SetOriginalURL(originalURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOriginalURL:"), rt.FileURL(originalURL))
-}
-
-// URL the URL that returned the metadata, taking server-side redirects into account. The URL that returns the metadata may differ from the “LPLinkMetadata/originalURL“ to which you sent the metadata request. This can happen if the server redirects the request, for example, when a resource has moved, or when the original URL is a domain alias.
-func (x *LinkMetadata) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+// URL returns the URL that returned the metadata, taking server-side redirects into account. The URL that returns the metadata may differ from the “LPLinkMetadata/originalURL“ to which you sent the metadata request. This can happen if the server redirects the request, for example, when a resource has moved, or when the original URL is a domain alias.
+func (lm *LinkMetadata) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// SetURL wraps the corresponding Objective-C method.
-func (x *LinkMetadata) SetURL(uRL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-}
-
-// Title a representative title for the URL.
-func (x *LinkMetadata) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+// Title returns a representative title for the URL.
+func (lm *LinkMetadata) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetTitle wraps the corresponding Objective-C method.
-func (x *LinkMetadata) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-}
-
-// IconProvider an object that retrieves data corresponding to a representative icon for the URL.
-func (x *LinkMetadata) IconProvider() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconProvider"))
+// IconProvider returns an object that retrieves data corresponding to a representative icon for the URL.
+func (lm *LinkMetadata) IconProvider() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("iconProvider"))
 	return obj.Wrap(_r)
 }
 
-// SetIconProvider wraps the corresponding Objective-C method.
-func (x *LinkMetadata) SetIconProvider(iconProvider obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIconProvider:"), objref.IDOf(iconProvider))
-}
-
-// ImageProvider an object that retrieves data corresponding to a representative image for the URL.
-func (x *LinkMetadata) ImageProvider() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageProvider"))
+// ImageProvider returns an object that retrieves data corresponding to a representative image for the URL.
+func (lm *LinkMetadata) ImageProvider() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("imageProvider"))
 	return obj.Wrap(_r)
 }
 
-// SetImageProvider wraps the corresponding Objective-C method.
-func (x *LinkMetadata) SetImageProvider(imageProvider obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageProvider:"), objref.IDOf(imageProvider))
-}
-
-// VideoProvider an object that retrieves data corresponding to a representative video for the URL. The item provider returns a video that <doc://com.apple.documentation/documentation/avfoundation> can play.
-func (x *LinkMetadata) VideoProvider() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("videoProvider"))
+// VideoProvider returns an object that retrieves data corresponding to a representative video for the URL. The item provider returns a video that <doc://com.apple.documentation/documentation/avfoundation> can play.
+func (lm *LinkMetadata) VideoProvider() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("videoProvider"))
 	return obj.Wrap(_r)
 }
 
-// SetVideoProvider wraps the corresponding Objective-C method.
-func (x *LinkMetadata) SetVideoProvider(videoProvider obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoProvider:"), objref.IDOf(videoProvider))
-}
-
-// RemoteVideoURL a remote URL corresponding to a representative video for the URL. This may reference a remote video file that <doc://com.apple.documentation/documentation/avfoundation> can stream.
-func (x *LinkMetadata) RemoteVideoURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remoteVideoURL"))
+// RemoteVideoURL returns a remote URL corresponding to a representative video for the URL. This may reference a remote video file that <doc://com.apple.documentation/documentation/avfoundation> can stream.
+func (lm *LinkMetadata) RemoteVideoURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lm), objc.RegisterName("remoteVideoURL"))
 	return obj.Wrap(_r)
 }
-
-// SetRemoteVideoURL wraps the corresponding Objective-C method.
-func (x *LinkMetadata) SetRemoteVideoURL(remoteVideoURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemoteVideoURL:"), rt.FileURL(remoteVideoURL))
-}
-
-// LinkMetadataable is the interface implemented by [LinkMetadata], for mocking and DI.
-type LinkMetadataable interface {
-	obj.Object
-	WithOriginalURL(originalURL string) *LinkMetadata
-	WithURL(uRL string) *LinkMetadata
-	WithTitle(title string) *LinkMetadata
-	WithIconProvider(iconProvider obj.Object) *LinkMetadata
-	WithImageProvider(imageProvider obj.Object) *LinkMetadata
-	WithVideoProvider(videoProvider obj.Object) *LinkMetadata
-	WithRemoteVideoURL(remoteVideoURL string) *LinkMetadata
-	OriginalURL() obj.Object
-	SetOriginalURL(originalURL string)
-	URL() obj.Object
-	SetURL(uRL string)
-	Title() string
-	SetTitle(title string)
-	IconProvider() obj.Object
-	SetIconProvider(iconProvider obj.Object)
-	ImageProvider() obj.Object
-	SetImageProvider(imageProvider obj.Object)
-	VideoProvider() obj.Object
-	SetVideoProvider(videoProvider obj.Object)
-	RemoteVideoURL() obj.Object
-	SetRemoteVideoURL(remoteVideoURL string)
-}
-
-var _ LinkMetadataable = (*LinkMetadata)(nil)

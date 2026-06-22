@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRThreadBorderRouterManagementClusterDatasetResponseParams is an idiomatic wrapper over the Objective-C class MTRThreadBorderRouterManagementClusterDatasetResponseParams.
@@ -46,24 +47,24 @@ func mTRThreadBorderRouterManagementClusterDatasetResponseParamsAdopt(id objc.ID
 }
 
 // Description returns the object's -description text.
-func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtbrmcdrp *MTRThreadBorderRouterManagementClusterDatasetResponseParams) Description() string {
+	return rt.Description(objref.IDOf(mtbrmcdrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtbrmcdrp *MTRThreadBorderRouterManagementClusterDatasetResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtbrmcdrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtbrmcdrp *MTRThreadBorderRouterManagementClusterDatasetResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtbrmcdrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtbrmcdrp *MTRThreadBorderRouterManagementClusterDatasetResponseParams) String() string {
+	return rt.Description(objref.IDOf(mtbrmcdrp))
 }
 
 // NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseValueError initialize an MTRThreadBorderRouterManagementClusterDatasetResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
@@ -78,28 +79,13 @@ func NewMTRThreadBorderRouterManagementClusterDatasetResponseParamsWithResponseV
 }
 
 // WithDataset sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) WithDataset(dataset obj.Object) *MTRThreadBorderRouterManagementClusterDatasetResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataset:"), objref.IDOf(dataset))
-	return x
+func (mtbrmcdrp *MTRThreadBorderRouterManagementClusterDatasetResponseParams) WithDataset(dataset obj.Object) *MTRThreadBorderRouterManagementClusterDatasetResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mtbrmcdrp), objc.RegisterName("setDataset:"), objref.IDOf(dataset))
+	return mtbrmcdrp
 }
 
 // Dataset wraps the corresponding Objective-C method.
-func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) Dataset() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataset"))
+func (mtbrmcdrp *MTRThreadBorderRouterManagementClusterDatasetResponseParams) Dataset() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtbrmcdrp), objc.RegisterName("dataset"))
 	return obj.Wrap(_r)
 }
-
-// SetDataset wraps the corresponding Objective-C method.
-func (x *MTRThreadBorderRouterManagementClusterDatasetResponseParams) SetDataset(dataset obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataset:"), objref.IDOf(dataset))
-}
-
-// MTRThreadBorderRouterManagementClusterDatasetResponseParamsable is the interface implemented by [MTRThreadBorderRouterManagementClusterDatasetResponseParams], for mocking and DI.
-type MTRThreadBorderRouterManagementClusterDatasetResponseParamsable interface {
-	obj.Object
-	WithDataset(dataset obj.Object) *MTRThreadBorderRouterManagementClusterDatasetResponseParams
-	Dataset() obj.Object
-	SetDataset(dataset obj.Object)
-}
-
-var _ MTRThreadBorderRouterManagementClusterDatasetResponseParamsable = (*MTRThreadBorderRouterManagementClusterDatasetResponseParams)(nil)

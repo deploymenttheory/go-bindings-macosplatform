@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,159 +51,95 @@ func NewMTL4InstanceAccelerationStructureDescriptor() *MTL4InstanceAccelerationS
 	return mTL4InstanceAccelerationStructureDescriptorAdopt(_id)
 }
 
-// WithInstanceDescriptorStride sets the stride, in bytes, between instance descriptors the instance descriptor buffer references.
-func (x *MTL4InstanceAccelerationStructureDescriptor) WithInstanceDescriptorStride(instanceDescriptorStride int) *MTL4InstanceAccelerationStructureDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceDescriptorStride:"), instanceDescriptorStride)
-	return x
+// WithInstanceDescriptorStride sets sets the stride, in bytes, between instance descriptors the instance descriptor buffer references.
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) WithInstanceDescriptorStride(instanceDescriptorStride int) *MTL4InstanceAccelerationStructureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(miasd), objc.RegisterName("setInstanceDescriptorStride:"), instanceDescriptorStride)
+	return miasd
 }
 
-// WithInstanceCount controls the number of instance descriptors in the instance descriptor buffer references.
-func (x *MTL4InstanceAccelerationStructureDescriptor) WithInstanceCount(instanceCount int) *MTL4InstanceAccelerationStructureDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceCount:"), instanceCount)
-	return x
+// WithInstanceCount sets controls the number of instance descriptors in the instance descriptor buffer references.
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) WithInstanceCount(instanceCount int) *MTL4InstanceAccelerationStructureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(miasd), objc.RegisterName("setInstanceCount:"), instanceCount)
+	return miasd
 }
 
-// WithInstanceDescriptorType the type of instance descriptor that the instance descriptor buffer references.
-func (x *MTL4InstanceAccelerationStructureDescriptor) WithInstanceDescriptorType(instanceDescriptorType AccelerationStructureInstanceDescriptorType) *MTL4InstanceAccelerationStructureDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceDescriptorType:"), instanceDescriptorType)
-	return x
+// WithInstanceDescriptorType sets the type of instance descriptor that the instance descriptor buffer references.
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) WithInstanceDescriptorType(instanceDescriptorType AccelerationStructureInstanceDescriptorType) *MTL4InstanceAccelerationStructureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(miasd), objc.RegisterName("setInstanceDescriptorType:"), instanceDescriptorType)
+	return miasd
 }
 
-// WithMotionTransformCount controls the total number of motion transforms in the motion transform buffer.
-func (x *MTL4InstanceAccelerationStructureDescriptor) WithMotionTransformCount(motionTransformCount int) *MTL4InstanceAccelerationStructureDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionTransformCount:"), motionTransformCount)
-	return x
+// WithMotionTransformCount sets controls the total number of motion transforms in the motion transform buffer.
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) WithMotionTransformCount(motionTransformCount int) *MTL4InstanceAccelerationStructureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(miasd), objc.RegisterName("setMotionTransformCount:"), motionTransformCount)
+	return miasd
 }
 
-// WithInstanceTransformationMatrixLayout specifies the layout for the transformation matrices in the instance descriptor buffer and the motion transformation matrix buffer.
-func (x *MTL4InstanceAccelerationStructureDescriptor) WithInstanceTransformationMatrixLayout(instanceTransformationMatrixLayout MatrixLayout) *MTL4InstanceAccelerationStructureDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceTransformationMatrixLayout:"), instanceTransformationMatrixLayout)
-	return x
+// WithInstanceTransformationMatrixLayout sets specifies the layout for the transformation matrices in the instance descriptor buffer and the motion transformation matrix buffer.
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) WithInstanceTransformationMatrixLayout(instanceTransformationMatrixLayout MatrixLayout) *MTL4InstanceAccelerationStructureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(miasd), objc.RegisterName("setInstanceTransformationMatrixLayout:"), instanceTransformationMatrixLayout)
+	return miasd
 }
 
-// WithMotionTransformType controls the type of motion transforms, either as a matrix or individual components.
-func (x *MTL4InstanceAccelerationStructureDescriptor) WithMotionTransformType(motionTransformType TransformType) *MTL4InstanceAccelerationStructureDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionTransformType:"), motionTransformType)
-	return x
+// WithMotionTransformType sets controls the type of motion transforms, either as a matrix or individual components.
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) WithMotionTransformType(motionTransformType TransformType) *MTL4InstanceAccelerationStructureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(miasd), objc.RegisterName("setMotionTransformType:"), motionTransformType)
+	return miasd
 }
 
-// WithMotionTransformStride specify the stride for motion transform.
-func (x *MTL4InstanceAccelerationStructureDescriptor) WithMotionTransformStride(motionTransformStride int) *MTL4InstanceAccelerationStructureDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionTransformStride:"), motionTransformStride)
-	return x
+// WithMotionTransformStride sets specify the stride for motion transform.
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) WithMotionTransformStride(motionTransformStride int) *MTL4InstanceAccelerationStructureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(miasd), objc.RegisterName("setMotionTransformStride:"), motionTransformStride)
+	return miasd
 }
 
-// WithUsage the options that describe how you intend to use the acceleration structure.
-func (x *MTL4InstanceAccelerationStructureDescriptor) WithUsage(usage AccelerationStructureUsage) *MTL4InstanceAccelerationStructureDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsage:"), usage)
-	return x
+// WithUsage sets the options that describe how you intend to use the acceleration structure.
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) WithUsage(usage AccelerationStructureUsage) *MTL4InstanceAccelerationStructureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(miasd), objc.RegisterName("setUsage:"), usage)
+	return miasd
 }
 
 // InstanceDescriptorStride sets the stride, in bytes, between instance descriptors the instance descriptor buffer references. You are responsible for ensuring this stride is at least the size of the structure type corresponding to the instance descriptor type and a multiple of 4 bytes. Defaults to `0`, indicating the instance descriptors are tightly packed.
-func (x *MTL4InstanceAccelerationStructureDescriptor) InstanceDescriptorStride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("instanceDescriptorStride"))
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) InstanceDescriptorStride() int {
+	_r := objc.Send[int](objref.IDOf(miasd), objc.RegisterName("instanceDescriptorStride"))
 	return _r
 }
 
-// SetInstanceDescriptorStride wraps the corresponding Objective-C method.
-func (x *MTL4InstanceAccelerationStructureDescriptor) SetInstanceDescriptorStride(instanceDescriptorStride int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceDescriptorStride:"), instanceDescriptorStride)
-}
-
-// InstanceCount controls the number of instance descriptors in the instance descriptor buffer references.
-func (x *MTL4InstanceAccelerationStructureDescriptor) InstanceCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("instanceCount"))
+// InstanceCount returns controls the number of instance descriptors in the instance descriptor buffer references.
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) InstanceCount() int {
+	_r := objc.Send[int](objref.IDOf(miasd), objc.RegisterName("instanceCount"))
 	return _r
-}
-
-// SetInstanceCount wraps the corresponding Objective-C method.
-func (x *MTL4InstanceAccelerationStructureDescriptor) SetInstanceCount(instanceCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceCount:"), instanceCount)
 }
 
 // InstanceDescriptorType sets the type of instance descriptor that the instance descriptor buffer references. This value determines the layout Metal expects for the structs the instance descriptor buffer contains. Defaults to `MTLAccelerationStructureInstanceDescriptorTypeIndirect`. Valid values for this property are `MTLAccelerationStructureInstanceDescriptorTypeIndirect` or `MTLAccelerationStructureInstanceDescriptorTypeIndirectMotion`.
-func (x *MTL4InstanceAccelerationStructureDescriptor) InstanceDescriptorType() AccelerationStructureInstanceDescriptorType {
-	_r := objc.Send[AccelerationStructureInstanceDescriptorType](objref.IDOf(x), objc.RegisterName("instanceDescriptorType"))
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) InstanceDescriptorType() AccelerationStructureInstanceDescriptorType {
+	_r := objc.Send[AccelerationStructureInstanceDescriptorType](objref.IDOf(miasd), objc.RegisterName("instanceDescriptorType"))
 	return _r
 }
 
-// SetInstanceDescriptorType wraps the corresponding Objective-C method.
-func (x *MTL4InstanceAccelerationStructureDescriptor) SetInstanceDescriptorType(instanceDescriptorType AccelerationStructureInstanceDescriptorType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceDescriptorType:"), instanceDescriptorType)
-}
-
-// MotionTransformCount controls the total number of motion transforms in the motion transform buffer.
-func (x *MTL4InstanceAccelerationStructureDescriptor) MotionTransformCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("motionTransformCount"))
+// MotionTransformCount returns controls the total number of motion transforms in the motion transform buffer.
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) MotionTransformCount() int {
+	_r := objc.Send[int](objref.IDOf(miasd), objc.RegisterName("motionTransformCount"))
 	return _r
-}
-
-// SetMotionTransformCount wraps the corresponding Objective-C method.
-func (x *MTL4InstanceAccelerationStructureDescriptor) SetMotionTransformCount(motionTransformCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionTransformCount:"), motionTransformCount)
 }
 
 // InstanceTransformationMatrixLayout specifies the layout for the transformation matrices in the instance descriptor buffer and the motion transformation matrix buffer. Metal interprets the value of this property as the layout for the buffers that both “instanceDescriptorBuffer“ and “motionTransformBuffer“ reference. Defaults to `MTLMatrixLayoutColumnMajor`.
-func (x *MTL4InstanceAccelerationStructureDescriptor) InstanceTransformationMatrixLayout() MatrixLayout {
-	_r := objc.Send[MatrixLayout](objref.IDOf(x), objc.RegisterName("instanceTransformationMatrixLayout"))
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) InstanceTransformationMatrixLayout() MatrixLayout {
+	_r := objc.Send[MatrixLayout](objref.IDOf(miasd), objc.RegisterName("instanceTransformationMatrixLayout"))
 	return _r
 }
 
-// SetInstanceTransformationMatrixLayout wraps the corresponding Objective-C method.
-func (x *MTL4InstanceAccelerationStructureDescriptor) SetInstanceTransformationMatrixLayout(instanceTransformationMatrixLayout MatrixLayout) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstanceTransformationMatrixLayout:"), instanceTransformationMatrixLayout)
-}
-
-// MotionTransformType controls the type of motion transforms, either as a matrix or individual components. Defaults to `MTLTransformTypePackedFloat4x3`. Using a `MTLTransformTypeComponent` allows you to represent the rotation by a quaternion (instead as of part of the matrix), allowing for correct motion interpolation.
-func (x *MTL4InstanceAccelerationStructureDescriptor) MotionTransformType() TransformType {
-	_r := objc.Send[TransformType](objref.IDOf(x), objc.RegisterName("motionTransformType"))
+// MotionTransformType returns controls the type of motion transforms, either as a matrix or individual components. Defaults to `MTLTransformTypePackedFloat4x3`. Using a `MTLTransformTypeComponent` allows you to represent the rotation by a quaternion (instead as of part of the matrix), allowing for correct motion interpolation.
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) MotionTransformType() TransformType {
+	_r := objc.Send[TransformType](objref.IDOf(miasd), objc.RegisterName("motionTransformType"))
 	return _r
-}
-
-// SetMotionTransformType wraps the corresponding Objective-C method.
-func (x *MTL4InstanceAccelerationStructureDescriptor) SetMotionTransformType(motionTransformType TransformType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionTransformType:"), motionTransformType)
 }
 
 // MotionTransformStride specify the stride for motion transform. Defaults to `0`, indicating that transforms are tightly packed according to the motion transform type.
-func (x *MTL4InstanceAccelerationStructureDescriptor) MotionTransformStride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("motionTransformStride"))
+func (miasd *MTL4InstanceAccelerationStructureDescriptor) MotionTransformStride() int {
+	_r := objc.Send[int](objref.IDOf(miasd), objc.RegisterName("motionTransformStride"))
 	return _r
 }
-
-// SetMotionTransformStride wraps the corresponding Objective-C method.
-func (x *MTL4InstanceAccelerationStructureDescriptor) SetMotionTransformStride(motionTransformStride int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMotionTransformStride:"), motionTransformStride)
-}
-
-// MTL4InstanceAccelerationStructureDescriptorable is the interface implemented by [MTL4InstanceAccelerationStructureDescriptor], for mocking and DI.
-type MTL4InstanceAccelerationStructureDescriptorable interface {
-	obj.Object
-	WithInstanceDescriptorStride(instanceDescriptorStride int) *MTL4InstanceAccelerationStructureDescriptor
-	WithInstanceCount(instanceCount int) *MTL4InstanceAccelerationStructureDescriptor
-	WithInstanceDescriptorType(instanceDescriptorType AccelerationStructureInstanceDescriptorType) *MTL4InstanceAccelerationStructureDescriptor
-	WithMotionTransformCount(motionTransformCount int) *MTL4InstanceAccelerationStructureDescriptor
-	WithInstanceTransformationMatrixLayout(instanceTransformationMatrixLayout MatrixLayout) *MTL4InstanceAccelerationStructureDescriptor
-	WithMotionTransformType(motionTransformType TransformType) *MTL4InstanceAccelerationStructureDescriptor
-	WithMotionTransformStride(motionTransformStride int) *MTL4InstanceAccelerationStructureDescriptor
-	WithUsage(usage AccelerationStructureUsage) *MTL4InstanceAccelerationStructureDescriptor
-	InstanceDescriptorStride() int
-	SetInstanceDescriptorStride(instanceDescriptorStride int)
-	InstanceCount() int
-	SetInstanceCount(instanceCount int)
-	InstanceDescriptorType() AccelerationStructureInstanceDescriptorType
-	SetInstanceDescriptorType(instanceDescriptorType AccelerationStructureInstanceDescriptorType)
-	MotionTransformCount() int
-	SetMotionTransformCount(motionTransformCount int)
-	InstanceTransformationMatrixLayout() MatrixLayout
-	SetInstanceTransformationMatrixLayout(instanceTransformationMatrixLayout MatrixLayout)
-	MotionTransformType() TransformType
-	SetMotionTransformType(motionTransformType TransformType)
-	MotionTransformStride() int
-	SetMotionTransformStride(motionTransformStride int)
-}
-
-var _ MTL4InstanceAccelerationStructureDescriptorable = (*MTL4InstanceAccelerationStructureDescriptor)(nil)
 
 var _ MTL4AccelerationStructureDescriptorProvider = (*MTL4InstanceAccelerationStructureDescriptor)(nil)
 

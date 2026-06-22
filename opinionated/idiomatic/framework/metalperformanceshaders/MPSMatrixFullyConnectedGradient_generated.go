@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,134 +52,89 @@ func NewMatrixFullyConnectedGradient() *MatrixFullyConnectedGradient {
 	return matrixFullyConnectedGradientAdopt(_id)
 }
 
-// WithSourceNumberOfFeatureVectors the number of input vectors which make up the input array. This is equivalent to the number of rows in both the input matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
-func (x *MatrixFullyConnectedGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixFullyConnectedGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
-	return x
+// WithSourceNumberOfFeatureVectors sets the number of input vectors which make up the input array. This is equivalent to the number of rows in both the input matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+func (mfcg *MatrixFullyConnectedGradient) WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixFullyConnectedGradient {
+	objc.Send[objc.ID](objref.IDOf(mfcg), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
+	return mfcg
 }
 
-// WithSourceOutputFeatureChannels the number of feature channels in the output of the forward fully connected layer. This is equivalent to the number of columns in both the weight matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
-func (x *MatrixFullyConnectedGradient) WithSourceOutputFeatureChannels(sourceOutputFeatureChannels int) *MatrixFullyConnectedGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceOutputFeatureChannels:"), sourceOutputFeatureChannels)
-	return x
+// WithSourceOutputFeatureChannels sets the number of feature channels in the output of the forward fully connected layer. This is equivalent to the number of columns in both the weight matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+func (mfcg *MatrixFullyConnectedGradient) WithSourceOutputFeatureChannels(sourceOutputFeatureChannels int) *MatrixFullyConnectedGradient {
+	objc.Send[objc.ID](objref.IDOf(mfcg), objc.RegisterName("setSourceOutputFeatureChannels:"), sourceOutputFeatureChannels)
+	return mfcg
 }
 
-// WithSourceInputFeatureChannels the number of feature channels in the input to the forward fully connected layer. This is equivalent to the number of columns in the input matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
-func (x *MatrixFullyConnectedGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixFullyConnectedGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
-	return x
+// WithSourceInputFeatureChannels sets the number of feature channels in the input to the forward fully connected layer. This is equivalent to the number of columns in the input matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+func (mfcg *MatrixFullyConnectedGradient) WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixFullyConnectedGradient {
+	objc.Send[objc.ID](objref.IDOf(mfcg), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
+	return mfcg
 }
 
-// WithAlpha scale factor to apply to the product.  This value should be equal to the corresponding value in the forward fully connected kernel.
-func (x *MatrixFullyConnectedGradient) WithAlpha(alpha float64) *MatrixFullyConnectedGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets scale factor to apply to the product.  This value should be equal to the corresponding value in the forward fully connected kernel.
+func (mfcg *MatrixFullyConnectedGradient) WithAlpha(alpha float64) *MatrixFullyConnectedGradient {
+	objc.Send[objc.ID](objref.IDOf(mfcg), objc.RegisterName("setAlpha:"), alpha)
+	return mfcg
 }
 
-// WithPrimarySourceMatrixOrigin the origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixFullyConnectedGradient) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnectedGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceMatrixOrigin:"), primarySourceMatrixOrigin)
-	return x
+// WithPrimarySourceMatrixOrigin sets the origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (mfcg *MatrixFullyConnectedGradient) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnectedGradient {
+	objc.Send[objc.ID](objref.IDOf(mfcg), objc.RegisterName("setPrimarySourceMatrixOrigin:"), primarySourceMatrixOrigin)
+	return mfcg
 }
 
-// WithSecondarySourceMatrixOrigin the origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixFullyConnectedGradient) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnectedGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceMatrixOrigin:"), secondarySourceMatrixOrigin)
-	return x
+// WithSecondarySourceMatrixOrigin sets the origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (mfcg *MatrixFullyConnectedGradient) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnectedGradient {
+	objc.Send[objc.ID](objref.IDOf(mfcg), objc.RegisterName("setSecondarySourceMatrixOrigin:"), secondarySourceMatrixOrigin)
+	return mfcg
 }
 
-// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixFullyConnectedGradient) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixFullyConnectedGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
-	return x
+// WithResultMatrixOrigin sets the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (mfcg *MatrixFullyConnectedGradient) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixFullyConnectedGradient {
+	objc.Send[objc.ID](objref.IDOf(mfcg), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+	return mfcg
 }
 
-// WithBatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-func (x *MatrixFullyConnectedGradient) WithBatchStart(batchStart int) *MatrixFullyConnectedGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
-	return x
+// WithBatchStart sets the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+func (mfcg *MatrixFullyConnectedGradient) WithBatchStart(batchStart int) *MatrixFullyConnectedGradient {
+	objc.Send[objc.ID](objref.IDOf(mfcg), objc.RegisterName("setBatchStart:"), batchStart)
+	return mfcg
 }
 
-// WithBatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-func (x *MatrixFullyConnectedGradient) WithBatchSize(batchSize int) *MatrixFullyConnectedGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
-	return x
+// WithBatchSize sets the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+func (mfcg *MatrixFullyConnectedGradient) WithBatchSize(batchSize int) *MatrixFullyConnectedGradient {
+	objc.Send[objc.ID](objref.IDOf(mfcg), objc.RegisterName("setBatchSize:"), batchSize)
+	return mfcg
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *MatrixFullyConnectedGradient) WithLabel(label string) *MatrixFullyConnectedGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (mfcg *MatrixFullyConnectedGradient) WithLabel(label string) *MatrixFullyConnectedGradient {
+	objc.Send[objc.ID](objref.IDOf(mfcg), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mfcg
 }
 
-// SourceNumberOfFeatureVectors the number of input vectors which make up the input array. This is equivalent to the number of rows in both the input matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
-func (x *MatrixFullyConnectedGradient) SourceNumberOfFeatureVectors() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceNumberOfFeatureVectors"))
+// SourceNumberOfFeatureVectors returns the number of input vectors which make up the input array. This is equivalent to the number of rows in both the input matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+func (mfcg *MatrixFullyConnectedGradient) SourceNumberOfFeatureVectors() int {
+	_r := objc.Send[int](objref.IDOf(mfcg), objc.RegisterName("sourceNumberOfFeatureVectors"))
 	return _r
 }
 
-// SetSourceNumberOfFeatureVectors wraps the corresponding Objective-C method.
-func (x *MatrixFullyConnectedGradient) SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceNumberOfFeatureVectors:"), sourceNumberOfFeatureVectors)
-}
-
-// SourceOutputFeatureChannels the number of feature channels in the output of the forward fully connected layer. This is equivalent to the number of columns in both the weight matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
-func (x *MatrixFullyConnectedGradient) SourceOutputFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceOutputFeatureChannels"))
+// SourceOutputFeatureChannels returns the number of feature channels in the output of the forward fully connected layer. This is equivalent to the number of columns in both the weight matrix and the source gradient matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+func (mfcg *MatrixFullyConnectedGradient) SourceOutputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(mfcg), objc.RegisterName("sourceOutputFeatureChannels"))
 	return _r
 }
 
-// SetSourceOutputFeatureChannels wraps the corresponding Objective-C method.
-func (x *MatrixFullyConnectedGradient) SetSourceOutputFeatureChannels(sourceOutputFeatureChannels int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceOutputFeatureChannels:"), sourceOutputFeatureChannels)
-}
-
-// SourceInputFeatureChannels the number of feature channels in the input to the forward fully connected layer. This is equivalent to the number of columns in the input matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
-func (x *MatrixFullyConnectedGradient) SourceInputFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sourceInputFeatureChannels"))
+// SourceInputFeatureChannels returns the number of feature channels in the input to the forward fully connected layer. This is equivalent to the number of columns in the input matrix. This value should be equal to the corresponding value in the forward fully connected kernel.
+func (mfcg *MatrixFullyConnectedGradient) SourceInputFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(mfcg), objc.RegisterName("sourceInputFeatureChannels"))
 	return _r
 }
 
-// SetSourceInputFeatureChannels wraps the corresponding Objective-C method.
-func (x *MatrixFullyConnectedGradient) SetSourceInputFeatureChannels(sourceInputFeatureChannels int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceInputFeatureChannels:"), sourceInputFeatureChannels)
-}
-
-// Alpha scale factor to apply to the product.  This value should be equal to the corresponding value in the forward fully connected kernel.
-func (x *MatrixFullyConnectedGradient) Alpha() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
+// Alpha returns scale factor to apply to the product.  This value should be equal to the corresponding value in the forward fully connected kernel.
+func (mfcg *MatrixFullyConnectedGradient) Alpha() float64 {
+	_r := objc.Send[float64](objref.IDOf(mfcg), objc.RegisterName("alpha"))
 	return _r
 }
-
-// SetAlpha wraps the corresponding Objective-C method.
-func (x *MatrixFullyConnectedGradient) SetAlpha(alpha float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-}
-
-// MatrixFullyConnectedGradientable is the interface implemented by [MatrixFullyConnectedGradient], for mocking and DI.
-type MatrixFullyConnectedGradientable interface {
-	obj.Object
-	WithSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int) *MatrixFullyConnectedGradient
-	WithSourceOutputFeatureChannels(sourceOutputFeatureChannels int) *MatrixFullyConnectedGradient
-	WithSourceInputFeatureChannels(sourceInputFeatureChannels int) *MatrixFullyConnectedGradient
-	WithAlpha(alpha float64) *MatrixFullyConnectedGradient
-	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnectedGradient
-	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixFullyConnectedGradient
-	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixFullyConnectedGradient
-	WithBatchStart(batchStart int) *MatrixFullyConnectedGradient
-	WithBatchSize(batchSize int) *MatrixFullyConnectedGradient
-	WithLabel(label string) *MatrixFullyConnectedGradient
-	SourceNumberOfFeatureVectors() int
-	SetSourceNumberOfFeatureVectors(sourceNumberOfFeatureVectors int)
-	SourceOutputFeatureChannels() int
-	SetSourceOutputFeatureChannels(sourceOutputFeatureChannels int)
-	SourceInputFeatureChannels() int
-	SetSourceInputFeatureChannels(sourceInputFeatureChannels int)
-	Alpha() float64
-	SetAlpha(alpha float64)
-}
-
-var _ MatrixFullyConnectedGradientable = (*MatrixFullyConnectedGradient)(nil)
 
 var _ MatrixBinaryKernelProvider = (*MatrixFullyConnectedGradient)(nil)
 

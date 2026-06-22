@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,34 +51,19 @@ func NewMacGraphicsDeviceConfiguration() *MacGraphicsDeviceConfiguration {
 	return macGraphicsDeviceConfigurationAdopt(_id)
 }
 
-// WithDisplays the displays associated with this graphics device.
-func (x *MacGraphicsDeviceConfiguration) WithDisplays(items ...*MacGraphicsDisplayConfiguration) *MacGraphicsDeviceConfiguration {
+// WithDisplays sets the displays associated with this graphics device.
+func (mgdc *MacGraphicsDeviceConfiguration) WithDisplays(items ...*MacGraphicsDisplayConfiguration) *MacGraphicsDeviceConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v *MacGraphicsDisplayConfiguration) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplays:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mgdc), objc.RegisterName("setDisplays:"), _arr)
+	return mgdc
 }
 
 // Displays wraps the corresponding Objective-C method.
 //
 // Displays returns the collection as a Go slice.
-func (x *MacGraphicsDeviceConfiguration) Displays() []*MacGraphicsDisplayConfiguration {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displays"))
+func (mgdc *MacGraphicsDeviceConfiguration) Displays() []*MacGraphicsDisplayConfiguration {
+	_arr := objc.Send[objc.ID](objref.IDOf(mgdc), objc.RegisterName("displays"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MacGraphicsDisplayConfiguration { return MacGraphicsDisplayConfigurationFromID(_id) })
 }
-
-// SetDisplays wraps the corresponding Objective-C method.
-func (x *MacGraphicsDeviceConfiguration) SetDisplays(displays []*MacGraphicsDisplayConfiguration) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplays:"), purego.SliceToNSArray(displays, func(_v *MacGraphicsDisplayConfiguration) objc.ID { return objref.IDOf(_v) }))
-}
-
-// MacGraphicsDeviceConfigurationable is the interface implemented by [MacGraphicsDeviceConfiguration], for mocking and DI.
-type MacGraphicsDeviceConfigurationable interface {
-	obj.Object
-	WithDisplays(items ...*MacGraphicsDisplayConfiguration) *MacGraphicsDeviceConfiguration
-	Displays() []*MacGraphicsDisplayConfiguration
-	SetDisplays(displays []*MacGraphicsDisplayConfiguration)
-}
-
-var _ MacGraphicsDeviceConfigurationable = (*MacGraphicsDeviceConfiguration)(nil)
 
 var _ GraphicsDeviceConfigurationProvider = (*MacGraphicsDeviceConfiguration)(nil)

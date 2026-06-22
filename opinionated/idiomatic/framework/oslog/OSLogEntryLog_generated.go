@@ -7,7 +7,6 @@ package oslog
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,18 +51,10 @@ func NewLogEntryLog() *LogEntryLog {
 	return logEntryLogAdopt(_id)
 }
 
-// Level the level of the entry, e.g., info, debug.
-func (x *LogEntryLog) Level() LogEntryLogLevel {
-	_r := objc.Send[LogEntryLogLevel](objref.IDOf(x), objc.RegisterName("level"))
+// Level returns the level of the entry, e.g., info, debug.
+func (lel *LogEntryLog) Level() LogEntryLogLevel {
+	_r := objc.Send[LogEntryLogLevel](objref.IDOf(lel), objc.RegisterName("level"))
 	return _r
 }
-
-// LogEntryLogable is the interface implemented by [LogEntryLog], for mocking and DI.
-type LogEntryLogable interface {
-	obj.Object
-	Level() LogEntryLogLevel
-}
-
-var _ LogEntryLogable = (*LogEntryLog)(nil)
 
 var _ LogEntryProvider = (*LogEntryLog)(nil)

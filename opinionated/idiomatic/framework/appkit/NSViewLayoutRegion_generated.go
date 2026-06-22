@@ -44,24 +44,24 @@ func viewLayoutRegionAdopt(id objc.ID) *ViewLayoutRegion {
 }
 
 // Description returns the object's -description text.
-func (x *ViewLayoutRegion) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vlr *ViewLayoutRegion) Description() string {
+	return rt.Description(objref.IDOf(vlr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ViewLayoutRegion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vlr *ViewLayoutRegion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vlr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ViewLayoutRegion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vlr *ViewLayoutRegion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vlr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ViewLayoutRegion) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vlr *ViewLayoutRegion) String() string {
+	return rt.Description(objref.IDOf(vlr))
 }
 
 // NewViewLayoutRegion creates a new ViewLayoutRegion.
@@ -69,10 +69,3 @@ func NewViewLayoutRegion() *ViewLayoutRegion {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSViewLayoutRegion")), objc.RegisterName("new"))
 	return viewLayoutRegionAdopt(_id)
 }
-
-// ViewLayoutRegionable is the interface implemented by [ViewLayoutRegion], for mocking and DI.
-type ViewLayoutRegionable interface {
-	obj.Object
-}
-
-var _ ViewLayoutRegionable = (*ViewLayoutRegion)(nil)

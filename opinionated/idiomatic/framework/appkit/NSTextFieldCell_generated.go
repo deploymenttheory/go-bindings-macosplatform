@@ -60,477 +60,369 @@ func NewTextFieldCellWithCoder(coder obj.Object) *TextFieldCell {
 	return textFieldCellAdopt(_id)
 }
 
-// WithBackgroundColor the color of the cell’s background.
-func (x *TextFieldCell) WithBackgroundColor(backgroundColor *Color) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the color of the cell’s background.
+func (tfc *TextFieldCell) WithBackgroundColor(backgroundColor *Color) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return tfc
 }
 
-// WithDrawsBackground a Boolean value that indicates whether the cell draws its background color.
-func (x *TextFieldCell) WithDrawsBackground(drawsBackground bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
-	return x
+// WithDrawsBackground sets a Boolean value that indicates whether the cell draws its background color.
+func (tfc *TextFieldCell) WithDrawsBackground(drawsBackground bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	return tfc
 }
 
-// WithTextColor the color to use to draw the cell’s text.
-func (x *TextFieldCell) WithTextColor(textColor *Color) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
-	return x
+// WithTextColor sets the color to use to draw the cell’s text.
+func (tfc *TextFieldCell) WithTextColor(textColor *Color) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
+	return tfc
 }
 
-// WithBezelStyle the bezel style to use when drawing the text field.
-func (x *TextFieldCell) WithBezelStyle(bezelStyle TextFieldBezelStyle) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
-	return x
+// WithBezelStyle sets the bezel style to use when drawing the text field.
+func (tfc *TextFieldCell) WithBezelStyle(bezelStyle TextFieldBezelStyle) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBezelStyle:"), bezelStyle)
+	return tfc
 }
 
-// WithPlaceholderString the placeholder text for the cell, specified as a plain text string.
-func (x *TextFieldCell) WithPlaceholderString(placeholderString string) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
-	return x
+// WithPlaceholderString sets the placeholder text for the cell, specified as a plain text string.
+func (tfc *TextFieldCell) WithPlaceholderString(placeholderString string) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	return tfc
 }
 
-// WithPlaceholderAttributedString the placeholder text for the cell, specified as an attributed string.
-func (x *TextFieldCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
-	return x
+// WithPlaceholderAttributedString sets the placeholder text for the cell, specified as an attributed string.
+func (tfc *TextFieldCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	return tfc
 }
 
-// WithAllowedInputSourceLocales an array of locale identifiers that represent the allowed input sources when the text field has the keyboard focus.
-func (x *TextFieldCell) WithAllowedInputSourceLocales(items ...obj.Object) *TextFieldCell {
+// WithAllowedInputSourceLocales sets an array of locale identifiers that represent the allowed input sources when the text field has the keyboard focus.
+func (tfc *TextFieldCell) WithAllowedInputSourceLocales(items ...obj.Object) *TextFieldCell {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedInputSourceLocales:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAllowedInputSourceLocales:"), _arr)
+	return tfc
 }
 
-// WithControlView the view associated with the cell.
-func (x *TextFieldCell) WithControlView(controlView ViewProvider) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
-	return x
+// WithControlView sets the view associated with the cell.
+func (tfc *TextFieldCell) WithControlView(controlView ViewProvider) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	return tfc
 }
 
-// WithType the type of the cell.
-func (x *TextFieldCell) WithType(type_ CellType) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the type of the cell.
+func (tfc *TextFieldCell) WithType(type_ CellType) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setType:"), type_)
+	return tfc
 }
 
-// WithState the cell’s current state.
-func (x *TextFieldCell) WithState(state int) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the cell’s current state.
+func (tfc *TextFieldCell) WithState(state int) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setState:"), state)
+	return tfc
 }
 
-// WithTarget the object that receives the cell’s action messages.
-func (x *TextFieldCell) WithTarget(target obj.Object) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that receives the cell’s action messages.
+func (tfc *TextFieldCell) WithTarget(target obj.Object) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return tfc
 }
 
-// WithTag a tag for identifying the cell.
-func (x *TextFieldCell) WithTag(tag int) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets a tag for identifying the cell.
+func (tfc *TextFieldCell) WithTag(tag int) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTag:"), tag)
+	return tfc
 }
 
-// WithTitle the cell’s title text.
-func (x *TextFieldCell) WithTitle(title string) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the cell’s title text.
+func (tfc *TextFieldCell) WithTitle(title string) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return tfc
 }
 
-// WithEnabled a Boolean value indicating whether the cell is currently enabled.
-func (x *TextFieldCell) WithEnabled(enabled bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
+func (tfc *TextFieldCell) WithEnabled(enabled bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setEnabled:"), enabled)
+	return tfc
 }
 
-// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-func (x *TextFieldCell) WithContinuous(continuous bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+func (tfc *TextFieldCell) WithContinuous(continuous bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setContinuous:"), continuous)
+	return tfc
 }
 
-// WithEditable a Boolean value indicating whether the cell is editable.
-func (x *TextFieldCell) WithEditable(editable bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets a Boolean value indicating whether the cell is editable.
+func (tfc *TextFieldCell) WithEditable(editable bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setEditable:"), editable)
+	return tfc
 }
 
-// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
-func (x *TextFieldCell) WithSelectable(selectable bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
-	return x
+// WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
+func (tfc *TextFieldCell) WithSelectable(selectable bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setSelectable:"), selectable)
+	return tfc
 }
 
-// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
-func (x *TextFieldCell) WithBordered(bordered bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
-	return x
+// WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
+func (tfc *TextFieldCell) WithBordered(bordered bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBordered:"), bordered)
+	return tfc
 }
 
-// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
-func (x *TextFieldCell) WithBezeled(bezeled bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
-	return x
+// WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
+func (tfc *TextFieldCell) WithBezeled(bezeled bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBezeled:"), bezeled)
+	return tfc
 }
 
-// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
-func (x *TextFieldCell) WithScrollable(scrollable bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
-	return x
+// WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
+func (tfc *TextFieldCell) WithScrollable(scrollable bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setScrollable:"), scrollable)
+	return tfc
 }
 
-// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
-func (x *TextFieldCell) WithHighlighted(highlighted bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
+func (tfc *TextFieldCell) WithHighlighted(highlighted bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setHighlighted:"), highlighted)
+	return tfc
 }
 
-// WithAlignment the alignment of the cell’s text.
-func (x *TextFieldCell) WithAlignment(alignment TextAlignment) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment of the cell’s text.
+func (tfc *TextFieldCell) WithAlignment(alignment TextAlignment) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAlignment:"), alignment)
+	return tfc
 }
 
-// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-func (x *TextFieldCell) WithWraps(wraps bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
-	return x
+// WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+func (tfc *TextFieldCell) WithWraps(wraps bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setWraps:"), wraps)
+	return tfc
 }
 
-// WithFont the font that the cell uses to display text.
-func (x *TextFieldCell) WithFont(font *Font) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font that the cell uses to display text.
+func (tfc *TextFieldCell) WithFont(font *Font) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return tfc
 }
 
-// WithFormatter the cell’s formatter object.
-func (x *TextFieldCell) WithFormatter(formatter obj.Object) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the cell’s formatter object.
+func (tfc *TextFieldCell) WithFormatter(formatter obj.Object) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return tfc
 }
 
-// WithObjectValue the cell’s value as an Objective-C object.
-func (x *TextFieldCell) WithObjectValue(objectValue obj.Object) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the cell’s value as an Objective-C object.
+func (tfc *TextFieldCell) WithObjectValue(objectValue obj.Object) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return tfc
 }
 
-// WithStringValue the cell’s value as a string.
-func (x *TextFieldCell) WithStringValue(stringValue string) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the cell’s value as a string.
+func (tfc *TextFieldCell) WithStringValue(stringValue string) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return tfc
 }
 
-// WithIntValue the cell’s value as an integer.
-func (x *TextFieldCell) WithIntValue(intValue int) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the cell’s value as an integer.
+func (tfc *TextFieldCell) WithIntValue(intValue int) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setIntValue:"), intValue)
+	return tfc
 }
 
-// WithFloatValue the cell’s value as a single-precision floating-point number.
-func (x *TextFieldCell) WithFloatValue(floatValue float32) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the cell’s value as a single-precision floating-point number.
+func (tfc *TextFieldCell) WithFloatValue(floatValue float32) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFloatValue:"), floatValue)
+	return tfc
 }
 
-// WithDoubleValue the cell’s value as a double-precision floating-point number.
-func (x *TextFieldCell) WithDoubleValue(doubleValue float64) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the cell’s value as a double-precision floating-point number.
+func (tfc *TextFieldCell) WithDoubleValue(doubleValue float64) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return tfc
 }
 
-// WithIntegerValue the cell’s value as an integer value.
-func (x *TextFieldCell) WithIntegerValue(integerValue int) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the cell’s value as an integer value.
+func (tfc *TextFieldCell) WithIntegerValue(integerValue int) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setIntegerValue:"), integerValue)
+	return tfc
 }
 
-// WithImage the image displayed by the cell, if any.
-func (x *TextFieldCell) WithImage(image *Image) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+// WithImage sets the image displayed by the cell, if any.
+func (tfc *TextFieldCell) WithImage(image *Image) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return tfc
 }
 
-// WithControlSize the size of the cell.
-func (x *TextFieldCell) WithControlSize(controlSize ControlSize) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the cell.
+func (tfc *TextFieldCell) WithControlSize(controlSize ControlSize) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setControlSize:"), controlSize)
+	return tfc
 }
 
-// WithRepresentedObject the object represented by the cell.
-func (x *TextFieldCell) WithRepresentedObject(representedObject obj.Object) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
-	return x
+// WithRepresentedObject sets the object represented by the cell.
+func (tfc *TextFieldCell) WithRepresentedObject(representedObject obj.Object) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	return tfc
 }
 
-// WithMenu the cell’s contextual menu.
-func (x *TextFieldCell) WithMenu(menu *Menu) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets the cell’s contextual menu.
+func (tfc *TextFieldCell) WithMenu(menu *Menu) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return tfc
 }
 
-// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-func (x *TextFieldCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
-	return x
+// WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+func (tfc *TextFieldCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	return tfc
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *TextFieldCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (tfc *TextFieldCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return tfc
 }
 
-// WithLineBreakMode the line break mode to use when drawing text in the cell.
-func (x *TextFieldCell) WithLineBreakMode(lineBreakMode LineBreakMode) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use when drawing text in the cell.
+func (tfc *TextFieldCell) WithLineBreakMode(lineBreakMode LineBreakMode) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return tfc
 }
 
-// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
-func (x *TextFieldCell) WithAllowsUndo(allowsUndo bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
-	return x
+// WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
+func (tfc *TextFieldCell) WithAllowsUndo(allowsUndo bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	return tfc
 }
 
-// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-func (x *TextFieldCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
-	return x
+// WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+func (tfc *TextFieldCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	return tfc
 }
 
-// WithUserInterfaceLayoutDirection the layout direction of the user interface.
-func (x *TextFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+// WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
+func (tfc *TextFieldCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return tfc
 }
 
-// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-func (x *TextFieldCell) WithUsesSingleLineMode(usesSingleLineMode bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+func (tfc *TextFieldCell) WithUsesSingleLineMode(usesSingleLineMode bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return tfc
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
-func (x *TextFieldCell) WithRefusesFirstResponder(refusesFirstResponder bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
+func (tfc *TextFieldCell) WithRefusesFirstResponder(refusesFirstResponder bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return tfc
 }
 
-// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-func (x *TextFieldCell) WithShowsFirstResponder(showsFirstResponder bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
-	return x
+// WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+func (tfc *TextFieldCell) WithShowsFirstResponder(showsFirstResponder bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	return tfc
 }
 
-// WithFocusRingType the type of focus ring to use with the associated view.
-func (x *TextFieldCell) WithFocusRingType(focusRingType FocusRingType) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+// WithFocusRingType sets the type of focus ring to use with the associated view.
+func (tfc *TextFieldCell) WithFocusRingType(focusRingType FocusRingType) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return tfc
 }
 
-// WithAttributedStringValue the cell’s value as an attributed string.
-func (x *TextFieldCell) WithAttributedStringValue(attributedStringValue obj.Object) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the cell’s value as an attributed string.
+func (tfc *TextFieldCell) WithAttributedStringValue(attributedStringValue obj.Object) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return tfc
 }
 
-// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-func (x *TextFieldCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
-	return x
+// WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+func (tfc *TextFieldCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	return tfc
 }
 
-// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
-func (x *TextFieldCell) WithImportsGraphics(importsGraphics bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
-	return x
+// WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
+func (tfc *TextFieldCell) WithImportsGraphics(importsGraphics bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	return tfc
 }
 
-// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
-func (x *TextFieldCell) WithAllowsMixedState(allowsMixedState bool) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
-	return x
+// WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
+func (tfc *TextFieldCell) WithAllowsMixedState(allowsMixedState bool) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	return tfc
 }
 
-// WithBackgroundStyle the cell’s background style.
-func (x *TextFieldCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
-	return x
+// WithBackgroundStyle sets the cell’s background style.
+func (tfc *TextFieldCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	return tfc
 }
 
-// WithControlTint the cell’s control tint.
-func (x *TextFieldCell) WithControlTint(controlTint ControlTint) *TextFieldCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
-	return x
+// WithControlTint sets the cell’s control tint.
+func (tfc *TextFieldCell) WithControlTint(controlTint ControlTint) *TextFieldCell {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setControlTint:"), controlTint)
+	return tfc
 }
 
 // SetWantsNotificationForMarkedText directs the cell’s associated field editor to post text change notifications.
-func (x *TextFieldCell) SetWantsNotificationForMarkedText(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsNotificationForMarkedText:"), flag)
+func (tfc *TextFieldCell) SetWantsNotificationForMarkedText(flag bool) {
+	objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("setWantsNotificationForMarkedText:"), flag)
 }
 
 // BackgroundColor wraps the corresponding Objective-C method.
-func (x *TextFieldCell) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+func (tfc *TextFieldCell) BackgroundColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
-}
-
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *TextFieldCell) SetBackgroundColor(backgroundColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
 // DrawsBackground wraps the corresponding Objective-C method.
-func (x *TextFieldCell) DrawsBackground() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsBackground"))
+func (tfc *TextFieldCell) DrawsBackground() bool {
+	_r := objc.Send[bool](objref.IDOf(tfc), objc.RegisterName("drawsBackground"))
 	return _r
-}
-
-// SetDrawsBackground wraps the corresponding Objective-C method.
-func (x *TextFieldCell) SetDrawsBackground(drawsBackground bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 }
 
 // TextColor wraps the corresponding Objective-C method.
-func (x *TextFieldCell) TextColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textColor"))
+func (tfc *TextFieldCell) TextColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("textColor"))
 	return ColorFromID(_r)
 }
 
-// SetTextColor wraps the corresponding Objective-C method.
-func (x *TextFieldCell) SetTextColor(textColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
-}
-
 // BezelStyle wraps the corresponding Objective-C method.
-func (x *TextFieldCell) BezelStyle() TextFieldBezelStyle {
-	_r := objc.Send[TextFieldBezelStyle](objref.IDOf(x), objc.RegisterName("bezelStyle"))
+func (tfc *TextFieldCell) BezelStyle() TextFieldBezelStyle {
+	_r := objc.Send[TextFieldBezelStyle](objref.IDOf(tfc), objc.RegisterName("bezelStyle"))
 	return _r
 }
 
-// SetBezelStyle wraps the corresponding Objective-C method.
-func (x *TextFieldCell) SetBezelStyle(bezelStyle TextFieldBezelStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
-}
-
 // PlaceholderString wraps the corresponding Objective-C method.
-func (x *TextFieldCell) PlaceholderString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderString"))
+func (tfc *TextFieldCell) PlaceholderString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("placeholderString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetPlaceholderString wraps the corresponding Objective-C method.
-func (x *TextFieldCell) SetPlaceholderString(placeholderString string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
-}
-
 // PlaceholderAttributedString wraps the corresponding Objective-C method.
-func (x *TextFieldCell) PlaceholderAttributedString() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderAttributedString"))
+func (tfc *TextFieldCell) PlaceholderAttributedString() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("placeholderAttributedString"))
 	return obj.Wrap(_r)
-}
-
-// SetPlaceholderAttributedString wraps the corresponding Objective-C method.
-func (x *TextFieldCell) SetPlaceholderAttributedString(placeholderAttributedString obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 }
 
 // AllowedInputSourceLocales wraps the corresponding Objective-C method.
 //
 // AllowedInputSourceLocales returns the collection as a Go slice.
-func (x *TextFieldCell) AllowedInputSourceLocales() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowedInputSourceLocales"))
+func (tfc *TextFieldCell) AllowedInputSourceLocales() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(tfc), objc.RegisterName("allowedInputSourceLocales"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// SetAllowedInputSourceLocales wraps the corresponding Objective-C method.
-func (x *TextFieldCell) SetAllowedInputSourceLocales(allowedInputSourceLocales []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedInputSourceLocales:"), purego.SliceToNSArray(allowedInputSourceLocales, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
-// TextFieldCellable is the interface implemented by [TextFieldCell], for mocking and DI.
-type TextFieldCellable interface {
-	obj.Object
-	WithBackgroundColor(backgroundColor *Color) *TextFieldCell
-	WithDrawsBackground(drawsBackground bool) *TextFieldCell
-	WithTextColor(textColor *Color) *TextFieldCell
-	WithBezelStyle(bezelStyle TextFieldBezelStyle) *TextFieldCell
-	WithPlaceholderString(placeholderString string) *TextFieldCell
-	WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *TextFieldCell
-	WithAllowedInputSourceLocales(items ...obj.Object) *TextFieldCell
-	WithControlView(controlView ViewProvider) *TextFieldCell
-	WithType(type_ CellType) *TextFieldCell
-	WithState(state int) *TextFieldCell
-	WithTarget(target obj.Object) *TextFieldCell
-	WithTag(tag int) *TextFieldCell
-	WithTitle(title string) *TextFieldCell
-	WithEnabled(enabled bool) *TextFieldCell
-	WithContinuous(continuous bool) *TextFieldCell
-	WithEditable(editable bool) *TextFieldCell
-	WithSelectable(selectable bool) *TextFieldCell
-	WithBordered(bordered bool) *TextFieldCell
-	WithBezeled(bezeled bool) *TextFieldCell
-	WithScrollable(scrollable bool) *TextFieldCell
-	WithHighlighted(highlighted bool) *TextFieldCell
-	WithAlignment(alignment TextAlignment) *TextFieldCell
-	WithWraps(wraps bool) *TextFieldCell
-	WithFont(font *Font) *TextFieldCell
-	WithFormatter(formatter obj.Object) *TextFieldCell
-	WithObjectValue(objectValue obj.Object) *TextFieldCell
-	WithStringValue(stringValue string) *TextFieldCell
-	WithIntValue(intValue int) *TextFieldCell
-	WithFloatValue(floatValue float32) *TextFieldCell
-	WithDoubleValue(doubleValue float64) *TextFieldCell
-	WithIntegerValue(integerValue int) *TextFieldCell
-	WithImage(image *Image) *TextFieldCell
-	WithControlSize(controlSize ControlSize) *TextFieldCell
-	WithRepresentedObject(representedObject obj.Object) *TextFieldCell
-	WithMenu(menu *Menu) *TextFieldCell
-	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *TextFieldCell
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *TextFieldCell
-	WithLineBreakMode(lineBreakMode LineBreakMode) *TextFieldCell
-	WithAllowsUndo(allowsUndo bool) *TextFieldCell
-	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *TextFieldCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *TextFieldCell
-	WithUsesSingleLineMode(usesSingleLineMode bool) *TextFieldCell
-	WithRefusesFirstResponder(refusesFirstResponder bool) *TextFieldCell
-	WithShowsFirstResponder(showsFirstResponder bool) *TextFieldCell
-	WithFocusRingType(focusRingType FocusRingType) *TextFieldCell
-	WithAttributedStringValue(attributedStringValue obj.Object) *TextFieldCell
-	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *TextFieldCell
-	WithImportsGraphics(importsGraphics bool) *TextFieldCell
-	WithAllowsMixedState(allowsMixedState bool) *TextFieldCell
-	WithBackgroundStyle(backgroundStyle BackgroundStyle) *TextFieldCell
-	WithControlTint(controlTint ControlTint) *TextFieldCell
-	SetWantsNotificationForMarkedText(flag bool)
-	BackgroundColor() *Color
-	SetBackgroundColor(backgroundColor *Color)
-	DrawsBackground() bool
-	SetDrawsBackground(drawsBackground bool)
-	TextColor() *Color
-	SetTextColor(textColor *Color)
-	BezelStyle() TextFieldBezelStyle
-	SetBezelStyle(bezelStyle TextFieldBezelStyle)
-	PlaceholderString() string
-	SetPlaceholderString(placeholderString string)
-	PlaceholderAttributedString() obj.Object
-	SetPlaceholderAttributedString(placeholderAttributedString obj.Object)
-	AllowedInputSourceLocales() []string
-	SetAllowedInputSourceLocales(allowedInputSourceLocales []string)
-}
-
-var _ TextFieldCellable = (*TextFieldCell)(nil)
 
 // isTextFieldCell marks TextFieldCell — and, by embedding promotion, its
 // subclasses — as a member of the TextFieldCell hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *TextFieldCell) isTextFieldCell() {}
+func (tfc *TextFieldCell) isTextFieldCell() {}
 
 var _ TextFieldCellProvider = (*TextFieldCell)(nil)
 

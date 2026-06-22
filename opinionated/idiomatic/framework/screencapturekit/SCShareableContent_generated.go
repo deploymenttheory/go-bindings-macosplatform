@@ -46,24 +46,24 @@ func shareableContentAdopt(id objc.ID) *ShareableContent {
 }
 
 // Description returns the object's -description text.
-func (x *ShareableContent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sc *ShareableContent) Description() string {
+	return rt.Description(objref.IDOf(sc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ShareableContent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sc *ShareableContent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ShareableContent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sc *ShareableContent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ShareableContent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sc *ShareableContent) String() string {
+	return rt.Description(objref.IDOf(sc))
 }
 
 // NewShareableContent creates a new ShareableContent.
@@ -72,36 +72,26 @@ func NewShareableContent() *ShareableContent {
 	return shareableContentAdopt(_id)
 }
 
-// Windows windows SCShareableContent property that contains all the sharable SCWindows
+// Windows returns windows SCShareableContent property that contains all the sharable SCWindows
 //
 // Windows returns the collection as a Go slice.
-func (x *ShareableContent) Windows() []*Window {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("windows"))
+func (sc *ShareableContent) Windows() []*Window {
+	_arr := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("windows"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
 }
 
-// Displays displays SCShareableContent property that contains all the sharable SCDisplays
+// Displays returns displays SCShareableContent property that contains all the sharable SCDisplays
 //
 // Displays returns the collection as a Go slice.
-func (x *ShareableContent) Displays() []*Display {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displays"))
+func (sc *ShareableContent) Displays() []*Display {
+	_arr := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("displays"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Display { return DisplayFromID(_id) })
 }
 
-// Applications applications SCShareableContent property that contains all the sharable SCRunningApplications
+// Applications returns applications SCShareableContent property that contains all the sharable SCRunningApplications
 //
 // Applications returns the collection as a Go slice.
-func (x *ShareableContent) Applications() []*RunningApplication {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applications"))
+func (sc *ShareableContent) Applications() []*RunningApplication {
+	_arr := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("applications"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RunningApplication { return RunningApplicationFromID(_id) })
 }
-
-// ShareableContentable is the interface implemented by [ShareableContent], for mocking and DI.
-type ShareableContentable interface {
-	obj.Object
-	Windows() []*Window
-	Displays() []*Display
-	Applications() []*RunningApplication
-}
-
-var _ ShareableContentable = (*ShareableContent)(nil)

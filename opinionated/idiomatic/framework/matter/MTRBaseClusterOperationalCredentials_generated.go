@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -63,7 +64,7 @@ func NewMTRBaseClusterOperationalCredentialsWithDeviceEndpointQueue(device *MTRB
 // AttestationRequestWithParamsCompletion command AttestationRequest Sender is requesting attestation information from the receiver.
 //
 // AttestationRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) AttestationRequestWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams) (result *MTROperationalCredentialsClusterAttestationResponseParams, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) AttestationRequestWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams) (result *MTROperationalCredentialsClusterAttestationResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterAttestationResponseParams
 		err error
@@ -75,7 +76,7 @@ func (x *MTRBaseClusterOperationalCredentials) AttestationRequestWithParamsCompl
 		_o.val = MTROperationalCredentialsClusterAttestationResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attestationRequestWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("attestationRequestWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -88,7 +89,7 @@ func (x *MTRBaseClusterOperationalCredentials) AttestationRequestWithParamsCompl
 // CertificateChainRequestWithParamsCompletion command CertificateChainRequest Sender is requesting a device attestation certificate from the receiver.
 //
 // CertificateChainRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams) (result *MTROperationalCredentialsClusterCertificateChainResponseParams, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams) (result *MTROperationalCredentialsClusterCertificateChainResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterCertificateChainResponseParams
 		err error
@@ -100,7 +101,7 @@ func (x *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithParams
 		_o.val = MTROperationalCredentialsClusterCertificateChainResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificateChainRequestWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("certificateChainRequestWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -113,7 +114,7 @@ func (x *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithParams
 // CSRRequestWithParamsCompletion command CSRRequest Sender is requesting a certificate signing request (CSR) from the receiver.
 //
 // CSRRequestWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) CSRRequestWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams) (result *MTROperationalCredentialsClusterCSRResponseParams, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) CSRRequestWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams) (result *MTROperationalCredentialsClusterCSRResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterCSRResponseParams
 		err error
@@ -125,7 +126,7 @@ func (x *MTRBaseClusterOperationalCredentials) CSRRequestWithParamsCompletion(ct
 		_o.val = MTROperationalCredentialsClusterCSRResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CSRRequestWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("CSRRequestWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -138,7 +139,7 @@ func (x *MTRBaseClusterOperationalCredentials) CSRRequestWithParamsCompletion(ct
 // AddNOCWithParamsCompletion command AddNOC Sender is requesting to add the new node operational certificates.
 //
 // AddNOCWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) AddNOCWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) AddNOCWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -150,7 +151,7 @@ func (x *MTRBaseClusterOperationalCredentials) AddNOCWithParamsCompletion(ctx co
 		_o.val = MTROperationalCredentialsClusterNOCResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addNOCWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("addNOCWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +164,7 @@ func (x *MTRBaseClusterOperationalCredentials) AddNOCWithParamsCompletion(ctx co
 // UpdateNOCWithParamsCompletion command UpdateNOC This command SHALL replace the NOC and optional associated ICAC (if present) scoped under the accessing fabric upon successful validation of all arguments and preconditions.
 //
 // UpdateNOCWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) UpdateNOCWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) UpdateNOCWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -175,7 +176,7 @@ func (x *MTRBaseClusterOperationalCredentials) UpdateNOCWithParamsCompletion(ctx
 		_o.val = MTROperationalCredentialsClusterNOCResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateNOCWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("updateNOCWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -188,7 +189,7 @@ func (x *MTRBaseClusterOperationalCredentials) UpdateNOCWithParamsCompletion(ctx
 // UpdateFabricLabelWithParamsCompletion command UpdateFabricLabel This command SHALL be used by an Administrative Node to set the user-visible Label field for a given Fabric, as reflected by entries in the Fabrics attribute.
 //
 // UpdateFabricLabelWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -200,7 +201,7 @@ func (x *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParamsComple
 		_o.val = MTROperationalCredentialsClusterNOCResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateFabricLabelWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("updateFabricLabelWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -213,7 +214,7 @@ func (x *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParamsComple
 // RemoveFabricWithParamsCompletion command RemoveFabric This command is used by Administrative Nodes to remove a given fabric index and delete all associated fabric-scoped data.
 //
 // RemoveFabricWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) RemoveFabricWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) RemoveFabricWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -225,7 +226,7 @@ func (x *MTRBaseClusterOperationalCredentials) RemoveFabricWithParamsCompletion(
 		_o.val = MTROperationalCredentialsClusterNOCResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFabricWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("removeFabricWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -238,7 +239,7 @@ func (x *MTRBaseClusterOperationalCredentials) RemoveFabricWithParamsCompletion(
 // ReadAttributeNOCsWithParamsCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNOCsWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -250,7 +251,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParamsComple
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNOCsWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeNOCsWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -263,7 +264,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParamsComple
 // SubscribeAttributeNOCsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNOCsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -275,7 +276,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNOCsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeNOCsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -288,7 +289,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithParamsS
 // ReadAttributeFabricsWithParamsCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeFabricsWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -300,7 +301,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParamsCom
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFabricsWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeFabricsWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -313,7 +314,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParamsCom
 // SubscribeAttributeFabricsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFabricsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -325,7 +326,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFabricsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeFabricsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -338,7 +339,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWithPara
 // ReadAttributeSupportedFabricsWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeSupportedFabricsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabricsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabricsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -350,7 +351,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabricsWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedFabricsWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeSupportedFabricsWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -363,7 +364,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabricsWith
 // SubscribeAttributeSupportedFabricsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeSupportedFabricsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFabricsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFabricsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -375,7 +376,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFabric
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeSupportedFabricsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeSupportedFabricsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -388,7 +389,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFabric
 // ReadAttributeCommissionedFabricsWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCommissionedFabricsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabricsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabricsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -400,7 +401,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabricsW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCommissionedFabricsWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeCommissionedFabricsWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -413,7 +414,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabricsW
 // SubscribeAttributeCommissionedFabricsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCommissionedFabricsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissionedFabricsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissionedFabricsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -425,7 +426,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissionedFab
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCommissionedFabricsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeCommissionedFabricsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -438,7 +439,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissionedFab
 // ReadAttributeTrustedRootCertificatesWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTrustedRootCertificatesWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCertificatesWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCertificatesWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -450,7 +451,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCertifica
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTrustedRootCertificatesWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeTrustedRootCertificatesWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -463,7 +464,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCertifica
 // SubscribeAttributeTrustedRootCertificatesWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTrustedRootCertificatesWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRootCertificatesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRootCertificatesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -475,7 +476,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRootCert
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTrustedRootCertificatesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeTrustedRootCertificatesWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -488,7 +489,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRootCert
 // ReadAttributeCurrentFabricIndexWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentFabricIndexWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricIndexWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricIndexWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -500,7 +501,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricIndexWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentFabricIndexWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeCurrentFabricIndexWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -513,7 +514,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricIndexWi
 // SubscribeAttributeCurrentFabricIndexWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentFabricIndexWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabricIndexWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabricIndexWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -525,7 +526,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabricIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentFabricIndexWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeCurrentFabricIndexWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -538,7 +539,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabricIn
 // ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -550,7 +551,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommandList
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -563,7 +564,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommandList
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -575,7 +576,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedComman
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -588,7 +589,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedComman
 // ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -600,7 +601,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandListW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -613,7 +614,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandListW
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -625,7 +626,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCommand
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -638,7 +639,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCommand
 // ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -650,7 +651,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeListWithCom
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -663,7 +664,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeListWithCom
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -675,7 +676,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeListWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -688,7 +689,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeListWi
 // ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -700,7 +701,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMapWithComple
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -713,7 +714,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMapWithComple
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -725,7 +726,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -738,7 +739,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapWithP
 // ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -750,7 +751,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevisionWithC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -763,7 +764,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevisionWithC
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -775,7 +776,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeClusterRevision
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -788,7 +789,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeClusterRevision
 // AttestationRequestWithParams wraps the corresponding Objective-C method.
 //
 // AttestationRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) AttestationRequestWithParams(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams) (result *MTROperationalCredentialsClusterAttestationResponseParams, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) AttestationRequestWithParams(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams) (result *MTROperationalCredentialsClusterAttestationResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterAttestationResponseParams
 		err error
@@ -800,7 +801,7 @@ func (x *MTRBaseClusterOperationalCredentials) AttestationRequestWithParams(ctx 
 		_o.val = MTROperationalCredentialsClusterAttestationResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attestationRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("attestationRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -813,7 +814,7 @@ func (x *MTRBaseClusterOperationalCredentials) AttestationRequestWithParams(ctx 
 // CertificateChainRequestWithParams wraps the corresponding Objective-C method.
 //
 // CertificateChainRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithParams(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams) (result *MTROperationalCredentialsClusterCertificateChainResponseParams, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithParams(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams) (result *MTROperationalCredentialsClusterCertificateChainResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterCertificateChainResponseParams
 		err error
@@ -825,7 +826,7 @@ func (x *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithParams
 		_o.val = MTROperationalCredentialsClusterCertificateChainResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificateChainRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("certificateChainRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -838,7 +839,7 @@ func (x *MTRBaseClusterOperationalCredentials) CertificateChainRequestWithParams
 // CSRRequestWithParams wraps the corresponding Objective-C method.
 //
 // CSRRequestWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) CSRRequestWithParams(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams) (result *MTROperationalCredentialsClusterCSRResponseParams, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) CSRRequestWithParams(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams) (result *MTROperationalCredentialsClusterCSRResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterCSRResponseParams
 		err error
@@ -850,7 +851,7 @@ func (x *MTRBaseClusterOperationalCredentials) CSRRequestWithParams(ctx context.
 		_o.val = MTROperationalCredentialsClusterCSRResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CSRRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("CSRRequestWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -863,7 +864,7 @@ func (x *MTRBaseClusterOperationalCredentials) CSRRequestWithParams(ctx context.
 // AddNOCWithParams wraps the corresponding Objective-C method.
 //
 // AddNOCWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) AddNOCWithParams(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) AddNOCWithParams(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -875,7 +876,7 @@ func (x *MTRBaseClusterOperationalCredentials) AddNOCWithParams(ctx context.Cont
 		_o.val = MTROperationalCredentialsClusterNOCResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addNOCWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("addNOCWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -888,7 +889,7 @@ func (x *MTRBaseClusterOperationalCredentials) AddNOCWithParams(ctx context.Cont
 // UpdateNOCWithParams wraps the corresponding Objective-C method.
 //
 // UpdateNOCWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) UpdateNOCWithParams(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) UpdateNOCWithParams(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -900,7 +901,7 @@ func (x *MTRBaseClusterOperationalCredentials) UpdateNOCWithParams(ctx context.C
 		_o.val = MTROperationalCredentialsClusterNOCResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateNOCWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("updateNOCWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -913,7 +914,7 @@ func (x *MTRBaseClusterOperationalCredentials) UpdateNOCWithParams(ctx context.C
 // UpdateFabricLabelWithParams wraps the corresponding Objective-C method.
 //
 // UpdateFabricLabelWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParams(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParams(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -925,7 +926,7 @@ func (x *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParams(ctx c
 		_o.val = MTROperationalCredentialsClusterNOCResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateFabricLabelWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("updateFabricLabelWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -938,7 +939,7 @@ func (x *MTRBaseClusterOperationalCredentials) UpdateFabricLabelWithParams(ctx c
 // RemoveFabricWithParams wraps the corresponding Objective-C method.
 //
 // RemoveFabricWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) RemoveFabricWithParams(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) RemoveFabricWithParams(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams) (result *MTROperationalCredentialsClusterNOCResponseParams, err error) {
 	type _result struct {
 		val *MTROperationalCredentialsClusterNOCResponseParams
 		err error
@@ -950,7 +951,7 @@ func (x *MTRBaseClusterOperationalCredentials) RemoveFabricWithParams(ctx contex
 		_o.val = MTROperationalCredentialsClusterNOCResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFabricWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("removeFabricWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -963,7 +964,7 @@ func (x *MTRBaseClusterOperationalCredentials) RemoveFabricWithParams(ctx contex
 // ReadAttributeNOCsWithParams wraps the corresponding Objective-C method.
 //
 // ReadAttributeNOCsWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -975,7 +976,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParams(ctx c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNOCsWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeNOCsWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -988,7 +989,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeNOCsWithParams(ctx c
 // SubscribeAttributeNOCsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNOCsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1000,7 +1001,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithMinInte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNOCsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeNOCsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1013,7 +1014,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeNOCsWithMinInte
 // ReadAttributeFabricsWithParams wraps the corresponding Objective-C method.
 //
 // ReadAttributeFabricsWithParams blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParams(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1025,7 +1026,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParams(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFabricsWithParams:completionHandler:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeFabricsWithParams:completionHandler:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1038,7 +1039,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFabricsWithParams(ct
 // SubscribeAttributeFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1050,7 +1051,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFabricsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeFabricsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1063,7 +1064,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFabricsWithMinI
 // ReadAttributeSupportedFabrics wraps the corresponding Objective-C method.
 //
 // ReadAttributeSupportedFabrics blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabrics(ctx context.Context) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabrics(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1075,7 +1076,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabrics(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedFabricsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeSupportedFabricsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1088,7 +1089,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeSupportedFabrics(ctx
 // SubscribeAttributeSupportedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeSupportedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1100,7 +1101,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFabric
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeSupportedFabricsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeSupportedFabricsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1113,7 +1114,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeSupportedFabric
 // ReadAttributeCommissionedFabrics wraps the corresponding Objective-C method.
 //
 // ReadAttributeCommissionedFabrics blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabrics(ctx context.Context) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabrics(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1125,7 +1126,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabrics(
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCommissionedFabricsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeCommissionedFabricsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1138,7 +1139,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCommissionedFabrics(
 // SubscribeAttributeCommissionedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCommissionedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissionedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissionedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1150,7 +1151,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissionedFab
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCommissionedFabricsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeCommissionedFabricsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1163,7 +1164,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCommissionedFab
 // ReadAttributeTrustedRootCertificates wraps the corresponding Objective-C method.
 //
 // ReadAttributeTrustedRootCertificates blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCertificates(ctx context.Context) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCertificates(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1175,7 +1176,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCertifica
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTrustedRootCertificatesWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeTrustedRootCertificatesWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1188,7 +1189,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeTrustedRootCertifica
 // SubscribeAttributeTrustedRootCertificatesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTrustedRootCertificatesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRootCertificatesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRootCertificatesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1200,7 +1201,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRootCert
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTrustedRootCertificatesWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeTrustedRootCertificatesWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1213,7 +1214,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeTrustedRootCert
 // ReadAttributeCurrentFabricIndex wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentFabricIndex blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricIndex(ctx context.Context) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricIndex(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1225,7 +1226,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricIndex(c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentFabricIndexWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeCurrentFabricIndexWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1238,7 +1239,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeCurrentFabricIndex(c
 // SubscribeAttributeCurrentFabricIndexWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentFabricIndexWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabricIndexWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabricIndexWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1250,7 +1251,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabricIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentFabricIndexWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeCurrentFabricIndexWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1263,7 +1264,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeCurrentFabricIn
 // ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1275,7 +1276,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommandList
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1288,7 +1289,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeGeneratedCommandList
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1300,7 +1301,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedComman
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1313,7 +1314,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeGeneratedComman
 // ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1325,7 +1326,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandList(
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1338,7 +1339,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAcceptedCommandList(
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1350,7 +1351,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCommand
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1363,7 +1364,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAcceptedCommand
 // ReadAttributeAttributeList wraps the corresponding Objective-C method.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1375,7 +1376,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeList(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeAttributeListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1388,7 +1389,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeAttributeList(ctx co
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1400,7 +1401,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeListWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1413,7 +1414,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeAttributeListWi
 // ReadAttributeFeatureMap wraps the corresponding Objective-C method.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1425,7 +1426,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMap(ctx conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1438,7 +1439,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeFeatureMap(ctx conte
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1450,7 +1451,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapWithM
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1463,7 +1464,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeFeatureMapWithM
 // ReadAttributeClusterRevision wraps the corresponding Objective-C method.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1475,7 +1476,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevision(ctx 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1488,7 +1489,7 @@ func (x *MTRBaseClusterOperationalCredentials) ReadAttributeClusterRevision(ctx 
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcoc *MTRBaseClusterOperationalCredentials) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1500,7 +1501,7 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeClusterRevision
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcoc), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1509,71 +1510,6 @@ func (x *MTRBaseClusterOperationalCredentials) SubscribeAttributeClusterRevision
 		return _zero, ctx.Err()
 	}
 }
-
-// MTRBaseClusterOperationalCredentialsable is the interface implemented by [MTRBaseClusterOperationalCredentials], for mocking and DI.
-type MTRBaseClusterOperationalCredentialsable interface {
-	obj.Object
-	AttestationRequestWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams) (*MTROperationalCredentialsClusterAttestationResponseParams, error)
-	CertificateChainRequestWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams) (*MTROperationalCredentialsClusterCertificateChainResponseParams, error)
-	CSRRequestWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams) (*MTROperationalCredentialsClusterCSRResponseParams, error)
-	AddNOCWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams) (*MTROperationalCredentialsClusterNOCResponseParams, error)
-	UpdateNOCWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams) (*MTROperationalCredentialsClusterNOCResponseParams, error)
-	UpdateFabricLabelWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams) (*MTROperationalCredentialsClusterNOCResponseParams, error)
-	RemoveFabricWithParamsCompletion(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams) (*MTROperationalCredentialsClusterNOCResponseParams, error)
-	ReadAttributeNOCsWithParamsCompletion(ctx context.Context, params *MTRReadParams) (obj.Object, error)
-	SubscribeAttributeNOCsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeFabricsWithParamsCompletion(ctx context.Context, params *MTRReadParams) (obj.Object, error)
-	SubscribeAttributeFabricsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeSupportedFabricsWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeSupportedFabricsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeCommissionedFabricsWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCommissionedFabricsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTrustedRootCertificatesWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTrustedRootCertificatesWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeCurrentFabricIndexWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentFabricIndexWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	AttestationRequestWithParams(ctx context.Context, params *MTROperationalCredentialsClusterAttestationRequestParams) (*MTROperationalCredentialsClusterAttestationResponseParams, error)
-	CertificateChainRequestWithParams(ctx context.Context, params *MTROperationalCredentialsClusterCertificateChainRequestParams) (*MTROperationalCredentialsClusterCertificateChainResponseParams, error)
-	CSRRequestWithParams(ctx context.Context, params *MTROperationalCredentialsClusterCSRRequestParams) (*MTROperationalCredentialsClusterCSRResponseParams, error)
-	AddNOCWithParams(ctx context.Context, params *MTROperationalCredentialsClusterAddNOCParams) (*MTROperationalCredentialsClusterNOCResponseParams, error)
-	UpdateNOCWithParams(ctx context.Context, params *MTROperationalCredentialsClusterUpdateNOCParams) (*MTROperationalCredentialsClusterNOCResponseParams, error)
-	UpdateFabricLabelWithParams(ctx context.Context, params *MTROperationalCredentialsClusterUpdateFabricLabelParams) (*MTROperationalCredentialsClusterNOCResponseParams, error)
-	RemoveFabricWithParams(ctx context.Context, params *MTROperationalCredentialsClusterRemoveFabricParams) (*MTROperationalCredentialsClusterNOCResponseParams, error)
-	ReadAttributeNOCsWithParams(ctx context.Context, params *MTRReadParams) (obj.Object, error)
-	SubscribeAttributeNOCsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeFabricsWithParams(ctx context.Context, params *MTRReadParams) (obj.Object, error)
-	SubscribeAttributeFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeSupportedFabrics(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeSupportedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeCommissionedFabrics(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCommissionedFabricsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTrustedRootCertificates(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTrustedRootCertificatesWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeCurrentFabricIndex(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentFabricIndexWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeAttributeList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-}
-
-var _ MTRBaseClusterOperationalCredentialsable = (*MTRBaseClusterOperationalCredentials)(nil)
 
 var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterOperationalCredentials)(nil)
 

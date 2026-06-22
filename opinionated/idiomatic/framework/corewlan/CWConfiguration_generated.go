@@ -48,24 +48,24 @@ func configurationAdopt(id objc.ID) *Configuration {
 }
 
 // Description returns the object's -description text.
-func (x *Configuration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Configuration) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Configuration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Configuration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Configuration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Configuration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Configuration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Configuration) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewConfigurationWithConfiguration creates and returns a CWConfiguration object initialized with the given CWConfiguration object.
@@ -76,57 +76,44 @@ func NewConfigurationWithConfiguration(configuration *Configuration) *Configurat
 }
 
 // IsEqualToConfiguration determine CWConfiguration object equality.
-func (x *Configuration) IsEqualToConfiguration(configuration *Configuration) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToConfiguration:"), objref.IDOf(configuration))
+func (c *Configuration) IsEqualToConfiguration(configuration *Configuration) bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isEqualToConfiguration:"), objref.IDOf(configuration))
 	return _r
 }
 
 // NetworkProfiles returns the preferred networks list. The order of the ordered set corresponds to the order the preferred networks list.
-func (x *Configuration) NetworkProfiles() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkProfiles"))
+func (c *Configuration) NetworkProfiles() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("networkProfiles"))
 	return obj.Wrap(_r)
 }
 
-// RequireAdministratorForAssociation returns the preference to require an administrator password to change networks. If YES, the user may be prompted to enter an administrator password upon attempting to join a Wi-Fi network. This preference is enforced at the API layer.
-func (x *Configuration) RequireAdministratorForAssociation() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requireAdministratorForAssociation"))
+// RequireAdministratorForAssociation reports whether returns the preference to require an administrator password to change networks. If true, the user may be prompted to enter an administrator password upon attempting to join a Wi-Fi network. This preference is enforced at the API layer.
+func (c *Configuration) RequireAdministratorForAssociation() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("requireAdministratorForAssociation"))
 	return _r
 }
 
-// RequireAdministratorForPower returns the preference to require an administrator password to change the interface power state. If YES, the user may be prompted to enter an administrator password upon attempting to turn Wi-Fi on or off. This preference is enforced at the API layer.
-func (x *Configuration) RequireAdministratorForPower() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requireAdministratorForPower"))
+// RequireAdministratorForPower reports whether returns the preference to require an administrator password to change the interface power state. If true, the user may be prompted to enter an administrator password upon attempting to turn Wi-Fi on or off. This preference is enforced at the API layer.
+func (c *Configuration) RequireAdministratorForPower() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("requireAdministratorForPower"))
 	return _r
 }
 
-// RequireAdministratorForIBSSMode returns the preference to require an administrator password to create a computer-to-computer network. If YES, the user may be prompted to enter an administrator password upon attempting to create an IBSS network. This preference is enforced at the API layer.
-func (x *Configuration) RequireAdministratorForIBSSMode() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requireAdministratorForIBSSMode"))
+// RequireAdministratorForIBSSMode reports whether returns the preference to require an administrator password to create a computer-to-computer network. If true, the user may be prompted to enter an administrator password upon attempting to create an IBSS network. This preference is enforced at the API layer.
+func (c *Configuration) RequireAdministratorForIBSSMode() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("requireAdministratorForIBSSMode"))
 	return _r
 }
 
-// RememberJoinedNetworks returns the preference to remember all Wi-Fi networks joined unless otherwise specified by the user when joining a particular Wi-Fi network.
-func (x *Configuration) RememberJoinedNetworks() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("rememberJoinedNetworks"))
+// RememberJoinedNetworks reports whether returns the preference to remember all Wi-Fi networks joined unless otherwise specified by the user when joining a particular Wi-Fi network.
+func (c *Configuration) RememberJoinedNetworks() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("rememberJoinedNetworks"))
 	return _r
 }
-
-// Configurationable is the interface implemented by [Configuration], for mocking and DI.
-type Configurationable interface {
-	obj.Object
-	IsEqualToConfiguration(configuration *Configuration) bool
-	NetworkProfiles() obj.Object
-	RequireAdministratorForAssociation() bool
-	RequireAdministratorForPower() bool
-	RequireAdministratorForIBSSMode() bool
-	RememberJoinedNetworks() bool
-}
-
-var _ Configurationable = (*Configuration)(nil)
 
 // isConfiguration marks Configuration — and, by embedding promotion, its
 // subclasses — as a member of the Configuration hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Configuration) isConfiguration() {}
+func (c *Configuration) isConfiguration() {}
 
 var _ ConfigurationProvider = (*Configuration)(nil)

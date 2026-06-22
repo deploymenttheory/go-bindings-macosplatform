@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -68,191 +69,138 @@ func NewFetchRecordZoneChangesOperationWithRecordZoneIDsOptionsByRecordZoneID(re
 	return fetchRecordZoneChangesOperationAdopt(_id)
 }
 
-// WithRecordZoneIDs the IDs of the record zones that contain the records to fetch.
-func (x *FetchRecordZoneChangesOperation) WithRecordZoneIDs(items ...*RecordZoneID) *FetchRecordZoneChangesOperation {
+// WithRecordZoneIDs sets the IDs of the record zones that contain the records to fetch.
+func (frzco *FetchRecordZoneChangesOperation) WithRecordZoneIDs(items ...*RecordZoneID) *FetchRecordZoneChangesOperation {
 	_arr := purego.SliceToNSArray(items, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneIDs:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setRecordZoneIDs:"), _arr)
+	return frzco
 }
 
-// WithConfigurationsByRecordZoneID a dictionary of configurations for fetching change operations by zone identifier.
-func (x *FetchRecordZoneChangesOperation) WithConfigurationsByRecordZoneID(configurationsByRecordZoneID obj.Object) *FetchRecordZoneChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfigurationsByRecordZoneID:"), objref.IDOf(configurationsByRecordZoneID))
-	return x
+// WithConfigurationsByRecordZoneID sets a dictionary of configurations for fetching change operations by zone identifier.
+func (frzco *FetchRecordZoneChangesOperation) WithConfigurationsByRecordZoneID(configurationsByRecordZoneID obj.Object) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setConfigurationsByRecordZoneID:"), objref.IDOf(configurationsByRecordZoneID))
+	return frzco
 }
 
-// WithFetchAllChanges a Boolean value that indicates whether to send repeated requests to the server.
-func (x *FetchRecordZoneChangesOperation) WithFetchAllChanges(fetchAllChanges bool) *FetchRecordZoneChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchAllChanges:"), fetchAllChanges)
-	return x
+// WithFetchAllChanges sets a Boolean value that indicates whether to send repeated requests to the server.
+func (frzco *FetchRecordZoneChangesOperation) WithFetchAllChanges(fetchAllChanges bool) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setFetchAllChanges:"), fetchAllChanges)
+	return frzco
 }
 
-// WithRecordChangedBlock the closure to execute with the contents of a changed record.
-func (x *FetchRecordZoneChangesOperation) WithRecordChangedBlock(recordChangedBlock func(obj.Object)) *FetchRecordZoneChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordChangedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { recordChangedBlock(obj.Wrap(_b0)) }))
-	return x
+// WithRecordChangedBlock sets the closure to execute with the contents of a changed record.
+func (frzco *FetchRecordZoneChangesOperation) WithRecordChangedBlock(recordChangedBlock func(obj.Object)) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setRecordChangedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { recordChangedBlock(obj.Wrap(_b0)) }))
+	return frzco
 }
 
-// WithRecordWithIDWasDeletedBlock the block to execute when a record no longer exists.
-func (x *FetchRecordZoneChangesOperation) WithRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(obj.Object, obj.Object)) *FetchRecordZoneChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordWithIDWasDeletedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) {
+// WithRecordWithIDWasDeletedBlock sets the block to execute when a record no longer exists.
+func (frzco *FetchRecordZoneChangesOperation) WithRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(obj.Object, obj.Object)) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setRecordWithIDWasDeletedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) {
 		recordWithIDWasDeletedBlock(obj.Wrap(_b0), obj.Wrap(_b1))
 	}))
-	return x
+	return frzco
 }
 
-// WithRecordZoneChangeTokensUpdatedBlock the closure to execute when the change token updates.
-func (x *FetchRecordZoneChangesOperation) WithRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock func(obj.Object, obj.Object, obj.Object)) *FetchRecordZoneChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneChangeTokensUpdatedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID) {
+// WithRecordZoneChangeTokensUpdatedBlock sets the closure to execute when the change token updates.
+func (frzco *FetchRecordZoneChangesOperation) WithRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock func(obj.Object, obj.Object, obj.Object)) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setRecordZoneChangeTokensUpdatedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID) {
 		recordZoneChangeTokensUpdatedBlock(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2))
 	}))
-	return x
+	return frzco
 }
 
-// WithOptionsByRecordZoneID configuration options for each record zone that the operation retrieves.
-func (x *FetchRecordZoneChangesOperation) WithOptionsByRecordZoneID(optionsByRecordZoneID obj.Object) *FetchRecordZoneChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsByRecordZoneID:"), objref.IDOf(optionsByRecordZoneID))
-	return x
+// WithOptionsByRecordZoneID sets configuration options for each record zone that the operation retrieves.
+func (frzco *FetchRecordZoneChangesOperation) WithOptionsByRecordZoneID(optionsByRecordZoneID obj.Object) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setOptionsByRecordZoneID:"), objref.IDOf(optionsByRecordZoneID))
+	return frzco
 }
 
-// WithDatabase the database that the operation uses.
-func (x *FetchRecordZoneChangesOperation) WithDatabase(database *Database) *FetchRecordZoneChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
-	return x
+// WithDatabase sets the database that the operation uses.
+func (frzco *FetchRecordZoneChangesOperation) WithDatabase(database *Database) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setDatabase:"), objref.IDOf(database))
+	return frzco
 }
 
-// WithConfiguration the operation’s configuration.
-func (x *FetchRecordZoneChangesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordZoneChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
-	return x
+// WithConfiguration sets the operation’s configuration.
+func (frzco *FetchRecordZoneChangesOperation) WithConfiguration(configuration *OperationConfiguration) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
+	return frzco
 }
 
-// WithGroup the operation’s group.
-func (x *FetchRecordZoneChangesOperation) WithGroup(group *OperationGroup) *FetchRecordZoneChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
-	return x
+// WithGroup sets the operation’s group.
+func (frzco *FetchRecordZoneChangesOperation) WithGroup(group *OperationGroup) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setGroup:"), objref.IDOf(group))
+	return frzco
 }
 
-// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
-func (x *FetchRecordZoneChangesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordZoneChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
-	return x
+// WithLongLivedOperationWasPersistedBlock sets the closure to execute when the server begins to store callbacks for the long-lived operation.
+func (frzco *FetchRecordZoneChangesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
+	return frzco
 }
 
-// WithContainer the operation's container.
-func (x *FetchRecordZoneChangesOperation) WithContainer(container *Container) *FetchRecordZoneChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
-	return x
+// WithContainer sets the operation's container.
+func (frzco *FetchRecordZoneChangesOperation) WithContainer(container *Container) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setContainer:"), objref.IDOf(container))
+	return frzco
 }
 
-// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
-func (x *FetchRecordZoneChangesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordZoneChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
-	return x
+// WithAllowsCellularAccess sets a Boolean value that indicates whether the operation can send data over the cellular network.
+func (frzco *FetchRecordZoneChangesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
+	return frzco
 }
 
-// WithLongLived a Boolean value that indicates whether the operation is long-lived.
-func (x *FetchRecordZoneChangesOperation) WithLongLived(longLived bool) *FetchRecordZoneChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
-	return x
+// WithLongLived sets a Boolean value that indicates whether the operation is long-lived.
+func (frzco *FetchRecordZoneChangesOperation) WithLongLived(longLived bool) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setLongLived:"), longLived)
+	return frzco
 }
 
-// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
-func (x *FetchRecordZoneChangesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordZoneChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
-	return x
+// WithTimeoutIntervalForRequest sets the timeout interval when waiting for additional data.
+func (frzco *FetchRecordZoneChangesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
+	return frzco
 }
 
-// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
-func (x *FetchRecordZoneChangesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordZoneChangesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
-	return x
+// WithTimeoutIntervalForResource sets the maximum amount of time that a resource request can use.
+func (frzco *FetchRecordZoneChangesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordZoneChangesOperation {
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
+	return frzco
 }
 
-// RecordZoneIDs the IDs of the record zones that contain the records to fetch. Typically, you set the value of this property when you create the operation. If you intend to change the record zone IDs, update the value before you execute the operation or submit it to a queue.
+// RecordZoneIDs returns the IDs of the record zones that contain the records to fetch. Typically, you set the value of this property when you create the operation. If you intend to change the record zone IDs, update the value before you execute the operation or submit it to a queue.
 //
 // RecordZoneIDs returns the collection as a Go slice.
-func (x *FetchRecordZoneChangesOperation) RecordZoneIDs() []*RecordZoneID {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordZoneIDs"))
+func (frzco *FetchRecordZoneChangesOperation) RecordZoneIDs() []*RecordZoneID {
+	_arr := objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("recordZoneIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordZoneID { return RecordZoneIDFromID(_id) })
 }
 
-// SetRecordZoneIDs wraps the corresponding Objective-C method.
-func (x *FetchRecordZoneChangesOperation) SetRecordZoneIDs(recordZoneIDs []*RecordZoneID) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneIDs:"), purego.SliceToNSArray(recordZoneIDs, func(_v *RecordZoneID) objc.ID { return objref.IDOf(_v) }))
-}
-
-// ConfigurationsByRecordZoneID a dictionary of configurations for fetching change operations by zone identifier.
-func (x *FetchRecordZoneChangesOperation) ConfigurationsByRecordZoneID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationsByRecordZoneID"))
+// ConfigurationsByRecordZoneID returns a dictionary of configurations for fetching change operations by zone identifier.
+func (frzco *FetchRecordZoneChangesOperation) ConfigurationsByRecordZoneID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("configurationsByRecordZoneID"))
 	return obj.Wrap(_r)
 }
 
-// SetConfigurationsByRecordZoneID wraps the corresponding Objective-C method.
-func (x *FetchRecordZoneChangesOperation) SetConfigurationsByRecordZoneID(configurationsByRecordZoneID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfigurationsByRecordZoneID:"), objref.IDOf(configurationsByRecordZoneID))
-}
-
-// FetchAllChanges a Boolean value that indicates whether to send repeated requests to the server. If <doc://com.apple.documentation/documentation/swift/true>, the operation sends repeat requests to the server until it fetches all changes. CloudKit executes the handler you set on the “CKFetchRecordZoneChangesOperation/recordZoneFetchResultBlock“ property with a change token after each request. The default value is <doc://com.apple.documentation/documentation/swift/true>.
-func (x *FetchRecordZoneChangesOperation) FetchAllChanges() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("fetchAllChanges"))
+// FetchAllChanges reports whether to send repeated requests to the server. If <doc://com.apple.documentation/documentation/swift/true>, the operation sends repeat requests to the server until it fetches all changes. CloudKit executes the handler you set on the “CKFetchRecordZoneChangesOperation/recordZoneFetchResultBlock“ property with a change token after each request. The default value is <doc://com.apple.documentation/documentation/swift/true>.
+func (frzco *FetchRecordZoneChangesOperation) FetchAllChanges() bool {
+	_r := objc.Send[bool](objref.IDOf(frzco), objc.RegisterName("fetchAllChanges"))
 	return _r
-}
-
-// SetFetchAllChanges wraps the corresponding Objective-C method.
-func (x *FetchRecordZoneChangesOperation) SetFetchAllChanges(fetchAllChanges bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchAllChanges:"), fetchAllChanges)
-}
-
-// SetRecordChangedBlock wraps the corresponding Objective-C method.
-//
-// SetRecordChangedBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchRecordZoneChangesOperation) SetRecordChangedBlock(ctx context.Context) (result *Record, err error) {
-	type _result struct {
-		val *Record
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _o _result
-		_o.val = RecordFromID(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordChangedBlock:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *Record
-		return _zero, ctx.Err()
-	}
-}
-
-// SetRecordWithIDWasDeletedBlock wraps the corresponding Objective-C method.
-func (x *FetchRecordZoneChangesOperation) SetRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(obj.Object, obj.Object)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordWithIDWasDeletedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) {
-		recordWithIDWasDeletedBlock(obj.Wrap(_b0), obj.Wrap(_b1))
-	}))
-}
-
-// SetRecordZoneChangeTokensUpdatedBlock wraps the corresponding Objective-C method.
-func (x *FetchRecordZoneChangesOperation) SetRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock func(obj.Object, obj.Object, obj.Object)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordZoneChangeTokensUpdatedBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID) {
-		recordZoneChangeTokensUpdatedBlock(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2))
-	}))
 }
 
 // SetFetchRecordZoneChangesCompletionBlock wraps the corresponding Objective-C method.
 //
 // SetFetchRecordZoneChangesCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (x *FetchRecordZoneChangesOperation) SetFetchRecordZoneChangesCompletionBlock(ctx context.Context) error {
+func (frzco *FetchRecordZoneChangesOperation) SetFetchRecordZoneChangesCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFetchRecordZoneChangesCompletionBlock:"), _block)
+	objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("setFetchRecordZoneChangesCompletionBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -261,51 +209,11 @@ func (x *FetchRecordZoneChangesOperation) SetFetchRecordZoneChangesCompletionBlo
 	}
 }
 
-// OptionsByRecordZoneID configuration options for each record zone that the operation retrieves.
-func (x *FetchRecordZoneChangesOperation) OptionsByRecordZoneID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsByRecordZoneID"))
+// OptionsByRecordZoneID returns configuration options for each record zone that the operation retrieves.
+func (frzco *FetchRecordZoneChangesOperation) OptionsByRecordZoneID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(frzco), objc.RegisterName("optionsByRecordZoneID"))
 	return obj.Wrap(_r)
 }
-
-// SetOptionsByRecordZoneID configuration options for each record zone that the operation retrieves.
-func (x *FetchRecordZoneChangesOperation) SetOptionsByRecordZoneID(optionsByRecordZoneID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsByRecordZoneID:"), objref.IDOf(optionsByRecordZoneID))
-}
-
-// FetchRecordZoneChangesOperationable is the interface implemented by [FetchRecordZoneChangesOperation], for mocking and DI.
-type FetchRecordZoneChangesOperationable interface {
-	obj.Object
-	WithRecordZoneIDs(items ...*RecordZoneID) *FetchRecordZoneChangesOperation
-	WithConfigurationsByRecordZoneID(configurationsByRecordZoneID obj.Object) *FetchRecordZoneChangesOperation
-	WithFetchAllChanges(fetchAllChanges bool) *FetchRecordZoneChangesOperation
-	WithRecordChangedBlock(recordChangedBlock func(obj.Object)) *FetchRecordZoneChangesOperation
-	WithRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(obj.Object, obj.Object)) *FetchRecordZoneChangesOperation
-	WithRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock func(obj.Object, obj.Object, obj.Object)) *FetchRecordZoneChangesOperation
-	WithOptionsByRecordZoneID(optionsByRecordZoneID obj.Object) *FetchRecordZoneChangesOperation
-	WithDatabase(database *Database) *FetchRecordZoneChangesOperation
-	WithConfiguration(configuration *OperationConfiguration) *FetchRecordZoneChangesOperation
-	WithGroup(group *OperationGroup) *FetchRecordZoneChangesOperation
-	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchRecordZoneChangesOperation
-	WithContainer(container *Container) *FetchRecordZoneChangesOperation
-	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchRecordZoneChangesOperation
-	WithLongLived(longLived bool) *FetchRecordZoneChangesOperation
-	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchRecordZoneChangesOperation
-	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchRecordZoneChangesOperation
-	RecordZoneIDs() []*RecordZoneID
-	SetRecordZoneIDs(recordZoneIDs []*RecordZoneID)
-	ConfigurationsByRecordZoneID() obj.Object
-	SetConfigurationsByRecordZoneID(configurationsByRecordZoneID obj.Object)
-	FetchAllChanges() bool
-	SetFetchAllChanges(fetchAllChanges bool)
-	SetRecordChangedBlock(ctx context.Context) (*Record, error)
-	SetRecordWithIDWasDeletedBlock(recordWithIDWasDeletedBlock func(obj.Object, obj.Object))
-	SetRecordZoneChangeTokensUpdatedBlock(recordZoneChangeTokensUpdatedBlock func(obj.Object, obj.Object, obj.Object))
-	SetFetchRecordZoneChangesCompletionBlock(ctx context.Context) error
-	OptionsByRecordZoneID() obj.Object
-	SetOptionsByRecordZoneID(optionsByRecordZoneID obj.Object)
-}
-
-var _ FetchRecordZoneChangesOperationable = (*FetchRecordZoneChangesOperation)(nil)
 
 var _ DatabaseOperationProvider = (*FetchRecordZoneChangesOperation)(nil)
 

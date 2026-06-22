@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,102 +51,82 @@ func NewCNNLoss() *CNNLoss {
 	return cNNLossAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. offset.z is the index of starting source image in batch processing mode. See Also:
-func (x *CNNLoss) WithOffset(offset mpscore.MPSOffset) *CNNLoss {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (cl *CNNLoss) WithOffset(offset mpscore.MPSOffset) *CNNLoss {
+	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("setOffset:"), offset)
+	return cl
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
-func (x *CNNLoss) WithClipRect(clipRect metal.MTLRegion) *CNNLoss {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
+func (cl *CNNLoss) WithClipRect(clipRect metal.MTLRegion) *CNNLoss {
+	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("setClipRect:"), clipRect)
+	return cl
 }
 
-// WithDestinationFeatureChannelOffset the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
-func (x *CNNLoss) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNLoss {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
-	return x
+// WithDestinationFeatureChannelOffset sets the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, the destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and the destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+func (cl *CNNLoss) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNLoss {
+	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
+	return cl
 }
 
-// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-func (x *CNNLoss) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNLoss {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
-	return x
+// WithSourceFeatureChannelOffset sets the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (cl *CNNLoss) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNLoss {
+	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
+	return cl
 }
 
-// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNLoss) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNLoss {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
-	return x
+// WithSourceFeatureChannelMaxCount sets the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (cl *CNNLoss) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNLoss {
+	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
+	return cl
 }
 
-// LossType see MPSCNNLossDescriptor for information about the following properties.
-func (x *CNNLoss) LossType() CNNLossType {
-	_r := objc.Send[CNNLossType](objref.IDOf(x), objc.RegisterName("lossType"))
+// LossType returns see MPSCNNLossDescriptor for information about the following properties.
+func (cl *CNNLoss) LossType() CNNLossType {
+	_r := objc.Send[CNNLossType](objref.IDOf(cl), objc.RegisterName("lossType"))
 	return _r
 }
 
 // ReductionType wraps the corresponding Objective-C method.
-func (x *CNNLoss) ReductionType() CNNReductionType {
-	_r := objc.Send[CNNReductionType](objref.IDOf(x), objc.RegisterName("reductionType"))
+func (cl *CNNLoss) ReductionType() CNNReductionType {
+	_r := objc.Send[CNNReductionType](objref.IDOf(cl), objc.RegisterName("reductionType"))
 	return _r
 }
 
 // Weight wraps the corresponding Objective-C method.
-func (x *CNNLoss) Weight() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weight"))
+func (cl *CNNLoss) Weight() float32 {
+	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("weight"))
 	return _r
 }
 
 // LabelSmoothing wraps the corresponding Objective-C method.
-func (x *CNNLoss) LabelSmoothing() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("labelSmoothing"))
+func (cl *CNNLoss) LabelSmoothing() float32 {
+	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("labelSmoothing"))
 	return _r
 }
 
 // NumberOfClasses wraps the corresponding Objective-C method.
-func (x *CNNLoss) NumberOfClasses() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfClasses"))
+func (cl *CNNLoss) NumberOfClasses() int {
+	_r := objc.Send[int](objref.IDOf(cl), objc.RegisterName("numberOfClasses"))
 	return _r
 }
 
 // Epsilon wraps the corresponding Objective-C method.
-func (x *CNNLoss) Epsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+func (cl *CNNLoss) Epsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("epsilon"))
 	return _r
 }
 
 // Delta wraps the corresponding Objective-C method.
-func (x *CNNLoss) Delta() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
+func (cl *CNNLoss) Delta() float32 {
+	_r := objc.Send[float32](objref.IDOf(cl), objc.RegisterName("delta"))
 	return _r
 }
 
 // ReduceAcrossBatch wraps the corresponding Objective-C method.
-func (x *CNNLoss) ReduceAcrossBatch() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("reduceAcrossBatch"))
+func (cl *CNNLoss) ReduceAcrossBatch() bool {
+	_r := objc.Send[bool](objref.IDOf(cl), objc.RegisterName("reduceAcrossBatch"))
 	return _r
 }
-
-// CNNLossable is the interface implemented by [CNNLoss], for mocking and DI.
-type CNNLossable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *CNNLoss
-	WithClipRect(clipRect metal.MTLRegion) *CNNLoss
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNLoss
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNLoss
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNLoss
-	LossType() CNNLossType
-	ReductionType() CNNReductionType
-	Weight() float32
-	LabelSmoothing() float32
-	NumberOfClasses() int
-	Epsilon() float32
-	Delta() float32
-	ReduceAcrossBatch() bool
-}
-
-var _ CNNLossable = (*CNNLoss)(nil)
 
 var _ CNNKernelProvider = (*CNNLoss)(nil)

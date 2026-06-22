@@ -46,24 +46,24 @@ func spatialPipelineAdopt(id objc.ID) *SpatialPipeline {
 }
 
 // Description returns the object's -description text.
-func (x *SpatialPipeline) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sp *SpatialPipeline) Description() string {
+	return rt.Description(objref.IDOf(sp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpatialPipeline) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sp *SpatialPipeline) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpatialPipeline) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sp *SpatialPipeline) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SpatialPipeline) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sp *SpatialPipeline) String() string {
+	return rt.Description(objref.IDOf(sp))
 }
 
 // NewSpatialPipelineWithFlags creates a spatial pipeline with the specified flags.
@@ -73,23 +73,14 @@ func NewSpatialPipelineWithFlags(flags SpatialPipelineFlags) *SpatialPipeline {
 	return spatialPipelineAdopt(_id)
 }
 
-// Flags spatial Pipeline Flags.
-func (x *SpatialPipeline) Flags() SpatialPipelineFlags {
-	_r := objc.Send[SpatialPipelineFlags](objref.IDOf(x), objc.RegisterName("flags"))
+// Flags returns spatial Pipeline Flags.
+func (sp *SpatialPipeline) Flags() SpatialPipelineFlags {
+	_r := objc.Send[SpatialPipelineFlags](objref.IDOf(sp), objc.RegisterName("flags"))
 	return _r
 }
 
-// Entries a dictionary of entries in the Spatial Pipeline. Upon initialization, an entry will be created for every flag in the PHASESpatialPipelineFlags passed to PHASESpatialPipeline:initWithFlags.
-func (x *SpatialPipeline) Entries() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entries"))
+// Entries returns a dictionary of entries in the Spatial Pipeline. Upon initialization, an entry will be created for every flag in the PHASESpatialPipelineFlags passed to PHASESpatialPipeline:initWithFlags.
+func (sp *SpatialPipeline) Entries() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("entries"))
 	return obj.Wrap(_r)
 }
-
-// SpatialPipelineable is the interface implemented by [SpatialPipeline], for mocking and DI.
-type SpatialPipelineable interface {
-	obj.Object
-	Flags() SpatialPipelineFlags
-	Entries() obj.Object
-}
-
-var _ SpatialPipelineable = (*SpatialPipeline)(nil)

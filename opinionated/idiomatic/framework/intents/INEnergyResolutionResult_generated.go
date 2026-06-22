@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewEnergyResolutionResult() *EnergyResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INEnergyResolutionResult")), objc.RegisterName("new"))
 	return energyResolutionResultAdopt(_id)
 }
-
-// EnergyResolutionResultable is the interface implemented by [EnergyResolutionResult], for mocking and DI.
-type EnergyResolutionResultable interface {
-	obj.Object
-}
-
-var _ EnergyResolutionResultable = (*EnergyResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*EnergyResolutionResult)(nil)

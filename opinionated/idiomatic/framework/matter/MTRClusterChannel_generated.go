@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -63,7 +64,7 @@ func NewMTRClusterChannelWithDeviceEndpointQueue(device *MTRDevice, endpoint uin
 // ChangeChannelWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // ChangeChannelWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterChannel) ChangeChannelWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRChannelClusterChangeChannelParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRChannelClusterChangeChannelResponseParams, err error) {
+func (mcc *MTRClusterChannel) ChangeChannelWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRChannelClusterChangeChannelParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRChannelClusterChangeChannelResponseParams, err error) {
 	type _result struct {
 		val *MTRChannelClusterChangeChannelResponseParams
 		err error
@@ -75,7 +76,7 @@ func (x *MTRClusterChannel) ChangeChannelWithParamsExpectedValuesExpectedValueIn
 		_o.val = MTRChannelClusterChangeChannelResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeChannelWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("changeChannelWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -88,7 +89,7 @@ func (x *MTRClusterChannel) ChangeChannelWithParamsExpectedValuesExpectedValueIn
 // GetProgramGuideWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // GetProgramGuideWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterChannel) GetProgramGuideWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRChannelClusterGetProgramGuideParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRChannelClusterProgramGuideResponseParams, err error) {
+func (mcc *MTRClusterChannel) GetProgramGuideWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRChannelClusterGetProgramGuideParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRChannelClusterProgramGuideResponseParams, err error) {
 	type _result struct {
 		val *MTRChannelClusterProgramGuideResponseParams
 		err error
@@ -100,7 +101,7 @@ func (x *MTRClusterChannel) GetProgramGuideWithParamsExpectedValuesExpectedValue
 		_o.val = MTRChannelClusterProgramGuideResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getProgramGuideWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("getProgramGuideWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -113,7 +114,7 @@ func (x *MTRClusterChannel) GetProgramGuideWithParamsExpectedValuesExpectedValue
 // GetProgramGuideWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // GetProgramGuideWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterChannel) GetProgramGuideWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRChannelClusterProgramGuideResponseParams, err error) {
+func (mcc *MTRClusterChannel) GetProgramGuideWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRChannelClusterProgramGuideResponseParams, err error) {
 	type _result struct {
 		val *MTRChannelClusterProgramGuideResponseParams
 		err error
@@ -125,7 +126,7 @@ func (x *MTRClusterChannel) GetProgramGuideWithExpectedValuesExpectedValueInterv
 		_o.val = MTRChannelClusterProgramGuideResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getProgramGuideWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("getProgramGuideWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -136,57 +137,57 @@ func (x *MTRClusterChannel) GetProgramGuideWithExpectedValuesExpectedValueInterv
 }
 
 // ReadAttributeChannelListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterChannel) ReadAttributeChannelListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChannelListWithParams:"), objref.IDOf(params))
+func (mcc *MTRClusterChannel) ReadAttributeChannelListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("readAttributeChannelListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeLineupWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterChannel) ReadAttributeLineupWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLineupWithParams:"), objref.IDOf(params))
+func (mcc *MTRClusterChannel) ReadAttributeLineupWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("readAttributeLineupWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeCurrentChannelWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterChannel) ReadAttributeCurrentChannelWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentChannelWithParams:"), objref.IDOf(params))
+func (mcc *MTRClusterChannel) ReadAttributeCurrentChannelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("readAttributeCurrentChannelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterChannel) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mcc *MTRClusterChannel) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterChannel) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mcc *MTRClusterChannel) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterChannel) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mcc *MTRClusterChannel) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterChannel) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mcc *MTRClusterChannel) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterChannel) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mcc *MTRClusterChannel) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ChangeChannelWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // ChangeChannelWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterChannel) ChangeChannelWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRChannelClusterChangeChannelParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRChannelClusterChangeChannelResponseParams, err error) {
+func (mcc *MTRClusterChannel) ChangeChannelWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRChannelClusterChangeChannelParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRChannelClusterChangeChannelResponseParams, err error) {
 	type _result struct {
 		val *MTRChannelClusterChangeChannelResponseParams
 		err error
@@ -198,7 +199,7 @@ func (x *MTRClusterChannel) ChangeChannelWithParamsExpectedValuesExpectedValueIn
 		_o.val = MTRChannelClusterChangeChannelResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeChannelWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcc), objc.RegisterName("changeChannelWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -207,25 +208,6 @@ func (x *MTRClusterChannel) ChangeChannelWithParamsExpectedValuesExpectedValueIn
 		return _zero, ctx.Err()
 	}
 }
-
-// MTRClusterChannelable is the interface implemented by [MTRClusterChannel], for mocking and DI.
-type MTRClusterChannelable interface {
-	obj.Object
-	ChangeChannelWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRChannelClusterChangeChannelParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRChannelClusterChangeChannelResponseParams, error)
-	GetProgramGuideWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRChannelClusterGetProgramGuideParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRChannelClusterProgramGuideResponseParams, error)
-	GetProgramGuideWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRChannelClusterProgramGuideResponseParams, error)
-	ReadAttributeChannelListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeLineupWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeCurrentChannelWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-	ChangeChannelWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRChannelClusterChangeChannelParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRChannelClusterChangeChannelResponseParams, error)
-}
-
-var _ MTRClusterChannelable = (*MTRClusterChannel)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterChannel)(nil)
 

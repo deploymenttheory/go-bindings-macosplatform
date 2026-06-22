@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,17 +45,10 @@ func callRecordResolutionResultAdopt(id objc.ID) *CallRecordResolutionResult {
 	return x
 }
 
-// CallRecordResolutionResultable is the interface implemented by [CallRecordResolutionResult], for mocking and DI.
-type CallRecordResolutionResultable interface {
-	obj.Object
-}
-
-var _ CallRecordResolutionResultable = (*CallRecordResolutionResult)(nil)
-
 // isCallRecordResolutionResult marks CallRecordResolutionResult — and, by embedding promotion, its
 // subclasses — as a member of the CallRecordResolutionResult hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CallRecordResolutionResult) isCallRecordResolutionResult() {}
+func (crrr *CallRecordResolutionResult) isCallRecordResolutionResult() {}
 
 var _ CallRecordResolutionResultProvider = (*CallRecordResolutionResult)(nil)
 

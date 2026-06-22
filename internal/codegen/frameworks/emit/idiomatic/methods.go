@@ -41,7 +41,15 @@ func buildMethods(
 			rawGoName = naming.MethodName(method.Selector)
 		}
 		e := buildMethod(method, rawGoName, cls, fc, ctx, m, rawPkgAlias, trialNames, abstractBases)
-		if e == nil || seenMethod[e.goName] || isReservedMemberName(e.goName) {
+		if e == nil {
+			continue
+		}
+		// Re-case recognised initialisms in the exported name (UsbControllers →
+		// USBControllers). Done before the dedup check so collisions are detected
+		// on the final name. The bridge dispatches by selector, so this is a
+		// Go-facing rename only.
+		e.goName = applyInitialisms(e.goName)
+		if seenMethod[e.goName] || isReservedMemberName(e.goName) {
 			continue
 		}
 		e.doc = method.Doc
@@ -591,7 +599,30 @@ func buildPlainMethod(
 }
 
 func writeMethod(w io.Writer, typeName string, me methodEntry) {
-	writeMethodAs(w, fmt.Sprintf("(x *%s) ", typeName), "objref.IDOf(x)", me)
+	recvVar := uniqueReceiver(typeName, methodParamNames(me))
+	writeMethodAs(w, fmt.Sprintf("(%s *%s) ", recvVar, typeName), "objref.IDOf("+recvVar+")", me)
+}
+
+// methodParamNames returns the Go signature parameter names of a method entry —
+// the names a receiver variable must not collide with. Out-parameters are
+// excluded (they are return values), slice and bool methods take no parameters,
+// and an async method's leading ctx is included.
+func methodParamNames(me methodEntry) []string {
+	var names []string
+	switch me.kind {
+	case kindAsync:
+		names = append(names, "ctx")
+		for _, p := range me.asyncNonBlockParams {
+			names = append(names, p.goName)
+		}
+	case kindPlain:
+		for _, p := range me.plainParams {
+			if !p.isOut {
+				names = append(names, p.goName)
+			}
+		}
+	}
+	return names
 }
 
 // writeClassFunc renders a class-level (static) method as a package-level
@@ -639,14 +670,16 @@ func writePlainMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 	// declaration; the body statements around it are rendered by the template.
 	call := fmt.Sprintf("objc.Send[%s](%s)", me.plainSendType, strings.Join(sendArgs, ", "))
 
+	// recv is "(rv *Type) " for an instance method (empty for a package-level
+	// class function); the receiver variable is the identifier after the opening
+	// paren.
+	recvVar := ""
+	if fields := strings.Fields(recv); len(fields) > 0 {
+		recvVar = strings.TrimPrefix(fields[0], "(")
+	}
+
 	var guards []string
-	// recv is "(x *Type) " for an instance method; the receiver variable is the
-	// identifier after the opening paren.
-	if fields := strings.Fields(
-		recv,
-	); me.indexGuardSize != "" && len(me.plainParams) == 1 &&
-		len(fields) > 0 {
-		recvVar := strings.TrimPrefix(fields[0], "(")
+	if me.indexGuardSize != "" && len(me.plainParams) == 1 && recvVar != "" {
 		guards = append(guards, fmt.Sprintf("errkit.CheckIndex(%s, %s.%s())",
 			me.plainParams[0].goName, recvVar, me.indexGuardSize))
 	}
@@ -661,11 +694,11 @@ func writePlainMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 	}
 
 	out, err := render.Method(view.Method{
-		DocComment: docLead(me.goName, me.doc, "wraps the corresponding Objective-C method."),
+		DocComment: docLeadKind(me.goName, me.doc, "wraps the corresponding Objective-C method.", plainDocKind(me)),
 		Recv:       recv,
 		GoName:     me.goName,
 		ParamStr:   strings.Join(paramParts, ", "),
-		RetSig:     plainRetSig(me),
+		RetSig:     plainRetSig(me, recvVar),
 		Dispatch: view.Dispatch{
 			Guards:  guards,
 			Call:    call,
@@ -680,6 +713,21 @@ func writePlainMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 		panic(err)
 	}
 	_, _ = w.Write(out)
+}
+
+// plainDocKind classifies a plain pass-through method for documentation: a
+// no-argument, non-error call that returns a value is an accessor (a boolean one
+// when its result is a bool), so its doc comment gets a "returns"/"reports
+// whether" lead; everything else is an action method whose Apple prose is
+// already verb-led.
+func plainDocKind(me methodEntry) docKind {
+	if len(me.plainParams) != 0 || me.plainHasError || me.plainRetType == "" {
+		return docMethod
+	}
+	if me.plainRetKind == kindBool {
+		return docBoolGetter
+	}
+	return docGetter
 }
 
 // plainRetKindToView maps the internal objKind result classification to the
@@ -709,10 +757,11 @@ func outParams(me methodEntry) []plainParam {
 	return outs
 }
 
-// plainRetSig is the return clause for a plain method, shared by the writer and
-// the mockable-interface builder so their signatures match exactly:
-// " (value, error)" | " error" | " value" | "".
-func plainRetSig(me methodEntry) string {
+// plainRetSig is the return clause for a plain method:
+// " (value, error)" | " error" | " value" | "". recvVar is the receiver
+// variable (empty for a package-level function); named returns are chosen so
+// they never collide with it.
+func plainRetSig(me methodEntry, recvVar string) string {
 	type ret struct{ name, typ string }
 	var rets []ret
 	hasOut := false
@@ -741,7 +790,10 @@ func plainRetSig(me methodEntry) string {
 	if len(rets) == 1 && !hasOut {
 		return " " + rets[0].typ
 	}
-	taken := map[string]bool{"x": true}
+	taken := map[string]bool{}
+	if recvVar != "" {
+		taken[recvVar] = true
+	}
 	for _, p := range me.plainParams {
 		if !p.isOut {
 			taken[p.goName] = true
@@ -860,7 +912,7 @@ func writeSliceMethod(w io.Writer, recv, recvExpr string, me methodEntry) {
 	conv := fmt.Sprintf(me.sliceConvFmt, "_id")
 	convClosure := fmt.Sprintf("func(_id objc.ID) %s { return %s }", me.sliceElemGoType, conv)
 	out, err := render.SliceMethod(view.SliceMethod{
-		DocComment:  docLead(me.goName, me.doc, "wraps the corresponding Objective-C method."),
+		DocComment:  docLeadKind(me.goName, me.doc, "wraps the corresponding Objective-C method.", docGetter),
 		Recv:        recv,
 		GoName:      me.goName,
 		RecvExpr:    recvExpr,

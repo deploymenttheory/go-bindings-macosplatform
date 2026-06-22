@@ -46,24 +46,24 @@ func pipelineBufferDescriptorAdopt(id objc.ID) *PipelineBufferDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *PipelineBufferDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pbd *PipelineBufferDescriptor) Description() string {
+	return rt.Description(objref.IDOf(pbd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PipelineBufferDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pbd *PipelineBufferDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pbd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PipelineBufferDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pbd *PipelineBufferDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pbd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PipelineBufferDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pbd *PipelineBufferDescriptor) String() string {
+	return rt.Description(objref.IDOf(pbd))
 }
 
 // NewPipelineBufferDescriptor creates a new PipelineBufferDescriptor.
@@ -72,29 +72,14 @@ func NewPipelineBufferDescriptor() *PipelineBufferDescriptor {
 	return pipelineBufferDescriptorAdopt(_id)
 }
 
-// WithMutability a mutability option that determines whether you can update a buffer’s contents before related commands use the buffer.
-func (x *PipelineBufferDescriptor) WithMutability(mutability Mutability) *PipelineBufferDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMutability:"), mutability)
-	return x
+// WithMutability sets a mutability option that determines whether you can update a buffer’s contents before related commands use the buffer.
+func (pbd *PipelineBufferDescriptor) WithMutability(mutability Mutability) *PipelineBufferDescriptor {
+	objc.Send[objc.ID](objref.IDOf(pbd), objc.RegisterName("setMutability:"), mutability)
+	return pbd
 }
 
 // Mutability wraps the corresponding Objective-C method.
-func (x *PipelineBufferDescriptor) Mutability() Mutability {
-	_r := objc.Send[Mutability](objref.IDOf(x), objc.RegisterName("mutability"))
+func (pbd *PipelineBufferDescriptor) Mutability() Mutability {
+	_r := objc.Send[Mutability](objref.IDOf(pbd), objc.RegisterName("mutability"))
 	return _r
 }
-
-// SetMutability wraps the corresponding Objective-C method.
-func (x *PipelineBufferDescriptor) SetMutability(mutability Mutability) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMutability:"), mutability)
-}
-
-// PipelineBufferDescriptorable is the interface implemented by [PipelineBufferDescriptor], for mocking and DI.
-type PipelineBufferDescriptorable interface {
-	obj.Object
-	WithMutability(mutability Mutability) *PipelineBufferDescriptor
-	Mutability() Mutability
-	SetMutability(mutability Mutability)
-}
-
-var _ PipelineBufferDescriptorable = (*PipelineBufferDescriptor)(nil)

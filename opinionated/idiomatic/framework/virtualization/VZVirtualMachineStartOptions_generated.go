@@ -48,36 +48,29 @@ func virtualMachineStartOptionsAdopt(id objc.ID) *VirtualMachineStartOptions {
 }
 
 // Description returns the object's -description text.
-func (x *VirtualMachineStartOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vmso *VirtualMachineStartOptions) Description() string {
+	return rt.Description(objref.IDOf(vmso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtualMachineStartOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vmso *VirtualMachineStartOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vmso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtualMachineStartOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vmso *VirtualMachineStartOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vmso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VirtualMachineStartOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vmso *VirtualMachineStartOptions) String() string {
+	return rt.Description(objref.IDOf(vmso))
 }
-
-// VirtualMachineStartOptionsable is the interface implemented by [VirtualMachineStartOptions], for mocking and DI.
-type VirtualMachineStartOptionsable interface {
-	obj.Object
-}
-
-var _ VirtualMachineStartOptionsable = (*VirtualMachineStartOptions)(nil)
 
 // isVirtualMachineStartOptions marks VirtualMachineStartOptions — and, by embedding promotion, its
 // subclasses — as a member of the VirtualMachineStartOptions hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *VirtualMachineStartOptions) isVirtualMachineStartOptions() {}
+func (vmso *VirtualMachineStartOptions) isVirtualMachineStartOptions() {}
 
 var _ VirtualMachineStartOptionsProvider = (*VirtualMachineStartOptions)(nil)

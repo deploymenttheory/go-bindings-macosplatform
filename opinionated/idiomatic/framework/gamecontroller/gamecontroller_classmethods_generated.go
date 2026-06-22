@@ -6,6 +6,7 @@ package gamecontroller
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
@@ -19,13 +20,13 @@ func Controllers() []*Controller {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Controller { return ControllerFromID(_id) })
 }
 
-// Current the most recently used game controller. If a user actuates a game controller input, that controller will become the current one.
+// Current returns the most recently used game controller. If a user actuates a game controller input, that controller will become the current one.
 func Current() *Controller {
 	_r := objc.Send[objc.ID](objc.ID(_class("GCController")), objc.RegisterName("current"))
 	return ControllerFromID(_r)
 }
 
-// ShouldMonitorBackgroundEvents whether the current application should monitor and respond to game controller events when it is not the frontmost application.
+// ShouldMonitorBackgroundEvents reports whether the current application should monitor and respond to game controller events when it is not the frontmost application.
 func ShouldMonitorBackgroundEvents() bool {
 	_r := objc.Send[bool](objc.ID(_class("GCController")), objc.RegisterName("shouldMonitorBackgroundEvents"))
 	return _r
@@ -70,7 +71,7 @@ func StopWirelessControllerDiscovery() {
 	objc.Send[objc.ID](objc.ID(_class("GCController")), objc.RegisterName("stopWirelessControllerDiscovery"))
 }
 
-// CoalescedKeyboard keyboard object that represents all keyboards connected to the device Should be used to query key states every time input needs to be handled
+// CoalescedKeyboard returns keyboard object that represents all keyboards connected to the device Should be used to query key states every time input needs to be handled
 func CoalescedKeyboard() *Keyboard {
 	_r := objc.Send[objc.ID](objc.ID(_class("GCKeyboard")), objc.RegisterName("coalescedKeyboard"))
 	return KeyboardFromID(_r)
@@ -84,7 +85,7 @@ func Mice() []*Mouse {
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Mouse { return MouseFromID(_id) })
 }
 
-// GCMouseCurrent the most recently used mouse device. If a user actuates a mouse input, that mouse will become the current one.
+// GCMouseCurrent returns the most recently used mouse device. If a user actuates a mouse input, that mouse will become the current one.
 func GCMouseCurrent() *Mouse {
 	_r := objc.Send[objc.ID](objc.ID(_class("GCMouse")), objc.RegisterName("current"))
 	return MouseFromID(_r)

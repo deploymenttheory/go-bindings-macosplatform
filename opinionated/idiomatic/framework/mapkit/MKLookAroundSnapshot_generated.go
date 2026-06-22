@@ -46,24 +46,24 @@ func lookAroundSnapshotAdopt(id objc.ID) *LookAroundSnapshot {
 }
 
 // Description returns the object's -description text.
-func (x *LookAroundSnapshot) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (las *LookAroundSnapshot) Description() string {
+	return rt.Description(objref.IDOf(las))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LookAroundSnapshot) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (las *LookAroundSnapshot) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(las), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LookAroundSnapshot) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (las *LookAroundSnapshot) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(las), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LookAroundSnapshot) String() string {
-	return rt.Description(objref.IDOf(x))
+func (las *LookAroundSnapshot) String() string {
+	return rt.Description(objref.IDOf(las))
 }
 
 // NewLookAroundSnapshot creates a new LookAroundSnapshot.
@@ -73,15 +73,7 @@ func NewLookAroundSnapshot() *LookAroundSnapshot {
 }
 
 // Image wraps the corresponding Objective-C method.
-func (x *LookAroundSnapshot) Image() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+func (las *LookAroundSnapshot) Image() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(las), objc.RegisterName("image"))
 	return obj.Wrap(_r)
 }
-
-// LookAroundSnapshotable is the interface implemented by [LookAroundSnapshot], for mocking and DI.
-type LookAroundSnapshotable interface {
-	obj.Object
-	Image() obj.Object
-}
-
-var _ LookAroundSnapshotable = (*LookAroundSnapshot)(nil)

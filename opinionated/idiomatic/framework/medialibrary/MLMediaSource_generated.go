@@ -46,24 +46,24 @@ func mediaSourceAdopt(id objc.ID) *MediaSource {
 }
 
 // Description returns the object's -description text.
-func (x *MediaSource) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ms *MediaSource) Description() string {
+	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MediaSource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ms *MediaSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MediaSource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ms *MediaSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MediaSource) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ms *MediaSource) String() string {
+	return rt.Description(objref.IDOf(ms))
 }
 
 // NewMediaSource creates a new MediaSource.
@@ -73,38 +73,38 @@ func NewMediaSource() *MediaSource {
 }
 
 // MediaGroupForIdentifier returns the media group with the specified identifier.
-func (x *MediaSource) MediaGroupForIdentifier(mediaGroupIdentifier string) *MediaGroup {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaGroupForIdentifier:"), purego.NSString(mediaGroupIdentifier))
+func (ms *MediaSource) MediaGroupForIdentifier(mediaGroupIdentifier string) *MediaGroup {
+	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("mediaGroupForIdentifier:"), purego.NSString(mediaGroupIdentifier))
 	return MediaGroupFromID(_r)
 }
 
 // MediaGroupsForIdentifiers returns the media groups with the specified identifiers.
-func (x *MediaSource) MediaGroupsForIdentifiers(mediaGroupIdentifiers []string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaGroupsForIdentifiers:"), purego.SliceToNSArray(mediaGroupIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
+func (ms *MediaSource) MediaGroupsForIdentifiers(mediaGroupIdentifiers []string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("mediaGroupsForIdentifiers:"), purego.SliceToNSArray(mediaGroupIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return obj.Wrap(_r)
 }
 
 // MediaObjectForIdentifier returns the media object with the specified identifier.
-func (x *MediaSource) MediaObjectForIdentifier(mediaObjectIdentifier string) *MediaObject {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaObjectForIdentifier:"), purego.NSString(mediaObjectIdentifier))
+func (ms *MediaSource) MediaObjectForIdentifier(mediaObjectIdentifier string) *MediaObject {
+	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("mediaObjectForIdentifier:"), purego.NSString(mediaObjectIdentifier))
 	return MediaObjectFromID(_r)
 }
 
 // MediaObjectsForIdentifiers returns the media objects with the specified identifiers.
-func (x *MediaSource) MediaObjectsForIdentifiers(mediaObjectIdentifiers []string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaObjectsForIdentifiers:"), purego.SliceToNSArray(mediaObjectIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
+func (ms *MediaSource) MediaObjectsForIdentifiers(mediaObjectIdentifiers []string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("mediaObjectsForIdentifiers:"), purego.SliceToNSArray(mediaObjectIdentifiers, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return obj.Wrap(_r)
 }
 
 // MediaLibrary wraps the corresponding Objective-C method.
-func (x *MediaSource) MediaLibrary() *MediaLibrary {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaLibrary"))
+func (ms *MediaSource) MediaLibrary() *MediaLibrary {
+	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("mediaLibrary"))
 	return MediaLibraryFromID(_r)
 }
 
 // MediaSourceIdentifier wraps the corresponding Objective-C method.
-func (x *MediaSource) MediaSourceIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSourceIdentifier"))
+func (ms *MediaSource) MediaSourceIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("mediaSourceIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -112,28 +112,13 @@ func (x *MediaSource) MediaSourceIdentifier() string {
 }
 
 // Attributes wraps the corresponding Objective-C method.
-func (x *MediaSource) Attributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+func (ms *MediaSource) Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
 // RootMediaGroup wraps the corresponding Objective-C method.
-func (x *MediaSource) RootMediaGroup() *MediaGroup {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootMediaGroup"))
+func (ms *MediaSource) RootMediaGroup() *MediaGroup {
+	_r := objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("rootMediaGroup"))
 	return MediaGroupFromID(_r)
 }
-
-// MediaSourceable is the interface implemented by [MediaSource], for mocking and DI.
-type MediaSourceable interface {
-	obj.Object
-	MediaGroupForIdentifier(mediaGroupIdentifier string) *MediaGroup
-	MediaGroupsForIdentifiers(mediaGroupIdentifiers []string) obj.Object
-	MediaObjectForIdentifier(mediaObjectIdentifier string) *MediaObject
-	MediaObjectsForIdentifiers(mediaObjectIdentifiers []string) obj.Object
-	MediaLibrary() *MediaLibrary
-	MediaSourceIdentifier() string
-	Attributes() obj.Object
-	RootMediaGroup() *MediaGroup
-}
-
-var _ MediaSourceable = (*MediaSource)(nil)

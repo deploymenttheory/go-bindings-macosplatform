@@ -46,24 +46,24 @@ func activityMoveModeObjectAdopt(id objc.ID) *ActivityMoveModeObject {
 }
 
 // Description returns the object's -description text.
-func (x *ActivityMoveModeObject) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ammo *ActivityMoveModeObject) Description() string {
+	return rt.Description(objref.IDOf(ammo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ActivityMoveModeObject) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ammo *ActivityMoveModeObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ammo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ActivityMoveModeObject) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ammo *ActivityMoveModeObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ammo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ActivityMoveModeObject) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ammo *ActivityMoveModeObject) String() string {
+	return rt.Description(objref.IDOf(ammo))
 }
 
 // NewActivityMoveModeObject creates a new ActivityMoveModeObject.
@@ -73,15 +73,7 @@ func NewActivityMoveModeObject() *ActivityMoveModeObject {
 }
 
 // ActivityMoveMode wraps the corresponding Objective-C method.
-func (x *ActivityMoveModeObject) ActivityMoveMode() ActivityMoveMode {
-	_r := objc.Send[ActivityMoveMode](objref.IDOf(x), objc.RegisterName("activityMoveMode"))
+func (ammo *ActivityMoveModeObject) ActivityMoveMode() ActivityMoveMode {
+	_r := objc.Send[ActivityMoveMode](objref.IDOf(ammo), objc.RegisterName("activityMoveMode"))
 	return _r
 }
-
-// ActivityMoveModeObjectable is the interface implemented by [ActivityMoveModeObject], for mocking and DI.
-type ActivityMoveModeObjectable interface {
-	obj.Object
-	ActivityMoveMode() ActivityMoveMode
-}
-
-var _ ActivityMoveModeObjectable = (*ActivityMoveModeObject)(nil)

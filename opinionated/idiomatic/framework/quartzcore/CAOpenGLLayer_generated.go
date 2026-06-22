@@ -53,436 +53,358 @@ func NewOpenGLLayer() *OpenGLLayer {
 	return openGLLayerAdopt(_id)
 }
 
-// WithAsynchronous determines when the contents of the layer are updated.
-func (x *OpenGLLayer) WithAsynchronous(asynchronous bool) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAsynchronous:"), asynchronous)
-	return x
+// WithAsynchronous sets determines when the contents of the layer are updated.
+func (ogl *OpenGLLayer) WithAsynchronous(asynchronous bool) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setAsynchronous:"), asynchronous)
+	return ogl
 }
 
-// WithColorspace the layer’s colorspace in Core Graphics.
-func (x *OpenGLLayer) WithColorspace(colorspace obj.Object) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace))
-	return x
+// WithColorspace sets the layer’s colorspace in Core Graphics.
+func (ogl *OpenGLLayer) WithColorspace(colorspace obj.Object) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace))
+	return ogl
 }
 
-// WithBounds the layer’s bounds rectangle. Animatable.
-func (x *OpenGLLayer) WithBounds(bounds corefoundation.CGRect) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the layer’s bounds rectangle. Animatable.
+func (ogl *OpenGLLayer) WithBounds(bounds corefoundation.CGRect) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setBounds:"), bounds)
+	return ogl
 }
 
-// WithPosition the layer’s position in its superlayer’s coordinate space. Animatable.
-func (x *OpenGLLayer) WithPosition(position corefoundation.CGPoint) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
-	return x
+// WithPosition sets the layer’s position in its superlayer’s coordinate space. Animatable.
+func (ogl *OpenGLLayer) WithPosition(position corefoundation.CGPoint) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setPosition:"), position)
+	return ogl
 }
 
-// WithZPosition the layer’s position on the z axis. Animatable.
-func (x *OpenGLLayer) WithZPosition(zPosition float64) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
-	return x
+// WithZPosition sets the layer’s position on the z axis. Animatable.
+func (ogl *OpenGLLayer) WithZPosition(zPosition float64) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setZPosition:"), zPosition)
+	return ogl
 }
 
-// WithAnchorPoint defines the anchor point of the layer’s bounds rectangle. Animatable.
-func (x *OpenGLLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
-	return x
+// WithAnchorPoint sets defines the anchor point of the layer’s bounds rectangle. Animatable.
+func (ogl *OpenGLLayer) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	return ogl
 }
 
-// WithAnchorPointZ the anchor point for the layer’s position along the z axis. Animatable.
-func (x *OpenGLLayer) WithAnchorPointZ(anchorPointZ float64) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
-	return x
+// WithAnchorPointZ sets the anchor point for the layer’s position along the z axis. Animatable.
+func (ogl *OpenGLLayer) WithAnchorPointZ(anchorPointZ float64) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setAnchorPointZ:"), anchorPointZ)
+	return ogl
 }
 
-// WithFrame the layer’s frame rectangle.
-func (x *OpenGLLayer) WithFrame(frame corefoundation.CGRect) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the layer’s frame rectangle.
+func (ogl *OpenGLLayer) WithFrame(frame corefoundation.CGRect) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setFrame:"), frame)
+	return ogl
 }
 
-// WithHidden a Boolean indicating whether the layer is displayed. Animatable.
-func (x *OpenGLLayer) WithHidden(hidden bool) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean indicating whether the layer is displayed. Animatable.
+func (ogl *OpenGLLayer) WithHidden(hidden bool) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setHidden:"), hidden)
+	return ogl
 }
 
-// WithDoubleSided a Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
-func (x *OpenGLLayer) WithDoubleSided(doubleSided bool) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleSided:"), doubleSided)
-	return x
+// WithDoubleSided sets a Boolean indicating whether the layer displays its content when facing away from the viewer. Animatable.
+func (ogl *OpenGLLayer) WithDoubleSided(doubleSided bool) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setDoubleSided:"), doubleSided)
+	return ogl
 }
 
-// WithGeometryFlipped a Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
-func (x *OpenGLLayer) WithGeometryFlipped(geometryFlipped bool) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
-	return x
+// WithGeometryFlipped sets a Boolean that indicates whether the geometry of the layer and its sublayers is flipped vertically.
+func (ogl *OpenGLLayer) WithGeometryFlipped(geometryFlipped bool) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setGeometryFlipped:"), geometryFlipped)
+	return ogl
 }
 
-// WithSublayers an array containing the layer’s sublayers.
-func (x *OpenGLLayer) WithSublayers(items ...LayerProvider) *OpenGLLayer {
+// WithSublayers sets an array containing the layer’s sublayers.
+func (ogl *OpenGLLayer) WithSublayers(items ...LayerProvider) *OpenGLLayer {
 	_arr := purego.SliceToNSArray(items, func(_v LayerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSublayers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setSublayers:"), _arr)
+	return ogl
 }
 
-// WithMask an optional layer whose alpha channel is used to mask the layer’s content.
-func (x *OpenGLLayer) WithMask(mask LayerProvider) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMask:"), objref.IDOf(mask))
-	return x
+// WithMask sets an optional layer whose alpha channel is used to mask the layer’s content.
+func (ogl *OpenGLLayer) WithMask(mask LayerProvider) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setMask:"), objref.IDOf(mask))
+	return ogl
 }
 
-// WithMasksToBounds a Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
-func (x *OpenGLLayer) WithMasksToBounds(masksToBounds bool) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMasksToBounds:"), masksToBounds)
-	return x
+// WithMasksToBounds sets a Boolean indicating whether sublayers are clipped to the layer’s bounds. Animatable.
+func (ogl *OpenGLLayer) WithMasksToBounds(masksToBounds bool) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setMasksToBounds:"), masksToBounds)
+	return ogl
 }
 
-// WithContents an object that provides the contents of the layer. Animatable.
-func (x *OpenGLLayer) WithContents(contents obj.Object) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContents:"), objref.IDOf(contents))
-	return x
+// WithContents sets an object that provides the contents of the layer. Animatable.
+func (ogl *OpenGLLayer) WithContents(contents obj.Object) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setContents:"), objref.IDOf(contents))
+	return ogl
 }
 
-// WithContentsRect the rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
-func (x *OpenGLLayer) WithContentsRect(contentsRect corefoundation.CGRect) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsRect:"), contentsRect)
-	return x
+// WithContentsRect sets the rectangle, in the unit coordinate space, that defines the portion of the layer’s contents that should be used. Animatable.
+func (ogl *OpenGLLayer) WithContentsRect(contentsRect corefoundation.CGRect) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setContentsRect:"), contentsRect)
+	return ogl
 }
 
-// WithContentsGravity a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
-func (x *OpenGLLayer) WithContentsGravity(contentsGravity obj.Object) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
-	return x
+// WithContentsGravity sets a constant that specifies how the layer’s contents are positioned or scaled within its bounds.
+func (ogl *OpenGLLayer) WithContentsGravity(contentsGravity obj.Object) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setContentsGravity:"), objref.IDOf(contentsGravity))
+	return ogl
 }
 
-// WithContentsScale the scale factor applied to the layer.
-func (x *OpenGLLayer) WithContentsScale(contentsScale float64) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsScale:"), contentsScale)
-	return x
+// WithContentsScale sets the scale factor applied to the layer.
+func (ogl *OpenGLLayer) WithContentsScale(contentsScale float64) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setContentsScale:"), contentsScale)
+	return ogl
 }
 
-// WithContentsCenter the rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
-func (x *OpenGLLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsCenter:"), contentsCenter)
-	return x
+// WithContentsCenter sets the rectangle that defines how the layer contents are scaled if the layer’s contents are resized. Animatable.
+func (ogl *OpenGLLayer) WithContentsCenter(contentsCenter corefoundation.CGRect) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setContentsCenter:"), contentsCenter)
+	return ogl
 }
 
-// WithContentsFormat a hint for the desired storage format of the layer contents.
-func (x *OpenGLLayer) WithContentsFormat(contentsFormat obj.Object) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
-	return x
+// WithContentsFormat sets a hint for the desired storage format of the layer contents.
+func (ogl *OpenGLLayer) WithContentsFormat(contentsFormat obj.Object) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setContentsFormat:"), objref.IDOf(contentsFormat))
+	return ogl
 }
 
 // WithWantsExtendedDynamicRangeContent sets the property and returns the receiver so calls can be chained.
-func (x *OpenGLLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
-	return x
+func (ogl *OpenGLLayer) WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setWantsExtendedDynamicRangeContent:"), wantsExtendedDynamicRangeContent)
+	return ogl
 }
 
 // WithToneMapMode sets the property and returns the receiver so calls can be chained.
-func (x *OpenGLLayer) WithToneMapMode(toneMapMode obj.Object) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
-	return x
+func (ogl *OpenGLLayer) WithToneMapMode(toneMapMode obj.Object) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setToneMapMode:"), objref.IDOf(toneMapMode))
+	return ogl
 }
 
 // WithPreferredDynamicRange sets the property and returns the receiver so calls can be chained.
-func (x *OpenGLLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
-	return x
+func (ogl *OpenGLLayer) WithPreferredDynamicRange(preferredDynamicRange obj.Object) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setPreferredDynamicRange:"), objref.IDOf(preferredDynamicRange))
+	return ogl
 }
 
 // WithContentsHeadroom sets the property and returns the receiver so calls can be chained.
-func (x *OpenGLLayer) WithContentsHeadroom(contentsHeadroom float64) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
-	return x
+func (ogl *OpenGLLayer) WithContentsHeadroom(contentsHeadroom float64) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setContentsHeadroom:"), contentsHeadroom)
+	return ogl
 }
 
-// WithMinificationFilter the filter used when reducing the size of the content.
-func (x *OpenGLLayer) WithMinificationFilter(minificationFilter obj.Object) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
-	return x
+// WithMinificationFilter sets the filter used when reducing the size of the content.
+func (ogl *OpenGLLayer) WithMinificationFilter(minificationFilter obj.Object) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setMinificationFilter:"), objref.IDOf(minificationFilter))
+	return ogl
 }
 
-// WithMagnificationFilter the filter used when increasing the size of the content.
-func (x *OpenGLLayer) WithMagnificationFilter(magnificationFilter obj.Object) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
-	return x
+// WithMagnificationFilter sets the filter used when increasing the size of the content.
+func (ogl *OpenGLLayer) WithMagnificationFilter(magnificationFilter obj.Object) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setMagnificationFilter:"), objref.IDOf(magnificationFilter))
+	return ogl
 }
 
-// WithMinificationFilterBias the bias factor used by the minification filter to determine the levels of detail.
-func (x *OpenGLLayer) WithMinificationFilterBias(minificationFilterBias float32) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
-	return x
+// WithMinificationFilterBias sets the bias factor used by the minification filter to determine the levels of detail.
+func (ogl *OpenGLLayer) WithMinificationFilterBias(minificationFilterBias float32) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setMinificationFilterBias:"), minificationFilterBias)
+	return ogl
 }
 
-// WithOpaque a Boolean value indicating whether the layer contains completely opaque content.
-func (x *OpenGLLayer) WithOpaque(opaque bool) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets a Boolean value indicating whether the layer contains completely opaque content.
+func (ogl *OpenGLLayer) WithOpaque(opaque bool) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setOpaque:"), opaque)
+	return ogl
 }
 
-// WithNeedsDisplayOnBoundsChange a Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
-func (x *OpenGLLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
-	return x
+// WithNeedsDisplayOnBoundsChange sets a Boolean indicating whether the layer contents must be updated when its bounds rectangle changes.
+func (ogl *OpenGLLayer) WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setNeedsDisplayOnBoundsChange:"), needsDisplayOnBoundsChange)
+	return ogl
 }
 
-// WithDrawsAsynchronously a Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
-func (x *OpenGLLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
-	return x
+// WithDrawsAsynchronously sets a Boolean indicating whether drawing commands are deferred and processed asynchronously in a background thread.
+func (ogl *OpenGLLayer) WithDrawsAsynchronously(drawsAsynchronously bool) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setDrawsAsynchronously:"), drawsAsynchronously)
+	return ogl
 }
 
-// WithEdgeAntialiasingMask a bitmask defining how the edges of the receiver are rasterized.
-func (x *OpenGLLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
-	return x
+// WithEdgeAntialiasingMask sets a bitmask defining how the edges of the receiver are rasterized.
+func (ogl *OpenGLLayer) WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setEdgeAntialiasingMask:"), edgeAntialiasingMask)
+	return ogl
 }
 
-// WithAllowsEdgeAntialiasing a Boolean indicating whether the layer is allowed to perform edge antialiasing.
-func (x *OpenGLLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
-	return x
+// WithAllowsEdgeAntialiasing sets a Boolean indicating whether the layer is allowed to perform edge antialiasing.
+func (ogl *OpenGLLayer) WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setAllowsEdgeAntialiasing:"), allowsEdgeAntialiasing)
+	return ogl
 }
 
-// WithBackgroundColor the background color of the receiver. Animatable.
-func (x *OpenGLLayer) WithBackgroundColor(backgroundColor obj.Object) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the background color of the receiver. Animatable.
+func (ogl *OpenGLLayer) WithBackgroundColor(backgroundColor obj.Object) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return ogl
 }
 
-// WithCornerRadius the radius to use when drawing rounded corners for the layer’s background. Animatable.
-func (x *OpenGLLayer) WithCornerRadius(cornerRadius float64) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerRadius:"), cornerRadius)
-	return x
+// WithCornerRadius sets the radius to use when drawing rounded corners for the layer’s background. Animatable.
+func (ogl *OpenGLLayer) WithCornerRadius(cornerRadius float64) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setCornerRadius:"), cornerRadius)
+	return ogl
 }
 
 // WithMaskedCorners sets the property and returns the receiver so calls can be chained.
-func (x *OpenGLLayer) WithMaskedCorners(maskedCorners CornerMask) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskedCorners:"), maskedCorners)
-	return x
+func (ogl *OpenGLLayer) WithMaskedCorners(maskedCorners CornerMask) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setMaskedCorners:"), maskedCorners)
+	return ogl
 }
 
 // WithCornerCurve sets the property and returns the receiver so calls can be chained.
-func (x *OpenGLLayer) WithCornerCurve(cornerCurve obj.Object) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
-	return x
+func (ogl *OpenGLLayer) WithCornerCurve(cornerCurve obj.Object) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setCornerCurve:"), objref.IDOf(cornerCurve))
+	return ogl
 }
 
-// WithBorderWidth the width of the layer’s border. Animatable.
-func (x *OpenGLLayer) WithBorderWidth(borderWidth float64) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderWidth:"), borderWidth)
-	return x
+// WithBorderWidth sets the width of the layer’s border. Animatable.
+func (ogl *OpenGLLayer) WithBorderWidth(borderWidth float64) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setBorderWidth:"), borderWidth)
+	return ogl
 }
 
-// WithBorderColor the color of the layer’s border. Animatable.
-func (x *OpenGLLayer) WithBorderColor(borderColor obj.Object) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
-	return x
+// WithBorderColor sets the color of the layer’s border. Animatable.
+func (ogl *OpenGLLayer) WithBorderColor(borderColor obj.Object) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	return ogl
 }
 
-// WithOpacity the opacity of the receiver. Animatable.
-func (x *OpenGLLayer) WithOpacity(opacity float32) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpacity:"), opacity)
-	return x
+// WithOpacity sets the opacity of the receiver. Animatable.
+func (ogl *OpenGLLayer) WithOpacity(opacity float32) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setOpacity:"), opacity)
+	return ogl
 }
 
-// WithAllowsGroupOpacity a Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
-func (x *OpenGLLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
-	return x
+// WithAllowsGroupOpacity sets a Boolean indicating whether the layer is allowed to composite itself as a group separate from its parent.
+func (ogl *OpenGLLayer) WithAllowsGroupOpacity(allowsGroupOpacity bool) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setAllowsGroupOpacity:"), allowsGroupOpacity)
+	return ogl
 }
 
-// WithCompositingFilter a CoreImage filter used to composite the layer and the content behind it. Animatable.
-func (x *OpenGLLayer) WithCompositingFilter(compositingFilter obj.Object) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+// WithCompositingFilter sets a CoreImage filter used to composite the layer and the content behind it. Animatable.
+func (ogl *OpenGLLayer) WithCompositingFilter(compositingFilter obj.Object) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return ogl
 }
 
-// WithShouldRasterize a Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
-func (x *OpenGLLayer) WithShouldRasterize(shouldRasterize bool) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
-	return x
+// WithShouldRasterize sets a Boolean that indicates whether the layer is rendered as a bitmap before compositing. Animatable
+func (ogl *OpenGLLayer) WithShouldRasterize(shouldRasterize bool) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	return ogl
 }
 
-// WithRasterizationScale the scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
-func (x *OpenGLLayer) WithRasterizationScale(rasterizationScale float64) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
-	return x
+// WithRasterizationScale sets the scale at which to rasterize content, relative to the coordinate space of the layer. Animatable
+func (ogl *OpenGLLayer) WithRasterizationScale(rasterizationScale float64) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setRasterizationScale:"), rasterizationScale)
+	return ogl
 }
 
-// WithShadowColor the color of the layer’s shadow. Animatable.
-func (x *OpenGLLayer) WithShadowColor(shadowColor obj.Object) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
-	return x
+// WithShadowColor sets the color of the layer’s shadow. Animatable.
+func (ogl *OpenGLLayer) WithShadowColor(shadowColor obj.Object) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setShadowColor:"), objref.IDOf(shadowColor))
+	return ogl
 }
 
-// WithShadowOpacity the opacity of the layer’s shadow. Animatable.
-func (x *OpenGLLayer) WithShadowOpacity(shadowOpacity float32) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
-	return x
+// WithShadowOpacity sets the opacity of the layer’s shadow. Animatable.
+func (ogl *OpenGLLayer) WithShadowOpacity(shadowOpacity float32) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setShadowOpacity:"), shadowOpacity)
+	return ogl
 }
 
-// WithShadowOffset the offset (in points) of the layer’s shadow. Animatable.
-func (x *OpenGLLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowOffset:"), shadowOffset)
-	return x
+// WithShadowOffset sets the offset (in points) of the layer’s shadow. Animatable.
+func (ogl *OpenGLLayer) WithShadowOffset(shadowOffset corefoundation.CGSize) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setShadowOffset:"), shadowOffset)
+	return ogl
 }
 
-// WithShadowRadius the blur radius (in points) used to render the layer’s shadow. Animatable.
-func (x *OpenGLLayer) WithShadowRadius(shadowRadius float64) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowRadius:"), shadowRadius)
-	return x
+// WithShadowRadius sets the blur radius (in points) used to render the layer’s shadow. Animatable.
+func (ogl *OpenGLLayer) WithShadowRadius(shadowRadius float64) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setShadowRadius:"), shadowRadius)
+	return ogl
 }
 
-// WithShadowPath the shape of the layer’s shadow. Animatable.
-func (x *OpenGLLayer) WithShadowPath(shadowPath obj.Object) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
-	return x
+// WithShadowPath sets the shape of the layer’s shadow. Animatable.
+func (ogl *OpenGLLayer) WithShadowPath(shadowPath obj.Object) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setShadowPath:"), objref.IDOf(shadowPath))
+	return ogl
 }
 
-// WithAutoresizingMask a bitmask defining how the layer is resized when the bounds of its superlayer changes.
-func (x *OpenGLLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+// WithAutoresizingMask sets a bitmask defining how the layer is resized when the bounds of its superlayer changes.
+func (ogl *OpenGLLayer) WithAutoresizingMask(autoresizingMask AutoresizingMask) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return ogl
 }
 
-// WithActions a dictionary containing layer actions.
-func (x *OpenGLLayer) WithActions(actions obj.Object) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActions:"), objref.IDOf(actions))
-	return x
+// WithActions sets a dictionary containing layer actions.
+func (ogl *OpenGLLayer) WithActions(actions obj.Object) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setActions:"), objref.IDOf(actions))
+	return ogl
 }
 
-// WithName the name of the receiver.
-func (x *OpenGLLayer) WithName(name string) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the receiver.
+func (ogl *OpenGLLayer) WithName(name string) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setName:"), purego.NSString(name))
+	return ogl
 }
 
-// WithStyle an optional dictionary used to store property values that aren’t explicitly defined by the layer.
-func (x *OpenGLLayer) WithStyle(style obj.Object) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), objref.IDOf(style))
-	return x
+// WithStyle sets an optional dictionary used to store property values that aren’t explicitly defined by the layer.
+func (ogl *OpenGLLayer) WithStyle(style obj.Object) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setStyle:"), objref.IDOf(style))
+	return ogl
 }
 
-// WithConstraints the constraints used to position current layer’s sublayers.
-func (x *OpenGLLayer) WithConstraints(items ...*Constraint) *OpenGLLayer {
+// WithConstraints sets the constraints used to position current layer’s sublayers.
+func (ogl *OpenGLLayer) WithConstraints(items ...*Constraint) *OpenGLLayer {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setConstraints:"), _arr)
+	return ogl
 }
 
 // CopyCGLPixelFormatForDisplayMask returns the OpenGL pixel format suitable for rendering to the set of displays specified by the display mask.
-func (x *OpenGLLayer) CopyCGLPixelFormatForDisplayMask(mask uint32) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyCGLPixelFormatForDisplayMask:"), mask)
+func (ogl *OpenGLLayer) CopyCGLPixelFormatForDisplayMask(mask uint32) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("copyCGLPixelFormatForDisplayMask:"), mask)
 	return obj.Wrap(_r)
 }
 
 // ReleaseCGLPixelFormat releases the specified OpenGL pixel format object.
-func (x *OpenGLLayer) ReleaseCGLPixelFormat(pf obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseCGLPixelFormat:"), objref.IDOf(pf))
+func (ogl *OpenGLLayer) ReleaseCGLPixelFormat(pf obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("releaseCGLPixelFormat:"), objref.IDOf(pf))
 }
 
 // CopyCGLContextForPixelFormat returns the rendering context the receiver requires for the specified pixel format.
-func (x *OpenGLLayer) CopyCGLContextForPixelFormat(pf obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyCGLContextForPixelFormat:"), objref.IDOf(pf))
+func (ogl *OpenGLLayer) CopyCGLContextForPixelFormat(pf obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("copyCGLContextForPixelFormat:"), objref.IDOf(pf))
 	return obj.Wrap(_r)
 }
 
 // ReleaseCGLContext releases the specified rendering context.
-func (x *OpenGLLayer) ReleaseCGLContext(ctx obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseCGLContext:"), objref.IDOf(ctx))
+func (ogl *OpenGLLayer) ReleaseCGLContext(ctx obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("releaseCGLContext:"), objref.IDOf(ctx))
 }
 
 // IsAsynchronous wraps the corresponding Objective-C method.
-func (x *OpenGLLayer) IsAsynchronous() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAsynchronous"))
+func (ogl *OpenGLLayer) IsAsynchronous() bool {
+	_r := objc.Send[bool](objref.IDOf(ogl), objc.RegisterName("isAsynchronous"))
 	return _r
 }
 
-// SetAsynchronous wraps the corresponding Objective-C method.
-func (x *OpenGLLayer) SetAsynchronous(asynchronous bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAsynchronous:"), asynchronous)
-}
-
 // Colorspace wraps the corresponding Objective-C method.
-func (x *OpenGLLayer) Colorspace() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorspace"))
+func (ogl *OpenGLLayer) Colorspace() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("colorspace"))
 	return obj.Wrap(_r)
 }
-
-// SetColorspace wraps the corresponding Objective-C method.
-func (x *OpenGLLayer) SetColorspace(colorspace obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace))
-}
-
-// OpenGLLayerable is the interface implemented by [OpenGLLayer], for mocking and DI.
-type OpenGLLayerable interface {
-	obj.Object
-	WithAsynchronous(asynchronous bool) *OpenGLLayer
-	WithColorspace(colorspace obj.Object) *OpenGLLayer
-	WithBounds(bounds corefoundation.CGRect) *OpenGLLayer
-	WithPosition(position corefoundation.CGPoint) *OpenGLLayer
-	WithZPosition(zPosition float64) *OpenGLLayer
-	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *OpenGLLayer
-	WithAnchorPointZ(anchorPointZ float64) *OpenGLLayer
-	WithFrame(frame corefoundation.CGRect) *OpenGLLayer
-	WithHidden(hidden bool) *OpenGLLayer
-	WithDoubleSided(doubleSided bool) *OpenGLLayer
-	WithGeometryFlipped(geometryFlipped bool) *OpenGLLayer
-	WithSublayers(items ...LayerProvider) *OpenGLLayer
-	WithMask(mask LayerProvider) *OpenGLLayer
-	WithMasksToBounds(masksToBounds bool) *OpenGLLayer
-	WithContents(contents obj.Object) *OpenGLLayer
-	WithContentsRect(contentsRect corefoundation.CGRect) *OpenGLLayer
-	WithContentsGravity(contentsGravity obj.Object) *OpenGLLayer
-	WithContentsScale(contentsScale float64) *OpenGLLayer
-	WithContentsCenter(contentsCenter corefoundation.CGRect) *OpenGLLayer
-	WithContentsFormat(contentsFormat obj.Object) *OpenGLLayer
-	WithWantsExtendedDynamicRangeContent(wantsExtendedDynamicRangeContent bool) *OpenGLLayer
-	WithToneMapMode(toneMapMode obj.Object) *OpenGLLayer
-	WithPreferredDynamicRange(preferredDynamicRange obj.Object) *OpenGLLayer
-	WithContentsHeadroom(contentsHeadroom float64) *OpenGLLayer
-	WithMinificationFilter(minificationFilter obj.Object) *OpenGLLayer
-	WithMagnificationFilter(magnificationFilter obj.Object) *OpenGLLayer
-	WithMinificationFilterBias(minificationFilterBias float32) *OpenGLLayer
-	WithOpaque(opaque bool) *OpenGLLayer
-	WithNeedsDisplayOnBoundsChange(needsDisplayOnBoundsChange bool) *OpenGLLayer
-	WithDrawsAsynchronously(drawsAsynchronously bool) *OpenGLLayer
-	WithEdgeAntialiasingMask(edgeAntialiasingMask EdgeAntialiasingMask) *OpenGLLayer
-	WithAllowsEdgeAntialiasing(allowsEdgeAntialiasing bool) *OpenGLLayer
-	WithBackgroundColor(backgroundColor obj.Object) *OpenGLLayer
-	WithCornerRadius(cornerRadius float64) *OpenGLLayer
-	WithMaskedCorners(maskedCorners CornerMask) *OpenGLLayer
-	WithCornerCurve(cornerCurve obj.Object) *OpenGLLayer
-	WithBorderWidth(borderWidth float64) *OpenGLLayer
-	WithBorderColor(borderColor obj.Object) *OpenGLLayer
-	WithOpacity(opacity float32) *OpenGLLayer
-	WithAllowsGroupOpacity(allowsGroupOpacity bool) *OpenGLLayer
-	WithCompositingFilter(compositingFilter obj.Object) *OpenGLLayer
-	WithShouldRasterize(shouldRasterize bool) *OpenGLLayer
-	WithRasterizationScale(rasterizationScale float64) *OpenGLLayer
-	WithShadowColor(shadowColor obj.Object) *OpenGLLayer
-	WithShadowOpacity(shadowOpacity float32) *OpenGLLayer
-	WithShadowOffset(shadowOffset corefoundation.CGSize) *OpenGLLayer
-	WithShadowRadius(shadowRadius float64) *OpenGLLayer
-	WithShadowPath(shadowPath obj.Object) *OpenGLLayer
-	WithAutoresizingMask(autoresizingMask AutoresizingMask) *OpenGLLayer
-	WithActions(actions obj.Object) *OpenGLLayer
-	WithName(name string) *OpenGLLayer
-	WithStyle(style obj.Object) *OpenGLLayer
-	WithConstraints(items ...*Constraint) *OpenGLLayer
-	CopyCGLPixelFormatForDisplayMask(mask uint32) obj.Object
-	ReleaseCGLPixelFormat(pf obj.Object)
-	CopyCGLContextForPixelFormat(pf obj.Object) obj.Object
-	ReleaseCGLContext(ctx obj.Object)
-	IsAsynchronous() bool
-	SetAsynchronous(asynchronous bool)
-	Colorspace() obj.Object
-	SetColorspace(colorspace obj.Object)
-}
-
-var _ OpenGLLayerable = (*OpenGLLayer)(nil)
 
 var _ LayerProvider = (*OpenGLLayer)(nil)

@@ -46,24 +46,24 @@ func recurrenceDayOfWeekAdopt(id objc.ID) *RecurrenceDayOfWeek {
 }
 
 // Description returns the object's -description text.
-func (x *RecurrenceDayOfWeek) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rdow *RecurrenceDayOfWeek) Description() string {
+	return rt.Description(objref.IDOf(rdow))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecurrenceDayOfWeek) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rdow *RecurrenceDayOfWeek) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rdow), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecurrenceDayOfWeek) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rdow *RecurrenceDayOfWeek) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rdow), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RecurrenceDayOfWeek) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rdow *RecurrenceDayOfWeek) String() string {
+	return rt.Description(objref.IDOf(rdow))
 }
 
 // NewRecurrenceDayOfWeekWithDayOfTheWeekWeekNumber initializes and returns a day of the week with a given day and week number.
@@ -73,23 +73,14 @@ func NewRecurrenceDayOfWeekWithDayOfTheWeekWeekNumber(dayOfTheWeek Weekday, week
 	return recurrenceDayOfWeekAdopt(_id)
 }
 
-// DayOfTheWeek the day of the week.
-func (x *RecurrenceDayOfWeek) DayOfTheWeek() Weekday {
-	_r := objc.Send[Weekday](objref.IDOf(x), objc.RegisterName("dayOfTheWeek"))
+// DayOfTheWeek returns the day of the week.
+func (rdow *RecurrenceDayOfWeek) DayOfTheWeek() Weekday {
+	_r := objc.Send[Weekday](objref.IDOf(rdow), objc.RegisterName("dayOfTheWeek"))
 	return _r
 }
 
-// WeekNumber the week number.
-func (x *RecurrenceDayOfWeek) WeekNumber() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("weekNumber"))
+// WeekNumber returns the week number.
+func (rdow *RecurrenceDayOfWeek) WeekNumber() int {
+	_r := objc.Send[int](objref.IDOf(rdow), objc.RegisterName("weekNumber"))
 	return _r
 }
-
-// RecurrenceDayOfWeekable is the interface implemented by [RecurrenceDayOfWeek], for mocking and DI.
-type RecurrenceDayOfWeekable interface {
-	obj.Object
-	DayOfTheWeek() Weekday
-	WeekNumber() int
-}
-
-var _ RecurrenceDayOfWeekable = (*RecurrenceDayOfWeek)(nil)

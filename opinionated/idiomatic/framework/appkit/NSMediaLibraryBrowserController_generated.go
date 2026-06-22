@@ -47,24 +47,24 @@ func mediaLibraryBrowserControllerAdopt(id objc.ID) *MediaLibraryBrowserControll
 }
 
 // Description returns the object's -description text.
-func (x *MediaLibraryBrowserController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mlbc *MediaLibraryBrowserController) Description() string {
+	return rt.Description(objref.IDOf(mlbc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MediaLibraryBrowserController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mlbc *MediaLibraryBrowserController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mlbc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MediaLibraryBrowserController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mlbc *MediaLibraryBrowserController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mlbc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MediaLibraryBrowserController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mlbc *MediaLibraryBrowserController) String() string {
+	return rt.Description(objref.IDOf(mlbc))
 }
 
 // NewMediaLibraryBrowserController creates a new MediaLibraryBrowserController.
@@ -73,75 +73,43 @@ func NewMediaLibraryBrowserController() *MediaLibraryBrowserController {
 	return mediaLibraryBrowserControllerAdopt(_id)
 }
 
-// WithVisible a Boolean value that determines whether the Media Library Browser panel is visible.
-func (x *MediaLibraryBrowserController) WithVisible(visible bool) *MediaLibraryBrowserController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisible:"), visible)
-	return x
+// WithVisible sets a Boolean value that determines whether the Media Library Browser panel is visible.
+func (mlbc *MediaLibraryBrowserController) WithVisible(visible bool) *MediaLibraryBrowserController {
+	objc.Send[objc.ID](objref.IDOf(mlbc), objc.RegisterName("setVisible:"), visible)
+	return mlbc
 }
 
-// WithFrame the frame, in global coordinates, used to display the Media Library Browser panel.
-func (x *MediaLibraryBrowserController) WithFrame(frame corefoundation.CGRect) *MediaLibraryBrowserController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the frame, in global coordinates, used to display the Media Library Browser panel.
+func (mlbc *MediaLibraryBrowserController) WithFrame(frame corefoundation.CGRect) *MediaLibraryBrowserController {
+	objc.Send[objc.ID](objref.IDOf(mlbc), objc.RegisterName("setFrame:"), frame)
+	return mlbc
 }
 
-// WithMediaLibraries the media library that is in use.
-func (x *MediaLibraryBrowserController) WithMediaLibraries(mediaLibraries MediaLibrary) *MediaLibraryBrowserController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaLibraries:"), mediaLibraries)
-	return x
+// WithMediaLibraries sets the media library that is in use.
+func (mlbc *MediaLibraryBrowserController) WithMediaLibraries(mediaLibraries MediaLibrary) *MediaLibraryBrowserController {
+	objc.Send[objc.ID](objref.IDOf(mlbc), objc.RegisterName("setMediaLibraries:"), mediaLibraries)
+	return mlbc
 }
 
 // TogglePanel toggles the visibility of the Media Library Browser.
-func (x *MediaLibraryBrowserController) TogglePanel(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("togglePanel:"), objref.IDOf(sender))
+func (mlbc *MediaLibraryBrowserController) TogglePanel(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mlbc), objc.RegisterName("togglePanel:"), objref.IDOf(sender))
 }
 
 // IsVisible wraps the corresponding Objective-C method.
-func (x *MediaLibraryBrowserController) IsVisible() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVisible"))
+func (mlbc *MediaLibraryBrowserController) IsVisible() bool {
+	_r := objc.Send[bool](objref.IDOf(mlbc), objc.RegisterName("isVisible"))
 	return _r
-}
-
-// SetVisible wraps the corresponding Objective-C method.
-func (x *MediaLibraryBrowserController) SetVisible(visible bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisible:"), visible)
 }
 
 // Frame wraps the corresponding Objective-C method.
-func (x *MediaLibraryBrowserController) Frame() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("frame"))
+func (mlbc *MediaLibraryBrowserController) Frame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(mlbc), objc.RegisterName("frame"))
 	return _r
-}
-
-// SetFrame wraps the corresponding Objective-C method.
-func (x *MediaLibraryBrowserController) SetFrame(frame corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
 }
 
 // MediaLibraries wraps the corresponding Objective-C method.
-func (x *MediaLibraryBrowserController) MediaLibraries() MediaLibrary {
-	_r := objc.Send[MediaLibrary](objref.IDOf(x), objc.RegisterName("mediaLibraries"))
+func (mlbc *MediaLibraryBrowserController) MediaLibraries() MediaLibrary {
+	_r := objc.Send[MediaLibrary](objref.IDOf(mlbc), objc.RegisterName("mediaLibraries"))
 	return _r
 }
-
-// SetMediaLibraries wraps the corresponding Objective-C method.
-func (x *MediaLibraryBrowserController) SetMediaLibraries(mediaLibraries MediaLibrary) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaLibraries:"), mediaLibraries)
-}
-
-// MediaLibraryBrowserControllerable is the interface implemented by [MediaLibraryBrowserController], for mocking and DI.
-type MediaLibraryBrowserControllerable interface {
-	obj.Object
-	WithVisible(visible bool) *MediaLibraryBrowserController
-	WithFrame(frame corefoundation.CGRect) *MediaLibraryBrowserController
-	WithMediaLibraries(mediaLibraries MediaLibrary) *MediaLibraryBrowserController
-	TogglePanel(sender obj.Object)
-	IsVisible() bool
-	SetVisible(visible bool)
-	Frame() corefoundation.CGRect
-	SetFrame(frame corefoundation.CGRect)
-	MediaLibraries() MediaLibrary
-	SetMediaLibraries(mediaLibraries MediaLibrary)
-}
-
-var _ MediaLibraryBrowserControllerable = (*MediaLibraryBrowserController)(nil)

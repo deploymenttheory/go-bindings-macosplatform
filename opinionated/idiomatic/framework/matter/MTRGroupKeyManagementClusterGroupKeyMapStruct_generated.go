@@ -44,24 +44,24 @@ func mTRGroupKeyManagementClusterGroupKeyMapStructAdopt(id objc.ID) *MTRGroupKey
 }
 
 // Description returns the object's -description text.
-func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) Description() string {
+	return rt.Description(objref.IDOf(mgkmcgkms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mgkmcgkms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mgkmcgkms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) String() string {
+	return rt.Description(objref.IDOf(mgkmcgkms))
 }
 
 // NewMTRGroupKeyManagementClusterGroupKeyMapStruct creates a new MTRGroupKeyManagementClusterGroupKeyMapStruct.
@@ -70,69 +70,38 @@ func NewMTRGroupKeyManagementClusterGroupKeyMapStruct() *MTRGroupKeyManagementCl
 	return mTRGroupKeyManagementClusterGroupKeyMapStructAdopt(_id)
 }
 
-// WithGroupId sets the property and returns the receiver so calls can be chained.
-func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) WithGroupId(groupId obj.Object) *MTRGroupKeyManagementClusterGroupKeyMapStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupId:"), objref.IDOf(groupId))
-	return x
+// WithGroupID sets the property and returns the receiver so calls can be chained.
+func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) WithGroupID(groupId obj.Object) *MTRGroupKeyManagementClusterGroupKeyMapStruct {
+	objc.Send[objc.ID](objref.IDOf(mgkmcgkms), objc.RegisterName("setGroupId:"), objref.IDOf(groupId))
+	return mgkmcgkms
 }
 
 // WithGroupKeySetID sets the property and returns the receiver so calls can be chained.
-func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) WithGroupKeySetID(groupKeySetID obj.Object) *MTRGroupKeyManagementClusterGroupKeyMapStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupKeySetID:"), objref.IDOf(groupKeySetID))
-	return x
+func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) WithGroupKeySetID(groupKeySetID obj.Object) *MTRGroupKeyManagementClusterGroupKeyMapStruct {
+	objc.Send[objc.ID](objref.IDOf(mgkmcgkms), objc.RegisterName("setGroupKeySetID:"), objref.IDOf(groupKeySetID))
+	return mgkmcgkms
 }
 
 // WithFabricIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) WithFabricIndex(fabricIndex obj.Object) *MTRGroupKeyManagementClusterGroupKeyMapStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-	return x
+func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) WithFabricIndex(fabricIndex obj.Object) *MTRGroupKeyManagementClusterGroupKeyMapStruct {
+	objc.Send[objc.ID](objref.IDOf(mgkmcgkms), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return mgkmcgkms
 }
 
-// GroupId wraps the corresponding Objective-C method.
-func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) GroupId() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupId"))
+// GroupID wraps the corresponding Objective-C method.
+func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) GroupID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkms), objc.RegisterName("groupId"))
 	return obj.Wrap(_r)
-}
-
-// SetGroupId wraps the corresponding Objective-C method.
-func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) SetGroupId(groupId obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupId:"), objref.IDOf(groupId))
 }
 
 // GroupKeySetID wraps the corresponding Objective-C method.
-func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) GroupKeySetID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupKeySetID"))
+func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) GroupKeySetID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkms), objc.RegisterName("groupKeySetID"))
 	return obj.Wrap(_r)
-}
-
-// SetGroupKeySetID wraps the corresponding Objective-C method.
-func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) SetGroupKeySetID(groupKeySetID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupKeySetID:"), objref.IDOf(groupKeySetID))
 }
 
 // FabricIndex wraps the corresponding Objective-C method.
-func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) FabricIndex() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+func (mgkmcgkms *MTRGroupKeyManagementClusterGroupKeyMapStruct) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgkmcgkms), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
-
-// SetFabricIndex wraps the corresponding Objective-C method.
-func (x *MTRGroupKeyManagementClusterGroupKeyMapStruct) SetFabricIndex(fabricIndex obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-}
-
-// MTRGroupKeyManagementClusterGroupKeyMapStructable is the interface implemented by [MTRGroupKeyManagementClusterGroupKeyMapStruct], for mocking and DI.
-type MTRGroupKeyManagementClusterGroupKeyMapStructable interface {
-	obj.Object
-	WithGroupId(groupId obj.Object) *MTRGroupKeyManagementClusterGroupKeyMapStruct
-	WithGroupKeySetID(groupKeySetID obj.Object) *MTRGroupKeyManagementClusterGroupKeyMapStruct
-	WithFabricIndex(fabricIndex obj.Object) *MTRGroupKeyManagementClusterGroupKeyMapStruct
-	GroupId() obj.Object
-	SetGroupId(groupId obj.Object)
-	GroupKeySetID() obj.Object
-	SetGroupKeySetID(groupKeySetID obj.Object)
-	FabricIndex() obj.Object
-	SetFabricIndex(fabricIndex obj.Object)
-}
-
-var _ MTRGroupKeyManagementClusterGroupKeyMapStructable = (*MTRGroupKeyManagementClusterGroupKeyMapStruct)(nil)

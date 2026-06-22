@@ -7,7 +7,6 @@ package contacts
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,27 +52,18 @@ func NewChangeHistoryAddGroupEvent() *ChangeHistoryAddGroupEvent {
 }
 
 // Group wraps the corresponding Objective-C method.
-func (x *ChangeHistoryAddGroupEvent) Group() *Group {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("group"))
+func (chage *ChangeHistoryAddGroupEvent) Group() *Group {
+	_r := objc.Send[objc.ID](objref.IDOf(chage), objc.RegisterName("group"))
 	return GroupFromID(_r)
 }
 
 // ContainerIdentifier wraps the corresponding Objective-C method.
-func (x *ChangeHistoryAddGroupEvent) ContainerIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containerIdentifier"))
+func (chage *ChangeHistoryAddGroupEvent) ContainerIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(chage), objc.RegisterName("containerIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ChangeHistoryAddGroupEventable is the interface implemented by [ChangeHistoryAddGroupEvent], for mocking and DI.
-type ChangeHistoryAddGroupEventable interface {
-	obj.Object
-	Group() *Group
-	ContainerIdentifier() string
-}
-
-var _ ChangeHistoryAddGroupEventable = (*ChangeHistoryAddGroupEvent)(nil)
 
 var _ ChangeHistoryEventProvider = (*ChangeHistoryAddGroupEvent)(nil)

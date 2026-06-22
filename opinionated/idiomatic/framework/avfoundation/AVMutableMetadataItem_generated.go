@@ -52,128 +52,58 @@ func NewMutableMetadataItem() *MutableMetadataItem {
 	return mutableMetadataItemAdopt(_id)
 }
 
-// WithIdentifier indicates the identifier of the metadata item.
-func (x *MutableMetadataItem) WithIdentifier(identifier obj.Object) *MutableMetadataItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
-	return x
+// WithIdentifier sets indicates the identifier of the metadata item.
+func (mmi *MutableMetadataItem) WithIdentifier(identifier obj.Object) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
+	return mmi
 }
 
-// WithExtendedLanguageTag the IETF BCP 47 (RFC 4646) language identifier of the metadata item.
-func (x *MutableMetadataItem) WithExtendedLanguageTag(extendedLanguageTag string) *MutableMetadataItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedLanguageTag:"), purego.NSString(extendedLanguageTag))
-	return x
+// WithExtendedLanguageTag sets the IETF BCP 47 (RFC 4646) language identifier of the metadata item.
+func (mmi *MutableMetadataItem) WithExtendedLanguageTag(extendedLanguageTag string) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setExtendedLanguageTag:"), purego.NSString(extendedLanguageTag))
+	return mmi
 }
 
-// WithLocale the locale for a mutable metadata item.
-func (x *MutableMetadataItem) WithLocale(locale obj.Object) *MutableMetadataItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
-	return x
+// WithLocale sets the locale for a mutable metadata item.
+func (mmi *MutableMetadataItem) WithLocale(locale obj.Object) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setLocale:"), objref.IDOf(locale))
+	return mmi
 }
 
-// WithDataType the data type of the metadata item’s value.
-func (x *MutableMetadataItem) WithDataType(dataType string) *MutableMetadataItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataType:"), purego.NSString(dataType))
-	return x
+// WithDataType sets the data type of the metadata item’s value.
+func (mmi *MutableMetadataItem) WithDataType(dataType string) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setDataType:"), purego.NSString(dataType))
+	return mmi
 }
 
-// WithValue the value for the mutable metadata item.
-func (x *MutableMetadataItem) WithValue(value obj.Object) *MutableMetadataItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
+// WithValue sets the value for the mutable metadata item.
+func (mmi *MutableMetadataItem) WithValue(value obj.Object) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return mmi
 }
 
-// WithExtraAttributes a dictionary of additional attributes for a metadata item.
-func (x *MutableMetadataItem) WithExtraAttributes(extraAttributes obj.Object) *MutableMetadataItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtraAttributes:"), objref.IDOf(extraAttributes))
-	return x
+// WithExtraAttributes sets a dictionary of additional attributes for a metadata item.
+func (mmi *MutableMetadataItem) WithExtraAttributes(extraAttributes obj.Object) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setExtraAttributes:"), objref.IDOf(extraAttributes))
+	return mmi
 }
 
-// WithStartDate the start date of the timed metadata.
-func (x *MutableMetadataItem) WithStartDate(startDate obj.Object) *MutableMetadataItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
-	return x
+// WithStartDate sets the start date of the timed metadata.
+func (mmi *MutableMetadataItem) WithStartDate(startDate obj.Object) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
+	return mmi
 }
 
-// WithKeySpace the key space of the metadata item’s key.
-func (x *MutableMetadataItem) WithKeySpace(keySpace obj.Object) *MutableMetadataItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeySpace:"), objref.IDOf(keySpace))
-	return x
+// WithKeySpace sets the key space of the metadata item’s key.
+func (mmi *MutableMetadataItem) WithKeySpace(keySpace obj.Object) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setKeySpace:"), objref.IDOf(keySpace))
+	return mmi
 }
 
-// WithKey the key for a mutable metadata item.
-func (x *MutableMetadataItem) WithKey(key obj.Object) *MutableMetadataItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
-	return x
+// WithKey sets the key for a mutable metadata item.
+func (mmi *MutableMetadataItem) WithKey(key obj.Object) *MutableMetadataItem {
+	objc.Send[objc.ID](objref.IDOf(mmi), objc.RegisterName("setKey:"), objref.IDOf(key))
+	return mmi
 }
-
-// SetIdentifier wraps the corresponding Objective-C method.
-func (x *MutableMetadataItem) SetIdentifier(identifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
-}
-
-// SetExtendedLanguageTag wraps the corresponding Objective-C method.
-func (x *MutableMetadataItem) SetExtendedLanguageTag(extendedLanguageTag string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedLanguageTag:"), purego.NSString(extendedLanguageTag))
-}
-
-// SetLocale wraps the corresponding Objective-C method.
-func (x *MutableMetadataItem) SetLocale(locale obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
-}
-
-// SetDataType wraps the corresponding Objective-C method.
-func (x *MutableMetadataItem) SetDataType(dataType string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataType:"), purego.NSString(dataType))
-}
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *MutableMetadataItem) SetValue(value obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-}
-
-// SetExtraAttributes wraps the corresponding Objective-C method.
-func (x *MutableMetadataItem) SetExtraAttributes(extraAttributes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtraAttributes:"), objref.IDOf(extraAttributes))
-}
-
-// SetStartDate wraps the corresponding Objective-C method.
-func (x *MutableMetadataItem) SetStartDate(startDate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
-}
-
-// SetKeySpace wraps the corresponding Objective-C method.
-func (x *MutableMetadataItem) SetKeySpace(keySpace obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeySpace:"), objref.IDOf(keySpace))
-}
-
-// SetKey wraps the corresponding Objective-C method.
-func (x *MutableMetadataItem) SetKey(key obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
-}
-
-// MutableMetadataItemable is the interface implemented by [MutableMetadataItem], for mocking and DI.
-type MutableMetadataItemable interface {
-	obj.Object
-	WithIdentifier(identifier obj.Object) *MutableMetadataItem
-	WithExtendedLanguageTag(extendedLanguageTag string) *MutableMetadataItem
-	WithLocale(locale obj.Object) *MutableMetadataItem
-	WithDataType(dataType string) *MutableMetadataItem
-	WithValue(value obj.Object) *MutableMetadataItem
-	WithExtraAttributes(extraAttributes obj.Object) *MutableMetadataItem
-	WithStartDate(startDate obj.Object) *MutableMetadataItem
-	WithKeySpace(keySpace obj.Object) *MutableMetadataItem
-	WithKey(key obj.Object) *MutableMetadataItem
-	SetIdentifier(identifier obj.Object)
-	SetExtendedLanguageTag(extendedLanguageTag string)
-	SetLocale(locale obj.Object)
-	SetDataType(dataType string)
-	SetValue(value obj.Object)
-	SetExtraAttributes(extraAttributes obj.Object)
-	SetStartDate(startDate obj.Object)
-	SetKeySpace(keySpace obj.Object)
-	SetKey(key obj.Object)
-}
-
-var _ MutableMetadataItemable = (*MutableMetadataItem)(nil)
 
 var _ MetadataItemProvider = (*MutableMetadataItem)(nil)

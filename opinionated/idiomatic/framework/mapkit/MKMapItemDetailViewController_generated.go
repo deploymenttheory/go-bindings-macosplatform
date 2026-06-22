@@ -46,24 +46,24 @@ func mapItemDetailViewControllerAdopt(id objc.ID) *MapItemDetailViewController {
 }
 
 // Description returns the object's -description text.
-func (x *MapItemDetailViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (midvc *MapItemDetailViewController) Description() string {
+	return rt.Description(objref.IDOf(midvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MapItemDetailViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (midvc *MapItemDetailViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(midvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MapItemDetailViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (midvc *MapItemDetailViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(midvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MapItemDetailViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (midvc *MapItemDetailViewController) String() string {
+	return rt.Description(objref.IDOf(midvc))
 }
 
 // NewMapItemDetailViewControllerWithMapItemDisplaysMap create a map item detail view controller
@@ -80,29 +80,14 @@ func NewMapItemDetailViewControllerWithMapItem(mapItem *MapItem) *MapItemDetailV
 	return mapItemDetailViewControllerAdopt(_id)
 }
 
-// WithMapItem the map item to display.
-func (x *MapItemDetailViewController) WithMapItem(mapItem *MapItem) *MapItemDetailViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapItem:"), objref.IDOf(mapItem))
-	return x
+// WithMapItem sets the map item to display.
+func (midvc *MapItemDetailViewController) WithMapItem(mapItem *MapItem) *MapItemDetailViewController {
+	objc.Send[objc.ID](objref.IDOf(midvc), objc.RegisterName("setMapItem:"), objref.IDOf(mapItem))
+	return midvc
 }
 
 // MapItem wraps the corresponding Objective-C method.
-func (x *MapItemDetailViewController) MapItem() *MapItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapItem"))
+func (midvc *MapItemDetailViewController) MapItem() *MapItem {
+	_r := objc.Send[objc.ID](objref.IDOf(midvc), objc.RegisterName("mapItem"))
 	return MapItemFromID(_r)
 }
-
-// SetMapItem wraps the corresponding Objective-C method.
-func (x *MapItemDetailViewController) SetMapItem(mapItem *MapItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapItem:"), objref.IDOf(mapItem))
-}
-
-// MapItemDetailViewControllerable is the interface implemented by [MapItemDetailViewController], for mocking and DI.
-type MapItemDetailViewControllerable interface {
-	obj.Object
-	WithMapItem(mapItem *MapItem) *MapItemDetailViewController
-	MapItem() *MapItem
-	SetMapItem(mapItem *MapItem)
-}
-
-var _ MapItemDetailViewControllerable = (*MapItemDetailViewController)(nil)

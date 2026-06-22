@@ -7,7 +7,6 @@ package accessibility
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,24 +51,15 @@ func NewMathExpressionFractionWithNumeratorExpressionDenimonatorExpression(numer
 }
 
 // NumeratorExpression wraps the corresponding Objective-C method.
-func (x *MathExpressionFraction) NumeratorExpression() *MathExpression {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numeratorExpression"))
+func (mef *MathExpressionFraction) NumeratorExpression() *MathExpression {
+	_r := objc.Send[objc.ID](objref.IDOf(mef), objc.RegisterName("numeratorExpression"))
 	return MathExpressionFromID(_r)
 }
 
 // DenimonatorExpression wraps the corresponding Objective-C method.
-func (x *MathExpressionFraction) DenimonatorExpression() *MathExpression {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("denimonatorExpression"))
+func (mef *MathExpressionFraction) DenimonatorExpression() *MathExpression {
+	_r := objc.Send[objc.ID](objref.IDOf(mef), objc.RegisterName("denimonatorExpression"))
 	return MathExpressionFromID(_r)
 }
-
-// MathExpressionFractionable is the interface implemented by [MathExpressionFraction], for mocking and DI.
-type MathExpressionFractionable interface {
-	obj.Object
-	NumeratorExpression() *MathExpression
-	DenimonatorExpression() *MathExpression
-}
-
-var _ MathExpressionFractionable = (*MathExpressionFraction)(nil)
 
 var _ MathExpressionProvider = (*MathExpressionFraction)(nil)

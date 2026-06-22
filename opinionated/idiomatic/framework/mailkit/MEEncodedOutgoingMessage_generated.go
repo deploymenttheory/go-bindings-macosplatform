@@ -46,24 +46,24 @@ func encodedOutgoingMessageAdopt(id objc.ID) *EncodedOutgoingMessage {
 }
 
 // Description returns the object's -description text.
-func (x *EncodedOutgoingMessage) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (eom *EncodedOutgoingMessage) Description() string {
+	return rt.Description(objref.IDOf(eom))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EncodedOutgoingMessage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (eom *EncodedOutgoingMessage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(eom), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EncodedOutgoingMessage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (eom *EncodedOutgoingMessage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(eom), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *EncodedOutgoingMessage) String() string {
-	return rt.Description(objref.IDOf(x))
+func (eom *EncodedOutgoingMessage) String() string {
+	return rt.Description(objref.IDOf(eom))
 }
 
 // NewEncodedOutgoingMessageWithRawDataIsSignedIsEncrypted creates an object that contains the outgoing message’s encoded data, and indicates if the encoder encrypted or signed the message.
@@ -73,30 +73,20 @@ func NewEncodedOutgoingMessageWithRawDataIsSignedIsEncrypted(rawData obj.Object,
 	return encodedOutgoingMessageAdopt(_id)
 }
 
-// RawData the full encoded RFC822 message including headers and body.
-func (x *EncodedOutgoingMessage) RawData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rawData"))
+// RawData returns the full encoded RFC822 message including headers and body.
+func (eom *EncodedOutgoingMessage) RawData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(eom), objc.RegisterName("rawData"))
 	return obj.Wrap(_r)
 }
 
-// IsSigned whether or not the encoded message is signed
-func (x *EncodedOutgoingMessage) IsSigned() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSigned"))
+// IsSigned reports whether the encoded message is signed
+func (eom *EncodedOutgoingMessage) IsSigned() bool {
+	_r := objc.Send[bool](objref.IDOf(eom), objc.RegisterName("isSigned"))
 	return _r
 }
 
-// IsEncrypted whether or not the encoded message is encrypted
-func (x *EncodedOutgoingMessage) IsEncrypted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEncrypted"))
+// IsEncrypted reports whether the encoded message is encrypted
+func (eom *EncodedOutgoingMessage) IsEncrypted() bool {
+	_r := objc.Send[bool](objref.IDOf(eom), objc.RegisterName("isEncrypted"))
 	return _r
 }
-
-// EncodedOutgoingMessageable is the interface implemented by [EncodedOutgoingMessage], for mocking and DI.
-type EncodedOutgoingMessageable interface {
-	obj.Object
-	RawData() obj.Object
-	IsSigned() bool
-	IsEncrypted() bool
-}
-
-var _ EncodedOutgoingMessageable = (*EncodedOutgoingMessage)(nil)

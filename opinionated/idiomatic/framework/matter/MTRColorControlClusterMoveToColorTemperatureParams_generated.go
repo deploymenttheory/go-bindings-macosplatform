@@ -44,24 +44,24 @@ func mTRColorControlClusterMoveToColorTemperatureParamsAdopt(id objc.ID) *MTRCol
 }
 
 // Description returns the object's -description text.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) Description() string {
+	return rt.Description(objref.IDOf(mcccmtctp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcccmtctp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcccmtctp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) String() string {
+	return rt.Description(objref.IDOf(mcccmtctp))
 }
 
 // NewMTRColorControlClusterMoveToColorTemperatureParams creates a new MTRColorControlClusterMoveToColorTemperatureParams.
@@ -71,148 +71,85 @@ func NewMTRColorControlClusterMoveToColorTemperatureParams() *MTRColorControlClu
 }
 
 // WithColorTemperatureMireds sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) WithColorTemperatureMireds(colorTemperatureMireds obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorTemperatureMireds:"), objref.IDOf(colorTemperatureMireds))
-	return x
+func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) WithColorTemperatureMireds(colorTemperatureMireds obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("setColorTemperatureMireds:"), objref.IDOf(colorTemperatureMireds))
+	return mcccmtctp
 }
 
 // WithTransitionTime sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
-	return x
+func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
+	return mcccmtctp
 }
 
 // WithOptionsMask sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
-	return x
+func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
+	return mcccmtctp
 }
 
 // WithOptionsOverride sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
-	return x
+func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
+	return mcccmtctp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mcccmtctp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mcccmtctp
 }
 
 // WithColorTemperature sets the property and returns the receiver so calls can be chained.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) WithColorTemperature(colorTemperature obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorTemperature:"), objref.IDOf(colorTemperature))
-	return x
+func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) WithColorTemperature(colorTemperature obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams {
+	objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("setColorTemperature:"), objref.IDOf(colorTemperature))
+	return mcccmtctp
 }
 
 // ColorTemperatureMireds wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) ColorTemperatureMireds() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorTemperatureMireds"))
+func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) ColorTemperatureMireds() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("colorTemperatureMireds"))
 	return obj.Wrap(_r)
-}
-
-// SetColorTemperatureMireds wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) SetColorTemperatureMireds(colorTemperatureMireds obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorTemperatureMireds:"), objref.IDOf(colorTemperatureMireds))
 }
 
 // TransitionTime wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) TransitionTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionTime"))
+func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) TransitionTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("transitionTime"))
 	return obj.Wrap(_r)
-}
-
-// SetTransitionTime wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) SetTransitionTime(transitionTime obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitionTime:"), objref.IDOf(transitionTime))
 }
 
 // OptionsMask wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) OptionsMask() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsMask"))
+func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) OptionsMask() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("optionsMask"))
 	return obj.Wrap(_r)
-}
-
-// SetOptionsMask wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) SetOptionsMask(optionsMask obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsMask:"), objref.IDOf(optionsMask))
 }
 
 // OptionsOverride wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) OptionsOverride() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsOverride"))
+func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) OptionsOverride() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("optionsOverride"))
 	return obj.Wrap(_r)
 }
 
-// SetOptionsOverride wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) SetOptionsOverride(optionsOverride obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsOverride:"), objref.IDOf(optionsOverride))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
-}
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // ColorTemperature wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) ColorTemperature() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorTemperature"))
+func (mcccmtctp *MTRColorControlClusterMoveToColorTemperatureParams) ColorTemperature() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccmtctp), objc.RegisterName("colorTemperature"))
 	return obj.Wrap(_r)
 }
-
-// SetColorTemperature wraps the corresponding Objective-C method.
-func (x *MTRColorControlClusterMoveToColorTemperatureParams) SetColorTemperature(colorTemperature obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorTemperature:"), objref.IDOf(colorTemperature))
-}
-
-// MTRColorControlClusterMoveToColorTemperatureParamsable is the interface implemented by [MTRColorControlClusterMoveToColorTemperatureParams], for mocking and DI.
-type MTRColorControlClusterMoveToColorTemperatureParamsable interface {
-	obj.Object
-	WithColorTemperatureMireds(colorTemperatureMireds obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams
-	WithTransitionTime(transitionTime obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams
-	WithOptionsMask(optionsMask obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams
-	WithOptionsOverride(optionsOverride obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams
-	WithColorTemperature(colorTemperature obj.Object) *MTRColorControlClusterMoveToColorTemperatureParams
-	ColorTemperatureMireds() obj.Object
-	SetColorTemperatureMireds(colorTemperatureMireds obj.Object)
-	TransitionTime() obj.Object
-	SetTransitionTime(transitionTime obj.Object)
-	OptionsMask() obj.Object
-	SetOptionsMask(optionsMask obj.Object)
-	OptionsOverride() obj.Object
-	SetOptionsOverride(optionsOverride obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-	ColorTemperature() obj.Object
-	SetColorTemperature(colorTemperature obj.Object)
-}
-
-var _ MTRColorControlClusterMoveToColorTemperatureParamsable = (*MTRColorControlClusterMoveToColorTemperatureParams)(nil)

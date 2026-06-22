@@ -46,24 +46,24 @@ func groupAdopt(id objc.ID) *Group {
 }
 
 // Description returns the object's -description text.
-func (x *Group) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (g *Group) Description() string {
+	return rt.Description(objref.IDOf(g))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Group) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (g *Group) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(g), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Group) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (g *Group) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(g), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Group) String() string {
-	return rt.Description(objref.IDOf(x))
+func (g *Group) String() string {
+	return rt.Description(objref.IDOf(g))
 }
 
 // NewGroupWithIdentifier creates a group with a unique name.
@@ -73,121 +73,87 @@ func NewGroupWithIdentifier(identifier string) *Group {
 	return groupAdopt(_id)
 }
 
-// WithGain modifies the volume of the group’s sounds.
-func (x *Group) WithGain(gain float64) *Group {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
-	return x
+// WithGain sets modifies the volume of the group’s sounds.
+func (g *Group) WithGain(gain float64) *Group {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setGain:"), gain)
+	return g
 }
 
-// WithRate the group’s playback speed.
-func (x *Group) WithRate(rate float64) *Group {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
-	return x
+// WithRate sets the group’s playback speed.
+func (g *Group) WithRate(rate float64) *Group {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("setRate:"), rate)
+	return g
 }
 
 // RegisterWithEngine adds the group to the engine’s dictionary.
-func (x *Group) RegisterWithEngine(engine *Engine) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registerWithEngine:"), objref.IDOf(engine))
+func (g *Group) RegisterWithEngine(engine *Engine) {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("registerWithEngine:"), objref.IDOf(engine))
 }
 
 // UnregisterFromEngine removes the group from the engine’s dictionary.
-func (x *Group) UnregisterFromEngine() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unregisterFromEngine"))
+func (g *Group) UnregisterFromEngine() {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("unregisterFromEngine"))
 }
 
 // FadeGainDurationCurveType adjusts the volume of the sounds in a group gradually.
-func (x *Group) FadeGainDurationCurveType(gain float64, duration float64, curveType CurveType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fadeGain:duration:curveType:"), gain, duration, curveType)
+func (g *Group) FadeGainDurationCurveType(gain float64, duration float64, curveType CurveType) {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("fadeGain:duration:curveType:"), gain, duration, curveType)
 }
 
 // FadeRateDurationCurveType adjusts the playback speed of the sounds in a group gradually.
-func (x *Group) FadeRateDurationCurveType(rate float64, duration float64, curveType CurveType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fadeRate:duration:curveType:"), rate, duration, curveType)
+func (g *Group) FadeRateDurationCurveType(rate float64, duration float64, curveType CurveType) {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("fadeRate:duration:curveType:"), rate, duration, curveType)
 }
 
 // Mute silences the group.
-func (x *Group) Mute() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mute"))
+func (g *Group) Mute() {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("mute"))
 }
 
 // Unmute restores the group’s volume.
-func (x *Group) Unmute() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unmute"))
+func (g *Group) Unmute() {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("unmute"))
 }
 
 // Solo silences all other groups.
-func (x *Group) Solo() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("solo"))
+func (g *Group) Solo() {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("solo"))
 }
 
 // Unsolo restores the other groups’ volume.
-func (x *Group) Unsolo() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unsolo"))
+func (g *Group) Unsolo() {
+	objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("unsolo"))
 }
 
-// Identifier the identifier that uniquely represents this group.
-func (x *Group) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns the identifier that uniquely represents this group.
+func (g *Group) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Gain linear gain scalar.
-func (x *Group) Gain() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("gain"))
+// Gain returns linear gain scalar.
+func (g *Group) Gain() float64 {
+	_r := objc.Send[float64](objref.IDOf(g), objc.RegisterName("gain"))
 	return _r
 }
 
-// SetGain wraps the corresponding Objective-C method.
-func (x *Group) SetGain(gain float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
-}
-
-// Rate linear rate scalar.
-func (x *Group) Rate() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rate"))
+// Rate returns linear rate scalar.
+func (g *Group) Rate() float64 {
+	_r := objc.Send[float64](objref.IDOf(g), objc.RegisterName("rate"))
 	return _r
 }
 
-// SetRate wraps the corresponding Objective-C method.
-func (x *Group) SetRate(rate float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRate:"), rate)
-}
-
-// IsMuted whether or not this group is muted.
-func (x *Group) IsMuted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMuted"))
+// IsMuted reports whether this group is muted.
+func (g *Group) IsMuted() bool {
+	_r := objc.Send[bool](objref.IDOf(g), objc.RegisterName("isMuted"))
 	return _r
 }
 
-// IsSoloed whether or not this group is soloed.
-func (x *Group) IsSoloed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSoloed"))
+// IsSoloed reports whether this group is soloed.
+func (g *Group) IsSoloed() bool {
+	_r := objc.Send[bool](objref.IDOf(g), objc.RegisterName("isSoloed"))
 	return _r
 }
-
-// Groupable is the interface implemented by [Group], for mocking and DI.
-type Groupable interface {
-	obj.Object
-	WithGain(gain float64) *Group
-	WithRate(rate float64) *Group
-	RegisterWithEngine(engine *Engine)
-	UnregisterFromEngine()
-	FadeGainDurationCurveType(gain float64, duration float64, curveType CurveType)
-	FadeRateDurationCurveType(rate float64, duration float64, curveType CurveType)
-	Mute()
-	Unmute()
-	Solo()
-	Unsolo()
-	Identifier() string
-	Gain() float64
-	SetGain(gain float64)
-	Rate() float64
-	SetRate(rate float64)
-	IsMuted() bool
-	IsSoloed() bool
-}
-
-var _ Groupable = (*Group)(nil)

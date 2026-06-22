@@ -7,7 +7,6 @@ package localauthentication
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,32 +51,22 @@ func NewPersistedRight() *PersistedRight {
 	return persistedRightAdopt(_id)
 }
 
-// WithTag an integer you use to identify a right.
-func (x *PersistedRight) WithTag(tag int) *PersistedRight {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets an integer you use to identify a right.
+func (pr *PersistedRight) WithTag(tag int) *PersistedRight {
+	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setTag:"), tag)
+	return pr
 }
 
-// Key managed private key
-func (x *PersistedRight) Key() *PrivateKey {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("key"))
+// Key returns managed private key
+func (pr *PersistedRight) Key() *PrivateKey {
+	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("key"))
 	return PrivateKeyFromID(_r)
 }
 
-// Secret generic secret This is the generic secret that would have been stored along with the right
-func (x *PersistedRight) Secret() *Secret {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("secret"))
+// Secret returns generic secret This is the generic secret that would have been stored along with the right
+func (pr *PersistedRight) Secret() *Secret {
+	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("secret"))
 	return SecretFromID(_r)
 }
-
-// PersistedRightable is the interface implemented by [PersistedRight], for mocking and DI.
-type PersistedRightable interface {
-	obj.Object
-	WithTag(tag int) *PersistedRight
-	Key() *PrivateKey
-	Secret() *Secret
-}
-
-var _ PersistedRightable = (*PersistedRight)(nil)
 
 var _ RightProvider = (*PersistedRight)(nil)

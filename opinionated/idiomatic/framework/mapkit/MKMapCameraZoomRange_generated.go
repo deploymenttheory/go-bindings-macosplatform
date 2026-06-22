@@ -46,24 +46,24 @@ func mapCameraZoomRangeAdopt(id objc.ID) *MapCameraZoomRange {
 }
 
 // Description returns the object's -description text.
-func (x *MapCameraZoomRange) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mczr *MapCameraZoomRange) Description() string {
+	return rt.Description(objref.IDOf(mczr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MapCameraZoomRange) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mczr *MapCameraZoomRange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mczr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MapCameraZoomRange) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mczr *MapCameraZoomRange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mczr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MapCameraZoomRange) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mczr *MapCameraZoomRange) String() string {
+	return rt.Description(objref.IDOf(mczr))
 }
 
 // NewMapCameraZoomRange creates a new MapCameraZoomRange.
@@ -71,10 +71,3 @@ func NewMapCameraZoomRange() *MapCameraZoomRange {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKMapCameraZoomRange")), objc.RegisterName("new"))
 	return mapCameraZoomRangeAdopt(_id)
 }
-
-// MapCameraZoomRangeable is the interface implemented by [MapCameraZoomRange], for mocking and DI.
-type MapCameraZoomRangeable interface {
-	obj.Object
-}
-
-var _ MapCameraZoomRangeable = (*MapCameraZoomRange)(nil)

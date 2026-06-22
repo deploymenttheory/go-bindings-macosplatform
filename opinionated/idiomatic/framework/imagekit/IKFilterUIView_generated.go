@@ -45,24 +45,24 @@ func filterUIViewAdopt(id objc.ID) *FilterUIView {
 }
 
 // Description returns the object's -description text.
-func (x *FilterUIView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fuv *FilterUIView) Description() string {
+	return rt.Description(objref.IDOf(fuv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FilterUIView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fuv *FilterUIView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fuv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FilterUIView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fuv *FilterUIView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fuv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FilterUIView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fuv *FilterUIView) String() string {
+	return rt.Description(objref.IDOf(fuv))
 }
 
 // NewFilterUIViewWithFrameFilter the initWithFrame method initializes a view that retains the filter passed into it.
@@ -72,23 +72,14 @@ func NewFilterUIViewWithFrameFilter(frameRect corefoundation.CGRect, inFilter ob
 	return filterUIViewAdopt(_id)
 }
 
-// Filter accessor method to return the filter instance that the view controls.
-func (x *FilterUIView) Filter() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filter"))
+// Filter returns accessor method to return the filter instance that the view controls.
+func (fuv *FilterUIView) Filter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fuv), objc.RegisterName("filter"))
 	return obj.Wrap(_r)
 }
 
-// ObjectController accessor method for the object controller for all bindings between the filter and the UI representation.
-func (x *FilterUIView) ObjectController() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectController"))
+// ObjectController returns accessor method for the object controller for all bindings between the filter and the UI representation.
+func (fuv *FilterUIView) ObjectController() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fuv), objc.RegisterName("objectController"))
 	return obj.Wrap(_r)
 }
-
-// FilterUIViewable is the interface implemented by [FilterUIView], for mocking and DI.
-type FilterUIViewable interface {
-	obj.Object
-	Filter() obj.Object
-	ObjectController() obj.Object
-}
-
-var _ FilterUIViewable = (*FilterUIView)(nil)

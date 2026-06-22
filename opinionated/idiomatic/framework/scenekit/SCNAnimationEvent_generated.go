@@ -46,24 +46,24 @@ func animationEventAdopt(id objc.ID) *AnimationEvent {
 }
 
 // Description returns the object's -description text.
-func (x *AnimationEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ae *AnimationEvent) Description() string {
+	return rt.Description(objref.IDOf(ae))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AnimationEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ae *AnimationEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ae), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AnimationEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ae *AnimationEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ae), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AnimationEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ae *AnimationEvent) String() string {
+	return rt.Description(objref.IDOf(ae))
 }
 
 // NewAnimationEvent creates a new AnimationEvent.
@@ -71,10 +71,3 @@ func NewAnimationEvent() *AnimationEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("SCNAnimationEvent")), objc.RegisterName("new"))
 	return animationEventAdopt(_id)
 }
-
-// AnimationEventable is the interface implemented by [AnimationEvent], for mocking and DI.
-type AnimationEventable interface {
-	obj.Object
-}
-
-var _ AnimationEventable = (*AnimationEvent)(nil)

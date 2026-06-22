@@ -46,24 +46,24 @@ func keyboardAdopt(id objc.ID) *Keyboard {
 }
 
 // Description returns the object's -description text.
-func (x *Keyboard) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (k *Keyboard) Description() string {
+	return rt.Description(objref.IDOf(k))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Keyboard) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (k *Keyboard) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(k), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Keyboard) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (k *Keyboard) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(k), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Keyboard) String() string {
-	return rt.Description(objref.IDOf(x))
+func (k *Keyboard) String() string {
+	return rt.Description(objref.IDOf(k))
 }
 
 // NewKeyboard creates a new Keyboard.
@@ -72,16 +72,8 @@ func NewKeyboard() *Keyboard {
 	return keyboardAdopt(_id)
 }
 
-// KeyboardInput unlike GCController GCKeyboard only has one input profile. This profile allows you to query buttons and button state
-func (x *Keyboard) KeyboardInput() *KeyboardInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyboardInput"))
+// KeyboardInput returns unlike GCController GCKeyboard only has one input profile. This profile allows you to query buttons and button state
+func (k *Keyboard) KeyboardInput() *KeyboardInput {
+	_r := objc.Send[objc.ID](objref.IDOf(k), objc.RegisterName("keyboardInput"))
 	return KeyboardInputFromID(_r)
 }
-
-// Keyboardable is the interface implemented by [Keyboard], for mocking and DI.
-type Keyboardable interface {
-	obj.Object
-	KeyboardInput() *KeyboardInput
-}
-
-var _ Keyboardable = (*Keyboard)(nil)

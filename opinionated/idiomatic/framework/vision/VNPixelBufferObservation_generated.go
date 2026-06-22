@@ -7,7 +7,6 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,27 +45,19 @@ func pixelBufferObservationAdopt(id objc.ID) *PixelBufferObservation {
 	return x
 }
 
-// FeatureName the name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model. This can be nil if the observation is not the result of a VNCoreMLRequest operation.
-func (x *PixelBufferObservation) FeatureName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("featureName"))
+// FeatureName returns the name used in the model description of the CoreML model that produced this observation allowing to correlate the observation back to the output of the model. This can be nil if the observation is not the result of a VNCoreMLRequest operation.
+func (pbo *PixelBufferObservation) FeatureName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pbo), objc.RegisterName("featureName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// PixelBufferObservationable is the interface implemented by [PixelBufferObservation], for mocking and DI.
-type PixelBufferObservationable interface {
-	obj.Object
-	FeatureName() string
-}
-
-var _ PixelBufferObservationable = (*PixelBufferObservation)(nil)
-
 // isPixelBufferObservation marks PixelBufferObservation — and, by embedding promotion, its
 // subclasses — as a member of the PixelBufferObservation hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PixelBufferObservation) isPixelBufferObservation() {}
+func (pbo *PixelBufferObservation) isPixelBufferObservation() {}
 
 var _ PixelBufferObservationProvider = (*PixelBufferObservation)(nil)
 

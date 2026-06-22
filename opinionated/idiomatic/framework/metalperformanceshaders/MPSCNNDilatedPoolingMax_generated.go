@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,68 +53,53 @@ func NewCNNDilatedPoolingMax() *CNNDilatedPoolingMax {
 	return cNNDilatedPoolingMaxAdopt(_id)
 }
 
-// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
-func (x *CNNDilatedPoolingMax) WithOffset(offset mpscore.MPSOffset) *CNNDilatedPoolingMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination image’s clip rectangle origin, relative to the source image.
+func (cdpm *CNNDilatedPoolingMax) WithOffset(offset mpscore.MPSOffset) *CNNDilatedPoolingMax {
+	objc.Send[objc.ID](objref.IDOf(cdpm), objc.RegisterName("setOffset:"), offset)
+	return cdpm
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-func (x *CNNDilatedPoolingMax) WithClipRect(clipRect metal.MTLRegion) *CNNDilatedPoolingMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
+func (cdpm *CNNDilatedPoolingMax) WithClipRect(clipRect metal.MTLRegion) *CNNDilatedPoolingMax {
+	objc.Send[objc.ID](objref.IDOf(cdpm), objc.RegisterName("setClipRect:"), clipRect)
+	return cdpm
 }
 
-// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
-func (x *CNNDilatedPoolingMax) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNDilatedPoolingMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
-	return x
+// WithDestinationFeatureChannelOffset sets the number of channels in the destination image to skip before writing output data.
+func (cdpm *CNNDilatedPoolingMax) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNDilatedPoolingMax {
+	objc.Send[objc.ID](objref.IDOf(cdpm), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
+	return cdpm
 }
 
-// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-func (x *CNNDilatedPoolingMax) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNDilatedPoolingMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
-	return x
+// WithSourceFeatureChannelOffset sets the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (cdpm *CNNDilatedPoolingMax) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNDilatedPoolingMax {
+	objc.Send[objc.ID](objref.IDOf(cdpm), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
+	return cdpm
 }
 
-// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNDilatedPoolingMax) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNDilatedPoolingMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
-	return x
+// WithSourceFeatureChannelMaxCount sets the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (cdpm *CNNDilatedPoolingMax) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNDilatedPoolingMax {
+	objc.Send[objc.ID](objref.IDOf(cdpm), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
+	return cdpm
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *CNNDilatedPoolingMax) WithLabel(label string) *CNNDilatedPoolingMax {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (cdpm *CNNDilatedPoolingMax) WithLabel(label string) *CNNDilatedPoolingMax {
+	objc.Send[objc.ID](objref.IDOf(cdpm), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cdpm
 }
 
-// DilationRateX dilationRateX for accessing the image passed in as source
-func (x *CNNDilatedPoolingMax) DilationRateX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateX"))
+// DilationRateX returns dilationRateX for accessing the image passed in as source
+func (cdpm *CNNDilatedPoolingMax) DilationRateX() int {
+	_r := objc.Send[int](objref.IDOf(cdpm), objc.RegisterName("dilationRateX"))
 	return _r
 }
 
-// DilationRateY dilationRateY for accessing the image passed in as source
-func (x *CNNDilatedPoolingMax) DilationRateY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateY"))
+// DilationRateY returns dilationRateY for accessing the image passed in as source
+func (cdpm *CNNDilatedPoolingMax) DilationRateY() int {
+	_r := objc.Send[int](objref.IDOf(cdpm), objc.RegisterName("dilationRateY"))
 	return _r
 }
-
-// CNNDilatedPoolingMaxable is the interface implemented by [CNNDilatedPoolingMax], for mocking and DI.
-type CNNDilatedPoolingMaxable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *CNNDilatedPoolingMax
-	WithClipRect(clipRect metal.MTLRegion) *CNNDilatedPoolingMax
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNDilatedPoolingMax
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNDilatedPoolingMax
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNDilatedPoolingMax
-	WithLabel(label string) *CNNDilatedPoolingMax
-	DilationRateX() int
-	DilationRateY() int
-}
-
-var _ CNNDilatedPoolingMaxable = (*CNNDilatedPoolingMax)(nil)
 
 var _ CNNPoolingProvider = (*CNNDilatedPoolingMax)(nil)
 

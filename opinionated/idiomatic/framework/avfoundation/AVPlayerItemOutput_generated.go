@@ -48,56 +48,41 @@ func playerItemOutputAdopt(id objc.ID) *PlayerItemOutput {
 }
 
 // Description returns the object's -description text.
-func (x *PlayerItemOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pio *PlayerItemOutput) Description() string {
+	return rt.Description(objref.IDOf(pio))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlayerItemOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pio *PlayerItemOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pio), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlayerItemOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pio *PlayerItemOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pio), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PlayerItemOutput) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pio *PlayerItemOutput) String() string {
+	return rt.Description(objref.IDOf(pio))
 }
 
-// WithSuppressesPlayerRendering a Boolean value that indicates whether the player object renders the receiver’s output.
-func (x *PlayerItemOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
-	return x
+// WithSuppressesPlayerRendering sets a Boolean value that indicates whether the player object renders the receiver’s output.
+func (pio *PlayerItemOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemOutput {
+	objc.Send[objc.ID](objref.IDOf(pio), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
+	return pio
 }
 
 // SuppressesPlayerRendering wraps the corresponding Objective-C method.
-func (x *PlayerItemOutput) SuppressesPlayerRendering() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("suppressesPlayerRendering"))
+func (pio *PlayerItemOutput) SuppressesPlayerRendering() bool {
+	_r := objc.Send[bool](objref.IDOf(pio), objc.RegisterName("suppressesPlayerRendering"))
 	return _r
 }
-
-// SetSuppressesPlayerRendering wraps the corresponding Objective-C method.
-func (x *PlayerItemOutput) SetSuppressesPlayerRendering(suppressesPlayerRendering bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
-}
-
-// PlayerItemOutputable is the interface implemented by [PlayerItemOutput], for mocking and DI.
-type PlayerItemOutputable interface {
-	obj.Object
-	WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemOutput
-	SuppressesPlayerRendering() bool
-	SetSuppressesPlayerRendering(suppressesPlayerRendering bool)
-}
-
-var _ PlayerItemOutputable = (*PlayerItemOutput)(nil)
 
 // isPlayerItemOutput marks PlayerItemOutput — and, by embedding promotion, its
 // subclasses — as a member of the PlayerItemOutput hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PlayerItemOutput) isPlayerItemOutput() {}
+func (pio *PlayerItemOutput) isPlayerItemOutput() {}
 
 var _ PlayerItemOutputProvider = (*PlayerItemOutput)(nil)

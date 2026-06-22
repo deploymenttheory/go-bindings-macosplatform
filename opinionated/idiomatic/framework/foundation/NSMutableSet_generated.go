@@ -61,77 +61,60 @@ func NewMutableSetWithCapacity(numItems int) *MutableSet {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *MutableSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableSet {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ms *MutableSet) WithScriptingProperties(scriptingProperties obj.Object) *MutableSet {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ms
 }
 
 // AddObject adds a given object to the set, if it is not already a member.
-func (x *MutableSet) AddObject(object obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObject:"), objref.IDOf(object))
+func (ms *MutableSet) AddObject(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("addObject:"), objref.IDOf(object))
 }
 
 // RemoveObject removes a given object from the set.
-func (x *MutableSet) RemoveObject(object obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObject:"), objref.IDOf(object))
+func (ms *MutableSet) RemoveObject(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("removeObject:"), objref.IDOf(object))
 }
 
 // AddObjectsFromArray adds to the set each object contained in a given array that is not already a member.
-func (x *MutableSet) AddObjectsFromArray(array []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObjectsFromArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (ms *MutableSet) AddObjectsFromArray(array []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("addObjectsFromArray:"), purego.SliceToNSArray(array, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // IntersectSet removes from the receiving set each object that isn’t a member of another given set.
-func (x *MutableSet) IntersectSet(otherSet obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intersectSet:"), objref.IDOf(otherSet))
+func (ms *MutableSet) IntersectSet(otherSet obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("intersectSet:"), objref.IDOf(otherSet))
 }
 
 // MinusSet removes each object in another given set from the receiving set, if present.
-func (x *MutableSet) MinusSet(otherSet obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minusSet:"), objref.IDOf(otherSet))
+func (ms *MutableSet) MinusSet(otherSet obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("minusSet:"), objref.IDOf(otherSet))
 }
 
 // RemoveAllObjects empties the set of all of its members.
-func (x *MutableSet) RemoveAllObjects() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllObjects"))
+func (ms *MutableSet) RemoveAllObjects() {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("removeAllObjects"))
 }
 
 // UnionSet adds each object in another given set to the receiving set, if not present.
-func (x *MutableSet) UnionSet(otherSet obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unionSet:"), objref.IDOf(otherSet))
+func (ms *MutableSet) UnionSet(otherSet obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("unionSet:"), objref.IDOf(otherSet))
 }
 
 // SetSet empties the receiving set, then adds each object contained in another given set.
-func (x *MutableSet) SetSet(otherSet obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSet:"), objref.IDOf(otherSet))
+func (ms *MutableSet) SetSet(otherSet obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setSet:"), objref.IDOf(otherSet))
 }
 
 // FilterUsingPredicate evaluates a given predicate against the set’s content and removes from the set those objects for which the predicate returns false.
-func (x *MutableSet) FilterUsingPredicate(predicate *Predicate) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterUsingPredicate:"), objref.IDOf(predicate))
+func (ms *MutableSet) FilterUsingPredicate(predicate *Predicate) {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("filterUsingPredicate:"), objref.IDOf(predicate))
 }
-
-// MutableSetable is the interface implemented by [MutableSet], for mocking and DI.
-type MutableSetable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *MutableSet
-	AddObject(object obj.Object)
-	RemoveObject(object obj.Object)
-	AddObjectsFromArray(array []obj.Object)
-	IntersectSet(otherSet obj.Object)
-	MinusSet(otherSet obj.Object)
-	RemoveAllObjects()
-	UnionSet(otherSet obj.Object)
-	SetSet(otherSet obj.Object)
-	FilterUsingPredicate(predicate *Predicate)
-}
-
-var _ MutableSetable = (*MutableSet)(nil)
 
 // isMutableSet marks MutableSet — and, by embedding promotion, its
 // subclasses — as a member of the MutableSet hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MutableSet) isMutableSet() {}
+func (ms *MutableSet) isMutableSet() {}
 
 var _ MutableSetProvider = (*MutableSet)(nil)
 

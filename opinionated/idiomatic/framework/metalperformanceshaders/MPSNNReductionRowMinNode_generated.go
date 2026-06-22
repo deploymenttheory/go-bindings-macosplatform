@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,26 +50,17 @@ func NewNNReductionRowMinNode() *NNReductionRowMinNode {
 	return nNReductionRowMinNodeAdopt(_id)
 }
 
-// WithClipRectSource the clip rectangle to apply to the source image.
-func (x *NNReductionRowMinNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowMinNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the clip rectangle to apply to the source image.
+func (nrrmn *NNReductionRowMinNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowMinNode {
+	objc.Send[objc.ID](objref.IDOf(nrrmn), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return nrrmn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNReductionRowMinNode) WithLabel(label string) *NNReductionRowMinNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nrrmn *NNReductionRowMinNode) WithLabel(label string) *NNReductionRowMinNode {
+	objc.Send[objc.ID](objref.IDOf(nrrmn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nrrmn
 }
-
-// NNReductionRowMinNodeable is the interface implemented by [NNReductionRowMinNode], for mocking and DI.
-type NNReductionRowMinNodeable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowMinNode
-	WithLabel(label string) *NNReductionRowMinNode
-}
-
-var _ NNReductionRowMinNodeable = (*NNReductionRowMinNode)(nil)
 
 var _ NNUnaryReductionNodeProvider = (*NNReductionRowMinNode)(nil)
 

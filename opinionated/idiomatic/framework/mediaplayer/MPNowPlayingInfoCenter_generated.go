@@ -46,24 +46,24 @@ func nowPlayingInfoCenterAdopt(id objc.ID) *NowPlayingInfoCenter {
 }
 
 // Description returns the object's -description text.
-func (x *NowPlayingInfoCenter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (npic *NowPlayingInfoCenter) Description() string {
+	return rt.Description(objref.IDOf(npic))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NowPlayingInfoCenter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (npic *NowPlayingInfoCenter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(npic), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NowPlayingInfoCenter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (npic *NowPlayingInfoCenter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(npic), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NowPlayingInfoCenter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (npic *NowPlayingInfoCenter) String() string {
+	return rt.Description(objref.IDOf(npic))
 }
 
 // NewNowPlayingInfoCenter creates a new NowPlayingInfoCenter.
@@ -72,49 +72,26 @@ func NewNowPlayingInfoCenter() *NowPlayingInfoCenter {
 	return nowPlayingInfoCenterAdopt(_id)
 }
 
-// WithNowPlayingInfo the current Now Playing information for the default Now Playing info center.
-func (x *NowPlayingInfoCenter) WithNowPlayingInfo(nowPlayingInfo obj.Object) *NowPlayingInfoCenter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNowPlayingInfo:"), objref.IDOf(nowPlayingInfo))
-	return x
+// WithNowPlayingInfo sets the current Now Playing information for the default Now Playing info center.
+func (npic *NowPlayingInfoCenter) WithNowPlayingInfo(nowPlayingInfo obj.Object) *NowPlayingInfoCenter {
+	objc.Send[objc.ID](objref.IDOf(npic), objc.RegisterName("setNowPlayingInfo:"), objref.IDOf(nowPlayingInfo))
+	return npic
 }
 
-// WithPlaybackState the current playback state of the app.
-func (x *NowPlayingInfoCenter) WithPlaybackState(playbackState NowPlayingPlaybackState) *NowPlayingInfoCenter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaybackState:"), playbackState)
-	return x
+// WithPlaybackState sets the current playback state of the app.
+func (npic *NowPlayingInfoCenter) WithPlaybackState(playbackState NowPlayingPlaybackState) *NowPlayingInfoCenter {
+	objc.Send[objc.ID](objref.IDOf(npic), objc.RegisterName("setPlaybackState:"), playbackState)
+	return npic
 }
 
-// NowPlayingInfo the current now playing info for the center. Setting the info to nil will clear it.
-func (x *NowPlayingInfoCenter) NowPlayingInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nowPlayingInfo"))
+// NowPlayingInfo returns the current now playing info for the center. Setting the info to nil will clear it.
+func (npic *NowPlayingInfoCenter) NowPlayingInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(npic), objc.RegisterName("nowPlayingInfo"))
 	return obj.Wrap(_r)
 }
 
-// SetNowPlayingInfo wraps the corresponding Objective-C method.
-func (x *NowPlayingInfoCenter) SetNowPlayingInfo(nowPlayingInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNowPlayingInfo:"), objref.IDOf(nowPlayingInfo))
-}
-
-// PlaybackState the current playback state of the app. This only applies on macOS, where playback state cannot be determined by the application's audio session. This property must be set every time the app begins or halts playback, otherwise remote control functionality may not work as expected.
-func (x *NowPlayingInfoCenter) PlaybackState() NowPlayingPlaybackState {
-	_r := objc.Send[NowPlayingPlaybackState](objref.IDOf(x), objc.RegisterName("playbackState"))
+// PlaybackState returns the current playback state of the app. This only applies on macOS, where playback state cannot be determined by the application's audio session. This property must be set every time the app begins or halts playback, otherwise remote control functionality may not work as expected.
+func (npic *NowPlayingInfoCenter) PlaybackState() NowPlayingPlaybackState {
+	_r := objc.Send[NowPlayingPlaybackState](objref.IDOf(npic), objc.RegisterName("playbackState"))
 	return _r
 }
-
-// SetPlaybackState wraps the corresponding Objective-C method.
-func (x *NowPlayingInfoCenter) SetPlaybackState(playbackState NowPlayingPlaybackState) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaybackState:"), playbackState)
-}
-
-// NowPlayingInfoCenterable is the interface implemented by [NowPlayingInfoCenter], for mocking and DI.
-type NowPlayingInfoCenterable interface {
-	obj.Object
-	WithNowPlayingInfo(nowPlayingInfo obj.Object) *NowPlayingInfoCenter
-	WithPlaybackState(playbackState NowPlayingPlaybackState) *NowPlayingInfoCenter
-	NowPlayingInfo() obj.Object
-	SetNowPlayingInfo(nowPlayingInfo obj.Object)
-	PlaybackState() NowPlayingPlaybackState
-	SetPlaybackState(playbackState NowPlayingPlaybackState)
-}
-
-var _ NowPlayingInfoCenterable = (*NowPlayingInfoCenter)(nil)

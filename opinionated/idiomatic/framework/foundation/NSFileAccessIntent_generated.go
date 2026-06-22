@@ -46,24 +46,24 @@ func fileAccessIntentAdopt(id objc.ID) *FileAccessIntent {
 }
 
 // Description returns the object's -description text.
-func (x *FileAccessIntent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fai *FileAccessIntent) Description() string {
+	return rt.Description(objref.IDOf(fai))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FileAccessIntent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fai *FileAccessIntent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fai), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FileAccessIntent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fai *FileAccessIntent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fai), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FileAccessIntent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fai *FileAccessIntent) String() string {
+	return rt.Description(objref.IDOf(fai))
 }
 
 // NewFileAccessIntent creates a new FileAccessIntent.
@@ -73,22 +73,13 @@ func NewFileAccessIntent() *FileAccessIntent {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *FileAccessIntent) WithScriptingProperties(scriptingProperties obj.Object) *FileAccessIntent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (fai *FileAccessIntent) WithScriptingProperties(scriptingProperties obj.Object) *FileAccessIntent {
+	objc.Send[objc.ID](objref.IDOf(fai), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return fai
 }
 
 // URL wraps the corresponding Objective-C method.
-func (x *FileAccessIntent) URL() *URL {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (fai *FileAccessIntent) URL() *URL {
+	_r := objc.Send[objc.ID](objref.IDOf(fai), objc.RegisterName("URL"))
 	return URLFromID(_r)
 }
-
-// FileAccessIntentable is the interface implemented by [FileAccessIntent], for mocking and DI.
-type FileAccessIntentable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *FileAccessIntent
-	URL() *URL
-}
-
-var _ FileAccessIntentable = (*FileAccessIntent)(nil)

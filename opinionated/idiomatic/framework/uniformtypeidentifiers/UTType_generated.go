@@ -46,24 +46,24 @@ func typeAdopt(id objc.ID) *Type {
 }
 
 // Description returns the object's -description text.
-func (x *Type) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Type) Description() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Type) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (t *Type) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Type) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (t *Type) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Type) String() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Type) String() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // NewType creates a new Type.
@@ -72,112 +72,92 @@ func NewType() *Type {
 	return typeAdopt(_id)
 }
 
-// Identifier \brief The receiver's identifier. A type is \em identified \em by its Uniform Type Identifier (UTI), a reverse-DNS string such as \c "public.jpeg" or \c "com.adobe.pdf". The type itself \em has a UTI, but is not itself the UTI. This terminology is not consistently used across Apple's documentation.
-func (x *Type) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns \brief The receiver's identifier. A type is \em identified \em by its Uniform Type Identifier (UTI), a reverse-DNS string such as \c "public.jpeg" or \c "com.adobe.pdf". The type itself \em has a UTI, but is not itself the UTI. This terminology is not consistently used across Apple's documentation.
+func (t *Type) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// PreferredFilenameExtension \brief If available, the preferred (first available) tag of class \c UTTagClassFilenameExtension. Many uses of types require the generation of a filename (e.g. when saving a file to disk.) If not \c nil, the value of this property is the best available filename extension for the given type. The value of this property is equivalent to, but more efficient than: \code type.tags[UTTagClassFilenameExtension].firstObject \endcode
-func (x *Type) PreferredFilenameExtension() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredFilenameExtension"))
+// PreferredFilenameExtension returns \brief If available, the preferred (first available) tag of class \c UTTagClassFilenameExtension. Many uses of types require the generation of a filename (e.g. when saving a file to disk.) If not \c nil, the value of this property is the best available filename extension for the given type. The value of this property is equivalent to, but more efficient than: \code type.tags[UTTagClassFilenameExtension].firstObject \endcode
+func (t *Type) PreferredFilenameExtension() string {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("preferredFilenameExtension"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// PreferredMIMEType \brief If available, the preferred (first available) tag of class \c UTTagClassMIMEType. If not \c nil, the value of this property is the best available MIME type for the given type, according to its declaration. The value of this property is equivalent to, but more efficient than: \code type.tags[UTTagClassMIMEType].firstObject \endcode
-func (x *Type) PreferredMIMEType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredMIMEType"))
+// PreferredMIMEType returns \brief If available, the preferred (first available) tag of class \c UTTagClassMIMEType. If not \c nil, the value of this property is the best available MIME type for the given type, according to its declaration. The value of this property is equivalent to, but more efficient than: \code type.tags[UTTagClassMIMEType].firstObject \endcode
+func (t *Type) PreferredMIMEType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("preferredMIMEType"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// LocalizedDescription \brief The localized description of the type. If the type does not provide a description, the system may search its supertypes for one. Dynamic types never have localized descriptions even if their supertypes do.
-func (x *Type) LocalizedDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
+// LocalizedDescription returns \brief The localized description of the type. If the type does not provide a description, the system may search its supertypes for one. Dynamic types never have localized descriptions even if their supertypes do.
+func (t *Type) LocalizedDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ReferenceURL \brief The reference URL of the type. A reference URL is a human-readable document describing a type. Most types do not specify reference URLs. \warning This URL is not validated in any way by the system, nor is its scheme or structure guaranteed in any way.
-func (x *Type) ReferenceURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("referenceURL"))
+// ReferenceURL returns \brief The reference URL of the type. A reference URL is a human-readable document describing a type. Most types do not specify reference URLs. \warning This URL is not validated in any way by the system, nor is its scheme or structure guaranteed in any way.
+func (t *Type) ReferenceURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("referenceURL"))
 	return obj.Wrap(_r)
 }
 
-// IsDynamic \brief Whether or not the receiver is a dynamically generated type. Dynamic types are recognized by the system, but may not be directly declared or claimed by an application. They are used when a file is encountered whose metadata has no corresponding type known to the system. A type cannot be both declared \em and dynamic.
-func (x *Type) IsDynamic() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDynamic"))
+// IsDynamic reports whether \brief Whether or not the receiver is a dynamically generated type. Dynamic types are recognized by the system, but may not be directly declared or claimed by an application. They are used when a file is encountered whose metadata has no corresponding type known to the system. A type cannot be both declared \em and dynamic.
+func (t *Type) IsDynamic() bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isDynamic"))
 	return _r
 }
 
-// IsDeclared \brief Whether or not the receiver is a type known to the system. A type cannot be both declared \em and dynamic.
-func (x *Type) IsDeclared() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDeclared"))
+// IsDeclared reports whether \brief Whether or not the receiver is a type known to the system. A type cannot be both declared \em and dynamic.
+func (t *Type) IsDeclared() bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isDeclared"))
 	return _r
 }
 
-// IsPublicType \brief Whether or not the type is in the public domain. Types in the public domain have identifiers starting with \c "public." and are generally defined by a standards body or by convention. They are never dynamic.
-func (x *Type) IsPublicType() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPublicType"))
+// IsPublicType reports whether \brief Whether or not the type is in the public domain. Types in the public domain have identifiers starting with \c "public." and are generally defined by a standards body or by convention. They are never dynamic.
+func (t *Type) IsPublicType() bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isPublicType"))
 	return _r
 }
 
 // ConformsToType \brief Tests for a conformance relationship between the receiver and another type. \param type The type against which conformance should be tested. \result If the two types are equal, returns \c YES. If the receiver conforms, directly or indirectly, to \a type, returns \c YES. Otherwise, returns \c NO. \sa -isSupertypeOfType: \sa -isSubtypeOfType:
-func (x *Type) ConformsToType(type_ *Type) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("conformsToType:"), objref.IDOf(type_))
+func (t *Type) ConformsToType(type_ *Type) bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("conformsToType:"), objref.IDOf(type_))
 	return _r
 }
 
 // IsSupertypeOfType \brief Tests if the receiver is a supertype of another type. \param type The type against which conformance should be tested. \result If \a type conforms, directly or indirectly, to the receiver and is not equal to it, returns \c YES. Otherwise, returns \c NO. \sa -conformsToType: \sa -isSubtypeOfType:
-func (x *Type) IsSupertypeOfType(type_ *Type) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSupertypeOfType:"), objref.IDOf(type_))
+func (t *Type) IsSupertypeOfType(type_ *Type) bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isSupertypeOfType:"), objref.IDOf(type_))
 	return _r
 }
 
 // IsSubtypeOfType \brief Tests if the receiver is a subtype of another type. \param type The type against which conformance should be tested. \result If the receiver conforms, directly or indirectly, to \a type and is not equal to it, returns \c YES. Otherwise, returns \c NO. \sa -conformsToType: \sa -isSupertypeOfType:
-func (x *Type) IsSubtypeOfType(type_ *Type) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSubtypeOfType:"), objref.IDOf(type_))
+func (t *Type) IsSubtypeOfType(type_ *Type) bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isSubtypeOfType:"), objref.IDOf(type_))
 	return _r
 }
 
-// Supertypes \brief The set of types to which the receiving type conforms, directly or indirectly. If you are just interested in checking if one type conforms to another, it is more efficient to use \c -conformsToType: than this property.
-func (x *Type) Supertypes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supertypes"))
+// Supertypes returns \brief The set of types to which the receiving type conforms, directly or indirectly. If you are just interested in checking if one type conforms to another, it is more efficient to use \c -conformsToType: than this property.
+func (t *Type) Supertypes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("supertypes"))
 	return obj.Wrap(_r)
 }
 
-// Tags \brief The tag specification dictionary of the type. The system does not store tag information for non-standard tag classes. It normalizes string values into arrays containing those strings. For instance, a value of: \code { "public.mime-type": "x/y", "nonstandard-tag-class": "abc", } \endcode Is normalized to: \code { "public.mime-type": [ "x/y" ] } \endcode If you are simply looking for the preferred filename extension or MIME type of a type, it is more efficient for you to use the \c preferredFilenameExtension and \c preferredMIMEType properties respectively.
-func (x *Type) Tags() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tags"))
+// Tags returns \brief The tag specification dictionary of the type. The system does not store tag information for non-standard tag classes. It normalizes string values into arrays containing those strings. For instance, a value of: \code { "public.mime-type": "x/y", "nonstandard-tag-class": "abc", } \endcode Is normalized to: \code { "public.mime-type": [ "x/y" ] } \endcode If you are simply looking for the preferred filename extension or MIME type of a type, it is more efficient for you to use the \c preferredFilenameExtension and \c preferredMIMEType properties respectively.
+func (t *Type) Tags() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("tags"))
 	return obj.Wrap(_r)
 }
-
-// Typeable is the interface implemented by [Type], for mocking and DI.
-type Typeable interface {
-	obj.Object
-	Identifier() string
-	PreferredFilenameExtension() string
-	PreferredMIMEType() string
-	LocalizedDescription() string
-	ReferenceURL() obj.Object
-	IsDynamic() bool
-	IsDeclared() bool
-	IsPublicType() bool
-	ConformsToType(type_ *Type) bool
-	IsSupertypeOfType(type_ *Type) bool
-	IsSubtypeOfType(type_ *Type) bool
-	Supertypes() obj.Object
-	Tags() obj.Object
-}
-
-var _ Typeable = (*Type)(nil)

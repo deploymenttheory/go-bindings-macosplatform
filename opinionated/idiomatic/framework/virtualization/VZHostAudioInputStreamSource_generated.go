@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewHostAudioInputStreamSource() *HostAudioInputStreamSource {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZHostAudioInputStreamSource")), objc.RegisterName("new"))
 	return hostAudioInputStreamSourceAdopt(_id)
 }
-
-// HostAudioInputStreamSourceable is the interface implemented by [HostAudioInputStreamSource], for mocking and DI.
-type HostAudioInputStreamSourceable interface {
-	obj.Object
-}
-
-var _ HostAudioInputStreamSourceable = (*HostAudioInputStreamSource)(nil)
 
 var _ AudioInputStreamSourceProvider = (*HostAudioInputStreamSource)(nil)

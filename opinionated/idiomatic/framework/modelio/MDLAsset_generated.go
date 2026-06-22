@@ -47,24 +47,24 @@ func assetAdopt(id objc.ID) *Asset {
 }
 
 // Description returns the object's -description text.
-func (x *Asset) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Asset) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Asset) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Asset) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Asset) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Asset) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Asset) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Asset) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewAssetWithURL initializes an asset from the file at the specified URL.
@@ -74,138 +74,97 @@ func NewAssetWithURL(uRL string) *Asset {
 	return assetAdopt(_id)
 }
 
-// WithFrameInterval the time interval between data samples in the asset.
-func (x *Asset) WithFrameInterval(frameInterval float64) *Asset {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameInterval:"), frameInterval)
-	return x
+// WithFrameInterval sets the time interval between data samples in the asset.
+func (a *Asset) WithFrameInterval(frameInterval float64) *Asset {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setFrameInterval:"), frameInterval)
+	return a
 }
 
-// WithStartTime the timestamp for the first timed data sample in the asset.
-func (x *Asset) WithStartTime(startTime float64) *Asset {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), startTime)
-	return x
+// WithStartTime sets the timestamp for the first timed data sample in the asset.
+func (a *Asset) WithStartTime(startTime float64) *Asset {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setStartTime:"), startTime)
+	return a
 }
 
-// WithEndTime the timestamp for the last timed data sample in the asset.
-func (x *Asset) WithEndTime(endTime float64) *Asset {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndTime:"), endTime)
-	return x
+// WithEndTime sets the timestamp for the last timed data sample in the asset.
+func (a *Asset) WithEndTime(endTime float64) *Asset {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setEndTime:"), endTime)
+	return a
 }
 
 // ExportAssetToURL writes asset data to a file at the specified URL.
-func (x *Asset) ExportAssetToURL(uRL string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("exportAssetToURL:"), rt.FileURL(uRL))
+func (a *Asset) ExportAssetToURL(uRL string) bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("exportAssetToURL:"), rt.FileURL(uRL))
 	return _r
 }
 
 // ObjectAtPath return the object at the specified path, or nil if none exists there
-func (x *Asset) ObjectAtPath(path string) *Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtPath:"), purego.NSString(path))
+func (a *Asset) ObjectAtPath(path string) *Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("objectAtPath:"), purego.NSString(path))
 	return ObjectFromID(_r)
 }
 
 // LoadTextures iterates over all material properties on all materials. If they are string values or NSURL values, and can be resolved as textures, then the string and NSURL values will be replaced by MDLTextureSampler values.
-func (x *Asset) LoadTextures() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadTextures"))
+func (a *Asset) LoadTextures() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("loadTextures"))
 }
 
 // AddObject adds the specified object to the asset’s list of top-level objects.
-func (x *Asset) AddObject(object *Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObject:"), objref.IDOf(object))
+func (a *Asset) AddObject(object *Object) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addObject:"), objref.IDOf(object))
 }
 
 // RemoveObject removes the specified object from the asset’s list of top-level objects.
-func (x *Asset) RemoveObject(object *Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObject:"), objref.IDOf(object))
+func (a *Asset) RemoveObject(object *Object) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeObject:"), objref.IDOf(object))
 }
 
 // ObjectAtIndexedSubscript returns the top-level object at the specified index in the asset, using subscript syntax.
-func (x *Asset) ObjectAtIndexedSubscript(index int) *Object {
-	errkit.CheckIndex(index, x.Count())
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
+func (a *Asset) ObjectAtIndexedSubscript(index int) *Object {
+	errkit.CheckIndex(index, a.Count())
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("objectAtIndexedSubscript:"), index)
 	return ObjectFromID(_r)
 }
 
 // ObjectAtIndex returns the top-level object at the specified index in the asset.
-func (x *Asset) ObjectAtIndex(index int) *Object {
-	errkit.CheckIndex(index, x.Count())
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndex:"), index)
+func (a *Asset) ObjectAtIndex(index int) *Object {
+	errkit.CheckIndex(index, a.Count())
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("objectAtIndex:"), index)
 	return ObjectFromID(_r)
 }
 
-// FrameInterval inherent frame rate of an asset If no framerate was specified by resource or resource uncapable of specifying framerate, this value defaults to 0
-func (x *Asset) FrameInterval() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frameInterval"))
+// FrameInterval returns inherent frame rate of an asset If no framerate was specified by resource or resource uncapable of specifying framerate, this value defaults to 0
+func (a *Asset) FrameInterval() float64 {
+	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("frameInterval"))
 	return _r
 }
 
-// SetFrameInterval wraps the corresponding Objective-C method.
-func (x *Asset) SetFrameInterval(frameInterval float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameInterval:"), frameInterval)
-}
-
-// StartTime start time bracket of animation data If no animation data was specified by resource or resource incapable of specifying animation data, this value defaults to 0. If startTime was set explicitly, then the value of startTime will be the lesser of the set value and the animated values.
-func (x *Asset) StartTime() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("startTime"))
+// StartTime returns start time bracket of animation data If no animation data was specified by resource or resource incapable of specifying animation data, this value defaults to 0. If startTime was set explicitly, then the value of startTime will be the lesser of the set value and the animated values.
+func (a *Asset) StartTime() float64 {
+	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("startTime"))
 	return _r
 }
 
-// SetStartTime wraps the corresponding Objective-C method.
-func (x *Asset) SetStartTime(startTime float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), startTime)
-}
-
-// EndTime end time bracket of animation data If no animation data was specified by resource or resource incapable of specifying animation data, this value defaults to 0. If the endTime was set explicitly, then the value of endTime will be the greater of the set value and the animated values.
-func (x *Asset) EndTime() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("endTime"))
+// EndTime returns end time bracket of animation data If no animation data was specified by resource or resource incapable of specifying animation data, this value defaults to 0. If the endTime was set explicitly, then the value of endTime will be the greater of the set value and the animated values.
+func (a *Asset) EndTime() float64 {
+	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("endTime"))
 	return _r
 }
 
-// SetEndTime wraps the corresponding Objective-C method.
-func (x *Asset) SetEndTime(endTime float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndTime:"), endTime)
-}
-
-// URL URL used to create the asset If the asset was not created with a URL, nil will be returned.
-func (x *Asset) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+// URL returns URL used to create the asset If the asset was not created with a URL, nil will be returned.
+func (a *Asset) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// VertexDescriptor vertex descriptor set upon asset initialization Will be nil if there was no descriptor set
-func (x *Asset) VertexDescriptor() *VertexDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertexDescriptor"))
+// VertexDescriptor returns vertex descriptor set upon asset initialization Will be nil if there was no descriptor set
+func (a *Asset) VertexDescriptor() *VertexDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("vertexDescriptor"))
 	return VertexDescriptorFromID(_r)
 }
 
-// Count the number of top level objects
-func (x *Asset) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+// Count returns the number of top level objects
+func (a *Asset) Count() int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("count"))
 	return _r
 }
-
-// Assetable is the interface implemented by [Asset], for mocking and DI.
-type Assetable interface {
-	obj.Object
-	WithFrameInterval(frameInterval float64) *Asset
-	WithStartTime(startTime float64) *Asset
-	WithEndTime(endTime float64) *Asset
-	ExportAssetToURL(uRL string) bool
-	ObjectAtPath(path string) *Object
-	LoadTextures()
-	AddObject(object *Object)
-	RemoveObject(object *Object)
-	ObjectAtIndexedSubscript(index int) *Object
-	ObjectAtIndex(index int) *Object
-	FrameInterval() float64
-	SetFrameInterval(frameInterval float64)
-	StartTime() float64
-	SetStartTime(startTime float64)
-	EndTime() float64
-	SetEndTime(endTime float64)
-	URL() obj.Object
-	VertexDescriptor() *VertexDescriptor
-	Count() int
-}
-
-var _ Assetable = (*Asset)(nil)

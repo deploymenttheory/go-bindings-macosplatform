@@ -53,17 +53,9 @@ func NewUserAppleScriptTask() *UserAppleScriptTask {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UserAppleScriptTask) WithScriptingProperties(scriptingProperties obj.Object) *UserAppleScriptTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (uast *UserAppleScriptTask) WithScriptingProperties(scriptingProperties obj.Object) *UserAppleScriptTask {
+	objc.Send[objc.ID](objref.IDOf(uast), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return uast
 }
-
-// UserAppleScriptTaskable is the interface implemented by [UserAppleScriptTask], for mocking and DI.
-type UserAppleScriptTaskable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UserAppleScriptTask
-}
-
-var _ UserAppleScriptTaskable = (*UserAppleScriptTask)(nil)
 
 var _ UserScriptTaskProvider = (*UserAppleScriptTask)(nil)

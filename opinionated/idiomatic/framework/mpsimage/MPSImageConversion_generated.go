@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,39 +51,28 @@ func NewImageConversion() *ImageConversion {
 	return imageConversionAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
-func (x *ImageConversion) WithOffset(offset mpscore.MPSOffset) *ImageConversion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (ic *ImageConversion) WithOffset(offset mpscore.MPSOffset) *ImageConversion {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setOffset:"), offset)
+	return ic
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
-func (x *ImageConversion) WithClipRect(clipRect metal.MTLRegion) *ImageConversion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (ic *ImageConversion) WithClipRect(clipRect metal.MTLRegion) *ImageConversion {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setClipRect:"), clipRect)
+	return ic
 }
 
-// SourceAlpha premultiplication description for the source texture Most colorspace conversion operations can not work directly on premultiplied data. Use this property to tag premultiplied data so that the source texture can be unpremultiplied prior to application of these transforms. Default: MPSPixelAlpha_AlphaIsOne
-func (x *ImageConversion) SourceAlpha() AlphaType {
-	_r := objc.Send[AlphaType](objref.IDOf(x), objc.RegisterName("sourceAlpha"))
+// SourceAlpha returns premultiplication description for the source texture Most colorspace conversion operations can not work directly on premultiplied data. Use this property to tag premultiplied data so that the source texture can be unpremultiplied prior to application of these transforms. Default: MPSPixelAlpha_AlphaIsOne
+func (ic *ImageConversion) SourceAlpha() AlphaType {
+	_r := objc.Send[AlphaType](objref.IDOf(ic), objc.RegisterName("sourceAlpha"))
 	return _r
 }
 
-// DestinationAlpha premultiplication description for the destinationAlpha texture Colorspace conversion operations produce non-premultiplied data. Use this property to tag cases where premultiplied results are required. If MPSPixelAlpha_AlphaIsOne is used, the alpha channel will be set to 1. Default: MPSPixelAlpha_AlphaIsOne
-func (x *ImageConversion) DestinationAlpha() AlphaType {
-	_r := objc.Send[AlphaType](objref.IDOf(x), objc.RegisterName("destinationAlpha"))
+// DestinationAlpha returns premultiplication description for the destinationAlpha texture Colorspace conversion operations produce non-premultiplied data. Use this property to tag cases where premultiplied results are required. If MPSPixelAlpha_AlphaIsOne is used, the alpha channel will be set to 1. Default: MPSPixelAlpha_AlphaIsOne
+func (ic *ImageConversion) DestinationAlpha() AlphaType {
+	_r := objc.Send[AlphaType](objref.IDOf(ic), objc.RegisterName("destinationAlpha"))
 	return _r
 }
-
-// ImageConversionable is the interface implemented by [ImageConversion], for mocking and DI.
-type ImageConversionable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageConversion
-	WithClipRect(clipRect metal.MTLRegion) *ImageConversion
-	SourceAlpha() AlphaType
-	DestinationAlpha() AlphaType
-}
-
-var _ ImageConversionable = (*ImageConversion)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageConversion)(nil)

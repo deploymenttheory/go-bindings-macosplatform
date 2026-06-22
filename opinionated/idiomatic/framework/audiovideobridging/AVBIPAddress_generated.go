@@ -44,24 +44,24 @@ func iPAddressAdopt(id objc.ID) *IPAddress {
 }
 
 // Description returns the object's -description text.
-func (x *IPAddress) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ia *IPAddress) Description() string {
+	return rt.Description(objref.IDOf(ia))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IPAddress) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ia *IPAddress) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ia), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IPAddress) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ia *IPAddress) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ia), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IPAddress) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ia *IPAddress) String() string {
+	return rt.Description(objref.IDOf(ia))
 }
 
 // NewIPAddressWithIPv6AddressData this method initializes the receiver to contain the IPv6 address specified.
@@ -78,79 +78,47 @@ func NewIPAddressWithIPv4Address(ipv4Address uint32) *IPAddress {
 	return iPAddressAdopt(_id)
 }
 
-// WithIpv6Address an NSData object containing the bytes of the IPv6 representaion of the address. This value is always valid and uses the IPv4 to IPv6 address translation of 2.5.5.2 of RFC 4291 to encode the address
-func (x *IPAddress) WithIpv6Address(ipv6Address obj.Object) *IPAddress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIpv6Address:"), objref.IDOf(ipv6Address))
-	return x
+// WithIpv6Address sets an NSData object containing the bytes of the IPv6 representaion of the address. This value is always valid and uses the IPv4 to IPv6 address translation of 2.5.5.2 of RFC 4291 to encode the address
+func (ia *IPAddress) WithIpv6Address(ipv6Address obj.Object) *IPAddress {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setIpv6Address:"), objref.IDOf(ipv6Address))
+	return ia
 }
 
-// WithIpv4Address an unsigned32 bit integer containg the IPv4 representaion in host byte order. This value is only valid when representsIPv4Address returns YES.
-func (x *IPAddress) WithIpv4Address(ipv4Address uint32) *IPAddress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIpv4Address:"), ipv4Address)
-	return x
+// WithIpv4Address sets an unsigned32 bit integer containg the IPv4 representaion in host byte order. This value is only valid when representsIPv4Address returns YES.
+func (ia *IPAddress) WithIpv4Address(ipv4Address uint32) *IPAddress {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setIpv4Address:"), ipv4Address)
+	return ia
 }
 
-// WithStringRepresentation a strign representation of the IP address in the appropriate representation for IPv4 or IPv6.
-func (x *IPAddress) WithStringRepresentation(stringRepresentation string) *IPAddress {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringRepresentation:"), purego.NSString(stringRepresentation))
-	return x
+// WithStringRepresentation sets a strign representation of the IP address in the appropriate representation for IPv4 or IPv6.
+func (ia *IPAddress) WithStringRepresentation(stringRepresentation string) *IPAddress {
+	objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("setStringRepresentation:"), purego.NSString(stringRepresentation))
+	return ia
 }
 
-// RepresentsIPv4Address a boolean indicating if the address is an IPv4 address.
-func (x *IPAddress) RepresentsIPv4Address() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("representsIPv4Address"))
+// RepresentsIPv4Address reports whether a boolean indicating if the address is an IPv4 address.
+func (ia *IPAddress) RepresentsIPv4Address() bool {
+	_r := objc.Send[bool](objref.IDOf(ia), objc.RegisterName("representsIPv4Address"))
 	return _r
 }
 
-// Ipv6Address an NSData object containing the bytes of the IPv6 representaion of the address. This value is always valid and uses the IPv4 to IPv6 address translation of 2.5.5.2 of RFC 4291 to encode the address
-func (x *IPAddress) Ipv6Address() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ipv6Address"))
+// Ipv6Address returns an NSData object containing the bytes of the IPv6 representaion of the address. This value is always valid and uses the IPv4 to IPv6 address translation of 2.5.5.2 of RFC 4291 to encode the address
+func (ia *IPAddress) Ipv6Address() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("ipv6Address"))
 	return obj.Wrap(_r)
 }
 
-// SetIpv6Address wraps the corresponding Objective-C method.
-func (x *IPAddress) SetIpv6Address(ipv6Address obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIpv6Address:"), objref.IDOf(ipv6Address))
-}
-
-// Ipv4Address an unsigned32 bit integer containg the IPv4 representaion in host byte order. This value is only valid when representsIPv4Address returns YES.
-func (x *IPAddress) Ipv4Address() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("ipv4Address"))
+// Ipv4Address returns an unsigned32 bit integer containg the IPv4 representaion in host byte order. This value is only valid when representsIPv4Address returns YES.
+func (ia *IPAddress) Ipv4Address() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(ia), objc.RegisterName("ipv4Address"))
 	return _r
 }
 
-// SetIpv4Address wraps the corresponding Objective-C method.
-func (x *IPAddress) SetIpv4Address(ipv4Address uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIpv4Address:"), ipv4Address)
-}
-
-// StringRepresentation a strign representation of the IP address in the appropriate representation for IPv4 or IPv6.
-func (x *IPAddress) StringRepresentation() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringRepresentation"))
+// StringRepresentation returns a strign representation of the IP address in the appropriate representation for IPv4 or IPv6.
+func (ia *IPAddress) StringRepresentation() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ia), objc.RegisterName("stringRepresentation"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetStringRepresentation wraps the corresponding Objective-C method.
-func (x *IPAddress) SetStringRepresentation(stringRepresentation string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringRepresentation:"), purego.NSString(stringRepresentation))
-}
-
-// IPAddressable is the interface implemented by [IPAddress], for mocking and DI.
-type IPAddressable interface {
-	obj.Object
-	WithIpv6Address(ipv6Address obj.Object) *IPAddress
-	WithIpv4Address(ipv4Address uint32) *IPAddress
-	WithStringRepresentation(stringRepresentation string) *IPAddress
-	RepresentsIPv4Address() bool
-	Ipv6Address() obj.Object
-	SetIpv6Address(ipv6Address obj.Object)
-	Ipv4Address() uint32
-	SetIpv4Address(ipv4Address uint32)
-	StringRepresentation() string
-	SetStringRepresentation(stringRepresentation string)
-}
-
-var _ IPAddressable = (*IPAddress)(nil)

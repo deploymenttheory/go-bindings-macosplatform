@@ -46,24 +46,24 @@ func notificationRequestAdopt(id objc.ID) *NotificationRequest {
 }
 
 // Description returns the object's -description text.
-func (x *NotificationRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nr *NotificationRequest) Description() string {
+	return rt.Description(objref.IDOf(nr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NotificationRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nr *NotificationRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NotificationRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nr *NotificationRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NotificationRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nr *NotificationRequest) String() string {
+	return rt.Description(objref.IDOf(nr))
 }
 
 // NewNotificationRequest creates a new NotificationRequest.
@@ -73,8 +73,8 @@ func NewNotificationRequest() *NotificationRequest {
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *NotificationRequest) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (nr *NotificationRequest) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,23 +82,13 @@ func (x *NotificationRequest) Identifier() string {
 }
 
 // Content wraps the corresponding Objective-C method.
-func (x *NotificationRequest) Content() *NotificationContent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("content"))
+func (nr *NotificationRequest) Content() *NotificationContent {
+	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("content"))
 	return NotificationContentFromID(_r)
 }
 
 // Trigger wraps the corresponding Objective-C method.
-func (x *NotificationRequest) Trigger() *NotificationTrigger {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trigger"))
+func (nr *NotificationRequest) Trigger() *NotificationTrigger {
+	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("trigger"))
 	return NotificationTriggerFromID(_r)
 }
-
-// NotificationRequestable is the interface implemented by [NotificationRequest], for mocking and DI.
-type NotificationRequestable interface {
-	obj.Object
-	Identifier() string
-	Content() *NotificationContent
-	Trigger() *NotificationTrigger
-}
-
-var _ NotificationRequestable = (*NotificationRequest)(nil)

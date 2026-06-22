@@ -44,24 +44,24 @@ func quartzFilterManagerAdopt(id objc.ID) *QuartzFilterManager {
 }
 
 // Description returns the object's -description text.
-func (x *QuartzFilterManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (qfm *QuartzFilterManager) Description() string {
+	return rt.Description(objref.IDOf(qfm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QuartzFilterManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (qfm *QuartzFilterManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(qfm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QuartzFilterManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (qfm *QuartzFilterManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(qfm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *QuartzFilterManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (qfm *QuartzFilterManager) String() string {
+	return rt.Description(objref.IDOf(qfm))
 }
 
 // NewQuartzFilterManager creates a new QuartzFilterManager.
@@ -71,56 +71,42 @@ func NewQuartzFilterManager() *QuartzFilterManager {
 }
 
 // FilterPanel wraps the corresponding Objective-C method.
-func (x *QuartzFilterManager) FilterPanel() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterPanel"))
+func (qfm *QuartzFilterManager) FilterPanel() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qfm), objc.RegisterName("filterPanel"))
 	return obj.Wrap(_r)
 }
 
 // FilterView wraps the corresponding Objective-C method.
-func (x *QuartzFilterManager) FilterView() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterView"))
+func (qfm *QuartzFilterManager) FilterView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qfm), objc.RegisterName("filterView"))
 	return obj.Wrap(_r)
 }
 
 // SelectedFilter wraps the corresponding Objective-C method.
-func (x *QuartzFilterManager) SelectedFilter() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedFilter"))
+func (qfm *QuartzFilterManager) SelectedFilter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qfm), objc.RegisterName("selectedFilter"))
 	return obj.Wrap(_r)
 }
 
 // SelectFilter wraps the corresponding Objective-C method.
-func (x *QuartzFilterManager) SelectFilter(filter obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("selectFilter:"), objref.IDOf(filter))
+func (qfm *QuartzFilterManager) SelectFilter(filter obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(qfm), objc.RegisterName("selectFilter:"), objref.IDOf(filter))
 	return _r
 }
 
 // SetDelegate wraps the corresponding Objective-C method.
-func (x *QuartzFilterManager) SetDelegate(aDelegate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(aDelegate))
+func (qfm *QuartzFilterManager) SetDelegate(aDelegate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(qfm), objc.RegisterName("setDelegate:"), objref.IDOf(aDelegate))
 }
 
 // Delegate wraps the corresponding Objective-C method.
-func (x *QuartzFilterManager) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+func (qfm *QuartzFilterManager) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qfm), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
 // ImportFilter wraps the corresponding Objective-C method.
-func (x *QuartzFilterManager) ImportFilter(filterProperties obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("importFilter:"), objref.IDOf(filterProperties))
+func (qfm *QuartzFilterManager) ImportFilter(filterProperties obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qfm), objc.RegisterName("importFilter:"), objref.IDOf(filterProperties))
 	return obj.Wrap(_r)
 }
-
-// QuartzFilterManagerable is the interface implemented by [QuartzFilterManager], for mocking and DI.
-type QuartzFilterManagerable interface {
-	obj.Object
-	FilterPanel() obj.Object
-	FilterView() obj.Object
-	SelectedFilter() obj.Object
-	SelectFilter(filter obj.Object) bool
-	SetDelegate(aDelegate obj.Object)
-	Delegate() obj.Object
-	ImportFilter(filterProperties obj.Object) obj.Object
-}
-
-var _ QuartzFilterManagerable = (*QuartzFilterManager)(nil)

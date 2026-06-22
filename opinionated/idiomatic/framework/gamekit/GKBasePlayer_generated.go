@@ -48,56 +48,47 @@ func basePlayerAdopt(id objc.ID) *BasePlayer {
 }
 
 // Description returns the object's -description text.
-func (x *BasePlayer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bp *BasePlayer) Description() string {
+	return rt.Description(objref.IDOf(bp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BasePlayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bp *BasePlayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BasePlayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bp *BasePlayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BasePlayer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bp *BasePlayer) String() string {
+	return rt.Description(objref.IDOf(bp))
 }
 
 // PlayerID wraps the corresponding Objective-C method.
-func (x *BasePlayer) PlayerID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerID"))
+func (bp *BasePlayer) PlayerID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("playerID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// DisplayName this player's name representation as displayed in the Game Center in-game UI. Use this when you need to display the player's name. The display name may be very long, so be sure to use appropriate string truncation API when drawing.
-func (x *BasePlayer) DisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+// DisplayName returns this player's name representation as displayed in the Game Center in-game UI. Use this when you need to display the player's name. The display name may be very long, so be sure to use appropriate string truncation API when drawing.
+func (bp *BasePlayer) DisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// BasePlayerable is the interface implemented by [BasePlayer], for mocking and DI.
-type BasePlayerable interface {
-	obj.Object
-	PlayerID() string
-	DisplayName() string
-}
-
-var _ BasePlayerable = (*BasePlayer)(nil)
 
 // isBasePlayer marks BasePlayer — and, by embedding promotion, its
 // subclasses — as a member of the BasePlayer hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *BasePlayer) isBasePlayer() {}
+func (bp *BasePlayer) isBasePlayer() {}
 
 var _ BasePlayerProvider = (*BasePlayer)(nil)

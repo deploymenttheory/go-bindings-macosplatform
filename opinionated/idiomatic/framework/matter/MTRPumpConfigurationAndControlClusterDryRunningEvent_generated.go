@@ -44,24 +44,24 @@ func mTRPumpConfigurationAndControlClusterDryRunningEventAdopt(id objc.ID) *MTRP
 }
 
 // Description returns the object's -description text.
-func (x *MTRPumpConfigurationAndControlClusterDryRunningEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccdre *MTRPumpConfigurationAndControlClusterDryRunningEvent) Description() string {
+	return rt.Description(objref.IDOf(mpcaccdre))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRPumpConfigurationAndControlClusterDryRunningEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpcaccdre *MTRPumpConfigurationAndControlClusterDryRunningEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpcaccdre), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRPumpConfigurationAndControlClusterDryRunningEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpcaccdre *MTRPumpConfigurationAndControlClusterDryRunningEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpcaccdre), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRPumpConfigurationAndControlClusterDryRunningEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccdre *MTRPumpConfigurationAndControlClusterDryRunningEvent) String() string {
+	return rt.Description(objref.IDOf(mpcaccdre))
 }
 
 // NewMTRPumpConfigurationAndControlClusterDryRunningEvent creates a new MTRPumpConfigurationAndControlClusterDryRunningEvent.
@@ -69,10 +69,3 @@ func NewMTRPumpConfigurationAndControlClusterDryRunningEvent() *MTRPumpConfigura
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterDryRunningEvent")), objc.RegisterName("new"))
 	return mTRPumpConfigurationAndControlClusterDryRunningEventAdopt(_id)
 }
-
-// MTRPumpConfigurationAndControlClusterDryRunningEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterDryRunningEvent], for mocking and DI.
-type MTRPumpConfigurationAndControlClusterDryRunningEventable interface {
-	obj.Object
-}
-
-var _ MTRPumpConfigurationAndControlClusterDryRunningEventable = (*MTRPumpConfigurationAndControlClusterDryRunningEvent)(nil)

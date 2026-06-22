@@ -54,433 +54,305 @@ func NewLabelNodeWithFontNamed(fontName string) *LabelNode {
 	return labelNodeAdopt(_id)
 }
 
-// WithVerticalAlignmentMode the vertical position of the text within the node.
-func (x *LabelNode) WithVerticalAlignmentMode(verticalAlignmentMode LabelVerticalAlignmentMode) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalAlignmentMode:"), verticalAlignmentMode)
-	return x
+// WithVerticalAlignmentMode sets the vertical position of the text within the node.
+func (ln *LabelNode) WithVerticalAlignmentMode(verticalAlignmentMode LabelVerticalAlignmentMode) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setVerticalAlignmentMode:"), verticalAlignmentMode)
+	return ln
 }
 
-// WithHorizontalAlignmentMode the horizontal position of the text within the node.
-func (x *LabelNode) WithHorizontalAlignmentMode(horizontalAlignmentMode LabelHorizontalAlignmentMode) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalAlignmentMode:"), horizontalAlignmentMode)
-	return x
+// WithHorizontalAlignmentMode sets the horizontal position of the text within the node.
+func (ln *LabelNode) WithHorizontalAlignmentMode(horizontalAlignmentMode LabelHorizontalAlignmentMode) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setHorizontalAlignmentMode:"), horizontalAlignmentMode)
+	return ln
 }
 
-// WithNumberOfLines determines the number of lines to draw.
-func (x *LabelNode) WithNumberOfLines(numberOfLines int) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfLines:"), numberOfLines)
-	return x
+// WithNumberOfLines sets determines the number of lines to draw.
+func (ln *LabelNode) WithNumberOfLines(numberOfLines int) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setNumberOfLines:"), numberOfLines)
+	return ln
 }
 
-// WithPreferredMaxLayoutWidth the width, in screen points, after which line-break mode should be applied.
-func (x *LabelNode) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
-	return x
+// WithPreferredMaxLayoutWidth sets the width, in screen points, after which line-break mode should be applied.
+func (ln *LabelNode) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
+	return ln
 }
 
-// WithFontName the font used for the text in the label.
-func (x *LabelNode) WithFontName(fontName string) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontName:"), purego.NSString(fontName))
-	return x
+// WithFontName sets the font used for the text in the label.
+func (ln *LabelNode) WithFontName(fontName string) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setFontName:"), purego.NSString(fontName))
+	return ln
 }
 
-// WithText the string that the label node displays.
-func (x *LabelNode) WithText(text string) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setText:"), purego.NSString(text))
-	return x
+// WithText sets the string that the label node displays.
+func (ln *LabelNode) WithText(text string) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setText:"), purego.NSString(text))
+	return ln
 }
 
-// WithAttributedText the attributed string displayed by the label.
-func (x *LabelNode) WithAttributedText(attributedText obj.Object) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedText:"), objref.IDOf(attributedText))
-	return x
+// WithAttributedText sets the attributed string displayed by the label.
+func (ln *LabelNode) WithAttributedText(attributedText obj.Object) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAttributedText:"), objref.IDOf(attributedText))
+	return ln
 }
 
-// WithFontSize the size of the font used in the label.
-func (x *LabelNode) WithFontSize(fontSize float64) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontSize:"), fontSize)
-	return x
+// WithFontSize sets the size of the font used in the label.
+func (ln *LabelNode) WithFontSize(fontSize float64) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setFontSize:"), fontSize)
+	return ln
 }
 
-// WithFontColor the color of the label.
-func (x *LabelNode) WithFontColor(fontColor obj.Object) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
-	return x
+// WithFontColor sets the color of the label.
+func (ln *LabelNode) WithFontColor(fontColor obj.Object) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
+	return ln
 }
 
-// WithColorBlendFactor a floating-point value that describes how the color is blended with the font color.
-func (x *LabelNode) WithColorBlendFactor(colorBlendFactor float64) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorBlendFactor:"), colorBlendFactor)
-	return x
+// WithColorBlendFactor sets a floating-point value that describes how the color is blended with the font color.
+func (ln *LabelNode) WithColorBlendFactor(colorBlendFactor float64) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setColorBlendFactor:"), colorBlendFactor)
+	return ln
 }
 
-// WithColor an alternative to the font color that can be used for animations.
-func (x *LabelNode) WithColor(color obj.Object) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
-	return x
+// WithColor sets an alternative to the font color that can be used for animations.
+func (ln *LabelNode) WithColor(color obj.Object) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setColor:"), objref.IDOf(color))
+	return ln
 }
 
-// WithBlendMode the blend mode used to draw the label into the parent’s framebuffer.
-func (x *LabelNode) WithBlendMode(blendMode BlendMode) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendMode:"), blendMode)
-	return x
+// WithBlendMode sets the blend mode used to draw the label into the parent’s framebuffer.
+func (ln *LabelNode) WithBlendMode(blendMode BlendMode) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setBlendMode:"), blendMode)
+	return ln
 }
 
-// WithPosition the position of the node in its parent’s coordinate system.
-func (x *LabelNode) WithPosition(position corefoundation.CGPoint) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
-	return x
+// WithPosition sets the position of the node in its parent’s coordinate system.
+func (ln *LabelNode) WithPosition(position corefoundation.CGPoint) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPosition:"), position)
+	return ln
 }
 
-// WithZPosition the height of the node relative to its parent.
-func (x *LabelNode) WithZPosition(zPosition float64) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
-	return x
+// WithZPosition sets the height of the node relative to its parent.
+func (ln *LabelNode) WithZPosition(zPosition float64) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setZPosition:"), zPosition)
+	return ln
 }
 
-// WithZRotation the Euler rotation about the z axis (in radians).
-func (x *LabelNode) WithZRotation(zRotation float64) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
-	return x
+// WithZRotation sets the Euler rotation about the z axis (in radians).
+func (ln *LabelNode) WithZRotation(zRotation float64) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setZRotation:"), zRotation)
+	return ln
 }
 
-// WithXScale a scaling factor that multiplies the width of a node and its children.
-func (x *LabelNode) WithXScale(xScale float64) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
-	return x
+// WithXScale sets a scaling factor that multiplies the width of a node and its children.
+func (ln *LabelNode) WithXScale(xScale float64) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setXScale:"), xScale)
+	return ln
 }
 
-// WithYScale a scaling factor that multiplies the height of a node and its children.
-func (x *LabelNode) WithYScale(yScale float64) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
-	return x
+// WithYScale sets a scaling factor that multiplies the height of a node and its children.
+func (ln *LabelNode) WithYScale(yScale float64) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setYScale:"), yScale)
+	return ln
 }
 
-// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
-func (x *LabelNode) WithSpeed(speed float64) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
-	return x
+// WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
+func (ln *LabelNode) WithSpeed(speed float64) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setSpeed:"), speed)
+	return ln
 }
 
-// WithAlpha the transparency value applied to the node’s contents.
-func (x *LabelNode) WithAlpha(alpha float64) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the transparency value applied to the node’s contents.
+func (ln *LabelNode) WithAlpha(alpha float64) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAlpha:"), alpha)
+	return ln
 }
 
-// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
-func (x *LabelNode) WithPaused(paused bool) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
-	return x
+// WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
+func (ln *LabelNode) WithPaused(paused bool) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPaused:"), paused)
+	return ln
 }
 
-// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
-func (x *LabelNode) WithHidden(hidden bool) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
+func (ln *LabelNode) WithHidden(hidden bool) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setHidden:"), hidden)
+	return ln
 }
 
-// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
-func (x *LabelNode) WithUserInteractionEnabled(userInteractionEnabled bool) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
-	return x
+// WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
+func (ln *LabelNode) WithUserInteractionEnabled(userInteractionEnabled bool) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	return ln
 }
 
-// WithName the node’s assignable name.
-func (x *LabelNode) WithName(name string) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the node’s assignable name.
+func (ln *LabelNode) WithName(name string) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setName:"), purego.NSString(name))
+	return ln
 }
 
-// WithPhysicsBody the physics body associated with the node.
-func (x *LabelNode) WithPhysicsBody(physicsBody *PhysicsBody) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
-	return x
+// WithPhysicsBody sets the physics body associated with the node.
+func (ln *LabelNode) WithPhysicsBody(physicsBody *PhysicsBody) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	return ln
 }
 
-// WithUserData a dictionary containing arbitrary data.
-func (x *LabelNode) WithUserData(userData obj.Object) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
-	return x
+// WithUserData sets a dictionary containing arbitrary data.
+func (ln *LabelNode) WithUserData(userData obj.Object) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	return ln
 }
 
-// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
-func (x *LabelNode) WithReachConstraints(reachConstraints *ReachConstraints) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
-	return x
+// WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
+func (ln *LabelNode) WithReachConstraints(reachConstraints *ReachConstraints) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	return ln
 }
 
-// WithConstraints a list of constraints to apply to the node.
-func (x *LabelNode) WithConstraints(items ...*Constraint) *LabelNode {
+// WithConstraints sets a list of constraints to apply to the node.
+func (ln *LabelNode) WithConstraints(items ...*Constraint) *LabelNode {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setConstraints:"), _arr)
+	return ln
 }
 
-// WithAttributeValues the values of each attribute associated with the node’s attached shader.
-func (x *LabelNode) WithAttributeValues(attributeValues obj.Object) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
-	return x
+// WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
+func (ln *LabelNode) WithAttributeValues(attributeValues obj.Object) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	return ln
 }
 
-// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-func (x *LabelNode) WithAccessibilityElement(accessibilityElement bool) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
-	return x
+// WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+func (ln *LabelNode) WithAccessibilityElement(accessibilityElement bool) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	return ln
 }
 
-// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
-func (x *LabelNode) WithAccessibilityRole(accessibilityRole string) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
-	return x
+// WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
+func (ln *LabelNode) WithAccessibilityRole(accessibilityRole string) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	return ln
 }
 
-// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
-func (x *LabelNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
-	return x
+// WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
+func (ln *LabelNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	return ln
 }
 
-// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
-func (x *LabelNode) WithAccessibilitySubrole(accessibilitySubrole string) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
-	return x
+// WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
+func (ln *LabelNode) WithAccessibilitySubrole(accessibilitySubrole string) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	return ln
 }
 
-// WithAccessibilityFrame the size of this user interface element, in screen points.
-func (x *LabelNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
-	return x
+// WithAccessibilityFrame sets the size of this user interface element, in screen points.
+func (ln *LabelNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	return ln
 }
 
-// WithAccessibilityParent the user interface element that contains this element.
-func (x *LabelNode) WithAccessibilityParent(accessibilityParent obj.Object) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
-	return x
+// WithAccessibilityParent sets the user interface element that contains this element.
+func (ln *LabelNode) WithAccessibilityParent(accessibilityParent obj.Object) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	return ln
 }
 
-// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
-func (x *LabelNode) WithAccessibilityHelp(accessibilityHelp string) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
-	return x
+// WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
+func (ln *LabelNode) WithAccessibilityHelp(accessibilityHelp string) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	return ln
 }
 
-// WithAccessibilityLabel a short description of this user interface element.
-func (x *LabelNode) WithAccessibilityLabel(accessibilityLabel string) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
-	return x
+// WithAccessibilityLabel sets a short description of this user interface element.
+func (ln *LabelNode) WithAccessibilityLabel(accessibilityLabel string) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	return ln
 }
 
-// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
-func (x *LabelNode) WithAccessibilityEnabled(accessibilityEnabled bool) *LabelNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
-	return x
+// WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
+func (ln *LabelNode) WithAccessibilityEnabled(accessibilityEnabled bool) *LabelNode {
+	objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	return ln
 }
 
 // VerticalAlignmentMode wraps the corresponding Objective-C method.
-func (x *LabelNode) VerticalAlignmentMode() LabelVerticalAlignmentMode {
-	_r := objc.Send[LabelVerticalAlignmentMode](objref.IDOf(x), objc.RegisterName("verticalAlignmentMode"))
+func (ln *LabelNode) VerticalAlignmentMode() LabelVerticalAlignmentMode {
+	_r := objc.Send[LabelVerticalAlignmentMode](objref.IDOf(ln), objc.RegisterName("verticalAlignmentMode"))
 	return _r
-}
-
-// SetVerticalAlignmentMode wraps the corresponding Objective-C method.
-func (x *LabelNode) SetVerticalAlignmentMode(verticalAlignmentMode LabelVerticalAlignmentMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalAlignmentMode:"), verticalAlignmentMode)
 }
 
 // HorizontalAlignmentMode wraps the corresponding Objective-C method.
-func (x *LabelNode) HorizontalAlignmentMode() LabelHorizontalAlignmentMode {
-	_r := objc.Send[LabelHorizontalAlignmentMode](objref.IDOf(x), objc.RegisterName("horizontalAlignmentMode"))
+func (ln *LabelNode) HorizontalAlignmentMode() LabelHorizontalAlignmentMode {
+	_r := objc.Send[LabelHorizontalAlignmentMode](objref.IDOf(ln), objc.RegisterName("horizontalAlignmentMode"))
 	return _r
-}
-
-// SetHorizontalAlignmentMode wraps the corresponding Objective-C method.
-func (x *LabelNode) SetHorizontalAlignmentMode(horizontalAlignmentMode LabelHorizontalAlignmentMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalAlignmentMode:"), horizontalAlignmentMode)
 }
 
 // NumberOfLines determines the number of lines to draw. The default value is 1 (single line). A value of 0 means no limit. If the height of the text reaches the # of lines the text will be truncated using the line break mode.
-func (x *LabelNode) NumberOfLines() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfLines"))
+func (ln *LabelNode) NumberOfLines() int {
+	_r := objc.Send[int](objref.IDOf(ln), objc.RegisterName("numberOfLines"))
 	return _r
 }
 
-// SetNumberOfLines wraps the corresponding Objective-C method.
-func (x *LabelNode) SetNumberOfLines(numberOfLines int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfLines:"), numberOfLines)
-}
-
-// PreferredMaxLayoutWidth if nonzero, this is used when determining layout width for multiline labels. Default is zero.
-func (x *LabelNode) PreferredMaxLayoutWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("preferredMaxLayoutWidth"))
+// PreferredMaxLayoutWidth returns if nonzero, this is used when determining layout width for multiline labels. Default is zero.
+func (ln *LabelNode) PreferredMaxLayoutWidth() float64 {
+	_r := objc.Send[float64](objref.IDOf(ln), objc.RegisterName("preferredMaxLayoutWidth"))
 	return _r
-}
-
-// SetPreferredMaxLayoutWidth wraps the corresponding Objective-C method.
-func (x *LabelNode) SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
 }
 
 // FontName wraps the corresponding Objective-C method.
-func (x *LabelNode) FontName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontName"))
+func (ln *LabelNode) FontName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("fontName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetFontName wraps the corresponding Objective-C method.
-func (x *LabelNode) SetFontName(fontName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontName:"), purego.NSString(fontName))
 }
 
 // Text wraps the corresponding Objective-C method.
-func (x *LabelNode) Text() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("text"))
+func (ln *LabelNode) Text() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("text"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetText wraps the corresponding Objective-C method.
-func (x *LabelNode) SetText(text string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setText:"), purego.NSString(text))
-}
-
 // AttributedText wraps the corresponding Objective-C method.
-func (x *LabelNode) AttributedText() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedText"))
+func (ln *LabelNode) AttributedText() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("attributedText"))
 	return obj.Wrap(_r)
-}
-
-// SetAttributedText wraps the corresponding Objective-C method.
-func (x *LabelNode) SetAttributedText(attributedText obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedText:"), objref.IDOf(attributedText))
 }
 
 // FontSize wraps the corresponding Objective-C method.
-func (x *LabelNode) FontSize() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("fontSize"))
+func (ln *LabelNode) FontSize() float64 {
+	_r := objc.Send[float64](objref.IDOf(ln), objc.RegisterName("fontSize"))
 	return _r
 }
 
-// SetFontSize wraps the corresponding Objective-C method.
-func (x *LabelNode) SetFontSize(fontSize float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontSize:"), fontSize)
-}
-
-// FontColor base color that the text is rendered with (if supported by the font)
-func (x *LabelNode) FontColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fontColor"))
+// FontColor returns base color that the text is rendered with (if supported by the font)
+func (ln *LabelNode) FontColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("fontColor"))
 	return obj.Wrap(_r)
 }
 
-// SetFontColor wraps the corresponding Objective-C method.
-func (x *LabelNode) SetFontColor(fontColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
-}
-
-// ColorBlendFactor controls the blending between the rendered text and a color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
-func (x *LabelNode) ColorBlendFactor() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("colorBlendFactor"))
+// ColorBlendFactor returns controls the blending between the rendered text and a color. The valid interval of values is from 0.0 up to and including 1.0. A value above or below that interval is clamped to the minimum (0.0) if below or the maximum (1.0) if above.
+func (ln *LabelNode) ColorBlendFactor() float64 {
+	_r := objc.Send[float64](objref.IDOf(ln), objc.RegisterName("colorBlendFactor"))
 	return _r
 }
 
-// SetColorBlendFactor wraps the corresponding Objective-C method.
-func (x *LabelNode) SetColorBlendFactor(colorBlendFactor float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorBlendFactor:"), colorBlendFactor)
-}
-
-// Color color to be blended with the text based on the colorBlendFactor
-func (x *LabelNode) Color() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+// Color returns color to be blended with the text based on the colorBlendFactor
+func (ln *LabelNode) Color() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ln), objc.RegisterName("color"))
 	return obj.Wrap(_r)
-}
-
-// SetColor wraps the corresponding Objective-C method.
-func (x *LabelNode) SetColor(color obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), objref.IDOf(color))
 }
 
 // BlendMode sets the blend mode to use when composing the sprite with the final framebuffer.
-func (x *LabelNode) BlendMode() BlendMode {
-	_r := objc.Send[BlendMode](objref.IDOf(x), objc.RegisterName("blendMode"))
+func (ln *LabelNode) BlendMode() BlendMode {
+	_r := objc.Send[BlendMode](objref.IDOf(ln), objc.RegisterName("blendMode"))
 	return _r
 }
-
-// SetBlendMode wraps the corresponding Objective-C method.
-func (x *LabelNode) SetBlendMode(blendMode BlendMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendMode:"), blendMode)
-}
-
-// LabelNodeable is the interface implemented by [LabelNode], for mocking and DI.
-type LabelNodeable interface {
-	obj.Object
-	WithVerticalAlignmentMode(verticalAlignmentMode LabelVerticalAlignmentMode) *LabelNode
-	WithHorizontalAlignmentMode(horizontalAlignmentMode LabelHorizontalAlignmentMode) *LabelNode
-	WithNumberOfLines(numberOfLines int) *LabelNode
-	WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *LabelNode
-	WithFontName(fontName string) *LabelNode
-	WithText(text string) *LabelNode
-	WithAttributedText(attributedText obj.Object) *LabelNode
-	WithFontSize(fontSize float64) *LabelNode
-	WithFontColor(fontColor obj.Object) *LabelNode
-	WithColorBlendFactor(colorBlendFactor float64) *LabelNode
-	WithColor(color obj.Object) *LabelNode
-	WithBlendMode(blendMode BlendMode) *LabelNode
-	WithPosition(position corefoundation.CGPoint) *LabelNode
-	WithZPosition(zPosition float64) *LabelNode
-	WithZRotation(zRotation float64) *LabelNode
-	WithXScale(xScale float64) *LabelNode
-	WithYScale(yScale float64) *LabelNode
-	WithSpeed(speed float64) *LabelNode
-	WithAlpha(alpha float64) *LabelNode
-	WithPaused(paused bool) *LabelNode
-	WithHidden(hidden bool) *LabelNode
-	WithUserInteractionEnabled(userInteractionEnabled bool) *LabelNode
-	WithName(name string) *LabelNode
-	WithPhysicsBody(physicsBody *PhysicsBody) *LabelNode
-	WithUserData(userData obj.Object) *LabelNode
-	WithReachConstraints(reachConstraints *ReachConstraints) *LabelNode
-	WithConstraints(items ...*Constraint) *LabelNode
-	WithAttributeValues(attributeValues obj.Object) *LabelNode
-	WithAccessibilityElement(accessibilityElement bool) *LabelNode
-	WithAccessibilityRole(accessibilityRole string) *LabelNode
-	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *LabelNode
-	WithAccessibilitySubrole(accessibilitySubrole string) *LabelNode
-	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *LabelNode
-	WithAccessibilityParent(accessibilityParent obj.Object) *LabelNode
-	WithAccessibilityHelp(accessibilityHelp string) *LabelNode
-	WithAccessibilityLabel(accessibilityLabel string) *LabelNode
-	WithAccessibilityEnabled(accessibilityEnabled bool) *LabelNode
-	VerticalAlignmentMode() LabelVerticalAlignmentMode
-	SetVerticalAlignmentMode(verticalAlignmentMode LabelVerticalAlignmentMode)
-	HorizontalAlignmentMode() LabelHorizontalAlignmentMode
-	SetHorizontalAlignmentMode(horizontalAlignmentMode LabelHorizontalAlignmentMode)
-	NumberOfLines() int
-	SetNumberOfLines(numberOfLines int)
-	PreferredMaxLayoutWidth() float64
-	SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64)
-	FontName() string
-	SetFontName(fontName string)
-	Text() string
-	SetText(text string)
-	AttributedText() obj.Object
-	SetAttributedText(attributedText obj.Object)
-	FontSize() float64
-	SetFontSize(fontSize float64)
-	FontColor() obj.Object
-	SetFontColor(fontColor obj.Object)
-	ColorBlendFactor() float64
-	SetColorBlendFactor(colorBlendFactor float64)
-	Color() obj.Object
-	SetColor(color obj.Object)
-	BlendMode() BlendMode
-	SetBlendMode(blendMode BlendMode)
-}
-
-var _ LabelNodeable = (*LabelNode)(nil)
 
 var _ NodeProvider = (*LabelNode)(nil)

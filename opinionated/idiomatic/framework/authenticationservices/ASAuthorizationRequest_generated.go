@@ -48,36 +48,29 @@ func authorizationRequestAdopt(id objc.ID) *AuthorizationRequest {
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ar *AuthorizationRequest) Description() string {
+	return rt.Description(objref.IDOf(ar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ar *AuthorizationRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ar *AuthorizationRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ar *AuthorizationRequest) String() string {
+	return rt.Description(objref.IDOf(ar))
 }
-
-// AuthorizationRequestable is the interface implemented by [AuthorizationRequest], for mocking and DI.
-type AuthorizationRequestable interface {
-	obj.Object
-}
-
-var _ AuthorizationRequestable = (*AuthorizationRequest)(nil)
 
 // isAuthorizationRequest marks AuthorizationRequest — and, by embedding promotion, its
 // subclasses — as a member of the AuthorizationRequest hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AuthorizationRequest) isAuthorizationRequest() {}
+func (ar *AuthorizationRequest) isAuthorizationRequest() {}
 
 var _ AuthorizationRequestProvider = (*AuthorizationRequest)(nil)

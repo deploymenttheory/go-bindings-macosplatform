@@ -44,24 +44,24 @@ func mTRGeneralDiagnosticsClusterHardwareFaultChangeEventAdopt(id objc.ID) *MTRG
 }
 
 // Description returns the object's -description text.
-func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Description() string {
+	return rt.Description(objref.IDOf(mgdchfce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mgdchfce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mgdchfce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) String() string {
+	return rt.Description(objref.IDOf(mgdchfce))
 }
 
 // NewMTRGeneralDiagnosticsClusterHardwareFaultChangeEvent creates a new MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent.
@@ -71,34 +71,23 @@ func NewMTRGeneralDiagnosticsClusterHardwareFaultChangeEvent() *MTRGeneralDiagno
 }
 
 // Current wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Current() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("current"))
+func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Current() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdchfce), objc.RegisterName("current"))
 	return obj.Wrap(_r)
 }
 
 // SetCurrent wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) SetCurrent(current obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrent:"), objref.IDOf(current))
+func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) SetCurrent(current obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mgdchfce), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
 // Previous wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Previous() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previous"))
+func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) Previous() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mgdchfce), objc.RegisterName("previous"))
 	return obj.Wrap(_r)
 }
 
 // SetPrevious wraps the corresponding Objective-C method.
-func (x *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) SetPrevious(previous obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
+func (mgdchfce *MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent) SetPrevious(previous obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mgdchfce), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
 }
-
-// MTRGeneralDiagnosticsClusterHardwareFaultChangeEventable is the interface implemented by [MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent], for mocking and DI.
-type MTRGeneralDiagnosticsClusterHardwareFaultChangeEventable interface {
-	obj.Object
-	Current() obj.Object
-	SetCurrent(current obj.Object)
-	Previous() obj.Object
-	SetPrevious(previous obj.Object)
-}
-
-var _ MTRGeneralDiagnosticsClusterHardwareFaultChangeEventable = (*MTRGeneralDiagnosticsClusterHardwareFaultChangeEvent)(nil)

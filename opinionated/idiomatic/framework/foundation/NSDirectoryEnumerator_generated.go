@@ -53,57 +53,43 @@ func NewDirectoryEnumerator() *DirectoryEnumerator {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *DirectoryEnumerator) WithScriptingProperties(scriptingProperties obj.Object) *DirectoryEnumerator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (de *DirectoryEnumerator) WithScriptingProperties(scriptingProperties obj.Object) *DirectoryEnumerator {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return de
 }
 
 // SkipDescendents wraps the corresponding Objective-C method.
-func (x *DirectoryEnumerator) SkipDescendents() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipDescendents"))
+func (de *DirectoryEnumerator) SkipDescendents() {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("skipDescendents"))
 }
 
 // SkipDescendants wraps the corresponding Objective-C method.
-func (x *DirectoryEnumerator) SkipDescendants() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipDescendants"))
+func (de *DirectoryEnumerator) SkipDescendants() {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("skipDescendants"))
 }
 
 // FileAttributes wraps the corresponding Objective-C method.
-func (x *DirectoryEnumerator) FileAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileAttributes"))
+func (de *DirectoryEnumerator) FileAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("fileAttributes"))
 	return obj.Wrap(_r)
 }
 
 // DirectoryAttributes wraps the corresponding Objective-C method.
-func (x *DirectoryEnumerator) DirectoryAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directoryAttributes"))
+func (de *DirectoryEnumerator) DirectoryAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("directoryAttributes"))
 	return obj.Wrap(_r)
 }
 
 // IsEnumeratingDirectoryPostOrder wraps the corresponding Objective-C method.
-func (x *DirectoryEnumerator) IsEnumeratingDirectoryPostOrder() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnumeratingDirectoryPostOrder"))
+func (de *DirectoryEnumerator) IsEnumeratingDirectoryPostOrder() bool {
+	_r := objc.Send[bool](objref.IDOf(de), objc.RegisterName("isEnumeratingDirectoryPostOrder"))
 	return _r
 }
 
 // Level wraps the corresponding Objective-C method.
-func (x *DirectoryEnumerator) Level() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("level"))
+func (de *DirectoryEnumerator) Level() int {
+	_r := objc.Send[int](objref.IDOf(de), objc.RegisterName("level"))
 	return _r
 }
-
-// DirectoryEnumeratorable is the interface implemented by [DirectoryEnumerator], for mocking and DI.
-type DirectoryEnumeratorable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *DirectoryEnumerator
-	SkipDescendents()
-	SkipDescendants()
-	FileAttributes() obj.Object
-	DirectoryAttributes() obj.Object
-	IsEnumeratingDirectoryPostOrder() bool
-	Level() int
-}
-
-var _ DirectoryEnumeratorable = (*DirectoryEnumerator)(nil)
 
 var _ EnumeratorProvider = (*DirectoryEnumerator)(nil)

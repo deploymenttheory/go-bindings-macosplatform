@@ -46,24 +46,24 @@ func wKNavigationAdopt(id objc.ID) *WKNavigation {
 }
 
 // Description returns the object's -description text.
-func (x *WKNavigation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wn *WKNavigation) Description() string {
+	return rt.Description(objref.IDOf(wn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKNavigation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wn *WKNavigation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKNavigation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wn *WKNavigation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKNavigation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wn *WKNavigation) String() string {
+	return rt.Description(objref.IDOf(wn))
 }
 
 // NewWKNavigation creates a new WKNavigation.
@@ -73,15 +73,7 @@ func NewWKNavigation() *WKNavigation {
 }
 
 // EffectiveContentMode wraps the corresponding Objective-C method.
-func (x *WKNavigation) EffectiveContentMode() WKContentMode {
-	_r := objc.Send[WKContentMode](objref.IDOf(x), objc.RegisterName("effectiveContentMode"))
+func (wn *WKNavigation) EffectiveContentMode() WKContentMode {
+	_r := objc.Send[WKContentMode](objref.IDOf(wn), objc.RegisterName("effectiveContentMode"))
 	return _r
 }
-
-// WKNavigationable is the interface implemented by [WKNavigation], for mocking and DI.
-type WKNavigationable interface {
-	obj.Object
-	EffectiveContentMode() WKContentMode
-}
-
-var _ WKNavigationable = (*WKNavigation)(nil)

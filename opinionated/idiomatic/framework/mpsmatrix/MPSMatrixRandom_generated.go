@@ -46,83 +46,59 @@ func matrixRandomAdopt(id objc.ID) *MatrixRandom {
 }
 
 // Description returns the object's -description text.
-func (x *MatrixRandom) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mr *MatrixRandom) Description() string {
+	return rt.Description(objref.IDOf(mr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MatrixRandom) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mr *MatrixRandom) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MatrixRandom) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mr *MatrixRandom) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MatrixRandom) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mr *MatrixRandom) String() string {
+	return rt.Description(objref.IDOf(mr))
 }
 
-// WithBatchStart the starting index in the destination batch.
-func (x *MatrixRandom) WithBatchStart(batchStart int) *MatrixRandom {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
-	return x
+// WithBatchStart sets the starting index in the destination batch.
+func (mr *MatrixRandom) WithBatchStart(batchStart int) *MatrixRandom {
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setBatchStart:"), batchStart)
+	return mr
 }
 
-// WithBatchSize the size of the batch to process.
-func (x *MatrixRandom) WithBatchSize(batchSize int) *MatrixRandom {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
-	return x
+// WithBatchSize sets the size of the batch to process.
+func (mr *MatrixRandom) WithBatchSize(batchSize int) *MatrixRandom {
+	objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("setBatchSize:"), batchSize)
+	return mr
 }
 
-// DistributionType the distribution from which to generate random values. Default is MPSMatrixRandomDistributionDefault
-func (x *MatrixRandom) DistributionType() MatrixRandomDistribution {
-	_r := objc.Send[MatrixRandomDistribution](objref.IDOf(x), objc.RegisterName("distributionType"))
+// DistributionType returns the distribution from which to generate random values. Default is MPSMatrixRandomDistributionDefault
+func (mr *MatrixRandom) DistributionType() MatrixRandomDistribution {
+	_r := objc.Send[MatrixRandomDistribution](objref.IDOf(mr), objc.RegisterName("distributionType"))
 	return _r
 }
 
-// BatchStart the starting index in the destination batch.
-func (x *MatrixRandom) BatchStart() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("batchStart"))
+// BatchStart returns the starting index in the destination batch.
+func (mr *MatrixRandom) BatchStart() int {
+	_r := objc.Send[int](objref.IDOf(mr), objc.RegisterName("batchStart"))
 	return _r
 }
 
-// SetBatchStart wraps the corresponding Objective-C method.
-func (x *MatrixRandom) SetBatchStart(batchStart int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
-}
-
-// BatchSize the size of the batch to process.
-func (x *MatrixRandom) BatchSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("batchSize"))
+// BatchSize returns the size of the batch to process.
+func (mr *MatrixRandom) BatchSize() int {
+	_r := objc.Send[int](objref.IDOf(mr), objc.RegisterName("batchSize"))
 	return _r
 }
-
-// SetBatchSize wraps the corresponding Objective-C method.
-func (x *MatrixRandom) SetBatchSize(batchSize int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
-}
-
-// MatrixRandomable is the interface implemented by [MatrixRandom], for mocking and DI.
-type MatrixRandomable interface {
-	obj.Object
-	WithBatchStart(batchStart int) *MatrixRandom
-	WithBatchSize(batchSize int) *MatrixRandom
-	DistributionType() MatrixRandomDistribution
-	BatchStart() int
-	SetBatchStart(batchStart int)
-	BatchSize() int
-	SetBatchSize(batchSize int)
-}
-
-var _ MatrixRandomable = (*MatrixRandom)(nil)
 
 // isMatrixRandom marks MatrixRandom — and, by embedding promotion, its
 // subclasses — as a member of the MatrixRandom hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MatrixRandom) isMatrixRandom() {}
+func (mr *MatrixRandom) isMatrixRandom() {}
 
 var _ MatrixRandomProvider = (*MatrixRandom)(nil)

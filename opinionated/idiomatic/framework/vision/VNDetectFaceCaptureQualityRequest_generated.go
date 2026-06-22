@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,40 +52,29 @@ func NewDetectFaceCaptureQualityRequest() *DetectFaceCaptureQualityRequest {
 	return detectFaceCaptureQualityRequestAdopt(_id)
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *DetectFaceCaptureQualityRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceCaptureQualityRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (dfcqr *DetectFaceCaptureQualityRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceCaptureQualityRequest {
+	objc.Send[objc.ID](objref.IDOf(dfcqr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return dfcqr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *DetectFaceCaptureQualityRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceCaptureQualityRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (dfcqr *DetectFaceCaptureQualityRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceCaptureQualityRequest {
+	objc.Send[objc.ID](objref.IDOf(dfcqr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return dfcqr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *DetectFaceCaptureQualityRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceCaptureQualityRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (dfcqr *DetectFaceCaptureQualityRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceCaptureQualityRequest {
+	objc.Send[objc.ID](objref.IDOf(dfcqr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return dfcqr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *DetectFaceCaptureQualityRequest) WithRevision(revision int) *DetectFaceCaptureQualityRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (dfcqr *DetectFaceCaptureQualityRequest) WithRevision(revision int) *DetectFaceCaptureQualityRequest {
+	objc.Send[objc.ID](objref.IDOf(dfcqr), objc.RegisterName("setRevision:"), revision)
+	return dfcqr
 }
-
-// DetectFaceCaptureQualityRequestable is the interface implemented by [DetectFaceCaptureQualityRequest], for mocking and DI.
-type DetectFaceCaptureQualityRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceCaptureQualityRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceCaptureQualityRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceCaptureQualityRequest
-	WithRevision(revision int) *DetectFaceCaptureQualityRequest
-}
-
-var _ DetectFaceCaptureQualityRequestable = (*DetectFaceCaptureQualityRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*DetectFaceCaptureQualityRequest)(nil)
 

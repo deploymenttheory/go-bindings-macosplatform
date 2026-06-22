@@ -5,13 +5,14 @@
 package oslog
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // LogStore is an idiomatic wrapper over the Objective-C class OSLogStore.
@@ -48,24 +49,24 @@ func logStoreAdopt(id objc.ID) *LogStore {
 }
 
 // Description returns the object's -description text.
-func (x *LogStore) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ls *LogStore) Description() string {
+	return rt.Description(objref.IDOf(ls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LogStore) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ls *LogStore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LogStore) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ls *LogStore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LogStore) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ls *LogStore) String() string {
+	return rt.Description(objref.IDOf(ls))
 }
 
 // NewLogStore creates a new LogStore.
@@ -75,9 +76,9 @@ func NewLogStore() *LogStore {
 }
 
 // EntriesEnumeratorWithOptionsPositionPredicateError returns a log enumerator based on an underlying store.
-func (x *LogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options LogEnumeratorOptions, position *LogPosition, predicate obj.Object) (result *LogEnumerator, err error) {
+func (ls *LogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options LogEnumeratorOptions, position *LogPosition, predicate obj.Object) (result *LogEnumerator, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entriesEnumeratorWithOptions:position:predicate:error:"), options, objref.IDOf(position), objref.IDOf(predicate), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("entriesEnumeratorWithOptions:position:predicate:error:"), options, objref.IDOf(position), objref.IDOf(predicate), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -85,9 +86,9 @@ func (x *LogStore) EntriesEnumeratorWithOptionsPositionPredicateError(options Lo
 }
 
 // EntriesEnumeratorAndReturnError returns a log enumerator with default options for viewing the entries.
-func (x *LogStore) EntriesEnumeratorAndReturnError() (result *LogEnumerator, err error) {
+func (ls *LogStore) EntriesEnumeratorAndReturnError() (result *LogEnumerator, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entriesEnumeratorAndReturnError:"), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("entriesEnumeratorAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -95,31 +96,19 @@ func (x *LogStore) EntriesEnumeratorAndReturnError() (result *LogEnumerator, err
 }
 
 // PositionWithDate returns a position representing the time specified.
-func (x *LogStore) PositionWithDate(date obj.Object) *LogPosition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("positionWithDate:"), objref.IDOf(date))
+func (ls *LogStore) PositionWithDate(date obj.Object) *LogPosition {
+	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("positionWithDate:"), objref.IDOf(date))
 	return LogPositionFromID(_r)
 }
 
 // PositionWithTimeIntervalSinceEnd returns a position representing time since the end of the time range that the entries span.
-func (x *LogStore) PositionWithTimeIntervalSinceEnd(seconds float64) *LogPosition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("positionWithTimeIntervalSinceEnd:"), seconds)
+func (ls *LogStore) PositionWithTimeIntervalSinceEnd(seconds float64) *LogPosition {
+	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("positionWithTimeIntervalSinceEnd:"), seconds)
 	return LogPositionFromID(_r)
 }
 
 // PositionWithTimeIntervalSinceLatestBoot returns a position representing time since the last boot in the series of entries.
-func (x *LogStore) PositionWithTimeIntervalSinceLatestBoot(seconds float64) *LogPosition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("positionWithTimeIntervalSinceLatestBoot:"), seconds)
+func (ls *LogStore) PositionWithTimeIntervalSinceLatestBoot(seconds float64) *LogPosition {
+	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("positionWithTimeIntervalSinceLatestBoot:"), seconds)
 	return LogPositionFromID(_r)
 }
-
-// LogStoreable is the interface implemented by [LogStore], for mocking and DI.
-type LogStoreable interface {
-	obj.Object
-	EntriesEnumeratorWithOptionsPositionPredicateError(options LogEnumeratorOptions, position *LogPosition, predicate obj.Object) (result *LogEnumerator, err error)
-	EntriesEnumeratorAndReturnError() (result *LogEnumerator, err error)
-	PositionWithDate(date obj.Object) *LogPosition
-	PositionWithTimeIntervalSinceEnd(seconds float64) *LogPosition
-	PositionWithTimeIntervalSinceLatestBoot(seconds float64) *LogPosition
-}
-
-var _ LogStoreable = (*LogStore)(nil)

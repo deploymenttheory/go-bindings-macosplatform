@@ -46,24 +46,24 @@ func envelopeSegmentAdopt(id objc.ID) *EnvelopeSegment {
 }
 
 // Description returns the object's -description text.
-func (x *EnvelopeSegment) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (es *EnvelopeSegment) Description() string {
+	return rt.Description(objref.IDOf(es))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EnvelopeSegment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (es *EnvelopeSegment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(es), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EnvelopeSegment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (es *EnvelopeSegment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(es), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *EnvelopeSegment) String() string {
-	return rt.Description(objref.IDOf(x))
+func (es *EnvelopeSegment) String() string {
+	return rt.Description(objref.IDOf(es))
 }
 
 // NewEnvelopeSegment creates a new EnvelopeSegment.
@@ -72,29 +72,14 @@ func NewEnvelopeSegment() *EnvelopeSegment {
 	return envelopeSegmentAdopt(_id)
 }
 
-// WithCurveType a curve along the envelope that shapes the segment.
-func (x *EnvelopeSegment) WithCurveType(curveType CurveType) *EnvelopeSegment {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurveType:"), curveType)
-	return x
+// WithCurveType sets a curve along the envelope that shapes the segment.
+func (es *EnvelopeSegment) WithCurveType(curveType CurveType) *EnvelopeSegment {
+	objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("setCurveType:"), curveType)
+	return es
 }
 
-// CurveType the curve type of the envelope segment. The default value is PHASECurveTypeLinear.
-func (x *EnvelopeSegment) CurveType() CurveType {
-	_r := objc.Send[CurveType](objref.IDOf(x), objc.RegisterName("curveType"))
+// CurveType returns the curve type of the envelope segment. The default value is PHASECurveTypeLinear.
+func (es *EnvelopeSegment) CurveType() CurveType {
+	_r := objc.Send[CurveType](objref.IDOf(es), objc.RegisterName("curveType"))
 	return _r
 }
-
-// SetCurveType wraps the corresponding Objective-C method.
-func (x *EnvelopeSegment) SetCurveType(curveType CurveType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurveType:"), curveType)
-}
-
-// EnvelopeSegmentable is the interface implemented by [EnvelopeSegment], for mocking and DI.
-type EnvelopeSegmentable interface {
-	obj.Object
-	WithCurveType(curveType CurveType) *EnvelopeSegment
-	CurveType() CurveType
-	SetCurveType(curveType CurveType)
-}
-
-var _ EnvelopeSegmentable = (*EnvelopeSegment)(nil)

@@ -46,24 +46,24 @@ func frameProcessorOpticalFlowAdopt(id objc.ID) *FrameProcessorOpticalFlow {
 }
 
 // Description returns the object's -description text.
-func (x *FrameProcessorOpticalFlow) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fpof *FrameProcessorOpticalFlow) Description() string {
+	return rt.Description(objref.IDOf(fpof))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FrameProcessorOpticalFlow) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fpof *FrameProcessorOpticalFlow) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fpof), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FrameProcessorOpticalFlow) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fpof *FrameProcessorOpticalFlow) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fpof), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FrameProcessorOpticalFlow) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fpof *FrameProcessorOpticalFlow) String() string {
+	return rt.Description(objref.IDOf(fpof))
 }
 
 // NewFrameProcessorOpticalFlow creates a new FrameProcessorOpticalFlow.
@@ -71,10 +71,3 @@ func NewFrameProcessorOpticalFlow() *FrameProcessorOpticalFlow {
 	_id := objc.Send[objc.ID](objc.ID(_class("VTFrameProcessorOpticalFlow")), objc.RegisterName("new"))
 	return frameProcessorOpticalFlowAdopt(_id)
 }
-
-// FrameProcessorOpticalFlowable is the interface implemented by [FrameProcessorOpticalFlow], for mocking and DI.
-type FrameProcessorOpticalFlowable interface {
-	obj.Object
-}
-
-var _ FrameProcessorOpticalFlowable = (*FrameProcessorOpticalFlow)(nil)

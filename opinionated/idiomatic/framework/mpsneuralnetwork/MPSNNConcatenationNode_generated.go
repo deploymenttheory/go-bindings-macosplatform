@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,18 +52,10 @@ func NewNNConcatenationNodeWithSources(sourceNodes []*NNImageNode) *NNConcatenat
 	return nNConcatenationNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNConcatenationNode) WithLabel(label string) *NNConcatenationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (ncn *NNConcatenationNode) WithLabel(label string) *NNConcatenationNode {
+	objc.Send[objc.ID](objref.IDOf(ncn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ncn
 }
-
-// NNConcatenationNodeable is the interface implemented by [NNConcatenationNode], for mocking and DI.
-type NNConcatenationNodeable interface {
-	obj.Object
-	WithLabel(label string) *NNConcatenationNode
-}
-
-var _ NNConcatenationNodeable = (*NNConcatenationNode)(nil)
 
 var _ NNFilterNodeProvider = (*NNConcatenationNode)(nil)

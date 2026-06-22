@@ -7,7 +7,6 @@ package cloudkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewRecordZoneNotification() *RecordZoneNotification {
 	return recordZoneNotificationAdopt(_id)
 }
 
-// RecordZoneID the ID of the record zone that has changes.
-func (x *RecordZoneNotification) RecordZoneID() *RecordZoneID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordZoneID"))
+// RecordZoneID returns the ID of the record zone that has changes.
+func (rzn *RecordZoneNotification) RecordZoneID() *RecordZoneID {
+	_r := objc.Send[objc.ID](objref.IDOf(rzn), objc.RegisterName("recordZoneID"))
 	return RecordZoneIDFromID(_r)
 }
 
-// DatabaseScope the type of database for the record zone. This property's value is one of the constants that “CKDatabase/Scope“ defines.
-func (x *RecordZoneNotification) DatabaseScope() DatabaseScope {
-	_r := objc.Send[DatabaseScope](objref.IDOf(x), objc.RegisterName("databaseScope"))
+// DatabaseScope returns the type of database for the record zone. This property's value is one of the constants that “CKDatabase/Scope“ defines.
+func (rzn *RecordZoneNotification) DatabaseScope() DatabaseScope {
+	_r := objc.Send[DatabaseScope](objref.IDOf(rzn), objc.RegisterName("databaseScope"))
 	return _r
 }
-
-// RecordZoneNotificationable is the interface implemented by [RecordZoneNotification], for mocking and DI.
-type RecordZoneNotificationable interface {
-	obj.Object
-	RecordZoneID() *RecordZoneID
-	DatabaseScope() DatabaseScope
-}
-
-var _ RecordZoneNotificationable = (*RecordZoneNotification)(nil)
 
 var _ NotificationProvider = (*RecordZoneNotification)(nil)

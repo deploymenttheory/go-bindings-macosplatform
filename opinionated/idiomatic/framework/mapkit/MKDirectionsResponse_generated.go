@@ -46,24 +46,24 @@ func directionsResponseAdopt(id objc.ID) *DirectionsResponse {
 }
 
 // Description returns the object's -description text.
-func (x *DirectionsResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dr *DirectionsResponse) Description() string {
+	return rt.Description(objref.IDOf(dr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DirectionsResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dr *DirectionsResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DirectionsResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dr *DirectionsResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DirectionsResponse) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dr *DirectionsResponse) String() string {
+	return rt.Description(objref.IDOf(dr))
 }
 
 // NewDirectionsResponse creates a new DirectionsResponse.
@@ -73,31 +73,21 @@ func NewDirectionsResponse() *DirectionsResponse {
 }
 
 // Source wraps the corresponding Objective-C method.
-func (x *DirectionsResponse) Source() *MapItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("source"))
+func (dr *DirectionsResponse) Source() *MapItem {
+	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("source"))
 	return MapItemFromID(_r)
 }
 
 // Destination wraps the corresponding Objective-C method.
-func (x *DirectionsResponse) Destination() *MapItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destination"))
+func (dr *DirectionsResponse) Destination() *MapItem {
+	_r := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("destination"))
 	return MapItemFromID(_r)
 }
 
 // Routes wraps the corresponding Objective-C method.
 //
 // Routes returns the collection as a Go slice.
-func (x *DirectionsResponse) Routes() []*Route {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("routes"))
+func (dr *DirectionsResponse) Routes() []*Route {
+	_arr := objc.Send[objc.ID](objref.IDOf(dr), objc.RegisterName("routes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Route { return RouteFromID(_id) })
 }
-
-// DirectionsResponseable is the interface implemented by [DirectionsResponse], for mocking and DI.
-type DirectionsResponseable interface {
-	obj.Object
-	Source() *MapItem
-	Destination() *MapItem
-	Routes() []*Route
-}
-
-var _ DirectionsResponseable = (*DirectionsResponse)(nil)

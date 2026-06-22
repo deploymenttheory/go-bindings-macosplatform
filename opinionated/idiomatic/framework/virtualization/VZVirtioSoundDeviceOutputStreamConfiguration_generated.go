@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,31 +51,16 @@ func NewVirtioSoundDeviceOutputStreamConfiguration() *VirtioSoundDeviceOutputStr
 	return virtioSoundDeviceOutputStreamConfigurationAdopt(_id)
 }
 
-// WithSink an audio stream sink that defines how the host handles audio data produced by the guest.
-func (x *VirtioSoundDeviceOutputStreamConfiguration) WithSink(sink AudioOutputStreamSinkProvider) *VirtioSoundDeviceOutputStreamConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSink:"), objref.IDOf(sink))
-	return x
+// WithSink sets an audio stream sink that defines how the host handles audio data produced by the guest.
+func (vsdosc *VirtioSoundDeviceOutputStreamConfiguration) WithSink(sink AudioOutputStreamSinkProvider) *VirtioSoundDeviceOutputStreamConfiguration {
+	objc.Send[objc.ID](objref.IDOf(vsdosc), objc.RegisterName("setSink:"), objref.IDOf(sink))
+	return vsdosc
 }
 
 // Sink wraps the corresponding Objective-C method.
-func (x *VirtioSoundDeviceOutputStreamConfiguration) Sink() *AudioOutputStreamSink {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sink"))
+func (vsdosc *VirtioSoundDeviceOutputStreamConfiguration) Sink() *AudioOutputStreamSink {
+	_r := objc.Send[objc.ID](objref.IDOf(vsdosc), objc.RegisterName("sink"))
 	return AudioOutputStreamSinkFromID(_r)
 }
-
-// SetSink wraps the corresponding Objective-C method.
-func (x *VirtioSoundDeviceOutputStreamConfiguration) SetSink(sink *AudioOutputStreamSink) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSink:"), objref.IDOf(sink))
-}
-
-// VirtioSoundDeviceOutputStreamConfigurationable is the interface implemented by [VirtioSoundDeviceOutputStreamConfiguration], for mocking and DI.
-type VirtioSoundDeviceOutputStreamConfigurationable interface {
-	obj.Object
-	WithSink(sink AudioOutputStreamSinkProvider) *VirtioSoundDeviceOutputStreamConfiguration
-	Sink() *AudioOutputStreamSink
-	SetSink(sink *AudioOutputStreamSink)
-}
-
-var _ VirtioSoundDeviceOutputStreamConfigurationable = (*VirtioSoundDeviceOutputStreamConfiguration)(nil)
 
 var _ VirtioSoundDeviceStreamConfigurationProvider = (*VirtioSoundDeviceOutputStreamConfiguration)(nil)

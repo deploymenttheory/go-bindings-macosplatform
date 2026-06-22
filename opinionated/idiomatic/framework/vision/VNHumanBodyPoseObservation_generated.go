@@ -5,12 +5,13 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // HumanBodyPoseObservation is an idiomatic wrapper over the Objective-C class VNHumanBodyPoseObservation.
@@ -55,9 +56,9 @@ func NewHumanBodyPoseObservation() *HumanBodyPoseObservation {
 }
 
 // RecognizedPointForJointNameError retrieves the recognized point for a joint name.
-func (x *HumanBodyPoseObservation) RecognizedPointForJointNameError(jointName obj.Object) (result *RecognizedPoint, err error) {
+func (hbpo *HumanBodyPoseObservation) RecognizedPointForJointNameError(jointName obj.Object) (result *RecognizedPoint, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognizedPointForJointName:error:"), objref.IDOf(jointName), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(hbpo), objc.RegisterName("recognizedPointForJointName:error:"), objref.IDOf(jointName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -65,41 +66,30 @@ func (x *HumanBodyPoseObservation) RecognizedPointForJointNameError(jointName ob
 }
 
 // RecognizedPointsForJointsGroupNameError retrieves the recognized points associated with the joint group name.
-func (x *HumanBodyPoseObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error) {
+func (hbpo *HumanBodyPoseObservation) RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognizedPointsForJointsGroupName:error:"), objref.IDOf(jointsGroupName), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(hbpo), objc.RegisterName("recognizedPointsForJointsGroupName:error:"), objref.IDOf(jointsGroupName), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return obj.Wrap(_r), nil
 }
 
-// AvailableJointNames all of the joint names available in the observation.
+// AvailableJointNames returns all of the joint names available in the observation.
 //
 // AvailableJointNames returns the collection as a Go slice.
-func (x *HumanBodyPoseObservation) AvailableJointNames() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableJointNames"))
+func (hbpo *HumanBodyPoseObservation) AvailableJointNames() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(hbpo), objc.RegisterName("availableJointNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// AvailableJointsGroupNames all of the joints group names available in the observation.
+// AvailableJointsGroupNames returns all of the joints group names available in the observation.
 //
 // AvailableJointsGroupNames returns the collection as a Go slice.
-func (x *HumanBodyPoseObservation) AvailableJointsGroupNames() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableJointsGroupNames"))
+func (hbpo *HumanBodyPoseObservation) AvailableJointsGroupNames() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(hbpo), objc.RegisterName("availableJointsGroupNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// HumanBodyPoseObservationable is the interface implemented by [HumanBodyPoseObservation], for mocking and DI.
-type HumanBodyPoseObservationable interface {
-	obj.Object
-	RecognizedPointForJointNameError(jointName obj.Object) (result *RecognizedPoint, err error)
-	RecognizedPointsForJointsGroupNameError(jointsGroupName obj.Object) (result obj.Object, err error)
-	AvailableJointNames() []obj.Object
-	AvailableJointsGroupNames() []obj.Object
-}
-
-var _ HumanBodyPoseObservationable = (*HumanBodyPoseObservation)(nil)
 
 var _ RecognizedPointsObservationProvider = (*HumanBodyPoseObservation)(nil)
 

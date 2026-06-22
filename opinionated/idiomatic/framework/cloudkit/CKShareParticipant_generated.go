@@ -46,24 +46,24 @@ func shareParticipantAdopt(id objc.ID) *ShareParticipant {
 }
 
 // Description returns the object's -description text.
-func (x *ShareParticipant) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sp *ShareParticipant) Description() string {
+	return rt.Description(objref.IDOf(sp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ShareParticipant) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sp *ShareParticipant) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ShareParticipant) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sp *ShareParticipant) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ShareParticipant) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sp *ShareParticipant) String() string {
+	return rt.Description(objref.IDOf(sp))
 }
 
 // NewShareParticipant creates a new ShareParticipant.
@@ -72,87 +72,59 @@ func NewShareParticipant() *ShareParticipant {
 	return shareParticipantAdopt(_id)
 }
 
-// WithRole the participant's role for the share.
-func (x *ShareParticipant) WithRole(role ShareParticipantRole) *ShareParticipant {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRole:"), role)
-	return x
+// WithRole sets the participant's role for the share.
+func (sp *ShareParticipant) WithRole(role ShareParticipantRole) *ShareParticipant {
+	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setRole:"), role)
+	return sp
 }
 
-// WithPermission the participant's permission level for the share. This property controls the permissions that the participant has for the share. For a list of possible values, see “CKShare/ParticipantPermission“.
-func (x *ShareParticipant) WithPermission(permission ShareParticipantPermission) *ShareParticipant {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPermission:"), permission)
-	return x
+// WithPermission sets the participant's permission level for the share. This property controls the permissions that the participant has for the share. For a list of possible values, see “CKShare/ParticipantPermission“.
+func (sp *ShareParticipant) WithPermission(permission ShareParticipantPermission) *ShareParticipant {
+	objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("setPermission:"), permission)
+	return sp
 }
 
-// UserIdentity the identity of the participant. This property contains a reference to the user identity for the share participant.
-func (x *ShareParticipant) UserIdentity() *UserIdentity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIdentity"))
+// UserIdentity returns the identity of the participant. This property contains a reference to the user identity for the share participant.
+func (sp *ShareParticipant) UserIdentity() *UserIdentity {
+	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("userIdentity"))
 	return UserIdentityFromID(_r)
 }
 
-// Role the participant's role for the share.
-func (x *ShareParticipant) Role() ShareParticipantRole {
-	_r := objc.Send[ShareParticipantRole](objref.IDOf(x), objc.RegisterName("role"))
+// Role returns the participant's role for the share.
+func (sp *ShareParticipant) Role() ShareParticipantRole {
+	_r := objc.Send[ShareParticipantRole](objref.IDOf(sp), objc.RegisterName("role"))
 	return _r
 }
 
-// SetRole wraps the corresponding Objective-C method.
-func (x *ShareParticipant) SetRole(role ShareParticipantRole) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRole:"), role)
-}
-
-// AcceptanceStatus the current state of the user's acceptance of the share. This property contains the current state of the participant's acceptance of the share. For a list of possible values, see “CKShare/ParticipantAcceptanceStatus“.
-func (x *ShareParticipant) AcceptanceStatus() ShareParticipantAcceptanceStatus {
-	_r := objc.Send[ShareParticipantAcceptanceStatus](objref.IDOf(x), objc.RegisterName("acceptanceStatus"))
+// AcceptanceStatus returns the current state of the user's acceptance of the share. This property contains the current state of the participant's acceptance of the share. For a list of possible values, see “CKShare/ParticipantAcceptanceStatus“.
+func (sp *ShareParticipant) AcceptanceStatus() ShareParticipantAcceptanceStatus {
+	_r := objc.Send[ShareParticipantAcceptanceStatus](objref.IDOf(sp), objc.RegisterName("acceptanceStatus"))
 	return _r
 }
 
-// Permission the participant's permission level for the share. This property controls the permissions that the participant has for the share. For a list of possible values, see “CKShare/ParticipantPermission“.
-func (x *ShareParticipant) Permission() ShareParticipantPermission {
-	_r := objc.Send[ShareParticipantPermission](objref.IDOf(x), objc.RegisterName("permission"))
+// Permission returns the participant's permission level for the share. This property controls the permissions that the participant has for the share. For a list of possible values, see “CKShare/ParticipantPermission“.
+func (sp *ShareParticipant) Permission() ShareParticipantPermission {
+	_r := objc.Send[ShareParticipantPermission](objref.IDOf(sp), objc.RegisterName("permission"))
 	return _r
 }
 
-// SetPermission wraps the corresponding Objective-C method.
-func (x *ShareParticipant) SetPermission(permission ShareParticipantPermission) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPermission:"), permission)
-}
-
-// ParticipantID a unique identifier for this participant.
-func (x *ShareParticipant) ParticipantID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("participantID"))
+// ParticipantID returns a unique identifier for this participant.
+func (sp *ShareParticipant) ParticipantID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("participantID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// IsApprovedRequester indicates whether the participant was originally a requester that an originator or administrator approved to join the share.
-func (x *ShareParticipant) IsApprovedRequester() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isApprovedRequester"))
+// IsApprovedRequester reports whether the participant was originally a requester that an originator or administrator approved to join the share.
+func (sp *ShareParticipant) IsApprovedRequester() bool {
+	_r := objc.Send[bool](objref.IDOf(sp), objc.RegisterName("isApprovedRequester"))
 	return _r
 }
 
-// DateAddedToShare the date and time when an originator or administrator added this participant to the share. CloudKit sets this timestamp when the share is successfully saved to the server.
-func (x *ShareParticipant) DateAddedToShare() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateAddedToShare"))
+// DateAddedToShare returns the date and time when an originator or administrator added this participant to the share. CloudKit sets this timestamp when the share is successfully saved to the server.
+func (sp *ShareParticipant) DateAddedToShare() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sp), objc.RegisterName("dateAddedToShare"))
 	return obj.Wrap(_r)
 }
-
-// ShareParticipantable is the interface implemented by [ShareParticipant], for mocking and DI.
-type ShareParticipantable interface {
-	obj.Object
-	WithRole(role ShareParticipantRole) *ShareParticipant
-	WithPermission(permission ShareParticipantPermission) *ShareParticipant
-	UserIdentity() *UserIdentity
-	Role() ShareParticipantRole
-	SetRole(role ShareParticipantRole)
-	AcceptanceStatus() ShareParticipantAcceptanceStatus
-	Permission() ShareParticipantPermission
-	SetPermission(permission ShareParticipantPermission)
-	ParticipantID() string
-	IsApprovedRequester() bool
-	DateAddedToShare() obj.Object
-}
-
-var _ ShareParticipantable = (*ShareParticipant)(nil)

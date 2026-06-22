@@ -46,97 +46,66 @@ func mTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsAdopt(id obj
 }
 
 // Description returns the object's -description text.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) Description() string {
+	return rt.Description(objref.IDOf(mutctetfserp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mutctetfserp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mutctetfserp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) String() string {
+	return rt.Description(objref.IDOf(mutctetfserp))
 }
 
 // WithArg1 sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) WithArg1(arg1 obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
-	return x
+func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) WithArg1(arg1 obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mutctetfserp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
+	return mutctetfserp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mutctetfserp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mutctetfserp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mutctetfserp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mutctetfserp
 }
 
 // Arg1 wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) Arg1() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg1"))
+func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) Arg1() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctetfserp), objc.RegisterName("arg1"))
 	return obj.Wrap(_r)
 }
 
-// SetArg1 wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) SetArg1(arg1 obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctetfserp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctetfserp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams], for mocking and DI.
-type MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsable interface {
-	obj.Object
-	WithArg1(arg1 obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams
-	Arg1() obj.Object
-	SetArg1(arg1 obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsable = (*MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams)(nil)
 
 // isMTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams marks MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams — and, by embedding promotion, its
 // subclasses — as a member of the MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) isMTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams() {
+func (mutctetfserp *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams) isMTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams() {
 }
 
 var _ MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParamsProvider = (*MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams)(nil)

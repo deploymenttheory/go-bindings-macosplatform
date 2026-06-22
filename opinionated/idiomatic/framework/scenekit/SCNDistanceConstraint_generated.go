@@ -7,7 +7,6 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,92 +49,58 @@ func NewDistanceConstraint() *DistanceConstraint {
 	return distanceConstraintAdopt(_id)
 }
 
-// WithTarget defines the target node to keep distance with.
-func (x *DistanceConstraint) WithTarget(target NodeProvider) *DistanceConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets defines the target node to keep distance with.
+func (dc *DistanceConstraint) WithTarget(target NodeProvider) *DistanceConstraint {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return dc
 }
 
-// WithMinimumDistance the minimum distance. Defaults to 0. Animatable.
-func (x *DistanceConstraint) WithMinimumDistance(minimumDistance float64) *DistanceConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumDistance:"), minimumDistance)
-	return x
+// WithMinimumDistance sets the minimum distance. Defaults to 0. Animatable.
+func (dc *DistanceConstraint) WithMinimumDistance(minimumDistance float64) *DistanceConstraint {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setMinimumDistance:"), minimumDistance)
+	return dc
 }
 
-// WithMaximumDistance the minimum distance. Defaults to MAXFLOAT. Animatable.
-func (x *DistanceConstraint) WithMaximumDistance(maximumDistance float64) *DistanceConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumDistance:"), maximumDistance)
-	return x
+// WithMaximumDistance sets the minimum distance. Defaults to MAXFLOAT. Animatable.
+func (dc *DistanceConstraint) WithMaximumDistance(maximumDistance float64) *DistanceConstraint {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setMaximumDistance:"), maximumDistance)
+	return dc
 }
 
-// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
-func (x *DistanceConstraint) WithEnabled(enabled bool) *DistanceConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets determines whether the constraint is enabled or not. Defaults to YES.
+func (dc *DistanceConstraint) WithEnabled(enabled bool) *DistanceConstraint {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setEnabled:"), enabled)
+	return dc
 }
 
-// WithInfluenceFactor the influence of the constraint on the node’s transformation.
-func (x *DistanceConstraint) WithInfluenceFactor(influenceFactor float64) *DistanceConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
-	return x
+// WithInfluenceFactor sets the influence of the constraint on the node’s transformation.
+func (dc *DistanceConstraint) WithInfluenceFactor(influenceFactor float64) *DistanceConstraint {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
+	return dc
 }
 
-// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-func (x *DistanceConstraint) WithIncremental(incremental bool) *DistanceConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
-	return x
+// WithIncremental sets specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+func (dc *DistanceConstraint) WithIncremental(incremental bool) *DistanceConstraint {
+	objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("setIncremental:"), incremental)
+	return dc
 }
 
 // Target defines the target node to keep distance with.
-func (x *DistanceConstraint) Target() *Node {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+func (dc *DistanceConstraint) Target() *Node {
+	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("target"))
 	return NodeFromID(_r)
 }
 
-// SetTarget wraps the corresponding Objective-C method.
-func (x *DistanceConstraint) SetTarget(target *Node) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-}
-
-// MinimumDistance the minimum distance. Defaults to 0. Animatable.
-func (x *DistanceConstraint) MinimumDistance() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumDistance"))
+// MinimumDistance returns the minimum distance. Defaults to 0. Animatable.
+func (dc *DistanceConstraint) MinimumDistance() float64 {
+	_r := objc.Send[float64](objref.IDOf(dc), objc.RegisterName("minimumDistance"))
 	return _r
 }
 
-// SetMinimumDistance wraps the corresponding Objective-C method.
-func (x *DistanceConstraint) SetMinimumDistance(minimumDistance float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumDistance:"), minimumDistance)
-}
-
-// MaximumDistance the minimum distance. Defaults to MAXFLOAT. Animatable.
-func (x *DistanceConstraint) MaximumDistance() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumDistance"))
+// MaximumDistance returns the minimum distance. Defaults to MAXFLOAT. Animatable.
+func (dc *DistanceConstraint) MaximumDistance() float64 {
+	_r := objc.Send[float64](objref.IDOf(dc), objc.RegisterName("maximumDistance"))
 	return _r
 }
-
-// SetMaximumDistance wraps the corresponding Objective-C method.
-func (x *DistanceConstraint) SetMaximumDistance(maximumDistance float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumDistance:"), maximumDistance)
-}
-
-// DistanceConstraintable is the interface implemented by [DistanceConstraint], for mocking and DI.
-type DistanceConstraintable interface {
-	obj.Object
-	WithTarget(target NodeProvider) *DistanceConstraint
-	WithMinimumDistance(minimumDistance float64) *DistanceConstraint
-	WithMaximumDistance(maximumDistance float64) *DistanceConstraint
-	WithEnabled(enabled bool) *DistanceConstraint
-	WithInfluenceFactor(influenceFactor float64) *DistanceConstraint
-	WithIncremental(incremental bool) *DistanceConstraint
-	Target() *Node
-	SetTarget(target *Node)
-	MinimumDistance() float64
-	SetMinimumDistance(minimumDistance float64)
-	MaximumDistance() float64
-	SetMaximumDistance(maximumDistance float64)
-}
-
-var _ DistanceConstraintable = (*DistanceConstraint)(nil)
 
 var _ ConstraintProvider = (*DistanceConstraint)(nil)

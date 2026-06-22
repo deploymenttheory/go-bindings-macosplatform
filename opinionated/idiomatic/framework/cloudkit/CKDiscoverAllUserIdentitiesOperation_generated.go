@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -54,95 +55,71 @@ func NewDiscoverAllUserIdentitiesOperation() *DiscoverAllUserIdentitiesOperation
 	return discoverAllUserIdentitiesOperationAdopt(_id)
 }
 
-// WithUserIdentityDiscoveredBlock the closure to execute for each user identity.
-func (x *DiscoverAllUserIdentitiesOperation) WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(obj.Object)) *DiscoverAllUserIdentitiesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIdentityDiscoveredBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { userIdentityDiscoveredBlock(obj.Wrap(_b0)) }))
-	return x
+// WithUserIdentityDiscoveredBlock sets the closure to execute for each user identity.
+func (dauio *DiscoverAllUserIdentitiesOperation) WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(obj.Object)) *DiscoverAllUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(dauio), objc.RegisterName("setUserIdentityDiscoveredBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { userIdentityDiscoveredBlock(obj.Wrap(_b0)) }))
+	return dauio
 }
 
-// WithConfiguration the operation’s configuration.
-func (x *DiscoverAllUserIdentitiesOperation) WithConfiguration(configuration *OperationConfiguration) *DiscoverAllUserIdentitiesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
-	return x
+// WithConfiguration sets the operation’s configuration.
+func (dauio *DiscoverAllUserIdentitiesOperation) WithConfiguration(configuration *OperationConfiguration) *DiscoverAllUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(dauio), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
+	return dauio
 }
 
-// WithGroup the operation’s group.
-func (x *DiscoverAllUserIdentitiesOperation) WithGroup(group *OperationGroup) *DiscoverAllUserIdentitiesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
-	return x
+// WithGroup sets the operation’s group.
+func (dauio *DiscoverAllUserIdentitiesOperation) WithGroup(group *OperationGroup) *DiscoverAllUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(dauio), objc.RegisterName("setGroup:"), objref.IDOf(group))
+	return dauio
 }
 
-// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
-func (x *DiscoverAllUserIdentitiesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DiscoverAllUserIdentitiesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
-	return x
+// WithLongLivedOperationWasPersistedBlock sets the closure to execute when the server begins to store callbacks for the long-lived operation.
+func (dauio *DiscoverAllUserIdentitiesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DiscoverAllUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(dauio), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
+	return dauio
 }
 
-// WithContainer the operation's container.
-func (x *DiscoverAllUserIdentitiesOperation) WithContainer(container *Container) *DiscoverAllUserIdentitiesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
-	return x
+// WithContainer sets the operation's container.
+func (dauio *DiscoverAllUserIdentitiesOperation) WithContainer(container *Container) *DiscoverAllUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(dauio), objc.RegisterName("setContainer:"), objref.IDOf(container))
+	return dauio
 }
 
-// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
-func (x *DiscoverAllUserIdentitiesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *DiscoverAllUserIdentitiesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
-	return x
+// WithAllowsCellularAccess sets a Boolean value that indicates whether the operation can send data over the cellular network.
+func (dauio *DiscoverAllUserIdentitiesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *DiscoverAllUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(dauio), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
+	return dauio
 }
 
-// WithLongLived a Boolean value that indicates whether the operation is long-lived.
-func (x *DiscoverAllUserIdentitiesOperation) WithLongLived(longLived bool) *DiscoverAllUserIdentitiesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
-	return x
+// WithLongLived sets a Boolean value that indicates whether the operation is long-lived.
+func (dauio *DiscoverAllUserIdentitiesOperation) WithLongLived(longLived bool) *DiscoverAllUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(dauio), objc.RegisterName("setLongLived:"), longLived)
+	return dauio
 }
 
-// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
-func (x *DiscoverAllUserIdentitiesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DiscoverAllUserIdentitiesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
-	return x
+// WithTimeoutIntervalForRequest sets the timeout interval when waiting for additional data.
+func (dauio *DiscoverAllUserIdentitiesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DiscoverAllUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(dauio), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
+	return dauio
 }
 
-// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
-func (x *DiscoverAllUserIdentitiesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DiscoverAllUserIdentitiesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
-	return x
-}
-
-// SetUserIdentityDiscoveredBlock wraps the corresponding Objective-C method.
-//
-// SetUserIdentityDiscoveredBlock blocks until the operation completes or ctx is cancelled.
-func (x *DiscoverAllUserIdentitiesOperation) SetUserIdentityDiscoveredBlock(ctx context.Context) (result *UserIdentity, err error) {
-	type _result struct {
-		val *UserIdentity
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _o _result
-		_o.val = UserIdentityFromID(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIdentityDiscoveredBlock:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero *UserIdentity
-		return _zero, ctx.Err()
-	}
+// WithTimeoutIntervalForResource sets the maximum amount of time that a resource request can use.
+func (dauio *DiscoverAllUserIdentitiesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DiscoverAllUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(dauio), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
+	return dauio
 }
 
 // SetDiscoverAllUserIdentitiesCompletionBlock wraps the corresponding Objective-C method.
 //
 // SetDiscoverAllUserIdentitiesCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (x *DiscoverAllUserIdentitiesOperation) SetDiscoverAllUserIdentitiesCompletionBlock(ctx context.Context) error {
+func (dauio *DiscoverAllUserIdentitiesOperation) SetDiscoverAllUserIdentitiesCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscoverAllUserIdentitiesCompletionBlock:"), _block)
+	objc.Send[objc.ID](objref.IDOf(dauio), objc.RegisterName("setDiscoverAllUserIdentitiesCompletionBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -150,23 +127,5 @@ func (x *DiscoverAllUserIdentitiesOperation) SetDiscoverAllUserIdentitiesComplet
 		return ctx.Err()
 	}
 }
-
-// DiscoverAllUserIdentitiesOperationable is the interface implemented by [DiscoverAllUserIdentitiesOperation], for mocking and DI.
-type DiscoverAllUserIdentitiesOperationable interface {
-	obj.Object
-	WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(obj.Object)) *DiscoverAllUserIdentitiesOperation
-	WithConfiguration(configuration *OperationConfiguration) *DiscoverAllUserIdentitiesOperation
-	WithGroup(group *OperationGroup) *DiscoverAllUserIdentitiesOperation
-	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DiscoverAllUserIdentitiesOperation
-	WithContainer(container *Container) *DiscoverAllUserIdentitiesOperation
-	WithAllowsCellularAccess(allowsCellularAccess bool) *DiscoverAllUserIdentitiesOperation
-	WithLongLived(longLived bool) *DiscoverAllUserIdentitiesOperation
-	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DiscoverAllUserIdentitiesOperation
-	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DiscoverAllUserIdentitiesOperation
-	SetUserIdentityDiscoveredBlock(ctx context.Context) (*UserIdentity, error)
-	SetDiscoverAllUserIdentitiesCompletionBlock(ctx context.Context) error
-}
-
-var _ DiscoverAllUserIdentitiesOperationable = (*DiscoverAllUserIdentitiesOperation)(nil)
 
 var _ OperationProvider = (*DiscoverAllUserIdentitiesOperation)(nil)

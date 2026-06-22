@@ -47,24 +47,24 @@ func statusItemAdopt(id objc.ID) *StatusItem {
 }
 
 // Description returns the object's -description text.
-func (x *StatusItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (si *StatusItem) Description() string {
+	return rt.Description(objref.IDOf(si))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StatusItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (si *StatusItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(si), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StatusItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (si *StatusItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(si), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StatusItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (si *StatusItem) String() string {
+	return rt.Description(objref.IDOf(si))
 }
 
 // NewStatusItem creates a new StatusItem.
@@ -73,328 +73,204 @@ func NewStatusItem() *StatusItem {
 	return statusItemAdopt(_id)
 }
 
-// WithLength the amount of space in the status bar that should be allocated to the status item.
-func (x *StatusItem) WithLength(length float64) *StatusItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
-	return x
+// WithLength sets the amount of space in the status bar that should be allocated to the status item.
+func (si *StatusItem) WithLength(length float64) *StatusItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setLength:"), length)
+	return si
 }
 
-// WithMenu the pull-down menu displayed when the user clicks the status item.
-func (x *StatusItem) WithMenu(menu *Menu) *StatusItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets the pull-down menu displayed when the user clicks the status item.
+func (si *StatusItem) WithMenu(menu *Menu) *StatusItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return si
 }
 
-// WithBehavior the set of allowed behaviors for the status item.
-func (x *StatusItem) WithBehavior(behavior StatusItemBehavior) *StatusItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBehavior:"), behavior)
-	return x
+// WithBehavior sets the set of allowed behaviors for the status item.
+func (si *StatusItem) WithBehavior(behavior StatusItemBehavior) *StatusItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setBehavior:"), behavior)
+	return si
 }
 
-// WithVisible a Boolean value indicating if the menu bar currently displays the status item.
-func (x *StatusItem) WithVisible(visible bool) *StatusItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisible:"), visible)
-	return x
+// WithVisible sets a Boolean value indicating if the menu bar currently displays the status item.
+func (si *StatusItem) WithVisible(visible bool) *StatusItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setVisible:"), visible)
+	return si
 }
 
-// WithAutosaveName a unique name for saving and restoring information about a status item.
-func (x *StatusItem) WithAutosaveName(autosaveName obj.Object) *StatusItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutosaveName:"), objref.IDOf(autosaveName))
-	return x
+// WithAutosaveName sets a unique name for saving and restoring information about a status item.
+func (si *StatusItem) WithAutosaveName(autosaveName obj.Object) *StatusItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setAutosaveName:"), objref.IDOf(autosaveName))
+	return si
 }
 
-// WithTarget the object that receives the status item’s action message when someone clicks the status item.
-func (x *StatusItem) WithTarget(target obj.Object) *StatusItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that receives the status item’s action message when someone clicks the status item.
+func (si *StatusItem) WithTarget(target obj.Object) *StatusItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return si
 }
 
-// WithTitle the string that is displayed at the status item’s position in the status bar.
-func (x *StatusItem) WithTitle(title string) *StatusItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the string that is displayed at the status item’s position in the status bar.
+func (si *StatusItem) WithTitle(title string) *StatusItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return si
 }
 
-// WithAttributedTitle the attributed string that is displayed at the status item’s position in the status bar.
-func (x *StatusItem) WithAttributedTitle(attributedTitle obj.Object) *StatusItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
-	return x
+// WithAttributedTitle sets the attributed string that is displayed at the status item’s position in the status bar.
+func (si *StatusItem) WithAttributedTitle(attributedTitle obj.Object) *StatusItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
+	return si
 }
 
-// WithImage the image that is displayed at the status item’s position in the status bar.
-func (x *StatusItem) WithImage(image *Image) *StatusItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+// WithImage sets the image that is displayed at the status item’s position in the status bar.
+func (si *StatusItem) WithImage(image *Image) *StatusItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return si
 }
 
-// WithAlternateImage the alternate image to be displayed when a status bar item is highlighted.
-func (x *StatusItem) WithAlternateImage(alternateImage *Image) *StatusItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
-	return x
+// WithAlternateImage sets the alternate image to be displayed when a status bar item is highlighted.
+func (si *StatusItem) WithAlternateImage(alternateImage *Image) *StatusItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
+	return si
 }
 
-// WithEnabled a Boolean that indicates whether the status item is enabled to respond to clicks.
-func (x *StatusItem) WithEnabled(enabled bool) *StatusItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean that indicates whether the status item is enabled to respond to clicks.
+func (si *StatusItem) WithEnabled(enabled bool) *StatusItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setEnabled:"), enabled)
+	return si
 }
 
-// WithHighlightMode a Boolean that indicates whether the status item is highlighted when it is clicked.
-func (x *StatusItem) WithHighlightMode(highlightMode bool) *StatusItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlightMode:"), highlightMode)
-	return x
+// WithHighlightMode sets a Boolean that indicates whether the status item is highlighted when it is clicked.
+func (si *StatusItem) WithHighlightMode(highlightMode bool) *StatusItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setHighlightMode:"), highlightMode)
+	return si
 }
 
-// WithToolTip the tool tip string that is displayed when the cursor pauses over the status item.
-func (x *StatusItem) WithToolTip(toolTip string) *StatusItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+// WithToolTip sets the tool tip string that is displayed when the cursor pauses over the status item.
+func (si *StatusItem) WithToolTip(toolTip string) *StatusItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return si
 }
 
-// WithView the custom view the status item displays at its position in the status bar.
-func (x *StatusItem) WithView(view ViewProvider) *StatusItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
-	return x
+// WithView sets the custom view the status item displays at its position in the status bar.
+func (si *StatusItem) WithView(view ViewProvider) *StatusItem {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("setView:"), objref.IDOf(view))
+	return si
 }
 
 // StatusBar wraps the corresponding Objective-C method.
-func (x *StatusItem) StatusBar() *StatusBar {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusBar"))
+func (si *StatusItem) StatusBar() *StatusBar {
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("statusBar"))
 	return StatusBarFromID(_r)
 }
 
 // Length wraps the corresponding Objective-C method.
-func (x *StatusItem) Length() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("length"))
+func (si *StatusItem) Length() float64 {
+	_r := objc.Send[float64](objref.IDOf(si), objc.RegisterName("length"))
 	return _r
 }
 
-// SetLength wraps the corresponding Objective-C method.
-func (x *StatusItem) SetLength(length float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLength:"), length)
-}
-
 // Menu wraps the corresponding Objective-C method.
-func (x *StatusItem) Menu() *Menu {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menu"))
+func (si *StatusItem) Menu() *Menu {
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("menu"))
 	return MenuFromID(_r)
 }
 
-// SetMenu wraps the corresponding Objective-C method.
-func (x *StatusItem) SetMenu(menu *Menu) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-}
-
 // Button wraps the corresponding Objective-C method.
-func (x *StatusItem) Button() *StatusBarButton {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("button"))
+func (si *StatusItem) Button() *StatusBarButton {
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("button"))
 	return StatusBarButtonFromID(_r)
 }
 
 // Behavior wraps the corresponding Objective-C method.
-func (x *StatusItem) Behavior() StatusItemBehavior {
-	_r := objc.Send[StatusItemBehavior](objref.IDOf(x), objc.RegisterName("behavior"))
+func (si *StatusItem) Behavior() StatusItemBehavior {
+	_r := objc.Send[StatusItemBehavior](objref.IDOf(si), objc.RegisterName("behavior"))
 	return _r
-}
-
-// SetBehavior wraps the corresponding Objective-C method.
-func (x *StatusItem) SetBehavior(behavior StatusItemBehavior) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBehavior:"), behavior)
 }
 
 // IsVisible wraps the corresponding Objective-C method.
-func (x *StatusItem) IsVisible() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVisible"))
+func (si *StatusItem) IsVisible() bool {
+	_r := objc.Send[bool](objref.IDOf(si), objc.RegisterName("isVisible"))
 	return _r
 }
 
-// SetVisible wraps the corresponding Objective-C method.
-func (x *StatusItem) SetVisible(visible bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisible:"), visible)
-}
-
 // AutosaveName wraps the corresponding Objective-C method.
-func (x *StatusItem) AutosaveName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("autosaveName"))
+func (si *StatusItem) AutosaveName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("autosaveName"))
 	return obj.Wrap(_r)
 }
 
-// SetAutosaveName wraps the corresponding Objective-C method.
-func (x *StatusItem) SetAutosaveName(autosaveName obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutosaveName:"), objref.IDOf(autosaveName))
-}
-
 // SendActionOn sets the conditions on which the status item sends action messages to its target.
-func (x *StatusItem) SendActionOn(mask EventMask) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sendActionOn:"), mask)
+func (si *StatusItem) SendActionOn(mask EventMask) int {
+	_r := objc.Send[int](objref.IDOf(si), objc.RegisterName("sendActionOn:"), mask)
 	return _r
 }
 
 // DrawStatusBarBackgroundInRectWithHighlight draws the menu background pattern for a custom status-bar item in regular or highlight pattern.
-func (x *StatusItem) DrawStatusBarBackgroundInRectWithHighlight(rect corefoundation.CGRect, highlight bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawStatusBarBackgroundInRect:withHighlight:"), rect, highlight)
+func (si *StatusItem) DrawStatusBarBackgroundInRectWithHighlight(rect corefoundation.CGRect, highlight bool) {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("drawStatusBarBackgroundInRect:withHighlight:"), rect, highlight)
 }
 
 // PopUpStatusItemMenu displays a menu under a custom status bar item.
-func (x *StatusItem) PopUpStatusItemMenu(menu *Menu) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("popUpStatusItemMenu:"), objref.IDOf(menu))
+func (si *StatusItem) PopUpStatusItemMenu(menu *Menu) {
+	objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("popUpStatusItemMenu:"), objref.IDOf(menu))
 }
 
 // Target wraps the corresponding Objective-C method.
-func (x *StatusItem) Target() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+func (si *StatusItem) Target() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("target"))
 	return obj.Wrap(_r)
-}
-
-// SetTarget wraps the corresponding Objective-C method.
-func (x *StatusItem) SetTarget(target obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *StatusItem) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (si *StatusItem) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetTitle wraps the corresponding Objective-C method.
-func (x *StatusItem) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
 // AttributedTitle wraps the corresponding Objective-C method.
-func (x *StatusItem) AttributedTitle() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedTitle"))
+func (si *StatusItem) AttributedTitle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("attributedTitle"))
 	return obj.Wrap(_r)
 }
 
-// SetAttributedTitle wraps the corresponding Objective-C method.
-func (x *StatusItem) SetAttributedTitle(attributedTitle obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
-}
-
 // Image wraps the corresponding Objective-C method.
-func (x *StatusItem) Image() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+func (si *StatusItem) Image() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("image"))
 	return ImageFromID(_r)
-}
-
-// SetImage wraps the corresponding Objective-C method.
-func (x *StatusItem) SetImage(image *Image) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 }
 
 // AlternateImage wraps the corresponding Objective-C method.
-func (x *StatusItem) AlternateImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternateImage"))
+func (si *StatusItem) AlternateImage() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("alternateImage"))
 	return ImageFromID(_r)
 }
 
-// SetAlternateImage wraps the corresponding Objective-C method.
-func (x *StatusItem) SetAlternateImage(alternateImage *Image) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
-}
-
 // IsEnabled wraps the corresponding Objective-C method.
-func (x *StatusItem) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+func (si *StatusItem) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(si), objc.RegisterName("isEnabled"))
 	return _r
-}
-
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *StatusItem) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
 // HighlightMode wraps the corresponding Objective-C method.
-func (x *StatusItem) HighlightMode() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("highlightMode"))
+func (si *StatusItem) HighlightMode() bool {
+	_r := objc.Send[bool](objref.IDOf(si), objc.RegisterName("highlightMode"))
 	return _r
 }
 
-// SetHighlightMode wraps the corresponding Objective-C method.
-func (x *StatusItem) SetHighlightMode(highlightMode bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlightMode:"), highlightMode)
-}
-
 // ToolTip wraps the corresponding Objective-C method.
-func (x *StatusItem) ToolTip() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolTip"))
+func (si *StatusItem) ToolTip() string {
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("toolTip"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetToolTip wraps the corresponding Objective-C method.
-func (x *StatusItem) SetToolTip(toolTip string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-}
-
 // View wraps the corresponding Objective-C method.
-func (x *StatusItem) View() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+func (si *StatusItem) View() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(si), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
-
-// SetView wraps the corresponding Objective-C method.
-func (x *StatusItem) SetView(view *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
-}
-
-// StatusItemable is the interface implemented by [StatusItem], for mocking and DI.
-type StatusItemable interface {
-	obj.Object
-	WithLength(length float64) *StatusItem
-	WithMenu(menu *Menu) *StatusItem
-	WithBehavior(behavior StatusItemBehavior) *StatusItem
-	WithVisible(visible bool) *StatusItem
-	WithAutosaveName(autosaveName obj.Object) *StatusItem
-	WithTarget(target obj.Object) *StatusItem
-	WithTitle(title string) *StatusItem
-	WithAttributedTitle(attributedTitle obj.Object) *StatusItem
-	WithImage(image *Image) *StatusItem
-	WithAlternateImage(alternateImage *Image) *StatusItem
-	WithEnabled(enabled bool) *StatusItem
-	WithHighlightMode(highlightMode bool) *StatusItem
-	WithToolTip(toolTip string) *StatusItem
-	WithView(view ViewProvider) *StatusItem
-	StatusBar() *StatusBar
-	Length() float64
-	SetLength(length float64)
-	Menu() *Menu
-	SetMenu(menu *Menu)
-	Button() *StatusBarButton
-	Behavior() StatusItemBehavior
-	SetBehavior(behavior StatusItemBehavior)
-	IsVisible() bool
-	SetVisible(visible bool)
-	AutosaveName() obj.Object
-	SetAutosaveName(autosaveName obj.Object)
-	SendActionOn(mask EventMask) int
-	DrawStatusBarBackgroundInRectWithHighlight(rect corefoundation.CGRect, highlight bool)
-	PopUpStatusItemMenu(menu *Menu)
-	Target() obj.Object
-	SetTarget(target obj.Object)
-	Title() string
-	SetTitle(title string)
-	AttributedTitle() obj.Object
-	SetAttributedTitle(attributedTitle obj.Object)
-	Image() *Image
-	SetImage(image *Image)
-	AlternateImage() *Image
-	SetAlternateImage(alternateImage *Image)
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-	HighlightMode() bool
-	SetHighlightMode(highlightMode bool)
-	ToolTip() string
-	SetToolTip(toolTip string)
-	View() *View
-	SetView(view *View)
-}
-
-var _ StatusItemable = (*StatusItem)(nil)

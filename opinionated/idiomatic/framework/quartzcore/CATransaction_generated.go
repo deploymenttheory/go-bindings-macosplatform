@@ -46,24 +46,24 @@ func transactionAdopt(id objc.ID) *Transaction {
 }
 
 // Description returns the object's -description text.
-func (x *Transaction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Transaction) Description() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Transaction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (t *Transaction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Transaction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (t *Transaction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Transaction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Transaction) String() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // NewTransaction creates a new Transaction.
@@ -71,10 +71,3 @@ func NewTransaction() *Transaction {
 	_id := objc.Send[objc.ID](objc.ID(_class("CATransaction")), objc.RegisterName("new"))
 	return transactionAdopt(_id)
 }
-
-// Transactionable is the interface implemented by [Transaction], for mocking and DI.
-type Transactionable interface {
-	obj.Object
-}
-
-var _ Transactionable = (*Transaction)(nil)

@@ -7,7 +7,6 @@ package symbols
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewSymbolBounceEffect() *SymbolBounceEffect {
 	return symbolBounceEffectAdopt(_id)
 }
 
-// EffectWithByLayer an effect that bounces each layer separately.
-func (x *SymbolBounceEffect) EffectWithByLayer() *SymbolBounceEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+// EffectWithByLayer returns an effect that bounces each layer separately.
+func (sbe *SymbolBounceEffect) EffectWithByLayer() *SymbolBounceEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sbe), objc.RegisterName("effectWithByLayer"))
 	return SymbolBounceEffectFromID(_r)
 }
 
-// EffectWithWholeSymbol an effect that bounces all layers simultaneously.
-func (x *SymbolBounceEffect) EffectWithWholeSymbol() *SymbolBounceEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+// EffectWithWholeSymbol returns an effect that bounces all layers simultaneously.
+func (sbe *SymbolBounceEffect) EffectWithWholeSymbol() *SymbolBounceEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sbe), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolBounceEffectFromID(_r)
 }
-
-// SymbolBounceEffectable is the interface implemented by [SymbolBounceEffect], for mocking and DI.
-type SymbolBounceEffectable interface {
-	obj.Object
-	EffectWithByLayer() *SymbolBounceEffect
-	EffectWithWholeSymbol() *SymbolBounceEffect
-}
-
-var _ SymbolBounceEffectable = (*SymbolBounceEffect)(nil)
 
 var _ SymbolEffectProvider = (*SymbolBounceEffect)(nil)

@@ -46,24 +46,24 @@ func fileNameAdopt(id objc.ID) *FileName {
 }
 
 // Description returns the object's -description text.
-func (x *FileName) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fn *FileName) Description() string {
+	return rt.Description(objref.IDOf(fn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FileName) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fn *FileName) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FileName) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fn *FileName) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FileName) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fn *FileName) String() string {
+	return rt.Description(objref.IDOf(fn))
 }
 
 // NewFileNameWithCString initializes a filename from a null-terminated character sequence.
@@ -94,16 +94,8 @@ func NewFileNameWithString(name string) *FileName {
 	return fileNameAdopt(_id)
 }
 
-// Data the byte sequence of the filename, as a data object. This property always provides a value.
-func (x *FileName) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+// Data returns the byte sequence of the filename, as a data object. This property always provides a value.
+func (fn *FileName) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fn), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
-
-// FileNameable is the interface implemented by [FileName], for mocking and DI.
-type FileNameable interface {
-	obj.Object
-	Data() obj.Object
-}
-
-var _ FileNameable = (*FileName)(nil)

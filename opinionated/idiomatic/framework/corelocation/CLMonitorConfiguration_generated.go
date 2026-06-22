@@ -46,24 +46,24 @@ func monitorConfigurationAdopt(id objc.ID) *MonitorConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *MonitorConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mc *MonitorConfiguration) Description() string {
+	return rt.Description(objref.IDOf(mc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MonitorConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mc *MonitorConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MonitorConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mc *MonitorConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MonitorConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mc *MonitorConfiguration) String() string {
+	return rt.Description(objref.IDOf(mc))
 }
 
 // NewMonitorConfiguration creates a new MonitorConfiguration.
@@ -73,8 +73,8 @@ func NewMonitorConfiguration() *MonitorConfiguration {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *MonitorConfiguration) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (mc *MonitorConfiguration) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,16 +82,7 @@ func (x *MonitorConfiguration) Name() string {
 }
 
 // Queue wraps the corresponding Objective-C method.
-func (x *MonitorConfiguration) Queue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queue"))
+func (mc *MonitorConfiguration) Queue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("queue"))
 	return obj.Wrap(_r)
 }
-
-// MonitorConfigurationable is the interface implemented by [MonitorConfiguration], for mocking and DI.
-type MonitorConfigurationable interface {
-	obj.Object
-	Name() string
-	Queue() obj.Object
-}
-
-var _ MonitorConfigurationable = (*MonitorConfiguration)(nil)

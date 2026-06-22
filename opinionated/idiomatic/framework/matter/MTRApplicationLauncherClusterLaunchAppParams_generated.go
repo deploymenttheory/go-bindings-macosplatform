@@ -44,24 +44,24 @@ func mTRApplicationLauncherClusterLaunchAppParamsAdopt(id objc.ID) *MTRApplicati
 }
 
 // Description returns the object's -description text.
-func (x *MTRApplicationLauncherClusterLaunchAppParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (malclap *MTRApplicationLauncherClusterLaunchAppParams) Description() string {
+	return rt.Description(objref.IDOf(malclap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRApplicationLauncherClusterLaunchAppParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (malclap *MTRApplicationLauncherClusterLaunchAppParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(malclap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRApplicationLauncherClusterLaunchAppParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (malclap *MTRApplicationLauncherClusterLaunchAppParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(malclap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRApplicationLauncherClusterLaunchAppParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (malclap *MTRApplicationLauncherClusterLaunchAppParams) String() string {
+	return rt.Description(objref.IDOf(malclap))
 }
 
 // NewMTRApplicationLauncherClusterLaunchAppParams creates a new MTRApplicationLauncherClusterLaunchAppParams.
@@ -71,88 +71,49 @@ func NewMTRApplicationLauncherClusterLaunchAppParams() *MTRApplicationLauncherCl
 }
 
 // WithApplication sets the property and returns the receiver so calls can be chained.
-func (x *MTRApplicationLauncherClusterLaunchAppParams) WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterLaunchAppParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplication:"), objref.IDOf(application))
-	return x
+func (malclap *MTRApplicationLauncherClusterLaunchAppParams) WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterLaunchAppParams {
+	objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("setApplication:"), objref.IDOf(application))
+	return malclap
 }
 
 // WithData sets the property and returns the receiver so calls can be chained.
-func (x *MTRApplicationLauncherClusterLaunchAppParams) WithData(data obj.Object) *MTRApplicationLauncherClusterLaunchAppParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
-	return x
+func (malclap *MTRApplicationLauncherClusterLaunchAppParams) WithData(data obj.Object) *MTRApplicationLauncherClusterLaunchAppParams {
+	objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("setData:"), objref.IDOf(data))
+	return malclap
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRApplicationLauncherClusterLaunchAppParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRApplicationLauncherClusterLaunchAppParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (malclap *MTRApplicationLauncherClusterLaunchAppParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRApplicationLauncherClusterLaunchAppParams {
+	objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return malclap
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRApplicationLauncherClusterLaunchAppParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRApplicationLauncherClusterLaunchAppParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (malclap *MTRApplicationLauncherClusterLaunchAppParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRApplicationLauncherClusterLaunchAppParams {
+	objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return malclap
 }
 
 // Application wraps the corresponding Objective-C method.
-func (x *MTRApplicationLauncherClusterLaunchAppParams) Application() *MTRApplicationLauncherClusterApplicationStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("application"))
+func (malclap *MTRApplicationLauncherClusterLaunchAppParams) Application() *MTRApplicationLauncherClusterApplicationStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("application"))
 	return MTRApplicationLauncherClusterApplicationStructFromID(_r)
 }
 
-// SetApplication wraps the corresponding Objective-C method.
-func (x *MTRApplicationLauncherClusterLaunchAppParams) SetApplication(application *MTRApplicationLauncherClusterApplicationStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplication:"), objref.IDOf(application))
-}
-
 // Data wraps the corresponding Objective-C method.
-func (x *MTRApplicationLauncherClusterLaunchAppParams) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+func (malclap *MTRApplicationLauncherClusterLaunchAppParams) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// SetData wraps the corresponding Objective-C method.
-func (x *MTRApplicationLauncherClusterLaunchAppParams) SetData(data obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRApplicationLauncherClusterLaunchAppParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (malclap *MTRApplicationLauncherClusterLaunchAppParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRApplicationLauncherClusterLaunchAppParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRApplicationLauncherClusterLaunchAppParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (malclap *MTRApplicationLauncherClusterLaunchAppParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(malclap), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRApplicationLauncherClusterLaunchAppParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRApplicationLauncherClusterLaunchAppParamsable is the interface implemented by [MTRApplicationLauncherClusterLaunchAppParams], for mocking and DI.
-type MTRApplicationLauncherClusterLaunchAppParamsable interface {
-	obj.Object
-	WithApplication(application MTRApplicationLauncherClusterApplicationStructProvider) *MTRApplicationLauncherClusterLaunchAppParams
-	WithData(data obj.Object) *MTRApplicationLauncherClusterLaunchAppParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRApplicationLauncherClusterLaunchAppParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRApplicationLauncherClusterLaunchAppParams
-	Application() *MTRApplicationLauncherClusterApplicationStruct
-	SetApplication(application *MTRApplicationLauncherClusterApplicationStruct)
-	Data() obj.Object
-	SetData(data obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRApplicationLauncherClusterLaunchAppParamsable = (*MTRApplicationLauncherClusterLaunchAppParams)(nil)

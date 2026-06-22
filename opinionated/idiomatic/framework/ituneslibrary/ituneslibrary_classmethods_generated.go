@@ -5,10 +5,11 @@
 package ituneslibrary
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // LibraryWithAPIVersionError creates and initializes an instance of ITLibrary that can retrieve media entities.

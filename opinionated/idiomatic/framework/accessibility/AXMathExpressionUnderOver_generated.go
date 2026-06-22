@@ -7,7 +7,6 @@ package accessibility
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,31 +51,21 @@ func NewMathExpressionUnderOverWithBaseExpressionUnderExpressionOverExpression(b
 }
 
 // BaseExpression wraps the corresponding Objective-C method.
-func (x *MathExpressionUnderOver) BaseExpression() *MathExpression {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseExpression"))
+func (meuo *MathExpressionUnderOver) BaseExpression() *MathExpression {
+	_r := objc.Send[objc.ID](objref.IDOf(meuo), objc.RegisterName("baseExpression"))
 	return MathExpressionFromID(_r)
 }
 
 // UnderExpression wraps the corresponding Objective-C method.
-func (x *MathExpressionUnderOver) UnderExpression() *MathExpression {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("underExpression"))
+func (meuo *MathExpressionUnderOver) UnderExpression() *MathExpression {
+	_r := objc.Send[objc.ID](objref.IDOf(meuo), objc.RegisterName("underExpression"))
 	return MathExpressionFromID(_r)
 }
 
 // OverExpression wraps the corresponding Objective-C method.
-func (x *MathExpressionUnderOver) OverExpression() *MathExpression {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("overExpression"))
+func (meuo *MathExpressionUnderOver) OverExpression() *MathExpression {
+	_r := objc.Send[objc.ID](objref.IDOf(meuo), objc.RegisterName("overExpression"))
 	return MathExpressionFromID(_r)
 }
-
-// MathExpressionUnderOverable is the interface implemented by [MathExpressionUnderOver], for mocking and DI.
-type MathExpressionUnderOverable interface {
-	obj.Object
-	BaseExpression() *MathExpression
-	UnderExpression() *MathExpression
-	OverExpression() *MathExpression
-}
-
-var _ MathExpressionUnderOverable = (*MathExpressionUnderOver)(nil)
 
 var _ MathExpressionProvider = (*MathExpressionUnderOver)(nil)

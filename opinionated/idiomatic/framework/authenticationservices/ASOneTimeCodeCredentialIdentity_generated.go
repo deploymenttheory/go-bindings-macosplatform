@@ -44,24 +44,24 @@ func oneTimeCodeCredentialIdentityAdopt(id objc.ID) *OneTimeCodeCredentialIdenti
 }
 
 // Description returns the object's -description text.
-func (x *OneTimeCodeCredentialIdentity) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (otcci *OneTimeCodeCredentialIdentity) Description() string {
+	return rt.Description(objref.IDOf(otcci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OneTimeCodeCredentialIdentity) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (otcci *OneTimeCodeCredentialIdentity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(otcci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OneTimeCodeCredentialIdentity) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (otcci *OneTimeCodeCredentialIdentity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(otcci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *OneTimeCodeCredentialIdentity) String() string {
-	return rt.Description(objref.IDOf(x))
+func (otcci *OneTimeCodeCredentialIdentity) String() string {
+	return rt.Description(objref.IDOf(otcci))
 }
 
 // NewOneTimeCodeCredentialIdentityWithServiceIdentifierLabelRecordIdentifier initializes an instance of ASOneTimeCodeCredentialIdentity.
@@ -72,18 +72,10 @@ func NewOneTimeCodeCredentialIdentityWithServiceIdentifierLabelRecordIdentifier(
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *OneTimeCodeCredentialIdentity) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (otcci *OneTimeCodeCredentialIdentity) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(otcci), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// OneTimeCodeCredentialIdentityable is the interface implemented by [OneTimeCodeCredentialIdentity], for mocking and DI.
-type OneTimeCodeCredentialIdentityable interface {
-	obj.Object
-	Label() string
-}
-
-var _ OneTimeCodeCredentialIdentityable = (*OneTimeCodeCredentialIdentity)(nil)

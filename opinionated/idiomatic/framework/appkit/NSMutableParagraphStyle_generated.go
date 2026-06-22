@@ -7,7 +7,6 @@ package appkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,318 +51,154 @@ func NewMutableParagraphStyle() *MutableParagraphStyle {
 	return mutableParagraphStyleAdopt(_id)
 }
 
-// WithLineSpacing the distance in points between the bottom of one line fragment and the top of the next.
-func (x *MutableParagraphStyle) WithLineSpacing(lineSpacing float64) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineSpacing:"), lineSpacing)
-	return x
+// WithLineSpacing sets the distance in points between the bottom of one line fragment and the top of the next.
+func (mps *MutableParagraphStyle) WithLineSpacing(lineSpacing float64) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setLineSpacing:"), lineSpacing)
+	return mps
 }
 
-// WithParagraphSpacing the space after the end of the paragraph.
-func (x *MutableParagraphStyle) WithParagraphSpacing(paragraphSpacing float64) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParagraphSpacing:"), paragraphSpacing)
-	return x
+// WithParagraphSpacing sets the space after the end of the paragraph.
+func (mps *MutableParagraphStyle) WithParagraphSpacing(paragraphSpacing float64) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setParagraphSpacing:"), paragraphSpacing)
+	return mps
 }
 
-// WithFirstLineHeadIndent the indentation of the first line of the paragraph.
-func (x *MutableParagraphStyle) WithFirstLineHeadIndent(firstLineHeadIndent float64) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstLineHeadIndent:"), firstLineHeadIndent)
-	return x
+// WithFirstLineHeadIndent sets the indentation of the first line of the paragraph.
+func (mps *MutableParagraphStyle) WithFirstLineHeadIndent(firstLineHeadIndent float64) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setFirstLineHeadIndent:"), firstLineHeadIndent)
+	return mps
 }
 
-// WithHeadIndent the indentation of the paragraph’s lines other than the first.
-func (x *MutableParagraphStyle) WithHeadIndent(headIndent float64) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeadIndent:"), headIndent)
-	return x
+// WithHeadIndent sets the indentation of the paragraph’s lines other than the first.
+func (mps *MutableParagraphStyle) WithHeadIndent(headIndent float64) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setHeadIndent:"), headIndent)
+	return mps
 }
 
-// WithTailIndent the trailing indentation of the paragraph.
-func (x *MutableParagraphStyle) WithTailIndent(tailIndent float64) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTailIndent:"), tailIndent)
-	return x
+// WithTailIndent sets the trailing indentation of the paragraph.
+func (mps *MutableParagraphStyle) WithTailIndent(tailIndent float64) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setTailIndent:"), tailIndent)
+	return mps
 }
 
-// WithLineBreakMode the mode for breaking lines in the paragraph.
-func (x *MutableParagraphStyle) WithLineBreakMode(lineBreakMode LineBreakMode) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the mode for breaking lines in the paragraph.
+func (mps *MutableParagraphStyle) WithLineBreakMode(lineBreakMode LineBreakMode) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return mps
 }
 
-// WithMinimumLineHeight the paragraph’s minimum line height.
-func (x *MutableParagraphStyle) WithMinimumLineHeight(minimumLineHeight float64) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumLineHeight:"), minimumLineHeight)
-	return x
+// WithMinimumLineHeight sets the paragraph’s minimum line height.
+func (mps *MutableParagraphStyle) WithMinimumLineHeight(minimumLineHeight float64) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setMinimumLineHeight:"), minimumLineHeight)
+	return mps
 }
 
-// WithMaximumLineHeight the paragraph’s maximum line height.
-func (x *MutableParagraphStyle) WithMaximumLineHeight(maximumLineHeight float64) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLineHeight:"), maximumLineHeight)
-	return x
+// WithMaximumLineHeight sets the paragraph’s maximum line height.
+func (mps *MutableParagraphStyle) WithMaximumLineHeight(maximumLineHeight float64) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setMaximumLineHeight:"), maximumLineHeight)
+	return mps
 }
 
-// WithBaseWritingDirection the base writing direction for the paragraph.
-func (x *MutableParagraphStyle) WithBaseWritingDirection(baseWritingDirection WritingDirection) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the base writing direction for the paragraph.
+func (mps *MutableParagraphStyle) WithBaseWritingDirection(baseWritingDirection WritingDirection) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return mps
 }
 
-// WithLineHeightMultiple the line height multiple.
-func (x *MutableParagraphStyle) WithLineHeightMultiple(lineHeightMultiple float64) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineHeightMultiple:"), lineHeightMultiple)
-	return x
+// WithLineHeightMultiple sets the line height multiple.
+func (mps *MutableParagraphStyle) WithLineHeightMultiple(lineHeightMultiple float64) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setLineHeightMultiple:"), lineHeightMultiple)
+	return mps
 }
 
-// WithParagraphSpacingBefore the distance between the paragraph’s top and the beginning of its text content.
-func (x *MutableParagraphStyle) WithParagraphSpacingBefore(paragraphSpacingBefore float64) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParagraphSpacingBefore:"), paragraphSpacingBefore)
-	return x
+// WithParagraphSpacingBefore sets the distance between the paragraph’s top and the beginning of its text content.
+func (mps *MutableParagraphStyle) WithParagraphSpacingBefore(paragraphSpacingBefore float64) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setParagraphSpacingBefore:"), paragraphSpacingBefore)
+	return mps
 }
 
-// WithHyphenationFactor the paragraph’s threshold for hyphenation.
-func (x *MutableParagraphStyle) WithHyphenationFactor(hyphenationFactor float32) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHyphenationFactor:"), hyphenationFactor)
-	return x
+// WithHyphenationFactor sets the paragraph’s threshold for hyphenation.
+func (mps *MutableParagraphStyle) WithHyphenationFactor(hyphenationFactor float32) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setHyphenationFactor:"), hyphenationFactor)
+	return mps
 }
 
 // WithUsesDefaultHyphenation sets the property and returns the receiver so calls can be chained.
-func (x *MutableParagraphStyle) WithUsesDefaultHyphenation(usesDefaultHyphenation bool) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesDefaultHyphenation:"), usesDefaultHyphenation)
-	return x
+func (mps *MutableParagraphStyle) WithUsesDefaultHyphenation(usesDefaultHyphenation bool) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setUsesDefaultHyphenation:"), usesDefaultHyphenation)
+	return mps
 }
 
-// WithTabStops the text tab objects that represent the paragraph’s tab stops.
-func (x *MutableParagraphStyle) WithTabStops(items ...*TextTab) *MutableParagraphStyle {
+// WithTabStops sets the text tab objects that represent the paragraph’s tab stops.
+func (mps *MutableParagraphStyle) WithTabStops(items ...*TextTab) *MutableParagraphStyle {
 	_arr := purego.SliceToNSArray(items, func(_v *TextTab) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabStops:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setTabStops:"), _arr)
+	return mps
 }
 
-// WithDefaultTabInterval a number used as the document’s default tab spacing.
-func (x *MutableParagraphStyle) WithDefaultTabInterval(defaultTabInterval float64) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultTabInterval:"), defaultTabInterval)
-	return x
+// WithDefaultTabInterval sets a number used as the document’s default tab spacing.
+func (mps *MutableParagraphStyle) WithDefaultTabInterval(defaultTabInterval float64) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setDefaultTabInterval:"), defaultTabInterval)
+	return mps
 }
 
-// WithAllowsDefaultTighteningForTruncation a Boolean value that indicates whether the system tightens intercharacter spacing before truncating text.
-func (x *MutableParagraphStyle) WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsDefaultTighteningForTruncation:"), allowsDefaultTighteningForTruncation)
-	return x
+// WithAllowsDefaultTighteningForTruncation sets a Boolean value that indicates whether the system tightens intercharacter spacing before truncating text.
+func (mps *MutableParagraphStyle) WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setAllowsDefaultTighteningForTruncation:"), allowsDefaultTighteningForTruncation)
+	return mps
 }
 
-// WithLineBreakStrategy the strategies that the text system may use to break lines while laying out the paragraph.
-func (x *MutableParagraphStyle) WithLineBreakStrategy(lineBreakStrategy LineBreakStrategy) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakStrategy:"), lineBreakStrategy)
-	return x
+// WithLineBreakStrategy sets the strategies that the text system may use to break lines while laying out the paragraph.
+func (mps *MutableParagraphStyle) WithLineBreakStrategy(lineBreakStrategy LineBreakStrategy) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setLineBreakStrategy:"), lineBreakStrategy)
+	return mps
 }
 
-// WithTextLists the text lists that contain the paragraph.
-func (x *MutableParagraphStyle) WithTextLists(items ...*TextList) *MutableParagraphStyle {
+// WithTextLists sets the text lists that contain the paragraph.
+func (mps *MutableParagraphStyle) WithTextLists(items ...*TextList) *MutableParagraphStyle {
 	_arr := purego.SliceToNSArray(items, func(_v *TextList) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextLists:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setTextLists:"), _arr)
+	return mps
 }
 
-// WithAlignment the text alignment of the paragraph.
-func (x *MutableParagraphStyle) WithAlignment(alignment TextAlignment) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the text alignment of the paragraph.
+func (mps *MutableParagraphStyle) WithAlignment(alignment TextAlignment) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setAlignment:"), alignment)
+	return mps
 }
 
-// WithTighteningFactorForTruncation the threshold for using tightening as an alternative to truncation.
-func (x *MutableParagraphStyle) WithTighteningFactorForTruncation(tighteningFactorForTruncation float32) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTighteningFactorForTruncation:"), tighteningFactorForTruncation)
-	return x
+// WithTighteningFactorForTruncation sets the threshold for using tightening as an alternative to truncation.
+func (mps *MutableParagraphStyle) WithTighteningFactorForTruncation(tighteningFactorForTruncation float32) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setTighteningFactorForTruncation:"), tighteningFactorForTruncation)
+	return mps
 }
 
-// WithTextBlocks the text blocks that contain the paragraph.
-func (x *MutableParagraphStyle) WithTextBlocks(items ...TextBlockProvider) *MutableParagraphStyle {
+// WithTextBlocks sets the text blocks that contain the paragraph.
+func (mps *MutableParagraphStyle) WithTextBlocks(items ...TextBlockProvider) *MutableParagraphStyle {
 	_arr := purego.SliceToNSArray(items, func(_v TextBlockProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextBlocks:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setTextBlocks:"), _arr)
+	return mps
 }
 
-// WithHeaderLevel the paragraph’s header level for HTML generation.
-func (x *MutableParagraphStyle) WithHeaderLevel(headerLevel int) *MutableParagraphStyle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderLevel:"), headerLevel)
-	return x
+// WithHeaderLevel sets the paragraph’s header level for HTML generation.
+func (mps *MutableParagraphStyle) WithHeaderLevel(headerLevel int) *MutableParagraphStyle {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setHeaderLevel:"), headerLevel)
+	return mps
 }
 
 // AddTabStop adds the specified tab stop to the paragraph.
-func (x *MutableParagraphStyle) AddTabStop(anObject *TextTab) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addTabStop:"), objref.IDOf(anObject))
+func (mps *MutableParagraphStyle) AddTabStop(anObject *TextTab) {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("addTabStop:"), objref.IDOf(anObject))
 }
 
 // RemoveTabStop removes the first text tab with a location and type equal to the specified tab stop.
-func (x *MutableParagraphStyle) RemoveTabStop(anObject *TextTab) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTabStop:"), objref.IDOf(anObject))
+func (mps *MutableParagraphStyle) RemoveTabStop(anObject *TextTab) {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("removeTabStop:"), objref.IDOf(anObject))
 }
 
 // SetParagraphStyle replaces the subattributes of the paragraph with those in the specified paragraph style object.
-func (x *MutableParagraphStyle) SetParagraphStyle(obj_ *ParagraphStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParagraphStyle:"), objref.IDOf(obj_))
+func (mps *MutableParagraphStyle) SetParagraphStyle(obj_ *ParagraphStyle) {
+	objc.Send[objc.ID](objref.IDOf(mps), objc.RegisterName("setParagraphStyle:"), objref.IDOf(obj_))
 }
-
-// SetLineSpacing wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetLineSpacing(lineSpacing float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineSpacing:"), lineSpacing)
-}
-
-// SetParagraphSpacing wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetParagraphSpacing(paragraphSpacing float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParagraphSpacing:"), paragraphSpacing)
-}
-
-// SetFirstLineHeadIndent wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetFirstLineHeadIndent(firstLineHeadIndent float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstLineHeadIndent:"), firstLineHeadIndent)
-}
-
-// SetHeadIndent wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetHeadIndent(headIndent float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeadIndent:"), headIndent)
-}
-
-// SetTailIndent wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetTailIndent(tailIndent float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTailIndent:"), tailIndent)
-}
-
-// SetLineBreakMode wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetLineBreakMode(lineBreakMode LineBreakMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-}
-
-// SetMinimumLineHeight wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetMinimumLineHeight(minimumLineHeight float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumLineHeight:"), minimumLineHeight)
-}
-
-// SetMaximumLineHeight wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetMaximumLineHeight(maximumLineHeight float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLineHeight:"), maximumLineHeight)
-}
-
-// SetBaseWritingDirection wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetBaseWritingDirection(baseWritingDirection WritingDirection) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-}
-
-// SetLineHeightMultiple wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetLineHeightMultiple(lineHeightMultiple float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineHeightMultiple:"), lineHeightMultiple)
-}
-
-// SetParagraphSpacingBefore wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetParagraphSpacingBefore(paragraphSpacingBefore float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParagraphSpacingBefore:"), paragraphSpacingBefore)
-}
-
-// SetHyphenationFactor wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetHyphenationFactor(hyphenationFactor float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHyphenationFactor:"), hyphenationFactor)
-}
-
-// SetUsesDefaultHyphenation wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetUsesDefaultHyphenation(usesDefaultHyphenation bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesDefaultHyphenation:"), usesDefaultHyphenation)
-}
-
-// SetTabStops wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetTabStops(tabStops []*TextTab) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabStops:"), purego.SliceToNSArray(tabStops, func(_v *TextTab) objc.ID { return objref.IDOf(_v) }))
-}
-
-// SetDefaultTabInterval wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetDefaultTabInterval(defaultTabInterval float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultTabInterval:"), defaultTabInterval)
-}
-
-// SetAllowsDefaultTighteningForTruncation wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsDefaultTighteningForTruncation:"), allowsDefaultTighteningForTruncation)
-}
-
-// SetLineBreakStrategy wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetLineBreakStrategy(lineBreakStrategy LineBreakStrategy) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakStrategy:"), lineBreakStrategy)
-}
-
-// SetTextLists wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetTextLists(textLists []*TextList) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextLists:"), purego.SliceToNSArray(textLists, func(_v *TextList) objc.ID { return objref.IDOf(_v) }))
-}
-
-// SetAlignment wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetAlignment(alignment TextAlignment) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-}
-
-// SetTighteningFactorForTruncation wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetTighteningFactorForTruncation(tighteningFactorForTruncation float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTighteningFactorForTruncation:"), tighteningFactorForTruncation)
-}
-
-// SetTextBlocks wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetTextBlocks(textBlocks []*TextBlock) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextBlocks:"), purego.SliceToNSArray(textBlocks, func(_v *TextBlock) objc.ID { return objref.IDOf(_v) }))
-}
-
-// SetHeaderLevel wraps the corresponding Objective-C method.
-func (x *MutableParagraphStyle) SetHeaderLevel(headerLevel int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderLevel:"), headerLevel)
-}
-
-// MutableParagraphStyleable is the interface implemented by [MutableParagraphStyle], for mocking and DI.
-type MutableParagraphStyleable interface {
-	obj.Object
-	WithLineSpacing(lineSpacing float64) *MutableParagraphStyle
-	WithParagraphSpacing(paragraphSpacing float64) *MutableParagraphStyle
-	WithFirstLineHeadIndent(firstLineHeadIndent float64) *MutableParagraphStyle
-	WithHeadIndent(headIndent float64) *MutableParagraphStyle
-	WithTailIndent(tailIndent float64) *MutableParagraphStyle
-	WithLineBreakMode(lineBreakMode LineBreakMode) *MutableParagraphStyle
-	WithMinimumLineHeight(minimumLineHeight float64) *MutableParagraphStyle
-	WithMaximumLineHeight(maximumLineHeight float64) *MutableParagraphStyle
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *MutableParagraphStyle
-	WithLineHeightMultiple(lineHeightMultiple float64) *MutableParagraphStyle
-	WithParagraphSpacingBefore(paragraphSpacingBefore float64) *MutableParagraphStyle
-	WithHyphenationFactor(hyphenationFactor float32) *MutableParagraphStyle
-	WithUsesDefaultHyphenation(usesDefaultHyphenation bool) *MutableParagraphStyle
-	WithTabStops(items ...*TextTab) *MutableParagraphStyle
-	WithDefaultTabInterval(defaultTabInterval float64) *MutableParagraphStyle
-	WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *MutableParagraphStyle
-	WithLineBreakStrategy(lineBreakStrategy LineBreakStrategy) *MutableParagraphStyle
-	WithTextLists(items ...*TextList) *MutableParagraphStyle
-	WithAlignment(alignment TextAlignment) *MutableParagraphStyle
-	WithTighteningFactorForTruncation(tighteningFactorForTruncation float32) *MutableParagraphStyle
-	WithTextBlocks(items ...TextBlockProvider) *MutableParagraphStyle
-	WithHeaderLevel(headerLevel int) *MutableParagraphStyle
-	AddTabStop(anObject *TextTab)
-	RemoveTabStop(anObject *TextTab)
-	SetParagraphStyle(obj_ *ParagraphStyle)
-	SetLineSpacing(lineSpacing float64)
-	SetParagraphSpacing(paragraphSpacing float64)
-	SetFirstLineHeadIndent(firstLineHeadIndent float64)
-	SetHeadIndent(headIndent float64)
-	SetTailIndent(tailIndent float64)
-	SetLineBreakMode(lineBreakMode LineBreakMode)
-	SetMinimumLineHeight(minimumLineHeight float64)
-	SetMaximumLineHeight(maximumLineHeight float64)
-	SetBaseWritingDirection(baseWritingDirection WritingDirection)
-	SetLineHeightMultiple(lineHeightMultiple float64)
-	SetParagraphSpacingBefore(paragraphSpacingBefore float64)
-	SetHyphenationFactor(hyphenationFactor float32)
-	SetUsesDefaultHyphenation(usesDefaultHyphenation bool)
-	SetTabStops(tabStops []*TextTab)
-	SetDefaultTabInterval(defaultTabInterval float64)
-	SetAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool)
-	SetLineBreakStrategy(lineBreakStrategy LineBreakStrategy)
-	SetTextLists(textLists []*TextList)
-	SetAlignment(alignment TextAlignment)
-	SetTighteningFactorForTruncation(tighteningFactorForTruncation float32)
-	SetTextBlocks(textBlocks []*TextBlock)
-	SetHeaderLevel(headerLevel int)
-}
-
-var _ MutableParagraphStyleable = (*MutableParagraphStyle)(nil)
 
 var _ ParagraphStyleProvider = (*MutableParagraphStyle)(nil)

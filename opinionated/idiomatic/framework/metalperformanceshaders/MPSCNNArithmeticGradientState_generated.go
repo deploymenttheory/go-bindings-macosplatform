@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,25 +52,16 @@ func NewCNNArithmeticGradientState() *CNNArithmeticGradientState {
 }
 
 // WithReadCount sets the property and returns the receiver so calls can be chained.
-func (x *CNNArithmeticGradientState) WithReadCount(readCount int) *CNNArithmeticGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-	return x
+func (cags *CNNArithmeticGradientState) WithReadCount(readCount int) *CNNArithmeticGradientState {
+	objc.Send[objc.ID](objref.IDOf(cags), objc.RegisterName("setReadCount:"), readCount)
+	return cags
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNArithmeticGradientState) WithLabel(label string) *CNNArithmeticGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cags *CNNArithmeticGradientState) WithLabel(label string) *CNNArithmeticGradientState {
+	objc.Send[objc.ID](objref.IDOf(cags), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cags
 }
-
-// CNNArithmeticGradientStateable is the interface implemented by [CNNArithmeticGradientState], for mocking and DI.
-type CNNArithmeticGradientStateable interface {
-	obj.Object
-	WithReadCount(readCount int) *CNNArithmeticGradientState
-	WithLabel(label string) *CNNArithmeticGradientState
-}
-
-var _ CNNArithmeticGradientStateable = (*CNNArithmeticGradientState)(nil)
 
 var _ NNBinaryGradientStateProvider = (*CNNArithmeticGradientState)(nil)
 

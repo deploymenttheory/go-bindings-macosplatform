@@ -46,24 +46,24 @@ func dDDiscoverySessionAdopt(id objc.ID) *DDDiscoverySession {
 }
 
 // Description returns the object's -description text.
-func (x *DDDiscoverySession) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dds *DDDiscoverySession) Description() string {
+	return rt.Description(objref.IDOf(dds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DDDiscoverySession) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dds *DDDiscoverySession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DDDiscoverySession) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dds *DDDiscoverySession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DDDiscoverySession) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dds *DDDiscoverySession) String() string {
+	return rt.Description(objref.IDOf(dds))
 }
 
 // NewDDDiscoverySession creates a new DDDiscoverySession.
@@ -73,14 +73,6 @@ func NewDDDiscoverySession() *DDDiscoverySession {
 }
 
 // ReportEvent reports an event to the system.
-func (x *DDDiscoverySession) ReportEvent(inEvent *DDDeviceEvent) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reportEvent:"), objref.IDOf(inEvent))
+func (dds *DDDiscoverySession) ReportEvent(inEvent *DDDeviceEvent) {
+	objc.Send[objc.ID](objref.IDOf(dds), objc.RegisterName("reportEvent:"), objref.IDOf(inEvent))
 }
-
-// DDDiscoverySessionable is the interface implemented by [DDDiscoverySession], for mocking and DI.
-type DDDiscoverySessionable interface {
-	obj.Object
-	ReportEvent(inEvent *DDDeviceEvent)
-}
-
-var _ DDDiscoverySessionable = (*DDDiscoverySession)(nil)

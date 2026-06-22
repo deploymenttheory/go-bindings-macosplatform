@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,39 +52,23 @@ func NewMIDIPitchBendEventWithChannelValue(channel int, value int) *MIDIPitchBen
 	return mIDIPitchBendEventAdopt(_id)
 }
 
-// WithValue the value of the pitch bend event.
-func (x *MIDIPitchBendEvent) WithValue(value int) *MIDIPitchBendEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-	return x
+// WithValue sets the value of the pitch bend event.
+func (mpbe *MIDIPitchBendEvent) WithValue(value int) *MIDIPitchBendEvent {
+	objc.Send[objc.ID](objref.IDOf(mpbe), objc.RegisterName("setValue:"), value)
+	return mpbe
 }
 
-// WithChannel the MIDI channel.
-func (x *MIDIPitchBendEvent) WithChannel(channel int) *MIDIPitchBendEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
-	return x
+// WithChannel sets the MIDI channel.
+func (mpbe *MIDIPitchBendEvent) WithChannel(channel int) *MIDIPitchBendEvent {
+	objc.Send[objc.ID](objref.IDOf(mpbe), objc.RegisterName("setChannel:"), channel)
+	return mpbe
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *MIDIPitchBendEvent) Value() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("value"))
+func (mpbe *MIDIPitchBendEvent) Value() int {
+	_r := objc.Send[int](objref.IDOf(mpbe), objc.RegisterName("value"))
 	return _r
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *MIDIPitchBendEvent) SetValue(value int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-}
-
-// MIDIPitchBendEventable is the interface implemented by [MIDIPitchBendEvent], for mocking and DI.
-type MIDIPitchBendEventable interface {
-	obj.Object
-	WithValue(value int) *MIDIPitchBendEvent
-	WithChannel(channel int) *MIDIPitchBendEvent
-	Value() int
-	SetValue(value int)
-}
-
-var _ MIDIPitchBendEventable = (*MIDIPitchBendEvent)(nil)
 
 var _ MIDIChannelEventProvider = (*MIDIPitchBendEvent)(nil)
 

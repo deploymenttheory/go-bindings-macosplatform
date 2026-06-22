@@ -66,142 +66,97 @@ func NewXMLDTDNodeWithKindOptions(kind XMLNodeKind, options XMLNodeOptions) *XML
 	return xMLDTDNodeAdopt(_id)
 }
 
-// WithDTDKind sets the DTD sub kind.
-func (x *XMLDTDNode) WithDTDKind(dTDKind XMLDTDNodeKind) *XMLDTDNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDTDKind:"), dTDKind)
-	return x
+// WithDTDKind sets sets the DTD sub kind.
+func (xn *XMLDTDNode) WithDTDKind(dTDKind XMLDTDNodeKind) *XMLDTDNode {
+	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("setDTDKind:"), dTDKind)
+	return xn
 }
 
-// WithPublicID sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set. Valid for entities and notations.
-func (x *XMLDTDNode) WithPublicID(publicID StringProvider) *XMLDTDNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPublicID:"), objref.IDOf(publicID))
-	return x
+// WithPublicID sets sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set. Valid for entities and notations.
+func (xn *XMLDTDNode) WithPublicID(publicID StringProvider) *XMLDTDNode {
+	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("setPublicID:"), objref.IDOf(publicID))
+	return xn
 }
 
-// WithSystemID sets the system id. This should be a URL that points to a valid DTD. Valid for entities and notations.
-func (x *XMLDTDNode) WithSystemID(systemID StringProvider) *XMLDTDNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSystemID:"), objref.IDOf(systemID))
-	return x
+// WithSystemID sets sets the system id. This should be a URL that points to a valid DTD. Valid for entities and notations.
+func (xn *XMLDTDNode) WithSystemID(systemID StringProvider) *XMLDTDNode {
+	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("setSystemID:"), objref.IDOf(systemID))
+	return xn
 }
 
-// WithNotationName set the notation name. Valid for entities only.
-func (x *XMLDTDNode) WithNotationName(notationName StringProvider) *XMLDTDNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotationName:"), objref.IDOf(notationName))
-	return x
+// WithNotationName sets set the notation name. Valid for entities only.
+func (xn *XMLDTDNode) WithNotationName(notationName StringProvider) *XMLDTDNode {
+	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("setNotationName:"), objref.IDOf(notationName))
+	return xn
 }
 
-// WithName sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
-func (x *XMLDTDNode) WithName(name StringProvider) *XMLDTDNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
-	return x
+// WithName sets sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
+func (xn *XMLDTDNode) WithName(name StringProvider) *XMLDTDNode {
+	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("setName:"), objref.IDOf(name))
+	return xn
 }
 
-// WithObjectValue sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
-func (x *XMLDTDNode) WithObjectValue(objectValue obj.Object) *XMLDTDNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
+func (xn *XMLDTDNode) WithObjectValue(objectValue obj.Object) *XMLDTDNode {
+	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return xn
 }
 
-// WithStringValue sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
-func (x *XMLDTDNode) WithStringValue(stringValue StringProvider) *XMLDTDNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), objref.IDOf(stringValue))
-	return x
+// WithStringValue sets sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
+func (xn *XMLDTDNode) WithStringValue(stringValue StringProvider) *XMLDTDNode {
+	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("setStringValue:"), objref.IDOf(stringValue))
+	return xn
 }
 
-// WithURI set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
-func (x *XMLDTDNode) WithURI(uRI StringProvider) *XMLDTDNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURI:"), objref.IDOf(uRI))
-	return x
+// WithURI sets set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
+func (xn *XMLDTDNode) WithURI(uRI StringProvider) *XMLDTDNode {
+	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("setURI:"), objref.IDOf(uRI))
+	return xn
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *XMLDTDNode) WithScriptingProperties(scriptingProperties obj.Object) *XMLDTDNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (xn *XMLDTDNode) WithScriptingProperties(scriptingProperties obj.Object) *XMLDTDNode {
+	objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return xn
 }
 
 // DTDKind sets the DTD sub kind.
-func (x *XMLDTDNode) DTDKind() XMLDTDNodeKind {
-	_r := objc.Send[XMLDTDNodeKind](objref.IDOf(x), objc.RegisterName("DTDKind"))
+func (xn *XMLDTDNode) DTDKind() XMLDTDNodeKind {
+	_r := objc.Send[XMLDTDNodeKind](objref.IDOf(xn), objc.RegisterName("DTDKind"))
 	return _r
 }
 
-// SetDTDKind wraps the corresponding Objective-C method.
-func (x *XMLDTDNode) SetDTDKind(dTDKind XMLDTDNodeKind) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDTDKind:"), dTDKind)
-}
-
-// IsExternal true if the system id is set. Valid for entities and notations.
-func (x *XMLDTDNode) IsExternal() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isExternal"))
+// IsExternal reports whether the system id is set. Valid for entities and notations.
+func (xn *XMLDTDNode) IsExternal() bool {
+	_r := objc.Send[bool](objref.IDOf(xn), objc.RegisterName("isExternal"))
 	return _r
 }
 
 // PublicID sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set. Valid for entities and notations.
-func (x *XMLDTDNode) PublicID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicID"))
+func (xn *XMLDTDNode) PublicID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("publicID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetPublicID wraps the corresponding Objective-C method.
-func (x *XMLDTDNode) SetPublicID(publicID string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPublicID:"), purego.NSString(publicID))
 }
 
 // SystemID sets the system id. This should be a URL that points to a valid DTD. Valid for entities and notations.
-func (x *XMLDTDNode) SystemID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("systemID"))
+func (xn *XMLDTDNode) SystemID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("systemID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetSystemID wraps the corresponding Objective-C method.
-func (x *XMLDTDNode) SetSystemID(systemID string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSystemID:"), purego.NSString(systemID))
 }
 
 // NotationName set the notation name. Valid for entities only.
-func (x *XMLDTDNode) NotationName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notationName"))
+func (xn *XMLDTDNode) NotationName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(xn), objc.RegisterName("notationName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetNotationName wraps the corresponding Objective-C method.
-func (x *XMLDTDNode) SetNotationName(notationName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotationName:"), purego.NSString(notationName))
-}
-
-// XMLDTDNodeable is the interface implemented by [XMLDTDNode], for mocking and DI.
-type XMLDTDNodeable interface {
-	obj.Object
-	WithDTDKind(dTDKind XMLDTDNodeKind) *XMLDTDNode
-	WithPublicID(publicID StringProvider) *XMLDTDNode
-	WithSystemID(systemID StringProvider) *XMLDTDNode
-	WithNotationName(notationName StringProvider) *XMLDTDNode
-	WithName(name StringProvider) *XMLDTDNode
-	WithObjectValue(objectValue obj.Object) *XMLDTDNode
-	WithStringValue(stringValue StringProvider) *XMLDTDNode
-	WithURI(uRI StringProvider) *XMLDTDNode
-	WithScriptingProperties(scriptingProperties obj.Object) *XMLDTDNode
-	DTDKind() XMLDTDNodeKind
-	SetDTDKind(dTDKind XMLDTDNodeKind)
-	IsExternal() bool
-	PublicID() string
-	SetPublicID(publicID string)
-	SystemID() string
-	SetSystemID(systemID string)
-	NotationName() string
-	SetNotationName(notationName string)
-}
-
-var _ XMLDTDNodeable = (*XMLDTDNode)(nil)
 
 var _ XMLNodeProvider = (*XMLDTDNode)(nil)

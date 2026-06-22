@@ -7,7 +7,6 @@ package cloudkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,17 +52,9 @@ func NewSyncEngineWillFetchRecordZoneChangesEvent() *SyncEngineWillFetchRecordZo
 }
 
 // ZoneID wraps the corresponding Objective-C method.
-func (x *SyncEngineWillFetchRecordZoneChangesEvent) ZoneID() *RecordZoneID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneID"))
+func (sewfrzce *SyncEngineWillFetchRecordZoneChangesEvent) ZoneID() *RecordZoneID {
+	_r := objc.Send[objc.ID](objref.IDOf(sewfrzce), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)
 }
-
-// SyncEngineWillFetchRecordZoneChangesEventable is the interface implemented by [SyncEngineWillFetchRecordZoneChangesEvent], for mocking and DI.
-type SyncEngineWillFetchRecordZoneChangesEventable interface {
-	obj.Object
-	ZoneID() *RecordZoneID
-}
-
-var _ SyncEngineWillFetchRecordZoneChangesEventable = (*SyncEngineWillFetchRecordZoneChangesEvent)(nil)
 
 var _ SyncEngineEventProvider = (*SyncEngineWillFetchRecordZoneChangesEvent)(nil)

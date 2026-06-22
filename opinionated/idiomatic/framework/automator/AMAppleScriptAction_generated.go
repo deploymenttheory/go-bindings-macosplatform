@@ -52,46 +52,29 @@ func NewAppleScriptAction() *AppleScriptAction {
 	return appleScriptActionAdopt(_id)
 }
 
-// WithScript an OSAScript object representing the receiver’s script containing the on run command handler.
-func (x *AppleScriptAction) WithScript(script obj.Object) *AppleScriptAction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScript:"), objref.IDOf(script))
-	return x
+// WithScript sets an OSAScript object representing the receiver’s script containing the on run command handler.
+func (asa *AppleScriptAction) WithScript(script obj.Object) *AppleScriptAction {
+	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("setScript:"), objref.IDOf(script))
+	return asa
 }
 
-// WithParameters the action’s parameters.
-func (x *AppleScriptAction) WithParameters(parameters obj.Object) *AppleScriptAction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
-	return x
+// WithParameters sets the action’s parameters.
+func (asa *AppleScriptAction) WithParameters(parameters obj.Object) *AppleScriptAction {
+	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
+	return asa
 }
 
-// WithProgressValue a float value between 0 and 1, which indicates how far along the action is while processing.
-func (x *AppleScriptAction) WithProgressValue(progressValue float64) *AppleScriptAction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressValue:"), progressValue)
-	return x
+// WithProgressValue sets a float value between 0 and 1, which indicates how far along the action is while processing.
+func (asa *AppleScriptAction) WithProgressValue(progressValue float64) *AppleScriptAction {
+	objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("setProgressValue:"), progressValue)
+	return asa
 }
 
 // Script wraps the corresponding Objective-C method.
-func (x *AppleScriptAction) Script() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("script"))
+func (asa *AppleScriptAction) Script() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(asa), objc.RegisterName("script"))
 	return obj.Wrap(_r)
 }
-
-// SetScript wraps the corresponding Objective-C method.
-func (x *AppleScriptAction) SetScript(script obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScript:"), objref.IDOf(script))
-}
-
-// AppleScriptActionable is the interface implemented by [AppleScriptAction], for mocking and DI.
-type AppleScriptActionable interface {
-	obj.Object
-	WithScript(script obj.Object) *AppleScriptAction
-	WithParameters(parameters obj.Object) *AppleScriptAction
-	WithProgressValue(progressValue float64) *AppleScriptAction
-	Script() obj.Object
-	SetScript(script obj.Object)
-}
-
-var _ AppleScriptActionable = (*AppleScriptAction)(nil)
 
 var _ BundleActionProvider = (*AppleScriptAction)(nil)
 

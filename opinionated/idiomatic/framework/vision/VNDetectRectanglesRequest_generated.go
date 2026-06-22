@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,160 +52,101 @@ func NewDetectRectanglesRequest() *DetectRectanglesRequest {
 	return detectRectanglesRequestAdopt(_id)
 }
 
-// WithMinimumAspectRatio a float specifying the minimum aspect ratio of the rectangle to detect, defined as the shorter dimension over the longer dimension.
-func (x *DetectRectanglesRequest) WithMinimumAspectRatio(minimumAspectRatio float32) *DetectRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumAspectRatio:"), minimumAspectRatio)
-	return x
+// WithMinimumAspectRatio sets a float specifying the minimum aspect ratio of the rectangle to detect, defined as the shorter dimension over the longer dimension.
+func (drr *DetectRectanglesRequest) WithMinimumAspectRatio(minimumAspectRatio float32) *DetectRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(drr), objc.RegisterName("setMinimumAspectRatio:"), minimumAspectRatio)
+	return drr
 }
 
-// WithMaximumAspectRatio a float specifying the maximum aspect ratio of the rectangle to detect, defined as the shorter dimension over the longer dimension.
-func (x *DetectRectanglesRequest) WithMaximumAspectRatio(maximumAspectRatio float32) *DetectRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumAspectRatio:"), maximumAspectRatio)
-	return x
+// WithMaximumAspectRatio sets a float specifying the maximum aspect ratio of the rectangle to detect, defined as the shorter dimension over the longer dimension.
+func (drr *DetectRectanglesRequest) WithMaximumAspectRatio(maximumAspectRatio float32) *DetectRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(drr), objc.RegisterName("setMaximumAspectRatio:"), maximumAspectRatio)
+	return drr
 }
 
-// WithQuadratureTolerance a float specifying the number of degrees a rectangle corner angle can deviate from 90°.
-func (x *DetectRectanglesRequest) WithQuadratureTolerance(quadratureTolerance float32) *DetectRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuadratureTolerance:"), quadratureTolerance)
-	return x
+// WithQuadratureTolerance sets a float specifying the number of degrees a rectangle corner angle can deviate from 90°.
+func (drr *DetectRectanglesRequest) WithQuadratureTolerance(quadratureTolerance float32) *DetectRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(drr), objc.RegisterName("setQuadratureTolerance:"), quadratureTolerance)
+	return drr
 }
 
-// WithMinimumSize the minimum size of a rectangle to detect, as a proportion of the smallest dimension.
-func (x *DetectRectanglesRequest) WithMinimumSize(minimumSize float32) *DetectRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumSize:"), minimumSize)
-	return x
+// WithMinimumSize sets the minimum size of a rectangle to detect, as a proportion of the smallest dimension.
+func (drr *DetectRectanglesRequest) WithMinimumSize(minimumSize float32) *DetectRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(drr), objc.RegisterName("setMinimumSize:"), minimumSize)
+	return drr
 }
 
-// WithMinimumConfidence a value specifying the minimum acceptable confidence level.
-func (x *DetectRectanglesRequest) WithMinimumConfidence(minimumConfidence float32) *DetectRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumConfidence:"), minimumConfidence)
-	return x
+// WithMinimumConfidence sets a value specifying the minimum acceptable confidence level.
+func (drr *DetectRectanglesRequest) WithMinimumConfidence(minimumConfidence float32) *DetectRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(drr), objc.RegisterName("setMinimumConfidence:"), minimumConfidence)
+	return drr
 }
 
-// WithMaximumObservations an integer specifying the maximum number of rectangles Vision returns.
-func (x *DetectRectanglesRequest) WithMaximumObservations(maximumObservations int) *DetectRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumObservations:"), maximumObservations)
-	return x
+// WithMaximumObservations sets an integer specifying the maximum number of rectangles Vision returns.
+func (drr *DetectRectanglesRequest) WithMaximumObservations(maximumObservations int) *DetectRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(drr), objc.RegisterName("setMaximumObservations:"), maximumObservations)
+	return drr
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *DetectRectanglesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (drr *DetectRectanglesRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(drr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return drr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *DetectRectanglesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (drr *DetectRectanglesRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(drr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return drr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *DetectRectanglesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (drr *DetectRectanglesRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(drr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return drr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *DetectRectanglesRequest) WithRevision(revision int) *DetectRectanglesRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (drr *DetectRectanglesRequest) WithRevision(revision int) *DetectRectanglesRequest {
+	objc.Send[objc.ID](objref.IDOf(drr), objc.RegisterName("setRevision:"), revision)
+	return drr
 }
 
 // MinimumAspectRatio specifies the minimum aspect ratio of the rectangle(s) to look for, range [0.0, 1.0], default 0.5
-func (x *DetectRectanglesRequest) MinimumAspectRatio() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumAspectRatio"))
+func (drr *DetectRectanglesRequest) MinimumAspectRatio() float32 {
+	_r := objc.Send[float32](objref.IDOf(drr), objc.RegisterName("minimumAspectRatio"))
 	return _r
-}
-
-// SetMinimumAspectRatio wraps the corresponding Objective-C method.
-func (x *DetectRectanglesRequest) SetMinimumAspectRatio(minimumAspectRatio float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumAspectRatio:"), minimumAspectRatio)
 }
 
 // MaximumAspectRatio specifies the maximum aspect ratio of the rectangle(s) to look for, range [0.0, 1.0], default 1.0
-func (x *DetectRectanglesRequest) MaximumAspectRatio() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumAspectRatio"))
+func (drr *DetectRectanglesRequest) MaximumAspectRatio() float32 {
+	_r := objc.Send[float32](objref.IDOf(drr), objc.RegisterName("maximumAspectRatio"))
 	return _r
-}
-
-// SetMaximumAspectRatio wraps the corresponding Objective-C method.
-func (x *DetectRectanglesRequest) SetMaximumAspectRatio(maximumAspectRatio float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumAspectRatio:"), maximumAspectRatio)
 }
 
 // QuadratureTolerance specifies the maximum number of degrees a rectangle corner angle can deviate from 90 degrees, range [0,45], default 30
-func (x *DetectRectanglesRequest) QuadratureTolerance() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("quadratureTolerance"))
+func (drr *DetectRectanglesRequest) QuadratureTolerance() float32 {
+	_r := objc.Send[float32](objref.IDOf(drr), objc.RegisterName("quadratureTolerance"))
 	return _r
-}
-
-// SetQuadratureTolerance wraps the corresponding Objective-C method.
-func (x *DetectRectanglesRequest) SetQuadratureTolerance(quadratureTolerance float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuadratureTolerance:"), quadratureTolerance)
 }
 
 // MinimumSize specifies the minimum size of the rectangle to be detected, as a proportion of the smallest dimension, range [0.0, 1.0], default .2. Any smaller rectangles that may have been detected will not be returned.
-func (x *DetectRectanglesRequest) MinimumSize() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumSize"))
+func (drr *DetectRectanglesRequest) MinimumSize() float32 {
+	_r := objc.Send[float32](objref.IDOf(drr), objc.RegisterName("minimumSize"))
 	return _r
-}
-
-// SetMinimumSize wraps the corresponding Objective-C method.
-func (x *DetectRectanglesRequest) SetMinimumSize(minimumSize float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumSize:"), minimumSize)
 }
 
 // MinimumConfidence specifies a minimum confidence score, range [0.0, 1.0], default 0.0. Any rectangles with a lower confidence score will not be returned.
-func (x *DetectRectanglesRequest) MinimumConfidence() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumConfidence"))
+func (drr *DetectRectanglesRequest) MinimumConfidence() float32 {
+	_r := objc.Send[float32](objref.IDOf(drr), objc.RegisterName("minimumConfidence"))
 	return _r
-}
-
-// SetMinimumConfidence wraps the corresponding Objective-C method.
-func (x *DetectRectanglesRequest) SetMinimumConfidence(minimumConfidence float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumConfidence:"), minimumConfidence)
 }
 
 // MaximumObservations specifies the maximum number of rectangles to be returned.  The default is 1.  Setting this property to 0 will allow an unlimited number of observations to be returned.
-func (x *DetectRectanglesRequest) MaximumObservations() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumObservations"))
+func (drr *DetectRectanglesRequest) MaximumObservations() int {
+	_r := objc.Send[int](objref.IDOf(drr), objc.RegisterName("maximumObservations"))
 	return _r
 }
-
-// SetMaximumObservations wraps the corresponding Objective-C method.
-func (x *DetectRectanglesRequest) SetMaximumObservations(maximumObservations int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumObservations:"), maximumObservations)
-}
-
-// DetectRectanglesRequestable is the interface implemented by [DetectRectanglesRequest], for mocking and DI.
-type DetectRectanglesRequestable interface {
-	obj.Object
-	WithMinimumAspectRatio(minimumAspectRatio float32) *DetectRectanglesRequest
-	WithMaximumAspectRatio(maximumAspectRatio float32) *DetectRectanglesRequest
-	WithQuadratureTolerance(quadratureTolerance float32) *DetectRectanglesRequest
-	WithMinimumSize(minimumSize float32) *DetectRectanglesRequest
-	WithMinimumConfidence(minimumConfidence float32) *DetectRectanglesRequest
-	WithMaximumObservations(maximumObservations int) *DetectRectanglesRequest
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectRectanglesRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectRectanglesRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *DetectRectanglesRequest
-	WithRevision(revision int) *DetectRectanglesRequest
-	MinimumAspectRatio() float32
-	SetMinimumAspectRatio(minimumAspectRatio float32)
-	MaximumAspectRatio() float32
-	SetMaximumAspectRatio(maximumAspectRatio float32)
-	QuadratureTolerance() float32
-	SetQuadratureTolerance(quadratureTolerance float32)
-	MinimumSize() float32
-	SetMinimumSize(minimumSize float32)
-	MinimumConfidence() float32
-	SetMinimumConfidence(minimumConfidence float32)
-	MaximumObservations() int
-	SetMaximumObservations(maximumObservations int)
-}
-
-var _ DetectRectanglesRequestable = (*DetectRectanglesRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*DetectRectanglesRequest)(nil)
 

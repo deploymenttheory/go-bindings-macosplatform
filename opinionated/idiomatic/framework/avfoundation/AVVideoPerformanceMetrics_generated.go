@@ -46,24 +46,24 @@ func videoPerformanceMetricsAdopt(id objc.ID) *VideoPerformanceMetrics {
 }
 
 // Description returns the object's -description text.
-func (x *VideoPerformanceMetrics) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vpm *VideoPerformanceMetrics) Description() string {
+	return rt.Description(objref.IDOf(vpm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VideoPerformanceMetrics) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vpm *VideoPerformanceMetrics) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vpm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VideoPerformanceMetrics) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vpm *VideoPerformanceMetrics) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vpm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VideoPerformanceMetrics) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vpm *VideoPerformanceMetrics) String() string {
+	return rt.Description(objref.IDOf(vpm))
 }
 
 // NewVideoPerformanceMetrics creates a new VideoPerformanceMetrics.
@@ -72,44 +72,32 @@ func NewVideoPerformanceMetrics() *VideoPerformanceMetrics {
 	return videoPerformanceMetricsAdopt(_id)
 }
 
-// TotalNumberOfFrames [SPI] The total number of frames that would have been displayed if no frames are dropped.
-func (x *VideoPerformanceMetrics) TotalNumberOfFrames() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalNumberOfFrames"))
+// TotalNumberOfFrames returns [SPI] The total number of frames that would have been displayed if no frames are dropped.
+func (vpm *VideoPerformanceMetrics) TotalNumberOfFrames() int {
+	_r := objc.Send[int](objref.IDOf(vpm), objc.RegisterName("totalNumberOfFrames"))
 	return _r
 }
 
-// NumberOfDroppedFrames [SPI] The total number of frames dropped prior to decoding or dropped because a frame missed its display deadline.
-func (x *VideoPerformanceMetrics) NumberOfDroppedFrames() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfDroppedFrames"))
+// NumberOfDroppedFrames returns [SPI] The total number of frames dropped prior to decoding or dropped because a frame missed its display deadline.
+func (vpm *VideoPerformanceMetrics) NumberOfDroppedFrames() int {
+	_r := objc.Send[int](objref.IDOf(vpm), objc.RegisterName("numberOfDroppedFrames"))
 	return _r
 }
 
-// NumberOfCorruptedFrames [SPI] The total number of corrupted frames that have been detected.
-func (x *VideoPerformanceMetrics) NumberOfCorruptedFrames() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfCorruptedFrames"))
+// NumberOfCorruptedFrames returns [SPI] The total number of corrupted frames that have been detected.
+func (vpm *VideoPerformanceMetrics) NumberOfCorruptedFrames() int {
+	_r := objc.Send[int](objref.IDOf(vpm), objc.RegisterName("numberOfCorruptedFrames"))
 	return _r
 }
 
-// NumberOfFramesDisplayedUsingOptimizedCompositing [SPI] The total number of full screen frames that were rendered in a special power-efficient mode that didn't require the frame to be composited with other UI elements.
-func (x *VideoPerformanceMetrics) NumberOfFramesDisplayedUsingOptimizedCompositing() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfFramesDisplayedUsingOptimizedCompositing"))
+// NumberOfFramesDisplayedUsingOptimizedCompositing returns [SPI] The total number of full screen frames that were rendered in a special power-efficient mode that didn't require the frame to be composited with other UI elements.
+func (vpm *VideoPerformanceMetrics) NumberOfFramesDisplayedUsingOptimizedCompositing() int {
+	_r := objc.Send[int](objref.IDOf(vpm), objc.RegisterName("numberOfFramesDisplayedUsingOptimizedCompositing"))
 	return _r
 }
 
-// TotalAccumulatedFrameDelay [SPI] The accumulated amount of time between the prescribed presentation times of displayed video frames and the actual time at which they were displayed. This delay is always greater than or equal to zero since frames must never be displayed before their presentation time. Non-zero delays are a sign of playback jitter and possible loss of A/V sync.
-func (x *VideoPerformanceMetrics) TotalAccumulatedFrameDelay() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("totalAccumulatedFrameDelay"))
+// TotalAccumulatedFrameDelay returns [SPI] The accumulated amount of time between the prescribed presentation times of displayed video frames and the actual time at which they were displayed. This delay is always greater than or equal to zero since frames must never be displayed before their presentation time. Non-zero delays are a sign of playback jitter and possible loss of A/V sync.
+func (vpm *VideoPerformanceMetrics) TotalAccumulatedFrameDelay() float64 {
+	_r := objc.Send[float64](objref.IDOf(vpm), objc.RegisterName("totalAccumulatedFrameDelay"))
 	return _r
 }
-
-// VideoPerformanceMetricsable is the interface implemented by [VideoPerformanceMetrics], for mocking and DI.
-type VideoPerformanceMetricsable interface {
-	obj.Object
-	TotalNumberOfFrames() int
-	NumberOfDroppedFrames() int
-	NumberOfCorruptedFrames() int
-	NumberOfFramesDisplayedUsingOptimizedCompositing() int
-	TotalAccumulatedFrameDelay() float64
-}
-
-var _ VideoPerformanceMetricsable = (*VideoPerformanceMetrics)(nil)

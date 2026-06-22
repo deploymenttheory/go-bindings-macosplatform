@@ -53,18 +53,10 @@ func NewUnitLength() *UnitLength {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitLength) WithScriptingProperties(scriptingProperties obj.Object) *UnitLength {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ul *UnitLength) WithScriptingProperties(scriptingProperties obj.Object) *UnitLength {
+	objc.Send[objc.ID](objref.IDOf(ul), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ul
 }
-
-// UnitLengthable is the interface implemented by [UnitLength], for mocking and DI.
-type UnitLengthable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitLength
-}
-
-var _ UnitLengthable = (*UnitLength)(nil)
 
 var _ DimensionProvider = (*UnitLength)(nil)
 

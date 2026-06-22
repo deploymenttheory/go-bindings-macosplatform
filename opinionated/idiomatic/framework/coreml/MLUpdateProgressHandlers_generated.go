@@ -46,24 +46,24 @@ func updateProgressHandlersAdopt(id objc.ID) *UpdateProgressHandlers {
 }
 
 // Description returns the object's -description text.
-func (x *UpdateProgressHandlers) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (uph *UpdateProgressHandlers) Description() string {
+	return rt.Description(objref.IDOf(uph))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UpdateProgressHandlers) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (uph *UpdateProgressHandlers) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(uph), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UpdateProgressHandlers) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (uph *UpdateProgressHandlers) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(uph), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *UpdateProgressHandlers) String() string {
-	return rt.Description(objref.IDOf(x))
+func (uph *UpdateProgressHandlers) String() string {
+	return rt.Description(objref.IDOf(uph))
 }
 
 // NewUpdateProgressHandlersForEventsProgressHandlerCompletionHandler creates the collection of closures an update task uses to notify your app of its progress.
@@ -72,10 +72,3 @@ func NewUpdateProgressHandlersForEventsProgressHandlerCompletionHandler(interest
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForEvents:progressHandler:completionHandler:"), interestedEvents, objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { progressHandler(obj.Wrap(_b0)) }), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completionHandler(obj.Wrap(_b0)) }))
 	return updateProgressHandlersAdopt(_id)
 }
-
-// UpdateProgressHandlersable is the interface implemented by [UpdateProgressHandlers], for mocking and DI.
-type UpdateProgressHandlersable interface {
-	obj.Object
-}
-
-var _ UpdateProgressHandlersable = (*UpdateProgressHandlers)(nil)

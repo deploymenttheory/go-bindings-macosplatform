@@ -48,24 +48,24 @@ func workoutBuilderAdopt(id objc.ID) *WorkoutBuilder {
 }
 
 // Description returns the object's -description text.
-func (x *WorkoutBuilder) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wb *WorkoutBuilder) Description() string {
+	return rt.Description(objref.IDOf(wb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WorkoutBuilder) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wb *WorkoutBuilder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WorkoutBuilder) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wb *WorkoutBuilder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WorkoutBuilder) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wb *WorkoutBuilder) String() string {
+	return rt.Description(objref.IDOf(wb))
 }
 
 // NewWorkoutBuilderWithHealthStoreConfigurationDevice returns a new workout builder object that is not connected to a workout session or other data source.
@@ -76,102 +76,83 @@ func NewWorkoutBuilderWithHealthStoreConfigurationDevice(healthStore *HealthStor
 }
 
 // DiscardWorkout stops the collection of data and discards the current results without saving the workout.
-func (x *WorkoutBuilder) DiscardWorkout() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discardWorkout"))
+func (wb *WorkoutBuilder) DiscardWorkout() {
+	objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("discardWorkout"))
 }
 
 // ElapsedTimeAtDate calculates the duration of the workout at the specified time.
-func (x *WorkoutBuilder) ElapsedTimeAtDate(date obj.Object) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("elapsedTimeAtDate:"), objref.IDOf(date))
+func (wb *WorkoutBuilder) ElapsedTimeAtDate(date obj.Object) float64 {
+	_r := objc.Send[float64](objref.IDOf(wb), objc.RegisterName("elapsedTimeAtDate:"), objref.IDOf(date))
 	return _r
 }
 
 // StatisticsForType returns the statistics calculated for matching samples added to the workout.
-func (x *WorkoutBuilder) StatisticsForType(quantityType *QuantityType) *Statistics {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statisticsForType:"), objref.IDOf(quantityType))
+func (wb *WorkoutBuilder) StatisticsForType(quantityType *QuantityType) *Statistics {
+	_r := objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("statisticsForType:"), objref.IDOf(quantityType))
 	return StatisticsFromID(_r)
 }
 
 // SeriesBuilderForType returns the series builder for the specified type, creating a new builder, if necessary.
-func (x *WorkoutBuilder) SeriesBuilderForType(seriesType *SeriesType) *SeriesBuilder {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seriesBuilderForType:"), objref.IDOf(seriesType))
+func (wb *WorkoutBuilder) SeriesBuilderForType(seriesType *SeriesType) *SeriesBuilder {
+	_r := objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("seriesBuilderForType:"), objref.IDOf(seriesType))
 	return SeriesBuilderFromID(_r)
 }
 
-// Device the HKDevice to be associated with the workout.
-func (x *WorkoutBuilder) Device() *Device {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+// Device returns the HKDevice to be associated with the workout.
+func (wb *WorkoutBuilder) Device() *Device {
+	_r := objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("device"))
 	return DeviceFromID(_r)
 }
 
-// StartDate the start date for the workout, as provided by beginCollectionWithStartDate:completion:
-func (x *WorkoutBuilder) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+// StartDate returns the start date for the workout, as provided by beginCollectionWithStartDate:completion:
+func (wb *WorkoutBuilder) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// EndDate the end date for the workout, as provided by endCollectionWithEndDate:completion:
-func (x *WorkoutBuilder) EndDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+// EndDate returns the end date for the workout, as provided by endCollectionWithEndDate:completion:
+func (wb *WorkoutBuilder) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// WorkoutConfiguration the configuration for the workout being built.
-func (x *WorkoutBuilder) WorkoutConfiguration() *WorkoutConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workoutConfiguration"))
+// WorkoutConfiguration returns the configuration for the workout being built.
+func (wb *WorkoutBuilder) WorkoutConfiguration() *WorkoutConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("workoutConfiguration"))
 	return WorkoutConfigurationFromID(_r)
 }
 
-// Metadata the metadata that will be used when the workout is finished.
-func (x *WorkoutBuilder) Metadata() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+// Metadata returns the metadata that will be used when the workout is finished.
+func (wb *WorkoutBuilder) Metadata() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("metadata"))
 	return obj.Wrap(_r)
 }
 
-// WorkoutEvents workout events that have been added to the builder. New events that are added using addWorkoutEvents:completion: will be appended to this array once the completion is called.
+// WorkoutEvents returns workout events that have been added to the builder. New events that are added using addWorkoutEvents:completion: will be appended to this array once the completion is called.
 //
 // WorkoutEvents returns the collection as a Go slice.
-func (x *WorkoutBuilder) WorkoutEvents() []*WorkoutEvent {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workoutEvents"))
+func (wb *WorkoutBuilder) WorkoutEvents() []*WorkoutEvent {
+	_arr := objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("workoutEvents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WorkoutEvent { return WorkoutEventFromID(_id) })
 }
 
-// WorkoutActivities workout activities that have been added to the builder. New activities that are added using addWorkoutActivity:completion: will be appended to this array once the completion is called.
+// WorkoutActivities returns workout activities that have been added to the builder. New activities that are added using addWorkoutActivity:completion: will be appended to this array once the completion is called.
 //
 // WorkoutActivities returns the collection as a Go slice.
-func (x *WorkoutBuilder) WorkoutActivities() []*WorkoutActivity {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workoutActivities"))
+func (wb *WorkoutBuilder) WorkoutActivities() []*WorkoutActivity {
+	_arr := objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("workoutActivities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WorkoutActivity { return WorkoutActivityFromID(_id) })
 }
 
-// AllStatistics a dictionary of statistics per quantity type added to the builder This dictionary will contain HKStatistics objects containing the statistics by quantity sample type for all of the samples that have been added to the builder.
-func (x *WorkoutBuilder) AllStatistics() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allStatistics"))
+// AllStatistics returns a dictionary of statistics per quantity type added to the builder This dictionary will contain HKStatistics objects containing the statistics by quantity sample type for all of the samples that have been added to the builder.
+func (wb *WorkoutBuilder) AllStatistics() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wb), objc.RegisterName("allStatistics"))
 	return obj.Wrap(_r)
 }
-
-// WorkoutBuilderable is the interface implemented by [WorkoutBuilder], for mocking and DI.
-type WorkoutBuilderable interface {
-	obj.Object
-	DiscardWorkout()
-	ElapsedTimeAtDate(date obj.Object) float64
-	StatisticsForType(quantityType *QuantityType) *Statistics
-	SeriesBuilderForType(seriesType *SeriesType) *SeriesBuilder
-	Device() *Device
-	StartDate() obj.Object
-	EndDate() obj.Object
-	WorkoutConfiguration() *WorkoutConfiguration
-	Metadata() obj.Object
-	WorkoutEvents() []*WorkoutEvent
-	WorkoutActivities() []*WorkoutActivity
-	AllStatistics() obj.Object
-}
-
-var _ WorkoutBuilderable = (*WorkoutBuilder)(nil)
 
 // isWorkoutBuilder marks WorkoutBuilder — and, by embedding promotion, its
 // subclasses — as a member of the WorkoutBuilder hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *WorkoutBuilder) isWorkoutBuilder() {}
+func (wb *WorkoutBuilder) isWorkoutBuilder() {}
 
 var _ WorkoutBuilderProvider = (*WorkoutBuilder)(nil)

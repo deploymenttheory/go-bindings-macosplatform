@@ -44,24 +44,24 @@ func mTRWiFiNetworkDiagnosticsClusterConnectionStatusEventAdopt(id objc.ID) *MTR
 }
 
 // Description returns the object's -description text.
-func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mwfndccse *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) Description() string {
+	return rt.Description(objref.IDOf(mwfndccse))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mwfndccse *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mwfndccse), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mwfndccse *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mwfndccse), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mwfndccse *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) String() string {
+	return rt.Description(objref.IDOf(mwfndccse))
 }
 
 // NewMTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent creates a new MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent.
@@ -71,28 +71,13 @@ func NewMTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent() *MTRWiFiNetworkD
 }
 
 // WithConnectionStatus sets the property and returns the receiver so calls can be chained.
-func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) WithConnectionStatus(connectionStatus obj.Object) *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionStatus:"), objref.IDOf(connectionStatus))
-	return x
+func (mwfndccse *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) WithConnectionStatus(connectionStatus obj.Object) *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent {
+	objc.Send[objc.ID](objref.IDOf(mwfndccse), objc.RegisterName("setConnectionStatus:"), objref.IDOf(connectionStatus))
+	return mwfndccse
 }
 
 // ConnectionStatus wraps the corresponding Objective-C method.
-func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectionStatus"))
+func (mwfndccse *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) ConnectionStatus() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwfndccse), objc.RegisterName("connectionStatus"))
 	return obj.Wrap(_r)
 }
-
-// SetConnectionStatus wraps the corresponding Objective-C method.
-func (x *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent) SetConnectionStatus(connectionStatus obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionStatus:"), objref.IDOf(connectionStatus))
-}
-
-// MTRWiFiNetworkDiagnosticsClusterConnectionStatusEventable is the interface implemented by [MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent], for mocking and DI.
-type MTRWiFiNetworkDiagnosticsClusterConnectionStatusEventable interface {
-	obj.Object
-	WithConnectionStatus(connectionStatus obj.Object) *MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent
-	ConnectionStatus() obj.Object
-	SetConnectionStatus(connectionStatus obj.Object)
-}
-
-var _ MTRWiFiNetworkDiagnosticsClusterConnectionStatusEventable = (*MTRWiFiNetworkDiagnosticsClusterConnectionStatusEvent)(nil)

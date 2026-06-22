@@ -46,24 +46,24 @@ func outgoingMessageEncodingStatusAdopt(id objc.ID) *OutgoingMessageEncodingStat
 }
 
 // Description returns the object's -description text.
-func (x *OutgoingMessageEncodingStatus) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (omes *OutgoingMessageEncodingStatus) Description() string {
+	return rt.Description(objref.IDOf(omes))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OutgoingMessageEncodingStatus) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (omes *OutgoingMessageEncodingStatus) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(omes), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OutgoingMessageEncodingStatus) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (omes *OutgoingMessageEncodingStatus) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(omes), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *OutgoingMessageEncodingStatus) String() string {
-	return rt.Description(objref.IDOf(x))
+func (omes *OutgoingMessageEncodingStatus) String() string {
+	return rt.Description(objref.IDOf(omes))
 }
 
 // NewOutgoingMessageEncodingStatus creates a new OutgoingMessageEncodingStatus.
@@ -72,32 +72,22 @@ func NewOutgoingMessageEncodingStatus() *OutgoingMessageEncodingStatus {
 	return outgoingMessageEncodingStatusAdopt(_id)
 }
 
-// CanSign whether or not the message can be signed.
-func (x *OutgoingMessageEncodingStatus) CanSign() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canSign"))
+// CanSign reports whether the message can be signed.
+func (omes *OutgoingMessageEncodingStatus) CanSign() bool {
+	_r := objc.Send[bool](objref.IDOf(omes), objc.RegisterName("canSign"))
 	return _r
 }
 
-// CanEncrypt whether or not the message can be encrypted.
-func (x *OutgoingMessageEncodingStatus) CanEncrypt() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canEncrypt"))
+// CanEncrypt reports whether the message can be encrypted.
+func (omes *OutgoingMessageEncodingStatus) CanEncrypt() bool {
+	_r := objc.Send[bool](objref.IDOf(omes), objc.RegisterName("canEncrypt"))
 	return _r
 }
 
-// AddressesFailingEncryption a list of any recipients for which the message should be encrypted but an error occurred. This could include missing the public key for the recipient.
+// AddressesFailingEncryption returns a list of any recipients for which the message should be encrypted but an error occurred. This could include missing the public key for the recipient.
 //
 // AddressesFailingEncryption returns the collection as a Go slice.
-func (x *OutgoingMessageEncodingStatus) AddressesFailingEncryption() []*EmailAddress {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressesFailingEncryption"))
+func (omes *OutgoingMessageEncodingStatus) AddressesFailingEncryption() []*EmailAddress {
+	_arr := objc.Send[objc.ID](objref.IDOf(omes), objc.RegisterName("addressesFailingEncryption"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
-
-// OutgoingMessageEncodingStatusable is the interface implemented by [OutgoingMessageEncodingStatus], for mocking and DI.
-type OutgoingMessageEncodingStatusable interface {
-	obj.Object
-	CanSign() bool
-	CanEncrypt() bool
-	AddressesFailingEncryption() []*EmailAddress
-}
-
-var _ OutgoingMessageEncodingStatusable = (*OutgoingMessageEncodingStatus)(nil)

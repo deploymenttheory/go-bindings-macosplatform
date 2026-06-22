@@ -46,24 +46,24 @@ func assetPackAdopt(id objc.ID) *AssetPack {
 }
 
 // Description returns the object's -description text.
-func (x *AssetPack) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ap *AssetPack) Description() string {
+	return rt.Description(objref.IDOf(ap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetPack) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ap *AssetPack) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetPack) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ap *AssetPack) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetPack) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ap *AssetPack) String() string {
+	return rt.Description(objref.IDOf(ap))
 }
 
 // NewAssetPack creates a new AssetPack.
@@ -73,46 +73,34 @@ func NewAssetPack() *AssetPack {
 }
 
 // Download creates a download object for the asset pack that you schedule using a download manager.
-func (x *AssetPack) Download() *Download {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("download"))
+func (ap *AssetPack) Download() *Download {
+	_r := objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("download"))
 	return DownloadFromID(_r)
 }
 
 // DownloadForContentRequest creates a download object for the asset pack that you schedule using a download manager.
-func (x *AssetPack) DownloadForContentRequest(contentRequest ContentRequest) *Download {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadForContentRequest:"), contentRequest)
+func (ap *AssetPack) DownloadForContentRequest(contentRequest ContentRequest) *Download {
+	_r := objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("downloadForContentRequest:"), contentRequest)
 	return DownloadFromID(_r)
 }
 
-// Identifier a unique identifier for the asset pack.
-func (x *AssetPack) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns a unique identifier for the asset pack.
+func (ap *AssetPack) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// DownloadSize the size of the download file containing the asset pack in bytes. This is different than the installation size, which could be larger.
-func (x *AssetPack) DownloadSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("downloadSize"))
+// DownloadSize returns the size of the download file containing the asset pack in bytes. This is different than the installation size, which could be larger.
+func (ap *AssetPack) DownloadSize() int {
+	_r := objc.Send[int](objref.IDOf(ap), objc.RegisterName("downloadSize"))
 	return _r
 }
 
-// UserInfo JSON-encoded custom information that’s associated with the asset pack. This property is `nil` for Apple-hosted asset packs.
-func (x *AssetPack) UserInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+// UserInfo returns JSON-encoded custom information that’s associated with the asset pack. This property is `nil` for Apple-hosted asset packs.
+func (ap *AssetPack) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
-
-// AssetPackable is the interface implemented by [AssetPack], for mocking and DI.
-type AssetPackable interface {
-	obj.Object
-	Download() *Download
-	DownloadForContentRequest(contentRequest ContentRequest) *Download
-	Identifier() string
-	DownloadSize() int
-	UserInfo() obj.Object
-}
-
-var _ AssetPackable = (*AssetPack)(nil)

@@ -5,13 +5,14 @@
 package passkit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // PaymentAuthorizationResult is an idiomatic wrapper over the Objective-C class PKPaymentAuthorizationResult.
@@ -48,24 +49,24 @@ func paymentAuthorizationResultAdopt(id objc.ID) *PaymentAuthorizationResult {
 }
 
 // Description returns the object's -description text.
-func (x *PaymentAuthorizationResult) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (par *PaymentAuthorizationResult) Description() string {
+	return rt.Description(objref.IDOf(par))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PaymentAuthorizationResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (par *PaymentAuthorizationResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(par), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PaymentAuthorizationResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (par *PaymentAuthorizationResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(par), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PaymentAuthorizationResult) String() string {
-	return rt.Description(objref.IDOf(x))
+func (par *PaymentAuthorizationResult) String() string {
+	return rt.Description(objref.IDOf(par))
 }
 
 // NewPaymentAuthorizationResultWithStatusErrors initializes the result with the status code and list of errors.
@@ -79,39 +80,34 @@ func NewPaymentAuthorizationResultWithStatusErrors(status PaymentAuthorizationSt
 	return paymentAuthorizationResultAdopt(_id), nil
 }
 
-// WithStatus payment authorization general status.
-func (x *PaymentAuthorizationResult) WithStatus(status PaymentAuthorizationStatus) *PaymentAuthorizationResult {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
-	return x
+// WithStatus sets payment authorization general status.
+func (par *PaymentAuthorizationResult) WithStatus(status PaymentAuthorizationStatus) *PaymentAuthorizationResult {
+	objc.Send[objc.ID](objref.IDOf(par), objc.RegisterName("setStatus:"), status)
+	return par
 }
 
-// WithOrderDetails optional metadata with order details for the placed order.
-func (x *PaymentAuthorizationResult) WithOrderDetails(orderDetails *PaymentOrderDetails) *PaymentAuthorizationResult {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderDetails:"), objref.IDOf(orderDetails))
-	return x
+// WithOrderDetails sets optional metadata with order details for the placed order.
+func (par *PaymentAuthorizationResult) WithOrderDetails(orderDetails *PaymentOrderDetails) *PaymentAuthorizationResult {
+	objc.Send[objc.ID](objref.IDOf(par), objc.RegisterName("setOrderDetails:"), objref.IDOf(orderDetails))
+	return par
 }
 
 // Status wraps the corresponding Objective-C method.
-func (x *PaymentAuthorizationResult) Status() PaymentAuthorizationStatus {
-	_r := objc.Send[PaymentAuthorizationStatus](objref.IDOf(x), objc.RegisterName("status"))
+func (par *PaymentAuthorizationResult) Status() PaymentAuthorizationStatus {
+	_r := objc.Send[PaymentAuthorizationStatus](objref.IDOf(par), objc.RegisterName("status"))
 	return _r
 }
 
-// SetStatus wraps the corresponding Objective-C method.
-func (x *PaymentAuthorizationResult) SetStatus(status PaymentAuthorizationStatus) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
-}
-
 // Errors wraps the corresponding Objective-C method.
-func (x *PaymentAuthorizationResult) Errors() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errors"))
+func (par *PaymentAuthorizationResult) Errors() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(par), objc.RegisterName("errors"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetErrors wraps the corresponding Objective-C method.
-func (x *PaymentAuthorizationResult) SetErrors() error {
+func (par *PaymentAuthorizationResult) SetErrors() error {
 	var _nsErr uintptr
-	_ = objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrors:"), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[objc.ID](objref.IDOf(par), objc.RegisterName("setErrors:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -119,27 +115,7 @@ func (x *PaymentAuthorizationResult) SetErrors() error {
 }
 
 // OrderDetails wraps the corresponding Objective-C method.
-func (x *PaymentAuthorizationResult) OrderDetails() *PaymentOrderDetails {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("orderDetails"))
+func (par *PaymentAuthorizationResult) OrderDetails() *PaymentOrderDetails {
+	_r := objc.Send[objc.ID](objref.IDOf(par), objc.RegisterName("orderDetails"))
 	return PaymentOrderDetailsFromID(_r)
 }
-
-// SetOrderDetails wraps the corresponding Objective-C method.
-func (x *PaymentAuthorizationResult) SetOrderDetails(orderDetails *PaymentOrderDetails) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderDetails:"), objref.IDOf(orderDetails))
-}
-
-// PaymentAuthorizationResultable is the interface implemented by [PaymentAuthorizationResult], for mocking and DI.
-type PaymentAuthorizationResultable interface {
-	obj.Object
-	WithStatus(status PaymentAuthorizationStatus) *PaymentAuthorizationResult
-	WithOrderDetails(orderDetails *PaymentOrderDetails) *PaymentAuthorizationResult
-	Status() PaymentAuthorizationStatus
-	SetStatus(status PaymentAuthorizationStatus)
-	Errors() []obj.Object
-	SetErrors() error
-	OrderDetails() *PaymentOrderDetails
-	SetOrderDetails(orderDetails *PaymentOrderDetails)
-}
-
-var _ PaymentAuthorizationResultable = (*PaymentAuthorizationResult)(nil)

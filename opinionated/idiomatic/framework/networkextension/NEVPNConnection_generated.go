@@ -6,13 +6,14 @@ package networkextension
 
 import (
 	"context"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // NEVPNConnection is an idiomatic wrapper over the Objective-C class NEVPNConnection.
@@ -51,32 +52,32 @@ func nEVPNConnectionAdopt(id objc.ID) *NEVPNConnection {
 }
 
 // Description returns the object's -description text.
-func (x *NEVPNConnection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nc *NEVPNConnection) Description() string {
+	return rt.Description(objref.IDOf(nc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEVPNConnection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nc *NEVPNConnection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEVPNConnection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nc *NEVPNConnection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEVPNConnection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nc *NEVPNConnection) String() string {
+	return rt.Description(objref.IDOf(nc))
 }
 
 // StartVPNTunnelAndReturnError start the process of connecting the VPN.
 //
 // StartVPNTunnelAndReturnError returns an error if the operation did not succeed.
-func (x *NEVPNConnection) StartVPNTunnelAndReturnError() error {
+func (nc *NEVPNConnection) StartVPNTunnelAndReturnError() error {
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("startVPNTunnelAndReturnError:"), unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(nc), objc.RegisterName("startVPNTunnelAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -84,9 +85,9 @@ func (x *NEVPNConnection) StartVPNTunnelAndReturnError() error {
 }
 
 // StartVPNTunnelWithOptionsAndReturnError start the process of connecting the VPN.
-func (x *NEVPNConnection) StartVPNTunnelWithOptionsAndReturnError(options obj.Object) error {
+func (nc *NEVPNConnection) StartVPNTunnelWithOptionsAndReturnError(options obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("startVPNTunnelWithOptions:andReturnError:"), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(nc), objc.RegisterName("startVPNTunnelWithOptions:andReturnError:"), objref.IDOf(options), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -94,21 +95,21 @@ func (x *NEVPNConnection) StartVPNTunnelWithOptionsAndReturnError(options obj.Ob
 }
 
 // StopVPNTunnel start the process of disconnecting the VPN.
-func (x *NEVPNConnection) StopVPNTunnel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopVPNTunnel"))
+func (nc *NEVPNConnection) StopVPNTunnel() {
+	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("stopVPNTunnel"))
 }
 
 // FetchLastDisconnectError retrives the most recent error that caused the VPN to disconnect.
 //
 // FetchLastDisconnectError blocks until the operation completes or ctx is cancelled.
-func (x *NEVPNConnection) FetchLastDisconnectError(ctx context.Context) error {
+func (nc *NEVPNConnection) FetchLastDisconnectError(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchLastDisconnectErrorWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("fetchLastDisconnectErrorWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -117,41 +118,27 @@ func (x *NEVPNConnection) FetchLastDisconnectError(ctx context.Context) error {
 	}
 }
 
-// Status the current status of the VPN.
-func (x *NEVPNConnection) Status() NEVPNStatus {
-	_r := objc.Send[NEVPNStatus](objref.IDOf(x), objc.RegisterName("status"))
+// Status returns the current status of the VPN.
+func (nc *NEVPNConnection) Status() NEVPNStatus {
+	_r := objc.Send[NEVPNStatus](objref.IDOf(nc), objc.RegisterName("status"))
 	return _r
 }
 
-// ConnectedDate the date and time when the connection status changed to NEVPNStatusConnected. This property is nil if the connection is not fully established.
-func (x *NEVPNConnection) ConnectedDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectedDate"))
+// ConnectedDate returns the date and time when the connection status changed to NEVPNStatusConnected. This property is nil if the connection is not fully established.
+func (nc *NEVPNConnection) ConnectedDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("connectedDate"))
 	return obj.Wrap(_r)
 }
 
-// Manager the NEVPNManager associated with this NEVPNConnection.
-func (x *NEVPNConnection) Manager() *NEVPNManager {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("manager"))
+// Manager returns the NEVPNManager associated with this NEVPNConnection.
+func (nc *NEVPNConnection) Manager() *NEVPNManager {
+	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("manager"))
 	return NEVPNManagerFromID(_r)
 }
-
-// NEVPNConnectionable is the interface implemented by [NEVPNConnection], for mocking and DI.
-type NEVPNConnectionable interface {
-	obj.Object
-	StartVPNTunnelAndReturnError() error
-	StartVPNTunnelWithOptionsAndReturnError(options obj.Object) error
-	StopVPNTunnel()
-	FetchLastDisconnectError(ctx context.Context) error
-	Status() NEVPNStatus
-	ConnectedDate() obj.Object
-	Manager() *NEVPNManager
-}
-
-var _ NEVPNConnectionable = (*NEVPNConnection)(nil)
 
 // isNEVPNConnection marks NEVPNConnection — and, by embedding promotion, its
 // subclasses — as a member of the NEVPNConnection hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NEVPNConnection) isNEVPNConnection() {}
+func (nc *NEVPNConnection) isNEVPNConnection() {}
 
 var _ NEVPNConnectionProvider = (*NEVPNConnection)(nil)

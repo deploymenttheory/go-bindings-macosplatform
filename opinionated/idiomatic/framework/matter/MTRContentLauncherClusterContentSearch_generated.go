@@ -7,7 +7,6 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,12 +48,5 @@ func NewMTRContentLauncherClusterContentSearch() *MTRContentLauncherClusterConte
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRContentLauncherClusterContentSearch")), objc.RegisterName("new"))
 	return mTRContentLauncherClusterContentSearchAdopt(_id)
 }
-
-// MTRContentLauncherClusterContentSearchable is the interface implemented by [MTRContentLauncherClusterContentSearch], for mocking and DI.
-type MTRContentLauncherClusterContentSearchable interface {
-	obj.Object
-}
-
-var _ MTRContentLauncherClusterContentSearchable = (*MTRContentLauncherClusterContentSearch)(nil)
 
 var _ MTRContentLauncherClusterContentSearchStructProvider = (*MTRContentLauncherClusterContentSearch)(nil)

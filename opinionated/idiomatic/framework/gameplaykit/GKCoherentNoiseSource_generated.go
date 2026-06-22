@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,97 +45,58 @@ func coherentNoiseSourceAdopt(id objc.ID) *CoherentNoiseSource {
 	return x
 }
 
-// WithFrequency a value that determines the size and spacing of features in generated noise.
-func (x *CoherentNoiseSource) WithFrequency(frequency float64) *CoherentNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
-	return x
+// WithFrequency sets a value that determines the size and spacing of features in generated noise.
+func (cns *CoherentNoiseSource) WithFrequency(frequency float64) *CoherentNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(cns), objc.RegisterName("setFrequency:"), frequency)
+	return cns
 }
 
-// WithOctaveCount the number of octaves of the underlying noise function to use for generating noise.
-func (x *CoherentNoiseSource) WithOctaveCount(octaveCount int) *CoherentNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOctaveCount:"), octaveCount)
-	return x
+// WithOctaveCount sets the number of octaves of the underlying noise function to use for generating noise.
+func (cns *CoherentNoiseSource) WithOctaveCount(octaveCount int) *CoherentNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(cns), objc.RegisterName("setOctaveCount:"), octaveCount)
+	return cns
 }
 
-// WithLacunarity the rate at which successive octaves of the noise function increase in frequency.
-func (x *CoherentNoiseSource) WithLacunarity(lacunarity float64) *CoherentNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLacunarity:"), lacunarity)
-	return x
+// WithLacunarity sets the rate at which successive octaves of the noise function increase in frequency.
+func (cns *CoherentNoiseSource) WithLacunarity(lacunarity float64) *CoherentNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(cns), objc.RegisterName("setLacunarity:"), lacunarity)
+	return cns
 }
 
-// WithSeed the value that determines the specific configuration of noise produced by the noise source.
-func (x *CoherentNoiseSource) WithSeed(seed int32) *CoherentNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
-	return x
+// WithSeed sets the value that determines the specific configuration of noise produced by the noise source.
+func (cns *CoherentNoiseSource) WithSeed(seed int32) *CoherentNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(cns), objc.RegisterName("setSeed:"), seed)
+	return cns
 }
 
 // Frequency wraps the corresponding Objective-C method.
-func (x *CoherentNoiseSource) Frequency() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("frequency"))
+func (cns *CoherentNoiseSource) Frequency() float64 {
+	_r := objc.Send[float64](objref.IDOf(cns), objc.RegisterName("frequency"))
 	return _r
-}
-
-// SetFrequency wraps the corresponding Objective-C method.
-func (x *CoherentNoiseSource) SetFrequency(frequency float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrequency:"), frequency)
 }
 
 // OctaveCount wraps the corresponding Objective-C method.
-func (x *CoherentNoiseSource) OctaveCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("octaveCount"))
+func (cns *CoherentNoiseSource) OctaveCount() int {
+	_r := objc.Send[int](objref.IDOf(cns), objc.RegisterName("octaveCount"))
 	return _r
-}
-
-// SetOctaveCount wraps the corresponding Objective-C method.
-func (x *CoherentNoiseSource) SetOctaveCount(octaveCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOctaveCount:"), octaveCount)
 }
 
 // Lacunarity wraps the corresponding Objective-C method.
-func (x *CoherentNoiseSource) Lacunarity() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lacunarity"))
+func (cns *CoherentNoiseSource) Lacunarity() float64 {
+	_r := objc.Send[float64](objref.IDOf(cns), objc.RegisterName("lacunarity"))
 	return _r
-}
-
-// SetLacunarity wraps the corresponding Objective-C method.
-func (x *CoherentNoiseSource) SetLacunarity(lacunarity float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLacunarity:"), lacunarity)
 }
 
 // Seed wraps the corresponding Objective-C method.
-func (x *CoherentNoiseSource) Seed() int32 {
-	_r := objc.Send[int32](objref.IDOf(x), objc.RegisterName("seed"))
+func (cns *CoherentNoiseSource) Seed() int32 {
+	_r := objc.Send[int32](objref.IDOf(cns), objc.RegisterName("seed"))
 	return _r
 }
-
-// SetSeed wraps the corresponding Objective-C method.
-func (x *CoherentNoiseSource) SetSeed(seed int32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), seed)
-}
-
-// CoherentNoiseSourceable is the interface implemented by [CoherentNoiseSource], for mocking and DI.
-type CoherentNoiseSourceable interface {
-	obj.Object
-	WithFrequency(frequency float64) *CoherentNoiseSource
-	WithOctaveCount(octaveCount int) *CoherentNoiseSource
-	WithLacunarity(lacunarity float64) *CoherentNoiseSource
-	WithSeed(seed int32) *CoherentNoiseSource
-	Frequency() float64
-	SetFrequency(frequency float64)
-	OctaveCount() int
-	SetOctaveCount(octaveCount int)
-	Lacunarity() float64
-	SetLacunarity(lacunarity float64)
-	Seed() int32
-	SetSeed(seed int32)
-}
-
-var _ CoherentNoiseSourceable = (*CoherentNoiseSource)(nil)
 
 // isCoherentNoiseSource marks CoherentNoiseSource — and, by embedding promotion, its
 // subclasses — as a member of the CoherentNoiseSource hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CoherentNoiseSource) isCoherentNoiseSource() {}
+func (cns *CoherentNoiseSource) isCoherentNoiseSource() {}
 
 var _ CoherentNoiseSourceProvider = (*CoherentNoiseSource)(nil)
 

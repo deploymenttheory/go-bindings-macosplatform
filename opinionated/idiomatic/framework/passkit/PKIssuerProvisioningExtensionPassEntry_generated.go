@@ -48,29 +48,29 @@ func issuerProvisioningExtensionPassEntryAdopt(id objc.ID) *IssuerProvisioningEx
 }
 
 // Description returns the object's -description text.
-func (x *IssuerProvisioningExtensionPassEntry) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ipepe *IssuerProvisioningExtensionPassEntry) Description() string {
+	return rt.Description(objref.IDOf(ipepe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IssuerProvisioningExtensionPassEntry) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ipepe *IssuerProvisioningExtensionPassEntry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ipepe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IssuerProvisioningExtensionPassEntry) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ipepe *IssuerProvisioningExtensionPassEntry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ipepe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IssuerProvisioningExtensionPassEntry) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ipepe *IssuerProvisioningExtensionPassEntry) String() string {
+	return rt.Description(objref.IDOf(ipepe))
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *IssuerProvisioningExtensionPassEntry) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (ipepe *IssuerProvisioningExtensionPassEntry) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ipepe), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -78,8 +78,8 @@ func (x *IssuerProvisioningExtensionPassEntry) Identifier() string {
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *IssuerProvisioningExtensionPassEntry) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (ipepe *IssuerProvisioningExtensionPassEntry) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ipepe), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
@@ -87,24 +87,14 @@ func (x *IssuerProvisioningExtensionPassEntry) Title() string {
 }
 
 // Art wraps the corresponding Objective-C method.
-func (x *IssuerProvisioningExtensionPassEntry) Art() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("art"))
+func (ipepe *IssuerProvisioningExtensionPassEntry) Art() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ipepe), objc.RegisterName("art"))
 	return obj.Wrap(_r)
 }
-
-// IssuerProvisioningExtensionPassEntryable is the interface implemented by [IssuerProvisioningExtensionPassEntry], for mocking and DI.
-type IssuerProvisioningExtensionPassEntryable interface {
-	obj.Object
-	Identifier() string
-	Title() string
-	Art() obj.Object
-}
-
-var _ IssuerProvisioningExtensionPassEntryable = (*IssuerProvisioningExtensionPassEntry)(nil)
 
 // isIssuerProvisioningExtensionPassEntry marks IssuerProvisioningExtensionPassEntry — and, by embedding promotion, its
 // subclasses — as a member of the IssuerProvisioningExtensionPassEntry hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *IssuerProvisioningExtensionPassEntry) isIssuerProvisioningExtensionPassEntry() {}
+func (ipepe *IssuerProvisioningExtensionPassEntry) isIssuerProvisioningExtensionPassEntry() {}
 
 var _ IssuerProvisioningExtensionPassEntryProvider = (*IssuerProvisioningExtensionPassEntry)(nil)

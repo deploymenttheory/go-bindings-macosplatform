@@ -44,24 +44,24 @@ func mTRAdministratorCommissioningClusterRevokeCommissioningParamsAdopt(id objc.
 }
 
 // Description returns the object's -description text.
-func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (maccrcp *MTRAdministratorCommissioningClusterRevokeCommissioningParams) Description() string {
+	return rt.Description(objref.IDOf(maccrcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (maccrcp *MTRAdministratorCommissioningClusterRevokeCommissioningParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(maccrcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (maccrcp *MTRAdministratorCommissioningClusterRevokeCommissioningParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(maccrcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (maccrcp *MTRAdministratorCommissioningClusterRevokeCommissioningParams) String() string {
+	return rt.Description(objref.IDOf(maccrcp))
 }
 
 // NewMTRAdministratorCommissioningClusterRevokeCommissioningParams creates a new MTRAdministratorCommissioningClusterRevokeCommissioningParams.
@@ -70,49 +70,26 @@ func NewMTRAdministratorCommissioningClusterRevokeCommissioningParams() *MTRAdmi
 	return mTRAdministratorCommissioningClusterRevokeCommissioningParamsAdopt(_id)
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAdministratorCommissioningClusterRevokeCommissioningParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (maccrcp *MTRAdministratorCommissioningClusterRevokeCommissioningParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAdministratorCommissioningClusterRevokeCommissioningParams {
+	objc.Send[objc.ID](objref.IDOf(maccrcp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return maccrcp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAdministratorCommissioningClusterRevokeCommissioningParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (maccrcp *MTRAdministratorCommissioningClusterRevokeCommissioningParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAdministratorCommissioningClusterRevokeCommissioningParams {
+	objc.Send[objc.ID](objref.IDOf(maccrcp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return maccrcp
 }
 
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (maccrcp *MTRAdministratorCommissioningClusterRevokeCommissioningParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccrcp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (maccrcp *MTRAdministratorCommissioningClusterRevokeCommissioningParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccrcp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRAdministratorCommissioningClusterRevokeCommissioningParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRAdministratorCommissioningClusterRevokeCommissioningParamsable is the interface implemented by [MTRAdministratorCommissioningClusterRevokeCommissioningParams], for mocking and DI.
-type MTRAdministratorCommissioningClusterRevokeCommissioningParamsable interface {
-	obj.Object
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAdministratorCommissioningClusterRevokeCommissioningParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAdministratorCommissioningClusterRevokeCommissioningParams
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRAdministratorCommissioningClusterRevokeCommissioningParamsable = (*MTRAdministratorCommissioningClusterRevokeCommissioningParams)(nil)

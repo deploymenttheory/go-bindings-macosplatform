@@ -46,24 +46,24 @@ func speechRecognitionMetadataAdopt(id objc.ID) *SpeechRecognitionMetadata {
 }
 
 // Description returns the object's -description text.
-func (x *SpeechRecognitionMetadata) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (srm *SpeechRecognitionMetadata) Description() string {
+	return rt.Description(objref.IDOf(srm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpeechRecognitionMetadata) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (srm *SpeechRecognitionMetadata) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(srm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpeechRecognitionMetadata) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (srm *SpeechRecognitionMetadata) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(srm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SpeechRecognitionMetadata) String() string {
-	return rt.Description(objref.IDOf(x))
+func (srm *SpeechRecognitionMetadata) String() string {
+	return rt.Description(objref.IDOf(srm))
 }
 
 // NewSpeechRecognitionMetadata creates a new SpeechRecognitionMetadata.
@@ -72,44 +72,32 @@ func NewSpeechRecognitionMetadata() *SpeechRecognitionMetadata {
 	return speechRecognitionMetadataAdopt(_id)
 }
 
-// SpeakingRate the number of words spoken per minute.
-func (x *SpeechRecognitionMetadata) SpeakingRate() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speakingRate"))
+// SpeakingRate returns the number of words spoken per minute.
+func (srm *SpeechRecognitionMetadata) SpeakingRate() float64 {
+	_r := objc.Send[float64](objref.IDOf(srm), objc.RegisterName("speakingRate"))
 	return _r
 }
 
-// AveragePauseDuration the average pause duration between words, measured in seconds.
-func (x *SpeechRecognitionMetadata) AveragePauseDuration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("averagePauseDuration"))
+// AveragePauseDuration returns the average pause duration between words, measured in seconds.
+func (srm *SpeechRecognitionMetadata) AveragePauseDuration() float64 {
+	_r := objc.Send[float64](objref.IDOf(srm), objc.RegisterName("averagePauseDuration"))
 	return _r
 }
 
-// SpeechStartTimestamp the start timestamp of speech in the audio.
-func (x *SpeechRecognitionMetadata) SpeechStartTimestamp() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speechStartTimestamp"))
+// SpeechStartTimestamp returns the start timestamp of speech in the audio.
+func (srm *SpeechRecognitionMetadata) SpeechStartTimestamp() float64 {
+	_r := objc.Send[float64](objref.IDOf(srm), objc.RegisterName("speechStartTimestamp"))
 	return _r
 }
 
-// SpeechDuration the duration in seconds of speech in the audio.
-func (x *SpeechRecognitionMetadata) SpeechDuration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speechDuration"))
+// SpeechDuration returns the duration in seconds of speech in the audio.
+func (srm *SpeechRecognitionMetadata) SpeechDuration() float64 {
+	_r := objc.Send[float64](objref.IDOf(srm), objc.RegisterName("speechDuration"))
 	return _r
 }
 
-// VoiceAnalytics an analysis of the transcription segment's vocal properties.
-func (x *SpeechRecognitionMetadata) VoiceAnalytics() *VoiceAnalytics {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voiceAnalytics"))
+// VoiceAnalytics returns an analysis of the transcription segment's vocal properties.
+func (srm *SpeechRecognitionMetadata) VoiceAnalytics() *VoiceAnalytics {
+	_r := objc.Send[objc.ID](objref.IDOf(srm), objc.RegisterName("voiceAnalytics"))
 	return VoiceAnalyticsFromID(_r)
 }
-
-// SpeechRecognitionMetadataable is the interface implemented by [SpeechRecognitionMetadata], for mocking and DI.
-type SpeechRecognitionMetadataable interface {
-	obj.Object
-	SpeakingRate() float64
-	AveragePauseDuration() float64
-	SpeechStartTimestamp() float64
-	SpeechDuration() float64
-	VoiceAnalytics() *VoiceAnalytics
-}
-
-var _ SpeechRecognitionMetadataable = (*SpeechRecognitionMetadata)(nil)

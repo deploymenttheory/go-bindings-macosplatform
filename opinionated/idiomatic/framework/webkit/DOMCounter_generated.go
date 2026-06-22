@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,8 +50,8 @@ func NewDOMCounter() *DOMCounter {
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *DOMCounter) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (dc *DOMCounter) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -60,8 +59,8 @@ func (x *DOMCounter) Identifier() string {
 }
 
 // ListStyle wraps the corresponding Objective-C method.
-func (x *DOMCounter) ListStyle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("listStyle"))
+func (dc *DOMCounter) ListStyle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("listStyle"))
 	if _r == 0 {
 		return ""
 	}
@@ -69,23 +68,13 @@ func (x *DOMCounter) ListStyle() string {
 }
 
 // Separator wraps the corresponding Objective-C method.
-func (x *DOMCounter) Separator() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("separator"))
+func (dc *DOMCounter) Separator() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("separator"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// DOMCounterable is the interface implemented by [DOMCounter], for mocking and DI.
-type DOMCounterable interface {
-	obj.Object
-	Identifier() string
-	ListStyle() string
-	Separator() string
-}
-
-var _ DOMCounterable = (*DOMCounter)(nil)
 
 var _ DOMObjectProvider = (*DOMCounter)(nil)
 

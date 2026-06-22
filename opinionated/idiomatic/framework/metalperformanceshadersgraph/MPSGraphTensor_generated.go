@@ -7,7 +7,6 @@ package metalperformanceshadersgraph
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,18 +51,10 @@ func NewGraphTensor() *GraphTensor {
 	return graphTensorAdopt(_id)
 }
 
-// Operation the operation responsible for creating this tensor.
-func (x *GraphTensor) Operation() *GraphOperation {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operation"))
+// Operation returns the operation responsible for creating this tensor.
+func (gt *GraphTensor) Operation() *GraphOperation {
+	_r := objc.Send[objc.ID](objref.IDOf(gt), objc.RegisterName("operation"))
 	return GraphOperationFromID(_r)
 }
-
-// GraphTensorable is the interface implemented by [GraphTensor], for mocking and DI.
-type GraphTensorable interface {
-	obj.Object
-	Operation() *GraphOperation
-}
-
-var _ GraphTensorable = (*GraphTensor)(nil)
 
 var _ GraphObjectProvider = (*GraphTensor)(nil)

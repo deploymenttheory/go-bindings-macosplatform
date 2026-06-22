@@ -53,33 +53,23 @@ func NewCNNUpsamplingNearestGradientNodeWithSourceGradientSourceImageGradientSta
 	return cNNUpsamplingNearestGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNUpsamplingNearestGradientNode) WithLabel(label string) *CNNUpsamplingNearestGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cungn *CNNUpsamplingNearestGradientNode) WithLabel(label string) *CNNUpsamplingNearestGradientNode {
+	objc.Send[objc.ID](objref.IDOf(cungn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cungn
 }
 
 // ScaleFactorX wraps the corresponding Objective-C method.
-func (x *CNNUpsamplingNearestGradientNode) ScaleFactorX() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorX"))
+func (cungn *CNNUpsamplingNearestGradientNode) ScaleFactorX() float64 {
+	_r := objc.Send[float64](objref.IDOf(cungn), objc.RegisterName("scaleFactorX"))
 	return _r
 }
 
 // ScaleFactorY wraps the corresponding Objective-C method.
-func (x *CNNUpsamplingNearestGradientNode) ScaleFactorY() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorY"))
+func (cungn *CNNUpsamplingNearestGradientNode) ScaleFactorY() float64 {
+	_r := objc.Send[float64](objref.IDOf(cungn), objc.RegisterName("scaleFactorY"))
 	return _r
 }
-
-// CNNUpsamplingNearestGradientNodeable is the interface implemented by [CNNUpsamplingNearestGradientNode], for mocking and DI.
-type CNNUpsamplingNearestGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNUpsamplingNearestGradientNode
-	ScaleFactorX() float64
-	ScaleFactorY() float64
-}
-
-var _ CNNUpsamplingNearestGradientNodeable = (*CNNUpsamplingNearestGradientNode)(nil)
 
 var _ NNGradientFilterNodeProvider = (*CNNUpsamplingNearestGradientNode)(nil)
 

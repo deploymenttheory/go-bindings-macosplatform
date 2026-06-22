@@ -44,24 +44,24 @@ func mTROvenCavityOperationalStateClusterOperationalErrorEventAdopt(id objc.ID) 
 }
 
 // Description returns the object's -description text.
-func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mocoscoee *MTROvenCavityOperationalStateClusterOperationalErrorEvent) Description() string {
+	return rt.Description(objref.IDOf(mocoscoee))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mocoscoee *MTROvenCavityOperationalStateClusterOperationalErrorEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mocoscoee), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mocoscoee *MTROvenCavityOperationalStateClusterOperationalErrorEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mocoscoee), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mocoscoee *MTROvenCavityOperationalStateClusterOperationalErrorEvent) String() string {
+	return rt.Description(objref.IDOf(mocoscoee))
 }
 
 // NewMTROvenCavityOperationalStateClusterOperationalErrorEvent creates a new MTROvenCavityOperationalStateClusterOperationalErrorEvent.
@@ -71,28 +71,13 @@ func NewMTROvenCavityOperationalStateClusterOperationalErrorEvent() *MTROvenCavi
 }
 
 // WithErrorState sets the property and returns the receiver so calls can be chained.
-func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *MTROvenCavityOperationalStateClusterErrorStateStruct) *MTROvenCavityOperationalStateClusterOperationalErrorEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorState:"), objref.IDOf(errorState))
-	return x
+func (mocoscoee *MTROvenCavityOperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *MTROvenCavityOperationalStateClusterErrorStateStruct) *MTROvenCavityOperationalStateClusterOperationalErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(mocoscoee), objc.RegisterName("setErrorState:"), objref.IDOf(errorState))
+	return mocoscoee
 }
 
 // ErrorState wraps the corresponding Objective-C method.
-func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) ErrorState() *MTROvenCavityOperationalStateClusterErrorStateStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorState"))
+func (mocoscoee *MTROvenCavityOperationalStateClusterOperationalErrorEvent) ErrorState() *MTROvenCavityOperationalStateClusterErrorStateStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(mocoscoee), objc.RegisterName("errorState"))
 	return MTROvenCavityOperationalStateClusterErrorStateStructFromID(_r)
 }
-
-// SetErrorState wraps the corresponding Objective-C method.
-func (x *MTROvenCavityOperationalStateClusterOperationalErrorEvent) SetErrorState(errorState *MTROvenCavityOperationalStateClusterErrorStateStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorState:"), objref.IDOf(errorState))
-}
-
-// MTROvenCavityOperationalStateClusterOperationalErrorEventable is the interface implemented by [MTROvenCavityOperationalStateClusterOperationalErrorEvent], for mocking and DI.
-type MTROvenCavityOperationalStateClusterOperationalErrorEventable interface {
-	obj.Object
-	WithErrorState(errorState *MTROvenCavityOperationalStateClusterErrorStateStruct) *MTROvenCavityOperationalStateClusterOperationalErrorEvent
-	ErrorState() *MTROvenCavityOperationalStateClusterErrorStateStruct
-	SetErrorState(errorState *MTROvenCavityOperationalStateClusterErrorStateStruct)
-}
-
-var _ MTROvenCavityOperationalStateClusterOperationalErrorEventable = (*MTROvenCavityOperationalStateClusterOperationalErrorEvent)(nil)

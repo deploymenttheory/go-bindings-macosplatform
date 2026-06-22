@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,32 +51,22 @@ func NewImageThresholdToZero() *ImageThresholdToZero {
 	return imageThresholdToZeroAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
-func (x *ImageThresholdToZero) WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZero {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (ittz *ImageThresholdToZero) WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZero {
+	objc.Send[objc.ID](objref.IDOf(ittz), objc.RegisterName("setOffset:"), offset)
+	return ittz
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
-func (x *ImageThresholdToZero) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZero {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (ittz *ImageThresholdToZero) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZero {
+	objc.Send[objc.ID](objref.IDOf(ittz), objc.RegisterName("setClipRect:"), clipRect)
+	return ittz
 }
 
-// ThresholdValue the threshold value used to init the threshold filter
-func (x *ImageThresholdToZero) ThresholdValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("thresholdValue"))
+// ThresholdValue returns the threshold value used to init the threshold filter
+func (ittz *ImageThresholdToZero) ThresholdValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(ittz), objc.RegisterName("thresholdValue"))
 	return _r
 }
-
-// ImageThresholdToZeroable is the interface implemented by [ImageThresholdToZero], for mocking and DI.
-type ImageThresholdToZeroable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageThresholdToZero
-	WithClipRect(clipRect metal.MTLRegion) *ImageThresholdToZero
-	ThresholdValue() float32
-}
-
-var _ ImageThresholdToZeroable = (*ImageThresholdToZero)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageThresholdToZero)(nil)

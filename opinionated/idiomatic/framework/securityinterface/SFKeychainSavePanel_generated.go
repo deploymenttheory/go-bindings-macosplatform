@@ -46,24 +46,24 @@ func keychainSavePanelAdopt(id objc.ID) *KeychainSavePanel {
 }
 
 // Description returns the object's -description text.
-func (x *KeychainSavePanel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ksp *KeychainSavePanel) Description() string {
+	return rt.Description(objref.IDOf(ksp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *KeychainSavePanel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ksp *KeychainSavePanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ksp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *KeychainSavePanel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ksp *KeychainSavePanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ksp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *KeychainSavePanel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ksp *KeychainSavePanel) String() string {
+	return rt.Description(objref.IDOf(ksp))
 }
 
 // NewKeychainSavePanel creates a new KeychainSavePanel.
@@ -73,21 +73,12 @@ func NewKeychainSavePanel() *KeychainSavePanel {
 }
 
 // SetPassword specifies the password for the keychain that will be created.
-func (x *KeychainSavePanel) SetPassword(password string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassword:"), purego.NSString(password))
+func (ksp *KeychainSavePanel) SetPassword(password string) {
+	objc.Send[objc.ID](objref.IDOf(ksp), objc.RegisterName("setPassword:"), purego.NSString(password))
 }
 
 // Keychain returns the keychain created by the keychain save panel.
-func (x *KeychainSavePanel) Keychain() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keychain"))
+func (ksp *KeychainSavePanel) Keychain() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ksp), objc.RegisterName("keychain"))
 	return obj.Wrap(_r)
 }
-
-// KeychainSavePanelable is the interface implemented by [KeychainSavePanel], for mocking and DI.
-type KeychainSavePanelable interface {
-	obj.Object
-	SetPassword(password string)
-	Keychain() obj.Object
-}
-
-var _ KeychainSavePanelable = (*KeychainSavePanel)(nil)

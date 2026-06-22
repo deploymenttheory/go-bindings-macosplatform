@@ -46,24 +46,24 @@ func gearShifterElementAdopt(id objc.ID) *GearShifterElement {
 }
 
 // Description returns the object's -description text.
-func (x *GearShifterElement) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (gse *GearShifterElement) Description() string {
+	return rt.Description(objref.IDOf(gse))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GearShifterElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (gse *GearShifterElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(gse), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GearShifterElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (gse *GearShifterElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(gse), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GearShifterElement) String() string {
-	return rt.Description(objref.IDOf(x))
+func (gse *GearShifterElement) String() string {
+	return rt.Description(objref.IDOf(gse))
 }
 
 // NewGearShifterElement creates a new GearShifterElement.
@@ -71,10 +71,3 @@ func NewGearShifterElement() *GearShifterElement {
 	_id := objc.Send[objc.ID](objc.ID(_class("GCGearShifterElement")), objc.RegisterName("new"))
 	return gearShifterElementAdopt(_id)
 }
-
-// GearShifterElementable is the interface implemented by [GearShifterElement], for mocking and DI.
-type GearShifterElementable interface {
-	obj.Object
-}
-
-var _ GearShifterElementable = (*GearShifterElement)(nil)

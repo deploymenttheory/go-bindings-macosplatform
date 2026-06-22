@@ -46,24 +46,24 @@ func extensionViewControllerAdopt(id objc.ID) *ExtensionViewController {
 }
 
 // Description returns the object's -description text.
-func (x *ExtensionViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (evc *ExtensionViewController) Description() string {
+	return rt.Description(objref.IDOf(evc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExtensionViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (evc *ExtensionViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(evc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExtensionViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (evc *ExtensionViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(evc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExtensionViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (evc *ExtensionViewController) String() string {
+	return rt.Description(objref.IDOf(evc))
 }
 
 // NewExtensionViewController creates a new ExtensionViewController.
@@ -71,10 +71,3 @@ func NewExtensionViewController() *ExtensionViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("MEExtensionViewController")), objc.RegisterName("new"))
 	return extensionViewControllerAdopt(_id)
 }
-
-// ExtensionViewControllerable is the interface implemented by [ExtensionViewController], for mocking and DI.
-type ExtensionViewControllerable interface {
-	obj.Object
-}
-
-var _ ExtensionViewControllerable = (*ExtensionViewController)(nil)

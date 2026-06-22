@@ -48,86 +48,76 @@ func objectAdopt(id objc.ID) *Object {
 }
 
 // Description returns the object's -description text.
-func (x *Object) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Object) Description() string {
+	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Object) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (o *Object) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Object) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (o *Object) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Object) String() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Object) String() string {
+	return rt.Description(objref.IDOf(o))
 }
 
-// WithParent the parent object that contains this object.
-func (x *Object) WithParent(parent ObjectProvider) *Object {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
-	return x
+// WithParent sets the parent object that contains this object.
+func (o *Object) WithParent(parent ObjectProvider) *Object {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setParent:"), objref.IDOf(parent))
+	return o
 }
 
-// WithInstance the primary object, if applicable, of which this object is an instance.
-func (x *Object) WithInstance(instance ObjectProvider) *Object {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
-	return x
+// WithInstance sets the primary object, if applicable, of which this object is an instance.
+func (o *Object) WithInstance(instance ObjectProvider) *Object {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setInstance:"), objref.IDOf(instance))
+	return o
 }
 
-// WithHidden a Boolean value indicating whether this object should be used in rendering.
-func (x *Object) WithHidden(hidden bool) *Object {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value indicating whether this object should be used in rendering.
+func (o *Object) WithHidden(hidden bool) *Object {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setHidden:"), hidden)
+	return o
 }
 
 // ObjectAtPath returns the child object at the specified path.
-func (x *Object) ObjectAtPath(path string) *Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtPath:"), purego.NSString(path))
+func (o *Object) ObjectAtPath(path string) *Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("objectAtPath:"), purego.NSString(path))
 	return ObjectFromID(_r)
 }
 
 // AddChild adds a child object to this object, creating a container for the object’s children if necessary.
-func (x *Object) AddChild(child *Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addChild:"), objref.IDOf(child))
+func (o *Object) AddChild(child *Object) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("addChild:"), objref.IDOf(child))
 }
 
-// Components allows applications to introspect the components on the objects.
-func (x *Object) Components() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("components"))
+// Components returns allows applications to introspect the components on the objects.
+func (o *Object) Components() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("components"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Parent parent object. Nil if no parent. Set to nil when you remove this from an object container inside the parent object.
-func (x *Object) Parent() *Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
+// Parent returns parent object. Nil if no parent. Set to nil when you remove this from an object container inside the parent object.
+func (o *Object) Parent() *Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("parent"))
 	return ObjectFromID(_r)
 }
 
-// SetParent wraps the corresponding Objective-C method.
-func (x *Object) SetParent(parent *Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
-}
-
-// Instance instance object nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
-func (x *Object) Instance() *Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instance"))
+// Instance returns instance object nil, unless this object refers to original data to be instanced. The original data object can be any MDLObject that does not have a parent. If an MDLAsset has been created from a data file, any original objects parsed from that file will be found in the originals property. A typical use of a original and instance might be to have one original chair MDLObject, and instance six chairs around a table. The transform of each chair would be found on the parent MDLObject, but the various items making up the chair would be found in the original object.
+func (o *Object) Instance() *Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("instance"))
 	return ObjectFromID(_r)
 }
 
-// SetInstance wraps the corresponding Objective-C method.
-func (x *Object) SetInstance(instance *Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
-}
-
-// Path a string representing a path to the object a path is of the form /path/to/object where the path is formed by concatenating the names of the objects up the parent chain. Requesting a path will force any unnamed objects to became uniquely named. Any characters outside of [A-Z][a-z][0-9][:-_.] will be forced to underscore.
-func (x *Object) Path() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+// Path returns a string representing a path to the object a path is of the form /path/to/object where the path is formed by concatenating the names of the objects up the parent chain. Requesting a path will force any unnamed objects to became uniquely named. Any characters outside of [A-Z][a-z][0-9][:-_.] will be forced to underscore.
+func (o *Object) Path() string {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("path"))
 	if _r == 0 {
 		return ""
 	}
@@ -135,39 +125,14 @@ func (x *Object) Path() string {
 }
 
 // Hidden wraps the corresponding Objective-C method.
-func (x *Object) Hidden() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hidden"))
+func (o *Object) Hidden() bool {
+	_r := objc.Send[bool](objref.IDOf(o), objc.RegisterName("hidden"))
 	return _r
 }
-
-// SetHidden wraps the corresponding Objective-C method.
-func (x *Object) SetHidden(hidden bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-}
-
-// Objectable is the interface implemented by [Object], for mocking and DI.
-type Objectable interface {
-	obj.Object
-	WithParent(parent ObjectProvider) *Object
-	WithInstance(instance ObjectProvider) *Object
-	WithHidden(hidden bool) *Object
-	ObjectAtPath(path string) *Object
-	AddChild(child *Object)
-	Components() []obj.Object
-	Parent() *Object
-	SetParent(parent *Object)
-	Instance() *Object
-	SetInstance(instance *Object)
-	Path() string
-	Hidden() bool
-	SetHidden(hidden bool)
-}
-
-var _ Objectable = (*Object)(nil)
 
 // isObject marks Object — and, by embedding promotion, its
 // subclasses — as a member of the Object hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Object) isObject() {}
+func (o *Object) isObject() {}
 
 var _ ObjectProvider = (*Object)(nil)

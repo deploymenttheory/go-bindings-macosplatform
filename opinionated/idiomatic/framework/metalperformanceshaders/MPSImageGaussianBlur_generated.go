@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,40 +53,29 @@ func NewImageGaussianBlur() *ImageGaussianBlur {
 	return imageGaussianBlurAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageGaussianBlur) WithOffset(offset mpscore.MPSOffset) *ImageGaussianBlur {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (igb *ImageGaussianBlur) WithOffset(offset mpscore.MPSOffset) *ImageGaussianBlur {
+	objc.Send[objc.ID](objref.IDOf(igb), objc.RegisterName("setOffset:"), offset)
+	return igb
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageGaussianBlur) WithClipRect(clipRect metal.MTLRegion) *ImageGaussianBlur {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (igb *ImageGaussianBlur) WithClipRect(clipRect metal.MTLRegion) *ImageGaussianBlur {
+	objc.Send[objc.ID](objref.IDOf(igb), objc.RegisterName("setClipRect:"), clipRect)
+	return igb
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageGaussianBlur) WithLabel(label string) *ImageGaussianBlur {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (igb *ImageGaussianBlur) WithLabel(label string) *ImageGaussianBlur {
+	objc.Send[objc.ID](objref.IDOf(igb), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return igb
 }
 
-// Sigma read-only sigma value with which filter was created
-func (x *ImageGaussianBlur) Sigma() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("sigma"))
+// Sigma returns read-only sigma value with which filter was created
+func (igb *ImageGaussianBlur) Sigma() float32 {
+	_r := objc.Send[float32](objref.IDOf(igb), objc.RegisterName("sigma"))
 	return _r
 }
-
-// ImageGaussianBlurable is the interface implemented by [ImageGaussianBlur], for mocking and DI.
-type ImageGaussianBlurable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageGaussianBlur
-	WithClipRect(clipRect metal.MTLRegion) *ImageGaussianBlur
-	WithLabel(label string) *ImageGaussianBlur
-	Sigma() float32
-}
-
-var _ ImageGaussianBlurable = (*ImageGaussianBlur)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageGaussianBlur)(nil)
 

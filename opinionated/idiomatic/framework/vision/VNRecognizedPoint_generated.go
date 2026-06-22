@@ -53,18 +53,10 @@ func NewRecognizedPoint() *RecognizedPoint {
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *RecognizedPoint) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (rp *RecognizedPoint) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rp), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
-
-// RecognizedPointable is the interface implemented by [RecognizedPoint], for mocking and DI.
-type RecognizedPointable interface {
-	obj.Object
-	Identifier() obj.Object
-}
-
-var _ RecognizedPointable = (*RecognizedPoint)(nil)
 
 var _ DetectedPointProvider = (*RecognizedPoint)(nil)
 

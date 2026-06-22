@@ -54,88 +54,70 @@ func NewMTRClusterWaterHeaterManagementWithDeviceEndpointIDQueue(device *MTRDevi
 }
 
 // ReadAttributeHeaterTypesWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterWaterHeaterManagement) ReadAttributeHeaterTypesWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHeaterTypesWithParams:"), objref.IDOf(params))
+func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeHeaterTypesWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeHeaterTypesWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeHeatDemandWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterWaterHeaterManagement) ReadAttributeHeatDemandWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeHeatDemandWithParams:"), objref.IDOf(params))
+func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeHeatDemandWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeHeatDemandWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeTankVolumeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterWaterHeaterManagement) ReadAttributeTankVolumeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTankVolumeWithParams:"), objref.IDOf(params))
+func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeTankVolumeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeTankVolumeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeEstimatedHeatRequiredWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterWaterHeaterManagement) ReadAttributeEstimatedHeatRequiredWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEstimatedHeatRequiredWithParams:"), objref.IDOf(params))
+func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeEstimatedHeatRequiredWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeEstimatedHeatRequiredWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeTankPercentageWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterWaterHeaterManagement) ReadAttributeTankPercentageWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTankPercentageWithParams:"), objref.IDOf(params))
+func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeTankPercentageWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeTankPercentageWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeBoostStateWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterWaterHeaterManagement) ReadAttributeBoostStateWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBoostStateWithParams:"), objref.IDOf(params))
+func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeBoostStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeBoostStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterWaterHeaterManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterWaterHeaterManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterWaterHeaterManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterWaterHeaterManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterWaterHeaterManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mcwhm *MTRClusterWaterHeaterManagement) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcwhm), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
-
-// MTRClusterWaterHeaterManagementable is the interface implemented by [MTRClusterWaterHeaterManagement], for mocking and DI.
-type MTRClusterWaterHeaterManagementable interface {
-	obj.Object
-	ReadAttributeHeaterTypesWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeHeatDemandWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeTankVolumeWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeEstimatedHeatRequiredWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeTankPercentageWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeBoostStateWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-}
-
-var _ MTRClusterWaterHeaterManagementable = (*MTRClusterWaterHeaterManagement)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterWaterHeaterManagement)(nil)
 

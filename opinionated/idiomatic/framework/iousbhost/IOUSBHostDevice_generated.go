@@ -5,12 +5,12 @@
 package iousbhost
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // HostDevice is an idiomatic wrapper over the Objective-C class IOUSBHostDevice.
@@ -55,9 +55,9 @@ func NewHostDevice() *HostDevice {
 }
 
 // ConfigureWithValueMatchInterfaces selects a new configuration for the device.
-func (x *HostDevice) ConfigureWithValueMatchInterfaces(value int, matchInterfaces bool) error {
+func (hd *HostDevice) ConfigureWithValueMatchInterfaces(value int, matchInterfaces bool) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("configureWithValue:matchInterfaces:error:"), value, matchInterfaces, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(hd), objc.RegisterName("configureWithValue:matchInterfaces:error:"), value, matchInterfaces, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -65,9 +65,9 @@ func (x *HostDevice) ConfigureWithValueMatchInterfaces(value int, matchInterface
 }
 
 // ConfigureWithValue selects a new configuration for the device and registers the interfaces for matching.
-func (x *HostDevice) ConfigureWithValue(value int) error {
+func (hd *HostDevice) ConfigureWithValue(value int) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("configureWithValue:error:"), value, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(hd), objc.RegisterName("configureWithValue:error:"), value, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -77,23 +77,13 @@ func (x *HostDevice) ConfigureWithValue(value int) error {
 // Reset terminates the device and attempts to re-enumerate it.
 //
 // Reset returns an error if the operation did not succeed.
-func (x *HostDevice) Reset() error {
+func (hd *HostDevice) Reset() error {
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("resetWithError:"), unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(hd), objc.RegisterName("resetWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
-
-// HostDeviceable is the interface implemented by [HostDevice], for mocking and DI.
-type HostDeviceable interface {
-	obj.Object
-	ConfigureWithValueMatchInterfaces(value int, matchInterfaces bool) error
-	ConfigureWithValue(value int) error
-	Reset() error
-}
-
-var _ HostDeviceable = (*HostDevice)(nil)
 
 var _ HostObjectProvider = (*HostDevice)(nil)

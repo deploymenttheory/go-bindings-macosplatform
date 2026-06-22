@@ -46,24 +46,24 @@ func playbackSpeedAdopt(id objc.ID) *PlaybackSpeed {
 }
 
 // Description returns the object's -description text.
-func (x *PlaybackSpeed) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ps *PlaybackSpeed) Description() string {
+	return rt.Description(objref.IDOf(ps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlaybackSpeed) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ps *PlaybackSpeed) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlaybackSpeed) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ps *PlaybackSpeed) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PlaybackSpeed) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ps *PlaybackSpeed) String() string {
+	return rt.Description(objref.IDOf(ps))
 }
 
 // NewPlaybackSpeedWithRateLocalizedName creates a playback speed with a rate and localized name.
@@ -73,36 +73,26 @@ func NewPlaybackSpeedWithRateLocalizedName(rate float32, localizedName string) *
 	return playbackSpeedAdopt(_id)
 }
 
-// Rate the rate associated with this object. When this playback speed is selected this rate will be set in response to the play button being pressed.
-func (x *PlaybackSpeed) Rate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
+// Rate returns the rate associated with this object. When this playback speed is selected this rate will be set in response to the play button being pressed.
+func (ps *PlaybackSpeed) Rate() float32 {
+	_r := objc.Send[float32](objref.IDOf(ps), objc.RegisterName("rate"))
 	return _r
 }
 
-// LocalizedName a localized name for this playback speed. This name will be used to represent this playback speed in playback UIs where more space is available.
-func (x *PlaybackSpeed) LocalizedName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+// LocalizedName returns a localized name for this playback speed. This name will be used to represent this playback speed in playback UIs where more space is available.
+func (ps *PlaybackSpeed) LocalizedName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// LocalizedNumericName a localized name for this playback speed used when space is limited. This name will be used to represent this playback speed in playback UIs where limited space is available.
-func (x *PlaybackSpeed) LocalizedNumericName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedNumericName"))
+// LocalizedNumericName returns a localized name for this playback speed used when space is limited. This name will be used to represent this playback speed in playback UIs where limited space is available.
+func (ps *PlaybackSpeed) LocalizedNumericName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ps), objc.RegisterName("localizedNumericName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// PlaybackSpeedable is the interface implemented by [PlaybackSpeed], for mocking and DI.
-type PlaybackSpeedable interface {
-	obj.Object
-	Rate() float32
-	LocalizedName() string
-	LocalizedNumericName() string
-}
-
-var _ PlaybackSpeedable = (*PlaybackSpeed)(nil)

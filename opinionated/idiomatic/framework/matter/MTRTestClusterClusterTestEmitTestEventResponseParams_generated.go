@@ -51,24 +51,15 @@ func NewMTRTestClusterClusterTestEmitTestEventResponseParams() *MTRTestClusterCl
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestEmitTestEventResponseParams) WithValue(value obj.Object) *MTRTestClusterClusterTestEmitTestEventResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
+func (mtccteterp *MTRTestClusterClusterTestEmitTestEventResponseParams) WithValue(value obj.Object) *MTRTestClusterClusterTestEmitTestEventResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mtccteterp), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return mtccteterp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRTestClusterClusterTestEmitTestEventResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestEmitTestEventResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mtccteterp *MTRTestClusterClusterTestEmitTestEventResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestEmitTestEventResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mtccteterp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mtccteterp
 }
-
-// MTRTestClusterClusterTestEmitTestEventResponseParamsable is the interface implemented by [MTRTestClusterClusterTestEmitTestEventResponseParams], for mocking and DI.
-type MTRTestClusterClusterTestEmitTestEventResponseParamsable interface {
-	obj.Object
-	WithValue(value obj.Object) *MTRTestClusterClusterTestEmitTestEventResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTestClusterClusterTestEmitTestEventResponseParams
-}
-
-var _ MTRTestClusterClusterTestEmitTestEventResponseParamsable = (*MTRTestClusterClusterTestEmitTestEventResponseParams)(nil)
 
 var _ MTRUnitTestingClusterTestEmitTestEventResponseParamsProvider = (*MTRTestClusterClusterTestEmitTestEventResponseParams)(nil)

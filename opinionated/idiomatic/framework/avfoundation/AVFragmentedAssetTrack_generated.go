@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewFragmentedAssetTrack() *FragmentedAssetTrack {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVFragmentedAssetTrack")), objc.RegisterName("new"))
 	return fragmentedAssetTrackAdopt(_id)
 }
-
-// FragmentedAssetTrackable is the interface implemented by [FragmentedAssetTrack], for mocking and DI.
-type FragmentedAssetTrackable interface {
-	obj.Object
-}
-
-var _ FragmentedAssetTrackable = (*FragmentedAssetTrack)(nil)
 
 var _ AssetTrackProvider = (*FragmentedAssetTrack)(nil)

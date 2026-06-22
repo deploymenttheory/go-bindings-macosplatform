@@ -44,24 +44,24 @@ func mTRTimeSynchronizationClusterSetDSTOffsetParamsAdopt(id objc.ID) *MTRTimeSy
 }
 
 // Description returns the object's -description text.
-func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) Description() string {
+	return rt.Description(objref.IDOf(mtscsdop))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtscsdop), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtscsdop), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) String() string {
+	return rt.Description(objref.IDOf(mtscsdop))
 }
 
 // NewMTRTimeSynchronizationClusterSetDSTOffsetParams creates a new MTRTimeSynchronizationClusterSetDSTOffsetParams.
@@ -70,62 +70,37 @@ func NewMTRTimeSynchronizationClusterSetDSTOffsetParams() *MTRTimeSynchronizatio
 	return mTRTimeSynchronizationClusterSetDSTOffsetParamsAdopt(_id)
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTimeSynchronizationClusterSetDSTOffsetParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTimeSynchronizationClusterSetDSTOffsetParams {
+	objc.Send[objc.ID](objref.IDOf(mtscsdop), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mtscsdop
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTimeSynchronizationClusterSetDSTOffsetParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTimeSynchronizationClusterSetDSTOffsetParams {
+	objc.Send[objc.ID](objref.IDOf(mtscsdop), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mtscsdop
 }
 
 // DstOffset wraps the corresponding Objective-C method.
-func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) DstOffset() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dstOffset"))
+func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) DstOffset() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtscsdop), objc.RegisterName("dstOffset"))
 	return obj.Wrap(_r)
 }
 
 // SetDstOffset wraps the corresponding Objective-C method.
-func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) SetDstOffset(dstOffset obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDstOffset:"), objref.IDOf(dstOffset))
+func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) SetDstOffset(dstOffset obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mtscsdop), objc.RegisterName("setDstOffset:"), objref.IDOf(dstOffset))
 }
 
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtscsdop), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mtscsdop *MTRTimeSynchronizationClusterSetDSTOffsetParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtscsdop), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRTimeSynchronizationClusterSetDSTOffsetParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRTimeSynchronizationClusterSetDSTOffsetParamsable is the interface implemented by [MTRTimeSynchronizationClusterSetDSTOffsetParams], for mocking and DI.
-type MTRTimeSynchronizationClusterSetDSTOffsetParamsable interface {
-	obj.Object
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRTimeSynchronizationClusterSetDSTOffsetParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRTimeSynchronizationClusterSetDSTOffsetParams
-	DstOffset() obj.Object
-	SetDstOffset(dstOffset obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRTimeSynchronizationClusterSetDSTOffsetParamsable = (*MTRTimeSynchronizationClusterSetDSTOffsetParams)(nil)

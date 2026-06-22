@@ -44,24 +44,24 @@ func mTRPumpConfigurationAndControlClusterMotorTemperatureHighEventAdopt(id objc
 }
 
 // Description returns the object's -description text.
-func (x *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccmthe *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent) Description() string {
+	return rt.Description(objref.IDOf(mpcaccmthe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpcaccmthe *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpcaccmthe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpcaccmthe *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpcaccmthe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccmthe *MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent) String() string {
+	return rt.Description(objref.IDOf(mpcaccmthe))
 }
 
 // NewMTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent creates a new MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent.
@@ -69,10 +69,3 @@ func NewMTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent() *MTRPum
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent")), objc.RegisterName("new"))
 	return mTRPumpConfigurationAndControlClusterMotorTemperatureHighEventAdopt(_id)
 }
-
-// MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent], for mocking and DI.
-type MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventable interface {
-	obj.Object
-}
-
-var _ MTRPumpConfigurationAndControlClusterMotorTemperatureHighEventable = (*MTRPumpConfigurationAndControlClusterMotorTemperatureHighEvent)(nil)

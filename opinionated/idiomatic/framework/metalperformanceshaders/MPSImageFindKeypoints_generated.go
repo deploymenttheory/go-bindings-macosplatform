@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpsimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,25 +52,16 @@ func NewImageFindKeypoints() *ImageFindKeypoints {
 	return imageFindKeypointsAdopt(_id)
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageFindKeypoints) WithLabel(label string) *ImageFindKeypoints {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ifk *ImageFindKeypoints) WithLabel(label string) *ImageFindKeypoints {
+	objc.Send[objc.ID](objref.IDOf(ifk), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ifk
 }
 
-// KeypointRangeInfo return a structure describing the keypoint range info Returns a MPSImageKeypointRangeInfo structure
-func (x *ImageFindKeypoints) KeypointRangeInfo() mpsimage.MPSImageKeypointRangeInfo {
-	_r := objc.Send[mpsimage.MPSImageKeypointRangeInfo](objref.IDOf(x), objc.RegisterName("keypointRangeInfo"))
+// KeypointRangeInfo returns a structure describing the keypoint range info Returns a MPSImageKeypointRangeInfo structure
+func (ifk *ImageFindKeypoints) KeypointRangeInfo() mpsimage.MPSImageKeypointRangeInfo {
+	_r := objc.Send[mpsimage.MPSImageKeypointRangeInfo](objref.IDOf(ifk), objc.RegisterName("keypointRangeInfo"))
 	return _r
 }
-
-// ImageFindKeypointsable is the interface implemented by [ImageFindKeypoints], for mocking and DI.
-type ImageFindKeypointsable interface {
-	obj.Object
-	WithLabel(label string) *ImageFindKeypoints
-	KeypointRangeInfo() mpsimage.MPSImageKeypointRangeInfo
-}
-
-var _ ImageFindKeypointsable = (*ImageFindKeypoints)(nil)
 
 var _ KernelProvider = (*ImageFindKeypoints)(nil)

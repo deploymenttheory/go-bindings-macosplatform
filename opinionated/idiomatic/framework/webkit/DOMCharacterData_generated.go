@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,32 +44,32 @@ func dOMCharacterDataAdopt(id objc.ID) *DOMCharacterData {
 }
 
 // WithData sets the property and returns the receiver so calls can be chained.
-func (x *DOMCharacterData) WithData(data string) *DOMCharacterData {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
-	return x
+func (dcd *DOMCharacterData) WithData(data string) *DOMCharacterData {
+	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("setData:"), purego.NSString(data))
+	return dcd
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMCharacterData) WithNodeValue(nodeValue string) *DOMCharacterData {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (dcd *DOMCharacterData) WithNodeValue(nodeValue string) *DOMCharacterData {
+	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return dcd
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMCharacterData) WithPrefix(prefix string) *DOMCharacterData {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (dcd *DOMCharacterData) WithPrefix(prefix string) *DOMCharacterData {
+	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return dcd
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMCharacterData) WithTextContent(textContent string) *DOMCharacterData {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (dcd *DOMCharacterData) WithTextContent(textContent string) *DOMCharacterData {
+	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return dcd
 }
 
 // SubstringDataLength wraps the corresponding Objective-C method.
-func (x *DOMCharacterData) SubstringDataLength(offset int, length int) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("substringData:length:"), offset, length)
+func (dcd *DOMCharacterData) SubstringDataLength(offset int, length int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("substringData:length:"), offset, length)
 	if _r == 0 {
 		return ""
 	}
@@ -78,48 +77,43 @@ func (x *DOMCharacterData) SubstringDataLength(offset int, length int) string {
 }
 
 // AppendData wraps the corresponding Objective-C method.
-func (x *DOMCharacterData) AppendData(data string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendData:"), purego.NSString(data))
+func (dcd *DOMCharacterData) AppendData(data string) {
+	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("appendData:"), purego.NSString(data))
 }
 
 // InsertDataData wraps the corresponding Objective-C method.
-func (x *DOMCharacterData) InsertDataData(offset int, data string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertData:data:"), offset, purego.NSString(data))
+func (dcd *DOMCharacterData) InsertDataData(offset int, data string) {
+	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("insertData:data:"), offset, purego.NSString(data))
 }
 
 // DeleteDataLength wraps the corresponding Objective-C method.
-func (x *DOMCharacterData) DeleteDataLength(offset int, length int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteData:length:"), offset, length)
+func (dcd *DOMCharacterData) DeleteDataLength(offset int, length int) {
+	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("deleteData:length:"), offset, length)
 }
 
 // ReplaceDataLengthData wraps the corresponding Objective-C method.
-func (x *DOMCharacterData) ReplaceDataLengthData(offset int, length int, data string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceData:length:data:"), offset, length, purego.NSString(data))
+func (dcd *DOMCharacterData) ReplaceDataLengthData(offset int, length int, data string) {
+	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("replaceData:length:data:"), offset, length, purego.NSString(data))
 }
 
 // Data wraps the corresponding Objective-C method.
-func (x *DOMCharacterData) Data() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+func (dcd *DOMCharacterData) Data() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("data"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetData wraps the corresponding Objective-C method.
-func (x *DOMCharacterData) SetData(data string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
-}
-
 // Length wraps the corresponding Objective-C method.
-func (x *DOMCharacterData) Length() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+func (dcd *DOMCharacterData) Length() int {
+	_r := objc.Send[int](objref.IDOf(dcd), objc.RegisterName("length"))
 	return _r
 }
 
 // SubstringData wraps the corresponding Objective-C method.
-func (x *DOMCharacterData) SubstringData(offset int, length int) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("substringData::"), offset, length)
+func (dcd *DOMCharacterData) SubstringData(offset int, length int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("substringData::"), offset, length)
 	if _r == 0 {
 		return ""
 	}
@@ -127,47 +121,24 @@ func (x *DOMCharacterData) SubstringData(offset int, length int) string {
 }
 
 // InsertData wraps the corresponding Objective-C method.
-func (x *DOMCharacterData) InsertData(offset int, data string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertData::"), offset, purego.NSString(data))
+func (dcd *DOMCharacterData) InsertData(offset int, data string) {
+	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("insertData::"), offset, purego.NSString(data))
 }
 
 // DeleteData wraps the corresponding Objective-C method.
-func (x *DOMCharacterData) DeleteData(offset int, length int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteData::"), offset, length)
+func (dcd *DOMCharacterData) DeleteData(offset int, length int) {
+	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("deleteData::"), offset, length)
 }
 
 // ReplaceData wraps the corresponding Objective-C method.
-func (x *DOMCharacterData) ReplaceData(offset int, length int, data string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceData:::"), offset, length, purego.NSString(data))
+func (dcd *DOMCharacterData) ReplaceData(offset int, length int, data string) {
+	objc.Send[objc.ID](objref.IDOf(dcd), objc.RegisterName("replaceData:::"), offset, length, purego.NSString(data))
 }
-
-// DOMCharacterDataable is the interface implemented by [DOMCharacterData], for mocking and DI.
-type DOMCharacterDataable interface {
-	obj.Object
-	WithData(data string) *DOMCharacterData
-	WithNodeValue(nodeValue string) *DOMCharacterData
-	WithPrefix(prefix string) *DOMCharacterData
-	WithTextContent(textContent string) *DOMCharacterData
-	SubstringDataLength(offset int, length int) string
-	AppendData(data string)
-	InsertDataData(offset int, data string)
-	DeleteDataLength(offset int, length int)
-	ReplaceDataLengthData(offset int, length int, data string)
-	Data() string
-	SetData(data string)
-	Length() int
-	SubstringData(offset int, length int) string
-	InsertData(offset int, data string)
-	DeleteData(offset int, length int)
-	ReplaceData(offset int, length int, data string)
-}
-
-var _ DOMCharacterDataable = (*DOMCharacterData)(nil)
 
 // isDOMCharacterData marks DOMCharacterData — and, by embedding promotion, its
 // subclasses — as a member of the DOMCharacterData hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DOMCharacterData) isDOMCharacterData() {}
+func (dcd *DOMCharacterData) isDOMCharacterData() {}
 
 var _ DOMCharacterDataProvider = (*DOMCharacterData)(nil)
 

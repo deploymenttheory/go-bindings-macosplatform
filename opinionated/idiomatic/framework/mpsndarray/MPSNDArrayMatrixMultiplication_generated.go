@@ -7,7 +7,6 @@ package mpsndarray
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,57 +43,34 @@ func arrayMatrixMultiplicationAdopt(id objc.ID) *ArrayMatrixMultiplication {
 	return x
 }
 
-// WithAlpha the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-func (x *ArrayMatrixMultiplication) WithAlpha(alpha float64) *ArrayMatrixMultiplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+func (amm *ArrayMatrixMultiplication) WithAlpha(alpha float64) *ArrayMatrixMultiplication {
+	objc.Send[objc.ID](objref.IDOf(amm), objc.RegisterName("setAlpha:"), alpha)
+	return amm
 }
 
-// WithBeta the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-func (x *ArrayMatrixMultiplication) WithBeta(beta float64) *ArrayMatrixMultiplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
-	return x
+// WithBeta sets the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+func (amm *ArrayMatrixMultiplication) WithBeta(beta float64) *ArrayMatrixMultiplication {
+	objc.Send[objc.ID](objref.IDOf(amm), objc.RegisterName("setBeta:"), beta)
+	return amm
 }
 
-// Alpha the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-func (x *ArrayMatrixMultiplication) Alpha() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("alpha"))
+// Alpha returns the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+func (amm *ArrayMatrixMultiplication) Alpha() float64 {
+	_r := objc.Send[float64](objref.IDOf(amm), objc.RegisterName("alpha"))
 	return _r
 }
 
-// SetAlpha wraps the corresponding Objective-C method.
-func (x *ArrayMatrixMultiplication) SetAlpha(alpha float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-}
-
-// Beta the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-func (x *ArrayMatrixMultiplication) Beta() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("beta"))
+// Beta returns the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+func (amm *ArrayMatrixMultiplication) Beta() float64 {
+	_r := objc.Send[float64](objref.IDOf(amm), objc.RegisterName("beta"))
 	return _r
 }
-
-// SetBeta wraps the corresponding Objective-C method.
-func (x *ArrayMatrixMultiplication) SetBeta(beta float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
-}
-
-// ArrayMatrixMultiplicationable is the interface implemented by [ArrayMatrixMultiplication], for mocking and DI.
-type ArrayMatrixMultiplicationable interface {
-	obj.Object
-	WithAlpha(alpha float64) *ArrayMatrixMultiplication
-	WithBeta(beta float64) *ArrayMatrixMultiplication
-	Alpha() float64
-	SetAlpha(alpha float64)
-	Beta() float64
-	SetBeta(beta float64)
-}
-
-var _ ArrayMatrixMultiplicationable = (*ArrayMatrixMultiplication)(nil)
 
 // isArrayMatrixMultiplication marks ArrayMatrixMultiplication — and, by embedding promotion, its
 // subclasses — as a member of the ArrayMatrixMultiplication hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ArrayMatrixMultiplication) isArrayMatrixMultiplication() {}
+func (amm *ArrayMatrixMultiplication) isArrayMatrixMultiplication() {}
 
 var _ ArrayMatrixMultiplicationProvider = (*ArrayMatrixMultiplication)(nil)
 

@@ -55,71 +55,40 @@ func NewActionRemoteGoToWithPageIndexAtPointFileURL(pageIndex int, point corefou
 	return actionRemoteGoToAdopt(_id)
 }
 
-// WithPageIndex returns the zero-based page index referenced by the remote go-to action.
-func (x *ActionRemoteGoTo) WithPageIndex(pageIndex int) *ActionRemoteGoTo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageIndex:"), pageIndex)
-	return x
+// WithPageIndex sets returns the zero-based page index referenced by the remote go-to action.
+func (argt *ActionRemoteGoTo) WithPageIndex(pageIndex int) *ActionRemoteGoTo {
+	objc.Send[objc.ID](objref.IDOf(argt), objc.RegisterName("setPageIndex:"), pageIndex)
+	return argt
 }
 
-// WithPoint sets the point, in page space, on the page referenced by the remote go-to action.
-func (x *ActionRemoteGoTo) WithPoint(point corefoundation.CGPoint) *ActionRemoteGoTo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPoint:"), point)
-	return x
+// WithPoint sets sets the point, in page space, on the page referenced by the remote go-to action.
+func (argt *ActionRemoteGoTo) WithPoint(point corefoundation.CGPoint) *ActionRemoteGoTo {
+	objc.Send[objc.ID](objref.IDOf(argt), objc.RegisterName("setPoint:"), point)
+	return argt
 }
 
-// WithURL returns the URL of the document referenced by the remote go-to action.
-func (x *ActionRemoteGoTo) WithURL(uRL string) *ActionRemoteGoTo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-	return x
+// WithURL sets returns the URL of the document referenced by the remote go-to action.
+func (argt *ActionRemoteGoTo) WithURL(uRL string) *ActionRemoteGoTo {
+	objc.Send[objc.ID](objref.IDOf(argt), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+	return argt
 }
 
 // PageIndex wraps the corresponding Objective-C method.
-func (x *ActionRemoteGoTo) PageIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pageIndex"))
+func (argt *ActionRemoteGoTo) PageIndex() int {
+	_r := objc.Send[int](objref.IDOf(argt), objc.RegisterName("pageIndex"))
 	return _r
-}
-
-// SetPageIndex wraps the corresponding Objective-C method.
-func (x *ActionRemoteGoTo) SetPageIndex(pageIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPageIndex:"), pageIndex)
 }
 
 // Point wraps the corresponding Objective-C method.
-func (x *ActionRemoteGoTo) Point() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("point"))
+func (argt *ActionRemoteGoTo) Point() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(argt), objc.RegisterName("point"))
 	return _r
 }
 
-// SetPoint wraps the corresponding Objective-C method.
-func (x *ActionRemoteGoTo) SetPoint(point corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPoint:"), point)
-}
-
 // URL wraps the corresponding Objective-C method.
-func (x *ActionRemoteGoTo) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (argt *ActionRemoteGoTo) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(argt), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
-
-// SetURL wraps the corresponding Objective-C method.
-func (x *ActionRemoteGoTo) SetURL(uRL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-}
-
-// ActionRemoteGoToable is the interface implemented by [ActionRemoteGoTo], for mocking and DI.
-type ActionRemoteGoToable interface {
-	obj.Object
-	WithPageIndex(pageIndex int) *ActionRemoteGoTo
-	WithPoint(point corefoundation.CGPoint) *ActionRemoteGoTo
-	WithURL(uRL string) *ActionRemoteGoTo
-	PageIndex() int
-	SetPageIndex(pageIndex int)
-	Point() corefoundation.CGPoint
-	SetPoint(point corefoundation.CGPoint)
-	URL() obj.Object
-	SetURL(uRL string)
-}
-
-var _ ActionRemoteGoToable = (*ActionRemoteGoTo)(nil)
 
 var _ ActionProvider = (*ActionRemoteGoTo)(nil)

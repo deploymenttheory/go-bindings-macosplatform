@@ -52,91 +52,57 @@ func NewRayIntersector() *RayIntersector {
 	return rayIntersectorAdopt(_id)
 }
 
-// WithRayStride offset, in bytes, between consecutive rays in the ray buffer. Defaults to 0, indicating that the rays are packed according to their natural aligned size. This can be used to skip past any additional per-ray data that may be stored alongside the MPSRay struct such as the current radiance along the ray or the source pixel coordinates. Must be aligned to the alignment of the ray data type.
-func (x *RayIntersector) WithRayStride(rayStride int) *RayIntersector {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRayStride:"), rayStride)
-	return x
+// WithRayStride sets offset, in bytes, between consecutive rays in the ray buffer. Defaults to 0, indicating that the rays are packed according to their natural aligned size. This can be used to skip past any additional per-ray data that may be stored alongside the MPSRay struct such as the current radiance along the ray or the source pixel coordinates. Must be aligned to the alignment of the ray data type.
+func (ri *RayIntersector) WithRayStride(rayStride int) *RayIntersector {
+	objc.Send[objc.ID](objref.IDOf(ri), objc.RegisterName("setRayStride:"), rayStride)
+	return ri
 }
 
-// WithIntersectionStride offset, in bytes, between consecutive intersections in the intersection buffer. Defaults to 0, indicating that the intersections are packed according to their natural aligned size. This can be used to skip past any additional per-intersection that which may be stored alongside the MPSRayIntersection struct such as the surface normal at the point of intersection. Must be aligned to the alignment of the intersection data type.
-func (x *RayIntersector) WithIntersectionStride(intersectionStride int) *RayIntersector {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntersectionStride:"), intersectionStride)
-	return x
+// WithIntersectionStride sets offset, in bytes, between consecutive intersections in the intersection buffer. Defaults to 0, indicating that the intersections are packed according to their natural aligned size. This can be used to skip past any additional per-intersection that which may be stored alongside the MPSRayIntersection struct such as the surface normal at the point of intersection. Must be aligned to the alignment of the intersection data type.
+func (ri *RayIntersector) WithIntersectionStride(intersectionStride int) *RayIntersector {
+	objc.Send[objc.ID](objref.IDOf(ri), objc.RegisterName("setIntersectionStride:"), intersectionStride)
+	return ri
 }
 
-// WithRayMask global ray mask. Defaults to 0xFFFFFFFF. This value will be logically AND-ed with the per-ray mask if the ray data type contains a mask.
-func (x *RayIntersector) WithRayMask(rayMask int) *RayIntersector {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRayMask:"), rayMask)
-	return x
+// WithRayMask sets global ray mask. Defaults to 0xFFFFFFFF. This value will be logically AND-ed with the per-ray mask if the ray data type contains a mask.
+func (ri *RayIntersector) WithRayMask(rayMask int) *RayIntersector {
+	objc.Send[objc.ID](objref.IDOf(ri), objc.RegisterName("setRayMask:"), rayMask)
+	return ri
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *RayIntersector) WithLabel(label string) *RayIntersector {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ri *RayIntersector) WithLabel(label string) *RayIntersector {
+	objc.Send[objc.ID](objref.IDOf(ri), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ri
 }
 
 // RecommendedMinimumRayBatchSizeForRayCount get the recommended minimum number of rays to submit for intersection in one batch In order to keep the system responsive, and to limit the amount of memory allocated to ray and intersection buffers, it may be desirable to divide the rays to be intersected against an acceleration structure into smaller batches. However, submitting too few rays in a batch reduces GPU utilization and performance. This method provides a recommended minimum number of rays to submit in any given batch. For example, for a 1920x1080 image, this method may recommend that the image be divided into 512x512 tiles. The actual recommendation varies per device and total ray count.
-func (x *RayIntersector) RecommendedMinimumRayBatchSizeForRayCount(rayCount int) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("recommendedMinimumRayBatchSizeForRayCount:"), rayCount)
+func (ri *RayIntersector) RecommendedMinimumRayBatchSizeForRayCount(rayCount int) int {
+	_r := objc.Send[int](objref.IDOf(ri), objc.RegisterName("recommendedMinimumRayBatchSizeForRayCount:"), rayCount)
 	return _r
 }
 
 // EncodeWithCoder wraps the corresponding Objective-C method.
-func (x *RayIntersector) EncodeWithCoder(coder obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
+func (ri *RayIntersector) EncodeWithCoder(coder obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ri), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }
 
-// RayStride offset, in bytes, between consecutive rays in the ray buffer. Defaults to 0, indicating that the rays are packed according to their natural aligned size. This can be used to skip past any additional per-ray data that may be stored alongside the MPSRay struct such as the current radiance along the ray or the source pixel coordinates. Must be aligned to the alignment of the ray data type.
-func (x *RayIntersector) RayStride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rayStride"))
+// RayStride returns offset, in bytes, between consecutive rays in the ray buffer. Defaults to 0, indicating that the rays are packed according to their natural aligned size. This can be used to skip past any additional per-ray data that may be stored alongside the MPSRay struct such as the current radiance along the ray or the source pixel coordinates. Must be aligned to the alignment of the ray data type.
+func (ri *RayIntersector) RayStride() int {
+	_r := objc.Send[int](objref.IDOf(ri), objc.RegisterName("rayStride"))
 	return _r
 }
 
-// SetRayStride wraps the corresponding Objective-C method.
-func (x *RayIntersector) SetRayStride(rayStride int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRayStride:"), rayStride)
-}
-
-// IntersectionStride offset, in bytes, between consecutive intersections in the intersection buffer. Defaults to 0, indicating that the intersections are packed according to their natural aligned size. This can be used to skip past any additional per-intersection that which may be stored alongside the MPSRayIntersection struct such as the surface normal at the point of intersection. Must be aligned to the alignment of the intersection data type.
-func (x *RayIntersector) IntersectionStride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("intersectionStride"))
+// IntersectionStride returns offset, in bytes, between consecutive intersections in the intersection buffer. Defaults to 0, indicating that the intersections are packed according to their natural aligned size. This can be used to skip past any additional per-intersection that which may be stored alongside the MPSRayIntersection struct such as the surface normal at the point of intersection. Must be aligned to the alignment of the intersection data type.
+func (ri *RayIntersector) IntersectionStride() int {
+	_r := objc.Send[int](objref.IDOf(ri), objc.RegisterName("intersectionStride"))
 	return _r
 }
 
-// SetIntersectionStride wraps the corresponding Objective-C method.
-func (x *RayIntersector) SetIntersectionStride(intersectionStride int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntersectionStride:"), intersectionStride)
-}
-
-// RayMask global ray mask. Defaults to 0xFFFFFFFF. This value will be logically AND-ed with the per-ray mask if the ray data type contains a mask.
-func (x *RayIntersector) RayMask() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rayMask"))
+// RayMask returns global ray mask. Defaults to 0xFFFFFFFF. This value will be logically AND-ed with the per-ray mask if the ray data type contains a mask.
+func (ri *RayIntersector) RayMask() int {
+	_r := objc.Send[int](objref.IDOf(ri), objc.RegisterName("rayMask"))
 	return _r
 }
-
-// SetRayMask wraps the corresponding Objective-C method.
-func (x *RayIntersector) SetRayMask(rayMask int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRayMask:"), rayMask)
-}
-
-// RayIntersectorable is the interface implemented by [RayIntersector], for mocking and DI.
-type RayIntersectorable interface {
-	obj.Object
-	WithRayStride(rayStride int) *RayIntersector
-	WithIntersectionStride(intersectionStride int) *RayIntersector
-	WithRayMask(rayMask int) *RayIntersector
-	WithLabel(label string) *RayIntersector
-	RecommendedMinimumRayBatchSizeForRayCount(rayCount int) int
-	EncodeWithCoder(coder obj.Object)
-	RayStride() int
-	SetRayStride(rayStride int)
-	IntersectionStride() int
-	SetIntersectionStride(intersectionStride int)
-	RayMask() int
-	SetRayMask(rayMask int)
-}
-
-var _ RayIntersectorable = (*RayIntersector)(nil)
 
 var _ KernelProvider = (*RayIntersector)(nil)

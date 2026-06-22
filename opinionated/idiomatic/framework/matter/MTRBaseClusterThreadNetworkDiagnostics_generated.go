@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -63,7 +64,7 @@ func NewMTRBaseClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue(device *MT
 // ReadAttributeChannelWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeChannelWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -75,7 +76,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelWithComplet
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChannelWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeChannelWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -88,7 +89,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelWithComplet
 // SubscribeAttributeChannelWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeChannelWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -100,7 +101,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeChannelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeChannelWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -113,7 +114,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelWithPa
 // ReadAttributeRoutingRoleWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRoutingRoleWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRoutingRoleWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRoutingRoleWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -125,7 +126,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRoutingRoleWithCom
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRoutingRoleWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRoutingRoleWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -138,7 +139,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRoutingRoleWithCom
 // SubscribeAttributeRoutingRoleWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRoutingRoleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingRoleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingRoleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -150,7 +151,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingRoleWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRoutingRoleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRoutingRoleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +164,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingRoleWi
 // ReadAttributeNetworkNameWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNetworkNameWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNetworkNameWithCompletion(ctx context.Context) (result string, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNetworkNameWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -175,7 +176,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNetworkNameWithCom
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNetworkNameWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeNetworkNameWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -188,7 +189,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNetworkNameWithCom
 // SubscribeAttributeNetworkNameWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNetworkNameWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -200,7 +201,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkNameWi
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNetworkNameWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeNetworkNameWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -210,10 +211,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkNameWi
 	}
 }
 
-// ReadAttributePanIdWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePanIDWithCompletion wraps the corresponding Objective-C method.
 //
-// ReadAttributePanIdWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePanIdWithCompletion(ctx context.Context) (result obj.Object, err error) {
+// ReadAttributePanIDWithCompletion blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePanIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -225,7 +226,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePanIdWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePanIdWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributePanIdWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -235,10 +236,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePanIdWithCompletio
 	}
 }
 
-// SubscribeAttributePanIdWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+// SubscribeAttributePanIDWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
-// SubscribeAttributePanIdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+// SubscribeAttributePanIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -250,7 +251,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIdWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePanIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePanIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -260,10 +261,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIdWithPara
 	}
 }
 
-// ReadAttributeExtendedPanIdWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeExtendedPanIDWithCompletion wraps the corresponding Objective-C method.
 //
-// ReadAttributeExtendedPanIdWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanIdWithCompletion(ctx context.Context) (result obj.Object, err error) {
+// ReadAttributeExtendedPanIDWithCompletion blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -275,7 +276,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanIdWithC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeExtendedPanIdWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeExtendedPanIdWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -285,10 +286,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanIdWithC
 	}
 }
 
-// SubscribeAttributeExtendedPanIdWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+// SubscribeAttributeExtendedPanIDWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
-// SubscribeAttributeExtendedPanIdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtendedPanIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+// SubscribeAttributeExtendedPanIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtendedPanIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -300,7 +301,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtendedPanId
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeExtendedPanIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeExtendedPanIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -313,7 +314,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtendedPanId
 // ReadAttributeMeshLocalPrefixWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeMeshLocalPrefixWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefixWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefixWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -325,7 +326,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefixWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeshLocalPrefixWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeMeshLocalPrefixWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -338,7 +339,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefixWit
 // SubscribeAttributeMeshLocalPrefixWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeMeshLocalPrefixWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLocalPrefixWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLocalPrefixWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -350,7 +351,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLocalPref
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeMeshLocalPrefixWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeMeshLocalPrefixWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -363,7 +364,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLocalPref
 // ReadAttributeOverrunCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeOverrunCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOverrunCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOverrunCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -375,7 +376,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOverrunCountWithCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOverrunCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeOverrunCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -388,7 +389,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOverrunCountWithCo
 // SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -400,7 +401,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunCountW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeOverrunCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeOverrunCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -413,7 +414,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunCountW
 // ReadAttributeNeighborTableWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNeighborTableWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -425,7 +426,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableWithC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNeighborTableWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeNeighborTableWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -438,7 +439,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableWithC
 // SubscribeAttributeNeighborTableWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNeighborTableWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighborTableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighborTableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -450,7 +451,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighborTable
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNeighborTableWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeNeighborTableWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -463,7 +464,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighborTable
 // ReadAttributeRouteTableWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRouteTableWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouteTableWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouteTableWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -475,7 +476,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouteTableWithComp
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRouteTableWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRouteTableWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -488,7 +489,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouteTableWithComp
 // SubscribeAttributeRouteTableWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRouteTableWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -500,7 +501,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTableWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRouteTableWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRouteTableWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -510,10 +511,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTableWit
 	}
 }
 
-// ReadAttributePartitionIdWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePartitionIDWithCompletion wraps the corresponding Objective-C method.
 //
-// ReadAttributePartitionIdWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIdWithCompletion(ctx context.Context) (result obj.Object, err error) {
+// ReadAttributePartitionIDWithCompletion blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -525,7 +526,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIdWithCom
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePartitionIdWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributePartitionIdWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -535,10 +536,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIdWithCom
 	}
 }
 
-// SubscribeAttributePartitionIdWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+// SubscribeAttributePartitionIDWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
-// SubscribeAttributePartitionIdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+// SubscribeAttributePartitionIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -550,7 +551,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePartitionIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePartitionIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -563,7 +564,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdWi
 // ReadAttributeWeightingWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeWeightingWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeWeightingWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeWeightingWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -575,7 +576,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeWeightingWithCompl
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWeightingWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeWeightingWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -588,7 +589,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeWeightingWithCompl
 // SubscribeAttributeWeightingWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeWeightingWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -600,7 +601,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightingWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeWeightingWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeWeightingWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -613,7 +614,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightingWith
 // ReadAttributeDataVersionWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeDataVersionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDataVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDataVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -625,7 +626,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDataVersionWithCom
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDataVersionWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeDataVersionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -638,7 +639,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDataVersionWithCom
 // SubscribeAttributeDataVersionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDataVersionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -650,7 +651,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVersionWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDataVersionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeDataVersionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -663,7 +664,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVersionWi
 // ReadAttributeStableDataVersionWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeStableDataVersionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -675,7 +676,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersionW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStableDataVersionWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeStableDataVersionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -688,7 +689,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersionW
 // SubscribeAttributeStableDataVersionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeStableDataVersionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDataVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDataVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -700,7 +701,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDataVer
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeStableDataVersionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeStableDataVersionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -710,10 +711,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDataVer
 	}
 }
 
-// ReadAttributeLeaderRouterIdWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributeLeaderRouterIDWithCompletion wraps the corresponding Objective-C method.
 //
-// ReadAttributeLeaderRouterIdWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterIdWithCompletion(ctx context.Context) (result obj.Object, err error) {
+// ReadAttributeLeaderRouterIDWithCompletion blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterIDWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -725,7 +726,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterIdWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLeaderRouterIdWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeLeaderRouterIdWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -735,10 +736,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterIdWith
 	}
 }
 
-// SubscribeAttributeLeaderRouterIdWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+// SubscribeAttributeLeaderRouterIDWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
-// SubscribeAttributeLeaderRouterIdWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRouterIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+// SubscribeAttributeLeaderRouterIDWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRouterIDWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -750,7 +751,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRouterI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeLeaderRouterIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeLeaderRouterIdWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -763,7 +764,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRouterI
 // ReadAttributeDetachedRoleCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeDetachedRoleCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -775,7 +776,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCountW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDetachedRoleCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeDetachedRoleCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -788,7 +789,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCountW
 // SubscribeAttributeDetachedRoleCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDetachedRoleCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetachedRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetachedRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -800,7 +801,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetachedRoleC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDetachedRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeDetachedRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -813,7 +814,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetachedRoleC
 // ReadAttributeChildRoleCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeChildRoleCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -825,7 +826,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCountWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChildRoleCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeChildRoleCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -838,7 +839,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCountWith
 // SubscribeAttributeChildRoleCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeChildRoleCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -850,7 +851,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRoleCoun
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeChildRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeChildRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -863,7 +864,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRoleCoun
 // ReadAttributeRouterRoleCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRouterRoleCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -875,7 +876,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCountWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRouterRoleCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRouterRoleCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -888,7 +889,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCountWit
 // SubscribeAttributeRouterRoleCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRouterRoleCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -900,7 +901,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRoleCou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRouterRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRouterRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -913,7 +914,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRoleCou
 // ReadAttributeLeaderRoleCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeLeaderRoleCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -925,7 +926,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCountWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLeaderRoleCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeLeaderRoleCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -938,7 +939,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCountWit
 // SubscribeAttributeLeaderRoleCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLeaderRoleCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -950,7 +951,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRoleCou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeLeaderRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeLeaderRoleCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -963,7 +964,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRoleCou
 // ReadAttributeAttachAttemptCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAttachAttemptCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -975,7 +976,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCount
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttachAttemptCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeAttachAttemptCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -988,7 +989,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCount
 // SubscribeAttributeAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1000,7 +1001,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAttempt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttachAttemptCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAttachAttemptCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1010,10 +1011,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAttempt
 	}
 }
 
-// ReadAttributePartitionIdChangeCountWithCompletion wraps the corresponding Objective-C method.
+// ReadAttributePartitionIDChangeCountWithCompletion wraps the corresponding Objective-C method.
 //
-// ReadAttributePartitionIdChangeCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIdChangeCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+// ReadAttributePartitionIDChangeCountWithCompletion blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIDChangeCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1025,7 +1026,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIdChangeC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePartitionIdChangeCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributePartitionIdChangeCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1035,10 +1036,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIdChangeC
 	}
 }
 
-// SubscribeAttributePartitionIdChangeCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+// SubscribeAttributePartitionIDChangeCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
-// SubscribeAttributePartitionIdChangeCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdChangeCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+// SubscribeAttributePartitionIDChangeCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIDChangeCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1050,7 +1051,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdCh
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePartitionIdChangeCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePartitionIdChangeCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1063,7 +1064,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdCh
 // ReadAttributeBetterPartitionAttachAttemptCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeBetterPartitionAttachAttemptCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAttachAttemptCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAttachAttemptCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1075,7 +1076,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAtt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBetterPartitionAttachAttemptCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeBetterPartitionAttachAttemptCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1088,7 +1089,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAtt
 // SubscribeAttributeBetterPartitionAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBetterPartitionAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPartitionAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPartitionAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1100,7 +1101,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPartiti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeBetterPartitionAttachAttemptCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeBetterPartitionAttachAttemptCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1113,7 +1114,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPartiti
 // ReadAttributeParentChangeCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeParentChangeCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1125,7 +1126,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCountW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeParentChangeCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeParentChangeCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1138,7 +1139,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCountW
 // SubscribeAttributeParentChangeCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeParentChangeCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentChangeCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentChangeCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1150,7 +1151,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentChangeC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeParentChangeCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeParentChangeCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1163,7 +1164,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentChangeC
 // ReadAttributeTxTotalCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxTotalCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1175,7 +1176,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCountWithCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxTotalCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxTotalCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1188,7 +1189,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCountWithCo
 // SubscribeAttributeTxTotalCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxTotalCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1200,7 +1201,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalCountW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxTotalCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxTotalCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1213,7 +1214,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalCountW
 // ReadAttributeTxUnicastCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxUnicastCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1225,7 +1226,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCountWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxUnicastCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxUnicastCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1238,7 +1239,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCountWith
 // SubscribeAttributeTxUnicastCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxUnicastCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1250,7 +1251,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicastCoun
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxUnicastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxUnicastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1263,7 +1264,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicastCoun
 // ReadAttributeTxBroadcastCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxBroadcastCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1275,7 +1276,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCountWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxBroadcastCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxBroadcastCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1288,7 +1289,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCountWi
 // SubscribeAttributeTxBroadcastCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxBroadcastCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadcastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadcastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1300,7 +1301,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadcastCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxBroadcastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxBroadcastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1313,7 +1314,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadcastCo
 // ReadAttributeTxAckRequestedCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxAckRequestedCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1325,7 +1326,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCoun
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxAckRequestedCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxAckRequestedCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1338,7 +1339,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCoun
 // SubscribeAttributeTxAckRequestedCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxAckRequestedCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckRequestedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckRequestedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1350,7 +1351,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckRequeste
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxAckRequestedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxAckRequestedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1363,7 +1364,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckRequeste
 // ReadAttributeTxAckedCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxAckedCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1375,7 +1376,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCountWithCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxAckedCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxAckedCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1388,7 +1389,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCountWithCo
 // SubscribeAttributeTxAckedCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxAckedCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1400,7 +1401,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedCountW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxAckedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxAckedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1413,7 +1414,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedCountW
 // ReadAttributeTxNoAckRequestedCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxNoAckRequestedCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1425,7 +1426,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxNoAckRequestedCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxNoAckRequestedCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1438,7 +1439,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCo
 // SubscribeAttributeTxNoAckRequestedCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxNoAckRequestedCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckRequestedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckRequestedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1450,7 +1451,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckReques
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxNoAckRequestedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxNoAckRequestedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1463,7 +1464,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckReques
 // ReadAttributeTxDataCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxDataCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1475,7 +1476,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataCountWithCom
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxDataCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxDataCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1488,7 +1489,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataCountWithCom
 // SubscribeAttributeTxDataCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxDataCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1500,7 +1501,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCountWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxDataCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxDataCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1513,7 +1514,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCountWi
 // ReadAttributeTxDataPollCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxDataPollCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1525,7 +1526,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCountWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxDataPollCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxDataPollCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1538,7 +1539,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCountWit
 // SubscribeAttributeTxDataPollCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxDataPollCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPollCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPollCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1550,7 +1551,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPollCou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxDataPollCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxDataPollCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1563,7 +1564,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPollCou
 // ReadAttributeTxBeaconCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxBeaconCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1575,7 +1576,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCountWithC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxBeaconCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxBeaconCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1588,7 +1589,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCountWithC
 // SubscribeAttributeTxBeaconCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxBeaconCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1600,7 +1601,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconCount
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxBeaconCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxBeaconCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1613,7 +1614,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconCount
 // ReadAttributeTxBeaconRequestCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxBeaconRequestCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1625,7 +1626,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxBeaconRequestCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxBeaconRequestCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1638,7 +1639,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCou
 // SubscribeAttributeTxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1650,7 +1651,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconReque
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxBeaconRequestCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxBeaconRequestCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1663,7 +1664,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconReque
 // ReadAttributeTxOtherCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxOtherCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1675,7 +1676,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCountWithCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxOtherCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxOtherCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1688,7 +1689,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCountWithCo
 // SubscribeAttributeTxOtherCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxOtherCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1700,7 +1701,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherCountW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxOtherCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxOtherCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1713,7 +1714,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherCountW
 // ReadAttributeTxRetryCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxRetryCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1725,7 +1726,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCountWithCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxRetryCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxRetryCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1738,7 +1739,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCountWithCo
 // SubscribeAttributeTxRetryCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxRetryCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1750,7 +1751,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryCountW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxRetryCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxRetryCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1763,7 +1764,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryCountW
 // ReadAttributeTxDirectMaxRetryExpiryCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxDirectMaxRetryExpiryCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryExpiryCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryExpiryCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1775,7 +1776,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryEx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxDirectMaxRetryExpiryCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxDirectMaxRetryExpiryCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1788,7 +1789,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryEx
 // SubscribeAttributeTxDirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxDirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1800,7 +1801,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirectMaxRe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxDirectMaxRetryExpiryCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxDirectMaxRetryExpiryCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1813,7 +1814,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirectMaxRe
 // ReadAttributeTxIndirectMaxRetryExpiryCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxIndirectMaxRetryExpiryCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetryExpiryCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetryExpiryCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1825,7 +1826,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetry
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxIndirectMaxRetryExpiryCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxIndirectMaxRetryExpiryCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1838,7 +1839,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetry
 // SubscribeAttributeTxIndirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxIndirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1850,7 +1851,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndirectMax
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxIndirectMaxRetryExpiryCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxIndirectMaxRetryExpiryCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1863,7 +1864,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndirectMax
 // ReadAttributeTxErrCcaCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxErrCcaCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1875,7 +1876,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCountWithC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrCcaCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxErrCcaCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1888,7 +1889,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCountWithC
 // SubscribeAttributeTxErrCcaCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxErrCcaCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCcaCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCcaCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1900,7 +1901,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCcaCount
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxErrCcaCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxErrCcaCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1913,7 +1914,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCcaCount
 // ReadAttributeTxErrAbortCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxErrAbortCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1925,7 +1926,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCountWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrAbortCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxErrAbortCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1938,7 +1939,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCountWit
 // SubscribeAttributeTxErrAbortCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxErrAbortCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbortCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbortCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1950,7 +1951,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbortCou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxErrAbortCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxErrAbortCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1963,7 +1964,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbortCou
 // ReadAttributeTxErrBusyChannelCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxErrBusyChannelCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1975,7 +1976,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrBusyChannelCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxErrBusyChannelCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1988,7 +1989,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCo
 // SubscribeAttributeTxErrBusyChannelCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxErrBusyChannelCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBusyChannelCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBusyChannelCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2000,7 +2001,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBusyChan
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxErrBusyChannelCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxErrBusyChannelCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2013,7 +2014,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBusyChan
 // ReadAttributeRxTotalCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxTotalCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2025,7 +2026,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCountWithCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxTotalCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxTotalCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2038,7 +2039,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCountWithCo
 // SubscribeAttributeRxTotalCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxTotalCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2050,7 +2051,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalCountW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxTotalCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxTotalCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2063,7 +2064,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalCountW
 // ReadAttributeRxUnicastCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxUnicastCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2075,7 +2076,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCountWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxUnicastCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxUnicastCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2088,7 +2089,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCountWith
 // SubscribeAttributeRxUnicastCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxUnicastCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2100,7 +2101,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicastCoun
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxUnicastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxUnicastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2113,7 +2114,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicastCoun
 // ReadAttributeRxBroadcastCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxBroadcastCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2125,7 +2126,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCountWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxBroadcastCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxBroadcastCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2138,7 +2139,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCountWi
 // SubscribeAttributeRxBroadcastCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxBroadcastCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadcastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadcastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2150,7 +2151,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadcastCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxBroadcastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxBroadcastCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2163,7 +2164,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadcastCo
 // ReadAttributeRxDataCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxDataCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2175,7 +2176,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataCountWithCom
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDataCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxDataCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2188,7 +2189,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataCountWithCom
 // SubscribeAttributeRxDataCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxDataCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2200,7 +2201,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCountWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxDataCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDataCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2213,7 +2214,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCountWi
 // ReadAttributeRxDataPollCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxDataPollCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2225,7 +2226,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCountWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDataPollCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxDataPollCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2238,7 +2239,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCountWit
 // SubscribeAttributeRxDataPollCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxDataPollCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPollCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPollCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2250,7 +2251,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPollCou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxDataPollCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDataPollCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2263,7 +2264,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPollCou
 // ReadAttributeRxBeaconCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxBeaconCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2275,7 +2276,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCountWithC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxBeaconCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxBeaconCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2288,7 +2289,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCountWithC
 // SubscribeAttributeRxBeaconCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxBeaconCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2300,7 +2301,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconCount
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxBeaconCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxBeaconCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2313,7 +2314,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconCount
 // ReadAttributeRxBeaconRequestCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxBeaconRequestCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2325,7 +2326,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxBeaconRequestCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxBeaconRequestCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2338,7 +2339,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCou
 // SubscribeAttributeRxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2350,7 +2351,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconReque
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxBeaconRequestCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxBeaconRequestCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2363,7 +2364,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconReque
 // ReadAttributeRxOtherCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxOtherCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2375,7 +2376,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCountWithCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxOtherCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxOtherCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2388,7 +2389,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCountWithCo
 // SubscribeAttributeRxOtherCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxOtherCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2400,7 +2401,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherCountW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxOtherCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxOtherCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2413,7 +2414,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherCountW
 // ReadAttributeRxAddressFilteredCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxAddressFilteredCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2425,7 +2426,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxAddressFilteredCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxAddressFilteredCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2438,7 +2439,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredC
 // SubscribeAttributeRxAddressFilteredCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxAddressFilteredCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddressFilteredCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddressFilteredCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2450,7 +2451,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddressFilt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxAddressFilteredCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxAddressFilteredCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2463,7 +2464,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddressFilt
 // ReadAttributeRxDestAddrFilteredCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxDestAddrFilteredCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFilteredCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFilteredCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2475,7 +2476,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFiltered
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDestAddrFilteredCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxDestAddrFilteredCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2488,7 +2489,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFiltered
 // SubscribeAttributeRxDestAddrFilteredCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxDestAddrFilteredCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAddrFilteredCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAddrFilteredCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2500,7 +2501,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAddrFil
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxDestAddrFilteredCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDestAddrFilteredCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2513,7 +2514,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAddrFil
 // ReadAttributeRxDuplicatedCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxDuplicatedCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2525,7 +2526,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCountW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDuplicatedCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxDuplicatedCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2538,7 +2539,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCountW
 // SubscribeAttributeRxDuplicatedCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxDuplicatedCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplicatedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplicatedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2550,7 +2551,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplicatedC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxDuplicatedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDuplicatedCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2563,7 +2564,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplicatedC
 // ReadAttributeRxErrNoFrameCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxErrNoFrameCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2575,7 +2576,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCountW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrNoFrameCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxErrNoFrameCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2588,7 +2589,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCountW
 // SubscribeAttributeRxErrNoFrameCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxErrNoFrameCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoFrameCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoFrameCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2600,7 +2601,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoFrameC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrNoFrameCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrNoFrameCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2613,7 +2614,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoFrameC
 // ReadAttributeRxErrUnknownNeighborCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxErrUnknownNeighborCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighborCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighborCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2625,7 +2626,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighb
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrUnknownNeighborCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxErrUnknownNeighborCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2638,7 +2639,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighb
 // SubscribeAttributeRxErrUnknownNeighborCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxErrUnknownNeighborCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnknownNeighborCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnknownNeighborCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2650,7 +2651,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnknownN
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrUnknownNeighborCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrUnknownNeighborCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2663,7 +2664,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnknownN
 // ReadAttributeRxErrInvalidSrcAddrCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxErrInvalidSrcAddrCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAddrCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAddrCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2675,7 +2676,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAdd
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrInvalidSrcAddrCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxErrInvalidSrcAddrCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2688,7 +2689,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAdd
 // SubscribeAttributeRxErrInvalidSrcAddrCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxErrInvalidSrcAddrCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInvalidSrcAddrCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInvalidSrcAddrCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2700,7 +2701,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInvalidS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrInvalidSrcAddrCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrInvalidSrcAddrCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2713,7 +2714,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInvalidS
 // ReadAttributeRxErrSecCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxErrSecCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2725,7 +2726,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCountWithC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrSecCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxErrSecCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2738,7 +2739,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCountWithC
 // SubscribeAttributeRxErrSecCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxErrSecCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSecCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSecCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2750,7 +2751,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSecCount
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrSecCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrSecCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2763,7 +2764,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSecCount
 // ReadAttributeRxErrFcsCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxErrFcsCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2775,7 +2776,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCountWithC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrFcsCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxErrFcsCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2788,7 +2789,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCountWithC
 // SubscribeAttributeRxErrFcsCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxErrFcsCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcsCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcsCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2800,7 +2801,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcsCount
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrFcsCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrFcsCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2813,7 +2814,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcsCount
 // ReadAttributeRxErrOtherCountWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxErrOtherCountWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCountWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2825,7 +2826,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCountWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrOtherCountWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxErrOtherCountWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2838,7 +2839,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCountWit
 // SubscribeAttributeRxErrOtherCountWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxErrOtherCountWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2850,7 +2851,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOtherCou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrOtherCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrOtherCountWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2863,7 +2864,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOtherCou
 // ReadAttributeActiveTimestampWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeActiveTimestampWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestampWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestampWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2875,7 +2876,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestampWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveTimestampWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeActiveTimestampWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2888,7 +2889,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestampWit
 // SubscribeAttributeActiveTimestampWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeActiveTimestampWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2900,7 +2901,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTimesta
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeActiveTimestampWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeActiveTimestampWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2913,7 +2914,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTimesta
 // ReadAttributePendingTimestampWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePendingTimestampWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePendingTimestampWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePendingTimestampWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2925,7 +2926,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePendingTimestampWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePendingTimestampWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributePendingTimestampWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2938,7 +2939,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePendingTimestampWi
 // SubscribeAttributePendingTimestampWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePendingTimestampWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2950,7 +2951,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingTimest
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePendingTimestampWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePendingTimestampWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2963,7 +2964,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingTimest
 // ReadAttributeDelayWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeDelayWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDelayWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2975,7 +2976,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDelayWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDelayWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeDelayWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2988,7 +2989,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDelayWithCompletio
 // SubscribeAttributeDelayWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDelayWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3000,7 +3001,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDelayWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeDelayWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3013,7 +3014,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWithPara
 // ReadAttributeSecurityPolicyWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeSecurityPolicyWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicyWithCompletion(ctx context.Context) (result *MTRThreadNetworkDiagnosticsClusterSecurityPolicy, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicyWithCompletion(ctx context.Context) (result *MTRThreadNetworkDiagnosticsClusterSecurityPolicy, err error) {
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterSecurityPolicy
 		err error
@@ -3025,7 +3026,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicyWith
 		_o.val = MTRThreadNetworkDiagnosticsClusterSecurityPolicyFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSecurityPolicyWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeSecurityPolicyWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3038,7 +3039,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicyWith
 // SubscribeAttributeSecurityPolicyWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeSecurityPolicyWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurityPolicyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRThreadNetworkDiagnosticsClusterSecurityPolicy, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurityPolicyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRThreadNetworkDiagnosticsClusterSecurityPolicy, err error) {
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterSecurityPolicy
 		err error
@@ -3050,7 +3051,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurityPolic
 		_o.val = MTRThreadNetworkDiagnosticsClusterSecurityPolicyFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeSecurityPolicyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeSecurityPolicyWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3063,7 +3064,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurityPolic
 // ReadAttributeChannelPage0MaskWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeChannelPage0MaskWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0MaskWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0MaskWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3075,7 +3076,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0MaskWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChannelPage0MaskWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeChannelPage0MaskWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3088,7 +3089,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0MaskWi
 // SubscribeAttributeChannelPage0MaskWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeChannelPage0MaskWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelPage0MaskWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelPage0MaskWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3100,7 +3101,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelPage0M
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeChannelPage0MaskWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeChannelPage0MaskWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3113,7 +3114,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelPage0M
 // ReadAttributeOperationalDatasetComponentsWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeOperationalDatasetComponentsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOperationalDatasetComponentsWithCompletion(ctx context.Context) (result *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOperationalDatasetComponentsWithCompletion(ctx context.Context) (result *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, err error) {
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents
 		err error
@@ -3125,7 +3126,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOperationalDataset
 		_o.val = MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationalDatasetComponentsWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeOperationalDatasetComponentsWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3138,7 +3139,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOperationalDataset
 // SubscribeAttributeOperationalDatasetComponentsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOperationalDatasetComponentsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperationalDatasetComponentsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperationalDatasetComponentsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, err error) {
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents
 		err error
@@ -3150,7 +3151,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperationalDa
 		_o.val = MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeOperationalDatasetComponentsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeOperationalDatasetComponentsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3163,7 +3164,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperationalDa
 // ReadAttributeActiveNetworkFaultsListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeActiveNetworkFaultsListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFaultsListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFaultsListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3175,7 +3176,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFault
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveNetworkFaultsListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeActiveNetworkFaultsListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3188,7 +3189,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFault
 // SubscribeAttributeActiveNetworkFaultsListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeActiveNetworkFaultsListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNetworkFaultsListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNetworkFaultsListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3200,7 +3201,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNetwork
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeActiveNetworkFaultsListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeActiveNetworkFaultsListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3213,7 +3214,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNetwork
 // ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3225,7 +3226,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandLi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3238,7 +3239,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandLi
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3250,7 +3251,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGeneratedComm
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3263,7 +3264,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGeneratedComm
 // ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3275,7 +3276,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandLis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3288,7 +3289,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandLis
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3300,7 +3301,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAcceptedComma
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3313,7 +3314,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAcceptedComma
 // ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3325,7 +3326,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttributeListWithC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3338,7 +3339,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttributeListWithC
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3350,7 +3351,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttributeList
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3363,7 +3364,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttributeList
 // ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3375,7 +3376,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeFeatureMapWithComp
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3388,7 +3389,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeFeatureMapWithComp
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3400,7 +3401,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureMapWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3413,7 +3414,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureMapWit
 // ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3425,7 +3426,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeClusterRevisionWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3438,7 +3439,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeClusterRevisionWit
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3450,7 +3451,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterRevisi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3463,7 +3464,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterRevisi
 // ReadAttributeChannel wraps the corresponding Objective-C method.
 //
 // ReadAttributeChannel blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannel(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannel(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3475,7 +3476,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannel(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChannelWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeChannelWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3488,7 +3489,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannel(ctx contex
 // SubscribeAttributeChannelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeChannelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3500,7 +3501,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelWithMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeChannelWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeChannelWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3513,7 +3514,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelWithMi
 // ReadAttributeRoutingRole wraps the corresponding Objective-C method.
 //
 // ReadAttributeRoutingRole blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRoutingRole(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRoutingRole(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3525,7 +3526,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRoutingRole(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRoutingRoleWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRoutingRoleWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3538,7 +3539,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRoutingRole(ctx co
 // SubscribeAttributeRoutingRoleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRoutingRoleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingRoleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingRoleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3550,7 +3551,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingRoleWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRoutingRoleWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRoutingRoleWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3563,7 +3564,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRoutingRoleWi
 // ReadAttributeNetworkName wraps the corresponding Objective-C method.
 //
 // ReadAttributeNetworkName blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNetworkName(ctx context.Context) (result string, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNetworkName(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -3575,7 +3576,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNetworkName(ctx co
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNetworkNameWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeNetworkNameWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3588,7 +3589,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNetworkName(ctx co
 // SubscribeAttributeNetworkNameWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNetworkNameWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkNameWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result string, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkNameWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -3600,7 +3601,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkNameWi
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNetworkNameWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeNetworkNameWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3610,10 +3611,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNetworkNameWi
 	}
 }
 
-// ReadAttributePanId wraps the corresponding Objective-C method.
+// ReadAttributePanID wraps the corresponding Objective-C method.
 //
-// ReadAttributePanId blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePanId(ctx context.Context) (result obj.Object, err error) {
+// ReadAttributePanID blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePanID(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3625,7 +3626,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePanId(ctx context.
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePanIdWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributePanIdWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3635,10 +3636,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePanId(ctx context.
 	}
 }
 
-// SubscribeAttributePanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+// SubscribeAttributePanIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
-// SubscribeAttributePanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+// SubscribeAttributePanIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3650,7 +3651,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIdWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePanIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePanIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3660,10 +3661,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePanIdWithMinI
 	}
 }
 
-// ReadAttributeExtendedPanId wraps the corresponding Objective-C method.
+// ReadAttributeExtendedPanID wraps the corresponding Objective-C method.
 //
-// ReadAttributeExtendedPanId blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanId(ctx context.Context) (result obj.Object, err error) {
+// ReadAttributeExtendedPanID blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanID(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3675,7 +3676,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanId(ctx 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeExtendedPanIdWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeExtendedPanIdWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3685,10 +3686,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanId(ctx 
 	}
 }
 
-// SubscribeAttributeExtendedPanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+// SubscribeAttributeExtendedPanIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
-// SubscribeAttributeExtendedPanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtendedPanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+// SubscribeAttributeExtendedPanIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtendedPanIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3700,7 +3701,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtendedPanId
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeExtendedPanIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeExtendedPanIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3713,7 +3714,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeExtendedPanId
 // ReadAttributeMeshLocalPrefix wraps the corresponding Objective-C method.
 //
 // ReadAttributeMeshLocalPrefix blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefix(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefix(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3725,7 +3726,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefix(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeshLocalPrefixWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeMeshLocalPrefixWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3738,7 +3739,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefix(ct
 // SubscribeAttributeMeshLocalPrefixWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeMeshLocalPrefixWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLocalPrefixWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLocalPrefixWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3750,7 +3751,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLocalPref
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeMeshLocalPrefixWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeMeshLocalPrefixWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3763,7 +3764,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeMeshLocalPref
 // ReadAttributeOverrunCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeOverrunCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOverrunCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOverrunCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3775,7 +3776,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOverrunCount(ctx c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOverrunCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeOverrunCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3788,7 +3789,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOverrunCount(ctx c
 // SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3800,7 +3801,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunCountW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeOverrunCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeOverrunCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3813,7 +3814,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOverrunCountW
 // ReadAttributeNeighborTableList wraps the corresponding Objective-C method.
 //
 // ReadAttributeNeighborTableList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableList(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3825,7 +3826,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableList(
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNeighborTableListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeNeighborTableListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3838,7 +3839,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableList(
 // SubscribeAttributeNeighborTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNeighborTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighborTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighborTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3850,7 +3851,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighborTable
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNeighborTableListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeNeighborTableListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3863,7 +3864,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeNeighborTable
 // ReadAttributeRouteTableList wraps the corresponding Objective-C method.
 //
 // ReadAttributeRouteTableList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouteTableList(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouteTableList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3875,7 +3876,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouteTableList(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRouteTableListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRouteTableListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3888,7 +3889,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouteTableList(ctx
 // SubscribeAttributeRouteTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRouteTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3900,7 +3901,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTableLis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRouteTableListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRouteTableListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3910,10 +3911,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouteTableLis
 	}
 }
 
-// ReadAttributePartitionId wraps the corresponding Objective-C method.
+// ReadAttributePartitionID wraps the corresponding Objective-C method.
 //
-// ReadAttributePartitionId blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionId(ctx context.Context) (result obj.Object, err error) {
+// ReadAttributePartitionID blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionID(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3925,7 +3926,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionId(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePartitionIdWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributePartitionIdWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3935,10 +3936,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionId(ctx co
 	}
 }
 
-// SubscribeAttributePartitionIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+// SubscribeAttributePartitionIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
-// SubscribeAttributePartitionIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+// SubscribeAttributePartitionIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3950,7 +3951,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePartitionIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePartitionIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3963,7 +3964,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdWi
 // ReadAttributeWeighting wraps the corresponding Objective-C method.
 //
 // ReadAttributeWeighting blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeWeighting(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeWeighting(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -3975,7 +3976,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeWeighting(ctx cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWeightingWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeWeightingWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -3988,7 +3989,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeWeighting(ctx cont
 // SubscribeAttributeWeightingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeWeightingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4000,7 +4001,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightingWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeWeightingWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeWeightingWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4013,7 +4014,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeWeightingWith
 // ReadAttributeDataVersion wraps the corresponding Objective-C method.
 //
 // ReadAttributeDataVersion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDataVersion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDataVersion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4025,7 +4026,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDataVersion(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDataVersionWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeDataVersionWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4038,7 +4039,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDataVersion(ctx co
 // SubscribeAttributeDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4050,7 +4051,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVersionWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDataVersionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeDataVersionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4063,7 +4064,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDataVersionWi
 // ReadAttributeStableDataVersion wraps the corresponding Objective-C method.
 //
 // ReadAttributeStableDataVersion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersion(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4075,7 +4076,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersion(
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStableDataVersionWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeStableDataVersionWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4088,7 +4089,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersion(
 // SubscribeAttributeStableDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeStableDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4100,7 +4101,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDataVer
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeStableDataVersionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeStableDataVersionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4110,10 +4111,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeStableDataVer
 	}
 }
 
-// ReadAttributeLeaderRouterId wraps the corresponding Objective-C method.
+// ReadAttributeLeaderRouterID wraps the corresponding Objective-C method.
 //
-// ReadAttributeLeaderRouterId blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterId(ctx context.Context) (result obj.Object, err error) {
+// ReadAttributeLeaderRouterID blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterID(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4125,7 +4126,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterId(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLeaderRouterIdWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeLeaderRouterIdWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4135,10 +4136,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterId(ctx
 	}
 }
 
-// SubscribeAttributeLeaderRouterIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+// SubscribeAttributeLeaderRouterIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
-// SubscribeAttributeLeaderRouterIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRouterIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+// SubscribeAttributeLeaderRouterIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRouterIDWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4150,7 +4151,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRouterI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeLeaderRouterIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeLeaderRouterIdWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4163,7 +4164,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRouterI
 // ReadAttributeDetachedRoleCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeDetachedRoleCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4175,7 +4176,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCount(
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDetachedRoleCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeDetachedRoleCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4188,7 +4189,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCount(
 // SubscribeAttributeDetachedRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDetachedRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetachedRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetachedRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4200,7 +4201,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetachedRoleC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDetachedRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeDetachedRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4213,7 +4214,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDetachedRoleC
 // ReadAttributeChildRoleCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeChildRoleCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4225,7 +4226,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCount(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChildRoleCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeChildRoleCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4238,7 +4239,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCount(ctx
 // SubscribeAttributeChildRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeChildRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4250,7 +4251,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRoleCoun
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeChildRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeChildRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4263,7 +4264,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChildRoleCoun
 // ReadAttributeRouterRoleCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeRouterRoleCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4275,7 +4276,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCount(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRouterRoleCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRouterRoleCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4288,7 +4289,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCount(ct
 // SubscribeAttributeRouterRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRouterRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4300,7 +4301,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRoleCou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRouterRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRouterRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4313,7 +4314,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRouterRoleCou
 // ReadAttributeLeaderRoleCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeLeaderRoleCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4325,7 +4326,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCount(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLeaderRoleCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeLeaderRoleCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4338,7 +4339,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCount(ct
 // SubscribeAttributeLeaderRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLeaderRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4350,7 +4351,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRoleCou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeLeaderRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeLeaderRoleCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4363,7 +4364,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeLeaderRoleCou
 // ReadAttributeAttachAttemptCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeAttachAttemptCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4375,7 +4376,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCount
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttachAttemptCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeAttachAttemptCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4388,7 +4389,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCount
 // SubscribeAttributeAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4400,7 +4401,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAttempt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttachAttemptCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAttachAttemptCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4410,10 +4411,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttachAttempt
 	}
 }
 
-// ReadAttributePartitionIdChangeCount wraps the corresponding Objective-C method.
+// ReadAttributePartitionIDChangeCount wraps the corresponding Objective-C method.
 //
-// ReadAttributePartitionIdChangeCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIdChangeCount(ctx context.Context) (result obj.Object, err error) {
+// ReadAttributePartitionIDChangeCount blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIDChangeCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4425,7 +4426,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIdChangeC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePartitionIdChangeCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributePartitionIdChangeCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4435,10 +4436,10 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePartitionIdChangeC
 	}
 }
 
-// SubscribeAttributePartitionIdChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
+// SubscribeAttributePartitionIDChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
-// SubscribeAttributePartitionIdChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+// SubscribeAttributePartitionIDChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIDChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4450,7 +4451,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdCh
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePartitionIdChangeCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePartitionIdChangeCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4463,7 +4464,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePartitionIdCh
 // ReadAttributeBetterPartitionAttachAttemptCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeBetterPartitionAttachAttemptCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAttachAttemptCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAttachAttemptCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4475,7 +4476,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAtt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBetterPartitionAttachAttemptCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeBetterPartitionAttachAttemptCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4488,7 +4489,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAtt
 // SubscribeAttributeBetterPartitionAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeBetterPartitionAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPartitionAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPartitionAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4500,7 +4501,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPartiti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeBetterPartitionAttachAttemptCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeBetterPartitionAttachAttemptCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4513,7 +4514,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeBetterPartiti
 // ReadAttributeParentChangeCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeParentChangeCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4525,7 +4526,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCount(
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeParentChangeCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeParentChangeCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4538,7 +4539,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCount(
 // SubscribeAttributeParentChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeParentChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4550,7 +4551,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentChangeC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeParentChangeCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeParentChangeCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4563,7 +4564,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeParentChangeC
 // ReadAttributeTxTotalCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxTotalCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4575,7 +4576,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCount(ctx c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxTotalCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxTotalCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4588,7 +4589,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCount(ctx c
 // SubscribeAttributeTxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4600,7 +4601,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalCountW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxTotalCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxTotalCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4613,7 +4614,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxTotalCountW
 // ReadAttributeTxUnicastCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxUnicastCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4625,7 +4626,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCount(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxUnicastCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxUnicastCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4638,7 +4639,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCount(ctx
 // SubscribeAttributeTxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4650,7 +4651,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicastCoun
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxUnicastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxUnicastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4663,7 +4664,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxUnicastCoun
 // ReadAttributeTxBroadcastCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxBroadcastCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4675,7 +4676,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCount(c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxBroadcastCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxBroadcastCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4688,7 +4689,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCount(c
 // SubscribeAttributeTxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4700,7 +4701,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadcastCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxBroadcastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxBroadcastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4713,7 +4714,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBroadcastCo
 // ReadAttributeTxAckRequestedCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxAckRequestedCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4725,7 +4726,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCoun
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxAckRequestedCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxAckRequestedCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4738,7 +4739,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCoun
 // SubscribeAttributeTxAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4750,7 +4751,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckRequeste
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxAckRequestedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxAckRequestedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4763,7 +4764,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckRequeste
 // ReadAttributeTxAckedCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxAckedCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4775,7 +4776,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCount(ctx c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxAckedCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxAckedCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4788,7 +4789,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCount(ctx c
 // SubscribeAttributeTxAckedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxAckedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4800,7 +4801,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedCountW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxAckedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxAckedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4813,7 +4814,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxAckedCountW
 // ReadAttributeTxNoAckRequestedCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxNoAckRequestedCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4825,7 +4826,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxNoAckRequestedCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxNoAckRequestedCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4838,7 +4839,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCo
 // SubscribeAttributeTxNoAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxNoAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4850,7 +4851,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckReques
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxNoAckRequestedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxNoAckRequestedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4863,7 +4864,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxNoAckReques
 // ReadAttributeTxDataCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxDataCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4875,7 +4876,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataCount(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxDataCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxDataCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4888,7 +4889,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataCount(ctx co
 // SubscribeAttributeTxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4900,7 +4901,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCountWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxDataCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxDataCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4913,7 +4914,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataCountWi
 // ReadAttributeTxDataPollCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxDataPollCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4925,7 +4926,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCount(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxDataPollCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxDataPollCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4938,7 +4939,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCount(ct
 // SubscribeAttributeTxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4950,7 +4951,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPollCou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxDataPollCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxDataPollCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4963,7 +4964,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDataPollCou
 // ReadAttributeTxBeaconCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxBeaconCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -4975,7 +4976,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCount(ctx 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxBeaconCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxBeaconCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -4988,7 +4989,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCount(ctx 
 // SubscribeAttributeTxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5000,7 +5001,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconCount
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxBeaconCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxBeaconCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5013,7 +5014,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconCount
 // ReadAttributeTxBeaconRequestCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxBeaconRequestCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5025,7 +5026,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxBeaconRequestCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxBeaconRequestCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5038,7 +5039,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCou
 // SubscribeAttributeTxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5050,7 +5051,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconReque
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxBeaconRequestCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxBeaconRequestCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5063,7 +5064,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxBeaconReque
 // ReadAttributeTxOtherCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxOtherCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5075,7 +5076,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCount(ctx c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxOtherCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxOtherCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5088,7 +5089,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCount(ctx c
 // SubscribeAttributeTxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5100,7 +5101,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherCountW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxOtherCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxOtherCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5113,7 +5114,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxOtherCountW
 // ReadAttributeTxRetryCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxRetryCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5125,7 +5126,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCount(ctx c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxRetryCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxRetryCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5138,7 +5139,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCount(ctx c
 // SubscribeAttributeTxRetryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxRetryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5150,7 +5151,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryCountW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxRetryCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxRetryCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5163,7 +5164,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxRetryCountW
 // ReadAttributeTxDirectMaxRetryExpiryCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxDirectMaxRetryExpiryCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryExpiryCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryExpiryCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5175,7 +5176,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryEx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxDirectMaxRetryExpiryCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxDirectMaxRetryExpiryCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5188,7 +5189,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryEx
 // SubscribeAttributeTxDirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxDirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5200,7 +5201,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirectMaxRe
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxDirectMaxRetryExpiryCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxDirectMaxRetryExpiryCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5213,7 +5214,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxDirectMaxRe
 // ReadAttributeTxIndirectMaxRetryExpiryCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxIndirectMaxRetryExpiryCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetryExpiryCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetryExpiryCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5225,7 +5226,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetry
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxIndirectMaxRetryExpiryCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxIndirectMaxRetryExpiryCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5238,7 +5239,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetry
 // SubscribeAttributeTxIndirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxIndirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5250,7 +5251,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndirectMax
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxIndirectMaxRetryExpiryCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxIndirectMaxRetryExpiryCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5263,7 +5264,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxIndirectMax
 // ReadAttributeTxErrCcaCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxErrCcaCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5275,7 +5276,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCount(ctx 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrCcaCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxErrCcaCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5288,7 +5289,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCount(ctx 
 // SubscribeAttributeTxErrCcaCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxErrCcaCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCcaCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCcaCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5300,7 +5301,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCcaCount
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxErrCcaCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxErrCcaCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5313,7 +5314,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrCcaCount
 // ReadAttributeTxErrAbortCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxErrAbortCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5325,7 +5326,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCount(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrAbortCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxErrAbortCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5338,7 +5339,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCount(ct
 // SubscribeAttributeTxErrAbortCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxErrAbortCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbortCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbortCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5350,7 +5351,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbortCou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxErrAbortCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxErrAbortCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5363,7 +5364,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrAbortCou
 // ReadAttributeTxErrBusyChannelCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeTxErrBusyChannelCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5375,7 +5376,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrBusyChannelCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeTxErrBusyChannelCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5388,7 +5389,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCo
 // SubscribeAttributeTxErrBusyChannelCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTxErrBusyChannelCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBusyChannelCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBusyChannelCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5400,7 +5401,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBusyChan
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTxErrBusyChannelCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeTxErrBusyChannelCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5413,7 +5414,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeTxErrBusyChan
 // ReadAttributeRxTotalCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxTotalCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5425,7 +5426,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCount(ctx c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxTotalCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxTotalCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5438,7 +5439,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCount(ctx c
 // SubscribeAttributeRxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5450,7 +5451,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalCountW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxTotalCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxTotalCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5463,7 +5464,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxTotalCountW
 // ReadAttributeRxUnicastCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxUnicastCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5475,7 +5476,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCount(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxUnicastCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxUnicastCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5488,7 +5489,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCount(ctx
 // SubscribeAttributeRxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5500,7 +5501,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicastCoun
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxUnicastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxUnicastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5513,7 +5514,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxUnicastCoun
 // ReadAttributeRxBroadcastCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxBroadcastCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5525,7 +5526,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCount(c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxBroadcastCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxBroadcastCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5538,7 +5539,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCount(c
 // SubscribeAttributeRxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5550,7 +5551,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadcastCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxBroadcastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxBroadcastCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5563,7 +5564,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBroadcastCo
 // ReadAttributeRxDataCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxDataCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5575,7 +5576,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataCount(ctx co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDataCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxDataCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5588,7 +5589,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataCount(ctx co
 // SubscribeAttributeRxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5600,7 +5601,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCountWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxDataCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDataCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5613,7 +5614,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataCountWi
 // ReadAttributeRxDataPollCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxDataPollCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5625,7 +5626,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCount(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDataPollCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxDataPollCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5638,7 +5639,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCount(ct
 // SubscribeAttributeRxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5650,7 +5651,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPollCou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxDataPollCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDataPollCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5663,7 +5664,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDataPollCou
 // ReadAttributeRxBeaconCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxBeaconCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5675,7 +5676,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCount(ctx 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxBeaconCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxBeaconCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5688,7 +5689,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCount(ctx 
 // SubscribeAttributeRxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5700,7 +5701,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconCount
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxBeaconCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxBeaconCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5713,7 +5714,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconCount
 // ReadAttributeRxBeaconRequestCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxBeaconRequestCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5725,7 +5726,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxBeaconRequestCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxBeaconRequestCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5738,7 +5739,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCou
 // SubscribeAttributeRxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5750,7 +5751,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconReque
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxBeaconRequestCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxBeaconRequestCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5763,7 +5764,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxBeaconReque
 // ReadAttributeRxOtherCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxOtherCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5775,7 +5776,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCount(ctx c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxOtherCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxOtherCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5788,7 +5789,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCount(ctx c
 // SubscribeAttributeRxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5800,7 +5801,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherCountW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxOtherCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxOtherCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5813,7 +5814,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxOtherCountW
 // ReadAttributeRxAddressFilteredCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxAddressFilteredCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5825,7 +5826,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxAddressFilteredCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxAddressFilteredCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5838,7 +5839,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredC
 // SubscribeAttributeRxAddressFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxAddressFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddressFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddressFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5850,7 +5851,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddressFilt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxAddressFilteredCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxAddressFilteredCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5863,7 +5864,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxAddressFilt
 // ReadAttributeRxDestAddrFilteredCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxDestAddrFilteredCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFilteredCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFilteredCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5875,7 +5876,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFiltered
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDestAddrFilteredCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxDestAddrFilteredCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5888,7 +5889,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFiltered
 // SubscribeAttributeRxDestAddrFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxDestAddrFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAddrFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAddrFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5900,7 +5901,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAddrFil
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxDestAddrFilteredCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDestAddrFilteredCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5913,7 +5914,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDestAddrFil
 // ReadAttributeRxDuplicatedCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxDuplicatedCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5925,7 +5926,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCount(
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDuplicatedCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxDuplicatedCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5938,7 +5939,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCount(
 // SubscribeAttributeRxDuplicatedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxDuplicatedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplicatedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplicatedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5950,7 +5951,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplicatedC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxDuplicatedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxDuplicatedCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5963,7 +5964,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxDuplicatedC
 // ReadAttributeRxErrNoFrameCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxErrNoFrameCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -5975,7 +5976,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCount(
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrNoFrameCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxErrNoFrameCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -5988,7 +5989,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCount(
 // SubscribeAttributeRxErrNoFrameCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxErrNoFrameCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoFrameCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoFrameCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6000,7 +6001,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoFrameC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrNoFrameCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrNoFrameCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6013,7 +6014,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrNoFrameC
 // ReadAttributeRxErrUnknownNeighborCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxErrUnknownNeighborCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighborCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighborCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6025,7 +6026,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighb
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrUnknownNeighborCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxErrUnknownNeighborCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6038,7 +6039,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighb
 // SubscribeAttributeRxErrUnknownNeighborCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxErrUnknownNeighborCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnknownNeighborCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnknownNeighborCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6050,7 +6051,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnknownN
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrUnknownNeighborCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrUnknownNeighborCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6063,7 +6064,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrUnknownN
 // ReadAttributeRxErrInvalidSrcAddrCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxErrInvalidSrcAddrCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAddrCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAddrCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6075,7 +6076,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAdd
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrInvalidSrcAddrCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxErrInvalidSrcAddrCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6088,7 +6089,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAdd
 // SubscribeAttributeRxErrInvalidSrcAddrCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxErrInvalidSrcAddrCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInvalidSrcAddrCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInvalidSrcAddrCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6100,7 +6101,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInvalidS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrInvalidSrcAddrCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrInvalidSrcAddrCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6113,7 +6114,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrInvalidS
 // ReadAttributeRxErrSecCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxErrSecCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6125,7 +6126,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCount(ctx 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrSecCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxErrSecCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6138,7 +6139,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCount(ctx 
 // SubscribeAttributeRxErrSecCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxErrSecCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSecCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSecCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6150,7 +6151,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSecCount
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrSecCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrSecCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6163,7 +6164,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrSecCount
 // ReadAttributeRxErrFcsCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxErrFcsCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6175,7 +6176,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCount(ctx 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrFcsCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxErrFcsCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6188,7 +6189,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCount(ctx 
 // SubscribeAttributeRxErrFcsCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxErrFcsCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcsCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcsCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6200,7 +6201,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcsCount
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrFcsCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrFcsCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6213,7 +6214,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrFcsCount
 // ReadAttributeRxErrOtherCount wraps the corresponding Objective-C method.
 //
 // ReadAttributeRxErrOtherCount blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCount(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCount(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6225,7 +6226,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCount(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrOtherCountWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeRxErrOtherCountWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6238,7 +6239,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCount(ct
 // SubscribeAttributeRxErrOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeRxErrOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6250,7 +6251,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOtherCou
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeRxErrOtherCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeRxErrOtherCountWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6263,7 +6264,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeRxErrOtherCou
 // ReadAttributeActiveTimestamp wraps the corresponding Objective-C method.
 //
 // ReadAttributeActiveTimestamp blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestamp(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestamp(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6275,7 +6276,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestamp(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveTimestampWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeActiveTimestampWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6288,7 +6289,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestamp(ct
 // SubscribeAttributeActiveTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeActiveTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6300,7 +6301,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTimesta
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeActiveTimestampWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeActiveTimestampWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6313,7 +6314,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveTimesta
 // ReadAttributePendingTimestamp wraps the corresponding Objective-C method.
 //
 // ReadAttributePendingTimestamp blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePendingTimestamp(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePendingTimestamp(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6325,7 +6326,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePendingTimestamp(c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePendingTimestampWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributePendingTimestampWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6338,7 +6339,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributePendingTimestamp(c
 // SubscribeAttributePendingTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePendingTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6350,7 +6351,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingTimest
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePendingTimestampWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributePendingTimestampWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6363,7 +6364,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributePendingTimest
 // ReadAttributeDelay wraps the corresponding Objective-C method.
 //
 // ReadAttributeDelay blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDelay(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDelay(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6375,7 +6376,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDelay(ctx context.
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDelayWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeDelayWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6388,7 +6389,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeDelay(ctx context.
 // SubscribeAttributeDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6400,7 +6401,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDelayWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeDelayWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6413,7 +6414,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeDelayWithMinI
 // ReadAttributeSecurityPolicy wraps the corresponding Objective-C method.
 //
 // ReadAttributeSecurityPolicy blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicy(ctx context.Context) (result *MTRThreadNetworkDiagnosticsClusterSecurityPolicy, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicy(ctx context.Context) (result *MTRThreadNetworkDiagnosticsClusterSecurityPolicy, err error) {
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterSecurityPolicy
 		err error
@@ -6425,7 +6426,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicy(ctx
 		_o.val = MTRThreadNetworkDiagnosticsClusterSecurityPolicyFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSecurityPolicyWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeSecurityPolicyWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6438,7 +6439,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicy(ctx
 // SubscribeAttributeSecurityPolicyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeSecurityPolicyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurityPolicyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result *MTRThreadNetworkDiagnosticsClusterSecurityPolicy, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurityPolicyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result *MTRThreadNetworkDiagnosticsClusterSecurityPolicy, err error) {
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterSecurityPolicy
 		err error
@@ -6450,7 +6451,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurityPolic
 		_o.val = MTRThreadNetworkDiagnosticsClusterSecurityPolicyFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeSecurityPolicyWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeSecurityPolicyWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6463,7 +6464,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeSecurityPolic
 // ReadAttributeChannelPage0Mask wraps the corresponding Objective-C method.
 //
 // ReadAttributeChannelPage0Mask blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0Mask(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0Mask(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6475,7 +6476,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0Mask(c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChannelPage0MaskWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeChannelPage0MaskWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6488,7 +6489,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0Mask(c
 // SubscribeAttributeChannelPage0MaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeChannelPage0MaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelPage0MaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelPage0MaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6500,7 +6501,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelPage0M
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeChannelPage0MaskWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeChannelPage0MaskWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6513,7 +6514,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeChannelPage0M
 // ReadAttributeOperationalDatasetComponents wraps the corresponding Objective-C method.
 //
 // ReadAttributeOperationalDatasetComponents blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOperationalDatasetComponents(ctx context.Context) (result *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOperationalDatasetComponents(ctx context.Context) (result *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, err error) {
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents
 		err error
@@ -6525,7 +6526,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOperationalDataset
 		_o.val = MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationalDatasetComponentsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeOperationalDatasetComponentsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6538,7 +6539,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeOperationalDataset
 // SubscribeAttributeOperationalDatasetComponentsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOperationalDatasetComponentsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperationalDatasetComponentsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperationalDatasetComponentsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, err error) {
 	type _result struct {
 		val *MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents
 		err error
@@ -6550,7 +6551,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperationalDa
 		_o.val = MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponentsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeOperationalDatasetComponentsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeOperationalDatasetComponentsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6563,7 +6564,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeOperationalDa
 // ReadAttributeActiveNetworkFaultsList wraps the corresponding Objective-C method.
 //
 // ReadAttributeActiveNetworkFaultsList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFaultsList(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFaultsList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6575,7 +6576,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFault
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveNetworkFaultsListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeActiveNetworkFaultsListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6588,7 +6589,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFault
 // SubscribeAttributeActiveNetworkFaultsListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeActiveNetworkFaultsListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNetworkFaultsListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNetworkFaultsListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6600,7 +6601,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNetwork
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeActiveNetworkFaultsListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeActiveNetworkFaultsListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6613,7 +6614,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeActiveNetwork
 // ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6625,7 +6626,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandLi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6638,7 +6639,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandLi
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6650,7 +6651,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGeneratedComm
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6663,7 +6664,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeGeneratedComm
 // ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6675,7 +6676,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandLis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6688,7 +6689,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandLis
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6700,7 +6701,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAcceptedComma
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6713,7 +6714,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAcceptedComma
 // ReadAttributeAttributeList wraps the corresponding Objective-C method.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6725,7 +6726,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttributeList(ctx 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeAttributeListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6738,7 +6739,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeAttributeList(ctx 
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6750,7 +6751,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttributeList
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6763,7 +6764,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeAttributeList
 // ReadAttributeFeatureMap wraps the corresponding Objective-C method.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6775,7 +6776,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeFeatureMap(ctx con
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6788,7 +6789,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeFeatureMap(ctx con
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6800,7 +6801,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureMapWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6813,7 +6814,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeFeatureMapWit
 // ReadAttributeClusterRevision wraps the corresponding Objective-C method.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6825,7 +6826,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeClusterRevision(ct
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6838,7 +6839,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) ReadAttributeClusterRevision(ct
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbctnd *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -6850,7 +6851,7 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterRevisi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbctnd), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -6859,285 +6860,6 @@ func (x *MTRBaseClusterThreadNetworkDiagnostics) SubscribeAttributeClusterRevisi
 		return _zero, ctx.Err()
 	}
 }
-
-// MTRBaseClusterThreadNetworkDiagnosticsable is the interface implemented by [MTRBaseClusterThreadNetworkDiagnostics], for mocking and DI.
-type MTRBaseClusterThreadNetworkDiagnosticsable interface {
-	obj.Object
-	ReadAttributeChannelWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeChannelWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRoutingRoleWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRoutingRoleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNetworkNameWithCompletion(ctx context.Context) (string, error)
-	SubscribeAttributeNetworkNameWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
-	ReadAttributePanIdWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePanIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeExtendedPanIdWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeExtendedPanIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeMeshLocalPrefixWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeMeshLocalPrefixWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeOverrunCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeOverrunCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNeighborTableWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNeighborTableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRouteTableWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRouteTableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePartitionIdWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePartitionIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeWeightingWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeWeightingWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeDataVersionWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeDataVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeStableDataVersionWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeStableDataVersionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeLeaderRouterIdWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeLeaderRouterIdWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeDetachedRoleCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeDetachedRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeChildRoleCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeChildRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRouterRoleCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRouterRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeLeaderRoleCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeLeaderRoleCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAttachAttemptCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePartitionIdChangeCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePartitionIdChangeCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeBetterPartitionAttachAttemptCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeBetterPartitionAttachAttemptCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeParentChangeCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeParentChangeCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTxTotalCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxTotalCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTxUnicastCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxUnicastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTxBroadcastCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxBroadcastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTxAckRequestedCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxAckRequestedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTxAckedCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxAckedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTxNoAckRequestedCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxNoAckRequestedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTxDataCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxDataCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTxDataPollCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxDataPollCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTxBeaconCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxBeaconCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTxBeaconRequestCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTxOtherCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTxRetryCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxRetryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTxDirectMaxRetryExpiryCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxDirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTxIndirectMaxRetryExpiryCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxIndirectMaxRetryExpiryCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTxErrCcaCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxErrCcaCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTxErrAbortCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxErrAbortCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTxErrBusyChannelCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxErrBusyChannelCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRxTotalCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxTotalCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRxUnicastCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxUnicastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRxBroadcastCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxBroadcastCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRxDataCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxDataCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRxDataPollCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxDataPollCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRxBeaconCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxBeaconCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRxBeaconRequestCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxBeaconRequestCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRxOtherCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRxAddressFilteredCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxAddressFilteredCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRxDestAddrFilteredCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxDestAddrFilteredCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRxDuplicatedCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxDuplicatedCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRxErrNoFrameCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxErrNoFrameCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRxErrUnknownNeighborCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxErrUnknownNeighborCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRxErrInvalidSrcAddrCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxErrInvalidSrcAddrCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRxErrSecCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxErrSecCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRxErrFcsCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxErrFcsCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeRxErrOtherCountWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxErrOtherCountWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeActiveTimestampWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeActiveTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePendingTimestampWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePendingTimestampWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeDelayWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeDelayWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeSecurityPolicyWithCompletion(ctx context.Context) (*MTRThreadNetworkDiagnosticsClusterSecurityPolicy, error)
-	SubscribeAttributeSecurityPolicyWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRThreadNetworkDiagnosticsClusterSecurityPolicy, error)
-	ReadAttributeChannelPage0MaskWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeChannelPage0MaskWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeOperationalDatasetComponentsWithCompletion(ctx context.Context) (*MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, error)
-	SubscribeAttributeOperationalDatasetComponentsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, error)
-	ReadAttributeActiveNetworkFaultsListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeActiveNetworkFaultsListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeChannel(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeChannelWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRoutingRole(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRoutingRoleWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNetworkName(ctx context.Context) (string, error)
-	SubscribeAttributeNetworkNameWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (string, error)
-	ReadAttributePanId(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeExtendedPanId(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeExtendedPanIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeMeshLocalPrefix(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeMeshLocalPrefixWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeOverrunCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeOverrunCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNeighborTableList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNeighborTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRouteTableList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRouteTableListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePartitionId(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePartitionIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeWeighting(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeWeightingWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeDataVersion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeStableDataVersion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeStableDataVersionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeLeaderRouterId(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeLeaderRouterIdWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeDetachedRoleCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeDetachedRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeChildRoleCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeChildRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRouterRoleCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRouterRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeLeaderRoleCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeLeaderRoleCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeAttachAttemptCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePartitionIdChangeCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePartitionIdChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeBetterPartitionAttachAttemptCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeBetterPartitionAttachAttemptCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeParentChangeCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeParentChangeCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTxTotalCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTxUnicastCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTxBroadcastCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTxAckRequestedCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTxAckedCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxAckedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTxNoAckRequestedCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxNoAckRequestedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTxDataCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTxDataPollCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTxBeaconCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTxBeaconRequestCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTxOtherCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTxRetryCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxRetryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTxDirectMaxRetryExpiryCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxDirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTxIndirectMaxRetryExpiryCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxIndirectMaxRetryExpiryCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTxErrCcaCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxErrCcaCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTxErrAbortCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxErrAbortCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTxErrBusyChannelCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTxErrBusyChannelCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRxTotalCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxTotalCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRxUnicastCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxUnicastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRxBroadcastCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxBroadcastCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRxDataCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxDataCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRxDataPollCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxDataPollCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRxBeaconCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxBeaconCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRxBeaconRequestCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxBeaconRequestCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRxOtherCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRxAddressFilteredCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxAddressFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRxDestAddrFilteredCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxDestAddrFilteredCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRxDuplicatedCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxDuplicatedCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRxErrNoFrameCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxErrNoFrameCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRxErrUnknownNeighborCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxErrUnknownNeighborCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRxErrInvalidSrcAddrCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxErrInvalidSrcAddrCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRxErrSecCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxErrSecCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRxErrFcsCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxErrFcsCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeRxErrOtherCount(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeRxErrOtherCountWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeActiveTimestamp(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeActiveTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePendingTimestamp(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePendingTimestampWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeDelay(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeDelayWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeSecurityPolicy(ctx context.Context) (*MTRThreadNetworkDiagnosticsClusterSecurityPolicy, error)
-	SubscribeAttributeSecurityPolicyWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRThreadNetworkDiagnosticsClusterSecurityPolicy, error)
-	ReadAttributeChannelPage0Mask(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeChannelPage0MaskWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeOperationalDatasetComponents(ctx context.Context) (*MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, error)
-	SubscribeAttributeOperationalDatasetComponentsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (*MTRThreadNetworkDiagnosticsClusterOperationalDatasetComponents, error)
-	ReadAttributeActiveNetworkFaultsList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeActiveNetworkFaultsListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeAttributeList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-}
-
-var _ MTRBaseClusterThreadNetworkDiagnosticsable = (*MTRBaseClusterThreadNetworkDiagnostics)(nil)
 
 var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterThreadNetworkDiagnostics)(nil)
 

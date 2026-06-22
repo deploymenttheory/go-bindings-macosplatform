@@ -7,7 +7,6 @@ package contacts
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,17 +52,9 @@ func NewChangeHistoryUpdateContactEvent() *ChangeHistoryUpdateContactEvent {
 }
 
 // Contact wraps the corresponding Objective-C method.
-func (x *ChangeHistoryUpdateContactEvent) Contact() *Contact {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contact"))
+func (chuce *ChangeHistoryUpdateContactEvent) Contact() *Contact {
+	_r := objc.Send[objc.ID](objref.IDOf(chuce), objc.RegisterName("contact"))
 	return ContactFromID(_r)
 }
-
-// ChangeHistoryUpdateContactEventable is the interface implemented by [ChangeHistoryUpdateContactEvent], for mocking and DI.
-type ChangeHistoryUpdateContactEventable interface {
-	obj.Object
-	Contact() *Contact
-}
-
-var _ ChangeHistoryUpdateContactEventable = (*ChangeHistoryUpdateContactEvent)(nil)
 
 var _ ChangeHistoryEventProvider = (*ChangeHistoryUpdateContactEvent)(nil)

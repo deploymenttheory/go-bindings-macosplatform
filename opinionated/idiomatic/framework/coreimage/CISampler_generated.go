@@ -47,24 +47,24 @@ func samplerAdopt(id objc.ID) *Sampler {
 }
 
 // Description returns the object's -description text.
-func (x *Sampler) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Sampler) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Sampler) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Sampler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Sampler) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Sampler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Sampler) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Sampler) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewSamplerWithImage initializes a sampler with an image object.
@@ -89,22 +89,13 @@ func NewSamplerWithImageOptions(im *Image, dict obj.Object) *Sampler {
 }
 
 // Definition wraps the corresponding Objective-C method.
-func (x *Sampler) Definition() *FilterShape {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("definition"))
+func (s *Sampler) Definition() *FilterShape {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("definition"))
 	return FilterShapeFromID(_r)
 }
 
 // Extent wraps the corresponding Objective-C method.
-func (x *Sampler) Extent() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("extent"))
+func (s *Sampler) Extent() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(s), objc.RegisterName("extent"))
 	return _r
 }
-
-// Samplerable is the interface implemented by [Sampler], for mocking and DI.
-type Samplerable interface {
-	obj.Object
-	Definition() *FilterShape
-	Extent() corefoundation.CGRect
-}
-
-var _ Samplerable = (*Sampler)(nil)

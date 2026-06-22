@@ -44,24 +44,24 @@ func mTRDoorLockClusterDoorLockAlarmEventAdopt(id objc.ID) *MTRDoorLockClusterDo
 }
 
 // Description returns the object's -description text.
-func (x *MTRDoorLockClusterDoorLockAlarmEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdlcdlae *MTRDoorLockClusterDoorLockAlarmEvent) Description() string {
+	return rt.Description(objref.IDOf(mdlcdlae))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDoorLockClusterDoorLockAlarmEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdlcdlae *MTRDoorLockClusterDoorLockAlarmEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdlcdlae), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDoorLockClusterDoorLockAlarmEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdlcdlae *MTRDoorLockClusterDoorLockAlarmEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdlcdlae), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDoorLockClusterDoorLockAlarmEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdlcdlae *MTRDoorLockClusterDoorLockAlarmEvent) String() string {
+	return rt.Description(objref.IDOf(mdlcdlae))
 }
 
 // NewMTRDoorLockClusterDoorLockAlarmEvent creates a new MTRDoorLockClusterDoorLockAlarmEvent.
@@ -71,28 +71,13 @@ func NewMTRDoorLockClusterDoorLockAlarmEvent() *MTRDoorLockClusterDoorLockAlarmE
 }
 
 // WithAlarmCode sets the property and returns the receiver so calls can be chained.
-func (x *MTRDoorLockClusterDoorLockAlarmEvent) WithAlarmCode(alarmCode obj.Object) *MTRDoorLockClusterDoorLockAlarmEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmCode:"), objref.IDOf(alarmCode))
-	return x
+func (mdlcdlae *MTRDoorLockClusterDoorLockAlarmEvent) WithAlarmCode(alarmCode obj.Object) *MTRDoorLockClusterDoorLockAlarmEvent {
+	objc.Send[objc.ID](objref.IDOf(mdlcdlae), objc.RegisterName("setAlarmCode:"), objref.IDOf(alarmCode))
+	return mdlcdlae
 }
 
 // AlarmCode wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterDoorLockAlarmEvent) AlarmCode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alarmCode"))
+func (mdlcdlae *MTRDoorLockClusterDoorLockAlarmEvent) AlarmCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdlcdlae), objc.RegisterName("alarmCode"))
 	return obj.Wrap(_r)
 }
-
-// SetAlarmCode wraps the corresponding Objective-C method.
-func (x *MTRDoorLockClusterDoorLockAlarmEvent) SetAlarmCode(alarmCode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmCode:"), objref.IDOf(alarmCode))
-}
-
-// MTRDoorLockClusterDoorLockAlarmEventable is the interface implemented by [MTRDoorLockClusterDoorLockAlarmEvent], for mocking and DI.
-type MTRDoorLockClusterDoorLockAlarmEventable interface {
-	obj.Object
-	WithAlarmCode(alarmCode obj.Object) *MTRDoorLockClusterDoorLockAlarmEvent
-	AlarmCode() obj.Object
-	SetAlarmCode(alarmCode obj.Object)
-}
-
-var _ MTRDoorLockClusterDoorLockAlarmEventable = (*MTRDoorLockClusterDoorLockAlarmEvent)(nil)

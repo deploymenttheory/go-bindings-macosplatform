@@ -53,18 +53,10 @@ func NewUnitSpeed() *UnitSpeed {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitSpeed) WithScriptingProperties(scriptingProperties obj.Object) *UnitSpeed {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (us *UnitSpeed) WithScriptingProperties(scriptingProperties obj.Object) *UnitSpeed {
+	objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return us
 }
-
-// UnitSpeedable is the interface implemented by [UnitSpeed], for mocking and DI.
-type UnitSpeedable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitSpeed
-}
-
-var _ UnitSpeedable = (*UnitSpeed)(nil)
 
 var _ DimensionProvider = (*UnitSpeed)(nil)
 

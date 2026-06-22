@@ -51,38 +51,27 @@ func NewMTROtaSoftwareUpdateRequestorClusterStateTransitionEvent() *MTROtaSoftwa
 }
 
 // WithPreviousState sets the property and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithPreviousState(previousState obj.Object) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousState:"), objref.IDOf(previousState))
-	return x
+func (mosurcste *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithPreviousState(previousState obj.Object) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
+	objc.Send[objc.ID](objref.IDOf(mosurcste), objc.RegisterName("setPreviousState:"), objref.IDOf(previousState))
+	return mosurcste
 }
 
 // WithNewState sets the property and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithNewState(newState obj.Object) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewState:"), objref.IDOf(newState))
-	return x
+func (mosurcste *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithNewState(newState obj.Object) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
+	objc.Send[objc.ID](objref.IDOf(mosurcste), objc.RegisterName("setNewState:"), objref.IDOf(newState))
+	return mosurcste
 }
 
 // WithReason sets the property and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithReason(reason obj.Object) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReason:"), objref.IDOf(reason))
-	return x
+func (mosurcste *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithReason(reason obj.Object) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
+	objc.Send[objc.ID](objref.IDOf(mosurcste), objc.RegisterName("setReason:"), objref.IDOf(reason))
+	return mosurcste
 }
 
 // WithTargetSoftwareVersion sets the property and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithTargetSoftwareVersion(targetSoftwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetSoftwareVersion:"), objref.IDOf(targetSoftwareVersion))
-	return x
+func (mosurcste *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent) WithTargetSoftwareVersion(targetSoftwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent {
+	objc.Send[objc.ID](objref.IDOf(mosurcste), objc.RegisterName("setTargetSoftwareVersion:"), objref.IDOf(targetSoftwareVersion))
+	return mosurcste
 }
-
-// MTROtaSoftwareUpdateRequestorClusterStateTransitionEventable is the interface implemented by [MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent], for mocking and DI.
-type MTROtaSoftwareUpdateRequestorClusterStateTransitionEventable interface {
-	obj.Object
-	WithPreviousState(previousState obj.Object) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent
-	WithNewState(newState obj.Object) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent
-	WithReason(reason obj.Object) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent
-	WithTargetSoftwareVersion(targetSoftwareVersion obj.Object) *MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent
-}
-
-var _ MTROtaSoftwareUpdateRequestorClusterStateTransitionEventable = (*MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent)(nil)
 
 var _ MTROTASoftwareUpdateRequestorClusterStateTransitionEventProvider = (*MTROtaSoftwareUpdateRequestorClusterStateTransitionEvent)(nil)

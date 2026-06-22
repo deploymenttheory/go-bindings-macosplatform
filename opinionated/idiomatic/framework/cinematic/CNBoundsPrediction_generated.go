@@ -47,24 +47,24 @@ func boundsPredictionAdopt(id objc.ID) *BoundsPrediction {
 }
 
 // Description returns the object's -description text.
-func (x *BoundsPrediction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bp *BoundsPrediction) Description() string {
+	return rt.Description(objref.IDOf(bp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BoundsPrediction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bp *BoundsPrediction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BoundsPrediction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bp *BoundsPrediction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BoundsPrediction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bp *BoundsPrediction) String() string {
+	return rt.Description(objref.IDOf(bp))
 }
 
 // NewBoundsPrediction creates a new BoundsPrediction.
@@ -73,49 +73,26 @@ func NewBoundsPrediction() *BoundsPrediction {
 	return boundsPredictionAdopt(_id)
 }
 
-// WithNormalizedBounds bounds of the detected object in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right
-func (x *BoundsPrediction) WithNormalizedBounds(normalizedBounds corefoundation.CGRect) *BoundsPrediction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalizedBounds:"), normalizedBounds)
-	return x
+// WithNormalizedBounds sets bounds of the detected object in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right
+func (bp *BoundsPrediction) WithNormalizedBounds(normalizedBounds corefoundation.CGRect) *BoundsPrediction {
+	objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("setNormalizedBounds:"), normalizedBounds)
+	return bp
 }
 
-// WithConfidence the probability that a well-defined object is within the bounds — a number between 0.0 and 1.0.
-func (x *BoundsPrediction) WithConfidence(confidence float32) *BoundsPrediction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfidence:"), confidence)
-	return x
+// WithConfidence sets the probability that a well-defined object is within the bounds — a number between 0.0 and 1.0.
+func (bp *BoundsPrediction) WithConfidence(confidence float32) *BoundsPrediction {
+	objc.Send[objc.ID](objref.IDOf(bp), objc.RegisterName("setConfidence:"), confidence)
+	return bp
 }
 
-// NormalizedBounds bounds of the detected object in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right
-func (x *BoundsPrediction) NormalizedBounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("normalizedBounds"))
+// NormalizedBounds returns bounds of the detected object in normalized coordinates where (0.0, 0.0) is the upper left corner, and (1.0, 1.0) is the lower right
+func (bp *BoundsPrediction) NormalizedBounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(bp), objc.RegisterName("normalizedBounds"))
 	return _r
 }
 
-// SetNormalizedBounds wraps the corresponding Objective-C method.
-func (x *BoundsPrediction) SetNormalizedBounds(normalizedBounds corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNormalizedBounds:"), normalizedBounds)
-}
-
-// Confidence the probability that a well-defined object is within the bounds — a number between 0.0 and 1.0.
-func (x *BoundsPrediction) Confidence() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("confidence"))
+// Confidence returns the probability that a well-defined object is within the bounds — a number between 0.0 and 1.0.
+func (bp *BoundsPrediction) Confidence() float32 {
+	_r := objc.Send[float32](objref.IDOf(bp), objc.RegisterName("confidence"))
 	return _r
 }
-
-// SetConfidence wraps the corresponding Objective-C method.
-func (x *BoundsPrediction) SetConfidence(confidence float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfidence:"), confidence)
-}
-
-// BoundsPredictionable is the interface implemented by [BoundsPrediction], for mocking and DI.
-type BoundsPredictionable interface {
-	obj.Object
-	WithNormalizedBounds(normalizedBounds corefoundation.CGRect) *BoundsPrediction
-	WithConfidence(confidence float32) *BoundsPrediction
-	NormalizedBounds() corefoundation.CGRect
-	SetNormalizedBounds(normalizedBounds corefoundation.CGRect)
-	Confidence() float32
-	SetConfidence(confidence float32)
-}
-
-var _ BoundsPredictionable = (*BoundsPrediction)(nil)

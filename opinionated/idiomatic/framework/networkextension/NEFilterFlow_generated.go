@@ -48,71 +48,59 @@ func nEFilterFlowAdopt(id objc.ID) *NEFilterFlow {
 }
 
 // Description returns the object's -description text.
-func (x *NEFilterFlow) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nff *NEFilterFlow) Description() string {
+	return rt.Description(objref.IDOf(nff))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEFilterFlow) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nff *NEFilterFlow) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nff), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEFilterFlow) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nff *NEFilterFlow) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nff), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEFilterFlow) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nff *NEFilterFlow) String() string {
+	return rt.Description(objref.IDOf(nff))
 }
 
-// URL the flow's HTTP request URL. Will be nil if the flow did not originate from WebKit.
-func (x *NEFilterFlow) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+// URL returns the flow's HTTP request URL. Will be nil if the flow did not originate from WebKit.
+func (nff *NEFilterFlow) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nff), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// Direction initial direction of the flow (outgoing or incoming flow)
-func (x *NEFilterFlow) Direction() NETrafficDirection {
-	_r := objc.Send[NETrafficDirection](objref.IDOf(x), objc.RegisterName("direction"))
+// Direction returns initial direction of the flow (outgoing or incoming flow)
+func (nff *NEFilterFlow) Direction() NETrafficDirection {
+	_r := objc.Send[NETrafficDirection](objref.IDOf(nff), objc.RegisterName("direction"))
 	return _r
 }
 
-// SourceAppAuditToken audit token of the source application of the flow.
-func (x *NEFilterFlow) SourceAppAuditToken() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceAppAuditToken"))
+// SourceAppAuditToken returns audit token of the source application of the flow.
+func (nff *NEFilterFlow) SourceAppAuditToken() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nff), objc.RegisterName("sourceAppAuditToken"))
 	return obj.Wrap(_r)
 }
 
-// SourceProcessAuditToken the audit token of the process that created the flow. In cases where the connection was created by a system process on behalf of the source application, sourceProcessAuditToken will be different from sourceAppAuditToken and will contain the audit token of the system process. In cases where the source application directly created the connection sourceAppAuditToken and sourceProcessAuditToken will be identical.
-func (x *NEFilterFlow) SourceProcessAuditToken() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceProcessAuditToken"))
+// SourceProcessAuditToken returns the audit token of the process that created the flow. In cases where the connection was created by a system process on behalf of the source application, sourceProcessAuditToken will be different from sourceAppAuditToken and will contain the audit token of the system process. In cases where the source application directly created the connection sourceAppAuditToken and sourceProcessAuditToken will be identical.
+func (nff *NEFilterFlow) SourceProcessAuditToken() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nff), objc.RegisterName("sourceProcessAuditToken"))
 	return obj.Wrap(_r)
 }
 
-// Identifier the unique identifier of the flow.
-func (x *NEFilterFlow) Identifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns the unique identifier of the flow.
+func (nff *NEFilterFlow) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nff), objc.RegisterName("identifier"))
 	return obj.Wrap(_r)
 }
-
-// NEFilterFlowable is the interface implemented by [NEFilterFlow], for mocking and DI.
-type NEFilterFlowable interface {
-	obj.Object
-	URL() obj.Object
-	Direction() NETrafficDirection
-	SourceAppAuditToken() obj.Object
-	SourceProcessAuditToken() obj.Object
-	Identifier() obj.Object
-}
-
-var _ NEFilterFlowable = (*NEFilterFlow)(nil)
 
 // isNEFilterFlow marks NEFilterFlow — and, by embedding promotion, its
 // subclasses — as a member of the NEFilterFlow hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NEFilterFlow) isNEFilterFlow() {}
+func (nff *NEFilterFlow) isNEFilterFlow() {}
 
 var _ NEFilterFlowProvider = (*NEFilterFlow)(nil)

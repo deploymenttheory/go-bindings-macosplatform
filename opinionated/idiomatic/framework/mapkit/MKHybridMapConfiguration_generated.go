@@ -7,7 +7,6 @@ package mapkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,58 +58,34 @@ func NewHybridMapConfigurationWithElevationStyle(elevationStyle MapElevationStyl
 	return hybridMapConfigurationAdopt(_id)
 }
 
-// WithPointOfInterestFilter the filter the framework uses to determine the points of interest to show on the map.
-func (x *HybridMapConfiguration) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *HybridMapConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
-	return x
+// WithPointOfInterestFilter sets the filter the framework uses to determine the points of interest to show on the map.
+func (hmc *HybridMapConfiguration) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *HybridMapConfiguration {
+	objc.Send[objc.ID](objref.IDOf(hmc), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
+	return hmc
 }
 
-// WithShowsTraffic a Boolean value that indicates whether the maps shows traffic conditions.
-func (x *HybridMapConfiguration) WithShowsTraffic(showsTraffic bool) *HybridMapConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsTraffic:"), showsTraffic)
-	return x
+// WithShowsTraffic sets a Boolean value that indicates whether the maps shows traffic conditions.
+func (hmc *HybridMapConfiguration) WithShowsTraffic(showsTraffic bool) *HybridMapConfiguration {
+	objc.Send[objc.ID](objref.IDOf(hmc), objc.RegisterName("setShowsTraffic:"), showsTraffic)
+	return hmc
 }
 
-// WithElevationStyle the value that indicates the map’s elevation style.
-func (x *HybridMapConfiguration) WithElevationStyle(elevationStyle MapElevationStyle) *HybridMapConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElevationStyle:"), elevationStyle)
-	return x
+// WithElevationStyle sets the value that indicates the map’s elevation style.
+func (hmc *HybridMapConfiguration) WithElevationStyle(elevationStyle MapElevationStyle) *HybridMapConfiguration {
+	objc.Send[objc.ID](objref.IDOf(hmc), objc.RegisterName("setElevationStyle:"), elevationStyle)
+	return hmc
 }
 
 // PointOfInterestFilter wraps the corresponding Objective-C method.
-func (x *HybridMapConfiguration) PointOfInterestFilter() *PointOfInterestFilter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestFilter"))
+func (hmc *HybridMapConfiguration) PointOfInterestFilter() *PointOfInterestFilter {
+	_r := objc.Send[objc.ID](objref.IDOf(hmc), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
-// SetPointOfInterestFilter wraps the corresponding Objective-C method.
-func (x *HybridMapConfiguration) SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
-}
-
 // ShowsTraffic wraps the corresponding Objective-C method.
-func (x *HybridMapConfiguration) ShowsTraffic() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsTraffic"))
+func (hmc *HybridMapConfiguration) ShowsTraffic() bool {
+	_r := objc.Send[bool](objref.IDOf(hmc), objc.RegisterName("showsTraffic"))
 	return _r
 }
-
-// SetShowsTraffic wraps the corresponding Objective-C method.
-func (x *HybridMapConfiguration) SetShowsTraffic(showsTraffic bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsTraffic:"), showsTraffic)
-}
-
-// HybridMapConfigurationable is the interface implemented by [HybridMapConfiguration], for mocking and DI.
-type HybridMapConfigurationable interface {
-	obj.Object
-	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *HybridMapConfiguration
-	WithShowsTraffic(showsTraffic bool) *HybridMapConfiguration
-	WithElevationStyle(elevationStyle MapElevationStyle) *HybridMapConfiguration
-	PointOfInterestFilter() *PointOfInterestFilter
-	SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter)
-	ShowsTraffic() bool
-	SetShowsTraffic(showsTraffic bool)
-}
-
-var _ HybridMapConfigurationable = (*HybridMapConfiguration)(nil)
 
 var _ MapConfigurationProvider = (*HybridMapConfiguration)(nil)

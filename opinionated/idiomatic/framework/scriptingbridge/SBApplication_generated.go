@@ -7,7 +7,6 @@ package scriptingbridge
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
@@ -68,64 +67,39 @@ func NewApplicationWithProcessIdentifier(pid int) *Application {
 	return applicationAdopt(_id)
 }
 
-// WithSendMode the mode for sending Apple events to the target application.
-func (x *Application) WithSendMode(sendMode int) *Application {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendMode:"), sendMode)
-	return x
+// WithSendMode sets the mode for sending Apple events to the target application.
+func (a *Application) WithSendMode(sendMode int) *Application {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setSendMode:"), sendMode)
+	return a
 }
 
-// WithTimeout the period the application will wait to receive reply Apple events.
-func (x *Application) WithTimeout(timeout int) *Application {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), timeout)
-	return x
+// WithTimeout sets the period the application will wait to receive reply Apple events.
+func (a *Application) WithTimeout(timeout int) *Application {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setTimeout:"), timeout)
+	return a
 }
 
 // Activate moves the target application to the foreground immediately.
-func (x *Application) Activate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activate"))
+func (a *Application) Activate() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("activate"))
 }
 
-// IsRunning a Boolean that indicates whether the target application represented by the receiver is running. <doc://com.apple.documentation/documentation/swift/true> if the application is running, <doc://com.apple.documentation/documentation/swift/false> otherwise. This may be <doc://com.apple.documentation/documentation/swift/true> for instances initialized with a bundle identifier or URL because `SBApplication` launches the application only when it's necessary to send it an event.
-func (x *Application) IsRunning() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRunning"))
+// IsRunning reports whether a Boolean that indicates whether the target application represented by the receiver is running. <doc://com.apple.documentation/documentation/swift/true> if the application is running, <doc://com.apple.documentation/documentation/swift/false> otherwise. This may be <doc://com.apple.documentation/documentation/swift/true> for instances initialized with a bundle identifier or URL because `SBApplication` launches the application only when it's necessary to send it an event.
+func (a *Application) IsRunning() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isRunning"))
 	return _r
 }
 
-// SendMode the mode for sending Apple events to the target application. For more information, see <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager>. The default send mode is <doc://com.apple.documentation/documentation/coreservices/1542914-anonymous/kaewaitreply>. If the send mode is something other than `kAEWaitReply`, the receiver might not correctly handle reply events from the target application.
-func (x *Application) SendMode() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sendMode"))
+// SendMode returns the mode for sending Apple events to the target application. For more information, see <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager>. The default send mode is <doc://com.apple.documentation/documentation/coreservices/1542914-anonymous/kaewaitreply>. If the send mode is something other than `kAEWaitReply`, the receiver might not correctly handle reply events from the target application.
+func (a *Application) SendMode() int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("sendMode"))
 	return _r
 }
 
-// SetSendMode wraps the corresponding Objective-C method.
-func (x *Application) SetSendMode(sendMode int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendMode:"), sendMode)
-}
-
-// Timeout the period the application will wait to receive reply Apple events. For more information, see <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager>. The default timeout value is <doc://com.apple.documentation/documentation/coreservices/1542814-timeout_constants/kaedefaulttimeout>, which is about a minute. If you want the receiver to wait indefinitely for reply Apple events, use <doc://com.apple.documentation/documentation/coreservices/1542814-timeout_constants/knotimeout>. For more information, see <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager>.
-func (x *Application) Timeout() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeout"))
+// Timeout returns the period the application will wait to receive reply Apple events. For more information, see <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager>. The default timeout value is <doc://com.apple.documentation/documentation/coreservices/1542814-timeout_constants/kaedefaulttimeout>, which is about a minute. If you want the receiver to wait indefinitely for reply Apple events, use <doc://com.apple.documentation/documentation/coreservices/1542814-timeout_constants/knotimeout>. For more information, see <doc://com.apple.documentation/documentation/applicationservices/apple_event_manager>.
+func (a *Application) Timeout() int {
+	_r := objc.Send[int](objref.IDOf(a), objc.RegisterName("timeout"))
 	return _r
 }
-
-// SetTimeout wraps the corresponding Objective-C method.
-func (x *Application) SetTimeout(timeout int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), timeout)
-}
-
-// Applicationable is the interface implemented by [Application], for mocking and DI.
-type Applicationable interface {
-	obj.Object
-	WithSendMode(sendMode int) *Application
-	WithTimeout(timeout int) *Application
-	Activate()
-	IsRunning() bool
-	SendMode() int
-	SetSendMode(sendMode int)
-	Timeout() int
-	SetTimeout(timeout int)
-}
-
-var _ Applicationable = (*Application)(nil)
 
 var _ ObjectProvider = (*Application)(nil)

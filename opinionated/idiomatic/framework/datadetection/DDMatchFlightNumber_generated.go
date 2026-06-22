@@ -7,7 +7,6 @@ package datadetection
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,31 +51,22 @@ func NewMatchFlightNumber() *MatchFlightNumber {
 	return matchFlightNumberAdopt(_id)
 }
 
-// Airline the name of an airline.
-func (x *MatchFlightNumber) Airline() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("airline"))
+// Airline returns the name of an airline.
+func (mfn *MatchFlightNumber) Airline() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mfn), objc.RegisterName("airline"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// FlightNumber a string that represents a flight number.
-func (x *MatchFlightNumber) FlightNumber() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flightNumber"))
+// FlightNumber returns a string that represents a flight number.
+func (mfn *MatchFlightNumber) FlightNumber() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mfn), objc.RegisterName("flightNumber"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// MatchFlightNumberable is the interface implemented by [MatchFlightNumber], for mocking and DI.
-type MatchFlightNumberable interface {
-	obj.Object
-	Airline() string
-	FlightNumber() string
-}
-
-var _ MatchFlightNumberable = (*MatchFlightNumber)(nil)
 
 var _ MatchProvider = (*MatchFlightNumber)(nil)

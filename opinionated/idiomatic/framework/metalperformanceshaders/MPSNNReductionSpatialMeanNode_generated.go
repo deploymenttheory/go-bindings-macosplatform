@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,26 +50,17 @@ func NewNNReductionSpatialMeanNode() *NNReductionSpatialMeanNode {
 	return nNReductionSpatialMeanNodeAdopt(_id)
 }
 
-// WithClipRectSource the clip rectangle to apply to the source image.
-func (x *NNReductionSpatialMeanNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionSpatialMeanNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the clip rectangle to apply to the source image.
+func (nrsmn *NNReductionSpatialMeanNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionSpatialMeanNode {
+	objc.Send[objc.ID](objref.IDOf(nrsmn), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return nrsmn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNReductionSpatialMeanNode) WithLabel(label string) *NNReductionSpatialMeanNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nrsmn *NNReductionSpatialMeanNode) WithLabel(label string) *NNReductionSpatialMeanNode {
+	objc.Send[objc.ID](objref.IDOf(nrsmn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nrsmn
 }
-
-// NNReductionSpatialMeanNodeable is the interface implemented by [NNReductionSpatialMeanNode], for mocking and DI.
-type NNReductionSpatialMeanNodeable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionSpatialMeanNode
-	WithLabel(label string) *NNReductionSpatialMeanNode
-}
-
-var _ NNReductionSpatialMeanNodeable = (*NNReductionSpatialMeanNode)(nil)
 
 var _ NNUnaryReductionNodeProvider = (*NNReductionSpatialMeanNode)(nil)
 

@@ -7,7 +7,6 @@ package gamekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewScoreChallenge() *ScoreChallenge {
 	return scoreChallengeAdopt(_id)
 }
 
-// Score the score to meet to satisfy this challenge
-func (x *ScoreChallenge) Score() *Score {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("score"))
+// Score returns the score to meet to satisfy this challenge
+func (sc *ScoreChallenge) Score() *Score {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("score"))
 	return ScoreFromID(_r)
 }
 
-// LeaderboardEntry the leaderboard entry to meet to satisfy this challenge
-func (x *ScoreChallenge) LeaderboardEntry() *LeaderboardEntry {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leaderboardEntry"))
+// LeaderboardEntry returns the leaderboard entry to meet to satisfy this challenge
+func (sc *ScoreChallenge) LeaderboardEntry() *LeaderboardEntry {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("leaderboardEntry"))
 	return LeaderboardEntryFromID(_r)
 }
-
-// ScoreChallengeable is the interface implemented by [ScoreChallenge], for mocking and DI.
-type ScoreChallengeable interface {
-	obj.Object
-	Score() *Score
-	LeaderboardEntry() *LeaderboardEntry
-}
-
-var _ ScoreChallengeable = (*ScoreChallenge)(nil)
 
 var _ ChallengeProvider = (*ScoreChallenge)(nil)

@@ -46,24 +46,24 @@ func extentPackerAdopt(id objc.ID) *ExtentPacker {
 }
 
 // Description returns the object's -description text.
-func (x *ExtentPacker) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ep *ExtentPacker) Description() string {
+	return rt.Description(objref.IDOf(ep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExtentPacker) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ep *ExtentPacker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExtentPacker) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ep *ExtentPacker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExtentPacker) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ep *ExtentPacker) String() string {
+	return rt.Description(objref.IDOf(ep))
 }
 
 // NewExtentPacker creates a new ExtentPacker.
@@ -73,15 +73,7 @@ func NewExtentPacker() *ExtentPacker {
 }
 
 // PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength packs a single extent to send to the kernel.
-func (x *ExtentPacker) PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource *BlockDeviceResource, type_ ExtentType, logicalOffset int64, physicalOffset int64, length int) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("packExtentWithResource:type:logicalOffset:physicalOffset:length:"), objref.IDOf(resource), type_, logicalOffset, physicalOffset, length)
+func (ep *ExtentPacker) PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource *BlockDeviceResource, type_ ExtentType, logicalOffset int64, physicalOffset int64, length int) bool {
+	_r := objc.Send[bool](objref.IDOf(ep), objc.RegisterName("packExtentWithResource:type:logicalOffset:physicalOffset:length:"), objref.IDOf(resource), type_, logicalOffset, physicalOffset, length)
 	return _r
 }
-
-// ExtentPackerable is the interface implemented by [ExtentPacker], for mocking and DI.
-type ExtentPackerable interface {
-	obj.Object
-	PackExtentWithResourceTypeLogicalOffsetPhysicalOffsetLength(resource *BlockDeviceResource, type_ ExtentType, logicalOffset int64, physicalOffset int64, length int) bool
-}
-
-var _ ExtentPackerable = (*ExtentPacker)(nil)

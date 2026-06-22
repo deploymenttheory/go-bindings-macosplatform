@@ -46,24 +46,24 @@ func directoryEntryPackerAdopt(id objc.ID) *DirectoryEntryPacker {
 }
 
 // Description returns the object's -description text.
-func (x *DirectoryEntryPacker) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dep *DirectoryEntryPacker) Description() string {
+	return rt.Description(objref.IDOf(dep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DirectoryEntryPacker) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dep *DirectoryEntryPacker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DirectoryEntryPacker) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dep *DirectoryEntryPacker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DirectoryEntryPacker) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dep *DirectoryEntryPacker) String() string {
+	return rt.Description(objref.IDOf(dep))
 }
 
 // NewDirectoryEntryPacker creates a new DirectoryEntryPacker.
@@ -73,15 +73,7 @@ func NewDirectoryEntryPacker() *DirectoryEntryPacker {
 }
 
 // PackEntryWithNameItemTypeItemIDNextCookieAttributes provides a directory entry during enumeration.
-func (x *DirectoryEntryPacker) PackEntryWithNameItemTypeItemIDNextCookieAttributes(name *FileName, itemType ItemType, itemID ItemID, nextCookie uint64, attributes *ItemAttributes) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("packEntryWithName:itemType:itemID:nextCookie:attributes:"), objref.IDOf(name), itemType, itemID, nextCookie, objref.IDOf(attributes))
+func (dep *DirectoryEntryPacker) PackEntryWithNameItemTypeItemIDNextCookieAttributes(name *FileName, itemType ItemType, itemID ItemID, nextCookie uint64, attributes *ItemAttributes) bool {
+	_r := objc.Send[bool](objref.IDOf(dep), objc.RegisterName("packEntryWithName:itemType:itemID:nextCookie:attributes:"), objref.IDOf(name), itemType, itemID, nextCookie, objref.IDOf(attributes))
 	return _r
 }
-
-// DirectoryEntryPackerable is the interface implemented by [DirectoryEntryPacker], for mocking and DI.
-type DirectoryEntryPackerable interface {
-	obj.Object
-	PackEntryWithNameItemTypeItemIDNextCookieAttributes(name *FileName, itemType ItemType, itemID ItemID, nextCookie uint64, attributes *ItemAttributes) bool
-}
-
-var _ DirectoryEntryPackerable = (*DirectoryEntryPacker)(nil)

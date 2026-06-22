@@ -46,24 +46,24 @@ func userNotificationActionAdopt(id objc.ID) *UserNotificationAction {
 }
 
 // Description returns the object's -description text.
-func (x *UserNotificationAction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (una *UserNotificationAction) Description() string {
+	return rt.Description(objref.IDOf(una))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UserNotificationAction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (una *UserNotificationAction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(una), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UserNotificationAction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (una *UserNotificationAction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(una), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *UserNotificationAction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (una *UserNotificationAction) String() string {
+	return rt.Description(objref.IDOf(una))
 }
 
 // NewUserNotificationAction creates a new UserNotificationAction.
@@ -73,14 +73,14 @@ func NewUserNotificationAction() *UserNotificationAction {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UserNotificationAction) WithScriptingProperties(scriptingProperties obj.Object) *UserNotificationAction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (una *UserNotificationAction) WithScriptingProperties(scriptingProperties obj.Object) *UserNotificationAction {
+	objc.Send[objc.ID](objref.IDOf(una), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return una
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *UserNotificationAction) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (una *UserNotificationAction) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(una), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -88,20 +88,10 @@ func (x *UserNotificationAction) Identifier() string {
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *UserNotificationAction) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (una *UserNotificationAction) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(una), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// UserNotificationActionable is the interface implemented by [UserNotificationAction], for mocking and DI.
-type UserNotificationActionable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UserNotificationAction
-	Identifier() string
-	Title() string
-}
-
-var _ UserNotificationActionable = (*UserNotificationAction)(nil)

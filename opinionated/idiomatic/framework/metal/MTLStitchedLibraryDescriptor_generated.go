@@ -46,24 +46,24 @@ func stitchedLibraryDescriptorAdopt(id objc.ID) *StitchedLibraryDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *StitchedLibraryDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sld *StitchedLibraryDescriptor) Description() string {
+	return rt.Description(objref.IDOf(sld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StitchedLibraryDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sld *StitchedLibraryDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StitchedLibraryDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sld *StitchedLibraryDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StitchedLibraryDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sld *StitchedLibraryDescriptor) String() string {
+	return rt.Description(objref.IDOf(sld))
 }
 
 // NewStitchedLibraryDescriptor creates a new StitchedLibraryDescriptor.
@@ -72,78 +72,51 @@ func NewStitchedLibraryDescriptor() *StitchedLibraryDescriptor {
 	return stitchedLibraryDescriptorAdopt(_id)
 }
 
-// WithFunctionGraphs the function graphs that define the new stitched library’s functions.
-func (x *StitchedLibraryDescriptor) WithFunctionGraphs(items ...*FunctionStitchingGraph) *StitchedLibraryDescriptor {
+// WithFunctionGraphs sets the function graphs that define the new stitched library’s functions.
+func (sld *StitchedLibraryDescriptor) WithFunctionGraphs(items ...*FunctionStitchingGraph) *StitchedLibraryDescriptor {
 	_arr := purego.SliceToNSArray(items, func(_v *FunctionStitchingGraph) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionGraphs:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(sld), objc.RegisterName("setFunctionGraphs:"), _arr)
+	return sld
 }
 
-// WithOptions the options to use for this new MTLLibrary.
-func (x *StitchedLibraryDescriptor) WithOptions(options StitchedLibraryOptions) *StitchedLibraryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
-	return x
+// WithOptions sets the options to use for this new MTLLibrary.
+func (sld *StitchedLibraryDescriptor) WithOptions(options StitchedLibraryOptions) *StitchedLibraryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(sld), objc.RegisterName("setOptions:"), options)
+	return sld
 }
 
 // FunctionGraphs wraps the corresponding Objective-C method.
 //
 // FunctionGraphs returns the collection as a Go slice.
-func (x *StitchedLibraryDescriptor) FunctionGraphs() []*FunctionStitchingGraph {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("functionGraphs"))
+func (sld *StitchedLibraryDescriptor) FunctionGraphs() []*FunctionStitchingGraph {
+	_arr := objc.Send[objc.ID](objref.IDOf(sld), objc.RegisterName("functionGraphs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FunctionStitchingGraph { return FunctionStitchingGraphFromID(_id) })
 }
 
-// SetFunctionGraphs wraps the corresponding Objective-C method.
-func (x *StitchedLibraryDescriptor) SetFunctionGraphs(functionGraphs []*FunctionStitchingGraph) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionGraphs:"), purego.SliceToNSArray(functionGraphs, func(_v *FunctionStitchingGraph) objc.ID { return objref.IDOf(_v) }))
-}
-
 // Functions wraps the corresponding Objective-C method.
-func (x *StitchedLibraryDescriptor) Functions() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("functions"))
+func (sld *StitchedLibraryDescriptor) Functions() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sld), objc.RegisterName("functions"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetFunctions wraps the corresponding Objective-C method.
-func (x *StitchedLibraryDescriptor) SetFunctions(functions []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctions:"), purego.SliceToNSArray(functions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (sld *StitchedLibraryDescriptor) SetFunctions(functions []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(sld), objc.RegisterName("setFunctions:"), purego.SliceToNSArray(functions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// BinaryArchives the array of archives to be searched. Binary archives to be searched for precompiled stitched libraries during the compilation of this library.
-func (x *StitchedLibraryDescriptor) BinaryArchives() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("binaryArchives"))
+// BinaryArchives returns the array of archives to be searched. Binary archives to be searched for precompiled stitched libraries during the compilation of this library.
+func (sld *StitchedLibraryDescriptor) BinaryArchives() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sld), objc.RegisterName("binaryArchives"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetBinaryArchives wraps the corresponding Objective-C method.
-func (x *StitchedLibraryDescriptor) SetBinaryArchives(binaryArchives []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBinaryArchives:"), purego.SliceToNSArray(binaryArchives, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (sld *StitchedLibraryDescriptor) SetBinaryArchives(binaryArchives []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(sld), objc.RegisterName("setBinaryArchives:"), purego.SliceToNSArray(binaryArchives, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Options the options to use for this new MTLLibrary.
-func (x *StitchedLibraryDescriptor) Options() StitchedLibraryOptions {
-	_r := objc.Send[StitchedLibraryOptions](objref.IDOf(x), objc.RegisterName("options"))
+// Options returns the options to use for this new MTLLibrary.
+func (sld *StitchedLibraryDescriptor) Options() StitchedLibraryOptions {
+	_r := objc.Send[StitchedLibraryOptions](objref.IDOf(sld), objc.RegisterName("options"))
 	return _r
 }
-
-// SetOptions wraps the corresponding Objective-C method.
-func (x *StitchedLibraryDescriptor) SetOptions(options StitchedLibraryOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
-}
-
-// StitchedLibraryDescriptorable is the interface implemented by [StitchedLibraryDescriptor], for mocking and DI.
-type StitchedLibraryDescriptorable interface {
-	obj.Object
-	WithFunctionGraphs(items ...*FunctionStitchingGraph) *StitchedLibraryDescriptor
-	WithOptions(options StitchedLibraryOptions) *StitchedLibraryDescriptor
-	FunctionGraphs() []*FunctionStitchingGraph
-	SetFunctionGraphs(functionGraphs []*FunctionStitchingGraph)
-	Functions() []obj.Object
-	SetFunctions(functions []obj.Object)
-	BinaryArchives() []obj.Object
-	SetBinaryArchives(binaryArchives []obj.Object)
-	Options() StitchedLibraryOptions
-	SetOptions(options StitchedLibraryOptions)
-}
-
-var _ StitchedLibraryDescriptorable = (*StitchedLibraryDescriptor)(nil)

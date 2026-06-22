@@ -53,18 +53,10 @@ func NewSmartCardTokenWithSmartCardAIDInstanceIDTokenDriver(smartCard *SmartCard
 	return smartCardTokenAdopt(_id)
 }
 
-// AID this is AID which is specified in extension's plist NSExtensionAttributes as
-func (x *SmartCardToken) AID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("AID"))
+// AID returns this is AID which is specified in extension's plist NSExtensionAttributes as
+func (sct *SmartCardToken) AID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sct), objc.RegisterName("AID"))
 	return obj.Wrap(_r)
 }
-
-// SmartCardTokenable is the interface implemented by [SmartCardToken], for mocking and DI.
-type SmartCardTokenable interface {
-	obj.Object
-	AID() obj.Object
-}
-
-var _ SmartCardTokenable = (*SmartCardToken)(nil)
 
 var _ TokenProvider = (*SmartCardToken)(nil)

@@ -5,13 +5,14 @@
 package spritekit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // PhysicsWorld is an idiomatic wrapper over the Objective-C class SKPhysicsWorld.
@@ -48,24 +49,24 @@ func physicsWorldAdopt(id objc.ID) *PhysicsWorld {
 }
 
 // Description returns the object's -description text.
-func (x *PhysicsWorld) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pw *PhysicsWorld) Description() string {
+	return rt.Description(objref.IDOf(pw))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PhysicsWorld) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pw *PhysicsWorld) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pw), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PhysicsWorld) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pw *PhysicsWorld) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pw), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PhysicsWorld) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pw *PhysicsWorld) String() string {
+	return rt.Description(objref.IDOf(pw))
 }
 
 // NewPhysicsWorld creates a new PhysicsWorld.
@@ -74,100 +75,69 @@ func NewPhysicsWorld() *PhysicsWorld {
 	return physicsWorldAdopt(_id)
 }
 
-// WithGravity a vector that specifies the gravitational acceleration applied to physics bodies in the physics world.
-func (x *PhysicsWorld) WithGravity(gravity corefoundation.CGVector) *PhysicsWorld {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGravity:"), gravity)
-	return x
+// WithGravity sets a vector that specifies the gravitational acceleration applied to physics bodies in the physics world.
+func (pw *PhysicsWorld) WithGravity(gravity corefoundation.CGVector) *PhysicsWorld {
+	objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("setGravity:"), gravity)
+	return pw
 }
 
-// WithSpeed the rate at which the simulation executes.
-func (x *PhysicsWorld) WithSpeed(speed float64) *PhysicsWorld {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
-	return x
+// WithSpeed sets the rate at which the simulation executes.
+func (pw *PhysicsWorld) WithSpeed(speed float64) *PhysicsWorld {
+	objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("setSpeed:"), speed)
+	return pw
 }
 
 // AddJoint adds a joint to the physics world.
-func (x *PhysicsWorld) AddJoint(joint *PhysicsJoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addJoint:"), objref.IDOf(joint))
+func (pw *PhysicsWorld) AddJoint(joint *PhysicsJoint) {
+	objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("addJoint:"), objref.IDOf(joint))
 }
 
 // RemoveJoint removes a specific joint from the physics world.
-func (x *PhysicsWorld) RemoveJoint(joint *PhysicsJoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeJoint:"), objref.IDOf(joint))
+func (pw *PhysicsWorld) RemoveJoint(joint *PhysicsJoint) {
+	objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("removeJoint:"), objref.IDOf(joint))
 }
 
 // RemoveAllJoints removes all joints from the physics world.
-func (x *PhysicsWorld) RemoveAllJoints() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllJoints"))
+func (pw *PhysicsWorld) RemoveAllJoints() {
+	objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("removeAllJoints"))
 }
 
 // BodyAtPoint searches for the first physics body that contains a point.
-func (x *PhysicsWorld) BodyAtPoint(point corefoundation.CGPoint) *PhysicsBody {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyAtPoint:"), point)
+func (pw *PhysicsWorld) BodyAtPoint(point corefoundation.CGPoint) *PhysicsBody {
+	_r := objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("bodyAtPoint:"), point)
 	return PhysicsBodyFromID(_r)
 }
 
 // BodyInRect searches for the first physics body that intersects the specified rectangle.
-func (x *PhysicsWorld) BodyInRect(rect corefoundation.CGRect) *PhysicsBody {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyInRect:"), rect)
+func (pw *PhysicsWorld) BodyInRect(rect corefoundation.CGRect) *PhysicsBody {
+	_r := objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("bodyInRect:"), rect)
 	return PhysicsBodyFromID(_r)
 }
 
 // BodyAlongRayStartEnd searches for the first physics body that intersects a ray.
-func (x *PhysicsWorld) BodyAlongRayStartEnd(start corefoundation.CGPoint, end corefoundation.CGPoint) *PhysicsBody {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bodyAlongRayStart:end:"), start, end)
+func (pw *PhysicsWorld) BodyAlongRayStartEnd(start corefoundation.CGPoint, end corefoundation.CGPoint) *PhysicsBody {
+	_r := objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("bodyAlongRayStart:end:"), start, end)
 	return PhysicsBodyFromID(_r)
 }
 
 // EnumerateBodiesAtPointUsing enumerates all the physics bodies in the scene that contain a point.
-func (x *PhysicsWorld) EnumerateBodiesAtPointUsing(point corefoundation.CGPoint, block func(obj.Object, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateBodiesAtPoint:usingBlock:"), point, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
+func (pw *PhysicsWorld) EnumerateBodiesAtPointUsing(point corefoundation.CGPoint, block func(obj.Object, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("enumerateBodiesAtPoint:usingBlock:"), point, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
 // EnumerateBodiesInRectUsing enumerates all the physics bodies in the scene that intersect the specified rectangle.
-func (x *PhysicsWorld) EnumerateBodiesInRectUsing(rect corefoundation.CGRect, block func(obj.Object, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateBodiesInRect:usingBlock:"), rect, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
+func (pw *PhysicsWorld) EnumerateBodiesInRectUsing(rect corefoundation.CGRect, block func(obj.Object, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(pw), objc.RegisterName("enumerateBodiesInRect:usingBlock:"), rect, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
-// Gravity a global 2D vector specifying the field force acceleration due to gravity. The unit is meters per second so standard earth gravity would be { 0.0, +/-9.8 }.
-func (x *PhysicsWorld) Gravity() corefoundation.CGVector {
-	_r := objc.Send[corefoundation.CGVector](objref.IDOf(x), objc.RegisterName("gravity"))
+// Gravity returns a global 2D vector specifying the field force acceleration due to gravity. The unit is meters per second so standard earth gravity would be { 0.0, +/-9.8 }.
+func (pw *PhysicsWorld) Gravity() corefoundation.CGVector {
+	_r := objc.Send[corefoundation.CGVector](objref.IDOf(pw), objc.RegisterName("gravity"))
 	return _r
-}
-
-// SetGravity wraps the corresponding Objective-C method.
-func (x *PhysicsWorld) SetGravity(gravity corefoundation.CGVector) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGravity:"), gravity)
 }
 
 // Speed wraps the corresponding Objective-C method.
-func (x *PhysicsWorld) Speed() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speed"))
+func (pw *PhysicsWorld) Speed() float64 {
+	_r := objc.Send[float64](objref.IDOf(pw), objc.RegisterName("speed"))
 	return _r
 }
-
-// SetSpeed wraps the corresponding Objective-C method.
-func (x *PhysicsWorld) SetSpeed(speed float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
-}
-
-// PhysicsWorldable is the interface implemented by [PhysicsWorld], for mocking and DI.
-type PhysicsWorldable interface {
-	obj.Object
-	WithGravity(gravity corefoundation.CGVector) *PhysicsWorld
-	WithSpeed(speed float64) *PhysicsWorld
-	AddJoint(joint *PhysicsJoint)
-	RemoveJoint(joint *PhysicsJoint)
-	RemoveAllJoints()
-	BodyAtPoint(point corefoundation.CGPoint) *PhysicsBody
-	BodyInRect(rect corefoundation.CGRect) *PhysicsBody
-	BodyAlongRayStartEnd(start corefoundation.CGPoint, end corefoundation.CGPoint) *PhysicsBody
-	EnumerateBodiesAtPointUsing(point corefoundation.CGPoint, block func(obj.Object, *bool))
-	EnumerateBodiesInRectUsing(rect corefoundation.CGRect, block func(obj.Object, *bool))
-	Gravity() corefoundation.CGVector
-	SetGravity(gravity corefoundation.CGVector)
-	Speed() float64
-	SetSpeed(speed float64)
-}
-
-var _ PhysicsWorldable = (*PhysicsWorld)(nil)

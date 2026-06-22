@@ -5,13 +5,14 @@
 package corespotlight
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // ImportExtension is an idiomatic wrapper over the Objective-C class CSImportExtension.
@@ -48,24 +49,24 @@ func importExtensionAdopt(id objc.ID) *ImportExtension {
 }
 
 // Description returns the object's -description text.
-func (x *ImportExtension) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ie *ImportExtension) Description() string {
+	return rt.Description(objref.IDOf(ie))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImportExtension) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ie *ImportExtension) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ie), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImportExtension) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ie *ImportExtension) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ie), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ImportExtension) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ie *ImportExtension) String() string {
+	return rt.Description(objref.IDOf(ie))
 }
 
 // NewImportExtension creates a new ImportExtension.
@@ -75,19 +76,11 @@ func NewImportExtension() *ImportExtension {
 }
 
 // UpdateAttributesForFileAtURL provides searchable attributes for a file at the specified URL.
-func (x *ImportExtension) UpdateAttributesForFileAtURL(attributes *SearchableItemAttributeSet, contentURL string) error {
+func (ie *ImportExtension) UpdateAttributesForFileAtURL(attributes *SearchableItemAttributeSet, contentURL string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("updateAttributes:forFileAtURL:error:"), objref.IDOf(attributes), rt.FileURL(contentURL), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(ie), objc.RegisterName("updateAttributes:forFileAtURL:error:"), objref.IDOf(attributes), rt.FileURL(contentURL), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
-
-// ImportExtensionable is the interface implemented by [ImportExtension], for mocking and DI.
-type ImportExtensionable interface {
-	obj.Object
-	UpdateAttributesForFileAtURL(attributes *SearchableItemAttributeSet, contentURL string) error
-}
-
-var _ ImportExtensionable = (*ImportExtension)(nil)

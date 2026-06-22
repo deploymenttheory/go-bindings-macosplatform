@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,39 +52,28 @@ func NewFragmentedMovieMinderWithMovieMindingInterval(movie *FragmentedMovie, mi
 	return fragmentedMovieMinderAdopt(_id)
 }
 
-// WithMindingInterval an interval that specifies when to perform a check for additional fragments.
-func (x *FragmentedMovieMinder) WithMindingInterval(mindingInterval float64) *FragmentedMovieMinder {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMindingInterval:"), mindingInterval)
-	return x
+// WithMindingInterval sets an interval that specifies when to perform a check for additional fragments.
+func (fmm *FragmentedMovieMinder) WithMindingInterval(mindingInterval float64) *FragmentedMovieMinder {
+	objc.Send[objc.ID](objref.IDOf(fmm), objc.RegisterName("setMindingInterval:"), mindingInterval)
+	return fmm
 }
 
 // AddFragmentedMovie adds a fragmented movie to the array of movies being minded.
-func (x *FragmentedMovieMinder) AddFragmentedMovie(movie *FragmentedMovie) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addFragmentedMovie:"), objref.IDOf(movie))
+func (fmm *FragmentedMovieMinder) AddFragmentedMovie(movie *FragmentedMovie) {
+	objc.Send[objc.ID](objref.IDOf(fmm), objc.RegisterName("addFragmentedMovie:"), objref.IDOf(movie))
 }
 
 // RemoveFragmentedMovie removes a fragmented movie from the array of movies being minded.
-func (x *FragmentedMovieMinder) RemoveFragmentedMovie(movie *FragmentedMovie) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFragmentedMovie:"), objref.IDOf(movie))
+func (fmm *FragmentedMovieMinder) RemoveFragmentedMovie(movie *FragmentedMovie) {
+	objc.Send[objc.ID](objref.IDOf(fmm), objc.RegisterName("removeFragmentedMovie:"), objref.IDOf(movie))
 }
 
-// Movies an NSArray of the AVFragmentedMovie objects being minded.
+// Movies returns an NSArray of the AVFragmentedMovie objects being minded.
 //
 // Movies returns the collection as a Go slice.
-func (x *FragmentedMovieMinder) Movies() []*FragmentedMovie {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("movies"))
+func (fmm *FragmentedMovieMinder) Movies() []*FragmentedMovie {
+	_arr := objc.Send[objc.ID](objref.IDOf(fmm), objc.RegisterName("movies"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FragmentedMovie { return FragmentedMovieFromID(_id) })
 }
-
-// FragmentedMovieMinderable is the interface implemented by [FragmentedMovieMinder], for mocking and DI.
-type FragmentedMovieMinderable interface {
-	obj.Object
-	WithMindingInterval(mindingInterval float64) *FragmentedMovieMinder
-	AddFragmentedMovie(movie *FragmentedMovie)
-	RemoveFragmentedMovie(movie *FragmentedMovie)
-	Movies() []*FragmentedMovie
-}
-
-var _ FragmentedMovieMinderable = (*FragmentedMovieMinder)(nil)
 
 var _ FragmentedAssetMinderProvider = (*FragmentedMovieMinder)(nil)

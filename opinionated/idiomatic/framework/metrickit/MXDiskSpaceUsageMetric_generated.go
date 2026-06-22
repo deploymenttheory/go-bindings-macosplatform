@@ -52,67 +52,52 @@ func NewDiskSpaceUsageMetric() *DiskSpaceUsageMetric {
 	return diskSpaceUsageMetricAdopt(_id)
 }
 
-// TotalBinaryFileSize total fixed size used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
-func (x *DiskSpaceUsageMetric) TotalBinaryFileSize() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalBinaryFileSize"))
+// TotalBinaryFileSize returns total fixed size used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
+func (dsum *DiskSpaceUsageMetric) TotalBinaryFileSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dsum), objc.RegisterName("totalBinaryFileSize"))
 	return obj.Wrap(_r)
 }
 
-// TotalBinaryFileCount total count of fixed files owned by the app.
-func (x *DiskSpaceUsageMetric) TotalBinaryFileCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalBinaryFileCount"))
+// TotalBinaryFileCount returns total count of fixed files owned by the app.
+func (dsum *DiskSpaceUsageMetric) TotalBinaryFileCount() int {
+	_r := objc.Send[int](objref.IDOf(dsum), objc.RegisterName("totalBinaryFileCount"))
 	return _r
 }
 
-// TotalDataFileSize total data file size used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
-func (x *DiskSpaceUsageMetric) TotalDataFileSize() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalDataFileSize"))
+// TotalDataFileSize returns total data file size used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
+func (dsum *DiskSpaceUsageMetric) TotalDataFileSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dsum), objc.RegisterName("totalDataFileSize"))
 	return obj.Wrap(_r)
 }
 
-// TotalDataFileCount total count of data files owned by the app.
-func (x *DiskSpaceUsageMetric) TotalDataFileCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("totalDataFileCount"))
+// TotalDataFileCount returns total count of data files owned by the app.
+func (dsum *DiskSpaceUsageMetric) TotalDataFileCount() int {
+	_r := objc.Send[int](objref.IDOf(dsum), objc.RegisterName("totalDataFileCount"))
 	return _r
 }
 
-// TotalCacheFolderSize total file size contained within the apps cache folder. Dimensioned as NSUnitInformationStorage, base unit is bytes.
-func (x *DiskSpaceUsageMetric) TotalCacheFolderSize() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalCacheFolderSize"))
+// TotalCacheFolderSize returns total file size contained within the apps cache folder. Dimensioned as NSUnitInformationStorage, base unit is bytes.
+func (dsum *DiskSpaceUsageMetric) TotalCacheFolderSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dsum), objc.RegisterName("totalCacheFolderSize"))
 	return obj.Wrap(_r)
 }
 
-// TotalCloneSize total clone size used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
-func (x *DiskSpaceUsageMetric) TotalCloneSize() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalCloneSize"))
+// TotalCloneSize returns total clone size used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
+func (dsum *DiskSpaceUsageMetric) TotalCloneSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dsum), objc.RegisterName("totalCloneSize"))
 	return obj.Wrap(_r)
 }
 
-// TotalDiskSpaceUsedSize total disk space used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
-func (x *DiskSpaceUsageMetric) TotalDiskSpaceUsedSize() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalDiskSpaceUsedSize"))
+// TotalDiskSpaceUsedSize returns total disk space used by the app. Dimensioned as NSUnitInformationStorage, base unit is bytes.
+func (dsum *DiskSpaceUsageMetric) TotalDiskSpaceUsedSize() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dsum), objc.RegisterName("totalDiskSpaceUsedSize"))
 	return obj.Wrap(_r)
 }
 
-// TotalDiskSpaceCapacity total disk space capacity of the device Dimensioned as NSUnitInformationStorage, base unit is bytes.
-func (x *DiskSpaceUsageMetric) TotalDiskSpaceCapacity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalDiskSpaceCapacity"))
+// TotalDiskSpaceCapacity returns total disk space capacity of the device Dimensioned as NSUnitInformationStorage, base unit is bytes.
+func (dsum *DiskSpaceUsageMetric) TotalDiskSpaceCapacity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dsum), objc.RegisterName("totalDiskSpaceCapacity"))
 	return obj.Wrap(_r)
 }
-
-// DiskSpaceUsageMetricable is the interface implemented by [DiskSpaceUsageMetric], for mocking and DI.
-type DiskSpaceUsageMetricable interface {
-	obj.Object
-	TotalBinaryFileSize() obj.Object
-	TotalBinaryFileCount() int
-	TotalDataFileSize() obj.Object
-	TotalDataFileCount() int
-	TotalCacheFolderSize() obj.Object
-	TotalCloneSize() obj.Object
-	TotalDiskSpaceUsedSize() obj.Object
-	TotalDiskSpaceCapacity() obj.Object
-}
-
-var _ DiskSpaceUsageMetricable = (*DiskSpaceUsageMetric)(nil)
 
 var _ MetricProvider = (*DiskSpaceUsageMetric)(nil)

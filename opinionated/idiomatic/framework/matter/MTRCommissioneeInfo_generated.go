@@ -46,24 +46,24 @@ func mTRCommissioneeInfoAdopt(id objc.ID) *MTRCommissioneeInfo {
 }
 
 // Description returns the object's -description text.
-func (x *MTRCommissioneeInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mci *MTRCommissioneeInfo) Description() string {
+	return rt.Description(objref.IDOf(mci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRCommissioneeInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mci *MTRCommissioneeInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRCommissioneeInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mci *MTRCommissioneeInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRCommissioneeInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mci *MTRCommissioneeInfo) String() string {
+	return rt.Description(objref.IDOf(mci))
 }
 
 // NewMTRCommissioneeInfo creates a new MTRCommissioneeInfo.
@@ -72,37 +72,26 @@ func NewMTRCommissioneeInfo() *MTRCommissioneeInfo {
 	return mTRCommissioneeInfoAdopt(_id)
 }
 
-// ProductIdentity the product identity (VID / PID) of the commissionee.
-func (x *MTRCommissioneeInfo) ProductIdentity() *MTRProductIdentity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentity"))
+// ProductIdentity returns the product identity (VID / PID) of the commissionee.
+func (mci *MTRCommissioneeInfo) ProductIdentity() *MTRProductIdentity {
+	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("productIdentity"))
 	return MTRProductIdentityFromID(_r)
 }
 
-// EndpointsById endpoint information for all endpoints of the commissionee. Will be present only if readEndpointInformation is set to YES on MTRCommissioningParameters. Use `rootEndpoint` and `-[MTREndpointInfo children]` to traverse endpoints in composition order.
-func (x *MTRCommissioneeInfo) EndpointsById() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpointsById"))
+// EndpointsByID returns endpoint information for all endpoints of the commissionee. Will be present only if readEndpointInformation is set to YES on MTRCommissioningParameters. Use `rootEndpoint` and `-[MTREndpointInfo children]` to traverse endpoints in composition order.
+func (mci *MTRCommissioneeInfo) EndpointsByID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("endpointsById"))
 	return obj.Wrap(_r)
 }
 
-// RootEndpoint endpoint information for the root endpoint of the commissionee. Will be present only if readEndpointInformation is set to YES on MTRCommissioningParameters.
-func (x *MTRCommissioneeInfo) RootEndpoint() *MTREndpointInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootEndpoint"))
+// RootEndpoint returns endpoint information for the root endpoint of the commissionee. Will be present only if readEndpointInformation is set to YES on MTRCommissioningParameters.
+func (mci *MTRCommissioneeInfo) RootEndpoint() *MTREndpointInfo {
+	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("rootEndpoint"))
 	return MTREndpointInfoFromID(_r)
 }
 
-// Attributes attributes that were read from the commissionee.  This will contain the following, if they are available: 1) The attributes in extraAttributesToRead on MTRCommissioningParameters. 2) The FeatureMap attributes of all Network Commissioning clusters on the commissionee.
-func (x *MTRCommissioneeInfo) Attributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+// Attributes returns attributes that were read from the commissionee.  This will contain the following, if they are available: 1) The attributes in extraAttributesToRead on MTRCommissioningParameters. 2) The FeatureMap attributes of all Network Commissioning clusters on the commissionee.
+func (mci *MTRCommissioneeInfo) Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
-
-// MTRCommissioneeInfoable is the interface implemented by [MTRCommissioneeInfo], for mocking and DI.
-type MTRCommissioneeInfoable interface {
-	obj.Object
-	ProductIdentity() *MTRProductIdentity
-	EndpointsById() obj.Object
-	RootEndpoint() *MTREndpointInfo
-	Attributes() obj.Object
-}
-
-var _ MTRCommissioneeInfoable = (*MTRCommissioneeInfo)(nil)

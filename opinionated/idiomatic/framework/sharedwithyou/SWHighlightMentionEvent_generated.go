@@ -46,24 +46,24 @@ func highlightMentionEventAdopt(id objc.ID) *HighlightMentionEvent {
 }
 
 // Description returns the object's -description text.
-func (x *HighlightMentionEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hme *HighlightMentionEvent) Description() string {
+	return rt.Description(objref.IDOf(hme))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HighlightMentionEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hme *HighlightMentionEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hme), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HighlightMentionEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hme *HighlightMentionEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hme), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HighlightMentionEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hme *HighlightMentionEvent) String() string {
+	return rt.Description(objref.IDOf(hme))
 }
 
 // NewHighlightMentionEventWithHighlightMentionedPersonCloudKitShareHandle creates and initializes a mention event.
@@ -80,19 +80,11 @@ func NewHighlightMentionEventWithHighlightMentionedPersonIdentity(highlight *Hig
 	return highlightMentionEventAdopt(_id)
 }
 
-// MentionedPersonHandle the person being mentioned by the sender.
-func (x *HighlightMentionEvent) MentionedPersonHandle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mentionedPersonHandle"))
+// MentionedPersonHandle returns the person being mentioned by the sender.
+func (hme *HighlightMentionEvent) MentionedPersonHandle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(hme), objc.RegisterName("mentionedPersonHandle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// HighlightMentionEventable is the interface implemented by [HighlightMentionEvent], for mocking and DI.
-type HighlightMentionEventable interface {
-	obj.Object
-	MentionedPersonHandle() string
-}
-
-var _ HighlightMentionEventable = (*HighlightMentionEvent)(nil)

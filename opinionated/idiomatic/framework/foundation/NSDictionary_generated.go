@@ -5,13 +5,14 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Dictionary is an idiomatic wrapper over the Objective-C class NSDictionary.
@@ -50,24 +51,24 @@ func dictionaryAdopt(id objc.ID) *Dictionary {
 }
 
 // Description returns the object's -description text.
-func (x *Dictionary) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Dictionary) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Dictionary) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Dictionary) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Dictionary) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Dictionary) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Dictionary) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Dictionary) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // NewDictionaryWithCoder creates a dictionary initialized from data in the provided unarchiver.
@@ -131,38 +132,38 @@ func NewDictionaryWithContentsOfURLError(url string) (result *Dictionary, err er
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Dictionary) WithScriptingProperties(scriptingProperties obj.Object) *Dictionary {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (d *Dictionary) WithScriptingProperties(scriptingProperties obj.Object) *Dictionary {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return d
 }
 
 // ObjectForKey returns the value associated with a given key.
-func (x *Dictionary) ObjectForKey(aKey obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKey:"), objref.IDOf(aKey))
+func (d *Dictionary) ObjectForKey(aKey obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("objectForKey:"), objref.IDOf(aKey))
 	return obj.Wrap(_r)
 }
 
 // KeyEnumerator provides an enumerator to access the keys in the dictionary.
-func (x *Dictionary) KeyEnumerator() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyEnumerator"))
+func (d *Dictionary) KeyEnumerator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("keyEnumerator"))
 	return obj.Wrap(_r)
 }
 
 // Count wraps the corresponding Objective-C method.
-func (x *Dictionary) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+func (d *Dictionary) Count() int {
+	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("count"))
 	return _r
 }
 
 // AllKeysForObject returns a new array containing the keys corresponding to all occurrences of a given object in the dictionary.
-func (x *Dictionary) AllKeysForObject(anObject obj.Object) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allKeysForObject:"), objref.IDOf(anObject))
+func (d *Dictionary) AllKeysForObject(anObject obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("allKeysForObject:"), objref.IDOf(anObject))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DescriptionWithLocale returns a string object that represents the contents of the dictionary, formatted as a property list.
-func (x *Dictionary) DescriptionWithLocale(locale obj.Object) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithLocale:"), objref.IDOf(locale))
+func (d *Dictionary) DescriptionWithLocale(locale obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("descriptionWithLocale:"), objref.IDOf(locale))
 	if _r == 0 {
 		return ""
 	}
@@ -170,8 +171,8 @@ func (x *Dictionary) DescriptionWithLocale(locale obj.Object) string {
 }
 
 // DescriptionWithLocaleIndent returns a string object that represents the contents of the dictionary, formatted as a property list.
-func (x *Dictionary) DescriptionWithLocaleIndent(locale obj.Object, level int) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithLocale:indent:"), objref.IDOf(locale), level)
+func (d *Dictionary) DescriptionWithLocaleIndent(locale obj.Object, level int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("descriptionWithLocale:indent:"), objref.IDOf(locale), level)
 	if _r == 0 {
 		return ""
 	}
@@ -179,27 +180,27 @@ func (x *Dictionary) DescriptionWithLocaleIndent(locale obj.Object, level int) s
 }
 
 // IsEqualToDictionary returns a Boolean value that indicates whether the contents of the receiving dictionary are equal to the contents of another given dictionary.
-func (x *Dictionary) IsEqualToDictionary(otherDictionary obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToDictionary:"), objref.IDOf(otherDictionary))
+func (d *Dictionary) IsEqualToDictionary(otherDictionary obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isEqualToDictionary:"), objref.IDOf(otherDictionary))
 	return _r
 }
 
 // ObjectEnumerator returns an enumerator object that lets you access each value in the dictionary.
-func (x *Dictionary) ObjectEnumerator() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectEnumerator"))
+func (d *Dictionary) ObjectEnumerator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("objectEnumerator"))
 	return obj.Wrap(_r)
 }
 
 // ObjectsForKeysNotFoundMarker returns as a static array the set of objects from the dictionary that corresponds to the specified keys.
-func (x *Dictionary) ObjectsForKeysNotFoundMarker(keys []obj.Object, marker obj.Object) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectsForKeys:notFoundMarker:"), purego.SliceToNSArray(keys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(marker))
+func (d *Dictionary) ObjectsForKeysNotFoundMarker(keys []obj.Object, marker obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("objectsForKeys:notFoundMarker:"), purego.SliceToNSArray(keys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(marker))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // WriteToURL writes a property list representation of the contents of the dictionary to a given URL.
-func (x *Dictionary) WriteToURL(url string) error {
+func (d *Dictionary) WriteToURL(url string) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -207,56 +208,56 @@ func (x *Dictionary) WriteToURL(url string) error {
 }
 
 // ObjectForKeyedSubscript returns the value associated with a given key.
-func (x *Dictionary) ObjectForKeyedSubscript(key obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
+func (d *Dictionary) ObjectForKeyedSubscript(key obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
 	return obj.Wrap(_r)
 }
 
 // EnumerateKeysAndObjectsUsing applies a given block object to the entries of the dictionary.
-func (x *Dictionary) EnumerateKeysAndObjectsUsing(block func(obj.Object, obj.Object, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateKeysAndObjectsUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+func (d *Dictionary) EnumerateKeysAndObjectsUsing(block func(obj.Object, obj.Object, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("enumerateKeysAndObjectsUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
 		block(obj.Wrap(_b0), obj.Wrap(_b1), (*bool)(_b2))
 	}))
 }
 
 // EnumerateKeysAndObjectsWithOptionsUsing applies a given block object to the entries of the dictionary, with options specifying how the enumeration is performed.
-func (x *Dictionary) EnumerateKeysAndObjectsWithOptionsUsing(opts EnumerationOptions, block func(obj.Object, obj.Object, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateKeysAndObjectsWithOptions:usingBlock:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
+func (d *Dictionary) EnumerateKeysAndObjectsWithOptionsUsing(opts EnumerationOptions, block func(obj.Object, obj.Object, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("enumerateKeysAndObjectsWithOptions:usingBlock:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) {
 		block(obj.Wrap(_b0), obj.Wrap(_b1), (*bool)(_b2))
 	}))
 }
 
 // KeysOfEntriesPassingTest returns the set of keys whose corresponding value satisfies a constraint described by a block object.
-func (x *Dictionary) KeysOfEntriesPassingTest(predicate func(obj.Object, obj.Object, *bool) bool) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keysOfEntriesPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) bool {
+func (d *Dictionary) KeysOfEntriesPassingTest(predicate func(obj.Object, obj.Object, *bool) bool) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("keysOfEntriesPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), obj.Wrap(_b1), (*bool)(_b2))
 	}))
 	return obj.Wrap(_r)
 }
 
 // KeysOfEntriesWithOptionsPassingTest returns the set of keys whose corresponding value satisfies a constraint described by a block object.
-func (x *Dictionary) KeysOfEntriesWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, obj.Object, *bool) bool) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keysOfEntriesWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) bool {
+func (d *Dictionary) KeysOfEntriesWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, obj.Object, *bool) bool) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("keysOfEntriesWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), obj.Wrap(_b1), (*bool)(_b2))
 	}))
 	return obj.Wrap(_r)
 }
 
 // AllKeys wraps the corresponding Objective-C method.
-func (x *Dictionary) AllKeys() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allKeys"))
+func (d *Dictionary) AllKeys() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("allKeys"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AllValues wraps the corresponding Objective-C method.
-func (x *Dictionary) AllValues() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allValues"))
+func (d *Dictionary) AllValues() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("allValues"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // DescriptionInStringsFileFormat wraps the corresponding Objective-C method.
-func (x *Dictionary) DescriptionInStringsFileFormat() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionInStringsFileFormat"))
+func (d *Dictionary) DescriptionInStringsFileFormat() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("descriptionInStringsFileFormat"))
 	if _r == 0 {
 		return ""
 	}
@@ -264,32 +265,32 @@ func (x *Dictionary) DescriptionInStringsFileFormat() string {
 }
 
 // WriteToFileAtomically writes a property list representation of the contents of the dictionary to a given path.
-func (x *Dictionary) WriteToFileAtomically(path string, useAuxiliaryFile bool) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToFile:atomically:"), purego.NSString(path), useAuxiliaryFile)
+func (d *Dictionary) WriteToFileAtomically(path string, useAuxiliaryFile bool) bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToFile:atomically:"), purego.NSString(path), useAuxiliaryFile)
 	return _r
 }
 
 // WriteToURLAtomically writes a property list representation of the contents of the dictionary to a given URL.
-func (x *Dictionary) WriteToURLAtomically(url string, atomically bool) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeToURL:atomically:"), rt.FileURL(url), atomically)
+func (d *Dictionary) WriteToURLAtomically(url string, atomically bool) bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("writeToURL:atomically:"), rt.FileURL(url), atomically)
 	return _r
 }
 
 // FileSize returns the file’s size, in bytes.
-func (x *Dictionary) FileSize() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("fileSize"))
+func (d *Dictionary) FileSize() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(d), objc.RegisterName("fileSize"))
 	return _r
 }
 
 // FileModificationDate returns file’s modification date.
-func (x *Dictionary) FileModificationDate() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileModificationDate"))
+func (d *Dictionary) FileModificationDate() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileModificationDate"))
 	return DateFromID(_r)
 }
 
 // FileType returns the file type.
-func (x *Dictionary) FileType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileType"))
+func (d *Dictionary) FileType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileType"))
 	if _r == 0 {
 		return ""
 	}
@@ -297,14 +298,14 @@ func (x *Dictionary) FileType() string {
 }
 
 // FilePosixPermissions returns the file’s POSIX permissions.
-func (x *Dictionary) FilePosixPermissions() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("filePosixPermissions"))
+func (d *Dictionary) FilePosixPermissions() int {
+	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("filePosixPermissions"))
 	return _r
 }
 
 // FileOwnerAccountName returns the file’s owner account name.
-func (x *Dictionary) FileOwnerAccountName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileOwnerAccountName"))
+func (d *Dictionary) FileOwnerAccountName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileOwnerAccountName"))
 	if _r == 0 {
 		return ""
 	}
@@ -312,8 +313,8 @@ func (x *Dictionary) FileOwnerAccountName() string {
 }
 
 // FileGroupOwnerAccountName returns the file’s group owner account name.
-func (x *Dictionary) FileGroupOwnerAccountName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileGroupOwnerAccountName"))
+func (d *Dictionary) FileGroupOwnerAccountName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileGroupOwnerAccountName"))
 	if _r == 0 {
 		return ""
 	}
@@ -321,112 +322,68 @@ func (x *Dictionary) FileGroupOwnerAccountName() string {
 }
 
 // FileSystemNumber returns the filesystem number.
-func (x *Dictionary) FileSystemNumber() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fileSystemNumber"))
+func (d *Dictionary) FileSystemNumber() int {
+	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("fileSystemNumber"))
 	return _r
 }
 
 // FileSystemFileNumber returns the filesystem file number.
-func (x *Dictionary) FileSystemFileNumber() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fileSystemFileNumber"))
+func (d *Dictionary) FileSystemFileNumber() int {
+	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("fileSystemFileNumber"))
 	return _r
 }
 
-// FileExtensionHidden returns a Boolean value indicating whether the file hides its extension.
-func (x *Dictionary) FileExtensionHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("fileExtensionHidden"))
+// FileExtensionHidden reports whether returns a Boolean value indicating whether the file hides its extension.
+func (d *Dictionary) FileExtensionHidden() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("fileExtensionHidden"))
 	return _r
 }
 
 // FileHFSCreatorCode returns the file’s HFS creator code.
-func (x *Dictionary) FileHFSCreatorCode() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fileHFSCreatorCode"))
+func (d *Dictionary) FileHFSCreatorCode() int {
+	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("fileHFSCreatorCode"))
 	return _r
 }
 
 // FileHFSTypeCode returns file’s HFS type code.
-func (x *Dictionary) FileHFSTypeCode() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fileHFSTypeCode"))
+func (d *Dictionary) FileHFSTypeCode() int {
+	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("fileHFSTypeCode"))
 	return _r
 }
 
-// FileIsImmutable returns a Boolean value indicating whether the file is immutable.
-func (x *Dictionary) FileIsImmutable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("fileIsImmutable"))
+// FileIsImmutable reports whether returns a Boolean value indicating whether the file is immutable.
+func (d *Dictionary) FileIsImmutable() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("fileIsImmutable"))
 	return _r
 }
 
-// FileIsAppendOnly returns a Boolean value indicating whether the file is append only.
-func (x *Dictionary) FileIsAppendOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("fileIsAppendOnly"))
+// FileIsAppendOnly reports whether returns a Boolean value indicating whether the file is append only.
+func (d *Dictionary) FileIsAppendOnly() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("fileIsAppendOnly"))
 	return _r
 }
 
 // FileCreationDate returns the file’s creation date.
-func (x *Dictionary) FileCreationDate() *Date {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileCreationDate"))
+func (d *Dictionary) FileCreationDate() *Date {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileCreationDate"))
 	return DateFromID(_r)
 }
 
 // FileOwnerAccountID returns the file’s owner account ID.
-func (x *Dictionary) FileOwnerAccountID() *Number {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileOwnerAccountID"))
+func (d *Dictionary) FileOwnerAccountID() *Number {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileOwnerAccountID"))
 	return NumberFromID(_r)
 }
 
 // FileGroupOwnerAccountID returns file’s group owner account ID.
-func (x *Dictionary) FileGroupOwnerAccountID() *Number {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileGroupOwnerAccountID"))
+func (d *Dictionary) FileGroupOwnerAccountID() *Number {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("fileGroupOwnerAccountID"))
 	return NumberFromID(_r)
 }
-
-// Dictionaryable is the interface implemented by [Dictionary], for mocking and DI.
-type Dictionaryable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Dictionary
-	ObjectForKey(aKey obj.Object) obj.Object
-	KeyEnumerator() obj.Object
-	Count() int
-	AllKeysForObject(anObject obj.Object) []obj.Object
-	DescriptionWithLocale(locale obj.Object) string
-	DescriptionWithLocaleIndent(locale obj.Object, level int) string
-	IsEqualToDictionary(otherDictionary obj.Object) bool
-	ObjectEnumerator() obj.Object
-	ObjectsForKeysNotFoundMarker(keys []obj.Object, marker obj.Object) []obj.Object
-	WriteToURL(url string) error
-	ObjectForKeyedSubscript(key obj.Object) obj.Object
-	EnumerateKeysAndObjectsUsing(block func(obj.Object, obj.Object, *bool))
-	EnumerateKeysAndObjectsWithOptionsUsing(opts EnumerationOptions, block func(obj.Object, obj.Object, *bool))
-	KeysOfEntriesPassingTest(predicate func(obj.Object, obj.Object, *bool) bool) obj.Object
-	KeysOfEntriesWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, obj.Object, *bool) bool) obj.Object
-	AllKeys() []obj.Object
-	AllValues() []obj.Object
-	DescriptionInStringsFileFormat() string
-	WriteToFileAtomically(path string, useAuxiliaryFile bool) bool
-	WriteToURLAtomically(url string, atomically bool) bool
-	FileSize() uint64
-	FileModificationDate() *Date
-	FileType() string
-	FilePosixPermissions() int
-	FileOwnerAccountName() string
-	FileGroupOwnerAccountName() string
-	FileSystemNumber() int
-	FileSystemFileNumber() int
-	FileExtensionHidden() bool
-	FileHFSCreatorCode() int
-	FileHFSTypeCode() int
-	FileIsImmutable() bool
-	FileIsAppendOnly() bool
-	FileCreationDate() *Date
-	FileOwnerAccountID() *Number
-	FileGroupOwnerAccountID() *Number
-}
-
-var _ Dictionaryable = (*Dictionary)(nil)
 
 // isDictionary marks Dictionary — and, by embedding promotion, its
 // subclasses — as a member of the Dictionary hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Dictionary) isDictionary() {}
+func (d *Dictionary) isDictionary() {}
 
 var _ DictionaryProvider = (*Dictionary)(nil)

@@ -46,24 +46,24 @@ func assetDownloadContentConfigurationAdopt(id objc.ID) *AssetDownloadContentCon
 }
 
 // Description returns the object's -description text.
-func (x *AssetDownloadContentConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (adcc *AssetDownloadContentConfiguration) Description() string {
+	return rt.Description(objref.IDOf(adcc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetDownloadContentConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (adcc *AssetDownloadContentConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(adcc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetDownloadContentConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (adcc *AssetDownloadContentConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(adcc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetDownloadContentConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (adcc *AssetDownloadContentConfiguration) String() string {
+	return rt.Description(objref.IDOf(adcc))
 }
 
 // NewAssetDownloadContentConfiguration creates a new AssetDownloadContentConfiguration.
@@ -72,55 +72,32 @@ func NewAssetDownloadContentConfiguration() *AssetDownloadContentConfiguration {
 	return assetDownloadContentConfigurationAdopt(_id)
 }
 
-// WithVariantQualifiers the variant qualifiers for this configuration.
-func (x *AssetDownloadContentConfiguration) WithVariantQualifiers(items ...*AssetVariantQualifier) *AssetDownloadContentConfiguration {
+// WithVariantQualifiers sets the variant qualifiers for this configuration.
+func (adcc *AssetDownloadContentConfiguration) WithVariantQualifiers(items ...*AssetVariantQualifier) *AssetDownloadContentConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v *AssetVariantQualifier) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariantQualifiers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(adcc), objc.RegisterName("setVariantQualifiers:"), _arr)
+	return adcc
 }
 
-// WithMediaSelections the media selections of an asset that a task downloads.
-func (x *AssetDownloadContentConfiguration) WithMediaSelections(items ...MediaSelectionProvider) *AssetDownloadContentConfiguration {
+// WithMediaSelections sets the media selections of an asset that a task downloads.
+func (adcc *AssetDownloadContentConfiguration) WithMediaSelections(items ...MediaSelectionProvider) *AssetDownloadContentConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v MediaSelectionProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaSelections:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(adcc), objc.RegisterName("setMediaSelections:"), _arr)
+	return adcc
 }
 
-// VariantQualifiers an array of variant qualifiers. The qualifiers are expected to be added in the preferential order and will be evaluated in that order until the qualifier matches one or more AVAssetVariants. Only those variants which can be played on the current device configuration will be initially chosen for evaluation. If there is more than one match, automatic variant selection will be used to choose among the matched. If a variant qualifier is constructed to explicitly choose a variant, no evaluation is performed and the variant provided will be downloaded as is, even if it is not playable on current device configuration. If a variant qualifier has not been provided, or if the variant qualifier when evaluated does not match any of the variants which can be played according to the current device configuration, automatic variant selection will be used.
+// VariantQualifiers returns an array of variant qualifiers. The qualifiers are expected to be added in the preferential order and will be evaluated in that order until the qualifier matches one or more AVAssetVariants. Only those variants which can be played on the current device configuration will be initially chosen for evaluation. If there is more than one match, automatic variant selection will be used to choose among the matched. If a variant qualifier is constructed to explicitly choose a variant, no evaluation is performed and the variant provided will be downloaded as is, even if it is not playable on current device configuration. If a variant qualifier has not been provided, or if the variant qualifier when evaluated does not match any of the variants which can be played according to the current device configuration, automatic variant selection will be used.
 //
 // VariantQualifiers returns the collection as a Go slice.
-func (x *AssetDownloadContentConfiguration) VariantQualifiers() []*AssetVariantQualifier {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variantQualifiers"))
+func (adcc *AssetDownloadContentConfiguration) VariantQualifiers() []*AssetVariantQualifier {
+	_arr := objc.Send[objc.ID](objref.IDOf(adcc), objc.RegisterName("variantQualifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetVariantQualifier { return AssetVariantQualifierFromID(_id) })
 }
 
-// SetVariantQualifiers wraps the corresponding Objective-C method.
-func (x *AssetDownloadContentConfiguration) SetVariantQualifiers(variantQualifiers []*AssetVariantQualifier) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariantQualifiers:"), purego.SliceToNSArray(variantQualifiers, func(_v *AssetVariantQualifier) objc.ID { return objref.IDOf(_v) }))
-}
-
-// MediaSelections an array of media selections obtained from the AVAsset. If a media selection is not provided, automatic media selection associated with the asset will be used.
+// MediaSelections returns an array of media selections obtained from the AVAsset. If a media selection is not provided, automatic media selection associated with the asset will be used.
 //
 // MediaSelections returns the collection as a Go slice.
-func (x *AssetDownloadContentConfiguration) MediaSelections() []*MediaSelection {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaSelections"))
+func (adcc *AssetDownloadContentConfiguration) MediaSelections() []*MediaSelection {
+	_arr := objc.Send[objc.ID](objref.IDOf(adcc), objc.RegisterName("mediaSelections"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaSelection { return MediaSelectionFromID(_id) })
 }
-
-// SetMediaSelections wraps the corresponding Objective-C method.
-func (x *AssetDownloadContentConfiguration) SetMediaSelections(mediaSelections []*MediaSelection) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMediaSelections:"), purego.SliceToNSArray(mediaSelections, func(_v *MediaSelection) objc.ID { return objref.IDOf(_v) }))
-}
-
-// AssetDownloadContentConfigurationable is the interface implemented by [AssetDownloadContentConfiguration], for mocking and DI.
-type AssetDownloadContentConfigurationable interface {
-	obj.Object
-	WithVariantQualifiers(items ...*AssetVariantQualifier) *AssetDownloadContentConfiguration
-	WithMediaSelections(items ...MediaSelectionProvider) *AssetDownloadContentConfiguration
-	VariantQualifiers() []*AssetVariantQualifier
-	SetVariantQualifiers(variantQualifiers []*AssetVariantQualifier)
-	MediaSelections() []*MediaSelection
-	SetMediaSelections(mediaSelections []*MediaSelection)
-}
-
-var _ AssetDownloadContentConfigurationable = (*AssetDownloadContentConfiguration)(nil)

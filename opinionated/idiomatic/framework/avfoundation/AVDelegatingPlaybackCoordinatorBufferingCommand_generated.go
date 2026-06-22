@@ -52,25 +52,16 @@ func NewDelegatingPlaybackCoordinatorBufferingCommand() *DelegatingPlaybackCoord
 	return delegatingPlaybackCoordinatorBufferingCommandAdopt(_id)
 }
 
-// AnticipatedPlaybackRate the rate to prepare playback for. The command should only be considered complete once the player is ready to receive an AVDelegatingPlaybackCoordinatorPlayCommand with the indicated rate.
-func (x *DelegatingPlaybackCoordinatorBufferingCommand) AnticipatedPlaybackRate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("anticipatedPlaybackRate"))
+// AnticipatedPlaybackRate returns the rate to prepare playback for. The command should only be considered complete once the player is ready to receive an AVDelegatingPlaybackCoordinatorPlayCommand with the indicated rate.
+func (dpcbc *DelegatingPlaybackCoordinatorBufferingCommand) AnticipatedPlaybackRate() float32 {
+	_r := objc.Send[float32](objref.IDOf(dpcbc), objc.RegisterName("anticipatedPlaybackRate"))
 	return _r
 }
 
-// CompletionDueDate communicates when the coordinator expects the command's completion handler at the latest. A receiver of a buffering command should fire the completion handler by this date at the latest. This is useful in buffering situations where the receiver has not yet buffered enough data to be considered ready to play by the due date. The receiver should then decide to either complete the command as is to try and keep up with the group, or alternatively begin a stall recovery suspension to communicate the situation to the other participants. Completing the command after this date means that the coordinator will likely send a play command for a later time than the receiver buffered for.
-func (x *DelegatingPlaybackCoordinatorBufferingCommand) CompletionDueDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completionDueDate"))
+// CompletionDueDate returns communicates when the coordinator expects the command's completion handler at the latest. A receiver of a buffering command should fire the completion handler by this date at the latest. This is useful in buffering situations where the receiver has not yet buffered enough data to be considered ready to play by the due date. The receiver should then decide to either complete the command as is to try and keep up with the group, or alternatively begin a stall recovery suspension to communicate the situation to the other participants. Completing the command after this date means that the coordinator will likely send a play command for a later time than the receiver buffered for.
+func (dpcbc *DelegatingPlaybackCoordinatorBufferingCommand) CompletionDueDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dpcbc), objc.RegisterName("completionDueDate"))
 	return obj.Wrap(_r)
 }
-
-// DelegatingPlaybackCoordinatorBufferingCommandable is the interface implemented by [DelegatingPlaybackCoordinatorBufferingCommand], for mocking and DI.
-type DelegatingPlaybackCoordinatorBufferingCommandable interface {
-	obj.Object
-	AnticipatedPlaybackRate() float32
-	CompletionDueDate() obj.Object
-}
-
-var _ DelegatingPlaybackCoordinatorBufferingCommandable = (*DelegatingPlaybackCoordinatorBufferingCommand)(nil)
 
 var _ DelegatingPlaybackCoordinatorPlaybackControlCommandProvider = (*DelegatingPlaybackCoordinatorBufferingCommand)(nil)

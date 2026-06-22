@@ -44,24 +44,24 @@ func matrix4x4ArrayAdopt(id objc.ID) *Matrix4x4Array {
 }
 
 // Description returns the object's -description text.
-func (x *Matrix4x4Array) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ma *Matrix4x4Array) Description() string {
+	return rt.Description(objref.IDOf(ma))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Matrix4x4Array) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ma *Matrix4x4Array) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ma), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Matrix4x4Array) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ma *Matrix4x4Array) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ma), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Matrix4x4Array) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ma *Matrix4x4Array) String() string {
+	return rt.Description(objref.IDOf(ma))
 }
 
 // NewMatrix4x4ArrayWithElementCount creates a new Matrix4x4Array.
@@ -72,28 +72,18 @@ func NewMatrix4x4ArrayWithElementCount(arrayElementCount int) *Matrix4x4Array {
 }
 
 // Clear wraps the corresponding Objective-C method.
-func (x *Matrix4x4Array) Clear() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clear"))
+func (ma *Matrix4x4Array) Clear() {
+	objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("clear"))
 }
 
 // ElementCount wraps the corresponding Objective-C method.
-func (x *Matrix4x4Array) ElementCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("elementCount"))
+func (ma *Matrix4x4Array) ElementCount() int {
+	_r := objc.Send[int](objref.IDOf(ma), objc.RegisterName("elementCount"))
 	return _r
 }
 
 // Precision wraps the corresponding Objective-C method.
-func (x *Matrix4x4Array) Precision() DataPrecision {
-	_r := objc.Send[DataPrecision](objref.IDOf(x), objc.RegisterName("precision"))
+func (ma *Matrix4x4Array) Precision() DataPrecision {
+	_r := objc.Send[DataPrecision](objref.IDOf(ma), objc.RegisterName("precision"))
 	return _r
 }
-
-// Matrix4x4Arrayable is the interface implemented by [Matrix4x4Array], for mocking and DI.
-type Matrix4x4Arrayable interface {
-	obj.Object
-	Clear()
-	ElementCount() int
-	Precision() DataPrecision
-}
-
-var _ Matrix4x4Arrayable = (*Matrix4x4Array)(nil)

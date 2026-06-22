@@ -54,82 +54,64 @@ func NewAudioUnitMIDIInstrumentWithAudioComponentDescription(description obj.Obj
 }
 
 // StartNoteWithVelocityOnChannel sends a MIDI Note On event to the instrument.
-func (x *AudioUnitMIDIInstrument) StartNoteWithVelocityOnChannel(note uint8, velocity uint8, channel uint8) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startNote:withVelocity:onChannel:"), note, velocity, channel)
+func (aumi *AudioUnitMIDIInstrument) StartNoteWithVelocityOnChannel(note uint8, velocity uint8, channel uint8) {
+	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("startNote:withVelocity:onChannel:"), note, velocity, channel)
 }
 
 // StopNoteOnChannel sends a MIDI Note Off event to the instrument.
-func (x *AudioUnitMIDIInstrument) StopNoteOnChannel(note uint8, channel uint8) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopNote:onChannel:"), note, channel)
+func (aumi *AudioUnitMIDIInstrument) StopNoteOnChannel(note uint8, channel uint8) {
+	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("stopNote:onChannel:"), note, channel)
 }
 
 // SendControllerWithValueOnChannel sends a MIDI controller event to the instrument.
-func (x *AudioUnitMIDIInstrument) SendControllerWithValueOnChannel(controller uint8, value uint8, channel uint8) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendController:withValue:onChannel:"), controller, value, channel)
+func (aumi *AudioUnitMIDIInstrument) SendControllerWithValueOnChannel(controller uint8, value uint8, channel uint8) {
+	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendController:withValue:onChannel:"), controller, value, channel)
 }
 
 // SendPitchBendOnChannel sends a MIDI Pitch Bend event to the instrument.
-func (x *AudioUnitMIDIInstrument) SendPitchBendOnChannel(pitchbend uint16, channel uint8) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendPitchBend:onChannel:"), pitchbend, channel)
+func (aumi *AudioUnitMIDIInstrument) SendPitchBendOnChannel(pitchbend uint16, channel uint8) {
+	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendPitchBend:onChannel:"), pitchbend, channel)
 }
 
 // SendPressureOnChannel sends a MIDI channel pressure event to the instrument.
-func (x *AudioUnitMIDIInstrument) SendPressureOnChannel(pressure uint8, channel uint8) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendPressure:onChannel:"), pressure, channel)
+func (aumi *AudioUnitMIDIInstrument) SendPressureOnChannel(pressure uint8, channel uint8) {
+	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendPressure:onChannel:"), pressure, channel)
 }
 
 // SendPressureForKeyWithValueOnChannel sends a MIDI Polyphonic key pressure event to the instrument.
-func (x *AudioUnitMIDIInstrument) SendPressureForKeyWithValueOnChannel(key uint8, value uint8, channel uint8) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendPressureForKey:withValue:onChannel:"), key, value, channel)
+func (aumi *AudioUnitMIDIInstrument) SendPressureForKeyWithValueOnChannel(key uint8, value uint8, channel uint8) {
+	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendPressureForKey:withValue:onChannel:"), key, value, channel)
 }
 
 // SendProgramChangeOnChannel sends MIDI Program Change and Bank Select events to the instrument.
-func (x *AudioUnitMIDIInstrument) SendProgramChangeOnChannel(program uint8, channel uint8) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendProgramChange:onChannel:"), program, channel)
+func (aumi *AudioUnitMIDIInstrument) SendProgramChangeOnChannel(program uint8, channel uint8) {
+	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendProgramChange:onChannel:"), program, channel)
 }
 
 // SendProgramChangeBankMSBBankLSBOnChannel sends MIDI Program Change and Bank Select events to the instrument.
-func (x *AudioUnitMIDIInstrument) SendProgramChangeBankMSBBankLSBOnChannel(program uint8, bankMSB uint8, bankLSB uint8, channel uint8) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendProgramChange:bankMSB:bankLSB:onChannel:"), program, bankMSB, bankLSB, channel)
+func (aumi *AudioUnitMIDIInstrument) SendProgramChangeBankMSBBankLSBOnChannel(program uint8, bankMSB uint8, bankLSB uint8, channel uint8) {
+	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendProgramChange:bankMSB:bankLSB:onChannel:"), program, bankMSB, bankLSB, channel)
 }
 
 // SendMIDIEventData1Data2 sends a MIDI event which contains two data bytes to the instrument.
-func (x *AudioUnitMIDIInstrument) SendMIDIEventData1Data2(midiStatus uint8, data1 uint8, data2 uint8) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendMIDIEvent:data1:data2:"), midiStatus, data1, data2)
+func (aumi *AudioUnitMIDIInstrument) SendMIDIEventData1Data2(midiStatus uint8, data1 uint8, data2 uint8) {
+	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendMIDIEvent:data1:data2:"), midiStatus, data1, data2)
 }
 
 // SendMIDIEventData1 sends a MIDI event which contains one data byte to the instrument.
-func (x *AudioUnitMIDIInstrument) SendMIDIEventData1(midiStatus uint8, data1 uint8) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendMIDIEvent:data1:"), midiStatus, data1)
+func (aumi *AudioUnitMIDIInstrument) SendMIDIEventData1(midiStatus uint8, data1 uint8) {
+	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendMIDIEvent:data1:"), midiStatus, data1)
 }
 
 // SendMIDISysExEvent sends a MIDI System Exclusive event to the instrument.
-func (x *AudioUnitMIDIInstrument) SendMIDISysExEvent(midiData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendMIDISysExEvent:"), objref.IDOf(midiData))
+func (aumi *AudioUnitMIDIInstrument) SendMIDISysExEvent(midiData obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(aumi), objc.RegisterName("sendMIDISysExEvent:"), objref.IDOf(midiData))
 }
-
-// AudioUnitMIDIInstrumentable is the interface implemented by [AudioUnitMIDIInstrument], for mocking and DI.
-type AudioUnitMIDIInstrumentable interface {
-	obj.Object
-	StartNoteWithVelocityOnChannel(note uint8, velocity uint8, channel uint8)
-	StopNoteOnChannel(note uint8, channel uint8)
-	SendControllerWithValueOnChannel(controller uint8, value uint8, channel uint8)
-	SendPitchBendOnChannel(pitchbend uint16, channel uint8)
-	SendPressureOnChannel(pressure uint8, channel uint8)
-	SendPressureForKeyWithValueOnChannel(key uint8, value uint8, channel uint8)
-	SendProgramChangeOnChannel(program uint8, channel uint8)
-	SendProgramChangeBankMSBBankLSBOnChannel(program uint8, bankMSB uint8, bankLSB uint8, channel uint8)
-	SendMIDIEventData1Data2(midiStatus uint8, data1 uint8, data2 uint8)
-	SendMIDIEventData1(midiStatus uint8, data1 uint8)
-	SendMIDISysExEvent(midiData obj.Object)
-}
-
-var _ AudioUnitMIDIInstrumentable = (*AudioUnitMIDIInstrument)(nil)
 
 // isAudioUnitMIDIInstrument marks AudioUnitMIDIInstrument — and, by embedding promotion, its
 // subclasses — as a member of the AudioUnitMIDIInstrument hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AudioUnitMIDIInstrument) isAudioUnitMIDIInstrument() {}
+func (aumi *AudioUnitMIDIInstrument) isAudioUnitMIDIInstrument() {}
 
 var _ AudioUnitMIDIInstrumentProvider = (*AudioUnitMIDIInstrument)(nil)
 

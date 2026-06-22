@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,153 +51,100 @@ func NewMTL4AccelerationStructureTriangleGeometryDescriptor() *MTL4AccelerationS
 	return mTL4AccelerationStructureTriangleGeometryDescriptorAdopt(_id)
 }
 
-// WithVertexFormat describes the format of the vertices in the vertex buffer.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithVertexFormat(vertexFormat AttributeFormat) *MTL4AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexFormat:"), vertexFormat)
-	return x
+// WithVertexFormat sets describes the format of the vertices in the vertex buffer.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithVertexFormat(vertexFormat AttributeFormat) *MTL4AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setVertexFormat:"), vertexFormat)
+	return mastgd
 }
 
-// WithVertexStride sets the stride, in bytes, between vertices in the vertex buffer.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithVertexStride(vertexStride int) *MTL4AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexStride:"), vertexStride)
-	return x
+// WithVertexStride sets sets the stride, in bytes, between vertices in the vertex buffer.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithVertexStride(vertexStride int) *MTL4AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setVertexStride:"), vertexStride)
+	return mastgd
 }
 
-// WithIndexType configures the size of the indices the indexBuffer contains, which is typically either 16 or 32-bits for each index.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithIndexType(indexType IndexType) *MTL4AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexType:"), indexType)
-	return x
+// WithIndexType sets configures the size of the indices the indexBuffer contains, which is typically either 16 or 32-bits for each index.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithIndexType(indexType IndexType) *MTL4AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setIndexType:"), indexType)
+	return mastgd
 }
 
-// WithTriangleCount declares the number of triangles in this geometry descriptor.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithTriangleCount(triangleCount int) *MTL4AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTriangleCount:"), triangleCount)
-	return x
+// WithTriangleCount sets declares the number of triangles in this geometry descriptor.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithTriangleCount(triangleCount int) *MTL4AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setTriangleCount:"), triangleCount)
+	return mastgd
 }
 
-// WithTransformationMatrixLayout configures the layout for the transformation matrix in the transformation matrix buffer.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatrixLayout(transformationMatrixLayout MatrixLayout) *MTL4AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransformationMatrixLayout:"), transformationMatrixLayout)
-	return x
+// WithTransformationMatrixLayout sets configures the layout for the transformation matrix in the transformation matrix buffer.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatrixLayout(transformationMatrixLayout MatrixLayout) *MTL4AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setTransformationMatrixLayout:"), transformationMatrixLayout)
+	return mastgd
 }
 
-// WithIntersectionFunctionTableOffset sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *MTL4AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntersectionFunctionTableOffset:"), intersectionFunctionTableOffset)
-	return x
+// WithIntersectionFunctionTableOffset sets sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *MTL4AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setIntersectionFunctionTableOffset:"), intersectionFunctionTableOffset)
+	return mastgd
 }
 
-// WithOpaque provides a hint to Metal that this geometry is opaque, potentially accelerating the ray/primitive intersection process.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithOpaque(opaque bool) *MTL4AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets provides a hint to Metal that this geometry is opaque, potentially accelerating the ray/primitive intersection process.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithOpaque(opaque bool) *MTL4AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setOpaque:"), opaque)
+	return mastgd
 }
 
-// WithAllowDuplicateIntersectionFunctionInvocation a boolean value that indicates whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:"), allowDuplicateIntersectionFunctionInvocation)
-	return x
+// WithAllowDuplicateIntersectionFunctionInvocation sets a boolean value that indicates whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:"), allowDuplicateIntersectionFunctionInvocation)
+	return mastgd
 }
 
-// WithLabel assigns an optional label you can assign to this geometry for debugging purposes.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithLabel(label string) *MTL4AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets assigns an optional label you can assign to this geometry for debugging purposes.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithLabel(label string) *MTL4AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mastgd
 }
 
-// WithPrimitiveDataStride defines the stride, in bytes, between each primitive’s data in the primitive data buffer primitiveDataBuffer references.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *MTL4AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
-	return x
+// WithPrimitiveDataStride sets defines the stride, in bytes, between each primitive’s data in the primitive data buffer primitiveDataBuffer references.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *MTL4AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
+	return mastgd
 }
 
-// WithPrimitiveDataElementSize sets the size, in bytes, of the data for each primitive in the primitive data buffer primitiveDataBuffer references.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *MTL4AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
-	return x
+// WithPrimitiveDataElementSize sets sets the size, in bytes, of the data for each primitive in the primitive data buffer primitiveDataBuffer references.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *MTL4AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mastgd), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
+	return mastgd
 }
 
 // VertexFormat describes the format of the vertices in the vertex buffer. This property controls the format of the position attribute of the vertices the “vertexBuffer“ references. The format defaults to `MTLAttributeFormatFloat3`, corresponding to three packed floating point numbers.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) VertexFormat() AttributeFormat {
-	_r := objc.Send[AttributeFormat](objref.IDOf(x), objc.RegisterName("vertexFormat"))
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) VertexFormat() AttributeFormat {
+	_r := objc.Send[AttributeFormat](objref.IDOf(mastgd), objc.RegisterName("vertexFormat"))
 	return _r
-}
-
-// SetVertexFormat wraps the corresponding Objective-C method.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) SetVertexFormat(vertexFormat AttributeFormat) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexFormat:"), vertexFormat)
 }
 
 // VertexStride sets the stride, in bytes, between vertices in the vertex buffer. The stride you specify needs to be a multiple of the size of the vertex format you provide in the “vertexFormat“ property. Similarly, you are responsible for ensuring this stride matches the vertex format data type's alignment. Defaults to `0`, which signals the stride matches the size of the “vertexFormat“ data.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) VertexStride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexStride"))
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) VertexStride() int {
+	_r := objc.Send[int](objref.IDOf(mastgd), objc.RegisterName("vertexStride"))
 	return _r
 }
 
-// SetVertexStride wraps the corresponding Objective-C method.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) SetVertexStride(vertexStride int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexStride:"), vertexStride)
-}
-
-// IndexType configures the size of the indices the `indexBuffer` contains, which is typically either 16 or 32-bits for each index.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) IndexType() IndexType {
-	_r := objc.Send[IndexType](objref.IDOf(x), objc.RegisterName("indexType"))
+// IndexType returns configures the size of the indices the `indexBuffer` contains, which is typically either 16 or 32-bits for each index.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) IndexType() IndexType {
+	_r := objc.Send[IndexType](objref.IDOf(mastgd), objc.RegisterName("indexType"))
 	return _r
 }
 
-// SetIndexType wraps the corresponding Objective-C method.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) SetIndexType(indexType IndexType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexType:"), indexType)
-}
-
-// TriangleCount declares the number of triangles in this geometry descriptor.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) TriangleCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("triangleCount"))
+// TriangleCount returns declares the number of triangles in this geometry descriptor.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) TriangleCount() int {
+	_r := objc.Send[int](objref.IDOf(mastgd), objc.RegisterName("triangleCount"))
 	return _r
 }
 
-// SetTriangleCount wraps the corresponding Objective-C method.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) SetTriangleCount(triangleCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTriangleCount:"), triangleCount)
-}
-
-// TransformationMatrixLayout configures the layout for the transformation matrix in the transformation matrix buffer. You can provide matrices in column-major or row-major form, and this property allows you to control how Metal interprets them. Defaults to `MTLMatrixLayoutColumnMajor`.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) TransformationMatrixLayout() MatrixLayout {
-	_r := objc.Send[MatrixLayout](objref.IDOf(x), objc.RegisterName("transformationMatrixLayout"))
+// TransformationMatrixLayout returns configures the layout for the transformation matrix in the transformation matrix buffer. You can provide matrices in column-major or row-major form, and this property allows you to control how Metal interprets them. Defaults to `MTLMatrixLayoutColumnMajor`.
+func (mastgd *MTL4AccelerationStructureTriangleGeometryDescriptor) TransformationMatrixLayout() MatrixLayout {
+	_r := objc.Send[MatrixLayout](objref.IDOf(mastgd), objc.RegisterName("transformationMatrixLayout"))
 	return _r
 }
-
-// SetTransformationMatrixLayout wraps the corresponding Objective-C method.
-func (x *MTL4AccelerationStructureTriangleGeometryDescriptor) SetTransformationMatrixLayout(transformationMatrixLayout MatrixLayout) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransformationMatrixLayout:"), transformationMatrixLayout)
-}
-
-// MTL4AccelerationStructureTriangleGeometryDescriptorable is the interface implemented by [MTL4AccelerationStructureTriangleGeometryDescriptor], for mocking and DI.
-type MTL4AccelerationStructureTriangleGeometryDescriptorable interface {
-	obj.Object
-	WithVertexFormat(vertexFormat AttributeFormat) *MTL4AccelerationStructureTriangleGeometryDescriptor
-	WithVertexStride(vertexStride int) *MTL4AccelerationStructureTriangleGeometryDescriptor
-	WithIndexType(indexType IndexType) *MTL4AccelerationStructureTriangleGeometryDescriptor
-	WithTriangleCount(triangleCount int) *MTL4AccelerationStructureTriangleGeometryDescriptor
-	WithTransformationMatrixLayout(transformationMatrixLayout MatrixLayout) *MTL4AccelerationStructureTriangleGeometryDescriptor
-	WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *MTL4AccelerationStructureTriangleGeometryDescriptor
-	WithOpaque(opaque bool) *MTL4AccelerationStructureTriangleGeometryDescriptor
-	WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureTriangleGeometryDescriptor
-	WithLabel(label string) *MTL4AccelerationStructureTriangleGeometryDescriptor
-	WithPrimitiveDataStride(primitiveDataStride int) *MTL4AccelerationStructureTriangleGeometryDescriptor
-	WithPrimitiveDataElementSize(primitiveDataElementSize int) *MTL4AccelerationStructureTriangleGeometryDescriptor
-	VertexFormat() AttributeFormat
-	SetVertexFormat(vertexFormat AttributeFormat)
-	VertexStride() int
-	SetVertexStride(vertexStride int)
-	IndexType() IndexType
-	SetIndexType(indexType IndexType)
-	TriangleCount() int
-	SetTriangleCount(triangleCount int)
-	TransformationMatrixLayout() MatrixLayout
-	SetTransformationMatrixLayout(transformationMatrixLayout MatrixLayout)
-}
-
-var _ MTL4AccelerationStructureTriangleGeometryDescriptorable = (*MTL4AccelerationStructureTriangleGeometryDescriptor)(nil)
 
 var _ MTL4AccelerationStructureGeometryDescriptorProvider = (*MTL4AccelerationStructureTriangleGeometryDescriptor)(nil)

@@ -46,78 +46,65 @@ func vectorAdopt(id objc.ID) *Vector {
 }
 
 // Description returns the object's -description text.
-func (x *Vector) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *Vector) Description() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Vector) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (v_ *Vector) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Vector) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (v_ *Vector) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Vector) String() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *Vector) String() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // ResourceSize get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSVector instantiation and MTLBuffer is not included. It only measures the size of the allocation used to hold the vector data in the buffer. This value is subject to change between different devices and operating systems. Except when -initWithBuffer:descriptor: is used, most MPSVectors are allocated without a backing store. The backing store is allocated lazily when it is needed, typically when the .texture property is called. Consequently, in most cases, it should be inexpensive to make a MPSMatrix to see how much memory it will need, and release it if it is too large. This method may fail in certain circumstances, such as when the MPSMatrix is created with -initWithBuffer:descriptor:. In such cases, 0 will be returned.
-func (x *Vector) ResourceSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resourceSize"))
+func (v_ *Vector) ResourceSize() int {
+	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("resourceSize"))
 	return _r
 }
 
-// Length the number of elements in the vector.
-func (x *Vector) Length() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+// Length returns the number of elements in the vector.
+func (v_ *Vector) Length() int {
+	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("length"))
 	return _r
 }
 
-// Vectors the number of vectors in the MPSVector.
-func (x *Vector) Vectors() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectors"))
+// Vectors returns the number of vectors in the MPSVector.
+func (v_ *Vector) Vectors() int {
+	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("vectors"))
 	return _r
 }
 
-// DataType the type of the MPSVector data.
-func (x *Vector) DataType() DataType {
-	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("dataType"))
+// DataType returns the type of the MPSVector data.
+func (v_ *Vector) DataType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(v_), objc.RegisterName("dataType"))
 	return _r
 }
 
-// VectorBytes the stride, in bytes, between corresponding elements of consecutive vectors.
-func (x *Vector) VectorBytes() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectorBytes"))
+// VectorBytes returns the stride, in bytes, between corresponding elements of consecutive vectors.
+func (v_ *Vector) VectorBytes() int {
+	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("vectorBytes"))
 	return _r
 }
 
-// Offset byte-offset to the buffer where the vector data begins - see
-func (x *Vector) Offset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
+// Offset returns byte-offset to the buffer where the vector data begins - see
+func (v_ *Vector) Offset() int {
+	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("offset"))
 	return _r
 }
-
-// Vectorable is the interface implemented by [Vector], for mocking and DI.
-type Vectorable interface {
-	obj.Object
-	ResourceSize() int
-	Length() int
-	Vectors() int
-	DataType() DataType
-	VectorBytes() int
-	Offset() int
-}
-
-var _ Vectorable = (*Vector)(nil)
 
 // isVector marks Vector — and, by embedding promotion, its
 // subclasses — as a member of the Vector hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Vector) isVector() {}
+func (v_ *Vector) isVector() {}
 
 var _ VectorProvider = (*Vector)(nil)

@@ -61,75 +61,54 @@ func NewGraphExecutableWithCoreMLPackageAtURLCompilationDescriptor(coreMLPackage
 	return graphExecutableAdopt(_id)
 }
 
-// WithOptions options for the graph executable.
-func (x *GraphExecutable) WithOptions(options GraphOptions) *GraphExecutable {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
-	return x
+// WithOptions sets options for the graph executable.
+func (ge *GraphExecutable) WithOptions(options GraphOptions) *GraphExecutable {
+	objc.Send[objc.ID](objref.IDOf(ge), objc.RegisterName("setOptions:"), options)
+	return ge
 }
 
 // SpecializeWithDeviceInputTypesCompilationDescriptor specialize the executable and optimize it.
-func (x *GraphExecutable) SpecializeWithDeviceInputTypesCompilationDescriptor(device *GraphDevice, inputTypes []*GraphType, compilationDescriptor *GraphCompilationDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("specializeWithDevice:inputTypes:compilationDescriptor:"), objref.IDOf(device), purego.SliceToNSArray(inputTypes, func(_v *GraphType) objc.ID { return objref.IDOf(_v) }), objref.IDOf(compilationDescriptor))
+func (ge *GraphExecutable) SpecializeWithDeviceInputTypesCompilationDescriptor(device *GraphDevice, inputTypes []*GraphType, compilationDescriptor *GraphCompilationDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(ge), objc.RegisterName("specializeWithDevice:inputTypes:compilationDescriptor:"), objref.IDOf(device), purego.SliceToNSArray(inputTypes, func(_v *GraphType) objc.ID { return objref.IDOf(_v) }), objref.IDOf(compilationDescriptor))
 }
 
 // GetOutputTypesWithDeviceInputTypesCompilationDescriptor get output shapes for a specialized executable.
-func (x *GraphExecutable) GetOutputTypesWithDeviceInputTypesCompilationDescriptor(device *GraphDevice, inputTypes []*GraphType, compilationDescriptor *GraphCompilationDescriptor) []*GraphShapedType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getOutputTypesWithDevice:inputTypes:compilationDescriptor:"), objref.IDOf(device), purego.SliceToNSArray(inputTypes, func(_v *GraphType) objc.ID { return objref.IDOf(_v) }), objref.IDOf(compilationDescriptor))
+func (ge *GraphExecutable) GetOutputTypesWithDeviceInputTypesCompilationDescriptor(device *GraphDevice, inputTypes []*GraphType, compilationDescriptor *GraphCompilationDescriptor) []*GraphShapedType {
+	_r := objc.Send[objc.ID](objref.IDOf(ge), objc.RegisterName("getOutputTypesWithDevice:inputTypes:compilationDescriptor:"), objref.IDOf(device), purego.SliceToNSArray(inputTypes, func(_v *GraphType) objc.ID { return objref.IDOf(_v) }), objref.IDOf(compilationDescriptor))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphShapedType { return GraphShapedTypeFromID(_id) })
 }
 
 // EncodeToCommandBufferInputsArrayResultsArrayExecutionDescriptor runs the graph for the given feeds and returns the target tensor values, ensuring all target operations also executed. This call is asynchronous and will return immediately after finishing encoding.
-func (x *GraphExecutable) EncodeToCommandBufferInputsArrayResultsArrayExecutionDescriptor(commandBuffer obj.Object, inputsArray []*GraphTensorData, resultsArray []*GraphTensorData, executionDescriptor *GraphExecutableExecutionDescriptor) []*GraphTensorData {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeToCommandBuffer:inputsArray:resultsArray:executionDescriptor:"), objref.IDOf(commandBuffer), purego.SliceToNSArray(inputsArray, func(_v *GraphTensorData) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(resultsArray, func(_v *GraphTensorData) objc.ID { return objref.IDOf(_v) }), objref.IDOf(executionDescriptor))
+func (ge *GraphExecutable) EncodeToCommandBufferInputsArrayResultsArrayExecutionDescriptor(commandBuffer obj.Object, inputsArray []*GraphTensorData, resultsArray []*GraphTensorData, executionDescriptor *GraphExecutableExecutionDescriptor) []*GraphTensorData {
+	_r := objc.Send[objc.ID](objref.IDOf(ge), objc.RegisterName("encodeToCommandBuffer:inputsArray:resultsArray:executionDescriptor:"), objref.IDOf(commandBuffer), purego.SliceToNSArray(inputsArray, func(_v *GraphTensorData) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(resultsArray, func(_v *GraphTensorData) objc.ID { return objref.IDOf(_v) }), objref.IDOf(executionDescriptor))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphTensorData { return GraphTensorDataFromID(_id) })
 }
 
 // SerializeToMPSGraphPackageAtURLDescriptor serialize the MPSGraph executable at the provided url.
-func (x *GraphExecutable) SerializeToMPSGraphPackageAtURLDescriptor(url string, descriptor *GraphExecutableSerializationDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serializeToMPSGraphPackageAtURL:descriptor:"), rt.FileURL(url), objref.IDOf(descriptor))
+func (ge *GraphExecutable) SerializeToMPSGraphPackageAtURLDescriptor(url string, descriptor *GraphExecutableSerializationDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(ge), objc.RegisterName("serializeToMPSGraphPackageAtURL:descriptor:"), rt.FileURL(url), objref.IDOf(descriptor))
 }
 
-// Options options for the graph executable. Default value is `MPSGraphOptionsDefault`.
-func (x *GraphExecutable) Options() GraphOptions {
-	_r := objc.Send[GraphOptions](objref.IDOf(x), objc.RegisterName("options"))
+// Options returns options for the graph executable. Default value is `MPSGraphOptionsDefault`.
+func (ge *GraphExecutable) Options() GraphOptions {
+	_r := objc.Send[GraphOptions](objref.IDOf(ge), objc.RegisterName("options"))
 	return _r
 }
 
-// SetOptions wraps the corresponding Objective-C method.
-func (x *GraphExecutable) SetOptions(options GraphOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
-}
-
-// FeedTensors tensors fed to the graph, can be used to order the inputs when executable is created with a graph.
+// FeedTensors returns tensors fed to the graph, can be used to order the inputs when executable is created with a graph.
 //
 // FeedTensors returns the collection as a Go slice.
-func (x *GraphExecutable) FeedTensors() []*GraphTensor {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("feedTensors"))
+func (ge *GraphExecutable) FeedTensors() []*GraphTensor {
+	_arr := objc.Send[objc.ID](objref.IDOf(ge), objc.RegisterName("feedTensors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
 
-// TargetTensors tensors targeted by the graph, can be used to order the outputs when executable was created with a graph.
+// TargetTensors returns tensors targeted by the graph, can be used to order the outputs when executable was created with a graph.
 //
 // TargetTensors returns the collection as a Go slice.
-func (x *GraphExecutable) TargetTensors() []*GraphTensor {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetTensors"))
+func (ge *GraphExecutable) TargetTensors() []*GraphTensor {
+	_arr := objc.Send[objc.ID](objref.IDOf(ge), objc.RegisterName("targetTensors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphTensor { return GraphTensorFromID(_id) })
 }
-
-// GraphExecutableable is the interface implemented by [GraphExecutable], for mocking and DI.
-type GraphExecutableable interface {
-	obj.Object
-	WithOptions(options GraphOptions) *GraphExecutable
-	SpecializeWithDeviceInputTypesCompilationDescriptor(device *GraphDevice, inputTypes []*GraphType, compilationDescriptor *GraphCompilationDescriptor)
-	GetOutputTypesWithDeviceInputTypesCompilationDescriptor(device *GraphDevice, inputTypes []*GraphType, compilationDescriptor *GraphCompilationDescriptor) []*GraphShapedType
-	EncodeToCommandBufferInputsArrayResultsArrayExecutionDescriptor(commandBuffer obj.Object, inputsArray []*GraphTensorData, resultsArray []*GraphTensorData, executionDescriptor *GraphExecutableExecutionDescriptor) []*GraphTensorData
-	SerializeToMPSGraphPackageAtURLDescriptor(url string, descriptor *GraphExecutableSerializationDescriptor)
-	Options() GraphOptions
-	SetOptions(options GraphOptions)
-	FeedTensors() []*GraphTensor
-	TargetTensors() []*GraphTensor
-}
-
-var _ GraphExecutableable = (*GraphExecutable)(nil)
 
 var _ GraphObjectProvider = (*GraphExecutable)(nil)

@@ -52,17 +52,17 @@ func NewMetadataMachineReadableCodeObject() *MetadataMachineReadableCodeObject {
 	return metadataMachineReadableCodeObjectAdopt(_id)
 }
 
-// Corners the points defining the (X,Y) locations of the corners of the machine-readable code. The value of this property is an NSArray of NSDictionaries, each of which has been created from a CGPoint using CGPointCreateDictionaryRepresentation(), representing the coordinates of the corners of the object with respect to the image in which it resides. If the metadata originates from video, the points may be expressed as scalar values from 0. - 1. The points in the corners differ from the bounds rectangle in that bounds is axis-aligned to orientation of the captured image, and the values of the corners reside within the bounds rectangle. The points are arranged in counter-clockwise order (clockwise if the code or image is mirrored), starting with the top-left of the code in its canonical orientation.
+// Corners returns the points defining the (X,Y) locations of the corners of the machine-readable code. The value of this property is an NSArray of NSDictionaries, each of which has been created from a CGPoint using CGPointCreateDictionaryRepresentation(), representing the coordinates of the corners of the object with respect to the image in which it resides. If the metadata originates from video, the points may be expressed as scalar values from 0. - 1. The points in the corners differ from the bounds rectangle in that bounds is axis-aligned to orientation of the captured image, and the values of the corners reside within the bounds rectangle. The points are arranged in counter-clockwise order (clockwise if the code or image is mirrored), starting with the top-left of the code in its canonical orientation.
 //
 // Corners returns the collection as a Go slice.
-func (x *MetadataMachineReadableCodeObject) Corners() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("corners"))
+func (mmrco *MetadataMachineReadableCodeObject) Corners() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(mmrco), objc.RegisterName("corners"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // StringValue returns the receiver's errorCorrectedData decoded into a human-readable string. The value of this property is an NSString created by decoding the binary payload according to the format of the machine readable code. Returns nil if a string representation cannot be created from the payload.
-func (x *MetadataMachineReadableCodeObject) StringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+func (mmrco *MetadataMachineReadableCodeObject) StringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mmrco), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
 	}
@@ -70,19 +70,9 @@ func (x *MetadataMachineReadableCodeObject) StringValue() string {
 }
 
 // Descriptor wraps the corresponding Objective-C method.
-func (x *MetadataMachineReadableCodeObject) Descriptor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+func (mmrco *MetadataMachineReadableCodeObject) Descriptor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmrco), objc.RegisterName("descriptor"))
 	return obj.Wrap(_r)
 }
-
-// MetadataMachineReadableCodeObjectable is the interface implemented by [MetadataMachineReadableCodeObject], for mocking and DI.
-type MetadataMachineReadableCodeObjectable interface {
-	obj.Object
-	Corners() []obj.Object
-	StringValue() string
-	Descriptor() obj.Object
-}
-
-var _ MetadataMachineReadableCodeObjectable = (*MetadataMachineReadableCodeObject)(nil)
 
 var _ MetadataObjectProvider = (*MetadataMachineReadableCodeObject)(nil)

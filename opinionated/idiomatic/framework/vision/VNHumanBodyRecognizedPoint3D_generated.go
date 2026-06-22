@@ -53,18 +53,10 @@ func NewHumanBodyRecognizedPoint3D() *HumanBodyRecognizedPoint3D {
 }
 
 // ParentJoint wraps the corresponding Objective-C method.
-func (x *HumanBodyRecognizedPoint3D) ParentJoint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentJoint"))
+func (hbrpd *HumanBodyRecognizedPoint3D) ParentJoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(hbrpd), objc.RegisterName("parentJoint"))
 	return obj.Wrap(_r)
 }
-
-// HumanBodyRecognizedPoint3Dable is the interface implemented by [HumanBodyRecognizedPoint3D], for mocking and DI.
-type HumanBodyRecognizedPoint3Dable interface {
-	obj.Object
-	ParentJoint() obj.Object
-}
-
-var _ HumanBodyRecognizedPoint3Dable = (*HumanBodyRecognizedPoint3D)(nil)
 
 var _ RecognizedPoint3DProvider = (*HumanBodyRecognizedPoint3D)(nil)
 

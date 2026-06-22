@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewPlacemarkResolutionResult() *PlacemarkResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INPlacemarkResolutionResult")), objc.RegisterName("new"))
 	return placemarkResolutionResultAdopt(_id)
 }
-
-// PlacemarkResolutionResultable is the interface implemented by [PlacemarkResolutionResult], for mocking and DI.
-type PlacemarkResolutionResultable interface {
-	obj.Object
-}
-
-var _ PlacemarkResolutionResultable = (*PlacemarkResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*PlacemarkResolutionResult)(nil)

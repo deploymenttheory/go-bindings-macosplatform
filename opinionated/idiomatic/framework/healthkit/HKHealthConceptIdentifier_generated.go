@@ -46,24 +46,24 @@ func healthConceptIdentifierAdopt(id objc.ID) *HealthConceptIdentifier {
 }
 
 // Description returns the object's -description text.
-func (x *HealthConceptIdentifier) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hci *HealthConceptIdentifier) Description() string {
+	return rt.Description(objref.IDOf(hci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HealthConceptIdentifier) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hci *HealthConceptIdentifier) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HealthConceptIdentifier) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hci *HealthConceptIdentifier) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HealthConceptIdentifier) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hci *HealthConceptIdentifier) String() string {
+	return rt.Description(objref.IDOf(hci))
 }
 
 // NewHealthConceptIdentifier creates a new HealthConceptIdentifier.
@@ -72,16 +72,8 @@ func NewHealthConceptIdentifier() *HealthConceptIdentifier {
 	return healthConceptIdentifierAdopt(_id)
 }
 
-// Domain the domain this identifier belongs to. This value identifies the group of concepts the identifier comes from. For example, if the identifier represents a medication, the category will be the medication domain.
-func (x *HealthConceptIdentifier) Domain() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
+// Domain returns the domain this identifier belongs to. This value identifies the group of concepts the identifier comes from. For example, if the identifier represents a medication, the category will be the medication domain.
+func (hci *HealthConceptIdentifier) Domain() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(hci), objc.RegisterName("domain"))
 	return obj.Wrap(_r)
 }
-
-// HealthConceptIdentifierable is the interface implemented by [HealthConceptIdentifier], for mocking and DI.
-type HealthConceptIdentifierable interface {
-	obj.Object
-	Domain() obj.Object
-}
-
-var _ HealthConceptIdentifierable = (*HealthConceptIdentifier)(nil)

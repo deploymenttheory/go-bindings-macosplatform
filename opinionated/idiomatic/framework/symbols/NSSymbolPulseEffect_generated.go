@@ -7,7 +7,6 @@ package symbols
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewSymbolPulseEffect() *SymbolPulseEffect {
 	return symbolPulseEffectAdopt(_id)
 }
 
-// EffectWithByLayer a copy of the effect requesting an animation that pulses only the layers marked to always pulse.
-func (x *SymbolPulseEffect) EffectWithByLayer() *SymbolPulseEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+// EffectWithByLayer returns a copy of the effect requesting an animation that pulses only the layers marked to always pulse.
+func (spe *SymbolPulseEffect) EffectWithByLayer() *SymbolPulseEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(spe), objc.RegisterName("effectWithByLayer"))
 	return SymbolPulseEffectFromID(_r)
 }
 
-// EffectWithWholeSymbol a copy of the effect requesting an animation that pulses all layers simultaneously.
-func (x *SymbolPulseEffect) EffectWithWholeSymbol() *SymbolPulseEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+// EffectWithWholeSymbol returns a copy of the effect requesting an animation that pulses all layers simultaneously.
+func (spe *SymbolPulseEffect) EffectWithWholeSymbol() *SymbolPulseEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(spe), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolPulseEffectFromID(_r)
 }
-
-// SymbolPulseEffectable is the interface implemented by [SymbolPulseEffect], for mocking and DI.
-type SymbolPulseEffectable interface {
-	obj.Object
-	EffectWithByLayer() *SymbolPulseEffect
-	EffectWithWholeSymbol() *SymbolPulseEffect
-}
-
-var _ SymbolPulseEffectable = (*SymbolPulseEffect)(nil)
 
 var _ SymbolEffectProvider = (*SymbolPulseEffect)(nil)

@@ -46,24 +46,24 @@ func userInterfaceCompressionOptionsAdopt(id objc.ID) *UserInterfaceCompressionO
 }
 
 // Description returns the object's -description text.
-func (x *UserInterfaceCompressionOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (uico *UserInterfaceCompressionOptions) Description() string {
+	return rt.Description(objref.IDOf(uico))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UserInterfaceCompressionOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (uico *UserInterfaceCompressionOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(uico), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UserInterfaceCompressionOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (uico *UserInterfaceCompressionOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(uico), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *UserInterfaceCompressionOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (uico *UserInterfaceCompressionOptions) String() string {
+	return rt.Description(objref.IDOf(uico))
 }
 
 // NewUserInterfaceCompressionOptions creates a new UserInterfaceCompressionOptions.
@@ -94,43 +94,31 @@ func NewUserInterfaceCompressionOptionsWithCompressionOptions(options obj.Object
 }
 
 // ContainsOptions determines whether the supplied compression options are all present in the current instance.
-func (x *UserInterfaceCompressionOptions) ContainsOptions(options *UserInterfaceCompressionOptions) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsOptions:"), objref.IDOf(options))
+func (uico *UserInterfaceCompressionOptions) ContainsOptions(options *UserInterfaceCompressionOptions) bool {
+	_r := objc.Send[bool](objref.IDOf(uico), objc.RegisterName("containsOptions:"), objref.IDOf(options))
 	return _r
 }
 
 // IntersectsOptions determines whether the supplied compression options intersect with the current instance’s options.
-func (x *UserInterfaceCompressionOptions) IntersectsOptions(options *UserInterfaceCompressionOptions) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("intersectsOptions:"), objref.IDOf(options))
+func (uico *UserInterfaceCompressionOptions) IntersectsOptions(options *UserInterfaceCompressionOptions) bool {
+	_r := objc.Send[bool](objref.IDOf(uico), objc.RegisterName("intersectsOptions:"), objref.IDOf(options))
 	return _r
 }
 
 // OptionsByAddingOptions creates a new compression options object representing the union with the provided options.
-func (x *UserInterfaceCompressionOptions) OptionsByAddingOptions(options *UserInterfaceCompressionOptions) *UserInterfaceCompressionOptions {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsByAddingOptions:"), objref.IDOf(options))
+func (uico *UserInterfaceCompressionOptions) OptionsByAddingOptions(options *UserInterfaceCompressionOptions) *UserInterfaceCompressionOptions {
+	_r := objc.Send[objc.ID](objref.IDOf(uico), objc.RegisterName("optionsByAddingOptions:"), objref.IDOf(options))
 	return UserInterfaceCompressionOptionsFromID(_r)
 }
 
 // OptionsByRemovingOptions creates a new compression options object with the supplied options removed.
-func (x *UserInterfaceCompressionOptions) OptionsByRemovingOptions(options *UserInterfaceCompressionOptions) *UserInterfaceCompressionOptions {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsByRemovingOptions:"), objref.IDOf(options))
+func (uico *UserInterfaceCompressionOptions) OptionsByRemovingOptions(options *UserInterfaceCompressionOptions) *UserInterfaceCompressionOptions {
+	_r := objc.Send[objc.ID](objref.IDOf(uico), objc.RegisterName("optionsByRemovingOptions:"), objref.IDOf(options))
 	return UserInterfaceCompressionOptionsFromID(_r)
 }
 
 // IsEmpty wraps the corresponding Objective-C method.
-func (x *UserInterfaceCompressionOptions) IsEmpty() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEmpty"))
+func (uico *UserInterfaceCompressionOptions) IsEmpty() bool {
+	_r := objc.Send[bool](objref.IDOf(uico), objc.RegisterName("isEmpty"))
 	return _r
 }
-
-// UserInterfaceCompressionOptionsable is the interface implemented by [UserInterfaceCompressionOptions], for mocking and DI.
-type UserInterfaceCompressionOptionsable interface {
-	obj.Object
-	ContainsOptions(options *UserInterfaceCompressionOptions) bool
-	IntersectsOptions(options *UserInterfaceCompressionOptions) bool
-	OptionsByAddingOptions(options *UserInterfaceCompressionOptions) *UserInterfaceCompressionOptions
-	OptionsByRemovingOptions(options *UserInterfaceCompressionOptions) *UserInterfaceCompressionOptions
-	IsEmpty() bool
-}
-
-var _ UserInterfaceCompressionOptionsable = (*UserInterfaceCompressionOptions)(nil)

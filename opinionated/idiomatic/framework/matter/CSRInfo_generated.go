@@ -44,24 +44,24 @@ func cSRInfoAdopt(id objc.ID) *CSRInfo {
 }
 
 // Description returns the object's -description text.
-func (x *CSRInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ci *CSRInfo) Description() string {
+	return rt.Description(objref.IDOf(ci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CSRInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ci *CSRInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CSRInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ci *CSRInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CSRInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ci *CSRInfo) String() string {
+	return rt.Description(objref.IDOf(ci))
 }
 
 // NewCSRInfoWithNonceElementsElementsSignatureCsr creates a new CSRInfo.
@@ -72,88 +72,49 @@ func NewCSRInfoWithNonceElementsElementsSignatureCsr(nonce obj.Object, elements 
 }
 
 // WithNonce sets the property and returns the receiver so calls can be chained.
-func (x *CSRInfo) WithNonce(nonce obj.Object) *CSRInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNonce:"), objref.IDOf(nonce))
-	return x
+func (ci *CSRInfo) WithNonce(nonce obj.Object) *CSRInfo {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setNonce:"), objref.IDOf(nonce))
+	return ci
 }
 
 // WithElements sets the property and returns the receiver so calls can be chained.
-func (x *CSRInfo) WithElements(elements obj.Object) *CSRInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElements:"), objref.IDOf(elements))
-	return x
+func (ci *CSRInfo) WithElements(elements obj.Object) *CSRInfo {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setElements:"), objref.IDOf(elements))
+	return ci
 }
 
 // WithElementsSignature sets the property and returns the receiver so calls can be chained.
-func (x *CSRInfo) WithElementsSignature(elementsSignature obj.Object) *CSRInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElementsSignature:"), objref.IDOf(elementsSignature))
-	return x
+func (ci *CSRInfo) WithElementsSignature(elementsSignature obj.Object) *CSRInfo {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setElementsSignature:"), objref.IDOf(elementsSignature))
+	return ci
 }
 
 // WithCsr sets the property and returns the receiver so calls can be chained.
-func (x *CSRInfo) WithCsr(csr obj.Object) *CSRInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCsr:"), objref.IDOf(csr))
-	return x
+func (ci *CSRInfo) WithCsr(csr obj.Object) *CSRInfo {
+	objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("setCsr:"), objref.IDOf(csr))
+	return ci
 }
 
 // Nonce wraps the corresponding Objective-C method.
-func (x *CSRInfo) Nonce() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nonce"))
+func (ci *CSRInfo) Nonce() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("nonce"))
 	return obj.Wrap(_r)
-}
-
-// SetNonce wraps the corresponding Objective-C method.
-func (x *CSRInfo) SetNonce(nonce obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNonce:"), objref.IDOf(nonce))
 }
 
 // Elements wraps the corresponding Objective-C method.
-func (x *CSRInfo) Elements() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elements"))
+func (ci *CSRInfo) Elements() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("elements"))
 	return obj.Wrap(_r)
-}
-
-// SetElements wraps the corresponding Objective-C method.
-func (x *CSRInfo) SetElements(elements obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElements:"), objref.IDOf(elements))
 }
 
 // ElementsSignature wraps the corresponding Objective-C method.
-func (x *CSRInfo) ElementsSignature() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementsSignature"))
+func (ci *CSRInfo) ElementsSignature() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("elementsSignature"))
 	return obj.Wrap(_r)
-}
-
-// SetElementsSignature wraps the corresponding Objective-C method.
-func (x *CSRInfo) SetElementsSignature(elementsSignature obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElementsSignature:"), objref.IDOf(elementsSignature))
 }
 
 // Csr wraps the corresponding Objective-C method.
-func (x *CSRInfo) Csr() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("csr"))
+func (ci *CSRInfo) Csr() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("csr"))
 	return obj.Wrap(_r)
 }
-
-// SetCsr wraps the corresponding Objective-C method.
-func (x *CSRInfo) SetCsr(csr obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCsr:"), objref.IDOf(csr))
-}
-
-// CSRInfoable is the interface implemented by [CSRInfo], for mocking and DI.
-type CSRInfoable interface {
-	obj.Object
-	WithNonce(nonce obj.Object) *CSRInfo
-	WithElements(elements obj.Object) *CSRInfo
-	WithElementsSignature(elementsSignature obj.Object) *CSRInfo
-	WithCsr(csr obj.Object) *CSRInfo
-	Nonce() obj.Object
-	SetNonce(nonce obj.Object)
-	Elements() obj.Object
-	SetElements(elements obj.Object)
-	ElementsSignature() obj.Object
-	SetElementsSignature(elementsSignature obj.Object)
-	Csr() obj.Object
-	SetCsr(csr obj.Object)
-}
-
-var _ CSRInfoable = (*CSRInfo)(nil)

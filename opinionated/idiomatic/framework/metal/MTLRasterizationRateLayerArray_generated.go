@@ -46,24 +46,24 @@ func rasterizationRateLayerArrayAdopt(id objc.ID) *RasterizationRateLayerArray {
 }
 
 // Description returns the object's -description text.
-func (x *RasterizationRateLayerArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rrla *RasterizationRateLayerArray) Description() string {
+	return rt.Description(objref.IDOf(rrla))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RasterizationRateLayerArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rrla *RasterizationRateLayerArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rrla), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RasterizationRateLayerArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rrla *RasterizationRateLayerArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rrla), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RasterizationRateLayerArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rrla *RasterizationRateLayerArray) String() string {
+	return rt.Description(objref.IDOf(rrla))
 }
 
 // NewRasterizationRateLayerArray creates a new RasterizationRateLayerArray.
@@ -73,21 +73,12 @@ func NewRasterizationRateLayerArray() *RasterizationRateLayerArray {
 }
 
 // ObjectAtIndexedSubscript retrieves the sample value at the specified index.
-func (x *RasterizationRateLayerArray) ObjectAtIndexedSubscript(layerIndex int) *RasterizationRateLayerDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), layerIndex)
+func (rrla *RasterizationRateLayerArray) ObjectAtIndexedSubscript(layerIndex int) *RasterizationRateLayerDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(rrla), objc.RegisterName("objectAtIndexedSubscript:"), layerIndex)
 	return RasterizationRateLayerDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript stores a sample value at the specified index.
-func (x *RasterizationRateLayerArray) SetObjectAtIndexedSubscript(layer *RasterizationRateLayerDescriptor, layerIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(layer), layerIndex)
+func (rrla *RasterizationRateLayerArray) SetObjectAtIndexedSubscript(layer *RasterizationRateLayerDescriptor, layerIndex int) {
+	objc.Send[objc.ID](objref.IDOf(rrla), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(layer), layerIndex)
 }
-
-// RasterizationRateLayerArrayable is the interface implemented by [RasterizationRateLayerArray], for mocking and DI.
-type RasterizationRateLayerArrayable interface {
-	obj.Object
-	ObjectAtIndexedSubscript(layerIndex int) *RasterizationRateLayerDescriptor
-	SetObjectAtIndexedSubscript(layer *RasterizationRateLayerDescriptor, layerIndex int)
-}
-
-var _ RasterizationRateLayerArrayable = (*RasterizationRateLayerArray)(nil)

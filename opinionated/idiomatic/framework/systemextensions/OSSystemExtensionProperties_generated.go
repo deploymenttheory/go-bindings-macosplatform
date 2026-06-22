@@ -46,24 +46,24 @@ func systemExtensionPropertiesAdopt(id objc.ID) *SystemExtensionProperties {
 }
 
 // Description returns the object's -description text.
-func (x *SystemExtensionProperties) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sep *SystemExtensionProperties) Description() string {
+	return rt.Description(objref.IDOf(sep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SystemExtensionProperties) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sep *SystemExtensionProperties) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SystemExtensionProperties) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sep *SystemExtensionProperties) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SystemExtensionProperties) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sep *SystemExtensionProperties) String() string {
+	return rt.Description(objref.IDOf(sep))
 }
 
 // NewSystemExtensionProperties creates a new SystemExtensionProperties.
@@ -72,67 +72,53 @@ func NewSystemExtensionProperties() *SystemExtensionProperties {
 	return systemExtensionPropertiesAdopt(_id)
 }
 
-// URL the file URL locating an indicating the extension bundle these properties were retreived from.
-func (x *SystemExtensionProperties) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+// URL returns the file URL locating an indicating the extension bundle these properties were retreived from.
+func (sep *SystemExtensionProperties) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// BundleIdentifier the bundle identifier of the extension (CFBundleIdentifier)
-func (x *SystemExtensionProperties) BundleIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
+// BundleIdentifier returns the bundle identifier of the extension (CFBundleIdentifier)
+func (sep *SystemExtensionProperties) BundleIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// BundleVersion the bundle version of the extension (CFBundleVersion)
-func (x *SystemExtensionProperties) BundleVersion() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleVersion"))
+// BundleVersion returns the bundle version of the extension (CFBundleVersion)
+func (sep *SystemExtensionProperties) BundleVersion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("bundleVersion"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// BundleShortVersion the bundle short version string of the extension (CFBundleShortVersionString)
-func (x *SystemExtensionProperties) BundleShortVersion() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleShortVersion"))
+// BundleShortVersion returns the bundle short version string of the extension (CFBundleShortVersionString)
+func (sep *SystemExtensionProperties) BundleShortVersion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sep), objc.RegisterName("bundleShortVersion"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// IsEnabled returns the enabled state of the extension
-func (x *SystemExtensionProperties) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+// IsEnabled reports whether returns the enabled state of the extension
+func (sep *SystemExtensionProperties) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(sep), objc.RegisterName("isEnabled"))
 	return _r
 }
 
-// IsAwaitingUserApproval returns whether an extension is waiting for user approval
-func (x *SystemExtensionProperties) IsAwaitingUserApproval() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAwaitingUserApproval"))
+// IsAwaitingUserApproval reports whether an extension is waiting for user approval
+func (sep *SystemExtensionProperties) IsAwaitingUserApproval() bool {
+	_r := objc.Send[bool](objref.IDOf(sep), objc.RegisterName("isAwaitingUserApproval"))
 	return _r
 }
 
-// IsUninstalling returns if an extension is being uninstalled
-func (x *SystemExtensionProperties) IsUninstalling() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUninstalling"))
+// IsUninstalling reports whether returns if an extension is being uninstalled
+func (sep *SystemExtensionProperties) IsUninstalling() bool {
+	_r := objc.Send[bool](objref.IDOf(sep), objc.RegisterName("isUninstalling"))
 	return _r
 }
-
-// SystemExtensionPropertiesable is the interface implemented by [SystemExtensionProperties], for mocking and DI.
-type SystemExtensionPropertiesable interface {
-	obj.Object
-	URL() obj.Object
-	BundleIdentifier() string
-	BundleVersion() string
-	BundleShortVersion() string
-	IsEnabled() bool
-	IsAwaitingUserApproval() bool
-	IsUninstalling() bool
-}
-
-var _ SystemExtensionPropertiesable = (*SystemExtensionProperties)(nil)

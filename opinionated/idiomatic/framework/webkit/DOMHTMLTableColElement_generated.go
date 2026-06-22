@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,265 +50,193 @@ func NewDOMHTMLTableColElement() *DOMHTMLTableColElement {
 }
 
 // WithAlign sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithAlign(align string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
-	return x
+func (dtce *DOMHTMLTableColElement) WithAlign(align string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setAlign:"), purego.NSString(align))
+	return dtce
 }
 
 // WithCh sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithCh(ch string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCh:"), purego.NSString(ch))
-	return x
+func (dtce *DOMHTMLTableColElement) WithCh(ch string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setCh:"), purego.NSString(ch))
+	return dtce
 }
 
 // WithChOff sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithChOff(chOff string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChOff:"), purego.NSString(chOff))
-	return x
+func (dtce *DOMHTMLTableColElement) WithChOff(chOff string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setChOff:"), purego.NSString(chOff))
+	return dtce
 }
 
 // WithSpan sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithSpan(span int) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpan:"), span)
-	return x
+func (dtce *DOMHTMLTableColElement) WithSpan(span int) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setSpan:"), span)
+	return dtce
 }
 
 // WithVAlign sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithVAlign(vAlign string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVAlign:"), purego.NSString(vAlign))
-	return x
+func (dtce *DOMHTMLTableColElement) WithVAlign(vAlign string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setVAlign:"), purego.NSString(vAlign))
+	return dtce
 }
 
 // WithWidth sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithWidth(width string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), purego.NSString(width))
-	return x
+func (dtce *DOMHTMLTableColElement) WithWidth(width string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setWidth:"), purego.NSString(width))
+	return dtce
 }
 
 // WithTitle sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithTitle(title string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+func (dtce *DOMHTMLTableColElement) WithTitle(title string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return dtce
 }
 
 // WithLang sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithLang(lang string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
-	return x
+func (dtce *DOMHTMLTableColElement) WithLang(lang string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setLang:"), purego.NSString(lang))
+	return dtce
 }
 
 // WithDir sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithDir(dir string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
-	return x
+func (dtce *DOMHTMLTableColElement) WithDir(dir string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setDir:"), purego.NSString(dir))
+	return dtce
 }
 
 // WithTabIndex sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithTabIndex(tabIndex int) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
-	return x
+func (dtce *DOMHTMLTableColElement) WithTabIndex(tabIndex int) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setTabIndex:"), tabIndex)
+	return dtce
 }
 
 // WithAccessKey sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithAccessKey(accessKey string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
-	return x
+func (dtce *DOMHTMLTableColElement) WithAccessKey(accessKey string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
+	return dtce
 }
 
 // WithInnerText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithInnerText(innerText string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
-	return x
+func (dtce *DOMHTMLTableColElement) WithInnerText(innerText string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
+	return dtce
 }
 
 // WithOuterText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithOuterText(outerText string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
-	return x
+func (dtce *DOMHTMLTableColElement) WithOuterText(outerText string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
+	return dtce
 }
 
 // WithContentEditable sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithContentEditable(contentEditable string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
-	return x
+func (dtce *DOMHTMLTableColElement) WithContentEditable(contentEditable string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
+	return dtce
 }
 
-// WithIdName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithIdName(idName string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
-	return x
+// WithIDName sets the property and returns the receiver so calls can be chained.
+func (dtce *DOMHTMLTableColElement) WithIDName(idName string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setIdName:"), purego.NSString(idName))
+	return dtce
 }
 
 // WithScrollLeft sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithScrollLeft(scrollLeft int) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
-	return x
+func (dtce *DOMHTMLTableColElement) WithScrollLeft(scrollLeft int) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setScrollLeft:"), scrollLeft)
+	return dtce
 }
 
 // WithScrollTop sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithScrollTop(scrollTop int) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
-	return x
+func (dtce *DOMHTMLTableColElement) WithScrollTop(scrollTop int) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setScrollTop:"), scrollTop)
+	return dtce
 }
 
 // WithInnerHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithInnerHTML(innerHTML string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
-	return x
+func (dtce *DOMHTMLTableColElement) WithInnerHTML(innerHTML string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
+	return dtce
 }
 
 // WithOuterHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithOuterHTML(outerHTML string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
-	return x
+func (dtce *DOMHTMLTableColElement) WithOuterHTML(outerHTML string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
+	return dtce
 }
 
 // WithClassName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithClassName(className string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
-	return x
+func (dtce *DOMHTMLTableColElement) WithClassName(className string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setClassName:"), purego.NSString(className))
+	return dtce
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithNodeValue(nodeValue string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (dtce *DOMHTMLTableColElement) WithNodeValue(nodeValue string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return dtce
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithPrefix(prefix string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (dtce *DOMHTMLTableColElement) WithPrefix(prefix string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return dtce
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableColElement) WithTextContent(textContent string) *DOMHTMLTableColElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (dtce *DOMHTMLTableColElement) WithTextContent(textContent string) *DOMHTMLTableColElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return dtce
 }
 
 // Align wraps the corresponding Objective-C method.
-func (x *DOMHTMLTableColElement) Align() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("align"))
+func (dtce *DOMHTMLTableColElement) Align() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetAlign wraps the corresponding Objective-C method.
-func (x *DOMHTMLTableColElement) SetAlign(align string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
 }
 
 // Ch wraps the corresponding Objective-C method.
-func (x *DOMHTMLTableColElement) Ch() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ch"))
+func (dtce *DOMHTMLTableColElement) Ch() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("ch"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetCh wraps the corresponding Objective-C method.
-func (x *DOMHTMLTableColElement) SetCh(ch string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCh:"), purego.NSString(ch))
 }
 
 // ChOff wraps the corresponding Objective-C method.
-func (x *DOMHTMLTableColElement) ChOff() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chOff"))
+func (dtce *DOMHTMLTableColElement) ChOff() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("chOff"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetChOff wraps the corresponding Objective-C method.
-func (x *DOMHTMLTableColElement) SetChOff(chOff string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChOff:"), purego.NSString(chOff))
 }
 
 // Span wraps the corresponding Objective-C method.
-func (x *DOMHTMLTableColElement) Span() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("span"))
+func (dtce *DOMHTMLTableColElement) Span() int {
+	_r := objc.Send[int](objref.IDOf(dtce), objc.RegisterName("span"))
 	return _r
 }
 
-// SetSpan wraps the corresponding Objective-C method.
-func (x *DOMHTMLTableColElement) SetSpan(span int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpan:"), span)
-}
-
 // VAlign wraps the corresponding Objective-C method.
-func (x *DOMHTMLTableColElement) VAlign() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vAlign"))
+func (dtce *DOMHTMLTableColElement) VAlign() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("vAlign"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetVAlign wraps the corresponding Objective-C method.
-func (x *DOMHTMLTableColElement) SetVAlign(vAlign string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVAlign:"), purego.NSString(vAlign))
 }
 
 // Width wraps the corresponding Objective-C method.
-func (x *DOMHTMLTableColElement) Width() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("width"))
+func (dtce *DOMHTMLTableColElement) Width() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("width"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetWidth wraps the corresponding Objective-C method.
-func (x *DOMHTMLTableColElement) SetWidth(width string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), purego.NSString(width))
-}
-
-// DOMHTMLTableColElementable is the interface implemented by [DOMHTMLTableColElement], for mocking and DI.
-type DOMHTMLTableColElementable interface {
-	obj.Object
-	WithAlign(align string) *DOMHTMLTableColElement
-	WithCh(ch string) *DOMHTMLTableColElement
-	WithChOff(chOff string) *DOMHTMLTableColElement
-	WithSpan(span int) *DOMHTMLTableColElement
-	WithVAlign(vAlign string) *DOMHTMLTableColElement
-	WithWidth(width string) *DOMHTMLTableColElement
-	WithTitle(title string) *DOMHTMLTableColElement
-	WithLang(lang string) *DOMHTMLTableColElement
-	WithDir(dir string) *DOMHTMLTableColElement
-	WithTabIndex(tabIndex int) *DOMHTMLTableColElement
-	WithAccessKey(accessKey string) *DOMHTMLTableColElement
-	WithInnerText(innerText string) *DOMHTMLTableColElement
-	WithOuterText(outerText string) *DOMHTMLTableColElement
-	WithContentEditable(contentEditable string) *DOMHTMLTableColElement
-	WithIdName(idName string) *DOMHTMLTableColElement
-	WithScrollLeft(scrollLeft int) *DOMHTMLTableColElement
-	WithScrollTop(scrollTop int) *DOMHTMLTableColElement
-	WithInnerHTML(innerHTML string) *DOMHTMLTableColElement
-	WithOuterHTML(outerHTML string) *DOMHTMLTableColElement
-	WithClassName(className string) *DOMHTMLTableColElement
-	WithNodeValue(nodeValue string) *DOMHTMLTableColElement
-	WithPrefix(prefix string) *DOMHTMLTableColElement
-	WithTextContent(textContent string) *DOMHTMLTableColElement
-	Align() string
-	SetAlign(align string)
-	Ch() string
-	SetCh(ch string)
-	ChOff() string
-	SetChOff(chOff string)
-	Span() int
-	SetSpan(span int)
-	VAlign() string
-	SetVAlign(vAlign string)
-	Width() string
-	SetWidth(width string)
-}
-
-var _ DOMHTMLTableColElementable = (*DOMHTMLTableColElement)(nil)
 
 var _ DOMHTMLElementProvider = (*DOMHTMLTableColElement)(nil)
 

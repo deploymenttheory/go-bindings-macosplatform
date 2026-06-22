@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,118 +51,70 @@ func NewCNNSpatialNormalizationGradientNodeWithSourceGradientSourceImageGradient
 }
 
 // WithKernelWidth sets the property and returns the receiver so calls can be chained.
-func (x *CNNSpatialNormalizationGradientNode) WithKernelWidth(kernelWidth int) *CNNSpatialNormalizationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
-	return x
+func (csngn *CNNSpatialNormalizationGradientNode) WithKernelWidth(kernelWidth int) *CNNSpatialNormalizationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(csngn), objc.RegisterName("setKernelWidth:"), kernelWidth)
+	return csngn
 }
 
 // WithKernelHeight sets the property and returns the receiver so calls can be chained.
-func (x *CNNSpatialNormalizationGradientNode) WithKernelHeight(kernelHeight int) *CNNSpatialNormalizationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
-	return x
+func (csngn *CNNSpatialNormalizationGradientNode) WithKernelHeight(kernelHeight int) *CNNSpatialNormalizationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(csngn), objc.RegisterName("setKernelHeight:"), kernelHeight)
+	return csngn
 }
 
-// WithAlpha the value of alpha.  Default is 1.0. Must be non-negative.
-func (x *CNNSpatialNormalizationGradientNode) WithAlpha(alpha float32) *CNNSpatialNormalizationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the value of alpha.  Default is 1.0. Must be non-negative.
+func (csngn *CNNSpatialNormalizationGradientNode) WithAlpha(alpha float32) *CNNSpatialNormalizationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(csngn), objc.RegisterName("setAlpha:"), alpha)
+	return csngn
 }
 
-// WithBeta the value of beta.  Default is 5.0
-func (x *CNNSpatialNormalizationGradientNode) WithBeta(beta float32) *CNNSpatialNormalizationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
-	return x
+// WithBeta sets the value of beta.  Default is 5.0
+func (csngn *CNNSpatialNormalizationGradientNode) WithBeta(beta float32) *CNNSpatialNormalizationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(csngn), objc.RegisterName("setBeta:"), beta)
+	return csngn
 }
 
-// WithDelta the value of delta.  Default is 1.0
-func (x *CNNSpatialNormalizationGradientNode) WithDelta(delta float32) *CNNSpatialNormalizationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
-	return x
+// WithDelta sets the value of delta.  Default is 1.0
+func (csngn *CNNSpatialNormalizationGradientNode) WithDelta(delta float32) *CNNSpatialNormalizationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(csngn), objc.RegisterName("setDelta:"), delta)
+	return csngn
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNSpatialNormalizationGradientNode) WithLabel(label string) *CNNSpatialNormalizationGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (csngn *CNNSpatialNormalizationGradientNode) WithLabel(label string) *CNNSpatialNormalizationGradientNode {
+	objc.Send[objc.ID](objref.IDOf(csngn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return csngn
 }
 
 // KernelWidth wraps the corresponding Objective-C method.
-func (x *CNNSpatialNormalizationGradientNode) KernelWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+func (csngn *CNNSpatialNormalizationGradientNode) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(csngn), objc.RegisterName("kernelWidth"))
 	return _r
-}
-
-// SetKernelWidth wraps the corresponding Objective-C method.
-func (x *CNNSpatialNormalizationGradientNode) SetKernelWidth(kernelWidth int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
 }
 
 // KernelHeight wraps the corresponding Objective-C method.
-func (x *CNNSpatialNormalizationGradientNode) KernelHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+func (csngn *CNNSpatialNormalizationGradientNode) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(csngn), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
-// SetKernelHeight wraps the corresponding Objective-C method.
-func (x *CNNSpatialNormalizationGradientNode) SetKernelHeight(kernelHeight int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
-}
-
-// Alpha the value of alpha.  Default is 1.0. Must be non-negative.
-func (x *CNNSpatialNormalizationGradientNode) Alpha() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
+// Alpha returns the value of alpha.  Default is 1.0. Must be non-negative.
+func (csngn *CNNSpatialNormalizationGradientNode) Alpha() float32 {
+	_r := objc.Send[float32](objref.IDOf(csngn), objc.RegisterName("alpha"))
 	return _r
 }
 
-// SetAlpha wraps the corresponding Objective-C method.
-func (x *CNNSpatialNormalizationGradientNode) SetAlpha(alpha float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-}
-
-// Beta the value of beta.  Default is 5.0
-func (x *CNNSpatialNormalizationGradientNode) Beta() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("beta"))
+// Beta returns the value of beta.  Default is 5.0
+func (csngn *CNNSpatialNormalizationGradientNode) Beta() float32 {
+	_r := objc.Send[float32](objref.IDOf(csngn), objc.RegisterName("beta"))
 	return _r
 }
 
-// SetBeta wraps the corresponding Objective-C method.
-func (x *CNNSpatialNormalizationGradientNode) SetBeta(beta float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
-}
-
-// Delta the value of delta.  Default is 1.0
-func (x *CNNSpatialNormalizationGradientNode) Delta() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
+// Delta returns the value of delta.  Default is 1.0
+func (csngn *CNNSpatialNormalizationGradientNode) Delta() float32 {
+	_r := objc.Send[float32](objref.IDOf(csngn), objc.RegisterName("delta"))
 	return _r
 }
-
-// SetDelta wraps the corresponding Objective-C method.
-func (x *CNNSpatialNormalizationGradientNode) SetDelta(delta float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
-}
-
-// CNNSpatialNormalizationGradientNodeable is the interface implemented by [CNNSpatialNormalizationGradientNode], for mocking and DI.
-type CNNSpatialNormalizationGradientNodeable interface {
-	obj.Object
-	WithKernelWidth(kernelWidth int) *CNNSpatialNormalizationGradientNode
-	WithKernelHeight(kernelHeight int) *CNNSpatialNormalizationGradientNode
-	WithAlpha(alpha float32) *CNNSpatialNormalizationGradientNode
-	WithBeta(beta float32) *CNNSpatialNormalizationGradientNode
-	WithDelta(delta float32) *CNNSpatialNormalizationGradientNode
-	WithLabel(label string) *CNNSpatialNormalizationGradientNode
-	KernelWidth() int
-	SetKernelWidth(kernelWidth int)
-	KernelHeight() int
-	SetKernelHeight(kernelHeight int)
-	Alpha() float32
-	SetAlpha(alpha float32)
-	Beta() float32
-	SetBeta(beta float32)
-	Delta() float32
-	SetDelta(delta float32)
-}
-
-var _ CNNSpatialNormalizationGradientNodeable = (*CNNSpatialNormalizationGradientNode)(nil)
 
 var _ NNGradientFilterNodeProvider = (*CNNSpatialNormalizationGradientNode)(nil)
 

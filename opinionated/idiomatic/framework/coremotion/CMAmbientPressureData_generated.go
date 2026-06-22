@@ -52,25 +52,16 @@ func NewAmbientPressureData() *AmbientPressureData {
 	return ambientPressureDataAdopt(_id)
 }
 
-// Pressure discussion: The pressure as measured by the pressure sensor. Pressure is in kPa (kilopascals).
-func (x *AmbientPressureData) Pressure() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pressure"))
+// Pressure returns discussion: The pressure as measured by the pressure sensor. Pressure is in kPa (kilopascals).
+func (apd *AmbientPressureData) Pressure() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apd), objc.RegisterName("pressure"))
 	return obj.Wrap(_r)
 }
 
-// Temperature discussion: The temperature as measured by the pressure sensor. Temperature is in C (degrees centrigrade).
-func (x *AmbientPressureData) Temperature() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("temperature"))
+// Temperature returns discussion: The temperature as measured by the pressure sensor. Temperature is in C (degrees centrigrade).
+func (apd *AmbientPressureData) Temperature() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apd), objc.RegisterName("temperature"))
 	return obj.Wrap(_r)
 }
-
-// AmbientPressureDataable is the interface implemented by [AmbientPressureData], for mocking and DI.
-type AmbientPressureDataable interface {
-	obj.Object
-	Pressure() obj.Object
-	Temperature() obj.Object
-}
-
-var _ AmbientPressureDataable = (*AmbientPressureData)(nil)
 
 var _ LogItemProvider = (*AmbientPressureData)(nil)

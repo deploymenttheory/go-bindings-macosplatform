@@ -46,24 +46,24 @@ func virtioSocketListenerAdopt(id objc.ID) *VirtioSocketListener {
 }
 
 // Description returns the object's -description text.
-func (x *VirtioSocketListener) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vsl *VirtioSocketListener) Description() string {
+	return rt.Description(objref.IDOf(vsl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtioSocketListener) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vsl *VirtioSocketListener) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vsl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtioSocketListener) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vsl *VirtioSocketListener) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vsl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VirtioSocketListener) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vsl *VirtioSocketListener) String() string {
+	return rt.Description(objref.IDOf(vsl))
 }
 
 // NewVirtioSocketListener creates a new VirtioSocketListener.
@@ -71,10 +71,3 @@ func NewVirtioSocketListener() *VirtioSocketListener {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioSocketListener")), objc.RegisterName("new"))
 	return virtioSocketListenerAdopt(_id)
 }
-
-// VirtioSocketListenerable is the interface implemented by [VirtioSocketListener], for mocking and DI.
-type VirtioSocketListenerable interface {
-	obj.Object
-}
-
-var _ VirtioSocketListenerable = (*VirtioSocketListener)(nil)

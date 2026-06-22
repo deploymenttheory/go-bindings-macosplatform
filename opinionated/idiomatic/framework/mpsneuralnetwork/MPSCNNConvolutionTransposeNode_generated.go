@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,33 +51,23 @@ func NewCNNConvolutionTransposeNode() *CNNConvolutionTransposeNode {
 	return cNNConvolutionTransposeNodeAdopt(_id)
 }
 
-// WithTrainingStyle the training style of the forward node will be propagated to gradient nodes made from it
-func (x *CNNConvolutionTransposeNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNConvolutionTransposeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrainingStyle:"), trainingStyle)
-	return x
+// WithTrainingStyle sets the training style of the forward node will be propagated to gradient nodes made from it
+func (cctn *CNNConvolutionTransposeNode) WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNConvolutionTransposeNode {
+	objc.Send[objc.ID](objref.IDOf(cctn), objc.RegisterName("setTrainingStyle:"), trainingStyle)
+	return cctn
 }
 
-// WithAccumulatorPrecision set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
-func (x *CNNConvolutionTransposeNode) WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNConvolutionTransposeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccumulatorPrecision:"), accumulatorPrecision)
-	return x
+// WithAccumulatorPrecision sets set the floating-point precision used by the convolution accumulator Default:  MPSNNConvolutionAccumulatorPrecisionOptionFloat
+func (cctn *CNNConvolutionTransposeNode) WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNConvolutionTransposeNode {
+	objc.Send[objc.ID](objref.IDOf(cctn), objc.RegisterName("setAccumulatorPrecision:"), accumulatorPrecision)
+	return cctn
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNConvolutionTransposeNode) WithLabel(label string) *CNNConvolutionTransposeNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cctn *CNNConvolutionTransposeNode) WithLabel(label string) *CNNConvolutionTransposeNode {
+	objc.Send[objc.ID](objref.IDOf(cctn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cctn
 }
-
-// CNNConvolutionTransposeNodeable is the interface implemented by [CNNConvolutionTransposeNode], for mocking and DI.
-type CNNConvolutionTransposeNodeable interface {
-	obj.Object
-	WithTrainingStyle(trainingStyle NNTrainingStyle) *CNNConvolutionTransposeNode
-	WithAccumulatorPrecision(accumulatorPrecision NNConvolutionAccumulatorPrecisionOption) *CNNConvolutionTransposeNode
-	WithLabel(label string) *CNNConvolutionTransposeNode
-}
-
-var _ CNNConvolutionTransposeNodeable = (*CNNConvolutionTransposeNode)(nil)
 
 var _ CNNConvolutionNodeProvider = (*CNNConvolutionTransposeNode)(nil)
 

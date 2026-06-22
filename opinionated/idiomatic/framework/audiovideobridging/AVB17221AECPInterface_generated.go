@@ -5,12 +5,12 @@
 package audiovideobridging
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // AVB17221AECPInterface is an idiomatic wrapper over the Objective-C class AVB17221AECPInterface.
@@ -53,33 +53,23 @@ func NewAVB17221AECPInterface() *AVB17221AECPInterface {
 }
 
 // RemoveCommandHandlerForEntityID removed a handler for command messages to or from a specified EntityID.
-func (x *AVB17221AECPInterface) RemoveCommandHandlerForEntityID(targetEntityID uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeCommandHandlerForEntityID:"), targetEntityID)
+func (aai *AVB17221AECPInterface) RemoveCommandHandlerForEntityID(targetEntityID uint64) {
+	objc.Send[objc.ID](objref.IDOf(aai), objc.RegisterName("removeCommandHandlerForEntityID:"), targetEntityID)
 }
 
 // RemoveResponseHandlerForControllerEntityID removed a handler for response messages to or from a specified EntityID.
-func (x *AVB17221AECPInterface) RemoveResponseHandlerForControllerEntityID(controllerEntityID uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeResponseHandlerForControllerEntityID:"), controllerEntityID)
+func (aai *AVB17221AECPInterface) RemoveResponseHandlerForControllerEntityID(controllerEntityID uint64) {
+	objc.Send[objc.ID](objref.IDOf(aai), objc.RegisterName("removeResponseHandlerForControllerEntityID:"), controllerEntityID)
 }
 
 // SendResponseToMACAddress send an AECP response. This method synchronizes access to the kernel service providing transport for the message. This method is safe to call from any thread.
-func (x *AVB17221AECPInterface) SendResponseToMACAddress(message *AVB17221AECPMessage, destMAC *MACAddress) error {
+func (aai *AVB17221AECPInterface) SendResponseToMACAddress(message *AVB17221AECPMessage, destMAC *MACAddress) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendResponse:toMACAddress:error:"), objref.IDOf(message), objref.IDOf(destMAC), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(aai), objc.RegisterName("sendResponse:toMACAddress:error:"), objref.IDOf(message), objref.IDOf(destMAC), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
-
-// AVB17221AECPInterfaceable is the interface implemented by [AVB17221AECPInterface], for mocking and DI.
-type AVB17221AECPInterfaceable interface {
-	obj.Object
-	RemoveCommandHandlerForEntityID(targetEntityID uint64)
-	RemoveResponseHandlerForControllerEntityID(controllerEntityID uint64)
-	SendResponseToMACAddress(message *AVB17221AECPMessage, destMAC *MACAddress) error
-}
-
-var _ AVB17221AECPInterfaceable = (*AVB17221AECPInterface)(nil)
 
 var _ AVB1722ControlInterfaceProvider = (*AVB17221AECPInterface)(nil)

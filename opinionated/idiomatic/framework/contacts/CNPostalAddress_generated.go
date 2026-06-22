@@ -48,29 +48,29 @@ func postalAddressAdopt(id objc.ID) *PostalAddress {
 }
 
 // Description returns the object's -description text.
-func (x *PostalAddress) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pa *PostalAddress) Description() string {
+	return rt.Description(objref.IDOf(pa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PostalAddress) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pa *PostalAddress) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PostalAddress) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pa *PostalAddress) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PostalAddress) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pa *PostalAddress) String() string {
+	return rt.Description(objref.IDOf(pa))
 }
 
-// Street multi-street address is delimited with carriage returns “\n”
-func (x *PostalAddress) Street() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("street"))
+// Street returns multi-street address is delimited with carriage returns “\n”
+func (pa *PostalAddress) Street() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("street"))
 	if _r == 0 {
 		return ""
 	}
@@ -78,8 +78,8 @@ func (x *PostalAddress) Street() string {
 }
 
 // SubLocality wraps the corresponding Objective-C method.
-func (x *PostalAddress) SubLocality() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subLocality"))
+func (pa *PostalAddress) SubLocality() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("subLocality"))
 	if _r == 0 {
 		return ""
 	}
@@ -87,8 +87,8 @@ func (x *PostalAddress) SubLocality() string {
 }
 
 // City wraps the corresponding Objective-C method.
-func (x *PostalAddress) City() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("city"))
+func (pa *PostalAddress) City() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("city"))
 	if _r == 0 {
 		return ""
 	}
@@ -96,8 +96,8 @@ func (x *PostalAddress) City() string {
 }
 
 // SubAdministrativeArea wraps the corresponding Objective-C method.
-func (x *PostalAddress) SubAdministrativeArea() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subAdministrativeArea"))
+func (pa *PostalAddress) SubAdministrativeArea() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("subAdministrativeArea"))
 	if _r == 0 {
 		return ""
 	}
@@ -105,8 +105,8 @@ func (x *PostalAddress) SubAdministrativeArea() string {
 }
 
 // State wraps the corresponding Objective-C method.
-func (x *PostalAddress) State() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
+func (pa *PostalAddress) State() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("state"))
 	if _r == 0 {
 		return ""
 	}
@@ -114,8 +114,8 @@ func (x *PostalAddress) State() string {
 }
 
 // PostalCode wraps the corresponding Objective-C method.
-func (x *PostalAddress) PostalCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postalCode"))
+func (pa *PostalAddress) PostalCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("postalCode"))
 	if _r == 0 {
 		return ""
 	}
@@ -123,8 +123,8 @@ func (x *PostalAddress) PostalCode() string {
 }
 
 // Country wraps the corresponding Objective-C method.
-func (x *PostalAddress) Country() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("country"))
+func (pa *PostalAddress) Country() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("country"))
 	if _r == 0 {
 		return ""
 	}
@@ -132,32 +132,17 @@ func (x *PostalAddress) Country() string {
 }
 
 // ISOCountryCode wraps the corresponding Objective-C method.
-func (x *PostalAddress) ISOCountryCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ISOCountryCode"))
+func (pa *PostalAddress) ISOCountryCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("ISOCountryCode"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// PostalAddressable is the interface implemented by [PostalAddress], for mocking and DI.
-type PostalAddressable interface {
-	obj.Object
-	Street() string
-	SubLocality() string
-	City() string
-	SubAdministrativeArea() string
-	State() string
-	PostalCode() string
-	Country() string
-	ISOCountryCode() string
-}
-
-var _ PostalAddressable = (*PostalAddress)(nil)
-
 // isPostalAddress marks PostalAddress — and, by embedding promotion, its
 // subclasses — as a member of the PostalAddress hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PostalAddress) isPostalAddress() {}
+func (pa *PostalAddress) isPostalAddress() {}
 
 var _ PostalAddressProvider = (*PostalAddress)(nil)

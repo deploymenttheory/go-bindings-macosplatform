@@ -46,24 +46,24 @@ func sampleBufferRequestAdopt(id objc.ID) *SampleBufferRequest {
 }
 
 // Description returns the object's -description text.
-func (x *SampleBufferRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sbr *SampleBufferRequest) Description() string {
+	return rt.Description(objref.IDOf(sbr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SampleBufferRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sbr *SampleBufferRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sbr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SampleBufferRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sbr *SampleBufferRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sbr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SampleBufferRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sbr *SampleBufferRequest) String() string {
+	return rt.Description(objref.IDOf(sbr))
 }
 
 // NewSampleBufferRequestWithStartCursor creates a newly allocated sample buffer request with the specified sample cursor.
@@ -73,116 +73,68 @@ func NewSampleBufferRequestWithStartCursor(startCursor *SampleCursor) *SampleBuf
 	return sampleBufferRequestAdopt(_id)
 }
 
-// WithDirection the buffer sample direction.
-func (x *SampleBufferRequest) WithDirection(direction SampleBufferRequestDirection) *SampleBufferRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirection:"), direction)
-	return x
+// WithDirection sets the buffer sample direction.
+func (sbr *SampleBufferRequest) WithDirection(direction SampleBufferRequestDirection) *SampleBufferRequest {
+	objc.Send[objc.ID](objref.IDOf(sbr), objc.RegisterName("setDirection:"), direction)
+	return sbr
 }
 
-// WithLimitCursor the limiting position for sample loading.
-func (x *SampleBufferRequest) WithLimitCursor(limitCursor *SampleCursor) *SampleBufferRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLimitCursor:"), objref.IDOf(limitCursor))
-	return x
+// WithLimitCursor sets the limiting position for sample loading.
+func (sbr *SampleBufferRequest) WithLimitCursor(limitCursor *SampleCursor) *SampleBufferRequest {
+	objc.Send[objc.ID](objref.IDOf(sbr), objc.RegisterName("setLimitCursor:"), objref.IDOf(limitCursor))
+	return sbr
 }
 
-// WithPreferredMinSampleCount the preferred minimum number of samples to load.
-func (x *SampleBufferRequest) WithPreferredMinSampleCount(preferredMinSampleCount int) *SampleBufferRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMinSampleCount:"), preferredMinSampleCount)
-	return x
+// WithPreferredMinSampleCount sets the preferred minimum number of samples to load.
+func (sbr *SampleBufferRequest) WithPreferredMinSampleCount(preferredMinSampleCount int) *SampleBufferRequest {
+	objc.Send[objc.ID](objref.IDOf(sbr), objc.RegisterName("setPreferredMinSampleCount:"), preferredMinSampleCount)
+	return sbr
 }
 
-// WithMaxSampleCount the maximum number of samples to load.
-func (x *SampleBufferRequest) WithMaxSampleCount(maxSampleCount int) *SampleBufferRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSampleCount:"), maxSampleCount)
-	return x
+// WithMaxSampleCount sets the maximum number of samples to load.
+func (sbr *SampleBufferRequest) WithMaxSampleCount(maxSampleCount int) *SampleBufferRequest {
+	objc.Send[objc.ID](objref.IDOf(sbr), objc.RegisterName("setMaxSampleCount:"), maxSampleCount)
+	return sbr
 }
 
-// WithMode the sample buffer request mode.
-func (x *SampleBufferRequest) WithMode(mode SampleBufferRequestMode) *SampleBufferRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
-	return x
+// WithMode sets the sample buffer request mode.
+func (sbr *SampleBufferRequest) WithMode(mode SampleBufferRequestMode) *SampleBufferRequest {
+	objc.Send[objc.ID](objref.IDOf(sbr), objc.RegisterName("setMode:"), mode)
+	return sbr
 }
 
 // StartCursor wraps the corresponding Objective-C method.
-func (x *SampleBufferRequest) StartCursor() *SampleCursor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startCursor"))
+func (sbr *SampleBufferRequest) StartCursor() *SampleCursor {
+	_r := objc.Send[objc.ID](objref.IDOf(sbr), objc.RegisterName("startCursor"))
 	return SampleCursorFromID(_r)
 }
 
 // Direction wraps the corresponding Objective-C method.
-func (x *SampleBufferRequest) Direction() SampleBufferRequestDirection {
-	_r := objc.Send[SampleBufferRequestDirection](objref.IDOf(x), objc.RegisterName("direction"))
+func (sbr *SampleBufferRequest) Direction() SampleBufferRequestDirection {
+	_r := objc.Send[SampleBufferRequestDirection](objref.IDOf(sbr), objc.RegisterName("direction"))
 	return _r
-}
-
-// SetDirection wraps the corresponding Objective-C method.
-func (x *SampleBufferRequest) SetDirection(direction SampleBufferRequestDirection) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirection:"), direction)
 }
 
 // LimitCursor wraps the corresponding Objective-C method.
-func (x *SampleBufferRequest) LimitCursor() *SampleCursor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("limitCursor"))
+func (sbr *SampleBufferRequest) LimitCursor() *SampleCursor {
+	_r := objc.Send[objc.ID](objref.IDOf(sbr), objc.RegisterName("limitCursor"))
 	return SampleCursorFromID(_r)
 }
 
-// SetLimitCursor wraps the corresponding Objective-C method.
-func (x *SampleBufferRequest) SetLimitCursor(limitCursor *SampleCursor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLimitCursor:"), objref.IDOf(limitCursor))
-}
-
 // PreferredMinSampleCount wraps the corresponding Objective-C method.
-func (x *SampleBufferRequest) PreferredMinSampleCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("preferredMinSampleCount"))
+func (sbr *SampleBufferRequest) PreferredMinSampleCount() int {
+	_r := objc.Send[int](objref.IDOf(sbr), objc.RegisterName("preferredMinSampleCount"))
 	return _r
-}
-
-// SetPreferredMinSampleCount wraps the corresponding Objective-C method.
-func (x *SampleBufferRequest) SetPreferredMinSampleCount(preferredMinSampleCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMinSampleCount:"), preferredMinSampleCount)
 }
 
 // MaxSampleCount wraps the corresponding Objective-C method.
-func (x *SampleBufferRequest) MaxSampleCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxSampleCount"))
+func (sbr *SampleBufferRequest) MaxSampleCount() int {
+	_r := objc.Send[int](objref.IDOf(sbr), objc.RegisterName("maxSampleCount"))
 	return _r
-}
-
-// SetMaxSampleCount wraps the corresponding Objective-C method.
-func (x *SampleBufferRequest) SetMaxSampleCount(maxSampleCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSampleCount:"), maxSampleCount)
 }
 
 // Mode wraps the corresponding Objective-C method.
-func (x *SampleBufferRequest) Mode() SampleBufferRequestMode {
-	_r := objc.Send[SampleBufferRequestMode](objref.IDOf(x), objc.RegisterName("mode"))
+func (sbr *SampleBufferRequest) Mode() SampleBufferRequestMode {
+	_r := objc.Send[SampleBufferRequestMode](objref.IDOf(sbr), objc.RegisterName("mode"))
 	return _r
 }
-
-// SetMode wraps the corresponding Objective-C method.
-func (x *SampleBufferRequest) SetMode(mode SampleBufferRequestMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), mode)
-}
-
-// SampleBufferRequestable is the interface implemented by [SampleBufferRequest], for mocking and DI.
-type SampleBufferRequestable interface {
-	obj.Object
-	WithDirection(direction SampleBufferRequestDirection) *SampleBufferRequest
-	WithLimitCursor(limitCursor *SampleCursor) *SampleBufferRequest
-	WithPreferredMinSampleCount(preferredMinSampleCount int) *SampleBufferRequest
-	WithMaxSampleCount(maxSampleCount int) *SampleBufferRequest
-	WithMode(mode SampleBufferRequestMode) *SampleBufferRequest
-	StartCursor() *SampleCursor
-	Direction() SampleBufferRequestDirection
-	SetDirection(direction SampleBufferRequestDirection)
-	LimitCursor() *SampleCursor
-	SetLimitCursor(limitCursor *SampleCursor)
-	PreferredMinSampleCount() int
-	SetPreferredMinSampleCount(preferredMinSampleCount int)
-	MaxSampleCount() int
-	SetMaxSampleCount(maxSampleCount int)
-	Mode() SampleBufferRequestMode
-	SetMode(mode SampleBufferRequestMode)
-}
-
-var _ SampleBufferRequestable = (*SampleBufferRequest)(nil)

@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,93 +51,64 @@ func NewMTL4AccelerationStructureBoundingBoxGeometryDescriptor() *MTL4Accelerati
 	return mTL4AccelerationStructureBoundingBoxGeometryDescriptorAdopt(_id)
 }
 
-// WithBoundingBoxStride assigns the stride, in bytes, between bounding boxes in the bounding box buffer boundingBoxBuffer references.
-func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxStride(boundingBoxStride int) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundingBoxStride:"), boundingBoxStride)
-	return x
+// WithBoundingBoxStride sets assigns the stride, in bytes, between bounding boxes in the bounding box buffer boundingBoxBuffer references.
+func (masbbgd *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxStride(boundingBoxStride int) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masbbgd), objc.RegisterName("setBoundingBoxStride:"), boundingBoxStride)
+	return masbbgd
 }
 
-// WithBoundingBoxCount describes the number of bounding boxes the boundingBoxBuffer contains.
-func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxCount(boundingBoxCount int) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundingBoxCount:"), boundingBoxCount)
-	return x
+// WithBoundingBoxCount sets describes the number of bounding boxes the boundingBoxBuffer contains.
+func (masbbgd *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithBoundingBoxCount(boundingBoxCount int) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masbbgd), objc.RegisterName("setBoundingBoxCount:"), boundingBoxCount)
+	return masbbgd
 }
 
-// WithIntersectionFunctionTableOffset sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it.
-func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntersectionFunctionTableOffset:"), intersectionFunctionTableOffset)
-	return x
+// WithIntersectionFunctionTableOffset sets sets the offset that this geometry contributes to determining the intersection function to invoke when a ray intersects it.
+func (masbbgd *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masbbgd), objc.RegisterName("setIntersectionFunctionTableOffset:"), intersectionFunctionTableOffset)
+	return masbbgd
 }
 
-// WithOpaque provides a hint to Metal that this geometry is opaque, potentially accelerating the ray/primitive intersection process.
-func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithOpaque(opaque bool) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets provides a hint to Metal that this geometry is opaque, potentially accelerating the ray/primitive intersection process.
+func (masbbgd *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithOpaque(opaque bool) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masbbgd), objc.RegisterName("setOpaque:"), opaque)
+	return masbbgd
 }
 
-// WithAllowDuplicateIntersectionFunctionInvocation a boolean value that indicates whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection.
-func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:"), allowDuplicateIntersectionFunctionInvocation)
-	return x
+// WithAllowDuplicateIntersectionFunctionInvocation sets a boolean value that indicates whether the ray-tracing system in Metal allows the invocation of intersection functions more than once per ray-primitive intersection.
+func (masbbgd *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masbbgd), objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:"), allowDuplicateIntersectionFunctionInvocation)
+	return masbbgd
 }
 
-// WithLabel assigns an optional label you can assign to this geometry for debugging purposes.
-func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithLabel(label string) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets assigns an optional label you can assign to this geometry for debugging purposes.
+func (masbbgd *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithLabel(label string) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masbbgd), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return masbbgd
 }
 
-// WithPrimitiveDataStride defines the stride, in bytes, between each primitive’s data in the primitive data buffer primitiveDataBuffer references.
-func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
-	return x
+// WithPrimitiveDataStride sets defines the stride, in bytes, between each primitive’s data in the primitive data buffer primitiveDataBuffer references.
+func (masbbgd *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masbbgd), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
+	return masbbgd
 }
 
-// WithPrimitiveDataElementSize sets the size, in bytes, of the data for each primitive in the primitive data buffer primitiveDataBuffer references.
-func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
-	return x
+// WithPrimitiveDataElementSize sets sets the size, in bytes, of the data for each primitive in the primitive data buffer primitiveDataBuffer references.
+func (masbbgd *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(masbbgd), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
+	return masbbgd
 }
 
-// BoundingBoxStride assigns the stride, in bytes, between bounding boxes in the bounding box buffer `boundingBoxBuffer` references. You are responsible for ensuring this stride is at least 24 bytes and a multiple of 4 bytes. This property defaults to `24` bytes.
-func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxStride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("boundingBoxStride"))
+// BoundingBoxStride returns assigns the stride, in bytes, between bounding boxes in the bounding box buffer `boundingBoxBuffer` references. You are responsible for ensuring this stride is at least 24 bytes and a multiple of 4 bytes. This property defaults to `24` bytes.
+func (masbbgd *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxStride() int {
+	_r := objc.Send[int](objref.IDOf(masbbgd), objc.RegisterName("boundingBoxStride"))
 	return _r
-}
-
-// SetBoundingBoxStride wraps the corresponding Objective-C method.
-func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) SetBoundingBoxStride(boundingBoxStride int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundingBoxStride:"), boundingBoxStride)
 }
 
 // BoundingBoxCount describes the number of bounding boxes the `boundingBoxBuffer` contains.
-func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("boundingBoxCount"))
+func (masbbgd *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) BoundingBoxCount() int {
+	_r := objc.Send[int](objref.IDOf(masbbgd), objc.RegisterName("boundingBoxCount"))
 	return _r
 }
-
-// SetBoundingBoxCount wraps the corresponding Objective-C method.
-func (x *MTL4AccelerationStructureBoundingBoxGeometryDescriptor) SetBoundingBoxCount(boundingBoxCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundingBoxCount:"), boundingBoxCount)
-}
-
-// MTL4AccelerationStructureBoundingBoxGeometryDescriptorable is the interface implemented by [MTL4AccelerationStructureBoundingBoxGeometryDescriptor], for mocking and DI.
-type MTL4AccelerationStructureBoundingBoxGeometryDescriptorable interface {
-	obj.Object
-	WithBoundingBoxStride(boundingBoxStride int) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor
-	WithBoundingBoxCount(boundingBoxCount int) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor
-	WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor
-	WithOpaque(opaque bool) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor
-	WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor
-	WithLabel(label string) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor
-	WithPrimitiveDataStride(primitiveDataStride int) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor
-	WithPrimitiveDataElementSize(primitiveDataElementSize int) *MTL4AccelerationStructureBoundingBoxGeometryDescriptor
-	BoundingBoxStride() int
-	SetBoundingBoxStride(boundingBoxStride int)
-	BoundingBoxCount() int
-	SetBoundingBoxCount(boundingBoxCount int)
-}
-
-var _ MTL4AccelerationStructureBoundingBoxGeometryDescriptorable = (*MTL4AccelerationStructureBoundingBoxGeometryDescriptor)(nil)
 
 var _ MTL4AccelerationStructureGeometryDescriptorProvider = (*MTL4AccelerationStructureBoundingBoxGeometryDescriptor)(nil)

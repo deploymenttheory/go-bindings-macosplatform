@@ -53,32 +53,22 @@ func NewTokenKeychainCertificateWithCertificateObjectID(certificateRef obj.Objec
 	return tokenKeychainCertificateAdopt(_id)
 }
 
-// WithLabel the user-visible label for the keychain item.
-func (x *TokenKeychainCertificate) WithLabel(label string) *TokenKeychainCertificate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the user-visible label for the keychain item.
+func (tkc *TokenKeychainCertificate) WithLabel(label string) *TokenKeychainCertificate {
+	objc.Send[objc.ID](objref.IDOf(tkc), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return tkc
 }
 
-// WithConstraints access constraints for the keychain item, keyed by TKTokenOperation values wrapped in NSNumber objects.
-func (x *TokenKeychainCertificate) WithConstraints(constraints obj.Object) *TokenKeychainCertificate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), objref.IDOf(constraints))
-	return x
+// WithConstraints sets access constraints for the keychain item, keyed by TKTokenOperation values wrapped in NSNumber objects.
+func (tkc *TokenKeychainCertificate) WithConstraints(constraints obj.Object) *TokenKeychainCertificate {
+	objc.Send[objc.ID](objref.IDOf(tkc), objc.RegisterName("setConstraints:"), objref.IDOf(constraints))
+	return tkc
 }
 
 // Data wraps the corresponding Objective-C method.
-func (x *TokenKeychainCertificate) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+func (tkc *TokenKeychainCertificate) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tkc), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
-
-// TokenKeychainCertificateable is the interface implemented by [TokenKeychainCertificate], for mocking and DI.
-type TokenKeychainCertificateable interface {
-	obj.Object
-	WithLabel(label string) *TokenKeychainCertificate
-	WithConstraints(constraints obj.Object) *TokenKeychainCertificate
-	Data() obj.Object
-}
-
-var _ TokenKeychainCertificateable = (*TokenKeychainCertificate)(nil)
 
 var _ TokenKeychainItemProvider = (*TokenKeychainCertificate)(nil)

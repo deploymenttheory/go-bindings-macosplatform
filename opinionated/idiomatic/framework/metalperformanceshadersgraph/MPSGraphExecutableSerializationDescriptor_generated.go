@@ -7,7 +7,6 @@ package metalperformanceshadersgraph
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,74 +51,43 @@ func NewGraphExecutableSerializationDescriptor() *GraphExecutableSerializationDe
 	return graphExecutableSerializationDescriptorAdopt(_id)
 }
 
-// WithAppend flag to append to an existing .mpsgraphpackage if found at provided url.
-func (x *GraphExecutableSerializationDescriptor) WithAppend(append_ bool) *GraphExecutableSerializationDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppend:"), append_)
-	return x
+// WithAppend sets flag to append to an existing .mpsgraphpackage if found at provided url.
+func (gesd *GraphExecutableSerializationDescriptor) WithAppend(append_ bool) *GraphExecutableSerializationDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gesd), objc.RegisterName("setAppend:"), append_)
+	return gesd
 }
 
-// WithDeploymentPlatform the deployment platform used to serialize the executable.
-func (x *GraphExecutableSerializationDescriptor) WithDeploymentPlatform(deploymentPlatform GraphDeploymentPlatform) *GraphExecutableSerializationDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeploymentPlatform:"), deploymentPlatform)
-	return x
+// WithDeploymentPlatform sets the deployment platform used to serialize the executable.
+func (gesd *GraphExecutableSerializationDescriptor) WithDeploymentPlatform(deploymentPlatform GraphDeploymentPlatform) *GraphExecutableSerializationDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gesd), objc.RegisterName("setDeploymentPlatform:"), deploymentPlatform)
+	return gesd
 }
 
-// WithMinimumDeploymentTarget the minimum deployment target to serialize the executable.
-func (x *GraphExecutableSerializationDescriptor) WithMinimumDeploymentTarget(minimumDeploymentTarget string) *GraphExecutableSerializationDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumDeploymentTarget:"), purego.NSString(minimumDeploymentTarget))
-	return x
+// WithMinimumDeploymentTarget sets the minimum deployment target to serialize the executable.
+func (gesd *GraphExecutableSerializationDescriptor) WithMinimumDeploymentTarget(minimumDeploymentTarget string) *GraphExecutableSerializationDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gesd), objc.RegisterName("setMinimumDeploymentTarget:"), purego.NSString(minimumDeploymentTarget))
+	return gesd
 }
 
-// Append flag to append to an existing .mpsgraphpackage if found at provided url. If false, the exisiting .mpsgraphpackage will be overwritten.
-func (x *GraphExecutableSerializationDescriptor) Append() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("append"))
+// Append reports whether flag to append to an existing .mpsgraphpackage if found at provided url. If false, the exisiting .mpsgraphpackage will be overwritten.
+func (gesd *GraphExecutableSerializationDescriptor) Append() bool {
+	_r := objc.Send[bool](objref.IDOf(gesd), objc.RegisterName("append"))
 	return _r
 }
 
-// SetAppend wraps the corresponding Objective-C method.
-func (x *GraphExecutableSerializationDescriptor) SetAppend(append_ bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppend:"), append_)
-}
-
-// DeploymentPlatform the deployment platform used to serialize the executable. Defaults to the current platform.
-func (x *GraphExecutableSerializationDescriptor) DeploymentPlatform() GraphDeploymentPlatform {
-	_r := objc.Send[GraphDeploymentPlatform](objref.IDOf(x), objc.RegisterName("deploymentPlatform"))
+// DeploymentPlatform returns the deployment platform used to serialize the executable. Defaults to the current platform.
+func (gesd *GraphExecutableSerializationDescriptor) DeploymentPlatform() GraphDeploymentPlatform {
+	_r := objc.Send[GraphDeploymentPlatform](objref.IDOf(gesd), objc.RegisterName("deploymentPlatform"))
 	return _r
 }
 
-// SetDeploymentPlatform wraps the corresponding Objective-C method.
-func (x *GraphExecutableSerializationDescriptor) SetDeploymentPlatform(deploymentPlatform GraphDeploymentPlatform) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeploymentPlatform:"), deploymentPlatform)
-}
-
-// MinimumDeploymentTarget the minimum deployment target to serialize the executable. If not set, the package created will target the latest version of the `deploymentPlatform` set.
-func (x *GraphExecutableSerializationDescriptor) MinimumDeploymentTarget() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minimumDeploymentTarget"))
+// MinimumDeploymentTarget returns the minimum deployment target to serialize the executable. If not set, the package created will target the latest version of the `deploymentPlatform` set.
+func (gesd *GraphExecutableSerializationDescriptor) MinimumDeploymentTarget() string {
+	_r := objc.Send[objc.ID](objref.IDOf(gesd), objc.RegisterName("minimumDeploymentTarget"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetMinimumDeploymentTarget wraps the corresponding Objective-C method.
-func (x *GraphExecutableSerializationDescriptor) SetMinimumDeploymentTarget(minimumDeploymentTarget string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumDeploymentTarget:"), purego.NSString(minimumDeploymentTarget))
-}
-
-// GraphExecutableSerializationDescriptorable is the interface implemented by [GraphExecutableSerializationDescriptor], for mocking and DI.
-type GraphExecutableSerializationDescriptorable interface {
-	obj.Object
-	WithAppend(append_ bool) *GraphExecutableSerializationDescriptor
-	WithDeploymentPlatform(deploymentPlatform GraphDeploymentPlatform) *GraphExecutableSerializationDescriptor
-	WithMinimumDeploymentTarget(minimumDeploymentTarget string) *GraphExecutableSerializationDescriptor
-	Append() bool
-	SetAppend(append_ bool)
-	DeploymentPlatform() GraphDeploymentPlatform
-	SetDeploymentPlatform(deploymentPlatform GraphDeploymentPlatform)
-	MinimumDeploymentTarget() string
-	SetMinimumDeploymentTarget(minimumDeploymentTarget string)
-}
-
-var _ GraphExecutableSerializationDescriptorable = (*GraphExecutableSerializationDescriptor)(nil)
 
 var _ GraphObjectProvider = (*GraphExecutableSerializationDescriptor)(nil)

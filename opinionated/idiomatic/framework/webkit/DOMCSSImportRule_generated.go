@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,15 +49,15 @@ func NewDOMCSSImportRule() *DOMCSSImportRule {
 	return dOMCSSImportRuleAdopt(_id)
 }
 
-// WithCssText sets the property and returns the receiver so calls can be chained.
-func (x *DOMCSSImportRule) WithCssText(cssText string) *DOMCSSImportRule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
-	return x
+// WithCSSText sets the property and returns the receiver so calls can be chained.
+func (dir *DOMCSSImportRule) WithCSSText(cssText string) *DOMCSSImportRule {
+	objc.Send[objc.ID](objref.IDOf(dir), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return dir
 }
 
 // Href wraps the corresponding Objective-C method.
-func (x *DOMCSSImportRule) Href() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("href"))
+func (dir *DOMCSSImportRule) Href() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dir), objc.RegisterName("href"))
 	if _r == 0 {
 		return ""
 	}
@@ -66,27 +65,16 @@ func (x *DOMCSSImportRule) Href() string {
 }
 
 // Media wraps the corresponding Objective-C method.
-func (x *DOMCSSImportRule) Media() *DOMMediaList {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("media"))
+func (dir *DOMCSSImportRule) Media() *DOMMediaList {
+	_r := objc.Send[objc.ID](objref.IDOf(dir), objc.RegisterName("media"))
 	return DOMMediaListFromID(_r)
 }
 
 // StyleSheet wraps the corresponding Objective-C method.
-func (x *DOMCSSImportRule) StyleSheet() *DOMCSSStyleSheet {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("styleSheet"))
+func (dir *DOMCSSImportRule) StyleSheet() *DOMCSSStyleSheet {
+	_r := objc.Send[objc.ID](objref.IDOf(dir), objc.RegisterName("styleSheet"))
 	return DOMCSSStyleSheetFromID(_r)
 }
-
-// DOMCSSImportRuleable is the interface implemented by [DOMCSSImportRule], for mocking and DI.
-type DOMCSSImportRuleable interface {
-	obj.Object
-	WithCssText(cssText string) *DOMCSSImportRule
-	Href() string
-	Media() *DOMMediaList
-	StyleSheet() *DOMCSSStyleSheet
-}
-
-var _ DOMCSSImportRuleable = (*DOMCSSImportRule)(nil)
 
 var _ DOMCSSRuleProvider = (*DOMCSSImportRule)(nil)
 

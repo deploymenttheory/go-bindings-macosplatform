@@ -7,7 +7,6 @@ package mpsndarray
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,32 +49,17 @@ func NewArrayVectorLUTDequantize() *ArrayVectorLUTDequantize {
 	return arrayVectorLUTDequantizeAdopt(_id)
 }
 
-// WithVectorAxis which axis in the destination will receive the vector component, must be less than 4.
-func (x *ArrayVectorLUTDequantize) WithVectorAxis(vectorAxis int) *ArrayVectorLUTDequantize {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVectorAxis:"), vectorAxis)
-	return x
+// WithVectorAxis sets which axis in the destination will receive the vector component, must be less than 4.
+func (avld *ArrayVectorLUTDequantize) WithVectorAxis(vectorAxis int) *ArrayVectorLUTDequantize {
+	objc.Send[objc.ID](objref.IDOf(avld), objc.RegisterName("setVectorAxis:"), vectorAxis)
+	return avld
 }
 
-// VectorAxis which axis in the destination will receive the vector component, must be less than 4.
-func (x *ArrayVectorLUTDequantize) VectorAxis() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vectorAxis"))
+// VectorAxis returns which axis in the destination will receive the vector component, must be less than 4.
+func (avld *ArrayVectorLUTDequantize) VectorAxis() int {
+	_r := objc.Send[int](objref.IDOf(avld), objc.RegisterName("vectorAxis"))
 	return _r
 }
-
-// SetVectorAxis wraps the corresponding Objective-C method.
-func (x *ArrayVectorLUTDequantize) SetVectorAxis(vectorAxis int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVectorAxis:"), vectorAxis)
-}
-
-// ArrayVectorLUTDequantizeable is the interface implemented by [ArrayVectorLUTDequantize], for mocking and DI.
-type ArrayVectorLUTDequantizeable interface {
-	obj.Object
-	WithVectorAxis(vectorAxis int) *ArrayVectorLUTDequantize
-	VectorAxis() int
-	SetVectorAxis(vectorAxis int)
-}
-
-var _ ArrayVectorLUTDequantizeable = (*ArrayVectorLUTDequantize)(nil)
 
 var _ ArrayMultiaryKernelProvider = (*ArrayVectorLUTDequantize)(nil)
 

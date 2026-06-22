@@ -53,92 +53,63 @@ func NewTextContentStorage() *TextContentStorage {
 }
 
 // WithIncludesTextListMarkers sets the property and returns the receiver so calls can be chained.
-func (x *TextContentStorage) WithIncludesTextListMarkers(includesTextListMarkers bool) *TextContentStorage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesTextListMarkers:"), includesTextListMarkers)
-	return x
+func (tcs *TextContentStorage) WithIncludesTextListMarkers(includesTextListMarkers bool) *TextContentStorage {
+	objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("setIncludesTextListMarkers:"), includesTextListMarkers)
+	return tcs
 }
 
-// WithAttributedString an attributed string that contains the contents of the document.
-func (x *TextContentStorage) WithAttributedString(attributedString obj.Object) *TextContentStorage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedString:"), objref.IDOf(attributedString))
-	return x
+// WithAttributedString sets an attributed string that contains the contents of the document.
+func (tcs *TextContentStorage) WithAttributedString(attributedString obj.Object) *TextContentStorage {
+	objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("setAttributedString:"), objref.IDOf(attributedString))
+	return tcs
 }
 
-// WithPrimaryTextLayoutManager the primary text layout manager for this content.
-func (x *TextContentStorage) WithPrimaryTextLayoutManager(primaryTextLayoutManager *TextLayoutManager) *TextContentStorage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryTextLayoutManager:"), objref.IDOf(primaryTextLayoutManager))
-	return x
+// WithPrimaryTextLayoutManager sets the primary text layout manager for this content.
+func (tcs *TextContentStorage) WithPrimaryTextLayoutManager(primaryTextLayoutManager *TextLayoutManager) *TextContentStorage {
+	objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("setPrimaryTextLayoutManager:"), objref.IDOf(primaryTextLayoutManager))
+	return tcs
 }
 
-// WithAutomaticallySynchronizesTextLayoutManagers determines if the framework should automatically synchronize all text layout managers when exiting an editing transaction.
-func (x *TextContentStorage) WithAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers bool) *TextContentStorage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallySynchronizesTextLayoutManagers:"), automaticallySynchronizesTextLayoutManagers)
-	return x
+// WithAutomaticallySynchronizesTextLayoutManagers sets determines if the framework should automatically synchronize all text layout managers when exiting an editing transaction.
+func (tcs *TextContentStorage) WithAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers bool) *TextContentStorage {
+	objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("setAutomaticallySynchronizesTextLayoutManagers:"), automaticallySynchronizesTextLayoutManagers)
+	return tcs
 }
 
-// WithAutomaticallySynchronizesToBackingStore determines whether to automatically synchronize with the backing store when an editing transaction finishes.
-func (x *TextContentStorage) WithAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool) *TextContentStorage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallySynchronizesToBackingStore:"), automaticallySynchronizesToBackingStore)
-	return x
+// WithAutomaticallySynchronizesToBackingStore sets determines whether to automatically synchronize with the backing store when an editing transaction finishes.
+func (tcs *TextContentStorage) WithAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool) *TextContentStorage {
+	objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("setAutomaticallySynchronizesToBackingStore:"), automaticallySynchronizesToBackingStore)
+	return tcs
 }
 
 // AttributedStringForTextElement returns a new attributed string for the text element.
-func (x *TextContentStorage) AttributedStringForTextElement(textElement *TextElement) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedStringForTextElement:"), objref.IDOf(textElement))
+func (tcs *TextContentStorage) AttributedStringForTextElement(textElement *TextElement) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("attributedStringForTextElement:"), objref.IDOf(textElement))
 	return obj.Wrap(_r)
 }
 
 // TextElementForAttributedString returns the text element corresponding to object’s attributed string.
-func (x *TextContentStorage) TextElementForAttributedString(attributedString obj.Object) *TextElement {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textElementForAttributedString:"), objref.IDOf(attributedString))
+func (tcs *TextContentStorage) TextElementForAttributedString(attributedString obj.Object) *TextElement {
+	_r := objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("textElementForAttributedString:"), objref.IDOf(attributedString))
 	return TextElementFromID(_r)
 }
 
 // AdjustedRangeFromRangeForEditingTextSelection returns the text range, if any, in the backing store that required manual adjustment after editing.
-func (x *TextContentStorage) AdjustedRangeFromRangeForEditingTextSelection(textRange *TextRange, forEditingTextSelection bool) *TextRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustedRangeFromRange:forEditingTextSelection:"), objref.IDOf(textRange), forEditingTextSelection)
+func (tcs *TextContentStorage) AdjustedRangeFromRangeForEditingTextSelection(textRange *TextRange, forEditingTextSelection bool) *TextRange {
+	_r := objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("adjustedRangeFromRange:forEditingTextSelection:"), objref.IDOf(textRange), forEditingTextSelection)
 	return TextRangeFromID(_r)
 }
 
 // IncludesTextListMarkers wraps the corresponding Objective-C method.
-func (x *TextContentStorage) IncludesTextListMarkers() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesTextListMarkers"))
+func (tcs *TextContentStorage) IncludesTextListMarkers() bool {
+	_r := objc.Send[bool](objref.IDOf(tcs), objc.RegisterName("includesTextListMarkers"))
 	return _r
 }
 
-// SetIncludesTextListMarkers wraps the corresponding Objective-C method.
-func (x *TextContentStorage) SetIncludesTextListMarkers(includesTextListMarkers bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesTextListMarkers:"), includesTextListMarkers)
-}
-
 // AttributedString wraps the corresponding Objective-C method.
-func (x *TextContentStorage) AttributedString() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedString"))
+func (tcs *TextContentStorage) AttributedString() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tcs), objc.RegisterName("attributedString"))
 	return obj.Wrap(_r)
 }
-
-// SetAttributedString wraps the corresponding Objective-C method.
-func (x *TextContentStorage) SetAttributedString(attributedString obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedString:"), objref.IDOf(attributedString))
-}
-
-// TextContentStorageable is the interface implemented by [TextContentStorage], for mocking and DI.
-type TextContentStorageable interface {
-	obj.Object
-	WithIncludesTextListMarkers(includesTextListMarkers bool) *TextContentStorage
-	WithAttributedString(attributedString obj.Object) *TextContentStorage
-	WithPrimaryTextLayoutManager(primaryTextLayoutManager *TextLayoutManager) *TextContentStorage
-	WithAutomaticallySynchronizesTextLayoutManagers(automaticallySynchronizesTextLayoutManagers bool) *TextContentStorage
-	WithAutomaticallySynchronizesToBackingStore(automaticallySynchronizesToBackingStore bool) *TextContentStorage
-	AttributedStringForTextElement(textElement *TextElement) obj.Object
-	TextElementForAttributedString(attributedString obj.Object) *TextElement
-	AdjustedRangeFromRangeForEditingTextSelection(textRange *TextRange, forEditingTextSelection bool) *TextRange
-	IncludesTextListMarkers() bool
-	SetIncludesTextListMarkers(includesTextListMarkers bool)
-	AttributedString() obj.Object
-	SetAttributedString(attributedString obj.Object)
-}
-
-var _ TextContentStorageable = (*TextContentStorage)(nil)
 
 var _ TextContentManagerProvider = (*TextContentStorage)(nil)

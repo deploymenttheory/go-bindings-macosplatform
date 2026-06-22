@@ -7,7 +7,6 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,43 +51,27 @@ func NewShareablePassMetadataPreviewWithTemplateIdentifier(templateIdentifier st
 }
 
 // WithOwnerDisplayName sets the property and returns the receiver so calls can be chained.
-func (x *ShareablePassMetadataPreview) WithOwnerDisplayName(ownerDisplayName string) *ShareablePassMetadataPreview {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOwnerDisplayName:"), purego.NSString(ownerDisplayName))
-	return x
+func (spmp *ShareablePassMetadataPreview) WithOwnerDisplayName(ownerDisplayName string) *ShareablePassMetadataPreview {
+	objc.Send[objc.ID](objref.IDOf(spmp), objc.RegisterName("setOwnerDisplayName:"), purego.NSString(ownerDisplayName))
+	return spmp
 }
 
 // OwnerDisplayName wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadataPreview) OwnerDisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerDisplayName"))
+func (spmp *ShareablePassMetadataPreview) OwnerDisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(spmp), objc.RegisterName("ownerDisplayName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetOwnerDisplayName wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadataPreview) SetOwnerDisplayName(ownerDisplayName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOwnerDisplayName:"), purego.NSString(ownerDisplayName))
 }
 
 // ProvisioningTemplateIdentifier wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadataPreview) ProvisioningTemplateIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("provisioningTemplateIdentifier"))
+func (spmp *ShareablePassMetadataPreview) ProvisioningTemplateIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(spmp), objc.RegisterName("provisioningTemplateIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ShareablePassMetadataPreviewable is the interface implemented by [ShareablePassMetadataPreview], for mocking and DI.
-type ShareablePassMetadataPreviewable interface {
-	obj.Object
-	WithOwnerDisplayName(ownerDisplayName string) *ShareablePassMetadataPreview
-	OwnerDisplayName() string
-	SetOwnerDisplayName(ownerDisplayName string)
-	ProvisioningTemplateIdentifier() string
-}
-
-var _ ShareablePassMetadataPreviewable = (*ShareablePassMetadataPreview)(nil)
 
 var _ AddPassMetadataPreviewProvider = (*ShareablePassMetadataPreview)(nil)

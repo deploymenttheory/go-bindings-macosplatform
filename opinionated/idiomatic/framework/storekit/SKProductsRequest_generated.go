@@ -53,11 +53,4 @@ func NewProductsRequestWithProductIdentifiers(productIdentifiers obj.Object) *Pr
 	return productsRequestAdopt(_id)
 }
 
-// ProductsRequestable is the interface implemented by [ProductsRequest], for mocking and DI.
-type ProductsRequestable interface {
-	obj.Object
-}
-
-var _ ProductsRequestable = (*ProductsRequest)(nil)
-
 var _ RequestProvider = (*ProductsRequest)(nil)

@@ -46,24 +46,24 @@ func mTL4CommandAllocatorDescriptorAdopt(id objc.ID) *MTL4CommandAllocatorDescri
 }
 
 // Description returns the object's -description text.
-func (x *MTL4CommandAllocatorDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcad *MTL4CommandAllocatorDescriptor) Description() string {
+	return rt.Description(objref.IDOf(mcad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTL4CommandAllocatorDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcad *MTL4CommandAllocatorDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTL4CommandAllocatorDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcad *MTL4CommandAllocatorDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTL4CommandAllocatorDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcad *MTL4CommandAllocatorDescriptor) String() string {
+	return rt.Description(objref.IDOf(mcad))
 }
 
 // NewMTL4CommandAllocatorDescriptor creates a new MTL4CommandAllocatorDescriptor.
@@ -72,32 +72,17 @@ func NewMTL4CommandAllocatorDescriptor() *MTL4CommandAllocatorDescriptor {
 	return mTL4CommandAllocatorDescriptorAdopt(_id)
 }
 
-// WithLabel an optional label you can assign to the command allocator to aid debugging.
-func (x *MTL4CommandAllocatorDescriptor) WithLabel(label string) *MTL4CommandAllocatorDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets an optional label you can assign to the command allocator to aid debugging.
+func (mcad *MTL4CommandAllocatorDescriptor) WithLabel(label string) *MTL4CommandAllocatorDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mcad), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mcad
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *MTL4CommandAllocatorDescriptor) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (mcad *MTL4CommandAllocatorDescriptor) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mcad), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetLabel wraps the corresponding Objective-C method.
-func (x *MTL4CommandAllocatorDescriptor) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// MTL4CommandAllocatorDescriptorable is the interface implemented by [MTL4CommandAllocatorDescriptor], for mocking and DI.
-type MTL4CommandAllocatorDescriptorable interface {
-	obj.Object
-	WithLabel(label string) *MTL4CommandAllocatorDescriptor
-	Label() string
-	SetLabel(label string)
-}
-
-var _ MTL4CommandAllocatorDescriptorable = (*MTL4CommandAllocatorDescriptor)(nil)

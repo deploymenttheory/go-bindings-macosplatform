@@ -46,24 +46,24 @@ func clinicalCodingAdopt(id objc.ID) *ClinicalCoding {
 }
 
 // Description returns the object's -description text.
-func (x *ClinicalCoding) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cc *ClinicalCoding) Description() string {
+	return rt.Description(objref.IDOf(cc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ClinicalCoding) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cc *ClinicalCoding) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ClinicalCoding) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cc *ClinicalCoding) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ClinicalCoding) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cc *ClinicalCoding) String() string {
+	return rt.Description(objref.IDOf(cc))
 }
 
 // NewClinicalCodingWithSystemVersionCode creates a clinical coding with the specified system, version, and code.
@@ -73,29 +73,20 @@ func NewClinicalCodingWithSystemVersionCode(system string, version string, code 
 	return clinicalCodingAdopt(_id)
 }
 
-// System the string that identifies the coding system that defines this clinical code. The system is usually expressed as a URL from the [HL7 Terminology](https://terminology.hl7.org/). For example, the RxNorm, a coding system for medications uses: `http://www.nlm.nih.gov/research/umls/rxnorm`.
-func (x *ClinicalCoding) System() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("system"))
+// System returns the string that identifies the coding system that defines this clinical code. The system is usually expressed as a URL from the [HL7 Terminology](https://terminology.hl7.org/). For example, the RxNorm, a coding system for medications uses: `http://www.nlm.nih.gov/research/umls/rxnorm`.
+func (cc *ClinicalCoding) System() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("system"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Code the clinical code that represents a medical concept inside the coding system. The format depends on the coding system. For example, RxNorm codes are numeric.
-func (x *ClinicalCoding) Code() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("code"))
+// Code returns the clinical code that represents a medical concept inside the coding system. The format depends on the coding system. For example, RxNorm codes are numeric.
+func (cc *ClinicalCoding) Code() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("code"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ClinicalCodingable is the interface implemented by [ClinicalCoding], for mocking and DI.
-type ClinicalCodingable interface {
-	obj.Object
-	System() string
-	Code() string
-}
-
-var _ ClinicalCodingable = (*ClinicalCoding)(nil)

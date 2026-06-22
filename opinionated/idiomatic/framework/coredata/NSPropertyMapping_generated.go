@@ -46,24 +46,24 @@ func propertyMappingAdopt(id objc.ID) *PropertyMapping {
 }
 
 // Description returns the object's -description text.
-func (x *PropertyMapping) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pm *PropertyMapping) Description() string {
+	return rt.Description(objref.IDOf(pm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PropertyMapping) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pm *PropertyMapping) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PropertyMapping) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pm *PropertyMapping) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PropertyMapping) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pm *PropertyMapping) String() string {
+	return rt.Description(objref.IDOf(pm))
 }
 
 // NewPropertyMapping creates a new PropertyMapping.
@@ -72,72 +72,41 @@ func NewPropertyMapping() *PropertyMapping {
 	return propertyMappingAdopt(_id)
 }
 
-// WithName the name of the property in the destination entity for the property mapping.
-func (x *PropertyMapping) WithName(name string) *PropertyMapping {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the name of the property in the destination entity for the property mapping.
+func (pm *PropertyMapping) WithName(name string) *PropertyMapping {
+	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("setName:"), purego.NSString(name))
+	return pm
 }
 
-// WithValueExpression the value expression for the property mapping.
-func (x *PropertyMapping) WithValueExpression(valueExpression obj.Object) *PropertyMapping {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueExpression:"), objref.IDOf(valueExpression))
-	return x
+// WithValueExpression sets the value expression for the property mapping.
+func (pm *PropertyMapping) WithValueExpression(valueExpression obj.Object) *PropertyMapping {
+	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("setValueExpression:"), objref.IDOf(valueExpression))
+	return pm
 }
 
-// WithUserInfo the user info for the property mapping.
-func (x *PropertyMapping) WithUserInfo(userInfo obj.Object) *PropertyMapping {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
-	return x
+// WithUserInfo sets the user info for the property mapping.
+func (pm *PropertyMapping) WithUserInfo(userInfo obj.Object) *PropertyMapping {
+	objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
+	return pm
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *PropertyMapping) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (pm *PropertyMapping) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetName wraps the corresponding Objective-C method.
-func (x *PropertyMapping) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
 // ValueExpression wraps the corresponding Objective-C method.
-func (x *PropertyMapping) ValueExpression() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueExpression"))
+func (pm *PropertyMapping) ValueExpression() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("valueExpression"))
 	return obj.Wrap(_r)
-}
-
-// SetValueExpression wraps the corresponding Objective-C method.
-func (x *PropertyMapping) SetValueExpression(valueExpression obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueExpression:"), objref.IDOf(valueExpression))
 }
 
 // UserInfo wraps the corresponding Objective-C method.
-func (x *PropertyMapping) UserInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+func (pm *PropertyMapping) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
-
-// SetUserInfo wraps the corresponding Objective-C method.
-func (x *PropertyMapping) SetUserInfo(userInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
-}
-
-// PropertyMappingable is the interface implemented by [PropertyMapping], for mocking and DI.
-type PropertyMappingable interface {
-	obj.Object
-	WithName(name string) *PropertyMapping
-	WithValueExpression(valueExpression obj.Object) *PropertyMapping
-	WithUserInfo(userInfo obj.Object) *PropertyMapping
-	Name() string
-	SetName(name string)
-	ValueExpression() obj.Object
-	SetValueExpression(valueExpression obj.Object)
-	UserInfo() obj.Object
-	SetUserInfo(userInfo obj.Object)
-}
-
-var _ PropertyMappingable = (*PropertyMapping)(nil)

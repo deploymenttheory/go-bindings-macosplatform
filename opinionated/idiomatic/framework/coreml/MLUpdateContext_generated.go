@@ -46,24 +46,24 @@ func updateContextAdopt(id objc.ID) *UpdateContext {
 }
 
 // Description returns the object's -description text.
-func (x *UpdateContext) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (uc *UpdateContext) Description() string {
+	return rt.Description(objref.IDOf(uc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UpdateContext) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (uc *UpdateContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(uc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UpdateContext) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (uc *UpdateContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(uc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *UpdateContext) String() string {
-	return rt.Description(objref.IDOf(x))
+func (uc *UpdateContext) String() string {
+	return rt.Description(objref.IDOf(uc))
 }
 
 // NewUpdateContext creates a new UpdateContext.
@@ -73,43 +73,31 @@ func NewUpdateContext() *UpdateContext {
 }
 
 // Task wraps the corresponding Objective-C method.
-func (x *UpdateContext) Task() *UpdateTask {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("task"))
+func (uc *UpdateContext) Task() *UpdateTask {
+	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("task"))
 	return UpdateTaskFromID(_r)
 }
 
 // Model wraps the corresponding Objective-C method.
-func (x *UpdateContext) Model() *Model {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("model"))
+func (uc *UpdateContext) Model() *Model {
+	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("model"))
 	return ModelFromID(_r)
 }
 
 // Event wraps the corresponding Objective-C method.
-func (x *UpdateContext) Event() UpdateProgressEvent {
-	_r := objc.Send[UpdateProgressEvent](objref.IDOf(x), objc.RegisterName("event"))
+func (uc *UpdateContext) Event() UpdateProgressEvent {
+	_r := objc.Send[UpdateProgressEvent](objref.IDOf(uc), objc.RegisterName("event"))
 	return _r
 }
 
 // Metrics wraps the corresponding Objective-C method.
-func (x *UpdateContext) Metrics() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metrics"))
+func (uc *UpdateContext) Metrics() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("metrics"))
 	return obj.Wrap(_r)
 }
 
 // Parameters wraps the corresponding Objective-C method.
-func (x *UpdateContext) Parameters() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameters"))
+func (uc *UpdateContext) Parameters() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("parameters"))
 	return obj.Wrap(_r)
 }
-
-// UpdateContextable is the interface implemented by [UpdateContext], for mocking and DI.
-type UpdateContextable interface {
-	obj.Object
-	Task() *UpdateTask
-	Model() *Model
-	Event() UpdateProgressEvent
-	Metrics() obj.Object
-	Parameters() obj.Object
-}
-
-var _ UpdateContextable = (*UpdateContext)(nil)

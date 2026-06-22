@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams is an idiomatic wrapper over the Objective-C class MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams.
@@ -46,24 +47,24 @@ func mTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsAdopt(id objc
 }
 
 // Description returns the object's -description text.
-func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mwfnmcnprp *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) Description() string {
+	return rt.Description(objref.IDOf(mwfnmcnprp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mwfnmcnprp *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mwfnmcnprp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mwfnmcnprp *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mwfnmcnprp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mwfnmcnprp *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) String() string {
+	return rt.Description(objref.IDOf(mwfnmcnprp))
 }
 
 // NewMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsWithResponseValueError initialize an MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
@@ -78,28 +79,13 @@ func NewMTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsWithRespon
 }
 
 // WithPassphrase sets the property and returns the receiver so calls can be chained.
-func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) WithPassphrase(passphrase obj.Object) *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassphrase:"), objref.IDOf(passphrase))
-	return x
+func (mwfnmcnprp *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) WithPassphrase(passphrase obj.Object) *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mwfnmcnprp), objc.RegisterName("setPassphrase:"), objref.IDOf(passphrase))
+	return mwfnmcnprp
 }
 
 // Passphrase wraps the corresponding Objective-C method.
-func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) Passphrase() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passphrase"))
+func (mwfnmcnprp *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) Passphrase() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwfnmcnprp), objc.RegisterName("passphrase"))
 	return obj.Wrap(_r)
 }
-
-// SetPassphrase wraps the corresponding Objective-C method.
-func (x *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams) SetPassphrase(passphrase obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassphrase:"), objref.IDOf(passphrase))
-}
-
-// MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsable is the interface implemented by [MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams], for mocking and DI.
-type MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsable interface {
-	obj.Object
-	WithPassphrase(passphrase obj.Object) *MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams
-	Passphrase() obj.Object
-	SetPassphrase(passphrase obj.Object)
-}
-
-var _ MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParamsable = (*MTRWiFiNetworkManagementClusterNetworkPassphraseResponseParams)(nil)

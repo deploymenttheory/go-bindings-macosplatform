@@ -46,24 +46,24 @@ func matchAdopt(id objc.ID) *Match {
 }
 
 // Description returns the object's -description text.
-func (x *Match) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Match) Description() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Match) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (m *Match) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Match) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (m *Match) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Match) String() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Match) String() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // NewMatch creates a new Match.
@@ -72,25 +72,16 @@ func NewMatch() *Match {
 	return matchAdopt(_id)
 }
 
-// MediaItems an array of the media items in the catalog that match the query signature, in order of the quality of the match.
+// MediaItems returns an array of the media items in the catalog that match the query signature, in order of the quality of the match.
 //
 // MediaItems returns the collection as a Go slice.
-func (x *Match) MediaItems() []*MatchedMediaItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mediaItems"))
+func (m *Match) MediaItems() []*MatchedMediaItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("mediaItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MatchedMediaItem { return MatchedMediaItemFromID(_id) })
 }
 
-// QuerySignature the query signature for the match.
-func (x *Match) QuerySignature() *Signature {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("querySignature"))
+// QuerySignature returns the query signature for the match.
+func (m *Match) QuerySignature() *Signature {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("querySignature"))
 	return SignatureFromID(_r)
 }
-
-// Matchable is the interface implemented by [Match], for mocking and DI.
-type Matchable interface {
-	obj.Object
-	MediaItems() []*MatchedMediaItem
-	QuerySignature() *Signature
-}
-
-var _ Matchable = (*Match)(nil)

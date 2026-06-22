@@ -5,13 +5,14 @@
 package coremediaio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // ExtensionDevice is an idiomatic wrapper over the Objective-C class CMIOExtensionDevice.
@@ -48,24 +49,24 @@ func extensionDeviceAdopt(id objc.ID) *ExtensionDevice {
 }
 
 // Description returns the object's -description text.
-func (x *ExtensionDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ed *ExtensionDevice) Description() string {
+	return rt.Description(objref.IDOf(ed))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExtensionDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ed *ExtensionDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ed), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExtensionDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ed *ExtensionDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ed), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExtensionDevice) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ed *ExtensionDevice) String() string {
+	return rt.Description(objref.IDOf(ed))
 }
 
 // NewExtensionDevice creates a new ExtensionDevice.
@@ -75,9 +76,9 @@ func NewExtensionDevice() *ExtensionDevice {
 }
 
 // AddStream adds a stream to a device.
-func (x *ExtensionDevice) AddStream(stream *ExtensionStream) error {
+func (ed *ExtensionDevice) AddStream(stream *ExtensionStream) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addStream:error:"), objref.IDOf(stream), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(ed), objc.RegisterName("addStream:error:"), objref.IDOf(stream), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -85,9 +86,9 @@ func (x *ExtensionDevice) AddStream(stream *ExtensionStream) error {
 }
 
 // RemoveStream removes a stream from the device.
-func (x *ExtensionDevice) RemoveStream(stream *ExtensionStream) error {
+func (ed *ExtensionDevice) RemoveStream(stream *ExtensionStream) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeStream:error:"), objref.IDOf(stream), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(ed), objc.RegisterName("removeStream:error:"), objref.IDOf(stream), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -95,52 +96,38 @@ func (x *ExtensionDevice) RemoveStream(stream *ExtensionStream) error {
 }
 
 // NotifyPropertiesChanged notifies clients of property changes.
-func (x *ExtensionDevice) NotifyPropertiesChanged(propertyStates obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notifyPropertiesChanged:"), objref.IDOf(propertyStates))
+func (ed *ExtensionDevice) NotifyPropertiesChanged(propertyStates obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("notifyPropertiesChanged:"), objref.IDOf(propertyStates))
 }
 
-// LocalizedName the localized name of the device.
-func (x *ExtensionDevice) LocalizedName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+// LocalizedName returns the localized name of the device.
+func (ed *ExtensionDevice) LocalizedName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// DeviceID the device identifier as UUID.
-func (x *ExtensionDevice) DeviceID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceID"))
+// DeviceID returns the device identifier as UUID.
+func (ed *ExtensionDevice) DeviceID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("deviceID"))
 	return obj.Wrap(_r)
 }
 
-// LegacyDeviceID the device identifier as a string (for backward compatibility with AVCaptureDevice.uniqueIdentifier)
-func (x *ExtensionDevice) LegacyDeviceID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("legacyDeviceID"))
+// LegacyDeviceID returns the device identifier as a string (for backward compatibility with AVCaptureDevice.uniqueIdentifier)
+func (ed *ExtensionDevice) LegacyDeviceID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("legacyDeviceID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Streams the streams array of the device. This property is not key-value observable.
+// Streams returns the streams array of the device. This property is not key-value observable.
 //
 // Streams returns the collection as a Go slice.
-func (x *ExtensionDevice) Streams() []*ExtensionStream {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("streams"))
+func (ed *ExtensionDevice) Streams() []*ExtensionStream {
+	_arr := objc.Send[objc.ID](objref.IDOf(ed), objc.RegisterName("streams"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExtensionStream { return ExtensionStreamFromID(_id) })
 }
-
-// ExtensionDeviceable is the interface implemented by [ExtensionDevice], for mocking and DI.
-type ExtensionDeviceable interface {
-	obj.Object
-	AddStream(stream *ExtensionStream) error
-	RemoveStream(stream *ExtensionStream) error
-	NotifyPropertiesChanged(propertyStates obj.Object)
-	LocalizedName() string
-	DeviceID() obj.Object
-	LegacyDeviceID() string
-	Streams() []*ExtensionStream
-}
-
-var _ ExtensionDeviceable = (*ExtensionDevice)(nil)

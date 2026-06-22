@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,23 +44,15 @@ func dOMObjectAdopt(id objc.ID) *DOMObject {
 }
 
 // Sheet wraps the corresponding Objective-C method.
-func (x *DOMObject) Sheet() *DOMStyleSheet {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sheet"))
+func (do *DOMObject) Sheet() *DOMStyleSheet {
+	_r := objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("sheet"))
 	return DOMStyleSheetFromID(_r)
 }
-
-// DOMObjectable is the interface implemented by [DOMObject], for mocking and DI.
-type DOMObjectable interface {
-	obj.Object
-	Sheet() *DOMStyleSheet
-}
-
-var _ DOMObjectable = (*DOMObject)(nil)
 
 // isDOMObject marks DOMObject — and, by embedding promotion, its
 // subclasses — as a member of the DOMObject hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DOMObject) isDOMObject() {}
+func (do *DOMObject) isDOMObject() {}
 
 var _ DOMObjectProvider = (*DOMObject)(nil)
 

@@ -48,99 +48,68 @@ func paymentSummaryItemAdopt(id objc.ID) *PaymentSummaryItem {
 }
 
 // Description returns the object's -description text.
-func (x *PaymentSummaryItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (psi *PaymentSummaryItem) Description() string {
+	return rt.Description(objref.IDOf(psi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PaymentSummaryItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (psi *PaymentSummaryItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(psi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PaymentSummaryItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (psi *PaymentSummaryItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(psi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PaymentSummaryItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (psi *PaymentSummaryItem) String() string {
+	return rt.Description(objref.IDOf(psi))
 }
 
-// WithLabel a short, localized description of the item.
-func (x *PaymentSummaryItem) WithLabel(label string) *PaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a short, localized description of the item.
+func (psi *PaymentSummaryItem) WithLabel(label string) *PaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(psi), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return psi
 }
 
-// WithAmount the summary item’s amount.
-func (x *PaymentSummaryItem) WithAmount(amount obj.Object) *PaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
-	return x
+// WithAmount sets the summary item’s amount.
+func (psi *PaymentSummaryItem) WithAmount(amount obj.Object) *PaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(psi), objc.RegisterName("setAmount:"), objref.IDOf(amount))
+	return psi
 }
 
-// WithType the summary item’s type that indicates whether the amount is final.
-func (x *PaymentSummaryItem) WithType(type_ PaymentSummaryItemType) *PaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the summary item’s type that indicates whether the amount is final.
+func (psi *PaymentSummaryItem) WithType(type_ PaymentSummaryItemType) *PaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(psi), objc.RegisterName("setType:"), type_)
+	return psi
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *PaymentSummaryItem) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (psi *PaymentSummaryItem) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(psi), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *PaymentSummaryItem) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
 // Amount wraps the corresponding Objective-C method.
-func (x *PaymentSummaryItem) Amount() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("amount"))
+func (psi *PaymentSummaryItem) Amount() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(psi), objc.RegisterName("amount"))
 	return obj.Wrap(_r)
 }
 
-// SetAmount wraps the corresponding Objective-C method.
-func (x *PaymentSummaryItem) SetAmount(amount obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
-}
-
 // Type wraps the corresponding Objective-C method.
-func (x *PaymentSummaryItem) Type() PaymentSummaryItemType {
-	_r := objc.Send[PaymentSummaryItemType](objref.IDOf(x), objc.RegisterName("type"))
+func (psi *PaymentSummaryItem) Type() PaymentSummaryItemType {
+	_r := objc.Send[PaymentSummaryItemType](objref.IDOf(psi), objc.RegisterName("type"))
 	return _r
 }
-
-// SetType wraps the corresponding Objective-C method.
-func (x *PaymentSummaryItem) SetType(type_ PaymentSummaryItemType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-}
-
-// PaymentSummaryItemable is the interface implemented by [PaymentSummaryItem], for mocking and DI.
-type PaymentSummaryItemable interface {
-	obj.Object
-	WithLabel(label string) *PaymentSummaryItem
-	WithAmount(amount obj.Object) *PaymentSummaryItem
-	WithType(type_ PaymentSummaryItemType) *PaymentSummaryItem
-	Label() string
-	SetLabel(label string)
-	Amount() obj.Object
-	SetAmount(amount obj.Object)
-	Type() PaymentSummaryItemType
-	SetType(type_ PaymentSummaryItemType)
-}
-
-var _ PaymentSummaryItemable = (*PaymentSummaryItem)(nil)
 
 // isPaymentSummaryItem marks PaymentSummaryItem — and, by embedding promotion, its
 // subclasses — as a member of the PaymentSummaryItem hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PaymentSummaryItem) isPaymentSummaryItem() {}
+func (psi *PaymentSummaryItem) isPaymentSummaryItem() {}
 
 var _ PaymentSummaryItemProvider = (*PaymentSummaryItem)(nil)

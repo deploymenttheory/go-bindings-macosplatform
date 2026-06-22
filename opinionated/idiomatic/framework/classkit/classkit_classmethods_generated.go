@@ -8,7 +8,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// Shared the data store provides read/write access to your app's ClassKit data. Data written to the data store is automatically synced via iCloud across the user's devices.
+// Shared returns the data store provides read/write access to your app's ClassKit data. Data written to the data store is automatically synced via iCloud across the user's devices.
 func Shared() *DataStore {
 	_r := objc.Send[objc.ID](objc.ID(_class("CLSDataStore")), objc.RegisterName("shared"))
 	return DataStoreFromID(_r)

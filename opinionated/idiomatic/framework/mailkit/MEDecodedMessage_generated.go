@@ -46,24 +46,24 @@ func decodedMessageAdopt(id objc.ID) *DecodedMessage {
 }
 
 // Description returns the object's -description text.
-func (x *DecodedMessage) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dm *DecodedMessage) Description() string {
+	return rt.Description(objref.IDOf(dm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DecodedMessage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dm *DecodedMessage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DecodedMessage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dm *DecodedMessage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DecodedMessage) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dm *DecodedMessage) String() string {
+	return rt.Description(objref.IDOf(dm))
 }
 
 // NewDecodedMessageWithDataSecurityInformationContext creates a new DecodedMessage.
@@ -80,37 +80,26 @@ func NewDecodedMessageWithDataSecurityInformationContextBanner(rawData obj.Objec
 	return decodedMessageAdopt(_id)
 }
 
-// RawData the decoded MIME data for the message The decoded data should not be encrypted or contain any signatures that were decoded. The
-func (x *DecodedMessage) RawData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rawData"))
+// RawData returns the decoded MIME data for the message The decoded data should not be encrypted or contain any signatures that were decoded. The
+func (dm *DecodedMessage) RawData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dm), objc.RegisterName("rawData"))
 	return obj.Wrap(_r)
 }
 
-// SecurityInformation the security information for whether or not the message was signed, encrypted, or had an errors in decoding.
-func (x *DecodedMessage) SecurityInformation() *MessageSecurityInformation {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("securityInformation"))
+// SecurityInformation returns the security information for whether or not the message was signed, encrypted, or had an errors in decoding.
+func (dm *DecodedMessage) SecurityInformation() *MessageSecurityInformation {
+	_r := objc.Send[objc.ID](objref.IDOf(dm), objc.RegisterName("securityInformation"))
 	return MessageSecurityInformationFromID(_r)
 }
 
-// Context the context for the decoded message. This will be passed back to the extension when Mail loads the extension's custom view controller for the message.
-func (x *DecodedMessage) Context() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
+// Context returns the context for the decoded message. This will be passed back to the extension when Mail loads the extension's custom view controller for the message.
+func (dm *DecodedMessage) Context() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dm), objc.RegisterName("context"))
 	return obj.Wrap(_r)
 }
 
-// Banner suggestion information used to populate a suggestion banner at the top of the message view. Clicking on the action associated with the suggestion banner will present the extension's view controller for the provided message context.
-func (x *DecodedMessage) Banner() *DecodedMessageBanner {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("banner"))
+// Banner returns suggestion information used to populate a suggestion banner at the top of the message view. Clicking on the action associated with the suggestion banner will present the extension's view controller for the provided message context.
+func (dm *DecodedMessage) Banner() *DecodedMessageBanner {
+	_r := objc.Send[objc.ID](objref.IDOf(dm), objc.RegisterName("banner"))
 	return DecodedMessageBannerFromID(_r)
 }
-
-// DecodedMessageable is the interface implemented by [DecodedMessage], for mocking and DI.
-type DecodedMessageable interface {
-	obj.Object
-	RawData() obj.Object
-	SecurityInformation() *MessageSecurityInformation
-	Context() obj.Object
-	Banner() *DecodedMessageBanner
-}
-
-var _ DecodedMessageable = (*DecodedMessage)(nil)

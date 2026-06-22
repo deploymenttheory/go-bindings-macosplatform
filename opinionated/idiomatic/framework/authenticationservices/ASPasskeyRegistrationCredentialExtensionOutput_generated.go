@@ -46,24 +46,24 @@ func passkeyRegistrationCredentialExtensionOutputAdopt(id objc.ID) *PasskeyRegis
 }
 
 // Description returns the object's -description text.
-func (x *PasskeyRegistrationCredentialExtensionOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (prceo *PasskeyRegistrationCredentialExtensionOutput) Description() string {
+	return rt.Description(objref.IDOf(prceo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PasskeyRegistrationCredentialExtensionOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (prceo *PasskeyRegistrationCredentialExtensionOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(prceo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PasskeyRegistrationCredentialExtensionOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (prceo *PasskeyRegistrationCredentialExtensionOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(prceo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PasskeyRegistrationCredentialExtensionOutput) String() string {
-	return rt.Description(objref.IDOf(x))
+func (prceo *PasskeyRegistrationCredentialExtensionOutput) String() string {
+	return rt.Description(objref.IDOf(prceo))
 }
 
 // NewPasskeyRegistrationCredentialExtensionOutputWithLargeBlobOutput creates a new PasskeyRegistrationCredentialExtensionOutput.
@@ -74,15 +74,7 @@ func NewPasskeyRegistrationCredentialExtensionOutputWithLargeBlobOutput(largeBlo
 }
 
 // LargeBlobRegistrationOutput wraps the corresponding Objective-C method.
-func (x *PasskeyRegistrationCredentialExtensionOutput) LargeBlobRegistrationOutput() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("largeBlobRegistrationOutput"))
+func (prceo *PasskeyRegistrationCredentialExtensionOutput) LargeBlobRegistrationOutput() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput {
+	_r := objc.Send[objc.ID](objref.IDOf(prceo), objc.RegisterName("largeBlobRegistrationOutput"))
 	return AuthorizationPublicKeyCredentialLargeBlobRegistrationOutputFromID(_r)
 }
-
-// PasskeyRegistrationCredentialExtensionOutputable is the interface implemented by [PasskeyRegistrationCredentialExtensionOutput], for mocking and DI.
-type PasskeyRegistrationCredentialExtensionOutputable interface {
-	obj.Object
-	LargeBlobRegistrationOutput() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput
-}
-
-var _ PasskeyRegistrationCredentialExtensionOutputable = (*PasskeyRegistrationCredentialExtensionOutput)(nil)

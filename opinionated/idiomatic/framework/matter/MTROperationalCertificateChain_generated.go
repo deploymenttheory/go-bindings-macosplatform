@@ -44,24 +44,24 @@ func mTROperationalCertificateChainAdopt(id objc.ID) *MTROperationalCertificateC
 }
 
 // Description returns the object's -description text.
-func (x *MTROperationalCertificateChain) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mocc *MTROperationalCertificateChain) Description() string {
+	return rt.Description(objref.IDOf(mocc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROperationalCertificateChain) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mocc *MTROperationalCertificateChain) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mocc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROperationalCertificateChain) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mocc *MTROperationalCertificateChain) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mocc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTROperationalCertificateChain) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mocc *MTROperationalCertificateChain) String() string {
+	return rt.Description(objref.IDOf(mocc))
 }
 
 // NewMTROperationalCertificateChainWithOperationalCertificateIntermediateCertificateRootCertificateAdminSubject creates a new MTROperationalCertificateChain.
@@ -72,88 +72,49 @@ func NewMTROperationalCertificateChainWithOperationalCertificateIntermediateCert
 }
 
 // WithOperationalCertificate sets the property and returns the receiver so calls can be chained.
-func (x *MTROperationalCertificateChain) WithOperationalCertificate(operationalCertificate obj.Object) *MTROperationalCertificateChain {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalCertificate:"), objref.IDOf(operationalCertificate))
-	return x
+func (mocc *MTROperationalCertificateChain) WithOperationalCertificate(operationalCertificate obj.Object) *MTROperationalCertificateChain {
+	objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("setOperationalCertificate:"), objref.IDOf(operationalCertificate))
+	return mocc
 }
 
-// WithIntermediateCertificate a nil intermediateCertificate means there is no intermediate.
-func (x *MTROperationalCertificateChain) WithIntermediateCertificate(intermediateCertificate obj.Object) *MTROperationalCertificateChain {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntermediateCertificate:"), objref.IDOf(intermediateCertificate))
-	return x
+// WithIntermediateCertificate sets a nil intermediateCertificate means there is no intermediate.
+func (mocc *MTROperationalCertificateChain) WithIntermediateCertificate(intermediateCertificate obj.Object) *MTROperationalCertificateChain {
+	objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("setIntermediateCertificate:"), objref.IDOf(intermediateCertificate))
+	return mocc
 }
 
 // WithRootCertificate sets the property and returns the receiver so calls can be chained.
-func (x *MTROperationalCertificateChain) WithRootCertificate(rootCertificate obj.Object) *MTROperationalCertificateChain {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootCertificate:"), objref.IDOf(rootCertificate))
-	return x
+func (mocc *MTROperationalCertificateChain) WithRootCertificate(rootCertificate obj.Object) *MTROperationalCertificateChain {
+	objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("setRootCertificate:"), objref.IDOf(rootCertificate))
+	return mocc
 }
 
-// WithAdminSubject adminSubject is passed to the device as part of the AddNOC command.  A nil adminSubject means the node id of the relevant MTRDeviceController will be used.
-func (x *MTROperationalCertificateChain) WithAdminSubject(adminSubject obj.Object) *MTROperationalCertificateChain {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdminSubject:"), objref.IDOf(adminSubject))
-	return x
+// WithAdminSubject sets adminSubject is passed to the device as part of the AddNOC command.  A nil adminSubject means the node id of the relevant MTRDeviceController will be used.
+func (mocc *MTROperationalCertificateChain) WithAdminSubject(adminSubject obj.Object) *MTROperationalCertificateChain {
+	objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("setAdminSubject:"), objref.IDOf(adminSubject))
+	return mocc
 }
 
 // OperationalCertificate wraps the corresponding Objective-C method.
-func (x *MTROperationalCertificateChain) OperationalCertificate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationalCertificate"))
+func (mocc *MTROperationalCertificateChain) OperationalCertificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("operationalCertificate"))
 	return obj.Wrap(_r)
 }
 
-// SetOperationalCertificate wraps the corresponding Objective-C method.
-func (x *MTROperationalCertificateChain) SetOperationalCertificate(operationalCertificate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalCertificate:"), objref.IDOf(operationalCertificate))
-}
-
-// IntermediateCertificate a nil intermediateCertificate means there is no intermediate.
-func (x *MTROperationalCertificateChain) IntermediateCertificate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intermediateCertificate"))
+// IntermediateCertificate returns a nil intermediateCertificate means there is no intermediate.
+func (mocc *MTROperationalCertificateChain) IntermediateCertificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("intermediateCertificate"))
 	return obj.Wrap(_r)
-}
-
-// SetIntermediateCertificate wraps the corresponding Objective-C method.
-func (x *MTROperationalCertificateChain) SetIntermediateCertificate(intermediateCertificate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntermediateCertificate:"), objref.IDOf(intermediateCertificate))
 }
 
 // RootCertificate wraps the corresponding Objective-C method.
-func (x *MTROperationalCertificateChain) RootCertificate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootCertificate"))
+func (mocc *MTROperationalCertificateChain) RootCertificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("rootCertificate"))
 	return obj.Wrap(_r)
 }
 
-// SetRootCertificate wraps the corresponding Objective-C method.
-func (x *MTROperationalCertificateChain) SetRootCertificate(rootCertificate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootCertificate:"), objref.IDOf(rootCertificate))
-}
-
-// AdminSubject adminSubject is passed to the device as part of the AddNOC command.  A nil adminSubject means the node id of the relevant MTRDeviceController will be used.
-func (x *MTROperationalCertificateChain) AdminSubject() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adminSubject"))
+// AdminSubject returns adminSubject is passed to the device as part of the AddNOC command.  A nil adminSubject means the node id of the relevant MTRDeviceController will be used.
+func (mocc *MTROperationalCertificateChain) AdminSubject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mocc), objc.RegisterName("adminSubject"))
 	return obj.Wrap(_r)
 }
-
-// SetAdminSubject wraps the corresponding Objective-C method.
-func (x *MTROperationalCertificateChain) SetAdminSubject(adminSubject obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdminSubject:"), objref.IDOf(adminSubject))
-}
-
-// MTROperationalCertificateChainable is the interface implemented by [MTROperationalCertificateChain], for mocking and DI.
-type MTROperationalCertificateChainable interface {
-	obj.Object
-	WithOperationalCertificate(operationalCertificate obj.Object) *MTROperationalCertificateChain
-	WithIntermediateCertificate(intermediateCertificate obj.Object) *MTROperationalCertificateChain
-	WithRootCertificate(rootCertificate obj.Object) *MTROperationalCertificateChain
-	WithAdminSubject(adminSubject obj.Object) *MTROperationalCertificateChain
-	OperationalCertificate() obj.Object
-	SetOperationalCertificate(operationalCertificate obj.Object)
-	IntermediateCertificate() obj.Object
-	SetIntermediateCertificate(intermediateCertificate obj.Object)
-	RootCertificate() obj.Object
-	SetRootCertificate(rootCertificate obj.Object)
-	AdminSubject() obj.Object
-	SetAdminSubject(adminSubject obj.Object)
-}
-
-var _ MTROperationalCertificateChainable = (*MTROperationalCertificateChain)(nil)

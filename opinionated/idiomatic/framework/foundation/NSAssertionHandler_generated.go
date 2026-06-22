@@ -46,24 +46,24 @@ func assertionHandlerAdopt(id objc.ID) *AssertionHandler {
 }
 
 // Description returns the object's -description text.
-func (x *AssertionHandler) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ah *AssertionHandler) Description() string {
+	return rt.Description(objref.IDOf(ah))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssertionHandler) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ah *AssertionHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ah), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssertionHandler) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ah *AssertionHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ah), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssertionHandler) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ah *AssertionHandler) String() string {
+	return rt.Description(objref.IDOf(ah))
 }
 
 // NewAssertionHandler creates a new AssertionHandler.
@@ -73,15 +73,7 @@ func NewAssertionHandler() *AssertionHandler {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *AssertionHandler) WithScriptingProperties(scriptingProperties obj.Object) *AssertionHandler {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ah *AssertionHandler) WithScriptingProperties(scriptingProperties obj.Object) *AssertionHandler {
+	objc.Send[objc.ID](objref.IDOf(ah), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ah
 }
-
-// AssertionHandlerable is the interface implemented by [AssertionHandler], for mocking and DI.
-type AssertionHandlerable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *AssertionHandler
-}
-
-var _ AssertionHandlerable = (*AssertionHandler)(nil)

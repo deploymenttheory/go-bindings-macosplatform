@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,60 +52,41 @@ func NewDetectFaceLandmarksRequest() *DetectFaceLandmarksRequest {
 	return detectFaceLandmarksRequestAdopt(_id)
 }
 
-// WithConstellation a variable that describes how a face landmarks request orders or enumerates the resulting features.
-func (x *DetectFaceLandmarksRequest) WithConstellation(constellation RequestFaceLandmarksConstellation) *DetectFaceLandmarksRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstellation:"), constellation)
-	return x
+// WithConstellation sets a variable that describes how a face landmarks request orders or enumerates the resulting features.
+func (dflr *DetectFaceLandmarksRequest) WithConstellation(constellation RequestFaceLandmarksConstellation) *DetectFaceLandmarksRequest {
+	objc.Send[objc.ID](objref.IDOf(dflr), objc.RegisterName("setConstellation:"), constellation)
+	return dflr
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *DetectFaceLandmarksRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceLandmarksRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (dflr *DetectFaceLandmarksRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceLandmarksRequest {
+	objc.Send[objc.ID](objref.IDOf(dflr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return dflr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *DetectFaceLandmarksRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceLandmarksRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (dflr *DetectFaceLandmarksRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceLandmarksRequest {
+	objc.Send[objc.ID](objref.IDOf(dflr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return dflr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *DetectFaceLandmarksRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceLandmarksRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (dflr *DetectFaceLandmarksRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceLandmarksRequest {
+	objc.Send[objc.ID](objref.IDOf(dflr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return dflr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *DetectFaceLandmarksRequest) WithRevision(revision int) *DetectFaceLandmarksRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (dflr *DetectFaceLandmarksRequest) WithRevision(revision int) *DetectFaceLandmarksRequest {
+	objc.Send[objc.ID](objref.IDOf(dflr), objc.RegisterName("setRevision:"), revision)
+	return dflr
 }
 
-// Constellation constellation type defines how many landmark points are used to map a face. Revisions 1, 2, and 3 of the request support 65 points, where Revision 3 also supports 76 points.
-func (x *DetectFaceLandmarksRequest) Constellation() RequestFaceLandmarksConstellation {
-	_r := objc.Send[RequestFaceLandmarksConstellation](objref.IDOf(x), objc.RegisterName("constellation"))
+// Constellation returns constellation type defines how many landmark points are used to map a face. Revisions 1, 2, and 3 of the request support 65 points, where Revision 3 also supports 76 points.
+func (dflr *DetectFaceLandmarksRequest) Constellation() RequestFaceLandmarksConstellation {
+	_r := objc.Send[RequestFaceLandmarksConstellation](objref.IDOf(dflr), objc.RegisterName("constellation"))
 	return _r
 }
-
-// SetConstellation wraps the corresponding Objective-C method.
-func (x *DetectFaceLandmarksRequest) SetConstellation(constellation RequestFaceLandmarksConstellation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstellation:"), constellation)
-}
-
-// DetectFaceLandmarksRequestable is the interface implemented by [DetectFaceLandmarksRequest], for mocking and DI.
-type DetectFaceLandmarksRequestable interface {
-	obj.Object
-	WithConstellation(constellation RequestFaceLandmarksConstellation) *DetectFaceLandmarksRequest
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectFaceLandmarksRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectFaceLandmarksRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *DetectFaceLandmarksRequest
-	WithRevision(revision int) *DetectFaceLandmarksRequest
-	Constellation() RequestFaceLandmarksConstellation
-	SetConstellation(constellation RequestFaceLandmarksConstellation)
-}
-
-var _ DetectFaceLandmarksRequestable = (*DetectFaceLandmarksRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*DetectFaceLandmarksRequest)(nil)
 

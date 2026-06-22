@@ -46,24 +46,24 @@ func renderDestinationAdopt(id objc.ID) *RenderDestination {
 }
 
 // Description returns the object's -description text.
-func (x *RenderDestination) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rd *RenderDestination) Description() string {
+	return rt.Description(objref.IDOf(rd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RenderDestination) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rd *RenderDestination) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RenderDestination) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rd *RenderDestination) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RenderDestination) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rd *RenderDestination) String() string {
+	return rt.Description(objref.IDOf(rd))
 }
 
 // NewRenderDestinationWithGLTextureTargetWidthHeight creates a render destination based on an OpenGL texture.
@@ -73,183 +73,110 @@ func NewRenderDestinationWithGLTextureTargetWidthHeight(texture int, target int,
 	return renderDestinationAdopt(_id)
 }
 
-// WithAlphaMode the render destination’s representation of alpha (transparency) values.
-func (x *RenderDestination) WithAlphaMode(alphaMode RenderDestinationAlphaMode) *RenderDestination {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaMode:"), alphaMode)
-	return x
+// WithAlphaMode sets the render destination’s representation of alpha (transparency) values.
+func (rd *RenderDestination) WithAlphaMode(alphaMode RenderDestinationAlphaMode) *RenderDestination {
+	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setAlphaMode:"), alphaMode)
+	return rd
 }
 
-// WithFlipped indicator of whether the destination is flipped.
-func (x *RenderDestination) WithFlipped(flipped bool) *RenderDestination {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlipped:"), flipped)
-	return x
+// WithFlipped sets indicator of whether the destination is flipped.
+func (rd *RenderDestination) WithFlipped(flipped bool) *RenderDestination {
+	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setFlipped:"), flipped)
+	return rd
 }
 
-// WithDithered indicator of whether or not the destination dithers.
-func (x *RenderDestination) WithDithered(dithered bool) *RenderDestination {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDithered:"), dithered)
-	return x
+// WithDithered sets indicator of whether or not the destination dithers.
+func (rd *RenderDestination) WithDithered(dithered bool) *RenderDestination {
+	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setDithered:"), dithered)
+	return rd
 }
 
-// WithClamped indicator of whether or not the destination clamps.
-func (x *RenderDestination) WithClamped(clamped bool) *RenderDestination {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClamped:"), clamped)
-	return x
+// WithClamped sets indicator of whether or not the destination clamps.
+func (rd *RenderDestination) WithClamped(clamped bool) *RenderDestination {
+	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setClamped:"), clamped)
+	return rd
 }
 
-// WithColorSpace the destination’s color space.
-func (x *RenderDestination) WithColorSpace(colorSpace obj.Object) *RenderDestination {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
-	return x
+// WithColorSpace sets the destination’s color space.
+func (rd *RenderDestination) WithColorSpace(colorSpace obj.Object) *RenderDestination {
+	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
+	return rd
 }
 
-// WithBlendKernel the destination’s blend kernel.
-func (x *RenderDestination) WithBlendKernel(blendKernel *BlendKernel) *RenderDestination {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendKernel:"), objref.IDOf(blendKernel))
-	return x
+// WithBlendKernel sets the destination’s blend kernel.
+func (rd *RenderDestination) WithBlendKernel(blendKernel *BlendKernel) *RenderDestination {
+	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setBlendKernel:"), objref.IDOf(blendKernel))
+	return rd
 }
 
-// WithBlendsInDestinationColorSpace indicator of whether to blend in the destination’s color space.
-func (x *RenderDestination) WithBlendsInDestinationColorSpace(blendsInDestinationColorSpace bool) *RenderDestination {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendsInDestinationColorSpace:"), blendsInDestinationColorSpace)
-	return x
+// WithBlendsInDestinationColorSpace sets indicator of whether to blend in the destination’s color space.
+func (rd *RenderDestination) WithBlendsInDestinationColorSpace(blendsInDestinationColorSpace bool) *RenderDestination {
+	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setBlendsInDestinationColorSpace:"), blendsInDestinationColorSpace)
+	return rd
 }
 
-// WithCaptureTraceURL tell the next render using this destination to capture a Metal trace.
-func (x *RenderDestination) WithCaptureTraceURL(captureTraceURL string) *RenderDestination {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptureTraceURL:"), rt.FileURL(captureTraceURL))
-	return x
+// WithCaptureTraceURL sets tell the next render using this destination to capture a Metal trace.
+func (rd *RenderDestination) WithCaptureTraceURL(captureTraceURL string) *RenderDestination {
+	objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("setCaptureTraceURL:"), rt.FileURL(captureTraceURL))
+	return rd
 }
 
 // Width wraps the corresponding Objective-C method.
-func (x *RenderDestination) Width() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("width"))
+func (rd *RenderDestination) Width() int {
+	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("width"))
 	return _r
 }
 
 // Height wraps the corresponding Objective-C method.
-func (x *RenderDestination) Height() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("height"))
+func (rd *RenderDestination) Height() int {
+	_r := objc.Send[int](objref.IDOf(rd), objc.RegisterName("height"))
 	return _r
 }
 
 // AlphaMode wraps the corresponding Objective-C method.
-func (x *RenderDestination) AlphaMode() RenderDestinationAlphaMode {
-	_r := objc.Send[RenderDestinationAlphaMode](objref.IDOf(x), objc.RegisterName("alphaMode"))
+func (rd *RenderDestination) AlphaMode() RenderDestinationAlphaMode {
+	_r := objc.Send[RenderDestinationAlphaMode](objref.IDOf(rd), objc.RegisterName("alphaMode"))
 	return _r
-}
-
-// SetAlphaMode wraps the corresponding Objective-C method.
-func (x *RenderDestination) SetAlphaMode(alphaMode RenderDestinationAlphaMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaMode:"), alphaMode)
 }
 
 // IsFlipped wraps the corresponding Objective-C method.
-func (x *RenderDestination) IsFlipped() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFlipped"))
+func (rd *RenderDestination) IsFlipped() bool {
+	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("isFlipped"))
 	return _r
-}
-
-// SetFlipped wraps the corresponding Objective-C method.
-func (x *RenderDestination) SetFlipped(flipped bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlipped:"), flipped)
 }
 
 // IsDithered wraps the corresponding Objective-C method.
-func (x *RenderDestination) IsDithered() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDithered"))
+func (rd *RenderDestination) IsDithered() bool {
+	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("isDithered"))
 	return _r
-}
-
-// SetDithered wraps the corresponding Objective-C method.
-func (x *RenderDestination) SetDithered(dithered bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDithered:"), dithered)
 }
 
 // IsClamped wraps the corresponding Objective-C method.
-func (x *RenderDestination) IsClamped() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isClamped"))
+func (rd *RenderDestination) IsClamped() bool {
+	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("isClamped"))
 	return _r
-}
-
-// SetClamped wraps the corresponding Objective-C method.
-func (x *RenderDestination) SetClamped(clamped bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClamped:"), clamped)
 }
 
 // ColorSpace wraps the corresponding Objective-C method.
-func (x *RenderDestination) ColorSpace() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorSpace"))
+func (rd *RenderDestination) ColorSpace() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("colorSpace"))
 	return obj.Wrap(_r)
-}
-
-// SetColorSpace wraps the corresponding Objective-C method.
-func (x *RenderDestination) SetColorSpace(colorSpace obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), objref.IDOf(colorSpace))
 }
 
 // BlendKernel wraps the corresponding Objective-C method.
-func (x *RenderDestination) BlendKernel() *BlendKernel {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("blendKernel"))
+func (rd *RenderDestination) BlendKernel() *BlendKernel {
+	_r := objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("blendKernel"))
 	return BlendKernelFromID(_r)
 }
 
-// SetBlendKernel wraps the corresponding Objective-C method.
-func (x *RenderDestination) SetBlendKernel(blendKernel *BlendKernel) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendKernel:"), objref.IDOf(blendKernel))
-}
-
 // BlendsInDestinationColorSpace wraps the corresponding Objective-C method.
-func (x *RenderDestination) BlendsInDestinationColorSpace() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("blendsInDestinationColorSpace"))
+func (rd *RenderDestination) BlendsInDestinationColorSpace() bool {
+	_r := objc.Send[bool](objref.IDOf(rd), objc.RegisterName("blendsInDestinationColorSpace"))
 	return _r
 }
 
-// SetBlendsInDestinationColorSpace wraps the corresponding Objective-C method.
-func (x *RenderDestination) SetBlendsInDestinationColorSpace(blendsInDestinationColorSpace bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendsInDestinationColorSpace:"), blendsInDestinationColorSpace)
-}
-
-// CaptureTraceURL tell the next render using this destination to capture a Metal trace. If this property is set to a file-based URL, then the next render using this destination will capture a Metal trace, deleting any existing file if present. This property is nil by default.
-func (x *RenderDestination) CaptureTraceURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("captureTraceURL"))
+// CaptureTraceURL returns tell the next render using this destination to capture a Metal trace. If this property is set to a file-based URL, then the next render using this destination will capture a Metal trace, deleting any existing file if present. This property is nil by default.
+func (rd *RenderDestination) CaptureTraceURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rd), objc.RegisterName("captureTraceURL"))
 	return obj.Wrap(_r)
 }
-
-// SetCaptureTraceURL wraps the corresponding Objective-C method.
-func (x *RenderDestination) SetCaptureTraceURL(captureTraceURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptureTraceURL:"), rt.FileURL(captureTraceURL))
-}
-
-// RenderDestinationable is the interface implemented by [RenderDestination], for mocking and DI.
-type RenderDestinationable interface {
-	obj.Object
-	WithAlphaMode(alphaMode RenderDestinationAlphaMode) *RenderDestination
-	WithFlipped(flipped bool) *RenderDestination
-	WithDithered(dithered bool) *RenderDestination
-	WithClamped(clamped bool) *RenderDestination
-	WithColorSpace(colorSpace obj.Object) *RenderDestination
-	WithBlendKernel(blendKernel *BlendKernel) *RenderDestination
-	WithBlendsInDestinationColorSpace(blendsInDestinationColorSpace bool) *RenderDestination
-	WithCaptureTraceURL(captureTraceURL string) *RenderDestination
-	Width() int
-	Height() int
-	AlphaMode() RenderDestinationAlphaMode
-	SetAlphaMode(alphaMode RenderDestinationAlphaMode)
-	IsFlipped() bool
-	SetFlipped(flipped bool)
-	IsDithered() bool
-	SetDithered(dithered bool)
-	IsClamped() bool
-	SetClamped(clamped bool)
-	ColorSpace() obj.Object
-	SetColorSpace(colorSpace obj.Object)
-	BlendKernel() *BlendKernel
-	SetBlendKernel(blendKernel *BlendKernel)
-	BlendsInDestinationColorSpace() bool
-	SetBlendsInDestinationColorSpace(blendsInDestinationColorSpace bool)
-	CaptureTraceURL() obj.Object
-	SetCaptureTraceURL(captureTraceURL string)
-}
-
-var _ RenderDestinationable = (*RenderDestination)(nil)

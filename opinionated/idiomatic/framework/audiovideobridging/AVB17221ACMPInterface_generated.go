@@ -5,12 +5,12 @@
 package audiovideobridging
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // AVB17221ACMPInterface is an idiomatic wrapper over the Objective-C class AVB17221ACMPInterface.
@@ -53,34 +53,24 @@ func NewAVB17221ACMPInterface() *AVB17221ACMPInterface {
 }
 
 // RemoveHandlerForEntityID removed a handler  for messages to or from a specified EntityID.
-func (x *AVB17221ACMPInterface) RemoveHandlerForEntityID(targetEntityID uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeHandlerForEntityID:"), targetEntityID)
+func (aai *AVB17221ACMPInterface) RemoveHandlerForEntityID(targetEntityID uint64) {
+	objc.Send[objc.ID](objref.IDOf(aai), objc.RegisterName("removeHandlerForEntityID:"), targetEntityID)
 }
 
 // SendACMPResponseMessage send an ACMP response message. This method synchronizes access to sending ACMP messages, and can safely be called from multiple threads and while handling a received command.
-func (x *AVB17221ACMPInterface) SendACMPResponseMessage(message *AVB17221ACMPMessage) error {
+func (aai *AVB17221ACMPInterface) SendACMPResponseMessage(message *AVB17221ACMPMessage) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendACMPResponseMessage:error:"), objref.IDOf(message), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(aai), objc.RegisterName("sendACMPResponseMessage:error:"), objref.IDOf(message), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// MulticastDestinationAddress an AVBMACAddress of the multicast destination MAC address being used for all ACMP messages on the interface. The MAC Address pointed to by the property is pre-initialized with the IEEE Std 1722.1™-2013 standard value, 91:e0:f0:01:00:00
-func (x *AVB17221ACMPInterface) MulticastDestinationAddress() *MACAddress {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multicastDestinationAddress"))
+// MulticastDestinationAddress returns an AVBMACAddress of the multicast destination MAC address being used for all ACMP messages on the interface. The MAC Address pointed to by the property is pre-initialized with the IEEE Std 1722.1™-2013 standard value, 91:e0:f0:01:00:00
+func (aai *AVB17221ACMPInterface) MulticastDestinationAddress() *MACAddress {
+	_r := objc.Send[objc.ID](objref.IDOf(aai), objc.RegisterName("multicastDestinationAddress"))
 	return MACAddressFromID(_r)
 }
-
-// AVB17221ACMPInterfaceable is the interface implemented by [AVB17221ACMPInterface], for mocking and DI.
-type AVB17221ACMPInterfaceable interface {
-	obj.Object
-	RemoveHandlerForEntityID(targetEntityID uint64)
-	SendACMPResponseMessage(message *AVB17221ACMPMessage) error
-	MulticastDestinationAddress() *MACAddress
-}
-
-var _ AVB17221ACMPInterfaceable = (*AVB17221ACMPInterface)(nil)
 
 var _ AVB1722ControlInterfaceProvider = (*AVB17221ACMPInterface)(nil)

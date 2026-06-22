@@ -46,24 +46,24 @@ func voIPPushMetadataAdopt(id objc.ID) *VoIPPushMetadata {
 }
 
 // Description returns the object's -description text.
-func (x *VoIPPushMetadata) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vipm *VoIPPushMetadata) Description() string {
+	return rt.Description(objref.IDOf(vipm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VoIPPushMetadata) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vipm *VoIPPushMetadata) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vipm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VoIPPushMetadata) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vipm *VoIPPushMetadata) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vipm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VoIPPushMetadata) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vipm *VoIPPushMetadata) String() string {
+	return rt.Description(objref.IDOf(vipm))
 }
 
 // NewVoIPPushMetadata creates a new VoIPPushMetadata.
@@ -73,15 +73,7 @@ func NewVoIPPushMetadata() *VoIPPushMetadata {
 }
 
 // MustReport wraps the corresponding Objective-C method.
-func (x *VoIPPushMetadata) MustReport() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mustReport"))
+func (vipm *VoIPPushMetadata) MustReport() bool {
+	_r := objc.Send[bool](objref.IDOf(vipm), objc.RegisterName("mustReport"))
 	return _r
 }
-
-// VoIPPushMetadataable is the interface implemented by [VoIPPushMetadata], for mocking and DI.
-type VoIPPushMetadataable interface {
-	obj.Object
-	MustReport() bool
-}
-
-var _ VoIPPushMetadataable = (*VoIPPushMetadata)(nil)

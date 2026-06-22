@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,52 +45,40 @@ func sampleTypeAdopt(id objc.ID) *SampleType {
 	return x
 }
 
-// IsMaximumDurationRestricted returns YES if the start and end date for samples of this type are restricted by a maximum duration.
-func (x *SampleType) IsMaximumDurationRestricted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMaximumDurationRestricted"))
+// IsMaximumDurationRestricted reports whether the start and end date for samples of this type are restricted by a maximum duration.
+func (st *SampleType) IsMaximumDurationRestricted() bool {
+	_r := objc.Send[bool](objref.IDOf(st), objc.RegisterName("isMaximumDurationRestricted"))
 	return _r
 }
 
-// MaximumAllowedDuration when the duration is restricted for samples of this type, returns the maximum duration allowed, calculated as the difference between end and start dates. Throws an exception if there is no maximum restriction on duration for samples of this type.
-func (x *SampleType) MaximumAllowedDuration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumAllowedDuration"))
+// MaximumAllowedDuration returns when the duration is restricted for samples of this type, returns the maximum duration allowed, calculated as the difference between end and start dates. Throws an exception if there is no maximum restriction on duration for samples of this type.
+func (st *SampleType) MaximumAllowedDuration() float64 {
+	_r := objc.Send[float64](objref.IDOf(st), objc.RegisterName("maximumAllowedDuration"))
 	return _r
 }
 
-// IsMinimumDurationRestricted returns YES if the start and end date for samples of this type are restricted by a minimum duration.
-func (x *SampleType) IsMinimumDurationRestricted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMinimumDurationRestricted"))
+// IsMinimumDurationRestricted reports whether the start and end date for samples of this type are restricted by a minimum duration.
+func (st *SampleType) IsMinimumDurationRestricted() bool {
+	_r := objc.Send[bool](objref.IDOf(st), objc.RegisterName("isMinimumDurationRestricted"))
 	return _r
 }
 
-// MinimumAllowedDuration when the duration is restricted for samples of this type, returns the minimum duration allowed, calculated as the difference between end and start dates. Throws an exception if there is no minimum restriction on duration for samples of this type.
-func (x *SampleType) MinimumAllowedDuration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumAllowedDuration"))
+// MinimumAllowedDuration returns when the duration is restricted for samples of this type, returns the minimum duration allowed, calculated as the difference between end and start dates. Throws an exception if there is no minimum restriction on duration for samples of this type.
+func (st *SampleType) MinimumAllowedDuration() float64 {
+	_r := objc.Send[float64](objref.IDOf(st), objc.RegisterName("minimumAllowedDuration"))
 	return _r
 }
 
-// AllowsRecalibrationForEstimates returns YES if first-party samples of this type are produced using a prediction algorithm, and that algorithm supports recalibration. To recalibrate the estimates for a sample type, see -[HKHealthStore recalibrateEstimatesForSampleType:atDate:completion:]
-func (x *SampleType) AllowsRecalibrationForEstimates() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsRecalibrationForEstimates"))
+// AllowsRecalibrationForEstimates reports whether first-party samples of this type are produced using a prediction algorithm, and that algorithm supports recalibration. To recalibrate the estimates for a sample type, see -[HKHealthStore recalibrateEstimatesForSampleType:atDate:completion:]
+func (st *SampleType) AllowsRecalibrationForEstimates() bool {
+	_r := objc.Send[bool](objref.IDOf(st), objc.RegisterName("allowsRecalibrationForEstimates"))
 	return _r
 }
-
-// SampleTypeable is the interface implemented by [SampleType], for mocking and DI.
-type SampleTypeable interface {
-	obj.Object
-	IsMaximumDurationRestricted() bool
-	MaximumAllowedDuration() float64
-	IsMinimumDurationRestricted() bool
-	MinimumAllowedDuration() float64
-	AllowsRecalibrationForEstimates() bool
-}
-
-var _ SampleTypeable = (*SampleType)(nil)
 
 // isSampleType marks SampleType — and, by embedding promotion, its
 // subclasses — as a member of the SampleType hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *SampleType) isSampleType() {}
+func (st *SampleType) isSampleType() {}
 
 var _ SampleTypeProvider = (*SampleType)(nil)
 

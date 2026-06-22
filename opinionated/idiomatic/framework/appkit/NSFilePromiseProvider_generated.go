@@ -46,24 +46,24 @@ func filePromiseProviderAdopt(id objc.ID) *FilePromiseProvider {
 }
 
 // Description returns the object's -description text.
-func (x *FilePromiseProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fpp *FilePromiseProvider) Description() string {
+	return rt.Description(objref.IDOf(fpp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FilePromiseProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fpp *FilePromiseProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fpp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FilePromiseProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fpp *FilePromiseProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fpp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FilePromiseProvider) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fpp *FilePromiseProvider) String() string {
+	return rt.Description(objref.IDOf(fpp))
 }
 
 // NewFilePromiseProvider creates a new FilePromiseProvider.
@@ -72,52 +72,29 @@ func NewFilePromiseProvider() *FilePromiseProvider {
 	return filePromiseProviderAdopt(_id)
 }
 
-// WithFileType the file type of the file promise provider.
-func (x *FilePromiseProvider) WithFileType(fileType string) *FilePromiseProvider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileType:"), purego.NSString(fileType))
-	return x
+// WithFileType sets the file type of the file promise provider.
+func (fpp *FilePromiseProvider) WithFileType(fileType string) *FilePromiseProvider {
+	objc.Send[objc.ID](objref.IDOf(fpp), objc.RegisterName("setFileType:"), purego.NSString(fileType))
+	return fpp
 }
 
-// WithUserInfo optional user information to pass to the file promise provider.
-func (x *FilePromiseProvider) WithUserInfo(userInfo obj.Object) *FilePromiseProvider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
-	return x
+// WithUserInfo sets optional user information to pass to the file promise provider.
+func (fpp *FilePromiseProvider) WithUserInfo(userInfo obj.Object) *FilePromiseProvider {
+	objc.Send[objc.ID](objref.IDOf(fpp), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
+	return fpp
 }
 
 // FileType wraps the corresponding Objective-C method.
-func (x *FilePromiseProvider) FileType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileType"))
+func (fpp *FilePromiseProvider) FileType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(fpp), objc.RegisterName("fileType"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetFileType wraps the corresponding Objective-C method.
-func (x *FilePromiseProvider) SetFileType(fileType string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFileType:"), purego.NSString(fileType))
-}
-
 // UserInfo wraps the corresponding Objective-C method.
-func (x *FilePromiseProvider) UserInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+func (fpp *FilePromiseProvider) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fpp), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
-
-// SetUserInfo wraps the corresponding Objective-C method.
-func (x *FilePromiseProvider) SetUserInfo(userInfo obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInfo:"), objref.IDOf(userInfo))
-}
-
-// FilePromiseProviderable is the interface implemented by [FilePromiseProvider], for mocking and DI.
-type FilePromiseProviderable interface {
-	obj.Object
-	WithFileType(fileType string) *FilePromiseProvider
-	WithUserInfo(userInfo obj.Object) *FilePromiseProvider
-	FileType() string
-	SetFileType(fileType string)
-	UserInfo() obj.Object
-	SetUserInfo(userInfo obj.Object)
-}
-
-var _ FilePromiseProviderable = (*FilePromiseProvider)(nil)

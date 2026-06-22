@@ -44,24 +44,24 @@ func mTRSwitchClusterInitialPressEventAdopt(id objc.ID) *MTRSwitchClusterInitial
 }
 
 // Description returns the object's -description text.
-func (x *MTRSwitchClusterInitialPressEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mscipe *MTRSwitchClusterInitialPressEvent) Description() string {
+	return rt.Description(objref.IDOf(mscipe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRSwitchClusterInitialPressEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mscipe *MTRSwitchClusterInitialPressEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mscipe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRSwitchClusterInitialPressEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mscipe *MTRSwitchClusterInitialPressEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mscipe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRSwitchClusterInitialPressEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mscipe *MTRSwitchClusterInitialPressEvent) String() string {
+	return rt.Description(objref.IDOf(mscipe))
 }
 
 // NewMTRSwitchClusterInitialPressEvent creates a new MTRSwitchClusterInitialPressEvent.
@@ -71,28 +71,13 @@ func NewMTRSwitchClusterInitialPressEvent() *MTRSwitchClusterInitialPressEvent {
 }
 
 // WithNewPosition sets the property and returns the receiver so calls can be chained.
-func (x *MTRSwitchClusterInitialPressEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterInitialPressEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
-	return x
+func (mscipe *MTRSwitchClusterInitialPressEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterInitialPressEvent {
+	objc.Send[objc.ID](objref.IDOf(mscipe), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
+	return mscipe
 }
 
 // GetNewPosition wraps the corresponding Objective-C method.
-func (x *MTRSwitchClusterInitialPressEvent) GetNewPosition() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewPosition"))
+func (mscipe *MTRSwitchClusterInitialPressEvent) GetNewPosition() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mscipe), objc.RegisterName("getNewPosition"))
 	return obj.Wrap(_r)
 }
-
-// SetNewPosition wraps the corresponding Objective-C method.
-func (x *MTRSwitchClusterInitialPressEvent) SetNewPosition(newPosition obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
-}
-
-// MTRSwitchClusterInitialPressEventable is the interface implemented by [MTRSwitchClusterInitialPressEvent], for mocking and DI.
-type MTRSwitchClusterInitialPressEventable interface {
-	obj.Object
-	WithNewPosition(newPosition obj.Object) *MTRSwitchClusterInitialPressEvent
-	GetNewPosition() obj.Object
-	SetNewPosition(newPosition obj.Object)
-}
-
-var _ MTRSwitchClusterInitialPressEventable = (*MTRSwitchClusterInitialPressEvent)(nil)

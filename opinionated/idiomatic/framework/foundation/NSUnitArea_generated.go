@@ -53,18 +53,10 @@ func NewUnitArea() *UnitArea {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitArea) WithScriptingProperties(scriptingProperties obj.Object) *UnitArea {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ua *UnitArea) WithScriptingProperties(scriptingProperties obj.Object) *UnitArea {
+	objc.Send[objc.ID](objref.IDOf(ua), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ua
 }
-
-// UnitAreaable is the interface implemented by [UnitArea], for mocking and DI.
-type UnitAreaable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitArea
-}
-
-var _ UnitAreaable = (*UnitArea)(nil)
 
 var _ DimensionProvider = (*UnitArea)(nil)
 

@@ -46,24 +46,24 @@ func recordIDAdopt(id objc.ID) *RecordID {
 }
 
 // Description returns the object's -description text.
-func (x *RecordID) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ri *RecordID) Description() string {
+	return rt.Description(objref.IDOf(ri))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecordID) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ri *RecordID) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ri), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecordID) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ri *RecordID) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ri), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RecordID) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ri *RecordID) String() string {
+	return rt.Description(objref.IDOf(ri))
 }
 
 // NewRecordIDWithRecordName creates a new record ID with the specified name in the default zone. - Parameters: - recordName: The name that identifies the record. The string must contain only ASCII characters, must not exceed 255 characters, and must not start with an underscore. If you specify an empty string for this parameter, the method throws an exception. - Returns: An initialized record ID object. Use this method when you're creating or searching for records in the default zone.
@@ -80,26 +80,17 @@ func NewRecordIDWithRecordNameZoneID(recordName string, zoneID *RecordZoneID) *R
 	return recordIDAdopt(_id)
 }
 
-// RecordName the unique name of the record. For share records that manage a shared record zone, this property's value is always “CKRecordNameZoneWideShare“.
-func (x *RecordID) RecordName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordName"))
+// RecordName returns the unique name of the record. For share records that manage a shared record zone, this property's value is always “CKRecordNameZoneWideShare“.
+func (ri *RecordID) RecordName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ri), objc.RegisterName("recordName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ZoneID the ID of the zone that contains the record.
-func (x *RecordID) ZoneID() *RecordZoneID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneID"))
+// ZoneID returns the ID of the zone that contains the record.
+func (ri *RecordID) ZoneID() *RecordZoneID {
+	_r := objc.Send[objc.ID](objref.IDOf(ri), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)
 }
-
-// RecordIDable is the interface implemented by [RecordID], for mocking and DI.
-type RecordIDable interface {
-	obj.Object
-	RecordName() string
-	ZoneID() *RecordZoneID
-}
-
-var _ RecordIDable = (*RecordID)(nil)

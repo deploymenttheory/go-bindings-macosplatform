@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,13 +50,6 @@ func NewFragmentedMovieTrack() *FragmentedMovieTrack {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVFragmentedMovieTrack")), objc.RegisterName("new"))
 	return fragmentedMovieTrackAdopt(_id)
 }
-
-// FragmentedMovieTrackable is the interface implemented by [FragmentedMovieTrack], for mocking and DI.
-type FragmentedMovieTrackable interface {
-	obj.Object
-}
-
-var _ FragmentedMovieTrackable = (*FragmentedMovieTrack)(nil)
 
 var _ MovieTrackProvider = (*FragmentedMovieTrack)(nil)
 

@@ -46,24 +46,24 @@ func vSAccountApplicationProviderAdopt(id objc.ID) *VSAccountApplicationProvider
 }
 
 // Description returns the object's -description text.
-func (x *VSAccountApplicationProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vaap *VSAccountApplicationProvider) Description() string {
+	return rt.Description(objref.IDOf(vaap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VSAccountApplicationProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vaap *VSAccountApplicationProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vaap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VSAccountApplicationProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vaap *VSAccountApplicationProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vaap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VSAccountApplicationProvider) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vaap *VSAccountApplicationProvider) String() string {
+	return rt.Description(objref.IDOf(vaap))
 }
 
 // NewVSAccountApplicationProviderWithLocalizedDisplayNameIdentifier returns an application provider using a given display name and identifier.
@@ -73,29 +73,20 @@ func NewVSAccountApplicationProviderWithLocalizedDisplayNameIdentifier(localized
 	return vSAccountApplicationProviderAdopt(_id)
 }
 
-// LocalizedDisplayName the display name of the provider as it will appear in the list of providers.
-func (x *VSAccountApplicationProvider) LocalizedDisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDisplayName"))
+// LocalizedDisplayName returns the display name of the provider as it will appear in the list of providers.
+func (vaap *VSAccountApplicationProvider) LocalizedDisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vaap), objc.RegisterName("localizedDisplayName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Identifier the identifier of the provider. If selected, this value is returned to your application.
-func (x *VSAccountApplicationProvider) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns the identifier of the provider. If selected, this value is returned to your application.
+func (vaap *VSAccountApplicationProvider) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vaap), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// VSAccountApplicationProviderable is the interface implemented by [VSAccountApplicationProvider], for mocking and DI.
-type VSAccountApplicationProviderable interface {
-	obj.Object
-	LocalizedDisplayName() string
-	Identifier() string
-}
-
-var _ VSAccountApplicationProviderable = (*VSAccountApplicationProvider)(nil)

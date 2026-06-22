@@ -46,24 +46,24 @@ func methodSignatureAdopt(id objc.ID) *MethodSignature {
 }
 
 // Description returns the object's -description text.
-func (x *MethodSignature) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ms *MethodSignature) Description() string {
+	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MethodSignature) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ms *MethodSignature) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MethodSignature) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ms *MethodSignature) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MethodSignature) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ms *MethodSignature) String() string {
+	return rt.Description(objref.IDOf(ms))
 }
 
 // NewMethodSignature creates a new MethodSignature.
@@ -73,50 +73,37 @@ func NewMethodSignature() *MethodSignature {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *MethodSignature) WithScriptingProperties(scriptingProperties obj.Object) *MethodSignature {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ms *MethodSignature) WithScriptingProperties(scriptingProperties obj.Object) *MethodSignature {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ms
 }
 
 // GetArgumentTypeAtIndex returns the type encoding for the argument at a given index.
-func (x *MethodSignature) GetArgumentTypeAtIndex(idx int) string {
-	_r := objc.Send[string](objref.IDOf(x), objc.RegisterName("getArgumentTypeAtIndex:"), idx)
+func (ms *MethodSignature) GetArgumentTypeAtIndex(idx int) string {
+	_r := objc.Send[string](objref.IDOf(ms), objc.RegisterName("getArgumentTypeAtIndex:"), idx)
 	return _r
 }
 
-// IsOneway whether the receiver is asynchronous when invoked through distributed objects.
-func (x *MethodSignature) IsOneway() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOneway"))
+// IsOneway reports whether the receiver is asynchronous when invoked through distributed objects.
+func (ms *MethodSignature) IsOneway() bool {
+	_r := objc.Send[bool](objref.IDOf(ms), objc.RegisterName("isOneway"))
 	return _r
 }
 
 // NumberOfArguments wraps the corresponding Objective-C method.
-func (x *MethodSignature) NumberOfArguments() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfArguments"))
+func (ms *MethodSignature) NumberOfArguments() int {
+	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("numberOfArguments"))
 	return _r
 }
 
 // FrameLength wraps the corresponding Objective-C method.
-func (x *MethodSignature) FrameLength() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameLength"))
+func (ms *MethodSignature) FrameLength() int {
+	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("frameLength"))
 	return _r
 }
 
 // MethodReturnLength wraps the corresponding Objective-C method.
-func (x *MethodSignature) MethodReturnLength() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("methodReturnLength"))
+func (ms *MethodSignature) MethodReturnLength() int {
+	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("methodReturnLength"))
 	return _r
 }
-
-// MethodSignatureable is the interface implemented by [MethodSignature], for mocking and DI.
-type MethodSignatureable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *MethodSignature
-	GetArgumentTypeAtIndex(idx int) string
-	IsOneway() bool
-	NumberOfArguments() int
-	FrameLength() int
-	MethodReturnLength() int
-}
-
-var _ MethodSignatureable = (*MethodSignature)(nil)

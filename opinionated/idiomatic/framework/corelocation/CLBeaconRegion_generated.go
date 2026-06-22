@@ -95,87 +95,64 @@ func NewBeaconRegionWithBeaconIdentityConstraintIdentifier(beaconIdentityConstra
 	return beaconRegionAdopt(_id)
 }
 
-// WithNotifyEntryStateOnDisplay a Boolean value that indicates whether Core Location sends beacon notifications when the device’s display is on.
-func (x *BeaconRegion) WithNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay bool) *BeaconRegion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyEntryStateOnDisplay:"), notifyEntryStateOnDisplay)
-	return x
+// WithNotifyEntryStateOnDisplay sets a Boolean value that indicates whether Core Location sends beacon notifications when the device’s display is on.
+func (br *BeaconRegion) WithNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay bool) *BeaconRegion {
+	objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("setNotifyEntryStateOnDisplay:"), notifyEntryStateOnDisplay)
+	return br
 }
 
-// WithNotifyOnEntry a Boolean indicating that notifications are generated upon entry into the region.
-func (x *BeaconRegion) WithNotifyOnEntry(notifyOnEntry bool) *BeaconRegion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnEntry:"), notifyOnEntry)
-	return x
+// WithNotifyOnEntry sets a Boolean indicating that notifications are generated upon entry into the region.
+func (br *BeaconRegion) WithNotifyOnEntry(notifyOnEntry bool) *BeaconRegion {
+	objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("setNotifyOnEntry:"), notifyOnEntry)
+	return br
 }
 
-// WithNotifyOnExit a Boolean indicating that notifications are generated upon exit from the region.
-func (x *BeaconRegion) WithNotifyOnExit(notifyOnExit bool) *BeaconRegion {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnExit:"), notifyOnExit)
-	return x
+// WithNotifyOnExit sets a Boolean indicating that notifications are generated upon exit from the region.
+func (br *BeaconRegion) WithNotifyOnExit(notifyOnExit bool) *BeaconRegion {
+	objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("setNotifyOnExit:"), notifyOnExit)
+	return br
 }
 
 // PeripheralDataWithMeasuredPower retrieves data that you can use to advertise the current device as a beacon.
-func (x *BeaconRegion) PeripheralDataWithMeasuredPower(measuredPower obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("peripheralDataWithMeasuredPower:"), objref.IDOf(measuredPower))
+func (br *BeaconRegion) PeripheralDataWithMeasuredPower(measuredPower obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("peripheralDataWithMeasuredPower:"), objref.IDOf(measuredPower))
 	return obj.Wrap(_r)
 }
 
 // BeaconIdentityConstraint wraps the corresponding Objective-C method.
-func (x *BeaconRegion) BeaconIdentityConstraint() *BeaconIdentityConstraint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beaconIdentityConstraint"))
+func (br *BeaconRegion) BeaconIdentityConstraint() *BeaconIdentityConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("beaconIdentityConstraint"))
 	return BeaconIdentityConstraintFromID(_r)
 }
 
 // UUID wraps the corresponding Objective-C method.
-func (x *BeaconRegion) UUID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
+func (br *BeaconRegion) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)
 }
 
 // ProximityUUID wraps the corresponding Objective-C method.
-func (x *BeaconRegion) ProximityUUID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("proximityUUID"))
+func (br *BeaconRegion) ProximityUUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("proximityUUID"))
 	return obj.Wrap(_r)
 }
 
 // Major wraps the corresponding Objective-C method.
-func (x *BeaconRegion) Major() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("major"))
+func (br *BeaconRegion) Major() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("major"))
 	return obj.Wrap(_r)
 }
 
 // Minor wraps the corresponding Objective-C method.
-func (x *BeaconRegion) Minor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minor"))
+func (br *BeaconRegion) Minor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("minor"))
 	return obj.Wrap(_r)
 }
 
 // NotifyEntryStateOnDisplay wraps the corresponding Objective-C method.
-func (x *BeaconRegion) NotifyEntryStateOnDisplay() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("notifyEntryStateOnDisplay"))
+func (br *BeaconRegion) NotifyEntryStateOnDisplay() bool {
+	_r := objc.Send[bool](objref.IDOf(br), objc.RegisterName("notifyEntryStateOnDisplay"))
 	return _r
 }
-
-// SetNotifyEntryStateOnDisplay wraps the corresponding Objective-C method.
-func (x *BeaconRegion) SetNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyEntryStateOnDisplay:"), notifyEntryStateOnDisplay)
-}
-
-// BeaconRegionable is the interface implemented by [BeaconRegion], for mocking and DI.
-type BeaconRegionable interface {
-	obj.Object
-	WithNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay bool) *BeaconRegion
-	WithNotifyOnEntry(notifyOnEntry bool) *BeaconRegion
-	WithNotifyOnExit(notifyOnExit bool) *BeaconRegion
-	PeripheralDataWithMeasuredPower(measuredPower obj.Object) obj.Object
-	BeaconIdentityConstraint() *BeaconIdentityConstraint
-	UUID() obj.Object
-	ProximityUUID() obj.Object
-	Major() obj.Object
-	Minor() obj.Object
-	NotifyEntryStateOnDisplay() bool
-	SetNotifyEntryStateOnDisplay(notifyEntryStateOnDisplay bool)
-}
-
-var _ BeaconRegionable = (*BeaconRegion)(nil)
 
 var _ RegionProvider = (*BeaconRegion)(nil)

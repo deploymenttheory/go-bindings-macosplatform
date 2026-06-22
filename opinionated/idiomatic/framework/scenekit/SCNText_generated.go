@@ -53,302 +53,198 @@ func NewText() *Text {
 	return textAdopt(_id)
 }
 
-// WithExtrusionDepth the extent of the extruded text in the z-axis direction. Animatable.
-func (x *Text) WithExtrusionDepth(extrusionDepth float64) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtrusionDepth:"), extrusionDepth)
-	return x
+// WithExtrusionDepth sets the extent of the extruded text in the z-axis direction. Animatable.
+func (t *Text) WithExtrusionDepth(extrusionDepth float64) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setExtrusionDepth:"), extrusionDepth)
+	return t
 }
 
-// WithString the string object whose text the geometry represents.
-func (x *Text) WithString(string_ obj.Object) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), objref.IDOf(string_))
-	return x
+// WithString sets the string object whose text the geometry represents.
+func (t *Text) WithString(string_ obj.Object) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setString:"), objref.IDOf(string_))
+	return t
 }
 
-// WithFont the font that SceneKit uses to create geometry from the text.
-func (x *Text) WithFont(font obj.Object) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font that SceneKit uses to create geometry from the text.
+func (t *Text) WithFont(font obj.Object) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return t
 }
 
-// WithWrapped a Boolean value that specifies whether SceneKit wraps long lines of text.
-func (x *Text) WithWrapped(wrapped bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrapped:"), wrapped)
-	return x
+// WithWrapped sets a Boolean value that specifies whether SceneKit wraps long lines of text.
+func (t *Text) WithWrapped(wrapped bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWrapped:"), wrapped)
+	return t
 }
 
-// WithContainerFrame a rectangle specifying the area in which SceneKit should lay out the text.
-func (x *Text) WithContainerFrame(containerFrame corefoundation.CGRect) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerFrame:"), containerFrame)
-	return x
+// WithContainerFrame sets a rectangle specifying the area in which SceneKit should lay out the text.
+func (t *Text) WithContainerFrame(containerFrame corefoundation.CGRect) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setContainerFrame:"), containerFrame)
+	return t
 }
 
-// WithTruncationMode a constant that specifies how SceneKit truncates text that is too long to fit its container.
-func (x *Text) WithTruncationMode(truncationMode string) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncationMode:"), purego.NSString(truncationMode))
-	return x
+// WithTruncationMode sets a constant that specifies how SceneKit truncates text that is too long to fit its container.
+func (t *Text) WithTruncationMode(truncationMode string) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTruncationMode:"), purego.NSString(truncationMode))
+	return t
 }
 
-// WithAlignmentMode a constant that specifies how SceneKit horizontally aligns each line of text within its container.
-func (x *Text) WithAlignmentMode(alignmentMode string) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignmentMode:"), purego.NSString(alignmentMode))
-	return x
+// WithAlignmentMode sets a constant that specifies how SceneKit horizontally aligns each line of text within its container.
+func (t *Text) WithAlignmentMode(alignmentMode string) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setAlignmentMode:"), purego.NSString(alignmentMode))
+	return t
 }
 
-// WithChamferRadius the width or depth of each chamfered edge. Animatable.
-func (x *Text) WithChamferRadius(chamferRadius float64) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChamferRadius:"), chamferRadius)
-	return x
+// WithChamferRadius sets the width or depth of each chamfered edge. Animatable.
+func (t *Text) WithChamferRadius(chamferRadius float64) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setChamferRadius:"), chamferRadius)
+	return t
 }
 
-// WithChamferSegmentCount the number of divisions SceneKit uses to create each chamfered edge of the text geometry. Animatable.
-func (x *Text) WithChamferSegmentCount(chamferSegmentCount int) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChamferSegmentCount:"), chamferSegmentCount)
-	return x
+// WithChamferSegmentCount sets the number of divisions SceneKit uses to create each chamfered edge of the text geometry. Animatable.
+func (t *Text) WithChamferSegmentCount(chamferSegmentCount int) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setChamferSegmentCount:"), chamferSegmentCount)
+	return t
 }
 
-// WithChamferProfile a path that determines the cross-sectional contour of each chamfered edge.
-func (x *Text) WithChamferProfile(chamferProfile obj.Object) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChamferProfile:"), objref.IDOf(chamferProfile))
-	return x
+// WithChamferProfile sets a path that determines the cross-sectional contour of each chamfered edge.
+func (t *Text) WithChamferProfile(chamferProfile obj.Object) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setChamferProfile:"), objref.IDOf(chamferProfile))
+	return t
 }
 
-// WithFlatness a number that determines the accuracy or smoothness of the text geometry.
-func (x *Text) WithFlatness(flatness float64) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlatness:"), flatness)
-	return x
+// WithFlatness sets a number that determines the accuracy or smoothness of the text geometry.
+func (t *Text) WithFlatness(flatness float64) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFlatness:"), flatness)
+	return t
 }
 
-// WithName a name associated with the geometry object.
-func (x *Text) WithName(name string) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets a name associated with the geometry object.
+func (t *Text) WithName(name string) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setName:"), purego.NSString(name))
+	return t
 }
 
-// WithMaterials an array of SCNMaterial objects that determine the geometry’s appearance when rendered.
-func (x *Text) WithMaterials(items ...*Material) *Text {
+// WithMaterials sets an array of SCNMaterial objects that determine the geometry’s appearance when rendered.
+func (t *Text) WithMaterials(items ...*Material) *Text {
 	_arr := purego.SliceToNSArray(items, func(_v *Material) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterials:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setMaterials:"), _arr)
+	return t
 }
 
-// WithFirstMaterial the first material attached to the geometry.
-func (x *Text) WithFirstMaterial(firstMaterial *Material) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
-	return x
+// WithFirstMaterial sets the first material attached to the geometry.
+func (t *Text) WithFirstMaterial(firstMaterial *Material) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
+	return t
 }
 
-// WithLevelsOfDetail an array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
-func (x *Text) WithLevelsOfDetail(items ...*LevelOfDetail) *Text {
+// WithLevelsOfDetail sets an array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
+func (t *Text) WithLevelsOfDetail(items ...*LevelOfDetail) *Text {
 	_arr := purego.SliceToNSArray(items, func(_v *LevelOfDetail) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetail:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setLevelsOfDetail:"), _arr)
+	return t
 }
 
 // WithTessellator sets the property and returns the receiver so calls can be chained.
-func (x *Text) WithTessellator(tessellator *GeometryTessellator) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
-	return x
+func (t *Text) WithTessellator(tessellator *GeometryTessellator) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
+	return t
 }
 
-// WithSubdivisionLevel the number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
-func (x *Text) WithSubdivisionLevel(subdivisionLevel int) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
-	return x
+// WithSubdivisionLevel sets the number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
+func (t *Text) WithSubdivisionLevel(subdivisionLevel int) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
+	return t
 }
 
-// WithWantsAdaptiveSubdivision specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
-func (x *Text) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
-	return x
+// WithWantsAdaptiveSubdivision sets specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+func (t *Text) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
+	return t
 }
 
-// WithEdgeCreasesElement the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
-func (x *Text) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
-	return x
+// WithEdgeCreasesElement sets the geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
+func (t *Text) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
+	return t
 }
 
-// WithEdgeCreasesSource the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
-func (x *Text) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Text {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
-	return x
+// WithEdgeCreasesSource sets the geometry source specifying the smoothness or sharpness of edges after surface subdivision.
+func (t *Text) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Text {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
+	return t
 }
 
-// ExtrusionDepth the extrusion depth. Animatable. If the value is 0, we get a mono-sided, 2D version of the text.
-func (x *Text) ExtrusionDepth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("extrusionDepth"))
+// ExtrusionDepth returns the extrusion depth. Animatable. If the value is 0, we get a mono-sided, 2D version of the text.
+func (t *Text) ExtrusionDepth() float64 {
+	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("extrusionDepth"))
 	return _r
 }
 
-// SetExtrusionDepth wraps the corresponding Objective-C method.
-func (x *Text) SetExtrusionDepth(extrusionDepth float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtrusionDepth:"), extrusionDepth)
-}
-
-// SetString wraps the corresponding Objective-C method.
-func (x *Text) SetString(string_ obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setString:"), objref.IDOf(string_))
-}
-
-// Font the font used to represent the text. The font property is only used when the string property is not an NSAttributedString. Defaults to the system font (12 point).
-func (x *Text) Font() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("font"))
+// Font returns the font used to represent the text. The font property is only used when the string property is not an NSAttributedString. Defaults to the system font (12 point).
+func (t *Text) Font() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("font"))
 	return obj.Wrap(_r)
 }
 
-// SetFont wraps the corresponding Objective-C method.
-func (x *Text) SetFont(font obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-}
-
-// IsWrapped determines whether the text is wrapped to fit within the bounds. For the text to be wrapped you first need to set its bounds, otherwise the text is not wrapped. The default value is NO.
-func (x *Text) IsWrapped() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWrapped"))
+// IsWrapped reports whether the text is wrapped to fit within the bounds. For the text to be wrapped you first need to set its bounds, otherwise the text is not wrapped. The default value is false.
+func (t *Text) IsWrapped() bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isWrapped"))
 	return _r
 }
 
-// SetWrapped wraps the corresponding Objective-C method.
-func (x *Text) SetWrapped(wrapped bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWrapped:"), wrapped)
-}
-
-// ContainerFrame a container within which the text may be wrapped or truncated. The text will start at the top-left corner of the rect. You need to set this property for text truncation or alignment to work. Getting this property when it has never been set returns CGRectZero.
-func (x *Text) ContainerFrame() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("containerFrame"))
+// ContainerFrame returns a container within which the text may be wrapped or truncated. The text will start at the top-left corner of the rect. You need to set this property for text truncation or alignment to work. Getting this property when it has never been set returns CGRectZero.
+func (t *Text) ContainerFrame() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(t), objc.RegisterName("containerFrame"))
 	return _r
-}
-
-// SetContainerFrame wraps the corresponding Objective-C method.
-func (x *Text) SetContainerFrame(containerFrame corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerFrame:"), containerFrame)
 }
 
 // TextSize returns the bounding box size the receiver occupies.
-func (x *Text) TextSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("textSize"))
+func (t *Text) TextSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(t), objc.RegisterName("textSize"))
 	return _r
 }
 
 // TruncationMode describes how the text is truncated to fit within the bounds. For the text to be truncated you first need to set its bounds, otherwise the text is not truncated. The default value is kCATruncationNone. See truncation modes in CATextLayer.h.
-func (x *Text) TruncationMode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("truncationMode"))
+func (t *Text) TruncationMode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("truncationMode"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetTruncationMode wraps the corresponding Objective-C method.
-func (x *Text) SetTruncationMode(truncationMode string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncationMode:"), purego.NSString(truncationMode))
 }
 
 // AlignmentMode determines how individual lines of text are horizontally aligned within the bounds. For the text to be aligned you first need to set its bounds, otherwise the text is not aligned. The default value is kCAAlignmentNatural. See alignments in CATextLayer.h.
-func (x *Text) AlignmentMode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alignmentMode"))
+func (t *Text) AlignmentMode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("alignmentMode"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetAlignmentMode wraps the corresponding Objective-C method.
-func (x *Text) SetAlignmentMode(alignmentMode string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignmentMode:"), purego.NSString(alignmentMode))
-}
-
-// ChamferRadius the chamfer radius. Animatable. Values are clamped to the range [0, extrusionDepth / 2]. The actual chamfer radius might be different to the one here specified: large values are clipped to a per-glyph max value. The default value is 0.
-func (x *Text) ChamferRadius() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("chamferRadius"))
+// ChamferRadius returns the chamfer radius. Animatable. Values are clamped to the range [0, extrusionDepth / 2]. The actual chamfer radius might be different to the one here specified: large values are clipped to a per-glyph max value. The default value is 0.
+func (t *Text) ChamferRadius() float64 {
+	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("chamferRadius"))
 	return _r
 }
 
-// SetChamferRadius wraps the corresponding Objective-C method.
-func (x *Text) SetChamferRadius(chamferRadius float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChamferRadius:"), chamferRadius)
-}
-
-// ChamferSegmentCount the number of chamfer subdivisions. Animatable. If the value is less than 1, the behavior is undefined. The default value is 10.
-func (x *Text) ChamferSegmentCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("chamferSegmentCount"))
+// ChamferSegmentCount returns the number of chamfer subdivisions. Animatable. If the value is less than 1, the behavior is undefined. The default value is 10.
+func (t *Text) ChamferSegmentCount() int {
+	_r := objc.Send[int](objref.IDOf(t), objc.RegisterName("chamferSegmentCount"))
 	return _r
-}
-
-// SetChamferSegmentCount wraps the corresponding Objective-C method.
-func (x *Text) SetChamferSegmentCount(chamferSegmentCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChamferSegmentCount:"), chamferSegmentCount)
 }
 
 // ChamferProfile describes the profile used to when "chamferRadius" is not nil. When "chamferProfile" is nil we fallback on a path representing a quadrant. The profile should be a 2D curve beginning at (0,1) and ending at (1,0). The "flatness" property is also used to flatten this path. The default value is nil.
-func (x *Text) ChamferProfile() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chamferProfile"))
+func (t *Text) ChamferProfile() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("chamferProfile"))
 	return obj.Wrap(_r)
 }
 
-// SetChamferProfile wraps the corresponding Objective-C method.
-func (x *Text) SetChamferProfile(chamferProfile obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChamferProfile:"), objref.IDOf(chamferProfile))
-}
-
 // Flatness specifies the accuracy (or smoothness) with which fonts are rendered. Smaller numbers give smoother curves at the expense of more computation and heavier geometries in terms of vertices. The default value is 0.6, which yields smooth curves.
-func (x *Text) Flatness() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("flatness"))
+func (t *Text) Flatness() float64 {
+	_r := objc.Send[float64](objref.IDOf(t), objc.RegisterName("flatness"))
 	return _r
 }
-
-// SetFlatness wraps the corresponding Objective-C method.
-func (x *Text) SetFlatness(flatness float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlatness:"), flatness)
-}
-
-// Textable is the interface implemented by [Text], for mocking and DI.
-type Textable interface {
-	obj.Object
-	WithExtrusionDepth(extrusionDepth float64) *Text
-	WithString(string_ obj.Object) *Text
-	WithFont(font obj.Object) *Text
-	WithWrapped(wrapped bool) *Text
-	WithContainerFrame(containerFrame corefoundation.CGRect) *Text
-	WithTruncationMode(truncationMode string) *Text
-	WithAlignmentMode(alignmentMode string) *Text
-	WithChamferRadius(chamferRadius float64) *Text
-	WithChamferSegmentCount(chamferSegmentCount int) *Text
-	WithChamferProfile(chamferProfile obj.Object) *Text
-	WithFlatness(flatness float64) *Text
-	WithName(name string) *Text
-	WithMaterials(items ...*Material) *Text
-	WithFirstMaterial(firstMaterial *Material) *Text
-	WithLevelsOfDetail(items ...*LevelOfDetail) *Text
-	WithTessellator(tessellator *GeometryTessellator) *Text
-	WithSubdivisionLevel(subdivisionLevel int) *Text
-	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Text
-	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Text
-	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Text
-	ExtrusionDepth() float64
-	SetExtrusionDepth(extrusionDepth float64)
-	SetString(string_ obj.Object)
-	Font() obj.Object
-	SetFont(font obj.Object)
-	IsWrapped() bool
-	SetWrapped(wrapped bool)
-	ContainerFrame() corefoundation.CGRect
-	SetContainerFrame(containerFrame corefoundation.CGRect)
-	TextSize() corefoundation.CGSize
-	TruncationMode() string
-	SetTruncationMode(truncationMode string)
-	AlignmentMode() string
-	SetAlignmentMode(alignmentMode string)
-	ChamferRadius() float64
-	SetChamferRadius(chamferRadius float64)
-	ChamferSegmentCount() int
-	SetChamferSegmentCount(chamferSegmentCount int)
-	ChamferProfile() obj.Object
-	SetChamferProfile(chamferProfile obj.Object)
-	Flatness() float64
-	SetFlatness(flatness float64)
-}
-
-var _ Textable = (*Text)(nil)
 
 var _ GeometryProvider = (*Text)(nil)

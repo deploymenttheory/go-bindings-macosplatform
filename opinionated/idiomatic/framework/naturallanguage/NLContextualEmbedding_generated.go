@@ -5,13 +5,14 @@
 package naturallanguage
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // ContextualEmbedding is an idiomatic wrapper over the Objective-C class NLContextualEmbedding.
@@ -48,24 +49,24 @@ func contextualEmbeddingAdopt(id objc.ID) *ContextualEmbedding {
 }
 
 // Description returns the object's -description text.
-func (x *ContextualEmbedding) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ce *ContextualEmbedding) Description() string {
+	return rt.Description(objref.IDOf(ce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContextualEmbedding) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ce *ContextualEmbedding) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContextualEmbedding) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ce *ContextualEmbedding) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ContextualEmbedding) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ce *ContextualEmbedding) String() string {
+	return rt.Description(objref.IDOf(ce))
 }
 
 // NewContextualEmbedding creates a new ContextualEmbedding.
@@ -77,9 +78,9 @@ func NewContextualEmbedding() *ContextualEmbedding {
 // Load the instance method that loads the embedding model.
 //
 // Load returns an error if the operation did not succeed.
-func (x *ContextualEmbedding) Load() error {
+func (ce *ContextualEmbedding) Load() error {
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadWithError:"), unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(ce), objc.RegisterName("loadWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -87,82 +88,65 @@ func (x *ContextualEmbedding) Load() error {
 }
 
 // Unload the instance method that unloads the embedding model.
-func (x *ContextualEmbedding) Unload() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unload"))
+func (ce *ContextualEmbedding) Unload() {
+	objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("unload"))
 }
 
 // EmbeddingResultForStringLanguageError applies an embedding to a string and obtains the resulting embedding vectors.
-func (x *ContextualEmbedding) EmbeddingResultForStringLanguageError(string_ string, language obj.Object) (result *ContextualEmbeddingResult, err error) {
+func (ce *ContextualEmbedding) EmbeddingResultForStringLanguageError(string_ string, language obj.Object) (result *ContextualEmbeddingResult, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("embeddingResultForString:language:error:"), purego.NSString(string_), objref.IDOf(language), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("embeddingResultForString:language:error:"), purego.NSString(string_), objref.IDOf(language), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return ContextualEmbeddingResultFromID(_r), nil
 }
 
-// ModelIdentifier a string that uniquely identifies the embedding model. Use the same model identifier that you developed and tested your app with to maintain consistent results.
-func (x *ContextualEmbedding) ModelIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modelIdentifier"))
+// ModelIdentifier returns a string that uniquely identifies the embedding model. Use the same model identifier that you developed and tested your app with to maintain consistent results.
+func (ce *ContextualEmbedding) ModelIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("modelIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Languages the languages that the contextual embedding supports. Starting in iOS 17 and macOS 14, the framework supports 27 languages across three models: - Latin — including Croatian, Czech, Danish, Dutch, English, Finnish, French, German, Hungarian, Indonesian, Italian, Norwegian, Polish, Portuguese, Romanian, Slovak, Swedish, Spanish, Turkish, and Vietnamese - Cyrillic — including Bulgarian, Kazakh, Russian, and Ukrainian - Chinese, Japanese, and Korean In iOS 18 and macOS 15, the framework expands language support to include three additional models: - Arabic - Indic — including Bangla, Gujarati, Hindi, Kannada, Malayalam, Marathi, Punjabi, Tamil, Telugu, and Urdu - Thai
+// Languages returns the languages that the contextual embedding supports. Starting in iOS 17 and macOS 14, the framework supports 27 languages across three models: - Latin — including Croatian, Czech, Danish, Dutch, English, Finnish, French, German, Hungarian, Indonesian, Italian, Norwegian, Polish, Portuguese, Romanian, Slovak, Swedish, Spanish, Turkish, and Vietnamese - Cyrillic — including Bulgarian, Kazakh, Russian, and Ukrainian - Chinese, Japanese, and Korean In iOS 18 and macOS 15, the framework expands language support to include three additional models: - Arabic - Indic — including Bangla, Gujarati, Hindi, Kannada, Malayalam, Marathi, Punjabi, Tamil, Telugu, and Urdu - Thai
 //
 // Languages returns the collection as a Go slice.
-func (x *ContextualEmbedding) Languages() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languages"))
+func (ce *ContextualEmbedding) Languages() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("languages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Scripts the writing systems that the language uses. The current scripts that are supported by `NLContextualEmbedding` include: - Arabic - Cyrillic - Chinese, Japanese, and Korean - Indic - Latin - Thai For the specific languages that each script supports, refer to “languages“.
+// Scripts returns the writing systems that the language uses. The current scripts that are supported by `NLContextualEmbedding` include: - Arabic - Cyrillic - Chinese, Japanese, and Korean - Indic - Latin - Thai For the specific languages that each script supports, refer to “languages“.
 //
 // Scripts returns the collection as a Go slice.
-func (x *ContextualEmbedding) Scripts() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scripts"))
+func (ce *ContextualEmbedding) Scripts() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ce), objc.RegisterName("scripts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Revision the version number the contextual embedding uses. Ensure your app uses the same model revision you used during development and testing to maintain consistent results.
-func (x *ContextualEmbedding) Revision() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("revision"))
+// Revision returns the version number the contextual embedding uses. Ensure your app uses the same model revision you used during development and testing to maintain consistent results.
+func (ce *ContextualEmbedding) Revision() int {
+	_r := objc.Send[int](objref.IDOf(ce), objc.RegisterName("revision"))
 	return _r
 }
 
-// Dimension the dimensionality of the embedding vectors generated by the model.
-func (x *ContextualEmbedding) Dimension() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimension"))
+// Dimension returns the dimensionality of the embedding vectors generated by the model.
+func (ce *ContextualEmbedding) Dimension() int {
+	_r := objc.Send[int](objref.IDOf(ce), objc.RegisterName("dimension"))
 	return _r
 }
 
-// MaximumSequenceLength the maximum number of tokens in sequence for which the embedding generates vectors. > Note: The model operates on subword tokens rather than whole words. Each token may represent a single character, part of a word, or (less commonly) an entire word. Most words are split into multiple tokens, especially rare or complex terms. As a result, the number of tokens in a sequence is often greater than the number of words. Inputs longer than the token limit will be truncated, and only the first `maximumSequenceLength` tokens will be processed to generate embeddings. `NLContextualEmbedding` works best with text snippets at the sentence or paragraph level. The model truncates text that exceeds this maximum length and only processes the truncated portion of the input.
-func (x *ContextualEmbedding) MaximumSequenceLength() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumSequenceLength"))
+// MaximumSequenceLength returns the maximum number of tokens in sequence for which the embedding generates vectors. > Note: The model operates on subword tokens rather than whole words. Each token may represent a single character, part of a word, or (less commonly) an entire word. Most words are split into multiple tokens, especially rare or complex terms. As a result, the number of tokens in a sequence is often greater than the number of words. Inputs longer than the token limit will be truncated, and only the first `maximumSequenceLength` tokens will be processed to generate embeddings. `NLContextualEmbedding` works best with text snippets at the sentence or paragraph level. The model truncates text that exceeds this maximum length and only processes the truncated portion of the input.
+func (ce *ContextualEmbedding) MaximumSequenceLength() int {
+	_r := objc.Send[int](objref.IDOf(ce), objc.RegisterName("maximumSequenceLength"))
 	return _r
 }
 
-// HasAvailableAssets a Boolean value that indicates whether assets are available on-device.
-func (x *ContextualEmbedding) HasAvailableAssets() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAvailableAssets"))
+// HasAvailableAssets reports whether assets are available on-device.
+func (ce *ContextualEmbedding) HasAvailableAssets() bool {
+	_r := objc.Send[bool](objref.IDOf(ce), objc.RegisterName("hasAvailableAssets"))
 	return _r
 }
-
-// ContextualEmbeddingable is the interface implemented by [ContextualEmbedding], for mocking and DI.
-type ContextualEmbeddingable interface {
-	obj.Object
-	Load() error
-	Unload()
-	EmbeddingResultForStringLanguageError(string_ string, language obj.Object) (result *ContextualEmbeddingResult, err error)
-	ModelIdentifier() string
-	Languages() []obj.Object
-	Scripts() []obj.Object
-	Revision() int
-	Dimension() int
-	MaximumSequenceLength() int
-	HasAvailableAssets() bool
-}
-
-var _ ContextualEmbeddingable = (*ContextualEmbedding)(nil)

@@ -46,24 +46,24 @@ func safariToolbarItemAdopt(id objc.ID) *SafariToolbarItem {
 }
 
 // Description returns the object's -description text.
-func (x *SafariToolbarItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sti *SafariToolbarItem) Description() string {
+	return rt.Description(objref.IDOf(sti))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SafariToolbarItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sti *SafariToolbarItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sti), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SafariToolbarItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sti *SafariToolbarItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sti), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SafariToolbarItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sti *SafariToolbarItem) String() string {
+	return rt.Description(objref.IDOf(sti))
 }
 
 // NewSafariToolbarItem creates a new SafariToolbarItem.
@@ -73,44 +73,31 @@ func NewSafariToolbarItem() *SafariToolbarItem {
 }
 
 // SetEnabledWithBadgeText sets the enabled state and the badge text for the toolbar item.
-func (x *SafariToolbarItem) SetEnabledWithBadgeText(enabled bool, badgeText string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:withBadgeText:"), enabled, purego.NSString(badgeText))
+func (sti *SafariToolbarItem) SetEnabledWithBadgeText(enabled bool, badgeText string) {
+	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setEnabled:withBadgeText:"), enabled, purego.NSString(badgeText))
 }
 
 // SetEnabled sets whether the toolbar item is enabled.
-func (x *SafariToolbarItem) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
+func (sti *SafariToolbarItem) SetEnabled(enabled bool) {
+	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setEnabled:"), enabled)
 }
 
 // SetBadgeText sets the badge text for the toolbar item.
-func (x *SafariToolbarItem) SetBadgeText(badgeText string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadgeText:"), purego.NSString(badgeText))
+func (sti *SafariToolbarItem) SetBadgeText(badgeText string) {
+	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setBadgeText:"), purego.NSString(badgeText))
 }
 
 // SetImage sets the image displayed in the toolbar button.
-func (x *SafariToolbarItem) SetImage(image obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
+func (sti *SafariToolbarItem) SetImage(image obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setImage:"), objref.IDOf(image))
 }
 
 // SetLabel sets the label for the toolbar button. Setting the label to nil will set the default label.
-func (x *SafariToolbarItem) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
+func (sti *SafariToolbarItem) SetLabel(label string) {
+	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
 // ShowPopover shows the popover associated with this toolbar button.
-func (x *SafariToolbarItem) ShowPopover() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showPopover"))
+func (sti *SafariToolbarItem) ShowPopover() {
+	objc.Send[objc.ID](objref.IDOf(sti), objc.RegisterName("showPopover"))
 }
-
-// SafariToolbarItemable is the interface implemented by [SafariToolbarItem], for mocking and DI.
-type SafariToolbarItemable interface {
-	obj.Object
-	SetEnabledWithBadgeText(enabled bool, badgeText string)
-	SetEnabled(enabled bool)
-	SetBadgeText(badgeText string)
-	SetImage(image obj.Object)
-	SetLabel(label string)
-	ShowPopover()
-}
-
-var _ SafariToolbarItemable = (*SafariToolbarItem)(nil)

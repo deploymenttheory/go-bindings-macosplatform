@@ -44,24 +44,24 @@ func mTRSmokeCOAlarmClusterEndOfServiceEventAdopt(id objc.ID) *MTRSmokeCOAlarmCl
 }
 
 // Description returns the object's -description text.
-func (x *MTRSmokeCOAlarmClusterEndOfServiceEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mscaceose *MTRSmokeCOAlarmClusterEndOfServiceEvent) Description() string {
+	return rt.Description(objref.IDOf(mscaceose))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRSmokeCOAlarmClusterEndOfServiceEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mscaceose *MTRSmokeCOAlarmClusterEndOfServiceEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mscaceose), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRSmokeCOAlarmClusterEndOfServiceEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mscaceose *MTRSmokeCOAlarmClusterEndOfServiceEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mscaceose), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRSmokeCOAlarmClusterEndOfServiceEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mscaceose *MTRSmokeCOAlarmClusterEndOfServiceEvent) String() string {
+	return rt.Description(objref.IDOf(mscaceose))
 }
 
 // NewMTRSmokeCOAlarmClusterEndOfServiceEvent creates a new MTRSmokeCOAlarmClusterEndOfServiceEvent.
@@ -69,10 +69,3 @@ func NewMTRSmokeCOAlarmClusterEndOfServiceEvent() *MTRSmokeCOAlarmClusterEndOfSe
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRSmokeCOAlarmClusterEndOfServiceEvent")), objc.RegisterName("new"))
 	return mTRSmokeCOAlarmClusterEndOfServiceEventAdopt(_id)
 }
-
-// MTRSmokeCOAlarmClusterEndOfServiceEventable is the interface implemented by [MTRSmokeCOAlarmClusterEndOfServiceEvent], for mocking and DI.
-type MTRSmokeCOAlarmClusterEndOfServiceEventable interface {
-	obj.Object
-}
-
-var _ MTRSmokeCOAlarmClusterEndOfServiceEventable = (*MTRSmokeCOAlarmClusterEndOfServiceEvent)(nil)

@@ -46,24 +46,24 @@ func iKSlideshowAdopt(id objc.ID) *IKSlideshow {
 }
 
 // Description returns the object's -description text.
-func (x *IKSlideshow) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (is *IKSlideshow) Description() string {
+	return rt.Description(objref.IDOf(is))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IKSlideshow) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (is *IKSlideshow) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(is), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IKSlideshow) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (is *IKSlideshow) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(is), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IKSlideshow) String() string {
-	return rt.Description(objref.IDOf(x))
+func (is *IKSlideshow) String() string {
+	return rt.Description(objref.IDOf(is))
 }
 
 // NewIKSlideshow creates a new IKSlideshow.
@@ -72,60 +72,40 @@ func NewIKSlideshow() *IKSlideshow {
 	return iKSlideshowAdopt(_id)
 }
 
-// WithAutoPlayDelay controls the interval of time before a slideshow starts to play automatically.
-func (x *IKSlideshow) WithAutoPlayDelay(autoPlayDelay float64) *IKSlideshow {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoPlayDelay:"), autoPlayDelay)
-	return x
+// WithAutoPlayDelay sets controls the interval of time before a slideshow starts to play automatically.
+func (is *IKSlideshow) WithAutoPlayDelay(autoPlayDelay float64) *IKSlideshow {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setAutoPlayDelay:"), autoPlayDelay)
+	return is
 }
 
 // RunSlideshowWithDataSourceInModeOptions runs a slideshow that contains the specified kind of items, provided from a data source.
-func (x *IKSlideshow) RunSlideshowWithDataSourceInModeOptions(dataSource obj.Object, slideshowMode string, slideshowOptions obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runSlideshowWithDataSource:inMode:options:"), objref.IDOf(dataSource), purego.NSString(slideshowMode), objref.IDOf(slideshowOptions))
+func (is *IKSlideshow) RunSlideshowWithDataSourceInModeOptions(dataSource obj.Object, slideshowMode string, slideshowOptions obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("runSlideshowWithDataSource:inMode:options:"), objref.IDOf(dataSource), purego.NSString(slideshowMode), objref.IDOf(slideshowOptions))
 }
 
 // StopSlideshow stops a slideshow.
-func (x *IKSlideshow) StopSlideshow(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopSlideshow:"), objref.IDOf(sender))
+func (is *IKSlideshow) StopSlideshow(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("stopSlideshow:"), objref.IDOf(sender))
 }
 
 // ReloadData reloads the data for a slideshow.
-func (x *IKSlideshow) ReloadData() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadData"))
+func (is *IKSlideshow) ReloadData() {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("reloadData"))
 }
 
 // ReloadSlideshowItemAtIndex reloads the data for a slideshow, starting at the specified index.
-func (x *IKSlideshow) ReloadSlideshowItemAtIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadSlideshowItemAtIndex:"), index)
+func (is *IKSlideshow) ReloadSlideshowItemAtIndex(index int) {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("reloadSlideshowItemAtIndex:"), index)
 }
 
 // IndexOfCurrentSlideshowItem returns the index of the current slideshow item.
-func (x *IKSlideshow) IndexOfCurrentSlideshowItem() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexOfCurrentSlideshowItem"))
+func (is *IKSlideshow) IndexOfCurrentSlideshowItem() int {
+	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("indexOfCurrentSlideshowItem"))
 	return _r
 }
 
-// AutoPlayDelay array of filters reflecting the current user adjustments in the adjust or effects tab.
-func (x *IKSlideshow) AutoPlayDelay() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("autoPlayDelay"))
+// AutoPlayDelay returns array of filters reflecting the current user adjustments in the adjust or effects tab.
+func (is *IKSlideshow) AutoPlayDelay() float64 {
+	_r := objc.Send[float64](objref.IDOf(is), objc.RegisterName("autoPlayDelay"))
 	return _r
 }
-
-// SetAutoPlayDelay wraps the corresponding Objective-C method.
-func (x *IKSlideshow) SetAutoPlayDelay(autoPlayDelay float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoPlayDelay:"), autoPlayDelay)
-}
-
-// IKSlideshowable is the interface implemented by [IKSlideshow], for mocking and DI.
-type IKSlideshowable interface {
-	obj.Object
-	WithAutoPlayDelay(autoPlayDelay float64) *IKSlideshow
-	RunSlideshowWithDataSourceInModeOptions(dataSource obj.Object, slideshowMode string, slideshowOptions obj.Object)
-	StopSlideshow(sender obj.Object)
-	ReloadData()
-	ReloadSlideshowItemAtIndex(index int)
-	IndexOfCurrentSlideshowItem() int
-	AutoPlayDelay() float64
-	SetAutoPlayDelay(autoPlayDelay float64)
-}
-
-var _ IKSlideshowable = (*IKSlideshow)(nil)

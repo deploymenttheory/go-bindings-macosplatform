@@ -53,18 +53,10 @@ func NewNNConcatenationNodeWithSources(sourceNodes []obj.Object) *NNConcatenatio
 	return nNConcatenationNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNConcatenationNode) WithLabel(label string) *NNConcatenationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (ncn *NNConcatenationNode) WithLabel(label string) *NNConcatenationNode {
+	objc.Send[objc.ID](objref.IDOf(ncn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ncn
 }
-
-// NNConcatenationNodeable is the interface implemented by [NNConcatenationNode], for mocking and DI.
-type NNConcatenationNodeable interface {
-	obj.Object
-	WithLabel(label string) *NNConcatenationNode
-}
-
-var _ NNConcatenationNodeable = (*NNConcatenationNode)(nil)
 
 var _ NNFilterNodeProvider = (*NNConcatenationNode)(nil)

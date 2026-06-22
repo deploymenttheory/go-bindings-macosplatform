@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,13 +50,6 @@ func NewDocumentType() *DocumentType {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKDocumentType")), objc.RegisterName("new"))
 	return documentTypeAdopt(_id)
 }
-
-// DocumentTypeable is the interface implemented by [DocumentType], for mocking and DI.
-type DocumentTypeable interface {
-	obj.Object
-}
-
-var _ DocumentTypeable = (*DocumentType)(nil)
 
 var _ SampleTypeProvider = (*DocumentType)(nil)
 

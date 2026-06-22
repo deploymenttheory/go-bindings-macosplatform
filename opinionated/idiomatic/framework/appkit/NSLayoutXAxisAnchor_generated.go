@@ -7,7 +7,6 @@ package appkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,38 +52,27 @@ func NewLayoutXAxisAnchor() *LayoutXAxisAnchor {
 }
 
 // AnchorWithOffsetToAnchor creates a layout dimension object from two anchors.
-func (x *LayoutXAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *LayoutXAxisAnchor) *LayoutDimension {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anchorWithOffsetToAnchor:"), objref.IDOf(otherAnchor))
+func (lxaa *LayoutXAxisAnchor) AnchorWithOffsetToAnchor(otherAnchor *LayoutXAxisAnchor) *LayoutDimension {
+	_r := objc.Send[objc.ID](objref.IDOf(lxaa), objc.RegisterName("anchorWithOffsetToAnchor:"), objref.IDOf(otherAnchor))
 	return LayoutDimensionFromID(_r)
 }
 
 // ConstraintEqualToSystemSpacingAfterAnchorMultiplier returns a constraint that defines by how much the current anchor trails the specified anchor.
-func (x *LayoutXAxisAnchor) ConstraintEqualToSystemSpacingAfterAnchorMultiplier(anchor *LayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintEqualToSystemSpacingAfterAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
+func (lxaa *LayoutXAxisAnchor) ConstraintEqualToSystemSpacingAfterAnchorMultiplier(anchor *LayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(lxaa), objc.RegisterName("constraintEqualToSystemSpacingAfterAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier returns a constraint that defines the minimum amount by which the current anchor trails the specified anchor.
-func (x *LayoutXAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *LayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintGreaterThanOrEqualToSystemSpacingAfterAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
+func (lxaa *LayoutXAxisAnchor) ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *LayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(lxaa), objc.RegisterName("constraintGreaterThanOrEqualToSystemSpacingAfterAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
 	return LayoutConstraintFromID(_r)
 }
 
 // ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier returns a constraint that defines the maximum amount by which the current anchor trails the specified anchor.
-func (x *LayoutXAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *LayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("constraintLessThanOrEqualToSystemSpacingAfterAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
+func (lxaa *LayoutXAxisAnchor) ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *LayoutXAxisAnchor, multiplier float64) *LayoutConstraint {
+	_r := objc.Send[objc.ID](objref.IDOf(lxaa), objc.RegisterName("constraintLessThanOrEqualToSystemSpacingAfterAnchor:multiplier:"), objref.IDOf(anchor), multiplier)
 	return LayoutConstraintFromID(_r)
 }
-
-// LayoutXAxisAnchorable is the interface implemented by [LayoutXAxisAnchor], for mocking and DI.
-type LayoutXAxisAnchorable interface {
-	obj.Object
-	AnchorWithOffsetToAnchor(otherAnchor *LayoutXAxisAnchor) *LayoutDimension
-	ConstraintEqualToSystemSpacingAfterAnchorMultiplier(anchor *LayoutXAxisAnchor, multiplier float64) *LayoutConstraint
-	ConstraintGreaterThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *LayoutXAxisAnchor, multiplier float64) *LayoutConstraint
-	ConstraintLessThanOrEqualToSystemSpacingAfterAnchorMultiplier(anchor *LayoutXAxisAnchor, multiplier float64) *LayoutConstraint
-}
-
-var _ LayoutXAxisAnchorable = (*LayoutXAxisAnchor)(nil)
 
 var _ LayoutAnchorProvider = (*LayoutXAxisAnchor)(nil)

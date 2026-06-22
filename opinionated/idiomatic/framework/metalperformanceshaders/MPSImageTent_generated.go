@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,33 +53,23 @@ func NewImageTent() *ImageTent {
 	return imageTentAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageTent) WithOffset(offset mpscore.MPSOffset) *ImageTent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (it *ImageTent) WithOffset(offset mpscore.MPSOffset) *ImageTent {
+	objc.Send[objc.ID](objref.IDOf(it), objc.RegisterName("setOffset:"), offset)
+	return it
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageTent) WithClipRect(clipRect metal.MTLRegion) *ImageTent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (it *ImageTent) WithClipRect(clipRect metal.MTLRegion) *ImageTent {
+	objc.Send[objc.ID](objref.IDOf(it), objc.RegisterName("setClipRect:"), clipRect)
+	return it
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageTent) WithLabel(label string) *ImageTent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (it *ImageTent) WithLabel(label string) *ImageTent {
+	objc.Send[objc.ID](objref.IDOf(it), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return it
 }
-
-// ImageTentable is the interface implemented by [ImageTent], for mocking and DI.
-type ImageTentable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageTent
-	WithClipRect(clipRect metal.MTLRegion) *ImageTent
-	WithLabel(label string) *ImageTent
-}
-
-var _ ImageTentable = (*ImageTent)(nil)
 
 var _ ImageBoxProvider = (*ImageTent)(nil)
 

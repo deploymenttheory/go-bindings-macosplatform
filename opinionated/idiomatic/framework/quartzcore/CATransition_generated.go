@@ -52,125 +52,76 @@ func NewTransition() *Transition {
 	return transitionAdopt(_id)
 }
 
-// WithType specifies the predefined transition type.
-func (x *Transition) WithType(type_ obj.Object) *Transition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
-	return x
+// WithType sets specifies the predefined transition type.
+func (t *Transition) WithType(type_ obj.Object) *Transition {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setType:"), objref.IDOf(type_))
+	return t
 }
 
-// WithSubtype specifies an optional subtype that indicates the direction for the predefined motion-based transitions.
-func (x *Transition) WithSubtype(subtype obj.Object) *Transition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtype:"), objref.IDOf(subtype))
-	return x
+// WithSubtype sets specifies an optional subtype that indicates the direction for the predefined motion-based transitions.
+func (t *Transition) WithSubtype(subtype obj.Object) *Transition {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setSubtype:"), objref.IDOf(subtype))
+	return t
 }
 
-// WithStartProgress indicates the start point of the receiver as a fraction of the entire transition.
-func (x *Transition) WithStartProgress(startProgress float32) *Transition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartProgress:"), startProgress)
-	return x
+// WithStartProgress sets indicates the start point of the receiver as a fraction of the entire transition.
+func (t *Transition) WithStartProgress(startProgress float32) *Transition {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setStartProgress:"), startProgress)
+	return t
 }
 
-// WithEndProgress indicates the end point of the receiver as a fraction of the entire transition.
-func (x *Transition) WithEndProgress(endProgress float32) *Transition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndProgress:"), endProgress)
-	return x
+// WithEndProgress sets indicates the end point of the receiver as a fraction of the entire transition.
+func (t *Transition) WithEndProgress(endProgress float32) *Transition {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setEndProgress:"), endProgress)
+	return t
 }
 
-// WithFilter an optional Core Image filter object that provides the transition.
-func (x *Transition) WithFilter(filter obj.Object) *Transition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilter:"), objref.IDOf(filter))
-	return x
+// WithFilter sets an optional Core Image filter object that provides the transition.
+func (t *Transition) WithFilter(filter obj.Object) *Transition {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setFilter:"), objref.IDOf(filter))
+	return t
 }
 
-// WithTimingFunction an optional timing function defining the pacing of the animation.
-func (x *Transition) WithTimingFunction(timingFunction *MediaTimingFunction) *Transition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
-	return x
+// WithTimingFunction sets an optional timing function defining the pacing of the animation.
+func (t *Transition) WithTimingFunction(timingFunction *MediaTimingFunction) *Transition {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
+	return t
 }
 
-// WithRemovedOnCompletion determines if the animation is removed from the target layer’s animations upon completion.
-func (x *Transition) WithRemovedOnCompletion(removedOnCompletion bool) *Transition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
-	return x
+// WithRemovedOnCompletion sets determines if the animation is removed from the target layer’s animations upon completion.
+func (t *Transition) WithRemovedOnCompletion(removedOnCompletion bool) *Transition {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
+	return t
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *Transition) Type() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+func (t *Transition) Type() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("type"))
 	return obj.Wrap(_r)
-}
-
-// SetType wraps the corresponding Objective-C method.
-func (x *Transition) SetType(type_ obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
 }
 
 // Subtype wraps the corresponding Objective-C method.
-func (x *Transition) Subtype() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtype"))
+func (t *Transition) Subtype() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("subtype"))
 	return obj.Wrap(_r)
-}
-
-// SetSubtype wraps the corresponding Objective-C method.
-func (x *Transition) SetSubtype(subtype obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtype:"), objref.IDOf(subtype))
 }
 
 // StartProgress wraps the corresponding Objective-C method.
-func (x *Transition) StartProgress() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("startProgress"))
+func (t *Transition) StartProgress() float32 {
+	_r := objc.Send[float32](objref.IDOf(t), objc.RegisterName("startProgress"))
 	return _r
-}
-
-// SetStartProgress wraps the corresponding Objective-C method.
-func (x *Transition) SetStartProgress(startProgress float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartProgress:"), startProgress)
 }
 
 // EndProgress wraps the corresponding Objective-C method.
-func (x *Transition) EndProgress() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("endProgress"))
+func (t *Transition) EndProgress() float32 {
+	_r := objc.Send[float32](objref.IDOf(t), objc.RegisterName("endProgress"))
 	return _r
 }
 
-// SetEndProgress wraps the corresponding Objective-C method.
-func (x *Transition) SetEndProgress(endProgress float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndProgress:"), endProgress)
-}
-
 // Filter wraps the corresponding Objective-C method.
-func (x *Transition) Filter() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filter"))
+func (t *Transition) Filter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("filter"))
 	return obj.Wrap(_r)
 }
-
-// SetFilter wraps the corresponding Objective-C method.
-func (x *Transition) SetFilter(filter obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilter:"), objref.IDOf(filter))
-}
-
-// Transitionable is the interface implemented by [Transition], for mocking and DI.
-type Transitionable interface {
-	obj.Object
-	WithType(type_ obj.Object) *Transition
-	WithSubtype(subtype obj.Object) *Transition
-	WithStartProgress(startProgress float32) *Transition
-	WithEndProgress(endProgress float32) *Transition
-	WithFilter(filter obj.Object) *Transition
-	WithTimingFunction(timingFunction *MediaTimingFunction) *Transition
-	WithRemovedOnCompletion(removedOnCompletion bool) *Transition
-	Type() obj.Object
-	SetType(type_ obj.Object)
-	Subtype() obj.Object
-	SetSubtype(subtype obj.Object)
-	StartProgress() float32
-	SetStartProgress(startProgress float32)
-	EndProgress() float32
-	SetEndProgress(endProgress float32)
-	Filter() obj.Object
-	SetFilter(filter obj.Object)
-}
-
-var _ Transitionable = (*Transition)(nil)
 
 var _ AnimationProvider = (*Transition)(nil)

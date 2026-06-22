@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,19 +49,11 @@ func NewCNNPoolingL2NormGradientNode() *CNNPoolingL2NormGradientNode {
 	return cNNPoolingL2NormGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNPoolingL2NormGradientNode) WithLabel(label string) *CNNPoolingL2NormGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cplngn *CNNPoolingL2NormGradientNode) WithLabel(label string) *CNNPoolingL2NormGradientNode {
+	objc.Send[objc.ID](objref.IDOf(cplngn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cplngn
 }
-
-// CNNPoolingL2NormGradientNodeable is the interface implemented by [CNNPoolingL2NormGradientNode], for mocking and DI.
-type CNNPoolingL2NormGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNPoolingL2NormGradientNode
-}
-
-var _ CNNPoolingL2NormGradientNodeable = (*CNNPoolingL2NormGradientNode)(nil)
 
 var _ CNNPoolingGradientNodeProvider = (*CNNPoolingL2NormGradientNode)(nil)
 

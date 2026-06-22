@@ -7,7 +7,6 @@ package classkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,104 +51,73 @@ func NewActivity() *Activity {
 	return activityAdopt(_id)
 }
 
-// WithProgress a measure of progress through the task, given as a fraction in the range [0, 1].
-func (x *Activity) WithProgress(progress float64) *Activity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgress:"), progress)
-	return x
+// WithProgress sets a measure of progress through the task, given as a fraction in the range [0, 1].
+func (a *Activity) WithProgress(progress float64) *Activity {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setProgress:"), progress)
+	return a
 }
 
-// WithPrimaryActivityItem adds an activity item to an activity and sets it as the primary activity item.
-func (x *Activity) WithPrimaryActivityItem(primaryActivityItem ActivityItemProvider) *Activity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryActivityItem:"), objref.IDOf(primaryActivityItem))
-	return x
+// WithPrimaryActivityItem sets adds an activity item to an activity and sets it as the primary activity item.
+func (a *Activity) WithPrimaryActivityItem(primaryActivityItem ActivityItemProvider) *Activity {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setPrimaryActivityItem:"), objref.IDOf(primaryActivityItem))
+	return a
 }
 
 // AddProgressRangeFromStartToEnd adds a progress range to a given activity.
-func (x *Activity) AddProgressRangeFromStartToEnd(start float64, end float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addProgressRangeFromStart:toEnd:"), start, end)
+func (a *Activity) AddProgressRangeFromStartToEnd(start float64, end float64) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addProgressRangeFromStart:toEnd:"), start, end)
 }
 
 // AddAdditionalActivityItem adds an activity item to an activity.
-func (x *Activity) AddAdditionalActivityItem(activityItem *ActivityItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAdditionalActivityItem:"), objref.IDOf(activityItem))
+func (a *Activity) AddAdditionalActivityItem(activityItem *ActivityItem) {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("addAdditionalActivityItem:"), objref.IDOf(activityItem))
 }
 
-// Progress current progress as a decimal representation of a percentage. Should be [0.0, 1.0].
-func (x *Activity) Progress() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("progress"))
+// Progress returns current progress as a decimal representation of a percentage. Should be [0.0, 1.0].
+func (a *Activity) Progress() float64 {
+	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("progress"))
 	return _r
-}
-
-// SetProgress wraps the corresponding Objective-C method.
-func (x *Activity) SetProgress(progress float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgress:"), progress)
 }
 
 // Duration returns the total time tracked in this activity (excluding any previous activities). The time between calling
-func (x *Activity) Duration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+func (a *Activity) Duration() float64 {
+	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("duration"))
 	return _r
 }
 
-// PrimaryActivityItem the primary activityItem to be reported on. This can be nil indicating
-func (x *Activity) PrimaryActivityItem() *ActivityItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primaryActivityItem"))
+// PrimaryActivityItem returns the primary activityItem to be reported on. This can be nil indicating
+func (a *Activity) PrimaryActivityItem() *ActivityItem {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("primaryActivityItem"))
 	return ActivityItemFromID(_r)
 }
 
-// SetPrimaryActivityItem wraps the corresponding Objective-C method.
-func (x *Activity) SetPrimaryActivityItem(primaryActivityItem *ActivityItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryActivityItem:"), objref.IDOf(primaryActivityItem))
-}
-
-// AdditionalActivityItems array of all additional activity items on this CLSActivity.
+// AdditionalActivityItems returns array of all additional activity items on this CLSActivity.
 //
 // AdditionalActivityItems returns the collection as a Go slice.
-func (x *Activity) AdditionalActivityItems() []*ActivityItem {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("additionalActivityItems"))
+func (a *Activity) AdditionalActivityItems() []*ActivityItem {
+	_arr := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("additionalActivityItems"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ActivityItem { return ActivityItemFromID(_id) })
 }
 
 // Start tells an activity to start recording duration and progress for a task.
-func (x *Activity) Start() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
+func (a *Activity) Start() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("start"))
 }
 
 // Stop tells an activity to stop or pause recording duration and progress for a task.
-func (x *Activity) Stop() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
+func (a *Activity) Stop() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("stop"))
 }
 
 // RemoveAllActivityItems deletes all activity items associated with the current activity.
-func (x *Activity) RemoveAllActivityItems() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllActivityItems"))
+func (a *Activity) RemoveAllActivityItems() {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("removeAllActivityItems"))
 }
 
-// IsStarted returns whether this Activity has been started or not.
-func (x *Activity) IsStarted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isStarted"))
+// IsStarted reports whether this Activity has been started or not.
+func (a *Activity) IsStarted() bool {
+	_r := objc.Send[bool](objref.IDOf(a), objc.RegisterName("isStarted"))
 	return _r
 }
-
-// Activityable is the interface implemented by [Activity], for mocking and DI.
-type Activityable interface {
-	obj.Object
-	WithProgress(progress float64) *Activity
-	WithPrimaryActivityItem(primaryActivityItem ActivityItemProvider) *Activity
-	AddProgressRangeFromStartToEnd(start float64, end float64)
-	AddAdditionalActivityItem(activityItem *ActivityItem)
-	Progress() float64
-	SetProgress(progress float64)
-	Duration() float64
-	PrimaryActivityItem() *ActivityItem
-	SetPrimaryActivityItem(primaryActivityItem *ActivityItem)
-	AdditionalActivityItems() []*ActivityItem
-	Start()
-	Stop()
-	RemoveAllActivityItems()
-	IsStarted() bool
-}
-
-var _ Activityable = (*Activity)(nil)
 
 var _ ObjectProvider = (*Activity)(nil)

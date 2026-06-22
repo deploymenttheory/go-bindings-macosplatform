@@ -67,45 +67,28 @@ func NewRecordZoneSubscriptionWithCoder(aDecoder obj.Object) *RecordZoneSubscrip
 	return recordZoneSubscriptionAdopt(_id)
 }
 
-// WithRecordType the type of record that the subscription queries.
-func (x *RecordZoneSubscription) WithRecordType(recordType obj.Object) *RecordZoneSubscription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordType:"), objref.IDOf(recordType))
-	return x
+// WithRecordType sets the type of record that the subscription queries.
+func (rzs *RecordZoneSubscription) WithRecordType(recordType obj.Object) *RecordZoneSubscription {
+	objc.Send[objc.ID](objref.IDOf(rzs), objc.RegisterName("setRecordType:"), objref.IDOf(recordType))
+	return rzs
 }
 
-// WithNotificationInfo the configuration for a subscription’s push notifications.
-func (x *RecordZoneSubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *RecordZoneSubscription {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
-	return x
+// WithNotificationInfo sets the configuration for a subscription’s push notifications.
+func (rzs *RecordZoneSubscription) WithNotificationInfo(notificationInfo *NotificationInfo) *RecordZoneSubscription {
+	objc.Send[objc.ID](objref.IDOf(rzs), objc.RegisterName("setNotificationInfo:"), objref.IDOf(notificationInfo))
+	return rzs
 }
 
-// ZoneID the ID of the record zone that the subscription queries. This property applies to query-based subscriptions and zone-based subscriptions. Specifying a record zone ID limits the scope of the query to only the records in that zone. For zone-based subscriptions, the query includes all records in the specified record zone. For a query-based subscription, the query includes only records of a specific type in the specified record zone. For zone-based subscriptions, CloudKit sets this property's value automatically. For all other subscription types, the default value is `nil`. If you want to scope your query-based subscription to a specific record zone, you must assign a value explicitly.
-func (x *RecordZoneSubscription) ZoneID() *RecordZoneID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneID"))
+// ZoneID returns the ID of the record zone that the subscription queries. This property applies to query-based subscriptions and zone-based subscriptions. Specifying a record zone ID limits the scope of the query to only the records in that zone. For zone-based subscriptions, the query includes all records in the specified record zone. For a query-based subscription, the query includes only records of a specific type in the specified record zone. For zone-based subscriptions, CloudKit sets this property's value automatically. For all other subscription types, the default value is `nil`. If you want to scope your query-based subscription to a specific record zone, you must assign a value explicitly.
+func (rzs *RecordZoneSubscription) ZoneID() *RecordZoneID {
+	_r := objc.Send[objc.ID](objref.IDOf(rzs), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)
 }
 
-// RecordType the type of record that the subscription queries.
-func (x *RecordZoneSubscription) RecordType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordType"))
+// RecordType returns the type of record that the subscription queries.
+func (rzs *RecordZoneSubscription) RecordType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rzs), objc.RegisterName("recordType"))
 	return obj.Wrap(_r)
 }
-
-// SetRecordType wraps the corresponding Objective-C method.
-func (x *RecordZoneSubscription) SetRecordType(recordType obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecordType:"), objref.IDOf(recordType))
-}
-
-// RecordZoneSubscriptionable is the interface implemented by [RecordZoneSubscription], for mocking and DI.
-type RecordZoneSubscriptionable interface {
-	obj.Object
-	WithRecordType(recordType obj.Object) *RecordZoneSubscription
-	WithNotificationInfo(notificationInfo *NotificationInfo) *RecordZoneSubscription
-	ZoneID() *RecordZoneID
-	RecordType() obj.Object
-	SetRecordType(recordType obj.Object)
-}
-
-var _ RecordZoneSubscriptionable = (*RecordZoneSubscription)(nil)
 
 var _ SubscriptionProvider = (*RecordZoneSubscription)(nil)

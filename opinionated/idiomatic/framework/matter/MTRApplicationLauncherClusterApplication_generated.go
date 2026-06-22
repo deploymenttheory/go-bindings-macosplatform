@@ -51,38 +51,15 @@ func NewMTRApplicationLauncherClusterApplication() *MTRApplicationLauncherCluste
 }
 
 // WithCatalogVendorID sets the property and returns the receiver so calls can be chained.
-func (x *MTRApplicationLauncherClusterApplication) WithCatalogVendorID(catalogVendorID obj.Object) *MTRApplicationLauncherClusterApplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCatalogVendorID:"), objref.IDOf(catalogVendorID))
-	return x
-}
-
-// WithCatalogVendorId sets the property and returns the receiver so calls can be chained.
-func (x *MTRApplicationLauncherClusterApplication) WithCatalogVendorId(catalogVendorId obj.Object) *MTRApplicationLauncherClusterApplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCatalogVendorId:"), objref.IDOf(catalogVendorId))
-	return x
+func (malca *MTRApplicationLauncherClusterApplication) WithCatalogVendorID(catalogVendorID obj.Object) *MTRApplicationLauncherClusterApplication {
+	objc.Send[objc.ID](objref.IDOf(malca), objc.RegisterName("setCatalogVendorID:"), objref.IDOf(catalogVendorID))
+	return malca
 }
 
 // WithApplicationID sets the property and returns the receiver so calls can be chained.
-func (x *MTRApplicationLauncherClusterApplication) WithApplicationID(applicationID string) *MTRApplicationLauncherClusterApplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationID:"), purego.NSString(applicationID))
-	return x
+func (malca *MTRApplicationLauncherClusterApplication) WithApplicationID(applicationID string) *MTRApplicationLauncherClusterApplication {
+	objc.Send[objc.ID](objref.IDOf(malca), objc.RegisterName("setApplicationID:"), purego.NSString(applicationID))
+	return malca
 }
-
-// WithApplicationId sets the property and returns the receiver so calls can be chained.
-func (x *MTRApplicationLauncherClusterApplication) WithApplicationId(applicationId string) *MTRApplicationLauncherClusterApplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplicationId:"), purego.NSString(applicationId))
-	return x
-}
-
-// MTRApplicationLauncherClusterApplicationable is the interface implemented by [MTRApplicationLauncherClusterApplication], for mocking and DI.
-type MTRApplicationLauncherClusterApplicationable interface {
-	obj.Object
-	WithCatalogVendorID(catalogVendorID obj.Object) *MTRApplicationLauncherClusterApplication
-	WithCatalogVendorId(catalogVendorId obj.Object) *MTRApplicationLauncherClusterApplication
-	WithApplicationID(applicationID string) *MTRApplicationLauncherClusterApplication
-	WithApplicationId(applicationId string) *MTRApplicationLauncherClusterApplication
-}
-
-var _ MTRApplicationLauncherClusterApplicationable = (*MTRApplicationLauncherClusterApplication)(nil)
 
 var _ MTRApplicationLauncherClusterApplicationStructProvider = (*MTRApplicationLauncherClusterApplication)(nil)

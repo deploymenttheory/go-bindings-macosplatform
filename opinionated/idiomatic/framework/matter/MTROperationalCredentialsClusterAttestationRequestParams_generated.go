@@ -44,24 +44,24 @@ func mTROperationalCredentialsClusterAttestationRequestParamsAdopt(id objc.ID) *
 }
 
 // Description returns the object's -description text.
-func (x *MTROperationalCredentialsClusterAttestationRequestParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (moccarp *MTROperationalCredentialsClusterAttestationRequestParams) Description() string {
+	return rt.Description(objref.IDOf(moccarp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROperationalCredentialsClusterAttestationRequestParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (moccarp *MTROperationalCredentialsClusterAttestationRequestParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(moccarp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROperationalCredentialsClusterAttestationRequestParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (moccarp *MTROperationalCredentialsClusterAttestationRequestParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(moccarp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTROperationalCredentialsClusterAttestationRequestParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (moccarp *MTROperationalCredentialsClusterAttestationRequestParams) String() string {
+	return rt.Description(objref.IDOf(moccarp))
 }
 
 // NewMTROperationalCredentialsClusterAttestationRequestParams creates a new MTROperationalCredentialsClusterAttestationRequestParams.
@@ -71,68 +71,37 @@ func NewMTROperationalCredentialsClusterAttestationRequestParams() *MTROperation
 }
 
 // WithAttestationNonce sets the property and returns the receiver so calls can be chained.
-func (x *MTROperationalCredentialsClusterAttestationRequestParams) WithAttestationNonce(attestationNonce obj.Object) *MTROperationalCredentialsClusterAttestationRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttestationNonce:"), objref.IDOf(attestationNonce))
-	return x
+func (moccarp *MTROperationalCredentialsClusterAttestationRequestParams) WithAttestationNonce(attestationNonce obj.Object) *MTROperationalCredentialsClusterAttestationRequestParams {
+	objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("setAttestationNonce:"), objref.IDOf(attestationNonce))
+	return moccarp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTROperationalCredentialsClusterAttestationRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterAttestationRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (moccarp *MTROperationalCredentialsClusterAttestationRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterAttestationRequestParams {
+	objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return moccarp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTROperationalCredentialsClusterAttestationRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterAttestationRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (moccarp *MTROperationalCredentialsClusterAttestationRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterAttestationRequestParams {
+	objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return moccarp
 }
 
 // AttestationNonce wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterAttestationRequestParams) AttestationNonce() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attestationNonce"))
+func (moccarp *MTROperationalCredentialsClusterAttestationRequestParams) AttestationNonce() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("attestationNonce"))
 	return obj.Wrap(_r)
 }
 
-// SetAttestationNonce wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterAttestationRequestParams) SetAttestationNonce(attestationNonce obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttestationNonce:"), objref.IDOf(attestationNonce))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTROperationalCredentialsClusterAttestationRequestParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (moccarp *MTROperationalCredentialsClusterAttestationRequestParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterAttestationRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTROperationalCredentialsClusterAttestationRequestParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (moccarp *MTROperationalCredentialsClusterAttestationRequestParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moccarp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterAttestationRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTROperationalCredentialsClusterAttestationRequestParamsable is the interface implemented by [MTROperationalCredentialsClusterAttestationRequestParams], for mocking and DI.
-type MTROperationalCredentialsClusterAttestationRequestParamsable interface {
-	obj.Object
-	WithAttestationNonce(attestationNonce obj.Object) *MTROperationalCredentialsClusterAttestationRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterAttestationRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterAttestationRequestParams
-	AttestationNonce() obj.Object
-	SetAttestationNonce(attestationNonce obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTROperationalCredentialsClusterAttestationRequestParamsable = (*MTROperationalCredentialsClusterAttestationRequestParams)(nil)

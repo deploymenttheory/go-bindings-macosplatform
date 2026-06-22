@@ -46,24 +46,24 @@ func brailleTableAdopt(id objc.ID) *BrailleTable {
 }
 
 // Description returns the object's -description text.
-func (x *BrailleTable) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bt *BrailleTable) Description() string {
+	return rt.Description(objref.IDOf(bt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BrailleTable) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bt *BrailleTable) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BrailleTable) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bt *BrailleTable) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BrailleTable) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bt *BrailleTable) String() string {
+	return rt.Description(objref.IDOf(bt))
 }
 
 // NewBrailleTableWithIdentifier returns nil if there is no table with the given identifier.
@@ -73,73 +73,59 @@ func NewBrailleTableWithIdentifier(identifier string) *BrailleTable {
 	return brailleTableAdopt(_id)
 }
 
-// Identifier a unique string that identifies this table.
-func (x *BrailleTable) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns a unique string that identifies this table.
+func (bt *BrailleTable) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// LocalizedName the localized name of this table for user display.
-func (x *BrailleTable) LocalizedName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+// LocalizedName returns the localized name of this table for user display.
+func (bt *BrailleTable) LocalizedName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ProviderIdentifier the identifier of the provider of this table.
-func (x *BrailleTable) ProviderIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("providerIdentifier"))
+// ProviderIdentifier returns the identifier of the provider of this table.
+func (bt *BrailleTable) ProviderIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("providerIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// LocalizedProviderName the localized name of the provider of this table for user display.
-func (x *BrailleTable) LocalizedProviderName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedProviderName"))
+// LocalizedProviderName returns the localized name of the provider of this table for user display.
+func (bt *BrailleTable) LocalizedProviderName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("localizedProviderName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Language the 3-character code from ISO 639-2 for the language this Braille table pertains to.
-func (x *BrailleTable) Language() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
+// Language returns the 3-character code from ISO 639-2 for the language this Braille table pertains to.
+func (bt *BrailleTable) Language() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("language"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Locales all locales this table supports.
-func (x *BrailleTable) Locales() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locales"))
+// Locales returns all locales this table supports.
+func (bt *BrailleTable) Locales() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("locales"))
 	return obj.Wrap(_r)
 }
 
-// IsEightDot returns true if this table makes use of eight dots as opposed to six dots.
-func (x *BrailleTable) IsEightDot() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEightDot"))
+// IsEightDot reports whether this table makes use of eight dots as opposed to six dots.
+func (bt *BrailleTable) IsEightDot() bool {
+	_r := objc.Send[bool](objref.IDOf(bt), objc.RegisterName("isEightDot"))
 	return _r
 }
-
-// BrailleTableable is the interface implemented by [BrailleTable], for mocking and DI.
-type BrailleTableable interface {
-	obj.Object
-	Identifier() string
-	LocalizedName() string
-	ProviderIdentifier() string
-	LocalizedProviderName() string
-	Language() string
-	Locales() obj.Object
-	IsEightDot() bool
-}
-
-var _ BrailleTableable = (*BrailleTable)(nil)

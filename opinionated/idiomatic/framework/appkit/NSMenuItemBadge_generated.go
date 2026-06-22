@@ -46,24 +46,24 @@ func menuItemBadgeAdopt(id objc.ID) *MenuItemBadge {
 }
 
 // Description returns the object's -description text.
-func (x *MenuItemBadge) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mib *MenuItemBadge) Description() string {
+	return rt.Description(objref.IDOf(mib))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MenuItemBadge) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mib *MenuItemBadge) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mib), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MenuItemBadge) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mib *MenuItemBadge) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mib), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MenuItemBadge) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mib *MenuItemBadge) String() string {
+	return rt.Description(objref.IDOf(mib))
 }
 
 // NewMenuItemBadgeWithCountType initializes the badge with a count and a pre-defined badge type.
@@ -87,33 +87,23 @@ func NewMenuItemBadgeWithString(string_ string) *MenuItemBadge {
 	return menuItemBadgeAdopt(_id)
 }
 
-// ItemCount the count of items the badge displays. If a custom string was used to create a badge, the value is 0.
-func (x *MenuItemBadge) ItemCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("itemCount"))
+// ItemCount returns the count of items the badge displays. If a custom string was used to create a badge, the value is 0.
+func (mib *MenuItemBadge) ItemCount() int {
+	_r := objc.Send[int](objref.IDOf(mib), objc.RegisterName("itemCount"))
 	return _r
 }
 
-// Type the type of items the badge displays. If a custom string was used to create a badge, this value is
-func (x *MenuItemBadge) Type() MenuItemBadgeType {
-	_r := objc.Send[MenuItemBadgeType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns the type of items the badge displays. If a custom string was used to create a badge, this value is
+func (mib *MenuItemBadge) Type() MenuItemBadgeType {
+	_r := objc.Send[MenuItemBadgeType](objref.IDOf(mib), objc.RegisterName("type"))
 	return _r
 }
 
-// StringValue the string representation of the badge as it would appear when the badge is displayed.
-func (x *MenuItemBadge) StringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+// StringValue returns the string representation of the badge as it would appear when the badge is displayed.
+func (mib *MenuItemBadge) StringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mib), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// MenuItemBadgeable is the interface implemented by [MenuItemBadge], for mocking and DI.
-type MenuItemBadgeable interface {
-	obj.Object
-	ItemCount() int
-	Type() MenuItemBadgeType
-	StringValue() string
-}
-
-var _ MenuItemBadgeable = (*MenuItemBadge)(nil)

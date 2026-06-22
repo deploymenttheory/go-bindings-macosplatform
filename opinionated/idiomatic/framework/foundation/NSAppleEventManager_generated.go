@@ -46,24 +46,24 @@ func appleEventManagerAdopt(id objc.ID) *AppleEventManager {
 }
 
 // Description returns the object's -description text.
-func (x *AppleEventManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aem *AppleEventManager) Description() string {
+	return rt.Description(objref.IDOf(aem))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AppleEventManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aem *AppleEventManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aem), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AppleEventManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aem *AppleEventManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aem), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AppleEventManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aem *AppleEventManager) String() string {
+	return rt.Description(objref.IDOf(aem))
 }
 
 // NewAppleEventManager creates a new AppleEventManager.
@@ -73,68 +73,52 @@ func NewAppleEventManager() *AppleEventManager {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *AppleEventManager) WithScriptingProperties(scriptingProperties obj.Object) *AppleEventManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (aem *AppleEventManager) WithScriptingProperties(scriptingProperties obj.Object) *AppleEventManager {
+	objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return aem
 }
 
 // RemoveEventHandlerForEventClassAndEventID if an Apple event handler has been registered for the event specified by eventClass and eventID, removes it.
-func (x *AppleEventManager) RemoveEventHandlerForEventClassAndEventID(eventClass int, eventID int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeEventHandlerForEventClass:andEventID:"), eventClass, eventID)
+func (aem *AppleEventManager) RemoveEventHandlerForEventClassAndEventID(eventClass int, eventID int) {
+	objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("removeEventHandlerForEventClass:andEventID:"), eventClass, eventID)
 }
 
-// SuspendCurrentAppleEvent suspends the handling of the current event and returns an ID that must be used to resume the handling of the event if an Apple event is being handled on the current thread.
-func (x *AppleEventManager) SuspendCurrentAppleEvent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suspendCurrentAppleEvent"))
+// SuspendCurrentAppleEvent returns suspends the handling of the current event and returns an ID that must be used to resume the handling of the event if an Apple event is being handled on the current thread.
+func (aem *AppleEventManager) SuspendCurrentAppleEvent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("suspendCurrentAppleEvent"))
 	return obj.Wrap(_r)
 }
 
 // AppleEventForSuspensionID given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, returns the descriptor for the event whose handling was suspended.
-func (x *AppleEventManager) AppleEventForSuspensionID(suspensionID obj.Object) *AppleEventDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appleEventForSuspensionID:"), objref.IDOf(suspensionID))
+func (aem *AppleEventManager) AppleEventForSuspensionID(suspensionID obj.Object) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("appleEventForSuspensionID:"), objref.IDOf(suspensionID))
 	return AppleEventDescriptorFromID(_r)
 }
 
 // ReplyAppleEventForSuspensionID given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, returns the corresponding reply event descriptor.
-func (x *AppleEventManager) ReplyAppleEventForSuspensionID(suspensionID obj.Object) *AppleEventDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replyAppleEventForSuspensionID:"), objref.IDOf(suspensionID))
+func (aem *AppleEventManager) ReplyAppleEventForSuspensionID(suspensionID obj.Object) *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("replyAppleEventForSuspensionID:"), objref.IDOf(suspensionID))
 	return AppleEventDescriptorFromID(_r)
 }
 
 // SetCurrentAppleEventAndReplyEventWithSuspensionID given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, sets the values that will be returned by subsequent invocations of currentAppleEvent and currentReplyAppleEvent to be the event whose handling was suspended and its corresponding reply event, respectively.
-func (x *AppleEventManager) SetCurrentAppleEventAndReplyEventWithSuspensionID(suspensionID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentAppleEventAndReplyEventWithSuspensionID:"), objref.IDOf(suspensionID))
+func (aem *AppleEventManager) SetCurrentAppleEventAndReplyEventWithSuspensionID(suspensionID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("setCurrentAppleEventAndReplyEventWithSuspensionID:"), objref.IDOf(suspensionID))
 }
 
 // ResumeWithSuspensionID given a nonzero suspensionID returned by an invocation of suspendCurrentAppleEvent, signal that handling of the suspended event may now continue.
-func (x *AppleEventManager) ResumeWithSuspensionID(suspensionID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeWithSuspensionID:"), objref.IDOf(suspensionID))
+func (aem *AppleEventManager) ResumeWithSuspensionID(suspensionID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("resumeWithSuspensionID:"), objref.IDOf(suspensionID))
 }
 
 // CurrentAppleEvent wraps the corresponding Objective-C method.
-func (x *AppleEventManager) CurrentAppleEvent() *AppleEventDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentAppleEvent"))
+func (aem *AppleEventManager) CurrentAppleEvent() *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("currentAppleEvent"))
 	return AppleEventDescriptorFromID(_r)
 }
 
 // CurrentReplyAppleEvent wraps the corresponding Objective-C method.
-func (x *AppleEventManager) CurrentReplyAppleEvent() *AppleEventDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentReplyAppleEvent"))
+func (aem *AppleEventManager) CurrentReplyAppleEvent() *AppleEventDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(aem), objc.RegisterName("currentReplyAppleEvent"))
 	return AppleEventDescriptorFromID(_r)
 }
-
-// AppleEventManagerable is the interface implemented by [AppleEventManager], for mocking and DI.
-type AppleEventManagerable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *AppleEventManager
-	RemoveEventHandlerForEventClassAndEventID(eventClass int, eventID int)
-	SuspendCurrentAppleEvent() obj.Object
-	AppleEventForSuspensionID(suspensionID obj.Object) *AppleEventDescriptor
-	ReplyAppleEventForSuspensionID(suspensionID obj.Object) *AppleEventDescriptor
-	SetCurrentAppleEventAndReplyEventWithSuspensionID(suspensionID obj.Object)
-	ResumeWithSuspensionID(suspensionID obj.Object)
-	CurrentAppleEvent() *AppleEventDescriptor
-	CurrentReplyAppleEvent() *AppleEventDescriptor
-}
-
-var _ AppleEventManagerable = (*AppleEventManager)(nil)

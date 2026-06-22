@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,39 +51,28 @@ func NewDropoutLayer() *DropoutLayer {
 	return dropoutLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *DropoutLayer) WithLabel(label string) *DropoutLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (dl *DropoutLayer) WithLabel(label string) *DropoutLayer {
+	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return dl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *DropoutLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *DropoutLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (dl *DropoutLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *DropoutLayer {
+	objc.Send[objc.ID](objref.IDOf(dl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return dl
 }
 
-// Rate the probability that each element is dropped
-func (x *DropoutLayer) Rate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
+// Rate returns the probability that each element is dropped
+func (dl *DropoutLayer) Rate() float32 {
+	_r := objc.Send[float32](objref.IDOf(dl), objc.RegisterName("rate"))
 	return _r
 }
 
-// Seed the initial seed used to generate random numbers
-func (x *DropoutLayer) Seed() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("seed"))
+// Seed returns the initial seed used to generate random numbers
+func (dl *DropoutLayer) Seed() int {
+	_r := objc.Send[int](objref.IDOf(dl), objc.RegisterName("seed"))
 	return _r
 }
-
-// DropoutLayerable is the interface implemented by [DropoutLayer], for mocking and DI.
-type DropoutLayerable interface {
-	obj.Object
-	WithLabel(label string) *DropoutLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *DropoutLayer
-	Rate() float32
-	Seed() int
-}
-
-var _ DropoutLayerable = (*DropoutLayer)(nil)
 
 var _ LayerProvider = (*DropoutLayer)(nil)

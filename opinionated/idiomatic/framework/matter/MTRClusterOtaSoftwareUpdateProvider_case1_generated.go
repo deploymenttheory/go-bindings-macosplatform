@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -56,7 +57,7 @@ func NewMTRClusterOtaSoftwareUpdateProviderWithDeviceEndpointQueue(device *MTRDe
 // QueryImageWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // QueryImageWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOtaSoftwareUpdateProvider) QueryImageWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROtaSoftwareUpdateProviderClusterQueryImageParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams, err error) {
+func (mcosup *MTRClusterOtaSoftwareUpdateProvider) QueryImageWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROtaSoftwareUpdateProviderClusterQueryImageParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams, err error) {
 	type _result struct {
 		val *MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams
 		err error
@@ -68,7 +69,7 @@ func (x *MTRClusterOtaSoftwareUpdateProvider) QueryImageWithParamsExpectedValues
 		_o.val = MTROtaSoftwareUpdateProviderClusterQueryImageResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queryImageWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcosup), objc.RegisterName("queryImageWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -81,7 +82,7 @@ func (x *MTRClusterOtaSoftwareUpdateProvider) QueryImageWithParamsExpectedValues
 // ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOtaSoftwareUpdateProvider) ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams, err error) {
+func (mcosup *MTRClusterOtaSoftwareUpdateProvider) ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams, err error) {
 	type _result struct {
 		val *MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams
 		err error
@@ -93,7 +94,7 @@ func (x *MTRClusterOtaSoftwareUpdateProvider) ApplyUpdateRequestWithParamsExpect
 		_o.val = MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyUpdateRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcosup), objc.RegisterName("applyUpdateRequestWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -102,15 +103,6 @@ func (x *MTRClusterOtaSoftwareUpdateProvider) ApplyUpdateRequestWithParamsExpect
 		return _zero, ctx.Err()
 	}
 }
-
-// MTRClusterOtaSoftwareUpdateProviderable is the interface implemented by [MTRClusterOtaSoftwareUpdateProvider], for mocking and DI.
-type MTRClusterOtaSoftwareUpdateProviderable interface {
-	obj.Object
-	QueryImageWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROtaSoftwareUpdateProviderClusterQueryImageParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROtaSoftwareUpdateProviderClusterQueryImageResponseParams, error)
-	ApplyUpdateRequestWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROtaSoftwareUpdateProviderClusterApplyUpdateResponseParams, error)
-}
-
-var _ MTRClusterOtaSoftwareUpdateProviderable = (*MTRClusterOtaSoftwareUpdateProvider)(nil)
 
 var _ MTRClusterOTASoftwareUpdateProviderProvider = (*MTRClusterOtaSoftwareUpdateProvider)(nil)
 

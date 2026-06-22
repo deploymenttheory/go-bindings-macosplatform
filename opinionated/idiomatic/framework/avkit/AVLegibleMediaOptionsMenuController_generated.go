@@ -44,24 +44,24 @@ func legibleMediaOptionsMenuControllerAdopt(id objc.ID) *LegibleMediaOptionsMenu
 }
 
 // Description returns the object's -description text.
-func (x *LegibleMediaOptionsMenuController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lmomc *LegibleMediaOptionsMenuController) Description() string {
+	return rt.Description(objref.IDOf(lmomc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LegibleMediaOptionsMenuController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lmomc *LegibleMediaOptionsMenuController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lmomc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LegibleMediaOptionsMenuController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lmomc *LegibleMediaOptionsMenuController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lmomc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LegibleMediaOptionsMenuController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lmomc *LegibleMediaOptionsMenuController) String() string {
+	return rt.Description(objref.IDOf(lmomc))
 }
 
 // NewLegibleMediaOptionsMenuControllerWithPlayer creates an AVLegibleMediaOptionsMenuController with an optional player When player is non-nil, both media tracks and caption appearance options will be included, otherwise, only caption appearance options.
@@ -71,36 +71,20 @@ func NewLegibleMediaOptionsMenuControllerWithPlayer(player obj.Object) *LegibleM
 	return legibleMediaOptionsMenuControllerAdopt(_id)
 }
 
-// WithPlayer the player associated with the menu controller.
-func (x *LegibleMediaOptionsMenuController) WithPlayer(player obj.Object) *LegibleMediaOptionsMenuController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:"), objref.IDOf(player))
-	return x
+// WithPlayer sets the player associated with the menu controller.
+func (lmomc *LegibleMediaOptionsMenuController) WithPlayer(player obj.Object) *LegibleMediaOptionsMenuController {
+	objc.Send[objc.ID](objref.IDOf(lmomc), objc.RegisterName("setPlayer:"), objref.IDOf(player))
+	return lmomc
 }
 
 // MenuWithContents builds a legible options menu using the specified contents. Returns nil if the requested menu type cannot be built due to missing content (e.g., requesting track selection without a player).
-func (x *LegibleMediaOptionsMenuController) MenuWithContents(contents LegibleMediaOptionsMenuContents) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuWithContents:"), contents)
+func (lmomc *LegibleMediaOptionsMenuController) MenuWithContents(contents LegibleMediaOptionsMenuContents) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lmomc), objc.RegisterName("menuWithContents:"), contents)
 	return obj.Wrap(_r)
 }
 
-// Player the player associated with the menu controller.
-func (x *LegibleMediaOptionsMenuController) Player() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
+// Player returns the player associated with the menu controller.
+func (lmomc *LegibleMediaOptionsMenuController) Player() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lmomc), objc.RegisterName("player"))
 	return obj.Wrap(_r)
 }
-
-// SetPlayer wraps the corresponding Objective-C method.
-func (x *LegibleMediaOptionsMenuController) SetPlayer(player obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:"), objref.IDOf(player))
-}
-
-// LegibleMediaOptionsMenuControllerable is the interface implemented by [LegibleMediaOptionsMenuController], for mocking and DI.
-type LegibleMediaOptionsMenuControllerable interface {
-	obj.Object
-	WithPlayer(player obj.Object) *LegibleMediaOptionsMenuController
-	MenuWithContents(contents LegibleMediaOptionsMenuContents) obj.Object
-	Player() obj.Object
-	SetPlayer(player obj.Object)
-}
-
-var _ LegibleMediaOptionsMenuControllerable = (*LegibleMediaOptionsMenuController)(nil)

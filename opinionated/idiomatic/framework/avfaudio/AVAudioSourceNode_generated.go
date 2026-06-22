@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewAudioSourceNode() *AudioSourceNode {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioSourceNode")), objc.RegisterName("new"))
 	return audioSourceNodeAdopt(_id)
 }
-
-// AudioSourceNodeable is the interface implemented by [AudioSourceNode], for mocking and DI.
-type AudioSourceNodeable interface {
-	obj.Object
-}
-
-var _ AudioSourceNodeable = (*AudioSourceNode)(nil)
 
 var _ AudioNodeProvider = (*AudioSourceNode)(nil)

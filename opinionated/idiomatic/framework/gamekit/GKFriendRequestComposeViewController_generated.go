@@ -46,24 +46,24 @@ func friendRequestComposeViewControllerAdopt(id objc.ID) *FriendRequestComposeVi
 }
 
 // Description returns the object's -description text.
-func (x *FriendRequestComposeViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (frcvc *FriendRequestComposeViewController) Description() string {
+	return rt.Description(objref.IDOf(frcvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FriendRequestComposeViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (frcvc *FriendRequestComposeViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(frcvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FriendRequestComposeViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (frcvc *FriendRequestComposeViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(frcvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FriendRequestComposeViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (frcvc *FriendRequestComposeViewController) String() string {
+	return rt.Description(objref.IDOf(frcvc))
 }
 
 // NewFriendRequestComposeViewController creates a new FriendRequestComposeViewController.
@@ -73,32 +73,21 @@ func NewFriendRequestComposeViewController() *FriendRequestComposeViewController
 }
 
 // SetMessage sets the text message included in the friend invitation.
-func (x *FriendRequestComposeViewController) SetMessage(message string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessage:"), purego.NSString(message))
+func (frcvc *FriendRequestComposeViewController) SetMessage(message string) {
+	objc.Send[objc.ID](objref.IDOf(frcvc), objc.RegisterName("setMessage:"), purego.NSString(message))
 }
 
 // AddRecipientPlayers adds recipients based on their Game Center player identifiers.
-func (x *FriendRequestComposeViewController) AddRecipientPlayers(players []*Player) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRecipientPlayers:"), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }))
+func (frcvc *FriendRequestComposeViewController) AddRecipientPlayers(players []*Player) {
+	objc.Send[objc.ID](objref.IDOf(frcvc), objc.RegisterName("addRecipientPlayers:"), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }))
 }
 
 // AddRecipientsWithPlayerIDs adds recipients based on their Game Center player identifiers.
-func (x *FriendRequestComposeViewController) AddRecipientsWithPlayerIDs(playerIDs []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRecipientsWithPlayerIDs:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }))
+func (frcvc *FriendRequestComposeViewController) AddRecipientsWithPlayerIDs(playerIDs []string) {
+	objc.Send[objc.ID](objref.IDOf(frcvc), objc.RegisterName("addRecipientsWithPlayerIDs:"), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // AddRecipientsWithEmailAddresses adds recipients based on their email addresses.
-func (x *FriendRequestComposeViewController) AddRecipientsWithEmailAddresses(emailAddresses []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRecipientsWithEmailAddresses:"), purego.SliceToNSArray(emailAddresses, func(_v string) objc.ID { return purego.NSString(_v) }))
+func (frcvc *FriendRequestComposeViewController) AddRecipientsWithEmailAddresses(emailAddresses []string) {
+	objc.Send[objc.ID](objref.IDOf(frcvc), objc.RegisterName("addRecipientsWithEmailAddresses:"), purego.SliceToNSArray(emailAddresses, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
-
-// FriendRequestComposeViewControllerable is the interface implemented by [FriendRequestComposeViewController], for mocking and DI.
-type FriendRequestComposeViewControllerable interface {
-	obj.Object
-	SetMessage(message string)
-	AddRecipientPlayers(players []*Player)
-	AddRecipientsWithPlayerIDs(playerIDs []string)
-	AddRecipientsWithEmailAddresses(emailAddresses []string)
-}
-
-var _ FriendRequestComposeViewControllerable = (*FriendRequestComposeViewController)(nil)

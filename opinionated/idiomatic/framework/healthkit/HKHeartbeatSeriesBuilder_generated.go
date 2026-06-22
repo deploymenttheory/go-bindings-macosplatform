@@ -6,6 +6,7 @@ package healthkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -58,7 +59,7 @@ func NewHeartbeatSeriesBuilderWithHealthStoreDeviceStartDate(healthStore *Health
 // FinishSeriesWithCompletion finalizes the series and returns the resulting heartbeat series sample.
 //
 // FinishSeriesWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *HeartbeatSeriesBuilder) FinishSeriesWithCompletion(ctx context.Context) (result *HeartbeatSeriesSample, err error) {
+func (hsb *HeartbeatSeriesBuilder) FinishSeriesWithCompletion(ctx context.Context) (result *HeartbeatSeriesSample, err error) {
 	type _result struct {
 		val *HeartbeatSeriesSample
 		err error
@@ -70,7 +71,7 @@ func (x *HeartbeatSeriesBuilder) FinishSeriesWithCompletion(ctx context.Context)
 		_o.val = HeartbeatSeriesSampleFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishSeriesWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(hsb), objc.RegisterName("finishSeriesWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -79,13 +80,5 @@ func (x *HeartbeatSeriesBuilder) FinishSeriesWithCompletion(ctx context.Context)
 		return _zero, ctx.Err()
 	}
 }
-
-// HeartbeatSeriesBuilderable is the interface implemented by [HeartbeatSeriesBuilder], for mocking and DI.
-type HeartbeatSeriesBuilderable interface {
-	obj.Object
-	FinishSeriesWithCompletion(ctx context.Context) (*HeartbeatSeriesSample, error)
-}
-
-var _ HeartbeatSeriesBuilderable = (*HeartbeatSeriesBuilder)(nil)
 
 var _ SeriesBuilderProvider = (*HeartbeatSeriesBuilder)(nil)

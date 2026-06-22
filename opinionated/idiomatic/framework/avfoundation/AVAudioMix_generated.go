@@ -48,45 +48,37 @@ func audioMixAdopt(id objc.ID) *AudioMix {
 }
 
 // Description returns the object's -description text.
-func (x *AudioMix) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (am *AudioMix) Description() string {
+	return rt.Description(objref.IDOf(am))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioMix) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (am *AudioMix) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(am), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioMix) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (am *AudioMix) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(am), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AudioMix) String() string {
-	return rt.Description(objref.IDOf(x))
+func (am *AudioMix) String() string {
+	return rt.Description(objref.IDOf(am))
 }
 
 // InputParameters wraps the corresponding Objective-C method.
 //
 // InputParameters returns the collection as a Go slice.
-func (x *AudioMix) InputParameters() []*AudioMixInputParameters {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputParameters"))
+func (am *AudioMix) InputParameters() []*AudioMixInputParameters {
+	_arr := objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("inputParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AudioMixInputParameters { return AudioMixInputParametersFromID(_id) })
 }
-
-// AudioMixable is the interface implemented by [AudioMix], for mocking and DI.
-type AudioMixable interface {
-	obj.Object
-	InputParameters() []*AudioMixInputParameters
-}
-
-var _ AudioMixable = (*AudioMix)(nil)
 
 // isAudioMix marks AudioMix — and, by embedding promotion, its
 // subclasses — as a member of the AudioMix hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AudioMix) isAudioMix() {}
+func (am *AudioMix) isAudioMix() {}
 
 var _ AudioMixProvider = (*AudioMix)(nil)

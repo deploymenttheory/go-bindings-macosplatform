@@ -6,6 +6,7 @@ package appkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func tableViewDiffableDataSourceAdopt(id objc.ID) *TableViewDiffableDataSource {
 }
 
 // Description returns the object's -description text.
-func (x *TableViewDiffableDataSource) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tvdds *TableViewDiffableDataSource) Description() string {
+	return rt.Description(objref.IDOf(tvdds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TableViewDiffableDataSource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tvdds *TableViewDiffableDataSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tvdds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TableViewDiffableDataSource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tvdds *TableViewDiffableDataSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tvdds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TableViewDiffableDataSource) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tvdds *TableViewDiffableDataSource) String() string {
+	return rt.Description(objref.IDOf(tvdds))
 }
 
 // NewTableViewDiffableDataSource creates a new TableViewDiffableDataSource.
@@ -74,31 +75,31 @@ func NewTableViewDiffableDataSource() *TableViewDiffableDataSource {
 }
 
 // WithDefaultRowAnimation sets the property and returns the receiver so calls can be chained.
-func (x *TableViewDiffableDataSource) WithDefaultRowAnimation(defaultRowAnimation TableViewAnimationOptions) *TableViewDiffableDataSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultRowAnimation:"), defaultRowAnimation)
-	return x
+func (tvdds *TableViewDiffableDataSource) WithDefaultRowAnimation(defaultRowAnimation TableViewAnimationOptions) *TableViewDiffableDataSource {
+	objc.Send[objc.ID](objref.IDOf(tvdds), objc.RegisterName("setDefaultRowAnimation:"), defaultRowAnimation)
+	return tvdds
 }
 
 // Snapshot wraps the corresponding Objective-C method.
-func (x *TableViewDiffableDataSource) Snapshot() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshot"))
+func (tvdds *TableViewDiffableDataSource) Snapshot() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tvdds), objc.RegisterName("snapshot"))
 	return obj.Wrap(_r)
 }
 
 // ApplySnapshotAnimatingDifferences wraps the corresponding Objective-C method.
-func (x *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferences(snapshot obj.Object, animatingDifferences bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applySnapshot:animatingDifferences:"), objref.IDOf(snapshot), animatingDifferences)
+func (tvdds *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferences(snapshot obj.Object, animatingDifferences bool) {
+	objc.Send[objc.ID](objref.IDOf(tvdds), objc.RegisterName("applySnapshot:animatingDifferences:"), objref.IDOf(snapshot), animatingDifferences)
 }
 
 // ApplySnapshotAnimatingDifferencesCompletion wraps the corresponding Objective-C method.
 //
 // ApplySnapshotAnimatingDifferencesCompletion blocks until the operation completes or ctx is cancelled.
-func (x *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferencesCompletion(ctx context.Context, snapshot obj.Object, animatingDifferences bool) error {
+func (tvdds *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferencesCompletion(ctx context.Context, snapshot obj.Object, animatingDifferences bool) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applySnapshot:animatingDifferences:completion:"), objref.IDOf(snapshot), animatingDifferences, _block)
+	objc.Send[objc.ID](objref.IDOf(tvdds), objc.RegisterName("applySnapshot:animatingDifferences:completion:"), objref.IDOf(snapshot), animatingDifferences, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -108,53 +109,31 @@ func (x *TableViewDiffableDataSource) ApplySnapshotAnimatingDifferencesCompletio
 }
 
 // ItemIdentifierForRow wraps the corresponding Objective-C method.
-func (x *TableViewDiffableDataSource) ItemIdentifierForRow(row int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemIdentifierForRow:"), row)
+func (tvdds *TableViewDiffableDataSource) ItemIdentifierForRow(row int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tvdds), objc.RegisterName("itemIdentifierForRow:"), row)
 	return obj.Wrap(_r)
 }
 
 // RowForItemIdentifier wraps the corresponding Objective-C method.
-func (x *TableViewDiffableDataSource) RowForItemIdentifier(identifier obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowForItemIdentifier:"), objref.IDOf(identifier))
+func (tvdds *TableViewDiffableDataSource) RowForItemIdentifier(identifier obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(tvdds), objc.RegisterName("rowForItemIdentifier:"), objref.IDOf(identifier))
 	return _r
 }
 
 // SectionIdentifierForRow wraps the corresponding Objective-C method.
-func (x *TableViewDiffableDataSource) SectionIdentifierForRow(row int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sectionIdentifierForRow:"), row)
+func (tvdds *TableViewDiffableDataSource) SectionIdentifierForRow(row int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tvdds), objc.RegisterName("sectionIdentifierForRow:"), row)
 	return obj.Wrap(_r)
 }
 
 // RowForSectionIdentifier wraps the corresponding Objective-C method.
-func (x *TableViewDiffableDataSource) RowForSectionIdentifier(identifier obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rowForSectionIdentifier:"), objref.IDOf(identifier))
+func (tvdds *TableViewDiffableDataSource) RowForSectionIdentifier(identifier obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(tvdds), objc.RegisterName("rowForSectionIdentifier:"), objref.IDOf(identifier))
 	return _r
 }
 
 // DefaultRowAnimation wraps the corresponding Objective-C method.
-func (x *TableViewDiffableDataSource) DefaultRowAnimation() TableViewAnimationOptions {
-	_r := objc.Send[TableViewAnimationOptions](objref.IDOf(x), objc.RegisterName("defaultRowAnimation"))
+func (tvdds *TableViewDiffableDataSource) DefaultRowAnimation() TableViewAnimationOptions {
+	_r := objc.Send[TableViewAnimationOptions](objref.IDOf(tvdds), objc.RegisterName("defaultRowAnimation"))
 	return _r
 }
-
-// SetDefaultRowAnimation wraps the corresponding Objective-C method.
-func (x *TableViewDiffableDataSource) SetDefaultRowAnimation(defaultRowAnimation TableViewAnimationOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultRowAnimation:"), defaultRowAnimation)
-}
-
-// TableViewDiffableDataSourceable is the interface implemented by [TableViewDiffableDataSource], for mocking and DI.
-type TableViewDiffableDataSourceable interface {
-	obj.Object
-	WithDefaultRowAnimation(defaultRowAnimation TableViewAnimationOptions) *TableViewDiffableDataSource
-	Snapshot() obj.Object
-	ApplySnapshotAnimatingDifferences(snapshot obj.Object, animatingDifferences bool)
-	ApplySnapshotAnimatingDifferencesCompletion(ctx context.Context, snapshot obj.Object, animatingDifferences bool) error
-	ItemIdentifierForRow(row int) obj.Object
-	RowForItemIdentifier(identifier obj.Object) int
-	SectionIdentifierForRow(row int) obj.Object
-	RowForSectionIdentifier(identifier obj.Object) int
-	DefaultRowAnimation() TableViewAnimationOptions
-	SetDefaultRowAnimation(defaultRowAnimation TableViewAnimationOptions)
-}
-
-var _ TableViewDiffableDataSourceable = (*TableViewDiffableDataSource)(nil)

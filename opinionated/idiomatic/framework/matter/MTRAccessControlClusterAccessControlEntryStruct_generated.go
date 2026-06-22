@@ -46,123 +46,88 @@ func mTRAccessControlClusterAccessControlEntryStructAdopt(id objc.ID) *MTRAccess
 }
 
 // Description returns the object's -description text.
-func (x *MTRAccessControlClusterAccessControlEntryStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) Description() string {
+	return rt.Description(objref.IDOf(maccaces))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAccessControlClusterAccessControlEntryStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(maccaces), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAccessControlClusterAccessControlEntryStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(maccaces), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAccessControlClusterAccessControlEntryStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) String() string {
+	return rt.Description(objref.IDOf(maccaces))
 }
 
 // WithPrivilege sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterAccessControlEntryStruct) WithPrivilege(privilege obj.Object) *MTRAccessControlClusterAccessControlEntryStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrivilege:"), objref.IDOf(privilege))
-	return x
+func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) WithPrivilege(privilege obj.Object) *MTRAccessControlClusterAccessControlEntryStruct {
+	objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("setPrivilege:"), objref.IDOf(privilege))
+	return maccaces
 }
 
 // WithAuthMode sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterAccessControlEntryStruct) WithAuthMode(authMode obj.Object) *MTRAccessControlClusterAccessControlEntryStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthMode:"), objref.IDOf(authMode))
-	return x
+func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) WithAuthMode(authMode obj.Object) *MTRAccessControlClusterAccessControlEntryStruct {
+	objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("setAuthMode:"), objref.IDOf(authMode))
+	return maccaces
 }
 
 // WithFabricIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterAccessControlEntryStruct) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlEntryStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-	return x
+func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlEntryStruct {
+	objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return maccaces
 }
 
 // Privilege wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlEntryStruct) Privilege() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("privilege"))
+func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) Privilege() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("privilege"))
 	return obj.Wrap(_r)
-}
-
-// SetPrivilege wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlEntryStruct) SetPrivilege(privilege obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrivilege:"), objref.IDOf(privilege))
 }
 
 // AuthMode wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlEntryStruct) AuthMode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authMode"))
+func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) AuthMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("authMode"))
 	return obj.Wrap(_r)
 }
 
-// SetAuthMode wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlEntryStruct) SetAuthMode(authMode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthMode:"), objref.IDOf(authMode))
-}
-
 // Subjects wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlEntryStruct) Subjects() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subjects"))
+func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) Subjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("subjects"))
 	return obj.Wrap(_r)
 }
 
 // SetSubjects wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlEntryStruct) SetSubjects(subjects obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubjects:"), objref.IDOf(subjects))
+func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) SetSubjects(subjects obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("setSubjects:"), objref.IDOf(subjects))
 }
 
 // Targets wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlEntryStruct) Targets() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targets"))
+func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) Targets() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("targets"))
 	return obj.Wrap(_r)
 }
 
 // SetTargets wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlEntryStruct) SetTargets(targets obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargets:"), objref.IDOf(targets))
+func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) SetTargets(targets obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("setTargets:"), objref.IDOf(targets))
 }
 
 // FabricIndex wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlEntryStruct) FabricIndex() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
-
-// SetFabricIndex wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlEntryStruct) SetFabricIndex(fabricIndex obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-}
-
-// MTRAccessControlClusterAccessControlEntryStructable is the interface implemented by [MTRAccessControlClusterAccessControlEntryStruct], for mocking and DI.
-type MTRAccessControlClusterAccessControlEntryStructable interface {
-	obj.Object
-	WithPrivilege(privilege obj.Object) *MTRAccessControlClusterAccessControlEntryStruct
-	WithAuthMode(authMode obj.Object) *MTRAccessControlClusterAccessControlEntryStruct
-	WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlEntryStruct
-	Privilege() obj.Object
-	SetPrivilege(privilege obj.Object)
-	AuthMode() obj.Object
-	SetAuthMode(authMode obj.Object)
-	Subjects() obj.Object
-	SetSubjects(subjects obj.Object)
-	Targets() obj.Object
-	SetTargets(targets obj.Object)
-	FabricIndex() obj.Object
-	SetFabricIndex(fabricIndex obj.Object)
-}
-
-var _ MTRAccessControlClusterAccessControlEntryStructable = (*MTRAccessControlClusterAccessControlEntryStruct)(nil)
 
 // isMTRAccessControlClusterAccessControlEntryStruct marks MTRAccessControlClusterAccessControlEntryStruct — and, by embedding promotion, its
 // subclasses — as a member of the MTRAccessControlClusterAccessControlEntryStruct hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRAccessControlClusterAccessControlEntryStruct) isMTRAccessControlClusterAccessControlEntryStruct() {
+func (maccaces *MTRAccessControlClusterAccessControlEntryStruct) isMTRAccessControlClusterAccessControlEntryStruct() {
 }
 
 var _ MTRAccessControlClusterAccessControlEntryStructProvider = (*MTRAccessControlClusterAccessControlEntryStruct)(nil)

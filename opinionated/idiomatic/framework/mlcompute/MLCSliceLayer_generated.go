@@ -52,52 +52,40 @@ func NewSliceLayer() *SliceLayer {
 	return sliceLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *SliceLayer) WithLabel(label string) *SliceLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (sl *SliceLayer) WithLabel(label string) *SliceLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return sl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *SliceLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SliceLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (sl *SliceLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *SliceLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return sl
 }
 
-// Start a vector of length equal to that of source. The element at index i specifies the beginning of slice in dimension i.
+// Start returns a vector of length equal to that of source. The element at index i specifies the beginning of slice in dimension i.
 //
 // Start returns the collection as a Go slice.
-func (x *SliceLayer) Start() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start"))
+func (sl *SliceLayer) Start() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("start"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// End a vector of length equal to that of source. The element at index i specifies the end of slice in dimension i.
+// End returns a vector of length equal to that of source. The element at index i specifies the end of slice in dimension i.
 //
 // End returns the collection as a Go slice.
-func (x *SliceLayer) End() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("end"))
+func (sl *SliceLayer) End() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("end"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Stride a vector of length equal to that of source. The element at index i specifies the stride of slice in dimension i.
+// Stride returns a vector of length equal to that of source. The element at index i specifies the stride of slice in dimension i.
 //
 // Stride returns the collection as a Go slice.
-func (x *SliceLayer) Stride() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stride"))
+func (sl *SliceLayer) Stride() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("stride"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// SliceLayerable is the interface implemented by [SliceLayer], for mocking and DI.
-type SliceLayerable interface {
-	obj.Object
-	WithLabel(label string) *SliceLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *SliceLayer
-	Start() []obj.Object
-	End() []obj.Object
-	Stride() []obj.Object
-}
-
-var _ SliceLayerable = (*SliceLayer)(nil)
 
 var _ LayerProvider = (*SliceLayer)(nil)

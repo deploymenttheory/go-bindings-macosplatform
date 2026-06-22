@@ -52,32 +52,22 @@ func NewCPUExceptionDiagnostic() *CPUExceptionDiagnostic {
 	return cPUExceptionDiagnosticAdopt(_id)
 }
 
-// CallStackTree the application call stack tree associated with the excessive CPU consumption.
-func (x *CPUExceptionDiagnostic) CallStackTree() *CallStackTree {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callStackTree"))
+// CallStackTree returns the application call stack tree associated with the excessive CPU consumption.
+func (ced *CPUExceptionDiagnostic) CallStackTree() *CallStackTree {
+	_r := objc.Send[objc.ID](objref.IDOf(ced), objc.RegisterName("callStackTree"))
 	return CallStackTreeFromID(_r)
 }
 
-// TotalCPUTime total CPU time consumed in the scope of this CPU exception. Dimensioned as NSUnitDuration.
-func (x *CPUExceptionDiagnostic) TotalCPUTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalCPUTime"))
+// TotalCPUTime returns total CPU time consumed in the scope of this CPU exception. Dimensioned as NSUnitDuration.
+func (ced *CPUExceptionDiagnostic) TotalCPUTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ced), objc.RegisterName("totalCPUTime"))
 	return obj.Wrap(_r)
 }
 
-// TotalSampledTime total time that the application was sampled for during the CPU exception. Dimensioned as NSUnitDuration.
-func (x *CPUExceptionDiagnostic) TotalSampledTime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalSampledTime"))
+// TotalSampledTime returns total time that the application was sampled for during the CPU exception. Dimensioned as NSUnitDuration.
+func (ced *CPUExceptionDiagnostic) TotalSampledTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ced), objc.RegisterName("totalSampledTime"))
 	return obj.Wrap(_r)
 }
-
-// CPUExceptionDiagnosticable is the interface implemented by [CPUExceptionDiagnostic], for mocking and DI.
-type CPUExceptionDiagnosticable interface {
-	obj.Object
-	CallStackTree() *CallStackTree
-	TotalCPUTime() obj.Object
-	TotalSampledTime() obj.Object
-}
-
-var _ CPUExceptionDiagnosticable = (*CPUExceptionDiagnostic)(nil)
 
 var _ DiagnosticProvider = (*CPUExceptionDiagnostic)(nil)

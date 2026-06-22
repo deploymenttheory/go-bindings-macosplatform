@@ -44,24 +44,24 @@ func mTRPumpConfigurationAndControlClusterGeneralFaultEventAdopt(id objc.ID) *MT
 }
 
 // Description returns the object's -description text.
-func (x *MTRPumpConfigurationAndControlClusterGeneralFaultEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccgfe *MTRPumpConfigurationAndControlClusterGeneralFaultEvent) Description() string {
+	return rt.Description(objref.IDOf(mpcaccgfe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRPumpConfigurationAndControlClusterGeneralFaultEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpcaccgfe *MTRPumpConfigurationAndControlClusterGeneralFaultEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpcaccgfe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRPumpConfigurationAndControlClusterGeneralFaultEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpcaccgfe *MTRPumpConfigurationAndControlClusterGeneralFaultEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpcaccgfe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRPumpConfigurationAndControlClusterGeneralFaultEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccgfe *MTRPumpConfigurationAndControlClusterGeneralFaultEvent) String() string {
+	return rt.Description(objref.IDOf(mpcaccgfe))
 }
 
 // NewMTRPumpConfigurationAndControlClusterGeneralFaultEvent creates a new MTRPumpConfigurationAndControlClusterGeneralFaultEvent.
@@ -69,10 +69,3 @@ func NewMTRPumpConfigurationAndControlClusterGeneralFaultEvent() *MTRPumpConfigu
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterGeneralFaultEvent")), objc.RegisterName("new"))
 	return mTRPumpConfigurationAndControlClusterGeneralFaultEventAdopt(_id)
 }
-
-// MTRPumpConfigurationAndControlClusterGeneralFaultEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterGeneralFaultEvent], for mocking and DI.
-type MTRPumpConfigurationAndControlClusterGeneralFaultEventable interface {
-	obj.Object
-}
-
-var _ MTRPumpConfigurationAndControlClusterGeneralFaultEventable = (*MTRPumpConfigurationAndControlClusterGeneralFaultEvent)(nil)

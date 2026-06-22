@@ -7,7 +7,6 @@ package matter
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,38 +50,21 @@ func NewMTRContentLauncherClusterStyleInformation() *MTRContentLauncherClusterSt
 }
 
 // WithImageURL sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterStyleInformation) WithImageURL(imageURL string) *MTRContentLauncherClusterStyleInformation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageURL:"), purego.NSString(imageURL))
-	return x
-}
-
-// WithImageUrl sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterStyleInformation) WithImageUrl(imageUrl string) *MTRContentLauncherClusterStyleInformation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageUrl:"), purego.NSString(imageUrl))
-	return x
+func (mclcsi *MTRContentLauncherClusterStyleInformation) WithImageURL(imageURL string) *MTRContentLauncherClusterStyleInformation {
+	objc.Send[objc.ID](objref.IDOf(mclcsi), objc.RegisterName("setImageURL:"), purego.NSString(imageURL))
+	return mclcsi
 }
 
 // WithColor sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterStyleInformation) WithColor(color string) *MTRContentLauncherClusterStyleInformation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), purego.NSString(color))
-	return x
+func (mclcsi *MTRContentLauncherClusterStyleInformation) WithColor(color string) *MTRContentLauncherClusterStyleInformation {
+	objc.Send[objc.ID](objref.IDOf(mclcsi), objc.RegisterName("setColor:"), purego.NSString(color))
+	return mclcsi
 }
 
 // WithSize sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterStyleInformation) WithSize(size MTRContentLauncherClusterDimensionStructProvider) *MTRContentLauncherClusterStyleInformation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), objref.IDOf(size))
-	return x
+func (mclcsi *MTRContentLauncherClusterStyleInformation) WithSize(size MTRContentLauncherClusterDimensionStructProvider) *MTRContentLauncherClusterStyleInformation {
+	objc.Send[objc.ID](objref.IDOf(mclcsi), objc.RegisterName("setSize:"), objref.IDOf(size))
+	return mclcsi
 }
-
-// MTRContentLauncherClusterStyleInformationable is the interface implemented by [MTRContentLauncherClusterStyleInformation], for mocking and DI.
-type MTRContentLauncherClusterStyleInformationable interface {
-	obj.Object
-	WithImageURL(imageURL string) *MTRContentLauncherClusterStyleInformation
-	WithImageUrl(imageUrl string) *MTRContentLauncherClusterStyleInformation
-	WithColor(color string) *MTRContentLauncherClusterStyleInformation
-	WithSize(size MTRContentLauncherClusterDimensionStructProvider) *MTRContentLauncherClusterStyleInformation
-}
-
-var _ MTRContentLauncherClusterStyleInformationable = (*MTRContentLauncherClusterStyleInformation)(nil)
 
 var _ MTRContentLauncherClusterStyleInformationStructProvider = (*MTRContentLauncherClusterStyleInformation)(nil)

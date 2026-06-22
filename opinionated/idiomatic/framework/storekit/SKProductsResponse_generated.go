@@ -46,24 +46,24 @@ func productsResponseAdopt(id objc.ID) *ProductsResponse {
 }
 
 // Description returns the object's -description text.
-func (x *ProductsResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pr *ProductsResponse) Description() string {
+	return rt.Description(objref.IDOf(pr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ProductsResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pr *ProductsResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ProductsResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pr *ProductsResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ProductsResponse) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pr *ProductsResponse) String() string {
+	return rt.Description(objref.IDOf(pr))
 }
 
 // NewProductsResponse creates a new ProductsResponse.
@@ -75,24 +75,15 @@ func NewProductsResponse() *ProductsResponse {
 // Products wraps the corresponding Objective-C method.
 //
 // Products returns the collection as a Go slice.
-func (x *ProductsResponse) Products() []*Product {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("products"))
+func (pr *ProductsResponse) Products() []*Product {
+	_arr := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("products"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Product { return ProductFromID(_id) })
 }
 
 // InvalidProductIdentifiers wraps the corresponding Objective-C method.
 //
 // InvalidProductIdentifiers returns the collection as a Go slice.
-func (x *ProductsResponse) InvalidProductIdentifiers() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidProductIdentifiers"))
+func (pr *ProductsResponse) InvalidProductIdentifiers() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("invalidProductIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// ProductsResponseable is the interface implemented by [ProductsResponse], for mocking and DI.
-type ProductsResponseable interface {
-	obj.Object
-	Products() []*Product
-	InvalidProductIdentifiers() []string
-}
-
-var _ ProductsResponseable = (*ProductsResponse)(nil)

@@ -48,36 +48,29 @@ func memoryBalloonDeviceConfigurationAdopt(id objc.ID) *MemoryBalloonDeviceConfi
 }
 
 // Description returns the object's -description text.
-func (x *MemoryBalloonDeviceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbdc *MemoryBalloonDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(mbdc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MemoryBalloonDeviceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbdc *MemoryBalloonDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbdc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MemoryBalloonDeviceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbdc *MemoryBalloonDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbdc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MemoryBalloonDeviceConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbdc *MemoryBalloonDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(mbdc))
 }
-
-// MemoryBalloonDeviceConfigurationable is the interface implemented by [MemoryBalloonDeviceConfiguration], for mocking and DI.
-type MemoryBalloonDeviceConfigurationable interface {
-	obj.Object
-}
-
-var _ MemoryBalloonDeviceConfigurationable = (*MemoryBalloonDeviceConfiguration)(nil)
 
 // isMemoryBalloonDeviceConfiguration marks MemoryBalloonDeviceConfiguration — and, by embedding promotion, its
 // subclasses — as a member of the MemoryBalloonDeviceConfiguration hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MemoryBalloonDeviceConfiguration) isMemoryBalloonDeviceConfiguration() {}
+func (mbdc *MemoryBalloonDeviceConfiguration) isMemoryBalloonDeviceConfiguration() {}
 
 var _ MemoryBalloonDeviceConfigurationProvider = (*MemoryBalloonDeviceConfiguration)(nil)

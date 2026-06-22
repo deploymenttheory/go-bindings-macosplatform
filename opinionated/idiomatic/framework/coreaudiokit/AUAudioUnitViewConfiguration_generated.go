@@ -46,24 +46,24 @@ func aUAudioUnitViewConfigurationAdopt(id objc.ID) *AUAudioUnitViewConfiguration
 }
 
 // Description returns the object's -description text.
-func (x *AUAudioUnitViewConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aauvc *AUAudioUnitViewConfiguration) Description() string {
+	return rt.Description(objref.IDOf(aauvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AUAudioUnitViewConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aauvc *AUAudioUnitViewConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aauvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AUAudioUnitViewConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aauvc *AUAudioUnitViewConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aauvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AUAudioUnitViewConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aauvc *AUAudioUnitViewConfiguration) String() string {
+	return rt.Description(objref.IDOf(aauvc))
 }
 
 // NewAUAudioUnitViewConfigurationWithWidthHeightHostHasController creates a new configuration object.
@@ -73,30 +73,20 @@ func NewAUAudioUnitViewConfigurationWithWidthHeightHostHasController(width float
 	return aUAudioUnitViewConfigurationAdopt(_id)
 }
 
-// Width the width of the view, measured in points. Setting the width to 0 will match any width.
-func (x *AUAudioUnitViewConfiguration) Width() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("width"))
+// Width returns the width of the view, measured in points. Setting the width to 0 will match any width.
+func (aauvc *AUAudioUnitViewConfiguration) Width() float64 {
+	_r := objc.Send[float64](objref.IDOf(aauvc), objc.RegisterName("width"))
 	return _r
 }
 
-// Height the height of the view, measured in points. Setting the height to 0 will match any height.
-func (x *AUAudioUnitViewConfiguration) Height() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("height"))
+// Height returns the height of the view, measured in points. Setting the height to 0 will match any height.
+func (aauvc *AUAudioUnitViewConfiguration) Height() float64 {
+	_r := objc.Send[float64](objref.IDOf(aauvc), objc.RegisterName("height"))
 	return _r
 }
 
-// HostHasController boolean property specifying whether the host displays its own control surface when showing the view of the audio unit.
-func (x *AUAudioUnitViewConfiguration) HostHasController() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hostHasController"))
+// HostHasController reports whether boolean property specifying whether the host displays its own control surface when showing the view of the audio unit.
+func (aauvc *AUAudioUnitViewConfiguration) HostHasController() bool {
+	_r := objc.Send[bool](objref.IDOf(aauvc), objc.RegisterName("hostHasController"))
 	return _r
 }
-
-// AUAudioUnitViewConfigurationable is the interface implemented by [AUAudioUnitViewConfiguration], for mocking and DI.
-type AUAudioUnitViewConfigurationable interface {
-	obj.Object
-	Width() float64
-	Height() float64
-	HostHasController() bool
-}
-
-var _ AUAudioUnitViewConfigurationable = (*AUAudioUnitViewConfiguration)(nil)

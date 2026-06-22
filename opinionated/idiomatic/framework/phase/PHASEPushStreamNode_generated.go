@@ -53,22 +53,13 @@ func NewPushStreamNode() *PushStreamNode {
 }
 
 // ScheduleBuffer schedules audio data for playback.
-func (x *PushStreamNode) ScheduleBuffer(buffer obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleBuffer:"), objref.IDOf(buffer))
+func (psn *PushStreamNode) ScheduleBuffer(buffer obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(psn), objc.RegisterName("scheduleBuffer:"), objref.IDOf(buffer))
 }
 
 // ScheduleBufferAtTimeOptions schedules audio data playback at a specific time.
-func (x *PushStreamNode) ScheduleBufferAtTimeOptions(buffer obj.Object, when obj.Object, options PushStreamBufferOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleBuffer:atTime:options:"), objref.IDOf(buffer), objref.IDOf(when), options)
+func (psn *PushStreamNode) ScheduleBufferAtTimeOptions(buffer obj.Object, when obj.Object, options PushStreamBufferOptions) {
+	objc.Send[objc.ID](objref.IDOf(psn), objc.RegisterName("scheduleBuffer:atTime:options:"), objref.IDOf(buffer), objref.IDOf(when), options)
 }
-
-// PushStreamNodeable is the interface implemented by [PushStreamNode], for mocking and DI.
-type PushStreamNodeable interface {
-	obj.Object
-	ScheduleBuffer(buffer obj.Object)
-	ScheduleBufferAtTimeOptions(buffer obj.Object, when obj.Object, options PushStreamBufferOptions)
-}
-
-var _ PushStreamNodeable = (*PushStreamNode)(nil)
 
 var _ StreamNodeProvider = (*PushStreamNode)(nil)

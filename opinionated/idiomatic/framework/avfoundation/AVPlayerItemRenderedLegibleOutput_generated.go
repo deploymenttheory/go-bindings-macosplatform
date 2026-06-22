@@ -54,65 +54,40 @@ func NewPlayerItemRenderedLegibleOutputWithVideoDisplaySize(videoDisplaySize cor
 	return playerItemRenderedLegibleOutputAdopt(_id)
 }
 
-// WithAdvanceIntervalForDelegateInvocation permits advance invocation of the associated delegate, if any.
-func (x *PlayerItemRenderedLegibleOutput) WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemRenderedLegibleOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdvanceIntervalForDelegateInvocation:"), advanceIntervalForDelegateInvocation)
-	return x
+// WithAdvanceIntervalForDelegateInvocation sets permits advance invocation of the associated delegate, if any.
+func (pirlo *PlayerItemRenderedLegibleOutput) WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemRenderedLegibleOutput {
+	objc.Send[objc.ID](objref.IDOf(pirlo), objc.RegisterName("setAdvanceIntervalForDelegateInvocation:"), advanceIntervalForDelegateInvocation)
+	return pirlo
 }
 
-// WithVideoDisplaySize set the video display size to use for rendering of pixel buffers.
-func (x *PlayerItemRenderedLegibleOutput) WithVideoDisplaySize(videoDisplaySize corefoundation.CGSize) *PlayerItemRenderedLegibleOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoDisplaySize:"), videoDisplaySize)
-	return x
+// WithVideoDisplaySize sets set the video display size to use for rendering of pixel buffers.
+func (pirlo *PlayerItemRenderedLegibleOutput) WithVideoDisplaySize(videoDisplaySize corefoundation.CGSize) *PlayerItemRenderedLegibleOutput {
+	objc.Send[objc.ID](objref.IDOf(pirlo), objc.RegisterName("setVideoDisplaySize:"), videoDisplaySize)
+	return pirlo
 }
 
-// WithSuppressesPlayerRendering a Boolean value that indicates whether the player object renders the receiver’s output.
-func (x *PlayerItemRenderedLegibleOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemRenderedLegibleOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
-	return x
+// WithSuppressesPlayerRendering sets a Boolean value that indicates whether the player object renders the receiver’s output.
+func (pirlo *PlayerItemRenderedLegibleOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemRenderedLegibleOutput {
+	objc.Send[objc.ID](objref.IDOf(pirlo), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
+	return pirlo
 }
 
-// DelegateQueue the dispatch queue where the delegate is messaged. This property is not key-value observable.
-func (x *PlayerItemRenderedLegibleOutput) DelegateQueue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateQueue"))
+// DelegateQueue returns the dispatch queue where the delegate is messaged. This property is not key-value observable.
+func (pirlo *PlayerItemRenderedLegibleOutput) DelegateQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pirlo), objc.RegisterName("delegateQueue"))
 	return obj.Wrap(_r)
 }
 
-// AdvanceIntervalForDelegateInvocation permits advance invocation of the associated delegate, if any. If it is possible, an AVPlayerItemRenderedLegibleOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemRenderedLegibleOutput is prepared to act on them, the delegate will be invoked as soon as possible.
-func (x *PlayerItemRenderedLegibleOutput) AdvanceIntervalForDelegateInvocation() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("advanceIntervalForDelegateInvocation"))
+// AdvanceIntervalForDelegateInvocation returns permits advance invocation of the associated delegate, if any. If it is possible, an AVPlayerItemRenderedLegibleOutput will message its delegate advanceIntervalForDelegateInvocation seconds earlier than otherwise. If the value you provide is large, effectively requesting provision of samples earlier than the AVPlayerItemRenderedLegibleOutput is prepared to act on them, the delegate will be invoked as soon as possible.
+func (pirlo *PlayerItemRenderedLegibleOutput) AdvanceIntervalForDelegateInvocation() float64 {
+	_r := objc.Send[float64](objref.IDOf(pirlo), objc.RegisterName("advanceIntervalForDelegateInvocation"))
 	return _r
 }
 
-// SetAdvanceIntervalForDelegateInvocation wraps the corresponding Objective-C method.
-func (x *PlayerItemRenderedLegibleOutput) SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdvanceIntervalForDelegateInvocation:"), advanceIntervalForDelegateInvocation)
-}
-
-// VideoDisplaySize permits rendering of pixel buffers according to the set width and height The client is expected to set videodisplay size during init and may also set it again during playback. The pixel buffers will be rendered according to the set width and height of display area. If this property is set during the presentation time of a vended caption image, a new caption image rendered according to new videoDisplaySize, will be vended out. Setting this property with a zero height or width will result in an exception being thrown and it is client's responsibility to handle it using appropriate catch block.
-func (x *PlayerItemRenderedLegibleOutput) VideoDisplaySize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("videoDisplaySize"))
+// VideoDisplaySize returns permits rendering of pixel buffers according to the set width and height The client is expected to set videodisplay size during init and may also set it again during playback. The pixel buffers will be rendered according to the set width and height of display area. If this property is set during the presentation time of a vended caption image, a new caption image rendered according to new videoDisplaySize, will be vended out. Setting this property with a zero height or width will result in an exception being thrown and it is client's responsibility to handle it using appropriate catch block.
+func (pirlo *PlayerItemRenderedLegibleOutput) VideoDisplaySize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(pirlo), objc.RegisterName("videoDisplaySize"))
 	return _r
 }
-
-// SetVideoDisplaySize wraps the corresponding Objective-C method.
-func (x *PlayerItemRenderedLegibleOutput) SetVideoDisplaySize(videoDisplaySize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVideoDisplaySize:"), videoDisplaySize)
-}
-
-// PlayerItemRenderedLegibleOutputable is the interface implemented by [PlayerItemRenderedLegibleOutput], for mocking and DI.
-type PlayerItemRenderedLegibleOutputable interface {
-	obj.Object
-	WithAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64) *PlayerItemRenderedLegibleOutput
-	WithVideoDisplaySize(videoDisplaySize corefoundation.CGSize) *PlayerItemRenderedLegibleOutput
-	WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemRenderedLegibleOutput
-	DelegateQueue() obj.Object
-	AdvanceIntervalForDelegateInvocation() float64
-	SetAdvanceIntervalForDelegateInvocation(advanceIntervalForDelegateInvocation float64)
-	VideoDisplaySize() corefoundation.CGSize
-	SetVideoDisplaySize(videoDisplaySize corefoundation.CGSize)
-}
-
-var _ PlayerItemRenderedLegibleOutputable = (*PlayerItemRenderedLegibleOutput)(nil)
 
 var _ PlayerItemOutputProvider = (*PlayerItemRenderedLegibleOutput)(nil)

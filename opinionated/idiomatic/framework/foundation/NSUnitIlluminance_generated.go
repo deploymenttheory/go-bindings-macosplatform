@@ -53,18 +53,10 @@ func NewUnitIlluminance() *UnitIlluminance {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitIlluminance) WithScriptingProperties(scriptingProperties obj.Object) *UnitIlluminance {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ui *UnitIlluminance) WithScriptingProperties(scriptingProperties obj.Object) *UnitIlluminance {
+	objc.Send[objc.ID](objref.IDOf(ui), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ui
 }
-
-// UnitIlluminanceable is the interface implemented by [UnitIlluminance], for mocking and DI.
-type UnitIlluminanceable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitIlluminance
-}
-
-var _ UnitIlluminanceable = (*UnitIlluminance)(nil)
 
 var _ DimensionProvider = (*UnitIlluminance)(nil)
 

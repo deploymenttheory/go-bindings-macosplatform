@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,30 +46,21 @@ func nNGradientStateAdopt(id objc.ID) *NNGradientState {
 }
 
 // WithReadCount sets the property and returns the receiver so calls can be chained.
-func (x *NNGradientState) WithReadCount(readCount int) *NNGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-	return x
+func (ngs *NNGradientState) WithReadCount(readCount int) *NNGradientState {
+	objc.Send[objc.ID](objref.IDOf(ngs), objc.RegisterName("setReadCount:"), readCount)
+	return ngs
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNGradientState) WithLabel(label string) *NNGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (ngs *NNGradientState) WithLabel(label string) *NNGradientState {
+	objc.Send[objc.ID](objref.IDOf(ngs), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ngs
 }
-
-// NNGradientStateable is the interface implemented by [NNGradientState], for mocking and DI.
-type NNGradientStateable interface {
-	obj.Object
-	WithReadCount(readCount int) *NNGradientState
-	WithLabel(label string) *NNGradientState
-}
-
-var _ NNGradientStateable = (*NNGradientState)(nil)
 
 // isNNGradientState marks NNGradientState — and, by embedding promotion, its
 // subclasses — as a member of the NNGradientState hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NNGradientState) isNNGradientState() {}
+func (ngs *NNGradientState) isNNGradientState() {}
 
 var _ NNGradientStateProvider = (*NNGradientState)(nil)
 

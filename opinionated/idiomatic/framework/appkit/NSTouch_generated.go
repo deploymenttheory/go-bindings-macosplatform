@@ -47,24 +47,24 @@ func touchAdopt(id objc.ID) *Touch {
 }
 
 // Description returns the object's -description text.
-func (x *Touch) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Touch) Description() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Touch) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (t *Touch) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Touch) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (t *Touch) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Touch) String() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Touch) String() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // NewTouch creates a new Touch.
@@ -74,71 +74,55 @@ func NewTouch() *Touch {
 }
 
 // Identity wraps the corresponding Objective-C method.
-func (x *Touch) Identity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identity"))
+func (t *Touch) Identity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("identity"))
 	return obj.Wrap(_r)
 }
 
 // Phase wraps the corresponding Objective-C method.
-func (x *Touch) Phase() TouchPhase {
-	_r := objc.Send[TouchPhase](objref.IDOf(x), objc.RegisterName("phase"))
+func (t *Touch) Phase() TouchPhase {
+	_r := objc.Send[TouchPhase](objref.IDOf(t), objc.RegisterName("phase"))
 	return _r
 }
 
 // NormalizedPosition wraps the corresponding Objective-C method.
-func (x *Touch) NormalizedPosition() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("normalizedPosition"))
+func (t *Touch) NormalizedPosition() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(t), objc.RegisterName("normalizedPosition"))
 	return _r
 }
 
 // IsResting wraps the corresponding Objective-C method.
-func (x *Touch) IsResting() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isResting"))
+func (t *Touch) IsResting() bool {
+	_r := objc.Send[bool](objref.IDOf(t), objc.RegisterName("isResting"))
 	return _r
 }
 
 // Device wraps the corresponding Objective-C method.
-func (x *Touch) Device() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+func (t *Touch) Device() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("device"))
 	return obj.Wrap(_r)
 }
 
 // DeviceSize wraps the corresponding Objective-C method.
-func (x *Touch) DeviceSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("deviceSize"))
+func (t *Touch) DeviceSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(t), objc.RegisterName("deviceSize"))
 	return _r
 }
 
 // LocationInView indicates the location of the touch in the view’s coordinates.
-func (x *Touch) LocationInView(view *View) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("locationInView:"), objref.IDOf(view))
+func (t *Touch) LocationInView(view *View) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(t), objc.RegisterName("locationInView:"), objref.IDOf(view))
 	return _r
 }
 
 // PreviousLocationInView indicates the previous location of the touch in the view’s coordinates.
-func (x *Touch) PreviousLocationInView(view *View) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("previousLocationInView:"), objref.IDOf(view))
+func (t *Touch) PreviousLocationInView(view *View) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(t), objc.RegisterName("previousLocationInView:"), objref.IDOf(view))
 	return _r
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *Touch) Type() TouchType {
-	_r := objc.Send[TouchType](objref.IDOf(x), objc.RegisterName("type"))
+func (t *Touch) Type() TouchType {
+	_r := objc.Send[TouchType](objref.IDOf(t), objc.RegisterName("type"))
 	return _r
 }
-
-// Touchable is the interface implemented by [Touch], for mocking and DI.
-type Touchable interface {
-	obj.Object
-	Identity() obj.Object
-	Phase() TouchPhase
-	NormalizedPosition() corefoundation.CGPoint
-	IsResting() bool
-	Device() obj.Object
-	DeviceSize() corefoundation.CGSize
-	LocationInView(view *View) corefoundation.CGPoint
-	PreviousLocationInView(view *View) corefoundation.CGPoint
-	Type() TouchType
-}
-
-var _ Touchable = (*Touch)(nil)

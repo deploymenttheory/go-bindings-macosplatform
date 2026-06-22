@@ -47,24 +47,24 @@ func collectionLayoutAnchorAdopt(id objc.ID) *CollectionLayoutAnchor {
 }
 
 // Description returns the object's -description text.
-func (x *CollectionLayoutAnchor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cla *CollectionLayoutAnchor) Description() string {
+	return rt.Description(objref.IDOf(cla))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionLayoutAnchor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cla *CollectionLayoutAnchor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cla), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionLayoutAnchor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cla *CollectionLayoutAnchor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cla), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CollectionLayoutAnchor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cla *CollectionLayoutAnchor) String() string {
+	return rt.Description(objref.IDOf(cla))
 }
 
 // NewCollectionLayoutAnchor creates a new CollectionLayoutAnchor.
@@ -74,36 +74,25 @@ func NewCollectionLayoutAnchor() *CollectionLayoutAnchor {
 }
 
 // Edges wraps the corresponding Objective-C method.
-func (x *CollectionLayoutAnchor) Edges() DirectionalRectEdge {
-	_r := objc.Send[DirectionalRectEdge](objref.IDOf(x), objc.RegisterName("edges"))
+func (cla *CollectionLayoutAnchor) Edges() DirectionalRectEdge {
+	_r := objc.Send[DirectionalRectEdge](objref.IDOf(cla), objc.RegisterName("edges"))
 	return _r
 }
 
 // Offset wraps the corresponding Objective-C method.
-func (x *CollectionLayoutAnchor) Offset() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("offset"))
+func (cla *CollectionLayoutAnchor) Offset() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cla), objc.RegisterName("offset"))
 	return _r
 }
 
 // IsAbsoluteOffset wraps the corresponding Objective-C method.
-func (x *CollectionLayoutAnchor) IsAbsoluteOffset() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAbsoluteOffset"))
+func (cla *CollectionLayoutAnchor) IsAbsoluteOffset() bool {
+	_r := objc.Send[bool](objref.IDOf(cla), objc.RegisterName("isAbsoluteOffset"))
 	return _r
 }
 
 // IsFractionalOffset wraps the corresponding Objective-C method.
-func (x *CollectionLayoutAnchor) IsFractionalOffset() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFractionalOffset"))
+func (cla *CollectionLayoutAnchor) IsFractionalOffset() bool {
+	_r := objc.Send[bool](objref.IDOf(cla), objc.RegisterName("isFractionalOffset"))
 	return _r
 }
-
-// CollectionLayoutAnchorable is the interface implemented by [CollectionLayoutAnchor], for mocking and DI.
-type CollectionLayoutAnchorable interface {
-	obj.Object
-	Edges() DirectionalRectEdge
-	Offset() corefoundation.CGPoint
-	IsAbsoluteOffset() bool
-	IsFractionalOffset() bool
-}
-
-var _ CollectionLayoutAnchorable = (*CollectionLayoutAnchor)(nil)

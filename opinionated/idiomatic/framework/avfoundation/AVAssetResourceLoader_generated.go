@@ -46,24 +46,24 @@ func assetResourceLoaderAdopt(id objc.ID) *AssetResourceLoader {
 }
 
 // Description returns the object's -description text.
-func (x *AssetResourceLoader) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (arl *AssetResourceLoader) Description() string {
+	return rt.Description(objref.IDOf(arl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetResourceLoader) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (arl *AssetResourceLoader) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(arl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetResourceLoader) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (arl *AssetResourceLoader) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(arl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetResourceLoader) String() string {
-	return rt.Description(objref.IDOf(x))
+func (arl *AssetResourceLoader) String() string {
+	return rt.Description(objref.IDOf(arl))
 }
 
 // NewAssetResourceLoader creates a new AssetResourceLoader.
@@ -72,56 +72,32 @@ func NewAssetResourceLoader() *AssetResourceLoader {
 	return assetResourceLoaderAdopt(_id)
 }
 
-// WithPreloadsEligibleContentKeys a Boolean value that indicates whether content keys will be loaded as quickly as possible.
-func (x *AssetResourceLoader) WithPreloadsEligibleContentKeys(preloadsEligibleContentKeys bool) *AssetResourceLoader {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreloadsEligibleContentKeys:"), preloadsEligibleContentKeys)
-	return x
+// WithPreloadsEligibleContentKeys sets a Boolean value that indicates whether content keys will be loaded as quickly as possible.
+func (arl *AssetResourceLoader) WithPreloadsEligibleContentKeys(preloadsEligibleContentKeys bool) *AssetResourceLoader {
+	objc.Send[objc.ID](objref.IDOf(arl), objc.RegisterName("setPreloadsEligibleContentKeys:"), preloadsEligibleContentKeys)
+	return arl
 }
 
-// WithSendsCommonMediaClientDataAsHTTPHeaders a Boolean value that indicates whether to enable attaching Common Media Client Data as HTTP request headers.
-func (x *AssetResourceLoader) WithSendsCommonMediaClientDataAsHTTPHeaders(sendsCommonMediaClientDataAsHTTPHeaders bool) *AssetResourceLoader {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsCommonMediaClientDataAsHTTPHeaders:"), sendsCommonMediaClientDataAsHTTPHeaders)
-	return x
+// WithSendsCommonMediaClientDataAsHTTPHeaders sets a Boolean value that indicates whether to enable attaching Common Media Client Data as HTTP request headers.
+func (arl *AssetResourceLoader) WithSendsCommonMediaClientDataAsHTTPHeaders(sendsCommonMediaClientDataAsHTTPHeaders bool) *AssetResourceLoader {
+	objc.Send[objc.ID](objref.IDOf(arl), objc.RegisterName("setSendsCommonMediaClientDataAsHTTPHeaders:"), sendsCommonMediaClientDataAsHTTPHeaders)
+	return arl
 }
 
-// DelegateQueue the dispatch queue on which all delegate methods will be invoked. The value of this property is a dispatch_queue_t. The queue is set using the setDelegate:queue: method.
-func (x *AssetResourceLoader) DelegateQueue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateQueue"))
+// DelegateQueue returns the dispatch queue on which all delegate methods will be invoked. The value of this property is a dispatch_queue_t. The queue is set using the setDelegate:queue: method.
+func (arl *AssetResourceLoader) DelegateQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(arl), objc.RegisterName("delegateQueue"))
 	return obj.Wrap(_r)
 }
 
 // PreloadsEligibleContentKeys wraps the corresponding Objective-C method.
-func (x *AssetResourceLoader) PreloadsEligibleContentKeys() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preloadsEligibleContentKeys"))
+func (arl *AssetResourceLoader) PreloadsEligibleContentKeys() bool {
+	_r := objc.Send[bool](objref.IDOf(arl), objc.RegisterName("preloadsEligibleContentKeys"))
 	return _r
-}
-
-// SetPreloadsEligibleContentKeys wraps the corresponding Objective-C method.
-func (x *AssetResourceLoader) SetPreloadsEligibleContentKeys(preloadsEligibleContentKeys bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreloadsEligibleContentKeys:"), preloadsEligibleContentKeys)
 }
 
 // SendsCommonMediaClientDataAsHTTPHeaders wraps the corresponding Objective-C method.
-func (x *AssetResourceLoader) SendsCommonMediaClientDataAsHTTPHeaders() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendsCommonMediaClientDataAsHTTPHeaders"))
+func (arl *AssetResourceLoader) SendsCommonMediaClientDataAsHTTPHeaders() bool {
+	_r := objc.Send[bool](objref.IDOf(arl), objc.RegisterName("sendsCommonMediaClientDataAsHTTPHeaders"))
 	return _r
 }
-
-// SetSendsCommonMediaClientDataAsHTTPHeaders wraps the corresponding Objective-C method.
-func (x *AssetResourceLoader) SetSendsCommonMediaClientDataAsHTTPHeaders(sendsCommonMediaClientDataAsHTTPHeaders bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsCommonMediaClientDataAsHTTPHeaders:"), sendsCommonMediaClientDataAsHTTPHeaders)
-}
-
-// AssetResourceLoaderable is the interface implemented by [AssetResourceLoader], for mocking and DI.
-type AssetResourceLoaderable interface {
-	obj.Object
-	WithPreloadsEligibleContentKeys(preloadsEligibleContentKeys bool) *AssetResourceLoader
-	WithSendsCommonMediaClientDataAsHTTPHeaders(sendsCommonMediaClientDataAsHTTPHeaders bool) *AssetResourceLoader
-	DelegateQueue() obj.Object
-	PreloadsEligibleContentKeys() bool
-	SetPreloadsEligibleContentKeys(preloadsEligibleContentKeys bool)
-	SendsCommonMediaClientDataAsHTTPHeaders() bool
-	SetSendsCommonMediaClientDataAsHTTPHeaders(sendsCommonMediaClientDataAsHTTPHeaders bool)
-}
-
-var _ AssetResourceLoaderable = (*AssetResourceLoader)(nil)

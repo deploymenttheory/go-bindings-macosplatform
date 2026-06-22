@@ -44,24 +44,24 @@ func rNNMatrixTrainingStateAdopt(id objc.ID) *RNNMatrixTrainingState {
 }
 
 // Description returns the object's -description text.
-func (x *RNNMatrixTrainingState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rmts *RNNMatrixTrainingState) Description() string {
+	return rt.Description(objref.IDOf(rmts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RNNMatrixTrainingState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rmts *RNNMatrixTrainingState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rmts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RNNMatrixTrainingState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rmts *RNNMatrixTrainingState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rmts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RNNMatrixTrainingState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rmts *RNNMatrixTrainingState) String() string {
+	return rt.Description(objref.IDOf(rmts))
 }
 
 // NewRNNMatrixTrainingState creates a new RNNMatrixTrainingState.
@@ -69,10 +69,3 @@ func NewRNNMatrixTrainingState() *RNNMatrixTrainingState {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSRNNMatrixTrainingState")), objc.RegisterName("new"))
 	return rNNMatrixTrainingStateAdopt(_id)
 }
-
-// RNNMatrixTrainingStateable is the interface implemented by [RNNMatrixTrainingState], for mocking and DI.
-type RNNMatrixTrainingStateable interface {
-	obj.Object
-}
-
-var _ RNNMatrixTrainingStateable = (*RNNMatrixTrainingState)(nil)

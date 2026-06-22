@@ -46,24 +46,24 @@ func vSAutoSignInTokenAdopt(id objc.ID) *VSAutoSignInToken {
 }
 
 // Description returns the object's -description text.
-func (x *VSAutoSignInToken) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vasit *VSAutoSignInToken) Description() string {
+	return rt.Description(objref.IDOf(vasit))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VSAutoSignInToken) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vasit *VSAutoSignInToken) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vasit), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VSAutoSignInToken) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vasit *VSAutoSignInToken) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vasit), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VSAutoSignInToken) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vasit *VSAutoSignInToken) String() string {
+	return rt.Description(objref.IDOf(vasit))
 }
 
 // NewVSAutoSignInToken creates a new VSAutoSignInToken.
@@ -73,25 +73,16 @@ func NewVSAutoSignInToken() *VSAutoSignInToken {
 }
 
 // Authorization wraps the corresponding Objective-C method.
-func (x *VSAutoSignInToken) Authorization() VSAutoSignInAuthorization {
-	_r := objc.Send[VSAutoSignInAuthorization](objref.IDOf(x), objc.RegisterName("authorization"))
+func (vasit *VSAutoSignInToken) Authorization() VSAutoSignInAuthorization {
+	_r := objc.Send[VSAutoSignInAuthorization](objref.IDOf(vasit), objc.RegisterName("authorization"))
 	return _r
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *VSAutoSignInToken) Value() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (vasit *VSAutoSignInToken) Value() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vasit), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// VSAutoSignInTokenable is the interface implemented by [VSAutoSignInToken], for mocking and DI.
-type VSAutoSignInTokenable interface {
-	obj.Object
-	Authorization() VSAutoSignInAuthorization
-	Value() string
-}
-
-var _ VSAutoSignInTokenable = (*VSAutoSignInToken)(nil)

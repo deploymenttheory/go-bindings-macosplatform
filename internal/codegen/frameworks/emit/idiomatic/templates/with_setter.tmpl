@@ -5,16 +5,16 @@
     Objective-C array from them, and a single-value property.
 */}}
 {{define "with_setter"}}{{.DocComment}}{{if .IsNSArray -}}
-func (x *{{.TypeName}}) {{.GoName}}(items ...{{.SliceElemType}}) *{{.TypeName}} {
+func ({{.RecvVar}} *{{.TypeName}}) {{.GoName}}(items ...{{.SliceElemType}}) *{{.TypeName}} {
 _arr := purego.SliceToNSArray(items, func(_v {{.SliceElemType}}) objc.ID { return objref.IDOf(_v) })
-objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName({{.SetterSelector | printf "%q"}}), _arr)
-return x
+objc.Send[objc.ID](objref.IDOf({{.RecvVar}}), objc.RegisterName({{.SetterSelector | printf "%q"}}), _arr)
+return {{.RecvVar}}
 }
 
 {{else -}}
-func (x *{{.TypeName}}) {{.GoName}}({{.ParamName}} {{.ParamType}}) *{{.TypeName}} {
-objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName({{.SetterSelector | printf "%q"}}), {{.ParamRawExpr}})
-return x
+func ({{.RecvVar}} *{{.TypeName}}) {{.GoName}}({{.ParamName}} {{.ParamType}}) *{{.TypeName}} {
+objc.Send[objc.ID](objref.IDOf({{.RecvVar}}), objc.RegisterName({{.SetterSelector | printf "%q"}}), {{.ParamRawExpr}})
+return {{.RecvVar}}
 }
 
 {{end}}{{end}}

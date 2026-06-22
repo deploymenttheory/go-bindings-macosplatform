@@ -46,24 +46,24 @@ func selectionAccessoryAdopt(id objc.ID) *SelectionAccessory {
 }
 
 // Description returns the object's -description text.
-func (x *SelectionAccessory) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sa *SelectionAccessory) Description() string {
+	return rt.Description(objref.IDOf(sa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SelectionAccessory) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sa *SelectionAccessory) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SelectionAccessory) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sa *SelectionAccessory) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SelectionAccessory) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sa *SelectionAccessory) String() string {
+	return rt.Description(objref.IDOf(sa))
 }
 
 // NewSelectionAccessory creates a new SelectionAccessory.
@@ -71,10 +71,3 @@ func NewSelectionAccessory() *SelectionAccessory {
 	_id := objc.Send[objc.ID](objc.ID(_class("MKSelectionAccessory")), objc.RegisterName("new"))
 	return selectionAccessoryAdopt(_id)
 }
-
-// SelectionAccessoryable is the interface implemented by [SelectionAccessory], for mocking and DI.
-type SelectionAccessoryable interface {
-	obj.Object
-}
-
-var _ SelectionAccessoryable = (*SelectionAccessory)(nil)

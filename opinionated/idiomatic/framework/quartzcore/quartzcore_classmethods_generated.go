@@ -6,6 +6,7 @@ package quartzcore
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -144,7 +145,7 @@ func SharedServer() *RemoteLayerServer {
 	return RemoteLayerServerFromID(_r)
 }
 
-// FadeDuration the time, in seconds, that newly added images take to “fade-in” to the rendered representation of the tiled layer.
+// FadeDuration returns the time, in seconds, that newly added images take to “fade-in” to the rendered representation of the tiled layer.
 func FadeDuration() float64 {
 	_r := objc.Send[float64](objc.ID(_class("CATiledLayer")), objc.RegisterName("fadeDuration"))
 	return _r
@@ -197,7 +198,7 @@ func SetAnimationTimingFunction(function *MediaTimingFunction) {
 	objc.Send[objc.ID](objc.ID(_class("CATransaction")), objc.RegisterName("setAnimationTimingFunction:"), objref.IDOf(function))
 }
 
-// DisableActions returns whether actions triggered as a result of property changes made within this transaction group are suppressed.
+// DisableActions reports whether actions triggered as a result of property changes made within this transaction group are suppressed.
 func DisableActions() bool {
 	_r := objc.Send[bool](objc.ID(_class("CATransaction")), objc.RegisterName("disableActions"))
 	return _r

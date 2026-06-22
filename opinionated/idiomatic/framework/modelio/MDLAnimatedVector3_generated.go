@@ -7,7 +7,6 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,17 +50,9 @@ func NewAnimatedVector3() *AnimatedVector3 {
 }
 
 // WithInterpolation sets the property and returns the receiver so calls can be chained.
-func (x *AnimatedVector3) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector3 {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
-	return x
+func (av *AnimatedVector3) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector3 {
+	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setInterpolation:"), interpolation)
+	return av
 }
-
-// AnimatedVector3able is the interface implemented by [AnimatedVector3], for mocking and DI.
-type AnimatedVector3able interface {
-	obj.Object
-	WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector3
-}
-
-var _ AnimatedVector3able = (*AnimatedVector3)(nil)
 
 var _ AnimatedValueProvider = (*AnimatedVector3)(nil)

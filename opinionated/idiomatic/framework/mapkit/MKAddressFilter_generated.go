@@ -46,24 +46,24 @@ func addressFilterAdopt(id objc.ID) *AddressFilter {
 }
 
 // Description returns the object's -description text.
-func (x *AddressFilter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (af *AddressFilter) Description() string {
+	return rt.Description(objref.IDOf(af))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AddressFilter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (af *AddressFilter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(af), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AddressFilter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (af *AddressFilter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(af), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AddressFilter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (af *AddressFilter) String() string {
+	return rt.Description(objref.IDOf(af))
 }
 
 // NewAddressFilterIncludingOptions creates an address filter with options for including results in a search.
@@ -81,22 +81,13 @@ func NewAddressFilterExcludingOptions(options AddressFilterOption) *AddressFilte
 }
 
 // IncludesOptions indicates whether options are included for filtering.
-func (x *AddressFilter) IncludesOptions(options AddressFilterOption) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesOptions:"), options)
+func (af *AddressFilter) IncludesOptions(options AddressFilterOption) bool {
+	_r := objc.Send[bool](objref.IDOf(af), objc.RegisterName("includesOptions:"), options)
 	return _r
 }
 
 // ExcludesOptions indicates whether options are excluded from filtering.
-func (x *AddressFilter) ExcludesOptions(options AddressFilterOption) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("excludesOptions:"), options)
+func (af *AddressFilter) ExcludesOptions(options AddressFilterOption) bool {
+	_r := objc.Send[bool](objref.IDOf(af), objc.RegisterName("excludesOptions:"), options)
 	return _r
 }
-
-// AddressFilterable is the interface implemented by [AddressFilter], for mocking and DI.
-type AddressFilterable interface {
-	obj.Object
-	IncludesOptions(options AddressFilterOption) bool
-	ExcludesOptions(options AddressFilterOption) bool
-}
-
-var _ AddressFilterable = (*AddressFilter)(nil)

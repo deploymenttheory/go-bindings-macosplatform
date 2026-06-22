@@ -53,24 +53,15 @@ func NewBatchInsertResult() *BatchInsertResult {
 }
 
 // Result wraps the corresponding Objective-C method.
-func (x *BatchInsertResult) Result() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("result"))
+func (bir *BatchInsertResult) Result() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bir), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
 
 // ResultType wraps the corresponding Objective-C method.
-func (x *BatchInsertResult) ResultType() BatchInsertRequestResultType {
-	_r := objc.Send[BatchInsertRequestResultType](objref.IDOf(x), objc.RegisterName("resultType"))
+func (bir *BatchInsertResult) ResultType() BatchInsertRequestResultType {
+	_r := objc.Send[BatchInsertRequestResultType](objref.IDOf(bir), objc.RegisterName("resultType"))
 	return _r
 }
-
-// BatchInsertResultable is the interface implemented by [BatchInsertResult], for mocking and DI.
-type BatchInsertResultable interface {
-	obj.Object
-	Result() obj.Object
-	ResultType() BatchInsertRequestResultType
-}
-
-var _ BatchInsertResultable = (*BatchInsertResult)(nil)
 
 var _ PersistentStoreResultProvider = (*BatchInsertResult)(nil)

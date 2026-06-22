@@ -46,24 +46,24 @@ func unitAveragePixelLuminanceAdopt(id objc.ID) *UnitAveragePixelLuminance {
 }
 
 // Description returns the object's -description text.
-func (x *UnitAveragePixelLuminance) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (uapl *UnitAveragePixelLuminance) Description() string {
+	return rt.Description(objref.IDOf(uapl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UnitAveragePixelLuminance) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (uapl *UnitAveragePixelLuminance) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(uapl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UnitAveragePixelLuminance) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (uapl *UnitAveragePixelLuminance) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(uapl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *UnitAveragePixelLuminance) String() string {
-	return rt.Description(objref.IDOf(x))
+func (uapl *UnitAveragePixelLuminance) String() string {
+	return rt.Description(objref.IDOf(uapl))
 }
 
 // NewUnitAveragePixelLuminance creates a new UnitAveragePixelLuminance.
@@ -71,10 +71,3 @@ func NewUnitAveragePixelLuminance() *UnitAveragePixelLuminance {
 	_id := objc.Send[objc.ID](objc.ID(_class("MXUnitAveragePixelLuminance")), objc.RegisterName("new"))
 	return unitAveragePixelLuminanceAdopt(_id)
 }
-
-// UnitAveragePixelLuminanceable is the interface implemented by [UnitAveragePixelLuminance], for mocking and DI.
-type UnitAveragePixelLuminanceable interface {
-	obj.Object
-}
-
-var _ UnitAveragePixelLuminanceable = (*UnitAveragePixelLuminance)(nil)

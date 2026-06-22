@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,21 +51,13 @@ func NewAudiogramSample() *AudiogramSample {
 	return audiogramSampleAdopt(_id)
 }
 
-// SensitivityPoints the hearing sensitivity readings associated with a hearing test.
+// SensitivityPoints returns the hearing sensitivity readings associated with a hearing test.
 //
 // SensitivityPoints returns the collection as a Go slice.
-func (x *AudiogramSample) SensitivityPoints() []*AudiogramSensitivityPoint {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sensitivityPoints"))
+func (as *AudiogramSample) SensitivityPoints() []*AudiogramSensitivityPoint {
+	_arr := objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("sensitivityPoints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AudiogramSensitivityPoint { return AudiogramSensitivityPointFromID(_id) })
 }
-
-// AudiogramSampleable is the interface implemented by [AudiogramSample], for mocking and DI.
-type AudiogramSampleable interface {
-	obj.Object
-	SensitivityPoints() []*AudiogramSensitivityPoint
-}
-
-var _ AudiogramSampleable = (*AudiogramSample)(nil)
 
 var _ SampleProvider = (*AudiogramSample)(nil)
 

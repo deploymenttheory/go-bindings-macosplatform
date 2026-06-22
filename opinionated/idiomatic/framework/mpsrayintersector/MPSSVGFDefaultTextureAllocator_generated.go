@@ -44,24 +44,24 @@ func sVGFDefaultTextureAllocatorAdopt(id objc.ID) *SVGFDefaultTextureAllocator {
 }
 
 // Description returns the object's -description text.
-func (x *SVGFDefaultTextureAllocator) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sdta *SVGFDefaultTextureAllocator) Description() string {
+	return rt.Description(objref.IDOf(sdta))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SVGFDefaultTextureAllocator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sdta *SVGFDefaultTextureAllocator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sdta), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SVGFDefaultTextureAllocator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sdta *SVGFDefaultTextureAllocator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sdta), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SVGFDefaultTextureAllocator) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sdta *SVGFDefaultTextureAllocator) String() string {
+	return rt.Description(objref.IDOf(sdta))
 }
 
 // NewSVGFDefaultTextureAllocator creates a new SVGFDefaultTextureAllocator.
@@ -71,21 +71,12 @@ func NewSVGFDefaultTextureAllocator() *SVGFDefaultTextureAllocator {
 }
 
 // Reset remove all textures from the cache
-func (x *SVGFDefaultTextureAllocator) Reset() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
+func (sdta *SVGFDefaultTextureAllocator) Reset() {
+	objc.Send[objc.ID](objref.IDOf(sdta), objc.RegisterName("reset"))
 }
 
-// AllocatedTextureCount the number of textures which have been allocated from this allocator
-func (x *SVGFDefaultTextureAllocator) AllocatedTextureCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("allocatedTextureCount"))
+// AllocatedTextureCount returns the number of textures which have been allocated from this allocator
+func (sdta *SVGFDefaultTextureAllocator) AllocatedTextureCount() int {
+	_r := objc.Send[int](objref.IDOf(sdta), objc.RegisterName("allocatedTextureCount"))
 	return _r
 }
-
-// SVGFDefaultTextureAllocatorable is the interface implemented by [SVGFDefaultTextureAllocator], for mocking and DI.
-type SVGFDefaultTextureAllocatorable interface {
-	obj.Object
-	Reset()
-	AllocatedTextureCount() int
-}
-
-var _ SVGFDefaultTextureAllocatorable = (*SVGFDefaultTextureAllocator)(nil)

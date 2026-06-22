@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewVolumeResolutionResult() *VolumeResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INVolumeResolutionResult")), objc.RegisterName("new"))
 	return volumeResolutionResultAdopt(_id)
 }
-
-// VolumeResolutionResultable is the interface implemented by [VolumeResolutionResult], for mocking and DI.
-type VolumeResolutionResultable interface {
-	obj.Object
-}
-
-var _ VolumeResolutionResultable = (*VolumeResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*VolumeResolutionResult)(nil)

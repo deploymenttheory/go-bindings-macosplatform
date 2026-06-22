@@ -7,7 +7,6 @@ package classkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,27 +53,18 @@ func NewProgressReportingCapabilityWithKindDetails(kind ProgressReportingCapabil
 }
 
 // Kind returns the kind of progress reporting capability
-func (x *ProgressReportingCapability) Kind() ProgressReportingCapabilityKind {
-	_r := objc.Send[ProgressReportingCapabilityKind](objref.IDOf(x), objc.RegisterName("kind"))
+func (prc *ProgressReportingCapability) Kind() ProgressReportingCapabilityKind {
+	_r := objc.Send[ProgressReportingCapabilityKind](objref.IDOf(prc), objc.RegisterName("kind"))
 	return _r
 }
 
 // Details returns progress reporting details
-func (x *ProgressReportingCapability) Details() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("details"))
+func (prc *ProgressReportingCapability) Details() string {
+	_r := objc.Send[objc.ID](objref.IDOf(prc), objc.RegisterName("details"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ProgressReportingCapabilityable is the interface implemented by [ProgressReportingCapability], for mocking and DI.
-type ProgressReportingCapabilityable interface {
-	obj.Object
-	Kind() ProgressReportingCapabilityKind
-	Details() string
-}
-
-var _ ProgressReportingCapabilityable = (*ProgressReportingCapability)(nil)
 
 var _ ObjectProvider = (*ProgressReportingCapability)(nil)

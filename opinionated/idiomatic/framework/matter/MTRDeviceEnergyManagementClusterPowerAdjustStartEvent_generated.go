@@ -44,24 +44,24 @@ func mTRDeviceEnergyManagementClusterPowerAdjustStartEventAdopt(id objc.ID) *MTR
 }
 
 // Description returns the object's -description text.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStartEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemcpase *MTRDeviceEnergyManagementClusterPowerAdjustStartEvent) Description() string {
+	return rt.Description(objref.IDOf(mdemcpase))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStartEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdemcpase *MTRDeviceEnergyManagementClusterPowerAdjustStartEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdemcpase), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStartEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdemcpase *MTRDeviceEnergyManagementClusterPowerAdjustStartEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdemcpase), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDeviceEnergyManagementClusterPowerAdjustStartEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemcpase *MTRDeviceEnergyManagementClusterPowerAdjustStartEvent) String() string {
+	return rt.Description(objref.IDOf(mdemcpase))
 }
 
 // NewMTRDeviceEnergyManagementClusterPowerAdjustStartEvent creates a new MTRDeviceEnergyManagementClusterPowerAdjustStartEvent.
@@ -69,10 +69,3 @@ func NewMTRDeviceEnergyManagementClusterPowerAdjustStartEvent() *MTRDeviceEnergy
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRDeviceEnergyManagementClusterPowerAdjustStartEvent")), objc.RegisterName("new"))
 	return mTRDeviceEnergyManagementClusterPowerAdjustStartEventAdopt(_id)
 }
-
-// MTRDeviceEnergyManagementClusterPowerAdjustStartEventable is the interface implemented by [MTRDeviceEnergyManagementClusterPowerAdjustStartEvent], for mocking and DI.
-type MTRDeviceEnergyManagementClusterPowerAdjustStartEventable interface {
-	obj.Object
-}
-
-var _ MTRDeviceEnergyManagementClusterPowerAdjustStartEventable = (*MTRDeviceEnergyManagementClusterPowerAdjustStartEvent)(nil)

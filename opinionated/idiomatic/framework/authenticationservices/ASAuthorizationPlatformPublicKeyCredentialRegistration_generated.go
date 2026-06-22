@@ -46,24 +46,24 @@ func authorizationPlatformPublicKeyCredentialRegistrationAdopt(id objc.ID) *Auth
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationPlatformPublicKeyCredentialRegistration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (appkcr *AuthorizationPlatformPublicKeyCredentialRegistration) Description() string {
+	return rt.Description(objref.IDOf(appkcr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationPlatformPublicKeyCredentialRegistration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (appkcr *AuthorizationPlatformPublicKeyCredentialRegistration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(appkcr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationPlatformPublicKeyCredentialRegistration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (appkcr *AuthorizationPlatformPublicKeyCredentialRegistration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(appkcr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationPlatformPublicKeyCredentialRegistration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (appkcr *AuthorizationPlatformPublicKeyCredentialRegistration) String() string {
+	return rt.Description(objref.IDOf(appkcr))
 }
 
 // NewAuthorizationPlatformPublicKeyCredentialRegistration creates a new AuthorizationPlatformPublicKeyCredentialRegistration.
@@ -73,29 +73,19 @@ func NewAuthorizationPlatformPublicKeyCredentialRegistration() *AuthorizationPla
 }
 
 // Attachment wraps the corresponding Objective-C method.
-func (x *AuthorizationPlatformPublicKeyCredentialRegistration) Attachment() AuthorizationPublicKeyCredentialAttachment {
-	_r := objc.Send[AuthorizationPublicKeyCredentialAttachment](objref.IDOf(x), objc.RegisterName("attachment"))
+func (appkcr *AuthorizationPlatformPublicKeyCredentialRegistration) Attachment() AuthorizationPublicKeyCredentialAttachment {
+	_r := objc.Send[AuthorizationPublicKeyCredentialAttachment](objref.IDOf(appkcr), objc.RegisterName("attachment"))
 	return _r
 }
 
 // LargeBlob wraps the corresponding Objective-C method.
-func (x *AuthorizationPlatformPublicKeyCredentialRegistration) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("largeBlob"))
+func (appkcr *AuthorizationPlatformPublicKeyCredentialRegistration) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput {
+	_r := objc.Send[objc.ID](objref.IDOf(appkcr), objc.RegisterName("largeBlob"))
 	return AuthorizationPublicKeyCredentialLargeBlobRegistrationOutputFromID(_r)
 }
 
 // Prf wraps the corresponding Objective-C method.
-func (x *AuthorizationPlatformPublicKeyCredentialRegistration) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationOutput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prf"))
+func (appkcr *AuthorizationPlatformPublicKeyCredentialRegistration) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationOutput {
+	_r := objc.Send[objc.ID](objref.IDOf(appkcr), objc.RegisterName("prf"))
 	return AuthorizationPublicKeyCredentialPRFRegistrationOutputFromID(_r)
 }
-
-// AuthorizationPlatformPublicKeyCredentialRegistrationable is the interface implemented by [AuthorizationPlatformPublicKeyCredentialRegistration], for mocking and DI.
-type AuthorizationPlatformPublicKeyCredentialRegistrationable interface {
-	obj.Object
-	Attachment() AuthorizationPublicKeyCredentialAttachment
-	LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput
-	Prf() *AuthorizationPublicKeyCredentialPRFRegistrationOutput
-}
-
-var _ AuthorizationPlatformPublicKeyCredentialRegistrationable = (*AuthorizationPlatformPublicKeyCredentialRegistration)(nil)

@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,40 +52,29 @@ func NewDetectHorizonRequest() *DetectHorizonRequest {
 	return detectHorizonRequestAdopt(_id)
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *DetectHorizonRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHorizonRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (dhr *DetectHorizonRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHorizonRequest {
+	objc.Send[objc.ID](objref.IDOf(dhr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return dhr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *DetectHorizonRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHorizonRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (dhr *DetectHorizonRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHorizonRequest {
+	objc.Send[objc.ID](objref.IDOf(dhr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return dhr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *DetectHorizonRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectHorizonRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (dhr *DetectHorizonRequest) WithUsesCPUOnly(usesCPUOnly bool) *DetectHorizonRequest {
+	objc.Send[objc.ID](objref.IDOf(dhr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return dhr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *DetectHorizonRequest) WithRevision(revision int) *DetectHorizonRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (dhr *DetectHorizonRequest) WithRevision(revision int) *DetectHorizonRequest {
+	objc.Send[objc.ID](objref.IDOf(dhr), objc.RegisterName("setRevision:"), revision)
+	return dhr
 }
-
-// DetectHorizonRequestable is the interface implemented by [DetectHorizonRequest], for mocking and DI.
-type DetectHorizonRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *DetectHorizonRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *DetectHorizonRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *DetectHorizonRequest
-	WithRevision(revision int) *DetectHorizonRequest
-}
-
-var _ DetectHorizonRequestable = (*DetectHorizonRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*DetectHorizonRequest)(nil)
 

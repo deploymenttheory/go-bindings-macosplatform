@@ -54,613 +54,516 @@ func NewPredicateEditor() *PredicateEditor {
 	return predicateEditorAdopt(_id)
 }
 
-// WithRowTemplates the row templates for the receiver.
-func (x *PredicateEditor) WithRowTemplates(items ...*PredicateEditorRowTemplate) *PredicateEditor {
+// WithRowTemplates sets the row templates for the receiver.
+func (pe *PredicateEditor) WithRowTemplates(items ...*PredicateEditorRowTemplate) *PredicateEditor {
 	_arr := purego.SliceToNSArray(items, func(_v *PredicateEditorRowTemplate) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowTemplates:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setRowTemplates:"), _arr)
+	return pe
 }
 
-// WithFormattingStringsFilename the name of the rule editor’s strings file.
-func (x *PredicateEditor) WithFormattingStringsFilename(formattingStringsFilename string) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingStringsFilename:"), purego.NSString(formattingStringsFilename))
-	return x
+// WithFormattingStringsFilename sets the name of the rule editor’s strings file.
+func (pe *PredicateEditor) WithFormattingStringsFilename(formattingStringsFilename string) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFormattingStringsFilename:"), purego.NSString(formattingStringsFilename))
+	return pe
 }
 
-// WithFormattingDictionary the formatting dictionary for the rule editor.
-func (x *PredicateEditor) WithFormattingDictionary(formattingDictionary obj.Object) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormattingDictionary:"), objref.IDOf(formattingDictionary))
-	return x
+// WithFormattingDictionary sets the formatting dictionary for the rule editor.
+func (pe *PredicateEditor) WithFormattingDictionary(formattingDictionary obj.Object) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFormattingDictionary:"), objref.IDOf(formattingDictionary))
+	return pe
 }
 
-// WithNestingMode the rule editor’s nesting mode.
-func (x *PredicateEditor) WithNestingMode(nestingMode RuleEditorNestingMode) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNestingMode:"), nestingMode)
-	return x
+// WithNestingMode sets the rule editor’s nesting mode.
+func (pe *PredicateEditor) WithNestingMode(nestingMode RuleEditorNestingMode) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNestingMode:"), nestingMode)
+	return pe
 }
 
-// WithRowHeight the rule editor’s row height.
-func (x *PredicateEditor) WithRowHeight(rowHeight float64) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowHeight:"), rowHeight)
-	return x
+// WithRowHeight sets the rule editor’s row height.
+func (pe *PredicateEditor) WithRowHeight(rowHeight float64) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setRowHeight:"), rowHeight)
+	return pe
 }
 
-// WithEditable a Boolean value that determines whether the rule editor is editable.
-func (x *PredicateEditor) WithEditable(editable bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets a Boolean value that determines whether the rule editor is editable.
+func (pe *PredicateEditor) WithEditable(editable bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setEditable:"), editable)
+	return pe
 }
 
-// WithCanRemoveAllRows a Boolean value that indicates whether all the rows can be removed.
-func (x *PredicateEditor) WithCanRemoveAllRows(canRemoveAllRows bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanRemoveAllRows:"), canRemoveAllRows)
-	return x
+// WithCanRemoveAllRows sets a Boolean value that indicates whether all the rows can be removed.
+func (pe *PredicateEditor) WithCanRemoveAllRows(canRemoveAllRows bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCanRemoveAllRows:"), canRemoveAllRows)
+	return pe
 }
 
-// WithRowTypeKeyPath the key path for the row type.
-func (x *PredicateEditor) WithRowTypeKeyPath(rowTypeKeyPath string) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowTypeKeyPath:"), purego.NSString(rowTypeKeyPath))
-	return x
+// WithRowTypeKeyPath sets the key path for the row type.
+func (pe *PredicateEditor) WithRowTypeKeyPath(rowTypeKeyPath string) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setRowTypeKeyPath:"), purego.NSString(rowTypeKeyPath))
+	return pe
 }
 
-// WithSubrowsKeyPath the key path for the subrows.
-func (x *PredicateEditor) WithSubrowsKeyPath(subrowsKeyPath string) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubrowsKeyPath:"), purego.NSString(subrowsKeyPath))
-	return x
+// WithSubrowsKeyPath sets the key path for the subrows.
+func (pe *PredicateEditor) WithSubrowsKeyPath(subrowsKeyPath string) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setSubrowsKeyPath:"), purego.NSString(subrowsKeyPath))
+	return pe
 }
 
-// WithCriteriaKeyPath the criteria key path.
-func (x *PredicateEditor) WithCriteriaKeyPath(criteriaKeyPath string) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCriteriaKeyPath:"), purego.NSString(criteriaKeyPath))
-	return x
+// WithCriteriaKeyPath sets the criteria key path.
+func (pe *PredicateEditor) WithCriteriaKeyPath(criteriaKeyPath string) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCriteriaKeyPath:"), purego.NSString(criteriaKeyPath))
+	return pe
 }
 
-// WithDisplayValuesKeyPath the display values key path.
-func (x *PredicateEditor) WithDisplayValuesKeyPath(displayValuesKeyPath string) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayValuesKeyPath:"), purego.NSString(displayValuesKeyPath))
-	return x
+// WithDisplayValuesKeyPath sets the display values key path.
+func (pe *PredicateEditor) WithDisplayValuesKeyPath(displayValuesKeyPath string) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setDisplayValuesKeyPath:"), purego.NSString(displayValuesKeyPath))
+	return pe
 }
 
-// WithTarget the target object that receives action messages from the cell.
-func (x *PredicateEditor) WithTarget(target obj.Object) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the target object that receives action messages from the cell.
+func (pe *PredicateEditor) WithTarget(target obj.Object) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return pe
 }
 
-// WithTag the tag identifying the receiver (not the tag of the receiver’s cell).
-func (x *PredicateEditor) WithTag(tag int) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets the tag identifying the receiver (not the tag of the receiver’s cell).
+func (pe *PredicateEditor) WithTag(tag int) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setTag:"), tag)
+	return pe
 }
 
-// WithIgnoresMultiClick a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
-func (x *PredicateEditor) WithIgnoresMultiClick(ignoresMultiClick bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
-	return x
+// WithIgnoresMultiClick sets a Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
+func (pe *PredicateEditor) WithIgnoresMultiClick(ignoresMultiClick bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
+	return pe
 }
 
-// WithContinuous a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
-func (x *PredicateEditor) WithContinuous(continuous bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
+func (pe *PredicateEditor) WithContinuous(continuous bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setContinuous:"), continuous)
+	return pe
 }
 
-// WithEnabled a Boolean value that indicates whether the receiver reacts to mouse events.
-func (x *PredicateEditor) WithEnabled(enabled bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the receiver reacts to mouse events.
+func (pe *PredicateEditor) WithEnabled(enabled bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setEnabled:"), enabled)
+	return pe
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the receiver refuses the first responder role.
-func (x *PredicateEditor) WithRefusesFirstResponder(refusesFirstResponder bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the receiver refuses the first responder role.
+func (pe *PredicateEditor) WithRefusesFirstResponder(refusesFirstResponder bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return pe
 }
 
-// WithHighlighted a Boolean value that indicates whether the cell is highlighted.
-func (x *PredicateEditor) WithHighlighted(highlighted bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value that indicates whether the cell is highlighted.
+func (pe *PredicateEditor) WithHighlighted(highlighted bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setHighlighted:"), highlighted)
+	return pe
 }
 
-// WithControlSize the size of the control.
-func (x *PredicateEditor) WithControlSize(controlSize ControlSize) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the control.
+func (pe *PredicateEditor) WithControlSize(controlSize ControlSize) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setControlSize:"), controlSize)
+	return pe
 }
 
-// WithFormatter the receiver’s formatter.
-func (x *PredicateEditor) WithFormatter(formatter obj.Object) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the receiver’s formatter.
+func (pe *PredicateEditor) WithFormatter(formatter obj.Object) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return pe
 }
 
-// WithObjectValue the value of the receiver’s cell as an Objective-C object.
-func (x *PredicateEditor) WithObjectValue(objectValue obj.Object) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the value of the receiver’s cell as an Objective-C object.
+func (pe *PredicateEditor) WithObjectValue(objectValue obj.Object) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return pe
 }
 
-// WithStringValue the value of the receiver’s cell as an NSString object.
-func (x *PredicateEditor) WithStringValue(stringValue string) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the value of the receiver’s cell as an NSString object.
+func (pe *PredicateEditor) WithStringValue(stringValue string) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return pe
 }
 
-// WithAttributedStringValue the value of the receiver’s cell as an attributed string.
-func (x *PredicateEditor) WithAttributedStringValue(attributedStringValue obj.Object) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the value of the receiver’s cell as an attributed string.
+func (pe *PredicateEditor) WithAttributedStringValue(attributedStringValue obj.Object) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return pe
 }
 
-// WithIntValue the value of the receiver’s cell as an integer.
-func (x *PredicateEditor) WithIntValue(intValue int) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the value of the receiver’s cell as an integer.
+func (pe *PredicateEditor) WithIntValue(intValue int) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setIntValue:"), intValue)
+	return pe
 }
 
-// WithIntegerValue the value of the receiver’s cell as an integer value.
-func (x *PredicateEditor) WithIntegerValue(integerValue int) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the value of the receiver’s cell as an integer value.
+func (pe *PredicateEditor) WithIntegerValue(integerValue int) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setIntegerValue:"), integerValue)
+	return pe
 }
 
-// WithFloatValue the value of the receiver’s cell as a single-precision floating-point number.
-func (x *PredicateEditor) WithFloatValue(floatValue float32) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the value of the receiver’s cell as a single-precision floating-point number.
+func (pe *PredicateEditor) WithFloatValue(floatValue float32) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFloatValue:"), floatValue)
+	return pe
 }
 
-// WithDoubleValue the value of the receiver’s cell as a double-precision floating-point number.
-func (x *PredicateEditor) WithDoubleValue(doubleValue float64) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the value of the receiver’s cell as a double-precision floating-point number.
+func (pe *PredicateEditor) WithDoubleValue(doubleValue float64) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return pe
 }
 
-// WithFont the font used to draw text in the receiver’s cell.
-func (x *PredicateEditor) WithFont(font *Font) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font used to draw text in the receiver’s cell.
+func (pe *PredicateEditor) WithFont(font *Font) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return pe
 }
 
-// WithUsesSingleLineMode a Boolean value that indicates whether the text in the control’s cell uses single line mode.
-func (x *PredicateEditor) WithUsesSingleLineMode(usesSingleLineMode bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value that indicates whether the text in the control’s cell uses single line mode.
+func (pe *PredicateEditor) WithUsesSingleLineMode(usesSingleLineMode bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return pe
 }
 
-// WithLineBreakMode the line break mode to use for text in the control’s cell.
-func (x *PredicateEditor) WithLineBreakMode(lineBreakMode LineBreakMode) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use for text in the control’s cell.
+func (pe *PredicateEditor) WithLineBreakMode(lineBreakMode LineBreakMode) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return pe
 }
 
-// WithAlignment the alignment mode of the text in the receiver’s cell.
-func (x *PredicateEditor) WithAlignment(alignment TextAlignment) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment mode of the text in the receiver’s cell.
+func (pe *PredicateEditor) WithAlignment(alignment TextAlignment) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAlignment:"), alignment)
+	return pe
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *PredicateEditor) WithBaseWritingDirection(baseWritingDirection WritingDirection) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (pe *PredicateEditor) WithBaseWritingDirection(baseWritingDirection WritingDirection) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return pe
 }
 
-// WithAllowsExpansionToolTips a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
-func (x *PredicateEditor) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
-	return x
+// WithAllowsExpansionToolTips sets a Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
+func (pe *PredicateEditor) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
+	return pe
 }
 
 // WithCell sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithCell(cell CellProvider) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
-	return x
+func (pe *PredicateEditor) WithCell(cell CellProvider) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCell:"), objref.IDOf(cell))
+	return pe
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithSubviews(items ...ViewProvider) *PredicateEditor {
+func (pe *PredicateEditor) WithSubviews(items ...ViewProvider) *PredicateEditor {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setSubviews:"), _arr)
+	return pe
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithHidden(hidden bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (pe *PredicateEditor) WithHidden(hidden bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setHidden:"), hidden)
+	return pe
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (pe *PredicateEditor) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return pe
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithAutoresizesSubviews(autoresizesSubviews bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (pe *PredicateEditor) WithAutoresizesSubviews(autoresizesSubviews bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return pe
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (pe *PredicateEditor) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return pe
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *PredicateEditor) WithFrame(frame corefoundation.CGRect) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (pe *PredicateEditor) WithFrame(frame corefoundation.CGRect) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFrame:"), frame)
+	return pe
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithFrameRotation(frameRotation float64) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (pe *PredicateEditor) WithFrameRotation(frameRotation float64) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return pe
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithFrameCenterRotation(frameCenterRotation float64) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (pe *PredicateEditor) WithFrameCenterRotation(frameCenterRotation float64) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return pe
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithBoundsRotation(boundsRotation float64) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (pe *PredicateEditor) WithBoundsRotation(boundsRotation float64) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return pe
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *PredicateEditor) WithBounds(bounds corefoundation.CGRect) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (pe *PredicateEditor) WithBounds(bounds corefoundation.CGRect) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setBounds:"), bounds)
+	return pe
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithCanDrawConcurrently(canDrawConcurrently bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (pe *PredicateEditor) WithCanDrawConcurrently(canDrawConcurrently bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return pe
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *PredicateEditor) WithNeedsDisplay(needsDisplay bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (pe *PredicateEditor) WithNeedsDisplay(needsDisplay bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return pe
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithAcceptsTouchEvents(acceptsTouchEvents bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (pe *PredicateEditor) WithAcceptsTouchEvents(acceptsTouchEvents bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return pe
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithWantsRestingTouches(wantsRestingTouches bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (pe *PredicateEditor) WithWantsRestingTouches(wantsRestingTouches bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return pe
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (pe *PredicateEditor) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return pe
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (pe *PredicateEditor) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return pe
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithWantsLayer(wantsLayer bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (pe *PredicateEditor) WithWantsLayer(wantsLayer bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return pe
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithLayer(layer obj.Object) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (pe *PredicateEditor) WithLayer(layer obj.Object) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return pe
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (pe *PredicateEditor) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return pe
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithNeedsLayout(needsLayout bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (pe *PredicateEditor) WithNeedsLayout(needsLayout bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return pe
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithAlphaValue(alphaValue float64) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (pe *PredicateEditor) WithAlphaValue(alphaValue float64) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return pe
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (pe *PredicateEditor) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return pe
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithBackgroundFilters(items ...obj.Object) *PredicateEditor {
+func (pe *PredicateEditor) WithBackgroundFilters(items ...obj.Object) *PredicateEditor {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return pe
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithCompositingFilter(compositingFilter obj.Object) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (pe *PredicateEditor) WithCompositingFilter(compositingFilter obj.Object) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return pe
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithContentFilters(items ...obj.Object) *PredicateEditor {
+func (pe *PredicateEditor) WithContentFilters(items ...obj.Object) *PredicateEditor {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setContentFilters:"), _arr)
+	return pe
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithShadow(shadow *Shadow) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (pe *PredicateEditor) WithShadow(shadow *Shadow) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return pe
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithClipsToBounds(clipsToBounds bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (pe *PredicateEditor) WithClipsToBounds(clipsToBounds bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return pe
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (pe *PredicateEditor) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return pe
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithToolTip(toolTip string) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (pe *PredicateEditor) WithToolTip(toolTip string) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return pe
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (pe *PredicateEditor) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return pe
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (pe *PredicateEditor) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return pe
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithNextKeyView(nextKeyView ViewProvider) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (pe *PredicateEditor) WithNextKeyView(nextKeyView ViewProvider) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return pe
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithFocusRingType(focusRingType FocusRingType) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (pe *PredicateEditor) WithFocusRingType(focusRingType FocusRingType) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return pe
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithGestureRecognizers(items ...GestureRecognizerProvider) *PredicateEditor {
+func (pe *PredicateEditor) WithGestureRecognizers(items ...GestureRecognizerProvider) *PredicateEditor {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return pe
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (pe *PredicateEditor) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return pe
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (pe *PredicateEditor) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return pe
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *PredicateEditor) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (pe *PredicateEditor) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return pe
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (pe *PredicateEditor) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return pe
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (pe *PredicateEditor) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return pe
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (pe *PredicateEditor) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return pe
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (pe *PredicateEditor) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return pe
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (pe *PredicateEditor) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return pe
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (pe *PredicateEditor) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return pe
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (pe *PredicateEditor) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return pe
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *PredicateEditor) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (pe *PredicateEditor) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return pe
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *PredicateEditor) WithNextResponder(nextResponder ResponderProvider) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (pe *PredicateEditor) WithNextResponder(nextResponder ResponderProvider) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return pe
 }
 
-// WithMenu returns the responder’s menu.
-func (x *PredicateEditor) WithMenu(menu *Menu) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (pe *PredicateEditor) WithMenu(menu *Menu) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return pe
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *PredicateEditor) WithUserActivity(userActivity obj.Object) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (pe *PredicateEditor) WithUserActivity(userActivity obj.Object) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return pe
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *PredicateEditor) WithTouchBar(touchBar *TouchBar) *PredicateEditor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (pe *PredicateEditor) WithTouchBar(touchBar *TouchBar) *PredicateEditor {
+	objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return pe
 }
 
 // RowTemplates wraps the corresponding Objective-C method.
 //
 // RowTemplates returns the collection as a Go slice.
-func (x *PredicateEditor) RowTemplates() []*PredicateEditorRowTemplate {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rowTemplates"))
+func (pe *PredicateEditor) RowTemplates() []*PredicateEditorRowTemplate {
+	_arr := objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("rowTemplates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PredicateEditorRowTemplate { return PredicateEditorRowTemplateFromID(_id) })
 }
-
-// SetRowTemplates wraps the corresponding Objective-C method.
-func (x *PredicateEditor) SetRowTemplates(rowTemplates []*PredicateEditorRowTemplate) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowTemplates:"), purego.SliceToNSArray(rowTemplates, func(_v *PredicateEditorRowTemplate) objc.ID { return objref.IDOf(_v) }))
-}
-
-// PredicateEditorable is the interface implemented by [PredicateEditor], for mocking and DI.
-type PredicateEditorable interface {
-	obj.Object
-	WithRowTemplates(items ...*PredicateEditorRowTemplate) *PredicateEditor
-	WithFormattingStringsFilename(formattingStringsFilename string) *PredicateEditor
-	WithFormattingDictionary(formattingDictionary obj.Object) *PredicateEditor
-	WithNestingMode(nestingMode RuleEditorNestingMode) *PredicateEditor
-	WithRowHeight(rowHeight float64) *PredicateEditor
-	WithEditable(editable bool) *PredicateEditor
-	WithCanRemoveAllRows(canRemoveAllRows bool) *PredicateEditor
-	WithRowTypeKeyPath(rowTypeKeyPath string) *PredicateEditor
-	WithSubrowsKeyPath(subrowsKeyPath string) *PredicateEditor
-	WithCriteriaKeyPath(criteriaKeyPath string) *PredicateEditor
-	WithDisplayValuesKeyPath(displayValuesKeyPath string) *PredicateEditor
-	WithTarget(target obj.Object) *PredicateEditor
-	WithTag(tag int) *PredicateEditor
-	WithIgnoresMultiClick(ignoresMultiClick bool) *PredicateEditor
-	WithContinuous(continuous bool) *PredicateEditor
-	WithEnabled(enabled bool) *PredicateEditor
-	WithRefusesFirstResponder(refusesFirstResponder bool) *PredicateEditor
-	WithHighlighted(highlighted bool) *PredicateEditor
-	WithControlSize(controlSize ControlSize) *PredicateEditor
-	WithFormatter(formatter obj.Object) *PredicateEditor
-	WithObjectValue(objectValue obj.Object) *PredicateEditor
-	WithStringValue(stringValue string) *PredicateEditor
-	WithAttributedStringValue(attributedStringValue obj.Object) *PredicateEditor
-	WithIntValue(intValue int) *PredicateEditor
-	WithIntegerValue(integerValue int) *PredicateEditor
-	WithFloatValue(floatValue float32) *PredicateEditor
-	WithDoubleValue(doubleValue float64) *PredicateEditor
-	WithFont(font *Font) *PredicateEditor
-	WithUsesSingleLineMode(usesSingleLineMode bool) *PredicateEditor
-	WithLineBreakMode(lineBreakMode LineBreakMode) *PredicateEditor
-	WithAlignment(alignment TextAlignment) *PredicateEditor
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *PredicateEditor
-	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *PredicateEditor
-	WithCell(cell CellProvider) *PredicateEditor
-	WithSubviews(items ...ViewProvider) *PredicateEditor
-	WithHidden(hidden bool) *PredicateEditor
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *PredicateEditor
-	WithAutoresizesSubviews(autoresizesSubviews bool) *PredicateEditor
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *PredicateEditor
-	WithFrame(frame corefoundation.CGRect) *PredicateEditor
-	WithFrameRotation(frameRotation float64) *PredicateEditor
-	WithFrameCenterRotation(frameCenterRotation float64) *PredicateEditor
-	WithBoundsRotation(boundsRotation float64) *PredicateEditor
-	WithBounds(bounds corefoundation.CGRect) *PredicateEditor
-	WithCanDrawConcurrently(canDrawConcurrently bool) *PredicateEditor
-	WithNeedsDisplay(needsDisplay bool) *PredicateEditor
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *PredicateEditor
-	WithWantsRestingTouches(wantsRestingTouches bool) *PredicateEditor
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *PredicateEditor
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *PredicateEditor
-	WithWantsLayer(wantsLayer bool) *PredicateEditor
-	WithLayer(layer obj.Object) *PredicateEditor
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *PredicateEditor
-	WithNeedsLayout(needsLayout bool) *PredicateEditor
-	WithAlphaValue(alphaValue float64) *PredicateEditor
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *PredicateEditor
-	WithBackgroundFilters(items ...obj.Object) *PredicateEditor
-	WithCompositingFilter(compositingFilter obj.Object) *PredicateEditor
-	WithContentFilters(items ...obj.Object) *PredicateEditor
-	WithShadow(shadow *Shadow) *PredicateEditor
-	WithClipsToBounds(clipsToBounds bool) *PredicateEditor
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *PredicateEditor
-	WithToolTip(toolTip string) *PredicateEditor
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PredicateEditor
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *PredicateEditor
-	WithNextKeyView(nextKeyView ViewProvider) *PredicateEditor
-	WithFocusRingType(focusRingType FocusRingType) *PredicateEditor
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *PredicateEditor
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PredicateEditor
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *PredicateEditor
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *PredicateEditor
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *PredicateEditor
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *PredicateEditor
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *PredicateEditor
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *PredicateEditor
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *PredicateEditor
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *PredicateEditor
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *PredicateEditor
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PredicateEditor
-	WithNextResponder(nextResponder ResponderProvider) *PredicateEditor
-	WithMenu(menu *Menu) *PredicateEditor
-	WithUserActivity(userActivity obj.Object) *PredicateEditor
-	WithTouchBar(touchBar *TouchBar) *PredicateEditor
-	RowTemplates() []*PredicateEditorRowTemplate
-	SetRowTemplates(rowTemplates []*PredicateEditorRowTemplate)
-}
-
-var _ PredicateEditorable = (*PredicateEditor)(nil)
 
 var _ RuleEditorProvider = (*PredicateEditor)(nil)
 

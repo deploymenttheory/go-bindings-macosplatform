@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,26 +50,17 @@ func NewNNReductionFeatureChannelsArgumentMaxNode() *NNReductionFeatureChannelsA
 	return nNReductionFeatureChannelsArgumentMaxNodeAdopt(_id)
 }
 
-// WithClipRectSource the clip rectangle to apply to the source image.
-func (x *NNReductionFeatureChannelsArgumentMaxNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsArgumentMaxNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the clip rectangle to apply to the source image.
+func (nrfcamn *NNReductionFeatureChannelsArgumentMaxNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsArgumentMaxNode {
+	objc.Send[objc.ID](objref.IDOf(nrfcamn), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return nrfcamn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNReductionFeatureChannelsArgumentMaxNode) WithLabel(label string) *NNReductionFeatureChannelsArgumentMaxNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nrfcamn *NNReductionFeatureChannelsArgumentMaxNode) WithLabel(label string) *NNReductionFeatureChannelsArgumentMaxNode {
+	objc.Send[objc.ID](objref.IDOf(nrfcamn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nrfcamn
 }
-
-// NNReductionFeatureChannelsArgumentMaxNodeable is the interface implemented by [NNReductionFeatureChannelsArgumentMaxNode], for mocking and DI.
-type NNReductionFeatureChannelsArgumentMaxNodeable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsArgumentMaxNode
-	WithLabel(label string) *NNReductionFeatureChannelsArgumentMaxNode
-}
-
-var _ NNReductionFeatureChannelsArgumentMaxNodeable = (*NNReductionFeatureChannelsArgumentMaxNode)(nil)
 
 var _ NNUnaryReductionNodeProvider = (*NNReductionFeatureChannelsArgumentMaxNode)(nil)
 

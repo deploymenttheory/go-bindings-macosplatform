@@ -51,66 +51,51 @@ func NewMTRTestClusterClusterSimpleStruct() *MTRTestClusterClusterSimpleStruct {
 }
 
 // WithA sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterSimpleStruct) WithA(a obj.Object) *MTRTestClusterClusterSimpleStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setA:"), objref.IDOf(a))
-	return x
+func (mtccss *MTRTestClusterClusterSimpleStruct) WithA(a obj.Object) *MTRTestClusterClusterSimpleStruct {
+	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setA:"), objref.IDOf(a))
+	return mtccss
 }
 
 // WithB sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterSimpleStruct) WithB(b obj.Object) *MTRTestClusterClusterSimpleStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setB:"), objref.IDOf(b))
-	return x
+func (mtccss *MTRTestClusterClusterSimpleStruct) WithB(b obj.Object) *MTRTestClusterClusterSimpleStruct {
+	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setB:"), objref.IDOf(b))
+	return mtccss
 }
 
 // WithC sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterSimpleStruct) WithC(c obj.Object) *MTRTestClusterClusterSimpleStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setC:"), objref.IDOf(c))
-	return x
+func (mtccss *MTRTestClusterClusterSimpleStruct) WithC(c obj.Object) *MTRTestClusterClusterSimpleStruct {
+	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setC:"), objref.IDOf(c))
+	return mtccss
 }
 
 // WithD sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterSimpleStruct) WithD(d obj.Object) *MTRTestClusterClusterSimpleStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setD:"), objref.IDOf(d))
-	return x
+func (mtccss *MTRTestClusterClusterSimpleStruct) WithD(d obj.Object) *MTRTestClusterClusterSimpleStruct {
+	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setD:"), objref.IDOf(d))
+	return mtccss
 }
 
 // WithE sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterSimpleStruct) WithE(e string) *MTRTestClusterClusterSimpleStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setE:"), purego.NSString(e))
-	return x
+func (mtccss *MTRTestClusterClusterSimpleStruct) WithE(e string) *MTRTestClusterClusterSimpleStruct {
+	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setE:"), purego.NSString(e))
+	return mtccss
 }
 
 // WithF sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterSimpleStruct) WithF(f obj.Object) *MTRTestClusterClusterSimpleStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setF:"), objref.IDOf(f))
-	return x
+func (mtccss *MTRTestClusterClusterSimpleStruct) WithF(f obj.Object) *MTRTestClusterClusterSimpleStruct {
+	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setF:"), objref.IDOf(f))
+	return mtccss
 }
 
 // WithG sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterSimpleStruct) WithG(g obj.Object) *MTRTestClusterClusterSimpleStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setG:"), objref.IDOf(g))
-	return x
+func (mtccss *MTRTestClusterClusterSimpleStruct) WithG(g obj.Object) *MTRTestClusterClusterSimpleStruct {
+	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setG:"), objref.IDOf(g))
+	return mtccss
 }
 
 // WithH sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterSimpleStruct) WithH(h obj.Object) *MTRTestClusterClusterSimpleStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setH:"), objref.IDOf(h))
-	return x
+func (mtccss *MTRTestClusterClusterSimpleStruct) WithH(h obj.Object) *MTRTestClusterClusterSimpleStruct {
+	objc.Send[objc.ID](objref.IDOf(mtccss), objc.RegisterName("setH:"), objref.IDOf(h))
+	return mtccss
 }
-
-// MTRTestClusterClusterSimpleStructable is the interface implemented by [MTRTestClusterClusterSimpleStruct], for mocking and DI.
-type MTRTestClusterClusterSimpleStructable interface {
-	obj.Object
-	WithA(a obj.Object) *MTRTestClusterClusterSimpleStruct
-	WithB(b obj.Object) *MTRTestClusterClusterSimpleStruct
-	WithC(c obj.Object) *MTRTestClusterClusterSimpleStruct
-	WithD(d obj.Object) *MTRTestClusterClusterSimpleStruct
-	WithE(e string) *MTRTestClusterClusterSimpleStruct
-	WithF(f obj.Object) *MTRTestClusterClusterSimpleStruct
-	WithG(g obj.Object) *MTRTestClusterClusterSimpleStruct
-	WithH(h obj.Object) *MTRTestClusterClusterSimpleStruct
-}
-
-var _ MTRTestClusterClusterSimpleStructable = (*MTRTestClusterClusterSimpleStruct)(nil)
 
 var _ MTRUnitTestingClusterSimpleStructProvider = (*MTRTestClusterClusterSimpleStruct)(nil)

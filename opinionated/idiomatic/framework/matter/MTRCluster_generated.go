@@ -46,43 +46,35 @@ func mTRClusterAdopt(id objc.ID) *MTRCluster {
 }
 
 // Description returns the object's -description text.
-func (x *MTRCluster) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mc *MTRCluster) Description() string {
+	return rt.Description(objref.IDOf(mc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRCluster) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mc *MTRCluster) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRCluster) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mc *MTRCluster) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRCluster) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mc *MTRCluster) String() string {
+	return rt.Description(objref.IDOf(mc))
 }
 
 // EndpointID wraps the corresponding Objective-C method.
-func (x *MTRCluster) EndpointID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpointID"))
+func (mc *MTRCluster) EndpointID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("endpointID"))
 	return obj.Wrap(_r)
 }
-
-// MTRClusterable is the interface implemented by [MTRCluster], for mocking and DI.
-type MTRClusterable interface {
-	obj.Object
-	EndpointID() obj.Object
-}
-
-var _ MTRClusterable = (*MTRCluster)(nil)
 
 // isMTRCluster marks MTRCluster — and, by embedding promotion, its
 // subclasses — as a member of the MTRCluster hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRCluster) isMTRCluster() {}
+func (mc *MTRCluster) isMTRCluster() {}
 
 var _ MTRClusterProvider = (*MTRCluster)(nil)

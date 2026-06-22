@@ -5,12 +5,13 @@
 package quartzcore
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MediaTimingFunction is an idiomatic wrapper over the Objective-C class CAMediaTimingFunction.
@@ -47,24 +48,24 @@ func mediaTimingFunctionAdopt(id objc.ID) *MediaTimingFunction {
 }
 
 // Description returns the object's -description text.
-func (x *MediaTimingFunction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtf *MediaTimingFunction) Description() string {
+	return rt.Description(objref.IDOf(mtf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MediaTimingFunction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtf *MediaTimingFunction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MediaTimingFunction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtf *MediaTimingFunction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MediaTimingFunction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtf *MediaTimingFunction) String() string {
+	return rt.Description(objref.IDOf(mtf))
 }
 
 // NewMediaTimingFunctionWithControlPoints returns an initialized timing function modeled as a cubic Bézier curve using the specified control points.
@@ -75,16 +76,8 @@ func NewMediaTimingFunctionWithControlPoints(c1x float32, c1y float32, c2x float
 }
 
 // GetControlPointAtIndexValues returns the control point for the specified index.
-func (x *MediaTimingFunction) GetControlPointAtIndexValues(idx int) (ptr float32) {
+func (mtf *MediaTimingFunction) GetControlPointAtIndexValues(idx int) (ptr float32) {
 	var _out0 float32
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getControlPointAtIndex:values:"), idx, unsafe.Pointer(&_out0))
+	objc.Send[objc.ID](objref.IDOf(mtf), objc.RegisterName("getControlPointAtIndex:values:"), idx, unsafe.Pointer(&_out0))
 	return _out0
 }
-
-// MediaTimingFunctionable is the interface implemented by [MediaTimingFunction], for mocking and DI.
-type MediaTimingFunctionable interface {
-	obj.Object
-	GetControlPointAtIndexValues(idx int) (ptr float32)
-}
-
-var _ MediaTimingFunctionable = (*MediaTimingFunction)(nil)

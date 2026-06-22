@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRNetworkCommissioningClusterScanNetworksResponseParams is an idiomatic wrapper over the Objective-C class MTRNetworkCommissioningClusterScanNetworksResponseParams.
@@ -46,24 +47,24 @@ func mTRNetworkCommissioningClusterScanNetworksResponseParamsAdopt(id objc.ID) *
 }
 
 // Description returns the object's -description text.
-func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) Description() string {
+	return rt.Description(objref.IDOf(mnccsnrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mnccsnrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mnccsnrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) String() string {
+	return rt.Description(objref.IDOf(mnccsnrp))
 }
 
 // NewMTRNetworkCommissioningClusterScanNetworksResponseParamsWithResponseValueError initialize an MTRNetworkCommissioningClusterScanNetworksResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
@@ -78,97 +79,62 @@ func NewMTRNetworkCommissioningClusterScanNetworksResponseParamsWithResponseValu
 }
 
 // WithNetworkingStatus sets the property and returns the receiver so calls can be chained.
-func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) WithNetworkingStatus(networkingStatus obj.Object) *MTRNetworkCommissioningClusterScanNetworksResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkingStatus:"), objref.IDOf(networkingStatus))
-	return x
+func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) WithNetworkingStatus(networkingStatus obj.Object) *MTRNetworkCommissioningClusterScanNetworksResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mnccsnrp), objc.RegisterName("setNetworkingStatus:"), objref.IDOf(networkingStatus))
+	return mnccsnrp
 }
 
 // WithDebugText sets the property and returns the receiver so calls can be chained.
-func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) WithDebugText(debugText string) *MTRNetworkCommissioningClusterScanNetworksResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
-	return x
+func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) WithDebugText(debugText string) *MTRNetworkCommissioningClusterScanNetworksResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mnccsnrp), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
+	return mnccsnrp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterScanNetworksResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterScanNetworksResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mnccsnrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mnccsnrp
 }
 
 // NetworkingStatus wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) NetworkingStatus() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkingStatus"))
+func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) NetworkingStatus() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mnccsnrp), objc.RegisterName("networkingStatus"))
 	return obj.Wrap(_r)
 }
 
-// SetNetworkingStatus wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetNetworkingStatus(networkingStatus obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkingStatus:"), objref.IDOf(networkingStatus))
-}
-
 // DebugText wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) DebugText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("debugText"))
+func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) DebugText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mnccsnrp), objc.RegisterName("debugText"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetDebugText wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetDebugText(debugText string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDebugText:"), purego.NSString(debugText))
-}
-
 // WiFiScanResults wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) WiFiScanResults() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wiFiScanResults"))
+func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) WiFiScanResults() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mnccsnrp), objc.RegisterName("wiFiScanResults"))
 	return obj.Wrap(_r)
 }
 
 // SetWiFiScanResults wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetWiFiScanResults(wiFiScanResults obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWiFiScanResults:"), objref.IDOf(wiFiScanResults))
+func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetWiFiScanResults(wiFiScanResults obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mnccsnrp), objc.RegisterName("setWiFiScanResults:"), objref.IDOf(wiFiScanResults))
 }
 
 // ThreadScanResults wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) ThreadScanResults() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("threadScanResults"))
+func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) ThreadScanResults() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mnccsnrp), objc.RegisterName("threadScanResults"))
 	return obj.Wrap(_r)
 }
 
 // SetThreadScanResults wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetThreadScanResults(threadScanResults obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadScanResults:"), objref.IDOf(threadScanResults))
+func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetThreadScanResults(threadScanResults obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mnccsnrp), objc.RegisterName("setThreadScanResults:"), objref.IDOf(threadScanResults))
 }
 
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mnccsnrp *MTRNetworkCommissioningClusterScanNetworksResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mnccsnrp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
-
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterScanNetworksResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// MTRNetworkCommissioningClusterScanNetworksResponseParamsable is the interface implemented by [MTRNetworkCommissioningClusterScanNetworksResponseParams], for mocking and DI.
-type MTRNetworkCommissioningClusterScanNetworksResponseParamsable interface {
-	obj.Object
-	WithNetworkingStatus(networkingStatus obj.Object) *MTRNetworkCommissioningClusterScanNetworksResponseParams
-	WithDebugText(debugText string) *MTRNetworkCommissioningClusterScanNetworksResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterScanNetworksResponseParams
-	NetworkingStatus() obj.Object
-	SetNetworkingStatus(networkingStatus obj.Object)
-	DebugText() string
-	SetDebugText(debugText string)
-	WiFiScanResults() obj.Object
-	SetWiFiScanResults(wiFiScanResults obj.Object)
-	ThreadScanResults() obj.Object
-	SetThreadScanResults(threadScanResults obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-}
-
-var _ MTRNetworkCommissioningClusterScanNetworksResponseParamsable = (*MTRNetworkCommissioningClusterScanNetworksResponseParams)(nil)

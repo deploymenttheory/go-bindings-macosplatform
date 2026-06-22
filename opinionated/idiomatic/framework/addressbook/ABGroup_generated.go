@@ -53,76 +53,60 @@ func NewGroup() *Group {
 }
 
 // Members returns an array of persons in a group.
-func (x *Group) Members() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("members"))
+func (g *Group) Members() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("members"))
 	return obj.Wrap(_r)
 }
 
 // AddMember adds a person to a group.
-func (x *Group) AddMember(person *Person) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addMember:"), objref.IDOf(person))
+func (g *Group) AddMember(person *Person) bool {
+	_r := objc.Send[bool](objref.IDOf(g), objc.RegisterName("addMember:"), objref.IDOf(person))
 	return _r
 }
 
 // RemoveMember removes a person from a group.
-func (x *Group) RemoveMember(person *Person) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeMember:"), objref.IDOf(person))
+func (g *Group) RemoveMember(person *Person) bool {
+	_r := objc.Send[bool](objref.IDOf(g), objc.RegisterName("removeMember:"), objref.IDOf(person))
 	return _r
 }
 
 // Subgroups returns an array containing a group’s subgroups.
-func (x *Group) Subgroups() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subgroups"))
+func (g *Group) Subgroups() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("subgroups"))
 	return obj.Wrap(_r)
 }
 
 // AddSubgroup adds a subgroup to another group.
-func (x *Group) AddSubgroup(group *Group) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("addSubgroup:"), objref.IDOf(group))
+func (g *Group) AddSubgroup(group *Group) bool {
+	_r := objc.Send[bool](objref.IDOf(g), objc.RegisterName("addSubgroup:"), objref.IDOf(group))
 	return _r
 }
 
 // RemoveSubgroup removes a subgroup from a group.
-func (x *Group) RemoveSubgroup(group *Group) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeSubgroup:"), objref.IDOf(group))
+func (g *Group) RemoveSubgroup(group *Group) bool {
+	_r := objc.Send[bool](objref.IDOf(g), objc.RegisterName("removeSubgroup:"), objref.IDOf(group))
 	return _r
 }
 
 // ParentGroups returns an array containing a group’s parents—that is, the groups that a group belongs to.
-func (x *Group) ParentGroups() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentGroups"))
+func (g *Group) ParentGroups() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("parentGroups"))
 	return obj.Wrap(_r)
 }
 
 // SetDistributionIdentifierForPropertyPerson assigns a specific distribution identifier for a person’s multivalue list property so that the group can be used as a distribution list.
-func (x *Group) SetDistributionIdentifierForPropertyPerson(identifier string, property string, person *Person) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setDistributionIdentifier:forProperty:person:"), purego.NSString(identifier), purego.NSString(property), objref.IDOf(person))
+func (g *Group) SetDistributionIdentifierForPropertyPerson(identifier string, property string, person *Person) bool {
+	_r := objc.Send[bool](objref.IDOf(g), objc.RegisterName("setDistributionIdentifier:forProperty:person:"), purego.NSString(identifier), purego.NSString(property), objref.IDOf(person))
 	return _r
 }
 
 // DistributionIdentifierForPropertyPerson returns the distribution identifier for the given property and person.
-func (x *Group) DistributionIdentifierForPropertyPerson(property string, person *Person) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("distributionIdentifierForProperty:person:"), purego.NSString(property), objref.IDOf(person))
+func (g *Group) DistributionIdentifierForPropertyPerson(property string, person *Person) string {
+	_r := objc.Send[objc.ID](objref.IDOf(g), objc.RegisterName("distributionIdentifierForProperty:person:"), purego.NSString(property), objref.IDOf(person))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Groupable is the interface implemented by [Group], for mocking and DI.
-type Groupable interface {
-	obj.Object
-	Members() obj.Object
-	AddMember(person *Person) bool
-	RemoveMember(person *Person) bool
-	Subgroups() obj.Object
-	AddSubgroup(group *Group) bool
-	RemoveSubgroup(group *Group) bool
-	ParentGroups() obj.Object
-	SetDistributionIdentifierForPropertyPerson(identifier string, property string, person *Person) bool
-	DistributionIdentifierForPropertyPerson(property string, person *Person) string
-}
-
-var _ Groupable = (*Group)(nil)
 
 var _ RecordProvider = (*Group)(nil)

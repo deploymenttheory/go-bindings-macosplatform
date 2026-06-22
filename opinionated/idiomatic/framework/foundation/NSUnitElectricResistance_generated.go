@@ -53,18 +53,10 @@ func NewUnitElectricResistance() *UnitElectricResistance {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitElectricResistance) WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricResistance {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (uer *UnitElectricResistance) WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricResistance {
+	objc.Send[objc.ID](objref.IDOf(uer), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return uer
 }
-
-// UnitElectricResistanceable is the interface implemented by [UnitElectricResistance], for mocking and DI.
-type UnitElectricResistanceable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitElectricResistance
-}
-
-var _ UnitElectricResistanceable = (*UnitElectricResistance)(nil)
 
 var _ DimensionProvider = (*UnitElectricResistance)(nil)
 

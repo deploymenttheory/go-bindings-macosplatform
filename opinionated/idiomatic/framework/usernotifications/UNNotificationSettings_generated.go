@@ -46,24 +46,24 @@ func notificationSettingsAdopt(id objc.ID) *NotificationSettings {
 }
 
 // Description returns the object's -description text.
-func (x *NotificationSettings) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ns *NotificationSettings) Description() string {
+	return rt.Description(objref.IDOf(ns))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NotificationSettings) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ns *NotificationSettings) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ns), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NotificationSettings) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ns *NotificationSettings) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ns), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NotificationSettings) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ns *NotificationSettings) String() string {
+	return rt.Description(objref.IDOf(ns))
 }
 
 // NewNotificationSettings creates a new NotificationSettings.
@@ -73,92 +73,73 @@ func NewNotificationSettings() *NotificationSettings {
 }
 
 // AuthorizationStatus wraps the corresponding Objective-C method.
-func (x *NotificationSettings) AuthorizationStatus() AuthorizationStatus {
-	_r := objc.Send[AuthorizationStatus](objref.IDOf(x), objc.RegisterName("authorizationStatus"))
+func (ns *NotificationSettings) AuthorizationStatus() AuthorizationStatus {
+	_r := objc.Send[AuthorizationStatus](objref.IDOf(ns), objc.RegisterName("authorizationStatus"))
 	return _r
 }
 
 // SoundSetting wraps the corresponding Objective-C method.
-func (x *NotificationSettings) SoundSetting() NotificationSetting {
-	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("soundSetting"))
+func (ns *NotificationSettings) SoundSetting() NotificationSetting {
+	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("soundSetting"))
 	return _r
 }
 
 // BadgeSetting wraps the corresponding Objective-C method.
-func (x *NotificationSettings) BadgeSetting() NotificationSetting {
-	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("badgeSetting"))
+func (ns *NotificationSettings) BadgeSetting() NotificationSetting {
+	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("badgeSetting"))
 	return _r
 }
 
 // AlertSetting wraps the corresponding Objective-C method.
-func (x *NotificationSettings) AlertSetting() NotificationSetting {
-	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("alertSetting"))
+func (ns *NotificationSettings) AlertSetting() NotificationSetting {
+	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("alertSetting"))
 	return _r
 }
 
 // NotificationCenterSetting wraps the corresponding Objective-C method.
-func (x *NotificationSettings) NotificationCenterSetting() NotificationSetting {
-	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("notificationCenterSetting"))
+func (ns *NotificationSettings) NotificationCenterSetting() NotificationSetting {
+	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("notificationCenterSetting"))
 	return _r
 }
 
 // LockScreenSetting wraps the corresponding Objective-C method.
-func (x *NotificationSettings) LockScreenSetting() NotificationSetting {
-	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("lockScreenSetting"))
+func (ns *NotificationSettings) LockScreenSetting() NotificationSetting {
+	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("lockScreenSetting"))
 	return _r
 }
 
 // ShowPreviewsSetting wraps the corresponding Objective-C method.
-func (x *NotificationSettings) ShowPreviewsSetting() ShowPreviewsSetting {
-	_r := objc.Send[ShowPreviewsSetting](objref.IDOf(x), objc.RegisterName("showPreviewsSetting"))
+func (ns *NotificationSettings) ShowPreviewsSetting() ShowPreviewsSetting {
+	_r := objc.Send[ShowPreviewsSetting](objref.IDOf(ns), objc.RegisterName("showPreviewsSetting"))
 	return _r
 }
 
 // CriticalAlertSetting wraps the corresponding Objective-C method.
-func (x *NotificationSettings) CriticalAlertSetting() NotificationSetting {
-	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("criticalAlertSetting"))
+func (ns *NotificationSettings) CriticalAlertSetting() NotificationSetting {
+	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("criticalAlertSetting"))
 	return _r
 }
 
 // ProvidesAppNotificationSettings wraps the corresponding Objective-C method.
-func (x *NotificationSettings) ProvidesAppNotificationSettings() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("providesAppNotificationSettings"))
+func (ns *NotificationSettings) ProvidesAppNotificationSettings() bool {
+	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("providesAppNotificationSettings"))
 	return _r
 }
 
 // TimeSensitiveSetting wraps the corresponding Objective-C method.
-func (x *NotificationSettings) TimeSensitiveSetting() NotificationSetting {
-	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("timeSensitiveSetting"))
+func (ns *NotificationSettings) TimeSensitiveSetting() NotificationSetting {
+	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("timeSensitiveSetting"))
 	return _r
 }
 
 // ScheduledDeliverySetting wraps the corresponding Objective-C method.
-func (x *NotificationSettings) ScheduledDeliverySetting() NotificationSetting {
-	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("scheduledDeliverySetting"))
+func (ns *NotificationSettings) ScheduledDeliverySetting() NotificationSetting {
+	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("scheduledDeliverySetting"))
 	return _r
 }
 
 // DirectMessagesSetting wraps the corresponding Objective-C method.
-func (x *NotificationSettings) DirectMessagesSetting() NotificationSetting {
-	_r := objc.Send[NotificationSetting](objref.IDOf(x), objc.RegisterName("directMessagesSetting"))
+func (ns *NotificationSettings) DirectMessagesSetting() NotificationSetting {
+	_r := objc.Send[NotificationSetting](objref.IDOf(ns), objc.RegisterName("directMessagesSetting"))
 	return _r
 }
-
-// NotificationSettingsable is the interface implemented by [NotificationSettings], for mocking and DI.
-type NotificationSettingsable interface {
-	obj.Object
-	AuthorizationStatus() AuthorizationStatus
-	SoundSetting() NotificationSetting
-	BadgeSetting() NotificationSetting
-	AlertSetting() NotificationSetting
-	NotificationCenterSetting() NotificationSetting
-	LockScreenSetting() NotificationSetting
-	ShowPreviewsSetting() ShowPreviewsSetting
-	CriticalAlertSetting() NotificationSetting
-	ProvidesAppNotificationSettings() bool
-	TimeSensitiveSetting() NotificationSetting
-	ScheduledDeliverySetting() NotificationSetting
-	DirectMessagesSetting() NotificationSetting
-}
-
-var _ NotificationSettingsable = (*NotificationSettings)(nil)

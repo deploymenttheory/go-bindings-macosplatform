@@ -46,50 +46,41 @@ func mTRUnitTestingClusterDoubleNestedStructListAdopt(id objc.ID) *MTRUnitTestin
 }
 
 // Description returns the object's -description text.
-func (x *MTRUnitTestingClusterDoubleNestedStructList) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mutcdnsl *MTRUnitTestingClusterDoubleNestedStructList) Description() string {
+	return rt.Description(objref.IDOf(mutcdnsl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRUnitTestingClusterDoubleNestedStructList) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mutcdnsl *MTRUnitTestingClusterDoubleNestedStructList) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mutcdnsl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRUnitTestingClusterDoubleNestedStructList) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mutcdnsl *MTRUnitTestingClusterDoubleNestedStructList) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mutcdnsl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRUnitTestingClusterDoubleNestedStructList) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mutcdnsl *MTRUnitTestingClusterDoubleNestedStructList) String() string {
+	return rt.Description(objref.IDOf(mutcdnsl))
 }
 
 // A wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterDoubleNestedStructList) A() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("a"))
+func (mutcdnsl *MTRUnitTestingClusterDoubleNestedStructList) A() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutcdnsl), objc.RegisterName("a"))
 	return obj.Wrap(_r)
 }
 
 // SetA wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterDoubleNestedStructList) SetA(a obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setA:"), objref.IDOf(a))
+func (mutcdnsl *MTRUnitTestingClusterDoubleNestedStructList) SetA(a obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mutcdnsl), objc.RegisterName("setA:"), objref.IDOf(a))
 }
-
-// MTRUnitTestingClusterDoubleNestedStructListable is the interface implemented by [MTRUnitTestingClusterDoubleNestedStructList], for mocking and DI.
-type MTRUnitTestingClusterDoubleNestedStructListable interface {
-	obj.Object
-	A() obj.Object
-	SetA(a obj.Object)
-}
-
-var _ MTRUnitTestingClusterDoubleNestedStructListable = (*MTRUnitTestingClusterDoubleNestedStructList)(nil)
 
 // isMTRUnitTestingClusterDoubleNestedStructList marks MTRUnitTestingClusterDoubleNestedStructList — and, by embedding promotion, its
 // subclasses — as a member of the MTRUnitTestingClusterDoubleNestedStructList hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRUnitTestingClusterDoubleNestedStructList) isMTRUnitTestingClusterDoubleNestedStructList() {
+func (mutcdnsl *MTRUnitTestingClusterDoubleNestedStructList) isMTRUnitTestingClusterDoubleNestedStructList() {
 }
 
 var _ MTRUnitTestingClusterDoubleNestedStructListProvider = (*MTRUnitTestingClusterDoubleNestedStructList)(nil)

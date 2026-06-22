@@ -48,101 +48,84 @@ func portAdopt(id objc.ID) *Port {
 }
 
 // Description returns the object's -description text.
-func (x *Port) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Port) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Port) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Port) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Port) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Port) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Port) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Port) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Port) WithScriptingProperties(scriptingProperties obj.Object) *Port {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (p *Port) WithScriptingProperties(scriptingProperties obj.Object) *Port {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return p
 }
 
 // Invalidate wraps the corresponding Objective-C method.
-func (x *Port) Invalidate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
+func (p *Port) Invalidate() {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("invalidate"))
 }
 
 // ScheduleInRunLoopForMode wraps the corresponding Objective-C method.
-func (x *Port) ScheduleInRunLoopForMode(runLoop *RunLoop, mode *String) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(runLoop), objref.IDOf(mode))
+func (p *Port) ScheduleInRunLoopForMode(runLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
 // RemoveFromRunLoopForMode wraps the corresponding Objective-C method.
-func (x *Port) RemoveFromRunLoopForMode(runLoop *RunLoop, mode *String) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(runLoop), objref.IDOf(mode))
+func (p *Port) RemoveFromRunLoopForMode(runLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
 // SendBeforeDateComponentsFromReserved wraps the corresponding Objective-C method.
-func (x *Port) SendBeforeDateComponentsFromReserved(limitDate *Date, components obj.Object, receivePort *Port, headerSpaceReserved int) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendBeforeDate:components:from:reserved:"), objref.IDOf(limitDate), objref.IDOf(components), objref.IDOf(receivePort), headerSpaceReserved)
+func (p *Port) SendBeforeDateComponentsFromReserved(limitDate *Date, components obj.Object, receivePort *Port, headerSpaceReserved int) bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("sendBeforeDate:components:from:reserved:"), objref.IDOf(limitDate), objref.IDOf(components), objref.IDOf(receivePort), headerSpaceReserved)
 	return _r
 }
 
 // SendBeforeDateMsgidComponentsFromReserved wraps the corresponding Objective-C method.
-func (x *Port) SendBeforeDateMsgidComponentsFromReserved(limitDate *Date, msgID int, components obj.Object, receivePort *Port, headerSpaceReserved int) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendBeforeDate:msgid:components:from:reserved:"), objref.IDOf(limitDate), msgID, objref.IDOf(components), objref.IDOf(receivePort), headerSpaceReserved)
+func (p *Port) SendBeforeDateMsgidComponentsFromReserved(limitDate *Date, msgID int, components obj.Object, receivePort *Port, headerSpaceReserved int) bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("sendBeforeDate:msgid:components:from:reserved:"), objref.IDOf(limitDate), msgID, objref.IDOf(components), objref.IDOf(receivePort), headerSpaceReserved)
 	return _r
 }
 
 // AddConnectionToRunLoopForMode adds the receiver to the list of ports monitored by a given run loop for the given input mode.
-func (x *Port) AddConnectionToRunLoopForMode(conn *Connection, runLoop *RunLoop, mode *String) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addConnection:toRunLoop:forMode:"), objref.IDOf(conn), objref.IDOf(runLoop), objref.IDOf(mode))
+func (p *Port) AddConnectionToRunLoopForMode(conn *Connection, runLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("addConnection:toRunLoop:forMode:"), objref.IDOf(conn), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
 // RemoveConnectionFromRunLoopForMode removes the receiver from the list of ports monitored by runLoop in the given input mode, mode.
-func (x *Port) RemoveConnectionFromRunLoopForMode(conn *Connection, runLoop *RunLoop, mode *String) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeConnection:fromRunLoop:forMode:"), objref.IDOf(conn), objref.IDOf(runLoop), objref.IDOf(mode))
+func (p *Port) RemoveConnectionFromRunLoopForMode(conn *Connection, runLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("removeConnection:fromRunLoop:forMode:"), objref.IDOf(conn), objref.IDOf(runLoop), objref.IDOf(mode))
 }
 
 // IsValid wraps the corresponding Objective-C method.
-func (x *Port) IsValid() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isValid"))
+func (p *Port) IsValid() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isValid"))
 	return _r
 }
 
 // ReservedSpaceLength wraps the corresponding Objective-C method.
-func (x *Port) ReservedSpaceLength() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("reservedSpaceLength"))
+func (p *Port) ReservedSpaceLength() int {
+	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("reservedSpaceLength"))
 	return _r
 }
-
-// Portable is the interface implemented by [Port], for mocking and DI.
-type Portable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Port
-	Invalidate()
-	ScheduleInRunLoopForMode(runLoop *RunLoop, mode *String)
-	RemoveFromRunLoopForMode(runLoop *RunLoop, mode *String)
-	SendBeforeDateComponentsFromReserved(limitDate *Date, components obj.Object, receivePort *Port, headerSpaceReserved int) bool
-	SendBeforeDateMsgidComponentsFromReserved(limitDate *Date, msgID int, components obj.Object, receivePort *Port, headerSpaceReserved int) bool
-	AddConnectionToRunLoopForMode(conn *Connection, runLoop *RunLoop, mode *String)
-	RemoveConnectionFromRunLoopForMode(conn *Connection, runLoop *RunLoop, mode *String)
-	IsValid() bool
-	ReservedSpaceLength() int
-}
-
-var _ Portable = (*Port)(nil)
 
 // isPort marks Port — and, by embedding promotion, its
 // subclasses — as a member of the Port hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Port) isPort() {}
+func (p *Port) isPort() {}
 
 var _ PortProvider = (*Port)(nil)

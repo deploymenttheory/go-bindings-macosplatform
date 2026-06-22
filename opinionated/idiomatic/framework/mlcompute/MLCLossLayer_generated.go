@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,45 +45,34 @@ func lossLayerAdopt(id objc.ID) *LossLayer {
 	return x
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *LossLayer) WithLabel(label string) *LossLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (ll *LossLayer) WithLabel(label string) *LossLayer {
+	objc.Send[objc.ID](objref.IDOf(ll), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ll
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *LossLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *LossLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (ll *LossLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *LossLayer {
+	objc.Send[objc.ID](objref.IDOf(ll), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return ll
 }
 
-// Descriptor the loss descriptor
-func (x *LossLayer) Descriptor() *LossDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+// Descriptor returns the loss descriptor
+func (ll *LossLayer) Descriptor() *LossDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(ll), objc.RegisterName("descriptor"))
 	return LossDescriptorFromID(_r)
 }
 
-// Weights the loss label weights tensor
-func (x *LossLayer) Weights() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weights"))
+// Weights returns the loss label weights tensor
+func (ll *LossLayer) Weights() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(ll), objc.RegisterName("weights"))
 	return TensorFromID(_r)
 }
-
-// LossLayerable is the interface implemented by [LossLayer], for mocking and DI.
-type LossLayerable interface {
-	obj.Object
-	WithLabel(label string) *LossLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *LossLayer
-	Descriptor() *LossDescriptor
-	Weights() *Tensor
-}
-
-var _ LossLayerable = (*LossLayer)(nil)
 
 // isLossLayer marks LossLayer — and, by embedding promotion, its
 // subclasses — as a member of the LossLayer hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *LossLayer) isLossLayer() {}
+func (ll *LossLayer) isLossLayer() {}
 
 var _ LossLayerProvider = (*LossLayer)(nil)
 

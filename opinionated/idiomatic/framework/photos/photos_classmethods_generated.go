@@ -234,7 +234,7 @@ func CancelLivePhotoRequestWithRequestID(requestID int32) {
 	objc.Send[objc.ID](objc.ID(_class("PHLivePhoto")), objc.RegisterName("cancelLivePhotoRequestWithRequestID:"), requestID)
 }
 
-// SharedPhotoLibrary retrieves the shared photo library object.
+// SharedPhotoLibrary returns retrieves the shared photo library object.
 func SharedPhotoLibrary() *PhotoLibrary {
 	_r := objc.Send[objc.ID](objc.ID(_class("PHPhotoLibrary")), objc.RegisterName("sharedPhotoLibrary"))
 	return PhotoLibraryFromID(_r)

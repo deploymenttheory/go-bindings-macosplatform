@@ -7,7 +7,6 @@ package eventkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,54 +51,31 @@ func NewStructuredLocation() *StructuredLocation {
 	return structuredLocationAdopt(_id)
 }
 
-// WithTitle the title of the location.
-func (x *StructuredLocation) WithTitle(title string) *StructuredLocation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title of the location.
+func (sl *StructuredLocation) WithTitle(title string) *StructuredLocation {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return sl
 }
 
-// WithRadius a minimum distance from the core location that would trigger the alarm or reminder.
-func (x *StructuredLocation) WithRadius(radius float64) *StructuredLocation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
-	return x
+// WithRadius sets a minimum distance from the core location that would trigger the alarm or reminder.
+func (sl *StructuredLocation) WithRadius(radius float64) *StructuredLocation {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setRadius:"), radius)
+	return sl
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *StructuredLocation) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (sl *StructuredLocation) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetTitle wraps the corresponding Objective-C method.
-func (x *StructuredLocation) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-}
-
 // Radius wraps the corresponding Objective-C method.
-func (x *StructuredLocation) Radius() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("radius"))
+func (sl *StructuredLocation) Radius() float64 {
+	_r := objc.Send[float64](objref.IDOf(sl), objc.RegisterName("radius"))
 	return _r
 }
-
-// SetRadius wraps the corresponding Objective-C method.
-func (x *StructuredLocation) SetRadius(radius float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
-}
-
-// StructuredLocationable is the interface implemented by [StructuredLocation], for mocking and DI.
-type StructuredLocationable interface {
-	obj.Object
-	WithTitle(title string) *StructuredLocation
-	WithRadius(radius float64) *StructuredLocation
-	Title() string
-	SetTitle(title string)
-	Radius() float64
-	SetRadius(radius float64)
-}
-
-var _ StructuredLocationable = (*StructuredLocation)(nil)
 
 var _ ObjectProvider = (*StructuredLocation)(nil)

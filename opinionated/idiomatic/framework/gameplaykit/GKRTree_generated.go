@@ -46,24 +46,24 @@ func rTreeAdopt(id objc.ID) *RTree {
 }
 
 // Description returns the object's -description text.
-func (x *RTree) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rt_ *RTree) Description() string {
+	return rt.Description(objref.IDOf(rt_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RTree) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rt_ *RTree) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rt_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RTree) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rt_ *RTree) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rt_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RTree) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rt_ *RTree) String() string {
+	return rt.Description(objref.IDOf(rt_))
 }
 
 // NewRTreeWithMaxNumberOfChildren initializes a new R-tree object.
@@ -73,29 +73,14 @@ func NewRTreeWithMaxNumberOfChildren(maxNumberOfChildren int) *RTree {
 	return rTreeAdopt(_id)
 }
 
-// WithQueryReserve the number of elements to reserve space for when searching.
-func (x *RTree) WithQueryReserve(queryReserve int) *RTree {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueryReserve:"), queryReserve)
-	return x
+// WithQueryReserve sets the number of elements to reserve space for when searching.
+func (rt_ *RTree) WithQueryReserve(queryReserve int) *RTree {
+	objc.Send[objc.ID](objref.IDOf(rt_), objc.RegisterName("setQueryReserve:"), queryReserve)
+	return rt_
 }
 
-// QueryReserve amount of array items to reserve before a query. This improves query performance at the cost of memory
-func (x *RTree) QueryReserve() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("queryReserve"))
+// QueryReserve returns amount of array items to reserve before a query. This improves query performance at the cost of memory
+func (rt_ *RTree) QueryReserve() int {
+	_r := objc.Send[int](objref.IDOf(rt_), objc.RegisterName("queryReserve"))
 	return _r
 }
-
-// SetQueryReserve wraps the corresponding Objective-C method.
-func (x *RTree) SetQueryReserve(queryReserve int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueryReserve:"), queryReserve)
-}
-
-// RTreeable is the interface implemented by [RTree], for mocking and DI.
-type RTreeable interface {
-	obj.Object
-	WithQueryReserve(queryReserve int) *RTree
-	QueryReserve() int
-	SetQueryReserve(queryReserve int)
-}
-
-var _ RTreeable = (*RTree)(nil)

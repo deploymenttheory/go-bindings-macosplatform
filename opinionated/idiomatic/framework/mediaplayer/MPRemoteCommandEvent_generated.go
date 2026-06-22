@@ -48,50 +48,41 @@ func remoteCommandEventAdopt(id objc.ID) *RemoteCommandEvent {
 }
 
 // Description returns the object's -description text.
-func (x *RemoteCommandEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rce *RemoteCommandEvent) Description() string {
+	return rt.Description(objref.IDOf(rce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RemoteCommandEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rce *RemoteCommandEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RemoteCommandEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rce *RemoteCommandEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RemoteCommandEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rce *RemoteCommandEvent) String() string {
+	return rt.Description(objref.IDOf(rce))
 }
 
-// Command the command that sent the event.
-func (x *RemoteCommandEvent) Command() *RemoteCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("command"))
+// Command returns the command that sent the event.
+func (rce *RemoteCommandEvent) Command() *RemoteCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rce), objc.RegisterName("command"))
 	return RemoteCommandFromID(_r)
 }
 
-// Timestamp the time when the event occurred.
-func (x *RemoteCommandEvent) Timestamp() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timestamp"))
+// Timestamp returns the time when the event occurred.
+func (rce *RemoteCommandEvent) Timestamp() float64 {
+	_r := objc.Send[float64](objref.IDOf(rce), objc.RegisterName("timestamp"))
 	return _r
 }
-
-// RemoteCommandEventable is the interface implemented by [RemoteCommandEvent], for mocking and DI.
-type RemoteCommandEventable interface {
-	obj.Object
-	Command() *RemoteCommand
-	Timestamp() float64
-}
-
-var _ RemoteCommandEventable = (*RemoteCommandEvent)(nil)
 
 // isRemoteCommandEvent marks RemoteCommandEvent — and, by embedding promotion, its
 // subclasses — as a member of the RemoteCommandEvent hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *RemoteCommandEvent) isRemoteCommandEvent() {}
+func (rce *RemoteCommandEvent) isRemoteCommandEvent() {}
 
 var _ RemoteCommandEventProvider = (*RemoteCommandEvent)(nil)

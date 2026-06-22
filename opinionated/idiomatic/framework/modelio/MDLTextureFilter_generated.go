@@ -46,24 +46,24 @@ func textureFilterAdopt(id objc.ID) *TextureFilter {
 }
 
 // Description returns the object's -description text.
-func (x *TextureFilter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tf *TextureFilter) Description() string {
+	return rt.Description(objref.IDOf(tf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextureFilter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tf *TextureFilter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextureFilter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tf *TextureFilter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextureFilter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tf *TextureFilter) String() string {
+	return rt.Description(objref.IDOf(tf))
 }
 
 // NewTextureFilter creates a new TextureFilter.
@@ -72,129 +72,74 @@ func NewTextureFilter() *TextureFilter {
 	return textureFilterAdopt(_id)
 }
 
-// WithSWrapMode the coordinate wrapping mode for texture t-coordinates.
-func (x *TextureFilter) WithSWrapMode(sWrapMode MaterialTextureWrapMode) *TextureFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSWrapMode:"), sWrapMode)
-	return x
+// WithSWrapMode sets the coordinate wrapping mode for texture t-coordinates.
+func (tf *TextureFilter) WithSWrapMode(sWrapMode MaterialTextureWrapMode) *TextureFilter {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setSWrapMode:"), sWrapMode)
+	return tf
 }
 
-// WithTWrapMode the coordinate wrapping mode for texture t-coordinates.
-func (x *TextureFilter) WithTWrapMode(tWrapMode MaterialTextureWrapMode) *TextureFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTWrapMode:"), tWrapMode)
-	return x
+// WithTWrapMode sets the coordinate wrapping mode for texture t-coordinates.
+func (tf *TextureFilter) WithTWrapMode(tWrapMode MaterialTextureWrapMode) *TextureFilter {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setTWrapMode:"), tWrapMode)
+	return tf
 }
 
-// WithRWrapMode the coordinate wrapping mode for texture r-coordinates.
-func (x *TextureFilter) WithRWrapMode(rWrapMode MaterialTextureWrapMode) *TextureFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRWrapMode:"), rWrapMode)
-	return x
+// WithRWrapMode sets the coordinate wrapping mode for texture r-coordinates.
+func (tf *TextureFilter) WithRWrapMode(rWrapMode MaterialTextureWrapMode) *TextureFilter {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setRWrapMode:"), rWrapMode)
+	return tf
 }
 
-// WithMinFilter the filter mode for rendering textures at sizes smaller than that of the original image.
-func (x *TextureFilter) WithMinFilter(minFilter MaterialTextureFilterMode) *TextureFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinFilter:"), minFilter)
-	return x
+// WithMinFilter sets the filter mode for rendering textures at sizes smaller than that of the original image.
+func (tf *TextureFilter) WithMinFilter(minFilter MaterialTextureFilterMode) *TextureFilter {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setMinFilter:"), minFilter)
+	return tf
 }
 
-// WithMagFilter the filter mode for rendering textures at sizes larger than that of the original image.
-func (x *TextureFilter) WithMagFilter(magFilter MaterialTextureFilterMode) *TextureFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagFilter:"), magFilter)
-	return x
+// WithMagFilter sets the filter mode for rendering textures at sizes larger than that of the original image.
+func (tf *TextureFilter) WithMagFilter(magFilter MaterialTextureFilterMode) *TextureFilter {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setMagFilter:"), magFilter)
+	return tf
 }
 
-// WithMipFilter the filter mode for rendering textures using mipmapping.
-func (x *TextureFilter) WithMipFilter(mipFilter MaterialMipMapFilterMode) *TextureFilter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMipFilter:"), mipFilter)
-	return x
+// WithMipFilter sets the filter mode for rendering textures using mipmapping.
+func (tf *TextureFilter) WithMipFilter(mipFilter MaterialMipMapFilterMode) *TextureFilter {
+	objc.Send[objc.ID](objref.IDOf(tf), objc.RegisterName("setMipFilter:"), mipFilter)
+	return tf
 }
 
 // SWrapMode wraps the corresponding Objective-C method.
-func (x *TextureFilter) SWrapMode() MaterialTextureWrapMode {
-	_r := objc.Send[MaterialTextureWrapMode](objref.IDOf(x), objc.RegisterName("sWrapMode"))
+func (tf *TextureFilter) SWrapMode() MaterialTextureWrapMode {
+	_r := objc.Send[MaterialTextureWrapMode](objref.IDOf(tf), objc.RegisterName("sWrapMode"))
 	return _r
-}
-
-// SetSWrapMode wraps the corresponding Objective-C method.
-func (x *TextureFilter) SetSWrapMode(sWrapMode MaterialTextureWrapMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSWrapMode:"), sWrapMode)
 }
 
 // TWrapMode wraps the corresponding Objective-C method.
-func (x *TextureFilter) TWrapMode() MaterialTextureWrapMode {
-	_r := objc.Send[MaterialTextureWrapMode](objref.IDOf(x), objc.RegisterName("tWrapMode"))
+func (tf *TextureFilter) TWrapMode() MaterialTextureWrapMode {
+	_r := objc.Send[MaterialTextureWrapMode](objref.IDOf(tf), objc.RegisterName("tWrapMode"))
 	return _r
-}
-
-// SetTWrapMode wraps the corresponding Objective-C method.
-func (x *TextureFilter) SetTWrapMode(tWrapMode MaterialTextureWrapMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTWrapMode:"), tWrapMode)
 }
 
 // RWrapMode wraps the corresponding Objective-C method.
-func (x *TextureFilter) RWrapMode() MaterialTextureWrapMode {
-	_r := objc.Send[MaterialTextureWrapMode](objref.IDOf(x), objc.RegisterName("rWrapMode"))
+func (tf *TextureFilter) RWrapMode() MaterialTextureWrapMode {
+	_r := objc.Send[MaterialTextureWrapMode](objref.IDOf(tf), objc.RegisterName("rWrapMode"))
 	return _r
-}
-
-// SetRWrapMode wraps the corresponding Objective-C method.
-func (x *TextureFilter) SetRWrapMode(rWrapMode MaterialTextureWrapMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRWrapMode:"), rWrapMode)
 }
 
 // MinFilter wraps the corresponding Objective-C method.
-func (x *TextureFilter) MinFilter() MaterialTextureFilterMode {
-	_r := objc.Send[MaterialTextureFilterMode](objref.IDOf(x), objc.RegisterName("minFilter"))
+func (tf *TextureFilter) MinFilter() MaterialTextureFilterMode {
+	_r := objc.Send[MaterialTextureFilterMode](objref.IDOf(tf), objc.RegisterName("minFilter"))
 	return _r
-}
-
-// SetMinFilter wraps the corresponding Objective-C method.
-func (x *TextureFilter) SetMinFilter(minFilter MaterialTextureFilterMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinFilter:"), minFilter)
 }
 
 // MagFilter wraps the corresponding Objective-C method.
-func (x *TextureFilter) MagFilter() MaterialTextureFilterMode {
-	_r := objc.Send[MaterialTextureFilterMode](objref.IDOf(x), objc.RegisterName("magFilter"))
+func (tf *TextureFilter) MagFilter() MaterialTextureFilterMode {
+	_r := objc.Send[MaterialTextureFilterMode](objref.IDOf(tf), objc.RegisterName("magFilter"))
 	return _r
-}
-
-// SetMagFilter wraps the corresponding Objective-C method.
-func (x *TextureFilter) SetMagFilter(magFilter MaterialTextureFilterMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMagFilter:"), magFilter)
 }
 
 // MipFilter wraps the corresponding Objective-C method.
-func (x *TextureFilter) MipFilter() MaterialMipMapFilterMode {
-	_r := objc.Send[MaterialMipMapFilterMode](objref.IDOf(x), objc.RegisterName("mipFilter"))
+func (tf *TextureFilter) MipFilter() MaterialMipMapFilterMode {
+	_r := objc.Send[MaterialMipMapFilterMode](objref.IDOf(tf), objc.RegisterName("mipFilter"))
 	return _r
 }
-
-// SetMipFilter wraps the corresponding Objective-C method.
-func (x *TextureFilter) SetMipFilter(mipFilter MaterialMipMapFilterMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMipFilter:"), mipFilter)
-}
-
-// TextureFilterable is the interface implemented by [TextureFilter], for mocking and DI.
-type TextureFilterable interface {
-	obj.Object
-	WithSWrapMode(sWrapMode MaterialTextureWrapMode) *TextureFilter
-	WithTWrapMode(tWrapMode MaterialTextureWrapMode) *TextureFilter
-	WithRWrapMode(rWrapMode MaterialTextureWrapMode) *TextureFilter
-	WithMinFilter(minFilter MaterialTextureFilterMode) *TextureFilter
-	WithMagFilter(magFilter MaterialTextureFilterMode) *TextureFilter
-	WithMipFilter(mipFilter MaterialMipMapFilterMode) *TextureFilter
-	SWrapMode() MaterialTextureWrapMode
-	SetSWrapMode(sWrapMode MaterialTextureWrapMode)
-	TWrapMode() MaterialTextureWrapMode
-	SetTWrapMode(tWrapMode MaterialTextureWrapMode)
-	RWrapMode() MaterialTextureWrapMode
-	SetRWrapMode(rWrapMode MaterialTextureWrapMode)
-	MinFilter() MaterialTextureFilterMode
-	SetMinFilter(minFilter MaterialTextureFilterMode)
-	MagFilter() MaterialTextureFilterMode
-	SetMagFilter(magFilter MaterialTextureFilterMode)
-	MipFilter() MaterialMipMapFilterMode
-	SetMipFilter(mipFilter MaterialMipMapFilterMode)
-}
-
-var _ TextureFilterable = (*TextureFilter)(nil)

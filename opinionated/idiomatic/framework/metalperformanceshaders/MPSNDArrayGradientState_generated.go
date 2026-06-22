@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,30 +44,21 @@ func nDArrayGradientStateAdopt(id objc.ID) *NDArrayGradientState {
 }
 
 // WithReadCount sets the property and returns the receiver so calls can be chained.
-func (x *NDArrayGradientState) WithReadCount(readCount int) *NDArrayGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-	return x
+func (nags *NDArrayGradientState) WithReadCount(readCount int) *NDArrayGradientState {
+	objc.Send[objc.ID](objref.IDOf(nags), objc.RegisterName("setReadCount:"), readCount)
+	return nags
 }
 
-// WithLabel a string to help identify this object.
-func (x *NDArrayGradientState) WithLabel(label string) *NDArrayGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nags *NDArrayGradientState) WithLabel(label string) *NDArrayGradientState {
+	objc.Send[objc.ID](objref.IDOf(nags), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nags
 }
-
-// NDArrayGradientStateable is the interface implemented by [NDArrayGradientState], for mocking and DI.
-type NDArrayGradientStateable interface {
-	obj.Object
-	WithReadCount(readCount int) *NDArrayGradientState
-	WithLabel(label string) *NDArrayGradientState
-}
-
-var _ NDArrayGradientStateable = (*NDArrayGradientState)(nil)
 
 // isNDArrayGradientState marks NDArrayGradientState — and, by embedding promotion, its
 // subclasses — as a member of the NDArrayGradientState hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NDArrayGradientState) isNDArrayGradientState() {}
+func (nags *NDArrayGradientState) isNDArrayGradientState() {}
 
 var _ NDArrayGradientStateProvider = (*NDArrayGradientState)(nil)
 

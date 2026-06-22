@@ -46,24 +46,24 @@ func modelStructureNeuralNetworkLayerAdopt(id objc.ID) *ModelStructureNeuralNetw
 }
 
 // Description returns the object's -description text.
-func (x *ModelStructureNeuralNetworkLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (msnnl *ModelStructureNeuralNetworkLayer) Description() string {
+	return rt.Description(objref.IDOf(msnnl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ModelStructureNeuralNetworkLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (msnnl *ModelStructureNeuralNetworkLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(msnnl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ModelStructureNeuralNetworkLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (msnnl *ModelStructureNeuralNetworkLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(msnnl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ModelStructureNeuralNetworkLayer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (msnnl *ModelStructureNeuralNetworkLayer) String() string {
+	return rt.Description(objref.IDOf(msnnl))
 }
 
 // NewModelStructureNeuralNetworkLayer creates a new ModelStructureNeuralNetworkLayer.
@@ -72,47 +72,36 @@ func NewModelStructureNeuralNetworkLayer() *ModelStructureNeuralNetworkLayer {
 	return modelStructureNeuralNetworkLayerAdopt(_id)
 }
 
-// Name the layer name.
-func (x *ModelStructureNeuralNetworkLayer) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns the layer name.
+func (msnnl *ModelStructureNeuralNetworkLayer) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(msnnl), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Type the type of the layer, e,g, "elementwise", "pooling", etc.
-func (x *ModelStructureNeuralNetworkLayer) Type() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns the type of the layer, e,g, "elementwise", "pooling", etc.
+func (msnnl *ModelStructureNeuralNetworkLayer) Type() string {
+	_r := objc.Send[objc.ID](objref.IDOf(msnnl), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// InputNames the input names.
+// InputNames returns the input names.
 //
 // InputNames returns the collection as a Go slice.
-func (x *ModelStructureNeuralNetworkLayer) InputNames() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputNames"))
+func (msnnl *ModelStructureNeuralNetworkLayer) InputNames() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(msnnl), objc.RegisterName("inputNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// OutputNames the output names.
+// OutputNames returns the output names.
 //
 // OutputNames returns the collection as a Go slice.
-func (x *ModelStructureNeuralNetworkLayer) OutputNames() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputNames"))
+func (msnnl *ModelStructureNeuralNetworkLayer) OutputNames() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(msnnl), objc.RegisterName("outputNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// ModelStructureNeuralNetworkLayerable is the interface implemented by [ModelStructureNeuralNetworkLayer], for mocking and DI.
-type ModelStructureNeuralNetworkLayerable interface {
-	obj.Object
-	Name() string
-	Type() string
-	InputNames() []string
-	OutputNames() []string
-}
-
-var _ ModelStructureNeuralNetworkLayerable = (*ModelStructureNeuralNetworkLayer)(nil)

@@ -46,24 +46,24 @@ func renderPassColorAttachmentDescriptorArrayAdopt(id objc.ID) *RenderPassColorA
 }
 
 // Description returns the object's -description text.
-func (x *RenderPassColorAttachmentDescriptorArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rpcada *RenderPassColorAttachmentDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(rpcada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RenderPassColorAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rpcada *RenderPassColorAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rpcada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RenderPassColorAttachmentDescriptorArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rpcada *RenderPassColorAttachmentDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rpcada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RenderPassColorAttachmentDescriptorArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rpcada *RenderPassColorAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(rpcada))
 }
 
 // NewRenderPassColorAttachmentDescriptorArray creates a new RenderPassColorAttachmentDescriptorArray.
@@ -73,21 +73,12 @@ func NewRenderPassColorAttachmentDescriptorArray() *RenderPassColorAttachmentDes
 }
 
 // ObjectAtIndexedSubscript returns the descriptor object for the specified color attachment.
-func (x *RenderPassColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *RenderPassColorAttachmentDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
+func (rpcada *RenderPassColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *RenderPassColorAttachmentDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(rpcada), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return RenderPassColorAttachmentDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets the descriptor for the specified color attachment.
-func (x *RenderPassColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *RenderPassColorAttachmentDescriptor, attachmentIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
+func (rpcada *RenderPassColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *RenderPassColorAttachmentDescriptor, attachmentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(rpcada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
-
-// RenderPassColorAttachmentDescriptorArrayable is the interface implemented by [RenderPassColorAttachmentDescriptorArray], for mocking and DI.
-type RenderPassColorAttachmentDescriptorArrayable interface {
-	obj.Object
-	ObjectAtIndexedSubscript(attachmentIndex int) *RenderPassColorAttachmentDescriptor
-	SetObjectAtIndexedSubscript(attachment *RenderPassColorAttachmentDescriptor, attachmentIndex int)
-}
-
-var _ RenderPassColorAttachmentDescriptorArrayable = (*RenderPassColorAttachmentDescriptorArray)(nil)

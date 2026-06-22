@@ -46,24 +46,24 @@ func storeReviewControllerAdopt(id objc.ID) *StoreReviewController {
 }
 
 // Description returns the object's -description text.
-func (x *StoreReviewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (src *StoreReviewController) Description() string {
+	return rt.Description(objref.IDOf(src))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StoreReviewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (src *StoreReviewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(src), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StoreReviewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (src *StoreReviewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(src), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StoreReviewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (src *StoreReviewController) String() string {
+	return rt.Description(objref.IDOf(src))
 }
 
 // NewStoreReviewController creates a new StoreReviewController.
@@ -71,10 +71,3 @@ func NewStoreReviewController() *StoreReviewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("SKStoreReviewController")), objc.RegisterName("new"))
 	return storeReviewControllerAdopt(_id)
 }
-
-// StoreReviewControllerable is the interface implemented by [StoreReviewController], for mocking and DI.
-type StoreReviewControllerable interface {
-	obj.Object
-}
-
-var _ StoreReviewControllerable = (*StoreReviewController)(nil)

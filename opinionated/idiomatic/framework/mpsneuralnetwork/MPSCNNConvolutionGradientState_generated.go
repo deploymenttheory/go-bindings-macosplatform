@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,31 +43,22 @@ func cNNConvolutionGradientStateAdopt(id objc.ID) *CNNConvolutionGradientState {
 	return x
 }
 
-// Convolution the convolution filter that produced the state. For child MPSCNNConvolutionTrasposeGradientState object, convolution below refers to MPSCNNConvolution object that produced MPSCNNConvolutionGradientState object which was used to create MPSCNNConvolutionTransposeGradientState object. See resultStateForSourceImage:sourceStates method of MPSCNNConvolutionTranspose below.
-func (x *CNNConvolutionGradientState) Convolution() *CNNConvolution {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolution"))
+// Convolution returns the convolution filter that produced the state. For child MPSCNNConvolutionTrasposeGradientState object, convolution below refers to MPSCNNConvolution object that produced MPSCNNConvolutionGradientState object which was used to create MPSCNNConvolutionTransposeGradientState object. See resultStateForSourceImage:sourceStates method of MPSCNNConvolutionTranspose below.
+func (ccgs *CNNConvolutionGradientState) Convolution() *CNNConvolution {
+	_r := objc.Send[objc.ID](objref.IDOf(ccgs), objc.RegisterName("convolution"))
 	return CNNConvolutionFromID(_r)
 }
 
-// GradientForWeightsLayout layout of gradient with respect to weights in gradientForWeights buffer. Currently only MPSCNNConvolutionWeightsLayoutOHWI is supported.
-func (x *CNNConvolutionGradientState) GradientForWeightsLayout() CNNConvolutionWeightsLayout {
-	_r := objc.Send[CNNConvolutionWeightsLayout](objref.IDOf(x), objc.RegisterName("gradientForWeightsLayout"))
+// GradientForWeightsLayout returns layout of gradient with respect to weights in gradientForWeights buffer. Currently only MPSCNNConvolutionWeightsLayoutOHWI is supported.
+func (ccgs *CNNConvolutionGradientState) GradientForWeightsLayout() CNNConvolutionWeightsLayout {
+	_r := objc.Send[CNNConvolutionWeightsLayout](objref.IDOf(ccgs), objc.RegisterName("gradientForWeightsLayout"))
 	return _r
 }
-
-// CNNConvolutionGradientStateable is the interface implemented by [CNNConvolutionGradientState], for mocking and DI.
-type CNNConvolutionGradientStateable interface {
-	obj.Object
-	Convolution() *CNNConvolution
-	GradientForWeightsLayout() CNNConvolutionWeightsLayout
-}
-
-var _ CNNConvolutionGradientStateable = (*CNNConvolutionGradientState)(nil)
 
 // isCNNConvolutionGradientState marks CNNConvolutionGradientState — and, by embedding promotion, its
 // subclasses — as a member of the CNNConvolutionGradientState hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CNNConvolutionGradientState) isCNNConvolutionGradientState() {}
+func (ccgs *CNNConvolutionGradientState) isCNNConvolutionGradientState() {}
 
 var _ CNNConvolutionGradientStateProvider = (*CNNConvolutionGradientState)(nil)
 

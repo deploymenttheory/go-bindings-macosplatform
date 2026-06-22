@@ -48,24 +48,24 @@ func textLineFragmentAdopt(id objc.ID) *TextLineFragment {
 }
 
 // Description returns the object's -description text.
-func (x *TextLineFragment) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tlf *TextLineFragment) Description() string {
+	return rt.Description(objref.IDOf(tlf))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextLineFragment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tlf *TextLineFragment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tlf), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextLineFragment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tlf *TextLineFragment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tlf), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextLineFragment) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tlf *TextLineFragment) String() string {
+	return rt.Description(objref.IDOf(tlf))
 }
 
 // NewTextLineFragmentWithAttributedStringRange creates a new line fragment from the attributed string for the range of characters you specify.
@@ -90,63 +90,48 @@ func NewTextLineFragmentWithStringAttributesRange(string_ string, attributes obj
 }
 
 // DrawAtPointInContext renders the line fragment contents at the rendering origin.
-func (x *TextLineFragment) DrawAtPointInContext(point corefoundation.CGPoint, context_ obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawAtPoint:inContext:"), point, objref.IDOf(context_))
+func (tlf *TextLineFragment) DrawAtPointInContext(point corefoundation.CGPoint, context_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("drawAtPoint:inContext:"), point, objref.IDOf(context_))
 }
 
 // LocationForCharacterAtIndex returns the location of the character at the specified index.
-func (x *TextLineFragment) LocationForCharacterAtIndex(index int) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("locationForCharacterAtIndex:"), index)
+func (tlf *TextLineFragment) LocationForCharacterAtIndex(index int) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(tlf), objc.RegisterName("locationForCharacterAtIndex:"), index)
 	return _r
 }
 
 // CharacterIndexForPoint returns character index for a point inside the line fragment coordinate system.
-func (x *TextLineFragment) CharacterIndexForPoint(point corefoundation.CGPoint) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("characterIndexForPoint:"), point)
+func (tlf *TextLineFragment) CharacterIndexForPoint(point corefoundation.CGPoint) int {
+	_r := objc.Send[int](objref.IDOf(tlf), objc.RegisterName("characterIndexForPoint:"), point)
 	return _r
 }
 
 // FractionOfDistanceThroughGlyphForPoint returns character index for a point inside the line fragment coordinate system.
-func (x *TextLineFragment) FractionOfDistanceThroughGlyphForPoint(point corefoundation.CGPoint) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("fractionOfDistanceThroughGlyphForPoint:"), point)
+func (tlf *TextLineFragment) FractionOfDistanceThroughGlyphForPoint(point corefoundation.CGPoint) float64 {
+	_r := objc.Send[float64](objref.IDOf(tlf), objc.RegisterName("fractionOfDistanceThroughGlyphForPoint:"), point)
 	return _r
 }
 
 // AttributedString wraps the corresponding Objective-C method.
-func (x *TextLineFragment) AttributedString() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedString"))
+func (tlf *TextLineFragment) AttributedString() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tlf), objc.RegisterName("attributedString"))
 	return obj.Wrap(_r)
 }
 
 // CharacterRange wraps the corresponding Objective-C method.
-func (x *TextLineFragment) CharacterRange() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("characterRange"))
+func (tlf *TextLineFragment) CharacterRange() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(tlf), objc.RegisterName("characterRange"))
 	return _r
 }
 
 // TypographicBounds wraps the corresponding Objective-C method.
-func (x *TextLineFragment) TypographicBounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("typographicBounds"))
+func (tlf *TextLineFragment) TypographicBounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(tlf), objc.RegisterName("typographicBounds"))
 	return _r
 }
 
 // GlyphOrigin wraps the corresponding Objective-C method.
-func (x *TextLineFragment) GlyphOrigin() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("glyphOrigin"))
+func (tlf *TextLineFragment) GlyphOrigin() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(tlf), objc.RegisterName("glyphOrigin"))
 	return _r
 }
-
-// TextLineFragmentable is the interface implemented by [TextLineFragment], for mocking and DI.
-type TextLineFragmentable interface {
-	obj.Object
-	DrawAtPointInContext(point corefoundation.CGPoint, context_ obj.Object)
-	LocationForCharacterAtIndex(index int) corefoundation.CGPoint
-	CharacterIndexForPoint(point corefoundation.CGPoint) int
-	FractionOfDistanceThroughGlyphForPoint(point corefoundation.CGPoint) float64
-	AttributedString() obj.Object
-	CharacterRange() foundation.NSRange
-	TypographicBounds() corefoundation.CGRect
-	GlyphOrigin() corefoundation.CGPoint
-}
-
-var _ TextLineFragmentable = (*TextLineFragment)(nil)

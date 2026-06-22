@@ -44,24 +44,24 @@ func plugInAdopt(id objc.ID) *PlugIn {
 }
 
 // Description returns the object's -description text.
-func (x *PlugIn) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pi *PlugIn) Description() string {
+	return rt.Description(objref.IDOf(pi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlugIn) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pi *PlugIn) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlugIn) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pi *PlugIn) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PlugIn) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pi *PlugIn) String() string {
+	return rt.Description(objref.IDOf(pi))
 }
 
 // NewPlugIn creates a new PlugIn.
@@ -71,73 +71,56 @@ func NewPlugIn() *PlugIn {
 }
 
 // SerializedValueForKey wraps the corresponding Objective-C method.
-func (x *PlugIn) SerializedValueForKey(key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serializedValueForKey:"), purego.NSString(key))
+func (pi *PlugIn) SerializedValueForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("serializedValueForKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // SetSerializedValueForKey wraps the corresponding Objective-C method.
-func (x *PlugIn) SetSerializedValueForKey(serializedValue obj.Object, key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSerializedValue:forKey:"), objref.IDOf(serializedValue), purego.NSString(key))
+func (pi *PlugIn) SetSerializedValueForKey(serializedValue obj.Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("setSerializedValue:forKey:"), objref.IDOf(serializedValue), purego.NSString(key))
 }
 
 // DidValueForInputKeyChange wraps the corresponding Objective-C method.
-func (x *PlugIn) DidValueForInputKeyChange(key string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("didValueForInputKeyChange:"), purego.NSString(key))
+func (pi *PlugIn) DidValueForInputKeyChange(key string) bool {
+	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("didValueForInputKeyChange:"), purego.NSString(key))
 	return _r
 }
 
 // ValueForInputKey wraps the corresponding Objective-C method.
-func (x *PlugIn) ValueForInputKey(key string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForInputKey:"), purego.NSString(key))
+func (pi *PlugIn) ValueForInputKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("valueForInputKey:"), purego.NSString(key))
 	return obj.Wrap(_r)
 }
 
 // SetValueForOutputKey wraps the corresponding Objective-C method.
-func (x *PlugIn) SetValueForOutputKey(value obj.Object, key string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setValue:forOutputKey:"), objref.IDOf(value), purego.NSString(key))
+func (pi *PlugIn) SetValueForOutputKey(value obj.Object, key string) bool {
+	_r := objc.Send[bool](objref.IDOf(pi), objc.RegisterName("setValue:forOutputKey:"), objref.IDOf(value), purego.NSString(key))
 	return _r
 }
 
 // AddInputPortWithTypeForKeyWithAttributes wraps the corresponding Objective-C method.
-func (x *PlugIn) AddInputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addInputPortWithType:forKey:withAttributes:"), purego.NSString(type_), purego.NSString(key), objref.IDOf(attributes))
+func (pi *PlugIn) AddInputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("addInputPortWithType:forKey:withAttributes:"), purego.NSString(type_), purego.NSString(key), objref.IDOf(attributes))
 }
 
 // RemoveInputPortForKey wraps the corresponding Objective-C method.
-func (x *PlugIn) RemoveInputPortForKey(key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeInputPortForKey:"), purego.NSString(key))
+func (pi *PlugIn) RemoveInputPortForKey(key string) {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("removeInputPortForKey:"), purego.NSString(key))
 }
 
 // AddOutputPortWithTypeForKeyWithAttributes wraps the corresponding Objective-C method.
-func (x *PlugIn) AddOutputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOutputPortWithType:forKey:withAttributes:"), purego.NSString(type_), purego.NSString(key), objref.IDOf(attributes))
+func (pi *PlugIn) AddOutputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("addOutputPortWithType:forKey:withAttributes:"), purego.NSString(type_), purego.NSString(key), objref.IDOf(attributes))
 }
 
 // RemoveOutputPortForKey wraps the corresponding Objective-C method.
-func (x *PlugIn) RemoveOutputPortForKey(key string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeOutputPortForKey:"), purego.NSString(key))
+func (pi *PlugIn) RemoveOutputPortForKey(key string) {
+	objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("removeOutputPortForKey:"), purego.NSString(key))
 }
 
 // CreateViewController wraps the corresponding Objective-C method.
-func (x *PlugIn) CreateViewController() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createViewController"))
+func (pi *PlugIn) CreateViewController() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pi), objc.RegisterName("createViewController"))
 	return obj.Wrap(_r)
 }
-
-// PlugInable is the interface implemented by [PlugIn], for mocking and DI.
-type PlugInable interface {
-	obj.Object
-	SerializedValueForKey(key string) obj.Object
-	SetSerializedValueForKey(serializedValue obj.Object, key string)
-	DidValueForInputKeyChange(key string) bool
-	ValueForInputKey(key string) obj.Object
-	SetValueForOutputKey(value obj.Object, key string) bool
-	AddInputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes obj.Object)
-	RemoveInputPortForKey(key string)
-	AddOutputPortWithTypeForKeyWithAttributes(type_ string, key string, attributes obj.Object)
-	RemoveOutputPortForKey(key string)
-	CreateViewController() obj.Object
-}
-
-var _ PlugInable = (*PlugIn)(nil)

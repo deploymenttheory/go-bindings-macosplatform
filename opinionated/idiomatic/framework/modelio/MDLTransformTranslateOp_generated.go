@@ -44,24 +44,24 @@ func transformTranslateOpAdopt(id objc.ID) *TransformTranslateOp {
 }
 
 // Description returns the object's -description text.
-func (x *TransformTranslateOp) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tto *TransformTranslateOp) Description() string {
+	return rt.Description(objref.IDOf(tto))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TransformTranslateOp) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tto *TransformTranslateOp) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tto), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TransformTranslateOp) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tto *TransformTranslateOp) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tto), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TransformTranslateOp) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tto *TransformTranslateOp) String() string {
+	return rt.Description(objref.IDOf(tto))
 }
 
 // NewTransformTranslateOp creates a new TransformTranslateOp.
@@ -71,8 +71,8 @@ func NewTransformTranslateOp() *TransformTranslateOp {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *TransformTranslateOp) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (tto *TransformTranslateOp) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tto), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -80,16 +80,7 @@ func (x *TransformTranslateOp) Name() string {
 }
 
 // AnimatedValue wraps the corresponding Objective-C method.
-func (x *TransformTranslateOp) AnimatedValue() *AnimatedVector3 {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animatedValue"))
+func (tto *TransformTranslateOp) AnimatedValue() *AnimatedVector3 {
+	_r := objc.Send[objc.ID](objref.IDOf(tto), objc.RegisterName("animatedValue"))
 	return AnimatedVector3FromID(_r)
 }
-
-// TransformTranslateOpable is the interface implemented by [TransformTranslateOp], for mocking and DI.
-type TransformTranslateOpable interface {
-	obj.Object
-	Name() string
-	AnimatedValue() *AnimatedVector3
-}
-
-var _ TransformTranslateOpable = (*TransformTranslateOp)(nil)

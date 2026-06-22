@@ -52,242 +52,163 @@ func NewKeyframeAnimation() *KeyframeAnimation {
 	return keyframeAnimationAdopt(_id)
 }
 
-// WithPath the path for a point-based property to follow.
-func (x *KeyframeAnimation) WithPath(path obj.Object) *KeyframeAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
-	return x
+// WithPath sets the path for a point-based property to follow.
+func (ka *KeyframeAnimation) WithPath(path obj.Object) *KeyframeAnimation {
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setPath:"), objref.IDOf(path))
+	return ka
 }
 
-// WithKeyTimes an optional array of NSNumber objects that define the time at which to apply a given keyframe segment.
-func (x *KeyframeAnimation) WithKeyTimes(items ...obj.Object) *KeyframeAnimation {
+// WithKeyTimes sets an optional array of NSNumber objects that define the time at which to apply a given keyframe segment.
+func (ka *KeyframeAnimation) WithKeyTimes(items ...obj.Object) *KeyframeAnimation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyTimes:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setKeyTimes:"), _arr)
+	return ka
 }
 
-// WithTimingFunctions an optional array of CAMediaTimingFunction objects that define the pacing for each keyframe segment.
-func (x *KeyframeAnimation) WithTimingFunctions(items ...*MediaTimingFunction) *KeyframeAnimation {
+// WithTimingFunctions sets an optional array of CAMediaTimingFunction objects that define the pacing for each keyframe segment.
+func (ka *KeyframeAnimation) WithTimingFunctions(items ...*MediaTimingFunction) *KeyframeAnimation {
 	_arr := purego.SliceToNSArray(items, func(_v *MediaTimingFunction) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunctions:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setTimingFunctions:"), _arr)
+	return ka
 }
 
-// WithCalculationMode specifies how intermediate keyframe values are calculated by the receiver.
-func (x *KeyframeAnimation) WithCalculationMode(calculationMode obj.Object) *KeyframeAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalculationMode:"), objref.IDOf(calculationMode))
-	return x
+// WithCalculationMode sets specifies how intermediate keyframe values are calculated by the receiver.
+func (ka *KeyframeAnimation) WithCalculationMode(calculationMode obj.Object) *KeyframeAnimation {
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setCalculationMode:"), objref.IDOf(calculationMode))
+	return ka
 }
 
-// WithTensionValues an array of numbers that define the tightness of the curve.
-func (x *KeyframeAnimation) WithTensionValues(items ...obj.Object) *KeyframeAnimation {
+// WithTensionValues sets an array of numbers that define the tightness of the curve.
+func (ka *KeyframeAnimation) WithTensionValues(items ...obj.Object) *KeyframeAnimation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTensionValues:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setTensionValues:"), _arr)
+	return ka
 }
 
-// WithContinuityValues an array of numbers that define the sharpness of the timing curve’s corners.
-func (x *KeyframeAnimation) WithContinuityValues(items ...obj.Object) *KeyframeAnimation {
+// WithContinuityValues sets an array of numbers that define the sharpness of the timing curve’s corners.
+func (ka *KeyframeAnimation) WithContinuityValues(items ...obj.Object) *KeyframeAnimation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuityValues:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setContinuityValues:"), _arr)
+	return ka
 }
 
-// WithBiasValues an array of numbers that define the position of the curve relative to a control point.
-func (x *KeyframeAnimation) WithBiasValues(items ...obj.Object) *KeyframeAnimation {
+// WithBiasValues sets an array of numbers that define the position of the curve relative to a control point.
+func (ka *KeyframeAnimation) WithBiasValues(items ...obj.Object) *KeyframeAnimation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBiasValues:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setBiasValues:"), _arr)
+	return ka
 }
 
-// WithRotationMode determines whether objects animating along the path rotate to match the path tangent.
-func (x *KeyframeAnimation) WithRotationMode(rotationMode obj.Object) *KeyframeAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotationMode:"), objref.IDOf(rotationMode))
-	return x
+// WithRotationMode sets determines whether objects animating along the path rotate to match the path tangent.
+func (ka *KeyframeAnimation) WithRotationMode(rotationMode obj.Object) *KeyframeAnimation {
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setRotationMode:"), objref.IDOf(rotationMode))
+	return ka
 }
 
-// WithKeyPath specifies the key path the receiver animates.
-func (x *KeyframeAnimation) WithKeyPath(keyPath string) *KeyframeAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyPath:"), purego.NSString(keyPath))
-	return x
+// WithKeyPath sets specifies the key path the receiver animates.
+func (ka *KeyframeAnimation) WithKeyPath(keyPath string) *KeyframeAnimation {
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setKeyPath:"), purego.NSString(keyPath))
+	return ka
 }
 
-// WithAdditive determines if the value specified by the animation is added to the current render tree value to produce the new render tree value.
-func (x *KeyframeAnimation) WithAdditive(additive bool) *KeyframeAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditive:"), additive)
-	return x
+// WithAdditive sets determines if the value specified by the animation is added to the current render tree value to produce the new render tree value.
+func (ka *KeyframeAnimation) WithAdditive(additive bool) *KeyframeAnimation {
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setAdditive:"), additive)
+	return ka
 }
 
-// WithCumulative determines if the value of the property is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle.
-func (x *KeyframeAnimation) WithCumulative(cumulative bool) *KeyframeAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCumulative:"), cumulative)
-	return x
+// WithCumulative sets determines if the value of the property is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle.
+func (ka *KeyframeAnimation) WithCumulative(cumulative bool) *KeyframeAnimation {
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setCumulative:"), cumulative)
+	return ka
 }
 
-// WithValueFunction an optional value function that is applied to interpolated values.
-func (x *KeyframeAnimation) WithValueFunction(valueFunction *ValueFunction) *KeyframeAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueFunction:"), objref.IDOf(valueFunction))
-	return x
+// WithValueFunction sets an optional value function that is applied to interpolated values.
+func (ka *KeyframeAnimation) WithValueFunction(valueFunction *ValueFunction) *KeyframeAnimation {
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setValueFunction:"), objref.IDOf(valueFunction))
+	return ka
 }
 
-// WithTimingFunction an optional timing function defining the pacing of the animation.
-func (x *KeyframeAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *KeyframeAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
-	return x
+// WithTimingFunction sets an optional timing function defining the pacing of the animation.
+func (ka *KeyframeAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *KeyframeAnimation {
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
+	return ka
 }
 
-// WithRemovedOnCompletion determines if the animation is removed from the target layer’s animations upon completion.
-func (x *KeyframeAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *KeyframeAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
-	return x
+// WithRemovedOnCompletion sets determines if the animation is removed from the target layer’s animations upon completion.
+func (ka *KeyframeAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *KeyframeAnimation {
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
+	return ka
 }
 
 // Values wraps the corresponding Objective-C method.
-func (x *KeyframeAnimation) Values() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("values"))
+func (ka *KeyframeAnimation) Values() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("values"))
 	return obj.Wrap(_r)
 }
 
 // SetValues wraps the corresponding Objective-C method.
-func (x *KeyframeAnimation) SetValues(values obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValues:"), objref.IDOf(values))
+func (ka *KeyframeAnimation) SetValues(values obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("setValues:"), objref.IDOf(values))
 }
 
 // Path wraps the corresponding Objective-C method.
-func (x *KeyframeAnimation) Path() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+func (ka *KeyframeAnimation) Path() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("path"))
 	return obj.Wrap(_r)
-}
-
-// SetPath wraps the corresponding Objective-C method.
-func (x *KeyframeAnimation) SetPath(path obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
 }
 
 // KeyTimes wraps the corresponding Objective-C method.
 //
 // KeyTimes returns the collection as a Go slice.
-func (x *KeyframeAnimation) KeyTimes() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyTimes"))
+func (ka *KeyframeAnimation) KeyTimes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("keyTimes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
-}
-
-// SetKeyTimes wraps the corresponding Objective-C method.
-func (x *KeyframeAnimation) SetKeyTimes(keyTimes []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyTimes:"), purego.SliceToNSArray(keyTimes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // TimingFunctions wraps the corresponding Objective-C method.
 //
 // TimingFunctions returns the collection as a Go slice.
-func (x *KeyframeAnimation) TimingFunctions() []*MediaTimingFunction {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timingFunctions"))
+func (ka *KeyframeAnimation) TimingFunctions() []*MediaTimingFunction {
+	_arr := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("timingFunctions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MediaTimingFunction { return MediaTimingFunctionFromID(_id) })
 }
 
-// SetTimingFunctions wraps the corresponding Objective-C method.
-func (x *KeyframeAnimation) SetTimingFunctions(timingFunctions []*MediaTimingFunction) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunctions:"), purego.SliceToNSArray(timingFunctions, func(_v *MediaTimingFunction) objc.ID { return objref.IDOf(_v) }))
-}
-
 // CalculationMode wraps the corresponding Objective-C method.
-func (x *KeyframeAnimation) CalculationMode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calculationMode"))
+func (ka *KeyframeAnimation) CalculationMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("calculationMode"))
 	return obj.Wrap(_r)
-}
-
-// SetCalculationMode wraps the corresponding Objective-C method.
-func (x *KeyframeAnimation) SetCalculationMode(calculationMode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalculationMode:"), objref.IDOf(calculationMode))
 }
 
 // TensionValues wraps the corresponding Objective-C method.
 //
 // TensionValues returns the collection as a Go slice.
-func (x *KeyframeAnimation) TensionValues() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tensionValues"))
+func (ka *KeyframeAnimation) TensionValues() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("tensionValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
-}
-
-// SetTensionValues wraps the corresponding Objective-C method.
-func (x *KeyframeAnimation) SetTensionValues(tensionValues []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTensionValues:"), purego.SliceToNSArray(tensionValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ContinuityValues wraps the corresponding Objective-C method.
 //
 // ContinuityValues returns the collection as a Go slice.
-func (x *KeyframeAnimation) ContinuityValues() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("continuityValues"))
+func (ka *KeyframeAnimation) ContinuityValues() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("continuityValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
-}
-
-// SetContinuityValues wraps the corresponding Objective-C method.
-func (x *KeyframeAnimation) SetContinuityValues(continuityValues []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuityValues:"), purego.SliceToNSArray(continuityValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // BiasValues wraps the corresponding Objective-C method.
 //
 // BiasValues returns the collection as a Go slice.
-func (x *KeyframeAnimation) BiasValues() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("biasValues"))
+func (ka *KeyframeAnimation) BiasValues() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("biasValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetBiasValues wraps the corresponding Objective-C method.
-func (x *KeyframeAnimation) SetBiasValues(biasValues []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBiasValues:"), purego.SliceToNSArray(biasValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
 // RotationMode wraps the corresponding Objective-C method.
-func (x *KeyframeAnimation) RotationMode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rotationMode"))
+func (ka *KeyframeAnimation) RotationMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ka), objc.RegisterName("rotationMode"))
 	return obj.Wrap(_r)
 }
-
-// SetRotationMode wraps the corresponding Objective-C method.
-func (x *KeyframeAnimation) SetRotationMode(rotationMode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotationMode:"), objref.IDOf(rotationMode))
-}
-
-// KeyframeAnimationable is the interface implemented by [KeyframeAnimation], for mocking and DI.
-type KeyframeAnimationable interface {
-	obj.Object
-	WithPath(path obj.Object) *KeyframeAnimation
-	WithKeyTimes(items ...obj.Object) *KeyframeAnimation
-	WithTimingFunctions(items ...*MediaTimingFunction) *KeyframeAnimation
-	WithCalculationMode(calculationMode obj.Object) *KeyframeAnimation
-	WithTensionValues(items ...obj.Object) *KeyframeAnimation
-	WithContinuityValues(items ...obj.Object) *KeyframeAnimation
-	WithBiasValues(items ...obj.Object) *KeyframeAnimation
-	WithRotationMode(rotationMode obj.Object) *KeyframeAnimation
-	WithKeyPath(keyPath string) *KeyframeAnimation
-	WithAdditive(additive bool) *KeyframeAnimation
-	WithCumulative(cumulative bool) *KeyframeAnimation
-	WithValueFunction(valueFunction *ValueFunction) *KeyframeAnimation
-	WithTimingFunction(timingFunction *MediaTimingFunction) *KeyframeAnimation
-	WithRemovedOnCompletion(removedOnCompletion bool) *KeyframeAnimation
-	Values() obj.Object
-	SetValues(values obj.Object)
-	Path() obj.Object
-	SetPath(path obj.Object)
-	KeyTimes() []obj.Object
-	SetKeyTimes(keyTimes []obj.Object)
-	TimingFunctions() []*MediaTimingFunction
-	SetTimingFunctions(timingFunctions []*MediaTimingFunction)
-	CalculationMode() obj.Object
-	SetCalculationMode(calculationMode obj.Object)
-	TensionValues() []obj.Object
-	SetTensionValues(tensionValues []obj.Object)
-	ContinuityValues() []obj.Object
-	SetContinuityValues(continuityValues []obj.Object)
-	BiasValues() []obj.Object
-	SetBiasValues(biasValues []obj.Object)
-	RotationMode() obj.Object
-	SetRotationMode(rotationMode obj.Object)
-}
-
-var _ KeyframeAnimationable = (*KeyframeAnimation)(nil)
 
 var _ PropertyAnimationProvider = (*KeyframeAnimation)(nil)
 

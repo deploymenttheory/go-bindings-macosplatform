@@ -7,7 +7,6 @@ package cloudkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,29 +51,20 @@ func NewSyncEngineFetchedRecordZoneChangesEvent() *SyncEngineFetchedRecordZoneCh
 	return syncEngineFetchedRecordZoneChangesEventAdopt(_id)
 }
 
-// Modifications the fetched record modifications.
+// Modifications returns the fetched record modifications.
 //
 // Modifications returns the collection as a Go slice.
-func (x *SyncEngineFetchedRecordZoneChangesEvent) Modifications() []*Record {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modifications"))
+func (sefrzce *SyncEngineFetchedRecordZoneChangesEvent) Modifications() []*Record {
+	_arr := objc.Send[objc.ID](objref.IDOf(sefrzce), objc.RegisterName("modifications"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Record { return RecordFromID(_id) })
 }
 
-// Deletions the fetched record deletions.
+// Deletions returns the fetched record deletions.
 //
 // Deletions returns the collection as a Go slice.
-func (x *SyncEngineFetchedRecordZoneChangesEvent) Deletions() []*SyncEngineFetchedRecordDeletion {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deletions"))
+func (sefrzce *SyncEngineFetchedRecordZoneChangesEvent) Deletions() []*SyncEngineFetchedRecordDeletion {
+	_arr := objc.Send[objc.ID](objref.IDOf(sefrzce), objc.RegisterName("deletions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SyncEngineFetchedRecordDeletion { return SyncEngineFetchedRecordDeletionFromID(_id) })
 }
-
-// SyncEngineFetchedRecordZoneChangesEventable is the interface implemented by [SyncEngineFetchedRecordZoneChangesEvent], for mocking and DI.
-type SyncEngineFetchedRecordZoneChangesEventable interface {
-	obj.Object
-	Modifications() []*Record
-	Deletions() []*SyncEngineFetchedRecordDeletion
-}
-
-var _ SyncEngineFetchedRecordZoneChangesEventable = (*SyncEngineFetchedRecordZoneChangesEvent)(nil)
 
 var _ SyncEngineEventProvider = (*SyncEngineFetchedRecordZoneChangesEvent)(nil)

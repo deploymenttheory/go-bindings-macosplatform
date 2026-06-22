@@ -46,24 +46,24 @@ func turnBasedEventHandlerAdopt(id objc.ID) *TurnBasedEventHandler {
 }
 
 // Description returns the object's -description text.
-func (x *TurnBasedEventHandler) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tbeh *TurnBasedEventHandler) Description() string {
+	return rt.Description(objref.IDOf(tbeh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TurnBasedEventHandler) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tbeh *TurnBasedEventHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tbeh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TurnBasedEventHandler) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tbeh *TurnBasedEventHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tbeh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TurnBasedEventHandler) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tbeh *TurnBasedEventHandler) String() string {
+	return rt.Description(objref.IDOf(tbeh))
 }
 
 // NewTurnBasedEventHandler creates a new TurnBasedEventHandler.
@@ -72,29 +72,14 @@ func NewTurnBasedEventHandler() *TurnBasedEventHandler {
 	return turnBasedEventHandlerAdopt(_id)
 }
 
-// WithDelegate the delegate for the event handler.
-func (x *TurnBasedEventHandler) WithDelegate(delegate obj.Object) *TurnBasedEventHandler {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
-	return x
+// WithDelegate sets the delegate for the event handler.
+func (tbeh *TurnBasedEventHandler) WithDelegate(delegate obj.Object) *TurnBasedEventHandler {
+	objc.Send[objc.ID](objref.IDOf(tbeh), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	return tbeh
 }
 
 // Delegate wraps the corresponding Objective-C method.
-func (x *TurnBasedEventHandler) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+func (tbeh *TurnBasedEventHandler) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tbeh), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
-
-// SetDelegate wraps the corresponding Objective-C method.
-func (x *TurnBasedEventHandler) SetDelegate(delegate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
-}
-
-// TurnBasedEventHandlerable is the interface implemented by [TurnBasedEventHandler], for mocking and DI.
-type TurnBasedEventHandlerable interface {
-	obj.Object
-	WithDelegate(delegate obj.Object) *TurnBasedEventHandler
-	Delegate() obj.Object
-	SetDelegate(delegate obj.Object)
-}
-
-var _ TurnBasedEventHandlerable = (*TurnBasedEventHandler)(nil)

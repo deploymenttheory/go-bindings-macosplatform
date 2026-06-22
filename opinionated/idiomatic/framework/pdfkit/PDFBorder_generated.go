@@ -47,24 +47,24 @@ func borderAdopt(id objc.ID) *Border {
 }
 
 // Description returns the object's -description text.
-func (x *Border) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (b *Border) Description() string {
+	return rt.Description(objref.IDOf(b))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Border) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (b *Border) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(b), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Border) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (b *Border) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(b), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Border) String() string {
-	return rt.Description(objref.IDOf(x))
+func (b *Border) String() string {
+	return rt.Description(objref.IDOf(b))
 }
 
 // NewBorder creates a new Border.
@@ -73,75 +73,48 @@ func NewBorder() *Border {
 	return borderAdopt(_id)
 }
 
-// WithStyle sets the border style.
-func (x *Border) WithStyle(style BorderStyle) *Border {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
-	return x
+// WithStyle sets sets the border style.
+func (b *Border) WithStyle(style BorderStyle) *Border {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setStyle:"), style)
+	return b
 }
 
-// WithLineWidth sets the line width (in points) for the border.
-func (x *Border) WithLineWidth(lineWidth float64) *Border {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
-	return x
+// WithLineWidth sets sets the line width (in points) for the border.
+func (b *Border) WithLineWidth(lineWidth float64) *Border {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setLineWidth:"), lineWidth)
+	return b
 }
 
 // DrawInRect draws the border.
-func (x *Border) DrawInRect(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawInRect:"), rect)
+func (b *Border) DrawInRect(rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("drawInRect:"), rect)
 }
 
 // Style wraps the corresponding Objective-C method.
-func (x *Border) Style() BorderStyle {
-	_r := objc.Send[BorderStyle](objref.IDOf(x), objc.RegisterName("style"))
+func (b *Border) Style() BorderStyle {
+	_r := objc.Send[BorderStyle](objref.IDOf(b), objc.RegisterName("style"))
 	return _r
-}
-
-// SetStyle wraps the corresponding Objective-C method.
-func (x *Border) SetStyle(style BorderStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 }
 
 // LineWidth wraps the corresponding Objective-C method.
-func (x *Border) LineWidth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineWidth"))
+func (b *Border) LineWidth() float64 {
+	_r := objc.Send[float64](objref.IDOf(b), objc.RegisterName("lineWidth"))
 	return _r
 }
 
-// SetLineWidth wraps the corresponding Objective-C method.
-func (x *Border) SetLineWidth(lineWidth float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
-}
-
 // DashPattern wraps the corresponding Objective-C method.
-func (x *Border) DashPattern() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dashPattern"))
+func (b *Border) DashPattern() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("dashPattern"))
 	return obj.Wrap(_r)
 }
 
 // SetDashPattern wraps the corresponding Objective-C method.
-func (x *Border) SetDashPattern(dashPattern obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDashPattern:"), objref.IDOf(dashPattern))
+func (b *Border) SetDashPattern(dashPattern obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("setDashPattern:"), objref.IDOf(dashPattern))
 }
 
 // BorderKeyValues wraps the corresponding Objective-C method.
-func (x *Border) BorderKeyValues() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderKeyValues"))
+func (b *Border) BorderKeyValues() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(b), objc.RegisterName("borderKeyValues"))
 	return obj.Wrap(_r)
 }
-
-// Borderable is the interface implemented by [Border], for mocking and DI.
-type Borderable interface {
-	obj.Object
-	WithStyle(style BorderStyle) *Border
-	WithLineWidth(lineWidth float64) *Border
-	DrawInRect(rect corefoundation.CGRect)
-	Style() BorderStyle
-	SetStyle(style BorderStyle)
-	LineWidth() float64
-	SetLineWidth(lineWidth float64)
-	DashPattern() obj.Object
-	SetDashPattern(dashPattern obj.Object)
-	BorderKeyValues() obj.Object
-}
-
-var _ Borderable = (*Border)(nil)

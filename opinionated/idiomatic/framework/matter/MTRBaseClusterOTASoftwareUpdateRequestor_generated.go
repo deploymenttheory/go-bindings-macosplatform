@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -56,7 +57,7 @@ func NewMTRBaseClusterOTASoftwareUpdateRequestorWithDeviceEndpointIDQueue(device
 // ReadAttributeDefaultOTAProvidersWithParamsCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeDefaultOTAProvidersWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeDefaultOTAProvidersWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeDefaultOTAProvidersWithParamsCompletion(ctx context.Context, params *MTRReadParams) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -68,7 +69,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeDefaultOTAProvid
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDefaultOTAProvidersWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("readAttributeDefaultOTAProvidersWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -81,7 +82,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeDefaultOTAProvid
 // SubscribeAttributeDefaultOTAProvidersWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDefaultOTAProvidersWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeDefaultOTAProvidersWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeDefaultOTAProvidersWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -93,7 +94,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeDefaultOTAP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDefaultOTAProvidersWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeDefaultOTAProvidersWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -106,7 +107,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeDefaultOTAP
 // ReadAttributeUpdatePossibleWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeUpdatePossibleWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeUpdatePossibleWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeUpdatePossibleWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -118,7 +119,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeUpdatePossibleWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUpdatePossibleWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("readAttributeUpdatePossibleWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -131,7 +132,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeUpdatePossibleWi
 // SubscribeAttributeUpdatePossibleWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeUpdatePossibleWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeUpdatePossibleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeUpdatePossibleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -143,7 +144,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeUpdatePossi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeUpdatePossibleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeUpdatePossibleWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -156,7 +157,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeUpdatePossi
 // ReadAttributeUpdateStateWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeUpdateStateWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeUpdateStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeUpdateStateWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -168,7 +169,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeUpdateStateWithC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUpdateStateWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("readAttributeUpdateStateWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -181,7 +182,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeUpdateStateWithC
 // SubscribeAttributeUpdateStateWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeUpdateStateWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeUpdateStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeUpdateStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -193,7 +194,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeUpdateState
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeUpdateStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeUpdateStateWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -206,7 +207,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeUpdateState
 // ReadAttributeUpdateStateProgressWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeUpdateStateProgressWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeUpdateStateProgressWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeUpdateStateProgressWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -218,7 +219,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeUpdateStateProgr
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUpdateStateProgressWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("readAttributeUpdateStateProgressWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -231,7 +232,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeUpdateStateProgr
 // SubscribeAttributeUpdateStateProgressWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeUpdateStateProgressWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeUpdateStateProgressWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeUpdateStateProgressWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -243,7 +244,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeUpdateState
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeUpdateStateProgressWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeUpdateStateProgressWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -256,7 +257,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeUpdateState
 // ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -268,7 +269,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeGeneratedCommand
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -281,7 +282,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeGeneratedCommand
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -293,7 +294,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeGeneratedCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -306,7 +307,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeGeneratedCo
 // ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -318,7 +319,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeAcceptedCommandL
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -331,7 +332,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeAcceptedCommandL
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -343,7 +344,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeAcceptedCom
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -356,7 +357,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeAcceptedCom
 // ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -368,7 +369,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeAttributeListWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -381,7 +382,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeAttributeListWit
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -393,7 +394,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeAttributeLi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -406,7 +407,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeAttributeLi
 // ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -418,7 +419,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeFeatureMapWithCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -431,7 +432,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeFeatureMapWithCo
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -443,7 +444,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeFeatureMapW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -456,7 +457,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeFeatureMapW
 // ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -468,7 +469,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeClusterRevisionW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -481,7 +482,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) ReadAttributeClusterRevisionW
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -493,7 +494,7 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeClusterRevi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcosur), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -503,35 +504,11 @@ func (x *MTRBaseClusterOTASoftwareUpdateRequestor) SubscribeAttributeClusterRevi
 	}
 }
 
-// MTRBaseClusterOTASoftwareUpdateRequestorable is the interface implemented by [MTRBaseClusterOTASoftwareUpdateRequestor], for mocking and DI.
-type MTRBaseClusterOTASoftwareUpdateRequestorable interface {
-	obj.Object
-	ReadAttributeDefaultOTAProvidersWithParamsCompletion(ctx context.Context, params *MTRReadParams) (obj.Object, error)
-	SubscribeAttributeDefaultOTAProvidersWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeUpdatePossibleWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeUpdatePossibleWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeUpdateStateWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeUpdateStateWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeUpdateStateProgressWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeUpdateStateProgressWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-}
-
-var _ MTRBaseClusterOTASoftwareUpdateRequestorable = (*MTRBaseClusterOTASoftwareUpdateRequestor)(nil)
-
 // isMTRBaseClusterOTASoftwareUpdateRequestor marks MTRBaseClusterOTASoftwareUpdateRequestor — and, by embedding promotion, its
 // subclasses — as a member of the MTRBaseClusterOTASoftwareUpdateRequestor hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRBaseClusterOTASoftwareUpdateRequestor) isMTRBaseClusterOTASoftwareUpdateRequestor() {}
+func (mbcosur *MTRBaseClusterOTASoftwareUpdateRequestor) isMTRBaseClusterOTASoftwareUpdateRequestor() {
+}
 
 var _ MTRBaseClusterOTASoftwareUpdateRequestorProvider = (*MTRBaseClusterOTASoftwareUpdateRequestor)(nil)
 

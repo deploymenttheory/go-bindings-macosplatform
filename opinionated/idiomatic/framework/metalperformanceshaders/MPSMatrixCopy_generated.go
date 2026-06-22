@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,46 +51,34 @@ func NewMatrixCopy() *MatrixCopy {
 	return matrixCopyAdopt(_id)
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *MatrixCopy) WithLabel(label string) *MatrixCopy {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (mc *MatrixCopy) WithLabel(label string) *MatrixCopy {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mc
 }
 
-// CopyRows the number of rows to copy for each copy operation
-func (x *MatrixCopy) CopyRows() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("copyRows"))
+// CopyRows returns the number of rows to copy for each copy operation
+func (mc *MatrixCopy) CopyRows() int {
+	_r := objc.Send[int](objref.IDOf(mc), objc.RegisterName("copyRows"))
 	return _r
 }
 
-// CopyColumns the number of columns to copy for each copy operation
-func (x *MatrixCopy) CopyColumns() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("copyColumns"))
+// CopyColumns returns the number of columns to copy for each copy operation
+func (mc *MatrixCopy) CopyColumns() int {
+	_r := objc.Send[int](objref.IDOf(mc), objc.RegisterName("copyColumns"))
 	return _r
 }
 
-// SourcesAreTransposed if YES, the sources are in row major storage order
-func (x *MatrixCopy) SourcesAreTransposed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sourcesAreTransposed"))
+// SourcesAreTransposed reports whether if true, the sources are in row major storage order
+func (mc *MatrixCopy) SourcesAreTransposed() bool {
+	_r := objc.Send[bool](objref.IDOf(mc), objc.RegisterName("sourcesAreTransposed"))
 	return _r
 }
 
-// DestinationsAreTransposed if YES, the destinations are in row major storage order
-func (x *MatrixCopy) DestinationsAreTransposed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("destinationsAreTransposed"))
+// DestinationsAreTransposed reports whether if true, the destinations are in row major storage order
+func (mc *MatrixCopy) DestinationsAreTransposed() bool {
+	_r := objc.Send[bool](objref.IDOf(mc), objc.RegisterName("destinationsAreTransposed"))
 	return _r
 }
-
-// MatrixCopyable is the interface implemented by [MatrixCopy], for mocking and DI.
-type MatrixCopyable interface {
-	obj.Object
-	WithLabel(label string) *MatrixCopy
-	CopyRows() int
-	CopyColumns() int
-	SourcesAreTransposed() bool
-	DestinationsAreTransposed() bool
-}
-
-var _ MatrixCopyable = (*MatrixCopy)(nil)
 
 var _ KernelProvider = (*MatrixCopy)(nil)

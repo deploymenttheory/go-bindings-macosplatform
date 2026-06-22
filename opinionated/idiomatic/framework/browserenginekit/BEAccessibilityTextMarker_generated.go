@@ -46,24 +46,24 @@ func accessibilityTextMarkerAdopt(id objc.ID) *AccessibilityTextMarker {
 }
 
 // Description returns the object's -description text.
-func (x *AccessibilityTextMarker) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (atm *AccessibilityTextMarker) Description() string {
+	return rt.Description(objref.IDOf(atm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccessibilityTextMarker) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (atm *AccessibilityTextMarker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(atm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccessibilityTextMarker) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (atm *AccessibilityTextMarker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(atm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AccessibilityTextMarker) String() string {
-	return rt.Description(objref.IDOf(x))
+func (atm *AccessibilityTextMarker) String() string {
+	return rt.Description(objref.IDOf(atm))
 }
 
 // NewAccessibilityTextMarker creates a new AccessibilityTextMarker.
@@ -71,10 +71,3 @@ func NewAccessibilityTextMarker() *AccessibilityTextMarker {
 	_id := objc.Send[objc.ID](objc.ID(_class("BEAccessibilityTextMarker")), objc.RegisterName("new"))
 	return accessibilityTextMarkerAdopt(_id)
 }
-
-// AccessibilityTextMarkerable is the interface implemented by [AccessibilityTextMarker], for mocking and DI.
-type AccessibilityTextMarkerable interface {
-	obj.Object
-}
-
-var _ AccessibilityTextMarkerable = (*AccessibilityTextMarker)(nil)

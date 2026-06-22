@@ -55,24 +55,15 @@ func NewBoatReservationWithItemReferenceReservationNumberBookingTimeReservationS
 }
 
 // ReservedSeat wraps the corresponding Objective-C method.
-func (x *BoatReservation) ReservedSeat() *Seat {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservedSeat"))
+func (br *BoatReservation) ReservedSeat() *Seat {
+	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("reservedSeat"))
 	return SeatFromID(_r)
 }
 
 // BoatTrip wraps the corresponding Objective-C method.
-func (x *BoatReservation) BoatTrip() *BoatTrip {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boatTrip"))
+func (br *BoatReservation) BoatTrip() *BoatTrip {
+	_r := objc.Send[objc.ID](objref.IDOf(br), objc.RegisterName("boatTrip"))
 	return BoatTripFromID(_r)
 }
-
-// BoatReservationable is the interface implemented by [BoatReservation], for mocking and DI.
-type BoatReservationable interface {
-	obj.Object
-	ReservedSeat() *Seat
-	BoatTrip() *BoatTrip
-}
-
-var _ BoatReservationable = (*BoatReservation)(nil)
 
 var _ ReservationProvider = (*BoatReservation)(nil)

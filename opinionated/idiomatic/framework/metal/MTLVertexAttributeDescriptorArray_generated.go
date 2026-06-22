@@ -46,24 +46,24 @@ func vertexAttributeDescriptorArrayAdopt(id objc.ID) *VertexAttributeDescriptorA
 }
 
 // Description returns the object's -description text.
-func (x *VertexAttributeDescriptorArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vada *VertexAttributeDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(vada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VertexAttributeDescriptorArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vada *VertexAttributeDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VertexAttributeDescriptorArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vada *VertexAttributeDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VertexAttributeDescriptorArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vada *VertexAttributeDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(vada))
 }
 
 // NewVertexAttributeDescriptorArray creates a new VertexAttributeDescriptorArray.
@@ -73,21 +73,12 @@ func NewVertexAttributeDescriptorArray() *VertexAttributeDescriptorArray {
 }
 
 // ObjectAtIndexedSubscript returns the state of the specified vertex attribute.
-func (x *VertexAttributeDescriptorArray) ObjectAtIndexedSubscript(index int) *VertexAttributeDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), index)
+func (vada *VertexAttributeDescriptorArray) ObjectAtIndexedSubscript(index int) *VertexAttributeDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(vada), objc.RegisterName("objectAtIndexedSubscript:"), index)
 	return VertexAttributeDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets state for the specified vertex attribute.
-func (x *VertexAttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *VertexAttributeDescriptor, index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attributeDesc), index)
+func (vada *VertexAttributeDescriptorArray) SetObjectAtIndexedSubscript(attributeDesc *VertexAttributeDescriptor, index int) {
+	objc.Send[objc.ID](objref.IDOf(vada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attributeDesc), index)
 }
-
-// VertexAttributeDescriptorArrayable is the interface implemented by [VertexAttributeDescriptorArray], for mocking and DI.
-type VertexAttributeDescriptorArrayable interface {
-	obj.Object
-	ObjectAtIndexedSubscript(index int) *VertexAttributeDescriptor
-	SetObjectAtIndexedSubscript(attributeDesc *VertexAttributeDescriptor, index int)
-}
-
-var _ VertexAttributeDescriptorArrayable = (*VertexAttributeDescriptorArray)(nil)

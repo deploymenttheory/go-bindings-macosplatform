@@ -44,24 +44,24 @@ func metricMediaRenditionAdopt(id objc.ID) *MetricMediaRendition {
 }
 
 // Description returns the object's -description text.
-func (x *MetricMediaRendition) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmr *MetricMediaRendition) Description() string {
+	return rt.Description(objref.IDOf(mmr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetricMediaRendition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmr *MetricMediaRendition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetricMediaRendition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmr *MetricMediaRendition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MetricMediaRendition) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmr *MetricMediaRendition) String() string {
+	return rt.Description(objref.IDOf(mmr))
 }
 
 // NewMetricMediaRendition creates a new MetricMediaRendition.
@@ -71,8 +71,8 @@ func NewMetricMediaRendition() *MetricMediaRendition {
 }
 
 // StableID provides ID corresponding to the rendition. This is equivalent to the STABLE-RENDITION-ID in the HLS playlist. If not available, value is nil.
-func (x *MetricMediaRendition) StableID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stableID"))
+func (mmr *MetricMediaRendition) StableID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mmr), objc.RegisterName("stableID"))
 	if _r == 0 {
 		return ""
 	}
@@ -80,16 +80,7 @@ func (x *MetricMediaRendition) StableID() string {
 }
 
 // URL provides URL corresponding to the rendition's HLS playlist. If not available, value is nil.
-func (x *MetricMediaRendition) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (mmr *MetricMediaRendition) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmr), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
-
-// MetricMediaRenditionable is the interface implemented by [MetricMediaRendition], for mocking and DI.
-type MetricMediaRenditionable interface {
-	obj.Object
-	StableID() string
-	URL() obj.Object
-}
-
-var _ MetricMediaRenditionable = (*MetricMediaRendition)(nil)

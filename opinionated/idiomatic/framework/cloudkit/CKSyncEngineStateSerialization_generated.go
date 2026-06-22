@@ -46,24 +46,24 @@ func syncEngineStateSerializationAdopt(id objc.ID) *SyncEngineStateSerialization
 }
 
 // Description returns the object's -description text.
-func (x *SyncEngineStateSerialization) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sess *SyncEngineStateSerialization) Description() string {
+	return rt.Description(objref.IDOf(sess))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEngineStateSerialization) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sess *SyncEngineStateSerialization) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sess), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEngineStateSerialization) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sess *SyncEngineStateSerialization) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sess), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SyncEngineStateSerialization) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sess *SyncEngineStateSerialization) String() string {
+	return rt.Description(objref.IDOf(sess))
 }
 
 // NewSyncEngineStateSerialization creates a new SyncEngineStateSerialization.
@@ -71,10 +71,3 @@ func NewSyncEngineStateSerialization() *SyncEngineStateSerialization {
 	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineStateSerialization")), objc.RegisterName("new"))
 	return syncEngineStateSerializationAdopt(_id)
 }
-
-// SyncEngineStateSerializationable is the interface implemented by [SyncEngineStateSerialization], for mocking and DI.
-type SyncEngineStateSerializationable interface {
-	obj.Object
-}
-
-var _ SyncEngineStateSerializationable = (*SyncEngineStateSerialization)(nil)

@@ -6,6 +6,7 @@ package storekit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func productStorePromotionControllerAdopt(id objc.ID) *ProductStorePromotionCont
 }
 
 // Description returns the object's -description text.
-func (x *ProductStorePromotionController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pspc *ProductStorePromotionController) Description() string {
+	return rt.Description(objref.IDOf(pspc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ProductStorePromotionController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pspc *ProductStorePromotionController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pspc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ProductStorePromotionController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pspc *ProductStorePromotionController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pspc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ProductStorePromotionController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pspc *ProductStorePromotionController) String() string {
+	return rt.Description(objref.IDOf(pspc))
 }
 
 // NewProductStorePromotionController creates a new ProductStorePromotionController.
@@ -77,14 +78,14 @@ func NewProductStorePromotionController() *ProductStorePromotionController {
 // UpdateStorePromotionVisibilityForProduct updates the visibility of the product on the App Store, per device.
 //
 // UpdateStorePromotionVisibilityForProduct blocks until the operation completes or ctx is cancelled.
-func (x *ProductStorePromotionController) UpdateStorePromotionVisibilityForProduct(ctx context.Context, promotionVisibility ProductStorePromotionVisibility, product *Product) error {
+func (pspc *ProductStorePromotionController) UpdateStorePromotionVisibilityForProduct(ctx context.Context, promotionVisibility ProductStorePromotionVisibility, product *Product) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateStorePromotionVisibility:forProduct:completionHandler:"), promotionVisibility, objref.IDOf(product), _block)
+	objc.Send[objc.ID](objref.IDOf(pspc), objc.RegisterName("updateStorePromotionVisibility:forProduct:completionHandler:"), promotionVisibility, objref.IDOf(product), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -96,7 +97,7 @@ func (x *ProductStorePromotionController) UpdateStorePromotionVisibilityForProdu
 // FetchStorePromotionOrder reads the product order override that determines the promoted product order on this device.
 //
 // FetchStorePromotionOrder blocks until the operation completes or ctx is cancelled.
-func (x *ProductStorePromotionController) FetchStorePromotionOrder(ctx context.Context) (result obj.Object, err error) {
+func (pspc *ProductStorePromotionController) FetchStorePromotionOrder(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -108,7 +109,7 @@ func (x *ProductStorePromotionController) FetchStorePromotionOrder(ctx context.C
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchStorePromotionOrderWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(pspc), objc.RegisterName("fetchStorePromotionOrderWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -121,14 +122,14 @@ func (x *ProductStorePromotionController) FetchStorePromotionOrder(ctx context.C
 // UpdateStorePromotionOrder overrides the promoted product order on this device.
 //
 // UpdateStorePromotionOrder blocks until the operation completes or ctx is cancelled.
-func (x *ProductStorePromotionController) UpdateStorePromotionOrder(ctx context.Context, promotionOrder []*Product) error {
+func (pspc *ProductStorePromotionController) UpdateStorePromotionOrder(ctx context.Context, promotionOrder []*Product) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateStorePromotionOrder:completionHandler:"), purego.SliceToNSArray(promotionOrder, func(_v *Product) objc.ID { return objref.IDOf(_v) }), _block)
+	objc.Send[objc.ID](objref.IDOf(pspc), objc.RegisterName("updateStorePromotionOrder:completionHandler:"), purego.SliceToNSArray(promotionOrder, func(_v *Product) objc.ID { return objref.IDOf(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -136,13 +137,3 @@ func (x *ProductStorePromotionController) UpdateStorePromotionOrder(ctx context.
 		return ctx.Err()
 	}
 }
-
-// ProductStorePromotionControllerable is the interface implemented by [ProductStorePromotionController], for mocking and DI.
-type ProductStorePromotionControllerable interface {
-	obj.Object
-	UpdateStorePromotionVisibilityForProduct(ctx context.Context, promotionVisibility ProductStorePromotionVisibility, product *Product) error
-	FetchStorePromotionOrder(ctx context.Context) (obj.Object, error)
-	UpdateStorePromotionOrder(ctx context.Context, promotionOrder []*Product) error
-}
-
-var _ ProductStorePromotionControllerable = (*ProductStorePromotionController)(nil)

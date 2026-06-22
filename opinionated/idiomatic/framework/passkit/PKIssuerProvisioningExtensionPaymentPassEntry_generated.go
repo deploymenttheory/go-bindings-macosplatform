@@ -54,17 +54,9 @@ func NewIssuerProvisioningExtensionPaymentPassEntryWithIdentifierTitleArtAddRequ
 }
 
 // AddRequestConfiguration wraps the corresponding Objective-C method.
-func (x *IssuerProvisioningExtensionPaymentPassEntry) AddRequestConfiguration() *AddPaymentPassRequestConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRequestConfiguration"))
+func (ipeppe *IssuerProvisioningExtensionPaymentPassEntry) AddRequestConfiguration() *AddPaymentPassRequestConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(ipeppe), objc.RegisterName("addRequestConfiguration"))
 	return AddPaymentPassRequestConfigurationFromID(_r)
 }
-
-// IssuerProvisioningExtensionPaymentPassEntryable is the interface implemented by [IssuerProvisioningExtensionPaymentPassEntry], for mocking and DI.
-type IssuerProvisioningExtensionPaymentPassEntryable interface {
-	obj.Object
-	AddRequestConfiguration() *AddPaymentPassRequestConfiguration
-}
-
-var _ IssuerProvisioningExtensionPaymentPassEntryable = (*IssuerProvisioningExtensionPaymentPassEntry)(nil)
 
 var _ IssuerProvisioningExtensionPassEntryProvider = (*IssuerProvisioningExtensionPaymentPassEntry)(nil)

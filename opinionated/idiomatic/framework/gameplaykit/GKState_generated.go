@@ -46,24 +46,24 @@ func stateAdopt(id objc.ID) *State {
 }
 
 // Description returns the object's -description text.
-func (x *State) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *State) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *State) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *State) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *State) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *State) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *State) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *State) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewState creates a new State.
@@ -73,33 +73,22 @@ func NewState() *State {
 }
 
 // DidEnterWithPreviousState performs custom actions when a state machine transitions into this state.
-func (x *State) DidEnterWithPreviousState(previousState *State) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didEnterWithPreviousState:"), objref.IDOf(previousState))
+func (s *State) DidEnterWithPreviousState(previousState *State) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didEnterWithPreviousState:"), objref.IDOf(previousState))
 }
 
 // UpdateWithDeltaTime performs custom actions when a state machine updates while in this state.
-func (x *State) UpdateWithDeltaTime(seconds float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithDeltaTime:"), seconds)
+func (s *State) UpdateWithDeltaTime(seconds float64) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("updateWithDeltaTime:"), seconds)
 }
 
 // WillExitWithNextState performs custom actions when a state machine transitions out of this state.
-func (x *State) WillExitWithNextState(nextState *State) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willExitWithNextState:"), objref.IDOf(nextState))
+func (s *State) WillExitWithNextState(nextState *State) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("willExitWithNextState:"), objref.IDOf(nextState))
 }
 
-// StateMachine the state machine that this state is associated with. This is nil if this state hasn't been added to a state machine yet.
-func (x *State) StateMachine() *StateMachine {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateMachine"))
+// StateMachine returns the state machine that this state is associated with. This is nil if this state hasn't been added to a state machine yet.
+func (s *State) StateMachine() *StateMachine {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("stateMachine"))
 	return StateMachineFromID(_r)
 }
-
-// Stateable is the interface implemented by [State], for mocking and DI.
-type Stateable interface {
-	obj.Object
-	DidEnterWithPreviousState(previousState *State)
-	UpdateWithDeltaTime(seconds float64)
-	WillExitWithNextState(nextState *State)
-	StateMachine() *StateMachine
-}
-
-var _ Stateable = (*State)(nil)

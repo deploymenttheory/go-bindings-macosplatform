@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,39 +52,23 @@ func NewMIDIChannelPressureEventWithChannelPressure(channel int, pressure int) *
 	return mIDIChannelPressureEventAdopt(_id)
 }
 
-// WithPressure the MIDI channel pressure.
-func (x *MIDIChannelPressureEvent) WithPressure(pressure int) *MIDIChannelPressureEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressure:"), pressure)
-	return x
+// WithPressure sets the MIDI channel pressure.
+func (mcpe *MIDIChannelPressureEvent) WithPressure(pressure int) *MIDIChannelPressureEvent {
+	objc.Send[objc.ID](objref.IDOf(mcpe), objc.RegisterName("setPressure:"), pressure)
+	return mcpe
 }
 
-// WithChannel the MIDI channel.
-func (x *MIDIChannelPressureEvent) WithChannel(channel int) *MIDIChannelPressureEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), channel)
-	return x
+// WithChannel sets the MIDI channel.
+func (mcpe *MIDIChannelPressureEvent) WithChannel(channel int) *MIDIChannelPressureEvent {
+	objc.Send[objc.ID](objref.IDOf(mcpe), objc.RegisterName("setChannel:"), channel)
+	return mcpe
 }
 
 // Pressure wraps the corresponding Objective-C method.
-func (x *MIDIChannelPressureEvent) Pressure() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pressure"))
+func (mcpe *MIDIChannelPressureEvent) Pressure() int {
+	_r := objc.Send[int](objref.IDOf(mcpe), objc.RegisterName("pressure"))
 	return _r
 }
-
-// SetPressure wraps the corresponding Objective-C method.
-func (x *MIDIChannelPressureEvent) SetPressure(pressure int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressure:"), pressure)
-}
-
-// MIDIChannelPressureEventable is the interface implemented by [MIDIChannelPressureEvent], for mocking and DI.
-type MIDIChannelPressureEventable interface {
-	obj.Object
-	WithPressure(pressure int) *MIDIChannelPressureEvent
-	WithChannel(channel int) *MIDIChannelPressureEvent
-	Pressure() int
-	SetPressure(pressure int)
-}
-
-var _ MIDIChannelPressureEventable = (*MIDIChannelPressureEvent)(nil)
 
 var _ MIDIChannelEventProvider = (*MIDIChannelPressureEvent)(nil)
 

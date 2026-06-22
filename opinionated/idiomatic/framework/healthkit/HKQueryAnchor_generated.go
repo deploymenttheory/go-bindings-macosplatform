@@ -46,24 +46,24 @@ func queryAnchorAdopt(id objc.ID) *QueryAnchor {
 }
 
 // Description returns the object's -description text.
-func (x *QueryAnchor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (qa *QueryAnchor) Description() string {
+	return rt.Description(objref.IDOf(qa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QueryAnchor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (qa *QueryAnchor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(qa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QueryAnchor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (qa *QueryAnchor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(qa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *QueryAnchor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (qa *QueryAnchor) String() string {
+	return rt.Description(objref.IDOf(qa))
 }
 
 // NewQueryAnchor creates a new QueryAnchor.
@@ -71,10 +71,3 @@ func NewQueryAnchor() *QueryAnchor {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKQueryAnchor")), objc.RegisterName("new"))
 	return queryAnchorAdopt(_id)
 }
-
-// QueryAnchorable is the interface implemented by [QueryAnchor], for mocking and DI.
-type QueryAnchorable interface {
-	obj.Object
-}
-
-var _ QueryAnchorable = (*QueryAnchor)(nil)

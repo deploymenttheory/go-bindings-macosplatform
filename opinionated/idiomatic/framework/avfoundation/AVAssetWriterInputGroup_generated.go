@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,27 +52,18 @@ func NewAssetWriterInputGroupWithInputsDefaultInput(inputs []*AssetWriterInput, 
 	return assetWriterInputGroupAdopt(_id)
 }
 
-// Inputs the inputs grouped together by the receiver. The value of this property is an NSArray containing concrete instances of AVAssetWriterInput.
+// Inputs returns the inputs grouped together by the receiver. The value of this property is an NSArray containing concrete instances of AVAssetWriterInput.
 //
 // Inputs returns the collection as a Go slice.
-func (x *AssetWriterInputGroup) Inputs() []*AssetWriterInput {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputs"))
+func (awig *AssetWriterInputGroup) Inputs() []*AssetWriterInput {
+	_arr := objc.Send[objc.ID](objref.IDOf(awig), objc.RegisterName("inputs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetWriterInput { return AssetWriterInputFromID(_id) })
 }
 
-// DefaultInput the input designated at the defaultInput of the receiver. The value of this property is a concrete instance of AVAssetWriterInput.
-func (x *AssetWriterInputGroup) DefaultInput() *AssetWriterInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultInput"))
+// DefaultInput returns the input designated at the defaultInput of the receiver. The value of this property is a concrete instance of AVAssetWriterInput.
+func (awig *AssetWriterInputGroup) DefaultInput() *AssetWriterInput {
+	_r := objc.Send[objc.ID](objref.IDOf(awig), objc.RegisterName("defaultInput"))
 	return AssetWriterInputFromID(_r)
 }
-
-// AssetWriterInputGroupable is the interface implemented by [AssetWriterInputGroup], for mocking and DI.
-type AssetWriterInputGroupable interface {
-	obj.Object
-	Inputs() []*AssetWriterInput
-	DefaultInput() *AssetWriterInput
-}
-
-var _ AssetWriterInputGroupable = (*AssetWriterInputGroup)(nil)
 
 var _ MediaSelectionGroupProvider = (*AssetWriterInputGroup)(nil)

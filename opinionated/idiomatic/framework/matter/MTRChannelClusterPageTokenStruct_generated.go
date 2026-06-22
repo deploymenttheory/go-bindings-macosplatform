@@ -44,24 +44,24 @@ func mTRChannelClusterPageTokenStructAdopt(id objc.ID) *MTRChannelClusterPageTok
 }
 
 // Description returns the object's -description text.
-func (x *MTRChannelClusterPageTokenStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mccpts *MTRChannelClusterPageTokenStruct) Description() string {
+	return rt.Description(objref.IDOf(mccpts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRChannelClusterPageTokenStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mccpts *MTRChannelClusterPageTokenStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mccpts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRChannelClusterPageTokenStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mccpts *MTRChannelClusterPageTokenStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mccpts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRChannelClusterPageTokenStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mccpts *MTRChannelClusterPageTokenStruct) String() string {
+	return rt.Description(objref.IDOf(mccpts))
 }
 
 // NewMTRChannelClusterPageTokenStruct creates a new MTRChannelClusterPageTokenStruct.
@@ -71,74 +71,43 @@ func NewMTRChannelClusterPageTokenStruct() *MTRChannelClusterPageTokenStruct {
 }
 
 // WithLimit sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterPageTokenStruct) WithLimit(limit obj.Object) *MTRChannelClusterPageTokenStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLimit:"), objref.IDOf(limit))
-	return x
+func (mccpts *MTRChannelClusterPageTokenStruct) WithLimit(limit obj.Object) *MTRChannelClusterPageTokenStruct {
+	objc.Send[objc.ID](objref.IDOf(mccpts), objc.RegisterName("setLimit:"), objref.IDOf(limit))
+	return mccpts
 }
 
 // WithAfter sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterPageTokenStruct) WithAfter(after string) *MTRChannelClusterPageTokenStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAfter:"), purego.NSString(after))
-	return x
+func (mccpts *MTRChannelClusterPageTokenStruct) WithAfter(after string) *MTRChannelClusterPageTokenStruct {
+	objc.Send[objc.ID](objref.IDOf(mccpts), objc.RegisterName("setAfter:"), purego.NSString(after))
+	return mccpts
 }
 
 // WithBefore sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterPageTokenStruct) WithBefore(before string) *MTRChannelClusterPageTokenStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBefore:"), purego.NSString(before))
-	return x
+func (mccpts *MTRChannelClusterPageTokenStruct) WithBefore(before string) *MTRChannelClusterPageTokenStruct {
+	objc.Send[objc.ID](objref.IDOf(mccpts), objc.RegisterName("setBefore:"), purego.NSString(before))
+	return mccpts
 }
 
 // Limit wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterPageTokenStruct) Limit() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("limit"))
+func (mccpts *MTRChannelClusterPageTokenStruct) Limit() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mccpts), objc.RegisterName("limit"))
 	return obj.Wrap(_r)
 }
 
-// SetLimit wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterPageTokenStruct) SetLimit(limit obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLimit:"), objref.IDOf(limit))
-}
-
 // After wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterPageTokenStruct) After() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("after"))
+func (mccpts *MTRChannelClusterPageTokenStruct) After() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mccpts), objc.RegisterName("after"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetAfter wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterPageTokenStruct) SetAfter(after string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAfter:"), purego.NSString(after))
 }
 
 // Before wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterPageTokenStruct) Before() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("before"))
+func (mccpts *MTRChannelClusterPageTokenStruct) Before() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mccpts), objc.RegisterName("before"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetBefore wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterPageTokenStruct) SetBefore(before string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBefore:"), purego.NSString(before))
-}
-
-// MTRChannelClusterPageTokenStructable is the interface implemented by [MTRChannelClusterPageTokenStruct], for mocking and DI.
-type MTRChannelClusterPageTokenStructable interface {
-	obj.Object
-	WithLimit(limit obj.Object) *MTRChannelClusterPageTokenStruct
-	WithAfter(after string) *MTRChannelClusterPageTokenStruct
-	WithBefore(before string) *MTRChannelClusterPageTokenStruct
-	Limit() obj.Object
-	SetLimit(limit obj.Object)
-	After() string
-	SetAfter(after string)
-	Before() string
-	SetBefore(before string)
-}
-
-var _ MTRChannelClusterPageTokenStructable = (*MTRChannelClusterPageTokenStruct)(nil)

@@ -46,24 +46,24 @@ func notificationQueueAdopt(id objc.ID) *NotificationQueue {
 }
 
 // Description returns the object's -description text.
-func (x *NotificationQueue) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nq *NotificationQueue) Description() string {
+	return rt.Description(objref.IDOf(nq))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NotificationQueue) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nq *NotificationQueue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nq), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NotificationQueue) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nq *NotificationQueue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nq), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NotificationQueue) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nq *NotificationQueue) String() string {
+	return rt.Description(objref.IDOf(nq))
 }
 
 // NewNotificationQueueWithNotificationCenter creates a new NotificationQueue.
@@ -74,33 +74,22 @@ func NewNotificationQueueWithNotificationCenter(notificationCenter *Notification
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *NotificationQueue) WithScriptingProperties(scriptingProperties obj.Object) *NotificationQueue {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (nq *NotificationQueue) WithScriptingProperties(scriptingProperties obj.Object) *NotificationQueue {
+	objc.Send[objc.ID](objref.IDOf(nq), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return nq
 }
 
 // EnqueueNotificationPostingStyle wraps the corresponding Objective-C method.
-func (x *NotificationQueue) EnqueueNotificationPostingStyle(notification *Notification, postingStyle PostingStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enqueueNotification:postingStyle:"), objref.IDOf(notification), postingStyle)
+func (nq *NotificationQueue) EnqueueNotificationPostingStyle(notification *Notification, postingStyle PostingStyle) {
+	objc.Send[objc.ID](objref.IDOf(nq), objc.RegisterName("enqueueNotification:postingStyle:"), objref.IDOf(notification), postingStyle)
 }
 
 // EnqueueNotificationPostingStyleCoalesceMaskForModes wraps the corresponding Objective-C method.
-func (x *NotificationQueue) EnqueueNotificationPostingStyleCoalesceMaskForModes(notification *Notification, postingStyle PostingStyle, coalesceMask NotificationCoalescing, modes []*String) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enqueueNotification:postingStyle:coalesceMask:forModes:"), objref.IDOf(notification), postingStyle, coalesceMask, purego.SliceToNSArray(modes, func(_v *String) objc.ID { return objref.IDOf(_v) }))
+func (nq *NotificationQueue) EnqueueNotificationPostingStyleCoalesceMaskForModes(notification *Notification, postingStyle PostingStyle, coalesceMask NotificationCoalescing, modes []*String) {
+	objc.Send[objc.ID](objref.IDOf(nq), objc.RegisterName("enqueueNotification:postingStyle:coalesceMask:forModes:"), objref.IDOf(notification), postingStyle, coalesceMask, purego.SliceToNSArray(modes, func(_v *String) objc.ID { return objref.IDOf(_v) }))
 }
 
 // DequeueNotificationsMatchingCoalesceMask wraps the corresponding Objective-C method.
-func (x *NotificationQueue) DequeueNotificationsMatchingCoalesceMask(notification *Notification, coalesceMask int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dequeueNotificationsMatching:coalesceMask:"), objref.IDOf(notification), coalesceMask)
+func (nq *NotificationQueue) DequeueNotificationsMatchingCoalesceMask(notification *Notification, coalesceMask int) {
+	objc.Send[objc.ID](objref.IDOf(nq), objc.RegisterName("dequeueNotificationsMatching:coalesceMask:"), objref.IDOf(notification), coalesceMask)
 }
-
-// NotificationQueueable is the interface implemented by [NotificationQueue], for mocking and DI.
-type NotificationQueueable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *NotificationQueue
-	EnqueueNotificationPostingStyle(notification *Notification, postingStyle PostingStyle)
-	EnqueueNotificationPostingStyleCoalesceMaskForModes(notification *Notification, postingStyle PostingStyle, coalesceMask NotificationCoalescing, modes []*String)
-	DequeueNotificationsMatchingCoalesceMask(notification *Notification, coalesceMask int)
-}
-
-var _ NotificationQueueable = (*NotificationQueue)(nil)

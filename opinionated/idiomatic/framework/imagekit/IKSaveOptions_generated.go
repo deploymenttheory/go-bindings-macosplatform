@@ -44,24 +44,24 @@ func saveOptionsAdopt(id objc.ID) *SaveOptions {
 }
 
 // Description returns the object's -description text.
-func (x *SaveOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (so *SaveOptions) Description() string {
+	return rt.Description(objref.IDOf(so))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SaveOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (so *SaveOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(so), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SaveOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (so *SaveOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(so), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SaveOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (so *SaveOptions) String() string {
+	return rt.Description(objref.IDOf(so))
 }
 
 // NewSaveOptionsWithImagePropertiesImageUTType initializes IKSaveOptions with metadata and UTType.
@@ -71,85 +71,57 @@ func NewSaveOptionsWithImagePropertiesImageUTType(imageProperties obj.Object, im
 	return saveOptionsAdopt(_id)
 }
 
-// WithDelegate delegate of the IKSaveOptions.
-func (x *SaveOptions) WithDelegate(delegate obj.Object) *SaveOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
-	return x
+// WithDelegate sets delegate of the IKSaveOptions.
+func (so *SaveOptions) WithDelegate(delegate obj.Object) *SaveOptions {
+	objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	return so
 }
 
-// WithRememberLastSetting if set, the last used UI choices are preserved for the next time IKSaveOptions is used. [default is YES]
-func (x *SaveOptions) WithRememberLastSetting(rememberLastSetting bool) *SaveOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRememberLastSetting:"), rememberLastSetting)
-	return x
+// WithRememberLastSetting sets if set, the last used UI choices are preserved for the next time IKSaveOptions is used. [default is YES]
+func (so *SaveOptions) WithRememberLastSetting(rememberLastSetting bool) *SaveOptions {
+	objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("setRememberLastSetting:"), rememberLastSetting)
+	return so
 }
 
 // AddSaveOptionsAccessoryViewToSavePanel adds IKSaveOptions UI to a NSSavePanel.
-func (x *SaveOptions) AddSaveOptionsAccessoryViewToSavePanel(savePanel obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSaveOptionsAccessoryViewToSavePanel:"), objref.IDOf(savePanel))
+func (so *SaveOptions) AddSaveOptionsAccessoryViewToSavePanel(savePanel obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("addSaveOptionsAccessoryViewToSavePanel:"), objref.IDOf(savePanel))
 }
 
 // AddSaveOptionsToView adds IKSaveOptions UI to a NSView.
-func (x *SaveOptions) AddSaveOptionsToView(view obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSaveOptionsToView:"), objref.IDOf(view))
+func (so *SaveOptions) AddSaveOptionsToView(view obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("addSaveOptionsToView:"), objref.IDOf(view))
 }
 
-// Delegate delegate of the IKSaveOptions.
-func (x *SaveOptions) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+// Delegate returns delegate of the IKSaveOptions.
+func (so *SaveOptions) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
-// SetDelegate wraps the corresponding Objective-C method.
-func (x *SaveOptions) SetDelegate(delegate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
-}
-
-// ImageProperties current imageProperties (respecting user UI selection).
-func (x *SaveOptions) ImageProperties() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageProperties"))
+// ImageProperties returns current imageProperties (respecting user UI selection).
+func (so *SaveOptions) ImageProperties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("imageProperties"))
 	return obj.Wrap(_r)
 }
 
-// ImageUTType current imageUTType (respecting user UI selection).
-func (x *SaveOptions) ImageUTType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageUTType"))
+// ImageUTType returns current imageUTType (respecting user UI selection).
+func (so *SaveOptions) ImageUTType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("imageUTType"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// UserSelection information about the UI settings.
-func (x *SaveOptions) UserSelection() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userSelection"))
+// UserSelection returns information about the UI settings.
+func (so *SaveOptions) UserSelection() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("userSelection"))
 	return obj.Wrap(_r)
 }
 
-// RememberLastSetting if set, the last used UI choices are preserved for the next time IKSaveOptions is used. [default is YES]
-func (x *SaveOptions) RememberLastSetting() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("rememberLastSetting"))
+// RememberLastSetting reports whether if set, the last used UI choices are preserved for the next time IKSaveOptions is used. [default is YES]
+func (so *SaveOptions) RememberLastSetting() bool {
+	_r := objc.Send[bool](objref.IDOf(so), objc.RegisterName("rememberLastSetting"))
 	return _r
 }
-
-// SetRememberLastSetting wraps the corresponding Objective-C method.
-func (x *SaveOptions) SetRememberLastSetting(rememberLastSetting bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRememberLastSetting:"), rememberLastSetting)
-}
-
-// SaveOptionsable is the interface implemented by [SaveOptions], for mocking and DI.
-type SaveOptionsable interface {
-	obj.Object
-	WithDelegate(delegate obj.Object) *SaveOptions
-	WithRememberLastSetting(rememberLastSetting bool) *SaveOptions
-	AddSaveOptionsAccessoryViewToSavePanel(savePanel obj.Object)
-	AddSaveOptionsToView(view obj.Object)
-	Delegate() obj.Object
-	SetDelegate(delegate obj.Object)
-	ImageProperties() obj.Object
-	ImageUTType() string
-	UserSelection() obj.Object
-	RememberLastSetting() bool
-	SetRememberLastSetting(rememberLastSetting bool)
-}
-
-var _ SaveOptionsable = (*SaveOptions)(nil)

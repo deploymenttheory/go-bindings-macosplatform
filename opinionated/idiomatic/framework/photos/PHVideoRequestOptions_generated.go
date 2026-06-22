@@ -46,24 +46,24 @@ func videoRequestOptionsAdopt(id objc.ID) *VideoRequestOptions {
 }
 
 // Description returns the object's -description text.
-func (x *VideoRequestOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vro *VideoRequestOptions) Description() string {
+	return rt.Description(objref.IDOf(vro))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VideoRequestOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vro *VideoRequestOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vro), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VideoRequestOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vro *VideoRequestOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vro), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VideoRequestOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vro *VideoRequestOptions) String() string {
+	return rt.Description(objref.IDOf(vro))
 }
 
 // NewVideoRequestOptions creates a new VideoRequestOptions.
@@ -72,49 +72,26 @@ func NewVideoRequestOptions() *VideoRequestOptions {
 	return videoRequestOptionsAdopt(_id)
 }
 
-// WithNetworkAccessAllowed a Boolean value that specifies whether Photos can download the requested video from iCloud.
-func (x *VideoRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *VideoRequestOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
-	return x
+// WithNetworkAccessAllowed sets a Boolean value that specifies whether Photos can download the requested video from iCloud.
+func (vro *VideoRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *VideoRequestOptions {
+	objc.Send[objc.ID](objref.IDOf(vro), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
+	return vro
 }
 
-// WithDeliveryMode a mode specifying the requested video quality and delivery priority.
-func (x *VideoRequestOptions) WithDeliveryMode(deliveryMode VideoRequestOptionsDeliveryMode) *VideoRequestOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryMode:"), deliveryMode)
-	return x
+// WithDeliveryMode sets a mode specifying the requested video quality and delivery priority.
+func (vro *VideoRequestOptions) WithDeliveryMode(deliveryMode VideoRequestOptionsDeliveryMode) *VideoRequestOptions {
+	objc.Send[objc.ID](objref.IDOf(vro), objc.RegisterName("setDeliveryMode:"), deliveryMode)
+	return vro
 }
 
 // IsNetworkAccessAllowed wraps the corresponding Objective-C method.
-func (x *VideoRequestOptions) IsNetworkAccessAllowed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNetworkAccessAllowed"))
+func (vro *VideoRequestOptions) IsNetworkAccessAllowed() bool {
+	_r := objc.Send[bool](objref.IDOf(vro), objc.RegisterName("isNetworkAccessAllowed"))
 	return _r
-}
-
-// SetNetworkAccessAllowed wraps the corresponding Objective-C method.
-func (x *VideoRequestOptions) SetNetworkAccessAllowed(networkAccessAllowed bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
 }
 
 // DeliveryMode wraps the corresponding Objective-C method.
-func (x *VideoRequestOptions) DeliveryMode() VideoRequestOptionsDeliveryMode {
-	_r := objc.Send[VideoRequestOptionsDeliveryMode](objref.IDOf(x), objc.RegisterName("deliveryMode"))
+func (vro *VideoRequestOptions) DeliveryMode() VideoRequestOptionsDeliveryMode {
+	_r := objc.Send[VideoRequestOptionsDeliveryMode](objref.IDOf(vro), objc.RegisterName("deliveryMode"))
 	return _r
 }
-
-// SetDeliveryMode wraps the corresponding Objective-C method.
-func (x *VideoRequestOptions) SetDeliveryMode(deliveryMode VideoRequestOptionsDeliveryMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeliveryMode:"), deliveryMode)
-}
-
-// VideoRequestOptionsable is the interface implemented by [VideoRequestOptions], for mocking and DI.
-type VideoRequestOptionsable interface {
-	obj.Object
-	WithNetworkAccessAllowed(networkAccessAllowed bool) *VideoRequestOptions
-	WithDeliveryMode(deliveryMode VideoRequestOptionsDeliveryMode) *VideoRequestOptions
-	IsNetworkAccessAllowed() bool
-	SetNetworkAccessAllowed(networkAccessAllowed bool)
-	DeliveryMode() VideoRequestOptionsDeliveryMode
-	SetDeliveryMode(deliveryMode VideoRequestOptionsDeliveryMode)
-}
-
-var _ VideoRequestOptionsable = (*VideoRequestOptions)(nil)

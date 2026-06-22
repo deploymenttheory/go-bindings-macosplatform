@@ -47,85 +47,54 @@ func macGraphicsDisplayConfigurationAdopt(id objc.ID) *MacGraphicsDisplayConfigu
 	return x
 }
 
-// NewMacGraphicsDisplayConfigurationWithWidthInPixelsHeightInPixelsPixelsPerInch create a display configuration with the specified pixel dimensions and pixel density.
-func NewMacGraphicsDisplayConfigurationWithWidthInPixelsHeightInPixelsPixelsPerInch(widthInPixels int, heightInPixels int, pixelsPerInch int) *MacGraphicsDisplayConfiguration {
+// NewMACGraphicsDisplayConfigurationWithWidthInPixelsHeightInPixelsPixelsPerInch create a display configuration with the specified pixel dimensions and pixel density.
+func NewMACGraphicsDisplayConfigurationWithWidthInPixelsHeightInPixelsPixelsPerInch(widthInPixels int, heightInPixels int, pixelsPerInch int) *MacGraphicsDisplayConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacGraphicsDisplayConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithWidthInPixels:heightInPixels:pixelsPerInch:"), widthInPixels, heightInPixels, pixelsPerInch)
 	return macGraphicsDisplayConfigurationAdopt(_id)
 }
 
-// NewMacGraphicsDisplayConfigurationForScreenSizeInPoints create a display configuration suitable for showing on the specified screen.
-func NewMacGraphicsDisplayConfigurationForScreenSizeInPoints(screen obj.Object, sizeInPoints corefoundation.CGSize) *MacGraphicsDisplayConfiguration {
+// NewMACGraphicsDisplayConfigurationForScreenSizeInPoints create a display configuration suitable for showing on the specified screen.
+func NewMACGraphicsDisplayConfigurationForScreenSizeInPoints(screen obj.Object, sizeInPoints corefoundation.CGSize) *MacGraphicsDisplayConfiguration {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("VZMacGraphicsDisplayConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initForScreen:sizeInPoints:"), objref.IDOf(screen), sizeInPoints)
 	return macGraphicsDisplayConfigurationAdopt(_id)
 }
 
-// WithWidthInPixels the width of the display, in pixels.
-func (x *MacGraphicsDisplayConfiguration) WithWidthInPixels(widthInPixels int) *MacGraphicsDisplayConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidthInPixels:"), widthInPixels)
-	return x
+// WithWidthInPixels sets the width of the display, in pixels.
+func (mgdc *MacGraphicsDisplayConfiguration) WithWidthInPixels(widthInPixels int) *MacGraphicsDisplayConfiguration {
+	objc.Send[objc.ID](objref.IDOf(mgdc), objc.RegisterName("setWidthInPixels:"), widthInPixels)
+	return mgdc
 }
 
-// WithHeightInPixels the height of the display, in pixels.
-func (x *MacGraphicsDisplayConfiguration) WithHeightInPixels(heightInPixels int) *MacGraphicsDisplayConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightInPixels:"), heightInPixels)
-	return x
+// WithHeightInPixels sets the height of the display, in pixels.
+func (mgdc *MacGraphicsDisplayConfiguration) WithHeightInPixels(heightInPixels int) *MacGraphicsDisplayConfiguration {
+	objc.Send[objc.ID](objref.IDOf(mgdc), objc.RegisterName("setHeightInPixels:"), heightInPixels)
+	return mgdc
 }
 
-// WithPixelsPerInch the pixel density in pixels per inch.
-func (x *MacGraphicsDisplayConfiguration) WithPixelsPerInch(pixelsPerInch int) *MacGraphicsDisplayConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsPerInch:"), pixelsPerInch)
-	return x
+// WithPixelsPerInch sets the pixel density in pixels per inch.
+func (mgdc *MacGraphicsDisplayConfiguration) WithPixelsPerInch(pixelsPerInch int) *MacGraphicsDisplayConfiguration {
+	objc.Send[objc.ID](objref.IDOf(mgdc), objc.RegisterName("setPixelsPerInch:"), pixelsPerInch)
+	return mgdc
 }
 
-// WidthInPixels the width of the display, in pixels.
-func (x *MacGraphicsDisplayConfiguration) WidthInPixels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("widthInPixels"))
+// WidthInPixels returns the width of the display, in pixels.
+func (mgdc *MacGraphicsDisplayConfiguration) WidthInPixels() int {
+	_r := objc.Send[int](objref.IDOf(mgdc), objc.RegisterName("widthInPixels"))
 	return _r
 }
 
-// SetWidthInPixels wraps the corresponding Objective-C method.
-func (x *MacGraphicsDisplayConfiguration) SetWidthInPixels(widthInPixels int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidthInPixels:"), widthInPixels)
-}
-
-// HeightInPixels the height of the display, in pixels.
-func (x *MacGraphicsDisplayConfiguration) HeightInPixels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("heightInPixels"))
+// HeightInPixels returns the height of the display, in pixels.
+func (mgdc *MacGraphicsDisplayConfiguration) HeightInPixels() int {
+	_r := objc.Send[int](objref.IDOf(mgdc), objc.RegisterName("heightInPixels"))
 	return _r
 }
 
-// SetHeightInPixels wraps the corresponding Objective-C method.
-func (x *MacGraphicsDisplayConfiguration) SetHeightInPixels(heightInPixels int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightInPixels:"), heightInPixels)
-}
-
-// PixelsPerInch the pixel density as a number of pixels per inch.
-func (x *MacGraphicsDisplayConfiguration) PixelsPerInch() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelsPerInch"))
+// PixelsPerInch returns the pixel density as a number of pixels per inch.
+func (mgdc *MacGraphicsDisplayConfiguration) PixelsPerInch() int {
+	_r := objc.Send[int](objref.IDOf(mgdc), objc.RegisterName("pixelsPerInch"))
 	return _r
 }
-
-// SetPixelsPerInch wraps the corresponding Objective-C method.
-func (x *MacGraphicsDisplayConfiguration) SetPixelsPerInch(pixelsPerInch int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsPerInch:"), pixelsPerInch)
-}
-
-// MacGraphicsDisplayConfigurationable is the interface implemented by [MacGraphicsDisplayConfiguration], for mocking and DI.
-type MacGraphicsDisplayConfigurationable interface {
-	obj.Object
-	WithWidthInPixels(widthInPixels int) *MacGraphicsDisplayConfiguration
-	WithHeightInPixels(heightInPixels int) *MacGraphicsDisplayConfiguration
-	WithPixelsPerInch(pixelsPerInch int) *MacGraphicsDisplayConfiguration
-	WidthInPixels() int
-	SetWidthInPixels(widthInPixels int)
-	HeightInPixels() int
-	SetHeightInPixels(heightInPixels int)
-	PixelsPerInch() int
-	SetPixelsPerInch(pixelsPerInch int)
-}
-
-var _ MacGraphicsDisplayConfigurationable = (*MacGraphicsDisplayConfiguration)(nil)
 
 var _ GraphicsDisplayConfigurationProvider = (*MacGraphicsDisplayConfiguration)(nil)

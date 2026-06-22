@@ -44,24 +44,24 @@ func mTRCommissioningOperationAdopt(id objc.ID) *MTRCommissioningOperation {
 }
 
 // Description returns the object's -description text.
-func (x *MTRCommissioningOperation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mco *MTRCommissioningOperation) Description() string {
+	return rt.Description(objref.IDOf(mco))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRCommissioningOperation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mco *MTRCommissioningOperation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mco), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRCommissioningOperation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mco *MTRCommissioningOperation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mco), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRCommissioningOperation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mco *MTRCommissioningOperation) String() string {
+	return rt.Description(objref.IDOf(mco))
 }
 
 // NewMTRCommissioningOperation creates a new MTRCommissioningOperation.
@@ -71,28 +71,18 @@ func NewMTRCommissioningOperation() *MTRCommissioningOperation {
 }
 
 // StartWithController start commissioning with the given controller (which identifies the fabric the commissionee should be commissioned into). The delegate will be notified if there are any failures.
-func (x *MTRCommissioningOperation) StartWithController(controller *MTRDeviceController) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startWithController:"), objref.IDOf(controller))
+func (mco *MTRCommissioningOperation) StartWithController(controller *MTRDeviceController) {
+	objc.Send[objc.ID](objref.IDOf(mco), objc.RegisterName("startWithController:"), objref.IDOf(controller))
 }
 
-// Stop stop commissioning. This will typically result in commissioning:failedWithError: callbacks to delegates.
-func (x *MTRCommissioningOperation) Stop() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stop"))
+// Stop reports whether stop commissioning. This will typically result in commissioning:failedWithError: callbacks to delegates.
+func (mco *MTRCommissioningOperation) Stop() bool {
+	_r := objc.Send[bool](objref.IDOf(mco), objc.RegisterName("stop"))
 	return _r
 }
 
 // MatchedPayload wraps the corresponding Objective-C method.
-func (x *MTRCommissioningOperation) MatchedPayload() *MTRSetupPayload {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchedPayload"))
+func (mco *MTRCommissioningOperation) MatchedPayload() *MTRSetupPayload {
+	_r := objc.Send[objc.ID](objref.IDOf(mco), objc.RegisterName("matchedPayload"))
 	return MTRSetupPayloadFromID(_r)
 }
-
-// MTRCommissioningOperationable is the interface implemented by [MTRCommissioningOperation], for mocking and DI.
-type MTRCommissioningOperationable interface {
-	obj.Object
-	StartWithController(controller *MTRDeviceController)
-	Stop() bool
-	MatchedPayload() *MTRSetupPayload
-}
-
-var _ MTRCommissioningOperationable = (*MTRCommissioningOperation)(nil)

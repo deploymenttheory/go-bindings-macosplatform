@@ -44,24 +44,24 @@ func mTRCommissionerControlClusterRequestCommissioningApprovalParamsAdopt(id obj
 }
 
 // Description returns the object's -description text.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) Description() string {
+	return rt.Description(objref.IDOf(mcccrcap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcccrcap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcccrcap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) String() string {
+	return rt.Description(objref.IDOf(mcccrcap))
 }
 
 // NewMTRCommissionerControlClusterRequestCommissioningApprovalParams creates a new MTRCommissionerControlClusterRequestCommissioningApprovalParams.
@@ -71,131 +71,76 @@ func NewMTRCommissionerControlClusterRequestCommissioningApprovalParams() *MTRCo
 }
 
 // WithRequestID sets the property and returns the receiver so calls can be chained.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithRequestID(requestID obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestID:"), objref.IDOf(requestID))
-	return x
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithRequestID(requestID obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
+	objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("setRequestID:"), objref.IDOf(requestID))
+	return mcccrcap
 }
 
 // WithVendorID sets the property and returns the receiver so calls can be chained.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithVendorID(vendorID obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
-	return x
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithVendorID(vendorID obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
+	objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
+	return mcccrcap
 }
 
 // WithProductID sets the property and returns the receiver so calls can be chained.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithProductID(productID obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductID:"), objref.IDOf(productID))
-	return x
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithProductID(productID obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
+	objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("setProductID:"), objref.IDOf(productID))
+	return mcccrcap
 }
 
 // WithLabel sets the property and returns the receiver so calls can be chained.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithLabel(label string) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithLabel(label string) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
+	objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mcccrcap
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
+	objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mcccrcap
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams {
+	objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mcccrcap
 }
 
 // RequestID wraps the corresponding Objective-C method.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) RequestID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestID"))
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) RequestID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("requestID"))
 	return obj.Wrap(_r)
-}
-
-// SetRequestID wraps the corresponding Objective-C method.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) SetRequestID(requestID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestID:"), objref.IDOf(requestID))
 }
 
 // VendorID wraps the corresponding Objective-C method.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) VendorID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorID"))
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) VendorID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("vendorID"))
 	return obj.Wrap(_r)
-}
-
-// SetVendorID wraps the corresponding Objective-C method.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) SetVendorID(vendorID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorID:"), objref.IDOf(vendorID))
 }
 
 // ProductID wraps the corresponding Objective-C method.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) ProductID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productID"))
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) ProductID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("productID"))
 	return obj.Wrap(_r)
 }
 
-// SetProductID wraps the corresponding Objective-C method.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) SetProductID(productID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductID:"), objref.IDOf(productID))
-}
-
 // Label wraps the corresponding Objective-C method.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mcccrcap *MTRCommissionerControlClusterRequestCommissioningApprovalParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccrcap), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRCommissionerControlClusterRequestCommissioningApprovalParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRCommissionerControlClusterRequestCommissioningApprovalParamsable is the interface implemented by [MTRCommissionerControlClusterRequestCommissioningApprovalParams], for mocking and DI.
-type MTRCommissionerControlClusterRequestCommissioningApprovalParamsable interface {
-	obj.Object
-	WithRequestID(requestID obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams
-	WithVendorID(vendorID obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams
-	WithProductID(productID obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams
-	WithLabel(label string) *MTRCommissionerControlClusterRequestCommissioningApprovalParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRCommissionerControlClusterRequestCommissioningApprovalParams
-	RequestID() obj.Object
-	SetRequestID(requestID obj.Object)
-	VendorID() obj.Object
-	SetVendorID(vendorID obj.Object)
-	ProductID() obj.Object
-	SetProductID(productID obj.Object)
-	Label() string
-	SetLabel(label string)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRCommissionerControlClusterRequestCommissioningApprovalParamsable = (*MTRCommissionerControlClusterRequestCommissioningApprovalParams)(nil)

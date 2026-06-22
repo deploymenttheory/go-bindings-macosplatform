@@ -48,24 +48,24 @@ func addPassMetadataPreviewAdopt(id objc.ID) *AddPassMetadataPreview {
 }
 
 // Description returns the object's -description text.
-func (x *AddPassMetadataPreview) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (apmp *AddPassMetadataPreview) Description() string {
+	return rt.Description(objref.IDOf(apmp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AddPassMetadataPreview) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (apmp *AddPassMetadataPreview) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(apmp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AddPassMetadataPreview) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (apmp *AddPassMetadataPreview) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(apmp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AddPassMetadataPreview) String() string {
-	return rt.Description(objref.IDOf(x))
+func (apmp *AddPassMetadataPreview) String() string {
+	return rt.Description(objref.IDOf(apmp))
 }
 
 // NewAddPassMetadataPreviewWithPassThumbnailLocalizedDescription provides a preview of an image object that represents the pass you add to Wallet.
@@ -75,33 +75,24 @@ func NewAddPassMetadataPreviewWithPassThumbnailLocalizedDescription(passThumbnai
 	return addPassMetadataPreviewAdopt(_id)
 }
 
-// PassThumbnailImage CGImage representing the pass in our provisioning UI.
-func (x *AddPassMetadataPreview) PassThumbnailImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passThumbnailImage"))
+// PassThumbnailImage returns CGImage representing the pass in our provisioning UI.
+func (apmp *AddPassMetadataPreview) PassThumbnailImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apmp), objc.RegisterName("passThumbnailImage"))
 	return obj.Wrap(_r)
 }
 
-// LocalizedDescription localized description of the pass to be referenced during provisioning.
-func (x *AddPassMetadataPreview) LocalizedDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
+// LocalizedDescription returns localized description of the pass to be referenced during provisioning.
+func (apmp *AddPassMetadataPreview) LocalizedDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(apmp), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// AddPassMetadataPreviewable is the interface implemented by [AddPassMetadataPreview], for mocking and DI.
-type AddPassMetadataPreviewable interface {
-	obj.Object
-	PassThumbnailImage() obj.Object
-	LocalizedDescription() string
-}
-
-var _ AddPassMetadataPreviewable = (*AddPassMetadataPreview)(nil)
-
 // isAddPassMetadataPreview marks AddPassMetadataPreview — and, by embedding promotion, its
 // subclasses — as a member of the AddPassMetadataPreview hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AddPassMetadataPreview) isAddPassMetadataPreview() {}
+func (apmp *AddPassMetadataPreview) isAddPassMetadataPreview() {}
 
 var _ AddPassMetadataPreviewProvider = (*AddPassMetadataPreview)(nil)

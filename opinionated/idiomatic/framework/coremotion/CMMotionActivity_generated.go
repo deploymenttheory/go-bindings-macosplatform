@@ -53,59 +53,45 @@ func NewMotionActivity() *MotionActivity {
 }
 
 // Confidence wraps the corresponding Objective-C method.
-func (x *MotionActivity) Confidence() MotionActivityConfidence {
-	_r := objc.Send[MotionActivityConfidence](objref.IDOf(x), objc.RegisterName("confidence"))
+func (ma *MotionActivity) Confidence() MotionActivityConfidence {
+	_r := objc.Send[MotionActivityConfidence](objref.IDOf(ma), objc.RegisterName("confidence"))
 	return _r
 }
 
 // StartDate wraps the corresponding Objective-C method.
-func (x *MotionActivity) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+func (ma *MotionActivity) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ma), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
 // Unknown wraps the corresponding Objective-C method.
-func (x *MotionActivity) Unknown() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("unknown"))
+func (ma *MotionActivity) Unknown() bool {
+	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("unknown"))
 	return _r
 }
 
 // Stationary wraps the corresponding Objective-C method.
-func (x *MotionActivity) Stationary() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("stationary"))
+func (ma *MotionActivity) Stationary() bool {
+	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("stationary"))
 	return _r
 }
 
 // Walking wraps the corresponding Objective-C method.
-func (x *MotionActivity) Walking() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("walking"))
+func (ma *MotionActivity) Walking() bool {
+	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("walking"))
 	return _r
 }
 
 // Running wraps the corresponding Objective-C method.
-func (x *MotionActivity) Running() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("running"))
+func (ma *MotionActivity) Running() bool {
+	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("running"))
 	return _r
 }
 
 // Automotive wraps the corresponding Objective-C method.
-func (x *MotionActivity) Automotive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automotive"))
+func (ma *MotionActivity) Automotive() bool {
+	_r := objc.Send[bool](objref.IDOf(ma), objc.RegisterName("automotive"))
 	return _r
 }
-
-// MotionActivityable is the interface implemented by [MotionActivity], for mocking and DI.
-type MotionActivityable interface {
-	obj.Object
-	Confidence() MotionActivityConfidence
-	StartDate() obj.Object
-	Unknown() bool
-	Stationary() bool
-	Walking() bool
-	Running() bool
-	Automotive() bool
-}
-
-var _ MotionActivityable = (*MotionActivity)(nil)
 
 var _ LogItemProvider = (*MotionActivity)(nil)

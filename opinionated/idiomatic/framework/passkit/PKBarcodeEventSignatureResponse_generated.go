@@ -44,24 +44,24 @@ func barcodeEventSignatureResponseAdopt(id objc.ID) *BarcodeEventSignatureRespon
 }
 
 // Description returns the object's -description text.
-func (x *BarcodeEventSignatureResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (besr *BarcodeEventSignatureResponse) Description() string {
+	return rt.Description(objref.IDOf(besr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BarcodeEventSignatureResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (besr *BarcodeEventSignatureResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(besr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BarcodeEventSignatureResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (besr *BarcodeEventSignatureResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(besr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BarcodeEventSignatureResponse) String() string {
-	return rt.Description(objref.IDOf(x))
+func (besr *BarcodeEventSignatureResponse) String() string {
+	return rt.Description(objref.IDOf(besr))
 }
 
 // NewBarcodeEventSignatureResponseWithSignedData creates a new BarcodeEventSignatureResponse.
@@ -72,28 +72,13 @@ func NewBarcodeEventSignatureResponseWithSignedData(signedData obj.Object) *Barc
 }
 
 // WithSignedData sets the property and returns the receiver so calls can be chained.
-func (x *BarcodeEventSignatureResponse) WithSignedData(signedData obj.Object) *BarcodeEventSignatureResponse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSignedData:"), objref.IDOf(signedData))
-	return x
+func (besr *BarcodeEventSignatureResponse) WithSignedData(signedData obj.Object) *BarcodeEventSignatureResponse {
+	objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("setSignedData:"), objref.IDOf(signedData))
+	return besr
 }
 
 // SignedData wraps the corresponding Objective-C method.
-func (x *BarcodeEventSignatureResponse) SignedData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signedData"))
+func (besr *BarcodeEventSignatureResponse) SignedData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(besr), objc.RegisterName("signedData"))
 	return obj.Wrap(_r)
 }
-
-// SetSignedData wraps the corresponding Objective-C method.
-func (x *BarcodeEventSignatureResponse) SetSignedData(signedData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSignedData:"), objref.IDOf(signedData))
-}
-
-// BarcodeEventSignatureResponseable is the interface implemented by [BarcodeEventSignatureResponse], for mocking and DI.
-type BarcodeEventSignatureResponseable interface {
-	obj.Object
-	WithSignedData(signedData obj.Object) *BarcodeEventSignatureResponse
-	SignedData() obj.Object
-	SetSignedData(signedData obj.Object)
-}
-
-var _ BarcodeEventSignatureResponseable = (*BarcodeEventSignatureResponse)(nil)

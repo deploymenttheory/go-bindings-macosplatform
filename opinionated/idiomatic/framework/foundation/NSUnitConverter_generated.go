@@ -48,57 +48,47 @@ func unitConverterAdopt(id objc.ID) *UnitConverter {
 }
 
 // Description returns the object's -description text.
-func (x *UnitConverter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (uc *UnitConverter) Description() string {
+	return rt.Description(objref.IDOf(uc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UnitConverter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (uc *UnitConverter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(uc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UnitConverter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (uc *UnitConverter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(uc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *UnitConverter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (uc *UnitConverter) String() string {
+	return rt.Description(objref.IDOf(uc))
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitConverter) WithScriptingProperties(scriptingProperties obj.Object) *UnitConverter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (uc *UnitConverter) WithScriptingProperties(scriptingProperties obj.Object) *UnitConverter {
+	objc.Send[objc.ID](objref.IDOf(uc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return uc
 }
 
 // BaseUnitValueFromValue wraps the corresponding Objective-C method.
-func (x *UnitConverter) BaseUnitValueFromValue(value float64) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("baseUnitValueFromValue:"), value)
+func (uc *UnitConverter) BaseUnitValueFromValue(value float64) float64 {
+	_r := objc.Send[float64](objref.IDOf(uc), objc.RegisterName("baseUnitValueFromValue:"), value)
 	return _r
 }
 
 // ValueFromBaseUnitValue wraps the corresponding Objective-C method.
-func (x *UnitConverter) ValueFromBaseUnitValue(baseUnitValue float64) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("valueFromBaseUnitValue:"), baseUnitValue)
+func (uc *UnitConverter) ValueFromBaseUnitValue(baseUnitValue float64) float64 {
+	_r := objc.Send[float64](objref.IDOf(uc), objc.RegisterName("valueFromBaseUnitValue:"), baseUnitValue)
 	return _r
 }
-
-// UnitConverterable is the interface implemented by [UnitConverter], for mocking and DI.
-type UnitConverterable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitConverter
-	BaseUnitValueFromValue(value float64) float64
-	ValueFromBaseUnitValue(baseUnitValue float64) float64
-}
-
-var _ UnitConverterable = (*UnitConverter)(nil)
 
 // isUnitConverter marks UnitConverter — and, by embedding promotion, its
 // subclasses — as a member of the UnitConverter hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *UnitConverter) isUnitConverter() {}
+func (uc *UnitConverter) isUnitConverter() {}
 
 var _ UnitConverterProvider = (*UnitConverter)(nil)

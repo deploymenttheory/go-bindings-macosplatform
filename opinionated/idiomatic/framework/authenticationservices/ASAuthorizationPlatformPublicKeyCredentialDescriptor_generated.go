@@ -46,24 +46,24 @@ func authorizationPlatformPublicKeyCredentialDescriptorAdopt(id objc.ID) *Author
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationPlatformPublicKeyCredentialDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (appkcd *AuthorizationPlatformPublicKeyCredentialDescriptor) Description() string {
+	return rt.Description(objref.IDOf(appkcd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationPlatformPublicKeyCredentialDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (appkcd *AuthorizationPlatformPublicKeyCredentialDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(appkcd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationPlatformPublicKeyCredentialDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (appkcd *AuthorizationPlatformPublicKeyCredentialDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(appkcd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationPlatformPublicKeyCredentialDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (appkcd *AuthorizationPlatformPublicKeyCredentialDescriptor) String() string {
+	return rt.Description(objref.IDOf(appkcd))
 }
 
 // NewAuthorizationPlatformPublicKeyCredentialDescriptorWithCredentialID creates the descriptor with a credential.
@@ -72,10 +72,3 @@ func NewAuthorizationPlatformPublicKeyCredentialDescriptorWithCredentialID(crede
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialID:"), objref.IDOf(credentialID))
 	return authorizationPlatformPublicKeyCredentialDescriptorAdopt(_id)
 }
-
-// AuthorizationPlatformPublicKeyCredentialDescriptorable is the interface implemented by [AuthorizationPlatformPublicKeyCredentialDescriptor], for mocking and DI.
-type AuthorizationPlatformPublicKeyCredentialDescriptorable interface {
-	obj.Object
-}
-
-var _ AuthorizationPlatformPublicKeyCredentialDescriptorable = (*AuthorizationPlatformPublicKeyCredentialDescriptor)(nil)

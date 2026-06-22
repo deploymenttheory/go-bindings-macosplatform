@@ -46,24 +46,24 @@ func assetSegmentReportAdopt(id objc.ID) *AssetSegmentReport {
 }
 
 // Description returns the object's -description text.
-func (x *AssetSegmentReport) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (asr *AssetSegmentReport) Description() string {
+	return rt.Description(objref.IDOf(asr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetSegmentReport) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (asr *AssetSegmentReport) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(asr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetSegmentReport) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (asr *AssetSegmentReport) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(asr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetSegmentReport) String() string {
-	return rt.Description(objref.IDOf(x))
+func (asr *AssetSegmentReport) String() string {
+	return rt.Description(objref.IDOf(asr))
 }
 
 // NewAssetSegmentReport creates a new AssetSegmentReport.
@@ -72,25 +72,16 @@ func NewAssetSegmentReport() *AssetSegmentReport {
 	return assetSegmentReportAdopt(_id)
 }
 
-// SegmentType a segment type of the segment data.
-func (x *AssetSegmentReport) SegmentType() AssetSegmentType {
-	_r := objc.Send[AssetSegmentType](objref.IDOf(x), objc.RegisterName("segmentType"))
+// SegmentType returns a segment type of the segment data.
+func (asr *AssetSegmentReport) SegmentType() AssetSegmentType {
+	_r := objc.Send[AssetSegmentType](objref.IDOf(asr), objc.RegisterName("segmentType"))
 	return _r
 }
 
 // TrackReports provides an array of AVAssetSegmentTrackReport in the segment data.
 //
 // TrackReports returns the collection as a Go slice.
-func (x *AssetSegmentReport) TrackReports() []*AssetSegmentTrackReport {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackReports"))
+func (asr *AssetSegmentReport) TrackReports() []*AssetSegmentTrackReport {
+	_arr := objc.Send[objc.ID](objref.IDOf(asr), objc.RegisterName("trackReports"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AssetSegmentTrackReport { return AssetSegmentTrackReportFromID(_id) })
 }
-
-// AssetSegmentReportable is the interface implemented by [AssetSegmentReport], for mocking and DI.
-type AssetSegmentReportable interface {
-	obj.Object
-	SegmentType() AssetSegmentType
-	TrackReports() []*AssetSegmentTrackReport
-}
-
-var _ AssetSegmentReportable = (*AssetSegmentReport)(nil)

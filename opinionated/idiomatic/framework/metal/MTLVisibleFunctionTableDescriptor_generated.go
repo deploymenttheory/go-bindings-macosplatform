@@ -46,24 +46,24 @@ func visibleFunctionTableDescriptorAdopt(id objc.ID) *VisibleFunctionTableDescri
 }
 
 // Description returns the object's -description text.
-func (x *VisibleFunctionTableDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vftd *VisibleFunctionTableDescriptor) Description() string {
+	return rt.Description(objref.IDOf(vftd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VisibleFunctionTableDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vftd *VisibleFunctionTableDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vftd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VisibleFunctionTableDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vftd *VisibleFunctionTableDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vftd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VisibleFunctionTableDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vftd *VisibleFunctionTableDescriptor) String() string {
+	return rt.Description(objref.IDOf(vftd))
 }
 
 // NewVisibleFunctionTableDescriptor creates a new VisibleFunctionTableDescriptor.
@@ -72,29 +72,14 @@ func NewVisibleFunctionTableDescriptor() *VisibleFunctionTableDescriptor {
 	return visibleFunctionTableDescriptorAdopt(_id)
 }
 
-// WithFunctionCount the number of entries in the function table.
-func (x *VisibleFunctionTableDescriptor) WithFunctionCount(functionCount int) *VisibleFunctionTableDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionCount:"), functionCount)
-	return x
+// WithFunctionCount sets the number of entries in the function table.
+func (vftd *VisibleFunctionTableDescriptor) WithFunctionCount(functionCount int) *VisibleFunctionTableDescriptor {
+	objc.Send[objc.ID](objref.IDOf(vftd), objc.RegisterName("setFunctionCount:"), functionCount)
+	return vftd
 }
 
 // FunctionCount wraps the corresponding Objective-C method.
-func (x *VisibleFunctionTableDescriptor) FunctionCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("functionCount"))
+func (vftd *VisibleFunctionTableDescriptor) FunctionCount() int {
+	_r := objc.Send[int](objref.IDOf(vftd), objc.RegisterName("functionCount"))
 	return _r
 }
-
-// SetFunctionCount wraps the corresponding Objective-C method.
-func (x *VisibleFunctionTableDescriptor) SetFunctionCount(functionCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFunctionCount:"), functionCount)
-}
-
-// VisibleFunctionTableDescriptorable is the interface implemented by [VisibleFunctionTableDescriptor], for mocking and DI.
-type VisibleFunctionTableDescriptorable interface {
-	obj.Object
-	WithFunctionCount(functionCount int) *VisibleFunctionTableDescriptor
-	FunctionCount() int
-	SetFunctionCount(functionCount int)
-}
-
-var _ VisibleFunctionTableDescriptorable = (*VisibleFunctionTableDescriptor)(nil)

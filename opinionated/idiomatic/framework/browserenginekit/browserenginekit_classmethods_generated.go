@@ -6,6 +6,7 @@ package browserenginekit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/ebitengine/purego/objc"
@@ -61,13 +62,13 @@ func NetworkProcessWithBundleIDInterruptionHandlerCompletion(ctx context.Context
 	}
 }
 
-// Foreground the helper extension process may run at foreground priority to work on behalf of the host process while it is foreground.
+// Foreground returns the helper extension process may run at foreground priority to work on behalf of the host process while it is foreground.
 func Foreground() *ProcessCapability {
 	_r := objc.Send[objc.ID](objc.ID(_class("BEProcessCapability")), objc.RegisterName("foreground"))
 	return ProcessCapabilityFromID(_r)
 }
 
-// Suspended the helper extension process may remain resident in a suspended state (it will not be granted CPU time).
+// Suspended returns the helper extension process may remain resident in a suspended state (it will not be granted CPU time).
 func Suspended() *ProcessCapability {
 	_r := objc.Send[objc.ID](objc.ID(_class("BEProcessCapability")), objc.RegisterName("suspended"))
 	return ProcessCapabilityFromID(_r)

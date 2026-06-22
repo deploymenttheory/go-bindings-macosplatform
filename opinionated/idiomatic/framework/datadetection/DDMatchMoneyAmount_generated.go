@@ -7,7 +7,6 @@ package datadetection
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,28 +51,19 @@ func NewMatchMoneyAmount() *MatchMoneyAmount {
 	return matchMoneyAmountAdopt(_id)
 }
 
-// Currency a string that contains an ISO currency code, which the data detection system identifies from the matched string and user preferences.
-func (x *MatchMoneyAmount) Currency() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currency"))
+// Currency returns a string that contains an ISO currency code, which the data detection system identifies from the matched string and user preferences.
+func (mma *MatchMoneyAmount) Currency() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mma), objc.RegisterName("currency"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Amount a number that represents an amount of money.
-func (x *MatchMoneyAmount) Amount() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("amount"))
+// Amount returns a number that represents an amount of money.
+func (mma *MatchMoneyAmount) Amount() float64 {
+	_r := objc.Send[float64](objref.IDOf(mma), objc.RegisterName("amount"))
 	return _r
 }
-
-// MatchMoneyAmountable is the interface implemented by [MatchMoneyAmount], for mocking and DI.
-type MatchMoneyAmountable interface {
-	obj.Object
-	Currency() string
-	Amount() float64
-}
-
-var _ MatchMoneyAmountable = (*MatchMoneyAmount)(nil)
 
 var _ MatchProvider = (*MatchMoneyAmount)(nil)

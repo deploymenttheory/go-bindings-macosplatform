@@ -48,43 +48,35 @@ func assetTrackSegmentAdopt(id objc.ID) *AssetTrackSegment {
 }
 
 // Description returns the object's -description text.
-func (x *AssetTrackSegment) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ats *AssetTrackSegment) Description() string {
+	return rt.Description(objref.IDOf(ats))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetTrackSegment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ats *AssetTrackSegment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ats), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetTrackSegment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ats *AssetTrackSegment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ats), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetTrackSegment) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ats *AssetTrackSegment) String() string {
+	return rt.Description(objref.IDOf(ats))
 }
 
 // IsEmpty wraps the corresponding Objective-C method.
-func (x *AssetTrackSegment) IsEmpty() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEmpty"))
+func (ats *AssetTrackSegment) IsEmpty() bool {
+	_r := objc.Send[bool](objref.IDOf(ats), objc.RegisterName("isEmpty"))
 	return _r
 }
-
-// AssetTrackSegmentable is the interface implemented by [AssetTrackSegment], for mocking and DI.
-type AssetTrackSegmentable interface {
-	obj.Object
-	IsEmpty() bool
-}
-
-var _ AssetTrackSegmentable = (*AssetTrackSegment)(nil)
 
 // isAssetTrackSegment marks AssetTrackSegment — and, by embedding promotion, its
 // subclasses — as a member of the AssetTrackSegment hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AssetTrackSegment) isAssetTrackSegment() {}
+func (ats *AssetTrackSegment) isAssetTrackSegment() {}
 
 var _ AssetTrackSegmentProvider = (*AssetTrackSegment)(nil)

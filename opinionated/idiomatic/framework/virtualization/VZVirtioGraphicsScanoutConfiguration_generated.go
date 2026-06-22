@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,51 +52,28 @@ func NewVirtioGraphicsScanoutConfigurationWithWidthInPixelsHeightInPixels(widthI
 	return virtioGraphicsScanoutConfigurationAdopt(_id)
 }
 
-// WithWidthInPixels an integer value that describes the width of the graphics device in pixels.
-func (x *VirtioGraphicsScanoutConfiguration) WithWidthInPixels(widthInPixels int) *VirtioGraphicsScanoutConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidthInPixels:"), widthInPixels)
-	return x
+// WithWidthInPixels sets an integer value that describes the width of the graphics device in pixels.
+func (vgsc *VirtioGraphicsScanoutConfiguration) WithWidthInPixels(widthInPixels int) *VirtioGraphicsScanoutConfiguration {
+	objc.Send[objc.ID](objref.IDOf(vgsc), objc.RegisterName("setWidthInPixels:"), widthInPixels)
+	return vgsc
 }
 
-// WithHeightInPixels an integer value that describes the height of the graphics device in pixels.
-func (x *VirtioGraphicsScanoutConfiguration) WithHeightInPixels(heightInPixels int) *VirtioGraphicsScanoutConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightInPixels:"), heightInPixels)
-	return x
+// WithHeightInPixels sets an integer value that describes the height of the graphics device in pixels.
+func (vgsc *VirtioGraphicsScanoutConfiguration) WithHeightInPixels(heightInPixels int) *VirtioGraphicsScanoutConfiguration {
+	objc.Send[objc.ID](objref.IDOf(vgsc), objc.RegisterName("setHeightInPixels:"), heightInPixels)
+	return vgsc
 }
 
-// WidthInPixels the width of the scanout, in pixels.
-func (x *VirtioGraphicsScanoutConfiguration) WidthInPixels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("widthInPixels"))
+// WidthInPixels returns the width of the scanout, in pixels.
+func (vgsc *VirtioGraphicsScanoutConfiguration) WidthInPixels() int {
+	_r := objc.Send[int](objref.IDOf(vgsc), objc.RegisterName("widthInPixels"))
 	return _r
 }
 
-// SetWidthInPixels wraps the corresponding Objective-C method.
-func (x *VirtioGraphicsScanoutConfiguration) SetWidthInPixels(widthInPixels int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidthInPixels:"), widthInPixels)
-}
-
-// HeightInPixels the height of the scanout, in pixels.
-func (x *VirtioGraphicsScanoutConfiguration) HeightInPixels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("heightInPixels"))
+// HeightInPixels returns the height of the scanout, in pixels.
+func (vgsc *VirtioGraphicsScanoutConfiguration) HeightInPixels() int {
+	_r := objc.Send[int](objref.IDOf(vgsc), objc.RegisterName("heightInPixels"))
 	return _r
 }
-
-// SetHeightInPixels wraps the corresponding Objective-C method.
-func (x *VirtioGraphicsScanoutConfiguration) SetHeightInPixels(heightInPixels int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightInPixels:"), heightInPixels)
-}
-
-// VirtioGraphicsScanoutConfigurationable is the interface implemented by [VirtioGraphicsScanoutConfiguration], for mocking and DI.
-type VirtioGraphicsScanoutConfigurationable interface {
-	obj.Object
-	WithWidthInPixels(widthInPixels int) *VirtioGraphicsScanoutConfiguration
-	WithHeightInPixels(heightInPixels int) *VirtioGraphicsScanoutConfiguration
-	WidthInPixels() int
-	SetWidthInPixels(widthInPixels int)
-	HeightInPixels() int
-	SetHeightInPixels(heightInPixels int)
-}
-
-var _ VirtioGraphicsScanoutConfigurationable = (*VirtioGraphicsScanoutConfiguration)(nil)
 
 var _ GraphicsDisplayConfigurationProvider = (*VirtioGraphicsScanoutConfiguration)(nil)

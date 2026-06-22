@@ -44,24 +44,24 @@ func patchControllerAdopt(id objc.ID) *PatchController {
 }
 
 // Description returns the object's -description text.
-func (x *PatchController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *PatchController) Description() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PatchController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pc *PatchController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PatchController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pc *PatchController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PatchController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *PatchController) String() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // NewPatchController creates a new PatchController.
@@ -69,10 +69,3 @@ func NewPatchController() *PatchController {
 	_id := objc.Send[objc.ID](objc.ID(_class("QCPatchController")), objc.RegisterName("new"))
 	return patchControllerAdopt(_id)
 }
-
-// PatchControllerable is the interface implemented by [PatchController], for mocking and DI.
-type PatchControllerable interface {
-	obj.Object
-}
-
-var _ PatchControllerable = (*PatchController)(nil)

@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,49 +50,37 @@ func NewDOMProcessingInstruction() *DOMProcessingInstruction {
 }
 
 // WithData sets the property and returns the receiver so calls can be chained.
-func (x *DOMProcessingInstruction) WithData(data string) *DOMProcessingInstruction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
-	return x
+func (dpi *DOMProcessingInstruction) WithData(data string) *DOMProcessingInstruction {
+	objc.Send[objc.ID](objref.IDOf(dpi), objc.RegisterName("setData:"), purego.NSString(data))
+	return dpi
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMProcessingInstruction) WithNodeValue(nodeValue string) *DOMProcessingInstruction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (dpi *DOMProcessingInstruction) WithNodeValue(nodeValue string) *DOMProcessingInstruction {
+	objc.Send[objc.ID](objref.IDOf(dpi), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return dpi
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMProcessingInstruction) WithPrefix(prefix string) *DOMProcessingInstruction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (dpi *DOMProcessingInstruction) WithPrefix(prefix string) *DOMProcessingInstruction {
+	objc.Send[objc.ID](objref.IDOf(dpi), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return dpi
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMProcessingInstruction) WithTextContent(textContent string) *DOMProcessingInstruction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (dpi *DOMProcessingInstruction) WithTextContent(textContent string) *DOMProcessingInstruction {
+	objc.Send[objc.ID](objref.IDOf(dpi), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return dpi
 }
 
 // Target wraps the corresponding Objective-C method.
-func (x *DOMProcessingInstruction) Target() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+func (dpi *DOMProcessingInstruction) Target() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dpi), objc.RegisterName("target"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// DOMProcessingInstructionable is the interface implemented by [DOMProcessingInstruction], for mocking and DI.
-type DOMProcessingInstructionable interface {
-	obj.Object
-	WithData(data string) *DOMProcessingInstruction
-	WithNodeValue(nodeValue string) *DOMProcessingInstruction
-	WithPrefix(prefix string) *DOMProcessingInstruction
-	WithTextContent(textContent string) *DOMProcessingInstruction
-	Target() string
-}
-
-var _ DOMProcessingInstructionable = (*DOMProcessingInstruction)(nil)
 
 var _ DOMCharacterDataProvider = (*DOMProcessingInstruction)(nil)
 

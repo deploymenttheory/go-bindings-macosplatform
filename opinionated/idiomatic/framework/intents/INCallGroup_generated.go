@@ -46,56 +46,47 @@ func callGroupAdopt(id objc.ID) *CallGroup {
 }
 
 // Description returns the object's -description text.
-func (x *CallGroup) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cg *CallGroup) Description() string {
+	return rt.Description(objref.IDOf(cg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CallGroup) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cg *CallGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CallGroup) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cg *CallGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CallGroup) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cg *CallGroup) String() string {
+	return rt.Description(objref.IDOf(cg))
 }
 
-// NewCallGroupWithGroupNameGroupId creates a call record with the group details.
-func NewCallGroupWithGroupNameGroupId(groupName string, groupId string) *CallGroup {
+// NewCallGroupWithGroupNameGroupID creates a call record with the group details.
+func NewCallGroupWithGroupNameGroupID(groupName string, groupId string) *CallGroup {
 	_alloc := objc.Send[objc.ID](objc.ID(_class("INCallGroup")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGroupName:groupId:"), purego.NSString(groupName), purego.NSString(groupId))
 	return callGroupAdopt(_id)
 }
 
 // GroupName wraps the corresponding Objective-C method.
-func (x *CallGroup) GroupName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupName"))
+func (cg *CallGroup) GroupName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cg), objc.RegisterName("groupName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// GroupId wraps the corresponding Objective-C method.
-func (x *CallGroup) GroupId() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupId"))
+// GroupID wraps the corresponding Objective-C method.
+func (cg *CallGroup) GroupID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cg), objc.RegisterName("groupId"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// CallGroupable is the interface implemented by [CallGroup], for mocking and DI.
-type CallGroupable interface {
-	obj.Object
-	GroupName() string
-	GroupId() string
-}
-
-var _ CallGroupable = (*CallGroup)(nil)

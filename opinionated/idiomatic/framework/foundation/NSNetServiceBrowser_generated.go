@@ -46,24 +46,24 @@ func netServiceBrowserAdopt(id objc.ID) *NetServiceBrowser {
 }
 
 // Description returns the object's -description text.
-func (x *NetServiceBrowser) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nsb *NetServiceBrowser) Description() string {
+	return rt.Description(objref.IDOf(nsb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NetServiceBrowser) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nsb *NetServiceBrowser) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nsb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NetServiceBrowser) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nsb *NetServiceBrowser) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nsb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NetServiceBrowser) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nsb *NetServiceBrowser) String() string {
+	return rt.Description(objref.IDOf(nsb))
 }
 
 // NewNetServiceBrowser creates a new NetServiceBrowser.
@@ -73,71 +73,49 @@ func NewNetServiceBrowser() *NetServiceBrowser {
 }
 
 // WithIncludesPeerToPeer sets the property and returns the receiver so calls can be chained.
-func (x *NetServiceBrowser) WithIncludesPeerToPeer(includesPeerToPeer bool) *NetServiceBrowser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
-	return x
+func (nsb *NetServiceBrowser) WithIncludesPeerToPeer(includesPeerToPeer bool) *NetServiceBrowser {
+	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
+	return nsb
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *NetServiceBrowser) WithScriptingProperties(scriptingProperties obj.Object) *NetServiceBrowser {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (nsb *NetServiceBrowser) WithScriptingProperties(scriptingProperties obj.Object) *NetServiceBrowser {
+	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return nsb
 }
 
 // ScheduleInRunLoopForMode wraps the corresponding Objective-C method.
-func (x *NetServiceBrowser) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
+func (nsb *NetServiceBrowser) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
 // RemoveFromRunLoopForMode wraps the corresponding Objective-C method.
-func (x *NetServiceBrowser) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
+func (nsb *NetServiceBrowser) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
 // SearchForBrowsableDomains wraps the corresponding Objective-C method.
-func (x *NetServiceBrowser) SearchForBrowsableDomains() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchForBrowsableDomains"))
+func (nsb *NetServiceBrowser) SearchForBrowsableDomains() {
+	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("searchForBrowsableDomains"))
 }
 
 // SearchForRegistrationDomains wraps the corresponding Objective-C method.
-func (x *NetServiceBrowser) SearchForRegistrationDomains() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchForRegistrationDomains"))
+func (nsb *NetServiceBrowser) SearchForRegistrationDomains() {
+	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("searchForRegistrationDomains"))
 }
 
 // SearchForServicesOfTypeInDomain wraps the corresponding Objective-C method.
-func (x *NetServiceBrowser) SearchForServicesOfTypeInDomain(type_ string, domainString string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchForServicesOfType:inDomain:"), purego.NSString(type_), purego.NSString(domainString))
+func (nsb *NetServiceBrowser) SearchForServicesOfTypeInDomain(type_ string, domainString string) {
+	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("searchForServicesOfType:inDomain:"), purego.NSString(type_), purego.NSString(domainString))
 }
 
 // Stop wraps the corresponding Objective-C method.
-func (x *NetServiceBrowser) Stop() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
+func (nsb *NetServiceBrowser) Stop() {
+	objc.Send[objc.ID](objref.IDOf(nsb), objc.RegisterName("stop"))
 }
 
 // IncludesPeerToPeer wraps the corresponding Objective-C method.
-func (x *NetServiceBrowser) IncludesPeerToPeer() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesPeerToPeer"))
+func (nsb *NetServiceBrowser) IncludesPeerToPeer() bool {
+	_r := objc.Send[bool](objref.IDOf(nsb), objc.RegisterName("includesPeerToPeer"))
 	return _r
 }
-
-// SetIncludesPeerToPeer wraps the corresponding Objective-C method.
-func (x *NetServiceBrowser) SetIncludesPeerToPeer(includesPeerToPeer bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
-}
-
-// NetServiceBrowserable is the interface implemented by [NetServiceBrowser], for mocking and DI.
-type NetServiceBrowserable interface {
-	obj.Object
-	WithIncludesPeerToPeer(includesPeerToPeer bool) *NetServiceBrowser
-	WithScriptingProperties(scriptingProperties obj.Object) *NetServiceBrowser
-	ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String)
-	RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String)
-	SearchForBrowsableDomains()
-	SearchForRegistrationDomains()
-	SearchForServicesOfTypeInDomain(type_ string, domainString string)
-	Stop()
-	IncludesPeerToPeer() bool
-	SetIncludesPeerToPeer(includesPeerToPeer bool)
-}
-
-var _ NetServiceBrowserable = (*NetServiceBrowser)(nil)

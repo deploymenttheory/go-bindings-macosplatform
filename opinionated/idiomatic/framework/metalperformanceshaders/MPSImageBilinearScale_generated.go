@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,33 +53,23 @@ func NewImageBilinearScale() *ImageBilinearScale {
 	return imageBilinearScaleAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageBilinearScale) WithOffset(offset mpscore.MPSOffset) *ImageBilinearScale {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (ibs *ImageBilinearScale) WithOffset(offset mpscore.MPSOffset) *ImageBilinearScale {
+	objc.Send[objc.ID](objref.IDOf(ibs), objc.RegisterName("setOffset:"), offset)
+	return ibs
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageBilinearScale) WithClipRect(clipRect metal.MTLRegion) *ImageBilinearScale {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (ibs *ImageBilinearScale) WithClipRect(clipRect metal.MTLRegion) *ImageBilinearScale {
+	objc.Send[objc.ID](objref.IDOf(ibs), objc.RegisterName("setClipRect:"), clipRect)
+	return ibs
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageBilinearScale) WithLabel(label string) *ImageBilinearScale {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ibs *ImageBilinearScale) WithLabel(label string) *ImageBilinearScale {
+	objc.Send[objc.ID](objref.IDOf(ibs), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ibs
 }
-
-// ImageBilinearScaleable is the interface implemented by [ImageBilinearScale], for mocking and DI.
-type ImageBilinearScaleable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageBilinearScale
-	WithClipRect(clipRect metal.MTLRegion) *ImageBilinearScale
-	WithLabel(label string) *ImageBilinearScale
-}
-
-var _ ImageBilinearScaleable = (*ImageBilinearScale)(nil)
 
 var _ ImageScaleProvider = (*ImageBilinearScale)(nil)
 

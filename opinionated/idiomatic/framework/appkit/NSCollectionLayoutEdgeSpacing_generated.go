@@ -46,24 +46,24 @@ func collectionLayoutEdgeSpacingAdopt(id objc.ID) *CollectionLayoutEdgeSpacing {
 }
 
 // Description returns the object's -description text.
-func (x *CollectionLayoutEdgeSpacing) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cles *CollectionLayoutEdgeSpacing) Description() string {
+	return rt.Description(objref.IDOf(cles))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionLayoutEdgeSpacing) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cles *CollectionLayoutEdgeSpacing) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cles), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionLayoutEdgeSpacing) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cles *CollectionLayoutEdgeSpacing) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cles), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CollectionLayoutEdgeSpacing) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cles *CollectionLayoutEdgeSpacing) String() string {
+	return rt.Description(objref.IDOf(cles))
 }
 
 // NewCollectionLayoutEdgeSpacing creates a new CollectionLayoutEdgeSpacing.
@@ -73,36 +73,25 @@ func NewCollectionLayoutEdgeSpacing() *CollectionLayoutEdgeSpacing {
 }
 
 // Leading wraps the corresponding Objective-C method.
-func (x *CollectionLayoutEdgeSpacing) Leading() *CollectionLayoutSpacing {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leading"))
+func (cles *CollectionLayoutEdgeSpacing) Leading() *CollectionLayoutSpacing {
+	_r := objc.Send[objc.ID](objref.IDOf(cles), objc.RegisterName("leading"))
 	return CollectionLayoutSpacingFromID(_r)
 }
 
 // Top wraps the corresponding Objective-C method.
-func (x *CollectionLayoutEdgeSpacing) Top() *CollectionLayoutSpacing {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("top"))
+func (cles *CollectionLayoutEdgeSpacing) Top() *CollectionLayoutSpacing {
+	_r := objc.Send[objc.ID](objref.IDOf(cles), objc.RegisterName("top"))
 	return CollectionLayoutSpacingFromID(_r)
 }
 
 // Trailing wraps the corresponding Objective-C method.
-func (x *CollectionLayoutEdgeSpacing) Trailing() *CollectionLayoutSpacing {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trailing"))
+func (cles *CollectionLayoutEdgeSpacing) Trailing() *CollectionLayoutSpacing {
+	_r := objc.Send[objc.ID](objref.IDOf(cles), objc.RegisterName("trailing"))
 	return CollectionLayoutSpacingFromID(_r)
 }
 
 // Bottom wraps the corresponding Objective-C method.
-func (x *CollectionLayoutEdgeSpacing) Bottom() *CollectionLayoutSpacing {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bottom"))
+func (cles *CollectionLayoutEdgeSpacing) Bottom() *CollectionLayoutSpacing {
+	_r := objc.Send[objc.ID](objref.IDOf(cles), objc.RegisterName("bottom"))
 	return CollectionLayoutSpacingFromID(_r)
 }
-
-// CollectionLayoutEdgeSpacingable is the interface implemented by [CollectionLayoutEdgeSpacing], for mocking and DI.
-type CollectionLayoutEdgeSpacingable interface {
-	obj.Object
-	Leading() *CollectionLayoutSpacing
-	Top() *CollectionLayoutSpacing
-	Trailing() *CollectionLayoutSpacing
-	Bottom() *CollectionLayoutSpacing
-}
-
-var _ CollectionLayoutEdgeSpacingable = (*CollectionLayoutEdgeSpacing)(nil)

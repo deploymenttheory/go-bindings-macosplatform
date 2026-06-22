@@ -6,6 +6,7 @@ package photos
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func assetResourceManagerAdopt(id objc.ID) *AssetResourceManager {
 }
 
 // Description returns the object's -description text.
-func (x *AssetResourceManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (arm *AssetResourceManager) Description() string {
+	return rt.Description(objref.IDOf(arm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetResourceManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (arm *AssetResourceManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(arm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetResourceManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (arm *AssetResourceManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(arm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetResourceManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (arm *AssetResourceManager) String() string {
+	return rt.Description(objref.IDOf(arm))
 }
 
 // NewAssetResourceManager creates a new AssetResourceManager.
@@ -77,14 +78,14 @@ func NewAssetResourceManager() *AssetResourceManager {
 // WriteDataForAssetResourceToFileOptions requests the underlying data for the specified asset resource, to be asynchronously written to a local file.
 //
 // WriteDataForAssetResourceToFileOptions blocks until the operation completes or ctx is cancelled.
-func (x *AssetResourceManager) WriteDataForAssetResourceToFileOptions(ctx context.Context, resource *AssetResource, fileURL string, options *AssetResourceRequestOptions) error {
+func (arm *AssetResourceManager) WriteDataForAssetResourceToFileOptions(ctx context.Context, resource *AssetResource, fileURL string, options *AssetResourceRequestOptions) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeDataForAssetResource:toFile:options:completionHandler:"), objref.IDOf(resource), rt.FileURL(fileURL), objref.IDOf(options), _block)
+	objc.Send[objc.ID](objref.IDOf(arm), objc.RegisterName("writeDataForAssetResource:toFile:options:completionHandler:"), objref.IDOf(resource), rt.FileURL(fileURL), objref.IDOf(options), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -94,15 +95,6 @@ func (x *AssetResourceManager) WriteDataForAssetResourceToFileOptions(ctx contex
 }
 
 // CancelDataRequest cancels an asynchronous request.
-func (x *AssetResourceManager) CancelDataRequest(requestID int32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelDataRequest:"), requestID)
+func (arm *AssetResourceManager) CancelDataRequest(requestID int32) {
+	objc.Send[objc.ID](objref.IDOf(arm), objc.RegisterName("cancelDataRequest:"), requestID)
 }
-
-// AssetResourceManagerable is the interface implemented by [AssetResourceManager], for mocking and DI.
-type AssetResourceManagerable interface {
-	obj.Object
-	WriteDataForAssetResourceToFileOptions(ctx context.Context, resource *AssetResource, fileURL string, options *AssetResourceRequestOptions) error
-	CancelDataRequest(requestID int32)
-}
-
-var _ AssetResourceManagerable = (*AssetResourceManager)(nil)

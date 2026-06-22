@@ -46,24 +46,24 @@ func renderingSessionAttributesAdopt(id objc.ID) *RenderingSessionAttributes {
 }
 
 // Description returns the object's -description text.
-func (x *RenderingSessionAttributes) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rsa *RenderingSessionAttributes) Description() string {
+	return rt.Description(objref.IDOf(rsa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RenderingSessionAttributes) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rsa *RenderingSessionAttributes) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rsa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RenderingSessionAttributes) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rsa *RenderingSessionAttributes) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rsa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RenderingSessionAttributes) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rsa *RenderingSessionAttributes) String() string {
+	return rt.Description(objref.IDOf(rsa))
 }
 
 // NewRenderingSessionAttributes creates a new RenderingSessionAttributes.
@@ -72,16 +72,8 @@ func NewRenderingSessionAttributes() *RenderingSessionAttributes {
 	return renderingSessionAttributesAdopt(_id)
 }
 
-// RenderingVersion rendering version used to render the original.
-func (x *RenderingSessionAttributes) RenderingVersion() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("renderingVersion"))
+// RenderingVersion returns rendering version used to render the original.
+func (rsa *RenderingSessionAttributes) RenderingVersion() int {
+	_r := objc.Send[int](objref.IDOf(rsa), objc.RegisterName("renderingVersion"))
 	return _r
 }
-
-// RenderingSessionAttributesable is the interface implemented by [RenderingSessionAttributes], for mocking and DI.
-type RenderingSessionAttributesable interface {
-	obj.Object
-	RenderingVersion() int
-}
-
-var _ RenderingSessionAttributesable = (*RenderingSessionAttributes)(nil)

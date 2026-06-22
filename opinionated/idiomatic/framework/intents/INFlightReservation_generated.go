@@ -62,24 +62,15 @@ func NewFlightReservationWithItemReferenceReservationNumberBookingTimeReservatio
 }
 
 // ReservedSeat wraps the corresponding Objective-C method.
-func (x *FlightReservation) ReservedSeat() *Seat {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reservedSeat"))
+func (fr *FlightReservation) ReservedSeat() *Seat {
+	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("reservedSeat"))
 	return SeatFromID(_r)
 }
 
 // Flight wraps the corresponding Objective-C method.
-func (x *FlightReservation) Flight() *Flight {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flight"))
+func (fr *FlightReservation) Flight() *Flight {
+	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("flight"))
 	return FlightFromID(_r)
 }
-
-// FlightReservationable is the interface implemented by [FlightReservation], for mocking and DI.
-type FlightReservationable interface {
-	obj.Object
-	ReservedSeat() *Seat
-	Flight() *Flight
-}
-
-var _ FlightReservationable = (*FlightReservation)(nil)
 
 var _ ReservationProvider = (*FlightReservation)(nil)

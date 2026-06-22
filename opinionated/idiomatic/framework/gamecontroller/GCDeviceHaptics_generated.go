@@ -46,24 +46,24 @@ func deviceHapticsAdopt(id objc.ID) *DeviceHaptics {
 }
 
 // Description returns the object's -description text.
-func (x *DeviceHaptics) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dh *DeviceHaptics) Description() string {
+	return rt.Description(objref.IDOf(dh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DeviceHaptics) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dh *DeviceHaptics) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DeviceHaptics) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dh *DeviceHaptics) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DeviceHaptics) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dh *DeviceHaptics) String() string {
+	return rt.Description(objref.IDOf(dh))
 }
 
 // NewDeviceHaptics creates a new DeviceHaptics.
@@ -73,22 +73,13 @@ func NewDeviceHaptics() *DeviceHaptics {
 }
 
 // CreateEngineWithLocality creates a haptics engine with the specified locality.
-func (x *DeviceHaptics) CreateEngineWithLocality(locality obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createEngineWithLocality:"), objref.IDOf(locality))
+func (dh *DeviceHaptics) CreateEngineWithLocality(locality obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dh), objc.RegisterName("createEngineWithLocality:"), objref.IDOf(locality))
 	return obj.Wrap(_r)
 }
 
-// SupportedLocalities the set of supported haptic localities for this device - representing the locations of its haptic actuators.
-func (x *DeviceHaptics) SupportedLocalities() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedLocalities"))
+// SupportedLocalities returns the set of supported haptic localities for this device - representing the locations of its haptic actuators.
+func (dh *DeviceHaptics) SupportedLocalities() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dh), objc.RegisterName("supportedLocalities"))
 	return obj.Wrap(_r)
 }
-
-// DeviceHapticsable is the interface implemented by [DeviceHaptics], for mocking and DI.
-type DeviceHapticsable interface {
-	obj.Object
-	CreateEngineWithLocality(locality obj.Object) obj.Object
-	SupportedLocalities() obj.Object
-}
-
-var _ DeviceHapticsable = (*DeviceHaptics)(nil)

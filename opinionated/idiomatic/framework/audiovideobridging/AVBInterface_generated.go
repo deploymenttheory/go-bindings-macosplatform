@@ -46,24 +46,24 @@ func interfaceAdopt(id objc.ID) *Interface {
 }
 
 // Description returns the object's -description text.
-func (x *Interface) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (i *Interface) Description() string {
+	return rt.Description(objref.IDOf(i))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Interface) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (i *Interface) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(i), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Interface) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (i *Interface) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(i), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Interface) String() string {
-	return rt.Description(objref.IDOf(x))
+func (i *Interface) String() string {
+	return rt.Description(objref.IDOf(i))
 }
 
 // NewInterfaceWithInterfaceName this method initializes the receiver to work on the specified interface.
@@ -73,47 +73,36 @@ func NewInterfaceWithInterfaceName(anInterfaceName string) *Interface {
 	return interfaceAdopt(_id)
 }
 
-// InterfaceName the BSD interface name.
-func (x *Interface) InterfaceName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interfaceName"))
+// InterfaceName returns the BSD interface name.
+func (i *Interface) InterfaceName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("interfaceName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// EntityDiscovery the IEEE Std 1722.1™-2013 entity discovery for the interface.
-func (x *Interface) EntityDiscovery() *AVB17221EntityDiscovery {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entityDiscovery"))
+// EntityDiscovery returns the IEEE Std 1722.1™-2013 entity discovery for the interface.
+func (i *Interface) EntityDiscovery() *AVB17221EntityDiscovery {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("entityDiscovery"))
 	return AVB17221EntityDiscoveryFromID(_r)
 }
 
-// Aecp the IEEE Std 1722.1™-2013 AECP interface for the interface.
-func (x *Interface) Aecp() *AVB17221AECPInterface {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("aecp"))
+// Aecp returns the IEEE Std 1722.1™-2013 AECP interface for the interface.
+func (i *Interface) Aecp() *AVB17221AECPInterface {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("aecp"))
 	return AVB17221AECPInterfaceFromID(_r)
 }
 
-// Acmp the IEEE Std 1722.1™-2013 ACMP interface for the interface.
-func (x *Interface) Acmp() *AVB17221ACMPInterface {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acmp"))
+// Acmp returns the IEEE Std 1722.1™-2013 ACMP interface for the interface.
+func (i *Interface) Acmp() *AVB17221ACMPInterface {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("acmp"))
 	return AVB17221ACMPInterfaceFromID(_r)
 }
-
-// Interfaceable is the interface implemented by [Interface], for mocking and DI.
-type Interfaceable interface {
-	obj.Object
-	InterfaceName() string
-	EntityDiscovery() *AVB17221EntityDiscovery
-	Aecp() *AVB17221AECPInterface
-	Acmp() *AVB17221ACMPInterface
-}
-
-var _ Interfaceable = (*Interface)(nil)
 
 // isInterface marks Interface — and, by embedding promotion, its
 // subclasses — as a member of the Interface hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Interface) isInterface() {}
+func (i *Interface) isInterface() {}
 
 var _ InterfaceProvider = (*Interface)(nil)

@@ -7,7 +7,6 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,17 +52,9 @@ func NewChangePlaybackRateCommandEvent() *ChangePlaybackRateCommandEvent {
 }
 
 // PlaybackRate wraps the corresponding Objective-C method.
-func (x *ChangePlaybackRateCommandEvent) PlaybackRate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("playbackRate"))
+func (cprce *ChangePlaybackRateCommandEvent) PlaybackRate() float32 {
+	_r := objc.Send[float32](objref.IDOf(cprce), objc.RegisterName("playbackRate"))
 	return _r
 }
-
-// ChangePlaybackRateCommandEventable is the interface implemented by [ChangePlaybackRateCommandEvent], for mocking and DI.
-type ChangePlaybackRateCommandEventable interface {
-	obj.Object
-	PlaybackRate() float32
-}
-
-var _ ChangePlaybackRateCommandEventable = (*ChangePlaybackRateCommandEvent)(nil)
 
 var _ RemoteCommandEventProvider = (*ChangePlaybackRateCommandEvent)(nil)

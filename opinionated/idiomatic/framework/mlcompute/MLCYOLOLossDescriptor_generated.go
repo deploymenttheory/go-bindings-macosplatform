@@ -46,24 +46,24 @@ func yOLOLossDescriptorAdopt(id objc.ID) *YOLOLossDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *YOLOLossDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (yld *YOLOLossDescriptor) Description() string {
+	return rt.Description(objref.IDOf(yld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *YOLOLossDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (yld *YOLOLossDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(yld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *YOLOLossDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (yld *YOLOLossDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(yld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *YOLOLossDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (yld *YOLOLossDescriptor) String() string {
+	return rt.Description(objref.IDOf(yld))
 }
 
 // NewYOLOLossDescriptor creates a new YOLOLossDescriptor.
@@ -72,183 +72,110 @@ func NewYOLOLossDescriptor() *YOLOLossDescriptor {
 	return yOLOLossDescriptorAdopt(_id)
 }
 
-// WithShouldRescore a Boolean that indicates whether the layer scales the object confidence loss by the intersection over union (IOU) overlap.
-func (x *YOLOLossDescriptor) WithShouldRescore(shouldRescore bool) *YOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRescore:"), shouldRescore)
-	return x
+// WithShouldRescore sets a Boolean that indicates whether the layer scales the object confidence loss by the intersection over union (IOU) overlap.
+func (yld *YOLOLossDescriptor) WithShouldRescore(shouldRescore bool) *YOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(yld), objc.RegisterName("setShouldRescore:"), shouldRescore)
+	return yld
 }
 
-// WithScaleSpatialPositionLoss the scale factor you use for spatial position loss and loss gradient.
-func (x *YOLOLossDescriptor) WithScaleSpatialPositionLoss(scaleSpatialPositionLoss float32) *YOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleSpatialPositionLoss:"), scaleSpatialPositionLoss)
-	return x
+// WithScaleSpatialPositionLoss sets the scale factor you use for spatial position loss and loss gradient.
+func (yld *YOLOLossDescriptor) WithScaleSpatialPositionLoss(scaleSpatialPositionLoss float32) *YOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(yld), objc.RegisterName("setScaleSpatialPositionLoss:"), scaleSpatialPositionLoss)
+	return yld
 }
 
-// WithScaleSpatialSizeLoss the scale factor you use for spatial size loss and loss gradient.
-func (x *YOLOLossDescriptor) WithScaleSpatialSizeLoss(scaleSpatialSizeLoss float32) *YOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleSpatialSizeLoss:"), scaleSpatialSizeLoss)
-	return x
+// WithScaleSpatialSizeLoss sets the scale factor you use for spatial size loss and loss gradient.
+func (yld *YOLOLossDescriptor) WithScaleSpatialSizeLoss(scaleSpatialSizeLoss float32) *YOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(yld), objc.RegisterName("setScaleSpatialSizeLoss:"), scaleSpatialSizeLoss)
+	return yld
 }
 
-// WithScaleNoObjectConfidenceLoss the scale factor you use for no object confidence loss and loss gradient.
-func (x *YOLOLossDescriptor) WithScaleNoObjectConfidenceLoss(scaleNoObjectConfidenceLoss float32) *YOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleNoObjectConfidenceLoss:"), scaleNoObjectConfidenceLoss)
-	return x
+// WithScaleNoObjectConfidenceLoss sets the scale factor you use for no object confidence loss and loss gradient.
+func (yld *YOLOLossDescriptor) WithScaleNoObjectConfidenceLoss(scaleNoObjectConfidenceLoss float32) *YOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(yld), objc.RegisterName("setScaleNoObjectConfidenceLoss:"), scaleNoObjectConfidenceLoss)
+	return yld
 }
 
-// WithScaleObjectConfidenceLoss the scale factor you use for object confidence loss and loss gradient.
-func (x *YOLOLossDescriptor) WithScaleObjectConfidenceLoss(scaleObjectConfidenceLoss float32) *YOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleObjectConfidenceLoss:"), scaleObjectConfidenceLoss)
-	return x
+// WithScaleObjectConfidenceLoss sets the scale factor you use for object confidence loss and loss gradient.
+func (yld *YOLOLossDescriptor) WithScaleObjectConfidenceLoss(scaleObjectConfidenceLoss float32) *YOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(yld), objc.RegisterName("setScaleObjectConfidenceLoss:"), scaleObjectConfidenceLoss)
+	return yld
 }
 
-// WithScaleClassLoss the scale factor you use for loss when there are no object classes, and for loss gradient.
-func (x *YOLOLossDescriptor) WithScaleClassLoss(scaleClassLoss float32) *YOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleClassLoss:"), scaleClassLoss)
-	return x
+// WithScaleClassLoss sets the scale factor you use for loss when there are no object classes, and for loss gradient.
+func (yld *YOLOLossDescriptor) WithScaleClassLoss(scaleClassLoss float32) *YOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(yld), objc.RegisterName("setScaleClassLoss:"), scaleClassLoss)
+	return yld
 }
 
-// WithMinimumIOUForObjectPresence the positive intersection over union (IOU).
-func (x *YOLOLossDescriptor) WithMinimumIOUForObjectPresence(minimumIOUForObjectPresence float32) *YOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumIOUForObjectPresence:"), minimumIOUForObjectPresence)
-	return x
+// WithMinimumIOUForObjectPresence sets the positive intersection over union (IOU).
+func (yld *YOLOLossDescriptor) WithMinimumIOUForObjectPresence(minimumIOUForObjectPresence float32) *YOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(yld), objc.RegisterName("setMinimumIOUForObjectPresence:"), minimumIOUForObjectPresence)
+	return yld
 }
 
-// WithMaximumIOUForObjectAbsence the negative intersection over union (IOU).
-func (x *YOLOLossDescriptor) WithMaximumIOUForObjectAbsence(maximumIOUForObjectAbsence float32) *YOLOLossDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumIOUForObjectAbsence:"), maximumIOUForObjectAbsence)
-	return x
+// WithMaximumIOUForObjectAbsence sets the negative intersection over union (IOU).
+func (yld *YOLOLossDescriptor) WithMaximumIOUForObjectAbsence(maximumIOUForObjectAbsence float32) *YOLOLossDescriptor {
+	objc.Send[objc.ID](objref.IDOf(yld), objc.RegisterName("setMaximumIOUForObjectAbsence:"), maximumIOUForObjectAbsence)
+	return yld
 }
 
-// AnchorBoxCount number of anchor boxes used to detect object per grid cell
-func (x *YOLOLossDescriptor) AnchorBoxCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("anchorBoxCount"))
+// AnchorBoxCount returns number of anchor boxes used to detect object per grid cell
+func (yld *YOLOLossDescriptor) AnchorBoxCount() int {
+	_r := objc.Send[int](objref.IDOf(yld), objc.RegisterName("anchorBoxCount"))
 	return _r
 }
 
-// AnchorBoxes \p NSData containing the width and height for \p anchorBoxCount anchor boxes This \p NSData should have 2 floating-point values per anchor box which represent the width and height of the anchor box.
-func (x *YOLOLossDescriptor) AnchorBoxes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anchorBoxes"))
+// AnchorBoxes returns \p NSData containing the width and height for \p anchorBoxCount anchor boxes This \p NSData should have 2 floating-point values per anchor box which represent the width and height of the anchor box.
+func (yld *YOLOLossDescriptor) AnchorBoxes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(yld), objc.RegisterName("anchorBoxes"))
 	return obj.Wrap(_r)
 }
 
-// ShouldRescore rescore pertains to multiplying the confidence groundTruth with IOU (intersection over union) of predicted bounding box and the groundTruth boundingBox.  The default is YES
-func (x *YOLOLossDescriptor) ShouldRescore() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldRescore"))
+// ShouldRescore reports whether rescore pertains to multiplying the confidence groundTruth with IOU (intersection over union) of predicted bounding box and the groundTruth boundingBox. The default is true
+func (yld *YOLOLossDescriptor) ShouldRescore() bool {
+	_r := objc.Send[bool](objref.IDOf(yld), objc.RegisterName("shouldRescore"))
 	return _r
 }
 
-// SetShouldRescore wraps the corresponding Objective-C method.
-func (x *YOLOLossDescriptor) SetShouldRescore(shouldRescore bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRescore:"), shouldRescore)
-}
-
-// ScaleSpatialPositionLoss the scale factor for spatial position loss and loss gradient.  The default is 10.0
-func (x *YOLOLossDescriptor) ScaleSpatialPositionLoss() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("scaleSpatialPositionLoss"))
+// ScaleSpatialPositionLoss returns the scale factor for spatial position loss and loss gradient.  The default is 10.0
+func (yld *YOLOLossDescriptor) ScaleSpatialPositionLoss() float32 {
+	_r := objc.Send[float32](objref.IDOf(yld), objc.RegisterName("scaleSpatialPositionLoss"))
 	return _r
 }
 
-// SetScaleSpatialPositionLoss wraps the corresponding Objective-C method.
-func (x *YOLOLossDescriptor) SetScaleSpatialPositionLoss(scaleSpatialPositionLoss float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleSpatialPositionLoss:"), scaleSpatialPositionLoss)
-}
-
-// ScaleSpatialSizeLoss the scale factor for spatial size loss and loss gradient.  The default is 10.0
-func (x *YOLOLossDescriptor) ScaleSpatialSizeLoss() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("scaleSpatialSizeLoss"))
+// ScaleSpatialSizeLoss returns the scale factor for spatial size loss and loss gradient.  The default is 10.0
+func (yld *YOLOLossDescriptor) ScaleSpatialSizeLoss() float32 {
+	_r := objc.Send[float32](objref.IDOf(yld), objc.RegisterName("scaleSpatialSizeLoss"))
 	return _r
 }
 
-// SetScaleSpatialSizeLoss wraps the corresponding Objective-C method.
-func (x *YOLOLossDescriptor) SetScaleSpatialSizeLoss(scaleSpatialSizeLoss float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleSpatialSizeLoss:"), scaleSpatialSizeLoss)
-}
-
-// ScaleNoObjectConfidenceLoss the scale factor for no object confidence loss and loss gradient.  The default is 5.0
-func (x *YOLOLossDescriptor) ScaleNoObjectConfidenceLoss() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("scaleNoObjectConfidenceLoss"))
+// ScaleNoObjectConfidenceLoss returns the scale factor for no object confidence loss and loss gradient.  The default is 5.0
+func (yld *YOLOLossDescriptor) ScaleNoObjectConfidenceLoss() float32 {
+	_r := objc.Send[float32](objref.IDOf(yld), objc.RegisterName("scaleNoObjectConfidenceLoss"))
 	return _r
 }
 
-// SetScaleNoObjectConfidenceLoss wraps the corresponding Objective-C method.
-func (x *YOLOLossDescriptor) SetScaleNoObjectConfidenceLoss(scaleNoObjectConfidenceLoss float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleNoObjectConfidenceLoss:"), scaleNoObjectConfidenceLoss)
-}
-
-// ScaleObjectConfidenceLoss the scale factor for object confidence loss and loss gradient.  The default is 100.0
-func (x *YOLOLossDescriptor) ScaleObjectConfidenceLoss() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("scaleObjectConfidenceLoss"))
+// ScaleObjectConfidenceLoss returns the scale factor for object confidence loss and loss gradient.  The default is 100.0
+func (yld *YOLOLossDescriptor) ScaleObjectConfidenceLoss() float32 {
+	_r := objc.Send[float32](objref.IDOf(yld), objc.RegisterName("scaleObjectConfidenceLoss"))
 	return _r
 }
 
-// SetScaleObjectConfidenceLoss wraps the corresponding Objective-C method.
-func (x *YOLOLossDescriptor) SetScaleObjectConfidenceLoss(scaleObjectConfidenceLoss float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleObjectConfidenceLoss:"), scaleObjectConfidenceLoss)
-}
-
-// ScaleClassLoss the scale factor for no object classes loss and loss gradient.  The default is 2.0
-func (x *YOLOLossDescriptor) ScaleClassLoss() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("scaleClassLoss"))
+// ScaleClassLoss returns the scale factor for no object classes loss and loss gradient.  The default is 2.0
+func (yld *YOLOLossDescriptor) ScaleClassLoss() float32 {
+	_r := objc.Send[float32](objref.IDOf(yld), objc.RegisterName("scaleClassLoss"))
 	return _r
 }
 
-// SetScaleClassLoss wraps the corresponding Objective-C method.
-func (x *YOLOLossDescriptor) SetScaleClassLoss(scaleClassLoss float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleClassLoss:"), scaleClassLoss)
-}
-
-// MinimumIOUForObjectPresence if the prediction IOU with groundTruth is higher than this value we consider it a confident object presence, The default is 0.7
-func (x *YOLOLossDescriptor) MinimumIOUForObjectPresence() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumIOUForObjectPresence"))
+// MinimumIOUForObjectPresence returns if the prediction IOU with groundTruth is higher than this value we consider it a confident object presence, The default is 0.7
+func (yld *YOLOLossDescriptor) MinimumIOUForObjectPresence() float32 {
+	_r := objc.Send[float32](objref.IDOf(yld), objc.RegisterName("minimumIOUForObjectPresence"))
 	return _r
 }
 
-// SetMinimumIOUForObjectPresence wraps the corresponding Objective-C method.
-func (x *YOLOLossDescriptor) SetMinimumIOUForObjectPresence(minimumIOUForObjectPresence float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumIOUForObjectPresence:"), minimumIOUForObjectPresence)
-}
-
-// MaximumIOUForObjectAbsence if the prediction IOU with groundTruth is lower than this value we consider it a confident object absence.  The default is 0.3
-func (x *YOLOLossDescriptor) MaximumIOUForObjectAbsence() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumIOUForObjectAbsence"))
+// MaximumIOUForObjectAbsence returns if the prediction IOU with groundTruth is lower than this value we consider it a confident object absence.  The default is 0.3
+func (yld *YOLOLossDescriptor) MaximumIOUForObjectAbsence() float32 {
+	_r := objc.Send[float32](objref.IDOf(yld), objc.RegisterName("maximumIOUForObjectAbsence"))
 	return _r
 }
-
-// SetMaximumIOUForObjectAbsence wraps the corresponding Objective-C method.
-func (x *YOLOLossDescriptor) SetMaximumIOUForObjectAbsence(maximumIOUForObjectAbsence float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumIOUForObjectAbsence:"), maximumIOUForObjectAbsence)
-}
-
-// YOLOLossDescriptorable is the interface implemented by [YOLOLossDescriptor], for mocking and DI.
-type YOLOLossDescriptorable interface {
-	obj.Object
-	WithShouldRescore(shouldRescore bool) *YOLOLossDescriptor
-	WithScaleSpatialPositionLoss(scaleSpatialPositionLoss float32) *YOLOLossDescriptor
-	WithScaleSpatialSizeLoss(scaleSpatialSizeLoss float32) *YOLOLossDescriptor
-	WithScaleNoObjectConfidenceLoss(scaleNoObjectConfidenceLoss float32) *YOLOLossDescriptor
-	WithScaleObjectConfidenceLoss(scaleObjectConfidenceLoss float32) *YOLOLossDescriptor
-	WithScaleClassLoss(scaleClassLoss float32) *YOLOLossDescriptor
-	WithMinimumIOUForObjectPresence(minimumIOUForObjectPresence float32) *YOLOLossDescriptor
-	WithMaximumIOUForObjectAbsence(maximumIOUForObjectAbsence float32) *YOLOLossDescriptor
-	AnchorBoxCount() int
-	AnchorBoxes() obj.Object
-	ShouldRescore() bool
-	SetShouldRescore(shouldRescore bool)
-	ScaleSpatialPositionLoss() float32
-	SetScaleSpatialPositionLoss(scaleSpatialPositionLoss float32)
-	ScaleSpatialSizeLoss() float32
-	SetScaleSpatialSizeLoss(scaleSpatialSizeLoss float32)
-	ScaleNoObjectConfidenceLoss() float32
-	SetScaleNoObjectConfidenceLoss(scaleNoObjectConfidenceLoss float32)
-	ScaleObjectConfidenceLoss() float32
-	SetScaleObjectConfidenceLoss(scaleObjectConfidenceLoss float32)
-	ScaleClassLoss() float32
-	SetScaleClassLoss(scaleClassLoss float32)
-	MinimumIOUForObjectPresence() float32
-	SetMinimumIOUForObjectPresence(minimumIOUForObjectPresence float32)
-	MaximumIOUForObjectAbsence() float32
-	SetMaximumIOUForObjectAbsence(maximumIOUForObjectAbsence float32)
-}
-
-var _ YOLOLossDescriptorable = (*YOLOLossDescriptor)(nil)

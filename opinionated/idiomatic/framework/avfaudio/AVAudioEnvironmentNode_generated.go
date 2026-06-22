@@ -52,101 +52,66 @@ func NewAudioEnvironmentNode() *AudioEnvironmentNode {
 	return audioEnvironmentNodeAdopt(_id)
 }
 
-// WithOutputType the type of output hardware.
-func (x *AudioEnvironmentNode) WithOutputType(outputType AudioEnvironmentOutputType) *AudioEnvironmentNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputType:"), outputType)
-	return x
+// WithOutputType sets the type of output hardware.
+func (aen *AudioEnvironmentNode) WithOutputType(outputType AudioEnvironmentOutputType) *AudioEnvironmentNode {
+	objc.Send[objc.ID](objref.IDOf(aen), objc.RegisterName("setOutputType:"), outputType)
+	return aen
 }
 
-// WithOutputVolume the mixer’s output volume.
-func (x *AudioEnvironmentNode) WithOutputVolume(outputVolume float32) *AudioEnvironmentNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputVolume:"), outputVolume)
-	return x
+// WithOutputVolume sets the mixer’s output volume.
+func (aen *AudioEnvironmentNode) WithOutputVolume(outputVolume float32) *AudioEnvironmentNode {
+	objc.Send[objc.ID](objref.IDOf(aen), objc.RegisterName("setOutputVolume:"), outputVolume)
+	return aen
 }
 
-// WithListenerHeadTrackingEnabled a Boolean value that indicates whether the listener orientation is automatically rotated based on head orientation.
-func (x *AudioEnvironmentNode) WithListenerHeadTrackingEnabled(listenerHeadTrackingEnabled bool) *AudioEnvironmentNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListenerHeadTrackingEnabled:"), listenerHeadTrackingEnabled)
-	return x
+// WithListenerHeadTrackingEnabled sets a Boolean value that indicates whether the listener orientation is automatically rotated based on head orientation.
+func (aen *AudioEnvironmentNode) WithListenerHeadTrackingEnabled(listenerHeadTrackingEnabled bool) *AudioEnvironmentNode {
+	objc.Send[objc.ID](objref.IDOf(aen), objc.RegisterName("setListenerHeadTrackingEnabled:"), listenerHeadTrackingEnabled)
+	return aen
 }
 
-// OutputType type of output hardware to be used with AVAudio3DMixingRenderingAlgorithmAuto Output hardware cannot be automatically determined in Manual Rendering modes or for wired output. This property can be used to override the output type if the correct type is known. Selecting an output type that does not match the actual hardware can produce unexpected results, especially with AVAudioEnvironmentOutputTypeBuiltInSpeakers. An app choosing a value other than AVAudio3DMixingOutputTypeAuto should listen to route change notifications and update the output type accordingly. Default:    AVAudio3DMixingOutputTypeAuto
-func (x *AudioEnvironmentNode) OutputType() AudioEnvironmentOutputType {
-	_r := objc.Send[AudioEnvironmentOutputType](objref.IDOf(x), objc.RegisterName("outputType"))
+// OutputType returns type of output hardware to be used with AVAudio3DMixingRenderingAlgorithmAuto Output hardware cannot be automatically determined in Manual Rendering modes or for wired output. This property can be used to override the output type if the correct type is known. Selecting an output type that does not match the actual hardware can produce unexpected results, especially with AVAudioEnvironmentOutputTypeBuiltInSpeakers. An app choosing a value other than AVAudio3DMixingOutputTypeAuto should listen to route change notifications and update the output type accordingly. Default:    AVAudio3DMixingOutputTypeAuto
+func (aen *AudioEnvironmentNode) OutputType() AudioEnvironmentOutputType {
+	_r := objc.Send[AudioEnvironmentOutputType](objref.IDOf(aen), objc.RegisterName("outputType"))
 	return _r
 }
 
-// SetOutputType wraps the corresponding Objective-C method.
-func (x *AudioEnvironmentNode) SetOutputType(outputType AudioEnvironmentOutputType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputType:"), outputType)
-}
-
-// OutputVolume the mixer's output volume. This accesses the mixer's output volume (0.0-1.0, inclusive).
-func (x *AudioEnvironmentNode) OutputVolume() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("outputVolume"))
+// OutputVolume returns the mixer's output volume. This accesses the mixer's output volume (0.0-1.0, inclusive).
+func (aen *AudioEnvironmentNode) OutputVolume() float32 {
+	_r := objc.Send[float32](objref.IDOf(aen), objc.RegisterName("outputVolume"))
 	return _r
 }
 
-// SetOutputVolume wraps the corresponding Objective-C method.
-func (x *AudioEnvironmentNode) SetOutputVolume(outputVolume float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputVolume:"), outputVolume)
-}
-
-// NextAvailableInputBus find an unused input bus This will find and return the first input bus to which no other node is connected.
-func (x *AudioEnvironmentNode) NextAvailableInputBus() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("nextAvailableInputBus"))
+// NextAvailableInputBus returns find an unused input bus This will find and return the first input bus to which no other node is connected.
+func (aen *AudioEnvironmentNode) NextAvailableInputBus() int {
+	_r := objc.Send[int](objref.IDOf(aen), objc.RegisterName("nextAvailableInputBus"))
 	return _r
 }
 
-// DistanceAttenuationParameters the distance attenuation parameters for the environment
-func (x *AudioEnvironmentNode) DistanceAttenuationParameters() *AudioEnvironmentDistanceAttenuationParameters {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("distanceAttenuationParameters"))
+// DistanceAttenuationParameters returns the distance attenuation parameters for the environment
+func (aen *AudioEnvironmentNode) DistanceAttenuationParameters() *AudioEnvironmentDistanceAttenuationParameters {
+	_r := objc.Send[objc.ID](objref.IDOf(aen), objc.RegisterName("distanceAttenuationParameters"))
 	return AudioEnvironmentDistanceAttenuationParametersFromID(_r)
 }
 
-// ReverbParameters the reverb parameters for the environment
-func (x *AudioEnvironmentNode) ReverbParameters() *AudioEnvironmentReverbParameters {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reverbParameters"))
+// ReverbParameters returns the reverb parameters for the environment
+func (aen *AudioEnvironmentNode) ReverbParameters() *AudioEnvironmentReverbParameters {
+	_r := objc.Send[objc.ID](objref.IDOf(aen), objc.RegisterName("reverbParameters"))
 	return AudioEnvironmentReverbParametersFromID(_r)
 }
 
 // ApplicableRenderingAlgorithms returns an array of AVAudio3DMixingRenderingAlgorithm values based on the current output format AVAudioEnvironmentNode supports several rendering algorithms per input bus which are defined in <AVFAudio/AVAudioMixing.h>. Depending on the current output format of the environment node, this method returns an immutable array of the applicable rendering algorithms. This is important when the environment node has been configured to a multichannel output format because only a subset of the available rendering algorithms are designed to render to all of the channels. This information should be retrieved after a successful connection to the destination node via the engine's connect method.
 //
 // ApplicableRenderingAlgorithms returns the collection as a Go slice.
-func (x *AudioEnvironmentNode) ApplicableRenderingAlgorithms() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicableRenderingAlgorithms"))
+func (aen *AudioEnvironmentNode) ApplicableRenderingAlgorithms() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(aen), objc.RegisterName("applicableRenderingAlgorithms"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// IsListenerHeadTrackingEnabled on capable devices, listener orientation will be automatically rotated based on user's head-orientation if enabled.
-func (x *AudioEnvironmentNode) IsListenerHeadTrackingEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isListenerHeadTrackingEnabled"))
+// IsListenerHeadTrackingEnabled reports whether on capable devices, listener orientation will be automatically rotated based on user's head-orientation if enabled.
+func (aen *AudioEnvironmentNode) IsListenerHeadTrackingEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(aen), objc.RegisterName("isListenerHeadTrackingEnabled"))
 	return _r
 }
-
-// SetListenerHeadTrackingEnabled wraps the corresponding Objective-C method.
-func (x *AudioEnvironmentNode) SetListenerHeadTrackingEnabled(listenerHeadTrackingEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListenerHeadTrackingEnabled:"), listenerHeadTrackingEnabled)
-}
-
-// AudioEnvironmentNodeable is the interface implemented by [AudioEnvironmentNode], for mocking and DI.
-type AudioEnvironmentNodeable interface {
-	obj.Object
-	WithOutputType(outputType AudioEnvironmentOutputType) *AudioEnvironmentNode
-	WithOutputVolume(outputVolume float32) *AudioEnvironmentNode
-	WithListenerHeadTrackingEnabled(listenerHeadTrackingEnabled bool) *AudioEnvironmentNode
-	OutputType() AudioEnvironmentOutputType
-	SetOutputType(outputType AudioEnvironmentOutputType)
-	OutputVolume() float32
-	SetOutputVolume(outputVolume float32)
-	NextAvailableInputBus() int
-	DistanceAttenuationParameters() *AudioEnvironmentDistanceAttenuationParameters
-	ReverbParameters() *AudioEnvironmentReverbParameters
-	ApplicableRenderingAlgorithms() []obj.Object
-	IsListenerHeadTrackingEnabled() bool
-	SetListenerHeadTrackingEnabled(listenerHeadTrackingEnabled bool)
-}
-
-var _ AudioEnvironmentNodeable = (*AudioEnvironmentNode)(nil)
 
 var _ AudioNodeProvider = (*AudioEnvironmentNode)(nil)

@@ -44,24 +44,24 @@ func mTRMediaPlaybackClusterSeekParamsAdopt(id objc.ID) *MTRMediaPlaybackCluster
 }
 
 // Description returns the object's -description text.
-func (x *MTRMediaPlaybackClusterSeekParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmpcsp *MTRMediaPlaybackClusterSeekParams) Description() string {
+	return rt.Description(objref.IDOf(mmpcsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRMediaPlaybackClusterSeekParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmpcsp *MTRMediaPlaybackClusterSeekParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmpcsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRMediaPlaybackClusterSeekParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmpcsp *MTRMediaPlaybackClusterSeekParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmpcsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRMediaPlaybackClusterSeekParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmpcsp *MTRMediaPlaybackClusterSeekParams) String() string {
+	return rt.Description(objref.IDOf(mmpcsp))
 }
 
 // NewMTRMediaPlaybackClusterSeekParams creates a new MTRMediaPlaybackClusterSeekParams.
@@ -71,68 +71,37 @@ func NewMTRMediaPlaybackClusterSeekParams() *MTRMediaPlaybackClusterSeekParams {
 }
 
 // WithPosition sets the property and returns the receiver so calls can be chained.
-func (x *MTRMediaPlaybackClusterSeekParams) WithPosition(position obj.Object) *MTRMediaPlaybackClusterSeekParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), objref.IDOf(position))
-	return x
+func (mmpcsp *MTRMediaPlaybackClusterSeekParams) WithPosition(position obj.Object) *MTRMediaPlaybackClusterSeekParams {
+	objc.Send[objc.ID](objref.IDOf(mmpcsp), objc.RegisterName("setPosition:"), objref.IDOf(position))
+	return mmpcsp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRMediaPlaybackClusterSeekParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaPlaybackClusterSeekParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mmpcsp *MTRMediaPlaybackClusterSeekParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaPlaybackClusterSeekParams {
+	objc.Send[objc.ID](objref.IDOf(mmpcsp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mmpcsp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRMediaPlaybackClusterSeekParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMediaPlaybackClusterSeekParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mmpcsp *MTRMediaPlaybackClusterSeekParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMediaPlaybackClusterSeekParams {
+	objc.Send[objc.ID](objref.IDOf(mmpcsp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mmpcsp
 }
 
 // Position wraps the corresponding Objective-C method.
-func (x *MTRMediaPlaybackClusterSeekParams) Position() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("position"))
+func (mmpcsp *MTRMediaPlaybackClusterSeekParams) Position() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmpcsp), objc.RegisterName("position"))
 	return obj.Wrap(_r)
 }
 
-// SetPosition wraps the corresponding Objective-C method.
-func (x *MTRMediaPlaybackClusterSeekParams) SetPosition(position obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), objref.IDOf(position))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRMediaPlaybackClusterSeekParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mmpcsp *MTRMediaPlaybackClusterSeekParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmpcsp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRMediaPlaybackClusterSeekParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRMediaPlaybackClusterSeekParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mmpcsp *MTRMediaPlaybackClusterSeekParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmpcsp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRMediaPlaybackClusterSeekParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRMediaPlaybackClusterSeekParamsable is the interface implemented by [MTRMediaPlaybackClusterSeekParams], for mocking and DI.
-type MTRMediaPlaybackClusterSeekParamsable interface {
-	obj.Object
-	WithPosition(position obj.Object) *MTRMediaPlaybackClusterSeekParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRMediaPlaybackClusterSeekParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRMediaPlaybackClusterSeekParams
-	Position() obj.Object
-	SetPosition(position obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRMediaPlaybackClusterSeekParamsable = (*MTRMediaPlaybackClusterSeekParams)(nil)

@@ -46,24 +46,24 @@ func assetResourceRequestOptionsAdopt(id objc.ID) *AssetResourceRequestOptions {
 }
 
 // Description returns the object's -description text.
-func (x *AssetResourceRequestOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (arro *AssetResourceRequestOptions) Description() string {
+	return rt.Description(objref.IDOf(arro))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetResourceRequestOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (arro *AssetResourceRequestOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(arro), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetResourceRequestOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (arro *AssetResourceRequestOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(arro), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetResourceRequestOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (arro *AssetResourceRequestOptions) String() string {
+	return rt.Description(objref.IDOf(arro))
 }
 
 // NewAssetResourceRequestOptions creates a new AssetResourceRequestOptions.
@@ -72,42 +72,20 @@ func NewAssetResourceRequestOptions() *AssetResourceRequestOptions {
 	return assetResourceRequestOptionsAdopt(_id)
 }
 
-// WithNetworkAccessAllowed a Boolean value that specifies whether Photos can download the requested asset resource data from iCloud.
-func (x *AssetResourceRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *AssetResourceRequestOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
-	return x
+// WithNetworkAccessAllowed sets a Boolean value that specifies whether Photos can download the requested asset resource data from iCloud.
+func (arro *AssetResourceRequestOptions) WithNetworkAccessAllowed(networkAccessAllowed bool) *AssetResourceRequestOptions {
+	objc.Send[objc.ID](objref.IDOf(arro), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
+	return arro
 }
 
-// WithProgressHandler a block that Photos calls periodically while downloading the asset resource data.
-func (x *AssetResourceRequestOptions) WithProgressHandler(progressHandler func(float64)) *AssetResourceRequestOptions {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressHandler:"), progressHandler)
-	return x
+// WithProgressHandler sets a block that Photos calls periodically while downloading the asset resource data.
+func (arro *AssetResourceRequestOptions) WithProgressHandler(progressHandler func(float64)) *AssetResourceRequestOptions {
+	objc.Send[objc.ID](objref.IDOf(arro), objc.RegisterName("setProgressHandler:"), progressHandler)
+	return arro
 }
 
 // IsNetworkAccessAllowed wraps the corresponding Objective-C method.
-func (x *AssetResourceRequestOptions) IsNetworkAccessAllowed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNetworkAccessAllowed"))
+func (arro *AssetResourceRequestOptions) IsNetworkAccessAllowed() bool {
+	_r := objc.Send[bool](objref.IDOf(arro), objc.RegisterName("isNetworkAccessAllowed"))
 	return _r
 }
-
-// SetNetworkAccessAllowed wraps the corresponding Objective-C method.
-func (x *AssetResourceRequestOptions) SetNetworkAccessAllowed(networkAccessAllowed bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkAccessAllowed:"), networkAccessAllowed)
-}
-
-// SetProgressHandler wraps the corresponding Objective-C method.
-func (x *AssetResourceRequestOptions) SetProgressHandler(progressHandler func(float64)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressHandler:"), progressHandler)
-}
-
-// AssetResourceRequestOptionsable is the interface implemented by [AssetResourceRequestOptions], for mocking and DI.
-type AssetResourceRequestOptionsable interface {
-	obj.Object
-	WithNetworkAccessAllowed(networkAccessAllowed bool) *AssetResourceRequestOptions
-	WithProgressHandler(progressHandler func(float64)) *AssetResourceRequestOptions
-	IsNetworkAccessAllowed() bool
-	SetNetworkAccessAllowed(networkAccessAllowed bool)
-	SetProgressHandler(progressHandler func(float64))
-}
-
-var _ AssetResourceRequestOptionsable = (*AssetResourceRequestOptions)(nil)

@@ -48,53 +48,44 @@ func notificationResponseAdopt(id objc.ID) *NotificationResponse {
 }
 
 // Description returns the object's -description text.
-func (x *NotificationResponse) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nr *NotificationResponse) Description() string {
+	return rt.Description(objref.IDOf(nr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NotificationResponse) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nr *NotificationResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NotificationResponse) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nr *NotificationResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NotificationResponse) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nr *NotificationResponse) String() string {
+	return rt.Description(objref.IDOf(nr))
 }
 
 // Notification wraps the corresponding Objective-C method.
-func (x *NotificationResponse) Notification() *Notification {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notification"))
+func (nr *NotificationResponse) Notification() *Notification {
+	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("notification"))
 	return NotificationFromID(_r)
 }
 
 // ActionIdentifier wraps the corresponding Objective-C method.
-func (x *NotificationResponse) ActionIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actionIdentifier"))
+func (nr *NotificationResponse) ActionIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nr), objc.RegisterName("actionIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// NotificationResponseable is the interface implemented by [NotificationResponse], for mocking and DI.
-type NotificationResponseable interface {
-	obj.Object
-	Notification() *Notification
-	ActionIdentifier() string
-}
-
-var _ NotificationResponseable = (*NotificationResponse)(nil)
-
 // isNotificationResponse marks NotificationResponse — and, by embedding promotion, its
 // subclasses — as a member of the NotificationResponse hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NotificationResponse) isNotificationResponse() {}
+func (nr *NotificationResponse) isNotificationResponse() {}
 
 var _ NotificationResponseProvider = (*NotificationResponse)(nil)

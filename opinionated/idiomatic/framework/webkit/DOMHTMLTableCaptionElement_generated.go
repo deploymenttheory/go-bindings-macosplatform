@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,153 +50,121 @@ func NewDOMHTMLTableCaptionElement() *DOMHTMLTableCaptionElement {
 }
 
 // WithAlign sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableCaptionElement) WithAlign(align string) *DOMHTMLTableCaptionElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
-	return x
+func (dtce *DOMHTMLTableCaptionElement) WithAlign(align string) *DOMHTMLTableCaptionElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setAlign:"), purego.NSString(align))
+	return dtce
 }
 
 // WithTitle sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableCaptionElement) WithTitle(title string) *DOMHTMLTableCaptionElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+func (dtce *DOMHTMLTableCaptionElement) WithTitle(title string) *DOMHTMLTableCaptionElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return dtce
 }
 
 // WithLang sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableCaptionElement) WithLang(lang string) *DOMHTMLTableCaptionElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
-	return x
+func (dtce *DOMHTMLTableCaptionElement) WithLang(lang string) *DOMHTMLTableCaptionElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setLang:"), purego.NSString(lang))
+	return dtce
 }
 
 // WithDir sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableCaptionElement) WithDir(dir string) *DOMHTMLTableCaptionElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
-	return x
+func (dtce *DOMHTMLTableCaptionElement) WithDir(dir string) *DOMHTMLTableCaptionElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setDir:"), purego.NSString(dir))
+	return dtce
 }
 
 // WithTabIndex sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableCaptionElement) WithTabIndex(tabIndex int) *DOMHTMLTableCaptionElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
-	return x
+func (dtce *DOMHTMLTableCaptionElement) WithTabIndex(tabIndex int) *DOMHTMLTableCaptionElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setTabIndex:"), tabIndex)
+	return dtce
 }
 
 // WithAccessKey sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableCaptionElement) WithAccessKey(accessKey string) *DOMHTMLTableCaptionElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
-	return x
+func (dtce *DOMHTMLTableCaptionElement) WithAccessKey(accessKey string) *DOMHTMLTableCaptionElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
+	return dtce
 }
 
 // WithInnerText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableCaptionElement) WithInnerText(innerText string) *DOMHTMLTableCaptionElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
-	return x
+func (dtce *DOMHTMLTableCaptionElement) WithInnerText(innerText string) *DOMHTMLTableCaptionElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
+	return dtce
 }
 
 // WithOuterText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableCaptionElement) WithOuterText(outerText string) *DOMHTMLTableCaptionElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
-	return x
+func (dtce *DOMHTMLTableCaptionElement) WithOuterText(outerText string) *DOMHTMLTableCaptionElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
+	return dtce
 }
 
 // WithContentEditable sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableCaptionElement) WithContentEditable(contentEditable string) *DOMHTMLTableCaptionElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
-	return x
+func (dtce *DOMHTMLTableCaptionElement) WithContentEditable(contentEditable string) *DOMHTMLTableCaptionElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
+	return dtce
 }
 
-// WithIdName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableCaptionElement) WithIdName(idName string) *DOMHTMLTableCaptionElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
-	return x
+// WithIDName sets the property and returns the receiver so calls can be chained.
+func (dtce *DOMHTMLTableCaptionElement) WithIDName(idName string) *DOMHTMLTableCaptionElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setIdName:"), purego.NSString(idName))
+	return dtce
 }
 
 // WithScrollLeft sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableCaptionElement) WithScrollLeft(scrollLeft int) *DOMHTMLTableCaptionElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
-	return x
+func (dtce *DOMHTMLTableCaptionElement) WithScrollLeft(scrollLeft int) *DOMHTMLTableCaptionElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setScrollLeft:"), scrollLeft)
+	return dtce
 }
 
 // WithScrollTop sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableCaptionElement) WithScrollTop(scrollTop int) *DOMHTMLTableCaptionElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
-	return x
+func (dtce *DOMHTMLTableCaptionElement) WithScrollTop(scrollTop int) *DOMHTMLTableCaptionElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setScrollTop:"), scrollTop)
+	return dtce
 }
 
 // WithInnerHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableCaptionElement) WithInnerHTML(innerHTML string) *DOMHTMLTableCaptionElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
-	return x
+func (dtce *DOMHTMLTableCaptionElement) WithInnerHTML(innerHTML string) *DOMHTMLTableCaptionElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
+	return dtce
 }
 
 // WithOuterHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableCaptionElement) WithOuterHTML(outerHTML string) *DOMHTMLTableCaptionElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
-	return x
+func (dtce *DOMHTMLTableCaptionElement) WithOuterHTML(outerHTML string) *DOMHTMLTableCaptionElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
+	return dtce
 }
 
 // WithClassName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableCaptionElement) WithClassName(className string) *DOMHTMLTableCaptionElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
-	return x
+func (dtce *DOMHTMLTableCaptionElement) WithClassName(className string) *DOMHTMLTableCaptionElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setClassName:"), purego.NSString(className))
+	return dtce
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableCaptionElement) WithNodeValue(nodeValue string) *DOMHTMLTableCaptionElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (dtce *DOMHTMLTableCaptionElement) WithNodeValue(nodeValue string) *DOMHTMLTableCaptionElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return dtce
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableCaptionElement) WithPrefix(prefix string) *DOMHTMLTableCaptionElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (dtce *DOMHTMLTableCaptionElement) WithPrefix(prefix string) *DOMHTMLTableCaptionElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return dtce
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLTableCaptionElement) WithTextContent(textContent string) *DOMHTMLTableCaptionElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (dtce *DOMHTMLTableCaptionElement) WithTextContent(textContent string) *DOMHTMLTableCaptionElement {
+	objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return dtce
 }
 
 // Align wraps the corresponding Objective-C method.
-func (x *DOMHTMLTableCaptionElement) Align() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("align"))
+func (dtce *DOMHTMLTableCaptionElement) Align() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dtce), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetAlign wraps the corresponding Objective-C method.
-func (x *DOMHTMLTableCaptionElement) SetAlign(align string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
-}
-
-// DOMHTMLTableCaptionElementable is the interface implemented by [DOMHTMLTableCaptionElement], for mocking and DI.
-type DOMHTMLTableCaptionElementable interface {
-	obj.Object
-	WithAlign(align string) *DOMHTMLTableCaptionElement
-	WithTitle(title string) *DOMHTMLTableCaptionElement
-	WithLang(lang string) *DOMHTMLTableCaptionElement
-	WithDir(dir string) *DOMHTMLTableCaptionElement
-	WithTabIndex(tabIndex int) *DOMHTMLTableCaptionElement
-	WithAccessKey(accessKey string) *DOMHTMLTableCaptionElement
-	WithInnerText(innerText string) *DOMHTMLTableCaptionElement
-	WithOuterText(outerText string) *DOMHTMLTableCaptionElement
-	WithContentEditable(contentEditable string) *DOMHTMLTableCaptionElement
-	WithIdName(idName string) *DOMHTMLTableCaptionElement
-	WithScrollLeft(scrollLeft int) *DOMHTMLTableCaptionElement
-	WithScrollTop(scrollTop int) *DOMHTMLTableCaptionElement
-	WithInnerHTML(innerHTML string) *DOMHTMLTableCaptionElement
-	WithOuterHTML(outerHTML string) *DOMHTMLTableCaptionElement
-	WithClassName(className string) *DOMHTMLTableCaptionElement
-	WithNodeValue(nodeValue string) *DOMHTMLTableCaptionElement
-	WithPrefix(prefix string) *DOMHTMLTableCaptionElement
-	WithTextContent(textContent string) *DOMHTMLTableCaptionElement
-	Align() string
-	SetAlign(align string)
-}
-
-var _ DOMHTMLTableCaptionElementable = (*DOMHTMLTableCaptionElement)(nil)
 
 var _ DOMHTMLElementProvider = (*DOMHTMLTableCaptionElement)(nil)
 

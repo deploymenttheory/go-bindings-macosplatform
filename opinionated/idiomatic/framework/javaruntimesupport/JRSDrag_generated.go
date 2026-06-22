@@ -44,24 +44,24 @@ func dragAdopt(id objc.ID) *Drag {
 }
 
 // Description returns the object's -description text.
-func (x *Drag) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Drag) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Drag) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Drag) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Drag) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Drag) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Drag) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Drag) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // NewDrag creates a new Drag.
@@ -69,10 +69,3 @@ func NewDrag() *Drag {
 	_id := objc.Send[objc.ID](objc.ID(_class("JRSDrag")), objc.RegisterName("new"))
 	return dragAdopt(_id)
 }
-
-// Dragable is the interface implemented by [Drag], for mocking and DI.
-type Dragable interface {
-	obj.Object
-}
-
-var _ Dragable = (*Drag)(nil)

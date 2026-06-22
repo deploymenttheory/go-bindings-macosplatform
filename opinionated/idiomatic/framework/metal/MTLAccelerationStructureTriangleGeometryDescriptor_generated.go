@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,220 +51,142 @@ func NewAccelerationStructureTriangleGeometryDescriptor() *AccelerationStructure
 	return accelerationStructureTriangleGeometryDescriptorAdopt(_id)
 }
 
-// WithVertexBufferOffset the offset, in bytes, for the first vertex in the vertex buffer.
-func (x *AccelerationStructureTriangleGeometryDescriptor) WithVertexBufferOffset(vertexBufferOffset int) *AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexBufferOffset:"), vertexBufferOffset)
-	return x
+// WithVertexBufferOffset sets the offset, in bytes, for the first vertex in the vertex buffer.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) WithVertexBufferOffset(vertexBufferOffset int) *AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(astgd), objc.RegisterName("setVertexBufferOffset:"), vertexBufferOffset)
+	return astgd
 }
 
-// WithVertexFormat the format of each vertex position in the vertex buffer property.
-func (x *AccelerationStructureTriangleGeometryDescriptor) WithVertexFormat(vertexFormat AttributeFormat) *AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexFormat:"), vertexFormat)
-	return x
+// WithVertexFormat sets the format of each vertex position in the vertex buffer property.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) WithVertexFormat(vertexFormat AttributeFormat) *AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(astgd), objc.RegisterName("setVertexFormat:"), vertexFormat)
+	return astgd
 }
 
-// WithVertexStride the stride, in bytes, between vertices in the vertex buffer.
-func (x *AccelerationStructureTriangleGeometryDescriptor) WithVertexStride(vertexStride int) *AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexStride:"), vertexStride)
-	return x
+// WithVertexStride sets the stride, in bytes, between vertices in the vertex buffer.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) WithVertexStride(vertexStride int) *AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(astgd), objc.RegisterName("setVertexStride:"), vertexStride)
+	return astgd
 }
 
-// WithIndexBufferOffset the offset, in bytes, to the first index in the buffer.
-func (x *AccelerationStructureTriangleGeometryDescriptor) WithIndexBufferOffset(indexBufferOffset int) *AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferOffset:"), indexBufferOffset)
-	return x
+// WithIndexBufferOffset sets the offset, in bytes, to the first index in the buffer.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) WithIndexBufferOffset(indexBufferOffset int) *AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(astgd), objc.RegisterName("setIndexBufferOffset:"), indexBufferOffset)
+	return astgd
 }
 
-// WithIndexType the data type of indices in the index buffer.
-func (x *AccelerationStructureTriangleGeometryDescriptor) WithIndexType(indexType IndexType) *AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexType:"), indexType)
-	return x
+// WithIndexType sets the data type of indices in the index buffer.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) WithIndexType(indexType IndexType) *AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(astgd), objc.RegisterName("setIndexType:"), indexType)
+	return astgd
 }
 
-// WithTriangleCount the number of triangles in the buffers.
-func (x *AccelerationStructureTriangleGeometryDescriptor) WithTriangleCount(triangleCount int) *AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTriangleCount:"), triangleCount)
-	return x
+// WithTriangleCount sets the number of triangles in the buffers.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) WithTriangleCount(triangleCount int) *AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(astgd), objc.RegisterName("setTriangleCount:"), triangleCount)
+	return astgd
 }
 
-// WithTransformationMatrixBufferOffset transformation matrix buffer offset. Must be a multiple of 4 bytes. Defaults to 0.
-func (x *AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatrixBufferOffset(transformationMatrixBufferOffset int) *AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransformationMatrixBufferOffset:"), transformationMatrixBufferOffset)
-	return x
+// WithTransformationMatrixBufferOffset sets transformation matrix buffer offset. Must be a multiple of 4 bytes. Defaults to 0.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatrixBufferOffset(transformationMatrixBufferOffset int) *AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(astgd), objc.RegisterName("setTransformationMatrixBufferOffset:"), transformationMatrixBufferOffset)
+	return astgd
 }
 
-// WithTransformationMatrixLayout matrix layout for the transformation matrix in the transformation matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
-func (x *AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatrixLayout(transformationMatrixLayout MatrixLayout) *AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransformationMatrixLayout:"), transformationMatrixLayout)
-	return x
+// WithTransformationMatrixLayout sets matrix layout for the transformation matrix in the transformation matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) WithTransformationMatrixLayout(transformationMatrixLayout MatrixLayout) *AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(astgd), objc.RegisterName("setTransformationMatrixLayout:"), transformationMatrixLayout)
+	return astgd
 }
 
-// WithIntersectionFunctionTableOffset an index into the intersection table for determining which intersection function Metal calls when it intersects a ray with the acceleration structure.
-func (x *AccelerationStructureTriangleGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntersectionFunctionTableOffset:"), intersectionFunctionTableOffset)
-	return x
+// WithIntersectionFunctionTableOffset sets an index into the intersection table for determining which intersection function Metal calls when it intersects a ray with the acceleration structure.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(astgd), objc.RegisterName("setIntersectionFunctionTableOffset:"), intersectionFunctionTableOffset)
+	return astgd
 }
 
-// WithOpaque a Boolean value that determines whether the geometry data in the acceleration structure needs to skip triangle-intersection tests.
-func (x *AccelerationStructureTriangleGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets a Boolean value that determines whether the geometry data in the acceleration structure needs to skip triangle-intersection tests.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) WithOpaque(opaque bool) *AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(astgd), objc.RegisterName("setOpaque:"), opaque)
+	return astgd
 }
 
-// WithAllowDuplicateIntersectionFunctionInvocation a Boolean value that indicates whether Metal calls the ray-intersection test more than once per primitive on the structure.
-func (x *AccelerationStructureTriangleGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:"), allowDuplicateIntersectionFunctionInvocation)
-	return x
+// WithAllowDuplicateIntersectionFunctionInvocation sets a Boolean value that indicates whether Metal calls the ray-intersection test more than once per primitive on the structure.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(astgd), objc.RegisterName("setAllowDuplicateIntersectionFunctionInvocation:"), allowDuplicateIntersectionFunctionInvocation)
+	return astgd
 }
 
-// WithLabel a label for the geometry structure, suitable for debugging.
-func (x *AccelerationStructureTriangleGeometryDescriptor) WithLabel(label string) *AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a label for the geometry structure, suitable for debugging.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) WithLabel(label string) *AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(astgd), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return astgd
 }
 
-// WithPrimitiveDataBufferOffset primitive data buffer offset in bytes. Must be aligned to the platform's buffer offset alignment. Defaults to 0 bytes.
-func (x *AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataBufferOffset(primitiveDataBufferOffset int) *AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataBufferOffset:"), primitiveDataBufferOffset)
-	return x
+// WithPrimitiveDataBufferOffset sets primitive data buffer offset in bytes. Must be aligned to the platform's buffer offset alignment. Defaults to 0 bytes.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataBufferOffset(primitiveDataBufferOffset int) *AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(astgd), objc.RegisterName("setPrimitiveDataBufferOffset:"), primitiveDataBufferOffset)
+	return astgd
 }
 
-// WithPrimitiveDataStride stride, in bytes, between per-primitive data in the primitive data buffer. Must be at least primitiveDataElementSize and must be a multiple of 4 bytes. Defaults to 0 bytes. Assumed to be equal to primitiveDataElementSize if zero.
-func (x *AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
-	return x
+// WithPrimitiveDataStride sets stride, in bytes, between per-primitive data in the primitive data buffer. Must be at least primitiveDataElementSize and must be a multiple of 4 bytes. Defaults to 0 bytes. Assumed to be equal to primitiveDataElementSize if zero.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataStride(primitiveDataStride int) *AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(astgd), objc.RegisterName("setPrimitiveDataStride:"), primitiveDataStride)
+	return astgd
 }
 
-// WithPrimitiveDataElementSize size, in bytes, of the data for each primitive in the primitive data buffer. Must be at most primitiveDataStride and must be a multiple of 4 bytes. Defaults to 0 bytes.
-func (x *AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *AccelerationStructureTriangleGeometryDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
-	return x
+// WithPrimitiveDataElementSize sets size, in bytes, of the data for each primitive in the primitive data buffer. Must be at most primitiveDataStride and must be a multiple of 4 bytes. Defaults to 0 bytes.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) WithPrimitiveDataElementSize(primitiveDataElementSize int) *AccelerationStructureTriangleGeometryDescriptor {
+	objc.Send[objc.ID](objref.IDOf(astgd), objc.RegisterName("setPrimitiveDataElementSize:"), primitiveDataElementSize)
+	return astgd
 }
 
-// VertexBufferOffset vertex buffer offset. Must be a multiple of the vertex stride and must be aligned to the platform's buffer offset alignment.
-func (x *AccelerationStructureTriangleGeometryDescriptor) VertexBufferOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexBufferOffset"))
+// VertexBufferOffset returns vertex buffer offset. Must be a multiple of the vertex stride and must be aligned to the platform's buffer offset alignment.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) VertexBufferOffset() int {
+	_r := objc.Send[int](objref.IDOf(astgd), objc.RegisterName("vertexBufferOffset"))
 	return _r
 }
 
-// SetVertexBufferOffset wraps the corresponding Objective-C method.
-func (x *AccelerationStructureTriangleGeometryDescriptor) SetVertexBufferOffset(vertexBufferOffset int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexBufferOffset:"), vertexBufferOffset)
-}
-
-// VertexFormat format type of the vertex buffer. Defaults to MTLAttributeFormatFloat3 (packed).
-func (x *AccelerationStructureTriangleGeometryDescriptor) VertexFormat() AttributeFormat {
-	_r := objc.Send[AttributeFormat](objref.IDOf(x), objc.RegisterName("vertexFormat"))
+// VertexFormat returns format type of the vertex buffer. Defaults to MTLAttributeFormatFloat3 (packed).
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) VertexFormat() AttributeFormat {
+	_r := objc.Send[AttributeFormat](objref.IDOf(astgd), objc.RegisterName("vertexFormat"))
 	return _r
 }
 
-// SetVertexFormat wraps the corresponding Objective-C method.
-func (x *AccelerationStructureTriangleGeometryDescriptor) SetVertexFormat(vertexFormat AttributeFormat) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexFormat:"), vertexFormat)
-}
-
-// VertexStride stride, in bytes, between vertices in the vertex buffer. Must be a multiple of the vertex format data type size and must be aligned to the vertex format data type's alignment. Defaults to 0, which will result in a stride of the vertex format data size.
-func (x *AccelerationStructureTriangleGeometryDescriptor) VertexStride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexStride"))
+// VertexStride returns stride, in bytes, between vertices in the vertex buffer. Must be a multiple of the vertex format data type size and must be aligned to the vertex format data type's alignment. Defaults to 0, which will result in a stride of the vertex format data size.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) VertexStride() int {
+	_r := objc.Send[int](objref.IDOf(astgd), objc.RegisterName("vertexStride"))
 	return _r
 }
 
-// SetVertexStride wraps the corresponding Objective-C method.
-func (x *AccelerationStructureTriangleGeometryDescriptor) SetVertexStride(vertexStride int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexStride:"), vertexStride)
-}
-
-// IndexBufferOffset index buffer offset. Must be a multiple of the index data type size and must be aligned to both the index data type's alignment and the platform's buffer offset alignment.
-func (x *AccelerationStructureTriangleGeometryDescriptor) IndexBufferOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("indexBufferOffset"))
+// IndexBufferOffset returns index buffer offset. Must be a multiple of the index data type size and must be aligned to both the index data type's alignment and the platform's buffer offset alignment.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) IndexBufferOffset() int {
+	_r := objc.Send[int](objref.IDOf(astgd), objc.RegisterName("indexBufferOffset"))
 	return _r
 }
 
-// SetIndexBufferOffset wraps the corresponding Objective-C method.
-func (x *AccelerationStructureTriangleGeometryDescriptor) SetIndexBufferOffset(indexBufferOffset int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferOffset:"), indexBufferOffset)
-}
-
-// IndexType index type
-func (x *AccelerationStructureTriangleGeometryDescriptor) IndexType() IndexType {
-	_r := objc.Send[IndexType](objref.IDOf(x), objc.RegisterName("indexType"))
+// IndexType returns index type
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) IndexType() IndexType {
+	_r := objc.Send[IndexType](objref.IDOf(astgd), objc.RegisterName("indexType"))
 	return _r
 }
 
-// SetIndexType wraps the corresponding Objective-C method.
-func (x *AccelerationStructureTriangleGeometryDescriptor) SetIndexType(indexType IndexType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexType:"), indexType)
-}
-
-// TriangleCount number of triangles
-func (x *AccelerationStructureTriangleGeometryDescriptor) TriangleCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("triangleCount"))
+// TriangleCount returns number of triangles
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) TriangleCount() int {
+	_r := objc.Send[int](objref.IDOf(astgd), objc.RegisterName("triangleCount"))
 	return _r
 }
 
-// SetTriangleCount wraps the corresponding Objective-C method.
-func (x *AccelerationStructureTriangleGeometryDescriptor) SetTriangleCount(triangleCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTriangleCount:"), triangleCount)
-}
-
-// TransformationMatrixBufferOffset transformation matrix buffer offset. Must be a multiple of 4 bytes. Defaults to 0.
-func (x *AccelerationStructureTriangleGeometryDescriptor) TransformationMatrixBufferOffset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("transformationMatrixBufferOffset"))
+// TransformationMatrixBufferOffset returns transformation matrix buffer offset. Must be a multiple of 4 bytes. Defaults to 0.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) TransformationMatrixBufferOffset() int {
+	_r := objc.Send[int](objref.IDOf(astgd), objc.RegisterName("transformationMatrixBufferOffset"))
 	return _r
 }
 
-// SetTransformationMatrixBufferOffset wraps the corresponding Objective-C method.
-func (x *AccelerationStructureTriangleGeometryDescriptor) SetTransformationMatrixBufferOffset(transformationMatrixBufferOffset int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransformationMatrixBufferOffset:"), transformationMatrixBufferOffset)
-}
-
-// TransformationMatrixLayout matrix layout for the transformation matrix in the transformation matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
-func (x *AccelerationStructureTriangleGeometryDescriptor) TransformationMatrixLayout() MatrixLayout {
-	_r := objc.Send[MatrixLayout](objref.IDOf(x), objc.RegisterName("transformationMatrixLayout"))
+// TransformationMatrixLayout returns matrix layout for the transformation matrix in the transformation matrix buffer. Defaults to MTLMatrixLayoutColumnMajor.
+func (astgd *AccelerationStructureTriangleGeometryDescriptor) TransformationMatrixLayout() MatrixLayout {
+	_r := objc.Send[MatrixLayout](objref.IDOf(astgd), objc.RegisterName("transformationMatrixLayout"))
 	return _r
 }
-
-// SetTransformationMatrixLayout wraps the corresponding Objective-C method.
-func (x *AccelerationStructureTriangleGeometryDescriptor) SetTransformationMatrixLayout(transformationMatrixLayout MatrixLayout) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransformationMatrixLayout:"), transformationMatrixLayout)
-}
-
-// AccelerationStructureTriangleGeometryDescriptorable is the interface implemented by [AccelerationStructureTriangleGeometryDescriptor], for mocking and DI.
-type AccelerationStructureTriangleGeometryDescriptorable interface {
-	obj.Object
-	WithVertexBufferOffset(vertexBufferOffset int) *AccelerationStructureTriangleGeometryDescriptor
-	WithVertexFormat(vertexFormat AttributeFormat) *AccelerationStructureTriangleGeometryDescriptor
-	WithVertexStride(vertexStride int) *AccelerationStructureTriangleGeometryDescriptor
-	WithIndexBufferOffset(indexBufferOffset int) *AccelerationStructureTriangleGeometryDescriptor
-	WithIndexType(indexType IndexType) *AccelerationStructureTriangleGeometryDescriptor
-	WithTriangleCount(triangleCount int) *AccelerationStructureTriangleGeometryDescriptor
-	WithTransformationMatrixBufferOffset(transformationMatrixBufferOffset int) *AccelerationStructureTriangleGeometryDescriptor
-	WithTransformationMatrixLayout(transformationMatrixLayout MatrixLayout) *AccelerationStructureTriangleGeometryDescriptor
-	WithIntersectionFunctionTableOffset(intersectionFunctionTableOffset int) *AccelerationStructureTriangleGeometryDescriptor
-	WithOpaque(opaque bool) *AccelerationStructureTriangleGeometryDescriptor
-	WithAllowDuplicateIntersectionFunctionInvocation(allowDuplicateIntersectionFunctionInvocation bool) *AccelerationStructureTriangleGeometryDescriptor
-	WithLabel(label string) *AccelerationStructureTriangleGeometryDescriptor
-	WithPrimitiveDataBufferOffset(primitiveDataBufferOffset int) *AccelerationStructureTriangleGeometryDescriptor
-	WithPrimitiveDataStride(primitiveDataStride int) *AccelerationStructureTriangleGeometryDescriptor
-	WithPrimitiveDataElementSize(primitiveDataElementSize int) *AccelerationStructureTriangleGeometryDescriptor
-	VertexBufferOffset() int
-	SetVertexBufferOffset(vertexBufferOffset int)
-	VertexFormat() AttributeFormat
-	SetVertexFormat(vertexFormat AttributeFormat)
-	VertexStride() int
-	SetVertexStride(vertexStride int)
-	IndexBufferOffset() int
-	SetIndexBufferOffset(indexBufferOffset int)
-	IndexType() IndexType
-	SetIndexType(indexType IndexType)
-	TriangleCount() int
-	SetTriangleCount(triangleCount int)
-	TransformationMatrixBufferOffset() int
-	SetTransformationMatrixBufferOffset(transformationMatrixBufferOffset int)
-	TransformationMatrixLayout() MatrixLayout
-	SetTransformationMatrixLayout(transformationMatrixLayout MatrixLayout)
-}
-
-var _ AccelerationStructureTriangleGeometryDescriptorable = (*AccelerationStructureTriangleGeometryDescriptor)(nil)
 
 var _ AccelerationStructureGeometryDescriptorProvider = (*AccelerationStructureTriangleGeometryDescriptor)(nil)

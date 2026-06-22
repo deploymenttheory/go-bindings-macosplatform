@@ -53,101 +53,81 @@ func NewIOBluetoothRFCOMMChannel() *IOBluetoothRFCOMMChannel {
 }
 
 // GetRFCOMMChannelRef returns an IOBluetoothRFCOMMChannelRef representation of the target IOBluetoothRFCOMMChannel object.
-func (x *IOBluetoothRFCOMMChannel) GetRFCOMMChannelRef() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getRFCOMMChannelRef"))
+func (ibrc *IOBluetoothRFCOMMChannel) GetRFCOMMChannelRef() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibrc), objc.RegisterName("getRFCOMMChannelRef"))
 	return obj.Wrap(_r)
 }
 
-// CloseChannel close the channel.
-func (x *IOBluetoothRFCOMMChannel) CloseChannel() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("closeChannel"))
+// CloseChannel returns close the channel.
+func (ibrc *IOBluetoothRFCOMMChannel) CloseChannel() int {
+	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("closeChannel"))
 	return _r
 }
 
-// IsOpen returns the state of the channel.
-func (x *IOBluetoothRFCOMMChannel) IsOpen() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isOpen"))
+// IsOpen reports whether returns the state of the channel.
+func (ibrc *IOBluetoothRFCOMMChannel) IsOpen() bool {
+	_r := objc.Send[bool](objref.IDOf(ibrc), objc.RegisterName("isOpen"))
 	return _r
 }
 
 // GetMTU returns the channel maximum transfer unit.
-func (x *IOBluetoothRFCOMMChannel) GetMTU() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("getMTU"))
+func (ibrc *IOBluetoothRFCOMMChannel) GetMTU() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(ibrc), objc.RegisterName("getMTU"))
 	return _r
 }
 
-// IsTransmissionPaused returns TRUE if flow control is off.
-func (x *IOBluetoothRFCOMMChannel) IsTransmissionPaused() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTransmissionPaused"))
+// IsTransmissionPaused reports whether flow control is off.
+func (ibrc *IOBluetoothRFCOMMChannel) IsTransmissionPaused() bool {
+	_r := objc.Send[bool](objref.IDOf(ibrc), objc.RegisterName("isTransmissionPaused"))
 	return _r
 }
 
 // SetSerialParametersDataBitsParityStopBits changes the parameters of the serial connection.
-func (x *IOBluetoothRFCOMMChannel) SetSerialParametersDataBitsParityStopBits(speed int, nBits uint8, parity BluetoothRFCOMMParityType, bitStop uint8) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("setSerialParameters:dataBits:parity:stopBits:"), speed, nBits, parity, bitStop)
+func (ibrc *IOBluetoothRFCOMMChannel) SetSerialParametersDataBitsParityStopBits(speed int, nBits uint8, parity BluetoothRFCOMMParityType, bitStop uint8) int {
+	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("setSerialParameters:dataBits:parity:stopBits:"), speed, nBits, parity, bitStop)
 	return _r
 }
 
 // SendRemoteLineStatus sends an error to the remote side.
-func (x *IOBluetoothRFCOMMChannel) SendRemoteLineStatus(lineStatus BluetoothRFCOMMLineStatus) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sendRemoteLineStatus:"), lineStatus)
+func (ibrc *IOBluetoothRFCOMMChannel) SendRemoteLineStatus(lineStatus BluetoothRFCOMMLineStatus) int {
+	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("sendRemoteLineStatus:"), lineStatus)
 	return _r
 }
 
 // SetDelegate allows an object to register itself as a client of the RFCOMM channel.
-func (x *IOBluetoothRFCOMMChannel) SetDelegate(delegate obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+func (ibrc *IOBluetoothRFCOMMChannel) SetDelegate(delegate obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
 	return _r
 }
 
 // Delegate returns the object delegate
-func (x *IOBluetoothRFCOMMChannel) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+func (ibrc *IOBluetoothRFCOMMChannel) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ibrc), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
 // GetChannelID returns the object rfcomm channel ID.
-func (x *IOBluetoothRFCOMMChannel) GetChannelID() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("getChannelID"))
+func (ibrc *IOBluetoothRFCOMMChannel) GetChannelID() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(ibrc), objc.RegisterName("getChannelID"))
 	return _r
 }
 
-// IsIncoming returns the direction of the channel. An incoming channel is one that was opened by the remote device.
-func (x *IOBluetoothRFCOMMChannel) IsIncoming() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIncoming"))
+// IsIncoming reports whether returns the direction of the channel. An incoming channel is one that was opened by the remote device.
+func (ibrc *IOBluetoothRFCOMMChannel) IsIncoming() bool {
+	_r := objc.Send[bool](objref.IDOf(ibrc), objc.RegisterName("isIncoming"))
 	return _r
 }
 
 // GetDevice returns the Bluetooth Device that carries the rfcomm data.
-func (x *IOBluetoothRFCOMMChannel) GetDevice() *IOBluetoothDevice {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getDevice"))
+func (ibrc *IOBluetoothRFCOMMChannel) GetDevice() *IOBluetoothDevice {
+	_r := objc.Send[objc.ID](objref.IDOf(ibrc), objc.RegisterName("getDevice"))
 	return IOBluetoothDeviceFromID(_r)
 }
 
 // GetObjectID returns the IOBluetoothObjectID of the given IOBluetoothRFCOMMChannel.
-func (x *IOBluetoothRFCOMMChannel) GetObjectID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getObjectID"))
+func (ibrc *IOBluetoothRFCOMMChannel) GetObjectID() int {
+	_r := objc.Send[int](objref.IDOf(ibrc), objc.RegisterName("getObjectID"))
 	return _r
 }
-
-// IOBluetoothRFCOMMChannelable is the interface implemented by [IOBluetoothRFCOMMChannel], for mocking and DI.
-type IOBluetoothRFCOMMChannelable interface {
-	obj.Object
-	GetRFCOMMChannelRef() obj.Object
-	CloseChannel() int
-	IsOpen() bool
-	GetMTU() uint16
-	IsTransmissionPaused() bool
-	SetSerialParametersDataBitsParityStopBits(speed int, nBits uint8, parity BluetoothRFCOMMParityType, bitStop uint8) int
-	SendRemoteLineStatus(lineStatus BluetoothRFCOMMLineStatus) int
-	SetDelegate(delegate obj.Object) int
-	Delegate() obj.Object
-	GetChannelID() uint8
-	IsIncoming() bool
-	GetDevice() *IOBluetoothDevice
-	GetObjectID() int
-}
-
-var _ IOBluetoothRFCOMMChannelable = (*IOBluetoothRFCOMMChannel)(nil)
 
 var _ IOBluetoothObjectProvider = (*IOBluetoothRFCOMMChannel)(nil)

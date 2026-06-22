@@ -51,233 +51,203 @@ func NewDOMHTMLAreaElement() *DOMHTMLAreaElement {
 }
 
 // WithAlt sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithAlt(alt string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlt:"), purego.NSString(alt))
-	return x
+func (dae *DOMHTMLAreaElement) WithAlt(alt string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setAlt:"), purego.NSString(alt))
+	return dae
 }
 
 // WithCoords sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithCoords(coords string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCoords:"), purego.NSString(coords))
-	return x
+func (dae *DOMHTMLAreaElement) WithCoords(coords string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setCoords:"), purego.NSString(coords))
+	return dae
 }
 
 // WithNoHref sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithNoHref(noHref bool) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNoHref:"), noHref)
-	return x
+func (dae *DOMHTMLAreaElement) WithNoHref(noHref bool) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setNoHref:"), noHref)
+	return dae
 }
 
 // WithShape sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithShape(shape string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShape:"), purego.NSString(shape))
-	return x
+func (dae *DOMHTMLAreaElement) WithShape(shape string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setShape:"), purego.NSString(shape))
+	return dae
 }
 
 // WithTarget sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithTarget(target string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), purego.NSString(target))
-	return x
+func (dae *DOMHTMLAreaElement) WithTarget(target string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setTarget:"), purego.NSString(target))
+	return dae
 }
 
 // WithHref sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithHref(href string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHref:"), purego.NSString(href))
-	return x
+func (dae *DOMHTMLAreaElement) WithHref(href string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setHref:"), purego.NSString(href))
+	return dae
 }
 
 // WithTitle sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithTitle(title string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+func (dae *DOMHTMLAreaElement) WithTitle(title string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return dae
 }
 
 // WithLang sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithLang(lang string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
-	return x
+func (dae *DOMHTMLAreaElement) WithLang(lang string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setLang:"), purego.NSString(lang))
+	return dae
 }
 
 // WithDir sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithDir(dir string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
-	return x
+func (dae *DOMHTMLAreaElement) WithDir(dir string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setDir:"), purego.NSString(dir))
+	return dae
 }
 
 // WithTabIndex sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithTabIndex(tabIndex int) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
-	return x
+func (dae *DOMHTMLAreaElement) WithTabIndex(tabIndex int) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setTabIndex:"), tabIndex)
+	return dae
 }
 
 // WithAccessKey sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithAccessKey(accessKey string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
-	return x
+func (dae *DOMHTMLAreaElement) WithAccessKey(accessKey string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
+	return dae
 }
 
 // WithInnerText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithInnerText(innerText string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
-	return x
+func (dae *DOMHTMLAreaElement) WithInnerText(innerText string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
+	return dae
 }
 
 // WithOuterText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithOuterText(outerText string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
-	return x
+func (dae *DOMHTMLAreaElement) WithOuterText(outerText string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
+	return dae
 }
 
 // WithContentEditable sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithContentEditable(contentEditable string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
-	return x
+func (dae *DOMHTMLAreaElement) WithContentEditable(contentEditable string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
+	return dae
 }
 
-// WithIdName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithIdName(idName string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
-	return x
+// WithIDName sets the property and returns the receiver so calls can be chained.
+func (dae *DOMHTMLAreaElement) WithIDName(idName string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setIdName:"), purego.NSString(idName))
+	return dae
 }
 
 // WithScrollLeft sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithScrollLeft(scrollLeft int) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
-	return x
+func (dae *DOMHTMLAreaElement) WithScrollLeft(scrollLeft int) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setScrollLeft:"), scrollLeft)
+	return dae
 }
 
 // WithScrollTop sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithScrollTop(scrollTop int) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
-	return x
+func (dae *DOMHTMLAreaElement) WithScrollTop(scrollTop int) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setScrollTop:"), scrollTop)
+	return dae
 }
 
 // WithInnerHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithInnerHTML(innerHTML string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
-	return x
+func (dae *DOMHTMLAreaElement) WithInnerHTML(innerHTML string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
+	return dae
 }
 
 // WithOuterHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithOuterHTML(outerHTML string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
-	return x
+func (dae *DOMHTMLAreaElement) WithOuterHTML(outerHTML string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
+	return dae
 }
 
 // WithClassName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithClassName(className string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
-	return x
+func (dae *DOMHTMLAreaElement) WithClassName(className string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setClassName:"), purego.NSString(className))
+	return dae
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithNodeValue(nodeValue string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (dae *DOMHTMLAreaElement) WithNodeValue(nodeValue string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return dae
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithPrefix(prefix string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (dae *DOMHTMLAreaElement) WithPrefix(prefix string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return dae
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLAreaElement) WithTextContent(textContent string) *DOMHTMLAreaElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (dae *DOMHTMLAreaElement) WithTextContent(textContent string) *DOMHTMLAreaElement {
+	objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return dae
 }
 
 // Alt wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) Alt() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alt"))
+func (dae *DOMHTMLAreaElement) Alt() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("alt"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetAlt wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) SetAlt(alt string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlt:"), purego.NSString(alt))
 }
 
 // Coords wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) Coords() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coords"))
+func (dae *DOMHTMLAreaElement) Coords() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("coords"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetCoords wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) SetCoords(coords string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCoords:"), purego.NSString(coords))
 }
 
 // NoHref wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) NoHref() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("noHref"))
+func (dae *DOMHTMLAreaElement) NoHref() bool {
+	_r := objc.Send[bool](objref.IDOf(dae), objc.RegisterName("noHref"))
 	return _r
 }
 
-// SetNoHref wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) SetNoHref(noHref bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNoHref:"), noHref)
-}
-
 // Shape wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) Shape() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shape"))
+func (dae *DOMHTMLAreaElement) Shape() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("shape"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetShape wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) SetShape(shape string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShape:"), purego.NSString(shape))
 }
 
 // Target wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) Target() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+func (dae *DOMHTMLAreaElement) Target() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("target"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetTarget wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) SetTarget(target string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), purego.NSString(target))
-}
-
 // AbsoluteLinkURL wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) AbsoluteLinkURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("absoluteLinkURL"))
+func (dae *DOMHTMLAreaElement) AbsoluteLinkURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("absoluteLinkURL"))
 	return obj.Wrap(_r)
 }
 
 // Href wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) Href() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("href"))
+func (dae *DOMHTMLAreaElement) Href() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("href"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetHref wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) SetHref(href string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHref:"), purego.NSString(href))
-}
-
 // Protocol wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) Protocol() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocol"))
+func (dae *DOMHTMLAreaElement) Protocol() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("protocol"))
 	if _r == 0 {
 		return ""
 	}
@@ -285,8 +255,8 @@ func (x *DOMHTMLAreaElement) Protocol() string {
 }
 
 // Host wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) Host() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("host"))
+func (dae *DOMHTMLAreaElement) Host() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("host"))
 	if _r == 0 {
 		return ""
 	}
@@ -294,8 +264,8 @@ func (x *DOMHTMLAreaElement) Host() string {
 }
 
 // Hostname wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) Hostname() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hostname"))
+func (dae *DOMHTMLAreaElement) Hostname() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("hostname"))
 	if _r == 0 {
 		return ""
 	}
@@ -303,8 +273,8 @@ func (x *DOMHTMLAreaElement) Hostname() string {
 }
 
 // Port wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) Port() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("port"))
+func (dae *DOMHTMLAreaElement) Port() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("port"))
 	if _r == 0 {
 		return ""
 	}
@@ -312,8 +282,8 @@ func (x *DOMHTMLAreaElement) Port() string {
 }
 
 // Pathname wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) Pathname() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathname"))
+func (dae *DOMHTMLAreaElement) Pathname() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("pathname"))
 	if _r == 0 {
 		return ""
 	}
@@ -321,8 +291,8 @@ func (x *DOMHTMLAreaElement) Pathname() string {
 }
 
 // Search wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) Search() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("search"))
+func (dae *DOMHTMLAreaElement) Search() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("search"))
 	if _r == 0 {
 		return ""
 	}
@@ -330,63 +300,13 @@ func (x *DOMHTMLAreaElement) Search() string {
 }
 
 // HashName wraps the corresponding Objective-C method.
-func (x *DOMHTMLAreaElement) HashName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hashName"))
+func (dae *DOMHTMLAreaElement) HashName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dae), objc.RegisterName("hashName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// DOMHTMLAreaElementable is the interface implemented by [DOMHTMLAreaElement], for mocking and DI.
-type DOMHTMLAreaElementable interface {
-	obj.Object
-	WithAlt(alt string) *DOMHTMLAreaElement
-	WithCoords(coords string) *DOMHTMLAreaElement
-	WithNoHref(noHref bool) *DOMHTMLAreaElement
-	WithShape(shape string) *DOMHTMLAreaElement
-	WithTarget(target string) *DOMHTMLAreaElement
-	WithHref(href string) *DOMHTMLAreaElement
-	WithTitle(title string) *DOMHTMLAreaElement
-	WithLang(lang string) *DOMHTMLAreaElement
-	WithDir(dir string) *DOMHTMLAreaElement
-	WithTabIndex(tabIndex int) *DOMHTMLAreaElement
-	WithAccessKey(accessKey string) *DOMHTMLAreaElement
-	WithInnerText(innerText string) *DOMHTMLAreaElement
-	WithOuterText(outerText string) *DOMHTMLAreaElement
-	WithContentEditable(contentEditable string) *DOMHTMLAreaElement
-	WithIdName(idName string) *DOMHTMLAreaElement
-	WithScrollLeft(scrollLeft int) *DOMHTMLAreaElement
-	WithScrollTop(scrollTop int) *DOMHTMLAreaElement
-	WithInnerHTML(innerHTML string) *DOMHTMLAreaElement
-	WithOuterHTML(outerHTML string) *DOMHTMLAreaElement
-	WithClassName(className string) *DOMHTMLAreaElement
-	WithNodeValue(nodeValue string) *DOMHTMLAreaElement
-	WithPrefix(prefix string) *DOMHTMLAreaElement
-	WithTextContent(textContent string) *DOMHTMLAreaElement
-	Alt() string
-	SetAlt(alt string)
-	Coords() string
-	SetCoords(coords string)
-	NoHref() bool
-	SetNoHref(noHref bool)
-	Shape() string
-	SetShape(shape string)
-	Target() string
-	SetTarget(target string)
-	AbsoluteLinkURL() obj.Object
-	Href() string
-	SetHref(href string)
-	Protocol() string
-	Host() string
-	Hostname() string
-	Port() string
-	Pathname() string
-	Search() string
-	HashName() string
-}
-
-var _ DOMHTMLAreaElementable = (*DOMHTMLAreaElement)(nil)
 
 var _ DOMHTMLElementProvider = (*DOMHTMLAreaElement)(nil)
 

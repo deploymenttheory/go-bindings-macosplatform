@@ -59,37 +59,21 @@ func NewARC4RandomSourceWithSeed(seed obj.Object) *ARC4RandomSource {
 	return aRC4RandomSourceAdopt(_id)
 }
 
-// WithSeed the seed data that determines the random source’s behavior.
-func (x *ARC4RandomSource) WithSeed(seed obj.Object) *ARC4RandomSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), objref.IDOf(seed))
-	return x
+// WithSeed sets the seed data that determines the random source’s behavior.
+func (ars *ARC4RandomSource) WithSeed(seed obj.Object) *ARC4RandomSource {
+	objc.Send[objc.ID](objref.IDOf(ars), objc.RegisterName("setSeed:"), objref.IDOf(seed))
+	return ars
 }
 
 // DropValuesWithCount skips the specified number of values in the random sequence.
-func (x *ARC4RandomSource) DropValuesWithCount(count int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dropValuesWithCount:"), count)
+func (ars *ARC4RandomSource) DropValuesWithCount(count int) {
+	objc.Send[objc.ID](objref.IDOf(ars), objc.RegisterName("dropValuesWithCount:"), count)
 }
 
-// Seed the seed used to stir the arc4 random source. The seed is not encoded through archiving, but the equivalent state buffers are encoded.
-func (x *ARC4RandomSource) Seed() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seed"))
+// Seed returns the seed used to stir the arc4 random source. The seed is not encoded through archiving, but the equivalent state buffers are encoded.
+func (ars *ARC4RandomSource) Seed() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ars), objc.RegisterName("seed"))
 	return obj.Wrap(_r)
 }
-
-// SetSeed wraps the corresponding Objective-C method.
-func (x *ARC4RandomSource) SetSeed(seed obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeed:"), objref.IDOf(seed))
-}
-
-// ARC4RandomSourceable is the interface implemented by [ARC4RandomSource], for mocking and DI.
-type ARC4RandomSourceable interface {
-	obj.Object
-	WithSeed(seed obj.Object) *ARC4RandomSource
-	DropValuesWithCount(count int)
-	Seed() obj.Object
-	SetSeed(seed obj.Object)
-}
-
-var _ ARC4RandomSourceable = (*ARC4RandomSource)(nil)
 
 var _ RandomSourceProvider = (*ARC4RandomSource)(nil)

@@ -53,19 +53,11 @@ func NewCNNSoftMaxGradientNodeWithSourceGradientSourceImageGradientState(sourceG
 	return cNNSoftMaxGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNSoftMaxGradientNode) WithLabel(label string) *CNNSoftMaxGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (csmgn *CNNSoftMaxGradientNode) WithLabel(label string) *CNNSoftMaxGradientNode {
+	objc.Send[objc.ID](objref.IDOf(csmgn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return csmgn
 }
-
-// CNNSoftMaxGradientNodeable is the interface implemented by [CNNSoftMaxGradientNode], for mocking and DI.
-type CNNSoftMaxGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNSoftMaxGradientNode
-}
-
-var _ CNNSoftMaxGradientNodeable = (*CNNSoftMaxGradientNode)(nil)
 
 var _ NNGradientFilterNodeProvider = (*CNNSoftMaxGradientNode)(nil)
 

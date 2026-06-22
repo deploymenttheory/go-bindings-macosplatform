@@ -46,24 +46,24 @@ func netServiceAdopt(id objc.ID) *NetService {
 }
 
 // Description returns the object's -description text.
-func (x *NetService) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ns *NetService) Description() string {
+	return rt.Description(objref.IDOf(ns))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NetService) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ns *NetService) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ns), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NetService) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ns *NetService) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ns), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NetService) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ns *NetService) String() string {
+	return rt.Description(objref.IDOf(ns))
 }
 
 // NewNetServiceWithDomainTypeNamePort creates a new NetService.
@@ -81,94 +81,89 @@ func NewNetServiceWithDomainTypeName(domain string, type_ string, name string) *
 }
 
 // WithIncludesPeerToPeer sets the property and returns the receiver so calls can be chained.
-func (x *NetService) WithIncludesPeerToPeer(includesPeerToPeer bool) *NetService {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
-	return x
+func (ns *NetService) WithIncludesPeerToPeer(includesPeerToPeer bool) *NetService {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
+	return ns
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *NetService) WithScriptingProperties(scriptingProperties obj.Object) *NetService {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ns *NetService) WithScriptingProperties(scriptingProperties obj.Object) *NetService {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ns
 }
 
 // ScheduleInRunLoopForMode wraps the corresponding Objective-C method.
-func (x *NetService) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
+func (ns *NetService) ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("scheduleInRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
 // RemoveFromRunLoopForMode wraps the corresponding Objective-C method.
-func (x *NetService) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
+func (ns *NetService) RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String) {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(aRunLoop), objref.IDOf(mode))
 }
 
 // Publish wraps the corresponding Objective-C method.
-func (x *NetService) Publish() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publish"))
+func (ns *NetService) Publish() {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("publish"))
 }
 
 // PublishWithOptions wraps the corresponding Objective-C method.
-func (x *NetService) PublishWithOptions(options NetServiceOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publishWithOptions:"), options)
+func (ns *NetService) PublishWithOptions(options NetServiceOptions) {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("publishWithOptions:"), options)
 }
 
 // Resolve wraps the corresponding Objective-C method.
-func (x *NetService) Resolve() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolve"))
+func (ns *NetService) Resolve() {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("resolve"))
 }
 
 // Stop wraps the corresponding Objective-C method.
-func (x *NetService) Stop() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
+func (ns *NetService) Stop() {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("stop"))
 }
 
 // ResolveWithTimeout wraps the corresponding Objective-C method.
-func (x *NetService) ResolveWithTimeout(timeout float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolveWithTimeout:"), timeout)
+func (ns *NetService) ResolveWithTimeout(timeout float64) {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("resolveWithTimeout:"), timeout)
 }
 
 // GetInputStreamOutputStream wraps the corresponding Objective-C method.
-func (x *NetService) GetInputStreamOutputStream(inputStream *InputStream, outputStream *OutputStream) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("getInputStream:outputStream:"), objref.IDOf(inputStream), objref.IDOf(outputStream))
+func (ns *NetService) GetInputStreamOutputStream(inputStream *InputStream, outputStream *OutputStream) bool {
+	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("getInputStream:outputStream:"), objref.IDOf(inputStream), objref.IDOf(outputStream))
 	return _r
 }
 
 // SetTXTRecordData wraps the corresponding Objective-C method.
-func (x *NetService) SetTXTRecordData(recordData *Data) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setTXTRecordData:"), objref.IDOf(recordData))
+func (ns *NetService) SetTXTRecordData(recordData *Data) bool {
+	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("setTXTRecordData:"), objref.IDOf(recordData))
 	return _r
 }
 
 // TXTRecordData wraps the corresponding Objective-C method.
-func (x *NetService) TXTRecordData() *Data {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("TXTRecordData"))
+func (ns *NetService) TXTRecordData() *Data {
+	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("TXTRecordData"))
 	return DataFromID(_r)
 }
 
 // StartMonitoring wraps the corresponding Objective-C method.
-func (x *NetService) StartMonitoring() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startMonitoring"))
+func (ns *NetService) StartMonitoring() {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("startMonitoring"))
 }
 
 // StopMonitoring wraps the corresponding Objective-C method.
-func (x *NetService) StopMonitoring() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopMonitoring"))
+func (ns *NetService) StopMonitoring() {
+	objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("stopMonitoring"))
 }
 
 // IncludesPeerToPeer wraps the corresponding Objective-C method.
-func (x *NetService) IncludesPeerToPeer() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesPeerToPeer"))
+func (ns *NetService) IncludesPeerToPeer() bool {
+	_r := objc.Send[bool](objref.IDOf(ns), objc.RegisterName("includesPeerToPeer"))
 	return _r
 }
 
-// SetIncludesPeerToPeer wraps the corresponding Objective-C method.
-func (x *NetService) SetIncludesPeerToPeer(includesPeerToPeer bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesPeerToPeer:"), includesPeerToPeer)
-}
-
 // Name wraps the corresponding Objective-C method.
-func (x *NetService) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (ns *NetService) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -176,8 +171,8 @@ func (x *NetService) Name() string {
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *NetService) Type() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+func (ns *NetService) Type() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
 	}
@@ -185,8 +180,8 @@ func (x *NetService) Type() string {
 }
 
 // Domain wraps the corresponding Objective-C method.
-func (x *NetService) Domain() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domain"))
+func (ns *NetService) Domain() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("domain"))
 	if _r == 0 {
 		return ""
 	}
@@ -194,8 +189,8 @@ func (x *NetService) Domain() string {
 }
 
 // HostName wraps the corresponding Objective-C method.
-func (x *NetService) HostName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hostName"))
+func (ns *NetService) HostName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("hostName"))
 	if _r == 0 {
 		return ""
 	}
@@ -205,42 +200,13 @@ func (x *NetService) HostName() string {
 // Addresses wraps the corresponding Objective-C method.
 //
 // Addresses returns the collection as a Go slice.
-func (x *NetService) Addresses() []*Data {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addresses"))
+func (ns *NetService) Addresses() []*Data {
+	_arr := objc.Send[objc.ID](objref.IDOf(ns), objc.RegisterName("addresses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Data { return DataFromID(_id) })
 }
 
 // Port wraps the corresponding Objective-C method.
-func (x *NetService) Port() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("port"))
+func (ns *NetService) Port() int {
+	_r := objc.Send[int](objref.IDOf(ns), objc.RegisterName("port"))
 	return _r
 }
-
-// NetServiceable is the interface implemented by [NetService], for mocking and DI.
-type NetServiceable interface {
-	obj.Object
-	WithIncludesPeerToPeer(includesPeerToPeer bool) *NetService
-	WithScriptingProperties(scriptingProperties obj.Object) *NetService
-	ScheduleInRunLoopForMode(aRunLoop *RunLoop, mode *String)
-	RemoveFromRunLoopForMode(aRunLoop *RunLoop, mode *String)
-	Publish()
-	PublishWithOptions(options NetServiceOptions)
-	Resolve()
-	Stop()
-	ResolveWithTimeout(timeout float64)
-	GetInputStreamOutputStream(inputStream *InputStream, outputStream *OutputStream) bool
-	SetTXTRecordData(recordData *Data) bool
-	TXTRecordData() *Data
-	StartMonitoring()
-	StopMonitoring()
-	IncludesPeerToPeer() bool
-	SetIncludesPeerToPeer(includesPeerToPeer bool)
-	Name() string
-	Type() string
-	Domain() string
-	HostName() string
-	Addresses() []*Data
-	Port() int
-}
-
-var _ NetServiceable = (*NetService)(nil)

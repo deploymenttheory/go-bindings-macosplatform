@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,33 +53,23 @@ func NewImageGaussianPyramid() *ImageGaussianPyramid {
 	return imageGaussianPyramidAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageGaussianPyramid) WithOffset(offset mpscore.MPSOffset) *ImageGaussianPyramid {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (igp *ImageGaussianPyramid) WithOffset(offset mpscore.MPSOffset) *ImageGaussianPyramid {
+	objc.Send[objc.ID](objref.IDOf(igp), objc.RegisterName("setOffset:"), offset)
+	return igp
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageGaussianPyramid) WithClipRect(clipRect metal.MTLRegion) *ImageGaussianPyramid {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (igp *ImageGaussianPyramid) WithClipRect(clipRect metal.MTLRegion) *ImageGaussianPyramid {
+	objc.Send[objc.ID](objref.IDOf(igp), objc.RegisterName("setClipRect:"), clipRect)
+	return igp
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageGaussianPyramid) WithLabel(label string) *ImageGaussianPyramid {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (igp *ImageGaussianPyramid) WithLabel(label string) *ImageGaussianPyramid {
+	objc.Send[objc.ID](objref.IDOf(igp), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return igp
 }
-
-// ImageGaussianPyramidable is the interface implemented by [ImageGaussianPyramid], for mocking and DI.
-type ImageGaussianPyramidable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageGaussianPyramid
-	WithClipRect(clipRect metal.MTLRegion) *ImageGaussianPyramid
-	WithLabel(label string) *ImageGaussianPyramid
-}
-
-var _ ImageGaussianPyramidable = (*ImageGaussianPyramid)(nil)
 
 var _ ImagePyramidProvider = (*ImageGaussianPyramid)(nil)
 

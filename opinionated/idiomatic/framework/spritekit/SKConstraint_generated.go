@@ -46,24 +46,24 @@ func constraintAdopt(id objc.ID) *Constraint {
 }
 
 // Description returns the object's -description text.
-func (x *Constraint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Constraint) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Constraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Constraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Constraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Constraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Constraint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Constraint) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewConstraint creates a new Constraint.
@@ -72,49 +72,26 @@ func NewConstraint() *Constraint {
 	return constraintAdopt(_id)
 }
 
-// WithEnabled a Boolean value that specifies whether the constraint is applied.
-func (x *Constraint) WithEnabled(enabled bool) *Constraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that specifies whether the constraint is applied.
+func (c *Constraint) WithEnabled(enabled bool) *Constraint {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setEnabled:"), enabled)
+	return c
 }
 
-// WithReferenceNode the node whose coordinate system should be used to apply the constraint.
-func (x *Constraint) WithReferenceNode(referenceNode NodeProvider) *Constraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReferenceNode:"), objref.IDOf(referenceNode))
-	return x
+// WithReferenceNode sets the node whose coordinate system should be used to apply the constraint.
+func (c *Constraint) WithReferenceNode(referenceNode NodeProvider) *Constraint {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setReferenceNode:"), objref.IDOf(referenceNode))
+	return c
 }
 
 // Enabled wraps the corresponding Objective-C method.
-func (x *Constraint) Enabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enabled"))
+func (c *Constraint) Enabled() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("enabled"))
 	return _r
 }
 
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *Constraint) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-}
-
 // ReferenceNode wraps the corresponding Objective-C method.
-func (x *Constraint) ReferenceNode() *Node {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("referenceNode"))
+func (c *Constraint) ReferenceNode() *Node {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("referenceNode"))
 	return NodeFromID(_r)
 }
-
-// SetReferenceNode wraps the corresponding Objective-C method.
-func (x *Constraint) SetReferenceNode(referenceNode *Node) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReferenceNode:"), objref.IDOf(referenceNode))
-}
-
-// Constraintable is the interface implemented by [Constraint], for mocking and DI.
-type Constraintable interface {
-	obj.Object
-	WithEnabled(enabled bool) *Constraint
-	WithReferenceNode(referenceNode NodeProvider) *Constraint
-	Enabled() bool
-	SetEnabled(enabled bool)
-	ReferenceNode() *Node
-	SetReferenceNode(referenceNode *Node)
-}
-
-var _ Constraintable = (*Constraint)(nil)

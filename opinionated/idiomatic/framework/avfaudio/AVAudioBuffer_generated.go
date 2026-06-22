@@ -48,43 +48,35 @@ func audioBufferAdopt(id objc.ID) *AudioBuffer {
 }
 
 // Description returns the object's -description text.
-func (x *AudioBuffer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ab *AudioBuffer) Description() string {
+	return rt.Description(objref.IDOf(ab))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioBuffer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ab *AudioBuffer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ab), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioBuffer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ab *AudioBuffer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ab), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AudioBuffer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ab *AudioBuffer) String() string {
+	return rt.Description(objref.IDOf(ab))
 }
 
-// Format the format of the audio in the buffer.
-func (x *AudioBuffer) Format() *AudioFormat {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("format"))
+// Format returns the format of the audio in the buffer.
+func (ab *AudioBuffer) Format() *AudioFormat {
+	_r := objc.Send[objc.ID](objref.IDOf(ab), objc.RegisterName("format"))
 	return AudioFormatFromID(_r)
 }
-
-// AudioBufferable is the interface implemented by [AudioBuffer], for mocking and DI.
-type AudioBufferable interface {
-	obj.Object
-	Format() *AudioFormat
-}
-
-var _ AudioBufferable = (*AudioBuffer)(nil)
 
 // isAudioBuffer marks AudioBuffer — and, by embedding promotion, its
 // subclasses — as a member of the AudioBuffer hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AudioBuffer) isAudioBuffer() {}
+func (ab *AudioBuffer) isAudioBuffer() {}
 
 var _ AudioBufferProvider = (*AudioBuffer)(nil)

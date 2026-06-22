@@ -5,13 +5,14 @@
 package coreml
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // DictionaryFeatureProvider is an idiomatic wrapper over the Objective-C class MLDictionaryFeatureProvider.
@@ -48,24 +49,24 @@ func dictionaryFeatureProviderAdopt(id objc.ID) *DictionaryFeatureProvider {
 }
 
 // Description returns the object's -description text.
-func (x *DictionaryFeatureProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dfp *DictionaryFeatureProvider) Description() string {
+	return rt.Description(objref.IDOf(dfp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DictionaryFeatureProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dfp *DictionaryFeatureProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dfp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DictionaryFeatureProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dfp *DictionaryFeatureProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dfp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DictionaryFeatureProvider) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dfp *DictionaryFeatureProvider) String() string {
+	return rt.Description(objref.IDOf(dfp))
 }
 
 // NewDictionaryFeatureProviderWithDictionaryError creates the feature provider based on a dictionary.
@@ -80,22 +81,13 @@ func NewDictionaryFeatureProviderWithDictionaryError(dictionary obj.Object) (res
 }
 
 // ObjectForKeyedSubscript subscript interface for the feature provider to pass through to the dictionary.
-func (x *DictionaryFeatureProvider) ObjectForKeyedSubscript(featureName string) *FeatureValue {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), purego.NSString(featureName))
+func (dfp *DictionaryFeatureProvider) ObjectForKeyedSubscript(featureName string) *FeatureValue {
+	_r := objc.Send[objc.ID](objref.IDOf(dfp), objc.RegisterName("objectForKeyedSubscript:"), purego.NSString(featureName))
 	return FeatureValueFromID(_r)
 }
 
-// Dictionary dictionary holding the feature values
-func (x *DictionaryFeatureProvider) Dictionary() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionary"))
+// Dictionary returns dictionary holding the feature values
+func (dfp *DictionaryFeatureProvider) Dictionary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dfp), objc.RegisterName("dictionary"))
 	return obj.Wrap(_r)
 }
-
-// DictionaryFeatureProviderable is the interface implemented by [DictionaryFeatureProvider], for mocking and DI.
-type DictionaryFeatureProviderable interface {
-	obj.Object
-	ObjectForKeyedSubscript(featureName string) *FeatureValue
-	Dictionary() obj.Object
-}
-
-var _ DictionaryFeatureProviderable = (*DictionaryFeatureProvider)(nil)

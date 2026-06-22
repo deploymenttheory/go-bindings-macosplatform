@@ -47,24 +47,24 @@ func filterShapeAdopt(id objc.ID) *FilterShape {
 }
 
 // Description returns the object's -description text.
-func (x *FilterShape) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fs *FilterShape) Description() string {
+	return rt.Description(objref.IDOf(fs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FilterShape) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fs *FilterShape) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FilterShape) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fs *FilterShape) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FilterShape) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fs *FilterShape) String() string {
+	return rt.Description(objref.IDOf(fs))
 }
 
 // NewFilterShapeWithRect initializes a filter shape object with a rectangle.
@@ -75,57 +75,43 @@ func NewFilterShapeWithRect(r corefoundation.CGRect) *FilterShape {
 }
 
 // TransformByInterior creates a filter shape that results from applying a transform to the current filter shape.
-func (x *FilterShape) TransformByInterior(m corefoundation.CGAffineTransform, flag bool) *FilterShape {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transformBy:interior:"), m, flag)
+func (fs *FilterShape) TransformByInterior(m corefoundation.CGAffineTransform, flag bool) *FilterShape {
+	_r := objc.Send[objc.ID](objref.IDOf(fs), objc.RegisterName("transformBy:interior:"), m, flag)
 	return FilterShapeFromID(_r)
 }
 
 // InsetByXY modifies a filter shape object so that it is inset by the specified x and y values.
-func (x *FilterShape) InsetByXY(dx int, dy int) *FilterShape {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insetByX:Y:"), dx, dy)
+func (fs *FilterShape) InsetByXY(dx int, dy int) *FilterShape {
+	_r := objc.Send[objc.ID](objref.IDOf(fs), objc.RegisterName("insetByX:Y:"), dx, dy)
 	return FilterShapeFromID(_r)
 }
 
 // UnionWith creates a filter shape that results from the union of the current filter shape and another filter shape object.
-func (x *FilterShape) UnionWith(s2 *FilterShape) *FilterShape {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unionWith:"), objref.IDOf(s2))
+func (fs *FilterShape) UnionWith(s2 *FilterShape) *FilterShape {
+	_r := objc.Send[objc.ID](objref.IDOf(fs), objc.RegisterName("unionWith:"), objref.IDOf(s2))
 	return FilterShapeFromID(_r)
 }
 
 // UnionWithRect creates a filter shape that results from the union of the current filter shape and a rectangle.
-func (x *FilterShape) UnionWithRect(r corefoundation.CGRect) *FilterShape {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unionWithRect:"), r)
+func (fs *FilterShape) UnionWithRect(r corefoundation.CGRect) *FilterShape {
+	_r := objc.Send[objc.ID](objref.IDOf(fs), objc.RegisterName("unionWithRect:"), r)
 	return FilterShapeFromID(_r)
 }
 
 // IntersectWith creates a filter shape object that represents the intersection of the current filter shape and the specified filter shape object.
-func (x *FilterShape) IntersectWith(s2 *FilterShape) *FilterShape {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intersectWith:"), objref.IDOf(s2))
+func (fs *FilterShape) IntersectWith(s2 *FilterShape) *FilterShape {
+	_r := objc.Send[objc.ID](objref.IDOf(fs), objc.RegisterName("intersectWith:"), objref.IDOf(s2))
 	return FilterShapeFromID(_r)
 }
 
 // IntersectWithRect creates a filter shape that represents the intersection of the current filter shape and a rectangle.
-func (x *FilterShape) IntersectWithRect(r corefoundation.CGRect) *FilterShape {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intersectWithRect:"), r)
+func (fs *FilterShape) IntersectWithRect(r corefoundation.CGRect) *FilterShape {
+	_r := objc.Send[objc.ID](objref.IDOf(fs), objc.RegisterName("intersectWithRect:"), r)
 	return FilterShapeFromID(_r)
 }
 
 // Extent wraps the corresponding Objective-C method.
-func (x *FilterShape) Extent() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("extent"))
+func (fs *FilterShape) Extent() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(fs), objc.RegisterName("extent"))
 	return _r
 }
-
-// FilterShapeable is the interface implemented by [FilterShape], for mocking and DI.
-type FilterShapeable interface {
-	obj.Object
-	TransformByInterior(m corefoundation.CGAffineTransform, flag bool) *FilterShape
-	InsetByXY(dx int, dy int) *FilterShape
-	UnionWith(s2 *FilterShape) *FilterShape
-	UnionWithRect(r corefoundation.CGRect) *FilterShape
-	IntersectWith(s2 *FilterShape) *FilterShape
-	IntersectWithRect(r corefoundation.CGRect) *FilterShape
-	Extent() corefoundation.CGRect
-}
-
-var _ FilterShapeable = (*FilterShape)(nil)

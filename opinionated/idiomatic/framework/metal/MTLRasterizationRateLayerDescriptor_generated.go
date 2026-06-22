@@ -46,24 +46,24 @@ func rasterizationRateLayerDescriptorAdopt(id objc.ID) *RasterizationRateLayerDe
 }
 
 // Description returns the object's -description text.
-func (x *RasterizationRateLayerDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rrld *RasterizationRateLayerDescriptor) Description() string {
+	return rt.Description(objref.IDOf(rrld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RasterizationRateLayerDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rrld *RasterizationRateLayerDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rrld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RasterizationRateLayerDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rrld *RasterizationRateLayerDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rrld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RasterizationRateLayerDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rrld *RasterizationRateLayerDescriptor) String() string {
+	return rt.Description(objref.IDOf(rrld))
 }
 
 // NewRasterizationRateLayerDescriptor creates a new RasterizationRateLayerDescriptor.
@@ -73,22 +73,13 @@ func NewRasterizationRateLayerDescriptor() *RasterizationRateLayerDescriptor {
 }
 
 // Horizontal provide convenient bounds-checked access to the quality samples stored in the descriptor.
-func (x *RasterizationRateLayerDescriptor) Horizontal() *RasterizationRateSampleArray {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("horizontal"))
+func (rrld *RasterizationRateLayerDescriptor) Horizontal() *RasterizationRateSampleArray {
+	_r := objc.Send[objc.ID](objref.IDOf(rrld), objc.RegisterName("horizontal"))
 	return RasterizationRateSampleArrayFromID(_r)
 }
 
 // Vertical provide convenient bounds-checked access to the quality samples stored in the descriptor.
-func (x *RasterizationRateLayerDescriptor) Vertical() *RasterizationRateSampleArray {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vertical"))
+func (rrld *RasterizationRateLayerDescriptor) Vertical() *RasterizationRateSampleArray {
+	_r := objc.Send[objc.ID](objref.IDOf(rrld), objc.RegisterName("vertical"))
 	return RasterizationRateSampleArrayFromID(_r)
 }
-
-// RasterizationRateLayerDescriptorable is the interface implemented by [RasterizationRateLayerDescriptor], for mocking and DI.
-type RasterizationRateLayerDescriptorable interface {
-	obj.Object
-	Horizontal() *RasterizationRateSampleArray
-	Vertical() *RasterizationRateSampleArray
-}
-
-var _ RasterizationRateLayerDescriptorable = (*RasterizationRateLayerDescriptor)(nil)

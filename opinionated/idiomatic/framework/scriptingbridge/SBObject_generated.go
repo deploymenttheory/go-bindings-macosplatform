@@ -48,24 +48,24 @@ func objectAdopt(id objc.ID) *Object {
 }
 
 // Description returns the object's -description text.
-func (x *Object) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Object) Description() string {
+	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Object) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (o *Object) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Object) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (o *Object) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Object) String() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Object) String() string {
+	return rt.Description(objref.IDOf(o))
 }
 
 // NewObjectWithProperties returns an instance of an SBObject subclass initialized with the specified properties.
@@ -89,43 +89,32 @@ func NewObjectWithElementCodePropertiesData(code int, properties obj.Object, dat
 	return objectAdopt(_id)
 }
 
-// Get forces evaluation of the receiver, causing the real object to be returned immediately.
-func (x *Object) Get() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("get"))
+// Get returns forces evaluation of the receiver, causing the real object to be returned immediately.
+func (o *Object) Get() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("get"))
 	return obj.Wrap(_r)
 }
 
 // PropertyWithCode returns an object representing the specified property of the receiver.
-func (x *Object) PropertyWithCode(code int) *Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyWithCode:"), code)
+func (o *Object) PropertyWithCode(code int) *Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("propertyWithCode:"), code)
 	return ObjectFromID(_r)
 }
 
 // ElementArrayWithCode returns an array containing every child of the receiver with the given class-type code.
-func (x *Object) ElementArrayWithCode(code int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementArrayWithCode:"), code)
+func (o *Object) ElementArrayWithCode(code int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("elementArrayWithCode:"), code)
 	return obj.Wrap(_r)
 }
 
 // SetTo sets the receiver to a specified value.
-func (x *Object) SetTo(value obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTo:"), objref.IDOf(value))
+func (o *Object) SetTo(value obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setTo:"), objref.IDOf(value))
 }
-
-// Objectable is the interface implemented by [Object], for mocking and DI.
-type Objectable interface {
-	obj.Object
-	Get() obj.Object
-	PropertyWithCode(code int) *Object
-	ElementArrayWithCode(code int) obj.Object
-	SetTo(value obj.Object)
-}
-
-var _ Objectable = (*Object)(nil)
 
 // isObject marks Object — and, by embedding promotion, its
 // subclasses — as a member of the Object hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Object) isObject() {}
+func (o *Object) isObject() {}
 
 var _ ObjectProvider = (*Object)(nil)

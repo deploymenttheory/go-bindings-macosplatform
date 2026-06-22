@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,54 +52,41 @@ func NewMatrixSolveCholesky() *MatrixSolveCholesky {
 	return matrixSolveCholeskyAdopt(_id)
 }
 
-// WithPrimarySourceMatrixOrigin the origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixSolveCholesky) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveCholesky {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceMatrixOrigin:"), primarySourceMatrixOrigin)
-	return x
+// WithPrimarySourceMatrixOrigin sets the origin, relative to [0, 0] in the primary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (msc *MatrixSolveCholesky) WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveCholesky {
+	objc.Send[objc.ID](objref.IDOf(msc), objc.RegisterName("setPrimarySourceMatrixOrigin:"), primarySourceMatrixOrigin)
+	return msc
 }
 
-// WithSecondarySourceMatrixOrigin the origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixSolveCholesky) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveCholesky {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceMatrixOrigin:"), secondarySourceMatrixOrigin)
-	return x
+// WithSecondarySourceMatrixOrigin sets the origin, relative to [0, 0] in the secondary source matrix, at which to start reading values.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (msc *MatrixSolveCholesky) WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveCholesky {
+	objc.Send[objc.ID](objref.IDOf(msc), objc.RegisterName("setSecondarySourceMatrixOrigin:"), secondarySourceMatrixOrigin)
+	return msc
 }
 
-// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
-func (x *MatrixSolveCholesky) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveCholesky {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
-	return x
+// WithResultMatrixOrigin sets the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.  The z value must be 0.
+func (msc *MatrixSolveCholesky) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveCholesky {
+	objc.Send[objc.ID](objref.IDOf(msc), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+	return msc
 }
 
-// WithBatchStart the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
-func (x *MatrixSolveCholesky) WithBatchStart(batchStart int) *MatrixSolveCholesky {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchStart:"), batchStart)
-	return x
+// WithBatchStart sets the index of the first matrix in the batch.  This property is modifiable and defaults to 0 at initialization time.  If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel.
+func (msc *MatrixSolveCholesky) WithBatchStart(batchStart int) *MatrixSolveCholesky {
+	objc.Send[objc.ID](objref.IDOf(msc), objc.RegisterName("setBatchStart:"), batchStart)
+	return msc
 }
 
-// WithBatchSize the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
-func (x *MatrixSolveCholesky) WithBatchSize(batchSize int) *MatrixSolveCholesky {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBatchSize:"), batchSize)
-	return x
+// WithBatchSize sets the number of matrices in the batch to process.  This property is modifiable and by default allows all matrices available at encoding time to be processed.  If a single matrix should be processed set this value to 1.
+func (msc *MatrixSolveCholesky) WithBatchSize(batchSize int) *MatrixSolveCholesky {
+	objc.Send[objc.ID](objref.IDOf(msc), objc.RegisterName("setBatchSize:"), batchSize)
+	return msc
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *MatrixSolveCholesky) WithLabel(label string) *MatrixSolveCholesky {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (msc *MatrixSolveCholesky) WithLabel(label string) *MatrixSolveCholesky {
+	objc.Send[objc.ID](objref.IDOf(msc), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return msc
 }
-
-// MatrixSolveCholeskyable is the interface implemented by [MatrixSolveCholesky], for mocking and DI.
-type MatrixSolveCholeskyable interface {
-	obj.Object
-	WithPrimarySourceMatrixOrigin(primarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveCholesky
-	WithSecondarySourceMatrixOrigin(secondarySourceMatrixOrigin metal.MTLOrigin) *MatrixSolveCholesky
-	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSolveCholesky
-	WithBatchStart(batchStart int) *MatrixSolveCholesky
-	WithBatchSize(batchSize int) *MatrixSolveCholesky
-	WithLabel(label string) *MatrixSolveCholesky
-}
-
-var _ MatrixSolveCholeskyable = (*MatrixSolveCholesky)(nil)
 
 var _ MatrixBinaryKernelProvider = (*MatrixSolveCholesky)(nil)
 

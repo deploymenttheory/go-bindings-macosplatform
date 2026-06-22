@@ -6,6 +6,7 @@ package avfoundation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func captionConversionValidatorAdopt(id objc.ID) *CaptionConversionValidator {
 }
 
 // Description returns the object's -description text.
-func (x *CaptionConversionValidator) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ccv *CaptionConversionValidator) Description() string {
+	return rt.Description(objref.IDOf(ccv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptionConversionValidator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ccv *CaptionConversionValidator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ccv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptionConversionValidator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ccv *CaptionConversionValidator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ccv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptionConversionValidator) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ccv *CaptionConversionValidator) String() string {
+	return rt.Description(objref.IDOf(ccv))
 }
 
 // NewCaptionConversionValidator creates a new CaptionConversionValidator.
@@ -76,7 +77,7 @@ func NewCaptionConversionValidator() *CaptionConversionValidator {
 // ValidateCaptionConversionWithWarningHandler validates the object’s captions.
 //
 // ValidateCaptionConversionWithWarningHandler blocks until the operation completes or ctx is cancelled.
-func (x *CaptionConversionValidator) ValidateCaptionConversionWithWarningHandler(ctx context.Context) (result *CaptionConversionWarning, err error) {
+func (ccv *CaptionConversionValidator) ValidateCaptionConversionWithWarningHandler(ctx context.Context) (result *CaptionConversionWarning, err error) {
 	type _result struct {
 		val *CaptionConversionWarning
 		err error
@@ -87,7 +88,7 @@ func (x *CaptionConversionValidator) ValidateCaptionConversionWithWarningHandler
 		_o.val = CaptionConversionWarningFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validateCaptionConversionWithWarningHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(ccv), objc.RegisterName("validateCaptionConversionWithWarningHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -98,40 +99,28 @@ func (x *CaptionConversionValidator) ValidateCaptionConversionWithWarningHandler
 }
 
 // StopValidating stops the active validation operation.
-func (x *CaptionConversionValidator) StopValidating() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopValidating"))
+func (ccv *CaptionConversionValidator) StopValidating() {
+	objc.Send[objc.ID](objref.IDOf(ccv), objc.RegisterName("stopValidating"))
 }
 
 // Status indicates the status of the validation.
-func (x *CaptionConversionValidator) Status() CaptionConversionValidatorStatus {
-	_r := objc.Send[CaptionConversionValidatorStatus](objref.IDOf(x), objc.RegisterName("status"))
+func (ccv *CaptionConversionValidator) Status() CaptionConversionValidatorStatus {
+	_r := objc.Send[CaptionConversionValidatorStatus](objref.IDOf(ccv), objc.RegisterName("status"))
 	return _r
 }
 
-// Captions the array of captions to be validated for the specified conversion operation.
+// Captions returns the array of captions to be validated for the specified conversion operation.
 //
 // Captions returns the collection as a Go slice.
-func (x *CaptionConversionValidator) Captions() []*Caption {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("captions"))
+func (ccv *CaptionConversionValidator) Captions() []*Caption {
+	_arr := objc.Send[objc.ID](objref.IDOf(ccv), objc.RegisterName("captions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Caption { return CaptionFromID(_id) })
 }
 
 // Warnings provides the collection of warnings for problems that have been encountered. While the value of status is AVCaptionConversionValidatorStatusValidating, the count of warnings may increase.
 //
 // Warnings returns the collection as a Go slice.
-func (x *CaptionConversionValidator) Warnings() []*CaptionConversionWarning {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("warnings"))
+func (ccv *CaptionConversionValidator) Warnings() []*CaptionConversionWarning {
+	_arr := objc.Send[objc.ID](objref.IDOf(ccv), objc.RegisterName("warnings"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CaptionConversionWarning { return CaptionConversionWarningFromID(_id) })
 }
-
-// CaptionConversionValidatorable is the interface implemented by [CaptionConversionValidator], for mocking and DI.
-type CaptionConversionValidatorable interface {
-	obj.Object
-	ValidateCaptionConversionWithWarningHandler(ctx context.Context) (*CaptionConversionWarning, error)
-	StopValidating()
-	Status() CaptionConversionValidatorStatus
-	Captions() []*Caption
-	Warnings() []*CaptionConversionWarning
-}
-
-var _ CaptionConversionValidatorable = (*CaptionConversionValidator)(nil)

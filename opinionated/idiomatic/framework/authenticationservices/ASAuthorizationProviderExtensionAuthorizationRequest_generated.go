@@ -46,24 +46,24 @@ func authorizationProviderExtensionAuthorizationRequestAdopt(id objc.ID) *Author
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) Description() string {
+	return rt.Description(objref.IDOf(apear))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(apear), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(apear), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) String() string {
+	return rt.Description(objref.IDOf(apear))
 }
 
 // NewAuthorizationProviderExtensionAuthorizationRequest creates a new AuthorizationProviderExtensionAuthorizationRequest.
@@ -73,154 +73,127 @@ func NewAuthorizationProviderExtensionAuthorizationRequest() *AuthorizationProvi
 }
 
 // DoNotHandle indicates the request wasn’t handled.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) DoNotHandle() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("doNotHandle"))
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) DoNotHandle() {
+	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("doNotHandle"))
 }
 
 // Cancel cancels the request, for example, because the user taps a cancel button.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("cancel"))
 }
 
 // Complete indicates the requested authorization completed with no output.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) Complete() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("complete"))
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) Complete() {
+	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("complete"))
 }
 
 // CompleteWithHTTPAuthorizationHeaders indicates the requested authorization succeeded with tokens in the HTTP headers.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPAuthorizationHeaders(httpAuthorizationHeaders obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeWithHTTPAuthorizationHeaders:"), objref.IDOf(httpAuthorizationHeaders))
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPAuthorizationHeaders(httpAuthorizationHeaders obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("completeWithHTTPAuthorizationHeaders:"), objref.IDOf(httpAuthorizationHeaders))
 }
 
-// CompleteWithHTTPResponseHttpBody indicates the requested authorization succeeded with an HTTP response.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPResponseHttpBody(httpResponse obj.Object, httpBody obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeWithHTTPResponse:httpBody:"), objref.IDOf(httpResponse), objref.IDOf(httpBody))
+// CompleteWithHTTPResponseHTTPBody indicates the requested authorization succeeded with an HTTP response.
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithHTTPResponseHTTPBody(httpResponse obj.Object, httpBody obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("completeWithHTTPResponse:httpBody:"), objref.IDOf(httpResponse), objref.IDOf(httpBody))
 }
 
 // CompleteWithAuthorizationResult call when authorization succeeded with
-func (x *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithAuthorizationResult(authorizationResult *AuthorizationProviderExtensionAuthorizationResult) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeWithAuthorizationResult:"), objref.IDOf(authorizationResult))
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) CompleteWithAuthorizationResult(authorizationResult *AuthorizationProviderExtensionAuthorizationResult) {
+	objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("completeWithAuthorizationResult:"), objref.IDOf(authorizationResult))
 }
 
-// Url request URL with all components.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) Url() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+// URL returns request URL with all components.
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("url"))
 	return obj.Wrap(_r)
 }
 
-// RequestedOperation operation to be executed by the extension.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) RequestedOperation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestedOperation"))
+// RequestedOperation returns operation to be executed by the extension.
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) RequestedOperation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("requestedOperation"))
 	return obj.Wrap(_r)
 }
 
-// HttpHeaders request HTTP headers.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) HttpHeaders() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("httpHeaders"))
+// HTTPHeaders returns request HTTP headers.
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) HTTPHeaders() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("httpHeaders"))
 	return obj.Wrap(_r)
 }
 
-// HttpBody request body.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) HttpBody() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("httpBody"))
+// HTTPBody returns request body.
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) HTTPBody() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("httpBody"))
 	return obj.Wrap(_r)
 }
 
-// Realm realm.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) Realm() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("realm"))
+// Realm returns realm.
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) Realm() string {
+	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("realm"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ExtensionData extension data from extension configuration provided by MDM stored as a property-list.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) ExtensionData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionData"))
+// ExtensionData returns extension data from extension configuration provided by MDM stored as a property-list.
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) ExtensionData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("extensionData"))
 	return obj.Wrap(_r)
 }
 
-// CallerBundleIdentifier identification of the calling application.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) CallerBundleIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callerBundleIdentifier"))
+// CallerBundleIdentifier returns identification of the calling application.
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) CallerBundleIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("callerBundleIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// AuthorizationOptions authorization options.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) AuthorizationOptions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorizationOptions"))
+// AuthorizationOptions returns authorization options.
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) AuthorizationOptions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("authorizationOptions"))
 	return obj.Wrap(_r)
 }
 
-// IsCallerManaged indicates whether the calling application is managed.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) IsCallerManaged() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCallerManaged"))
+// IsCallerManaged reports whether the calling application is managed.
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) IsCallerManaged() bool {
+	_r := objc.Send[bool](objref.IDOf(apear), objc.RegisterName("isCallerManaged"))
 	return _r
 }
 
-// CallerTeamIdentifier team identifier of the calling application.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) CallerTeamIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callerTeamIdentifier"))
+// CallerTeamIdentifier returns team identifier of the calling application.
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) CallerTeamIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("callerTeamIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// LocalizedCallerDisplayName localized display name of the calling application.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) LocalizedCallerDisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedCallerDisplayName"))
+// LocalizedCallerDisplayName returns localized display name of the calling application.
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) LocalizedCallerDisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("localizedCallerDisplayName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// CallerAuditToken audit token of the calling application.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) CallerAuditToken() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callerAuditToken"))
+// CallerAuditToken returns audit token of the calling application.
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) CallerAuditToken() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("callerAuditToken"))
 	return obj.Wrap(_r)
 }
 
-// IsUserInterfaceEnabled indicates whether the authorization user interface is enabled. If user interface is not enabled, then the authorization will fail with
-func (x *AuthorizationProviderExtensionAuthorizationRequest) IsUserInterfaceEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUserInterfaceEnabled"))
+// IsUserInterfaceEnabled reports whether the authorization user interface is enabled. If user interface is not enabled, then the authorization will fail with
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) IsUserInterfaceEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(apear), objc.RegisterName("isUserInterfaceEnabled"))
 	return _r
 }
 
-// LoginManager the login manager to interface with the Platform SSO configuration.
-func (x *AuthorizationProviderExtensionAuthorizationRequest) LoginManager() *AuthorizationProviderExtensionLoginManager {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loginManager"))
+// LoginManager returns the login manager to interface with the Platform SSO configuration.
+func (apear *AuthorizationProviderExtensionAuthorizationRequest) LoginManager() *AuthorizationProviderExtensionLoginManager {
+	_r := objc.Send[objc.ID](objref.IDOf(apear), objc.RegisterName("loginManager"))
 	return AuthorizationProviderExtensionLoginManagerFromID(_r)
 }
-
-// AuthorizationProviderExtensionAuthorizationRequestable is the interface implemented by [AuthorizationProviderExtensionAuthorizationRequest], for mocking and DI.
-type AuthorizationProviderExtensionAuthorizationRequestable interface {
-	obj.Object
-	DoNotHandle()
-	Cancel()
-	Complete()
-	CompleteWithHTTPAuthorizationHeaders(httpAuthorizationHeaders obj.Object)
-	CompleteWithHTTPResponseHttpBody(httpResponse obj.Object, httpBody obj.Object)
-	CompleteWithAuthorizationResult(authorizationResult *AuthorizationProviderExtensionAuthorizationResult)
-	Url() obj.Object
-	RequestedOperation() obj.Object
-	HttpHeaders() obj.Object
-	HttpBody() obj.Object
-	Realm() string
-	ExtensionData() obj.Object
-	CallerBundleIdentifier() string
-	AuthorizationOptions() obj.Object
-	IsCallerManaged() bool
-	CallerTeamIdentifier() string
-	LocalizedCallerDisplayName() string
-	CallerAuditToken() obj.Object
-	IsUserInterfaceEnabled() bool
-	LoginManager() *AuthorizationProviderExtensionLoginManager
-}
-
-var _ AuthorizationProviderExtensionAuthorizationRequestable = (*AuthorizationProviderExtensionAuthorizationRequest)(nil)

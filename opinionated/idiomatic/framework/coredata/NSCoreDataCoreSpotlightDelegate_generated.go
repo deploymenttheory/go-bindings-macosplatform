@@ -6,6 +6,7 @@ package coredata
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func coreDataCoreSpotlightDelegateAdopt(id objc.ID) *CoreDataCoreSpotlightDelega
 }
 
 // Description returns the object's -description text.
-func (x *CoreDataCoreSpotlightDelegate) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cdcsd *CoreDataCoreSpotlightDelegate) Description() string {
+	return rt.Description(objref.IDOf(cdcsd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CoreDataCoreSpotlightDelegate) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cdcsd *CoreDataCoreSpotlightDelegate) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cdcsd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CoreDataCoreSpotlightDelegate) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cdcsd *CoreDataCoreSpotlightDelegate) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cdcsd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CoreDataCoreSpotlightDelegate) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cdcsd *CoreDataCoreSpotlightDelegate) String() string {
+	return rt.Description(objref.IDOf(cdcsd))
 }
 
 // NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionCoordinator creates a Core Spotlight delegate with the specified store description and coordinator.
@@ -83,8 +84,8 @@ func NewCoreDataCoreSpotlightDelegateForStoreWithDescriptionModel(description *P
 }
 
 // DomainIdentifier returns the domain identifier.
-func (x *CoreDataCoreSpotlightDelegate) DomainIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("domainIdentifier"))
+func (cdcsd *CoreDataCoreSpotlightDelegate) DomainIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cdcsd), objc.RegisterName("domainIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -92,8 +93,8 @@ func (x *CoreDataCoreSpotlightDelegate) DomainIdentifier() string {
 }
 
 // IndexName returns the index’s name.
-func (x *CoreDataCoreSpotlightDelegate) IndexName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexName"))
+func (cdcsd *CoreDataCoreSpotlightDelegate) IndexName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cdcsd), objc.RegisterName("indexName"))
 	if _r == 0 {
 		return ""
 	}
@@ -101,26 +102,26 @@ func (x *CoreDataCoreSpotlightDelegate) IndexName() string {
 }
 
 // StartSpotlightIndexing starts the indexing of the store’s entities.
-func (x *CoreDataCoreSpotlightDelegate) StartSpotlightIndexing() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startSpotlightIndexing"))
+func (cdcsd *CoreDataCoreSpotlightDelegate) StartSpotlightIndexing() {
+	objc.Send[objc.ID](objref.IDOf(cdcsd), objc.RegisterName("startSpotlightIndexing"))
 }
 
 // StopSpotlightIndexing stops the indexing of the store’s entities.
-func (x *CoreDataCoreSpotlightDelegate) StopSpotlightIndexing() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopSpotlightIndexing"))
+func (cdcsd *CoreDataCoreSpotlightDelegate) StopSpotlightIndexing() {
+	objc.Send[objc.ID](objref.IDOf(cdcsd), objc.RegisterName("stopSpotlightIndexing"))
 }
 
 // DeleteSpotlightIndex deletes all searchable items from the configured index.
 //
 // DeleteSpotlightIndex blocks until the operation completes or ctx is cancelled.
-func (x *CoreDataCoreSpotlightDelegate) DeleteSpotlightIndex(ctx context.Context) error {
+func (cdcsd *CoreDataCoreSpotlightDelegate) DeleteSpotlightIndex(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteSpotlightIndexWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(cdcsd), objc.RegisterName("deleteSpotlightIndexWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -130,20 +131,20 @@ func (x *CoreDataCoreSpotlightDelegate) DeleteSpotlightIndex(ctx context.Context
 }
 
 // AttributeSetForObject returns the searchable attributes for the specified managed object.
-func (x *CoreDataCoreSpotlightDelegate) AttributeSetForObject(object *ManagedObject) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeSetForObject:"), objref.IDOf(object))
+func (cdcsd *CoreDataCoreSpotlightDelegate) AttributeSetForObject(object *ManagedObject) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cdcsd), objc.RegisterName("attributeSetForObject:"), objref.IDOf(object))
 	return obj.Wrap(_r)
 }
 
 // SearchableIndexReindexAllSearchableItemsWithAcknowledgementHandler reindexes all searchable items and clears any local state.
 //
 // SearchableIndexReindexAllSearchableItemsWithAcknowledgementHandler blocks until the operation completes or ctx is cancelled.
-func (x *CoreDataCoreSpotlightDelegate) SearchableIndexReindexAllSearchableItemsWithAcknowledgementHandler(ctx context.Context, searchableIndex obj.Object) error {
+func (cdcsd *CoreDataCoreSpotlightDelegate) SearchableIndexReindexAllSearchableItemsWithAcknowledgementHandler(ctx context.Context, searchableIndex obj.Object) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchableIndex:reindexAllSearchableItemsWithAcknowledgementHandler:"), objref.IDOf(searchableIndex), _block)
+	objc.Send[objc.ID](objref.IDOf(cdcsd), objc.RegisterName("searchableIndex:reindexAllSearchableItemsWithAcknowledgementHandler:"), objref.IDOf(searchableIndex), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -155,12 +156,12 @@ func (x *CoreDataCoreSpotlightDelegate) SearchableIndexReindexAllSearchableItems
 // SearchableIndexReindexSearchableItemsWithIdentifiersAcknowledgementHandler reindexes the searchable items for the specified identifiers.
 //
 // SearchableIndexReindexSearchableItemsWithIdentifiersAcknowledgementHandler blocks until the operation completes or ctx is cancelled.
-func (x *CoreDataCoreSpotlightDelegate) SearchableIndexReindexSearchableItemsWithIdentifiersAcknowledgementHandler(ctx context.Context, searchableIndex obj.Object, identifiers []string) error {
+func (cdcsd *CoreDataCoreSpotlightDelegate) SearchableIndexReindexSearchableItemsWithIdentifiersAcknowledgementHandler(ctx context.Context, searchableIndex obj.Object, identifiers []string) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchableIndex:reindexSearchableItemsWithIdentifiers:acknowledgementHandler:"), objref.IDOf(searchableIndex), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
+	objc.Send[objc.ID](objref.IDOf(cdcsd), objc.RegisterName("searchableIndex:reindexSearchableItemsWithIdentifiers:acknowledgementHandler:"), objref.IDOf(searchableIndex), purego.SliceToNSArray(identifiers, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -170,23 +171,7 @@ func (x *CoreDataCoreSpotlightDelegate) SearchableIndexReindexSearchableItemsWit
 }
 
 // IsIndexingEnabled wraps the corresponding Objective-C method.
-func (x *CoreDataCoreSpotlightDelegate) IsIndexingEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIndexingEnabled"))
+func (cdcsd *CoreDataCoreSpotlightDelegate) IsIndexingEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cdcsd), objc.RegisterName("isIndexingEnabled"))
 	return _r
 }
-
-// CoreDataCoreSpotlightDelegateable is the interface implemented by [CoreDataCoreSpotlightDelegate], for mocking and DI.
-type CoreDataCoreSpotlightDelegateable interface {
-	obj.Object
-	DomainIdentifier() string
-	IndexName() string
-	StartSpotlightIndexing()
-	StopSpotlightIndexing()
-	DeleteSpotlightIndex(ctx context.Context) error
-	AttributeSetForObject(object *ManagedObject) obj.Object
-	SearchableIndexReindexAllSearchableItemsWithAcknowledgementHandler(ctx context.Context, searchableIndex obj.Object) error
-	SearchableIndexReindexSearchableItemsWithIdentifiersAcknowledgementHandler(ctx context.Context, searchableIndex obj.Object, identifiers []string) error
-	IsIndexingEnabled() bool
-}
-
-var _ CoreDataCoreSpotlightDelegateable = (*CoreDataCoreSpotlightDelegate)(nil)

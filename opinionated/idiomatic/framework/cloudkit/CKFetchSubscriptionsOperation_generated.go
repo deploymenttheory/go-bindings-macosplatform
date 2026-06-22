@@ -59,98 +59,74 @@ func NewFetchSubscriptionsOperationWithSubscriptionIDs(subscriptionIDs []obj.Obj
 	return fetchSubscriptionsOperationAdopt(_id)
 }
 
-// WithSubscriptionIDs the IDs of the subscriptions to fetch.
-func (x *FetchSubscriptionsOperation) WithSubscriptionIDs(items ...obj.Object) *FetchSubscriptionsOperation {
+// WithSubscriptionIDs sets the IDs of the subscriptions to fetch.
+func (fso *FetchSubscriptionsOperation) WithSubscriptionIDs(items ...obj.Object) *FetchSubscriptionsOperation {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionIDs:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("setSubscriptionIDs:"), _arr)
+	return fso
 }
 
-// WithDatabase the database that the operation uses.
-func (x *FetchSubscriptionsOperation) WithDatabase(database *Database) *FetchSubscriptionsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDatabase:"), objref.IDOf(database))
-	return x
+// WithDatabase sets the database that the operation uses.
+func (fso *FetchSubscriptionsOperation) WithDatabase(database *Database) *FetchSubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("setDatabase:"), objref.IDOf(database))
+	return fso
 }
 
-// WithConfiguration the operation’s configuration.
-func (x *FetchSubscriptionsOperation) WithConfiguration(configuration *OperationConfiguration) *FetchSubscriptionsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
-	return x
+// WithConfiguration sets the operation’s configuration.
+func (fso *FetchSubscriptionsOperation) WithConfiguration(configuration *OperationConfiguration) *FetchSubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
+	return fso
 }
 
-// WithGroup the operation’s group.
-func (x *FetchSubscriptionsOperation) WithGroup(group *OperationGroup) *FetchSubscriptionsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
-	return x
+// WithGroup sets the operation’s group.
+func (fso *FetchSubscriptionsOperation) WithGroup(group *OperationGroup) *FetchSubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("setGroup:"), objref.IDOf(group))
+	return fso
 }
 
-// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
-func (x *FetchSubscriptionsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchSubscriptionsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
-	return x
+// WithLongLivedOperationWasPersistedBlock sets the closure to execute when the server begins to store callbacks for the long-lived operation.
+func (fso *FetchSubscriptionsOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchSubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
+	return fso
 }
 
-// WithContainer the operation's container.
-func (x *FetchSubscriptionsOperation) WithContainer(container *Container) *FetchSubscriptionsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
-	return x
+// WithContainer sets the operation's container.
+func (fso *FetchSubscriptionsOperation) WithContainer(container *Container) *FetchSubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("setContainer:"), objref.IDOf(container))
+	return fso
 }
 
-// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
-func (x *FetchSubscriptionsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchSubscriptionsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
-	return x
+// WithAllowsCellularAccess sets a Boolean value that indicates whether the operation can send data over the cellular network.
+func (fso *FetchSubscriptionsOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *FetchSubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
+	return fso
 }
 
-// WithLongLived a Boolean value that indicates whether the operation is long-lived.
-func (x *FetchSubscriptionsOperation) WithLongLived(longLived bool) *FetchSubscriptionsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
-	return x
+// WithLongLived sets a Boolean value that indicates whether the operation is long-lived.
+func (fso *FetchSubscriptionsOperation) WithLongLived(longLived bool) *FetchSubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("setLongLived:"), longLived)
+	return fso
 }
 
-// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
-func (x *FetchSubscriptionsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchSubscriptionsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
-	return x
+// WithTimeoutIntervalForRequest sets the timeout interval when waiting for additional data.
+func (fso *FetchSubscriptionsOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchSubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
+	return fso
 }
 
-// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
-func (x *FetchSubscriptionsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchSubscriptionsOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
-	return x
+// WithTimeoutIntervalForResource sets the maximum amount of time that a resource request can use.
+func (fso *FetchSubscriptionsOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchSubscriptionsOperation {
+	objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
+	return fso
 }
 
-// SubscriptionIDs the IDs of the subscriptions to fetch. Use this property to view or change the IDs of the subscriptions to fetch. Each element of the array is a string that represents the ID of a subscription. If you intend to modify this property's value, do so before you execute the operation or submit it to a queue. If you use the “CKFetchSubscriptionsOperation/fetchAllSubscriptionsOperation()“ method to create the operation, CloudKit ignores this property's value and sets it to `nil`.
+// SubscriptionIDs returns the IDs of the subscriptions to fetch. Use this property to view or change the IDs of the subscriptions to fetch. Each element of the array is a string that represents the ID of a subscription. If you intend to modify this property's value, do so before you execute the operation or submit it to a queue. If you use the “CKFetchSubscriptionsOperation/fetchAllSubscriptionsOperation()“ method to create the operation, CloudKit ignores this property's value and sets it to `nil`.
 //
 // SubscriptionIDs returns the collection as a Go slice.
-func (x *FetchSubscriptionsOperation) SubscriptionIDs() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionIDs"))
+func (fso *FetchSubscriptionsOperation) SubscriptionIDs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(fso), objc.RegisterName("subscriptionIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// SetSubscriptionIDs wraps the corresponding Objective-C method.
-func (x *FetchSubscriptionsOperation) SetSubscriptionIDs(subscriptionIDs []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionIDs:"), purego.SliceToNSArray(subscriptionIDs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// FetchSubscriptionsOperationable is the interface implemented by [FetchSubscriptionsOperation], for mocking and DI.
-type FetchSubscriptionsOperationable interface {
-	obj.Object
-	WithSubscriptionIDs(items ...obj.Object) *FetchSubscriptionsOperation
-	WithDatabase(database *Database) *FetchSubscriptionsOperation
-	WithConfiguration(configuration *OperationConfiguration) *FetchSubscriptionsOperation
-	WithGroup(group *OperationGroup) *FetchSubscriptionsOperation
-	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *FetchSubscriptionsOperation
-	WithContainer(container *Container) *FetchSubscriptionsOperation
-	WithAllowsCellularAccess(allowsCellularAccess bool) *FetchSubscriptionsOperation
-	WithLongLived(longLived bool) *FetchSubscriptionsOperation
-	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *FetchSubscriptionsOperation
-	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *FetchSubscriptionsOperation
-	SubscriptionIDs() []obj.Object
-	SetSubscriptionIDs(subscriptionIDs []obj.Object)
-}
-
-var _ FetchSubscriptionsOperationable = (*FetchSubscriptionsOperation)(nil)
 
 var _ DatabaseOperationProvider = (*FetchSubscriptionsOperation)(nil)
 

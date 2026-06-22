@@ -6,6 +6,7 @@ package securityui
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func certificatePresentationAdopt(id objc.ID) *CertificatePresentation {
 }
 
 // Description returns the object's -description text.
-func (x *CertificatePresentation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cp *CertificatePresentation) Description() string {
+	return rt.Description(objref.IDOf(cp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CertificatePresentation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cp *CertificatePresentation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CertificatePresentation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cp *CertificatePresentation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CertificatePresentation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cp *CertificatePresentation) String() string {
+	return rt.Description(objref.IDOf(cp))
 }
 
 // NewCertificatePresentationWithTrust initialize the certificate presentation with a certificate trust reference.
@@ -74,33 +75,33 @@ func NewCertificatePresentationWithTrust(trust obj.Object) *CertificatePresentat
 	return certificatePresentationAdopt(_id)
 }
 
-// WithTitle title string to be displayed. If no title is provided, a default title will be used.
-func (x *CertificatePresentation) WithTitle(title string) *CertificatePresentation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets title string to be displayed. If no title is provided, a default title will be used.
+func (cp *CertificatePresentation) WithTitle(title string) *CertificatePresentation {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return cp
 }
 
-// WithMessage message string to be displayed. If no message is provided, a default message will be used.
-func (x *CertificatePresentation) WithMessage(message string) *CertificatePresentation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessage:"), purego.NSString(message))
-	return x
+// WithMessage sets message string to be displayed. If no message is provided, a default message will be used.
+func (cp *CertificatePresentation) WithMessage(message string) *CertificatePresentation {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setMessage:"), purego.NSString(message))
+	return cp
 }
 
-// WithHelpURL the URL that will be opened by clicking the “Learn More” button.
-func (x *CertificatePresentation) WithHelpURL(helpURL string) *CertificatePresentation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpURL:"), rt.FileURL(helpURL))
-	return x
+// WithHelpURL sets the URL that will be opened by clicking the “Learn More” button.
+func (cp *CertificatePresentation) WithHelpURL(helpURL string) *CertificatePresentation {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setHelpURL:"), rt.FileURL(helpURL))
+	return cp
 }
 
 // PresentSheetInWindowDismissHandler wraps the corresponding Objective-C method.
 //
 // PresentSheetInWindowDismissHandler blocks until the operation completes or ctx is cancelled.
-func (x *CertificatePresentation) PresentSheetInWindowDismissHandler(ctx context.Context, window obj.Object) error {
+func (cp *CertificatePresentation) PresentSheetInWindowDismissHandler(ctx context.Context, window obj.Object) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentSheetInWindow:dismissHandler:"), objref.IDOf(window), _block)
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("presentSheetInWindow:dismissHandler:"), objref.IDOf(window), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -110,70 +111,36 @@ func (x *CertificatePresentation) PresentSheetInWindowDismissHandler(ctx context
 }
 
 // DismissSheet dismisses the certificate sheet.
-func (x *CertificatePresentation) DismissSheet() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dismissSheet"))
+func (cp *CertificatePresentation) DismissSheet() {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("dismissSheet"))
 }
 
-// Trust a trust reference, previously created with SecTrustCreateWithCertificates (see <Security/SecTrust.h>).
-func (x *CertificatePresentation) Trust() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trust"))
+// Trust returns a trust reference, previously created with SecTrustCreateWithCertificates (see <Security/SecTrust.h>).
+func (cp *CertificatePresentation) Trust() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("trust"))
 	return obj.Wrap(_r)
 }
 
-// Title title string to be displayed. If no title is provided, a default title will be used.
-func (x *CertificatePresentation) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+// Title returns title string to be displayed. If no title is provided, a default title will be used.
+func (cp *CertificatePresentation) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetTitle wraps the corresponding Objective-C method.
-func (x *CertificatePresentation) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-}
-
-// Message message string to be displayed. If no message is provided, a default message will be used.
-func (x *CertificatePresentation) Message() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("message"))
+// Message returns message string to be displayed. If no message is provided, a default message will be used.
+func (cp *CertificatePresentation) Message() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("message"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetMessage wraps the corresponding Objective-C method.
-func (x *CertificatePresentation) SetMessage(message string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessage:"), purego.NSString(message))
-}
-
-// HelpURL the URL that will be opened by clicking the "Learn More" button.
-func (x *CertificatePresentation) HelpURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("helpURL"))
+// HelpURL returns the URL that will be opened by clicking the "Learn More" button.
+func (cp *CertificatePresentation) HelpURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("helpURL"))
 	return obj.Wrap(_r)
 }
-
-// SetHelpURL wraps the corresponding Objective-C method.
-func (x *CertificatePresentation) SetHelpURL(helpURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHelpURL:"), rt.FileURL(helpURL))
-}
-
-// CertificatePresentationable is the interface implemented by [CertificatePresentation], for mocking and DI.
-type CertificatePresentationable interface {
-	obj.Object
-	WithTitle(title string) *CertificatePresentation
-	WithMessage(message string) *CertificatePresentation
-	WithHelpURL(helpURL string) *CertificatePresentation
-	PresentSheetInWindowDismissHandler(ctx context.Context, window obj.Object) error
-	DismissSheet()
-	Trust() obj.Object
-	Title() string
-	SetTitle(title string)
-	Message() string
-	SetMessage(message string)
-	HelpURL() obj.Object
-	SetHelpURL(helpURL string)
-}
-
-var _ CertificatePresentationable = (*CertificatePresentation)(nil)

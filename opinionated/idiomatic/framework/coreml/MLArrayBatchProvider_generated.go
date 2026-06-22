@@ -5,13 +5,14 @@
 package coreml
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // ArrayBatchProvider is an idiomatic wrapper over the Objective-C class MLArrayBatchProvider.
@@ -48,24 +49,24 @@ func arrayBatchProviderAdopt(id objc.ID) *ArrayBatchProvider {
 }
 
 // Description returns the object's -description text.
-func (x *ArrayBatchProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (abp *ArrayBatchProvider) Description() string {
+	return rt.Description(objref.IDOf(abp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ArrayBatchProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (abp *ArrayBatchProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(abp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ArrayBatchProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (abp *ArrayBatchProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(abp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ArrayBatchProvider) String() string {
-	return rt.Description(objref.IDOf(x))
+func (abp *ArrayBatchProvider) String() string {
+	return rt.Description(objref.IDOf(abp))
 }
 
 // NewArrayBatchProviderWithFeatureProviderArray creates the batch provider based on the array of feature providers.
@@ -87,15 +88,7 @@ func NewArrayBatchProviderWithDictionaryError(dictionary obj.Object) (result *Ar
 }
 
 // Array wraps the corresponding Objective-C method.
-func (x *ArrayBatchProvider) Array() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("array"))
+func (abp *ArrayBatchProvider) Array() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(abp), objc.RegisterName("array"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// ArrayBatchProviderable is the interface implemented by [ArrayBatchProvider], for mocking and DI.
-type ArrayBatchProviderable interface {
-	obj.Object
-	Array() []obj.Object
-}
-
-var _ ArrayBatchProviderable = (*ArrayBatchProvider)(nil)

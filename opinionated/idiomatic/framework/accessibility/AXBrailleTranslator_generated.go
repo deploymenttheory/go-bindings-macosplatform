@@ -46,24 +46,24 @@ func brailleTranslatorAdopt(id objc.ID) *BrailleTranslator {
 }
 
 // Description returns the object's -description text.
-func (x *BrailleTranslator) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bt *BrailleTranslator) Description() string {
+	return rt.Description(objref.IDOf(bt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BrailleTranslator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bt *BrailleTranslator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BrailleTranslator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bt *BrailleTranslator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BrailleTranslator) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bt *BrailleTranslator) String() string {
+	return rt.Description(objref.IDOf(bt))
 }
 
 // NewBrailleTranslatorWithBrailleTable creates a new BrailleTranslator.
@@ -74,22 +74,13 @@ func NewBrailleTranslatorWithBrailleTable(brailleTable *BrailleTable) *BrailleTr
 }
 
 // TranslatePrintText output Braille uses the unicode Braille characters (0x2800-0x28FF).
-func (x *BrailleTranslator) TranslatePrintText(printText string) *BrailleTranslationResult {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("translatePrintText:"), purego.NSString(printText))
+func (bt *BrailleTranslator) TranslatePrintText(printText string) *BrailleTranslationResult {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("translatePrintText:"), purego.NSString(printText))
 	return BrailleTranslationResultFromID(_r)
 }
 
 // BackTranslateBraille input Braille should use the unicode Braille characters (0x2800-0x28FF).
-func (x *BrailleTranslator) BackTranslateBraille(braille string) *BrailleTranslationResult {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backTranslateBraille:"), purego.NSString(braille))
+func (bt *BrailleTranslator) BackTranslateBraille(braille string) *BrailleTranslationResult {
+	_r := objc.Send[objc.ID](objref.IDOf(bt), objc.RegisterName("backTranslateBraille:"), purego.NSString(braille))
 	return BrailleTranslationResultFromID(_r)
 }
-
-// BrailleTranslatorable is the interface implemented by [BrailleTranslator], for mocking and DI.
-type BrailleTranslatorable interface {
-	obj.Object
-	TranslatePrintText(printText string) *BrailleTranslationResult
-	BackTranslateBraille(braille string) *BrailleTranslationResult
-}
-
-var _ BrailleTranslatorable = (*BrailleTranslator)(nil)

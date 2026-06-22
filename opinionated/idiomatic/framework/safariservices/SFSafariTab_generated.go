@@ -6,6 +6,7 @@ package safariservices
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func safariTabAdopt(id objc.ID) *SafariTab {
 }
 
 // Description returns the object's -description text.
-func (x *SafariTab) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (st *SafariTab) Description() string {
+	return rt.Description(objref.IDOf(st))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SafariTab) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (st *SafariTab) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(st), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SafariTab) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (st *SafariTab) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(st), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SafariTab) String() string {
-	return rt.Description(objref.IDOf(x))
+func (st *SafariTab) String() string {
+	return rt.Description(objref.IDOf(st))
 }
 
 // NewSafariTab creates a new SafariTab.
@@ -76,7 +77,7 @@ func NewSafariTab() *SafariTab {
 // GetActivePage calls the completion handler passing the active page in the tab.
 //
 // GetActivePage blocks until the operation completes or ctx is cancelled.
-func (x *SafariTab) GetActivePage(ctx context.Context) (result *SafariPage, err error) {
+func (st *SafariTab) GetActivePage(ctx context.Context) (result *SafariPage, err error) {
 	type _result struct {
 		val *SafariPage
 		err error
@@ -87,7 +88,7 @@ func (x *SafariTab) GetActivePage(ctx context.Context) (result *SafariPage, err 
 		_o.val = SafariPageFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getActivePageWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("getActivePageWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -100,7 +101,7 @@ func (x *SafariTab) GetActivePage(ctx context.Context) (result *SafariPage, err 
 // GetPages calls the completion handler with all of the tab’s active and preloading pages.
 //
 // GetPages blocks until the operation completes or ctx is cancelled.
-func (x *SafariTab) GetPages(ctx context.Context) (result obj.Object, err error) {
+func (st *SafariTab) GetPages(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -111,7 +112,7 @@ func (x *SafariTab) GetPages(ctx context.Context) (result obj.Object, err error)
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getPagesWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("getPagesWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -124,7 +125,7 @@ func (x *SafariTab) GetPages(ctx context.Context) (result obj.Object, err error)
 // GetContainingWindow this calls completion handler with the window containing this tab. If the tab is pinned, the window is nil.
 //
 // GetContainingWindow blocks until the operation completes or ctx is cancelled.
-func (x *SafariTab) GetContainingWindow(ctx context.Context) (result *SafariWindow, err error) {
+func (st *SafariTab) GetContainingWindow(ctx context.Context) (result *SafariWindow, err error) {
 	type _result struct {
 		val *SafariWindow
 		err error
@@ -135,7 +136,7 @@ func (x *SafariTab) GetContainingWindow(ctx context.Context) (result *SafariWind
 		_o.val = SafariWindowFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getContainingWindowWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("getContainingWindowWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -148,12 +149,12 @@ func (x *SafariTab) GetContainingWindow(ctx context.Context) (result *SafariWind
 // Activate activates the tab.
 //
 // Activate blocks until the operation completes or ctx is cancelled.
-func (x *SafariTab) Activate(ctx context.Context) error {
+func (st *SafariTab) Activate(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activateWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("activateWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -163,24 +164,11 @@ func (x *SafariTab) Activate(ctx context.Context) error {
 }
 
 // NavigateToURL navigates this tab to the given URL. The extension doesn't need permission to access the URL to navigate to it.
-func (x *SafariTab) NavigateToURL(url string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("navigateToURL:"), rt.FileURL(url))
+func (st *SafariTab) NavigateToURL(url string) {
+	objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("navigateToURL:"), rt.FileURL(url))
 }
 
 // Close closes this tab. If this is the last tab in its window, the window is also closed.
-func (x *SafariTab) Close() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
+func (st *SafariTab) Close() {
+	objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("close"))
 }
-
-// SafariTabable is the interface implemented by [SafariTab], for mocking and DI.
-type SafariTabable interface {
-	obj.Object
-	GetActivePage(ctx context.Context) (*SafariPage, error)
-	GetPages(ctx context.Context) (obj.Object, error)
-	GetContainingWindow(ctx context.Context) (*SafariWindow, error)
-	Activate(ctx context.Context) error
-	NavigateToURL(url string)
-	Close()
-}
-
-var _ SafariTabable = (*SafariTab)(nil)

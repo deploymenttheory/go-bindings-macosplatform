@@ -46,24 +46,24 @@ func contactsUserDefaultsAdopt(id objc.ID) *ContactsUserDefaults {
 }
 
 // Description returns the object's -description text.
-func (x *ContactsUserDefaults) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cud *ContactsUserDefaults) Description() string {
+	return rt.Description(objref.IDOf(cud))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContactsUserDefaults) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cud *ContactsUserDefaults) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cud), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContactsUserDefaults) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cud *ContactsUserDefaults) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cud), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ContactsUserDefaults) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cud *ContactsUserDefaults) String() string {
+	return rt.Description(objref.IDOf(cud))
 }
 
 // NewContactsUserDefaults creates a new ContactsUserDefaults.
@@ -73,25 +73,16 @@ func NewContactsUserDefaults() *ContactsUserDefaults {
 }
 
 // SortOrder wraps the corresponding Objective-C method.
-func (x *ContactsUserDefaults) SortOrder() ContactSortOrder {
-	_r := objc.Send[ContactSortOrder](objref.IDOf(x), objc.RegisterName("sortOrder"))
+func (cud *ContactsUserDefaults) SortOrder() ContactSortOrder {
+	_r := objc.Send[ContactSortOrder](objref.IDOf(cud), objc.RegisterName("sortOrder"))
 	return _r
 }
 
 // CountryCode wraps the corresponding Objective-C method.
-func (x *ContactsUserDefaults) CountryCode() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("countryCode"))
+func (cud *ContactsUserDefaults) CountryCode() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cud), objc.RegisterName("countryCode"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// ContactsUserDefaultsable is the interface implemented by [ContactsUserDefaults], for mocking and DI.
-type ContactsUserDefaultsable interface {
-	obj.Object
-	SortOrder() ContactSortOrder
-	CountryCode() string
-}
-
-var _ ContactsUserDefaultsable = (*ContactsUserDefaults)(nil)

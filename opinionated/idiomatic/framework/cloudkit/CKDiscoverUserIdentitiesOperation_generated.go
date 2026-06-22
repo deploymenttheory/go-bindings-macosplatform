@@ -6,6 +6,7 @@ package cloudkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -61,100 +62,88 @@ func NewDiscoverUserIdentitiesOperationWithUserIdentityLookupInfos(userIdentityL
 	return discoverUserIdentitiesOperationAdopt(_id)
 }
 
-// WithUserIdentityLookupInfos the lookup info for discovering user identities.
-func (x *DiscoverUserIdentitiesOperation) WithUserIdentityLookupInfos(items ...*UserIdentityLookupInfo) *DiscoverUserIdentitiesOperation {
+// WithUserIdentityLookupInfos sets the lookup info for discovering user identities.
+func (duio *DiscoverUserIdentitiesOperation) WithUserIdentityLookupInfos(items ...*UserIdentityLookupInfo) *DiscoverUserIdentitiesOperation {
 	_arr := purego.SliceToNSArray(items, func(_v *UserIdentityLookupInfo) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIdentityLookupInfos:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("setUserIdentityLookupInfos:"), _arr)
+	return duio
 }
 
-// WithUserIdentityDiscoveredBlock the closure to execute for each user identity.
-func (x *DiscoverUserIdentitiesOperation) WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(obj.Object, obj.Object)) *DiscoverUserIdentitiesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIdentityDiscoveredBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) {
+// WithUserIdentityDiscoveredBlock sets the closure to execute for each user identity.
+func (duio *DiscoverUserIdentitiesOperation) WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(obj.Object, obj.Object)) *DiscoverUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("setUserIdentityDiscoveredBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) {
 		userIdentityDiscoveredBlock(obj.Wrap(_b0), obj.Wrap(_b1))
 	}))
-	return x
+	return duio
 }
 
-// WithConfiguration the operation’s configuration.
-func (x *DiscoverUserIdentitiesOperation) WithConfiguration(configuration *OperationConfiguration) *DiscoverUserIdentitiesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
-	return x
+// WithConfiguration sets the operation’s configuration.
+func (duio *DiscoverUserIdentitiesOperation) WithConfiguration(configuration *OperationConfiguration) *DiscoverUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("setConfiguration:"), objref.IDOf(configuration))
+	return duio
 }
 
-// WithGroup the operation’s group.
-func (x *DiscoverUserIdentitiesOperation) WithGroup(group *OperationGroup) *DiscoverUserIdentitiesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroup:"), objref.IDOf(group))
-	return x
+// WithGroup sets the operation’s group.
+func (duio *DiscoverUserIdentitiesOperation) WithGroup(group *OperationGroup) *DiscoverUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("setGroup:"), objref.IDOf(group))
+	return duio
 }
 
-// WithLongLivedOperationWasPersistedBlock the closure to execute when the server begins to store callbacks for the long-lived operation.
-func (x *DiscoverUserIdentitiesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DiscoverUserIdentitiesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
-	return x
+// WithLongLivedOperationWasPersistedBlock sets the closure to execute when the server begins to store callbacks for the long-lived operation.
+func (duio *DiscoverUserIdentitiesOperation) WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DiscoverUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("setLongLivedOperationWasPersistedBlock:"), objc.NewBlock(func(_ objc.Block) { longLivedOperationWasPersistedBlock() }))
+	return duio
 }
 
-// WithContainer the operation's container.
-func (x *DiscoverUserIdentitiesOperation) WithContainer(container *Container) *DiscoverUserIdentitiesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainer:"), objref.IDOf(container))
-	return x
+// WithContainer sets the operation's container.
+func (duio *DiscoverUserIdentitiesOperation) WithContainer(container *Container) *DiscoverUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("setContainer:"), objref.IDOf(container))
+	return duio
 }
 
-// WithAllowsCellularAccess a Boolean value that indicates whether the operation can send data over the cellular network.
-func (x *DiscoverUserIdentitiesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *DiscoverUserIdentitiesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
-	return x
+// WithAllowsCellularAccess sets a Boolean value that indicates whether the operation can send data over the cellular network.
+func (duio *DiscoverUserIdentitiesOperation) WithAllowsCellularAccess(allowsCellularAccess bool) *DiscoverUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
+	return duio
 }
 
-// WithLongLived a Boolean value that indicates whether the operation is long-lived.
-func (x *DiscoverUserIdentitiesOperation) WithLongLived(longLived bool) *DiscoverUserIdentitiesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLongLived:"), longLived)
-	return x
+// WithLongLived sets a Boolean value that indicates whether the operation is long-lived.
+func (duio *DiscoverUserIdentitiesOperation) WithLongLived(longLived bool) *DiscoverUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("setLongLived:"), longLived)
+	return duio
 }
 
-// WithTimeoutIntervalForRequest the timeout interval when waiting for additional data.
-func (x *DiscoverUserIdentitiesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DiscoverUserIdentitiesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
-	return x
+// WithTimeoutIntervalForRequest sets the timeout interval when waiting for additional data.
+func (duio *DiscoverUserIdentitiesOperation) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DiscoverUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
+	return duio
 }
 
-// WithTimeoutIntervalForResource the maximum amount of time that a resource request can use.
-func (x *DiscoverUserIdentitiesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DiscoverUserIdentitiesOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
-	return x
+// WithTimeoutIntervalForResource sets the maximum amount of time that a resource request can use.
+func (duio *DiscoverUserIdentitiesOperation) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DiscoverUserIdentitiesOperation {
+	objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
+	return duio
 }
 
-// UserIdentityLookupInfos the lookup info for discovering user identities. Use this property to view or change the lookup info that CloudKit uses to discover user identities. If you intend to modify this property's value, do so before you execute the operation or submit it to a queue.
+// UserIdentityLookupInfos returns the lookup info for discovering user identities. Use this property to view or change the lookup info that CloudKit uses to discover user identities. If you intend to modify this property's value, do so before you execute the operation or submit it to a queue.
 //
 // UserIdentityLookupInfos returns the collection as a Go slice.
-func (x *DiscoverUserIdentitiesOperation) UserIdentityLookupInfos() []*UserIdentityLookupInfo {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userIdentityLookupInfos"))
+func (duio *DiscoverUserIdentitiesOperation) UserIdentityLookupInfos() []*UserIdentityLookupInfo {
+	_arr := objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("userIdentityLookupInfos"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *UserIdentityLookupInfo { return UserIdentityLookupInfoFromID(_id) })
-}
-
-// SetUserIdentityLookupInfos wraps the corresponding Objective-C method.
-func (x *DiscoverUserIdentitiesOperation) SetUserIdentityLookupInfos(userIdentityLookupInfos []*UserIdentityLookupInfo) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIdentityLookupInfos:"), purego.SliceToNSArray(userIdentityLookupInfos, func(_v *UserIdentityLookupInfo) objc.ID { return objref.IDOf(_v) }))
-}
-
-// SetUserIdentityDiscoveredBlock wraps the corresponding Objective-C method.
-func (x *DiscoverUserIdentitiesOperation) SetUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(obj.Object, obj.Object)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserIdentityDiscoveredBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) {
-		userIdentityDiscoveredBlock(obj.Wrap(_b0), obj.Wrap(_b1))
-	}))
 }
 
 // SetDiscoverUserIdentitiesCompletionBlock wraps the corresponding Objective-C method.
 //
 // SetDiscoverUserIdentitiesCompletionBlock blocks until the operation completes or ctx is cancelled.
-func (x *DiscoverUserIdentitiesOperation) SetDiscoverUserIdentitiesCompletionBlock(ctx context.Context) error {
+func (duio *DiscoverUserIdentitiesOperation) SetDiscoverUserIdentitiesCompletionBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscoverUserIdentitiesCompletionBlock:"), _block)
+	objc.Send[objc.ID](objref.IDOf(duio), objc.RegisterName("setDiscoverUserIdentitiesCompletionBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -162,26 +151,5 @@ func (x *DiscoverUserIdentitiesOperation) SetDiscoverUserIdentitiesCompletionBlo
 		return ctx.Err()
 	}
 }
-
-// DiscoverUserIdentitiesOperationable is the interface implemented by [DiscoverUserIdentitiesOperation], for mocking and DI.
-type DiscoverUserIdentitiesOperationable interface {
-	obj.Object
-	WithUserIdentityLookupInfos(items ...*UserIdentityLookupInfo) *DiscoverUserIdentitiesOperation
-	WithUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(obj.Object, obj.Object)) *DiscoverUserIdentitiesOperation
-	WithConfiguration(configuration *OperationConfiguration) *DiscoverUserIdentitiesOperation
-	WithGroup(group *OperationGroup) *DiscoverUserIdentitiesOperation
-	WithLongLivedOperationWasPersistedBlock(longLivedOperationWasPersistedBlock func()) *DiscoverUserIdentitiesOperation
-	WithContainer(container *Container) *DiscoverUserIdentitiesOperation
-	WithAllowsCellularAccess(allowsCellularAccess bool) *DiscoverUserIdentitiesOperation
-	WithLongLived(longLived bool) *DiscoverUserIdentitiesOperation
-	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *DiscoverUserIdentitiesOperation
-	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *DiscoverUserIdentitiesOperation
-	UserIdentityLookupInfos() []*UserIdentityLookupInfo
-	SetUserIdentityLookupInfos(userIdentityLookupInfos []*UserIdentityLookupInfo)
-	SetUserIdentityDiscoveredBlock(userIdentityDiscoveredBlock func(obj.Object, obj.Object))
-	SetDiscoverUserIdentitiesCompletionBlock(ctx context.Context) error
-}
-
-var _ DiscoverUserIdentitiesOperationable = (*DiscoverUserIdentitiesOperation)(nil)
 
 var _ OperationProvider = (*DiscoverUserIdentitiesOperation)(nil)

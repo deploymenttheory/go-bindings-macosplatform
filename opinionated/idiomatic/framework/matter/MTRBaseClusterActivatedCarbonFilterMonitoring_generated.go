@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -56,7 +57,7 @@ func NewMTRBaseClusterActivatedCarbonFilterMonitoringWithDeviceEndpointIDQueue(d
 // ReadAttributeConditionWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeConditionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeConditionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeConditionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -68,7 +69,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeConditionWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeConditionWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("readAttributeConditionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -81,7 +82,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeConditionWi
 // SubscribeAttributeConditionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeConditionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeConditionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeConditionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -93,7 +94,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeCondit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeConditionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeConditionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -106,7 +107,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeCondit
 // ReadAttributeDegradationDirectionWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeDegradationDirectionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeDegradationDirectionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeDegradationDirectionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -118,7 +119,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeDegradation
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDegradationDirectionWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("readAttributeDegradationDirectionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -131,7 +132,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeDegradation
 // SubscribeAttributeDegradationDirectionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDegradationDirectionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeDegradationDirectionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeDegradationDirectionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -143,7 +144,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeDegrad
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDegradationDirectionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeDegradationDirectionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -156,7 +157,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeDegrad
 // ReadAttributeChangeIndicationWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeChangeIndicationWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeChangeIndicationWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeChangeIndicationWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -168,7 +169,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeChangeIndic
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChangeIndicationWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("readAttributeChangeIndicationWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -181,7 +182,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeChangeIndic
 // SubscribeAttributeChangeIndicationWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeChangeIndicationWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeChangeIndicationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeChangeIndicationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -193,7 +194,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeChange
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeChangeIndicationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeChangeIndicationWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -206,7 +207,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeChange
 // ReadAttributeInPlaceIndicatorWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInPlaceIndicatorWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeInPlaceIndicatorWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeInPlaceIndicatorWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -218,7 +219,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeInPlaceIndi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInPlaceIndicatorWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("readAttributeInPlaceIndicatorWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -231,7 +232,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeInPlaceIndi
 // SubscribeAttributeInPlaceIndicatorWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInPlaceIndicatorWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeInPlaceIndicatorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeInPlaceIndicatorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -243,7 +244,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeInPlac
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInPlaceIndicatorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeInPlaceIndicatorWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -256,7 +257,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeInPlac
 // ReadAttributeLastChangedTimeWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeLastChangedTimeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeLastChangedTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeLastChangedTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -268,7 +269,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeLastChanged
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLastChangedTimeWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("readAttributeLastChangedTimeWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -281,7 +282,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeLastChanged
 // SubscribeAttributeLastChangedTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLastChangedTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeLastChangedTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeLastChangedTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -293,7 +294,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeLastCh
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeLastChangedTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeLastChangedTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -306,7 +307,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeLastCh
 // ReadAttributeReplacementProductListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeReplacementProductListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeReplacementProductListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeReplacementProductListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -318,7 +319,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeReplacement
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeReplacementProductListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("readAttributeReplacementProductListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -331,7 +332,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeReplacement
 // SubscribeAttributeReplacementProductListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeReplacementProductListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeReplacementProductListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeReplacementProductListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -343,7 +344,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeReplac
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeReplacementProductListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeReplacementProductListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -356,7 +357,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeReplac
 // ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -368,7 +369,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeGeneratedCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -381,7 +382,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeGeneratedCo
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -393,7 +394,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeGenera
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -406,7 +407,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeGenera
 // ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -418,7 +419,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeAcceptedCom
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -431,7 +432,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeAcceptedCom
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -443,7 +444,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeAccept
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -456,7 +457,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeAccept
 // ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -468,7 +469,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeAttributeLi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -481,7 +482,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeAttributeLi
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -493,7 +494,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeAttrib
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -506,7 +507,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeAttrib
 // ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -518,7 +519,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeFeatureMapW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -531,7 +532,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeFeatureMapW
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -543,7 +544,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeFeatur
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -556,7 +557,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeFeatur
 // ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -568,7 +569,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeClusterRevi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -581,7 +582,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) ReadAttributeClusterRevi
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcacfm *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -593,7 +594,7 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeCluste
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcacfm), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -602,35 +603,6 @@ func (x *MTRBaseClusterActivatedCarbonFilterMonitoring) SubscribeAttributeCluste
 		return _zero, ctx.Err()
 	}
 }
-
-// MTRBaseClusterActivatedCarbonFilterMonitoringable is the interface implemented by [MTRBaseClusterActivatedCarbonFilterMonitoring], for mocking and DI.
-type MTRBaseClusterActivatedCarbonFilterMonitoringable interface {
-	obj.Object
-	ReadAttributeConditionWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeConditionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeDegradationDirectionWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeDegradationDirectionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeChangeIndicationWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeChangeIndicationWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInPlaceIndicatorWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInPlaceIndicatorWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeLastChangedTimeWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeLastChangedTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeReplacementProductListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeReplacementProductListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-}
-
-var _ MTRBaseClusterActivatedCarbonFilterMonitoringable = (*MTRBaseClusterActivatedCarbonFilterMonitoring)(nil)
 
 var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterActivatedCarbonFilterMonitoring)(nil)
 

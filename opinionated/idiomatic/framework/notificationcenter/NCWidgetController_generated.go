@@ -46,24 +46,24 @@ func widgetControllerAdopt(id objc.ID) *WidgetController {
 }
 
 // Description returns the object's -description text.
-func (x *WidgetController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wc *WidgetController) Description() string {
+	return rt.Description(objref.IDOf(wc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WidgetController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wc *WidgetController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WidgetController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wc *WidgetController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WidgetController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wc *WidgetController) String() string {
+	return rt.Description(objref.IDOf(wc))
 }
 
 // NewWidgetController creates a new WidgetController.
@@ -73,14 +73,6 @@ func NewWidgetController() *WidgetController {
 }
 
 // SetHasContentForWidgetWithBundleIdentifier sets whether the specified widget has content to display.
-func (x *WidgetController) SetHasContentForWidgetWithBundleIdentifier(flag bool, bundleID string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasContent:forWidgetWithBundleIdentifier:"), flag, purego.NSString(bundleID))
+func (wc *WidgetController) SetHasContentForWidgetWithBundleIdentifier(flag bool, bundleID string) {
+	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setHasContent:forWidgetWithBundleIdentifier:"), flag, purego.NSString(bundleID))
 }
-
-// WidgetControllerable is the interface implemented by [WidgetController], for mocking and DI.
-type WidgetControllerable interface {
-	obj.Object
-	SetHasContentForWidgetWithBundleIdentifier(flag bool, bundleID string)
-}
-
-var _ WidgetControllerable = (*WidgetController)(nil)

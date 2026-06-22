@@ -47,37 +47,27 @@ func cNNConvolutionGradientStateAdopt(id objc.ID) *CNNConvolutionGradientState {
 }
 
 // WithReadCount sets the property and returns the receiver so calls can be chained.
-func (x *CNNConvolutionGradientState) WithReadCount(readCount int) *CNNConvolutionGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-	return x
+func (ccgs *CNNConvolutionGradientState) WithReadCount(readCount int) *CNNConvolutionGradientState {
+	objc.Send[objc.ID](objref.IDOf(ccgs), objc.RegisterName("setReadCount:"), readCount)
+	return ccgs
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNConvolutionGradientState) WithLabel(label string) *CNNConvolutionGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (ccgs *CNNConvolutionGradientState) WithLabel(label string) *CNNConvolutionGradientState {
+	objc.Send[objc.ID](objref.IDOf(ccgs), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ccgs
 }
 
-// Convolution the convolution filter that produced the state. For child MPSCNNConvolutionTrasposeGradientState object, convolution below refers to MPSCNNConvolution object that produced MPSCNNConvolutionGradientState object which was used to create MPSCNNConvolutionTransposeGradientState object. See resultStateForSourceImage:sourceStates method of MPSCNNConvolutionTranspose below.
-func (x *CNNConvolutionGradientState) Convolution() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolution"))
+// Convolution returns the convolution filter that produced the state. For child MPSCNNConvolutionTrasposeGradientState object, convolution below refers to MPSCNNConvolution object that produced MPSCNNConvolutionGradientState object which was used to create MPSCNNConvolutionTransposeGradientState object. See resultStateForSourceImage:sourceStates method of MPSCNNConvolutionTranspose below.
+func (ccgs *CNNConvolutionGradientState) Convolution() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ccgs), objc.RegisterName("convolution"))
 	return obj.Wrap(_r)
 }
-
-// CNNConvolutionGradientStateable is the interface implemented by [CNNConvolutionGradientState], for mocking and DI.
-type CNNConvolutionGradientStateable interface {
-	obj.Object
-	WithReadCount(readCount int) *CNNConvolutionGradientState
-	WithLabel(label string) *CNNConvolutionGradientState
-	Convolution() obj.Object
-}
-
-var _ CNNConvolutionGradientStateable = (*CNNConvolutionGradientState)(nil)
 
 // isCNNConvolutionGradientState marks CNNConvolutionGradientState — and, by embedding promotion, its
 // subclasses — as a member of the CNNConvolutionGradientState hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CNNConvolutionGradientState) isCNNConvolutionGradientState() {}
+func (ccgs *CNNConvolutionGradientState) isCNNConvolutionGradientState() {}
 
 var _ CNNConvolutionGradientStateProvider = (*CNNConvolutionGradientState)(nil)
 

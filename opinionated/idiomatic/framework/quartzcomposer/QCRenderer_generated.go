@@ -45,24 +45,24 @@ func rendererAdopt(id objc.ID) *Renderer {
 }
 
 // Description returns the object's -description text.
-func (x *Renderer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Renderer) Description() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Renderer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (r *Renderer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Renderer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (r *Renderer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Renderer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Renderer) String() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // NewRendererWithCompositionColorSpace creates a new Renderer.
@@ -94,43 +94,31 @@ func NewRendererWithOpenGLContextPixelFormatFile(context_ obj.Object, format obj
 }
 
 // RenderAtTimeArguments wraps the corresponding Objective-C method.
-func (x *Renderer) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("renderAtTime:arguments:"), time_, objref.IDOf(arguments))
+func (r *Renderer) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(r), objc.RegisterName("renderAtTime:arguments:"), time_, objref.IDOf(arguments))
 	return _r
 }
 
 // RenderingTimeForTimeArguments wraps the corresponding Objective-C method.
-func (x *Renderer) RenderingTimeForTimeArguments(time_ float64, arguments obj.Object) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("renderingTimeForTime:arguments:"), time_, objref.IDOf(arguments))
+func (r *Renderer) RenderingTimeForTimeArguments(time_ float64, arguments obj.Object) float64 {
+	_r := objc.Send[float64](objref.IDOf(r), objc.RegisterName("renderingTimeForTime:arguments:"), time_, objref.IDOf(arguments))
 	return _r
 }
 
 // Composition wraps the corresponding Objective-C method.
-func (x *Renderer) Composition() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composition"))
+func (r *Renderer) Composition() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("composition"))
 	return obj.Wrap(_r)
 }
 
 // SnapshotImage wraps the corresponding Objective-C method.
-func (x *Renderer) SnapshotImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotImage"))
+func (r *Renderer) SnapshotImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("snapshotImage"))
 	return obj.Wrap(_r)
 }
 
 // CreateSnapshotImageOfType wraps the corresponding Objective-C method.
-func (x *Renderer) CreateSnapshotImageOfType(type_ string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createSnapshotImageOfType:"), purego.NSString(type_))
+func (r *Renderer) CreateSnapshotImageOfType(type_ string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("createSnapshotImageOfType:"), purego.NSString(type_))
 	return obj.Wrap(_r)
 }
-
-// Rendererable is the interface implemented by [Renderer], for mocking and DI.
-type Rendererable interface {
-	obj.Object
-	RenderAtTimeArguments(time_ float64, arguments obj.Object) bool
-	RenderingTimeForTimeArguments(time_ float64, arguments obj.Object) float64
-	Composition() obj.Object
-	SnapshotImage() obj.Object
-	CreateSnapshotImageOfType(type_ string) obj.Object
-}
-
-var _ Rendererable = (*Renderer)(nil)

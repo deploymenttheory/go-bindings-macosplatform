@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,33 +53,23 @@ func NewImageIntegral() *ImageIntegral {
 	return imageIntegralAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageIntegral) WithOffset(offset mpscore.MPSOffset) *ImageIntegral {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (ii *ImageIntegral) WithOffset(offset mpscore.MPSOffset) *ImageIntegral {
+	objc.Send[objc.ID](objref.IDOf(ii), objc.RegisterName("setOffset:"), offset)
+	return ii
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageIntegral) WithClipRect(clipRect metal.MTLRegion) *ImageIntegral {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (ii *ImageIntegral) WithClipRect(clipRect metal.MTLRegion) *ImageIntegral {
+	objc.Send[objc.ID](objref.IDOf(ii), objc.RegisterName("setClipRect:"), clipRect)
+	return ii
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageIntegral) WithLabel(label string) *ImageIntegral {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ii *ImageIntegral) WithLabel(label string) *ImageIntegral {
+	objc.Send[objc.ID](objref.IDOf(ii), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ii
 }
-
-// ImageIntegralable is the interface implemented by [ImageIntegral], for mocking and DI.
-type ImageIntegralable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageIntegral
-	WithClipRect(clipRect metal.MTLRegion) *ImageIntegral
-	WithLabel(label string) *ImageIntegral
-}
-
-var _ ImageIntegralable = (*ImageIntegral)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageIntegral)(nil)
 

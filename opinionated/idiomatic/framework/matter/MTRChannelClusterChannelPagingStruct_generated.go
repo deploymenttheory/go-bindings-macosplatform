@@ -44,24 +44,24 @@ func mTRChannelClusterChannelPagingStructAdopt(id objc.ID) *MTRChannelClusterCha
 }
 
 // Description returns the object's -description text.
-func (x *MTRChannelClusterChannelPagingStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcccps *MTRChannelClusterChannelPagingStruct) Description() string {
+	return rt.Description(objref.IDOf(mcccps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRChannelClusterChannelPagingStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcccps *MTRChannelClusterChannelPagingStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcccps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRChannelClusterChannelPagingStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcccps *MTRChannelClusterChannelPagingStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcccps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRChannelClusterChannelPagingStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcccps *MTRChannelClusterChannelPagingStruct) String() string {
+	return rt.Description(objref.IDOf(mcccps))
 }
 
 // NewMTRChannelClusterChannelPagingStruct creates a new MTRChannelClusterChannelPagingStruct.
@@ -71,48 +71,25 @@ func NewMTRChannelClusterChannelPagingStruct() *MTRChannelClusterChannelPagingSt
 }
 
 // WithPreviousToken sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterChannelPagingStruct) WithPreviousToken(previousToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterChannelPagingStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousToken:"), objref.IDOf(previousToken))
-	return x
+func (mcccps *MTRChannelClusterChannelPagingStruct) WithPreviousToken(previousToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterChannelPagingStruct {
+	objc.Send[objc.ID](objref.IDOf(mcccps), objc.RegisterName("setPreviousToken:"), objref.IDOf(previousToken))
+	return mcccps
 }
 
 // WithNextToken sets the property and returns the receiver so calls can be chained.
-func (x *MTRChannelClusterChannelPagingStruct) WithNextToken(nextToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterChannelPagingStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextToken:"), objref.IDOf(nextToken))
-	return x
+func (mcccps *MTRChannelClusterChannelPagingStruct) WithNextToken(nextToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterChannelPagingStruct {
+	objc.Send[objc.ID](objref.IDOf(mcccps), objc.RegisterName("setNextToken:"), objref.IDOf(nextToken))
+	return mcccps
 }
 
 // PreviousToken wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterChannelPagingStruct) PreviousToken() *MTRChannelClusterPageTokenStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousToken"))
+func (mcccps *MTRChannelClusterChannelPagingStruct) PreviousToken() *MTRChannelClusterPageTokenStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccps), objc.RegisterName("previousToken"))
 	return MTRChannelClusterPageTokenStructFromID(_r)
-}
-
-// SetPreviousToken wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterChannelPagingStruct) SetPreviousToken(previousToken *MTRChannelClusterPageTokenStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreviousToken:"), objref.IDOf(previousToken))
 }
 
 // NextToken wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterChannelPagingStruct) NextToken() *MTRChannelClusterPageTokenStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextToken"))
+func (mcccps *MTRChannelClusterChannelPagingStruct) NextToken() *MTRChannelClusterPageTokenStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(mcccps), objc.RegisterName("nextToken"))
 	return MTRChannelClusterPageTokenStructFromID(_r)
 }
-
-// SetNextToken wraps the corresponding Objective-C method.
-func (x *MTRChannelClusterChannelPagingStruct) SetNextToken(nextToken *MTRChannelClusterPageTokenStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextToken:"), objref.IDOf(nextToken))
-}
-
-// MTRChannelClusterChannelPagingStructable is the interface implemented by [MTRChannelClusterChannelPagingStruct], for mocking and DI.
-type MTRChannelClusterChannelPagingStructable interface {
-	obj.Object
-	WithPreviousToken(previousToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterChannelPagingStruct
-	WithNextToken(nextToken *MTRChannelClusterPageTokenStruct) *MTRChannelClusterChannelPagingStruct
-	PreviousToken() *MTRChannelClusterPageTokenStruct
-	SetPreviousToken(previousToken *MTRChannelClusterPageTokenStruct)
-	NextToken() *MTRChannelClusterPageTokenStruct
-	SetNextToken(nextToken *MTRChannelClusterPageTokenStruct)
-}
-
-var _ MTRChannelClusterChannelPagingStructable = (*MTRChannelClusterChannelPagingStruct)(nil)

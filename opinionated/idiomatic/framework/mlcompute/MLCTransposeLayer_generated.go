@@ -52,34 +52,24 @@ func NewTransposeLayer() *TransposeLayer {
 	return transposeLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *TransposeLayer) WithLabel(label string) *TransposeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (tl *TransposeLayer) WithLabel(label string) *TransposeLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return tl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *TransposeLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *TransposeLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (tl *TransposeLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *TransposeLayer {
+	objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return tl
 }
 
-// Dimensions permutes the dimensions according to 'dimensions'. The returned tensor's dimension i will correspond to dimensions[i].
+// Dimensions returns permutes the dimensions according to 'dimensions'. The returned tensor's dimension i will correspond to dimensions[i].
 //
 // Dimensions returns the collection as a Go slice.
-func (x *TransposeLayer) Dimensions() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dimensions"))
+func (tl *TransposeLayer) Dimensions() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(tl), objc.RegisterName("dimensions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// TransposeLayerable is the interface implemented by [TransposeLayer], for mocking and DI.
-type TransposeLayerable interface {
-	obj.Object
-	WithLabel(label string) *TransposeLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *TransposeLayer
-	Dimensions() []obj.Object
-}
-
-var _ TransposeLayerable = (*TransposeLayer)(nil)
 
 var _ LayerProvider = (*TransposeLayer)(nil)

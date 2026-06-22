@@ -46,24 +46,24 @@ func settingsHelperAdopt(id objc.ID) *SettingsHelper {
 }
 
 // Description returns the object's -description text.
-func (x *SettingsHelper) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sh *SettingsHelper) Description() string {
+	return rt.Description(objref.IDOf(sh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SettingsHelper) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sh *SettingsHelper) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SettingsHelper) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sh *SettingsHelper) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SettingsHelper) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sh *SettingsHelper) String() string {
+	return rt.Description(objref.IDOf(sh))
 }
 
 // NewSettingsHelper creates a new SettingsHelper.
@@ -71,10 +71,3 @@ func NewSettingsHelper() *SettingsHelper {
 	_id := objc.Send[objc.ID](objc.ID(_class("ASSettingsHelper")), objc.RegisterName("new"))
 	return settingsHelperAdopt(_id)
 }
-
-// SettingsHelperable is the interface implemented by [SettingsHelper], for mocking and DI.
-type SettingsHelperable interface {
-	obj.Object
-}
-
-var _ SettingsHelperable = (*SettingsHelper)(nil)

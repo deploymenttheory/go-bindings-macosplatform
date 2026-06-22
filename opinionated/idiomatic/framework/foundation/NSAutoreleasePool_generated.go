@@ -46,24 +46,24 @@ func autoreleasePoolAdopt(id objc.ID) *AutoreleasePool {
 }
 
 // Description returns the object's -description text.
-func (x *AutoreleasePool) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ap *AutoreleasePool) Description() string {
+	return rt.Description(objref.IDOf(ap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AutoreleasePool) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ap *AutoreleasePool) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AutoreleasePool) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ap *AutoreleasePool) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AutoreleasePool) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ap *AutoreleasePool) String() string {
+	return rt.Description(objref.IDOf(ap))
 }
 
 // NewAutoreleasePool creates a new AutoreleasePool.
@@ -73,27 +73,17 @@ func NewAutoreleasePool() *AutoreleasePool {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *AutoreleasePool) WithScriptingProperties(scriptingProperties obj.Object) *AutoreleasePool {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ap *AutoreleasePool) WithScriptingProperties(scriptingProperties obj.Object) *AutoreleasePool {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ap
 }
 
 // AddObject adds a given object to the receiver
-func (x *AutoreleasePool) AddObject(anObject obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObject:"), objref.IDOf(anObject))
+func (ap *AutoreleasePool) AddObject(anObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("addObject:"), objref.IDOf(anObject))
 }
 
 // Drain in a reference-counted environment, releases and pops the receiver; in a garbage-collected environment, triggers garbage collection if the memory allocated since the last collection is greater than the current threshold.
-func (x *AutoreleasePool) Drain() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drain"))
+func (ap *AutoreleasePool) Drain() {
+	objc.Send[objc.ID](objref.IDOf(ap), objc.RegisterName("drain"))
 }
-
-// AutoreleasePoolable is the interface implemented by [AutoreleasePool], for mocking and DI.
-type AutoreleasePoolable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *AutoreleasePool
-	AddObject(anObject obj.Object)
-	Drain()
-}
-
-var _ AutoreleasePoolable = (*AutoreleasePool)(nil)

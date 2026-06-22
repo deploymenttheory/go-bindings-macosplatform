@@ -46,24 +46,24 @@ func lossDescriptorAdopt(id objc.ID) *LossDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *LossDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ld *LossDescriptor) Description() string {
+	return rt.Description(objref.IDOf(ld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LossDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ld *LossDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LossDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ld *LossDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LossDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ld *LossDescriptor) String() string {
+	return rt.Description(objref.IDOf(ld))
 }
 
 // NewLossDescriptor creates a new LossDescriptor.
@@ -73,57 +73,43 @@ func NewLossDescriptor() *LossDescriptor {
 }
 
 // LossType specifies the loss function.
-func (x *LossDescriptor) LossType() LossType {
-	_r := objc.Send[LossType](objref.IDOf(x), objc.RegisterName("lossType"))
+func (ld *LossDescriptor) LossType() LossType {
+	_r := objc.Send[LossType](objref.IDOf(ld), objc.RegisterName("lossType"))
 	return _r
 }
 
-// ReductionType the reduction operation performed by the loss function.
-func (x *LossDescriptor) ReductionType() ReductionType {
-	_r := objc.Send[ReductionType](objref.IDOf(x), objc.RegisterName("reductionType"))
+// ReductionType returns the reduction operation performed by the loss function.
+func (ld *LossDescriptor) ReductionType() ReductionType {
+	_r := objc.Send[ReductionType](objref.IDOf(ld), objc.RegisterName("reductionType"))
 	return _r
 }
 
-// Weight the scale factor to apply to each element of a result.  The default value is 1.0.
-func (x *LossDescriptor) Weight() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weight"))
+// Weight returns the scale factor to apply to each element of a result.  The default value is 1.0.
+func (ld *LossDescriptor) Weight() float32 {
+	_r := objc.Send[float32](objref.IDOf(ld), objc.RegisterName("weight"))
 	return _r
 }
 
-// LabelSmoothing the label smoothing parameter. The default value is 0.0. This parameter is valid only for the loss functions of the following type(s): MLCLossTypeSoftmaxCrossEntropy and MLCLossTypeSigmoidCrossEntropy.
-func (x *LossDescriptor) LabelSmoothing() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("labelSmoothing"))
+// LabelSmoothing returns the label smoothing parameter. The default value is 0.0. This parameter is valid only for the loss functions of the following type(s): MLCLossTypeSoftmaxCrossEntropy and MLCLossTypeSigmoidCrossEntropy.
+func (ld *LossDescriptor) LabelSmoothing() float32 {
+	_r := objc.Send[float32](objref.IDOf(ld), objc.RegisterName("labelSmoothing"))
 	return _r
 }
 
-// ClassCount the number of classes parameter. The default value is 1. This parameter is valid only for the loss function MLCLossTypeSoftmaxCrossEntropy.
-func (x *LossDescriptor) ClassCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("classCount"))
+// ClassCount returns the number of classes parameter. The default value is 1. This parameter is valid only for the loss function MLCLossTypeSoftmaxCrossEntropy.
+func (ld *LossDescriptor) ClassCount() int {
+	_r := objc.Send[int](objref.IDOf(ld), objc.RegisterName("classCount"))
 	return _r
 }
 
-// Epsilon the epsilon parameter. The default value is 1e-7. This parameter is valid only for the loss function MLCLossTypeLog.
-func (x *LossDescriptor) Epsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("epsilon"))
+// Epsilon returns the epsilon parameter. The default value is 1e-7. This parameter is valid only for the loss function MLCLossTypeLog.
+func (ld *LossDescriptor) Epsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(ld), objc.RegisterName("epsilon"))
 	return _r
 }
 
-// Delta the delta parameter. The default value is 1.0f. This parameter is valid only for the loss function MLCLossTypeHuber.
-func (x *LossDescriptor) Delta() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
+// Delta returns the delta parameter. The default value is 1.0f. This parameter is valid only for the loss function MLCLossTypeHuber.
+func (ld *LossDescriptor) Delta() float32 {
+	_r := objc.Send[float32](objref.IDOf(ld), objc.RegisterName("delta"))
 	return _r
 }
-
-// LossDescriptorable is the interface implemented by [LossDescriptor], for mocking and DI.
-type LossDescriptorable interface {
-	obj.Object
-	LossType() LossType
-	ReductionType() ReductionType
-	Weight() float32
-	LabelSmoothing() float32
-	ClassCount() int
-	Epsilon() float32
-	Delta() float32
-}
-
-var _ LossDescriptorable = (*LossDescriptor)(nil)

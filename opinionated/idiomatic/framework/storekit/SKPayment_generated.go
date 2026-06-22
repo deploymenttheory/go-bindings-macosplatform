@@ -48,41 +48,41 @@ func paymentAdopt(id objc.ID) *Payment {
 }
 
 // Description returns the object's -description text.
-func (x *Payment) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Payment) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Payment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Payment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Payment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Payment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Payment) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Payment) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // RequestData wraps the corresponding Objective-C method.
-func (x *Payment) RequestData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestData"))
+func (p *Payment) RequestData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("requestData"))
 	return obj.Wrap(_r)
 }
 
 // Quantity wraps the corresponding Objective-C method.
-func (x *Payment) Quantity() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("quantity"))
+func (p *Payment) Quantity() int {
+	_r := objc.Send[int](objref.IDOf(p), objc.RegisterName("quantity"))
 	return _r
 }
 
 // ApplicationUsername wraps the corresponding Objective-C method.
-func (x *Payment) ApplicationUsername() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationUsername"))
+func (p *Payment) ApplicationUsername() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("applicationUsername"))
 	if _r == 0 {
 		return ""
 	}
@@ -90,32 +90,20 @@ func (x *Payment) ApplicationUsername() string {
 }
 
 // SimulatesAskToBuyInSandbox wraps the corresponding Objective-C method.
-func (x *Payment) SimulatesAskToBuyInSandbox() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("simulatesAskToBuyInSandbox"))
+func (p *Payment) SimulatesAskToBuyInSandbox() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("simulatesAskToBuyInSandbox"))
 	return _r
 }
 
 // PaymentDiscount wraps the corresponding Objective-C method.
-func (x *Payment) PaymentDiscount() *PaymentDiscount {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentDiscount"))
+func (p *Payment) PaymentDiscount() *PaymentDiscount {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("paymentDiscount"))
 	return PaymentDiscountFromID(_r)
 }
-
-// Paymentable is the interface implemented by [Payment], for mocking and DI.
-type Paymentable interface {
-	obj.Object
-	RequestData() obj.Object
-	Quantity() int
-	ApplicationUsername() string
-	SimulatesAskToBuyInSandbox() bool
-	PaymentDiscount() *PaymentDiscount
-}
-
-var _ Paymentable = (*Payment)(nil)
 
 // isPayment marks Payment — and, by embedding promotion, its
 // subclasses — as a member of the Payment hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Payment) isPayment() {}
+func (p *Payment) isPayment() {}
 
 var _ PaymentProvider = (*Payment)(nil)

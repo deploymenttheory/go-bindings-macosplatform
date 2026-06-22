@@ -46,24 +46,24 @@ func quantityAdopt(id objc.ID) *Quantity {
 }
 
 // Description returns the object's -description text.
-func (x *Quantity) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (q *Quantity) Description() string {
+	return rt.Description(objref.IDOf(q))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Quantity) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (q *Quantity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(q), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Quantity) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (q *Quantity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(q), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Quantity) String() string {
-	return rt.Description(objref.IDOf(x))
+func (q *Quantity) String() string {
+	return rt.Description(objref.IDOf(q))
 }
 
 // NewQuantity creates a new Quantity.
@@ -73,22 +73,13 @@ func NewQuantity() *Quantity {
 }
 
 // IsCompatibleWithUnit returns a boolean value indicating whether the quantity is compatible with the provided unit.
-func (x *Quantity) IsCompatibleWithUnit(unit *Unit) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompatibleWithUnit:"), objref.IDOf(unit))
+func (q *Quantity) IsCompatibleWithUnit(unit *Unit) bool {
+	_r := objc.Send[bool](objref.IDOf(q), objc.RegisterName("isCompatibleWithUnit:"), objref.IDOf(unit))
 	return _r
 }
 
 // DoubleValueForUnit returns the quantity’s value in the provided unit.
-func (x *Quantity) DoubleValueForUnit(unit *Unit) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleValueForUnit:"), objref.IDOf(unit))
+func (q *Quantity) DoubleValueForUnit(unit *Unit) float64 {
+	_r := objc.Send[float64](objref.IDOf(q), objc.RegisterName("doubleValueForUnit:"), objref.IDOf(unit))
 	return _r
 }
-
-// Quantityable is the interface implemented by [Quantity], for mocking and DI.
-type Quantityable interface {
-	obj.Object
-	IsCompatibleWithUnit(unit *Unit) bool
-	DoubleValueForUnit(unit *Unit) float64
-}
-
-var _ Quantityable = (*Quantity)(nil)

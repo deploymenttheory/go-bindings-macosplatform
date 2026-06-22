@@ -46,24 +46,24 @@ func leaderboardScoreAdopt(id objc.ID) *LeaderboardScore {
 }
 
 // Description returns the object's -description text.
-func (x *LeaderboardScore) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ls *LeaderboardScore) Description() string {
+	return rt.Description(objref.IDOf(ls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LeaderboardScore) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ls *LeaderboardScore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LeaderboardScore) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ls *LeaderboardScore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LeaderboardScore) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ls *LeaderboardScore) String() string {
+	return rt.Description(objref.IDOf(ls))
 }
 
 // NewLeaderboardScore creates a new LeaderboardScore.
@@ -72,92 +72,53 @@ func NewLeaderboardScore() *LeaderboardScore {
 	return leaderboardScoreAdopt(_id)
 }
 
-// WithPlayer the player who earns the score.
-func (x *LeaderboardScore) WithPlayer(player PlayerProvider) *LeaderboardScore {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:"), objref.IDOf(player))
-	return x
+// WithPlayer sets the player who earns the score.
+func (ls *LeaderboardScore) WithPlayer(player PlayerProvider) *LeaderboardScore {
+	objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("setPlayer:"), objref.IDOf(player))
+	return ls
 }
 
-// WithValue the score that the player earns.
-func (x *LeaderboardScore) WithValue(value int) *LeaderboardScore {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-	return x
+// WithValue sets the score that the player earns.
+func (ls *LeaderboardScore) WithValue(value int) *LeaderboardScore {
+	objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("setValue:"), value)
+	return ls
 }
 
-// WithContext an integer value that your game uses.
-func (x *LeaderboardScore) WithContext(context_ int) *LeaderboardScore {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContext:"), context_)
-	return x
+// WithContext sets an integer value that your game uses.
+func (ls *LeaderboardScore) WithContext(context_ int) *LeaderboardScore {
+	objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("setContext:"), context_)
+	return ls
 }
 
-// WithLeaderboardID the ID that Game Center uses for the leaderboard.
-func (x *LeaderboardScore) WithLeaderboardID(leaderboardID string) *LeaderboardScore {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardID:"), purego.NSString(leaderboardID))
-	return x
+// WithLeaderboardID sets the ID that Game Center uses for the leaderboard.
+func (ls *LeaderboardScore) WithLeaderboardID(leaderboardID string) *LeaderboardScore {
+	objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("setLeaderboardID:"), purego.NSString(leaderboardID))
+	return ls
 }
 
-// Player the player who earns the score.
-func (x *LeaderboardScore) Player() *Player {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
+// Player returns the player who earns the score.
+func (ls *LeaderboardScore) Player() *Player {
+	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
-// SetPlayer wraps the corresponding Objective-C method.
-func (x *LeaderboardScore) SetPlayer(player *Player) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayer:"), objref.IDOf(player))
-}
-
-// Value the score that the player earns.
-func (x *LeaderboardScore) Value() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("value"))
+// Value returns the score that the player earns.
+func (ls *LeaderboardScore) Value() int {
+	_r := objc.Send[int](objref.IDOf(ls), objc.RegisterName("value"))
 	return _r
 }
 
-// SetValue wraps the corresponding Objective-C method.
-func (x *LeaderboardScore) SetValue(value int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-}
-
-// Context an integer value that your game uses.
-func (x *LeaderboardScore) Context() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("context"))
+// Context returns an integer value that your game uses.
+func (ls *LeaderboardScore) Context() int {
+	_r := objc.Send[int](objref.IDOf(ls), objc.RegisterName("context"))
 	return _r
 }
 
-// SetContext wraps the corresponding Objective-C method.
-func (x *LeaderboardScore) SetContext(context_ int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContext:"), context_)
-}
-
-// LeaderboardID the ID that Game Center uses for the leaderboard.
-func (x *LeaderboardScore) LeaderboardID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leaderboardID"))
+// LeaderboardID returns the ID that Game Center uses for the leaderboard.
+func (ls *LeaderboardScore) LeaderboardID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("leaderboardID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetLeaderboardID wraps the corresponding Objective-C method.
-func (x *LeaderboardScore) SetLeaderboardID(leaderboardID string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLeaderboardID:"), purego.NSString(leaderboardID))
-}
-
-// LeaderboardScoreable is the interface implemented by [LeaderboardScore], for mocking and DI.
-type LeaderboardScoreable interface {
-	obj.Object
-	WithPlayer(player PlayerProvider) *LeaderboardScore
-	WithValue(value int) *LeaderboardScore
-	WithContext(context_ int) *LeaderboardScore
-	WithLeaderboardID(leaderboardID string) *LeaderboardScore
-	Player() *Player
-	SetPlayer(player *Player)
-	Value() int
-	SetValue(value int)
-	Context() int
-	SetContext(context_ int)
-	LeaderboardID() string
-	SetLeaderboardID(leaderboardID string)
-}
-
-var _ LeaderboardScoreable = (*LeaderboardScore)(nil)

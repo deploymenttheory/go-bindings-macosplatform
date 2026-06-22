@@ -50,82 +50,60 @@ func NewQuadrilateralAccelerationStructure() *QuadrilateralAccelerationStructure
 	return quadrilateralAccelerationStructureAdopt(_id)
 }
 
-// WithQuadrilateralCount number of quads. Changes to this property require rebuilding the acceleration structure. This is an alias for the polygonCount property.
-func (x *QuadrilateralAccelerationStructure) WithQuadrilateralCount(quadrilateralCount int) *QuadrilateralAccelerationStructure {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuadrilateralCount:"), quadrilateralCount)
-	return x
+// WithQuadrilateralCount sets number of quads. Changes to this property require rebuilding the acceleration structure. This is an alias for the polygonCount property.
+func (qas *QuadrilateralAccelerationStructure) WithQuadrilateralCount(quadrilateralCount int) *QuadrilateralAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(qas), objc.RegisterName("setQuadrilateralCount:"), quadrilateralCount)
+	return qas
 }
 
-// WithVertexStride offset, in bytes, between consecutive vertices in the vertex buffer. Defaults to 0 bytes, indicating that the vertices are packed according to the natural alignment of the vector_float3 type: 16 bytes. This can be used to skip past any additional per-vertex data which may be stored alongside the position such as the vertex normal and texture coordinates. Must be a multiple of 4 bytes, and must be at least 12 bytes. Changes to this property require rebuilding the acceleration structure.
-func (x *QuadrilateralAccelerationStructure) WithVertexStride(vertexStride int) *QuadrilateralAccelerationStructure {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexStride:"), vertexStride)
-	return x
+// WithVertexStride sets offset, in bytes, between consecutive vertices in the vertex buffer. Defaults to 0 bytes, indicating that the vertices are packed according to the natural alignment of the vector_float3 type: 16 bytes. This can be used to skip past any additional per-vertex data which may be stored alongside the position such as the vertex normal and texture coordinates. Must be a multiple of 4 bytes, and must be at least 12 bytes. Changes to this property require rebuilding the acceleration structure.
+func (qas *QuadrilateralAccelerationStructure) WithVertexStride(vertexStride int) *QuadrilateralAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(qas), objc.RegisterName("setVertexStride:"), vertexStride)
+	return qas
 }
 
-// WithVertexBufferOffset offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].vertexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-func (x *QuadrilateralAccelerationStructure) WithVertexBufferOffset(vertexBufferOffset int) *QuadrilateralAccelerationStructure {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexBufferOffset:"), vertexBufferOffset)
-	return x
+// WithVertexBufferOffset sets offset, in bytes, into the vertex buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].vertexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+func (qas *QuadrilateralAccelerationStructure) WithVertexBufferOffset(vertexBufferOffset int) *QuadrilateralAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(qas), objc.RegisterName("setVertexBufferOffset:"), vertexBufferOffset)
+	return qas
 }
 
-// WithIndexBufferOffset offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].indexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-func (x *QuadrilateralAccelerationStructure) WithIndexBufferOffset(indexBufferOffset int) *QuadrilateralAccelerationStructure {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndexBufferOffset:"), indexBufferOffset)
-	return x
+// WithIndexBufferOffset sets offset, in bytes, into the index buffer. Defaults to 0 bytes. Must be aligned to a multiple of the index type. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].indexBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+func (qas *QuadrilateralAccelerationStructure) WithIndexBufferOffset(indexBufferOffset int) *QuadrilateralAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(qas), objc.RegisterName("setIndexBufferOffset:"), indexBufferOffset)
+	return qas
 }
 
-// WithMaskBufferOffset offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].maskBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-func (x *QuadrilateralAccelerationStructure) WithMaskBufferOffset(maskBufferOffset int) *QuadrilateralAccelerationStructure {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaskBufferOffset:"), maskBufferOffset)
-	return x
+// WithMaskBufferOffset sets offset, in bytes, into the mask buffer. Defaults to 0 bytes. Must be aligned to 4 bytes. This is an alias for polygonBuffers[0].maskBufferOffset. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+func (qas *QuadrilateralAccelerationStructure) WithMaskBufferOffset(maskBufferOffset int) *QuadrilateralAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(qas), objc.RegisterName("setMaskBufferOffset:"), maskBufferOffset)
+	return qas
 }
 
-// WithPolygonCount number of polygons. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].polygonCount. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
-func (x *QuadrilateralAccelerationStructure) WithPolygonCount(polygonCount int) *QuadrilateralAccelerationStructure {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonCount:"), polygonCount)
-	return x
+// WithPolygonCount sets number of polygons. Changes to this property require rebuilding the acceleration structure. This is an alias for polygonBuffers[0].polygonCount. There must be exactly one polygon buffer to use this property, or the polygonBuffers property must be nil, in which case an MPSPolygonBuffer will be created automatically.
+func (qas *QuadrilateralAccelerationStructure) WithPolygonCount(polygonCount int) *QuadrilateralAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(qas), objc.RegisterName("setPolygonCount:"), polygonCount)
+	return qas
 }
 
-// WithPolygonBuffers array of polygon buffers. Each buffer contains a vertex buffer and optional index and mask buffer for an array of polygons. Changing the length of this array requires rebuilding the acceleration structure. Using more than one MPSPolygonBuffer will reduce performance. It is better to concatenate these buffers into a single vertex buffer, index buffer, and mask buffer and use a single MPSPolygonBuffer if possible. This also applies when using an MPSInstanceAccelerationStructure: each instance or subclass of MPSPolygonAccelerationStructure in an instance hierarchy should use the same vertex buffer, index buffer, and mask buffer, although each acceleration structure may use different offsets into these buffers. This allows for the vertex, index, and mask buffers to be bound directly instead of indirectly through an argument buffer. There must be at least one MPSPolygonBuffer. On argument buffer tier 1 devices, there must be be exactly one MPSPolygonBuffer. Use the argumentBuffersSupport property of the MTLDevice to check for support.
-func (x *QuadrilateralAccelerationStructure) WithPolygonBuffers(items ...obj.Object) *QuadrilateralAccelerationStructure {
+// WithPolygonBuffers sets array of polygon buffers. Each buffer contains a vertex buffer and optional index and mask buffer for an array of polygons. Changing the length of this array requires rebuilding the acceleration structure. Using more than one MPSPolygonBuffer will reduce performance. It is better to concatenate these buffers into a single vertex buffer, index buffer, and mask buffer and use a single MPSPolygonBuffer if possible. This also applies when using an MPSInstanceAccelerationStructure: each instance or subclass of MPSPolygonAccelerationStructure in an instance hierarchy should use the same vertex buffer, index buffer, and mask buffer, although each acceleration structure may use different offsets into these buffers. This allows for the vertex, index, and mask buffers to be bound directly instead of indirectly through an argument buffer. There must be at least one MPSPolygonBuffer. On argument buffer tier 1 devices, there must be be exactly one MPSPolygonBuffer. Use the argumentBuffersSupport property of the MTLDevice to check for support.
+func (qas *QuadrilateralAccelerationStructure) WithPolygonBuffers(items ...obj.Object) *QuadrilateralAccelerationStructure {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolygonBuffers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(qas), objc.RegisterName("setPolygonBuffers:"), _arr)
+	return qas
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *QuadrilateralAccelerationStructure) WithLabel(label string) *QuadrilateralAccelerationStructure {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (qas *QuadrilateralAccelerationStructure) WithLabel(label string) *QuadrilateralAccelerationStructure {
+	objc.Send[objc.ID](objref.IDOf(qas), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return qas
 }
 
-// QuadrilateralCount number of quads. Changes to this property require rebuilding the acceleration structure. This is an alias for the polygonCount property.
-func (x *QuadrilateralAccelerationStructure) QuadrilateralCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("quadrilateralCount"))
+// QuadrilateralCount returns number of quads. Changes to this property require rebuilding the acceleration structure. This is an alias for the polygonCount property.
+func (qas *QuadrilateralAccelerationStructure) QuadrilateralCount() int {
+	_r := objc.Send[int](objref.IDOf(qas), objc.RegisterName("quadrilateralCount"))
 	return _r
 }
-
-// SetQuadrilateralCount wraps the corresponding Objective-C method.
-func (x *QuadrilateralAccelerationStructure) SetQuadrilateralCount(quadrilateralCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuadrilateralCount:"), quadrilateralCount)
-}
-
-// QuadrilateralAccelerationStructureable is the interface implemented by [QuadrilateralAccelerationStructure], for mocking and DI.
-type QuadrilateralAccelerationStructureable interface {
-	obj.Object
-	WithQuadrilateralCount(quadrilateralCount int) *QuadrilateralAccelerationStructure
-	WithVertexStride(vertexStride int) *QuadrilateralAccelerationStructure
-	WithVertexBufferOffset(vertexBufferOffset int) *QuadrilateralAccelerationStructure
-	WithIndexBufferOffset(indexBufferOffset int) *QuadrilateralAccelerationStructure
-	WithMaskBufferOffset(maskBufferOffset int) *QuadrilateralAccelerationStructure
-	WithPolygonCount(polygonCount int) *QuadrilateralAccelerationStructure
-	WithPolygonBuffers(items ...obj.Object) *QuadrilateralAccelerationStructure
-	WithLabel(label string) *QuadrilateralAccelerationStructure
-	QuadrilateralCount() int
-	SetQuadrilateralCount(quadrilateralCount int)
-}
-
-var _ QuadrilateralAccelerationStructureable = (*QuadrilateralAccelerationStructure)(nil)
 
 var _ PolygonAccelerationStructureProvider = (*QuadrilateralAccelerationStructure)(nil)
 

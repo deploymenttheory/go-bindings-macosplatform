@@ -46,122 +46,83 @@ func mTRDeviceControllerFactoryParamsAdopt(id objc.ID) *MTRDeviceControllerFacto
 }
 
 // Description returns the object's -description text.
-func (x *MTRDeviceControllerFactoryParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdcfp *MTRDeviceControllerFactoryParams) Description() string {
+	return rt.Description(objref.IDOf(mdcfp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDeviceControllerFactoryParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdcfp *MTRDeviceControllerFactoryParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdcfp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDeviceControllerFactoryParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdcfp *MTRDeviceControllerFactoryParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdcfp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDeviceControllerFactoryParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdcfp *MTRDeviceControllerFactoryParams) String() string {
+	return rt.Description(objref.IDOf(mdcfp))
 }
 
 // WithProductAttestationAuthorityCertificates sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceControllerFactoryParams) WithProductAttestationAuthorityCertificates(items ...obj.Object) *MTRDeviceControllerFactoryParams {
+func (mdcfp *MTRDeviceControllerFactoryParams) WithProductAttestationAuthorityCertificates(items ...obj.Object) *MTRDeviceControllerFactoryParams {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductAttestationAuthorityCertificates:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mdcfp), objc.RegisterName("setProductAttestationAuthorityCertificates:"), _arr)
+	return mdcfp
 }
 
 // WithCertificationDeclarationCertificates sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceControllerFactoryParams) WithCertificationDeclarationCertificates(items ...obj.Object) *MTRDeviceControllerFactoryParams {
+func (mdcfp *MTRDeviceControllerFactoryParams) WithCertificationDeclarationCertificates(items ...obj.Object) *MTRDeviceControllerFactoryParams {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificationDeclarationCertificates:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mdcfp), objc.RegisterName("setCertificationDeclarationCertificates:"), _arr)
+	return mdcfp
 }
 
 // WithPort sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceControllerFactoryParams) WithPort(port obj.Object) *MTRDeviceControllerFactoryParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPort:"), objref.IDOf(port))
-	return x
+func (mdcfp *MTRDeviceControllerFactoryParams) WithPort(port obj.Object) *MTRDeviceControllerFactoryParams {
+	objc.Send[objc.ID](objref.IDOf(mdcfp), objc.RegisterName("setPort:"), objref.IDOf(port))
+	return mdcfp
 }
 
 // WithShouldStartServer sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceControllerFactoryParams) WithShouldStartServer(shouldStartServer bool) *MTRDeviceControllerFactoryParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldStartServer:"), shouldStartServer)
-	return x
+func (mdcfp *MTRDeviceControllerFactoryParams) WithShouldStartServer(shouldStartServer bool) *MTRDeviceControllerFactoryParams {
+	objc.Send[objc.ID](objref.IDOf(mdcfp), objc.RegisterName("setShouldStartServer:"), shouldStartServer)
+	return mdcfp
 }
 
 // ProductAttestationAuthorityCertificates wraps the corresponding Objective-C method.
 //
 // ProductAttestationAuthorityCertificates returns the collection as a Go slice.
-func (x *MTRDeviceControllerFactoryParams) ProductAttestationAuthorityCertificates() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productAttestationAuthorityCertificates"))
+func (mdcfp *MTRDeviceControllerFactoryParams) ProductAttestationAuthorityCertificates() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(mdcfp), objc.RegisterName("productAttestationAuthorityCertificates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
-}
-
-// SetProductAttestationAuthorityCertificates wraps the corresponding Objective-C method.
-func (x *MTRDeviceControllerFactoryParams) SetProductAttestationAuthorityCertificates(productAttestationAuthorityCertificates []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductAttestationAuthorityCertificates:"), purego.SliceToNSArray(productAttestationAuthorityCertificates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // CertificationDeclarationCertificates wraps the corresponding Objective-C method.
 //
 // CertificationDeclarationCertificates returns the collection as a Go slice.
-func (x *MTRDeviceControllerFactoryParams) CertificationDeclarationCertificates() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificationDeclarationCertificates"))
+func (mdcfp *MTRDeviceControllerFactoryParams) CertificationDeclarationCertificates() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(mdcfp), objc.RegisterName("certificationDeclarationCertificates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetCertificationDeclarationCertificates wraps the corresponding Objective-C method.
-func (x *MTRDeviceControllerFactoryParams) SetCertificationDeclarationCertificates(certificationDeclarationCertificates []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificationDeclarationCertificates:"), purego.SliceToNSArray(certificationDeclarationCertificates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
 // Port wraps the corresponding Objective-C method.
-func (x *MTRDeviceControllerFactoryParams) Port() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("port"))
+func (mdcfp *MTRDeviceControllerFactoryParams) Port() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdcfp), objc.RegisterName("port"))
 	return obj.Wrap(_r)
 }
 
-// SetPort wraps the corresponding Objective-C method.
-func (x *MTRDeviceControllerFactoryParams) SetPort(port obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPort:"), objref.IDOf(port))
-}
-
 // ShouldStartServer wraps the corresponding Objective-C method.
-func (x *MTRDeviceControllerFactoryParams) ShouldStartServer() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldStartServer"))
+func (mdcfp *MTRDeviceControllerFactoryParams) ShouldStartServer() bool {
+	_r := objc.Send[bool](objref.IDOf(mdcfp), objc.RegisterName("shouldStartServer"))
 	return _r
 }
-
-// SetShouldStartServer wraps the corresponding Objective-C method.
-func (x *MTRDeviceControllerFactoryParams) SetShouldStartServer(shouldStartServer bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldStartServer:"), shouldStartServer)
-}
-
-// MTRDeviceControllerFactoryParamsable is the interface implemented by [MTRDeviceControllerFactoryParams], for mocking and DI.
-type MTRDeviceControllerFactoryParamsable interface {
-	obj.Object
-	WithProductAttestationAuthorityCertificates(items ...obj.Object) *MTRDeviceControllerFactoryParams
-	WithCertificationDeclarationCertificates(items ...obj.Object) *MTRDeviceControllerFactoryParams
-	WithPort(port obj.Object) *MTRDeviceControllerFactoryParams
-	WithShouldStartServer(shouldStartServer bool) *MTRDeviceControllerFactoryParams
-	ProductAttestationAuthorityCertificates() []obj.Object
-	SetProductAttestationAuthorityCertificates(productAttestationAuthorityCertificates []obj.Object)
-	CertificationDeclarationCertificates() []obj.Object
-	SetCertificationDeclarationCertificates(certificationDeclarationCertificates []obj.Object)
-	Port() obj.Object
-	SetPort(port obj.Object)
-	ShouldStartServer() bool
-	SetShouldStartServer(shouldStartServer bool)
-}
-
-var _ MTRDeviceControllerFactoryParamsable = (*MTRDeviceControllerFactoryParams)(nil)
 
 // isMTRDeviceControllerFactoryParams marks MTRDeviceControllerFactoryParams — and, by embedding promotion, its
 // subclasses — as a member of the MTRDeviceControllerFactoryParams hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRDeviceControllerFactoryParams) isMTRDeviceControllerFactoryParams() {}
+func (mdcfp *MTRDeviceControllerFactoryParams) isMTRDeviceControllerFactoryParams() {}
 
 var _ MTRDeviceControllerFactoryParamsProvider = (*MTRDeviceControllerFactoryParams)(nil)

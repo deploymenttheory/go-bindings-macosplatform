@@ -46,24 +46,24 @@ func cAInterDeviceAudioViewControllerAdopt(id objc.ID) *CAInterDeviceAudioViewCo
 }
 
 // Description returns the object's -description text.
-func (x *CAInterDeviceAudioViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cidavc *CAInterDeviceAudioViewController) Description() string {
+	return rt.Description(objref.IDOf(cidavc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CAInterDeviceAudioViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cidavc *CAInterDeviceAudioViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cidavc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CAInterDeviceAudioViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cidavc *CAInterDeviceAudioViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cidavc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CAInterDeviceAudioViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cidavc *CAInterDeviceAudioViewController) String() string {
+	return rt.Description(objref.IDOf(cidavc))
 }
 
 // NewCAInterDeviceAudioViewController creates a new CAInterDeviceAudioViewController.
@@ -71,10 +71,3 @@ func NewCAInterDeviceAudioViewController() *CAInterDeviceAudioViewController {
 	_id := objc.Send[objc.ID](objc.ID(_class("CAInterDeviceAudioViewController")), objc.RegisterName("new"))
 	return cAInterDeviceAudioViewControllerAdopt(_id)
 }
-
-// CAInterDeviceAudioViewControllerable is the interface implemented by [CAInterDeviceAudioViewController], for mocking and DI.
-type CAInterDeviceAudioViewControllerable interface {
-	obj.Object
-}
-
-var _ CAInterDeviceAudioViewControllerable = (*CAInterDeviceAudioViewController)(nil)

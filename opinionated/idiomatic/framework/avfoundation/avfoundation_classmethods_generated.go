@@ -6,6 +6,8 @@ package avfoundation
 
 import (
 	"context"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
@@ -13,7 +15,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // AssetWithURL creates an asset that models the media at the specified URL.
@@ -223,31 +224,31 @@ func CaptionFormatConformerWithConversionSettings(conversionSettings obj.Object)
 	return CaptionFormatConformerFromID(_r)
 }
 
-// AppleITTTopRegion the top region for iTT format This region can be used in iTT format and it occupies the top 15% of the display area. The region uses LRTB, a line progresses left to right and the block extends from top to bottom. Each line is stacked with top justified.
+// AppleITTTopRegion returns the top region for iTT format This region can be used in iTT format and it occupies the top 15% of the display area. The region uses LRTB, a line progresses left to right and the block extends from top to bottom. Each line is stacked with top justified.
 func AppleITTTopRegion() *CaptionRegion {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptionRegion")), objc.RegisterName("appleITTTopRegion"))
 	return CaptionRegionFromID(_r)
 }
 
-// AppleITTBottomRegion the bottom region for iTT format This region can be used in iTT format and it occupies the bottom 15% of the display area. The region uses LRTB, a line progresses left to right and the block extends from top to bottom. Each line is stacked with bottom justified.
+// AppleITTBottomRegion returns the bottom region for iTT format This region can be used in iTT format and it occupies the bottom 15% of the display area. The region uses LRTB, a line progresses left to right and the block extends from top to bottom. Each line is stacked with bottom justified.
 func AppleITTBottomRegion() *CaptionRegion {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptionRegion")), objc.RegisterName("appleITTBottomRegion"))
 	return CaptionRegionFromID(_r)
 }
 
-// AppleITTLeftRegion the  left region for iTT format This region can be used in iTT format and it occupies the left 15% of the display area. The region uses TBRL, a line progresses top to bottom and the block extends from right to left. Each line is stacked with right justified.
+// AppleITTLeftRegion returns the  left region for iTT format This region can be used in iTT format and it occupies the left 15% of the display area. The region uses TBRL, a line progresses top to bottom and the block extends from right to left. Each line is stacked with right justified.
 func AppleITTLeftRegion() *CaptionRegion {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptionRegion")), objc.RegisterName("appleITTLeftRegion"))
 	return CaptionRegionFromID(_r)
 }
 
-// AppleITTRightRegion the right region for iTT format This region can be used in iTT format and it occupies the right 15% of the display area. The region uses TBRL, a line progresses top to bottom and the block extends from right to left. Each line is stacked with right justified.
+// AppleITTRightRegion returns the right region for iTT format This region can be used in iTT format and it occupies the right 15% of the display area. The region uses TBRL, a line progresses top to bottom and the block extends from right to left. Each line is stacked with right justified.
 func AppleITTRightRegion() *CaptionRegion {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptionRegion")), objc.RegisterName("appleITTRightRegion"))
 	return CaptionRegionFromID(_r)
 }
 
-// SubRipTextBottomRegion the bottom region for SubRip Text (SRT) format This region can be used in SRT format and it occupies the entire video display area. The region uses LRTB, a line progresses left to right and the block extends from top to bottom. Each line is stacked with bottom justified.
+// SubRipTextBottomRegion returns the bottom region for SubRip Text (SRT) format This region can be used in SRT format and it occupies the entire video display area. The region uses LRTB, a line progresses left to right and the block extends from top to bottom. Each line is stacked with bottom justified.
 func SubRipTextBottomRegion() *CaptionRegion {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptionRegion")), objc.RegisterName("subRipTextBottomRegion"))
 	return CaptionRegionFromID(_r)
@@ -329,7 +330,7 @@ func DefaultDeviceWithDeviceTypeMediaTypePosition(deviceType obj.Object, mediaTy
 	return CaptureDeviceFromID(_r)
 }
 
-// UserPreferredCamera settable property that specifies a user preferred camera. Setting this property allows an application to persist its user’s preferred camera across app launches and reboots. The property internally maintains a short history, so if your user’s most recent preferred camera is not currently connected, it still reports the next best choice. This property always returns a device that is present. If no camera is available nil is returned. Setting the property to nil has no effect.
+// UserPreferredCamera returns settable property that specifies a user preferred camera. Setting this property allows an application to persist its user’s preferred camera across app launches and reboots. The property internally maintains a short history, so if your user’s most recent preferred camera is not currently connected, it still reports the next best choice. This property always returns a device that is present. If no camera is available nil is returned. Setting the property to nil has no effect.
 func UserPreferredCamera() *CaptureDevice {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("userPreferredCamera"))
 	return CaptureDeviceFromID(_r)
@@ -357,7 +358,7 @@ func RequestAccessForMediaTypeCompletionHandler(mediaType obj.Object, handler fu
 	objc.Send[objc.ID](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("requestAccessForMediaType:completionHandler:"), objref.IDOf(mediaType), objc.NewBlock(func(_ objc.Block, _b0 bool) { handler(_b0) }))
 }
 
-// CenterStageControlMode a class property indicating the current mode of Center Stage control (user, app, or cooperative). This class property determines how the Center Stage feature is controlled. When set to the default value of AVCaptureCenterStageControlModeUser, centerStageEnabled may not be set programmatically and throws an NSInvalidArgumentException. In User mode, the feature may only be set by the user in Control Center. If you wish to take Center Stage control away from the user and exclusively enable / disable it programmatically, set this property to AVCaptureCenterStageControlModeApp. When under exclusive app control, Center Stage user control is disallowed (for instance, the toggle is grayed out in Control Center). If you wish to take control of Center Stage, but also cooperate with the user by listening for and appropriately reacting to their changes to the centerStageEnabled property, set this property to AVCaptureCenterStageControlModeCooperative. Note that in this mode, the onus is on you, the app developer, to honor user intent and conform your AVCaptureSession configuration to make Center Stage active (see the AVCaptureDevice instance property centerStageActive). In cooperative mode, the centerStageEnabled property may change at any time (such as when the user enables / disables the feature in Control Center).
+// CenterStageControlMode returns a class property indicating the current mode of Center Stage control (user, app, or cooperative). This class property determines how the Center Stage feature is controlled. When set to the default value of AVCaptureCenterStageControlModeUser, centerStageEnabled may not be set programmatically and throws an NSInvalidArgumentException. In User mode, the feature may only be set by the user in Control Center. If you wish to take Center Stage control away from the user and exclusively enable / disable it programmatically, set this property to AVCaptureCenterStageControlModeApp. When under exclusive app control, Center Stage user control is disallowed (for instance, the toggle is grayed out in Control Center). If you wish to take control of Center Stage, but also cooperate with the user by listening for and appropriately reacting to their changes to the centerStageEnabled property, set this property to AVCaptureCenterStageControlModeCooperative. Note that in this mode, the onus is on you, the app developer, to honor user intent and conform your AVCaptureSession configuration to make Center Stage active (see the AVCaptureDevice instance property centerStageActive). In cooperative mode, the centerStageEnabled property may change at any time (such as when the user enables / disables the feature in Control Center).
 func CenterStageControlMode() CaptureCenterStageControlMode {
 	_r := objc.Send[CaptureCenterStageControlMode](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("centerStageControlMode"))
 	return _r
@@ -368,7 +369,7 @@ func SetCenterStageControlMode(centerStageControlMode CaptureCenterStageControlM
 	objc.Send[objc.ID](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("setCenterStageControlMode:"), centerStageControlMode)
 }
 
-// IsCenterStageEnabled a class property indicating whether the Center Stage feature is currently enabled or disabled (such as in Control Center or programmatically via your app). This property may only be set if centerStageControlMode is AVCaptureCenterStageControlModeApp or AVCaptureCenterStageControlModeCooperative, and otherwise throws an NSInvalidArgumentException. When centerStageControlMode is AVCaptureCenterStageControlModeUser or AVCaptureCenterStageControlModeCooperative, this property may change according to user desire (such as enabling / disabling the feature in Control Center), so you should key-value observe it.
+// IsCenterStageEnabled reports whether a class property indicating whether the Center Stage feature is currently enabled or disabled (such as in Control Center or programmatically via your app). This property may only be set if centerStageControlMode is AVCaptureCenterStageControlModeApp or AVCaptureCenterStageControlModeCooperative, and otherwise throws an NSInvalidArgumentException. When centerStageControlMode is AVCaptureCenterStageControlModeUser or AVCaptureCenterStageControlModeCooperative, this property may change according to user desire (such as enabling / disabling the feature in Control Center), so you should key-value observe it.
 func IsCenterStageEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("isCenterStageEnabled"))
 	return _r
@@ -379,25 +380,25 @@ func SetCenterStageEnabled(centerStageEnabled bool) {
 	objc.Send[objc.ID](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("setCenterStageEnabled:"), centerStageEnabled)
 }
 
-// IsPortraitEffectEnabled a class property indicating whether the Portrait Effect feature is currently enabled in Control Center. This property changes to reflect the Portrait Effect state in Control Center. It is key-value observable. On iOS, Portrait Effect only applies to video conferencing apps by default (apps that use "voip" as one of their UIBackgroundModes). Non video conferencing apps may opt in for the Portrait Effect by adding the following key to their Info.plist: <key>NSCameraPortraitEffectEnabled</key> <true/>
+// IsPortraitEffectEnabled reports whether a class property indicating whether the Portrait Effect feature is currently enabled in Control Center. This property changes to reflect the Portrait Effect state in Control Center. It is key-value observable. On iOS, Portrait Effect only applies to video conferencing apps by default (apps that use "voip" as one of their UIBackgroundModes). Non video conferencing apps may opt in for the Portrait Effect by adding the following key to their Info.plist: <key>NSCameraPortraitEffectEnabled</key> <true/>
 func IsPortraitEffectEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("isPortraitEffectEnabled"))
 	return _r
 }
 
-// ReactionEffectsEnabled a class property indicating whether the application is suitable for reaction effects, either by automatic gesture detection, or by calls to -[AVCaptureDevice performEffectForReaction:]. Reactions are only rendered when the device's activeFormat.reactionEffectsSupported is also YES, which will be reflected by canPerformReactionEffects when the feature is both enabled and supported. On macOS, Reaction Effects are enabled by default for all applications. On iOS, Reaction Effects are enabled by default for video conferencing applications (apps that use "voip" as one of their UIBackgroundModes). Non video conferencing applications may opt in for Reaction Effects by adding the following key to their Info.plist: <key>NSCameraReactionEffectsEnabled</key> <true/>
+// ReactionEffectsEnabled reports whether a class property indicating whether the application is suitable for reaction effects, either by automatic gesture detection, or by calls to -[AVCaptureDevice performEffectForReaction:]. Reactions are only rendered when the device's activeFormat.reactionEffectsSupported is also true, which will be reflected by canPerformReactionEffects when the feature is both enabled and supported. On macOS, Reaction Effects are enabled by default for all applications. On iOS, Reaction Effects are enabled by default for video conferencing applications (apps that use "voip" as one of their UIBackgroundModes). Non video conferencing applications may opt in for Reaction Effects by adding the following key to their Info.plist: <key>NSCameraReactionEffectsEnabled</key> <true/>
 func ReactionEffectsEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("reactionEffectsEnabled"))
 	return _r
 }
 
-// ReactionEffectGesturesEnabled a class property indicating whether gesture detection will trigger reaction effects on the video stream. Gesture detection will only run when the device's activeFormat.reactionEffectsSupported is also YES, which will be reflected by canPerformReactionEffects. This property changes to reflect the Gestures state in Control Center. It is key-value observable. Clients can call performEffectForReaction: independently of whether gesture detection is enabled, reaction effects from either source will be intermixed. By default, gesture detection is enabled.  As of iOS 17.4 and macOS 14.4, applications can control the default value of this property by adding the following key to their Info.plist: <key>NSCameraReactionEffectGesturesEnabledDefault</key> A value of true enables gesture detection and a value of false disables it, until such time that the user makes their own selection in Control Center.
+// ReactionEffectGesturesEnabled reports whether a class property indicating whether gesture detection will trigger reaction effects on the video stream. Gesture detection will only run when the device's activeFormat.reactionEffectsSupported is also true, which will be reflected by canPerformReactionEffects. This property changes to reflect the Gestures state in Control Center. It is key-value observable. Clients can call performEffectForReaction: independently of whether gesture detection is enabled, reaction effects from either source will be intermixed. By default, gesture detection is enabled. As of iOS 17.4 and macOS 14.4, applications can control the default value of this property by adding the following key to their Info.plist: <key>NSCameraReactionEffectGesturesEnabledDefault</key> A value of true enables gesture detection and a value of false disables it, until such time that the user makes their own selection in Control Center.
 func ReactionEffectGesturesEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("reactionEffectGesturesEnabled"))
 	return _r
 }
 
-// IsBackgroundReplacementEnabled a class property indicating whether the user has enabled the Background Replacement feature for this application.
+// IsBackgroundReplacementEnabled reports whether a class property indicating whether the user has enabled the Background Replacement feature for this application.
 func IsBackgroundReplacementEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("isBackgroundReplacementEnabled"))
 	return _r
@@ -420,19 +421,19 @@ func ShowSystemUserInterface(systemUserInterface CaptureSystemUserInterface) {
 	objc.Send[objc.ID](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("showSystemUserInterface:"), systemUserInterface)
 }
 
-// IsStudioLightEnabled a class property indicating whether the Studio Light feature is currently enabled in Control Center. This property changes to reflect the Studio Light state in Control Center. It is key-value observable.  On iOS, Studio Light only applies to video conferencing apps by default (apps that use "voip" as one of their UIBackgroundModes). Non video conferencing apps may opt in for Studio Light by adding the following key to their Info.plist: <key>NSCameraStudioLightEnabled</key> <true/>
+// IsStudioLightEnabled reports whether a class property indicating whether the Studio Light feature is currently enabled in Control Center. This property changes to reflect the Studio Light state in Control Center. It is key-value observable. On iOS, Studio Light only applies to video conferencing apps by default (apps that use "voip" as one of their UIBackgroundModes). Non video conferencing apps may opt in for Studio Light by adding the following key to their Info.plist: <key>NSCameraStudioLightEnabled</key> <true/>
 func IsStudioLightEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("isStudioLightEnabled"))
 	return _r
 }
 
-// IsEdgeLightEnabled a class property indicating whether the Edge Light feature is currently enabled in Control Center. This readonly property changes to reflect the Edge Light state in Control Center. It is key-value observable.
+// IsEdgeLightEnabled reports whether a class property indicating whether the Edge Light feature is currently enabled in Control Center. This readonly property changes to reflect the Edge Light state in Control Center. It is key-value observable.
 func IsEdgeLightEnabled() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("isEdgeLightEnabled"))
 	return _r
 }
 
-// IsEdgeLightActive a class property indicating whether the edge light UI is actively being shown on a screen. This readonly property reflects whether the edge light UI is actively being shown on a screen. It is key-value observable.
+// IsEdgeLightActive reports whether a class property indicating whether the edge light UI is actively being shown on a screen. This readonly property reflects whether the edge light UI is actively being shown on a screen. It is key-value observable.
 func IsEdgeLightActive() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureDevice")), objc.RegisterName("isEdgeLightActive"))
 	return _r
@@ -454,19 +455,19 @@ func DeviceInputWithDeviceError(device *CaptureDevice) (result *CaptureDeviceInp
 	return CaptureDeviceInputFromID(_r), nil
 }
 
-// IsMatchingFrameRateSupported whether the external display supports matching frame rate to a capture device. If `true`, you may instantiate a configurator with a configuration specifying “AVCaptureExternalDisplayConfiguration/shouldMatchFrameRate“ set to `true`.
+// IsMatchingFrameRateSupported reports whether the external display supports matching frame rate to a capture device. If `true`, you may instantiate a configurator with a configuration specifying “AVCaptureExternalDisplayConfiguration/shouldMatchFrameRate“ set to `true`.
 func IsMatchingFrameRateSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureExternalDisplayConfigurator")), objc.RegisterName("isMatchingFrameRateSupported"))
 	return _r
 }
 
-// IsBypassingColorSpaceConversionSupported whether the external display supports bypassing color space conversion. If `true`, you may instantiate a configurator with a configuration specifying “AVCaptureExternalDisplayConfiguration/bypassColorSpaceConversion“ set to `true`.
+// IsBypassingColorSpaceConversionSupported reports whether the external display supports bypassing color space conversion. If `true`, you may instantiate a configurator with a configuration specifying “AVCaptureExternalDisplayConfiguration/bypassColorSpaceConversion“ set to `true`.
 func IsBypassingColorSpaceConversionSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureExternalDisplayConfigurator")), objc.RegisterName("isBypassingColorSpaceConversionSupported"))
 	return _r
 }
 
-// IsPreferredResolutionSupported whether the external display supports configuration to your preferred resolution. If `true`, you may instantiate a configurator with a configuration specifying “AVCaptureExternalDisplayConfiguration/preferredResolution“ set to `true`.
+// IsPreferredResolutionSupported reports whether the external display supports configuration to your preferred resolution. If `true`, you may instantiate a configurator with a configuration specifying “AVCaptureExternalDisplayConfiguration/preferredResolution“ set to `true`.
 func IsPreferredResolutionSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVCaptureExternalDisplayConfigurator")), objc.RegisterName("isPreferredResolutionSupported"))
 	return _r
@@ -526,13 +527,13 @@ func JpegStillImageNSDataRepresentation(jpegSampleBuffer obj.Object) obj.Object 
 	return obj.Wrap(_r)
 }
 
-// FrameCountSource a frame counter timecode source that operates independently of any internal or external synchronization. This class property represents a standalone timecode source that advances based purely on frame count, independent of any real-time or external synchronization. It is ideal for scenarios where a simple, self-contained timing reference is sufficient, without requiring alignment to system clocks or external devices.
+// FrameCountSource returns a frame counter timecode source that operates independently of any internal or external synchronization. This class property represents a standalone timecode source that advances based purely on frame count, independent of any real-time or external synchronization. It is ideal for scenarios where a simple, self-contained timing reference is sufficient, without requiring alignment to system clocks or external devices.
 func FrameCountSource() *CaptureTimecodeSource {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureTimecodeGenerator")), objc.RegisterName("frameCountSource"))
 	return CaptureTimecodeSourceFromID(_r)
 }
 
-// RealTimeClockSource a predefined timecode source synchronized to the real-time system clock. This class property provides a default timecode source based on the real-time system clock, requiring no external device. It is ideal for live events or scenarios where alignment with the current time of day is necessary.
+// RealTimeClockSource returns a predefined timecode source synchronized to the real-time system clock. This class property provides a default timecode source based on the real-time system clock, requiring no external device. It is ideal for live events or scenarios where alignment with the current time of day is necessary.
 func RealTimeClockSource() *CaptureTimecodeSource {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVCaptureTimecodeGenerator")), objc.RegisterName("realTimeClockSource"))
 	return CaptureTimecodeSourceFromID(_r)
@@ -630,19 +631,19 @@ func SharedSession() *ExternalStorageDeviceDiscoverySession {
 	return ExternalStorageDeviceDiscoverySessionFromID(_r)
 }
 
-// IsSupported whether the external storage devices are supported by this device. A value of YES indicates that external storage devices are supported while NO indicates it is not.
+// IsSupported reports whether the external storage devices are supported by this device. A value of true indicates that external storage devices are supported while false indicates it is not.
 func IsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVExternalStorageDeviceDiscoverySession")), objc.RegisterName("isSupported"))
 	return _r
 }
 
-// AVExternalSyncDeviceDiscoverySessionSharedSession the singleton instance of the external sync source device discovery session. Access the one and only external sync device discovery session on this host device using this method. “sharedSession“ returns `nil` if the host device doesn't support external sync devices.
+// AVExternalSyncDeviceDiscoverySessionSharedSession returns the singleton instance of the external sync source device discovery session. Access the one and only external sync device discovery session on this host device using this method. “sharedSession“ returns `nil` if the host device doesn't support external sync devices.
 func AVExternalSyncDeviceDiscoverySessionSharedSession() *ExternalSyncDeviceDiscoverySession {
 	_r := objc.Send[objc.ID](objc.ID(_class("AVExternalSyncDeviceDiscoverySession")), objc.RegisterName("sharedSession"))
 	return ExternalSyncDeviceDiscoverySessionFromID(_r)
 }
 
-// AVExternalSyncDeviceDiscoverySessionIsSupported whether external sync devices are supported by this device. A value of `true` indicates that external sync devices are supported while `false` indicates they are not.
+// AVExternalSyncDeviceDiscoverySessionIsSupported reports whether external sync devices are supported by this device. A value of `true` indicates that external sync devices are supported while `false` indicates they are not.
 func AVExternalSyncDeviceDiscoverySessionIsSupported() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVExternalSyncDeviceDiscoverySession")), objc.RegisterName("isSupported"))
 	return _r
@@ -991,7 +992,7 @@ func PlayerWithPlayerItem(item *PlayerItem) *Player {
 	return PlayerFromID(_r)
 }
 
-// EligibleForHDRPlayback indicates whether HDR content can be played to an appropriate display. This property is YES if an HDR display is available and the device is capable of playing HDR content from an appropriate AVAsset, NO otherwise. This property does not indicate whether video contains HDR content, whether HDR video is currently playing, or whether video is playing on an HDR display. This property is not KVO observable.
+// EligibleForHDRPlayback reports whether HDR content can be played to an appropriate display. This property is true if an HDR display is available and the device is capable of playing HDR content from an appropriate AVAsset, false otherwise. This property does not indicate whether video contains HDR content, whether HDR video is currently playing, or whether video is playing on an HDR display. This property is not KVO observable.
 func EligibleForHDRPlayback() bool {
 	_r := objc.Send[bool](objc.ID(_class("AVPlayer")), objc.RegisterName("eligibleForHDRPlayback"))
 	return _r

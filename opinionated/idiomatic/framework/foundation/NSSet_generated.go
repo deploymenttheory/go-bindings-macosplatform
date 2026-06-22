@@ -5,12 +5,13 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Set is an idiomatic wrapper over the Objective-C class NSSet.
@@ -49,24 +50,24 @@ func setAdopt(id objc.ID) *Set {
 }
 
 // Description returns the object's -description text.
-func (x *Set) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Set) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Set) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Set) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Set) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Set) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Set) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Set) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewSetWithCoder creates a new Set.
@@ -105,44 +106,44 @@ func NewSetWithArray(array []obj.Object) *Set {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Set) WithScriptingProperties(scriptingProperties obj.Object) *Set {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (s *Set) WithScriptingProperties(scriptingProperties obj.Object) *Set {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return s
 }
 
 // Member determines whether a given object is present in the set, and returns that object if it is.
-func (x *Set) Member(object obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("member:"), objref.IDOf(object))
+func (s *Set) Member(object obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("member:"), objref.IDOf(object))
 	return obj.Wrap(_r)
 }
 
 // ObjectEnumerator returns an enumerator object that lets you access each object in the set.
-func (x *Set) ObjectEnumerator() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectEnumerator"))
+func (s *Set) ObjectEnumerator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("objectEnumerator"))
 	return obj.Wrap(_r)
 }
 
 // Count wraps the corresponding Objective-C method.
-func (x *Set) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+func (s *Set) Count() int {
+	_r := objc.Send[int](objref.IDOf(s), objc.RegisterName("count"))
 	return _r
 }
 
 // AnyObject returns one of the objects in the set, or nil if the set contains no objects.
-func (x *Set) AnyObject() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anyObject"))
+func (s *Set) AnyObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("anyObject"))
 	return obj.Wrap(_r)
 }
 
 // ContainsObject returns a Boolean value that indicates whether a given object is present in the set.
-func (x *Set) ContainsObject(anObject obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsObject:"), objref.IDOf(anObject))
+func (s *Set) ContainsObject(anObject obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("containsObject:"), objref.IDOf(anObject))
 	return _r
 }
 
 // DescriptionWithLocale returns a string that represents the contents of the set, formatted as a property list.
-func (x *Set) DescriptionWithLocale(locale obj.Object) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionWithLocale:"), objref.IDOf(locale))
+func (s *Set) DescriptionWithLocale(locale obj.Object) string {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("descriptionWithLocale:"), objref.IDOf(locale))
 	if _r == 0 {
 		return ""
 	}
@@ -150,115 +151,88 @@ func (x *Set) DescriptionWithLocale(locale obj.Object) string {
 }
 
 // IntersectsSet returns a Boolean value that indicates whether at least one object in the receiving set is also present in another given set.
-func (x *Set) IntersectsSet(otherSet obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("intersectsSet:"), objref.IDOf(otherSet))
+func (s *Set) IntersectsSet(otherSet obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("intersectsSet:"), objref.IDOf(otherSet))
 	return _r
 }
 
 // IsEqualToSet compares the receiving set to another set.
-func (x *Set) IsEqualToSet(otherSet obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToSet:"), objref.IDOf(otherSet))
+func (s *Set) IsEqualToSet(otherSet obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isEqualToSet:"), objref.IDOf(otherSet))
 	return _r
 }
 
 // IsSubsetOfSet returns a Boolean value that indicates whether every object in the receiving set is also present in another given set.
-func (x *Set) IsSubsetOfSet(otherSet obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSubsetOfSet:"), objref.IDOf(otherSet))
+func (s *Set) IsSubsetOfSet(otherSet obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(s), objc.RegisterName("isSubsetOfSet:"), objref.IDOf(otherSet))
 	return _r
 }
 
 // SetByAddingObject returns a new set formed by adding a given object to the receiving set.
-func (x *Set) SetByAddingObject(anObject obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setByAddingObject:"), objref.IDOf(anObject))
+func (s *Set) SetByAddingObject(anObject obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setByAddingObject:"), objref.IDOf(anObject))
 	return obj.Wrap(_r)
 }
 
 // SetByAddingObjectsFromSet returns a new set formed by adding the objects in a given set to the receiving set.
-func (x *Set) SetByAddingObjectsFromSet(other obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setByAddingObjectsFromSet:"), objref.IDOf(other))
+func (s *Set) SetByAddingObjectsFromSet(other obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setByAddingObjectsFromSet:"), objref.IDOf(other))
 	return obj.Wrap(_r)
 }
 
 // SetByAddingObjectsFromArray returns a new set formed by adding the objects in a given array to the receiving set.
-func (x *Set) SetByAddingObjectsFromArray(other []obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setByAddingObjectsFromArray:"), purego.SliceToNSArray(other, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (s *Set) SetByAddingObjectsFromArray(other []obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setByAddingObjectsFromArray:"), purego.SliceToNSArray(other, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 	return obj.Wrap(_r)
 }
 
 // EnumerateObjectsUsing executes a given block using each object in the set.
-func (x *Set) EnumerateObjectsUsing(block func(obj.Object, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateObjectsUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
+func (s *Set) EnumerateObjectsUsing(block func(obj.Object, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("enumerateObjectsUsingBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
 // EnumerateObjectsWithOptionsUsing executes a given block using each object in the set, using the specified enumeration options.
-func (x *Set) EnumerateObjectsWithOptionsUsing(opts EnumerationOptions, block func(obj.Object, *bool)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateObjectsWithOptions:usingBlock:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
+func (s *Set) EnumerateObjectsWithOptionsUsing(opts EnumerationOptions, block func(obj.Object, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("enumerateObjectsWithOptions:usingBlock:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
 // ObjectsPassingTest returns a set of objects that pass a test in a given block.
-func (x *Set) ObjectsPassingTest(predicate func(obj.Object, *bool) bool) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectsPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) bool {
+func (s *Set) ObjectsPassingTest(predicate func(obj.Object, *bool) bool) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("objectsPassingTest:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), (*bool)(_b1))
 	}))
 	return obj.Wrap(_r)
 }
 
 // ObjectsWithOptionsPassingTest returns a set of objects that pass a test in a given block, using the specified enumeration options.
-func (x *Set) ObjectsWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, *bool) bool) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectsWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) bool {
+func (s *Set) ObjectsWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, *bool) bool) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("objectsWithOptions:passingTest:"), opts, objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) bool {
 		return predicate(obj.Wrap(_b0), (*bool)(_b1))
 	}))
 	return obj.Wrap(_r)
 }
 
 // AllObjects wraps the corresponding Objective-C method.
-func (x *Set) AllObjects() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allObjects"))
+func (s *Set) AllObjects() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("allObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SortedArrayUsingDescriptors returns an array of the set’s content sorted as specified by a given array of sort descriptors.
-func (x *Set) SortedArrayUsingDescriptors(sortDescriptors []*SortDescriptor) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortedArrayUsingDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v *SortDescriptor) objc.ID { return objref.IDOf(_v) }))
+func (s *Set) SortedArrayUsingDescriptors(sortDescriptors []*SortDescriptor) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("sortedArrayUsingDescriptors:"), purego.SliceToNSArray(sortDescriptors, func(_v *SortDescriptor) objc.ID { return objref.IDOf(_v) }))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // FilteredSetUsingPredicate evaluates a given predicate against each object in the receiving set and returns a new set containing the objects for which the predicate returns true.
-func (x *Set) FilteredSetUsingPredicate(predicate *Predicate) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filteredSetUsingPredicate:"), objref.IDOf(predicate))
+func (s *Set) FilteredSetUsingPredicate(predicate *Predicate) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("filteredSetUsingPredicate:"), objref.IDOf(predicate))
 	return obj.Wrap(_r)
 }
-
-// Setable is the interface implemented by [Set], for mocking and DI.
-type Setable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Set
-	Member(object obj.Object) obj.Object
-	ObjectEnumerator() obj.Object
-	Count() int
-	AnyObject() obj.Object
-	ContainsObject(anObject obj.Object) bool
-	DescriptionWithLocale(locale obj.Object) string
-	IntersectsSet(otherSet obj.Object) bool
-	IsEqualToSet(otherSet obj.Object) bool
-	IsSubsetOfSet(otherSet obj.Object) bool
-	SetByAddingObject(anObject obj.Object) obj.Object
-	SetByAddingObjectsFromSet(other obj.Object) obj.Object
-	SetByAddingObjectsFromArray(other []obj.Object) obj.Object
-	EnumerateObjectsUsing(block func(obj.Object, *bool))
-	EnumerateObjectsWithOptionsUsing(opts EnumerationOptions, block func(obj.Object, *bool))
-	ObjectsPassingTest(predicate func(obj.Object, *bool) bool) obj.Object
-	ObjectsWithOptionsPassingTest(opts EnumerationOptions, predicate func(obj.Object, *bool) bool) obj.Object
-	AllObjects() []obj.Object
-	SortedArrayUsingDescriptors(sortDescriptors []*SortDescriptor) []obj.Object
-	FilteredSetUsingPredicate(predicate *Predicate) obj.Object
-}
-
-var _ Setable = (*Set)(nil)
 
 // isSet marks Set — and, by embedding promotion, its
 // subclasses — as a member of the Set hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Set) isSet() {}
+func (s *Set) isSet() {}
 
 var _ SetProvider = (*Set)(nil)

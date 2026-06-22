@@ -47,24 +47,24 @@ func eventAdopt(id objc.ID) *Event {
 }
 
 // Description returns the object's -description text.
-func (x *Event) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Event) Description() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Event) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (e *Event) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Event) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (e *Event) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Event) String() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Event) String() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // NewEvent creates a new Event.
@@ -74,8 +74,8 @@ func NewEvent() *Event {
 }
 
 // CharactersByApplyingModifiers returns the new characters that result if you apply the specified modifier keys to the event.
-func (x *Event) CharactersByApplyingModifiers(modifiers EventModifierFlags) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("charactersByApplyingModifiers:"), modifiers)
+func (e *Event) CharactersByApplyingModifiers(modifiers EventModifierFlags) string {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("charactersByApplyingModifiers:"), modifiers)
 	if _r == 0 {
 		return ""
 	}
@@ -83,146 +83,146 @@ func (x *Event) CharactersByApplyingModifiers(modifiers EventModifierFlags) stri
 }
 
 // TouchesMatchingPhaseInView returns the touch objects associated with the specified phase.
-func (x *Event) TouchesMatchingPhaseInView(phase TouchPhase, view *View) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchesMatchingPhase:inView:"), phase, objref.IDOf(view))
+func (e *Event) TouchesMatchingPhaseInView(phase TouchPhase, view *View) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("touchesMatchingPhase:inView:"), phase, objref.IDOf(view))
 	return obj.Wrap(_r)
 }
 
 // AllTouches returns all touch objects associated with the event.
-func (x *Event) AllTouches() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allTouches"))
+func (e *Event) AllTouches() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("allTouches"))
 	return obj.Wrap(_r)
 }
 
 // TouchesForView returns the touch objects from the event that belong to the specified view.
-func (x *Event) TouchesForView(view *View) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("touchesForView:"), objref.IDOf(view))
+func (e *Event) TouchesForView(view *View) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("touchesForView:"), objref.IDOf(view))
 	return obj.Wrap(_r)
 }
 
 // CoalescedTouchesForTouch returns all of the touch objects associated with the specified main touch.
-func (x *Event) CoalescedTouchesForTouch(touch *Touch) []*Touch {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coalescedTouchesForTouch:"), objref.IDOf(touch))
+func (e *Event) CoalescedTouchesForTouch(touch *Touch) []*Touch {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("coalescedTouchesForTouch:"), objref.IDOf(touch))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Touch { return TouchFromID(_id) })
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *Event) Type() EventType {
-	_r := objc.Send[EventType](objref.IDOf(x), objc.RegisterName("type"))
+func (e *Event) Type() EventType {
+	_r := objc.Send[EventType](objref.IDOf(e), objc.RegisterName("type"))
 	return _r
 }
 
 // ModifierFlags wraps the corresponding Objective-C method.
-func (x *Event) ModifierFlags() EventModifierFlags {
-	_r := objc.Send[EventModifierFlags](objref.IDOf(x), objc.RegisterName("modifierFlags"))
+func (e *Event) ModifierFlags() EventModifierFlags {
+	_r := objc.Send[EventModifierFlags](objref.IDOf(e), objc.RegisterName("modifierFlags"))
 	return _r
 }
 
 // Timestamp wraps the corresponding Objective-C method.
-func (x *Event) Timestamp() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timestamp"))
+func (e *Event) Timestamp() float64 {
+	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("timestamp"))
 	return _r
 }
 
 // Window wraps the corresponding Objective-C method.
-func (x *Event) Window() *Window {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("window"))
+func (e *Event) Window() *Window {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("window"))
 	return WindowFromID(_r)
 }
 
 // WindowNumber wraps the corresponding Objective-C method.
-func (x *Event) WindowNumber() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("windowNumber"))
+func (e *Event) WindowNumber() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("windowNumber"))
 	return _r
 }
 
 // Context wraps the corresponding Objective-C method.
-func (x *Event) Context() *GraphicsContext {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
+func (e *Event) Context() *GraphicsContext {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("context"))
 	return GraphicsContextFromID(_r)
 }
 
 // ClickCount wraps the corresponding Objective-C method.
-func (x *Event) ClickCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("clickCount"))
+func (e *Event) ClickCount() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("clickCount"))
 	return _r
 }
 
 // ButtonNumber wraps the corresponding Objective-C method.
-func (x *Event) ButtonNumber() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("buttonNumber"))
+func (e *Event) ButtonNumber() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("buttonNumber"))
 	return _r
 }
 
 // EventNumber wraps the corresponding Objective-C method.
-func (x *Event) EventNumber() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("eventNumber"))
+func (e *Event) EventNumber() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("eventNumber"))
 	return _r
 }
 
 // Pressure wraps the corresponding Objective-C method.
-func (x *Event) Pressure() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("pressure"))
+func (e *Event) Pressure() float32 {
+	_r := objc.Send[float32](objref.IDOf(e), objc.RegisterName("pressure"))
 	return _r
 }
 
 // LocationInWindow wraps the corresponding Objective-C method.
-func (x *Event) LocationInWindow() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("locationInWindow"))
+func (e *Event) LocationInWindow() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(e), objc.RegisterName("locationInWindow"))
 	return _r
 }
 
 // DeltaX wraps the corresponding Objective-C method.
-func (x *Event) DeltaX() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("deltaX"))
+func (e *Event) DeltaX() float64 {
+	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("deltaX"))
 	return _r
 }
 
 // DeltaY wraps the corresponding Objective-C method.
-func (x *Event) DeltaY() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("deltaY"))
+func (e *Event) DeltaY() float64 {
+	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("deltaY"))
 	return _r
 }
 
 // DeltaZ wraps the corresponding Objective-C method.
-func (x *Event) DeltaZ() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("deltaZ"))
+func (e *Event) DeltaZ() float64 {
+	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("deltaZ"))
 	return _r
 }
 
 // HasPreciseScrollingDeltas wraps the corresponding Objective-C method.
-func (x *Event) HasPreciseScrollingDeltas() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasPreciseScrollingDeltas"))
+func (e *Event) HasPreciseScrollingDeltas() bool {
+	_r := objc.Send[bool](objref.IDOf(e), objc.RegisterName("hasPreciseScrollingDeltas"))
 	return _r
 }
 
 // ScrollingDeltaX wraps the corresponding Objective-C method.
-func (x *Event) ScrollingDeltaX() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scrollingDeltaX"))
+func (e *Event) ScrollingDeltaX() float64 {
+	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("scrollingDeltaX"))
 	return _r
 }
 
 // ScrollingDeltaY wraps the corresponding Objective-C method.
-func (x *Event) ScrollingDeltaY() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scrollingDeltaY"))
+func (e *Event) ScrollingDeltaY() float64 {
+	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("scrollingDeltaY"))
 	return _r
 }
 
 // MomentumPhase wraps the corresponding Objective-C method.
-func (x *Event) MomentumPhase() EventPhase {
-	_r := objc.Send[EventPhase](objref.IDOf(x), objc.RegisterName("momentumPhase"))
+func (e *Event) MomentumPhase() EventPhase {
+	_r := objc.Send[EventPhase](objref.IDOf(e), objc.RegisterName("momentumPhase"))
 	return _r
 }
 
 // IsDirectionInvertedFromDevice wraps the corresponding Objective-C method.
-func (x *Event) IsDirectionInvertedFromDevice() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDirectionInvertedFromDevice"))
+func (e *Event) IsDirectionInvertedFromDevice() bool {
+	_r := objc.Send[bool](objref.IDOf(e), objc.RegisterName("isDirectionInvertedFromDevice"))
 	return _r
 }
 
 // Characters wraps the corresponding Objective-C method.
-func (x *Event) Characters() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("characters"))
+func (e *Event) Characters() string {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("characters"))
 	if _r == 0 {
 		return ""
 	}
@@ -230,8 +230,8 @@ func (x *Event) Characters() string {
 }
 
 // CharactersIgnoringModifiers wraps the corresponding Objective-C method.
-func (x *Event) CharactersIgnoringModifiers() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("charactersIgnoringModifiers"))
+func (e *Event) CharactersIgnoringModifiers() string {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("charactersIgnoringModifiers"))
 	if _r == 0 {
 		return ""
 	}
@@ -239,265 +239,199 @@ func (x *Event) CharactersIgnoringModifiers() string {
 }
 
 // IsARepeat wraps the corresponding Objective-C method.
-func (x *Event) IsARepeat() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isARepeat"))
+func (e *Event) IsARepeat() bool {
+	_r := objc.Send[bool](objref.IDOf(e), objc.RegisterName("isARepeat"))
 	return _r
 }
 
 // KeyCode wraps the corresponding Objective-C method.
-func (x *Event) KeyCode() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("keyCode"))
+func (e *Event) KeyCode() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(e), objc.RegisterName("keyCode"))
 	return _r
 }
 
 // TrackingNumber wraps the corresponding Objective-C method.
-func (x *Event) TrackingNumber() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("trackingNumber"))
+func (e *Event) TrackingNumber() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("trackingNumber"))
 	return _r
 }
 
 // TrackingArea wraps the corresponding Objective-C method.
-func (x *Event) TrackingArea() *TrackingArea {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackingArea"))
+func (e *Event) TrackingArea() *TrackingArea {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("trackingArea"))
 	return TrackingAreaFromID(_r)
 }
 
 // Subtype wraps the corresponding Objective-C method.
-func (x *Event) Subtype() EventSubtype {
-	_r := objc.Send[EventSubtype](objref.IDOf(x), objc.RegisterName("subtype"))
+func (e *Event) Subtype() EventSubtype {
+	_r := objc.Send[EventSubtype](objref.IDOf(e), objc.RegisterName("subtype"))
 	return _r
 }
 
 // Data1 wraps the corresponding Objective-C method.
-func (x *Event) Data1() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("data1"))
+func (e *Event) Data1() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("data1"))
 	return _r
 }
 
 // Data2 wraps the corresponding Objective-C method.
-func (x *Event) Data2() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("data2"))
+func (e *Event) Data2() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("data2"))
 	return _r
 }
 
 // CGEvent wraps the corresponding Objective-C method.
-func (x *Event) CGEvent() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGEvent"))
+func (e *Event) CGEvent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("CGEvent"))
 	return obj.Wrap(_r)
 }
 
 // Magnification wraps the corresponding Objective-C method.
-func (x *Event) Magnification() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("magnification"))
+func (e *Event) Magnification() float64 {
+	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("magnification"))
 	return _r
 }
 
 // DeviceID wraps the corresponding Objective-C method.
-func (x *Event) DeviceID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("deviceID"))
+func (e *Event) DeviceID() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("deviceID"))
 	return _r
 }
 
 // Rotation wraps the corresponding Objective-C method.
-func (x *Event) Rotation() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rotation"))
+func (e *Event) Rotation() float32 {
+	_r := objc.Send[float32](objref.IDOf(e), objc.RegisterName("rotation"))
 	return _r
 }
 
 // AbsoluteX wraps the corresponding Objective-C method.
-func (x *Event) AbsoluteX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("absoluteX"))
+func (e *Event) AbsoluteX() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("absoluteX"))
 	return _r
 }
 
 // AbsoluteY wraps the corresponding Objective-C method.
-func (x *Event) AbsoluteY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("absoluteY"))
+func (e *Event) AbsoluteY() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("absoluteY"))
 	return _r
 }
 
 // AbsoluteZ wraps the corresponding Objective-C method.
-func (x *Event) AbsoluteZ() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("absoluteZ"))
+func (e *Event) AbsoluteZ() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("absoluteZ"))
 	return _r
 }
 
 // ButtonMask wraps the corresponding Objective-C method.
-func (x *Event) ButtonMask() EventButtonMask {
-	_r := objc.Send[EventButtonMask](objref.IDOf(x), objc.RegisterName("buttonMask"))
+func (e *Event) ButtonMask() EventButtonMask {
+	_r := objc.Send[EventButtonMask](objref.IDOf(e), objc.RegisterName("buttonMask"))
 	return _r
 }
 
 // Tilt wraps the corresponding Objective-C method.
-func (x *Event) Tilt() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("tilt"))
+func (e *Event) Tilt() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(e), objc.RegisterName("tilt"))
 	return _r
 }
 
 // TangentialPressure wraps the corresponding Objective-C method.
-func (x *Event) TangentialPressure() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("tangentialPressure"))
+func (e *Event) TangentialPressure() float32 {
+	_r := objc.Send[float32](objref.IDOf(e), objc.RegisterName("tangentialPressure"))
 	return _r
 }
 
 // VendorDefined wraps the corresponding Objective-C method.
-func (x *Event) VendorDefined() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorDefined"))
+func (e *Event) VendorDefined() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("vendorDefined"))
 	return obj.Wrap(_r)
 }
 
 // VendorID wraps the corresponding Objective-C method.
-func (x *Event) VendorID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vendorID"))
+func (e *Event) VendorID() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("vendorID"))
 	return _r
 }
 
 // TabletID wraps the corresponding Objective-C method.
-func (x *Event) TabletID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tabletID"))
+func (e *Event) TabletID() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("tabletID"))
 	return _r
 }
 
 // PointingDeviceID wraps the corresponding Objective-C method.
-func (x *Event) PointingDeviceID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pointingDeviceID"))
+func (e *Event) PointingDeviceID() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("pointingDeviceID"))
 	return _r
 }
 
 // SystemTabletID wraps the corresponding Objective-C method.
-func (x *Event) SystemTabletID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("systemTabletID"))
+func (e *Event) SystemTabletID() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("systemTabletID"))
 	return _r
 }
 
 // VendorPointingDeviceType wraps the corresponding Objective-C method.
-func (x *Event) VendorPointingDeviceType() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vendorPointingDeviceType"))
+func (e *Event) VendorPointingDeviceType() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("vendorPointingDeviceType"))
 	return _r
 }
 
 // PointingDeviceSerialNumber wraps the corresponding Objective-C method.
-func (x *Event) PointingDeviceSerialNumber() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pointingDeviceSerialNumber"))
+func (e *Event) PointingDeviceSerialNumber() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("pointingDeviceSerialNumber"))
 	return _r
 }
 
 // UniqueID wraps the corresponding Objective-C method.
-func (x *Event) UniqueID() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("uniqueID"))
+func (e *Event) UniqueID() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(e), objc.RegisterName("uniqueID"))
 	return _r
 }
 
 // CapabilityMask wraps the corresponding Objective-C method.
-func (x *Event) CapabilityMask() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("capabilityMask"))
+func (e *Event) CapabilityMask() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("capabilityMask"))
 	return _r
 }
 
 // PointingDeviceType wraps the corresponding Objective-C method.
-func (x *Event) PointingDeviceType() PointingDeviceType {
-	_r := objc.Send[PointingDeviceType](objref.IDOf(x), objc.RegisterName("pointingDeviceType"))
+func (e *Event) PointingDeviceType() PointingDeviceType {
+	_r := objc.Send[PointingDeviceType](objref.IDOf(e), objc.RegisterName("pointingDeviceType"))
 	return _r
 }
 
 // IsEnteringProximity wraps the corresponding Objective-C method.
-func (x *Event) IsEnteringProximity() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnteringProximity"))
+func (e *Event) IsEnteringProximity() bool {
+	_r := objc.Send[bool](objref.IDOf(e), objc.RegisterName("isEnteringProximity"))
 	return _r
 }
 
 // Phase wraps the corresponding Objective-C method.
-func (x *Event) Phase() EventPhase {
-	_r := objc.Send[EventPhase](objref.IDOf(x), objc.RegisterName("phase"))
+func (e *Event) Phase() EventPhase {
+	_r := objc.Send[EventPhase](objref.IDOf(e), objc.RegisterName("phase"))
 	return _r
 }
 
 // Stage wraps the corresponding Objective-C method.
-func (x *Event) Stage() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stage"))
+func (e *Event) Stage() int {
+	_r := objc.Send[int](objref.IDOf(e), objc.RegisterName("stage"))
 	return _r
 }
 
 // StageTransition wraps the corresponding Objective-C method.
-func (x *Event) StageTransition() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("stageTransition"))
+func (e *Event) StageTransition() float64 {
+	_r := objc.Send[float64](objref.IDOf(e), objc.RegisterName("stageTransition"))
 	return _r
 }
 
 // AssociatedEventsMask wraps the corresponding Objective-C method.
-func (x *Event) AssociatedEventsMask() EventMask {
-	_r := objc.Send[EventMask](objref.IDOf(x), objc.RegisterName("associatedEventsMask"))
+func (e *Event) AssociatedEventsMask() EventMask {
+	_r := objc.Send[EventMask](objref.IDOf(e), objc.RegisterName("associatedEventsMask"))
 	return _r
 }
 
 // PressureBehavior wraps the corresponding Objective-C method.
-func (x *Event) PressureBehavior() PressureBehavior {
-	_r := objc.Send[PressureBehavior](objref.IDOf(x), objc.RegisterName("pressureBehavior"))
+func (e *Event) PressureBehavior() PressureBehavior {
+	_r := objc.Send[PressureBehavior](objref.IDOf(e), objc.RegisterName("pressureBehavior"))
 	return _r
 }
-
-// Eventable is the interface implemented by [Event], for mocking and DI.
-type Eventable interface {
-	obj.Object
-	CharactersByApplyingModifiers(modifiers EventModifierFlags) string
-	TouchesMatchingPhaseInView(phase TouchPhase, view *View) obj.Object
-	AllTouches() obj.Object
-	TouchesForView(view *View) obj.Object
-	CoalescedTouchesForTouch(touch *Touch) []*Touch
-	Type() EventType
-	ModifierFlags() EventModifierFlags
-	Timestamp() float64
-	Window() *Window
-	WindowNumber() int
-	Context() *GraphicsContext
-	ClickCount() int
-	ButtonNumber() int
-	EventNumber() int
-	Pressure() float32
-	LocationInWindow() corefoundation.CGPoint
-	DeltaX() float64
-	DeltaY() float64
-	DeltaZ() float64
-	HasPreciseScrollingDeltas() bool
-	ScrollingDeltaX() float64
-	ScrollingDeltaY() float64
-	MomentumPhase() EventPhase
-	IsDirectionInvertedFromDevice() bool
-	Characters() string
-	CharactersIgnoringModifiers() string
-	IsARepeat() bool
-	KeyCode() uint16
-	TrackingNumber() int
-	TrackingArea() *TrackingArea
-	Subtype() EventSubtype
-	Data1() int
-	Data2() int
-	CGEvent() obj.Object
-	Magnification() float64
-	DeviceID() int
-	Rotation() float32
-	AbsoluteX() int
-	AbsoluteY() int
-	AbsoluteZ() int
-	ButtonMask() EventButtonMask
-	Tilt() corefoundation.CGPoint
-	TangentialPressure() float32
-	VendorDefined() obj.Object
-	VendorID() int
-	TabletID() int
-	PointingDeviceID() int
-	SystemTabletID() int
-	VendorPointingDeviceType() int
-	PointingDeviceSerialNumber() int
-	UniqueID() uint64
-	CapabilityMask() int
-	PointingDeviceType() PointingDeviceType
-	IsEnteringProximity() bool
-	Phase() EventPhase
-	Stage() int
-	StageTransition() float64
-	AssociatedEventsMask() EventMask
-	PressureBehavior() PressureBehavior
-}
-
-var _ Eventable = (*Event)(nil)

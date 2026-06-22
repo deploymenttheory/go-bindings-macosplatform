@@ -7,7 +7,6 @@ package contacts
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewChangeHistoryDropEverythingEvent() *ChangeHistoryDropEverythingEvent {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNChangeHistoryDropEverythingEvent")), objc.RegisterName("new"))
 	return changeHistoryDropEverythingEventAdopt(_id)
 }
-
-// ChangeHistoryDropEverythingEventable is the interface implemented by [ChangeHistoryDropEverythingEvent], for mocking and DI.
-type ChangeHistoryDropEverythingEventable interface {
-	obj.Object
-}
-
-var _ ChangeHistoryDropEverythingEventable = (*ChangeHistoryDropEverythingEvent)(nil)
 
 var _ ChangeHistoryEventProvider = (*ChangeHistoryDropEverythingEvent)(nil)

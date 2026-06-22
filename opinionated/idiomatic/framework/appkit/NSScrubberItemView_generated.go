@@ -48,378 +48,320 @@ func scrubberItemViewAdopt(id objc.ID) *ScrubberItemView {
 	return x
 }
 
-// WithSelected a Boolean value that specifies whether the current view is selected.
-func (x *ScrubberItemView) WithSelected(selected bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelected:"), selected)
-	return x
+// WithSelected sets a Boolean value that specifies whether the current view is selected.
+func (siv *ScrubberItemView) WithSelected(selected bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setSelected:"), selected)
+	return siv
 }
 
-// WithHighlighted a Boolean value that specifies whether the view is currently highlighted.
-func (x *ScrubberItemView) WithHighlighted(highlighted bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value that specifies whether the view is currently highlighted.
+func (siv *ScrubberItemView) WithHighlighted(highlighted bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setHighlighted:"), highlighted)
+	return siv
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithSubviews(items ...ViewProvider) *ScrubberItemView {
+func (siv *ScrubberItemView) WithSubviews(items ...ViewProvider) *ScrubberItemView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setSubviews:"), _arr)
+	return siv
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithHidden(hidden bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (siv *ScrubberItemView) WithHidden(hidden bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setHidden:"), hidden)
+	return siv
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (siv *ScrubberItemView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return siv
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithAutoresizesSubviews(autoresizesSubviews bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (siv *ScrubberItemView) WithAutoresizesSubviews(autoresizesSubviews bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return siv
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (siv *ScrubberItemView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return siv
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *ScrubberItemView) WithFrame(frame corefoundation.CGRect) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (siv *ScrubberItemView) WithFrame(frame corefoundation.CGRect) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setFrame:"), frame)
+	return siv
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithFrameRotation(frameRotation float64) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (siv *ScrubberItemView) WithFrameRotation(frameRotation float64) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return siv
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithFrameCenterRotation(frameCenterRotation float64) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (siv *ScrubberItemView) WithFrameCenterRotation(frameCenterRotation float64) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return siv
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithBoundsRotation(boundsRotation float64) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (siv *ScrubberItemView) WithBoundsRotation(boundsRotation float64) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return siv
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *ScrubberItemView) WithBounds(bounds corefoundation.CGRect) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (siv *ScrubberItemView) WithBounds(bounds corefoundation.CGRect) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setBounds:"), bounds)
+	return siv
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithCanDrawConcurrently(canDrawConcurrently bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (siv *ScrubberItemView) WithCanDrawConcurrently(canDrawConcurrently bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return siv
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *ScrubberItemView) WithNeedsDisplay(needsDisplay bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (siv *ScrubberItemView) WithNeedsDisplay(needsDisplay bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return siv
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (siv *ScrubberItemView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return siv
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithWantsRestingTouches(wantsRestingTouches bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (siv *ScrubberItemView) WithWantsRestingTouches(wantsRestingTouches bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return siv
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (siv *ScrubberItemView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return siv
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (siv *ScrubberItemView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return siv
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithWantsLayer(wantsLayer bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (siv *ScrubberItemView) WithWantsLayer(wantsLayer bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return siv
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithLayer(layer obj.Object) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (siv *ScrubberItemView) WithLayer(layer obj.Object) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return siv
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (siv *ScrubberItemView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return siv
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithNeedsLayout(needsLayout bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (siv *ScrubberItemView) WithNeedsLayout(needsLayout bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return siv
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithAlphaValue(alphaValue float64) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (siv *ScrubberItemView) WithAlphaValue(alphaValue float64) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return siv
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (siv *ScrubberItemView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return siv
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithBackgroundFilters(items ...obj.Object) *ScrubberItemView {
+func (siv *ScrubberItemView) WithBackgroundFilters(items ...obj.Object) *ScrubberItemView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return siv
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithCompositingFilter(compositingFilter obj.Object) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (siv *ScrubberItemView) WithCompositingFilter(compositingFilter obj.Object) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return siv
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithContentFilters(items ...obj.Object) *ScrubberItemView {
+func (siv *ScrubberItemView) WithContentFilters(items ...obj.Object) *ScrubberItemView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setContentFilters:"), _arr)
+	return siv
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithShadow(shadow *Shadow) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (siv *ScrubberItemView) WithShadow(shadow *Shadow) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return siv
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithClipsToBounds(clipsToBounds bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (siv *ScrubberItemView) WithClipsToBounds(clipsToBounds bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return siv
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (siv *ScrubberItemView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return siv
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithToolTip(toolTip string) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (siv *ScrubberItemView) WithToolTip(toolTip string) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return siv
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (siv *ScrubberItemView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return siv
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (siv *ScrubberItemView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return siv
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithNextKeyView(nextKeyView ViewProvider) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (siv *ScrubberItemView) WithNextKeyView(nextKeyView ViewProvider) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return siv
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithFocusRingType(focusRingType FocusRingType) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (siv *ScrubberItemView) WithFocusRingType(focusRingType FocusRingType) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return siv
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrubberItemView {
+func (siv *ScrubberItemView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrubberItemView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return siv
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (siv *ScrubberItemView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return siv
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (siv *ScrubberItemView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return siv
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *ScrubberItemView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (siv *ScrubberItemView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return siv
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (siv *ScrubberItemView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return siv
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (siv *ScrubberItemView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return siv
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (siv *ScrubberItemView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return siv
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (siv *ScrubberItemView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return siv
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (siv *ScrubberItemView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return siv
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (siv *ScrubberItemView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return siv
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (siv *ScrubberItemView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return siv
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *ScrubberItemView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (siv *ScrubberItemView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return siv
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *ScrubberItemView) WithNextResponder(nextResponder ResponderProvider) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (siv *ScrubberItemView) WithNextResponder(nextResponder ResponderProvider) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return siv
 }
 
-// WithMenu returns the responder’s menu.
-func (x *ScrubberItemView) WithMenu(menu *Menu) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (siv *ScrubberItemView) WithMenu(menu *Menu) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return siv
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *ScrubberItemView) WithUserActivity(userActivity obj.Object) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (siv *ScrubberItemView) WithUserActivity(userActivity obj.Object) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return siv
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *ScrubberItemView) WithTouchBar(touchBar *TouchBar) *ScrubberItemView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (siv *ScrubberItemView) WithTouchBar(touchBar *TouchBar) *ScrubberItemView {
+	objc.Send[objc.ID](objref.IDOf(siv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return siv
 }
-
-// ScrubberItemViewable is the interface implemented by [ScrubberItemView], for mocking and DI.
-type ScrubberItemViewable interface {
-	obj.Object
-	WithSelected(selected bool) *ScrubberItemView
-	WithHighlighted(highlighted bool) *ScrubberItemView
-	WithSubviews(items ...ViewProvider) *ScrubberItemView
-	WithHidden(hidden bool) *ScrubberItemView
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ScrubberItemView
-	WithAutoresizesSubviews(autoresizesSubviews bool) *ScrubberItemView
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ScrubberItemView
-	WithFrame(frame corefoundation.CGRect) *ScrubberItemView
-	WithFrameRotation(frameRotation float64) *ScrubberItemView
-	WithFrameCenterRotation(frameCenterRotation float64) *ScrubberItemView
-	WithBoundsRotation(boundsRotation float64) *ScrubberItemView
-	WithBounds(bounds corefoundation.CGRect) *ScrubberItemView
-	WithCanDrawConcurrently(canDrawConcurrently bool) *ScrubberItemView
-	WithNeedsDisplay(needsDisplay bool) *ScrubberItemView
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ScrubberItemView
-	WithWantsRestingTouches(wantsRestingTouches bool) *ScrubberItemView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ScrubberItemView
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ScrubberItemView
-	WithWantsLayer(wantsLayer bool) *ScrubberItemView
-	WithLayer(layer obj.Object) *ScrubberItemView
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ScrubberItemView
-	WithNeedsLayout(needsLayout bool) *ScrubberItemView
-	WithAlphaValue(alphaValue float64) *ScrubberItemView
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ScrubberItemView
-	WithBackgroundFilters(items ...obj.Object) *ScrubberItemView
-	WithCompositingFilter(compositingFilter obj.Object) *ScrubberItemView
-	WithContentFilters(items ...obj.Object) *ScrubberItemView
-	WithShadow(shadow *Shadow) *ScrubberItemView
-	WithClipsToBounds(clipsToBounds bool) *ScrubberItemView
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ScrubberItemView
-	WithToolTip(toolTip string) *ScrubberItemView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ScrubberItemView
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ScrubberItemView
-	WithNextKeyView(nextKeyView ViewProvider) *ScrubberItemView
-	WithFocusRingType(focusRingType FocusRingType) *ScrubberItemView
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *ScrubberItemView
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ScrubberItemView
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ScrubberItemView
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ScrubberItemView
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ScrubberItemView
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ScrubberItemView
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ScrubberItemView
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ScrubberItemView
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ScrubberItemView
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ScrubberItemView
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ScrubberItemView
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ScrubberItemView
-	WithNextResponder(nextResponder ResponderProvider) *ScrubberItemView
-	WithMenu(menu *Menu) *ScrubberItemView
-	WithUserActivity(userActivity obj.Object) *ScrubberItemView
-	WithTouchBar(touchBar *TouchBar) *ScrubberItemView
-}
-
-var _ ScrubberItemViewable = (*ScrubberItemView)(nil)
 
 // isScrubberItemView marks ScrubberItemView — and, by embedding promotion, its
 // subclasses — as a member of the ScrubberItemView hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ScrubberItemView) isScrubberItemView() {}
+func (siv *ScrubberItemView) isScrubberItemView() {}
 
 var _ ScrubberItemViewProvider = (*ScrubberItemView)(nil)
 

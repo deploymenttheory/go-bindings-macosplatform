@@ -47,24 +47,24 @@ func rendererAdopt(id objc.ID) *Renderer {
 }
 
 // Description returns the object's -description text.
-func (x *Renderer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Renderer) Description() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Renderer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (r *Renderer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Renderer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (r *Renderer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Renderer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Renderer) String() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // NewRenderer creates a new Renderer.
@@ -73,67 +73,46 @@ func NewRenderer() *Renderer {
 	return rendererAdopt(_id)
 }
 
-// WithScene the scene to be rendered.
-func (x *Renderer) WithScene(scene *Scene) *Renderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
-	return x
+// WithScene sets the scene to be rendered.
+func (r *Renderer) WithScene(scene *Scene) *Renderer {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("setScene:"), objref.IDOf(scene))
+	return r
 }
 
 // RenderAtTime renders the scene’s contents at the specified system time in the renderer’s OpenGL context.
-func (x *Renderer) RenderAtTime(time_ float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("renderAtTime:"), time_)
+func (r *Renderer) RenderAtTime(time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("renderAtTime:"), time_)
 }
 
 // UpdateAtTime updates the receiver's scene at the specified time (system time).
-func (x *Renderer) UpdateAtTime(time_ float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateAtTime:"), time_)
+func (r *Renderer) UpdateAtTime(time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("updateAtTime:"), time_)
 }
 
 // SnapshotAtTimeWithSizeAntialiasingMode creates an image by drawing the renderer’s content at the specified system time.
-func (x *Renderer) SnapshotAtTimeWithSizeAntialiasingMode(time_ float64, size corefoundation.CGSize, antialiasingMode AntialiasingMode) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotAtTime:withSize:antialiasingMode:"), time_, size, antialiasingMode)
+func (r *Renderer) SnapshotAtTimeWithSizeAntialiasingMode(time_ float64, size corefoundation.CGSize, antialiasingMode AntialiasingMode) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("snapshotAtTime:withSize:antialiasingMode:"), time_, size, antialiasingMode)
 	return obj.Wrap(_r)
 }
 
 // UpdateProbesAtTime update the specified probes by computing their incoming irradiance in the receiver's scene at the specified time. Light probes are only supported with Metal. This method is observable using NSProgress.
-func (x *Renderer) UpdateProbesAtTime(lightProbes []*Node, time_ float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateProbes:atTime:"), purego.SliceToNSArray(lightProbes, func(_v *Node) objc.ID { return objref.IDOf(_v) }), time_)
+func (r *Renderer) UpdateProbesAtTime(lightProbes []*Node, time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("updateProbes:atTime:"), purego.SliceToNSArray(lightProbes, func(_v *Node) objc.ID { return objref.IDOf(_v) }), time_)
 }
 
 // Scene specifies the scene of the receiver
-func (x *Renderer) Scene() *Scene {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scene"))
+func (r *Renderer) Scene() *Scene {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("scene"))
 	return SceneFromID(_r)
 }
 
-// SetScene wraps the corresponding Objective-C method.
-func (x *Renderer) SetScene(scene *Scene) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
-}
-
 // NextFrameTime returns the time at which the next update should happen. If infinite no update needs to be scheduled yet. If the current frame time, a continuous animation is running and an update should be scheduled after a "natural" delay.
-func (x *Renderer) NextFrameTime() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("nextFrameTime"))
+func (r *Renderer) NextFrameTime() float64 {
+	_r := objc.Send[float64](objref.IDOf(r), objc.RegisterName("nextFrameTime"))
 	return _r
 }
 
 // Render renders the scene’s contents in the renderer’s OpenGL context.
-func (x *Renderer) Render() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("render"))
+func (r *Renderer) Render() {
+	objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("render"))
 }
-
-// Rendererable is the interface implemented by [Renderer], for mocking and DI.
-type Rendererable interface {
-	obj.Object
-	WithScene(scene *Scene) *Renderer
-	RenderAtTime(time_ float64)
-	UpdateAtTime(time_ float64)
-	SnapshotAtTimeWithSizeAntialiasingMode(time_ float64, size corefoundation.CGSize, antialiasingMode AntialiasingMode) obj.Object
-	UpdateProbesAtTime(lightProbes []*Node, time_ float64)
-	Scene() *Scene
-	SetScene(scene *Scene)
-	NextFrameTime() float64
-	Render()
-}
-
-var _ Rendererable = (*Renderer)(nil)

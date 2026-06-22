@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,34 +52,19 @@ func NewVirtioBlockDeviceConfigurationWithAttachment(attachment *StorageDeviceAt
 	return virtioBlockDeviceConfigurationAdopt(_id)
 }
 
-// WithBlockDeviceIdentifier the string that identifies the VIRTIO block device.
-func (x *VirtioBlockDeviceConfiguration) WithBlockDeviceIdentifier(blockDeviceIdentifier string) *VirtioBlockDeviceConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlockDeviceIdentifier:"), purego.NSString(blockDeviceIdentifier))
-	return x
+// WithBlockDeviceIdentifier sets the string that identifies the VIRTIO block device.
+func (vbdc *VirtioBlockDeviceConfiguration) WithBlockDeviceIdentifier(blockDeviceIdentifier string) *VirtioBlockDeviceConfiguration {
+	objc.Send[objc.ID](objref.IDOf(vbdc), objc.RegisterName("setBlockDeviceIdentifier:"), purego.NSString(blockDeviceIdentifier))
+	return vbdc
 }
 
 // BlockDeviceIdentifier wraps the corresponding Objective-C method.
-func (x *VirtioBlockDeviceConfiguration) BlockDeviceIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("blockDeviceIdentifier"))
+func (vbdc *VirtioBlockDeviceConfiguration) BlockDeviceIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(vbdc), objc.RegisterName("blockDeviceIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetBlockDeviceIdentifier wraps the corresponding Objective-C method.
-func (x *VirtioBlockDeviceConfiguration) SetBlockDeviceIdentifier(blockDeviceIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlockDeviceIdentifier:"), purego.NSString(blockDeviceIdentifier))
-}
-
-// VirtioBlockDeviceConfigurationable is the interface implemented by [VirtioBlockDeviceConfiguration], for mocking and DI.
-type VirtioBlockDeviceConfigurationable interface {
-	obj.Object
-	WithBlockDeviceIdentifier(blockDeviceIdentifier string) *VirtioBlockDeviceConfiguration
-	BlockDeviceIdentifier() string
-	SetBlockDeviceIdentifier(blockDeviceIdentifier string)
-}
-
-var _ VirtioBlockDeviceConfigurationable = (*VirtioBlockDeviceConfiguration)(nil)
 
 var _ StorageDeviceConfigurationProvider = (*VirtioBlockDeviceConfiguration)(nil)

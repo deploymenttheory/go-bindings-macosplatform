@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,88 +51,70 @@ func NewInstanceNormalizationLayer() *InstanceNormalizationLayer {
 	return instanceNormalizationLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *InstanceNormalizationLayer) WithLabel(label string) *InstanceNormalizationLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (inl *InstanceNormalizationLayer) WithLabel(label string) *InstanceNormalizationLayer {
+	objc.Send[objc.ID](objref.IDOf(inl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return inl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *InstanceNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *InstanceNormalizationLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (inl *InstanceNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *InstanceNormalizationLayer {
+	objc.Send[objc.ID](objref.IDOf(inl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return inl
 }
 
-// FeatureChannelCount the number of feature channels
-func (x *InstanceNormalizationLayer) FeatureChannelCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("featureChannelCount"))
+// FeatureChannelCount returns the number of feature channels
+func (inl *InstanceNormalizationLayer) FeatureChannelCount() int {
+	_r := objc.Send[int](objref.IDOf(inl), objc.RegisterName("featureChannelCount"))
 	return _r
 }
 
-// Mean the running mean tensor
-func (x *InstanceNormalizationLayer) Mean() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mean"))
+// Mean returns the running mean tensor
+func (inl *InstanceNormalizationLayer) Mean() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(inl), objc.RegisterName("mean"))
 	return TensorFromID(_r)
 }
 
-// Variance the running variance tensor
-func (x *InstanceNormalizationLayer) Variance() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variance"))
+// Variance returns the running variance tensor
+func (inl *InstanceNormalizationLayer) Variance() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(inl), objc.RegisterName("variance"))
 	return TensorFromID(_r)
 }
 
-// Beta the beta tensor
-func (x *InstanceNormalizationLayer) Beta() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beta"))
+// Beta returns the beta tensor
+func (inl *InstanceNormalizationLayer) Beta() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(inl), objc.RegisterName("beta"))
 	return TensorFromID(_r)
 }
 
-// Gamma the gamma tensor
-func (x *InstanceNormalizationLayer) Gamma() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gamma"))
+// Gamma returns the gamma tensor
+func (inl *InstanceNormalizationLayer) Gamma() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(inl), objc.RegisterName("gamma"))
 	return TensorFromID(_r)
 }
 
-// BetaParameter the beta tensor parameter used for optimizer update
-func (x *InstanceNormalizationLayer) BetaParameter() *TensorParameter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("betaParameter"))
+// BetaParameter returns the beta tensor parameter used for optimizer update
+func (inl *InstanceNormalizationLayer) BetaParameter() *TensorParameter {
+	_r := objc.Send[objc.ID](objref.IDOf(inl), objc.RegisterName("betaParameter"))
 	return TensorParameterFromID(_r)
 }
 
-// GammaParameter the gamma tensor parameter used for optimizer update
-func (x *InstanceNormalizationLayer) GammaParameter() *TensorParameter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gammaParameter"))
+// GammaParameter returns the gamma tensor parameter used for optimizer update
+func (inl *InstanceNormalizationLayer) GammaParameter() *TensorParameter {
+	_r := objc.Send[objc.ID](objref.IDOf(inl), objc.RegisterName("gammaParameter"))
 	return TensorParameterFromID(_r)
 }
 
-// VarianceEpsilon a value used for numerical stability
-func (x *InstanceNormalizationLayer) VarianceEpsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("varianceEpsilon"))
+// VarianceEpsilon returns a value used for numerical stability
+func (inl *InstanceNormalizationLayer) VarianceEpsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(inl), objc.RegisterName("varianceEpsilon"))
 	return _r
 }
 
-// Momentum the value used for the running mean and variance computation The default is 0.99f.
-func (x *InstanceNormalizationLayer) Momentum() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("momentum"))
+// Momentum returns the value used for the running mean and variance computation The default is 0.99f.
+func (inl *InstanceNormalizationLayer) Momentum() float32 {
+	_r := objc.Send[float32](objref.IDOf(inl), objc.RegisterName("momentum"))
 	return _r
 }
-
-// InstanceNormalizationLayerable is the interface implemented by [InstanceNormalizationLayer], for mocking and DI.
-type InstanceNormalizationLayerable interface {
-	obj.Object
-	WithLabel(label string) *InstanceNormalizationLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *InstanceNormalizationLayer
-	FeatureChannelCount() int
-	Mean() *Tensor
-	Variance() *Tensor
-	Beta() *Tensor
-	Gamma() *Tensor
-	BetaParameter() *TensorParameter
-	GammaParameter() *TensorParameter
-	VarianceEpsilon() float32
-	Momentum() float32
-}
-
-var _ InstanceNormalizationLayerable = (*InstanceNormalizationLayer)(nil)
 
 var _ LayerProvider = (*InstanceNormalizationLayer)(nil)

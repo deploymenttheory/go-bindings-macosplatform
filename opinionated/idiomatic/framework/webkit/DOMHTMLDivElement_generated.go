@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,153 +50,121 @@ func NewDOMHTMLDivElement() *DOMHTMLDivElement {
 }
 
 // WithAlign sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLDivElement) WithAlign(align string) *DOMHTMLDivElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
-	return x
+func (dde *DOMHTMLDivElement) WithAlign(align string) *DOMHTMLDivElement {
+	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setAlign:"), purego.NSString(align))
+	return dde
 }
 
 // WithTitle sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLDivElement) WithTitle(title string) *DOMHTMLDivElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+func (dde *DOMHTMLDivElement) WithTitle(title string) *DOMHTMLDivElement {
+	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return dde
 }
 
 // WithLang sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLDivElement) WithLang(lang string) *DOMHTMLDivElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
-	return x
+func (dde *DOMHTMLDivElement) WithLang(lang string) *DOMHTMLDivElement {
+	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setLang:"), purego.NSString(lang))
+	return dde
 }
 
 // WithDir sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLDivElement) WithDir(dir string) *DOMHTMLDivElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
-	return x
+func (dde *DOMHTMLDivElement) WithDir(dir string) *DOMHTMLDivElement {
+	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setDir:"), purego.NSString(dir))
+	return dde
 }
 
 // WithTabIndex sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLDivElement) WithTabIndex(tabIndex int) *DOMHTMLDivElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
-	return x
+func (dde *DOMHTMLDivElement) WithTabIndex(tabIndex int) *DOMHTMLDivElement {
+	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setTabIndex:"), tabIndex)
+	return dde
 }
 
 // WithAccessKey sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLDivElement) WithAccessKey(accessKey string) *DOMHTMLDivElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
-	return x
+func (dde *DOMHTMLDivElement) WithAccessKey(accessKey string) *DOMHTMLDivElement {
+	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
+	return dde
 }
 
 // WithInnerText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLDivElement) WithInnerText(innerText string) *DOMHTMLDivElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
-	return x
+func (dde *DOMHTMLDivElement) WithInnerText(innerText string) *DOMHTMLDivElement {
+	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
+	return dde
 }
 
 // WithOuterText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLDivElement) WithOuterText(outerText string) *DOMHTMLDivElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
-	return x
+func (dde *DOMHTMLDivElement) WithOuterText(outerText string) *DOMHTMLDivElement {
+	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
+	return dde
 }
 
 // WithContentEditable sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLDivElement) WithContentEditable(contentEditable string) *DOMHTMLDivElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
-	return x
+func (dde *DOMHTMLDivElement) WithContentEditable(contentEditable string) *DOMHTMLDivElement {
+	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
+	return dde
 }
 
-// WithIdName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLDivElement) WithIdName(idName string) *DOMHTMLDivElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
-	return x
+// WithIDName sets the property and returns the receiver so calls can be chained.
+func (dde *DOMHTMLDivElement) WithIDName(idName string) *DOMHTMLDivElement {
+	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setIdName:"), purego.NSString(idName))
+	return dde
 }
 
 // WithScrollLeft sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLDivElement) WithScrollLeft(scrollLeft int) *DOMHTMLDivElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
-	return x
+func (dde *DOMHTMLDivElement) WithScrollLeft(scrollLeft int) *DOMHTMLDivElement {
+	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setScrollLeft:"), scrollLeft)
+	return dde
 }
 
 // WithScrollTop sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLDivElement) WithScrollTop(scrollTop int) *DOMHTMLDivElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
-	return x
+func (dde *DOMHTMLDivElement) WithScrollTop(scrollTop int) *DOMHTMLDivElement {
+	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setScrollTop:"), scrollTop)
+	return dde
 }
 
 // WithInnerHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLDivElement) WithInnerHTML(innerHTML string) *DOMHTMLDivElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
-	return x
+func (dde *DOMHTMLDivElement) WithInnerHTML(innerHTML string) *DOMHTMLDivElement {
+	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
+	return dde
 }
 
 // WithOuterHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLDivElement) WithOuterHTML(outerHTML string) *DOMHTMLDivElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
-	return x
+func (dde *DOMHTMLDivElement) WithOuterHTML(outerHTML string) *DOMHTMLDivElement {
+	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
+	return dde
 }
 
 // WithClassName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLDivElement) WithClassName(className string) *DOMHTMLDivElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
-	return x
+func (dde *DOMHTMLDivElement) WithClassName(className string) *DOMHTMLDivElement {
+	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setClassName:"), purego.NSString(className))
+	return dde
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLDivElement) WithNodeValue(nodeValue string) *DOMHTMLDivElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (dde *DOMHTMLDivElement) WithNodeValue(nodeValue string) *DOMHTMLDivElement {
+	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return dde
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLDivElement) WithPrefix(prefix string) *DOMHTMLDivElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (dde *DOMHTMLDivElement) WithPrefix(prefix string) *DOMHTMLDivElement {
+	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return dde
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLDivElement) WithTextContent(textContent string) *DOMHTMLDivElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (dde *DOMHTMLDivElement) WithTextContent(textContent string) *DOMHTMLDivElement {
+	objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return dde
 }
 
 // Align wraps the corresponding Objective-C method.
-func (x *DOMHTMLDivElement) Align() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("align"))
+func (dde *DOMHTMLDivElement) Align() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dde), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetAlign wraps the corresponding Objective-C method.
-func (x *DOMHTMLDivElement) SetAlign(align string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
-}
-
-// DOMHTMLDivElementable is the interface implemented by [DOMHTMLDivElement], for mocking and DI.
-type DOMHTMLDivElementable interface {
-	obj.Object
-	WithAlign(align string) *DOMHTMLDivElement
-	WithTitle(title string) *DOMHTMLDivElement
-	WithLang(lang string) *DOMHTMLDivElement
-	WithDir(dir string) *DOMHTMLDivElement
-	WithTabIndex(tabIndex int) *DOMHTMLDivElement
-	WithAccessKey(accessKey string) *DOMHTMLDivElement
-	WithInnerText(innerText string) *DOMHTMLDivElement
-	WithOuterText(outerText string) *DOMHTMLDivElement
-	WithContentEditable(contentEditable string) *DOMHTMLDivElement
-	WithIdName(idName string) *DOMHTMLDivElement
-	WithScrollLeft(scrollLeft int) *DOMHTMLDivElement
-	WithScrollTop(scrollTop int) *DOMHTMLDivElement
-	WithInnerHTML(innerHTML string) *DOMHTMLDivElement
-	WithOuterHTML(outerHTML string) *DOMHTMLDivElement
-	WithClassName(className string) *DOMHTMLDivElement
-	WithNodeValue(nodeValue string) *DOMHTMLDivElement
-	WithPrefix(prefix string) *DOMHTMLDivElement
-	WithTextContent(textContent string) *DOMHTMLDivElement
-	Align() string
-	SetAlign(align string)
-}
-
-var _ DOMHTMLDivElementable = (*DOMHTMLDivElement)(nil)
 
 var _ DOMHTMLElementProvider = (*DOMHTMLDivElement)(nil)
 

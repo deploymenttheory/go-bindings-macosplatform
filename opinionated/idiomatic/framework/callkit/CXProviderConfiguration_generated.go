@@ -46,24 +46,24 @@ func providerConfigurationAdopt(id objc.ID) *ProviderConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *ProviderConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *ProviderConfiguration) Description() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ProviderConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pc *ProviderConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ProviderConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pc *ProviderConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ProviderConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *ProviderConfiguration) String() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // NewProviderConfiguration creates a new ProviderConfiguration.
@@ -79,182 +79,110 @@ func NewProviderConfigurationWithLocalizedName(localizedName string) *ProviderCo
 	return providerConfigurationAdopt(_id)
 }
 
-// WithRingtoneSound the name of the sound resource in the app bundle to be used for the provider ringtone.
-func (x *ProviderConfiguration) WithRingtoneSound(ringtoneSound string) *ProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRingtoneSound:"), purego.NSString(ringtoneSound))
-	return x
+// WithRingtoneSound sets the name of the sound resource in the app bundle to be used for the provider ringtone.
+func (pc *ProviderConfiguration) WithRingtoneSound(ringtoneSound string) *ProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setRingtoneSound:"), purego.NSString(ringtoneSound))
+	return pc
 }
 
-// WithIconTemplateImageData the PNG data for the icon image to be displayed for the provider.
-func (x *ProviderConfiguration) WithIconTemplateImageData(iconTemplateImageData obj.Object) *ProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIconTemplateImageData:"), objref.IDOf(iconTemplateImageData))
-	return x
+// WithIconTemplateImageData sets the PNG data for the icon image to be displayed for the provider.
+func (pc *ProviderConfiguration) WithIconTemplateImageData(iconTemplateImageData obj.Object) *ProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIconTemplateImageData:"), objref.IDOf(iconTemplateImageData))
+	return pc
 }
 
-// WithMaximumCallGroups the maximum number of call groups.
-func (x *ProviderConfiguration) WithMaximumCallGroups(maximumCallGroups int) *ProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumCallGroups:"), maximumCallGroups)
-	return x
+// WithMaximumCallGroups sets the maximum number of call groups.
+func (pc *ProviderConfiguration) WithMaximumCallGroups(maximumCallGroups int) *ProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setMaximumCallGroups:"), maximumCallGroups)
+	return pc
 }
 
-// WithMaximumCallsPerCallGroup the maximum number of calls per call group.
-func (x *ProviderConfiguration) WithMaximumCallsPerCallGroup(maximumCallsPerCallGroup int) *ProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumCallsPerCallGroup:"), maximumCallsPerCallGroup)
-	return x
+// WithMaximumCallsPerCallGroup sets the maximum number of calls per call group.
+func (pc *ProviderConfiguration) WithMaximumCallsPerCallGroup(maximumCallsPerCallGroup int) *ProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setMaximumCallsPerCallGroup:"), maximumCallsPerCallGroup)
+	return pc
 }
 
-// WithIncludesCallsInRecents a Boolean value that indicates whether the provider includes a call in the system’s Recents list after the call ends.
-func (x *ProviderConfiguration) WithIncludesCallsInRecents(includesCallsInRecents bool) *ProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesCallsInRecents:"), includesCallsInRecents)
-	return x
+// WithIncludesCallsInRecents sets a Boolean value that indicates whether the provider includes a call in the system’s Recents list after the call ends.
+func (pc *ProviderConfiguration) WithIncludesCallsInRecents(includesCallsInRecents bool) *ProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIncludesCallsInRecents:"), includesCallsInRecents)
+	return pc
 }
 
-// WithSupportsVideo a Boolean value that indicates whether the provider supports video in addition to audio.
-func (x *ProviderConfiguration) WithSupportsVideo(supportsVideo bool) *ProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsVideo:"), supportsVideo)
-	return x
+// WithSupportsVideo sets a Boolean value that indicates whether the provider supports video in addition to audio.
+func (pc *ProviderConfiguration) WithSupportsVideo(supportsVideo bool) *ProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSupportsVideo:"), supportsVideo)
+	return pc
 }
 
 // WithSupportsAudioTranslation sets the property and returns the receiver so calls can be chained.
-func (x *ProviderConfiguration) WithSupportsAudioTranslation(supportsAudioTranslation bool) *ProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsAudioTranslation:"), supportsAudioTranslation)
-	return x
+func (pc *ProviderConfiguration) WithSupportsAudioTranslation(supportsAudioTranslation bool) *ProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSupportsAudioTranslation:"), supportsAudioTranslation)
+	return pc
 }
 
-// WithSupportedHandleTypes the supported handle types.
-func (x *ProviderConfiguration) WithSupportedHandleTypes(supportedHandleTypes obj.Object) *ProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedHandleTypes:"), objref.IDOf(supportedHandleTypes))
-	return x
+// WithSupportedHandleTypes sets the supported handle types.
+func (pc *ProviderConfiguration) WithSupportedHandleTypes(supportedHandleTypes obj.Object) *ProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSupportedHandleTypes:"), objref.IDOf(supportedHandleTypes))
+	return pc
 }
 
-// LocalizedName localized name of the provider
-func (x *ProviderConfiguration) LocalizedName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+// LocalizedName returns localized name of the provider
+func (pc *ProviderConfiguration) LocalizedName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// RingtoneSound name of resource in app's bundle to play as ringtone for incoming call
-func (x *ProviderConfiguration) RingtoneSound() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ringtoneSound"))
+// RingtoneSound returns name of resource in app's bundle to play as ringtone for incoming call
+func (pc *ProviderConfiguration) RingtoneSound() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("ringtoneSound"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetRingtoneSound wraps the corresponding Objective-C method.
-func (x *ProviderConfiguration) SetRingtoneSound(ringtoneSound string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRingtoneSound:"), purego.NSString(ringtoneSound))
 }
 
 // IconTemplateImageData wraps the corresponding Objective-C method.
-func (x *ProviderConfiguration) IconTemplateImageData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iconTemplateImageData"))
+func (pc *ProviderConfiguration) IconTemplateImageData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("iconTemplateImageData"))
 	return obj.Wrap(_r)
-}
-
-// SetIconTemplateImageData wraps the corresponding Objective-C method.
-func (x *ProviderConfiguration) SetIconTemplateImageData(iconTemplateImageData obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIconTemplateImageData:"), objref.IDOf(iconTemplateImageData))
 }
 
 // MaximumCallGroups wraps the corresponding Objective-C method.
-func (x *ProviderConfiguration) MaximumCallGroups() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumCallGroups"))
+func (pc *ProviderConfiguration) MaximumCallGroups() int {
+	_r := objc.Send[int](objref.IDOf(pc), objc.RegisterName("maximumCallGroups"))
 	return _r
-}
-
-// SetMaximumCallGroups wraps the corresponding Objective-C method.
-func (x *ProviderConfiguration) SetMaximumCallGroups(maximumCallGroups int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumCallGroups:"), maximumCallGroups)
 }
 
 // MaximumCallsPerCallGroup wraps the corresponding Objective-C method.
-func (x *ProviderConfiguration) MaximumCallsPerCallGroup() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumCallsPerCallGroup"))
+func (pc *ProviderConfiguration) MaximumCallsPerCallGroup() int {
+	_r := objc.Send[int](objref.IDOf(pc), objc.RegisterName("maximumCallsPerCallGroup"))
 	return _r
 }
 
-// SetMaximumCallsPerCallGroup wraps the corresponding Objective-C method.
-func (x *ProviderConfiguration) SetMaximumCallsPerCallGroup(maximumCallsPerCallGroup int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumCallsPerCallGroup:"), maximumCallsPerCallGroup)
-}
-
-// IncludesCallsInRecents whether this provider's calls should be included in the system's Recents list at the end of each call. Default: YES
-func (x *ProviderConfiguration) IncludesCallsInRecents() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesCallsInRecents"))
+// IncludesCallsInRecents reports whether this provider's calls should be included in the system's Recents list at the end of each call. Default: true
+func (pc *ProviderConfiguration) IncludesCallsInRecents() bool {
+	_r := objc.Send[bool](objref.IDOf(pc), objc.RegisterName("includesCallsInRecents"))
 	return _r
-}
-
-// SetIncludesCallsInRecents wraps the corresponding Objective-C method.
-func (x *ProviderConfiguration) SetIncludesCallsInRecents(includesCallsInRecents bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludesCallsInRecents:"), includesCallsInRecents)
 }
 
 // SupportsVideo wraps the corresponding Objective-C method.
-func (x *ProviderConfiguration) SupportsVideo() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsVideo"))
+func (pc *ProviderConfiguration) SupportsVideo() bool {
+	_r := objc.Send[bool](objref.IDOf(pc), objc.RegisterName("supportsVideo"))
 	return _r
-}
-
-// SetSupportsVideo wraps the corresponding Objective-C method.
-func (x *ProviderConfiguration) SetSupportsVideo(supportsVideo bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsVideo:"), supportsVideo)
 }
 
 // SupportsAudioTranslation wraps the corresponding Objective-C method.
-func (x *ProviderConfiguration) SupportsAudioTranslation() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsAudioTranslation"))
+func (pc *ProviderConfiguration) SupportsAudioTranslation() bool {
+	_r := objc.Send[bool](objref.IDOf(pc), objc.RegisterName("supportsAudioTranslation"))
 	return _r
 }
 
-// SetSupportsAudioTranslation wraps the corresponding Objective-C method.
-func (x *ProviderConfiguration) SetSupportsAudioTranslation(supportsAudioTranslation bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportsAudioTranslation:"), supportsAudioTranslation)
-}
-
 // SupportedHandleTypes wraps the corresponding Objective-C method.
-func (x *ProviderConfiguration) SupportedHandleTypes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedHandleTypes"))
+func (pc *ProviderConfiguration) SupportedHandleTypes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("supportedHandleTypes"))
 	return obj.Wrap(_r)
 }
-
-// SetSupportedHandleTypes wraps the corresponding Objective-C method.
-func (x *ProviderConfiguration) SetSupportedHandleTypes(supportedHandleTypes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedHandleTypes:"), objref.IDOf(supportedHandleTypes))
-}
-
-// ProviderConfigurationable is the interface implemented by [ProviderConfiguration], for mocking and DI.
-type ProviderConfigurationable interface {
-	obj.Object
-	WithRingtoneSound(ringtoneSound string) *ProviderConfiguration
-	WithIconTemplateImageData(iconTemplateImageData obj.Object) *ProviderConfiguration
-	WithMaximumCallGroups(maximumCallGroups int) *ProviderConfiguration
-	WithMaximumCallsPerCallGroup(maximumCallsPerCallGroup int) *ProviderConfiguration
-	WithIncludesCallsInRecents(includesCallsInRecents bool) *ProviderConfiguration
-	WithSupportsVideo(supportsVideo bool) *ProviderConfiguration
-	WithSupportsAudioTranslation(supportsAudioTranslation bool) *ProviderConfiguration
-	WithSupportedHandleTypes(supportedHandleTypes obj.Object) *ProviderConfiguration
-	LocalizedName() string
-	RingtoneSound() string
-	SetRingtoneSound(ringtoneSound string)
-	IconTemplateImageData() obj.Object
-	SetIconTemplateImageData(iconTemplateImageData obj.Object)
-	MaximumCallGroups() int
-	SetMaximumCallGroups(maximumCallGroups int)
-	MaximumCallsPerCallGroup() int
-	SetMaximumCallsPerCallGroup(maximumCallsPerCallGroup int)
-	IncludesCallsInRecents() bool
-	SetIncludesCallsInRecents(includesCallsInRecents bool)
-	SupportsVideo() bool
-	SetSupportsVideo(supportsVideo bool)
-	SupportsAudioTranslation() bool
-	SetSupportsAudioTranslation(supportsAudioTranslation bool)
-	SupportedHandleTypes() obj.Object
-	SetSupportedHandleTypes(supportedHandleTypes obj.Object)
-}
-
-var _ ProviderConfigurationable = (*ProviderConfiguration)(nil)

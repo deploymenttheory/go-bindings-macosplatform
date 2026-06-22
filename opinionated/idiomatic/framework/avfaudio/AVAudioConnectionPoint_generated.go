@@ -46,24 +46,24 @@ func audioConnectionPointAdopt(id objc.ID) *AudioConnectionPoint {
 }
 
 // Description returns the object's -description text.
-func (x *AudioConnectionPoint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (acp *AudioConnectionPoint) Description() string {
+	return rt.Description(objref.IDOf(acp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioConnectionPoint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (acp *AudioConnectionPoint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(acp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioConnectionPoint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (acp *AudioConnectionPoint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(acp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AudioConnectionPoint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (acp *AudioConnectionPoint) String() string {
+	return rt.Description(objref.IDOf(acp))
 }
 
 // NewAudioConnectionPointWithNodeBus creates a connection point object.
@@ -74,22 +74,13 @@ func NewAudioConnectionPointWithNodeBus(node *AudioNode, bus int) *AudioConnecti
 }
 
 // Node returns the node in the connection point.
-func (x *AudioConnectionPoint) Node() *AudioNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("node"))
+func (acp *AudioConnectionPoint) Node() *AudioNode {
+	_r := objc.Send[objc.ID](objref.IDOf(acp), objc.RegisterName("node"))
 	return AudioNodeFromID(_r)
 }
 
 // Bus returns the bus on the node in the connection point.
-func (x *AudioConnectionPoint) Bus() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bus"))
+func (acp *AudioConnectionPoint) Bus() int {
+	_r := objc.Send[int](objref.IDOf(acp), objc.RegisterName("bus"))
 	return _r
 }
-
-// AudioConnectionPointable is the interface implemented by [AudioConnectionPoint], for mocking and DI.
-type AudioConnectionPointable interface {
-	obj.Object
-	Node() *AudioNode
-	Bus() int
-}
-
-var _ AudioConnectionPointable = (*AudioConnectionPoint)(nil)

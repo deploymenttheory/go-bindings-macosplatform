@@ -46,77 +46,54 @@ func mTRAccessControlClusterAccessControlExtensionStructAdopt(id objc.ID) *MTRAc
 }
 
 // Description returns the object's -description text.
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (maccaces *MTRAccessControlClusterAccessControlExtensionStruct) Description() string {
+	return rt.Description(objref.IDOf(maccaces))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (maccaces *MTRAccessControlClusterAccessControlExtensionStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(maccaces), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (maccaces *MTRAccessControlClusterAccessControlExtensionStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(maccaces), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (maccaces *MTRAccessControlClusterAccessControlExtensionStruct) String() string {
+	return rt.Description(objref.IDOf(maccaces))
 }
 
 // WithData sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) WithData(data obj.Object) *MTRAccessControlClusterAccessControlExtensionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
-	return x
+func (maccaces *MTRAccessControlClusterAccessControlExtensionStruct) WithData(data obj.Object) *MTRAccessControlClusterAccessControlExtensionStruct {
+	objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("setData:"), objref.IDOf(data))
+	return maccaces
 }
 
 // WithFabricIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlExtensionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-	return x
+func (maccaces *MTRAccessControlClusterAccessControlExtensionStruct) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlExtensionStruct {
+	objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return maccaces
 }
 
 // Data wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+func (maccaces *MTRAccessControlClusterAccessControlExtensionStruct) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("data"))
 	return obj.Wrap(_r)
-}
-
-// SetData wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) SetData(data obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
 }
 
 // FabricIndex wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) FabricIndex() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+func (maccaces *MTRAccessControlClusterAccessControlExtensionStruct) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccaces), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
-
-// SetFabricIndex wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) SetFabricIndex(fabricIndex obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-}
-
-// MTRAccessControlClusterAccessControlExtensionStructable is the interface implemented by [MTRAccessControlClusterAccessControlExtensionStruct], for mocking and DI.
-type MTRAccessControlClusterAccessControlExtensionStructable interface {
-	obj.Object
-	WithData(data obj.Object) *MTRAccessControlClusterAccessControlExtensionStruct
-	WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessControlExtensionStruct
-	Data() obj.Object
-	SetData(data obj.Object)
-	FabricIndex() obj.Object
-	SetFabricIndex(fabricIndex obj.Object)
-}
-
-var _ MTRAccessControlClusterAccessControlExtensionStructable = (*MTRAccessControlClusterAccessControlExtensionStruct)(nil)
 
 // isMTRAccessControlClusterAccessControlExtensionStruct marks MTRAccessControlClusterAccessControlExtensionStruct — and, by embedding promotion, its
 // subclasses — as a member of the MTRAccessControlClusterAccessControlExtensionStruct hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRAccessControlClusterAccessControlExtensionStruct) isMTRAccessControlClusterAccessControlExtensionStruct() {
+func (maccaces *MTRAccessControlClusterAccessControlExtensionStruct) isMTRAccessControlClusterAccessControlExtensionStruct() {
 }
 
 var _ MTRAccessControlClusterAccessControlExtensionStructProvider = (*MTRAccessControlClusterAccessControlExtensionStruct)(nil)

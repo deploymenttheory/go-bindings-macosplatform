@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,24 +43,16 @@ func nDArrayMultiaryGradientKernelAdopt(id objc.ID) *NDArrayMultiaryGradientKern
 	return x
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NDArrayMultiaryGradientKernel) WithLabel(label string) *NDArrayMultiaryGradientKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (namgk *NDArrayMultiaryGradientKernel) WithLabel(label string) *NDArrayMultiaryGradientKernel {
+	objc.Send[objc.ID](objref.IDOf(namgk), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return namgk
 }
-
-// NDArrayMultiaryGradientKernelable is the interface implemented by [NDArrayMultiaryGradientKernel], for mocking and DI.
-type NDArrayMultiaryGradientKernelable interface {
-	obj.Object
-	WithLabel(label string) *NDArrayMultiaryGradientKernel
-}
-
-var _ NDArrayMultiaryGradientKernelable = (*NDArrayMultiaryGradientKernel)(nil)
 
 // isNDArrayMultiaryGradientKernel marks NDArrayMultiaryGradientKernel — and, by embedding promotion, its
 // subclasses — as a member of the NDArrayMultiaryGradientKernel hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NDArrayMultiaryGradientKernel) isNDArrayMultiaryGradientKernel() {}
+func (namgk *NDArrayMultiaryGradientKernel) isNDArrayMultiaryGradientKernel() {}
 
 var _ NDArrayMultiaryGradientKernelProvider = (*NDArrayMultiaryGradientKernel)(nil)
 

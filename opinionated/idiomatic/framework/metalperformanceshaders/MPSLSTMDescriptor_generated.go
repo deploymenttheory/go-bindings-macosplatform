@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,119 +51,76 @@ func NewLSTMDescriptor() *LSTMDescriptor {
 	return lSTMDescriptorAdopt(_id)
 }
 
-// WithMemoryWeightsAreDiagonal if YES, then the 'peephole' weight matrices will be diagonal matrices represented as vectors of length the number of features in memory cells, that will be multiplied pointwise with the peephole matrix or image in order to achieve the diagonal (nonmixing) update. Defaults to NO.
-func (x *LSTMDescriptor) WithMemoryWeightsAreDiagonal(memoryWeightsAreDiagonal bool) *LSTMDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMemoryWeightsAreDiagonal:"), memoryWeightsAreDiagonal)
-	return x
+// WithMemoryWeightsAreDiagonal sets if YES, then the 'peephole' weight matrices will be diagonal matrices represented as vectors of length the number of features in memory cells, that will be multiplied pointwise with the peephole matrix or image in order to achieve the diagonal (nonmixing) update. Defaults to NO.
+func (ld *LSTMDescriptor) WithMemoryWeightsAreDiagonal(memoryWeightsAreDiagonal bool) *LSTMDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ld), objc.RegisterName("setMemoryWeightsAreDiagonal:"), memoryWeightsAreDiagonal)
+	return ld
 }
 
-// WithCellToOutputNeuronParamA neuron parameter A for 'gh'. Defaults to 1.0f.
-func (x *LSTMDescriptor) WithCellToOutputNeuronParamA(cellToOutputNeuronParamA float32) *LSTMDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellToOutputNeuronParamA:"), cellToOutputNeuronParamA)
-	return x
+// WithCellToOutputNeuronParamA sets neuron parameter A for 'gh'. Defaults to 1.0f.
+func (ld *LSTMDescriptor) WithCellToOutputNeuronParamA(cellToOutputNeuronParamA float32) *LSTMDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ld), objc.RegisterName("setCellToOutputNeuronParamA:"), cellToOutputNeuronParamA)
+	return ld
 }
 
-// WithCellToOutputNeuronParamB neuron parameter B for 'gh'. Defaults to 1.0f.
-func (x *LSTMDescriptor) WithCellToOutputNeuronParamB(cellToOutputNeuronParamB float32) *LSTMDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellToOutputNeuronParamB:"), cellToOutputNeuronParamB)
-	return x
+// WithCellToOutputNeuronParamB sets neuron parameter B for 'gh'. Defaults to 1.0f.
+func (ld *LSTMDescriptor) WithCellToOutputNeuronParamB(cellToOutputNeuronParamB float32) *LSTMDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ld), objc.RegisterName("setCellToOutputNeuronParamB:"), cellToOutputNeuronParamB)
+	return ld
 }
 
-// WithCellToOutputNeuronParamC neuron parameter C for 'gh'. Defaults to 1.0f.
-func (x *LSTMDescriptor) WithCellToOutputNeuronParamC(cellToOutputNeuronParamC float32) *LSTMDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellToOutputNeuronParamC:"), cellToOutputNeuronParamC)
-	return x
+// WithCellToOutputNeuronParamC sets neuron parameter C for 'gh'. Defaults to 1.0f.
+func (ld *LSTMDescriptor) WithCellToOutputNeuronParamC(cellToOutputNeuronParamC float32) *LSTMDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ld), objc.RegisterName("setCellToOutputNeuronParamC:"), cellToOutputNeuronParamC)
+	return ld
 }
 
-// WithInputFeatureChannels the number of feature channels per pixel in the input image or number of rows in the input matrix.
-func (x *LSTMDescriptor) WithInputFeatureChannels(inputFeatureChannels int) *LSTMDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
-	return x
+// WithInputFeatureChannels sets the number of feature channels per pixel in the input image or number of rows in the input matrix.
+func (ld *LSTMDescriptor) WithInputFeatureChannels(inputFeatureChannels int) *LSTMDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ld), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
+	return ld
 }
 
-// WithOutputFeatureChannels the number of feature channels per pixel in the destination image or number of rows in the destination matrix.
-func (x *LSTMDescriptor) WithOutputFeatureChannels(outputFeatureChannels int) *LSTMDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
-	return x
+// WithOutputFeatureChannels sets the number of feature channels per pixel in the destination image or number of rows in the destination matrix.
+func (ld *LSTMDescriptor) WithOutputFeatureChannels(outputFeatureChannels int) *LSTMDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ld), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
+	return ld
 }
 
-// WithUseLayerInputUnitTransformMode if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
-func (x *LSTMDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *LSTMDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseLayerInputUnitTransformMode:"), useLayerInputUnitTransformMode)
-	return x
+// WithUseLayerInputUnitTransformMode sets if YES then use identity transformation for all weights (W, Wr, Wi, Wf, Wo, Wc) affecting input x_j in this layer, even if said weights are specified as nil. For example 'W_ij * x_j' is replaced by 'x_j' in formulae defined in
+func (ld *LSTMDescriptor) WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *LSTMDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ld), objc.RegisterName("setUseLayerInputUnitTransformMode:"), useLayerInputUnitTransformMode)
+	return ld
 }
 
-// WithUseFloat32Weights if YES, then
-func (x *LSTMDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *LSTMDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseFloat32Weights:"), useFloat32Weights)
-	return x
+// WithUseFloat32Weights sets if YES, then
+func (ld *LSTMDescriptor) WithUseFloat32Weights(useFloat32Weights bool) *LSTMDescriptor {
+	objc.Send[objc.ID](objref.IDOf(ld), objc.RegisterName("setUseFloat32Weights:"), useFloat32Weights)
+	return ld
 }
 
-// MemoryWeightsAreDiagonal if YES, then the 'peephole' weight matrices will be diagonal matrices represented as vectors of length the number of features in memory cells, that will be multiplied pointwise with the peephole matrix or image in order to achieve the diagonal (nonmixing) update. Defaults to NO.
-func (x *LSTMDescriptor) MemoryWeightsAreDiagonal() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("memoryWeightsAreDiagonal"))
+// MemoryWeightsAreDiagonal reports whether if true, then the 'peephole' weight matrices will be diagonal matrices represented as vectors of length the number of features in memory cells, that will be multiplied pointwise with the peephole matrix or image in order to achieve the diagonal (nonmixing) update. Defaults to false.
+func (ld *LSTMDescriptor) MemoryWeightsAreDiagonal() bool {
+	_r := objc.Send[bool](objref.IDOf(ld), objc.RegisterName("memoryWeightsAreDiagonal"))
 	return _r
 }
 
-// SetMemoryWeightsAreDiagonal wraps the corresponding Objective-C method.
-func (x *LSTMDescriptor) SetMemoryWeightsAreDiagonal(memoryWeightsAreDiagonal bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMemoryWeightsAreDiagonal:"), memoryWeightsAreDiagonal)
-}
-
-// CellToOutputNeuronParamA neuron parameter A for 'gh'. Defaults to 1.0f.
-func (x *LSTMDescriptor) CellToOutputNeuronParamA() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("cellToOutputNeuronParamA"))
+// CellToOutputNeuronParamA returns neuron parameter A for 'gh'. Defaults to 1.0f.
+func (ld *LSTMDescriptor) CellToOutputNeuronParamA() float32 {
+	_r := objc.Send[float32](objref.IDOf(ld), objc.RegisterName("cellToOutputNeuronParamA"))
 	return _r
 }
 
-// SetCellToOutputNeuronParamA wraps the corresponding Objective-C method.
-func (x *LSTMDescriptor) SetCellToOutputNeuronParamA(cellToOutputNeuronParamA float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellToOutputNeuronParamA:"), cellToOutputNeuronParamA)
-}
-
-// CellToOutputNeuronParamB neuron parameter B for 'gh'. Defaults to 1.0f.
-func (x *LSTMDescriptor) CellToOutputNeuronParamB() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("cellToOutputNeuronParamB"))
+// CellToOutputNeuronParamB returns neuron parameter B for 'gh'. Defaults to 1.0f.
+func (ld *LSTMDescriptor) CellToOutputNeuronParamB() float32 {
+	_r := objc.Send[float32](objref.IDOf(ld), objc.RegisterName("cellToOutputNeuronParamB"))
 	return _r
 }
 
-// SetCellToOutputNeuronParamB wraps the corresponding Objective-C method.
-func (x *LSTMDescriptor) SetCellToOutputNeuronParamB(cellToOutputNeuronParamB float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellToOutputNeuronParamB:"), cellToOutputNeuronParamB)
-}
-
-// CellToOutputNeuronParamC neuron parameter C for 'gh'. Defaults to 1.0f.
-func (x *LSTMDescriptor) CellToOutputNeuronParamC() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("cellToOutputNeuronParamC"))
+// CellToOutputNeuronParamC returns neuron parameter C for 'gh'. Defaults to 1.0f.
+func (ld *LSTMDescriptor) CellToOutputNeuronParamC() float32 {
+	_r := objc.Send[float32](objref.IDOf(ld), objc.RegisterName("cellToOutputNeuronParamC"))
 	return _r
 }
-
-// SetCellToOutputNeuronParamC wraps the corresponding Objective-C method.
-func (x *LSTMDescriptor) SetCellToOutputNeuronParamC(cellToOutputNeuronParamC float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCellToOutputNeuronParamC:"), cellToOutputNeuronParamC)
-}
-
-// LSTMDescriptorable is the interface implemented by [LSTMDescriptor], for mocking and DI.
-type LSTMDescriptorable interface {
-	obj.Object
-	WithMemoryWeightsAreDiagonal(memoryWeightsAreDiagonal bool) *LSTMDescriptor
-	WithCellToOutputNeuronParamA(cellToOutputNeuronParamA float32) *LSTMDescriptor
-	WithCellToOutputNeuronParamB(cellToOutputNeuronParamB float32) *LSTMDescriptor
-	WithCellToOutputNeuronParamC(cellToOutputNeuronParamC float32) *LSTMDescriptor
-	WithInputFeatureChannels(inputFeatureChannels int) *LSTMDescriptor
-	WithOutputFeatureChannels(outputFeatureChannels int) *LSTMDescriptor
-	WithUseLayerInputUnitTransformMode(useLayerInputUnitTransformMode bool) *LSTMDescriptor
-	WithUseFloat32Weights(useFloat32Weights bool) *LSTMDescriptor
-	MemoryWeightsAreDiagonal() bool
-	SetMemoryWeightsAreDiagonal(memoryWeightsAreDiagonal bool)
-	CellToOutputNeuronParamA() float32
-	SetCellToOutputNeuronParamA(cellToOutputNeuronParamA float32)
-	CellToOutputNeuronParamB() float32
-	SetCellToOutputNeuronParamB(cellToOutputNeuronParamB float32)
-	CellToOutputNeuronParamC() float32
-	SetCellToOutputNeuronParamC(cellToOutputNeuronParamC float32)
-}
-
-var _ LSTMDescriptorable = (*LSTMDescriptor)(nil)
 
 var _ RNNDescriptorProvider = (*LSTMDescriptor)(nil)

@@ -46,24 +46,24 @@ func sceneAdopt(id objc.ID) *Scene {
 }
 
 // Description returns the object's -description text.
-func (x *Scene) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Scene) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Scene) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Scene) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Scene) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Scene) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Scene) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Scene) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewScene creates a new Scene.
@@ -73,48 +73,35 @@ func NewScene() *Scene {
 }
 
 // AddEntity adds a GameplayKit entity to the list of entities managed by the scene.
-func (x *Scene) AddEntity(entity *Entity) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addEntity:"), objref.IDOf(entity))
+func (s *Scene) AddEntity(entity *Entity) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("addEntity:"), objref.IDOf(entity))
 }
 
 // RemoveEntity removes a GameplayKit entity from the list of entities managed by the scene.
-func (x *Scene) RemoveEntity(entity *Entity) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeEntity:"), objref.IDOf(entity))
+func (s *Scene) RemoveEntity(entity *Entity) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("removeEntity:"), objref.IDOf(entity))
 }
 
 // AddGraphName adds a graph to the scene's list of graphs.
-func (x *Scene) AddGraphName(graph *Graph, name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addGraph:name:"), objref.IDOf(graph), purego.NSString(name))
+func (s *Scene) AddGraphName(graph *Graph, name string) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("addGraph:name:"), objref.IDOf(graph), purego.NSString(name))
 }
 
 // RemoveGraph removes a pathfinding graph from the list of graphs managed by the scene.
-func (x *Scene) RemoveGraph(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeGraph:"), purego.NSString(name))
+func (s *Scene) RemoveGraph(name string) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("removeGraph:"), purego.NSString(name))
 }
 
-// Entities the entities of this scene.
+// Entities returns the entities of this scene.
 //
 // Entities returns the collection as a Go slice.
-func (x *Scene) Entities() []*Entity {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entities"))
+func (s *Scene) Entities() []*Entity {
+	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("entities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Entity { return EntityFromID(_id) })
 }
 
-// Graphs the navigational graphs of this scene.
-func (x *Scene) Graphs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("graphs"))
+// Graphs returns the navigational graphs of this scene.
+func (s *Scene) Graphs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("graphs"))
 	return obj.Wrap(_r)
 }
-
-// Sceneable is the interface implemented by [Scene], for mocking and DI.
-type Sceneable interface {
-	obj.Object
-	AddEntity(entity *Entity)
-	RemoveEntity(entity *Entity)
-	AddGraphName(graph *Graph, name string)
-	RemoveGraph(name string)
-	Entities() []*Entity
-	Graphs() obj.Object
-}
-
-var _ Sceneable = (*Scene)(nil)

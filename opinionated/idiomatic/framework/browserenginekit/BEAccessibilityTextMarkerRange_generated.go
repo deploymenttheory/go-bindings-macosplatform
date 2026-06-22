@@ -44,24 +44,24 @@ func accessibilityTextMarkerRangeAdopt(id objc.ID) *AccessibilityTextMarkerRange
 }
 
 // Description returns the object's -description text.
-func (x *AccessibilityTextMarkerRange) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (atmr *AccessibilityTextMarkerRange) Description() string {
+	return rt.Description(objref.IDOf(atmr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccessibilityTextMarkerRange) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (atmr *AccessibilityTextMarkerRange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(atmr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccessibilityTextMarkerRange) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (atmr *AccessibilityTextMarkerRange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(atmr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AccessibilityTextMarkerRange) String() string {
-	return rt.Description(objref.IDOf(x))
+func (atmr *AccessibilityTextMarkerRange) String() string {
+	return rt.Description(objref.IDOf(atmr))
 }
 
 // NewAccessibilityTextMarkerRange creates a new AccessibilityTextMarkerRange.
@@ -71,48 +71,25 @@ func NewAccessibilityTextMarkerRange() *AccessibilityTextMarkerRange {
 }
 
 // WithStartMarker sets the property and returns the receiver so calls can be chained.
-func (x *AccessibilityTextMarkerRange) WithStartMarker(startMarker *AccessibilityTextMarker) *AccessibilityTextMarkerRange {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartMarker:"), objref.IDOf(startMarker))
-	return x
+func (atmr *AccessibilityTextMarkerRange) WithStartMarker(startMarker *AccessibilityTextMarker) *AccessibilityTextMarkerRange {
+	objc.Send[objc.ID](objref.IDOf(atmr), objc.RegisterName("setStartMarker:"), objref.IDOf(startMarker))
+	return atmr
 }
 
 // WithEndMarker sets the property and returns the receiver so calls can be chained.
-func (x *AccessibilityTextMarkerRange) WithEndMarker(endMarker *AccessibilityTextMarker) *AccessibilityTextMarkerRange {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndMarker:"), objref.IDOf(endMarker))
-	return x
+func (atmr *AccessibilityTextMarkerRange) WithEndMarker(endMarker *AccessibilityTextMarker) *AccessibilityTextMarkerRange {
+	objc.Send[objc.ID](objref.IDOf(atmr), objc.RegisterName("setEndMarker:"), objref.IDOf(endMarker))
+	return atmr
 }
 
 // StartMarker wraps the corresponding Objective-C method.
-func (x *AccessibilityTextMarkerRange) StartMarker() *AccessibilityTextMarker {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startMarker"))
+func (atmr *AccessibilityTextMarkerRange) StartMarker() *AccessibilityTextMarker {
+	_r := objc.Send[objc.ID](objref.IDOf(atmr), objc.RegisterName("startMarker"))
 	return AccessibilityTextMarkerFromID(_r)
-}
-
-// SetStartMarker wraps the corresponding Objective-C method.
-func (x *AccessibilityTextMarkerRange) SetStartMarker(startMarker *AccessibilityTextMarker) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartMarker:"), objref.IDOf(startMarker))
 }
 
 // EndMarker wraps the corresponding Objective-C method.
-func (x *AccessibilityTextMarkerRange) EndMarker() *AccessibilityTextMarker {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endMarker"))
+func (atmr *AccessibilityTextMarkerRange) EndMarker() *AccessibilityTextMarker {
+	_r := objc.Send[objc.ID](objref.IDOf(atmr), objc.RegisterName("endMarker"))
 	return AccessibilityTextMarkerFromID(_r)
 }
-
-// SetEndMarker wraps the corresponding Objective-C method.
-func (x *AccessibilityTextMarkerRange) SetEndMarker(endMarker *AccessibilityTextMarker) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndMarker:"), objref.IDOf(endMarker))
-}
-
-// AccessibilityTextMarkerRangeable is the interface implemented by [AccessibilityTextMarkerRange], for mocking and DI.
-type AccessibilityTextMarkerRangeable interface {
-	obj.Object
-	WithStartMarker(startMarker *AccessibilityTextMarker) *AccessibilityTextMarkerRange
-	WithEndMarker(endMarker *AccessibilityTextMarker) *AccessibilityTextMarkerRange
-	StartMarker() *AccessibilityTextMarker
-	SetStartMarker(startMarker *AccessibilityTextMarker)
-	EndMarker() *AccessibilityTextMarker
-	SetEndMarker(endMarker *AccessibilityTextMarker)
-}
-
-var _ AccessibilityTextMarkerRangeable = (*AccessibilityTextMarkerRange)(nil)

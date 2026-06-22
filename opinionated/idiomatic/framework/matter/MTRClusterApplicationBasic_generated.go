@@ -59,102 +59,82 @@ func NewMTRClusterApplicationBasicWithDeviceEndpointQueue(device *MTRDevice, end
 }
 
 // ReadAttributeVendorNameWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterApplicationBasic) ReadAttributeVendorNameWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeVendorNameWithParams:"), objref.IDOf(params))
+func (mcab *MTRClusterApplicationBasic) ReadAttributeVendorNameWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcab), objc.RegisterName("readAttributeVendorNameWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeVendorIDWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterApplicationBasic) ReadAttributeVendorIDWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeVendorIDWithParams:"), objref.IDOf(params))
+func (mcab *MTRClusterApplicationBasic) ReadAttributeVendorIDWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcab), objc.RegisterName("readAttributeVendorIDWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeApplicationNameWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterApplicationBasic) ReadAttributeApplicationNameWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeApplicationNameWithParams:"), objref.IDOf(params))
+func (mcab *MTRClusterApplicationBasic) ReadAttributeApplicationNameWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcab), objc.RegisterName("readAttributeApplicationNameWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeProductIDWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterApplicationBasic) ReadAttributeProductIDWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeProductIDWithParams:"), objref.IDOf(params))
+func (mcab *MTRClusterApplicationBasic) ReadAttributeProductIDWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcab), objc.RegisterName("readAttributeProductIDWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeApplicationWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterApplicationBasic) ReadAttributeApplicationWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeApplicationWithParams:"), objref.IDOf(params))
+func (mcab *MTRClusterApplicationBasic) ReadAttributeApplicationWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcab), objc.RegisterName("readAttributeApplicationWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeStatusWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterApplicationBasic) ReadAttributeStatusWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStatusWithParams:"), objref.IDOf(params))
+func (mcab *MTRClusterApplicationBasic) ReadAttributeStatusWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcab), objc.RegisterName("readAttributeStatusWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeApplicationVersionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterApplicationBasic) ReadAttributeApplicationVersionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeApplicationVersionWithParams:"), objref.IDOf(params))
+func (mcab *MTRClusterApplicationBasic) ReadAttributeApplicationVersionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcab), objc.RegisterName("readAttributeApplicationVersionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAllowedVendorListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterApplicationBasic) ReadAttributeAllowedVendorListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAllowedVendorListWithParams:"), objref.IDOf(params))
+func (mcab *MTRClusterApplicationBasic) ReadAttributeAllowedVendorListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcab), objc.RegisterName("readAttributeAllowedVendorListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterApplicationBasic) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mcab *MTRClusterApplicationBasic) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcab), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterApplicationBasic) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mcab *MTRClusterApplicationBasic) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcab), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterApplicationBasic) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mcab *MTRClusterApplicationBasic) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcab), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterApplicationBasic) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mcab *MTRClusterApplicationBasic) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcab), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterApplicationBasic) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mcab *MTRClusterApplicationBasic) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcab), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
-
-// MTRClusterApplicationBasicable is the interface implemented by [MTRClusterApplicationBasic], for mocking and DI.
-type MTRClusterApplicationBasicable interface {
-	obj.Object
-	ReadAttributeVendorNameWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeVendorIDWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeApplicationNameWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeProductIDWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeApplicationWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeStatusWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeApplicationVersionWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAllowedVendorListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-}
-
-var _ MTRClusterApplicationBasicable = (*MTRClusterApplicationBasic)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterApplicationBasic)(nil)
 

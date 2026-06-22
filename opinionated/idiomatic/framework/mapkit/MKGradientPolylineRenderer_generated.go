@@ -52,114 +52,93 @@ func NewGradientPolylineRenderer() *GradientPolylineRenderer {
 	return gradientPolylineRendererAdopt(_id)
 }
 
-// WithStrokeStart the unit distance along the line where the stroke starts.
-func (x *GradientPolylineRenderer) WithStrokeStart(strokeStart float64) *GradientPolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeStart:"), strokeStart)
-	return x
+// WithStrokeStart sets the unit distance along the line where the stroke starts.
+func (gpr *GradientPolylineRenderer) WithStrokeStart(strokeStart float64) *GradientPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setStrokeStart:"), strokeStart)
+	return gpr
 }
 
-// WithStrokeEnd the unit distance along the line where the stroke ends.
-func (x *GradientPolylineRenderer) WithStrokeEnd(strokeEnd float64) *GradientPolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeEnd:"), strokeEnd)
-	return x
+// WithStrokeEnd sets the unit distance along the line where the stroke ends.
+func (gpr *GradientPolylineRenderer) WithStrokeEnd(strokeEnd float64) *GradientPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setStrokeEnd:"), strokeEnd)
+	return gpr
 }
 
-// WithFillColor the fill color to use for the path.
-func (x *GradientPolylineRenderer) WithFillColor(fillColor obj.Object) *GradientPolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
-	return x
+// WithFillColor sets the fill color to use for the path.
+func (gpr *GradientPolylineRenderer) WithFillColor(fillColor obj.Object) *GradientPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
+	return gpr
 }
 
-// WithStrokeColor the stroke color to use for the path.
-func (x *GradientPolylineRenderer) WithStrokeColor(strokeColor obj.Object) *GradientPolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
-	return x
+// WithStrokeColor sets the stroke color to use for the path.
+func (gpr *GradientPolylineRenderer) WithStrokeColor(strokeColor obj.Object) *GradientPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
+	return gpr
 }
 
-// WithLineWidth the stroke width to use for the path.
-func (x *GradientPolylineRenderer) WithLineWidth(lineWidth float64) *GradientPolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
-	return x
+// WithLineWidth sets the stroke width to use for the path.
+func (gpr *GradientPolylineRenderer) WithLineWidth(lineWidth float64) *GradientPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setLineWidth:"), lineWidth)
+	return gpr
 }
 
-// WithMiterLimit the limiting value that helps avoid spikes at junctions between connected line segments.
-func (x *GradientPolylineRenderer) WithMiterLimit(miterLimit float64) *GradientPolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
-	return x
+// WithMiterLimit sets the limiting value that helps avoid spikes at junctions between connected line segments.
+func (gpr *GradientPolylineRenderer) WithMiterLimit(miterLimit float64) *GradientPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setMiterLimit:"), miterLimit)
+	return gpr
 }
 
-// WithLineDashPhase the offset (in points) at which to start drawing the dash pattern.
-func (x *GradientPolylineRenderer) WithLineDashPhase(lineDashPhase float64) *GradientPolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
-	return x
+// WithLineDashPhase sets the offset (in points) at which to start drawing the dash pattern.
+func (gpr *GradientPolylineRenderer) WithLineDashPhase(lineDashPhase float64) *GradientPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
+	return gpr
 }
 
-// WithLineDashPattern an array of numbers specifying the dash pattern to use for the path.
-func (x *GradientPolylineRenderer) WithLineDashPattern(items ...obj.Object) *GradientPolylineRenderer {
+// WithLineDashPattern sets an array of numbers specifying the dash pattern to use for the path.
+func (gpr *GradientPolylineRenderer) WithLineDashPattern(items ...obj.Object) *GradientPolylineRenderer {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPattern:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setLineDashPattern:"), _arr)
+	return gpr
 }
 
-// WithShouldRasterize a Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
-func (x *GradientPolylineRenderer) WithShouldRasterize(shouldRasterize bool) *GradientPolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
-	return x
+// WithShouldRasterize sets a Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
+func (gpr *GradientPolylineRenderer) WithShouldRasterize(shouldRasterize bool) *GradientPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	return gpr
 }
 
-// WithPath the path representing the overlay’s shape.
-func (x *GradientPolylineRenderer) WithPath(path obj.Object) *GradientPolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
-	return x
+// WithPath sets the path representing the overlay’s shape.
+func (gpr *GradientPolylineRenderer) WithPath(path obj.Object) *GradientPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setPath:"), objref.IDOf(path))
+	return gpr
 }
 
-// WithAlpha the amount of transparency to apply to the overlay.
-func (x *GradientPolylineRenderer) WithAlpha(alpha float64) *GradientPolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the amount of transparency to apply to the overlay.
+func (gpr *GradientPolylineRenderer) WithAlpha(alpha float64) *GradientPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setAlpha:"), alpha)
+	return gpr
 }
 
 // SetColorsAtLocations sets the colors and corresponding unit distance values to create gradients.
-func (x *GradientPolylineRenderer) SetColorsAtLocations(colors []obj.Object, locations []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColors:atLocations:"), purego.SliceToNSArray(colors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(locations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (gpr *GradientPolylineRenderer) SetColorsAtLocations(colors []obj.Object, locations []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("setColors:atLocations:"), purego.SliceToNSArray(colors, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(locations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Locations wraps the corresponding Objective-C method.
 //
 // Locations returns the collection as a Go slice.
-func (x *GradientPolylineRenderer) Locations() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locations"))
+func (gpr *GradientPolylineRenderer) Locations() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("locations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Colors wraps the corresponding Objective-C method.
 //
 // Colors returns the collection as a Go slice.
-func (x *GradientPolylineRenderer) Colors() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colors"))
+func (gpr *GradientPolylineRenderer) Colors() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(gpr), objc.RegisterName("colors"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// GradientPolylineRendererable is the interface implemented by [GradientPolylineRenderer], for mocking and DI.
-type GradientPolylineRendererable interface {
-	obj.Object
-	WithStrokeStart(strokeStart float64) *GradientPolylineRenderer
-	WithStrokeEnd(strokeEnd float64) *GradientPolylineRenderer
-	WithFillColor(fillColor obj.Object) *GradientPolylineRenderer
-	WithStrokeColor(strokeColor obj.Object) *GradientPolylineRenderer
-	WithLineWidth(lineWidth float64) *GradientPolylineRenderer
-	WithMiterLimit(miterLimit float64) *GradientPolylineRenderer
-	WithLineDashPhase(lineDashPhase float64) *GradientPolylineRenderer
-	WithLineDashPattern(items ...obj.Object) *GradientPolylineRenderer
-	WithShouldRasterize(shouldRasterize bool) *GradientPolylineRenderer
-	WithPath(path obj.Object) *GradientPolylineRenderer
-	WithAlpha(alpha float64) *GradientPolylineRenderer
-	SetColorsAtLocations(colors []obj.Object, locations []obj.Object)
-	Locations() []obj.Object
-	Colors() []obj.Object
-}
-
-var _ GradientPolylineRendererable = (*GradientPolylineRenderer)(nil)
 
 var _ PolylineRendererProvider = (*GradientPolylineRenderer)(nil)
 

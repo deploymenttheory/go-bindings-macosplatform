@@ -46,24 +46,24 @@ func bluetoothDeviceSelectorControllerAdopt(id objc.ID) *BluetoothDeviceSelector
 }
 
 // Description returns the object's -description text.
-func (x *BluetoothDeviceSelectorController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bdsc *BluetoothDeviceSelectorController) Description() string {
+	return rt.Description(objref.IDOf(bdsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BluetoothDeviceSelectorController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bdsc *BluetoothDeviceSelectorController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bdsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BluetoothDeviceSelectorController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bdsc *BluetoothDeviceSelectorController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bdsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BluetoothDeviceSelectorController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bdsc *BluetoothDeviceSelectorController) String() string {
+	return rt.Description(objref.IDOf(bdsc))
 }
 
 // NewBluetoothDeviceSelectorController creates a new BluetoothDeviceSelectorController.
@@ -72,52 +72,52 @@ func NewBluetoothDeviceSelectorController() *BluetoothDeviceSelectorController {
 	return bluetoothDeviceSelectorControllerAdopt(_id)
 }
 
-// RunModal runs the device selector panel in a modal session to allow the user to select a Bluetooth device.
-func (x *BluetoothDeviceSelectorController) RunModal() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModal"))
+// RunModal returns runs the device selector panel in a modal session to allow the user to select a Bluetooth device.
+func (bdsc *BluetoothDeviceSelectorController) RunModal() int {
+	_r := objc.Send[int](objref.IDOf(bdsc), objc.RegisterName("runModal"))
 	return _r
 }
 
 // GetResults returns the result of the user’s selection.
-func (x *BluetoothDeviceSelectorController) GetResults() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getResults"))
+func (bdsc *BluetoothDeviceSelectorController) GetResults() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("getResults"))
 	return obj.Wrap(_r)
 }
 
 // SetOptions sets the option bits that control the panel’s behavior.
-func (x *BluetoothDeviceSelectorController) SetOptions(options uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), options)
+func (bdsc *BluetoothDeviceSelectorController) SetOptions(options uint32) {
+	objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("setOptions:"), options)
 }
 
 // GetOptions returns the option bits that control the panel’s behavior.
-func (x *BluetoothDeviceSelectorController) GetOptions() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("getOptions"))
+func (bdsc *BluetoothDeviceSelectorController) GetOptions() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(bdsc), objc.RegisterName("getOptions"))
 	return _r
 }
 
 // AddAllowedUUID adds a UUID to the list of UUIDs that are used to validate the user’s selection.
-func (x *BluetoothDeviceSelectorController) AddAllowedUUID(allowedUUID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAllowedUUID:"), objref.IDOf(allowedUUID))
+func (bdsc *BluetoothDeviceSelectorController) AddAllowedUUID(allowedUUID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("addAllowedUUID:"), objref.IDOf(allowedUUID))
 }
 
 // AddAllowedUUIDArray adds an array of UUIDs to the list of UUIDs that are used to validate the user’s selection.
-func (x *BluetoothDeviceSelectorController) AddAllowedUUIDArray(allowedUUIDArray obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAllowedUUIDArray:"), objref.IDOf(allowedUUIDArray))
+func (bdsc *BluetoothDeviceSelectorController) AddAllowedUUIDArray(allowedUUIDArray obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("addAllowedUUIDArray:"), objref.IDOf(allowedUUIDArray))
 }
 
 // ClearAllowedUUIDs resets the controller back to the default state where it will accept any device the user selects.
-func (x *BluetoothDeviceSelectorController) ClearAllowedUUIDs() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearAllowedUUIDs"))
+func (bdsc *BluetoothDeviceSelectorController) ClearAllowedUUIDs() {
+	objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("clearAllowedUUIDs"))
 }
 
 // SetTitle sets the title of the panel when not run as a sheet.
-func (x *BluetoothDeviceSelectorController) SetTitle(windowTitle string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(windowTitle))
+func (bdsc *BluetoothDeviceSelectorController) SetTitle(windowTitle string) {
+	objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("setTitle:"), purego.NSString(windowTitle))
 }
 
 // GetTitle returns the title of the device selector panel.
-func (x *BluetoothDeviceSelectorController) GetTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getTitle"))
+func (bdsc *BluetoothDeviceSelectorController) GetTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("getTitle"))
 	if _r == 0 {
 		return ""
 	}
@@ -125,13 +125,13 @@ func (x *BluetoothDeviceSelectorController) GetTitle() string {
 }
 
 // SetHeader sets the header text that appears in the device selector panel.
-func (x *BluetoothDeviceSelectorController) SetHeader(headerText string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeader:"), purego.NSString(headerText))
+func (bdsc *BluetoothDeviceSelectorController) SetHeader(headerText string) {
+	objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("setHeader:"), purego.NSString(headerText))
 }
 
 // GetHeader returns the header text that appears in the device selector panel.
-func (x *BluetoothDeviceSelectorController) GetHeader() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getHeader"))
+func (bdsc *BluetoothDeviceSelectorController) GetHeader() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("getHeader"))
 	if _r == 0 {
 		return ""
 	}
@@ -139,13 +139,13 @@ func (x *BluetoothDeviceSelectorController) GetHeader() string {
 }
 
 // SetDescriptionText sets the description text that appears in the device selector panel.
-func (x *BluetoothDeviceSelectorController) SetDescriptionText(descriptionText string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDescriptionText:"), purego.NSString(descriptionText))
+func (bdsc *BluetoothDeviceSelectorController) SetDescriptionText(descriptionText string) {
+	objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("setDescriptionText:"), purego.NSString(descriptionText))
 }
 
 // GetDescriptionText returns the description text that appears in the device selector panel.
-func (x *BluetoothDeviceSelectorController) GetDescriptionText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getDescriptionText"))
+func (bdsc *BluetoothDeviceSelectorController) GetDescriptionText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("getDescriptionText"))
 	if _r == 0 {
 		return ""
 	}
@@ -153,13 +153,13 @@ func (x *BluetoothDeviceSelectorController) GetDescriptionText() string {
 }
 
 // SetPrompt sets the title of the default/select button in the device selector panel.
-func (x *BluetoothDeviceSelectorController) SetPrompt(prompt string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrompt:"), purego.NSString(prompt))
+func (bdsc *BluetoothDeviceSelectorController) SetPrompt(prompt string) {
+	objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("setPrompt:"), purego.NSString(prompt))
 }
 
 // GetPrompt returns the title of the default/select button in the device selector panel.
-func (x *BluetoothDeviceSelectorController) GetPrompt() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getPrompt"))
+func (bdsc *BluetoothDeviceSelectorController) GetPrompt() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("getPrompt"))
 	if _r == 0 {
 		return ""
 	}
@@ -167,39 +167,15 @@ func (x *BluetoothDeviceSelectorController) GetPrompt() string {
 }
 
 // SetCancel sets the title of the default/cancel button in the device selector panel.
-func (x *BluetoothDeviceSelectorController) SetCancel(prompt string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancel:"), purego.NSString(prompt))
+func (bdsc *BluetoothDeviceSelectorController) SetCancel(prompt string) {
+	objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("setCancel:"), purego.NSString(prompt))
 }
 
 // GetCancel returns the title of the default/cancel button in the device selector panel.
-func (x *BluetoothDeviceSelectorController) GetCancel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getCancel"))
+func (bdsc *BluetoothDeviceSelectorController) GetCancel() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bdsc), objc.RegisterName("getCancel"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// BluetoothDeviceSelectorControllerable is the interface implemented by [BluetoothDeviceSelectorController], for mocking and DI.
-type BluetoothDeviceSelectorControllerable interface {
-	obj.Object
-	RunModal() int
-	GetResults() obj.Object
-	SetOptions(options uint32)
-	GetOptions() uint32
-	AddAllowedUUID(allowedUUID obj.Object)
-	AddAllowedUUIDArray(allowedUUIDArray obj.Object)
-	ClearAllowedUUIDs()
-	SetTitle(windowTitle string)
-	GetTitle() string
-	SetHeader(headerText string)
-	GetHeader() string
-	SetDescriptionText(descriptionText string)
-	GetDescriptionText() string
-	SetPrompt(prompt string)
-	GetPrompt() string
-	SetCancel(prompt string)
-	GetCancel() string
-}
-
-var _ BluetoothDeviceSelectorControllerable = (*BluetoothDeviceSelectorController)(nil)

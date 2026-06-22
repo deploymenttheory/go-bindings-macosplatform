@@ -54,494 +54,377 @@ func NewLevelIndicatorCellWithLevelIndicatorStyle(levelIndicatorStyle LevelIndic
 	return levelIndicatorCellAdopt(_id)
 }
 
-// WithLevelIndicatorStyle the style of the level indicator control.
-func (x *LevelIndicatorCell) WithLevelIndicatorStyle(levelIndicatorStyle LevelIndicatorStyle) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelIndicatorStyle:"), levelIndicatorStyle)
-	return x
+// WithLevelIndicatorStyle sets the style of the level indicator control.
+func (lic *LevelIndicatorCell) WithLevelIndicatorStyle(levelIndicatorStyle LevelIndicatorStyle) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setLevelIndicatorStyle:"), levelIndicatorStyle)
+	return lic
 }
 
-// WithMinValue the minimum value of the control.
-func (x *LevelIndicatorCell) WithMinValue(minValue float64) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinValue:"), minValue)
-	return x
+// WithMinValue sets the minimum value of the control.
+func (lic *LevelIndicatorCell) WithMinValue(minValue float64) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setMinValue:"), minValue)
+	return lic
 }
 
-// WithMaxValue the maximum value of the control.
-func (x *LevelIndicatorCell) WithMaxValue(maxValue float64) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxValue:"), maxValue)
-	return x
+// WithMaxValue sets the maximum value of the control.
+func (lic *LevelIndicatorCell) WithMaxValue(maxValue float64) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setMaxValue:"), maxValue)
+	return lic
 }
 
-// WithWarningValue the warning value of the level indicator control.
-func (x *LevelIndicatorCell) WithWarningValue(warningValue float64) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWarningValue:"), warningValue)
-	return x
+// WithWarningValue sets the warning value of the level indicator control.
+func (lic *LevelIndicatorCell) WithWarningValue(warningValue float64) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setWarningValue:"), warningValue)
+	return lic
 }
 
-// WithCriticalValue the critical value of the level indicator control.
-func (x *LevelIndicatorCell) WithCriticalValue(criticalValue float64) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCriticalValue:"), criticalValue)
-	return x
+// WithCriticalValue sets the critical value of the level indicator control.
+func (lic *LevelIndicatorCell) WithCriticalValue(criticalValue float64) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setCriticalValue:"), criticalValue)
+	return lic
 }
 
-// WithTickMarkPosition the placement of tick marks on the level indicator control.
-func (x *LevelIndicatorCell) WithTickMarkPosition(tickMarkPosition TickMarkPosition) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTickMarkPosition:"), tickMarkPosition)
-	return x
+// WithTickMarkPosition sets the placement of tick marks on the level indicator control.
+func (lic *LevelIndicatorCell) WithTickMarkPosition(tickMarkPosition TickMarkPosition) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setTickMarkPosition:"), tickMarkPosition)
+	return lic
 }
 
-// WithNumberOfTickMarks the number of tick marks displayed by the control.
-func (x *LevelIndicatorCell) WithNumberOfTickMarks(numberOfTickMarks int) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTickMarks:"), numberOfTickMarks)
-	return x
+// WithNumberOfTickMarks sets the number of tick marks displayed by the control.
+func (lic *LevelIndicatorCell) WithNumberOfTickMarks(numberOfTickMarks int) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setNumberOfTickMarks:"), numberOfTickMarks)
+	return lic
 }
 
-// WithNumberOfMajorTickMarks the number of major tick marks displayed by the control.
-func (x *LevelIndicatorCell) WithNumberOfMajorTickMarks(numberOfMajorTickMarks int) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfMajorTickMarks:"), numberOfMajorTickMarks)
-	return x
+// WithNumberOfMajorTickMarks sets the number of major tick marks displayed by the control.
+func (lic *LevelIndicatorCell) WithNumberOfMajorTickMarks(numberOfMajorTickMarks int) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setNumberOfMajorTickMarks:"), numberOfMajorTickMarks)
+	return lic
 }
 
-// WithControlView the view associated with the cell.
-func (x *LevelIndicatorCell) WithControlView(controlView ViewProvider) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
-	return x
+// WithControlView sets the view associated with the cell.
+func (lic *LevelIndicatorCell) WithControlView(controlView ViewProvider) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	return lic
 }
 
-// WithType the type of the cell.
-func (x *LevelIndicatorCell) WithType(type_ CellType) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the type of the cell.
+func (lic *LevelIndicatorCell) WithType(type_ CellType) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setType:"), type_)
+	return lic
 }
 
-// WithState the cell’s current state.
-func (x *LevelIndicatorCell) WithState(state int) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the cell’s current state.
+func (lic *LevelIndicatorCell) WithState(state int) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setState:"), state)
+	return lic
 }
 
-// WithTarget the object that receives the cell’s action messages.
-func (x *LevelIndicatorCell) WithTarget(target obj.Object) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that receives the cell’s action messages.
+func (lic *LevelIndicatorCell) WithTarget(target obj.Object) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return lic
 }
 
-// WithTag a tag for identifying the cell.
-func (x *LevelIndicatorCell) WithTag(tag int) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets a tag for identifying the cell.
+func (lic *LevelIndicatorCell) WithTag(tag int) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setTag:"), tag)
+	return lic
 }
 
-// WithTitle the cell’s title text.
-func (x *LevelIndicatorCell) WithTitle(title string) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the cell’s title text.
+func (lic *LevelIndicatorCell) WithTitle(title string) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return lic
 }
 
-// WithEnabled a Boolean value indicating whether the cell is currently enabled.
-func (x *LevelIndicatorCell) WithEnabled(enabled bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
+func (lic *LevelIndicatorCell) WithEnabled(enabled bool) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setEnabled:"), enabled)
+	return lic
 }
 
-// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-func (x *LevelIndicatorCell) WithContinuous(continuous bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+func (lic *LevelIndicatorCell) WithContinuous(continuous bool) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setContinuous:"), continuous)
+	return lic
 }
 
-// WithEditable a Boolean value indicating whether the cell is editable.
-func (x *LevelIndicatorCell) WithEditable(editable bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets a Boolean value indicating whether the cell is editable.
+func (lic *LevelIndicatorCell) WithEditable(editable bool) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setEditable:"), editable)
+	return lic
 }
 
-// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
-func (x *LevelIndicatorCell) WithSelectable(selectable bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
-	return x
+// WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
+func (lic *LevelIndicatorCell) WithSelectable(selectable bool) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setSelectable:"), selectable)
+	return lic
 }
 
-// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
-func (x *LevelIndicatorCell) WithBordered(bordered bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
-	return x
+// WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
+func (lic *LevelIndicatorCell) WithBordered(bordered bool) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setBordered:"), bordered)
+	return lic
 }
 
-// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
-func (x *LevelIndicatorCell) WithBezeled(bezeled bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
-	return x
+// WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
+func (lic *LevelIndicatorCell) WithBezeled(bezeled bool) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setBezeled:"), bezeled)
+	return lic
 }
 
-// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
-func (x *LevelIndicatorCell) WithScrollable(scrollable bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
-	return x
+// WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
+func (lic *LevelIndicatorCell) WithScrollable(scrollable bool) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setScrollable:"), scrollable)
+	return lic
 }
 
-// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
-func (x *LevelIndicatorCell) WithHighlighted(highlighted bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
+func (lic *LevelIndicatorCell) WithHighlighted(highlighted bool) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setHighlighted:"), highlighted)
+	return lic
 }
 
-// WithAlignment the alignment of the cell’s text.
-func (x *LevelIndicatorCell) WithAlignment(alignment TextAlignment) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment of the cell’s text.
+func (lic *LevelIndicatorCell) WithAlignment(alignment TextAlignment) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setAlignment:"), alignment)
+	return lic
 }
 
-// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-func (x *LevelIndicatorCell) WithWraps(wraps bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
-	return x
+// WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+func (lic *LevelIndicatorCell) WithWraps(wraps bool) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setWraps:"), wraps)
+	return lic
 }
 
-// WithFont the font that the cell uses to display text.
-func (x *LevelIndicatorCell) WithFont(font *Font) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font that the cell uses to display text.
+func (lic *LevelIndicatorCell) WithFont(font *Font) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return lic
 }
 
-// WithFormatter the cell’s formatter object.
-func (x *LevelIndicatorCell) WithFormatter(formatter obj.Object) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the cell’s formatter object.
+func (lic *LevelIndicatorCell) WithFormatter(formatter obj.Object) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return lic
 }
 
-// WithObjectValue the cell’s value as an Objective-C object.
-func (x *LevelIndicatorCell) WithObjectValue(objectValue obj.Object) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the cell’s value as an Objective-C object.
+func (lic *LevelIndicatorCell) WithObjectValue(objectValue obj.Object) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return lic
 }
 
-// WithStringValue the cell’s value as a string.
-func (x *LevelIndicatorCell) WithStringValue(stringValue string) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the cell’s value as a string.
+func (lic *LevelIndicatorCell) WithStringValue(stringValue string) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return lic
 }
 
-// WithIntValue the cell’s value as an integer.
-func (x *LevelIndicatorCell) WithIntValue(intValue int) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the cell’s value as an integer.
+func (lic *LevelIndicatorCell) WithIntValue(intValue int) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setIntValue:"), intValue)
+	return lic
 }
 
-// WithFloatValue the cell’s value as a single-precision floating-point number.
-func (x *LevelIndicatorCell) WithFloatValue(floatValue float32) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the cell’s value as a single-precision floating-point number.
+func (lic *LevelIndicatorCell) WithFloatValue(floatValue float32) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setFloatValue:"), floatValue)
+	return lic
 }
 
-// WithDoubleValue the cell’s value as a double-precision floating-point number.
-func (x *LevelIndicatorCell) WithDoubleValue(doubleValue float64) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the cell’s value as a double-precision floating-point number.
+func (lic *LevelIndicatorCell) WithDoubleValue(doubleValue float64) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return lic
 }
 
-// WithIntegerValue the cell’s value as an integer value.
-func (x *LevelIndicatorCell) WithIntegerValue(integerValue int) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the cell’s value as an integer value.
+func (lic *LevelIndicatorCell) WithIntegerValue(integerValue int) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setIntegerValue:"), integerValue)
+	return lic
 }
 
-// WithImage the image displayed by the cell, if any.
-func (x *LevelIndicatorCell) WithImage(image *Image) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+// WithImage sets the image displayed by the cell, if any.
+func (lic *LevelIndicatorCell) WithImage(image *Image) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return lic
 }
 
-// WithControlSize the size of the cell.
-func (x *LevelIndicatorCell) WithControlSize(controlSize ControlSize) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the cell.
+func (lic *LevelIndicatorCell) WithControlSize(controlSize ControlSize) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setControlSize:"), controlSize)
+	return lic
 }
 
-// WithRepresentedObject the object represented by the cell.
-func (x *LevelIndicatorCell) WithRepresentedObject(representedObject obj.Object) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
-	return x
+// WithRepresentedObject sets the object represented by the cell.
+func (lic *LevelIndicatorCell) WithRepresentedObject(representedObject obj.Object) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	return lic
 }
 
-// WithMenu the cell’s contextual menu.
-func (x *LevelIndicatorCell) WithMenu(menu *Menu) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets the cell’s contextual menu.
+func (lic *LevelIndicatorCell) WithMenu(menu *Menu) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return lic
 }
 
-// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-func (x *LevelIndicatorCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
-	return x
+// WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+func (lic *LevelIndicatorCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	return lic
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *LevelIndicatorCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (lic *LevelIndicatorCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return lic
 }
 
-// WithLineBreakMode the line break mode to use when drawing text in the cell.
-func (x *LevelIndicatorCell) WithLineBreakMode(lineBreakMode LineBreakMode) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use when drawing text in the cell.
+func (lic *LevelIndicatorCell) WithLineBreakMode(lineBreakMode LineBreakMode) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return lic
 }
 
-// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
-func (x *LevelIndicatorCell) WithAllowsUndo(allowsUndo bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
-	return x
+// WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
+func (lic *LevelIndicatorCell) WithAllowsUndo(allowsUndo bool) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	return lic
 }
 
-// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-func (x *LevelIndicatorCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
-	return x
+// WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+func (lic *LevelIndicatorCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	return lic
 }
 
-// WithUserInterfaceLayoutDirection the layout direction of the user interface.
-func (x *LevelIndicatorCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+// WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
+func (lic *LevelIndicatorCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return lic
 }
 
-// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-func (x *LevelIndicatorCell) WithUsesSingleLineMode(usesSingleLineMode bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+func (lic *LevelIndicatorCell) WithUsesSingleLineMode(usesSingleLineMode bool) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return lic
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
-func (x *LevelIndicatorCell) WithRefusesFirstResponder(refusesFirstResponder bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
+func (lic *LevelIndicatorCell) WithRefusesFirstResponder(refusesFirstResponder bool) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return lic
 }
 
-// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-func (x *LevelIndicatorCell) WithShowsFirstResponder(showsFirstResponder bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
-	return x
+// WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+func (lic *LevelIndicatorCell) WithShowsFirstResponder(showsFirstResponder bool) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	return lic
 }
 
-// WithFocusRingType the type of focus ring to use with the associated view.
-func (x *LevelIndicatorCell) WithFocusRingType(focusRingType FocusRingType) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+// WithFocusRingType sets the type of focus ring to use with the associated view.
+func (lic *LevelIndicatorCell) WithFocusRingType(focusRingType FocusRingType) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return lic
 }
 
-// WithAttributedStringValue the cell’s value as an attributed string.
-func (x *LevelIndicatorCell) WithAttributedStringValue(attributedStringValue obj.Object) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the cell’s value as an attributed string.
+func (lic *LevelIndicatorCell) WithAttributedStringValue(attributedStringValue obj.Object) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return lic
 }
 
-// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-func (x *LevelIndicatorCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
-	return x
+// WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+func (lic *LevelIndicatorCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	return lic
 }
 
-// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
-func (x *LevelIndicatorCell) WithImportsGraphics(importsGraphics bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
-	return x
+// WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
+func (lic *LevelIndicatorCell) WithImportsGraphics(importsGraphics bool) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	return lic
 }
 
-// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
-func (x *LevelIndicatorCell) WithAllowsMixedState(allowsMixedState bool) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
-	return x
+// WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
+func (lic *LevelIndicatorCell) WithAllowsMixedState(allowsMixedState bool) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	return lic
 }
 
-// WithBackgroundStyle the cell’s background style.
-func (x *LevelIndicatorCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
-	return x
+// WithBackgroundStyle sets the cell’s background style.
+func (lic *LevelIndicatorCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	return lic
 }
 
-// WithControlTint the cell’s control tint.
-func (x *LevelIndicatorCell) WithControlTint(controlTint ControlTint) *LevelIndicatorCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
-	return x
+// WithControlTint sets the cell’s control tint.
+func (lic *LevelIndicatorCell) WithControlTint(controlTint ControlTint) *LevelIndicatorCell {
+	objc.Send[objc.ID](objref.IDOf(lic), objc.RegisterName("setControlTint:"), controlTint)
+	return lic
 }
 
 // RectOfTickMarkAtIndex returns the bounding rectangle of the tick mark identified by index (the minimum-value tick mark is at index 0).
-func (x *LevelIndicatorCell) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectOfTickMarkAtIndex:"), index)
+func (lic *LevelIndicatorCell) RectOfTickMarkAtIndex(index int) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(lic), objc.RegisterName("rectOfTickMarkAtIndex:"), index)
 	return _r
 }
 
 // TickMarkValueAtIndex returns the receiver’s value represented by the tick mark at index (the minimum-value tick mark has an index of 0).
-func (x *LevelIndicatorCell) TickMarkValueAtIndex(index int) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("tickMarkValueAtIndex:"), index)
+func (lic *LevelIndicatorCell) TickMarkValueAtIndex(index int) float64 {
+	_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("tickMarkValueAtIndex:"), index)
 	return _r
 }
 
 // LevelIndicatorStyle wraps the corresponding Objective-C method.
-func (x *LevelIndicatorCell) LevelIndicatorStyle() LevelIndicatorStyle {
-	_r := objc.Send[LevelIndicatorStyle](objref.IDOf(x), objc.RegisterName("levelIndicatorStyle"))
+func (lic *LevelIndicatorCell) LevelIndicatorStyle() LevelIndicatorStyle {
+	_r := objc.Send[LevelIndicatorStyle](objref.IDOf(lic), objc.RegisterName("levelIndicatorStyle"))
 	return _r
-}
-
-// SetLevelIndicatorStyle wraps the corresponding Objective-C method.
-func (x *LevelIndicatorCell) SetLevelIndicatorStyle(levelIndicatorStyle LevelIndicatorStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelIndicatorStyle:"), levelIndicatorStyle)
 }
 
 // MinValue wraps the corresponding Objective-C method.
-func (x *LevelIndicatorCell) MinValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minValue"))
+func (lic *LevelIndicatorCell) MinValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("minValue"))
 	return _r
-}
-
-// SetMinValue wraps the corresponding Objective-C method.
-func (x *LevelIndicatorCell) SetMinValue(minValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinValue:"), minValue)
 }
 
 // MaxValue wraps the corresponding Objective-C method.
-func (x *LevelIndicatorCell) MaxValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxValue"))
+func (lic *LevelIndicatorCell) MaxValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("maxValue"))
 	return _r
-}
-
-// SetMaxValue wraps the corresponding Objective-C method.
-func (x *LevelIndicatorCell) SetMaxValue(maxValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxValue:"), maxValue)
 }
 
 // WarningValue wraps the corresponding Objective-C method.
-func (x *LevelIndicatorCell) WarningValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("warningValue"))
+func (lic *LevelIndicatorCell) WarningValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("warningValue"))
 	return _r
-}
-
-// SetWarningValue wraps the corresponding Objective-C method.
-func (x *LevelIndicatorCell) SetWarningValue(warningValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWarningValue:"), warningValue)
 }
 
 // CriticalValue wraps the corresponding Objective-C method.
-func (x *LevelIndicatorCell) CriticalValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("criticalValue"))
+func (lic *LevelIndicatorCell) CriticalValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(lic), objc.RegisterName("criticalValue"))
 	return _r
-}
-
-// SetCriticalValue wraps the corresponding Objective-C method.
-func (x *LevelIndicatorCell) SetCriticalValue(criticalValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCriticalValue:"), criticalValue)
 }
 
 // TickMarkPosition wraps the corresponding Objective-C method.
-func (x *LevelIndicatorCell) TickMarkPosition() TickMarkPosition {
-	_r := objc.Send[TickMarkPosition](objref.IDOf(x), objc.RegisterName("tickMarkPosition"))
+func (lic *LevelIndicatorCell) TickMarkPosition() TickMarkPosition {
+	_r := objc.Send[TickMarkPosition](objref.IDOf(lic), objc.RegisterName("tickMarkPosition"))
 	return _r
-}
-
-// SetTickMarkPosition wraps the corresponding Objective-C method.
-func (x *LevelIndicatorCell) SetTickMarkPosition(tickMarkPosition TickMarkPosition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTickMarkPosition:"), tickMarkPosition)
 }
 
 // NumberOfTickMarks wraps the corresponding Objective-C method.
-func (x *LevelIndicatorCell) NumberOfTickMarks() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfTickMarks"))
+func (lic *LevelIndicatorCell) NumberOfTickMarks() int {
+	_r := objc.Send[int](objref.IDOf(lic), objc.RegisterName("numberOfTickMarks"))
 	return _r
-}
-
-// SetNumberOfTickMarks wraps the corresponding Objective-C method.
-func (x *LevelIndicatorCell) SetNumberOfTickMarks(numberOfTickMarks int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTickMarks:"), numberOfTickMarks)
 }
 
 // NumberOfMajorTickMarks wraps the corresponding Objective-C method.
-func (x *LevelIndicatorCell) NumberOfMajorTickMarks() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfMajorTickMarks"))
+func (lic *LevelIndicatorCell) NumberOfMajorTickMarks() int {
+	_r := objc.Send[int](objref.IDOf(lic), objc.RegisterName("numberOfMajorTickMarks"))
 	return _r
 }
-
-// SetNumberOfMajorTickMarks wraps the corresponding Objective-C method.
-func (x *LevelIndicatorCell) SetNumberOfMajorTickMarks(numberOfMajorTickMarks int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfMajorTickMarks:"), numberOfMajorTickMarks)
-}
-
-// LevelIndicatorCellable is the interface implemented by [LevelIndicatorCell], for mocking and DI.
-type LevelIndicatorCellable interface {
-	obj.Object
-	WithLevelIndicatorStyle(levelIndicatorStyle LevelIndicatorStyle) *LevelIndicatorCell
-	WithMinValue(minValue float64) *LevelIndicatorCell
-	WithMaxValue(maxValue float64) *LevelIndicatorCell
-	WithWarningValue(warningValue float64) *LevelIndicatorCell
-	WithCriticalValue(criticalValue float64) *LevelIndicatorCell
-	WithTickMarkPosition(tickMarkPosition TickMarkPosition) *LevelIndicatorCell
-	WithNumberOfTickMarks(numberOfTickMarks int) *LevelIndicatorCell
-	WithNumberOfMajorTickMarks(numberOfMajorTickMarks int) *LevelIndicatorCell
-	WithControlView(controlView ViewProvider) *LevelIndicatorCell
-	WithType(type_ CellType) *LevelIndicatorCell
-	WithState(state int) *LevelIndicatorCell
-	WithTarget(target obj.Object) *LevelIndicatorCell
-	WithTag(tag int) *LevelIndicatorCell
-	WithTitle(title string) *LevelIndicatorCell
-	WithEnabled(enabled bool) *LevelIndicatorCell
-	WithContinuous(continuous bool) *LevelIndicatorCell
-	WithEditable(editable bool) *LevelIndicatorCell
-	WithSelectable(selectable bool) *LevelIndicatorCell
-	WithBordered(bordered bool) *LevelIndicatorCell
-	WithBezeled(bezeled bool) *LevelIndicatorCell
-	WithScrollable(scrollable bool) *LevelIndicatorCell
-	WithHighlighted(highlighted bool) *LevelIndicatorCell
-	WithAlignment(alignment TextAlignment) *LevelIndicatorCell
-	WithWraps(wraps bool) *LevelIndicatorCell
-	WithFont(font *Font) *LevelIndicatorCell
-	WithFormatter(formatter obj.Object) *LevelIndicatorCell
-	WithObjectValue(objectValue obj.Object) *LevelIndicatorCell
-	WithStringValue(stringValue string) *LevelIndicatorCell
-	WithIntValue(intValue int) *LevelIndicatorCell
-	WithFloatValue(floatValue float32) *LevelIndicatorCell
-	WithDoubleValue(doubleValue float64) *LevelIndicatorCell
-	WithIntegerValue(integerValue int) *LevelIndicatorCell
-	WithImage(image *Image) *LevelIndicatorCell
-	WithControlSize(controlSize ControlSize) *LevelIndicatorCell
-	WithRepresentedObject(representedObject obj.Object) *LevelIndicatorCell
-	WithMenu(menu *Menu) *LevelIndicatorCell
-	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *LevelIndicatorCell
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *LevelIndicatorCell
-	WithLineBreakMode(lineBreakMode LineBreakMode) *LevelIndicatorCell
-	WithAllowsUndo(allowsUndo bool) *LevelIndicatorCell
-	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *LevelIndicatorCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *LevelIndicatorCell
-	WithUsesSingleLineMode(usesSingleLineMode bool) *LevelIndicatorCell
-	WithRefusesFirstResponder(refusesFirstResponder bool) *LevelIndicatorCell
-	WithShowsFirstResponder(showsFirstResponder bool) *LevelIndicatorCell
-	WithFocusRingType(focusRingType FocusRingType) *LevelIndicatorCell
-	WithAttributedStringValue(attributedStringValue obj.Object) *LevelIndicatorCell
-	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *LevelIndicatorCell
-	WithImportsGraphics(importsGraphics bool) *LevelIndicatorCell
-	WithAllowsMixedState(allowsMixedState bool) *LevelIndicatorCell
-	WithBackgroundStyle(backgroundStyle BackgroundStyle) *LevelIndicatorCell
-	WithControlTint(controlTint ControlTint) *LevelIndicatorCell
-	RectOfTickMarkAtIndex(index int) corefoundation.CGRect
-	TickMarkValueAtIndex(index int) float64
-	LevelIndicatorStyle() LevelIndicatorStyle
-	SetLevelIndicatorStyle(levelIndicatorStyle LevelIndicatorStyle)
-	MinValue() float64
-	SetMinValue(minValue float64)
-	MaxValue() float64
-	SetMaxValue(maxValue float64)
-	WarningValue() float64
-	SetWarningValue(warningValue float64)
-	CriticalValue() float64
-	SetCriticalValue(criticalValue float64)
-	TickMarkPosition() TickMarkPosition
-	SetTickMarkPosition(tickMarkPosition TickMarkPosition)
-	NumberOfTickMarks() int
-	SetNumberOfTickMarks(numberOfTickMarks int)
-	NumberOfMajorTickMarks() int
-	SetNumberOfMajorTickMarks(numberOfMajorTickMarks int)
-}
-
-var _ LevelIndicatorCellable = (*LevelIndicatorCell)(nil)
 
 var _ ActionCellProvider = (*LevelIndicatorCell)(nil)
 

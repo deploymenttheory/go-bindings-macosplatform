@@ -46,24 +46,24 @@ func compassButtonAdopt(id objc.ID) *CompassButton {
 }
 
 // Description returns the object's -description text.
-func (x *CompassButton) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cb *CompassButton) Description() string {
+	return rt.Description(objref.IDOf(cb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CompassButton) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cb *CompassButton) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CompassButton) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cb *CompassButton) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CompassButton) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cb *CompassButton) String() string {
+	return rt.Description(objref.IDOf(cb))
 }
 
 // NewCompassButton creates a new CompassButton.
@@ -72,49 +72,26 @@ func NewCompassButton() *CompassButton {
 	return compassButtonAdopt(_id)
 }
 
-// WithMapView the map view that provides the heading information for the compass button.
-func (x *CompassButton) WithMapView(mapView *MapView) *CompassButton {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
-	return x
+// WithMapView sets the map view that provides the heading information for the compass button.
+func (cb *CompassButton) WithMapView(mapView *MapView) *CompassButton {
+	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
+	return cb
 }
 
-// WithCompassVisibility the visibility of the compass button.
-func (x *CompassButton) WithCompassVisibility(compassVisibility FeatureVisibility) *CompassButton {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompassVisibility:"), compassVisibility)
-	return x
+// WithCompassVisibility sets the visibility of the compass button.
+func (cb *CompassButton) WithCompassVisibility(compassVisibility FeatureVisibility) *CompassButton {
+	objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("setCompassVisibility:"), compassVisibility)
+	return cb
 }
 
 // MapView wraps the corresponding Objective-C method.
-func (x *CompassButton) MapView() *MapView {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapView"))
+func (cb *CompassButton) MapView() *MapView {
+	_r := objc.Send[objc.ID](objref.IDOf(cb), objc.RegisterName("mapView"))
 	return MapViewFromID(_r)
 }
 
-// SetMapView wraps the corresponding Objective-C method.
-func (x *CompassButton) SetMapView(mapView *MapView) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapView:"), objref.IDOf(mapView))
-}
-
 // CompassVisibility wraps the corresponding Objective-C method.
-func (x *CompassButton) CompassVisibility() FeatureVisibility {
-	_r := objc.Send[FeatureVisibility](objref.IDOf(x), objc.RegisterName("compassVisibility"))
+func (cb *CompassButton) CompassVisibility() FeatureVisibility {
+	_r := objc.Send[FeatureVisibility](objref.IDOf(cb), objc.RegisterName("compassVisibility"))
 	return _r
 }
-
-// SetCompassVisibility wraps the corresponding Objective-C method.
-func (x *CompassButton) SetCompassVisibility(compassVisibility FeatureVisibility) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompassVisibility:"), compassVisibility)
-}
-
-// CompassButtonable is the interface implemented by [CompassButton], for mocking and DI.
-type CompassButtonable interface {
-	obj.Object
-	WithMapView(mapView *MapView) *CompassButton
-	WithCompassVisibility(compassVisibility FeatureVisibility) *CompassButton
-	MapView() *MapView
-	SetMapView(mapView *MapView)
-	CompassVisibility() FeatureVisibility
-	SetCompassVisibility(compassVisibility FeatureVisibility)
-}
-
-var _ CompassButtonable = (*CompassButton)(nil)

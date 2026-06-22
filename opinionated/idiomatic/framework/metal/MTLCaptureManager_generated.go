@@ -5,13 +5,14 @@
 package metal
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // CaptureManager is an idiomatic wrapper over the Objective-C class MTLCaptureManager.
@@ -48,24 +49,24 @@ func captureManagerAdopt(id objc.ID) *CaptureManager {
 }
 
 // Description returns the object's -description text.
-func (x *CaptureManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cm *CaptureManager) Description() string {
+	return rt.Description(objref.IDOf(cm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cm *CaptureManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cm *CaptureManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptureManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cm *CaptureManager) String() string {
+	return rt.Description(objref.IDOf(cm))
 }
 
 // NewCaptureManager creates a new CaptureManager.
@@ -75,15 +76,15 @@ func NewCaptureManager() *CaptureManager {
 }
 
 // SupportsDestination checks to see whether a particular capture destination is supported.
-func (x *CaptureManager) SupportsDestination(destination CaptureDestination) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsDestination:"), destination)
+func (cm *CaptureManager) SupportsDestination(destination CaptureDestination) bool {
+	_r := objc.Send[bool](objref.IDOf(cm), objc.RegisterName("supportsDestination:"), destination)
 	return _r
 }
 
 // StartCaptureWithDescriptor starts capturing any of your app’s Metal commands, with the capture session defined by a descriptor object.
-func (x *CaptureManager) StartCaptureWithDescriptor(descriptor *CaptureDescriptor) error {
+func (cm *CaptureManager) StartCaptureWithDescriptor(descriptor *CaptureDescriptor) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("startCaptureWithDescriptor:error:"), objref.IDOf(descriptor), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(cm), objc.RegisterName("startCaptureWithDescriptor:error:"), objref.IDOf(descriptor), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -91,23 +92,12 @@ func (x *CaptureManager) StartCaptureWithDescriptor(descriptor *CaptureDescripto
 }
 
 // StopCapture stops capturing Metal commands.
-func (x *CaptureManager) StopCapture() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopCapture"))
+func (cm *CaptureManager) StopCapture() {
+	objc.Send[objc.ID](objref.IDOf(cm), objc.RegisterName("stopCapture"))
 }
 
 // IsCapturing wraps the corresponding Objective-C method.
-func (x *CaptureManager) IsCapturing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCapturing"))
+func (cm *CaptureManager) IsCapturing() bool {
+	_r := objc.Send[bool](objref.IDOf(cm), objc.RegisterName("isCapturing"))
 	return _r
 }
-
-// CaptureManagerable is the interface implemented by [CaptureManager], for mocking and DI.
-type CaptureManagerable interface {
-	obj.Object
-	SupportsDestination(destination CaptureDestination) bool
-	StartCaptureWithDescriptor(descriptor *CaptureDescriptor) error
-	StopCapture()
-	IsCapturing() bool
-}
-
-var _ CaptureManagerable = (*CaptureManager)(nil)

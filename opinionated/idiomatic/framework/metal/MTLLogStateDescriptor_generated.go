@@ -46,24 +46,24 @@ func logStateDescriptorAdopt(id objc.ID) *LogStateDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *LogStateDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lsd *LogStateDescriptor) Description() string {
+	return rt.Description(objref.IDOf(lsd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LogStateDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lsd *LogStateDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lsd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LogStateDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lsd *LogStateDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lsd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LogStateDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lsd *LogStateDescriptor) String() string {
+	return rt.Description(objref.IDOf(lsd))
 }
 
 // NewLogStateDescriptor creates a new LogStateDescriptor.
@@ -72,49 +72,26 @@ func NewLogStateDescriptor() *LogStateDescriptor {
 	return logStateDescriptorAdopt(_id)
 }
 
-// WithLevel the minimum level of messages that the shader can log.
-func (x *LogStateDescriptor) WithLevel(level LogLevel) *LogStateDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
-	return x
+// WithLevel sets the minimum level of messages that the shader can log.
+func (lsd *LogStateDescriptor) WithLevel(level LogLevel) *LogStateDescriptor {
+	objc.Send[objc.ID](objref.IDOf(lsd), objc.RegisterName("setLevel:"), level)
+	return lsd
 }
 
-// WithBufferSize the size of the internal buffer the log state uses, specified in bytes.
-func (x *LogStateDescriptor) WithBufferSize(bufferSize int) *LogStateDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferSize:"), bufferSize)
-	return x
+// WithBufferSize sets the size of the internal buffer the log state uses, specified in bytes.
+func (lsd *LogStateDescriptor) WithBufferSize(bufferSize int) *LogStateDescriptor {
+	objc.Send[objc.ID](objref.IDOf(lsd), objc.RegisterName("setBufferSize:"), bufferSize)
+	return lsd
 }
 
-// Level level indicates the minimum level of the logs that will be printed. All the logs with level less than given level will be skipped on the GPU Side.
-func (x *LogStateDescriptor) Level() LogLevel {
-	_r := objc.Send[LogLevel](objref.IDOf(x), objc.RegisterName("level"))
+// Level returns level indicates the minimum level of the logs that will be printed. All the logs with level less than given level will be skipped on the GPU Side.
+func (lsd *LogStateDescriptor) Level() LogLevel {
+	_r := objc.Send[LogLevel](objref.IDOf(lsd), objc.RegisterName("level"))
 	return _r
 }
 
-// SetLevel wraps the corresponding Objective-C method.
-func (x *LogStateDescriptor) SetLevel(level LogLevel) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
-}
-
-// BufferSize bufferSize indicates the size of the buffer where GPU will store the logging content from shaders. Minimum value is 1KB
-func (x *LogStateDescriptor) BufferSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bufferSize"))
+// BufferSize returns bufferSize indicates the size of the buffer where GPU will store the logging content from shaders. Minimum value is 1KB
+func (lsd *LogStateDescriptor) BufferSize() int {
+	_r := objc.Send[int](objref.IDOf(lsd), objc.RegisterName("bufferSize"))
 	return _r
 }
-
-// SetBufferSize wraps the corresponding Objective-C method.
-func (x *LogStateDescriptor) SetBufferSize(bufferSize int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferSize:"), bufferSize)
-}
-
-// LogStateDescriptorable is the interface implemented by [LogStateDescriptor], for mocking and DI.
-type LogStateDescriptorable interface {
-	obj.Object
-	WithLevel(level LogLevel) *LogStateDescriptor
-	WithBufferSize(bufferSize int) *LogStateDescriptor
-	Level() LogLevel
-	SetLevel(level LogLevel)
-	BufferSize() int
-	SetBufferSize(bufferSize int)
-}
-
-var _ LogStateDescriptorable = (*LogStateDescriptor)(nil)

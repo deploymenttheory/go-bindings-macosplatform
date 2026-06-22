@@ -46,24 +46,24 @@ func authorizationPublicKeyCredentialPRFRegistrationInputAdopt(id objc.ID) *Auth
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (apkcpri *AuthorizationPublicKeyCredentialPRFRegistrationInput) Description() string {
+	return rt.Description(objref.IDOf(apkcpri))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (apkcpri *AuthorizationPublicKeyCredentialPRFRegistrationInput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(apkcpri), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (apkcpri *AuthorizationPublicKeyCredentialPRFRegistrationInput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(apkcpri), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) String() string {
-	return rt.Description(objref.IDOf(x))
+func (apkcpri *AuthorizationPublicKeyCredentialPRFRegistrationInput) String() string {
+	return rt.Description(objref.IDOf(apkcpri))
 }
 
 // NewAuthorizationPublicKeyCredentialPRFRegistrationInputWithInputValues creates a new AuthorizationPublicKeyCredentialPRFRegistrationInput.
@@ -74,22 +74,13 @@ func NewAuthorizationPublicKeyCredentialPRFRegistrationInputWithInputValues(inpu
 }
 
 // ShouldCheckForSupport wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) ShouldCheckForSupport() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldCheckForSupport"))
+func (apkcpri *AuthorizationPublicKeyCredentialPRFRegistrationInput) ShouldCheckForSupport() bool {
+	_r := objc.Send[bool](objref.IDOf(apkcpri), objc.RegisterName("shouldCheckForSupport"))
 	return _r
 }
 
 // InputValues wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialPRFRegistrationInput) InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputValues"))
+func (apkcpri *AuthorizationPublicKeyCredentialPRFRegistrationInput) InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues {
+	_r := objc.Send[objc.ID](objref.IDOf(apkcpri), objc.RegisterName("inputValues"))
 	return AuthorizationPublicKeyCredentialPRFAssertionInputValuesFromID(_r)
 }
-
-// AuthorizationPublicKeyCredentialPRFRegistrationInputable is the interface implemented by [AuthorizationPublicKeyCredentialPRFRegistrationInput], for mocking and DI.
-type AuthorizationPublicKeyCredentialPRFRegistrationInputable interface {
-	obj.Object
-	ShouldCheckForSupport() bool
-	InputValues() *AuthorizationPublicKeyCredentialPRFAssertionInputValues
-}
-
-var _ AuthorizationPublicKeyCredentialPRFRegistrationInputable = (*AuthorizationPublicKeyCredentialPRFRegistrationInput)(nil)

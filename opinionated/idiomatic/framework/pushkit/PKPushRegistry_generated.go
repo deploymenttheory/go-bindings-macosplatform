@@ -46,24 +46,24 @@ func pushRegistryAdopt(id objc.ID) *PushRegistry {
 }
 
 // Description returns the object's -description text.
-func (x *PushRegistry) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pr *PushRegistry) Description() string {
+	return rt.Description(objref.IDOf(pr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PushRegistry) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pr *PushRegistry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PushRegistry) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pr *PushRegistry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PushRegistry) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pr *PushRegistry) String() string {
+	return rt.Description(objref.IDOf(pr))
 }
 
 // NewPushRegistryWithQueue creates a push registry with the specified dispatch queue.
@@ -73,36 +73,20 @@ func NewPushRegistryWithQueue(queue obj.Object) *PushRegistry {
 	return pushRegistryAdopt(_id)
 }
 
-// WithDesiredPushTypes registers the push types for this push registry object.
-func (x *PushRegistry) WithDesiredPushTypes(desiredPushTypes obj.Object) *PushRegistry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredPushTypes:"), objref.IDOf(desiredPushTypes))
-	return x
+// WithDesiredPushTypes sets registers the push types for this push registry object.
+func (pr *PushRegistry) WithDesiredPushTypes(desiredPushTypes obj.Object) *PushRegistry {
+	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setDesiredPushTypes:"), objref.IDOf(desiredPushTypes))
+	return pr
 }
 
 // PushTokenForType retrieves the locally cached push token for the specified push type.
-func (x *PushRegistry) PushTokenForType(type_ obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pushTokenForType:"), objref.IDOf(type_))
+func (pr *PushRegistry) PushTokenForType(type_ obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("pushTokenForType:"), objref.IDOf(type_))
 	return obj.Wrap(_r)
 }
 
-// DesiredPushTypes registers the push types for this push registry object. When you assign a value to this property, the push registry object makes a registration request with the PushKit server. This request is asynchronous, and the success or failure of the request is reported to your registery's delegate object. For a successful registration, PushKit delivers a push token to the delegate. Use that token to generate push requests from your server. For a list of push types that you may include in the set, see “PushKit/PKPushType“.
-func (x *PushRegistry) DesiredPushTypes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("desiredPushTypes"))
+// DesiredPushTypes returns registers the push types for this push registry object. When you assign a value to this property, the push registry object makes a registration request with the PushKit server. This request is asynchronous, and the success or failure of the request is reported to your registery's delegate object. For a successful registration, PushKit delivers a push token to the delegate. Use that token to generate push requests from your server. For a list of push types that you may include in the set, see “PushKit/PKPushType“.
+func (pr *PushRegistry) DesiredPushTypes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("desiredPushTypes"))
 	return obj.Wrap(_r)
 }
-
-// SetDesiredPushTypes wraps the corresponding Objective-C method.
-func (x *PushRegistry) SetDesiredPushTypes(desiredPushTypes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredPushTypes:"), objref.IDOf(desiredPushTypes))
-}
-
-// PushRegistryable is the interface implemented by [PushRegistry], for mocking and DI.
-type PushRegistryable interface {
-	obj.Object
-	WithDesiredPushTypes(desiredPushTypes obj.Object) *PushRegistry
-	PushTokenForType(type_ obj.Object) obj.Object
-	DesiredPushTypes() obj.Object
-	SetDesiredPushTypes(desiredPushTypes obj.Object)
-}
-
-var _ PushRegistryable = (*PushRegistry)(nil)

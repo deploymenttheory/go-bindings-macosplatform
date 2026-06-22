@@ -46,24 +46,24 @@ func fileProviderItemVersionAdopt(id objc.ID) *FileProviderItemVersion {
 }
 
 // Description returns the object's -description text.
-func (x *FileProviderItemVersion) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fpiv *FileProviderItemVersion) Description() string {
+	return rt.Description(objref.IDOf(fpiv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FileProviderItemVersion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fpiv *FileProviderItemVersion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fpiv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FileProviderItemVersion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fpiv *FileProviderItemVersion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fpiv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FileProviderItemVersion) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fpiv *FileProviderItemVersion) String() string {
+	return rt.Description(objref.IDOf(fpiv))
 }
 
 // NewFileProviderItemVersionWithContentVersionMetadataVersion creates a new version object.
@@ -73,23 +73,14 @@ func NewFileProviderItemVersionWithContentVersionMetadataVersion(contentVersion 
 	return fileProviderItemVersionAdopt(_id)
 }
 
-// ContentVersion version data for the content of the file. This property is used by the system for two purposes: if the contentVersion changes, - the system assumes that the contents have changed and will trigger a redownload if necessary. The exception to this is the case where the extension accepts a content sent by the system when replying to a createItemBasedOnTemplate or modifyItem call with shouldFetchContent set to NO. - the thumbnail cache is invalidated Note that the resource fork of the file is considered content, so this version data should change when either the data fork or the resource fork changes.
-func (x *FileProviderItemVersion) ContentVersion() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentVersion"))
+// ContentVersion returns version data for the content of the file. This property is used by the system for two purposes: if the contentVersion changes, - the system assumes that the contents have changed and will trigger a redownload if necessary. The exception to this is the case where the extension accepts a content sent by the system when replying to a createItemBasedOnTemplate or modifyItem call with shouldFetchContent set to NO. - the thumbnail cache is invalidated Note that the resource fork of the file is considered content, so this version data should change when either the data fork or the resource fork changes.
+func (fpiv *FileProviderItemVersion) ContentVersion() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fpiv), objc.RegisterName("contentVersion"))
 	return obj.Wrap(_r)
 }
 
-// MetadataVersion version data for the metadata of the item, i.e everything but the data fork and the resource fork. The system will store this version, but otherwise ignore it: - metadata changes on an item will be applied even if the metadataVersion remains unchanged - if the metadata version changes without any corresponding observable changes in the metadata returned to the system, the system will simply store the updated metadata version (to return it as the base version of a possible future change request).
-func (x *FileProviderItemVersion) MetadataVersion() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadataVersion"))
+// MetadataVersion returns version data for the metadata of the item, i.e everything but the data fork and the resource fork. The system will store this version, but otherwise ignore it: - metadata changes on an item will be applied even if the metadataVersion remains unchanged - if the metadata version changes without any corresponding observable changes in the metadata returned to the system, the system will simply store the updated metadata version (to return it as the base version of a possible future change request).
+func (fpiv *FileProviderItemVersion) MetadataVersion() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fpiv), objc.RegisterName("metadataVersion"))
 	return obj.Wrap(_r)
 }
-
-// FileProviderItemVersionable is the interface implemented by [FileProviderItemVersion], for mocking and DI.
-type FileProviderItemVersionable interface {
-	obj.Object
-	ContentVersion() obj.Object
-	MetadataVersion() obj.Object
-}
-
-var _ FileProviderItemVersionable = (*FileProviderItemVersion)(nil)

@@ -46,24 +46,24 @@ func previewReplyAdopt(id objc.ID) *PreviewReply {
 }
 
 // Description returns the object's -description text.
-func (x *PreviewReply) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pr *PreviewReply) Description() string {
+	return rt.Description(objref.IDOf(pr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PreviewReply) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pr *PreviewReply) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PreviewReply) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pr *PreviewReply) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PreviewReply) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pr *PreviewReply) String() string {
+	return rt.Description(objref.IDOf(pr))
 }
 
 // NewPreviewReplyWithFileURL creates a preview reply from an existing file URL.
@@ -73,72 +73,41 @@ func NewPreviewReplyWithFileURL(fileURL string) *PreviewReply {
 	return previewReplyAdopt(_id)
 }
 
-// WithStringEncoding string encoding for text or html based previews. Defaults to NSUTF8StringEncoding.
-func (x *PreviewReply) WithStringEncoding(stringEncoding int) *PreviewReply {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringEncoding:"), stringEncoding)
-	return x
+// WithStringEncoding sets string encoding for text or html based previews. Defaults to NSUTF8StringEncoding.
+func (pr *PreviewReply) WithStringEncoding(stringEncoding int) *PreviewReply {
+	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setStringEncoding:"), stringEncoding)
+	return pr
 }
 
-// WithAttachments the attachments for a preview reply that provide additional data for the system to display the preview.
-func (x *PreviewReply) WithAttachments(attachments obj.Object) *PreviewReply {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachments:"), objref.IDOf(attachments))
-	return x
+// WithAttachments sets the attachments for a preview reply that provide additional data for the system to display the preview.
+func (pr *PreviewReply) WithAttachments(attachments obj.Object) *PreviewReply {
+	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setAttachments:"), objref.IDOf(attachments))
+	return pr
 }
 
-// WithTitle the title for the system to display with the preview.
-func (x *PreviewReply) WithTitle(title string) *PreviewReply {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title for the system to display with the preview.
+func (pr *PreviewReply) WithTitle(title string) *PreviewReply {
+	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return pr
 }
 
-// StringEncoding string encoding for text or html based previews. Defaults to NSUTF8StringEncoding.
-func (x *PreviewReply) StringEncoding() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stringEncoding"))
+// StringEncoding returns string encoding for text or html based previews. Defaults to NSUTF8StringEncoding.
+func (pr *PreviewReply) StringEncoding() int {
+	_r := objc.Send[int](objref.IDOf(pr), objc.RegisterName("stringEncoding"))
 	return _r
 }
 
-// SetStringEncoding wraps the corresponding Objective-C method.
-func (x *PreviewReply) SetStringEncoding(stringEncoding int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringEncoding:"), stringEncoding)
-}
-
-// Attachments attachments for HTML data previews. The keys of the dictionary are the attachment identifiers (eg foo) that can be referenced with the cid:id URL (eg cid:foo).
-func (x *PreviewReply) Attachments() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachments"))
+// Attachments returns attachments for HTML data previews. The keys of the dictionary are the attachment identifiers (eg foo) that can be referenced with the cid:id URL (eg cid:foo).
+func (pr *PreviewReply) Attachments() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("attachments"))
 	return obj.Wrap(_r)
 }
 
-// SetAttachments wraps the corresponding Objective-C method.
-func (x *PreviewReply) SetAttachments(attachments obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachments:"), objref.IDOf(attachments))
-}
-
-// Title custom display title for the preview. If left as the empty string, QuickLook will use the file name.
-func (x *PreviewReply) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+// Title returns custom display title for the preview. If left as the empty string, QuickLook will use the file name.
+func (pr *PreviewReply) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetTitle wraps the corresponding Objective-C method.
-func (x *PreviewReply) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-}
-
-// PreviewReplyable is the interface implemented by [PreviewReply], for mocking and DI.
-type PreviewReplyable interface {
-	obj.Object
-	WithStringEncoding(stringEncoding int) *PreviewReply
-	WithAttachments(attachments obj.Object) *PreviewReply
-	WithTitle(title string) *PreviewReply
-	StringEncoding() int
-	SetStringEncoding(stringEncoding int)
-	Attachments() obj.Object
-	SetAttachments(attachments obj.Object)
-	Title() string
-	SetTitle(title string)
-}
-
-var _ PreviewReplyable = (*PreviewReply)(nil)

@@ -7,7 +7,6 @@ package metalperformanceshadersgraph
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,31 +51,16 @@ func NewGraphExecutableExecutionDescriptor() *GraphExecutableExecutionDescriptor
 	return graphExecutableExecutionDescriptorAdopt(_id)
 }
 
-// WithWaitUntilCompleted flag for the graph executable to wait till the execution has completed.
-func (x *GraphExecutableExecutionDescriptor) WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutableExecutionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaitUntilCompleted:"), waitUntilCompleted)
-	return x
+// WithWaitUntilCompleted sets flag for the graph executable to wait till the execution has completed.
+func (geed *GraphExecutableExecutionDescriptor) WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutableExecutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(geed), objc.RegisterName("setWaitUntilCompleted:"), waitUntilCompleted)
+	return geed
 }
 
-// WaitUntilCompleted flag for the graph executable to wait till the execution has completed. Default value is false.
-func (x *GraphExecutableExecutionDescriptor) WaitUntilCompleted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("waitUntilCompleted"))
+// WaitUntilCompleted reports whether flag for the graph executable to wait till the execution has completed. Default value is false.
+func (geed *GraphExecutableExecutionDescriptor) WaitUntilCompleted() bool {
+	_r := objc.Send[bool](objref.IDOf(geed), objc.RegisterName("waitUntilCompleted"))
 	return _r
 }
-
-// SetWaitUntilCompleted wraps the corresponding Objective-C method.
-func (x *GraphExecutableExecutionDescriptor) SetWaitUntilCompleted(waitUntilCompleted bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaitUntilCompleted:"), waitUntilCompleted)
-}
-
-// GraphExecutableExecutionDescriptorable is the interface implemented by [GraphExecutableExecutionDescriptor], for mocking and DI.
-type GraphExecutableExecutionDescriptorable interface {
-	obj.Object
-	WithWaitUntilCompleted(waitUntilCompleted bool) *GraphExecutableExecutionDescriptor
-	WaitUntilCompleted() bool
-	SetWaitUntilCompleted(waitUntilCompleted bool)
-}
-
-var _ GraphExecutableExecutionDescriptorable = (*GraphExecutableExecutionDescriptor)(nil)
 
 var _ GraphObjectProvider = (*GraphExecutableExecutionDescriptor)(nil)

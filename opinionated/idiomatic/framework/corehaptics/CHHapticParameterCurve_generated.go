@@ -46,24 +46,24 @@ func hapticParameterCurveAdopt(id objc.ID) *HapticParameterCurve {
 }
 
 // Description returns the object's -description text.
-func (x *HapticParameterCurve) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hpc *HapticParameterCurve) Description() string {
+	return rt.Description(objref.IDOf(hpc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HapticParameterCurve) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hpc *HapticParameterCurve) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hpc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HapticParameterCurve) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hpc *HapticParameterCurve) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hpc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HapticParameterCurve) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hpc *HapticParameterCurve) String() string {
+	return rt.Description(objref.IDOf(hpc))
 }
 
 // NewHapticParameterCurveWithParameterIDControlPointsRelativeTime creates a parameter curve from its parameter ID, control points, and start time.
@@ -73,47 +73,30 @@ func NewHapticParameterCurveWithParameterIDControlPointsRelativeTime(parameterID
 	return hapticParameterCurveAdopt(_id)
 }
 
-// WithRelativeTime the time at which this parameter curve is applied, relative to the start time of the pattern.
-func (x *HapticParameterCurve) WithRelativeTime(relativeTime float64) *HapticParameterCurve {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativeTime:"), relativeTime)
-	return x
+// WithRelativeTime sets the time at which this parameter curve is applied, relative to the start time of the pattern.
+func (hpc *HapticParameterCurve) WithRelativeTime(relativeTime float64) *HapticParameterCurve {
+	objc.Send[objc.ID](objref.IDOf(hpc), objc.RegisterName("setRelativeTime:"), relativeTime)
+	return hpc
 }
 
 // ParameterID wraps the corresponding Objective-C method.
-func (x *HapticParameterCurve) ParameterID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameterID"))
+func (hpc *HapticParameterCurve) ParameterID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(hpc), objc.RegisterName("parameterID"))
 	return obj.Wrap(_r)
 }
 
 // RelativeTime wraps the corresponding Objective-C method.
-func (x *HapticParameterCurve) RelativeTime() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("relativeTime"))
+func (hpc *HapticParameterCurve) RelativeTime() float64 {
+	_r := objc.Send[float64](objref.IDOf(hpc), objc.RegisterName("relativeTime"))
 	return _r
-}
-
-// SetRelativeTime wraps the corresponding Objective-C method.
-func (x *HapticParameterCurve) SetRelativeTime(relativeTime float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativeTime:"), relativeTime)
 }
 
 // ControlPoints wraps the corresponding Objective-C method.
 //
 // ControlPoints returns the collection as a Go slice.
-func (x *HapticParameterCurve) ControlPoints() []*HapticParameterCurveControlPoint {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controlPoints"))
+func (hpc *HapticParameterCurve) ControlPoints() []*HapticParameterCurveControlPoint {
+	_arr := objc.Send[objc.ID](objref.IDOf(hpc), objc.RegisterName("controlPoints"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *HapticParameterCurveControlPoint {
 		return HapticParameterCurveControlPointFromID(_id)
 	})
 }
-
-// HapticParameterCurveable is the interface implemented by [HapticParameterCurve], for mocking and DI.
-type HapticParameterCurveable interface {
-	obj.Object
-	WithRelativeTime(relativeTime float64) *HapticParameterCurve
-	ParameterID() obj.Object
-	RelativeTime() float64
-	SetRelativeTime(relativeTime float64)
-	ControlPoints() []*HapticParameterCurveControlPoint
-}
-
-var _ HapticParameterCurveable = (*HapticParameterCurve)(nil)

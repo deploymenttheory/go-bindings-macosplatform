@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,39 +49,23 @@ func NewNDArrayGather() *NDArrayGather {
 	return nDArrayGatherAdopt(_id)
 }
 
-// WithAxis the axis along which to apply the gather operation. Defaults to zero.
-func (x *NDArrayGather) WithAxis(axis int) *NDArrayGather {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAxis:"), axis)
-	return x
+// WithAxis sets the axis along which to apply the gather operation. Defaults to zero.
+func (nag *NDArrayGather) WithAxis(axis int) *NDArrayGather {
+	objc.Send[objc.ID](objref.IDOf(nag), objc.RegisterName("setAxis:"), axis)
+	return nag
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NDArrayGather) WithLabel(label string) *NDArrayGather {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (nag *NDArrayGather) WithLabel(label string) *NDArrayGather {
+	objc.Send[objc.ID](objref.IDOf(nag), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nag
 }
 
-// Axis the axis along which to apply the gather operation. Defaults to zero.
-func (x *NDArrayGather) Axis() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("axis"))
+// Axis returns the axis along which to apply the gather operation. Defaults to zero.
+func (nag *NDArrayGather) Axis() int {
+	_r := objc.Send[int](objref.IDOf(nag), objc.RegisterName("axis"))
 	return _r
 }
-
-// SetAxis wraps the corresponding Objective-C method.
-func (x *NDArrayGather) SetAxis(axis int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAxis:"), axis)
-}
-
-// NDArrayGatherable is the interface implemented by [NDArrayGather], for mocking and DI.
-type NDArrayGatherable interface {
-	obj.Object
-	WithAxis(axis int) *NDArrayGather
-	WithLabel(label string) *NDArrayGather
-	Axis() int
-	SetAxis(axis int)
-}
-
-var _ NDArrayGatherable = (*NDArrayGather)(nil)
 
 var _ NDArrayBinaryKernelProvider = (*NDArrayGather)(nil)
 

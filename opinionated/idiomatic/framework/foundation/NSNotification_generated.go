@@ -46,24 +46,24 @@ func notificationAdopt(id objc.ID) *Notification {
 }
 
 // Description returns the object's -description text.
-func (x *Notification) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (n *Notification) Description() string {
+	return rt.Description(objref.IDOf(n))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Notification) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (n *Notification) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(n), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Notification) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (n *Notification) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(n), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Notification) String() string {
-	return rt.Description(objref.IDOf(x))
+func (n *Notification) String() string {
+	return rt.Description(objref.IDOf(n))
 }
 
 // NewNotificationWithNameObjectUserInfo initializes a notification with a specified name, object, and user information.
@@ -81,36 +81,25 @@ func NewNotificationWithCoder(coder *Coder) *Notification {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Notification) WithScriptingProperties(scriptingProperties obj.Object) *Notification {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (n *Notification) WithScriptingProperties(scriptingProperties obj.Object) *Notification {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return n
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Notification) Name() *String {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (n *Notification) Name() *String {
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("name"))
 	return StringFromID(_r)
 }
 
 // Object wraps the corresponding Objective-C method.
-func (x *Notification) Object() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("object"))
+func (n *Notification) Object() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("object"))
 	return obj.Wrap(_r)
 }
 
 // UserInfo wraps the corresponding Objective-C method.
-func (x *Notification) UserInfo() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+func (n *Notification) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("userInfo"))
 	return obj.Wrap(_r)
 }
-
-// Notificationable is the interface implemented by [Notification], for mocking and DI.
-type Notificationable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Notification
-	Name() *String
-	Object() obj.Object
-	UserInfo() obj.Object
-}
-
-var _ Notificationable = (*Notification)(nil)

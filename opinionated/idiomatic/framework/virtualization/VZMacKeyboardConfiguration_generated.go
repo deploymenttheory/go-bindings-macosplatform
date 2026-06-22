@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewMacKeyboardConfiguration() *MacKeyboardConfiguration {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZMacKeyboardConfiguration")), objc.RegisterName("new"))
 	return macKeyboardConfigurationAdopt(_id)
 }
-
-// MacKeyboardConfigurationable is the interface implemented by [MacKeyboardConfiguration], for mocking and DI.
-type MacKeyboardConfigurationable interface {
-	obj.Object
-}
-
-var _ MacKeyboardConfigurationable = (*MacKeyboardConfiguration)(nil)
 
 var _ KeyboardConfigurationProvider = (*MacKeyboardConfiguration)(nil)

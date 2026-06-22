@@ -61,59 +61,40 @@ func NewCNNCrossChannelNormalizationNodeWithSource(sourceNode obj.Object) *CNNCr
 }
 
 // WithKernelSizeInFeatureChannels sets the property and returns the receiver so calls can be chained.
-func (x *CNNCrossChannelNormalizationNode) WithKernelSizeInFeatureChannels(kernelSizeInFeatureChannels int) *CNNCrossChannelNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelSizeInFeatureChannels:"), kernelSizeInFeatureChannels)
-	return x
+func (cccnn *CNNCrossChannelNormalizationNode) WithKernelSizeInFeatureChannels(kernelSizeInFeatureChannels int) *CNNCrossChannelNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(cccnn), objc.RegisterName("setKernelSizeInFeatureChannels:"), kernelSizeInFeatureChannels)
+	return cccnn
 }
 
-// WithAlpha the value of alpha.  Default is 1.0. Must be non-negative.
-func (x *CNNCrossChannelNormalizationNode) WithAlpha(alpha float32) *CNNCrossChannelNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the value of alpha.  Default is 1.0. Must be non-negative.
+func (cccnn *CNNCrossChannelNormalizationNode) WithAlpha(alpha float32) *CNNCrossChannelNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(cccnn), objc.RegisterName("setAlpha:"), alpha)
+	return cccnn
 }
 
-// WithBeta the value of beta.  Default is 5.0
-func (x *CNNCrossChannelNormalizationNode) WithBeta(beta float32) *CNNCrossChannelNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
-	return x
+// WithBeta sets the value of beta.  Default is 5.0
+func (cccnn *CNNCrossChannelNormalizationNode) WithBeta(beta float32) *CNNCrossChannelNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(cccnn), objc.RegisterName("setBeta:"), beta)
+	return cccnn
 }
 
-// WithDelta the value of delta.  Default is 1.0
-func (x *CNNCrossChannelNormalizationNode) WithDelta(delta float32) *CNNCrossChannelNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
-	return x
+// WithDelta sets the value of delta.  Default is 1.0
+func (cccnn *CNNCrossChannelNormalizationNode) WithDelta(delta float32) *CNNCrossChannelNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(cccnn), objc.RegisterName("setDelta:"), delta)
+	return cccnn
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNCrossChannelNormalizationNode) WithLabel(label string) *CNNCrossChannelNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cccnn *CNNCrossChannelNormalizationNode) WithLabel(label string) *CNNCrossChannelNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(cccnn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cccnn
 }
 
 // KernelSizeInFeatureChannels wraps the corresponding Objective-C method.
-func (x *CNNCrossChannelNormalizationNode) KernelSizeInFeatureChannels() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelSizeInFeatureChannels"))
+func (cccnn *CNNCrossChannelNormalizationNode) KernelSizeInFeatureChannels() int {
+	_r := objc.Send[int](objref.IDOf(cccnn), objc.RegisterName("kernelSizeInFeatureChannels"))
 	return _r
 }
-
-// SetKernelSizeInFeatureChannels wraps the corresponding Objective-C method.
-func (x *CNNCrossChannelNormalizationNode) SetKernelSizeInFeatureChannels(kernelSizeInFeatureChannels int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelSizeInFeatureChannels:"), kernelSizeInFeatureChannels)
-}
-
-// CNNCrossChannelNormalizationNodeable is the interface implemented by [CNNCrossChannelNormalizationNode], for mocking and DI.
-type CNNCrossChannelNormalizationNodeable interface {
-	obj.Object
-	WithKernelSizeInFeatureChannels(kernelSizeInFeatureChannels int) *CNNCrossChannelNormalizationNode
-	WithAlpha(alpha float32) *CNNCrossChannelNormalizationNode
-	WithBeta(beta float32) *CNNCrossChannelNormalizationNode
-	WithDelta(delta float32) *CNNCrossChannelNormalizationNode
-	WithLabel(label string) *CNNCrossChannelNormalizationNode
-	KernelSizeInFeatureChannels() int
-	SetKernelSizeInFeatureChannels(kernelSizeInFeatureChannels int)
-}
-
-var _ CNNCrossChannelNormalizationNodeable = (*CNNCrossChannelNormalizationNode)(nil)
 
 var _ CNNNormalizationNodeProvider = (*CNNCrossChannelNormalizationNode)(nil)
 

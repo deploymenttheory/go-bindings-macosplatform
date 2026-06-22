@@ -44,24 +44,24 @@ func aVB17221ACMPMessageAdopt(id objc.ID) *AVB17221ACMPMessage {
 }
 
 // Description returns the object's -description text.
-func (x *AVB17221ACMPMessage) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aam *AVB17221ACMPMessage) Description() string {
+	return rt.Description(objref.IDOf(aam))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AVB17221ACMPMessage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aam *AVB17221ACMPMessage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aam), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AVB17221ACMPMessage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aam *AVB17221ACMPMessage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aam), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AVB17221ACMPMessage) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aam *AVB17221ACMPMessage) String() string {
+	return rt.Description(objref.IDOf(aam))
 }
 
 // NewAVB17221ACMPMessage creates a new AVB17221ACMPMessage.
@@ -70,429 +70,254 @@ func NewAVB17221ACMPMessage() *AVB17221ACMPMessage {
 	return aVB17221ACMPMessageAdopt(_id)
 }
 
-// WithMessageType the message_type field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithMessageType(messageType AVB17221ACMPMessageType) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageType:"), messageType)
-	return x
+// WithMessageType sets the message_type field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithMessageType(messageType AVB17221ACMPMessageType) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setMessageType:"), messageType)
+	return aam
 }
 
-// WithStatus the status field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithStatus(status AVB17221ACMPStatusCode) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
-	return x
+// WithStatus sets the status field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithStatus(status AVB17221ACMPStatusCode) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setStatus:"), status)
+	return aam
 }
 
-// WithStreamID the stream_id field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithStreamID(streamID uint64) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStreamID:"), streamID)
-	return x
+// WithStreamID sets the stream_id field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithStreamID(streamID uint64) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setStreamID:"), streamID)
+	return aam
 }
 
-// WithControllerEntityID the controller_entity_id field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerEntityID:"), controllerEntityID)
-	return x
+// WithControllerEntityID sets the controller_entity_id field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithControllerEntityID(controllerEntityID uint64) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setControllerEntityID:"), controllerEntityID)
+	return aam
 }
 
-// WithTalkerEntityID the talker_entity_id field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithTalkerEntityID(talkerEntityID uint64) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTalkerEntityID:"), talkerEntityID)
-	return x
+// WithTalkerEntityID sets the talker_entity_id field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithTalkerEntityID(talkerEntityID uint64) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setTalkerEntityID:"), talkerEntityID)
+	return aam
 }
 
-// WithListenerEntityID the listener_entity_id field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithListenerEntityID(listenerEntityID uint64) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListenerEntityID:"), listenerEntityID)
-	return x
+// WithListenerEntityID sets the listener_entity_id field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithListenerEntityID(listenerEntityID uint64) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setListenerEntityID:"), listenerEntityID)
+	return aam
 }
 
-// WithTalkerUniqueID the talker_unique_id field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithTalkerUniqueID(talkerUniqueID uint16) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTalkerUniqueID:"), talkerUniqueID)
-	return x
+// WithTalkerUniqueID sets the talker_unique_id field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithTalkerUniqueID(talkerUniqueID uint16) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setTalkerUniqueID:"), talkerUniqueID)
+	return aam
 }
 
-// WithListenerUniqueID the listener_unique_id field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithListenerUniqueID(listenerUniqueID uint16) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListenerUniqueID:"), listenerUniqueID)
-	return x
+// WithListenerUniqueID sets the listener_unique_id field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithListenerUniqueID(listenerUniqueID uint16) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setListenerUniqueID:"), listenerUniqueID)
+	return aam
 }
 
-// WithDestinationMAC the dest_mac field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithDestinationMAC(destinationMAC *MACAddress) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationMAC:"), objref.IDOf(destinationMAC))
-	return x
+// WithDestinationMAC sets the dest_mac field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithDestinationMAC(destinationMAC *MACAddress) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setDestinationMAC:"), objref.IDOf(destinationMAC))
+	return aam
 }
 
-// WithConnectionCount the connection_count field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithConnectionCount(connectionCount uint16) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionCount:"), connectionCount)
-	return x
+// WithConnectionCount sets the connection_count field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithConnectionCount(connectionCount uint16) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setConnectionCount:"), connectionCount)
+	return aam
 }
 
-// WithSequenceID the sequence_id field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithSequenceID(sequenceID uint16) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSequenceID:"), sequenceID)
-	return x
+// WithSequenceID sets the sequence_id field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithSequenceID(sequenceID uint16) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setSequenceID:"), sequenceID)
+	return aam
 }
 
-// WithFlags the flags field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithFlags(flags AVB17221ACMPFlags) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), flags)
-	return x
+// WithFlags sets the flags field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithFlags(flags AVB17221ACMPFlags) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setFlags:"), flags)
+	return aam
 }
 
-// WithVlanID the stream_vlan_id field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithVlanID(vlanID uint16) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVlanID:"), vlanID)
-	return x
+// WithVlanID sets the stream_vlan_id field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithVlanID(vlanID uint16) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setVlanID:"), vlanID)
+	return aam
 }
 
-// WithConnectedListenersEntries the connected_listeners_entries field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithConnectedListenersEntries(connectedListenersEntries uint16) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectedListenersEntries:"), connectedListenersEntries)
-	return x
+// WithConnectedListenersEntries sets the connected_listeners_entries field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithConnectedListenersEntries(connectedListenersEntries uint16) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setConnectedListenersEntries:"), connectedListenersEntries)
+	return aam
 }
 
-// WithConnectedListenersEntriesValid the CL_ENTRIES_VALID flag in the flags field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithConnectedListenersEntriesValid(connectedListenersEntriesValid bool) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectedListenersEntriesValid:"), connectedListenersEntriesValid)
-	return x
+// WithConnectedListenersEntriesValid sets the CL_ENTRIES_VALID flag in the flags field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithConnectedListenersEntriesValid(connectedListenersEntriesValid bool) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setConnectedListenersEntriesValid:"), connectedListenersEntriesValid)
+	return aam
 }
 
-// WithIpFlags the ip_flags field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithIpFlags(ipFlags AVB17221ACMPIPFlag) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIpFlags:"), ipFlags)
-	return x
+// WithIPFlags sets the ip_flags field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithIPFlags(ipFlags AVB17221ACMPIPFlag) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setIpFlags:"), ipFlags)
+	return aam
 }
 
-// WithSourcePort the source_port field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithSourcePort(sourcePort uint16) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourcePort:"), sourcePort)
-	return x
+// WithSourcePort sets the source_port field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithSourcePort(sourcePort uint16) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setSourcePort:"), sourcePort)
+	return aam
 }
 
-// WithDestinationPort the destination_port field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithDestinationPort(destinationPort uint16) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationPort:"), destinationPort)
-	return x
+// WithDestinationPort sets the destination_port field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithDestinationPort(destinationPort uint16) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setDestinationPort:"), destinationPort)
+	return aam
 }
 
-// WithSourceIPAddress the source_ip_address field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithSourceIPAddress(sourceIPAddress *IPAddress) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceIPAddress:"), objref.IDOf(sourceIPAddress))
-	return x
+// WithSourceIPAddress sets the source_ip_address field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithSourceIPAddress(sourceIPAddress *IPAddress) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setSourceIPAddress:"), objref.IDOf(sourceIPAddress))
+	return aam
 }
 
-// WithDestinationIPAddress the destination_ip_address field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithDestinationIPAddress(destinationIPAddress *IPAddress) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationIPAddress:"), objref.IDOf(destinationIPAddress))
-	return x
+// WithDestinationIPAddress sets the destination_ip_address field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithDestinationIPAddress(destinationIPAddress *IPAddress) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setDestinationIPAddress:"), objref.IDOf(destinationIPAddress))
+	return aam
 }
 
-// WithSourceMAC the source_mac field of the ACMP message.
-func (x *AVB17221ACMPMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221ACMPMessage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
-	return x
+// WithSourceMAC sets the source_mac field of the ACMP message.
+func (aam *AVB17221ACMPMessage) WithSourceMAC(sourceMAC *MACAddress) *AVB17221ACMPMessage {
+	objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
+	return aam
 }
 
-// MessageType the message_type field of the ACMP message.
-func (x *AVB17221ACMPMessage) MessageType() AVB17221ACMPMessageType {
-	_r := objc.Send[AVB17221ACMPMessageType](objref.IDOf(x), objc.RegisterName("messageType"))
+// MessageType returns the message_type field of the ACMP message.
+func (aam *AVB17221ACMPMessage) MessageType() AVB17221ACMPMessageType {
+	_r := objc.Send[AVB17221ACMPMessageType](objref.IDOf(aam), objc.RegisterName("messageType"))
 	return _r
 }
 
-// SetMessageType wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetMessageType(messageType AVB17221ACMPMessageType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMessageType:"), messageType)
-}
-
-// Status the status field of the ACMP message.
-func (x *AVB17221ACMPMessage) Status() AVB17221ACMPStatusCode {
-	_r := objc.Send[AVB17221ACMPStatusCode](objref.IDOf(x), objc.RegisterName("status"))
+// Status returns the status field of the ACMP message.
+func (aam *AVB17221ACMPMessage) Status() AVB17221ACMPStatusCode {
+	_r := objc.Send[AVB17221ACMPStatusCode](objref.IDOf(aam), objc.RegisterName("status"))
 	return _r
 }
 
-// SetStatus wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetStatus(status AVB17221ACMPStatusCode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
-}
-
-// StreamID the stream_id field of the ACMP message.
-func (x *AVB17221ACMPMessage) StreamID() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("streamID"))
+// StreamID returns the stream_id field of the ACMP message.
+func (aam *AVB17221ACMPMessage) StreamID() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(aam), objc.RegisterName("streamID"))
 	return _r
 }
 
-// SetStreamID wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetStreamID(streamID uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStreamID:"), streamID)
-}
-
-// ControllerEntityID the controller_entity_id field of the ACMP message.
-func (x *AVB17221ACMPMessage) ControllerEntityID() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("controllerEntityID"))
+// ControllerEntityID returns the controller_entity_id field of the ACMP message.
+func (aam *AVB17221ACMPMessage) ControllerEntityID() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(aam), objc.RegisterName("controllerEntityID"))
 	return _r
 }
 
-// SetControllerEntityID wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetControllerEntityID(controllerEntityID uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControllerEntityID:"), controllerEntityID)
-}
-
-// TalkerEntityID the talker_entity_id field of the ACMP message.
-func (x *AVB17221ACMPMessage) TalkerEntityID() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("talkerEntityID"))
+// TalkerEntityID returns the talker_entity_id field of the ACMP message.
+func (aam *AVB17221ACMPMessage) TalkerEntityID() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(aam), objc.RegisterName("talkerEntityID"))
 	return _r
 }
 
-// SetTalkerEntityID wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetTalkerEntityID(talkerEntityID uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTalkerEntityID:"), talkerEntityID)
-}
-
-// ListenerEntityID the listener_entity_id field of the ACMP message.
-func (x *AVB17221ACMPMessage) ListenerEntityID() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("listenerEntityID"))
+// ListenerEntityID returns the listener_entity_id field of the ACMP message.
+func (aam *AVB17221ACMPMessage) ListenerEntityID() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(aam), objc.RegisterName("listenerEntityID"))
 	return _r
 }
 
-// SetListenerEntityID wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetListenerEntityID(listenerEntityID uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListenerEntityID:"), listenerEntityID)
-}
-
-// TalkerUniqueID the talker_unique_id field of the ACMP message.
-func (x *AVB17221ACMPMessage) TalkerUniqueID() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("talkerUniqueID"))
+// TalkerUniqueID returns the talker_unique_id field of the ACMP message.
+func (aam *AVB17221ACMPMessage) TalkerUniqueID() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(aam), objc.RegisterName("talkerUniqueID"))
 	return _r
 }
 
-// SetTalkerUniqueID wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetTalkerUniqueID(talkerUniqueID uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTalkerUniqueID:"), talkerUniqueID)
-}
-
-// ListenerUniqueID the listener_unique_id field of the ACMP message.
-func (x *AVB17221ACMPMessage) ListenerUniqueID() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("listenerUniqueID"))
+// ListenerUniqueID returns the listener_unique_id field of the ACMP message.
+func (aam *AVB17221ACMPMessage) ListenerUniqueID() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(aam), objc.RegisterName("listenerUniqueID"))
 	return _r
 }
 
-// SetListenerUniqueID wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetListenerUniqueID(listenerUniqueID uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListenerUniqueID:"), listenerUniqueID)
-}
-
-// DestinationMAC the dest_mac field of the ACMP message.
-func (x *AVB17221ACMPMessage) DestinationMAC() *MACAddress {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationMAC"))
+// DestinationMAC returns the dest_mac field of the ACMP message.
+func (aam *AVB17221ACMPMessage) DestinationMAC() *MACAddress {
+	_r := objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("destinationMAC"))
 	return MACAddressFromID(_r)
 }
 
-// SetDestinationMAC wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetDestinationMAC(destinationMAC *MACAddress) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationMAC:"), objref.IDOf(destinationMAC))
-}
-
-// ConnectionCount the connection_count field of the ACMP message.
-func (x *AVB17221ACMPMessage) ConnectionCount() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("connectionCount"))
+// ConnectionCount returns the connection_count field of the ACMP message.
+func (aam *AVB17221ACMPMessage) ConnectionCount() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(aam), objc.RegisterName("connectionCount"))
 	return _r
 }
 
-// SetConnectionCount wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetConnectionCount(connectionCount uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionCount:"), connectionCount)
-}
-
-// SequenceID the sequence_id field of the ACMP message.
-func (x *AVB17221ACMPMessage) SequenceID() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("sequenceID"))
+// SequenceID returns the sequence_id field of the ACMP message.
+func (aam *AVB17221ACMPMessage) SequenceID() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(aam), objc.RegisterName("sequenceID"))
 	return _r
 }
 
-// SetSequenceID wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetSequenceID(sequenceID uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSequenceID:"), sequenceID)
-}
-
-// Flags the flags field of the ACMP message.
-func (x *AVB17221ACMPMessage) Flags() AVB17221ACMPFlags {
-	_r := objc.Send[AVB17221ACMPFlags](objref.IDOf(x), objc.RegisterName("flags"))
+// Flags returns the flags field of the ACMP message.
+func (aam *AVB17221ACMPMessage) Flags() AVB17221ACMPFlags {
+	_r := objc.Send[AVB17221ACMPFlags](objref.IDOf(aam), objc.RegisterName("flags"))
 	return _r
 }
 
-// SetFlags wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetFlags(flags AVB17221ACMPFlags) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFlags:"), flags)
-}
-
-// VlanID the stream_vlan_id field of the ACMP message.
-func (x *AVB17221ACMPMessage) VlanID() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("vlanID"))
+// VlanID returns the stream_vlan_id field of the ACMP message.
+func (aam *AVB17221ACMPMessage) VlanID() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(aam), objc.RegisterName("vlanID"))
 	return _r
 }
 
-// SetVlanID wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetVlanID(vlanID uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVlanID:"), vlanID)
-}
-
-// ConnectedListenersEntries the connected_listeners_entries field of the ACMP message.
-func (x *AVB17221ACMPMessage) ConnectedListenersEntries() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("connectedListenersEntries"))
+// ConnectedListenersEntries returns the connected_listeners_entries field of the ACMP message.
+func (aam *AVB17221ACMPMessage) ConnectedListenersEntries() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(aam), objc.RegisterName("connectedListenersEntries"))
 	return _r
 }
 
-// SetConnectedListenersEntries wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetConnectedListenersEntries(connectedListenersEntries uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectedListenersEntries:"), connectedListenersEntries)
-}
-
-// ConnectedListenersEntriesValid the CL_ENTRIES_VALID flag in the flags field of the ACMP message.
-func (x *AVB17221ACMPMessage) ConnectedListenersEntriesValid() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("connectedListenersEntriesValid"))
+// ConnectedListenersEntriesValid reports whether the CL_ENTRIES_VALID flag in the flags field of the ACMP message.
+func (aam *AVB17221ACMPMessage) ConnectedListenersEntriesValid() bool {
+	_r := objc.Send[bool](objref.IDOf(aam), objc.RegisterName("connectedListenersEntriesValid"))
 	return _r
 }
 
-// SetConnectedListenersEntriesValid wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetConnectedListenersEntriesValid(connectedListenersEntriesValid bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectedListenersEntriesValid:"), connectedListenersEntriesValid)
-}
-
-// IpFlags the ip_flags field of the ACMP message.
-func (x *AVB17221ACMPMessage) IpFlags() AVB17221ACMPIPFlag {
-	_r := objc.Send[AVB17221ACMPIPFlag](objref.IDOf(x), objc.RegisterName("ipFlags"))
+// IPFlags returns the ip_flags field of the ACMP message.
+func (aam *AVB17221ACMPMessage) IPFlags() AVB17221ACMPIPFlag {
+	_r := objc.Send[AVB17221ACMPIPFlag](objref.IDOf(aam), objc.RegisterName("ipFlags"))
 	return _r
 }
 
-// SetIpFlags wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetIpFlags(ipFlags AVB17221ACMPIPFlag) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIpFlags:"), ipFlags)
-}
-
-// SourcePort the source_port field of the ACMP message.
-func (x *AVB17221ACMPMessage) SourcePort() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("sourcePort"))
+// SourcePort returns the source_port field of the ACMP message.
+func (aam *AVB17221ACMPMessage) SourcePort() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(aam), objc.RegisterName("sourcePort"))
 	return _r
 }
 
-// SetSourcePort wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetSourcePort(sourcePort uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourcePort:"), sourcePort)
-}
-
-// DestinationPort the destination_port field of the ACMP message.
-func (x *AVB17221ACMPMessage) DestinationPort() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("destinationPort"))
+// DestinationPort returns the destination_port field of the ACMP message.
+func (aam *AVB17221ACMPMessage) DestinationPort() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(aam), objc.RegisterName("destinationPort"))
 	return _r
 }
 
-// SetDestinationPort wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetDestinationPort(destinationPort uint16) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationPort:"), destinationPort)
-}
-
-// SourceIPAddress the source_ip_address field of the ACMP message.
-func (x *AVB17221ACMPMessage) SourceIPAddress() *IPAddress {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceIPAddress"))
+// SourceIPAddress returns the source_ip_address field of the ACMP message.
+func (aam *AVB17221ACMPMessage) SourceIPAddress() *IPAddress {
+	_r := objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("sourceIPAddress"))
 	return IPAddressFromID(_r)
 }
 
-// SetSourceIPAddress wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetSourceIPAddress(sourceIPAddress *IPAddress) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceIPAddress:"), objref.IDOf(sourceIPAddress))
-}
-
-// DestinationIPAddress the destination_ip_address field of the ACMP message.
-func (x *AVB17221ACMPMessage) DestinationIPAddress() *IPAddress {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationIPAddress"))
+// DestinationIPAddress returns the destination_ip_address field of the ACMP message.
+func (aam *AVB17221ACMPMessage) DestinationIPAddress() *IPAddress {
+	_r := objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("destinationIPAddress"))
 	return IPAddressFromID(_r)
 }
 
-// SetDestinationIPAddress wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetDestinationIPAddress(destinationIPAddress *IPAddress) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationIPAddress:"), objref.IDOf(destinationIPAddress))
-}
-
-// SourceMAC the source_mac field of the ACMP message.
-func (x *AVB17221ACMPMessage) SourceMAC() *MACAddress {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceMAC"))
+// SourceMAC returns the source_mac field of the ACMP message.
+func (aam *AVB17221ACMPMessage) SourceMAC() *MACAddress {
+	_r := objc.Send[objc.ID](objref.IDOf(aam), objc.RegisterName("sourceMAC"))
 	return MACAddressFromID(_r)
 }
-
-// SetSourceMAC wraps the corresponding Objective-C method.
-func (x *AVB17221ACMPMessage) SetSourceMAC(sourceMAC *MACAddress) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceMAC:"), objref.IDOf(sourceMAC))
-}
-
-// AVB17221ACMPMessageable is the interface implemented by [AVB17221ACMPMessage], for mocking and DI.
-type AVB17221ACMPMessageable interface {
-	obj.Object
-	WithMessageType(messageType AVB17221ACMPMessageType) *AVB17221ACMPMessage
-	WithStatus(status AVB17221ACMPStatusCode) *AVB17221ACMPMessage
-	WithStreamID(streamID uint64) *AVB17221ACMPMessage
-	WithControllerEntityID(controllerEntityID uint64) *AVB17221ACMPMessage
-	WithTalkerEntityID(talkerEntityID uint64) *AVB17221ACMPMessage
-	WithListenerEntityID(listenerEntityID uint64) *AVB17221ACMPMessage
-	WithTalkerUniqueID(talkerUniqueID uint16) *AVB17221ACMPMessage
-	WithListenerUniqueID(listenerUniqueID uint16) *AVB17221ACMPMessage
-	WithDestinationMAC(destinationMAC *MACAddress) *AVB17221ACMPMessage
-	WithConnectionCount(connectionCount uint16) *AVB17221ACMPMessage
-	WithSequenceID(sequenceID uint16) *AVB17221ACMPMessage
-	WithFlags(flags AVB17221ACMPFlags) *AVB17221ACMPMessage
-	WithVlanID(vlanID uint16) *AVB17221ACMPMessage
-	WithConnectedListenersEntries(connectedListenersEntries uint16) *AVB17221ACMPMessage
-	WithConnectedListenersEntriesValid(connectedListenersEntriesValid bool) *AVB17221ACMPMessage
-	WithIpFlags(ipFlags AVB17221ACMPIPFlag) *AVB17221ACMPMessage
-	WithSourcePort(sourcePort uint16) *AVB17221ACMPMessage
-	WithDestinationPort(destinationPort uint16) *AVB17221ACMPMessage
-	WithSourceIPAddress(sourceIPAddress *IPAddress) *AVB17221ACMPMessage
-	WithDestinationIPAddress(destinationIPAddress *IPAddress) *AVB17221ACMPMessage
-	WithSourceMAC(sourceMAC *MACAddress) *AVB17221ACMPMessage
-	MessageType() AVB17221ACMPMessageType
-	SetMessageType(messageType AVB17221ACMPMessageType)
-	Status() AVB17221ACMPStatusCode
-	SetStatus(status AVB17221ACMPStatusCode)
-	StreamID() uint64
-	SetStreamID(streamID uint64)
-	ControllerEntityID() uint64
-	SetControllerEntityID(controllerEntityID uint64)
-	TalkerEntityID() uint64
-	SetTalkerEntityID(talkerEntityID uint64)
-	ListenerEntityID() uint64
-	SetListenerEntityID(listenerEntityID uint64)
-	TalkerUniqueID() uint16
-	SetTalkerUniqueID(talkerUniqueID uint16)
-	ListenerUniqueID() uint16
-	SetListenerUniqueID(listenerUniqueID uint16)
-	DestinationMAC() *MACAddress
-	SetDestinationMAC(destinationMAC *MACAddress)
-	ConnectionCount() uint16
-	SetConnectionCount(connectionCount uint16)
-	SequenceID() uint16
-	SetSequenceID(sequenceID uint16)
-	Flags() AVB17221ACMPFlags
-	SetFlags(flags AVB17221ACMPFlags)
-	VlanID() uint16
-	SetVlanID(vlanID uint16)
-	ConnectedListenersEntries() uint16
-	SetConnectedListenersEntries(connectedListenersEntries uint16)
-	ConnectedListenersEntriesValid() bool
-	SetConnectedListenersEntriesValid(connectedListenersEntriesValid bool)
-	IpFlags() AVB17221ACMPIPFlag
-	SetIpFlags(ipFlags AVB17221ACMPIPFlag)
-	SourcePort() uint16
-	SetSourcePort(sourcePort uint16)
-	DestinationPort() uint16
-	SetDestinationPort(destinationPort uint16)
-	SourceIPAddress() *IPAddress
-	SetSourceIPAddress(sourceIPAddress *IPAddress)
-	DestinationIPAddress() *IPAddress
-	SetDestinationIPAddress(destinationIPAddress *IPAddress)
-	SourceMAC() *MACAddress
-	SetSourceMAC(sourceMAC *MACAddress)
-}
-
-var _ AVB17221ACMPMessageable = (*AVB17221ACMPMessage)(nil)

@@ -46,24 +46,24 @@ func renderPipelineColorAttachmentDescriptorArrayAdopt(id objc.ID) *RenderPipeli
 }
 
 // Description returns the object's -description text.
-func (x *RenderPipelineColorAttachmentDescriptorArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rpcada *RenderPipelineColorAttachmentDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(rpcada))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RenderPipelineColorAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rpcada *RenderPipelineColorAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rpcada), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RenderPipelineColorAttachmentDescriptorArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rpcada *RenderPipelineColorAttachmentDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rpcada), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RenderPipelineColorAttachmentDescriptorArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rpcada *RenderPipelineColorAttachmentDescriptorArray) String() string {
+	return rt.Description(objref.IDOf(rpcada))
 }
 
 // NewRenderPipelineColorAttachmentDescriptorArray creates a new RenderPipelineColorAttachmentDescriptorArray.
@@ -73,21 +73,12 @@ func NewRenderPipelineColorAttachmentDescriptorArray() *RenderPipelineColorAttac
 }
 
 // ObjectAtIndexedSubscript returns the render pipeline state for the specified color attachment.
-func (x *RenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *RenderPipelineColorAttachmentDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
+func (rpcada *RenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *RenderPipelineColorAttachmentDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(rpcada), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
 	return RenderPipelineColorAttachmentDescriptorFromID(_r)
 }
 
 // SetObjectAtIndexedSubscript sets the render pipeline state for a specified color attachment.
-func (x *RenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *RenderPipelineColorAttachmentDescriptor, attachmentIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
+func (rpcada *RenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *RenderPipelineColorAttachmentDescriptor, attachmentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(rpcada), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
-
-// RenderPipelineColorAttachmentDescriptorArrayable is the interface implemented by [RenderPipelineColorAttachmentDescriptorArray], for mocking and DI.
-type RenderPipelineColorAttachmentDescriptorArrayable interface {
-	obj.Object
-	ObjectAtIndexedSubscript(attachmentIndex int) *RenderPipelineColorAttachmentDescriptor
-	SetObjectAtIndexedSubscript(attachment *RenderPipelineColorAttachmentDescriptor, attachmentIndex int)
-}
-
-var _ RenderPipelineColorAttachmentDescriptorArrayable = (*RenderPipelineColorAttachmentDescriptorArray)(nil)

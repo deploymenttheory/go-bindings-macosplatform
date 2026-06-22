@@ -54,23 +54,14 @@ func NewStartCollaborationAction() *StartCollaborationAction {
 }
 
 // FulfillUsingURLCollaborationIdentifier informs an app to set up the universal link and device independent identifier to provide to the system.
-func (x *StartCollaborationAction) FulfillUsingURLCollaborationIdentifier(url string, collaborationIdentifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fulfillUsingURL:collaborationIdentifier:"), rt.FileURL(url), objref.IDOf(collaborationIdentifier))
+func (sca *StartCollaborationAction) FulfillUsingURLCollaborationIdentifier(url string, collaborationIdentifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(sca), objc.RegisterName("fulfillUsingURL:collaborationIdentifier:"), rt.FileURL(url), objref.IDOf(collaborationIdentifier))
 }
 
 // CollaborationMetadata wraps the corresponding Objective-C method.
-func (x *StartCollaborationAction) CollaborationMetadata() *CollaborationMetadata {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collaborationMetadata"))
+func (sca *StartCollaborationAction) CollaborationMetadata() *CollaborationMetadata {
+	_r := objc.Send[objc.ID](objref.IDOf(sca), objc.RegisterName("collaborationMetadata"))
 	return CollaborationMetadataFromID(_r)
 }
-
-// StartCollaborationActionable is the interface implemented by [StartCollaborationAction], for mocking and DI.
-type StartCollaborationActionable interface {
-	obj.Object
-	FulfillUsingURLCollaborationIdentifier(url string, collaborationIdentifier obj.Object)
-	CollaborationMetadata() *CollaborationMetadata
-}
-
-var _ StartCollaborationActionable = (*StartCollaborationAction)(nil)
 
 var _ ActionProvider = (*StartCollaborationAction)(nil)

@@ -7,7 +7,6 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,112 +49,70 @@ func NewAccelerationConstraint() *AccelerationConstraint {
 	return accelerationConstraintAdopt(_id)
 }
 
-// WithMaximumLinearAcceleration controls the maximum linear acceleration. Defaults to MAXFLOAT. Animatable. The maximum linear acceleration is in m.s^-2
-func (x *AccelerationConstraint) WithMaximumLinearAcceleration(maximumLinearAcceleration float64) *AccelerationConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLinearAcceleration:"), maximumLinearAcceleration)
-	return x
+// WithMaximumLinearAcceleration sets controls the maximum linear acceleration. Defaults to MAXFLOAT. Animatable. The maximum linear acceleration is in m.s^-2
+func (ac *AccelerationConstraint) WithMaximumLinearAcceleration(maximumLinearAcceleration float64) *AccelerationConstraint {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setMaximumLinearAcceleration:"), maximumLinearAcceleration)
+	return ac
 }
 
-// WithMaximumLinearVelocity controls the maximum linear velocity. Defaults to MAXFLOAT. Animatable. The maximum linear velocity is in m.s
-func (x *AccelerationConstraint) WithMaximumLinearVelocity(maximumLinearVelocity float64) *AccelerationConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLinearVelocity:"), maximumLinearVelocity)
-	return x
+// WithMaximumLinearVelocity sets controls the maximum linear velocity. Defaults to MAXFLOAT. Animatable. The maximum linear velocity is in m.s
+func (ac *AccelerationConstraint) WithMaximumLinearVelocity(maximumLinearVelocity float64) *AccelerationConstraint {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setMaximumLinearVelocity:"), maximumLinearVelocity)
+	return ac
 }
 
-// WithDecelerationDistance controls the distance at which the node should start decelerating. Defaults to 0. Animatable.
-func (x *AccelerationConstraint) WithDecelerationDistance(decelerationDistance float64) *AccelerationConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecelerationDistance:"), decelerationDistance)
-	return x
+// WithDecelerationDistance sets controls the distance at which the node should start decelerating. Defaults to 0. Animatable.
+func (ac *AccelerationConstraint) WithDecelerationDistance(decelerationDistance float64) *AccelerationConstraint {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setDecelerationDistance:"), decelerationDistance)
+	return ac
 }
 
-// WithDamping specifies the damping factor of the receiver. Optionally reduce the body's linear velocity each frame to simulate fluid/air friction. Value should be zero or greater. Defaults to 0.1. Animatable.
-func (x *AccelerationConstraint) WithDamping(damping float64) *AccelerationConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDamping:"), damping)
-	return x
+// WithDamping sets specifies the damping factor of the receiver. Optionally reduce the body's linear velocity each frame to simulate fluid/air friction. Value should be zero or greater. Defaults to 0.1. Animatable.
+func (ac *AccelerationConstraint) WithDamping(damping float64) *AccelerationConstraint {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setDamping:"), damping)
+	return ac
 }
 
-// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
-func (x *AccelerationConstraint) WithEnabled(enabled bool) *AccelerationConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets determines whether the constraint is enabled or not. Defaults to YES.
+func (ac *AccelerationConstraint) WithEnabled(enabled bool) *AccelerationConstraint {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setEnabled:"), enabled)
+	return ac
 }
 
-// WithInfluenceFactor the influence of the constraint on the node’s transformation.
-func (x *AccelerationConstraint) WithInfluenceFactor(influenceFactor float64) *AccelerationConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
-	return x
+// WithInfluenceFactor sets the influence of the constraint on the node’s transformation.
+func (ac *AccelerationConstraint) WithInfluenceFactor(influenceFactor float64) *AccelerationConstraint {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
+	return ac
 }
 
-// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-func (x *AccelerationConstraint) WithIncremental(incremental bool) *AccelerationConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
-	return x
+// WithIncremental sets specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+func (ac *AccelerationConstraint) WithIncremental(incremental bool) *AccelerationConstraint {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setIncremental:"), incremental)
+	return ac
 }
 
-// MaximumLinearAcceleration controls the maximum linear acceleration. Defaults to MAXFLOAT. Animatable. The maximum linear acceleration is in m.s^-2
-func (x *AccelerationConstraint) MaximumLinearAcceleration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumLinearAcceleration"))
+// MaximumLinearAcceleration returns controls the maximum linear acceleration. Defaults to MAXFLOAT. Animatable. The maximum linear acceleration is in m.s^-2
+func (ac *AccelerationConstraint) MaximumLinearAcceleration() float64 {
+	_r := objc.Send[float64](objref.IDOf(ac), objc.RegisterName("maximumLinearAcceleration"))
 	return _r
 }
 
-// SetMaximumLinearAcceleration wraps the corresponding Objective-C method.
-func (x *AccelerationConstraint) SetMaximumLinearAcceleration(maximumLinearAcceleration float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLinearAcceleration:"), maximumLinearAcceleration)
-}
-
-// MaximumLinearVelocity controls the maximum linear velocity. Defaults to MAXFLOAT. Animatable. The maximum linear velocity is in m.s
-func (x *AccelerationConstraint) MaximumLinearVelocity() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maximumLinearVelocity"))
+// MaximumLinearVelocity returns controls the maximum linear velocity. Defaults to MAXFLOAT. Animatable. The maximum linear velocity is in m.s
+func (ac *AccelerationConstraint) MaximumLinearVelocity() float64 {
+	_r := objc.Send[float64](objref.IDOf(ac), objc.RegisterName("maximumLinearVelocity"))
 	return _r
 }
 
-// SetMaximumLinearVelocity wraps the corresponding Objective-C method.
-func (x *AccelerationConstraint) SetMaximumLinearVelocity(maximumLinearVelocity float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLinearVelocity:"), maximumLinearVelocity)
-}
-
-// DecelerationDistance controls the distance at which the node should start decelerating. Defaults to 0. Animatable.
-func (x *AccelerationConstraint) DecelerationDistance() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("decelerationDistance"))
+// DecelerationDistance returns controls the distance at which the node should start decelerating. Defaults to 0. Animatable.
+func (ac *AccelerationConstraint) DecelerationDistance() float64 {
+	_r := objc.Send[float64](objref.IDOf(ac), objc.RegisterName("decelerationDistance"))
 	return _r
-}
-
-// SetDecelerationDistance wraps the corresponding Objective-C method.
-func (x *AccelerationConstraint) SetDecelerationDistance(decelerationDistance float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDecelerationDistance:"), decelerationDistance)
 }
 
 // Damping specifies the damping factor of the receiver. Optionally reduce the body's linear velocity each frame to simulate fluid/air friction. Value should be zero or greater. Defaults to 0.1. Animatable.
-func (x *AccelerationConstraint) Damping() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("damping"))
+func (ac *AccelerationConstraint) Damping() float64 {
+	_r := objc.Send[float64](objref.IDOf(ac), objc.RegisterName("damping"))
 	return _r
 }
-
-// SetDamping wraps the corresponding Objective-C method.
-func (x *AccelerationConstraint) SetDamping(damping float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDamping:"), damping)
-}
-
-// AccelerationConstraintable is the interface implemented by [AccelerationConstraint], for mocking and DI.
-type AccelerationConstraintable interface {
-	obj.Object
-	WithMaximumLinearAcceleration(maximumLinearAcceleration float64) *AccelerationConstraint
-	WithMaximumLinearVelocity(maximumLinearVelocity float64) *AccelerationConstraint
-	WithDecelerationDistance(decelerationDistance float64) *AccelerationConstraint
-	WithDamping(damping float64) *AccelerationConstraint
-	WithEnabled(enabled bool) *AccelerationConstraint
-	WithInfluenceFactor(influenceFactor float64) *AccelerationConstraint
-	WithIncremental(incremental bool) *AccelerationConstraint
-	MaximumLinearAcceleration() float64
-	SetMaximumLinearAcceleration(maximumLinearAcceleration float64)
-	MaximumLinearVelocity() float64
-	SetMaximumLinearVelocity(maximumLinearVelocity float64)
-	DecelerationDistance() float64
-	SetDecelerationDistance(decelerationDistance float64)
-	Damping() float64
-	SetDamping(damping float64)
-}
-
-var _ AccelerationConstraintable = (*AccelerationConstraint)(nil)
 
 var _ ConstraintProvider = (*AccelerationConstraint)(nil)

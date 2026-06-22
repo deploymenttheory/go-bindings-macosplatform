@@ -59,74 +59,58 @@ func NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointQueue(device *MTRDevice, 
 }
 
 // ReadAttributeThreadMetricsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSoftwareDiagnostics) ReadAttributeThreadMetricsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeThreadMetricsWithParams:"), objref.IDOf(params))
+func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeThreadMetricsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeThreadMetricsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeCurrentHeapFreeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapFreeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentHeapFreeWithParams:"), objref.IDOf(params))
+func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapFreeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeCurrentHeapFreeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeCurrentHeapUsedWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapUsedWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentHeapUsedWithParams:"), objref.IDOf(params))
+func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapUsedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeCurrentHeapUsedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeCurrentHeapHighWatermarkWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapHighWatermarkWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentHeapHighWatermarkWithParams:"), objref.IDOf(params))
+func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapHighWatermarkWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeCurrentHeapHighWatermarkWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSoftwareDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSoftwareDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSoftwareDiagnostics) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSoftwareDiagnostics) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterSoftwareDiagnostics) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mcsd *MTRClusterSoftwareDiagnostics) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcsd), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
-
-// MTRClusterSoftwareDiagnosticsable is the interface implemented by [MTRClusterSoftwareDiagnostics], for mocking and DI.
-type MTRClusterSoftwareDiagnosticsable interface {
-	obj.Object
-	ReadAttributeThreadMetricsWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeCurrentHeapFreeWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeCurrentHeapUsedWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeCurrentHeapHighWatermarkWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-}
-
-var _ MTRClusterSoftwareDiagnosticsable = (*MTRClusterSoftwareDiagnostics)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterSoftwareDiagnostics)(nil)
 

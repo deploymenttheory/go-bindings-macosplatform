@@ -46,24 +46,24 @@ func personAdopt(id objc.ID) *Person {
 }
 
 // Description returns the object's -description text.
-func (x *Person) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Person) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Person) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Person) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Person) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Person) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Person) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Person) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // NewPersonWithPersonHandleNameComponentsDisplayNameImageContactIdentifierCustomIdentifier creates a person with the specified name and contact information.
@@ -130,20 +130,20 @@ func NewPersonWithHandleNameComponentsDisplayNameImageContactIdentifier(handle s
 }
 
 // PersonHandle wraps the corresponding Objective-C method.
-func (x *Person) PersonHandle() *PersonHandle {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("personHandle"))
+func (p *Person) PersonHandle() *PersonHandle {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("personHandle"))
 	return PersonHandleFromID(_r)
 }
 
 // NameComponents wraps the corresponding Objective-C method.
-func (x *Person) NameComponents() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nameComponents"))
+func (p *Person) NameComponents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("nameComponents"))
 	return obj.Wrap(_r)
 }
 
 // DisplayName wraps the corresponding Objective-C method.
-func (x *Person) DisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+func (p *Person) DisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
 	}
@@ -151,14 +151,14 @@ func (x *Person) DisplayName() string {
 }
 
 // Image wraps the corresponding Objective-C method.
-func (x *Person) Image() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+func (p *Person) Image() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
 // ContactIdentifier wraps the corresponding Objective-C method.
-func (x *Person) ContactIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contactIdentifier"))
+func (p *Person) ContactIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("contactIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -166,8 +166,8 @@ func (x *Person) ContactIdentifier() string {
 }
 
 // CustomIdentifier wraps the corresponding Objective-C method.
-func (x *Person) CustomIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customIdentifier"))
+func (p *Person) CustomIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("customIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -175,51 +175,33 @@ func (x *Person) CustomIdentifier() string {
 }
 
 // Relationship wraps the corresponding Objective-C method.
-func (x *Person) Relationship() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relationship"))
+func (p *Person) Relationship() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("relationship"))
 	return obj.Wrap(_r)
 }
 
 // IsContactSuggestion wraps the corresponding Objective-C method.
-func (x *Person) IsContactSuggestion() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isContactSuggestion"))
+func (p *Person) IsContactSuggestion() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isContactSuggestion"))
 	return _r
 }
 
 // Aliases wraps the corresponding Objective-C method.
 //
 // Aliases returns the collection as a Go slice.
-func (x *Person) Aliases() []*PersonHandle {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("aliases"))
+func (p *Person) Aliases() []*PersonHandle {
+	_arr := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("aliases"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersonHandle { return PersonHandleFromID(_id) })
 }
 
 // SuggestionType wraps the corresponding Objective-C method.
-func (x *Person) SuggestionType() PersonSuggestionType {
-	_r := objc.Send[PersonSuggestionType](objref.IDOf(x), objc.RegisterName("suggestionType"))
+func (p *Person) SuggestionType() PersonSuggestionType {
+	_r := objc.Send[PersonSuggestionType](objref.IDOf(p), objc.RegisterName("suggestionType"))
 	return _r
 }
 
 // IsMe wraps the corresponding Objective-C method.
-func (x *Person) IsMe() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMe"))
+func (p *Person) IsMe() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("isMe"))
 	return _r
 }
-
-// Personable is the interface implemented by [Person], for mocking and DI.
-type Personable interface {
-	obj.Object
-	PersonHandle() *PersonHandle
-	NameComponents() obj.Object
-	DisplayName() string
-	Image() *Image
-	ContactIdentifier() string
-	CustomIdentifier() string
-	Relationship() obj.Object
-	IsContactSuggestion() bool
-	Aliases() []*PersonHandle
-	SuggestionType() PersonSuggestionType
-	IsMe() bool
-}
-
-var _ Personable = (*Person)(nil)

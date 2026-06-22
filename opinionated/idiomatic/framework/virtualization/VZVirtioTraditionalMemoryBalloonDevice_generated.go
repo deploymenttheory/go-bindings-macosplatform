@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,31 +51,16 @@ func NewVirtioTraditionalMemoryBalloonDevice() *VirtioTraditionalMemoryBalloonDe
 	return virtioTraditionalMemoryBalloonDeviceAdopt(_id)
 }
 
-// WithTargetVirtualMachineMemorySize the target amount of memory, in bytes, to make available to the virtual machine.
-func (x *VirtioTraditionalMemoryBalloonDevice) WithTargetVirtualMachineMemorySize(targetVirtualMachineMemorySize uint64) *VirtioTraditionalMemoryBalloonDevice {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetVirtualMachineMemorySize:"), targetVirtualMachineMemorySize)
-	return x
+// WithTargetVirtualMachineMemorySize sets the target amount of memory, in bytes, to make available to the virtual machine.
+func (vtmbd *VirtioTraditionalMemoryBalloonDevice) WithTargetVirtualMachineMemorySize(targetVirtualMachineMemorySize uint64) *VirtioTraditionalMemoryBalloonDevice {
+	objc.Send[objc.ID](objref.IDOf(vtmbd), objc.RegisterName("setTargetVirtualMachineMemorySize:"), targetVirtualMachineMemorySize)
+	return vtmbd
 }
 
 // TargetVirtualMachineMemorySize wraps the corresponding Objective-C method.
-func (x *VirtioTraditionalMemoryBalloonDevice) TargetVirtualMachineMemorySize() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("targetVirtualMachineMemorySize"))
+func (vtmbd *VirtioTraditionalMemoryBalloonDevice) TargetVirtualMachineMemorySize() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(vtmbd), objc.RegisterName("targetVirtualMachineMemorySize"))
 	return _r
 }
-
-// SetTargetVirtualMachineMemorySize wraps the corresponding Objective-C method.
-func (x *VirtioTraditionalMemoryBalloonDevice) SetTargetVirtualMachineMemorySize(targetVirtualMachineMemorySize uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetVirtualMachineMemorySize:"), targetVirtualMachineMemorySize)
-}
-
-// VirtioTraditionalMemoryBalloonDeviceable is the interface implemented by [VirtioTraditionalMemoryBalloonDevice], for mocking and DI.
-type VirtioTraditionalMemoryBalloonDeviceable interface {
-	obj.Object
-	WithTargetVirtualMachineMemorySize(targetVirtualMachineMemorySize uint64) *VirtioTraditionalMemoryBalloonDevice
-	TargetVirtualMachineMemorySize() uint64
-	SetTargetVirtualMachineMemorySize(targetVirtualMachineMemorySize uint64)
-}
-
-var _ VirtioTraditionalMemoryBalloonDeviceable = (*VirtioTraditionalMemoryBalloonDevice)(nil)
 
 var _ MemoryBalloonDeviceProvider = (*VirtioTraditionalMemoryBalloonDevice)(nil)

@@ -46,24 +46,24 @@ func vertexBufferLayoutAdopt(id objc.ID) *VertexBufferLayout {
 }
 
 // Description returns the object's -description text.
-func (x *VertexBufferLayout) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vbl *VertexBufferLayout) Description() string {
+	return rt.Description(objref.IDOf(vbl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VertexBufferLayout) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vbl *VertexBufferLayout) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vbl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VertexBufferLayout) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vbl *VertexBufferLayout) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vbl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VertexBufferLayout) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vbl *VertexBufferLayout) String() string {
+	return rt.Description(objref.IDOf(vbl))
 }
 
 // NewVertexBufferLayoutWithStride creates a new VertexBufferLayout.
@@ -73,29 +73,14 @@ func NewVertexBufferLayoutWithStride(stride int) *VertexBufferLayout {
 	return vertexBufferLayoutAdopt(_id)
 }
 
-// WithStride the stride, in bytes, between data for separate vertices in a vertex buffer.
-func (x *VertexBufferLayout) WithStride(stride int) *VertexBufferLayout {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
-	return x
+// WithStride sets the stride, in bytes, between data for separate vertices in a vertex buffer.
+func (vbl *VertexBufferLayout) WithStride(stride int) *VertexBufferLayout {
+	objc.Send[objc.ID](objref.IDOf(vbl), objc.RegisterName("setStride:"), stride)
+	return vbl
 }
 
 // Stride wraps the corresponding Objective-C method.
-func (x *VertexBufferLayout) Stride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stride"))
+func (vbl *VertexBufferLayout) Stride() int {
+	_r := objc.Send[int](objref.IDOf(vbl), objc.RegisterName("stride"))
 	return _r
 }
-
-// SetStride wraps the corresponding Objective-C method.
-func (x *VertexBufferLayout) SetStride(stride int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
-}
-
-// VertexBufferLayoutable is the interface implemented by [VertexBufferLayout], for mocking and DI.
-type VertexBufferLayoutable interface {
-	obj.Object
-	WithStride(stride int) *VertexBufferLayout
-	Stride() int
-	SetStride(stride int)
-}
-
-var _ VertexBufferLayoutable = (*VertexBufferLayout)(nil)

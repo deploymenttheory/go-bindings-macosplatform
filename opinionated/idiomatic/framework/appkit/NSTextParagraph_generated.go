@@ -53,52 +53,40 @@ func NewTextParagraphWithAttributedString(attributedString obj.Object) *TextPara
 	return textParagraphAdopt(_id)
 }
 
-// WithTextContentManager the value that represents the current content manager.
-func (x *TextParagraph) WithTextContentManager(textContentManager TextContentManagerProvider) *TextParagraph {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContentManager:"), objref.IDOf(textContentManager))
-	return x
+// WithTextContentManager sets the value that represents the current content manager.
+func (tp *TextParagraph) WithTextContentManager(textContentManager TextContentManagerProvider) *TextParagraph {
+	objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("setTextContentManager:"), objref.IDOf(textContentManager))
+	return tp
 }
 
-// WithElementRange a range value that represents the range of the element inside the document.
-func (x *TextParagraph) WithElementRange(elementRange *TextRange) *TextParagraph {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElementRange:"), objref.IDOf(elementRange))
-	return x
+// WithElementRange sets a range value that represents the range of the element inside the document.
+func (tp *TextParagraph) WithElementRange(elementRange *TextRange) *TextParagraph {
+	objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("setElementRange:"), objref.IDOf(elementRange))
+	return tp
 }
 
 // AttributedString wraps the corresponding Objective-C method.
-func (x *TextParagraph) AttributedString() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedString"))
+func (tp *TextParagraph) AttributedString() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("attributedString"))
 	return obj.Wrap(_r)
 }
 
 // ParagraphContentRange wraps the corresponding Objective-C method.
-func (x *TextParagraph) ParagraphContentRange() *TextRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paragraphContentRange"))
+func (tp *TextParagraph) ParagraphContentRange() *TextRange {
+	_r := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("paragraphContentRange"))
 	return TextRangeFromID(_r)
 }
 
 // ParagraphSeparatorRange wraps the corresponding Objective-C method.
-func (x *TextParagraph) ParagraphSeparatorRange() *TextRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paragraphSeparatorRange"))
+func (tp *TextParagraph) ParagraphSeparatorRange() *TextRange {
+	_r := objc.Send[objc.ID](objref.IDOf(tp), objc.RegisterName("paragraphSeparatorRange"))
 	return TextRangeFromID(_r)
 }
-
-// TextParagraphable is the interface implemented by [TextParagraph], for mocking and DI.
-type TextParagraphable interface {
-	obj.Object
-	WithTextContentManager(textContentManager TextContentManagerProvider) *TextParagraph
-	WithElementRange(elementRange *TextRange) *TextParagraph
-	AttributedString() obj.Object
-	ParagraphContentRange() *TextRange
-	ParagraphSeparatorRange() *TextRange
-}
-
-var _ TextParagraphable = (*TextParagraph)(nil)
 
 // isTextParagraph marks TextParagraph — and, by embedding promotion, its
 // subclasses — as a member of the TextParagraph hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *TextParagraph) isTextParagraph() {}
+func (tp *TextParagraph) isTextParagraph() {}
 
 var _ TextParagraphProvider = (*TextParagraph)(nil)
 

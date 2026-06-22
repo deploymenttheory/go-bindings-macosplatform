@@ -46,24 +46,24 @@ func groupPresetSettingAdopt(id objc.ID) *GroupPresetSetting {
 }
 
 // Description returns the object's -description text.
-func (x *GroupPresetSetting) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (gps *GroupPresetSetting) Description() string {
+	return rt.Description(objref.IDOf(gps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GroupPresetSetting) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (gps *GroupPresetSetting) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(gps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GroupPresetSetting) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (gps *GroupPresetSetting) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(gps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GroupPresetSetting) String() string {
-	return rt.Description(objref.IDOf(x))
+func (gps *GroupPresetSetting) String() string {
+	return rt.Description(objref.IDOf(gps))
 }
 
 // NewGroupPresetSettingWithGainRateGainCurveTypeRateCurveType creates a group preset setting.
@@ -73,37 +73,26 @@ func NewGroupPresetSettingWithGainRateGainCurveTypeRateCurveType(gain float64, r
 	return groupPresetSettingAdopt(_id)
 }
 
-// Gain linear gain scalar.
-func (x *GroupPresetSetting) Gain() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("gain"))
+// Gain returns linear gain scalar.
+func (gps *GroupPresetSetting) Gain() float64 {
+	_r := objc.Send[float64](objref.IDOf(gps), objc.RegisterName("gain"))
 	return _r
 }
 
-// Rate linear rate scalar.
-func (x *GroupPresetSetting) Rate() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("rate"))
+// Rate returns linear rate scalar.
+func (gps *GroupPresetSetting) Rate() float64 {
+	_r := objc.Send[float64](objref.IDOf(gps), objc.RegisterName("rate"))
 	return _r
 }
 
-// GainCurveType the type of curve to apply to the gain as the preset changes to this new setting.
-func (x *GroupPresetSetting) GainCurveType() CurveType {
-	_r := objc.Send[CurveType](objref.IDOf(x), objc.RegisterName("gainCurveType"))
+// GainCurveType returns the type of curve to apply to the gain as the preset changes to this new setting.
+func (gps *GroupPresetSetting) GainCurveType() CurveType {
+	_r := objc.Send[CurveType](objref.IDOf(gps), objc.RegisterName("gainCurveType"))
 	return _r
 }
 
-// RateCurveType the type of curve to apply to the rate as the preset changes to this new setting.
-func (x *GroupPresetSetting) RateCurveType() CurveType {
-	_r := objc.Send[CurveType](objref.IDOf(x), objc.RegisterName("rateCurveType"))
+// RateCurveType returns the type of curve to apply to the rate as the preset changes to this new setting.
+func (gps *GroupPresetSetting) RateCurveType() CurveType {
+	_r := objc.Send[CurveType](objref.IDOf(gps), objc.RegisterName("rateCurveType"))
 	return _r
 }
-
-// GroupPresetSettingable is the interface implemented by [GroupPresetSetting], for mocking and DI.
-type GroupPresetSettingable interface {
-	obj.Object
-	Gain() float64
-	Rate() float64
-	GainCurveType() CurveType
-	RateCurveType() CurveType
-}
-
-var _ GroupPresetSettingable = (*GroupPresetSetting)(nil)

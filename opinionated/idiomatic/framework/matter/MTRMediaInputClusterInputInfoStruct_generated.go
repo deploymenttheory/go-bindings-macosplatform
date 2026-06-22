@@ -46,122 +46,83 @@ func mTRMediaInputClusterInputInfoStructAdopt(id objc.ID) *MTRMediaInputClusterI
 }
 
 // Description returns the object's -description text.
-func (x *MTRMediaInputClusterInputInfoStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmiciis *MTRMediaInputClusterInputInfoStruct) Description() string {
+	return rt.Description(objref.IDOf(mmiciis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRMediaInputClusterInputInfoStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmiciis *MTRMediaInputClusterInputInfoStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmiciis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRMediaInputClusterInputInfoStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmiciis *MTRMediaInputClusterInputInfoStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmiciis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRMediaInputClusterInputInfoStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmiciis *MTRMediaInputClusterInputInfoStruct) String() string {
+	return rt.Description(objref.IDOf(mmiciis))
 }
 
 // WithIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRMediaInputClusterInputInfoStruct) WithIndex(index obj.Object) *MTRMediaInputClusterInputInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), objref.IDOf(index))
-	return x
+func (mmiciis *MTRMediaInputClusterInputInfoStruct) WithIndex(index obj.Object) *MTRMediaInputClusterInputInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(mmiciis), objc.RegisterName("setIndex:"), objref.IDOf(index))
+	return mmiciis
 }
 
 // WithInputType sets the property and returns the receiver so calls can be chained.
-func (x *MTRMediaInputClusterInputInfoStruct) WithInputType(inputType obj.Object) *MTRMediaInputClusterInputInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputType:"), objref.IDOf(inputType))
-	return x
+func (mmiciis *MTRMediaInputClusterInputInfoStruct) WithInputType(inputType obj.Object) *MTRMediaInputClusterInputInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(mmiciis), objc.RegisterName("setInputType:"), objref.IDOf(inputType))
+	return mmiciis
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *MTRMediaInputClusterInputInfoStruct) WithName(name string) *MTRMediaInputClusterInputInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (mmiciis *MTRMediaInputClusterInputInfoStruct) WithName(name string) *MTRMediaInputClusterInputInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(mmiciis), objc.RegisterName("setName:"), purego.NSString(name))
+	return mmiciis
 }
 
 // WithDescriptionString sets the property and returns the receiver so calls can be chained.
-func (x *MTRMediaInputClusterInputInfoStruct) WithDescriptionString(descriptionString string) *MTRMediaInputClusterInputInfoStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDescriptionString:"), purego.NSString(descriptionString))
-	return x
+func (mmiciis *MTRMediaInputClusterInputInfoStruct) WithDescriptionString(descriptionString string) *MTRMediaInputClusterInputInfoStruct {
+	objc.Send[objc.ID](objref.IDOf(mmiciis), objc.RegisterName("setDescriptionString:"), purego.NSString(descriptionString))
+	return mmiciis
 }
 
 // Index wraps the corresponding Objective-C method.
-func (x *MTRMediaInputClusterInputInfoStruct) Index() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("index"))
+func (mmiciis *MTRMediaInputClusterInputInfoStruct) Index() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmiciis), objc.RegisterName("index"))
 	return obj.Wrap(_r)
-}
-
-// SetIndex wraps the corresponding Objective-C method.
-func (x *MTRMediaInputClusterInputInfoStruct) SetIndex(index obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndex:"), objref.IDOf(index))
 }
 
 // InputType wraps the corresponding Objective-C method.
-func (x *MTRMediaInputClusterInputInfoStruct) InputType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputType"))
+func (mmiciis *MTRMediaInputClusterInputInfoStruct) InputType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmiciis), objc.RegisterName("inputType"))
 	return obj.Wrap(_r)
 }
 
-// SetInputType wraps the corresponding Objective-C method.
-func (x *MTRMediaInputClusterInputInfoStruct) SetInputType(inputType obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputType:"), objref.IDOf(inputType))
-}
-
 // Name wraps the corresponding Objective-C method.
-func (x *MTRMediaInputClusterInputInfoStruct) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (mmiciis *MTRMediaInputClusterInputInfoStruct) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mmiciis), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetName wraps the corresponding Objective-C method.
-func (x *MTRMediaInputClusterInputInfoStruct) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
 // DescriptionString wraps the corresponding Objective-C method.
-func (x *MTRMediaInputClusterInputInfoStruct) DescriptionString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptionString"))
+func (mmiciis *MTRMediaInputClusterInputInfoStruct) DescriptionString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mmiciis), objc.RegisterName("descriptionString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetDescriptionString wraps the corresponding Objective-C method.
-func (x *MTRMediaInputClusterInputInfoStruct) SetDescriptionString(descriptionString string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDescriptionString:"), purego.NSString(descriptionString))
-}
-
-// MTRMediaInputClusterInputInfoStructable is the interface implemented by [MTRMediaInputClusterInputInfoStruct], for mocking and DI.
-type MTRMediaInputClusterInputInfoStructable interface {
-	obj.Object
-	WithIndex(index obj.Object) *MTRMediaInputClusterInputInfoStruct
-	WithInputType(inputType obj.Object) *MTRMediaInputClusterInputInfoStruct
-	WithName(name string) *MTRMediaInputClusterInputInfoStruct
-	WithDescriptionString(descriptionString string) *MTRMediaInputClusterInputInfoStruct
-	Index() obj.Object
-	SetIndex(index obj.Object)
-	InputType() obj.Object
-	SetInputType(inputType obj.Object)
-	Name() string
-	SetName(name string)
-	DescriptionString() string
-	SetDescriptionString(descriptionString string)
-}
-
-var _ MTRMediaInputClusterInputInfoStructable = (*MTRMediaInputClusterInputInfoStruct)(nil)
 
 // isMTRMediaInputClusterInputInfoStruct marks MTRMediaInputClusterInputInfoStruct — and, by embedding promotion, its
 // subclasses — as a member of the MTRMediaInputClusterInputInfoStruct hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRMediaInputClusterInputInfoStruct) isMTRMediaInputClusterInputInfoStruct() {}
+func (mmiciis *MTRMediaInputClusterInputInfoStruct) isMTRMediaInputClusterInputInfoStruct() {}
 
 var _ MTRMediaInputClusterInputInfoStructProvider = (*MTRMediaInputClusterInputInfoStruct)(nil)

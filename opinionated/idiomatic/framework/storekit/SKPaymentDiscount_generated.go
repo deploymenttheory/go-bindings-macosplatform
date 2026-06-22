@@ -46,24 +46,24 @@ func paymentDiscountAdopt(id objc.ID) *PaymentDiscount {
 }
 
 // Description returns the object's -description text.
-func (x *PaymentDiscount) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pd *PaymentDiscount) Description() string {
+	return rt.Description(objref.IDOf(pd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PaymentDiscount) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pd *PaymentDiscount) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PaymentDiscount) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pd *PaymentDiscount) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PaymentDiscount) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pd *PaymentDiscount) String() string {
+	return rt.Description(objref.IDOf(pd))
 }
 
 // NewPaymentDiscountWithIdentifierKeyIdentifierNonceSignatureTimestamp initializes the payment discount with a signature and the parameters used by the signature.
@@ -74,8 +74,8 @@ func NewPaymentDiscountWithIdentifierKeyIdentifierNonceSignatureTimestamp(identi
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *PaymentDiscount) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (pd *PaymentDiscount) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -83,8 +83,8 @@ func (x *PaymentDiscount) Identifier() string {
 }
 
 // KeyIdentifier wraps the corresponding Objective-C method.
-func (x *PaymentDiscount) KeyIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyIdentifier"))
+func (pd *PaymentDiscount) KeyIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("keyIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -92,14 +92,14 @@ func (x *PaymentDiscount) KeyIdentifier() string {
 }
 
 // Nonce wraps the corresponding Objective-C method.
-func (x *PaymentDiscount) Nonce() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nonce"))
+func (pd *PaymentDiscount) Nonce() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("nonce"))
 	return obj.Wrap(_r)
 }
 
 // Signature wraps the corresponding Objective-C method.
-func (x *PaymentDiscount) Signature() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signature"))
+func (pd *PaymentDiscount) Signature() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("signature"))
 	if _r == 0 {
 		return ""
 	}
@@ -107,19 +107,7 @@ func (x *PaymentDiscount) Signature() string {
 }
 
 // Timestamp wraps the corresponding Objective-C method.
-func (x *PaymentDiscount) Timestamp() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timestamp"))
+func (pd *PaymentDiscount) Timestamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pd), objc.RegisterName("timestamp"))
 	return obj.Wrap(_r)
 }
-
-// PaymentDiscountable is the interface implemented by [PaymentDiscount], for mocking and DI.
-type PaymentDiscountable interface {
-	obj.Object
-	Identifier() string
-	KeyIdentifier() string
-	Nonce() obj.Object
-	Signature() string
-	Timestamp() obj.Object
-}
-
-var _ PaymentDiscountable = (*PaymentDiscount)(nil)

@@ -46,24 +46,24 @@ func appearanceCharacteristicsAdopt(id objc.ID) *AppearanceCharacteristics {
 }
 
 // Description returns the object's -description text.
-func (x *AppearanceCharacteristics) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ac *AppearanceCharacteristics) Description() string {
+	return rt.Description(objref.IDOf(ac))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AppearanceCharacteristics) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ac *AppearanceCharacteristics) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ac), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AppearanceCharacteristics) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ac *AppearanceCharacteristics) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ac), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AppearanceCharacteristics) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ac *AppearanceCharacteristics) String() string {
+	return rt.Description(objref.IDOf(ac))
 }
 
 // NewAppearanceCharacteristics creates a new AppearanceCharacteristics.
@@ -72,165 +72,101 @@ func NewAppearanceCharacteristics() *AppearanceCharacteristics {
 	return appearanceCharacteristicsAdopt(_id)
 }
 
-// WithControlType the type of button widget annotation.
-func (x *AppearanceCharacteristics) WithControlType(controlType WidgetControlType) *AppearanceCharacteristics {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlType:"), controlType)
-	return x
+// WithControlType sets the type of button widget annotation.
+func (ac *AppearanceCharacteristics) WithControlType(controlType WidgetControlType) *AppearanceCharacteristics {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setControlType:"), controlType)
+	return ac
 }
 
-// WithBackgroundColor the background color of the widget annotation.
-func (x *AppearanceCharacteristics) WithBackgroundColor(backgroundColor obj.Object) *AppearanceCharacteristics {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the background color of the widget annotation.
+func (ac *AppearanceCharacteristics) WithBackgroundColor(backgroundColor obj.Object) *AppearanceCharacteristics {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return ac
 }
 
-// WithBorderColor the border color of the widget annotation.
-func (x *AppearanceCharacteristics) WithBorderColor(borderColor obj.Object) *AppearanceCharacteristics {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
-	return x
+// WithBorderColor sets the border color of the widget annotation.
+func (ac *AppearanceCharacteristics) WithBorderColor(borderColor obj.Object) *AppearanceCharacteristics {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
+	return ac
 }
 
-// WithRotation the number of degrees, in multiples of 90, that the widget annotation rotates counterclockwise relative to the page.
-func (x *AppearanceCharacteristics) WithRotation(rotation int) *AppearanceCharacteristics {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotation:"), rotation)
-	return x
+// WithRotation sets the number of degrees, in multiples of 90, that the widget annotation rotates counterclockwise relative to the page.
+func (ac *AppearanceCharacteristics) WithRotation(rotation int) *AppearanceCharacteristics {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setRotation:"), rotation)
+	return ac
 }
 
-// WithCaption the text that the button widget annotation displays when the user isn’t interacting with it.
-func (x *AppearanceCharacteristics) WithCaption(caption string) *AppearanceCharacteristics {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaption:"), purego.NSString(caption))
-	return x
+// WithCaption sets the text that the button widget annotation displays when the user isn’t interacting with it.
+func (ac *AppearanceCharacteristics) WithCaption(caption string) *AppearanceCharacteristics {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setCaption:"), purego.NSString(caption))
+	return ac
 }
 
-// WithRolloverCaption the text that the widget annotation displays when the user hovers the pointer over it.
-func (x *AppearanceCharacteristics) WithRolloverCaption(rolloverCaption string) *AppearanceCharacteristics {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRolloverCaption:"), purego.NSString(rolloverCaption))
-	return x
+// WithRolloverCaption sets the text that the widget annotation displays when the user hovers the pointer over it.
+func (ac *AppearanceCharacteristics) WithRolloverCaption(rolloverCaption string) *AppearanceCharacteristics {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setRolloverCaption:"), purego.NSString(rolloverCaption))
+	return ac
 }
 
-// WithDownCaption the text that the button widget annotation displays when the user holds down on it.
-func (x *AppearanceCharacteristics) WithDownCaption(downCaption string) *AppearanceCharacteristics {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownCaption:"), purego.NSString(downCaption))
-	return x
+// WithDownCaption sets the text that the button widget annotation displays when the user holds down on it.
+func (ac *AppearanceCharacteristics) WithDownCaption(downCaption string) *AppearanceCharacteristics {
+	objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("setDownCaption:"), purego.NSString(downCaption))
+	return ac
 }
 
 // ControlType wraps the corresponding Objective-C method.
-func (x *AppearanceCharacteristics) ControlType() WidgetControlType {
-	_r := objc.Send[WidgetControlType](objref.IDOf(x), objc.RegisterName("controlType"))
+func (ac *AppearanceCharacteristics) ControlType() WidgetControlType {
+	_r := objc.Send[WidgetControlType](objref.IDOf(ac), objc.RegisterName("controlType"))
 	return _r
-}
-
-// SetControlType wraps the corresponding Objective-C method.
-func (x *AppearanceCharacteristics) SetControlType(controlType WidgetControlType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlType:"), controlType)
 }
 
 // BackgroundColor wraps the corresponding Objective-C method.
-func (x *AppearanceCharacteristics) BackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+func (ac *AppearanceCharacteristics) BackgroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
-}
-
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *AppearanceCharacteristics) SetBackgroundColor(backgroundColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
 // BorderColor wraps the corresponding Objective-C method.
-func (x *AppearanceCharacteristics) BorderColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("borderColor"))
+func (ac *AppearanceCharacteristics) BorderColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("borderColor"))
 	return obj.Wrap(_r)
-}
-
-// SetBorderColor wraps the corresponding Objective-C method.
-func (x *AppearanceCharacteristics) SetBorderColor(borderColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBorderColor:"), objref.IDOf(borderColor))
 }
 
 // Rotation wraps the corresponding Objective-C method.
-func (x *AppearanceCharacteristics) Rotation() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rotation"))
+func (ac *AppearanceCharacteristics) Rotation() int {
+	_r := objc.Send[int](objref.IDOf(ac), objc.RegisterName("rotation"))
 	return _r
 }
 
-// SetRotation wraps the corresponding Objective-C method.
-func (x *AppearanceCharacteristics) SetRotation(rotation int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotation:"), rotation)
-}
-
 // Caption wraps the corresponding Objective-C method.
-func (x *AppearanceCharacteristics) Caption() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("caption"))
+func (ac *AppearanceCharacteristics) Caption() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("caption"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetCaption wraps the corresponding Objective-C method.
-func (x *AppearanceCharacteristics) SetCaption(caption string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaption:"), purego.NSString(caption))
 }
 
 // RolloverCaption wraps the corresponding Objective-C method.
-func (x *AppearanceCharacteristics) RolloverCaption() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rolloverCaption"))
+func (ac *AppearanceCharacteristics) RolloverCaption() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("rolloverCaption"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetRolloverCaption wraps the corresponding Objective-C method.
-func (x *AppearanceCharacteristics) SetRolloverCaption(rolloverCaption string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRolloverCaption:"), purego.NSString(rolloverCaption))
 }
 
 // DownCaption wraps the corresponding Objective-C method.
-func (x *AppearanceCharacteristics) DownCaption() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downCaption"))
+func (ac *AppearanceCharacteristics) DownCaption() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("downCaption"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetDownCaption wraps the corresponding Objective-C method.
-func (x *AppearanceCharacteristics) SetDownCaption(downCaption string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownCaption:"), purego.NSString(downCaption))
-}
-
 // AppearanceCharacteristicsKeyValues wraps the corresponding Objective-C method.
-func (x *AppearanceCharacteristics) AppearanceCharacteristicsKeyValues() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appearanceCharacteristicsKeyValues"))
+func (ac *AppearanceCharacteristics) AppearanceCharacteristicsKeyValues() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("appearanceCharacteristicsKeyValues"))
 	return obj.Wrap(_r)
 }
-
-// AppearanceCharacteristicsable is the interface implemented by [AppearanceCharacteristics], for mocking and DI.
-type AppearanceCharacteristicsable interface {
-	obj.Object
-	WithControlType(controlType WidgetControlType) *AppearanceCharacteristics
-	WithBackgroundColor(backgroundColor obj.Object) *AppearanceCharacteristics
-	WithBorderColor(borderColor obj.Object) *AppearanceCharacteristics
-	WithRotation(rotation int) *AppearanceCharacteristics
-	WithCaption(caption string) *AppearanceCharacteristics
-	WithRolloverCaption(rolloverCaption string) *AppearanceCharacteristics
-	WithDownCaption(downCaption string) *AppearanceCharacteristics
-	ControlType() WidgetControlType
-	SetControlType(controlType WidgetControlType)
-	BackgroundColor() obj.Object
-	SetBackgroundColor(backgroundColor obj.Object)
-	BorderColor() obj.Object
-	SetBorderColor(borderColor obj.Object)
-	Rotation() int
-	SetRotation(rotation int)
-	Caption() string
-	SetCaption(caption string)
-	RolloverCaption() string
-	SetRolloverCaption(rolloverCaption string)
-	DownCaption() string
-	SetDownCaption(downCaption string)
-	AppearanceCharacteristicsKeyValues() obj.Object
-}
-
-var _ AppearanceCharacteristicsable = (*AppearanceCharacteristics)(nil)

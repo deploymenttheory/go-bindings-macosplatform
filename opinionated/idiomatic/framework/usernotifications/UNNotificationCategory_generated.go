@@ -46,24 +46,24 @@ func notificationCategoryAdopt(id objc.ID) *NotificationCategory {
 }
 
 // Description returns the object's -description text.
-func (x *NotificationCategory) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nc *NotificationCategory) Description() string {
+	return rt.Description(objref.IDOf(nc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NotificationCategory) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nc *NotificationCategory) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NotificationCategory) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nc *NotificationCategory) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NotificationCategory) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nc *NotificationCategory) String() string {
+	return rt.Description(objref.IDOf(nc))
 }
 
 // NewNotificationCategory creates a new NotificationCategory.
@@ -73,8 +73,8 @@ func NewNotificationCategory() *NotificationCategory {
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *NotificationCategory) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (nc *NotificationCategory) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -84,52 +84,39 @@ func (x *NotificationCategory) Identifier() string {
 // Actions wraps the corresponding Objective-C method.
 //
 // Actions returns the collection as a Go slice.
-func (x *NotificationCategory) Actions() []*NotificationAction {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actions"))
+func (nc *NotificationCategory) Actions() []*NotificationAction {
+	_arr := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("actions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *NotificationAction { return NotificationActionFromID(_id) })
 }
 
 // IntentIdentifiers wraps the corresponding Objective-C method.
 //
 // IntentIdentifiers returns the collection as a Go slice.
-func (x *NotificationCategory) IntentIdentifiers() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intentIdentifiers"))
+func (nc *NotificationCategory) IntentIdentifiers() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("intentIdentifiers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Options wraps the corresponding Objective-C method.
-func (x *NotificationCategory) Options() NotificationCategoryOptions {
-	_r := objc.Send[NotificationCategoryOptions](objref.IDOf(x), objc.RegisterName("options"))
+func (nc *NotificationCategory) Options() NotificationCategoryOptions {
+	_r := objc.Send[NotificationCategoryOptions](objref.IDOf(nc), objc.RegisterName("options"))
 	return _r
 }
 
 // HiddenPreviewsBodyPlaceholder wraps the corresponding Objective-C method.
-func (x *NotificationCategory) HiddenPreviewsBodyPlaceholder() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hiddenPreviewsBodyPlaceholder"))
+func (nc *NotificationCategory) HiddenPreviewsBodyPlaceholder() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("hiddenPreviewsBodyPlaceholder"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// CategorySummaryFormat a format string for a summary description when notifications from this category are grouped together. It should contain descriptive text and format arguments that will be replaced with the information from the notifications that have been grouped together. The arguments are replaced with the number of notifications and the list created by joining the argument in each grouped notification. For example: "%u new messages from %
-func (x *NotificationCategory) CategorySummaryFormat() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("categorySummaryFormat"))
+// CategorySummaryFormat returns a format string for a summary description when notifications from this category are grouped together. It should contain descriptive text and format arguments that will be replaced with the information from the notifications that have been grouped together. The arguments are replaced with the number of notifications and the list created by joining the argument in each grouped notification. For example: "%u new messages from %
+func (nc *NotificationCategory) CategorySummaryFormat() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("categorySummaryFormat"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// NotificationCategoryable is the interface implemented by [NotificationCategory], for mocking and DI.
-type NotificationCategoryable interface {
-	obj.Object
-	Identifier() string
-	Actions() []*NotificationAction
-	IntentIdentifiers() []string
-	Options() NotificationCategoryOptions
-	HiddenPreviewsBodyPlaceholder() string
-	CategorySummaryFormat() string
-}
-
-var _ NotificationCategoryable = (*NotificationCategory)(nil)

@@ -46,24 +46,24 @@ func mapItemAnnotationAdopt(id objc.ID) *MapItemAnnotation {
 }
 
 // Description returns the object's -description text.
-func (x *MapItemAnnotation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mia *MapItemAnnotation) Description() string {
+	return rt.Description(objref.IDOf(mia))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MapItemAnnotation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mia *MapItemAnnotation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mia), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MapItemAnnotation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mia *MapItemAnnotation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mia), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MapItemAnnotation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mia *MapItemAnnotation) String() string {
+	return rt.Description(objref.IDOf(mia))
 }
 
 // NewMapItemAnnotationWithMapItem creates a map item annotation
@@ -74,15 +74,7 @@ func NewMapItemAnnotationWithMapItem(mapItem *MapItem) *MapItemAnnotation {
 }
 
 // MapItem wraps the corresponding Objective-C method.
-func (x *MapItemAnnotation) MapItem() *MapItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapItem"))
+func (mia *MapItemAnnotation) MapItem() *MapItem {
+	_r := objc.Send[objc.ID](objref.IDOf(mia), objc.RegisterName("mapItem"))
 	return MapItemFromID(_r)
 }
-
-// MapItemAnnotationable is the interface implemented by [MapItemAnnotation], for mocking and DI.
-type MapItemAnnotationable interface {
-	obj.Object
-	MapItem() *MapItem
-}
-
-var _ MapItemAnnotationable = (*MapItemAnnotation)(nil)

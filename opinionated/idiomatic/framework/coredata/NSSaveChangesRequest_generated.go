@@ -53,47 +53,35 @@ func NewSaveChangesRequestWithInsertedObjectsUpdatedObjectsDeletedObjectsLockedO
 	return saveChangesRequestAdopt(_id)
 }
 
-// WithAffectedStores the stores the request should be sent to.
-func (x *SaveChangesRequest) WithAffectedStores(items ...PersistentStoreProvider) *SaveChangesRequest {
+// WithAffectedStores sets the stores the request should be sent to.
+func (scr *SaveChangesRequest) WithAffectedStores(items ...PersistentStoreProvider) *SaveChangesRequest {
 	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(scr), objc.RegisterName("setAffectedStores:"), _arr)
+	return scr
 }
 
 // InsertedObjects wraps the corresponding Objective-C method.
-func (x *SaveChangesRequest) InsertedObjects() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertedObjects"))
+func (scr *SaveChangesRequest) InsertedObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(scr), objc.RegisterName("insertedObjects"))
 	return obj.Wrap(_r)
 }
 
 // UpdatedObjects wraps the corresponding Objective-C method.
-func (x *SaveChangesRequest) UpdatedObjects() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updatedObjects"))
+func (scr *SaveChangesRequest) UpdatedObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(scr), objc.RegisterName("updatedObjects"))
 	return obj.Wrap(_r)
 }
 
 // DeletedObjects wraps the corresponding Objective-C method.
-func (x *SaveChangesRequest) DeletedObjects() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deletedObjects"))
+func (scr *SaveChangesRequest) DeletedObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(scr), objc.RegisterName("deletedObjects"))
 	return obj.Wrap(_r)
 }
 
 // LockedObjects wraps the corresponding Objective-C method.
-func (x *SaveChangesRequest) LockedObjects() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lockedObjects"))
+func (scr *SaveChangesRequest) LockedObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(scr), objc.RegisterName("lockedObjects"))
 	return obj.Wrap(_r)
 }
-
-// SaveChangesRequestable is the interface implemented by [SaveChangesRequest], for mocking and DI.
-type SaveChangesRequestable interface {
-	obj.Object
-	WithAffectedStores(items ...PersistentStoreProvider) *SaveChangesRequest
-	InsertedObjects() obj.Object
-	UpdatedObjects() obj.Object
-	DeletedObjects() obj.Object
-	LockedObjects() obj.Object
-}
-
-var _ SaveChangesRequestable = (*SaveChangesRequest)(nil)
 
 var _ PersistentStoreRequestProvider = (*SaveChangesRequest)(nil)

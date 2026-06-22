@@ -6,12 +6,13 @@ package gamekit
 
 import (
 	"context"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Shared wraps the corresponding Objective-C method.
@@ -127,13 +128,13 @@ func LoadAchievementDescriptions(ctx context.Context) (result obj.Object, err er
 	}
 }
 
-// IncompleteAchievementImage a common image that you can display when the player hasn’t completed the achievement.
+// IncompleteAchievementImage returns a common image that you can display when the player hasn’t completed the achievement.
 func IncompleteAchievementImage() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKAchievementDescription")), objc.RegisterName("incompleteAchievementImage"))
 	return obj.Wrap(_r)
 }
 
-// PlaceholderCompletedAchievementImage a placeholder image that you can display when the player completes the achievement.
+// PlaceholderCompletedAchievementImage returns a placeholder image that you can display when the player completes the achievement.
 func PlaceholderCompletedAchievementImage() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKAchievementDescription")), objc.RegisterName("placeholderCompletedAchievementImage"))
 	return obj.Wrap(_r)
@@ -220,7 +221,7 @@ func GetCurrentSignedInPlayerForContainer(ctx context.Context, containerName str
 	}
 }
 
-// SharedDialogController retrieves the shared instance of the dialog controller.
+// SharedDialogController returns retrieves the shared instance of the dialog controller.
 func SharedDialogController() *DialogController {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKDialogController")), objc.RegisterName("sharedDialogController"))
 	return DialogControllerFromID(_r)
@@ -258,7 +259,7 @@ func IsValidPartyCode(partyCode string) bool {
 	return _r
 }
 
-// ValidPartyCodeAlphabet allowed characters for the party code to be used to share this activity.
+// ValidPartyCodeAlphabet returns allowed characters for the party code to be used to share this activity.
 //
 // ValidPartyCodeAlphabet returns the collection as a Go slice.
 func ValidPartyCodeAlphabet() []string {
@@ -538,7 +539,7 @@ func LoadLeaderboardSets(ctx context.Context) (result obj.Object, err error) {
 	}
 }
 
-// Local obtain the primary GKLocalPlayer object. The player is only available for offline play until logged in. A temporary player is created if no account is set up.
+// Local returns obtain the primary GKLocalPlayer object. The player is only available for offline play until logged in. A temporary player is created if no account is set up.
 func Local() *LocalPlayer {
 	_r := objc.Send[objc.ID](objc.ID(_class("GKLocalPlayer")), objc.RegisterName("local"))
 	return LocalPlayerFromID(_r)
@@ -765,7 +766,7 @@ func LoadMatchWithID(ctx context.Context, matchID string) (result *TurnBasedMatc
 	}
 }
 
-// IsVoIPAllowed returns whether voice chat is available on the device.
+// IsVoIPAllowed reports whether voice chat is available on the device.
 func IsVoIPAllowed() bool {
 	_r := objc.Send[bool](objc.ID(_class("GKVoiceChat")), objc.RegisterName("isVoIPAllowed"))
 	return _r

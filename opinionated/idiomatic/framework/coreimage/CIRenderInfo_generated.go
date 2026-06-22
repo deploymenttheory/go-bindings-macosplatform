@@ -46,24 +46,24 @@ func renderInfoAdopt(id objc.ID) *RenderInfo {
 }
 
 // Description returns the object's -description text.
-func (x *RenderInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ri *RenderInfo) Description() string {
+	return rt.Description(objref.IDOf(ri))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RenderInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ri *RenderInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ri), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RenderInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ri *RenderInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ri), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RenderInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ri *RenderInfo) String() string {
+	return rt.Description(objref.IDOf(ri))
 }
 
 // NewRenderInfo creates a new RenderInfo.
@@ -73,36 +73,25 @@ func NewRenderInfo() *RenderInfo {
 }
 
 // KernelExecutionTime wraps the corresponding Objective-C method.
-func (x *RenderInfo) KernelExecutionTime() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("kernelExecutionTime"))
+func (ri *RenderInfo) KernelExecutionTime() float64 {
+	_r := objc.Send[float64](objref.IDOf(ri), objc.RegisterName("kernelExecutionTime"))
 	return _r
 }
 
 // KernelCompileTime wraps the corresponding Objective-C method.
-func (x *RenderInfo) KernelCompileTime() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("kernelCompileTime"))
+func (ri *RenderInfo) KernelCompileTime() float64 {
+	_r := objc.Send[float64](objref.IDOf(ri), objc.RegisterName("kernelCompileTime"))
 	return _r
 }
 
 // PassCount wraps the corresponding Objective-C method.
-func (x *RenderInfo) PassCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("passCount"))
+func (ri *RenderInfo) PassCount() int {
+	_r := objc.Send[int](objref.IDOf(ri), objc.RegisterName("passCount"))
 	return _r
 }
 
 // PixelsProcessed wraps the corresponding Objective-C method.
-func (x *RenderInfo) PixelsProcessed() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelsProcessed"))
+func (ri *RenderInfo) PixelsProcessed() int {
+	_r := objc.Send[int](objref.IDOf(ri), objc.RegisterName("pixelsProcessed"))
 	return _r
 }
-
-// RenderInfoable is the interface implemented by [RenderInfo], for mocking and DI.
-type RenderInfoable interface {
-	obj.Object
-	KernelExecutionTime() float64
-	KernelCompileTime() float64
-	PassCount() int
-	PixelsProcessed() int
-}
-
-var _ RenderInfoable = (*RenderInfo)(nil)

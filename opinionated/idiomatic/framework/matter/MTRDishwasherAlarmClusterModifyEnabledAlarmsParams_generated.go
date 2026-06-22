@@ -44,24 +44,24 @@ func mTRDishwasherAlarmClusterModifyEnabledAlarmsParamsAdopt(id objc.ID) *MTRDis
 }
 
 // Description returns the object's -description text.
-func (x *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) Description() string {
+	return rt.Description(objref.IDOf(mdacmeap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdacmeap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdacmeap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) String() string {
+	return rt.Description(objref.IDOf(mdacmeap))
 }
 
 // NewMTRDishwasherAlarmClusterModifyEnabledAlarmsParams creates a new MTRDishwasherAlarmClusterModifyEnabledAlarmsParams.
@@ -71,68 +71,37 @@ func NewMTRDishwasherAlarmClusterModifyEnabledAlarmsParams() *MTRDishwasherAlarm
 }
 
 // WithMask sets the property and returns the receiver so calls can be chained.
-func (x *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) WithMask(mask obj.Object) *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMask:"), objref.IDOf(mask))
-	return x
+func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) WithMask(mask obj.Object) *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams {
+	objc.Send[objc.ID](objref.IDOf(mdacmeap), objc.RegisterName("setMask:"), objref.IDOf(mask))
+	return mdacmeap
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams {
+	objc.Send[objc.ID](objref.IDOf(mdacmeap), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mdacmeap
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams {
+	objc.Send[objc.ID](objref.IDOf(mdacmeap), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mdacmeap
 }
 
 // Mask wraps the corresponding Objective-C method.
-func (x *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) Mask() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mask"))
+func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) Mask() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdacmeap), objc.RegisterName("mask"))
 	return obj.Wrap(_r)
 }
 
-// SetMask wraps the corresponding Objective-C method.
-func (x *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) SetMask(mask obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMask:"), objref.IDOf(mask))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdacmeap), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mdacmeap *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdacmeap), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRDishwasherAlarmClusterModifyEnabledAlarmsParamsable is the interface implemented by [MTRDishwasherAlarmClusterModifyEnabledAlarmsParams], for mocking and DI.
-type MTRDishwasherAlarmClusterModifyEnabledAlarmsParamsable interface {
-	obj.Object
-	WithMask(mask obj.Object) *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDishwasherAlarmClusterModifyEnabledAlarmsParams
-	Mask() obj.Object
-	SetMask(mask obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRDishwasherAlarmClusterModifyEnabledAlarmsParamsable = (*MTRDishwasherAlarmClusterModifyEnabledAlarmsParams)(nil)

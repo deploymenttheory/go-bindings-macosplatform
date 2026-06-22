@@ -46,24 +46,24 @@ func authorizationPublicKeyCredentialParametersAdopt(id objc.ID) *AuthorizationP
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationPublicKeyCredentialParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (apkcp *AuthorizationPublicKeyCredentialParameters) Description() string {
+	return rt.Description(objref.IDOf(apkcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationPublicKeyCredentialParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (apkcp *AuthorizationPublicKeyCredentialParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(apkcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationPublicKeyCredentialParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (apkcp *AuthorizationPublicKeyCredentialParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(apkcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationPublicKeyCredentialParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (apkcp *AuthorizationPublicKeyCredentialParameters) String() string {
+	return rt.Description(objref.IDOf(apkcp))
 }
 
 // NewAuthorizationPublicKeyCredentialParametersWithAlgorithm creates the object with an algorithm.
@@ -73,16 +73,8 @@ func NewAuthorizationPublicKeyCredentialParametersWithAlgorithm(algorithm int) *
 	return authorizationPublicKeyCredentialParametersAdopt(_id)
 }
 
-// Algorithm a COSE algorithm indentifier.
-func (x *AuthorizationPublicKeyCredentialParameters) Algorithm() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("algorithm"))
+// Algorithm returns a COSE algorithm indentifier.
+func (apkcp *AuthorizationPublicKeyCredentialParameters) Algorithm() int {
+	_r := objc.Send[int](objref.IDOf(apkcp), objc.RegisterName("algorithm"))
 	return _r
 }
-
-// AuthorizationPublicKeyCredentialParametersable is the interface implemented by [AuthorizationPublicKeyCredentialParameters], for mocking and DI.
-type AuthorizationPublicKeyCredentialParametersable interface {
-	obj.Object
-	Algorithm() int
-}
-
-var _ AuthorizationPublicKeyCredentialParametersable = (*AuthorizationPublicKeyCredentialParameters)(nil)

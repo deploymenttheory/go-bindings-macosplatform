@@ -46,24 +46,24 @@ func localizedStringAdopt(id objc.ID) *LocalizedString {
 }
 
 // Description returns the object's -description text.
-func (x *LocalizedString) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ls *LocalizedString) Description() string {
+	return rt.Description(objref.IDOf(ls))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LocalizedString) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ls *LocalizedString) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ls), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LocalizedString) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ls *LocalizedString) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ls), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LocalizedString) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ls *LocalizedString) String() string {
+	return rt.Description(objref.IDOf(ls))
 }
 
 // NewLocalizedStringWithLocalizedStrings initializes a CSLocalizedString object with the specified dictionary of localized strings.
@@ -74,18 +74,10 @@ func NewLocalizedStringWithLocalizedStrings(localizedStrings obj.Object) *Locali
 }
 
 // LocalizedString returns the localized string for the current language.
-func (x *LocalizedString) LocalizedString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedString"))
+func (ls *LocalizedString) LocalizedString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ls), objc.RegisterName("localizedString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// LocalizedStringable is the interface implemented by [LocalizedString], for mocking and DI.
-type LocalizedStringable interface {
-	obj.Object
-	LocalizedString() string
-}
-
-var _ LocalizedStringable = (*LocalizedString)(nil)

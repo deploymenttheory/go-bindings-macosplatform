@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,219 +50,163 @@ func NewDOMHTMLHRElement() *DOMHTMLHRElement {
 }
 
 // WithAlign sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithAlign(align string) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
-	return x
+func (de *DOMHTMLHRElement) WithAlign(align string) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setAlign:"), purego.NSString(align))
+	return de
 }
 
 // WithNoShade sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithNoShade(noShade bool) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNoShade:"), noShade)
-	return x
+func (de *DOMHTMLHRElement) WithNoShade(noShade bool) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setNoShade:"), noShade)
+	return de
 }
 
 // WithSize sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithSize(size string) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), purego.NSString(size))
-	return x
+func (de *DOMHTMLHRElement) WithSize(size string) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setSize:"), purego.NSString(size))
+	return de
 }
 
 // WithWidth sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithWidth(width string) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), purego.NSString(width))
-	return x
+func (de *DOMHTMLHRElement) WithWidth(width string) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setWidth:"), purego.NSString(width))
+	return de
 }
 
 // WithTitle sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithTitle(title string) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+func (de *DOMHTMLHRElement) WithTitle(title string) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return de
 }
 
 // WithLang sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithLang(lang string) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
-	return x
+func (de *DOMHTMLHRElement) WithLang(lang string) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setLang:"), purego.NSString(lang))
+	return de
 }
 
 // WithDir sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithDir(dir string) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
-	return x
+func (de *DOMHTMLHRElement) WithDir(dir string) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setDir:"), purego.NSString(dir))
+	return de
 }
 
 // WithTabIndex sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithTabIndex(tabIndex int) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
-	return x
+func (de *DOMHTMLHRElement) WithTabIndex(tabIndex int) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setTabIndex:"), tabIndex)
+	return de
 }
 
 // WithAccessKey sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithAccessKey(accessKey string) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
-	return x
+func (de *DOMHTMLHRElement) WithAccessKey(accessKey string) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
+	return de
 }
 
 // WithInnerText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithInnerText(innerText string) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
-	return x
+func (de *DOMHTMLHRElement) WithInnerText(innerText string) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
+	return de
 }
 
 // WithOuterText sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithOuterText(outerText string) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
-	return x
+func (de *DOMHTMLHRElement) WithOuterText(outerText string) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
+	return de
 }
 
 // WithContentEditable sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithContentEditable(contentEditable string) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
-	return x
+func (de *DOMHTMLHRElement) WithContentEditable(contentEditable string) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
+	return de
 }
 
-// WithIdName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithIdName(idName string) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
-	return x
+// WithIDName sets the property and returns the receiver so calls can be chained.
+func (de *DOMHTMLHRElement) WithIDName(idName string) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setIdName:"), purego.NSString(idName))
+	return de
 }
 
 // WithScrollLeft sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithScrollLeft(scrollLeft int) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
-	return x
+func (de *DOMHTMLHRElement) WithScrollLeft(scrollLeft int) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setScrollLeft:"), scrollLeft)
+	return de
 }
 
 // WithScrollTop sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithScrollTop(scrollTop int) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
-	return x
+func (de *DOMHTMLHRElement) WithScrollTop(scrollTop int) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setScrollTop:"), scrollTop)
+	return de
 }
 
 // WithInnerHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithInnerHTML(innerHTML string) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
-	return x
+func (de *DOMHTMLHRElement) WithInnerHTML(innerHTML string) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
+	return de
 }
 
 // WithOuterHTML sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithOuterHTML(outerHTML string) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
-	return x
+func (de *DOMHTMLHRElement) WithOuterHTML(outerHTML string) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
+	return de
 }
 
 // WithClassName sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithClassName(className string) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
-	return x
+func (de *DOMHTMLHRElement) WithClassName(className string) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setClassName:"), purego.NSString(className))
+	return de
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithNodeValue(nodeValue string) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (de *DOMHTMLHRElement) WithNodeValue(nodeValue string) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return de
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithPrefix(prefix string) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (de *DOMHTMLHRElement) WithPrefix(prefix string) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return de
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMHTMLHRElement) WithTextContent(textContent string) *DOMHTMLHRElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (de *DOMHTMLHRElement) WithTextContent(textContent string) *DOMHTMLHRElement {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return de
 }
 
 // Align wraps the corresponding Objective-C method.
-func (x *DOMHTMLHRElement) Align() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("align"))
+func (de *DOMHTMLHRElement) Align() string {
+	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("align"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetAlign wraps the corresponding Objective-C method.
-func (x *DOMHTMLHRElement) SetAlign(align string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlign:"), purego.NSString(align))
 }
 
 // NoShade wraps the corresponding Objective-C method.
-func (x *DOMHTMLHRElement) NoShade() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("noShade"))
+func (de *DOMHTMLHRElement) NoShade() bool {
+	_r := objc.Send[bool](objref.IDOf(de), objc.RegisterName("noShade"))
 	return _r
 }
 
-// SetNoShade wraps the corresponding Objective-C method.
-func (x *DOMHTMLHRElement) SetNoShade(noShade bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNoShade:"), noShade)
-}
-
 // Size wraps the corresponding Objective-C method.
-func (x *DOMHTMLHRElement) Size() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("size"))
+func (de *DOMHTMLHRElement) Size() string {
+	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("size"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetSize wraps the corresponding Objective-C method.
-func (x *DOMHTMLHRElement) SetSize(size string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), purego.NSString(size))
 }
 
 // Width wraps the corresponding Objective-C method.
-func (x *DOMHTMLHRElement) Width() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("width"))
+func (de *DOMHTMLHRElement) Width() string {
+	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("width"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetWidth wraps the corresponding Objective-C method.
-func (x *DOMHTMLHRElement) SetWidth(width string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), purego.NSString(width))
-}
-
-// DOMHTMLHRElementable is the interface implemented by [DOMHTMLHRElement], for mocking and DI.
-type DOMHTMLHRElementable interface {
-	obj.Object
-	WithAlign(align string) *DOMHTMLHRElement
-	WithNoShade(noShade bool) *DOMHTMLHRElement
-	WithSize(size string) *DOMHTMLHRElement
-	WithWidth(width string) *DOMHTMLHRElement
-	WithTitle(title string) *DOMHTMLHRElement
-	WithLang(lang string) *DOMHTMLHRElement
-	WithDir(dir string) *DOMHTMLHRElement
-	WithTabIndex(tabIndex int) *DOMHTMLHRElement
-	WithAccessKey(accessKey string) *DOMHTMLHRElement
-	WithInnerText(innerText string) *DOMHTMLHRElement
-	WithOuterText(outerText string) *DOMHTMLHRElement
-	WithContentEditable(contentEditable string) *DOMHTMLHRElement
-	WithIdName(idName string) *DOMHTMLHRElement
-	WithScrollLeft(scrollLeft int) *DOMHTMLHRElement
-	WithScrollTop(scrollTop int) *DOMHTMLHRElement
-	WithInnerHTML(innerHTML string) *DOMHTMLHRElement
-	WithOuterHTML(outerHTML string) *DOMHTMLHRElement
-	WithClassName(className string) *DOMHTMLHRElement
-	WithNodeValue(nodeValue string) *DOMHTMLHRElement
-	WithPrefix(prefix string) *DOMHTMLHRElement
-	WithTextContent(textContent string) *DOMHTMLHRElement
-	Align() string
-	SetAlign(align string)
-	NoShade() bool
-	SetNoShade(noShade bool)
-	Size() string
-	SetSize(size string)
-	Width() string
-	SetWidth(width string)
-}
-
-var _ DOMHTMLHRElementable = (*DOMHTMLHRElement)(nil)
 
 var _ DOMHTMLElementProvider = (*DOMHTMLHRElement)(nil)
 

@@ -46,24 +46,24 @@ func symbolEffectOptionsRepeatBehaviorAdopt(id objc.ID) *SymbolEffectOptionsRepe
 }
 
 // Description returns the object's -description text.
-func (x *SymbolEffectOptionsRepeatBehavior) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (seorb *SymbolEffectOptionsRepeatBehavior) Description() string {
+	return rt.Description(objref.IDOf(seorb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SymbolEffectOptionsRepeatBehavior) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (seorb *SymbolEffectOptionsRepeatBehavior) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(seorb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SymbolEffectOptionsRepeatBehavior) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (seorb *SymbolEffectOptionsRepeatBehavior) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(seorb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SymbolEffectOptionsRepeatBehavior) String() string {
-	return rt.Description(objref.IDOf(x))
+func (seorb *SymbolEffectOptionsRepeatBehavior) String() string {
+	return rt.Description(objref.IDOf(seorb))
 }
 
 // NewSymbolEffectOptionsRepeatBehavior creates a new SymbolEffectOptionsRepeatBehavior.
@@ -71,10 +71,3 @@ func NewSymbolEffectOptionsRepeatBehavior() *SymbolEffectOptionsRepeatBehavior {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolEffectOptionsRepeatBehavior")), objc.RegisterName("new"))
 	return symbolEffectOptionsRepeatBehaviorAdopt(_id)
 }
-
-// SymbolEffectOptionsRepeatBehaviorable is the interface implemented by [SymbolEffectOptionsRepeatBehavior], for mocking and DI.
-type SymbolEffectOptionsRepeatBehaviorable interface {
-	obj.Object
-}
-
-var _ SymbolEffectOptionsRepeatBehaviorable = (*SymbolEffectOptionsRepeatBehavior)(nil)

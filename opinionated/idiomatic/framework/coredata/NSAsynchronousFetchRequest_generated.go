@@ -53,46 +53,29 @@ func NewAsynchronousFetchRequestWithFetchRequestCompletionBlock(request obj.Obje
 	return asynchronousFetchRequestAdopt(_id)
 }
 
-// WithEstimatedResultCount a configuration parameter that assists Core Data with scheduling the asynchronous fetch request.
-func (x *AsynchronousFetchRequest) WithEstimatedResultCount(estimatedResultCount int) *AsynchronousFetchRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEstimatedResultCount:"), estimatedResultCount)
-	return x
+// WithEstimatedResultCount sets a configuration parameter that assists Core Data with scheduling the asynchronous fetch request.
+func (afr *AsynchronousFetchRequest) WithEstimatedResultCount(estimatedResultCount int) *AsynchronousFetchRequest {
+	objc.Send[objc.ID](objref.IDOf(afr), objc.RegisterName("setEstimatedResultCount:"), estimatedResultCount)
+	return afr
 }
 
-// WithAffectedStores the stores the request should be sent to.
-func (x *AsynchronousFetchRequest) WithAffectedStores(items ...PersistentStoreProvider) *AsynchronousFetchRequest {
+// WithAffectedStores sets the stores the request should be sent to.
+func (afr *AsynchronousFetchRequest) WithAffectedStores(items ...PersistentStoreProvider) *AsynchronousFetchRequest {
 	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(afr), objc.RegisterName("setAffectedStores:"), _arr)
+	return afr
 }
 
 // FetchRequest wraps the corresponding Objective-C method.
-func (x *AsynchronousFetchRequest) FetchRequest() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRequest"))
+func (afr *AsynchronousFetchRequest) FetchRequest() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(afr), objc.RegisterName("fetchRequest"))
 	return obj.Wrap(_r)
 }
 
 // EstimatedResultCount wraps the corresponding Objective-C method.
-func (x *AsynchronousFetchRequest) EstimatedResultCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("estimatedResultCount"))
+func (afr *AsynchronousFetchRequest) EstimatedResultCount() int {
+	_r := objc.Send[int](objref.IDOf(afr), objc.RegisterName("estimatedResultCount"))
 	return _r
 }
-
-// SetEstimatedResultCount wraps the corresponding Objective-C method.
-func (x *AsynchronousFetchRequest) SetEstimatedResultCount(estimatedResultCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEstimatedResultCount:"), estimatedResultCount)
-}
-
-// AsynchronousFetchRequestable is the interface implemented by [AsynchronousFetchRequest], for mocking and DI.
-type AsynchronousFetchRequestable interface {
-	obj.Object
-	WithEstimatedResultCount(estimatedResultCount int) *AsynchronousFetchRequest
-	WithAffectedStores(items ...PersistentStoreProvider) *AsynchronousFetchRequest
-	FetchRequest() obj.Object
-	EstimatedResultCount() int
-	SetEstimatedResultCount(estimatedResultCount int)
-}
-
-var _ AsynchronousFetchRequestable = (*AsynchronousFetchRequest)(nil)
 
 var _ PersistentStoreRequestProvider = (*AsynchronousFetchRequest)(nil)

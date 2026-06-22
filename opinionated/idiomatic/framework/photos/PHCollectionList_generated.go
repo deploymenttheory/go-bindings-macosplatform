@@ -53,41 +53,30 @@ func NewCollectionList() *CollectionList {
 }
 
 // CollectionListSubtype wraps the corresponding Objective-C method.
-func (x *CollectionList) CollectionListSubtype() CollectionListSubtype {
-	_r := objc.Send[CollectionListSubtype](objref.IDOf(x), objc.RegisterName("collectionListSubtype"))
+func (cl *CollectionList) CollectionListSubtype() CollectionListSubtype {
+	_r := objc.Send[CollectionListSubtype](objref.IDOf(cl), objc.RegisterName("collectionListSubtype"))
 	return _r
 }
 
 // StartDate wraps the corresponding Objective-C method.
-func (x *CollectionList) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+func (cl *CollectionList) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
 // EndDate wraps the corresponding Objective-C method.
-func (x *CollectionList) EndDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+func (cl *CollectionList) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
 // LocalizedLocationNames wraps the corresponding Objective-C method.
 //
 // LocalizedLocationNames returns the collection as a Go slice.
-func (x *CollectionList) LocalizedLocationNames() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedLocationNames"))
+func (cl *CollectionList) LocalizedLocationNames() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("localizedLocationNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// CollectionListable is the interface implemented by [CollectionList], for mocking and DI.
-type CollectionListable interface {
-	obj.Object
-	CollectionListSubtype() CollectionListSubtype
-	StartDate() obj.Object
-	EndDate() obj.Object
-	LocalizedLocationNames() []string
-}
-
-var _ CollectionListable = (*CollectionList)(nil)
 
 var _ CollectionProvider = (*CollectionList)(nil)
 

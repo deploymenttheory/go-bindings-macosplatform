@@ -44,24 +44,24 @@ func mTRWaterHeaterManagementClusterBoostStartedEventAdopt(id objc.ID) *MTRWater
 }
 
 // Description returns the object's -description text.
-func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mwhmcbse *MTRWaterHeaterManagementClusterBoostStartedEvent) Description() string {
+	return rt.Description(objref.IDOf(mwhmcbse))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mwhmcbse *MTRWaterHeaterManagementClusterBoostStartedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mwhmcbse), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mwhmcbse *MTRWaterHeaterManagementClusterBoostStartedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mwhmcbse), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mwhmcbse *MTRWaterHeaterManagementClusterBoostStartedEvent) String() string {
+	return rt.Description(objref.IDOf(mwhmcbse))
 }
 
 // NewMTRWaterHeaterManagementClusterBoostStartedEvent creates a new MTRWaterHeaterManagementClusterBoostStartedEvent.
@@ -71,28 +71,13 @@ func NewMTRWaterHeaterManagementClusterBoostStartedEvent() *MTRWaterHeaterManage
 }
 
 // WithBoostInfo sets the property and returns the receiver so calls can be chained.
-func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) WithBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostStartedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoostInfo:"), objref.IDOf(boostInfo))
-	return x
+func (mwhmcbse *MTRWaterHeaterManagementClusterBoostStartedEvent) WithBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostStartedEvent {
+	objc.Send[objc.ID](objref.IDOf(mwhmcbse), objc.RegisterName("setBoostInfo:"), objref.IDOf(boostInfo))
+	return mwhmcbse
 }
 
 // BoostInfo wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) BoostInfo() *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boostInfo"))
+func (mwhmcbse *MTRWaterHeaterManagementClusterBoostStartedEvent) BoostInfo() *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(mwhmcbse), objc.RegisterName("boostInfo"))
 	return MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStructFromID(_r)
 }
-
-// SetBoostInfo wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterManagementClusterBoostStartedEvent) SetBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoostInfo:"), objref.IDOf(boostInfo))
-}
-
-// MTRWaterHeaterManagementClusterBoostStartedEventable is the interface implemented by [MTRWaterHeaterManagementClusterBoostStartedEvent], for mocking and DI.
-type MTRWaterHeaterManagementClusterBoostStartedEventable interface {
-	obj.Object
-	WithBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct) *MTRWaterHeaterManagementClusterBoostStartedEvent
-	BoostInfo() *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct
-	SetBoostInfo(boostInfo *MTRWaterHeaterManagementClusterWaterHeaterBoostInfoStruct)
-}
-
-var _ MTRWaterHeaterManagementClusterBoostStartedEventable = (*MTRWaterHeaterManagementClusterBoostStartedEvent)(nil)

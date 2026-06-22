@@ -5,11 +5,12 @@
 package mpscore
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // ImageDescriptorWithChannelFormatWidthHeightFeatureChannels create a MPSImageDescriptor for a single read/write cnn image.
@@ -62,7 +63,7 @@ func DescriptorWithDataTypeShape(dataType DataType, shape []obj.Object) *NDArray
 	return NDArrayDescriptorFromID(_r)
 }
 
-// ResourceList init an empty autoreleased resource list
+// ResourceList returns init an empty autoreleased resource list
 func ResourceList() *StateResourceList {
 	_r := objc.Send[objc.ID](objc.ID(_class("MPSStateResourceList")), objc.RegisterName("resourceList"))
 	return StateResourceListFromID(_r)

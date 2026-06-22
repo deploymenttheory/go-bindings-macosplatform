@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,11 @@ func NewMutableAudioMix() *MutableAudioMix {
 	return mutableAudioMixAdopt(_id)
 }
 
-// WithInputParameters an array of input parameters for the mix.
-func (x *MutableAudioMix) WithInputParameters(items ...AudioMixInputParametersProvider) *MutableAudioMix {
+// WithInputParameters sets an array of input parameters for the mix.
+func (mam *MutableAudioMix) WithInputParameters(items ...AudioMixInputParametersProvider) *MutableAudioMix {
 	_arr := purego.SliceToNSArray(items, func(_v AudioMixInputParametersProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputParameters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mam), objc.RegisterName("setInputParameters:"), _arr)
+	return mam
 }
-
-// SetInputParameters wraps the corresponding Objective-C method.
-func (x *MutableAudioMix) SetInputParameters(inputParameters []*AudioMixInputParameters) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputParameters:"), purego.SliceToNSArray(inputParameters, func(_v *AudioMixInputParameters) objc.ID { return objref.IDOf(_v) }))
-}
-
-// MutableAudioMixable is the interface implemented by [MutableAudioMix], for mocking and DI.
-type MutableAudioMixable interface {
-	obj.Object
-	WithInputParameters(items ...AudioMixInputParametersProvider) *MutableAudioMix
-	SetInputParameters(inputParameters []*AudioMixInputParameters)
-}
-
-var _ MutableAudioMixable = (*MutableAudioMix)(nil)
 
 var _ AudioMixProvider = (*MutableAudioMix)(nil)

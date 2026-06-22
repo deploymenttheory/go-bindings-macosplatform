@@ -46,24 +46,24 @@ func contactPickerAdopt(id objc.ID) *ContactPicker {
 }
 
 // Description returns the object's -description text.
-func (x *ContactPicker) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cp *ContactPicker) Description() string {
+	return rt.Description(objref.IDOf(cp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContactPicker) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cp *ContactPicker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContactPicker) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cp *ContactPicker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ContactPicker) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cp *ContactPicker) String() string {
+	return rt.Description(objref.IDOf(cp))
 }
 
 // NewContactPicker creates a new ContactPicker.
@@ -72,38 +72,22 @@ func NewContactPicker() *ContactPicker {
 	return contactPickerAdopt(_id)
 }
 
-// WithDisplayedKeys the keys to be displayed when a contact is expanded.
-func (x *ContactPicker) WithDisplayedKeys(items ...obj.Object) *ContactPicker {
+// WithDisplayedKeys sets the keys to be displayed when a contact is expanded.
+func (cp *ContactPicker) WithDisplayedKeys(items ...obj.Object) *ContactPicker {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayedKeys:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("setDisplayedKeys:"), _arr)
+	return cp
 }
 
 // Close closes the popover.
-func (x *ContactPicker) Close() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
+func (cp *ContactPicker) Close() {
+	objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("close"))
 }
 
-// DisplayedKeys the CNContact keys to display when a contact is expanded. If no keys are provided, the picker will select contacts instead of values.
+// DisplayedKeys returns the CNContact keys to display when a contact is expanded. If no keys are provided, the picker will select contacts instead of values.
 //
 // DisplayedKeys returns the collection as a Go slice.
-func (x *ContactPicker) DisplayedKeys() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayedKeys"))
+func (cp *ContactPicker) DisplayedKeys() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(cp), objc.RegisterName("displayedKeys"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// SetDisplayedKeys wraps the corresponding Objective-C method.
-func (x *ContactPicker) SetDisplayedKeys(displayedKeys []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayedKeys:"), purego.SliceToNSArray(displayedKeys, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
-// ContactPickerable is the interface implemented by [ContactPicker], for mocking and DI.
-type ContactPickerable interface {
-	obj.Object
-	WithDisplayedKeys(items ...obj.Object) *ContactPicker
-	Close()
-	DisplayedKeys() []string
-	SetDisplayedKeys(displayedKeys []string)
-}
-
-var _ ContactPickerable = (*ContactPicker)(nil)

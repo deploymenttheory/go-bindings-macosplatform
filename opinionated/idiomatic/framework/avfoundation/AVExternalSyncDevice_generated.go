@@ -46,24 +46,24 @@ func externalSyncDeviceAdopt(id objc.ID) *ExternalSyncDevice {
 }
 
 // Description returns the object's -description text.
-func (x *ExternalSyncDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (esd *ExternalSyncDevice) Description() string {
+	return rt.Description(objref.IDOf(esd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExternalSyncDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (esd *ExternalSyncDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(esd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExternalSyncDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (esd *ExternalSyncDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(esd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExternalSyncDevice) String() string {
-	return rt.Description(objref.IDOf(x))
+func (esd *ExternalSyncDevice) String() string {
+	return rt.Description(objref.IDOf(esd))
 }
 
 // NewExternalSyncDevice creates a new ExternalSyncDevice.
@@ -72,44 +72,32 @@ func NewExternalSyncDevice() *ExternalSyncDevice {
 	return externalSyncDeviceAdopt(_id)
 }
 
-// Status the status of the externally connected device. Use this property to query the current connection status of the external sync device. This property is key-value observable.
-func (x *ExternalSyncDevice) Status() ExternalSyncDeviceStatus {
-	_r := objc.Send[ExternalSyncDeviceStatus](objref.IDOf(x), objc.RegisterName("status"))
+// Status returns the status of the externally connected device. Use this property to query the current connection status of the external sync device. This property is key-value observable.
+func (esd *ExternalSyncDevice) Status() ExternalSyncDeviceStatus {
+	_r := objc.Send[ExternalSyncDeviceStatus](objref.IDOf(esd), objc.RegisterName("status"))
 	return _r
 }
 
-// Clock a clock representing the source of time from the external sync device. This property returns `NULL` until the “status“ reaches “AVExternalSyncDeviceStatusActiveSync“.
-func (x *ExternalSyncDevice) Clock() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clock"))
+// Clock returns a clock representing the source of time from the external sync device. This property returns `NULL` until the “status“ reaches “AVExternalSyncDeviceStatusActiveSync“.
+func (esd *ExternalSyncDevice) Clock() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(esd), objc.RegisterName("clock"))
 	return obj.Wrap(_r)
 }
 
-// Uuid a unique identifier for an external sync device. Use this property to select a specific external sync device.
-func (x *ExternalSyncDevice) Uuid() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uuid"))
+// UUID returns a unique identifier for an external sync device. Use this property to select a specific external sync device.
+func (esd *ExternalSyncDevice) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(esd), objc.RegisterName("uuid"))
 	return obj.Wrap(_r)
 }
 
-// VendorID the USB vendor identifier associated with the external sync device. This `UInt32` value is provided by the hardware vendor, and returns 0 if not available.
-func (x *ExternalSyncDevice) VendorID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vendorID"))
+// VendorID returns the USB vendor identifier associated with the external sync device. This `UInt32` value is provided by the hardware vendor, and returns 0 if not available.
+func (esd *ExternalSyncDevice) VendorID() int {
+	_r := objc.Send[int](objref.IDOf(esd), objc.RegisterName("vendorID"))
 	return _r
 }
 
-// ProductID the USB product identifier associated with the external sync device. This `UInt32` value comes from the hardware vendor, and returns 0 if not available. Use this value in conjunction with the “vendorID“ to determine a specific product.
-func (x *ExternalSyncDevice) ProductID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("productID"))
+// ProductID returns the USB product identifier associated with the external sync device. This `UInt32` value comes from the hardware vendor, and returns 0 if not available. Use this value in conjunction with the “vendorID“ to determine a specific product.
+func (esd *ExternalSyncDevice) ProductID() int {
+	_r := objc.Send[int](objref.IDOf(esd), objc.RegisterName("productID"))
 	return _r
 }
-
-// ExternalSyncDeviceable is the interface implemented by [ExternalSyncDevice], for mocking and DI.
-type ExternalSyncDeviceable interface {
-	obj.Object
-	Status() ExternalSyncDeviceStatus
-	Clock() obj.Object
-	Uuid() obj.Object
-	VendorID() int
-	ProductID() int
-}
-
-var _ ExternalSyncDeviceable = (*ExternalSyncDevice)(nil)

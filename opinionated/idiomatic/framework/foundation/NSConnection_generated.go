@@ -46,24 +46,24 @@ func connectionAdopt(id objc.ID) *Connection {
 }
 
 // Description returns the object's -description text.
-func (x *Connection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Connection) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Connection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Connection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Connection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Connection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Connection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Connection) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewConnectionWithReceivePortSendPort returns an NSConnection object initialized with given send and receive ports.
@@ -73,223 +73,164 @@ func NewConnectionWithReceivePortSendPort(receivePort *Port, sendPort *Port) *Co
 	return connectionAdopt(_id)
 }
 
-// WithRequestTimeout the timeout interval for outgoing remote messages.
-func (x *Connection) WithRequestTimeout(requestTimeout float64) *Connection {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestTimeout:"), requestTimeout)
-	return x
+// WithRequestTimeout sets the timeout interval for outgoing remote messages.
+func (c *Connection) WithRequestTimeout(requestTimeout float64) *Connection {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setRequestTimeout:"), requestTimeout)
+	return c
 }
 
-// WithReplyTimeout the timeout interval for replies to outgoing remote messages.
-func (x *Connection) WithReplyTimeout(replyTimeout float64) *Connection {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplyTimeout:"), replyTimeout)
-	return x
+// WithReplyTimeout sets the timeout interval for replies to outgoing remote messages.
+func (c *Connection) WithReplyTimeout(replyTimeout float64) *Connection {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setReplyTimeout:"), replyTimeout)
+	return c
 }
 
-// WithRootObject the object that the receiver (or its parent) makes available to other applications or threads.
-func (x *Connection) WithRootObject(rootObject obj.Object) *Connection {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootObject:"), objref.IDOf(rootObject))
-	return x
+// WithRootObject sets the object that the receiver (or its parent) makes available to other applications or threads.
+func (c *Connection) WithRootObject(rootObject obj.Object) *Connection {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setRootObject:"), objref.IDOf(rootObject))
+	return c
 }
 
-// WithIndependentConversationQueueing a Boolean value that indicates whether the receiver handles remote messages atomically.
-func (x *Connection) WithIndependentConversationQueueing(independentConversationQueueing bool) *Connection {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndependentConversationQueueing:"), independentConversationQueueing)
-	return x
+// WithIndependentConversationQueueing sets a Boolean value that indicates whether the receiver handles remote messages atomically.
+func (c *Connection) WithIndependentConversationQueueing(independentConversationQueueing bool) *Connection {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setIndependentConversationQueueing:"), independentConversationQueueing)
+	return c
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Connection) WithScriptingProperties(scriptingProperties obj.Object) *Connection {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (c *Connection) WithScriptingProperties(scriptingProperties obj.Object) *Connection {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return c
 }
 
 // Invalidate invalidates the receiver.
-func (x *Connection) Invalidate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
+func (c *Connection) Invalidate() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("invalidate"))
 }
 
 // AddRequestMode adds mode to the set of run-loop input modes that the receiver uses for connection requests.
-func (x *Connection) AddRequestMode(rmode string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRequestMode:"), purego.NSString(rmode))
+func (c *Connection) AddRequestMode(rmode string) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("addRequestMode:"), purego.NSString(rmode))
 }
 
 // RemoveRequestMode removes mode from the set of run-loop input modes the receiver uses for connection requests.
-func (x *Connection) RemoveRequestMode(rmode string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRequestMode:"), purego.NSString(rmode))
+func (c *Connection) RemoveRequestMode(rmode string) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("removeRequestMode:"), purego.NSString(rmode))
 }
 
 // RegisterName registers the specified service using with the default system port name server.
-func (x *Connection) RegisterName(name string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerName:"), purego.NSString(name))
+func (c *Connection) RegisterName(name string) bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("registerName:"), purego.NSString(name))
 	return _r
 }
 
 // RegisterNameWithNameServer registers a service with the specified port name server.
-func (x *Connection) RegisterNameWithNameServer(name string, server *PortNameServer) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerName:withNameServer:"), purego.NSString(name), objref.IDOf(server))
+func (c *Connection) RegisterNameWithNameServer(name string, server *PortNameServer) bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("registerName:withNameServer:"), purego.NSString(name), objref.IDOf(server))
 	return _r
 }
 
 // EnableMultipleThreads configures the receiver to allow requests from multiple threads to the remote object, without requiring each thread to each maintain its own connection.
-func (x *Connection) EnableMultipleThreads() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableMultipleThreads"))
+func (c *Connection) EnableMultipleThreads() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("enableMultipleThreads"))
 }
 
 // AddRunLoop adds the specified run loop to the list of run loops the receiver monitors and from which it responds to requests.
-func (x *Connection) AddRunLoop(runloop *RunLoop) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRunLoop:"), objref.IDOf(runloop))
+func (c *Connection) AddRunLoop(runloop *RunLoop) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("addRunLoop:"), objref.IDOf(runloop))
 }
 
 // RemoveRunLoop removes a given NSRunLoop object from the list of run loops the receiver monitors and from which it responds to requests.
-func (x *Connection) RemoveRunLoop(runloop *RunLoop) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeRunLoop:"), objref.IDOf(runloop))
+func (c *Connection) RemoveRunLoop(runloop *RunLoop) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("removeRunLoop:"), objref.IDOf(runloop))
 }
 
 // RunInNewThread creates and starts a new NSThread object and then runs the receiving connection in the new thread.
-func (x *Connection) RunInNewThread() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runInNewThread"))
+func (c *Connection) RunInNewThread() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("runInNewThread"))
 }
 
 // DispatchWithComponents allows subclasses to ask a connection object to dispatch component data.
-func (x *Connection) DispatchWithComponents(components obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dispatchWithComponents:"), objref.IDOf(components))
+func (c *Connection) DispatchWithComponents(components obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("dispatchWithComponents:"), objref.IDOf(components))
 }
 
 // Statistics wraps the corresponding Objective-C method.
-func (x *Connection) Statistics() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statistics"))
+func (c *Connection) Statistics() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("statistics"))
 	return obj.Wrap(_r)
 }
 
 // RequestTimeout wraps the corresponding Objective-C method.
-func (x *Connection) RequestTimeout() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("requestTimeout"))
+func (c *Connection) RequestTimeout() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("requestTimeout"))
 	return _r
-}
-
-// SetRequestTimeout wraps the corresponding Objective-C method.
-func (x *Connection) SetRequestTimeout(requestTimeout float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestTimeout:"), requestTimeout)
 }
 
 // ReplyTimeout wraps the corresponding Objective-C method.
-func (x *Connection) ReplyTimeout() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("replyTimeout"))
+func (c *Connection) ReplyTimeout() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("replyTimeout"))
 	return _r
-}
-
-// SetReplyTimeout wraps the corresponding Objective-C method.
-func (x *Connection) SetReplyTimeout(replyTimeout float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplyTimeout:"), replyTimeout)
 }
 
 // RootObject wraps the corresponding Objective-C method.
-func (x *Connection) RootObject() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootObject"))
+func (c *Connection) RootObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("rootObject"))
 	return obj.Wrap(_r)
 }
 
-// SetRootObject wraps the corresponding Objective-C method.
-func (x *Connection) SetRootObject(rootObject obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootObject:"), objref.IDOf(rootObject))
-}
-
 // IndependentConversationQueueing wraps the corresponding Objective-C method.
-func (x *Connection) IndependentConversationQueueing() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("independentConversationQueueing"))
+func (c *Connection) IndependentConversationQueueing() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("independentConversationQueueing"))
 	return _r
 }
 
-// SetIndependentConversationQueueing wraps the corresponding Objective-C method.
-func (x *Connection) SetIndependentConversationQueueing(independentConversationQueueing bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIndependentConversationQueueing:"), independentConversationQueueing)
-}
-
 // IsValid wraps the corresponding Objective-C method.
-func (x *Connection) IsValid() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isValid"))
+func (c *Connection) IsValid() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isValid"))
 	return _r
 }
 
 // RootProxy wraps the corresponding Objective-C method.
-func (x *Connection) RootProxy() *DistantObject {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootProxy"))
+func (c *Connection) RootProxy() *DistantObject {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("rootProxy"))
 	return DistantObjectFromID(_r)
 }
 
 // RequestModes wraps the corresponding Objective-C method.
 //
 // RequestModes returns the collection as a Go slice.
-func (x *Connection) RequestModes() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestModes"))
+func (c *Connection) RequestModes() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("requestModes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // SendPort wraps the corresponding Objective-C method.
-func (x *Connection) SendPort() *Port {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendPort"))
+func (c *Connection) SendPort() *Port {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("sendPort"))
 	return PortFromID(_r)
 }
 
 // ReceivePort wraps the corresponding Objective-C method.
-func (x *Connection) ReceivePort() *Port {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("receivePort"))
+func (c *Connection) ReceivePort() *Port {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("receivePort"))
 	return PortFromID(_r)
 }
 
 // MultipleThreadsEnabled wraps the corresponding Objective-C method.
-func (x *Connection) MultipleThreadsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("multipleThreadsEnabled"))
+func (c *Connection) MultipleThreadsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("multipleThreadsEnabled"))
 	return _r
 }
 
 // RemoteObjects wraps the corresponding Objective-C method.
-func (x *Connection) RemoteObjects() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remoteObjects"))
+func (c *Connection) RemoteObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("remoteObjects"))
 	return obj.Wrap(_r)
 }
 
 // LocalObjects wraps the corresponding Objective-C method.
-func (x *Connection) LocalObjects() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localObjects"))
+func (c *Connection) LocalObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("localObjects"))
 	return obj.Wrap(_r)
 }
-
-// Connectionable is the interface implemented by [Connection], for mocking and DI.
-type Connectionable interface {
-	obj.Object
-	WithRequestTimeout(requestTimeout float64) *Connection
-	WithReplyTimeout(replyTimeout float64) *Connection
-	WithRootObject(rootObject obj.Object) *Connection
-	WithIndependentConversationQueueing(independentConversationQueueing bool) *Connection
-	WithScriptingProperties(scriptingProperties obj.Object) *Connection
-	Invalidate()
-	AddRequestMode(rmode string)
-	RemoveRequestMode(rmode string)
-	RegisterName(name string) bool
-	RegisterNameWithNameServer(name string, server *PortNameServer) bool
-	EnableMultipleThreads()
-	AddRunLoop(runloop *RunLoop)
-	RemoveRunLoop(runloop *RunLoop)
-	RunInNewThread()
-	DispatchWithComponents(components obj.Object)
-	Statistics() obj.Object
-	RequestTimeout() float64
-	SetRequestTimeout(requestTimeout float64)
-	ReplyTimeout() float64
-	SetReplyTimeout(replyTimeout float64)
-	RootObject() obj.Object
-	SetRootObject(rootObject obj.Object)
-	IndependentConversationQueueing() bool
-	SetIndependentConversationQueueing(independentConversationQueueing bool)
-	IsValid() bool
-	RootProxy() *DistantObject
-	RequestModes() []string
-	SendPort() *Port
-	ReceivePort() *Port
-	MultipleThreadsEnabled() bool
-	RemoteObjects() obj.Object
-	LocalObjects() obj.Object
-}
-
-var _ Connectionable = (*Connection)(nil)

@@ -54,66 +54,51 @@ func NewInvocationOperationWithInvocation(inv *Invocation) *InvocationOperation 
 }
 
 // WithQueuePriority sets the property and returns the receiver so calls can be chained.
-func (x *InvocationOperation) WithQueuePriority(queuePriority OperationQueuePriority) *InvocationOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueuePriority:"), queuePriority)
-	return x
+func (io *InvocationOperation) WithQueuePriority(queuePriority OperationQueuePriority) *InvocationOperation {
+	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setQueuePriority:"), queuePriority)
+	return io
 }
 
 // WithCompletionBlock sets the property and returns the receiver so calls can be chained.
-func (x *InvocationOperation) WithCompletionBlock(completionBlock func()) *InvocationOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletionBlock:"), objc.NewBlock(func(_ objc.Block) { completionBlock() }))
-	return x
+func (io *InvocationOperation) WithCompletionBlock(completionBlock func()) *InvocationOperation {
+	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setCompletionBlock:"), objc.NewBlock(func(_ objc.Block) { completionBlock() }))
+	return io
 }
 
 // WithThreadPriority sets the property and returns the receiver so calls can be chained.
-func (x *InvocationOperation) WithThreadPriority(threadPriority float64) *InvocationOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadPriority:"), threadPriority)
-	return x
+func (io *InvocationOperation) WithThreadPriority(threadPriority float64) *InvocationOperation {
+	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setThreadPriority:"), threadPriority)
+	return io
 }
 
 // WithQualityOfService sets the property and returns the receiver so calls can be chained.
-func (x *InvocationOperation) WithQualityOfService(qualityOfService QualityOfService) *InvocationOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
-	return x
+func (io *InvocationOperation) WithQualityOfService(qualityOfService QualityOfService) *InvocationOperation {
+	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setQualityOfService:"), qualityOfService)
+	return io
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *InvocationOperation) WithName(name StringProvider) *InvocationOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
-	return x
+func (io *InvocationOperation) WithName(name StringProvider) *InvocationOperation {
+	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setName:"), objref.IDOf(name))
+	return io
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *InvocationOperation) WithScriptingProperties(scriptingProperties obj.Object) *InvocationOperation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (io *InvocationOperation) WithScriptingProperties(scriptingProperties obj.Object) *InvocationOperation {
+	objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return io
 }
 
 // Invocation wraps the corresponding Objective-C method.
-func (x *InvocationOperation) Invocation() *Invocation {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invocation"))
+func (io *InvocationOperation) Invocation() *Invocation {
+	_r := objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("invocation"))
 	return InvocationFromID(_r)
 }
 
 // Result wraps the corresponding Objective-C method.
-func (x *InvocationOperation) Result() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("result"))
+func (io *InvocationOperation) Result() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(io), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
-
-// InvocationOperationable is the interface implemented by [InvocationOperation], for mocking and DI.
-type InvocationOperationable interface {
-	obj.Object
-	WithQueuePriority(queuePriority OperationQueuePriority) *InvocationOperation
-	WithCompletionBlock(completionBlock func()) *InvocationOperation
-	WithThreadPriority(threadPriority float64) *InvocationOperation
-	WithQualityOfService(qualityOfService QualityOfService) *InvocationOperation
-	WithName(name StringProvider) *InvocationOperation
-	WithScriptingProperties(scriptingProperties obj.Object) *InvocationOperation
-	Invocation() *Invocation
-	Result() obj.Object
-}
-
-var _ InvocationOperationable = (*InvocationOperation)(nil)
 
 var _ OperationProvider = (*InvocationOperation)(nil)

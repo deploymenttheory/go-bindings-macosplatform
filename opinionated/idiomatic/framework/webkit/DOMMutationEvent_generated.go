@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -59,20 +58,20 @@ func NewDOMMutationEventMutationEvent(type_ string, canBubble bool, cancelable b
 }
 
 // WithReturnValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMMutationEvent) WithReturnValue(returnValue bool) *DOMMutationEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
-	return x
+func (dme *DOMMutationEvent) WithReturnValue(returnValue bool) *DOMMutationEvent {
+	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setReturnValue:"), returnValue)
+	return dme
 }
 
 // WithCancelBubble sets the property and returns the receiver so calls can be chained.
-func (x *DOMMutationEvent) WithCancelBubble(cancelBubble bool) *DOMMutationEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
-	return x
+func (dme *DOMMutationEvent) WithCancelBubble(cancelBubble bool) *DOMMutationEvent {
+	objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("setCancelBubble:"), cancelBubble)
+	return dme
 }
 
 // NewValue wraps the corresponding Objective-C method.
-func (x *DOMMutationEvent) NewValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("newValue"))
+func (dme *DOMMutationEvent) NewValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("newValue"))
 	if _r == 0 {
 		return ""
 	}
@@ -80,14 +79,14 @@ func (x *DOMMutationEvent) NewValue() string {
 }
 
 // RelatedNode wraps the corresponding Objective-C method.
-func (x *DOMMutationEvent) RelatedNode() *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relatedNode"))
+func (dme *DOMMutationEvent) RelatedNode() *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("relatedNode"))
 	return DOMNodeFromID(_r)
 }
 
 // PrevValue wraps the corresponding Objective-C method.
-func (x *DOMMutationEvent) PrevValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prevValue"))
+func (dme *DOMMutationEvent) PrevValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("prevValue"))
 	if _r == 0 {
 		return ""
 	}
@@ -95,8 +94,8 @@ func (x *DOMMutationEvent) PrevValue() string {
 }
 
 // AttrName wraps the corresponding Objective-C method.
-func (x *DOMMutationEvent) AttrName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attrName"))
+func (dme *DOMMutationEvent) AttrName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dme), objc.RegisterName("attrName"))
 	if _r == 0 {
 		return ""
 	}
@@ -104,24 +103,10 @@ func (x *DOMMutationEvent) AttrName() string {
 }
 
 // AttrChange wraps the corresponding Objective-C method.
-func (x *DOMMutationEvent) AttrChange() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("attrChange"))
+func (dme *DOMMutationEvent) AttrChange() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(dme), objc.RegisterName("attrChange"))
 	return _r
 }
-
-// DOMMutationEventable is the interface implemented by [DOMMutationEvent], for mocking and DI.
-type DOMMutationEventable interface {
-	obj.Object
-	WithReturnValue(returnValue bool) *DOMMutationEvent
-	WithCancelBubble(cancelBubble bool) *DOMMutationEvent
-	NewValue() string
-	RelatedNode() *DOMNode
-	PrevValue() string
-	AttrName() string
-	AttrChange() uint16
-}
-
-var _ DOMMutationEventable = (*DOMMutationEvent)(nil)
 
 var _ DOMEventProvider = (*DOMMutationEvent)(nil)
 

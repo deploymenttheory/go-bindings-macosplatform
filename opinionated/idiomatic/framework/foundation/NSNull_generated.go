@@ -46,24 +46,24 @@ func nullAdopt(id objc.ID) *Null {
 }
 
 // Description returns the object's -description text.
-func (x *Null) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (n *Null) Description() string {
+	return rt.Description(objref.IDOf(n))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Null) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (n *Null) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(n), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Null) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (n *Null) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(n), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Null) String() string {
-	return rt.Description(objref.IDOf(x))
+func (n *Null) String() string {
+	return rt.Description(objref.IDOf(n))
 }
 
 // NewNull creates a new Null.
@@ -73,15 +73,7 @@ func NewNull() *Null {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Null) WithScriptingProperties(scriptingProperties obj.Object) *Null {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (n *Null) WithScriptingProperties(scriptingProperties obj.Object) *Null {
+	objc.Send[objc.ID](objref.IDOf(n), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return n
 }
-
-// Nullable is the interface implemented by [Null], for mocking and DI.
-type Nullable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Null
-}
-
-var _ Nullable = (*Null)(nil)

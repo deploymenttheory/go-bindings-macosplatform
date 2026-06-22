@@ -46,24 +46,24 @@ func containerAdopt(id objc.ID) *Container {
 }
 
 // Description returns the object's -description text.
-func (x *Container) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Container) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Container) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Container) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Container) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Container) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Container) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Container) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewContainer creates a new Container.
@@ -72,9 +72,9 @@ func NewContainer() *Container {
 	return containerAdopt(_id)
 }
 
-// Identifier the identifier is unique among containers on the device. It can be saved and used for fetching containers next application launch.
-func (x *Container) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns the identifier is unique among containers on the device. It can be saved and used for fetching containers next application launch.
+func (c *Container) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,8 +82,8 @@ func (x *Container) Identifier() string {
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Container) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (c *Container) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -91,17 +91,7 @@ func (x *Container) Name() string {
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *Container) Type() ContainerType {
-	_r := objc.Send[ContainerType](objref.IDOf(x), objc.RegisterName("type"))
+func (c *Container) Type() ContainerType {
+	_r := objc.Send[ContainerType](objref.IDOf(c), objc.RegisterName("type"))
 	return _r
 }
-
-// Containerable is the interface implemented by [Container], for mocking and DI.
-type Containerable interface {
-	obj.Object
-	Identifier() string
-	Name() string
-	Type() ContainerType
-}
-
-var _ Containerable = (*Container)(nil)

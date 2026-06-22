@@ -83,45 +83,34 @@ func NewTargetedImageRequestWithTargetedCMSampleBufferOptions(sampleBuffer obj.O
 	return targetedImageRequestAdopt(_id)
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *TargetedImageRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TargetedImageRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (tir *TargetedImageRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TargetedImageRequest {
+	objc.Send[objc.ID](objref.IDOf(tir), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return tir
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *TargetedImageRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TargetedImageRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (tir *TargetedImageRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TargetedImageRequest {
+	objc.Send[objc.ID](objref.IDOf(tir), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return tir
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *TargetedImageRequest) WithUsesCPUOnly(usesCPUOnly bool) *TargetedImageRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (tir *TargetedImageRequest) WithUsesCPUOnly(usesCPUOnly bool) *TargetedImageRequest {
+	objc.Send[objc.ID](objref.IDOf(tir), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return tir
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *TargetedImageRequest) WithRevision(revision int) *TargetedImageRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (tir *TargetedImageRequest) WithRevision(revision int) *TargetedImageRequest {
+	objc.Send[objc.ID](objref.IDOf(tir), objc.RegisterName("setRevision:"), revision)
+	return tir
 }
-
-// TargetedImageRequestable is the interface implemented by [TargetedImageRequest], for mocking and DI.
-type TargetedImageRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TargetedImageRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TargetedImageRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *TargetedImageRequest
-	WithRevision(revision int) *TargetedImageRequest
-}
-
-var _ TargetedImageRequestable = (*TargetedImageRequest)(nil)
 
 // isTargetedImageRequest marks TargetedImageRequest — and, by embedding promotion, its
 // subclasses — as a member of the TargetedImageRequest hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *TargetedImageRequest) isTargetedImageRequest() {}
+func (tir *TargetedImageRequest) isTargetedImageRequest() {}
 
 var _ TargetedImageRequestProvider = (*TargetedImageRequest)(nil)
 

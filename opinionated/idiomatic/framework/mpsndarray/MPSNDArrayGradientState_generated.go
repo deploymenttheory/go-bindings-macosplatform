@@ -46,36 +46,29 @@ func arrayGradientStateAdopt(id objc.ID) *ArrayGradientState {
 }
 
 // Description returns the object's -description text.
-func (x *ArrayGradientState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ags *ArrayGradientState) Description() string {
+	return rt.Description(objref.IDOf(ags))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ArrayGradientState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ags *ArrayGradientState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ags), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ArrayGradientState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ags *ArrayGradientState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ags), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ArrayGradientState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ags *ArrayGradientState) String() string {
+	return rt.Description(objref.IDOf(ags))
 }
-
-// ArrayGradientStateable is the interface implemented by [ArrayGradientState], for mocking and DI.
-type ArrayGradientStateable interface {
-	obj.Object
-}
-
-var _ ArrayGradientStateable = (*ArrayGradientState)(nil)
 
 // isArrayGradientState marks ArrayGradientState — and, by embedding promotion, its
 // subclasses — as a member of the ArrayGradientState hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ArrayGradientState) isArrayGradientState() {}
+func (ags *ArrayGradientState) isArrayGradientState() {}
 
 var _ ArrayGradientStateProvider = (*ArrayGradientState)(nil)

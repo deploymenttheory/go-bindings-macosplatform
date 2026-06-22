@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,88 +49,70 @@ func NewCNNDepthWiseConvolutionDescriptor() *CNNDepthWiseConvolutionDescriptor {
 	return cNNDepthWiseConvolutionDescriptorAdopt(_id)
 }
 
-// WithKernelWidth the width of the filter window.  The default value is 3. Any positive non-zero value is valid, including even values. The position of the left edge of the filter window is given by offset.x - (kernelWidth>>1)
-func (x *CNNDepthWiseConvolutionDescriptor) WithKernelWidth(kernelWidth int) *CNNDepthWiseConvolutionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
-	return x
+// WithKernelWidth sets the width of the filter window.  The default value is 3. Any positive non-zero value is valid, including even values. The position of the left edge of the filter window is given by offset.x - (kernelWidth>>1)
+func (cdwcd *CNNDepthWiseConvolutionDescriptor) WithKernelWidth(kernelWidth int) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cdwcd), objc.RegisterName("setKernelWidth:"), kernelWidth)
+	return cdwcd
 }
 
-// WithKernelHeight the height of the filter window.  The default value is 3. Any positive non-zero value is valid, including even values. The position of the top edge of the filter window is given by offset.y - (kernelHeight>>1)
-func (x *CNNDepthWiseConvolutionDescriptor) WithKernelHeight(kernelHeight int) *CNNDepthWiseConvolutionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
-	return x
+// WithKernelHeight sets the height of the filter window.  The default value is 3. Any positive non-zero value is valid, including even values. The position of the top edge of the filter window is given by offset.y - (kernelHeight>>1)
+func (cdwcd *CNNDepthWiseConvolutionDescriptor) WithKernelHeight(kernelHeight int) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cdwcd), objc.RegisterName("setKernelHeight:"), kernelHeight)
+	return cdwcd
 }
 
-// WithInputFeatureChannels the number of feature channels per pixel in the input image.
-func (x *CNNDepthWiseConvolutionDescriptor) WithInputFeatureChannels(inputFeatureChannels int) *CNNDepthWiseConvolutionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
-	return x
+// WithInputFeatureChannels sets the number of feature channels per pixel in the input image.
+func (cdwcd *CNNDepthWiseConvolutionDescriptor) WithInputFeatureChannels(inputFeatureChannels int) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cdwcd), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
+	return cdwcd
 }
 
-// WithOutputFeatureChannels the number of feature channels per pixel in the output image.
-func (x *CNNDepthWiseConvolutionDescriptor) WithOutputFeatureChannels(outputFeatureChannels int) *CNNDepthWiseConvolutionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
-	return x
+// WithOutputFeatureChannels sets the number of feature channels per pixel in the output image.
+func (cdwcd *CNNDepthWiseConvolutionDescriptor) WithOutputFeatureChannels(outputFeatureChannels int) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cdwcd), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
+	return cdwcd
 }
 
-// WithStrideInPixelsX the output stride (downsampling factor) in the x dimension. The default value is 1.
-func (x *CNNDepthWiseConvolutionDescriptor) WithStrideInPixelsX(strideInPixelsX int) *CNNDepthWiseConvolutionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInPixelsX:"), strideInPixelsX)
-	return x
+// WithStrideInPixelsX sets the output stride (downsampling factor) in the x dimension. The default value is 1.
+func (cdwcd *CNNDepthWiseConvolutionDescriptor) WithStrideInPixelsX(strideInPixelsX int) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cdwcd), objc.RegisterName("setStrideInPixelsX:"), strideInPixelsX)
+	return cdwcd
 }
 
-// WithStrideInPixelsY the output stride (downsampling factor) in the y dimension. The default value is 1.
-func (x *CNNDepthWiseConvolutionDescriptor) WithStrideInPixelsY(strideInPixelsY int) *CNNDepthWiseConvolutionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInPixelsY:"), strideInPixelsY)
-	return x
+// WithStrideInPixelsY sets the output stride (downsampling factor) in the y dimension. The default value is 1.
+func (cdwcd *CNNDepthWiseConvolutionDescriptor) WithStrideInPixelsY(strideInPixelsY int) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cdwcd), objc.RegisterName("setStrideInPixelsY:"), strideInPixelsY)
+	return cdwcd
 }
 
-// WithGroups number of groups input and output channels are divided into. The default value is 1. Groups lets you reduce the parameterization. If groups is set to n, input is divided into n groups with inputFeatureChannels/n channels in each group. Similarly output is divided into n groups with outputFeatureChannels/n channels in each group. ith group in input is only connected to ith group in output so number of weights (parameters) needed is reduced by factor of n. Both inputFeatureChannels and outputFeatureChannels must be divisible by n and number of channels in each group must be multiple of 4.
-func (x *CNNDepthWiseConvolutionDescriptor) WithGroups(groups int) *CNNDepthWiseConvolutionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroups:"), groups)
-	return x
+// WithGroups sets number of groups input and output channels are divided into. The default value is 1. Groups lets you reduce the parameterization. If groups is set to n, input is divided into n groups with inputFeatureChannels/n channels in each group. Similarly output is divided into n groups with outputFeatureChannels/n channels in each group. ith group in input is only connected to ith group in output so number of weights (parameters) needed is reduced by factor of n. Both inputFeatureChannels and outputFeatureChannels must be divisible by n and number of channels in each group must be multiple of 4.
+func (cdwcd *CNNDepthWiseConvolutionDescriptor) WithGroups(groups int) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cdwcd), objc.RegisterName("setGroups:"), groups)
+	return cdwcd
 }
 
-// WithDilationRateX dilationRateX property can be used to implement dilated convolution as described in https://arxiv.org/pdf/1511.07122v3.pdf to aggregate global information in dense prediction problems. Default value is 1. When set to value > 1, original kernel width, kW is dilated to kW_Dilated = (kW-1)*dilationRateX + 1 by inserting d-1 zeros between consecutive entries in each row of the original kernel. The kernel is centered based on kW_Dilated.
-func (x *CNNDepthWiseConvolutionDescriptor) WithDilationRateX(dilationRateX int) *CNNDepthWiseConvolutionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateX:"), dilationRateX)
-	return x
+// WithDilationRateX sets dilationRateX property can be used to implement dilated convolution as described in https://arxiv.org/pdf/1511.07122v3.pdf to aggregate global information in dense prediction problems. Default value is 1. When set to value > 1, original kernel width, kW is dilated to kW_Dilated = (kW-1)*dilationRateX + 1 by inserting d-1 zeros between consecutive entries in each row of the original kernel. The kernel is centered based on kW_Dilated.
+func (cdwcd *CNNDepthWiseConvolutionDescriptor) WithDilationRateX(dilationRateX int) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cdwcd), objc.RegisterName("setDilationRateX:"), dilationRateX)
+	return cdwcd
 }
 
-// WithDilationRateY dilationRateY property can be used to implement dilated convolution as described in https://arxiv.org/pdf/1511.07122v3.pdf to aggregate global information in dense prediction problems. Default value is 1. When set to value > 1, original kernel height, kH is dilated to kH_Dilated = (kH-1)*dilationRateY + 1 by inserting d-1 rows of zeros between consecutive row of the original kernel. The kernel is centered based on kH_Dilated.
-func (x *CNNDepthWiseConvolutionDescriptor) WithDilationRateY(dilationRateY int) *CNNDepthWiseConvolutionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateY:"), dilationRateY)
-	return x
+// WithDilationRateY sets dilationRateY property can be used to implement dilated convolution as described in https://arxiv.org/pdf/1511.07122v3.pdf to aggregate global information in dense prediction problems. Default value is 1. When set to value > 1, original kernel height, kH is dilated to kH_Dilated = (kH-1)*dilationRateY + 1 by inserting d-1 rows of zeros between consecutive row of the original kernel. The kernel is centered based on kH_Dilated.
+func (cdwcd *CNNDepthWiseConvolutionDescriptor) WithDilationRateY(dilationRateY int) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cdwcd), objc.RegisterName("setDilationRateY:"), dilationRateY)
+	return cdwcd
 }
 
-// WithFusedNeuronDescriptor this mathod can be used to add a neuron activation funtion of given type with associated scalar parameters A and B that are shared across all output channels. Neuron activation fucntion is applied to output of convolution. This is a per-pixel operation that is fused with convolution kernel itself for best performance. Note that this method can only be used to fuse neuron of kind for which parameters A and B are shared across all channels of convoution output. It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. For those kind of neuron activation functions, use appropriate setter functions. Default is descriptor with neuronType MPSCNNNeuronTypeNone. Note: in certain cases the neuron descriptor will be cached by the MPSNNGraph or the MPSCNNConvolution. If the neuron type changes after either is made, behavior is undefined.
-func (x *CNNDepthWiseConvolutionDescriptor) WithFusedNeuronDescriptor(fusedNeuronDescriptor *NNNeuronDescriptor) *CNNDepthWiseConvolutionDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFusedNeuronDescriptor:"), objref.IDOf(fusedNeuronDescriptor))
-	return x
+// WithFusedNeuronDescriptor sets this mathod can be used to add a neuron activation funtion of given type with associated scalar parameters A and B that are shared across all output channels. Neuron activation fucntion is applied to output of convolution. This is a per-pixel operation that is fused with convolution kernel itself for best performance. Note that this method can only be used to fuse neuron of kind for which parameters A and B are shared across all channels of convoution output. It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. For those kind of neuron activation functions, use appropriate setter functions. Default is descriptor with neuronType MPSCNNNeuronTypeNone. Note: in certain cases the neuron descriptor will be cached by the MPSNNGraph or the MPSCNNConvolution. If the neuron type changes after either is made, behavior is undefined.
+func (cdwcd *CNNDepthWiseConvolutionDescriptor) WithFusedNeuronDescriptor(fusedNeuronDescriptor *NNNeuronDescriptor) *CNNDepthWiseConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(cdwcd), objc.RegisterName("setFusedNeuronDescriptor:"), objref.IDOf(fusedNeuronDescriptor))
+	return cdwcd
 }
 
-// ChannelMultiplier ratio of outputFeactureChannel to inputFeatureChannels for depthwise convolution i.e. how many output feature channels are produced by each input channel.
-func (x *CNNDepthWiseConvolutionDescriptor) ChannelMultiplier() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("channelMultiplier"))
+// ChannelMultiplier returns ratio of outputFeactureChannel to inputFeatureChannels for depthwise convolution i.e. how many output feature channels are produced by each input channel.
+func (cdwcd *CNNDepthWiseConvolutionDescriptor) ChannelMultiplier() int {
+	_r := objc.Send[int](objref.IDOf(cdwcd), objc.RegisterName("channelMultiplier"))
 	return _r
 }
-
-// CNNDepthWiseConvolutionDescriptorable is the interface implemented by [CNNDepthWiseConvolutionDescriptor], for mocking and DI.
-type CNNDepthWiseConvolutionDescriptorable interface {
-	obj.Object
-	WithKernelWidth(kernelWidth int) *CNNDepthWiseConvolutionDescriptor
-	WithKernelHeight(kernelHeight int) *CNNDepthWiseConvolutionDescriptor
-	WithInputFeatureChannels(inputFeatureChannels int) *CNNDepthWiseConvolutionDescriptor
-	WithOutputFeatureChannels(outputFeatureChannels int) *CNNDepthWiseConvolutionDescriptor
-	WithStrideInPixelsX(strideInPixelsX int) *CNNDepthWiseConvolutionDescriptor
-	WithStrideInPixelsY(strideInPixelsY int) *CNNDepthWiseConvolutionDescriptor
-	WithGroups(groups int) *CNNDepthWiseConvolutionDescriptor
-	WithDilationRateX(dilationRateX int) *CNNDepthWiseConvolutionDescriptor
-	WithDilationRateY(dilationRateY int) *CNNDepthWiseConvolutionDescriptor
-	WithFusedNeuronDescriptor(fusedNeuronDescriptor *NNNeuronDescriptor) *CNNDepthWiseConvolutionDescriptor
-	ChannelMultiplier() int
-}
-
-var _ CNNDepthWiseConvolutionDescriptorable = (*CNNDepthWiseConvolutionDescriptor)(nil)
 
 var _ CNNConvolutionDescriptorProvider = (*CNNDepthWiseConvolutionDescriptor)(nil)

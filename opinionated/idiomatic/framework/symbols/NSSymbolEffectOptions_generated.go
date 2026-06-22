@@ -46,24 +46,24 @@ func symbolEffectOptionsAdopt(id objc.ID) *SymbolEffectOptions {
 }
 
 // Description returns the object's -description text.
-func (x *SymbolEffectOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (seo *SymbolEffectOptions) Description() string {
+	return rt.Description(objref.IDOf(seo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SymbolEffectOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (seo *SymbolEffectOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(seo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SymbolEffectOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (seo *SymbolEffectOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(seo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SymbolEffectOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (seo *SymbolEffectOptions) String() string {
+	return rt.Description(objref.IDOf(seo))
 }
 
 // NewSymbolEffectOptions creates a new SymbolEffectOptions.
@@ -72,44 +72,32 @@ func NewSymbolEffectOptions() *SymbolEffectOptions {
 	return symbolEffectOptionsAdopt(_id)
 }
 
-// OptionsWithRepeating a set of effect options that prefers to repeat indefinitely.
-func (x *SymbolEffectOptions) OptionsWithRepeating() *SymbolEffectOptions {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsWithRepeating"))
+// OptionsWithRepeating returns a set of effect options that prefers to repeat indefinitely.
+func (seo *SymbolEffectOptions) OptionsWithRepeating() *SymbolEffectOptions {
+	_r := objc.Send[objc.ID](objref.IDOf(seo), objc.RegisterName("optionsWithRepeating"))
 	return SymbolEffectOptionsFromID(_r)
 }
 
-// OptionsWithNonRepeating a set of effect options that prefers to not repeat.
-func (x *SymbolEffectOptions) OptionsWithNonRepeating() *SymbolEffectOptions {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsWithNonRepeating"))
+// OptionsWithNonRepeating returns a set of effect options that prefers to not repeat.
+func (seo *SymbolEffectOptions) OptionsWithNonRepeating() *SymbolEffectOptions {
+	_r := objc.Send[objc.ID](objref.IDOf(seo), objc.RegisterName("optionsWithNonRepeating"))
 	return SymbolEffectOptionsFromID(_r)
 }
 
 // OptionsWithRepeatCount creates a set of effect options with a preferred repeat count.
-func (x *SymbolEffectOptions) OptionsWithRepeatCount(count int) *SymbolEffectOptions {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsWithRepeatCount:"), count)
+func (seo *SymbolEffectOptions) OptionsWithRepeatCount(count int) *SymbolEffectOptions {
+	_r := objc.Send[objc.ID](objref.IDOf(seo), objc.RegisterName("optionsWithRepeatCount:"), count)
 	return SymbolEffectOptionsFromID(_r)
 }
 
 // OptionsWithSpeed creates a set of effect options with a preferred speed multiplier.
-func (x *SymbolEffectOptions) OptionsWithSpeed(speed float64) *SymbolEffectOptions {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsWithSpeed:"), speed)
+func (seo *SymbolEffectOptions) OptionsWithSpeed(speed float64) *SymbolEffectOptions {
+	_r := objc.Send[objc.ID](objref.IDOf(seo), objc.RegisterName("optionsWithSpeed:"), speed)
 	return SymbolEffectOptionsFromID(_r)
 }
 
 // OptionsWithRepeatBehavior return a copy of the options setting a preferred repeat behavior.
-func (x *SymbolEffectOptions) OptionsWithRepeatBehavior(behavior *SymbolEffectOptionsRepeatBehavior) *SymbolEffectOptions {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsWithRepeatBehavior:"), objref.IDOf(behavior))
+func (seo *SymbolEffectOptions) OptionsWithRepeatBehavior(behavior *SymbolEffectOptionsRepeatBehavior) *SymbolEffectOptions {
+	_r := objc.Send[objc.ID](objref.IDOf(seo), objc.RegisterName("optionsWithRepeatBehavior:"), objref.IDOf(behavior))
 	return SymbolEffectOptionsFromID(_r)
 }
-
-// SymbolEffectOptionsable is the interface implemented by [SymbolEffectOptions], for mocking and DI.
-type SymbolEffectOptionsable interface {
-	obj.Object
-	OptionsWithRepeating() *SymbolEffectOptions
-	OptionsWithNonRepeating() *SymbolEffectOptions
-	OptionsWithRepeatCount(count int) *SymbolEffectOptions
-	OptionsWithSpeed(speed float64) *SymbolEffectOptions
-	OptionsWithRepeatBehavior(behavior *SymbolEffectOptionsRepeatBehavior) *SymbolEffectOptions
-}
-
-var _ SymbolEffectOptionsable = (*SymbolEffectOptions)(nil)

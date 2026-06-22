@@ -53,123 +53,90 @@ func NewCircleRendererWithCircle(circle *Circle) *CircleRenderer {
 	return circleRendererAdopt(_id)
 }
 
-// WithStrokeStart the unit distance along the circle where the stroke starts.
-func (x *CircleRenderer) WithStrokeStart(strokeStart float64) *CircleRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeStart:"), strokeStart)
-	return x
+// WithStrokeStart sets the unit distance along the circle where the stroke starts.
+func (cr *CircleRenderer) WithStrokeStart(strokeStart float64) *CircleRenderer {
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setStrokeStart:"), strokeStart)
+	return cr
 }
 
-// WithStrokeEnd the unit distance along the circle where the stroke ends.
-func (x *CircleRenderer) WithStrokeEnd(strokeEnd float64) *CircleRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeEnd:"), strokeEnd)
-	return x
+// WithStrokeEnd sets the unit distance along the circle where the stroke ends.
+func (cr *CircleRenderer) WithStrokeEnd(strokeEnd float64) *CircleRenderer {
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setStrokeEnd:"), strokeEnd)
+	return cr
 }
 
-// WithFillColor the fill color to use for the path.
-func (x *CircleRenderer) WithFillColor(fillColor obj.Object) *CircleRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
-	return x
+// WithFillColor sets the fill color to use for the path.
+func (cr *CircleRenderer) WithFillColor(fillColor obj.Object) *CircleRenderer {
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
+	return cr
 }
 
-// WithStrokeColor the stroke color to use for the path.
-func (x *CircleRenderer) WithStrokeColor(strokeColor obj.Object) *CircleRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
-	return x
+// WithStrokeColor sets the stroke color to use for the path.
+func (cr *CircleRenderer) WithStrokeColor(strokeColor obj.Object) *CircleRenderer {
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
+	return cr
 }
 
-// WithLineWidth the stroke width to use for the path.
-func (x *CircleRenderer) WithLineWidth(lineWidth float64) *CircleRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
-	return x
+// WithLineWidth sets the stroke width to use for the path.
+func (cr *CircleRenderer) WithLineWidth(lineWidth float64) *CircleRenderer {
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setLineWidth:"), lineWidth)
+	return cr
 }
 
-// WithMiterLimit the limiting value that helps avoid spikes at junctions between connected line segments.
-func (x *CircleRenderer) WithMiterLimit(miterLimit float64) *CircleRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
-	return x
+// WithMiterLimit sets the limiting value that helps avoid spikes at junctions between connected line segments.
+func (cr *CircleRenderer) WithMiterLimit(miterLimit float64) *CircleRenderer {
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setMiterLimit:"), miterLimit)
+	return cr
 }
 
-// WithLineDashPhase the offset (in points) at which to start drawing the dash pattern.
-func (x *CircleRenderer) WithLineDashPhase(lineDashPhase float64) *CircleRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
-	return x
+// WithLineDashPhase sets the offset (in points) at which to start drawing the dash pattern.
+func (cr *CircleRenderer) WithLineDashPhase(lineDashPhase float64) *CircleRenderer {
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
+	return cr
 }
 
-// WithLineDashPattern an array of numbers specifying the dash pattern to use for the path.
-func (x *CircleRenderer) WithLineDashPattern(items ...obj.Object) *CircleRenderer {
+// WithLineDashPattern sets an array of numbers specifying the dash pattern to use for the path.
+func (cr *CircleRenderer) WithLineDashPattern(items ...obj.Object) *CircleRenderer {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPattern:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setLineDashPattern:"), _arr)
+	return cr
 }
 
-// WithShouldRasterize a Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
-func (x *CircleRenderer) WithShouldRasterize(shouldRasterize bool) *CircleRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
-	return x
+// WithShouldRasterize sets a Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
+func (cr *CircleRenderer) WithShouldRasterize(shouldRasterize bool) *CircleRenderer {
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	return cr
 }
 
-// WithPath the path representing the overlay’s shape.
-func (x *CircleRenderer) WithPath(path obj.Object) *CircleRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
-	return x
+// WithPath sets the path representing the overlay’s shape.
+func (cr *CircleRenderer) WithPath(path obj.Object) *CircleRenderer {
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setPath:"), objref.IDOf(path))
+	return cr
 }
 
-// WithAlpha the amount of transparency to apply to the overlay.
-func (x *CircleRenderer) WithAlpha(alpha float64) *CircleRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the amount of transparency to apply to the overlay.
+func (cr *CircleRenderer) WithAlpha(alpha float64) *CircleRenderer {
+	objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("setAlpha:"), alpha)
+	return cr
 }
 
 // Circle wraps the corresponding Objective-C method.
-func (x *CircleRenderer) Circle() *Circle {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("circle"))
+func (cr *CircleRenderer) Circle() *Circle {
+	_r := objc.Send[objc.ID](objref.IDOf(cr), objc.RegisterName("circle"))
 	return CircleFromID(_r)
 }
 
 // StrokeStart wraps the corresponding Objective-C method.
-func (x *CircleRenderer) StrokeStart() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("strokeStart"))
+func (cr *CircleRenderer) StrokeStart() float64 {
+	_r := objc.Send[float64](objref.IDOf(cr), objc.RegisterName("strokeStart"))
 	return _r
-}
-
-// SetStrokeStart wraps the corresponding Objective-C method.
-func (x *CircleRenderer) SetStrokeStart(strokeStart float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeStart:"), strokeStart)
 }
 
 // StrokeEnd wraps the corresponding Objective-C method.
-func (x *CircleRenderer) StrokeEnd() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("strokeEnd"))
+func (cr *CircleRenderer) StrokeEnd() float64 {
+	_r := objc.Send[float64](objref.IDOf(cr), objc.RegisterName("strokeEnd"))
 	return _r
 }
-
-// SetStrokeEnd wraps the corresponding Objective-C method.
-func (x *CircleRenderer) SetStrokeEnd(strokeEnd float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeEnd:"), strokeEnd)
-}
-
-// CircleRendererable is the interface implemented by [CircleRenderer], for mocking and DI.
-type CircleRendererable interface {
-	obj.Object
-	WithStrokeStart(strokeStart float64) *CircleRenderer
-	WithStrokeEnd(strokeEnd float64) *CircleRenderer
-	WithFillColor(fillColor obj.Object) *CircleRenderer
-	WithStrokeColor(strokeColor obj.Object) *CircleRenderer
-	WithLineWidth(lineWidth float64) *CircleRenderer
-	WithMiterLimit(miterLimit float64) *CircleRenderer
-	WithLineDashPhase(lineDashPhase float64) *CircleRenderer
-	WithLineDashPattern(items ...obj.Object) *CircleRenderer
-	WithShouldRasterize(shouldRasterize bool) *CircleRenderer
-	WithPath(path obj.Object) *CircleRenderer
-	WithAlpha(alpha float64) *CircleRenderer
-	Circle() *Circle
-	StrokeStart() float64
-	SetStrokeStart(strokeStart float64)
-	StrokeEnd() float64
-	SetStrokeEnd(strokeEnd float64)
-}
-
-var _ CircleRendererable = (*CircleRenderer)(nil)
 
 var _ OverlayPathRendererProvider = (*CircleRenderer)(nil)
 

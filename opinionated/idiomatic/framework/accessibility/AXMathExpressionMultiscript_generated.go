@@ -7,7 +7,6 @@ package accessibility
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,35 +51,25 @@ func NewMathExpressionMultiscriptWithBaseExpressionPrescriptExpressionsPostscrip
 }
 
 // BaseExpression wraps the corresponding Objective-C method.
-func (x *MathExpressionMultiscript) BaseExpression() *MathExpression {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseExpression"))
+func (mem *MathExpressionMultiscript) BaseExpression() *MathExpression {
+	_r := objc.Send[objc.ID](objref.IDOf(mem), objc.RegisterName("baseExpression"))
 	return MathExpressionFromID(_r)
 }
 
 // PrescriptExpressions wraps the corresponding Objective-C method.
 //
 // PrescriptExpressions returns the collection as a Go slice.
-func (x *MathExpressionMultiscript) PrescriptExpressions() []*MathExpressionSubSuperscript {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prescriptExpressions"))
+func (mem *MathExpressionMultiscript) PrescriptExpressions() []*MathExpressionSubSuperscript {
+	_arr := objc.Send[objc.ID](objref.IDOf(mem), objc.RegisterName("prescriptExpressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpressionSubSuperscript { return MathExpressionSubSuperscriptFromID(_id) })
 }
 
 // PostscriptExpressions wraps the corresponding Objective-C method.
 //
 // PostscriptExpressions returns the collection as a Go slice.
-func (x *MathExpressionMultiscript) PostscriptExpressions() []*MathExpressionSubSuperscript {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postscriptExpressions"))
+func (mem *MathExpressionMultiscript) PostscriptExpressions() []*MathExpressionSubSuperscript {
+	_arr := objc.Send[objc.ID](objref.IDOf(mem), objc.RegisterName("postscriptExpressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpressionSubSuperscript { return MathExpressionSubSuperscriptFromID(_id) })
 }
-
-// MathExpressionMultiscriptable is the interface implemented by [MathExpressionMultiscript], for mocking and DI.
-type MathExpressionMultiscriptable interface {
-	obj.Object
-	BaseExpression() *MathExpression
-	PrescriptExpressions() []*MathExpressionSubSuperscript
-	PostscriptExpressions() []*MathExpressionSubSuperscript
-}
-
-var _ MathExpressionMultiscriptable = (*MathExpressionMultiscript)(nil)
 
 var _ MathExpressionProvider = (*MathExpressionMultiscript)(nil)

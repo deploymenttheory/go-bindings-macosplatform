@@ -46,24 +46,24 @@ func jSONSerializationAdopt(id objc.ID) *JSONSerialization {
 }
 
 // Description returns the object's -description text.
-func (x *JSONSerialization) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (js *JSONSerialization) Description() string {
+	return rt.Description(objref.IDOf(js))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *JSONSerialization) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (js *JSONSerialization) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(js), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *JSONSerialization) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (js *JSONSerialization) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(js), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *JSONSerialization) String() string {
-	return rt.Description(objref.IDOf(x))
+func (js *JSONSerialization) String() string {
+	return rt.Description(objref.IDOf(js))
 }
 
 // NewJSONSerialization creates a new JSONSerialization.
@@ -73,15 +73,7 @@ func NewJSONSerialization() *JSONSerialization {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *JSONSerialization) WithScriptingProperties(scriptingProperties obj.Object) *JSONSerialization {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (js *JSONSerialization) WithScriptingProperties(scriptingProperties obj.Object) *JSONSerialization {
+	objc.Send[objc.ID](objref.IDOf(js), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return js
 }
-
-// JSONSerializationable is the interface implemented by [JSONSerialization], for mocking and DI.
-type JSONSerializationable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *JSONSerialization
-}
-
-var _ JSONSerializationable = (*JSONSerialization)(nil)

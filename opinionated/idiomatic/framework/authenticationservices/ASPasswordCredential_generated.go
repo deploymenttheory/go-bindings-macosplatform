@@ -46,24 +46,24 @@ func passwordCredentialAdopt(id objc.ID) *PasswordCredential {
 }
 
 // Description returns the object's -description text.
-func (x *PasswordCredential) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *PasswordCredential) Description() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PasswordCredential) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pc *PasswordCredential) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PasswordCredential) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pc *PasswordCredential) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PasswordCredential) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *PasswordCredential) String() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // NewPasswordCredentialWithUserPassword initializes a password credential.
@@ -73,29 +73,20 @@ func NewPasswordCredentialWithUserPassword(user string, password string) *Passwo
 	return passwordCredentialAdopt(_id)
 }
 
-// User the user name of this credential.
-func (x *PasswordCredential) User() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("user"))
+// User returns the user name of this credential.
+func (pc *PasswordCredential) User() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("user"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Password the password of this credential.
-func (x *PasswordCredential) Password() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("password"))
+// Password returns the password of this credential.
+func (pc *PasswordCredential) Password() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("password"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// PasswordCredentialable is the interface implemented by [PasswordCredential], for mocking and DI.
-type PasswordCredentialable interface {
-	obj.Object
-	User() string
-	Password() string
-}
-
-var _ PasswordCredentialable = (*PasswordCredential)(nil)

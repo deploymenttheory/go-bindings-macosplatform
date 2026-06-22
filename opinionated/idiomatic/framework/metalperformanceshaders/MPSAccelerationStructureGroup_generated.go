@@ -46,24 +46,24 @@ func accelerationStructureGroupAdopt(id objc.ID) *AccelerationStructureGroup {
 }
 
 // Description returns the object's -description text.
-func (x *AccelerationStructureGroup) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (asg *AccelerationStructureGroup) Description() string {
+	return rt.Description(objref.IDOf(asg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccelerationStructureGroup) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (asg *AccelerationStructureGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(asg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccelerationStructureGroup) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (asg *AccelerationStructureGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(asg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AccelerationStructureGroup) String() string {
-	return rt.Description(objref.IDOf(x))
+func (asg *AccelerationStructureGroup) String() string {
+	return rt.Description(objref.IDOf(asg))
 }
 
 // NewAccelerationStructureGroup creates a new AccelerationStructureGroup.
@@ -71,10 +71,3 @@ func NewAccelerationStructureGroup() *AccelerationStructureGroup {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSAccelerationStructureGroup")), objc.RegisterName("new"))
 	return accelerationStructureGroupAdopt(_id)
 }
-
-// AccelerationStructureGroupable is the interface implemented by [AccelerationStructureGroup], for mocking and DI.
-type AccelerationStructureGroupable interface {
-	obj.Object
-}
-
-var _ AccelerationStructureGroupable = (*AccelerationStructureGroup)(nil)

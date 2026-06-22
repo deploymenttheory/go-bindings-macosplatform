@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,59 +52,45 @@ func NewPointerType() *PointerType {
 }
 
 // ElementStructType provides a description of the underlying struct when the pointer points to a struct.
-func (x *PointerType) ElementStructType() *StructType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementStructType"))
+func (pt *PointerType) ElementStructType() *StructType {
+	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("elementStructType"))
 	return StructTypeFromID(_r)
 }
 
 // ElementArrayType provides a description of the underlying array when the pointer points to an array.
-func (x *PointerType) ElementArrayType() *ArrayType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementArrayType"))
+func (pt *PointerType) ElementArrayType() *ArrayType {
+	_r := objc.Send[objc.ID](objref.IDOf(pt), objc.RegisterName("elementArrayType"))
 	return ArrayTypeFromID(_r)
 }
 
 // ElementType wraps the corresponding Objective-C method.
-func (x *PointerType) ElementType() DataType {
-	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("elementType"))
+func (pt *PointerType) ElementType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(pt), objc.RegisterName("elementType"))
 	return _r
 }
 
 // Access wraps the corresponding Objective-C method.
-func (x *PointerType) Access() BindingAccess {
-	_r := objc.Send[BindingAccess](objref.IDOf(x), objc.RegisterName("access"))
+func (pt *PointerType) Access() BindingAccess {
+	_r := objc.Send[BindingAccess](objref.IDOf(pt), objc.RegisterName("access"))
 	return _r
 }
 
 // Alignment wraps the corresponding Objective-C method.
-func (x *PointerType) Alignment() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("alignment"))
+func (pt *PointerType) Alignment() int {
+	_r := objc.Send[int](objref.IDOf(pt), objc.RegisterName("alignment"))
 	return _r
 }
 
 // DataSize wraps the corresponding Objective-C method.
-func (x *PointerType) DataSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataSize"))
+func (pt *PointerType) DataSize() int {
+	_r := objc.Send[int](objref.IDOf(pt), objc.RegisterName("dataSize"))
 	return _r
 }
 
 // ElementIsArgumentBuffer wraps the corresponding Objective-C method.
-func (x *PointerType) ElementIsArgumentBuffer() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("elementIsArgumentBuffer"))
+func (pt *PointerType) ElementIsArgumentBuffer() bool {
+	_r := objc.Send[bool](objref.IDOf(pt), objc.RegisterName("elementIsArgumentBuffer"))
 	return _r
 }
-
-// PointerTypeable is the interface implemented by [PointerType], for mocking and DI.
-type PointerTypeable interface {
-	obj.Object
-	ElementStructType() *StructType
-	ElementArrayType() *ArrayType
-	ElementType() DataType
-	Access() BindingAccess
-	Alignment() int
-	DataSize() int
-	ElementIsArgumentBuffer() bool
-}
-
-var _ PointerTypeable = (*PointerType)(nil)
 
 var _ TypeProvider = (*PointerType)(nil)

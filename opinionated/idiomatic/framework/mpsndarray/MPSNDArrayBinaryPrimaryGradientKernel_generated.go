@@ -7,7 +7,6 @@ package mpsndarray
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,17 +43,10 @@ func arrayBinaryPrimaryGradientKernelAdopt(id objc.ID) *ArrayBinaryPrimaryGradie
 	return x
 }
 
-// ArrayBinaryPrimaryGradientKernelable is the interface implemented by [ArrayBinaryPrimaryGradientKernel], for mocking and DI.
-type ArrayBinaryPrimaryGradientKernelable interface {
-	obj.Object
-}
-
-var _ ArrayBinaryPrimaryGradientKernelable = (*ArrayBinaryPrimaryGradientKernel)(nil)
-
 // isArrayBinaryPrimaryGradientKernel marks ArrayBinaryPrimaryGradientKernel — and, by embedding promotion, its
 // subclasses — as a member of the ArrayBinaryPrimaryGradientKernel hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ArrayBinaryPrimaryGradientKernel) isArrayBinaryPrimaryGradientKernel() {}
+func (abpgk *ArrayBinaryPrimaryGradientKernel) isArrayBinaryPrimaryGradientKernel() {}
 
 var _ ArrayBinaryPrimaryGradientKernelProvider = (*ArrayBinaryPrimaryGradientKernel)(nil)
 

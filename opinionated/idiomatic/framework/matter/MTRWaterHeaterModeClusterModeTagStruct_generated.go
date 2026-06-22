@@ -44,24 +44,24 @@ func mTRWaterHeaterModeClusterModeTagStructAdopt(id objc.ID) *MTRWaterHeaterMode
 }
 
 // Description returns the object's -description text.
-func (x *MTRWaterHeaterModeClusterModeTagStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mwhmcmts *MTRWaterHeaterModeClusterModeTagStruct) Description() string {
+	return rt.Description(objref.IDOf(mwhmcmts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRWaterHeaterModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mwhmcmts *MTRWaterHeaterModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mwhmcmts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRWaterHeaterModeClusterModeTagStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mwhmcmts *MTRWaterHeaterModeClusterModeTagStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mwhmcmts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRWaterHeaterModeClusterModeTagStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mwhmcmts *MTRWaterHeaterModeClusterModeTagStruct) String() string {
+	return rt.Description(objref.IDOf(mwhmcmts))
 }
 
 // NewMTRWaterHeaterModeClusterModeTagStruct creates a new MTRWaterHeaterModeClusterModeTagStruct.
@@ -71,48 +71,25 @@ func NewMTRWaterHeaterModeClusterModeTagStruct() *MTRWaterHeaterModeClusterModeT
 }
 
 // WithMfgCode sets the property and returns the receiver so calls can be chained.
-func (x *MTRWaterHeaterModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRWaterHeaterModeClusterModeTagStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
-	return x
+func (mwhmcmts *MTRWaterHeaterModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRWaterHeaterModeClusterModeTagStruct {
+	objc.Send[objc.ID](objref.IDOf(mwhmcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
+	return mwhmcmts
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRWaterHeaterModeClusterModeTagStruct) WithValue(value obj.Object) *MTRWaterHeaterModeClusterModeTagStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
+func (mwhmcmts *MTRWaterHeaterModeClusterModeTagStruct) WithValue(value obj.Object) *MTRWaterHeaterModeClusterModeTagStruct {
+	objc.Send[objc.ID](objref.IDOf(mwhmcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return mwhmcmts
 }
 
 // MfgCode wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterModeClusterModeTagStruct) MfgCode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mfgCode"))
+func (mwhmcmts *MTRWaterHeaterModeClusterModeTagStruct) MfgCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwhmcmts), objc.RegisterName("mfgCode"))
 	return obj.Wrap(_r)
-}
-
-// SetMfgCode wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterModeClusterModeTagStruct) SetMfgCode(mfgCode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterModeClusterModeTagStruct) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (mwhmcmts *MTRWaterHeaterModeClusterModeTagStruct) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mwhmcmts), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *MTRWaterHeaterModeClusterModeTagStruct) SetValue(value obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-}
-
-// MTRWaterHeaterModeClusterModeTagStructable is the interface implemented by [MTRWaterHeaterModeClusterModeTagStruct], for mocking and DI.
-type MTRWaterHeaterModeClusterModeTagStructable interface {
-	obj.Object
-	WithMfgCode(mfgCode obj.Object) *MTRWaterHeaterModeClusterModeTagStruct
-	WithValue(value obj.Object) *MTRWaterHeaterModeClusterModeTagStruct
-	MfgCode() obj.Object
-	SetMfgCode(mfgCode obj.Object)
-	Value() obj.Object
-	SetValue(value obj.Object)
-}
-
-var _ MTRWaterHeaterModeClusterModeTagStructable = (*MTRWaterHeaterModeClusterModeTagStruct)(nil)

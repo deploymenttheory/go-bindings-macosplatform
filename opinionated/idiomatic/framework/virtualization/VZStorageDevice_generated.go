@@ -48,36 +48,29 @@ func storageDeviceAdopt(id objc.ID) *StorageDevice {
 }
 
 // Description returns the object's -description text.
-func (x *StorageDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sd *StorageDevice) Description() string {
+	return rt.Description(objref.IDOf(sd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StorageDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sd *StorageDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StorageDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sd *StorageDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StorageDevice) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sd *StorageDevice) String() string {
+	return rt.Description(objref.IDOf(sd))
 }
-
-// StorageDeviceable is the interface implemented by [StorageDevice], for mocking and DI.
-type StorageDeviceable interface {
-	obj.Object
-}
-
-var _ StorageDeviceable = (*StorageDevice)(nil)
 
 // isStorageDevice marks StorageDevice — and, by embedding promotion, its
 // subclasses — as a member of the StorageDevice hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *StorageDevice) isStorageDevice() {}
+func (sd *StorageDevice) isStorageDevice() {}
 
 var _ StorageDeviceProvider = (*StorageDevice)(nil)

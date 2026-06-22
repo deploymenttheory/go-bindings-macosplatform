@@ -46,24 +46,24 @@ func cloudIdentifierAdopt(id objc.ID) *CloudIdentifier {
 }
 
 // Description returns the object's -description text.
-func (x *CloudIdentifier) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ci *CloudIdentifier) Description() string {
+	return rt.Description(objref.IDOf(ci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CloudIdentifier) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ci *CloudIdentifier) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CloudIdentifier) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ci *CloudIdentifier) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CloudIdentifier) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ci *CloudIdentifier) String() string {
+	return rt.Description(objref.IDOf(ci))
 }
 
 // NewCloudIdentifierWithStringValue deserializes a cloud identifier from its string value.
@@ -73,19 +73,11 @@ func NewCloudIdentifierWithStringValue(stringValue string) *CloudIdentifier {
 	return cloudIdentifierAdopt(_id)
 }
 
-// StringValue for use in serialization
-func (x *CloudIdentifier) StringValue() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringValue"))
+// StringValue returns for use in serialization
+func (ci *CloudIdentifier) StringValue() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ci), objc.RegisterName("stringValue"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// CloudIdentifierable is the interface implemented by [CloudIdentifier], for mocking and DI.
-type CloudIdentifierable interface {
-	obj.Object
-	StringValue() string
-}
-
-var _ CloudIdentifierable = (*CloudIdentifier)(nil)

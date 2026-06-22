@@ -46,24 +46,24 @@ func focusStatusCenterAdopt(id objc.ID) *FocusStatusCenter {
 }
 
 // Description returns the object's -description text.
-func (x *FocusStatusCenter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fsc *FocusStatusCenter) Description() string {
+	return rt.Description(objref.IDOf(fsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FocusStatusCenter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fsc *FocusStatusCenter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FocusStatusCenter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fsc *FocusStatusCenter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FocusStatusCenter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fsc *FocusStatusCenter) String() string {
+	return rt.Description(objref.IDOf(fsc))
 }
 
 // NewFocusStatusCenter creates a new FocusStatusCenter.
@@ -73,22 +73,13 @@ func NewFocusStatusCenter() *FocusStatusCenter {
 }
 
 // FocusStatus wraps the corresponding Objective-C method.
-func (x *FocusStatusCenter) FocusStatus() *FocusStatus {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("focusStatus"))
+func (fsc *FocusStatusCenter) FocusStatus() *FocusStatus {
+	_r := objc.Send[objc.ID](objref.IDOf(fsc), objc.RegisterName("focusStatus"))
 	return FocusStatusFromID(_r)
 }
 
 // AuthorizationStatus wraps the corresponding Objective-C method.
-func (x *FocusStatusCenter) AuthorizationStatus() FocusStatusAuthorizationStatus {
-	_r := objc.Send[FocusStatusAuthorizationStatus](objref.IDOf(x), objc.RegisterName("authorizationStatus"))
+func (fsc *FocusStatusCenter) AuthorizationStatus() FocusStatusAuthorizationStatus {
+	_r := objc.Send[FocusStatusAuthorizationStatus](objref.IDOf(fsc), objc.RegisterName("authorizationStatus"))
 	return _r
 }
-
-// FocusStatusCenterable is the interface implemented by [FocusStatusCenter], for mocking and DI.
-type FocusStatusCenterable interface {
-	obj.Object
-	FocusStatus() *FocusStatus
-	AuthorizationStatus() FocusStatusAuthorizationStatus
-}
-
-var _ FocusStatusCenterable = (*FocusStatusCenter)(nil)

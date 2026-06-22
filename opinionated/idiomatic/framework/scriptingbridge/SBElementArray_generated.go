@@ -46,24 +46,24 @@ func elementArrayAdopt(id objc.ID) *ElementArray {
 }
 
 // Description returns the object's -description text.
-func (x *ElementArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ea *ElementArray) Description() string {
+	return rt.Description(objref.IDOf(ea))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ElementArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ea *ElementArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ea), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ElementArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ea *ElementArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ea), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ElementArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ea *ElementArray) String() string {
+	return rt.Description(objref.IDOf(ea))
 }
 
 // NewElementArray creates a new ElementArray.
@@ -73,36 +73,25 @@ func NewElementArray() *ElementArray {
 }
 
 // ObjectWithName returns the object in the array with the given name.
-func (x *ElementArray) ObjectWithName(name string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectWithName:"), purego.NSString(name))
+func (ea *ElementArray) ObjectWithName(name string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ea), objc.RegisterName("objectWithName:"), purego.NSString(name))
 	return obj.Wrap(_r)
 }
 
 // ObjectWithID returns the object in the array with the given identifier.
-func (x *ElementArray) ObjectWithID(identifier obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectWithID:"), objref.IDOf(identifier))
+func (ea *ElementArray) ObjectWithID(identifier obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ea), objc.RegisterName("objectWithID:"), objref.IDOf(identifier))
 	return obj.Wrap(_r)
 }
 
 // ObjectAtLocation returns the object at the given location in the receiver.
-func (x *ElementArray) ObjectAtLocation(location obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtLocation:"), objref.IDOf(location))
+func (ea *ElementArray) ObjectAtLocation(location obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ea), objc.RegisterName("objectAtLocation:"), objref.IDOf(location))
 	return obj.Wrap(_r)
 }
 
-// Get forces evaluation of the receiver, causing the real object to be returned immediately.
-func (x *ElementArray) Get() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("get"))
+// Get returns forces evaluation of the receiver, causing the real object to be returned immediately.
+func (ea *ElementArray) Get() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ea), objc.RegisterName("get"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// ElementArrayable is the interface implemented by [ElementArray], for mocking and DI.
-type ElementArrayable interface {
-	obj.Object
-	ObjectWithName(name string) obj.Object
-	ObjectWithID(identifier obj.Object) obj.Object
-	ObjectAtLocation(location obj.Object) obj.Object
-	Get() []obj.Object
-}
-
-var _ ElementArrayable = (*ElementArray)(nil)

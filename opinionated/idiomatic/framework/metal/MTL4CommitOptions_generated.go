@@ -46,24 +46,24 @@ func mTL4CommitOptionsAdopt(id objc.ID) *MTL4CommitOptions {
 }
 
 // Description returns the object's -description text.
-func (x *MTL4CommitOptions) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mco *MTL4CommitOptions) Description() string {
+	return rt.Description(objref.IDOf(mco))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTL4CommitOptions) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mco *MTL4CommitOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mco), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTL4CommitOptions) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mco *MTL4CommitOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mco), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTL4CommitOptions) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mco *MTL4CommitOptions) String() string {
+	return rt.Description(objref.IDOf(mco))
 }
 
 // NewMTL4CommitOptions creates a new MTL4CommitOptions.
@@ -71,10 +71,3 @@ func NewMTL4CommitOptions() *MTL4CommitOptions {
 	_id := objc.Send[objc.ID](objc.ID(_class("MTL4CommitOptions")), objc.RegisterName("new"))
 	return mTL4CommitOptionsAdopt(_id)
 }
-
-// MTL4CommitOptionsable is the interface implemented by [MTL4CommitOptions], for mocking and DI.
-type MTL4CommitOptionsable interface {
-	obj.Object
-}
-
-var _ MTL4CommitOptionsable = (*MTL4CommitOptions)(nil)

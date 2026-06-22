@@ -52,38 +52,22 @@ func NewUserAutomatorTask() *UserAutomatorTask {
 	return userAutomatorTaskAdopt(_id)
 }
 
-// WithVariables the variables required by the Automator workflow.
-func (x *UserAutomatorTask) WithVariables(variables obj.Object) *UserAutomatorTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariables:"), objref.IDOf(variables))
-	return x
+// WithVariables sets the variables required by the Automator workflow.
+func (uat *UserAutomatorTask) WithVariables(variables obj.Object) *UserAutomatorTask {
+	objc.Send[objc.ID](objref.IDOf(uat), objc.RegisterName("setVariables:"), objref.IDOf(variables))
+	return uat
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UserAutomatorTask) WithScriptingProperties(scriptingProperties obj.Object) *UserAutomatorTask {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (uat *UserAutomatorTask) WithScriptingProperties(scriptingProperties obj.Object) *UserAutomatorTask {
+	objc.Send[objc.ID](objref.IDOf(uat), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return uat
 }
 
 // Variables wraps the corresponding Objective-C method.
-func (x *UserAutomatorTask) Variables() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variables"))
+func (uat *UserAutomatorTask) Variables() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(uat), objc.RegisterName("variables"))
 	return obj.Wrap(_r)
 }
-
-// SetVariables wraps the corresponding Objective-C method.
-func (x *UserAutomatorTask) SetVariables(variables obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariables:"), objref.IDOf(variables))
-}
-
-// UserAutomatorTaskable is the interface implemented by [UserAutomatorTask], for mocking and DI.
-type UserAutomatorTaskable interface {
-	obj.Object
-	WithVariables(variables obj.Object) *UserAutomatorTask
-	WithScriptingProperties(scriptingProperties obj.Object) *UserAutomatorTask
-	Variables() obj.Object
-	SetVariables(variables obj.Object)
-}
-
-var _ UserAutomatorTaskable = (*UserAutomatorTask)(nil)
 
 var _ UserScriptTaskProvider = (*UserAutomatorTask)(nil)

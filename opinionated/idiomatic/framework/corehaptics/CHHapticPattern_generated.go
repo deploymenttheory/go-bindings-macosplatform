@@ -5,13 +5,14 @@
 package corehaptics
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // HapticPattern is an idiomatic wrapper over the Objective-C class CHHapticPattern.
@@ -48,24 +49,24 @@ func hapticPatternAdopt(id objc.ID) *HapticPattern {
 }
 
 // Description returns the object's -description text.
-func (x *HapticPattern) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hp *HapticPattern) Description() string {
+	return rt.Description(objref.IDOf(hp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HapticPattern) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hp *HapticPattern) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HapticPattern) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hp *HapticPattern) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HapticPattern) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hp *HapticPattern) String() string {
+	return rt.Description(objref.IDOf(hp))
 }
 
 // NewHapticPatternWithEventsParametersError constructs a haptic pattern from a series of events and parameters.
@@ -113,9 +114,9 @@ func NewHapticPatternWithContentsOfURLError(ahapURL string) (result *HapticPatte
 }
 
 // ExportDictionaryAndReturnError returns the dictionary representation of the haptic pattern.
-func (x *HapticPattern) ExportDictionaryAndReturnError() (result obj.Object, err error) {
+func (hp *HapticPattern) ExportDictionaryAndReturnError() (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exportDictionaryAndReturnError:"), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(hp), objc.RegisterName("exportDictionaryAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -123,16 +124,7 @@ func (x *HapticPattern) ExportDictionaryAndReturnError() (result obj.Object, err
 }
 
 // Duration wraps the corresponding Objective-C method.
-func (x *HapticPattern) Duration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+func (hp *HapticPattern) Duration() float64 {
+	_r := objc.Send[float64](objref.IDOf(hp), objc.RegisterName("duration"))
 	return _r
 }
-
-// HapticPatternable is the interface implemented by [HapticPattern], for mocking and DI.
-type HapticPatternable interface {
-	obj.Object
-	ExportDictionaryAndReturnError() (result obj.Object, err error)
-	Duration() float64
-}
-
-var _ HapticPatternable = (*HapticPattern)(nil)

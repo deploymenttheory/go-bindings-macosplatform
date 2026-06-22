@@ -6,10 +6,10 @@ package networkextension
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,14 +51,14 @@ func nEFilterProviderAdopt(id objc.ID) *NEFilterProvider {
 // StartFilter start the filter.
 //
 // StartFilter blocks until the operation completes or ctx is cancelled.
-func (x *NEFilterProvider) StartFilter(ctx context.Context) error {
+func (nfp *NEFilterProvider) StartFilter(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startFilterWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(nfp), objc.RegisterName("startFilterWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -70,12 +70,12 @@ func (x *NEFilterProvider) StartFilter(ctx context.Context) error {
 // StopFilterWithReason stop the filter.
 //
 // StopFilterWithReason blocks until the operation completes or ctx is cancelled.
-func (x *NEFilterProvider) StopFilterWithReason(ctx context.Context, reason NEProviderStopReason) error {
+func (nfp *NEFilterProvider) StopFilterWithReason(ctx context.Context, reason NEProviderStopReason) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopFilterWithReason:completionHandler:"), reason, _block)
+	objc.Send[objc.ID](objref.IDOf(nfp), objc.RegisterName("stopFilterWithReason:completionHandler:"), reason, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -85,31 +85,20 @@ func (x *NEFilterProvider) StopFilterWithReason(ctx context.Context, reason NEPr
 }
 
 // HandleReport receives a report from the framework.
-func (x *NEFilterProvider) HandleReport(report *NEFilterReport) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("handleReport:"), objref.IDOf(report))
+func (nfp *NEFilterProvider) HandleReport(report *NEFilterReport) {
+	objc.Send[objc.ID](objref.IDOf(nfp), objc.RegisterName("handleReport:"), objref.IDOf(report))
 }
 
-// FilterConfiguration an NEContentFilterConfiguration object containing the current filter configuration. The value of this property can change during the lifetime of a filter. Filter implementations can use KVO to be notified when the configuration changes.
-func (x *NEFilterProvider) FilterConfiguration() *NEFilterProviderConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterConfiguration"))
+// FilterConfiguration returns an NEContentFilterConfiguration object containing the current filter configuration. The value of this property can change during the lifetime of a filter. Filter implementations can use KVO to be notified when the configuration changes.
+func (nfp *NEFilterProvider) FilterConfiguration() *NEFilterProviderConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(nfp), objc.RegisterName("filterConfiguration"))
 	return NEFilterProviderConfigurationFromID(_r)
 }
-
-// NEFilterProviderable is the interface implemented by [NEFilterProvider], for mocking and DI.
-type NEFilterProviderable interface {
-	obj.Object
-	StartFilter(ctx context.Context) error
-	StopFilterWithReason(ctx context.Context, reason NEProviderStopReason) error
-	HandleReport(report *NEFilterReport)
-	FilterConfiguration() *NEFilterProviderConfiguration
-}
-
-var _ NEFilterProviderable = (*NEFilterProvider)(nil)
 
 // isNEFilterProvider marks NEFilterProvider — and, by embedding promotion, its
 // subclasses — as a member of the NEFilterProvider hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NEFilterProvider) isNEFilterProvider() {}
+func (nfp *NEFilterProvider) isNEFilterProvider() {}
 
 var _ NEFilterProviderProvider = (*NEFilterProvider)(nil)
 

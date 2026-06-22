@@ -5,12 +5,13 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // OutputStream is an idiomatic wrapper over the Objective-C class NSOutputStream.
@@ -69,32 +70,22 @@ func NewOutputStreamToFileAtPathAppend(path string, shouldAppend bool) *OutputSt
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *OutputStream) WithScriptingProperties(scriptingProperties obj.Object) *OutputStream {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (os *OutputStream) WithScriptingProperties(scriptingProperties obj.Object) *OutputStream {
+	objc.Send[objc.ID](objref.IDOf(os), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return os
 }
 
 // WriteMaxLength wraps the corresponding Objective-C method.
-func (x *OutputStream) WriteMaxLength(len_ int) (result int, buffer uint8) {
+func (os *OutputStream) WriteMaxLength(len_ int) (result int, buffer uint8) {
 	var _out0 uint8
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("write:maxLength:"), unsafe.Pointer(&_out0), len_)
+	_r := objc.Send[int](objref.IDOf(os), objc.RegisterName("write:maxLength:"), unsafe.Pointer(&_out0), len_)
 	return _r, _out0
 }
 
 // HasSpaceAvailable wraps the corresponding Objective-C method.
-func (x *OutputStream) HasSpaceAvailable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasSpaceAvailable"))
+func (os *OutputStream) HasSpaceAvailable() bool {
+	_r := objc.Send[bool](objref.IDOf(os), objc.RegisterName("hasSpaceAvailable"))
 	return _r
 }
-
-// OutputStreamable is the interface implemented by [OutputStream], for mocking and DI.
-type OutputStreamable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *OutputStream
-	WriteMaxLength(len_ int) (result int, buffer uint8)
-	HasSpaceAvailable() bool
-}
-
-var _ OutputStreamable = (*OutputStream)(nil)
 
 var _ StreamProvider = (*OutputStream)(nil)

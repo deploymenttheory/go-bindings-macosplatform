@@ -7,7 +7,6 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,55 +50,42 @@ func NewSkeletonWithNameJointPaths(name string, jointPaths []string) *Skeleton {
 	return skeletonAdopt(_id)
 }
 
-// WithParent the parent object that contains this object.
-func (x *Skeleton) WithParent(parent ObjectProvider) *Skeleton {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
-	return x
+// WithParent sets the parent object that contains this object.
+func (s *Skeleton) WithParent(parent ObjectProvider) *Skeleton {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setParent:"), objref.IDOf(parent))
+	return s
 }
 
-// WithInstance the primary object, if applicable, of which this object is an instance.
-func (x *Skeleton) WithInstance(instance ObjectProvider) *Skeleton {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
-	return x
+// WithInstance sets the primary object, if applicable, of which this object is an instance.
+func (s *Skeleton) WithInstance(instance ObjectProvider) *Skeleton {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setInstance:"), objref.IDOf(instance))
+	return s
 }
 
-// WithHidden a Boolean value indicating whether this object should be used in rendering.
-func (x *Skeleton) WithHidden(hidden bool) *Skeleton {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value indicating whether this object should be used in rendering.
+func (s *Skeleton) WithHidden(hidden bool) *Skeleton {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHidden:"), hidden)
+	return s
 }
 
 // JointPaths wraps the corresponding Objective-C method.
 //
 // JointPaths returns the collection as a Go slice.
-func (x *Skeleton) JointPaths() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jointPaths"))
+func (s *Skeleton) JointPaths() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("jointPaths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // JointBindTransforms wraps the corresponding Objective-C method.
-func (x *Skeleton) JointBindTransforms() *Matrix4x4Array {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jointBindTransforms"))
+func (s *Skeleton) JointBindTransforms() *Matrix4x4Array {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("jointBindTransforms"))
 	return Matrix4x4ArrayFromID(_r)
 }
 
 // JointRestTransforms wraps the corresponding Objective-C method.
-func (x *Skeleton) JointRestTransforms() *Matrix4x4Array {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jointRestTransforms"))
+func (s *Skeleton) JointRestTransforms() *Matrix4x4Array {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("jointRestTransforms"))
 	return Matrix4x4ArrayFromID(_r)
 }
-
-// Skeletonable is the interface implemented by [Skeleton], for mocking and DI.
-type Skeletonable interface {
-	obj.Object
-	WithParent(parent ObjectProvider) *Skeleton
-	WithInstance(instance ObjectProvider) *Skeleton
-	WithHidden(hidden bool) *Skeleton
-	JointPaths() []string
-	JointBindTransforms() *Matrix4x4Array
-	JointRestTransforms() *Matrix4x4Array
-}
-
-var _ Skeletonable = (*Skeleton)(nil)
 
 var _ ObjectProvider = (*Skeleton)(nil)

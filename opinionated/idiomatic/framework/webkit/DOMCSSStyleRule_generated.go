@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,48 +50,31 @@ func NewDOMCSSStyleRule() *DOMCSSStyleRule {
 }
 
 // WithSelectorText sets the property and returns the receiver so calls can be chained.
-func (x *DOMCSSStyleRule) WithSelectorText(selectorText string) *DOMCSSStyleRule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectorText:"), purego.NSString(selectorText))
-	return x
+func (dsr *DOMCSSStyleRule) WithSelectorText(selectorText string) *DOMCSSStyleRule {
+	objc.Send[objc.ID](objref.IDOf(dsr), objc.RegisterName("setSelectorText:"), purego.NSString(selectorText))
+	return dsr
 }
 
-// WithCssText sets the property and returns the receiver so calls can be chained.
-func (x *DOMCSSStyleRule) WithCssText(cssText string) *DOMCSSStyleRule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
-	return x
+// WithCSSText sets the property and returns the receiver so calls can be chained.
+func (dsr *DOMCSSStyleRule) WithCSSText(cssText string) *DOMCSSStyleRule {
+	objc.Send[objc.ID](objref.IDOf(dsr), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return dsr
 }
 
 // SelectorText wraps the corresponding Objective-C method.
-func (x *DOMCSSStyleRule) SelectorText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectorText"))
+func (dsr *DOMCSSStyleRule) SelectorText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dsr), objc.RegisterName("selectorText"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetSelectorText wraps the corresponding Objective-C method.
-func (x *DOMCSSStyleRule) SetSelectorText(selectorText string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectorText:"), purego.NSString(selectorText))
-}
-
 // Style wraps the corresponding Objective-C method.
-func (x *DOMCSSStyleRule) Style() *DOMCSSStyleDeclaration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("style"))
+func (dsr *DOMCSSStyleRule) Style() *DOMCSSStyleDeclaration {
+	_r := objc.Send[objc.ID](objref.IDOf(dsr), objc.RegisterName("style"))
 	return DOMCSSStyleDeclarationFromID(_r)
 }
-
-// DOMCSSStyleRuleable is the interface implemented by [DOMCSSStyleRule], for mocking and DI.
-type DOMCSSStyleRuleable interface {
-	obj.Object
-	WithSelectorText(selectorText string) *DOMCSSStyleRule
-	WithCssText(cssText string) *DOMCSSStyleRule
-	SelectorText() string
-	SetSelectorText(selectorText string)
-	Style() *DOMCSSStyleDeclaration
-}
-
-var _ DOMCSSStyleRuleable = (*DOMCSSStyleRule)(nil)
 
 var _ DOMCSSRuleProvider = (*DOMCSSStyleRule)(nil)
 

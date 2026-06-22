@@ -46,24 +46,24 @@ func pushPayloadAdopt(id objc.ID) *PushPayload {
 }
 
 // Description returns the object's -description text.
-func (x *PushPayload) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pp *PushPayload) Description() string {
+	return rt.Description(objref.IDOf(pp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PushPayload) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pp *PushPayload) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PushPayload) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pp *PushPayload) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PushPayload) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pp *PushPayload) String() string {
+	return rt.Description(objref.IDOf(pp))
 }
 
 // NewPushPayload creates a new PushPayload.
@@ -72,23 +72,14 @@ func NewPushPayload() *PushPayload {
 	return pushPayloadAdopt(_id)
 }
 
-// Type the type value indicating how to interpret the payload. For possible values, see “PushKit/PKPushType“.
-func (x *PushPayload) Type() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns the type value indicating how to interpret the payload. For possible values, see “PushKit/PKPushType“.
+func (pp *PushPayload) Type() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
-// DictionaryPayload the contents of the received payload. For VoIP pushes, the sender is free to specify any fields for the contained data as long as it is provided in a text-encodable JSON format.
-func (x *PushPayload) DictionaryPayload() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryPayload"))
+// DictionaryPayload returns the contents of the received payload. For VoIP pushes, the sender is free to specify any fields for the contained data as long as it is provided in a text-encodable JSON format.
+func (pp *PushPayload) DictionaryPayload() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pp), objc.RegisterName("dictionaryPayload"))
 	return obj.Wrap(_r)
 }
-
-// PushPayloadable is the interface implemented by [PushPayload], for mocking and DI.
-type PushPayloadable interface {
-	obj.Object
-	Type() obj.Object
-	DictionaryPayload() obj.Object
-}
-
-var _ PushPayloadable = (*PushPayload)(nil)

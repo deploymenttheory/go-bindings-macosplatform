@@ -54,545 +54,426 @@ func NewClipView() *ClipView {
 	return clipViewAdopt(_id)
 }
 
-// WithBackgroundColor the color of the clip view’s background.
-func (x *ClipView) WithBackgroundColor(backgroundColor *Color) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the color of the clip view’s background.
+func (cv *ClipView) WithBackgroundColor(backgroundColor *Color) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return cv
 }
 
-// WithDrawsBackground a Boolean value that indicates if the clip view draws its background color.
-func (x *ClipView) WithDrawsBackground(drawsBackground bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
-	return x
+// WithDrawsBackground sets a Boolean value that indicates if the clip view draws its background color.
+func (cv *ClipView) WithDrawsBackground(drawsBackground bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDrawsBackground:"), drawsBackground)
+	return cv
 }
 
-// WithDocumentView the clip view’s document view.
-func (x *ClipView) WithDocumentView(documentView ViewProvider) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentView:"), objref.IDOf(documentView))
-	return x
+// WithDocumentView sets the clip view’s document view.
+func (cv *ClipView) WithDocumentView(documentView ViewProvider) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDocumentView:"), objref.IDOf(documentView))
+	return cv
 }
 
-// WithDocumentCursor the cursor object used when the pointer lies over the view.
-func (x *ClipView) WithDocumentCursor(documentCursor *Cursor) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentCursor:"), objref.IDOf(documentCursor))
-	return x
+// WithDocumentCursor sets the cursor object used when the pointer lies over the view.
+func (cv *ClipView) WithDocumentCursor(documentCursor *Cursor) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDocumentCursor:"), objref.IDOf(documentCursor))
+	return cv
 }
 
-// WithContentInsets the distance that the content view is inset from the enclosing scroll view.
-func (x *ClipView) WithContentInsets(contentInsets foundation.NSEdgeInsets) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentInsets:"), contentInsets)
-	return x
+// WithContentInsets sets the distance that the content view is inset from the enclosing scroll view.
+func (cv *ClipView) WithContentInsets(contentInsets foundation.NSEdgeInsets) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setContentInsets:"), contentInsets)
+	return cv
 }
 
-// WithAutomaticallyAdjustsContentInsets a Boolean value that indicates if the clip view automatically accounts for other scroll view subviews.
-func (x *ClipView) WithAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyAdjustsContentInsets:"), automaticallyAdjustsContentInsets)
-	return x
+// WithAutomaticallyAdjustsContentInsets sets a Boolean value that indicates if the clip view automatically accounts for other scroll view subviews.
+func (cv *ClipView) WithAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAutomaticallyAdjustsContentInsets:"), automaticallyAdjustsContentInsets)
+	return cv
 }
 
-// WithCopiesOnScroll a Boolean value that indicates if the clip view copies rendered images while scrolling.
-func (x *ClipView) WithCopiesOnScroll(copiesOnScroll bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCopiesOnScroll:"), copiesOnScroll)
-	return x
+// WithCopiesOnScroll sets a Boolean value that indicates if the clip view copies rendered images while scrolling.
+func (cv *ClipView) WithCopiesOnScroll(copiesOnScroll bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCopiesOnScroll:"), copiesOnScroll)
+	return cv
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithSubviews(items ...ViewProvider) *ClipView {
+func (cv *ClipView) WithSubviews(items ...ViewProvider) *ClipView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setSubviews:"), _arr)
+	return cv
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithHidden(hidden bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (cv *ClipView) WithHidden(hidden bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setHidden:"), hidden)
+	return cv
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (cv *ClipView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return cv
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithAutoresizesSubviews(autoresizesSubviews bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (cv *ClipView) WithAutoresizesSubviews(autoresizesSubviews bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return cv
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (cv *ClipView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return cv
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *ClipView) WithFrame(frame corefoundation.CGRect) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (cv *ClipView) WithFrame(frame corefoundation.CGRect) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setFrame:"), frame)
+	return cv
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithFrameRotation(frameRotation float64) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (cv *ClipView) WithFrameRotation(frameRotation float64) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return cv
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithFrameCenterRotation(frameCenterRotation float64) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (cv *ClipView) WithFrameCenterRotation(frameCenterRotation float64) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return cv
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithBoundsRotation(boundsRotation float64) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (cv *ClipView) WithBoundsRotation(boundsRotation float64) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return cv
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *ClipView) WithBounds(bounds corefoundation.CGRect) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (cv *ClipView) WithBounds(bounds corefoundation.CGRect) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setBounds:"), bounds)
+	return cv
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithCanDrawConcurrently(canDrawConcurrently bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (cv *ClipView) WithCanDrawConcurrently(canDrawConcurrently bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return cv
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *ClipView) WithNeedsDisplay(needsDisplay bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (cv *ClipView) WithNeedsDisplay(needsDisplay bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return cv
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (cv *ClipView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return cv
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithWantsRestingTouches(wantsRestingTouches bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (cv *ClipView) WithWantsRestingTouches(wantsRestingTouches bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return cv
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (cv *ClipView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return cv
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (cv *ClipView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return cv
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithWantsLayer(wantsLayer bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (cv *ClipView) WithWantsLayer(wantsLayer bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return cv
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithLayer(layer obj.Object) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (cv *ClipView) WithLayer(layer obj.Object) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return cv
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (cv *ClipView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return cv
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithNeedsLayout(needsLayout bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (cv *ClipView) WithNeedsLayout(needsLayout bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return cv
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithAlphaValue(alphaValue float64) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (cv *ClipView) WithAlphaValue(alphaValue float64) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return cv
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (cv *ClipView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return cv
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithBackgroundFilters(items ...obj.Object) *ClipView {
+func (cv *ClipView) WithBackgroundFilters(items ...obj.Object) *ClipView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return cv
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithCompositingFilter(compositingFilter obj.Object) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (cv *ClipView) WithCompositingFilter(compositingFilter obj.Object) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return cv
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithContentFilters(items ...obj.Object) *ClipView {
+func (cv *ClipView) WithContentFilters(items ...obj.Object) *ClipView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setContentFilters:"), _arr)
+	return cv
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithShadow(shadow *Shadow) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (cv *ClipView) WithShadow(shadow *Shadow) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return cv
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithClipsToBounds(clipsToBounds bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (cv *ClipView) WithClipsToBounds(clipsToBounds bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return cv
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (cv *ClipView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return cv
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithToolTip(toolTip string) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (cv *ClipView) WithToolTip(toolTip string) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return cv
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (cv *ClipView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return cv
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (cv *ClipView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return cv
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithNextKeyView(nextKeyView ViewProvider) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (cv *ClipView) WithNextKeyView(nextKeyView ViewProvider) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return cv
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithFocusRingType(focusRingType FocusRingType) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (cv *ClipView) WithFocusRingType(focusRingType FocusRingType) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return cv
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ClipView {
+func (cv *ClipView) WithGestureRecognizers(items ...GestureRecognizerProvider) *ClipView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return cv
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (cv *ClipView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return cv
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (cv *ClipView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return cv
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *ClipView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (cv *ClipView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return cv
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (cv *ClipView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return cv
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (cv *ClipView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return cv
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (cv *ClipView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return cv
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (cv *ClipView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return cv
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (cv *ClipView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return cv
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (cv *ClipView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return cv
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (cv *ClipView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return cv
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *ClipView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (cv *ClipView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return cv
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *ClipView) WithNextResponder(nextResponder ResponderProvider) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (cv *ClipView) WithNextResponder(nextResponder ResponderProvider) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return cv
 }
 
-// WithMenu returns the responder’s menu.
-func (x *ClipView) WithMenu(menu *Menu) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (cv *ClipView) WithMenu(menu *Menu) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return cv
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *ClipView) WithUserActivity(userActivity obj.Object) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (cv *ClipView) WithUserActivity(userActivity obj.Object) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return cv
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *ClipView) WithTouchBar(touchBar *TouchBar) *ClipView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (cv *ClipView) WithTouchBar(touchBar *TouchBar) *ClipView {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return cv
 }
 
 // ViewFrameChanged handles an NSViewFrameDidChangeNotification, passed in the aNotification argument, by updating a containing NSScrollView based on the new frame.
-func (x *ClipView) ViewFrameChanged(notification obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewFrameChanged:"), objref.IDOf(notification))
+func (cv *ClipView) ViewFrameChanged(notification obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("viewFrameChanged:"), objref.IDOf(notification))
 }
 
 // ViewBoundsChanged handles an NSViewBoundsDidChangeNotification, passed in the aNotification argument, by updating a containing NSScrollView based on the new bounds.
-func (x *ClipView) ViewBoundsChanged(notification obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("viewBoundsChanged:"), objref.IDOf(notification))
+func (cv *ClipView) ViewBoundsChanged(notification obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("viewBoundsChanged:"), objref.IDOf(notification))
 }
 
 // ScrollToPoint changes the origin of the clip view’s bounds rectangle to newOrigin.
-func (x *ClipView) ScrollToPoint(newOrigin corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollToPoint:"), newOrigin)
+func (cv *ClipView) ScrollToPoint(newOrigin corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("scrollToPoint:"), newOrigin)
 }
 
 // ConstrainBoundsRect constrains the bounds of the clip view while the user is magnifying and scrolling.
-func (x *ClipView) ConstrainBoundsRect(proposedBounds corefoundation.CGRect) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("constrainBoundsRect:"), proposedBounds)
+func (cv *ClipView) ConstrainBoundsRect(proposedBounds corefoundation.CGRect) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cv), objc.RegisterName("constrainBoundsRect:"), proposedBounds)
 	return _r
 }
 
 // BackgroundColor wraps the corresponding Objective-C method.
-func (x *ClipView) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+func (cv *ClipView) BackgroundColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
 
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *ClipView) SetBackgroundColor(backgroundColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-}
-
 // DrawsBackground wraps the corresponding Objective-C method.
-func (x *ClipView) DrawsBackground() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("drawsBackground"))
+func (cv *ClipView) DrawsBackground() bool {
+	_r := objc.Send[bool](objref.IDOf(cv), objc.RegisterName("drawsBackground"))
 	return _r
 }
 
-// SetDrawsBackground wraps the corresponding Objective-C method.
-func (x *ClipView) SetDrawsBackground(drawsBackground bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
-}
-
 // DocumentView wraps the corresponding Objective-C method.
-func (x *ClipView) DocumentView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentView"))
+func (cv *ClipView) DocumentView() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("documentView"))
 	return ViewFromID(_r)
 }
 
-// SetDocumentView wraps the corresponding Objective-C method.
-func (x *ClipView) SetDocumentView(documentView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentView:"), objref.IDOf(documentView))
-}
-
 // DocumentRect wraps the corresponding Objective-C method.
-func (x *ClipView) DocumentRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("documentRect"))
+func (cv *ClipView) DocumentRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cv), objc.RegisterName("documentRect"))
 	return _r
 }
 
 // DocumentCursor wraps the corresponding Objective-C method.
-func (x *ClipView) DocumentCursor() *Cursor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentCursor"))
+func (cv *ClipView) DocumentCursor() *Cursor {
+	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("documentCursor"))
 	return CursorFromID(_r)
 }
 
-// SetDocumentCursor wraps the corresponding Objective-C method.
-func (x *ClipView) SetDocumentCursor(documentCursor *Cursor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocumentCursor:"), objref.IDOf(documentCursor))
-}
-
 // DocumentVisibleRect wraps the corresponding Objective-C method.
-func (x *ClipView) DocumentVisibleRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("documentVisibleRect"))
+func (cv *ClipView) DocumentVisibleRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(cv), objc.RegisterName("documentVisibleRect"))
 	return _r
 }
 
 // ContentInsets wraps the corresponding Objective-C method.
-func (x *ClipView) ContentInsets() foundation.NSEdgeInsets {
-	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(x), objc.RegisterName("contentInsets"))
+func (cv *ClipView) ContentInsets() foundation.NSEdgeInsets {
+	_r := objc.Send[foundation.NSEdgeInsets](objref.IDOf(cv), objc.RegisterName("contentInsets"))
 	return _r
-}
-
-// SetContentInsets wraps the corresponding Objective-C method.
-func (x *ClipView) SetContentInsets(contentInsets foundation.NSEdgeInsets) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentInsets:"), contentInsets)
 }
 
 // AutomaticallyAdjustsContentInsets wraps the corresponding Objective-C method.
-func (x *ClipView) AutomaticallyAdjustsContentInsets() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyAdjustsContentInsets"))
+func (cv *ClipView) AutomaticallyAdjustsContentInsets() bool {
+	_r := objc.Send[bool](objref.IDOf(cv), objc.RegisterName("automaticallyAdjustsContentInsets"))
 	return _r
 }
 
-// SetAutomaticallyAdjustsContentInsets wraps the corresponding Objective-C method.
-func (x *ClipView) SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyAdjustsContentInsets:"), automaticallyAdjustsContentInsets)
-}
-
 // ConstrainScrollPoint returns a scroll point adjusted from the proposed new origin, if necessary, to guarantee the view will lie within its document view.
-func (x *ClipView) ConstrainScrollPoint(newOrigin corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("constrainScrollPoint:"), newOrigin)
+func (cv *ClipView) ConstrainScrollPoint(newOrigin corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(cv), objc.RegisterName("constrainScrollPoint:"), newOrigin)
 	return _r
 }
 
 // CopiesOnScroll wraps the corresponding Objective-C method.
-func (x *ClipView) CopiesOnScroll() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("copiesOnScroll"))
+func (cv *ClipView) CopiesOnScroll() bool {
+	_r := objc.Send[bool](objref.IDOf(cv), objc.RegisterName("copiesOnScroll"))
 	return _r
 }
-
-// SetCopiesOnScroll wraps the corresponding Objective-C method.
-func (x *ClipView) SetCopiesOnScroll(copiesOnScroll bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCopiesOnScroll:"), copiesOnScroll)
-}
-
-// ClipViewable is the interface implemented by [ClipView], for mocking and DI.
-type ClipViewable interface {
-	obj.Object
-	WithBackgroundColor(backgroundColor *Color) *ClipView
-	WithDrawsBackground(drawsBackground bool) *ClipView
-	WithDocumentView(documentView ViewProvider) *ClipView
-	WithDocumentCursor(documentCursor *Cursor) *ClipView
-	WithContentInsets(contentInsets foundation.NSEdgeInsets) *ClipView
-	WithAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool) *ClipView
-	WithCopiesOnScroll(copiesOnScroll bool) *ClipView
-	WithSubviews(items ...ViewProvider) *ClipView
-	WithHidden(hidden bool) *ClipView
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *ClipView
-	WithAutoresizesSubviews(autoresizesSubviews bool) *ClipView
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *ClipView
-	WithFrame(frame corefoundation.CGRect) *ClipView
-	WithFrameRotation(frameRotation float64) *ClipView
-	WithFrameCenterRotation(frameCenterRotation float64) *ClipView
-	WithBoundsRotation(boundsRotation float64) *ClipView
-	WithBounds(bounds corefoundation.CGRect) *ClipView
-	WithCanDrawConcurrently(canDrawConcurrently bool) *ClipView
-	WithNeedsDisplay(needsDisplay bool) *ClipView
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *ClipView
-	WithWantsRestingTouches(wantsRestingTouches bool) *ClipView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *ClipView
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *ClipView
-	WithWantsLayer(wantsLayer bool) *ClipView
-	WithLayer(layer obj.Object) *ClipView
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *ClipView
-	WithNeedsLayout(needsLayout bool) *ClipView
-	WithAlphaValue(alphaValue float64) *ClipView
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *ClipView
-	WithBackgroundFilters(items ...obj.Object) *ClipView
-	WithCompositingFilter(compositingFilter obj.Object) *ClipView
-	WithContentFilters(items ...obj.Object) *ClipView
-	WithShadow(shadow *Shadow) *ClipView
-	WithClipsToBounds(clipsToBounds bool) *ClipView
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *ClipView
-	WithToolTip(toolTip string) *ClipView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *ClipView
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *ClipView
-	WithNextKeyView(nextKeyView ViewProvider) *ClipView
-	WithFocusRingType(focusRingType FocusRingType) *ClipView
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *ClipView
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *ClipView
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *ClipView
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *ClipView
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *ClipView
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *ClipView
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *ClipView
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *ClipView
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *ClipView
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *ClipView
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *ClipView
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *ClipView
-	WithNextResponder(nextResponder ResponderProvider) *ClipView
-	WithMenu(menu *Menu) *ClipView
-	WithUserActivity(userActivity obj.Object) *ClipView
-	WithTouchBar(touchBar *TouchBar) *ClipView
-	ViewFrameChanged(notification obj.Object)
-	ViewBoundsChanged(notification obj.Object)
-	ScrollToPoint(newOrigin corefoundation.CGPoint)
-	ConstrainBoundsRect(proposedBounds corefoundation.CGRect) corefoundation.CGRect
-	BackgroundColor() *Color
-	SetBackgroundColor(backgroundColor *Color)
-	DrawsBackground() bool
-	SetDrawsBackground(drawsBackground bool)
-	DocumentView() *View
-	SetDocumentView(documentView *View)
-	DocumentRect() corefoundation.CGRect
-	DocumentCursor() *Cursor
-	SetDocumentCursor(documentCursor *Cursor)
-	DocumentVisibleRect() corefoundation.CGRect
-	ContentInsets() foundation.NSEdgeInsets
-	SetContentInsets(contentInsets foundation.NSEdgeInsets)
-	AutomaticallyAdjustsContentInsets() bool
-	SetAutomaticallyAdjustsContentInsets(automaticallyAdjustsContentInsets bool)
-	ConstrainScrollPoint(newOrigin corefoundation.CGPoint) corefoundation.CGPoint
-	CopiesOnScroll() bool
-	SetCopiesOnScroll(copiesOnScroll bool)
-}
-
-var _ ClipViewable = (*ClipView)(nil)
 
 var _ ViewProvider = (*ClipView)(nil)
 

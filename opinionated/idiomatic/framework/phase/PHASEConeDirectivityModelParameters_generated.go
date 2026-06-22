@@ -7,7 +7,6 @@ package phase
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -56,19 +55,11 @@ func NewConeDirectivityModelParametersWithSubbandParameters(subbandParameters []
 // SubbandParameters wraps the corresponding Objective-C method.
 //
 // SubbandParameters returns the collection as a Go slice.
-func (x *ConeDirectivityModelParameters) SubbandParameters() []*ConeDirectivityModelSubbandParameters {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subbandParameters"))
+func (cdmp *ConeDirectivityModelParameters) SubbandParameters() []*ConeDirectivityModelSubbandParameters {
+	_arr := objc.Send[objc.ID](objref.IDOf(cdmp), objc.RegisterName("subbandParameters"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ConeDirectivityModelSubbandParameters {
 		return ConeDirectivityModelSubbandParametersFromID(_id)
 	})
 }
-
-// ConeDirectivityModelParametersable is the interface implemented by [ConeDirectivityModelParameters], for mocking and DI.
-type ConeDirectivityModelParametersable interface {
-	obj.Object
-	SubbandParameters() []*ConeDirectivityModelSubbandParameters
-}
-
-var _ ConeDirectivityModelParametersable = (*ConeDirectivityModelParameters)(nil)
 
 var _ DirectivityModelParametersProvider = (*ConeDirectivityModelParameters)(nil)

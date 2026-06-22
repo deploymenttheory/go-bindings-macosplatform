@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewMacOSBootLoader() *MacOSBootLoader {
 	_id := objc.Send[objc.ID](objc.ID(_class("VZMacOSBootLoader")), objc.RegisterName("new"))
 	return macOSBootLoaderAdopt(_id)
 }
-
-// MacOSBootLoaderable is the interface implemented by [MacOSBootLoader], for mocking and DI.
-type MacOSBootLoaderable interface {
-	obj.Object
-}
-
-var _ MacOSBootLoaderable = (*MacOSBootLoader)(nil)
 
 var _ BootLoaderProvider = (*MacOSBootLoader)(nil)

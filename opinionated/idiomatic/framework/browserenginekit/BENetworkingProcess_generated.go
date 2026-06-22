@@ -5,13 +5,14 @@
 package browserenginekit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // NetworkingProcess is an idiomatic wrapper over the Objective-C class BENetworkingProcess.
@@ -48,24 +49,24 @@ func networkingProcessAdopt(id objc.ID) *NetworkingProcess {
 }
 
 // Description returns the object's -description text.
-func (x *NetworkingProcess) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (np *NetworkingProcess) Description() string {
+	return rt.Description(objref.IDOf(np))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NetworkingProcess) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (np *NetworkingProcess) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(np), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NetworkingProcess) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (np *NetworkingProcess) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(np), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NetworkingProcess) String() string {
-	return rt.Description(objref.IDOf(x))
+func (np *NetworkingProcess) String() string {
+	return rt.Description(objref.IDOf(np))
 }
 
 // NewNetworkingProcess creates a new NetworkingProcess.
@@ -75,25 +76,16 @@ func NewNetworkingProcess() *NetworkingProcess {
 }
 
 // Invalidate stops the networking process.
-func (x *NetworkingProcess) Invalidate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
+func (np *NetworkingProcess) Invalidate() {
+	objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("invalidate"))
 }
 
 // MakeLibXPCConnectionError creates a new XPC connection to the extension process.
-func (x *NetworkingProcess) MakeLibXPCConnectionError() (result obj.Object, err error) {
+func (np *NetworkingProcess) MakeLibXPCConnectionError() (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeLibXPCConnectionError:"), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("makeLibXPCConnectionError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return obj.Wrap(_r), nil
 }
-
-// NetworkingProcessable is the interface implemented by [NetworkingProcess], for mocking and DI.
-type NetworkingProcessable interface {
-	obj.Object
-	Invalidate()
-	MakeLibXPCConnectionError() (result obj.Object, err error)
-}
-
-var _ NetworkingProcessable = (*NetworkingProcess)(nil)

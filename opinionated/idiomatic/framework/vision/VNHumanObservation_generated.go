@@ -7,7 +7,6 @@ package vision
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,18 +52,10 @@ func NewHumanObservation() *HumanObservation {
 }
 
 // UpperBodyOnly wraps the corresponding Objective-C method.
-func (x *HumanObservation) UpperBodyOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("upperBodyOnly"))
+func (ho *HumanObservation) UpperBodyOnly() bool {
+	_r := objc.Send[bool](objref.IDOf(ho), objc.RegisterName("upperBodyOnly"))
 	return _r
 }
-
-// HumanObservationable is the interface implemented by [HumanObservation], for mocking and DI.
-type HumanObservationable interface {
-	obj.Object
-	UpperBodyOnly() bool
-}
-
-var _ HumanObservationable = (*HumanObservation)(nil)
 
 var _ DetectedObjectObservationProvider = (*HumanObservation)(nil)
 

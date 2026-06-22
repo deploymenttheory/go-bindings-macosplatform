@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,58 +52,34 @@ func NewImageNormalizedHistogram() *ImageNormalizedHistogram {
 	return imageNormalizedHistogramAdopt(_id)
 }
 
-// WithClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
-func (x *ImageNormalizedHistogram) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageNormalizedHistogram {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
+func (inh *ImageNormalizedHistogram) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageNormalizedHistogram {
+	objc.Send[objc.ID](objref.IDOf(inh), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return inh
 }
 
-// WithZeroHistogram zero-initalize the histogram results Indicates that the memory region in which the histogram results are to be written in the histogram buffer are to be zero-initialized or not. Default: YES.
-func (x *ImageNormalizedHistogram) WithZeroHistogram(zeroHistogram bool) *ImageNormalizedHistogram {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroHistogram:"), zeroHistogram)
-	return x
+// WithZeroHistogram sets zero-initalize the histogram results Indicates that the memory region in which the histogram results are to be written in the histogram buffer are to be zero-initialized or not. Default: YES.
+func (inh *ImageNormalizedHistogram) WithZeroHistogram(zeroHistogram bool) *ImageNormalizedHistogram {
+	objc.Send[objc.ID](objref.IDOf(inh), objc.RegisterName("setZeroHistogram:"), zeroHistogram)
+	return inh
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageNormalizedHistogram) WithLabel(label string) *ImageNormalizedHistogram {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (inh *ImageNormalizedHistogram) WithLabel(label string) *ImageNormalizedHistogram {
+	objc.Send[objc.ID](objref.IDOf(inh), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return inh
 }
 
-// ClipRectSource the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
-func (x *ImageNormalizedHistogram) ClipRectSource() metal.MTLRegion {
-	_r := objc.Send[metal.MTLRegion](objref.IDOf(x), objc.RegisterName("clipRectSource"))
+// ClipRectSource returns the source rectangle to use when reading data. A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture.
+func (inh *ImageNormalizedHistogram) ClipRectSource() metal.MTLRegion {
+	_r := objc.Send[metal.MTLRegion](objref.IDOf(inh), objc.RegisterName("clipRectSource"))
 	return _r
 }
 
-// SetClipRectSource wraps the corresponding Objective-C method.
-func (x *ImageNormalizedHistogram) SetClipRectSource(clipRectSource metal.MTLRegion) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-}
-
-// ZeroHistogram zero-initalize the histogram results Indicates that the memory region in which the histogram results are to be written in the histogram buffer are to be zero-initialized or not. Default: YES.
-func (x *ImageNormalizedHistogram) ZeroHistogram() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("zeroHistogram"))
+// ZeroHistogram reports whether zero-initalize the histogram results Indicates that the memory region in which the histogram results are to be written in the histogram buffer are to be zero-initialized or not. Default: true.
+func (inh *ImageNormalizedHistogram) ZeroHistogram() bool {
+	_r := objc.Send[bool](objref.IDOf(inh), objc.RegisterName("zeroHistogram"))
 	return _r
 }
-
-// SetZeroHistogram wraps the corresponding Objective-C method.
-func (x *ImageNormalizedHistogram) SetZeroHistogram(zeroHistogram bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZeroHistogram:"), zeroHistogram)
-}
-
-// ImageNormalizedHistogramable is the interface implemented by [ImageNormalizedHistogram], for mocking and DI.
-type ImageNormalizedHistogramable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageNormalizedHistogram
-	WithZeroHistogram(zeroHistogram bool) *ImageNormalizedHistogram
-	WithLabel(label string) *ImageNormalizedHistogram
-	ClipRectSource() metal.MTLRegion
-	SetClipRectSource(clipRectSource metal.MTLRegion)
-	ZeroHistogram() bool
-	SetZeroHistogram(zeroHistogram bool)
-}
-
-var _ ImageNormalizedHistogramable = (*ImageNormalizedHistogram)(nil)
 
 var _ KernelProvider = (*ImageNormalizedHistogram)(nil)

@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,18 +51,10 @@ func NewMetricErrorEvent() *MetricErrorEvent {
 	return metricErrorEventAdopt(_id)
 }
 
-// DidRecover returns whether the error was recoverable.
-func (x *MetricErrorEvent) DidRecover() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("didRecover"))
+// DidRecover reports whether the error was recoverable.
+func (mee *MetricErrorEvent) DidRecover() bool {
+	_r := objc.Send[bool](objref.IDOf(mee), objc.RegisterName("didRecover"))
 	return _r
 }
-
-// MetricErrorEventable is the interface implemented by [MetricErrorEvent], for mocking and DI.
-type MetricErrorEventable interface {
-	obj.Object
-	DidRecover() bool
-}
-
-var _ MetricErrorEventable = (*MetricErrorEvent)(nil)
 
 var _ MetricEventProvider = (*MetricErrorEvent)(nil)

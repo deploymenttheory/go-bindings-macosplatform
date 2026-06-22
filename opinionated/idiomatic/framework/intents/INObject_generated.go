@@ -46,24 +46,24 @@ func objectAdopt(id objc.ID) *Object {
 }
 
 // Description returns the object's -description text.
-func (x *Object) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Object) Description() string {
+	return rt.Description(objref.IDOf(o))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Object) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (o *Object) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(o), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Object) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (o *Object) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(o), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Object) String() string {
-	return rt.Description(objref.IDOf(x))
+func (o *Object) String() string {
+	return rt.Description(objref.IDOf(o))
 }
 
 // NewObjectWithIdentifierDisplayStringPronunciationHint creates a custom intent object with the specified attributes.
@@ -94,28 +94,28 @@ func NewObjectWithIdentifierDisplayStringPronunciationHintSubtitleStringDisplayI
 	return objectAdopt(_id)
 }
 
-// WithSubtitleString additional details about the custom intent object.
-func (x *Object) WithSubtitleString(subtitleString string) *Object {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitleString:"), purego.NSString(subtitleString))
-	return x
+// WithSubtitleString sets additional details about the custom intent object.
+func (o *Object) WithSubtitleString(subtitleString string) *Object {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setSubtitleString:"), purego.NSString(subtitleString))
+	return o
 }
 
-// WithDisplayImage an image to display alongside the custom intent object’s text.
-func (x *Object) WithDisplayImage(displayImage *Image) *Object {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayImage:"), objref.IDOf(displayImage))
-	return x
+// WithDisplayImage sets an image to display alongside the custom intent object’s text.
+func (o *Object) WithDisplayImage(displayImage *Image) *Object {
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setDisplayImage:"), objref.IDOf(displayImage))
+	return o
 }
 
-// WithAlternativeSpeakableMatches an array of alternative speakable strings that identify the object.
-func (x *Object) WithAlternativeSpeakableMatches(items ...*SpeakableString) *Object {
+// WithAlternativeSpeakableMatches sets an array of alternative speakable strings that identify the object.
+func (o *Object) WithAlternativeSpeakableMatches(items ...*SpeakableString) *Object {
 	_arr := purego.SliceToNSArray(items, func(_v *SpeakableString) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternativeSpeakableMatches:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("setAlternativeSpeakableMatches:"), _arr)
+	return o
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *Object) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (o *Object) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -123,8 +123,8 @@ func (x *Object) Identifier() string {
 }
 
 // DisplayString wraps the corresponding Objective-C method.
-func (x *Object) DisplayString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayString"))
+func (o *Object) DisplayString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("displayString"))
 	if _r == 0 {
 		return ""
 	}
@@ -132,8 +132,8 @@ func (x *Object) DisplayString() string {
 }
 
 // PronunciationHint wraps the corresponding Objective-C method.
-func (x *Object) PronunciationHint() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pronunciationHint"))
+func (o *Object) PronunciationHint() string {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("pronunciationHint"))
 	if _r == 0 {
 		return ""
 	}
@@ -141,58 +141,24 @@ func (x *Object) PronunciationHint() string {
 }
 
 // SubtitleString wraps the corresponding Objective-C method.
-func (x *Object) SubtitleString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitleString"))
+func (o *Object) SubtitleString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("subtitleString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetSubtitleString wraps the corresponding Objective-C method.
-func (x *Object) SetSubtitleString(subtitleString string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubtitleString:"), purego.NSString(subtitleString))
-}
-
 // DisplayImage wraps the corresponding Objective-C method.
-func (x *Object) DisplayImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayImage"))
+func (o *Object) DisplayImage() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("displayImage"))
 	return ImageFromID(_r)
-}
-
-// SetDisplayImage wraps the corresponding Objective-C method.
-func (x *Object) SetDisplayImage(displayImage *Image) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayImage:"), objref.IDOf(displayImage))
 }
 
 // AlternativeSpeakableMatches wraps the corresponding Objective-C method.
 //
 // AlternativeSpeakableMatches returns the collection as a Go slice.
-func (x *Object) AlternativeSpeakableMatches() []*SpeakableString {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternativeSpeakableMatches"))
+func (o *Object) AlternativeSpeakableMatches() []*SpeakableString {
+	_arr := objc.Send[objc.ID](objref.IDOf(o), objc.RegisterName("alternativeSpeakableMatches"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SpeakableString { return SpeakableStringFromID(_id) })
 }
-
-// SetAlternativeSpeakableMatches wraps the corresponding Objective-C method.
-func (x *Object) SetAlternativeSpeakableMatches(alternativeSpeakableMatches []*SpeakableString) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternativeSpeakableMatches:"), purego.SliceToNSArray(alternativeSpeakableMatches, func(_v *SpeakableString) objc.ID { return objref.IDOf(_v) }))
-}
-
-// Objectable is the interface implemented by [Object], for mocking and DI.
-type Objectable interface {
-	obj.Object
-	WithSubtitleString(subtitleString string) *Object
-	WithDisplayImage(displayImage *Image) *Object
-	WithAlternativeSpeakableMatches(items ...*SpeakableString) *Object
-	Identifier() string
-	DisplayString() string
-	PronunciationHint() string
-	SubtitleString() string
-	SetSubtitleString(subtitleString string)
-	DisplayImage() *Image
-	SetDisplayImage(displayImage *Image)
-	AlternativeSpeakableMatches() []*SpeakableString
-	SetAlternativeSpeakableMatches(alternativeSpeakableMatches []*SpeakableString)
-}
-
-var _ Objectable = (*Object)(nil)

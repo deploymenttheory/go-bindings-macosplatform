@@ -46,24 +46,24 @@ func keyValueSharedObserversAdopt(id objc.ID) *KeyValueSharedObservers {
 }
 
 // Description returns the object's -description text.
-func (x *KeyValueSharedObservers) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (kvso *KeyValueSharedObservers) Description() string {
+	return rt.Description(objref.IDOf(kvso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *KeyValueSharedObservers) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (kvso *KeyValueSharedObservers) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(kvso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *KeyValueSharedObservers) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (kvso *KeyValueSharedObservers) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(kvso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *KeyValueSharedObservers) String() string {
-	return rt.Description(objref.IDOf(x))
+func (kvso *KeyValueSharedObservers) String() string {
+	return rt.Description(objref.IDOf(kvso))
 }
 
 // NewKeyValueSharedObservers creates a new KeyValueSharedObservers.
@@ -73,22 +73,13 @@ func NewKeyValueSharedObservers() *KeyValueSharedObservers {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *KeyValueSharedObservers) WithScriptingProperties(scriptingProperties obj.Object) *KeyValueSharedObservers {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (kvso *KeyValueSharedObservers) WithScriptingProperties(scriptingProperties obj.Object) *KeyValueSharedObservers {
+	objc.Send[objc.ID](objref.IDOf(kvso), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return kvso
 }
 
-// Snapshot a momentary snapshot of all observers added to the collection thus far, that can be assigned to an observable using -[NSObject setSharedObservers:]
-func (x *KeyValueSharedObservers) Snapshot() *KeyValueSharedObserversSnapshot {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshot"))
+// Snapshot returns a momentary snapshot of all observers added to the collection thus far, that can be assigned to an observable using -[NSObject setSharedObservers:]
+func (kvso *KeyValueSharedObservers) Snapshot() *KeyValueSharedObserversSnapshot {
+	_r := objc.Send[objc.ID](objref.IDOf(kvso), objc.RegisterName("snapshot"))
 	return KeyValueSharedObserversSnapshotFromID(_r)
 }
-
-// KeyValueSharedObserversable is the interface implemented by [KeyValueSharedObservers], for mocking and DI.
-type KeyValueSharedObserversable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *KeyValueSharedObservers
-	Snapshot() *KeyValueSharedObserversSnapshot
-}
-
-var _ KeyValueSharedObserversable = (*KeyValueSharedObservers)(nil)

@@ -46,24 +46,24 @@ func fileAdopt(id objc.ID) *File {
 }
 
 // Description returns the object's -description text.
-func (x *File) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (f *File) Description() string {
+	return rt.Description(objref.IDOf(f))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *File) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (f *File) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(f), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *File) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (f *File) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(f), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *File) String() string {
-	return rt.Description(objref.IDOf(x))
+func (f *File) String() string {
+	return rt.Description(objref.IDOf(f))
 }
 
 // NewFile creates a new File.
@@ -72,76 +72,50 @@ func NewFile() *File {
 	return fileAdopt(_id)
 }
 
-// WithFilename the name of the file.
-func (x *File) WithFilename(filename string) *File {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilename:"), purego.NSString(filename))
-	return x
+// WithFilename sets the name of the file.
+func (f *File) WithFilename(filename string) *File {
+	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setFilename:"), purego.NSString(filename))
+	return f
 }
 
-// WithRemovedOnCompletion indicates whether the file should be automatically deleted from disk when the Shortcut is done running. `false` by default.
-func (x *File) WithRemovedOnCompletion(removedOnCompletion bool) *File {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
-	return x
+// WithRemovedOnCompletion sets indicates whether the file should be automatically deleted from disk when the Shortcut is done running. `false` by default.
+func (f *File) WithRemovedOnCompletion(removedOnCompletion bool) *File {
+	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
+	return f
 }
 
-// Data the contents of the file. If the file was created with a URL, accessing this property will memory map the file contents.
-func (x *File) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+// Data returns the contents of the file. If the file was created with a URL, accessing this property will memory map the file contents.
+func (f *File) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// Filename the human-readable name of the file, which will be displayed to the user.
-func (x *File) Filename() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filename"))
+// Filename returns the human-readable name of the file, which will be displayed to the user.
+func (f *File) Filename() string {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("filename"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetFilename wraps the corresponding Objective-C method.
-func (x *File) SetFilename(filename string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilename:"), purego.NSString(filename))
-}
-
-// TypeIdentifier the uniform type identifier of the file. (i.e. "public.json", "public.png", or any custom type) More information about uniform type identifiers can be found in <CoreServices/UTCoreTypes.h>
-func (x *File) TypeIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typeIdentifier"))
+// TypeIdentifier returns the uniform type identifier of the file. (i.e. "public.json", "public.png", or any custom type) More information about uniform type identifiers can be found in <CoreServices/UTCoreTypes.h>
+func (f *File) TypeIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("typeIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// FileURL URL to the file on disk, if any. If the file isn't stored on disk, access the contents using the `data` property. If the file was created elsewhere on the system, make sure to surround access to file contents with `-[NSURL startAccessingSecurityScopedResource]` and `-[NSURL stopAccessingSecurityScopedResource]`.
-func (x *File) FileURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileURL"))
+// FileURL returns URL to the file on disk, if any. If the file isn't stored on disk, access the contents using the `data` property. If the file was created elsewhere on the system, make sure to surround access to file contents with `-[NSURL startAccessingSecurityScopedResource]` and `-[NSURL stopAccessingSecurityScopedResource]`.
+func (f *File) FileURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("fileURL"))
 	return obj.Wrap(_r)
 }
 
-// RemovedOnCompletion indicates whether the file should be automatically deleted from disk when the Shortcut is done running. `false` by default.
-func (x *File) RemovedOnCompletion() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removedOnCompletion"))
+// RemovedOnCompletion reports whether the file should be automatically deleted from disk when the Shortcut is done running. `false` by default.
+func (f *File) RemovedOnCompletion() bool {
+	_r := objc.Send[bool](objref.IDOf(f), objc.RegisterName("removedOnCompletion"))
 	return _r
 }
-
-// SetRemovedOnCompletion wraps the corresponding Objective-C method.
-func (x *File) SetRemovedOnCompletion(removedOnCompletion bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
-}
-
-// Fileable is the interface implemented by [File], for mocking and DI.
-type Fileable interface {
-	obj.Object
-	WithFilename(filename string) *File
-	WithRemovedOnCompletion(removedOnCompletion bool) *File
-	Data() obj.Object
-	Filename() string
-	SetFilename(filename string)
-	TypeIdentifier() string
-	FileURL() obj.Object
-	RemovedOnCompletion() bool
-	SetRemovedOnCompletion(removedOnCompletion bool)
-}
-
-var _ Fileable = (*File)(nil)

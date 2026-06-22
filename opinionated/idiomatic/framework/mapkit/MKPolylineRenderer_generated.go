@@ -53,128 +53,95 @@ func NewPolylineRendererWithPolyline(polyline *Polyline) *PolylineRenderer {
 	return polylineRendererAdopt(_id)
 }
 
-// WithStrokeStart the unit distance along the line where the stroke starts.
-func (x *PolylineRenderer) WithStrokeStart(strokeStart float64) *PolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeStart:"), strokeStart)
-	return x
+// WithStrokeStart sets the unit distance along the line where the stroke starts.
+func (pr *PolylineRenderer) WithStrokeStart(strokeStart float64) *PolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setStrokeStart:"), strokeStart)
+	return pr
 }
 
-// WithStrokeEnd the unit distance along the line where the stroke ends.
-func (x *PolylineRenderer) WithStrokeEnd(strokeEnd float64) *PolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeEnd:"), strokeEnd)
-	return x
+// WithStrokeEnd sets the unit distance along the line where the stroke ends.
+func (pr *PolylineRenderer) WithStrokeEnd(strokeEnd float64) *PolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setStrokeEnd:"), strokeEnd)
+	return pr
 }
 
-// WithFillColor the fill color to use for the path.
-func (x *PolylineRenderer) WithFillColor(fillColor obj.Object) *PolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
-	return x
+// WithFillColor sets the fill color to use for the path.
+func (pr *PolylineRenderer) WithFillColor(fillColor obj.Object) *PolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
+	return pr
 }
 
-// WithStrokeColor the stroke color to use for the path.
-func (x *PolylineRenderer) WithStrokeColor(strokeColor obj.Object) *PolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
-	return x
+// WithStrokeColor sets the stroke color to use for the path.
+func (pr *PolylineRenderer) WithStrokeColor(strokeColor obj.Object) *PolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
+	return pr
 }
 
-// WithLineWidth the stroke width to use for the path.
-func (x *PolylineRenderer) WithLineWidth(lineWidth float64) *PolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
-	return x
+// WithLineWidth sets the stroke width to use for the path.
+func (pr *PolylineRenderer) WithLineWidth(lineWidth float64) *PolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setLineWidth:"), lineWidth)
+	return pr
 }
 
-// WithMiterLimit the limiting value that helps avoid spikes at junctions between connected line segments.
-func (x *PolylineRenderer) WithMiterLimit(miterLimit float64) *PolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
-	return x
+// WithMiterLimit sets the limiting value that helps avoid spikes at junctions between connected line segments.
+func (pr *PolylineRenderer) WithMiterLimit(miterLimit float64) *PolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setMiterLimit:"), miterLimit)
+	return pr
 }
 
-// WithLineDashPhase the offset (in points) at which to start drawing the dash pattern.
-func (x *PolylineRenderer) WithLineDashPhase(lineDashPhase float64) *PolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
-	return x
+// WithLineDashPhase sets the offset (in points) at which to start drawing the dash pattern.
+func (pr *PolylineRenderer) WithLineDashPhase(lineDashPhase float64) *PolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
+	return pr
 }
 
-// WithLineDashPattern an array of numbers specifying the dash pattern to use for the path.
-func (x *PolylineRenderer) WithLineDashPattern(items ...obj.Object) *PolylineRenderer {
+// WithLineDashPattern sets an array of numbers specifying the dash pattern to use for the path.
+func (pr *PolylineRenderer) WithLineDashPattern(items ...obj.Object) *PolylineRenderer {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPattern:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setLineDashPattern:"), _arr)
+	return pr
 }
 
-// WithShouldRasterize a Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
-func (x *PolylineRenderer) WithShouldRasterize(shouldRasterize bool) *PolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
-	return x
+// WithShouldRasterize sets a Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
+func (pr *PolylineRenderer) WithShouldRasterize(shouldRasterize bool) *PolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	return pr
 }
 
-// WithPath the path representing the overlay’s shape.
-func (x *PolylineRenderer) WithPath(path obj.Object) *PolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
-	return x
+// WithPath sets the path representing the overlay’s shape.
+func (pr *PolylineRenderer) WithPath(path obj.Object) *PolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setPath:"), objref.IDOf(path))
+	return pr
 }
 
-// WithAlpha the amount of transparency to apply to the overlay.
-func (x *PolylineRenderer) WithAlpha(alpha float64) *PolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the amount of transparency to apply to the overlay.
+func (pr *PolylineRenderer) WithAlpha(alpha float64) *PolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("setAlpha:"), alpha)
+	return pr
 }
 
 // Polyline wraps the corresponding Objective-C method.
-func (x *PolylineRenderer) Polyline() *Polyline {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("polyline"))
+func (pr *PolylineRenderer) Polyline() *Polyline {
+	_r := objc.Send[objc.ID](objref.IDOf(pr), objc.RegisterName("polyline"))
 	return PolylineFromID(_r)
 }
 
 // StrokeStart wraps the corresponding Objective-C method.
-func (x *PolylineRenderer) StrokeStart() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("strokeStart"))
+func (pr *PolylineRenderer) StrokeStart() float64 {
+	_r := objc.Send[float64](objref.IDOf(pr), objc.RegisterName("strokeStart"))
 	return _r
-}
-
-// SetStrokeStart wraps the corresponding Objective-C method.
-func (x *PolylineRenderer) SetStrokeStart(strokeStart float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeStart:"), strokeStart)
 }
 
 // StrokeEnd wraps the corresponding Objective-C method.
-func (x *PolylineRenderer) StrokeEnd() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("strokeEnd"))
+func (pr *PolylineRenderer) StrokeEnd() float64 {
+	_r := objc.Send[float64](objref.IDOf(pr), objc.RegisterName("strokeEnd"))
 	return _r
 }
-
-// SetStrokeEnd wraps the corresponding Objective-C method.
-func (x *PolylineRenderer) SetStrokeEnd(strokeEnd float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeEnd:"), strokeEnd)
-}
-
-// PolylineRendererable is the interface implemented by [PolylineRenderer], for mocking and DI.
-type PolylineRendererable interface {
-	obj.Object
-	WithStrokeStart(strokeStart float64) *PolylineRenderer
-	WithStrokeEnd(strokeEnd float64) *PolylineRenderer
-	WithFillColor(fillColor obj.Object) *PolylineRenderer
-	WithStrokeColor(strokeColor obj.Object) *PolylineRenderer
-	WithLineWidth(lineWidth float64) *PolylineRenderer
-	WithMiterLimit(miterLimit float64) *PolylineRenderer
-	WithLineDashPhase(lineDashPhase float64) *PolylineRenderer
-	WithLineDashPattern(items ...obj.Object) *PolylineRenderer
-	WithShouldRasterize(shouldRasterize bool) *PolylineRenderer
-	WithPath(path obj.Object) *PolylineRenderer
-	WithAlpha(alpha float64) *PolylineRenderer
-	Polyline() *Polyline
-	StrokeStart() float64
-	SetStrokeStart(strokeStart float64)
-	StrokeEnd() float64
-	SetStrokeEnd(strokeEnd float64)
-}
-
-var _ PolylineRendererable = (*PolylineRenderer)(nil)
 
 // isPolylineRenderer marks PolylineRenderer — and, by embedding promotion, its
 // subclasses — as a member of the PolylineRenderer hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PolylineRenderer) isPolylineRenderer() {}
+func (pr *PolylineRenderer) isPolylineRenderer() {}
 
 var _ PolylineRendererProvider = (*PolylineRenderer)(nil)
 

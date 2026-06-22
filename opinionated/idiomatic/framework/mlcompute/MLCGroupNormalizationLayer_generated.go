@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,74 +51,58 @@ func NewGroupNormalizationLayer() *GroupNormalizationLayer {
 	return groupNormalizationLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *GroupNormalizationLayer) WithLabel(label string) *GroupNormalizationLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (gnl *GroupNormalizationLayer) WithLabel(label string) *GroupNormalizationLayer {
+	objc.Send[objc.ID](objref.IDOf(gnl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return gnl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *GroupNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *GroupNormalizationLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (gnl *GroupNormalizationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *GroupNormalizationLayer {
+	objc.Send[objc.ID](objref.IDOf(gnl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return gnl
 }
 
-// FeatureChannelCount the number of feature channels
-func (x *GroupNormalizationLayer) FeatureChannelCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("featureChannelCount"))
+// FeatureChannelCount returns the number of feature channels
+func (gnl *GroupNormalizationLayer) FeatureChannelCount() int {
+	_r := objc.Send[int](objref.IDOf(gnl), objc.RegisterName("featureChannelCount"))
 	return _r
 }
 
-// GroupCount the number of groups to separate the channels into
-func (x *GroupNormalizationLayer) GroupCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("groupCount"))
+// GroupCount returns the number of groups to separate the channels into
+func (gnl *GroupNormalizationLayer) GroupCount() int {
+	_r := objc.Send[int](objref.IDOf(gnl), objc.RegisterName("groupCount"))
 	return _r
 }
 
-// Beta the beta tensor
-func (x *GroupNormalizationLayer) Beta() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beta"))
+// Beta returns the beta tensor
+func (gnl *GroupNormalizationLayer) Beta() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(gnl), objc.RegisterName("beta"))
 	return TensorFromID(_r)
 }
 
-// Gamma the gamma tensor
-func (x *GroupNormalizationLayer) Gamma() *Tensor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gamma"))
+// Gamma returns the gamma tensor
+func (gnl *GroupNormalizationLayer) Gamma() *Tensor {
+	_r := objc.Send[objc.ID](objref.IDOf(gnl), objc.RegisterName("gamma"))
 	return TensorFromID(_r)
 }
 
-// BetaParameter the beta tensor parameter used for optimizer update
-func (x *GroupNormalizationLayer) BetaParameter() *TensorParameter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("betaParameter"))
+// BetaParameter returns the beta tensor parameter used for optimizer update
+func (gnl *GroupNormalizationLayer) BetaParameter() *TensorParameter {
+	_r := objc.Send[objc.ID](objref.IDOf(gnl), objc.RegisterName("betaParameter"))
 	return TensorParameterFromID(_r)
 }
 
-// GammaParameter the gamma tensor parameter used for optimizer update
-func (x *GroupNormalizationLayer) GammaParameter() *TensorParameter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gammaParameter"))
+// GammaParameter returns the gamma tensor parameter used for optimizer update
+func (gnl *GroupNormalizationLayer) GammaParameter() *TensorParameter {
+	_r := objc.Send[objc.ID](objref.IDOf(gnl), objc.RegisterName("gammaParameter"))
 	return TensorParameterFromID(_r)
 }
 
-// VarianceEpsilon a value used for numerical stability
-func (x *GroupNormalizationLayer) VarianceEpsilon() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("varianceEpsilon"))
+// VarianceEpsilon returns a value used for numerical stability
+func (gnl *GroupNormalizationLayer) VarianceEpsilon() float32 {
+	_r := objc.Send[float32](objref.IDOf(gnl), objc.RegisterName("varianceEpsilon"))
 	return _r
 }
-
-// GroupNormalizationLayerable is the interface implemented by [GroupNormalizationLayer], for mocking and DI.
-type GroupNormalizationLayerable interface {
-	obj.Object
-	WithLabel(label string) *GroupNormalizationLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *GroupNormalizationLayer
-	FeatureChannelCount() int
-	GroupCount() int
-	Beta() *Tensor
-	Gamma() *Tensor
-	BetaParameter() *TensorParameter
-	GammaParameter() *TensorParameter
-	VarianceEpsilon() float32
-}
-
-var _ GroupNormalizationLayerable = (*GroupNormalizationLayer)(nil)
 
 var _ LayerProvider = (*GroupNormalizationLayer)(nil)

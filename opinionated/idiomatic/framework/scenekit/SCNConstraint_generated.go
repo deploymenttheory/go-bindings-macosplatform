@@ -48,96 +48,65 @@ func constraintAdopt(id objc.ID) *Constraint {
 }
 
 // Description returns the object's -description text.
-func (x *Constraint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Constraint) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Constraint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Constraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Constraint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Constraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Constraint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Constraint) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
-// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
-func (x *Constraint) WithEnabled(enabled bool) *Constraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets determines whether the constraint is enabled or not. Defaults to YES.
+func (c *Constraint) WithEnabled(enabled bool) *Constraint {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setEnabled:"), enabled)
+	return c
 }
 
-// WithInfluenceFactor the influence of the constraint on the node’s transformation.
-func (x *Constraint) WithInfluenceFactor(influenceFactor float64) *Constraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
-	return x
+// WithInfluenceFactor sets the influence of the constraint on the node’s transformation.
+func (c *Constraint) WithInfluenceFactor(influenceFactor float64) *Constraint {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
+	return c
 }
 
-// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-func (x *Constraint) WithIncremental(incremental bool) *Constraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
-	return x
+// WithIncremental sets specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+func (c *Constraint) WithIncremental(incremental bool) *Constraint {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setIncremental:"), incremental)
+	return c
 }
 
-// IsEnabled determines whether the constraint is enabled or not. Defaults to YES.
-func (x *Constraint) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+// IsEnabled reports whether the constraint is enabled or not. Defaults to true.
+func (c *Constraint) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isEnabled"))
 	return _r
-}
-
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *Constraint) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
 // InfluenceFactor specifies the inflence factor of the receiver. Defaults to 1. Animatable
-func (x *Constraint) InfluenceFactor() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("influenceFactor"))
+func (c *Constraint) InfluenceFactor() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("influenceFactor"))
 	return _r
 }
 
-// SetInfluenceFactor wraps the corresponding Objective-C method.
-func (x *Constraint) SetInfluenceFactor(influenceFactor float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
-}
-
-// IsIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-func (x *Constraint) IsIncremental() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isIncremental"))
+// IsIncremental reports whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to true starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to false in previous versions.
+func (c *Constraint) IsIncremental() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isIncremental"))
 	return _r
 }
-
-// SetIncremental wraps the corresponding Objective-C method.
-func (x *Constraint) SetIncremental(incremental bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
-}
-
-// Constraintable is the interface implemented by [Constraint], for mocking and DI.
-type Constraintable interface {
-	obj.Object
-	WithEnabled(enabled bool) *Constraint
-	WithInfluenceFactor(influenceFactor float64) *Constraint
-	WithIncremental(incremental bool) *Constraint
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-	InfluenceFactor() float64
-	SetInfluenceFactor(influenceFactor float64)
-	IsIncremental() bool
-	SetIncremental(incremental bool)
-}
-
-var _ Constraintable = (*Constraint)(nil)
 
 // isConstraint marks Constraint — and, by embedding promotion, its
 // subclasses — as a member of the Constraint hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Constraint) isConstraint() {}
+func (c *Constraint) isConstraint() {}
 
 var _ ConstraintProvider = (*Constraint)(nil)

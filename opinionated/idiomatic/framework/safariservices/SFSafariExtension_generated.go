@@ -46,24 +46,24 @@ func safariExtensionAdopt(id objc.ID) *SafariExtension {
 }
 
 // Description returns the object's -description text.
-func (x *SafariExtension) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (se *SafariExtension) Description() string {
+	return rt.Description(objref.IDOf(se))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SafariExtension) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (se *SafariExtension) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(se), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SafariExtension) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (se *SafariExtension) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(se), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SafariExtension) String() string {
-	return rt.Description(objref.IDOf(x))
+func (se *SafariExtension) String() string {
+	return rt.Description(objref.IDOf(se))
 }
 
 // NewSafariExtension creates a new SafariExtension.
@@ -71,10 +71,3 @@ func NewSafariExtension() *SafariExtension {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFSafariExtension")), objc.RegisterName("new"))
 	return safariExtensionAdopt(_id)
 }
-
-// SafariExtensionable is the interface implemented by [SafariExtension], for mocking and DI.
-type SafariExtensionable interface {
-	obj.Object
-}
-
-var _ SafariExtensionable = (*SafariExtension)(nil)

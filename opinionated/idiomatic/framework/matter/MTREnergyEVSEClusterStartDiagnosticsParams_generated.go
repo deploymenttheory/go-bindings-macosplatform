@@ -44,24 +44,24 @@ func mTREnergyEVSEClusterStartDiagnosticsParamsAdopt(id objc.ID) *MTREnergyEVSEC
 }
 
 // Description returns the object's -description text.
-func (x *MTREnergyEVSEClusterStartDiagnosticsParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (meecsdp *MTREnergyEVSEClusterStartDiagnosticsParams) Description() string {
+	return rt.Description(objref.IDOf(meecsdp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTREnergyEVSEClusterStartDiagnosticsParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (meecsdp *MTREnergyEVSEClusterStartDiagnosticsParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(meecsdp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTREnergyEVSEClusterStartDiagnosticsParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (meecsdp *MTREnergyEVSEClusterStartDiagnosticsParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(meecsdp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTREnergyEVSEClusterStartDiagnosticsParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (meecsdp *MTREnergyEVSEClusterStartDiagnosticsParams) String() string {
+	return rt.Description(objref.IDOf(meecsdp))
 }
 
 // NewMTREnergyEVSEClusterStartDiagnosticsParams creates a new MTREnergyEVSEClusterStartDiagnosticsParams.
@@ -70,49 +70,26 @@ func NewMTREnergyEVSEClusterStartDiagnosticsParams() *MTREnergyEVSEClusterStartD
 	return mTREnergyEVSEClusterStartDiagnosticsParamsAdopt(_id)
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTREnergyEVSEClusterStartDiagnosticsParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTREnergyEVSEClusterStartDiagnosticsParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (meecsdp *MTREnergyEVSEClusterStartDiagnosticsParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTREnergyEVSEClusterStartDiagnosticsParams {
+	objc.Send[objc.ID](objref.IDOf(meecsdp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return meecsdp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTREnergyEVSEClusterStartDiagnosticsParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTREnergyEVSEClusterStartDiagnosticsParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (meecsdp *MTREnergyEVSEClusterStartDiagnosticsParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTREnergyEVSEClusterStartDiagnosticsParams {
+	objc.Send[objc.ID](objref.IDOf(meecsdp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return meecsdp
 }
 
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTREnergyEVSEClusterStartDiagnosticsParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (meecsdp *MTREnergyEVSEClusterStartDiagnosticsParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meecsdp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterStartDiagnosticsParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTREnergyEVSEClusterStartDiagnosticsParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (meecsdp *MTREnergyEVSEClusterStartDiagnosticsParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meecsdp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterStartDiagnosticsParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTREnergyEVSEClusterStartDiagnosticsParamsable is the interface implemented by [MTREnergyEVSEClusterStartDiagnosticsParams], for mocking and DI.
-type MTREnergyEVSEClusterStartDiagnosticsParamsable interface {
-	obj.Object
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTREnergyEVSEClusterStartDiagnosticsParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTREnergyEVSEClusterStartDiagnosticsParams
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTREnergyEVSEClusterStartDiagnosticsParamsable = (*MTREnergyEVSEClusterStartDiagnosticsParams)(nil)

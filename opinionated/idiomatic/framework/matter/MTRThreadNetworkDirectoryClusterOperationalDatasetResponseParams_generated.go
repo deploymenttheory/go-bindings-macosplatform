@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams is an idiomatic wrapper over the Objective-C class MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams.
@@ -46,24 +47,24 @@ func mTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsAdopt(id ob
 }
 
 // Description returns the object's -description text.
-func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtndcodrp *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) Description() string {
+	return rt.Description(objref.IDOf(mtndcodrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtndcodrp *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtndcodrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtndcodrp *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtndcodrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtndcodrp *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) String() string {
+	return rt.Description(objref.IDOf(mtndcodrp))
 }
 
 // NewMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsWithResponseValueError initialize an MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
@@ -78,28 +79,13 @@ func NewMTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsWithResp
 }
 
 // WithOperationalDataset sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) WithOperationalDataset(operationalDataset obj.Object) *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalDataset:"), objref.IDOf(operationalDataset))
-	return x
+func (mtndcodrp *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) WithOperationalDataset(operationalDataset obj.Object) *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mtndcodrp), objc.RegisterName("setOperationalDataset:"), objref.IDOf(operationalDataset))
+	return mtndcodrp
 }
 
 // OperationalDataset wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) OperationalDataset() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operationalDataset"))
+func (mtndcodrp *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) OperationalDataset() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndcodrp), objc.RegisterName("operationalDataset"))
 	return obj.Wrap(_r)
 }
-
-// SetOperationalDataset wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams) SetOperationalDataset(operationalDataset obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOperationalDataset:"), objref.IDOf(operationalDataset))
-}
-
-// MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsable is the interface implemented by [MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams], for mocking and DI.
-type MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsable interface {
-	obj.Object
-	WithOperationalDataset(operationalDataset obj.Object) *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams
-	OperationalDataset() obj.Object
-	SetOperationalDataset(operationalDataset obj.Object)
-}
-
-var _ MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsable = (*MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams)(nil)

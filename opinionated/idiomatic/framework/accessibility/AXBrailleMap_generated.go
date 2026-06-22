@@ -47,24 +47,24 @@ func brailleMapAdopt(id objc.ID) *BrailleMap {
 }
 
 // Description returns the object's -description text.
-func (x *BrailleMap) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bm *BrailleMap) Description() string {
+	return rt.Description(objref.IDOf(bm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BrailleMap) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bm *BrailleMap) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BrailleMap) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bm *BrailleMap) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BrailleMap) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bm *BrailleMap) String() string {
+	return rt.Description(objref.IDOf(bm))
 }
 
 // NewBrailleMap creates a new BrailleMap.
@@ -74,34 +74,23 @@ func NewBrailleMap() *BrailleMap {
 }
 
 // SetHeightAtPoint sets the height of an individual pin on the braille display.
-func (x *BrailleMap) SetHeightAtPoint(status float32, point corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:atPoint:"), status, point)
+func (bm *BrailleMap) SetHeightAtPoint(status float32, point corefoundation.CGPoint) {
+	objc.Send[objc.ID](objref.IDOf(bm), objc.RegisterName("setHeight:atPoint:"), status, point)
 }
 
 // HeightAtPoint retrieves the height of an individual pin on the braille display.
-func (x *BrailleMap) HeightAtPoint(point corefoundation.CGPoint) float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("heightAtPoint:"), point)
+func (bm *BrailleMap) HeightAtPoint(point corefoundation.CGPoint) float32 {
+	_r := objc.Send[float32](objref.IDOf(bm), objc.RegisterName("heightAtPoint:"), point)
 	return _r
 }
 
 // PresentImage converts the data from the image you specify into the braille map.
-func (x *BrailleMap) PresentImage(image obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentImage:"), objref.IDOf(image))
+func (bm *BrailleMap) PresentImage(image obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(bm), objc.RegisterName("presentImage:"), objref.IDOf(image))
 }
 
 // Dimensions wraps the corresponding Objective-C method.
-func (x *BrailleMap) Dimensions() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("dimensions"))
+func (bm *BrailleMap) Dimensions() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(bm), objc.RegisterName("dimensions"))
 	return _r
 }
-
-// BrailleMapable is the interface implemented by [BrailleMap], for mocking and DI.
-type BrailleMapable interface {
-	obj.Object
-	SetHeightAtPoint(status float32, point corefoundation.CGPoint)
-	HeightAtPoint(point corefoundation.CGPoint) float32
-	PresentImage(image obj.Object)
-	Dimensions() corefoundation.CGSize
-}
-
-var _ BrailleMapable = (*BrailleMap)(nil)

@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,144 +52,118 @@ func NewCNNAdd() *CNNAdd {
 }
 
 // WithPrimaryScale sets the property and returns the receiver so calls can be chained.
-func (x *CNNAdd) WithPrimaryScale(primaryScale float32) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
-	return x
+func (ca *CNNAdd) WithPrimaryScale(primaryScale float32) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setPrimaryScale:"), primaryScale)
+	return ca
 }
 
 // WithSecondaryScale sets the property and returns the receiver so calls can be chained.
-func (x *CNNAdd) WithSecondaryScale(secondaryScale float32) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
-	return x
+func (ca *CNNAdd) WithSecondaryScale(secondaryScale float32) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setSecondaryScale:"), secondaryScale)
+	return ca
 }
 
 // WithBias sets the property and returns the receiver so calls can be chained.
-func (x *CNNAdd) WithBias(bias float32) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
-	return x
+func (ca *CNNAdd) WithBias(bias float32) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setBias:"), bias)
+	return ca
 }
 
-// WithPrimaryStrideInFeatureChannels the primarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
-func (x *CNNAdd) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
-	return x
+// WithPrimaryStrideInFeatureChannels sets the primarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (ca *CNNAdd) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
+	return ca
 }
 
-// WithSecondaryStrideInFeatureChannels the secondarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
-func (x *CNNAdd) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
-	return x
+// WithSecondaryStrideInFeatureChannels sets the secondarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
+func (ca *CNNAdd) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
+	return ca
 }
 
-// WithMinimumValue minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
-func (x *CNNAdd) WithMinimumValue(minimumValue float32) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
-	return x
+// WithMinimumValue sets minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
+func (ca *CNNAdd) WithMinimumValue(minimumValue float32) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setMinimumValue:"), minimumValue)
+	return ca
 }
 
-// WithMaximumValue maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
-func (x *CNNAdd) WithMaximumValue(maximumValue float32) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
-	return x
+// WithMaximumValue sets maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
+func (ca *CNNAdd) WithMaximumValue(maximumValue float32) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setMaximumValue:"), maximumValue)
+	return ca
 }
 
-// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
-func (x *CNNAdd) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
-	return x
+// WithPrimaryOffset sets the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (ca *CNNAdd) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
+	return ca
 }
 
-// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
-func (x *CNNAdd) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
-	return x
+// WithSecondaryOffset sets the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (ca *CNNAdd) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
+	return ca
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
-func (x *CNNAdd) WithClipRect(clipRect metal.MTLRegion) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
+func (ca *CNNAdd) WithClipRect(clipRect metal.MTLRegion) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setClipRect:"), clipRect)
+	return ca
 }
 
-// WithDestinationFeatureChannelOffset the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
-func (x *CNNAdd) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
-	return x
+// WithDestinationFeatureChannelOffset sets the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+func (ca *CNNAdd) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
+	return ca
 }
 
-// WithPrimarySourceFeatureChannelOffset the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-func (x *CNNAdd) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
-	return x
+// WithPrimarySourceFeatureChannelOffset sets the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (ca *CNNAdd) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
+	return ca
 }
 
-// WithSecondarySourceFeatureChannelOffset the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-func (x *CNNAdd) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
-	return x
+// WithSecondarySourceFeatureChannelOffset sets the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (ca *CNNAdd) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
+	return ca
 }
 
-// WithPrimarySourceFeatureChannelMaxCount the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNAdd) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
-	return x
+// WithPrimarySourceFeatureChannelMaxCount sets the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (ca *CNNAdd) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
+	return ca
 }
 
-// WithSecondarySourceFeatureChannelMaxCount the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNAdd) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
-	return x
+// WithSecondarySourceFeatureChannelMaxCount sets the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (ca *CNNAdd) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
+	return ca
 }
 
-// WithPrimaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNAdd) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
-	return x
+// WithPrimaryStrideInPixelsX sets the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (ca *CNNAdd) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
+	return ca
 }
 
-// WithPrimaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNAdd) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
-	return x
+// WithPrimaryStrideInPixelsY sets the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (ca *CNNAdd) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
+	return ca
 }
 
-// WithSecondaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNAdd) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
-	return x
+// WithSecondaryStrideInPixelsX sets the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (ca *CNNAdd) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
+	return ca
 }
 
-// WithSecondaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNAdd) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
-	return x
+// WithSecondaryStrideInPixelsY sets the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (ca *CNNAdd) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNAdd {
+	objc.Send[objc.ID](objref.IDOf(ca), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
+	return ca
 }
-
-// CNNAddable is the interface implemented by [CNNAdd], for mocking and DI.
-type CNNAddable interface {
-	obj.Object
-	WithPrimaryScale(primaryScale float32) *CNNAdd
-	WithSecondaryScale(secondaryScale float32) *CNNAdd
-	WithBias(bias float32) *CNNAdd
-	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *CNNAdd
-	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *CNNAdd
-	WithMinimumValue(minimumValue float32) *CNNAdd
-	WithMaximumValue(maximumValue float32) *CNNAdd
-	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNAdd
-	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNAdd
-	WithClipRect(clipRect metal.MTLRegion) *CNNAdd
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNAdd
-	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNAdd
-	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNAdd
-	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNAdd
-	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNAdd
-	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNAdd
-	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNAdd
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNAdd
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNAdd
-}
-
-var _ CNNAddable = (*CNNAdd)(nil)
 
 var _ CNNArithmeticProvider = (*CNNAdd)(nil)
 

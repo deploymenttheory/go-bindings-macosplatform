@@ -7,7 +7,6 @@ package imagecapturecore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,59 +51,40 @@ func NewScannerFeatureRange() *ScannerFeatureRange {
 	return scannerFeatureRangeAdopt(_id)
 }
 
-// WithCurrentValue ￼The current value. Attempting to set the current value to a value that is not coincident with a step will result in a value corresponding to the nearest step being assigned to the current value.
-func (x *ScannerFeatureRange) WithCurrentValue(currentValue float64) *ScannerFeatureRange {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
-	return x
+// WithCurrentValue sets ￼The current value. Attempting to set the current value to a value that is not coincident with a step will result in a value corresponding to the nearest step being assigned to the current value.
+func (sfr *ScannerFeatureRange) WithCurrentValue(currentValue float64) *ScannerFeatureRange {
+	objc.Send[objc.ID](objref.IDOf(sfr), objc.RegisterName("setCurrentValue:"), currentValue)
+	return sfr
 }
 
-// CurrentValue ￼The current value. Attempting to set the current value to a value that is not coincident with a step will result in a value corresponding to the nearest step being assigned to the current value.
-func (x *ScannerFeatureRange) CurrentValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("currentValue"))
+// CurrentValue returns ￼The current value. Attempting to set the current value to a value that is not coincident with a step will result in a value corresponding to the nearest step being assigned to the current value.
+func (sfr *ScannerFeatureRange) CurrentValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(sfr), objc.RegisterName("currentValue"))
 	return _r
 }
 
-// SetCurrentValue wraps the corresponding Objective-C method.
-func (x *ScannerFeatureRange) SetCurrentValue(currentValue float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
-}
-
-// DefaultValue the default value￼. Attempting to set the default value to a value that is not coincident with a step will result in a value corresponding to the nearest step being assigned to the default value.
-func (x *ScannerFeatureRange) DefaultValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("defaultValue"))
+// DefaultValue returns the default value￼. Attempting to set the default value to a value that is not coincident with a step will result in a value corresponding to the nearest step being assigned to the default value.
+func (sfr *ScannerFeatureRange) DefaultValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(sfr), objc.RegisterName("defaultValue"))
 	return _r
 }
 
-// MinValue the minimum value.
-func (x *ScannerFeatureRange) MinValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minValue"))
+// MinValue returns the minimum value.
+func (sfr *ScannerFeatureRange) MinValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(sfr), objc.RegisterName("minValue"))
 	return _r
 }
 
-// MaxValue ￼The maximum value.
-func (x *ScannerFeatureRange) MaxValue() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxValue"))
+// MaxValue returns ￼The maximum value.
+func (sfr *ScannerFeatureRange) MaxValue() float64 {
+	_r := objc.Send[float64](objref.IDOf(sfr), objc.RegisterName("maxValue"))
 	return _r
 }
 
-// StepSize ￼The step size.
-func (x *ScannerFeatureRange) StepSize() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("stepSize"))
+// StepSize returns ￼The step size.
+func (sfr *ScannerFeatureRange) StepSize() float64 {
+	_r := objc.Send[float64](objref.IDOf(sfr), objc.RegisterName("stepSize"))
 	return _r
 }
-
-// ScannerFeatureRangeable is the interface implemented by [ScannerFeatureRange], for mocking and DI.
-type ScannerFeatureRangeable interface {
-	obj.Object
-	WithCurrentValue(currentValue float64) *ScannerFeatureRange
-	CurrentValue() float64
-	SetCurrentValue(currentValue float64)
-	DefaultValue() float64
-	MinValue() float64
-	MaxValue() float64
-	StepSize() float64
-}
-
-var _ ScannerFeatureRangeable = (*ScannerFeatureRange)(nil)
 
 var _ ScannerFeatureProvider = (*ScannerFeatureRange)(nil)

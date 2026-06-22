@@ -46,24 +46,24 @@ func l2CAPChannelAdopt(id objc.ID) *L2CAPChannel {
 }
 
 // Description returns the object's -description text.
-func (x *L2CAPChannel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lcc *L2CAPChannel) Description() string {
+	return rt.Description(objref.IDOf(lcc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *L2CAPChannel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lcc *L2CAPChannel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lcc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *L2CAPChannel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lcc *L2CAPChannel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lcc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *L2CAPChannel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lcc *L2CAPChannel) String() string {
+	return rt.Description(objref.IDOf(lcc))
 }
 
 // NewL2CAPChannel creates a new L2CAPChannel.
@@ -72,37 +72,26 @@ func NewL2CAPChannel() *L2CAPChannel {
 	return l2CAPChannelAdopt(_id)
 }
 
-// Peer the peer connected to the channel
-func (x *L2CAPChannel) Peer() *Peer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("peer"))
+// Peer returns the peer connected to the channel
+func (lcc *L2CAPChannel) Peer() *Peer {
+	_r := objc.Send[objc.ID](objref.IDOf(lcc), objc.RegisterName("peer"))
 	return PeerFromID(_r)
 }
 
-// InputStream an NSStream used for reading data from the remote peer
-func (x *L2CAPChannel) InputStream() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputStream"))
+// InputStream returns an NSStream used for reading data from the remote peer
+func (lcc *L2CAPChannel) InputStream() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lcc), objc.RegisterName("inputStream"))
 	return obj.Wrap(_r)
 }
 
-// OutputStream an NSStream used for writing data to the peer
-func (x *L2CAPChannel) OutputStream() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputStream"))
+// OutputStream returns an NSStream used for writing data to the peer
+func (lcc *L2CAPChannel) OutputStream() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(lcc), objc.RegisterName("outputStream"))
 	return obj.Wrap(_r)
 }
 
-// PSM the PSM (Protocol/Service Multiplexer) of the channel
-func (x *L2CAPChannel) PSM() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("PSM"))
+// PSM returns the PSM (Protocol/Service Multiplexer) of the channel
+func (lcc *L2CAPChannel) PSM() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(lcc), objc.RegisterName("PSM"))
 	return _r
 }
-
-// L2CAPChannelable is the interface implemented by [L2CAPChannel], for mocking and DI.
-type L2CAPChannelable interface {
-	obj.Object
-	Peer() *Peer
-	InputStream() obj.Object
-	OutputStream() obj.Object
-	PSM() uint16
-}
-
-var _ L2CAPChannelable = (*L2CAPChannel)(nil)

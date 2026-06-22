@@ -46,24 +46,24 @@ func thumbnailReplyAdopt(id objc.ID) *ThumbnailReply {
 }
 
 // Description returns the object's -description text.
-func (x *ThumbnailReply) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tr *ThumbnailReply) Description() string {
+	return rt.Description(objref.IDOf(tr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ThumbnailReply) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tr *ThumbnailReply) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ThumbnailReply) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tr *ThumbnailReply) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ThumbnailReply) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tr *ThumbnailReply) String() string {
+	return rt.Description(objref.IDOf(tr))
 }
 
 // NewThumbnailReply creates a new ThumbnailReply.
@@ -72,32 +72,17 @@ func NewThumbnailReply() *ThumbnailReply {
 	return thumbnailReplyAdopt(_id)
 }
 
-// WithExtensionBadge a short string that identifies the file type that the system uses as a badge when producing an icon thumbnail.
-func (x *ThumbnailReply) WithExtensionBadge(extensionBadge string) *ThumbnailReply {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtensionBadge:"), purego.NSString(extensionBadge))
-	return x
+// WithExtensionBadge sets a short string that identifies the file type that the system uses as a badge when producing an icon thumbnail.
+func (tr *ThumbnailReply) WithExtensionBadge(extensionBadge string) *ThumbnailReply {
+	objc.Send[objc.ID](objref.IDOf(tr), objc.RegisterName("setExtensionBadge:"), purego.NSString(extensionBadge))
+	return tr
 }
 
-// ExtensionBadge the extensionBadge is a short string identifying the file type used as a badge when producing an icon.
-func (x *ThumbnailReply) ExtensionBadge() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extensionBadge"))
+// ExtensionBadge returns the extensionBadge is a short string identifying the file type used as a badge when producing an icon.
+func (tr *ThumbnailReply) ExtensionBadge() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tr), objc.RegisterName("extensionBadge"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetExtensionBadge wraps the corresponding Objective-C method.
-func (x *ThumbnailReply) SetExtensionBadge(extensionBadge string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtensionBadge:"), purego.NSString(extensionBadge))
-}
-
-// ThumbnailReplyable is the interface implemented by [ThumbnailReply], for mocking and DI.
-type ThumbnailReplyable interface {
-	obj.Object
-	WithExtensionBadge(extensionBadge string) *ThumbnailReply
-	ExtensionBadge() string
-	SetExtensionBadge(extensionBadge string)
-}
-
-var _ ThumbnailReplyable = (*ThumbnailReply)(nil)

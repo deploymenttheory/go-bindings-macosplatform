@@ -54,45 +54,28 @@ func NewURLTextureWithURLName(uRL string, name string) *URLTexture {
 	return uRLTextureAdopt(_id)
 }
 
-// WithURL the URL from which to load texture data.
-func (x *URLTexture) WithURL(uRL string) *URLTexture {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-	return x
+// WithURL sets the URL from which to load texture data.
+func (ut *URLTexture) WithURL(uRL string) *URLTexture {
+	objc.Send[objc.ID](objref.IDOf(ut), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+	return ut
 }
 
-// WithIsCube a Boolean value that indicates whether the texture is a cube textures.
-func (x *URLTexture) WithIsCube(isCube bool) *URLTexture {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCube:"), isCube)
-	return x
+// WithIsCube sets a Boolean value that indicates whether the texture is a cube textures.
+func (ut *URLTexture) WithIsCube(isCube bool) *URLTexture {
+	objc.Send[objc.ID](objref.IDOf(ut), objc.RegisterName("setIsCube:"), isCube)
+	return ut
 }
 
-// WithHasAlphaValues hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
-func (x *URLTexture) WithHasAlphaValues(hasAlphaValues bool) *URLTexture {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
-	return x
+// WithHasAlphaValues sets hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
+func (ut *URLTexture) WithHasAlphaValues(hasAlphaValues bool) *URLTexture {
+	objc.Send[objc.ID](objref.IDOf(ut), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
+	return ut
 }
 
 // URL wraps the corresponding Objective-C method.
-func (x *URLTexture) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (ut *URLTexture) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ut), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
-
-// SetURL wraps the corresponding Objective-C method.
-func (x *URLTexture) SetURL(uRL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-}
-
-// URLTextureable is the interface implemented by [URLTexture], for mocking and DI.
-type URLTextureable interface {
-	obj.Object
-	WithURL(uRL string) *URLTexture
-	WithIsCube(isCube bool) *URLTexture
-	WithHasAlphaValues(hasAlphaValues bool) *URLTexture
-	URL() obj.Object
-	SetURL(uRL string)
-}
-
-var _ URLTextureable = (*URLTexture)(nil)
 
 var _ TextureProvider = (*URLTexture)(nil)

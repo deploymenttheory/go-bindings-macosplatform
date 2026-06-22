@@ -53,18 +53,10 @@ func NewUnitEnergy() *UnitEnergy {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitEnergy) WithScriptingProperties(scriptingProperties obj.Object) *UnitEnergy {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ue *UnitEnergy) WithScriptingProperties(scriptingProperties obj.Object) *UnitEnergy {
+	objc.Send[objc.ID](objref.IDOf(ue), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ue
 }
-
-// UnitEnergyable is the interface implemented by [UnitEnergy], for mocking and DI.
-type UnitEnergyable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitEnergy
-}
-
-var _ UnitEnergyable = (*UnitEnergy)(nil)
 
 var _ DimensionProvider = (*UnitEnergy)(nil)
 

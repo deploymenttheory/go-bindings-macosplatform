@@ -44,24 +44,24 @@ func mTRRVCOperationalStateClusterGoHomeParamsAdopt(id objc.ID) *MTRRVCOperation
 }
 
 // Description returns the object's -description text.
-func (x *MTRRVCOperationalStateClusterGoHomeParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (moscghp *MTRRVCOperationalStateClusterGoHomeParams) Description() string {
+	return rt.Description(objref.IDOf(moscghp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRRVCOperationalStateClusterGoHomeParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (moscghp *MTRRVCOperationalStateClusterGoHomeParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(moscghp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRRVCOperationalStateClusterGoHomeParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (moscghp *MTRRVCOperationalStateClusterGoHomeParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(moscghp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRRVCOperationalStateClusterGoHomeParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (moscghp *MTRRVCOperationalStateClusterGoHomeParams) String() string {
+	return rt.Description(objref.IDOf(moscghp))
 }
 
 // NewMTRRVCOperationalStateClusterGoHomeParams creates a new MTRRVCOperationalStateClusterGoHomeParams.
@@ -70,49 +70,26 @@ func NewMTRRVCOperationalStateClusterGoHomeParams() *MTRRVCOperationalStateClust
 	return mTRRVCOperationalStateClusterGoHomeParamsAdopt(_id)
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRRVCOperationalStateClusterGoHomeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRRVCOperationalStateClusterGoHomeParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (moscghp *MTRRVCOperationalStateClusterGoHomeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRRVCOperationalStateClusterGoHomeParams {
+	objc.Send[objc.ID](objref.IDOf(moscghp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return moscghp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRRVCOperationalStateClusterGoHomeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRRVCOperationalStateClusterGoHomeParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (moscghp *MTRRVCOperationalStateClusterGoHomeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRRVCOperationalStateClusterGoHomeParams {
+	objc.Send[objc.ID](objref.IDOf(moscghp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return moscghp
 }
 
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRRVCOperationalStateClusterGoHomeParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (moscghp *MTRRVCOperationalStateClusterGoHomeParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moscghp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRRVCOperationalStateClusterGoHomeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRRVCOperationalStateClusterGoHomeParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (moscghp *MTRRVCOperationalStateClusterGoHomeParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moscghp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRRVCOperationalStateClusterGoHomeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRRVCOperationalStateClusterGoHomeParamsable is the interface implemented by [MTRRVCOperationalStateClusterGoHomeParams], for mocking and DI.
-type MTRRVCOperationalStateClusterGoHomeParamsable interface {
-	obj.Object
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRRVCOperationalStateClusterGoHomeParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRRVCOperationalStateClusterGoHomeParams
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRRVCOperationalStateClusterGoHomeParamsable = (*MTRRVCOperationalStateClusterGoHomeParams)(nil)

@@ -46,76 +46,54 @@ func mTRUnitTestingClusterTestListStructOctetAdopt(id objc.ID) *MTRUnitTestingCl
 }
 
 // Description returns the object's -description text.
-func (x *MTRUnitTestingClusterTestListStructOctet) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mutctlso *MTRUnitTestingClusterTestListStructOctet) Description() string {
+	return rt.Description(objref.IDOf(mutctlso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRUnitTestingClusterTestListStructOctet) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mutctlso *MTRUnitTestingClusterTestListStructOctet) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mutctlso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRUnitTestingClusterTestListStructOctet) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mutctlso *MTRUnitTestingClusterTestListStructOctet) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mutctlso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRUnitTestingClusterTestListStructOctet) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mutctlso *MTRUnitTestingClusterTestListStructOctet) String() string {
+	return rt.Description(objref.IDOf(mutctlso))
 }
 
 // WithMember1 sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestListStructOctet) WithMember1(member1 obj.Object) *MTRUnitTestingClusterTestListStructOctet {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMember1:"), objref.IDOf(member1))
-	return x
+func (mutctlso *MTRUnitTestingClusterTestListStructOctet) WithMember1(member1 obj.Object) *MTRUnitTestingClusterTestListStructOctet {
+	objc.Send[objc.ID](objref.IDOf(mutctlso), objc.RegisterName("setMember1:"), objref.IDOf(member1))
+	return mutctlso
 }
 
 // WithMember2 sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestListStructOctet) WithMember2(member2 obj.Object) *MTRUnitTestingClusterTestListStructOctet {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMember2:"), objref.IDOf(member2))
-	return x
+func (mutctlso *MTRUnitTestingClusterTestListStructOctet) WithMember2(member2 obj.Object) *MTRUnitTestingClusterTestListStructOctet {
+	objc.Send[objc.ID](objref.IDOf(mutctlso), objc.RegisterName("setMember2:"), objref.IDOf(member2))
+	return mutctlso
 }
 
 // Member1 wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestListStructOctet) Member1() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("member1"))
+func (mutctlso *MTRUnitTestingClusterTestListStructOctet) Member1() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctlso), objc.RegisterName("member1"))
 	return obj.Wrap(_r)
-}
-
-// SetMember1 wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestListStructOctet) SetMember1(member1 obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMember1:"), objref.IDOf(member1))
 }
 
 // Member2 wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestListStructOctet) Member2() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("member2"))
+func (mutctlso *MTRUnitTestingClusterTestListStructOctet) Member2() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctlso), objc.RegisterName("member2"))
 	return obj.Wrap(_r)
 }
-
-// SetMember2 wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestListStructOctet) SetMember2(member2 obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMember2:"), objref.IDOf(member2))
-}
-
-// MTRUnitTestingClusterTestListStructOctetable is the interface implemented by [MTRUnitTestingClusterTestListStructOctet], for mocking and DI.
-type MTRUnitTestingClusterTestListStructOctetable interface {
-	obj.Object
-	WithMember1(member1 obj.Object) *MTRUnitTestingClusterTestListStructOctet
-	WithMember2(member2 obj.Object) *MTRUnitTestingClusterTestListStructOctet
-	Member1() obj.Object
-	SetMember1(member1 obj.Object)
-	Member2() obj.Object
-	SetMember2(member2 obj.Object)
-}
-
-var _ MTRUnitTestingClusterTestListStructOctetable = (*MTRUnitTestingClusterTestListStructOctet)(nil)
 
 // isMTRUnitTestingClusterTestListStructOctet marks MTRUnitTestingClusterTestListStructOctet — and, by embedding promotion, its
 // subclasses — as a member of the MTRUnitTestingClusterTestListStructOctet hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRUnitTestingClusterTestListStructOctet) isMTRUnitTestingClusterTestListStructOctet() {}
+func (mutctlso *MTRUnitTestingClusterTestListStructOctet) isMTRUnitTestingClusterTestListStructOctet() {
+}
 
 var _ MTRUnitTestingClusterTestListStructOctetProvider = (*MTRUnitTestingClusterTestListStructOctet)(nil)

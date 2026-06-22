@@ -5,12 +5,13 @@
 package foundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // InputStream is an idiomatic wrapper over the Objective-C class NSInputStream.
@@ -70,41 +71,30 @@ func NewInputStreamWithFileAtPath(path string) *InputStream {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *InputStream) WithScriptingProperties(scriptingProperties obj.Object) *InputStream {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (is *InputStream) WithScriptingProperties(scriptingProperties obj.Object) *InputStream {
+	objc.Send[objc.ID](objref.IDOf(is), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return is
 }
 
 // ReadMaxLength wraps the corresponding Objective-C method.
-func (x *InputStream) ReadMaxLength(len_ int) (result int, buffer uint8) {
+func (is *InputStream) ReadMaxLength(len_ int) (result int, buffer uint8) {
 	var _out0 uint8
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("read:maxLength:"), unsafe.Pointer(&_out0), len_)
+	_r := objc.Send[int](objref.IDOf(is), objc.RegisterName("read:maxLength:"), unsafe.Pointer(&_out0), len_)
 	return _r, _out0
 }
 
 // GetBufferLength wraps the corresponding Objective-C method.
-func (x *InputStream) GetBufferLength() (ok bool, buffer uint8, len_ int) {
+func (is *InputStream) GetBufferLength() (ok bool, buffer uint8, len_ int) {
 	var _out0 uint8
 	var _out1 int
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("getBuffer:length:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
+	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("getBuffer:length:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1))
 	return _r, _out0, _out1
 }
 
 // HasBytesAvailable wraps the corresponding Objective-C method.
-func (x *InputStream) HasBytesAvailable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasBytesAvailable"))
+func (is *InputStream) HasBytesAvailable() bool {
+	_r := objc.Send[bool](objref.IDOf(is), objc.RegisterName("hasBytesAvailable"))
 	return _r
 }
-
-// InputStreamable is the interface implemented by [InputStream], for mocking and DI.
-type InputStreamable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *InputStream
-	ReadMaxLength(len_ int) (result int, buffer uint8)
-	GetBufferLength() (ok bool, buffer uint8, len_ int)
-	HasBytesAvailable() bool
-}
-
-var _ InputStreamable = (*InputStream)(nil)
 
 var _ StreamProvider = (*InputStream)(nil)

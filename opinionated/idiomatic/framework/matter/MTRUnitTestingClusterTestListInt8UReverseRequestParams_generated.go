@@ -46,90 +46,65 @@ func mTRUnitTestingClusterTestListInt8UReverseRequestParamsAdopt(id objc.ID) *MT
 }
 
 // Description returns the object's -description text.
-func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mutctliurrp *MTRUnitTestingClusterTestListInt8UReverseRequestParams) Description() string {
+	return rt.Description(objref.IDOf(mutctliurrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mutctliurrp *MTRUnitTestingClusterTestListInt8UReverseRequestParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mutctliurrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mutctliurrp *MTRUnitTestingClusterTestListInt8UReverseRequestParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mutctliurrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mutctliurrp *MTRUnitTestingClusterTestListInt8UReverseRequestParams) String() string {
+	return rt.Description(objref.IDOf(mutctliurrp))
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestListInt8UReverseRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mutctliurrp *MTRUnitTestingClusterTestListInt8UReverseRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestListInt8UReverseRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mutctliurrp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mutctliurrp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterTestListInt8UReverseRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mutctliurrp *MTRUnitTestingClusterTestListInt8UReverseRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterTestListInt8UReverseRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mutctliurrp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mutctliurrp
 }
 
 // Arg1 wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) Arg1() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg1"))
+func (mutctliurrp *MTRUnitTestingClusterTestListInt8UReverseRequestParams) Arg1() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctliurrp), objc.RegisterName("arg1"))
 	return obj.Wrap(_r)
 }
 
 // SetArg1 wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) SetArg1(arg1 obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
+func (mutctliurrp *MTRUnitTestingClusterTestListInt8UReverseRequestParams) SetArg1(arg1 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mutctliurrp), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 }
 
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mutctliurrp *MTRUnitTestingClusterTestListInt8UReverseRequestParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctliurrp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mutctliurrp *MTRUnitTestingClusterTestListInt8UReverseRequestParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctliurrp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRUnitTestingClusterTestListInt8UReverseRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestListInt8UReverseRequestParams], for mocking and DI.
-type MTRUnitTestingClusterTestListInt8UReverseRequestParamsable interface {
-	obj.Object
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestListInt8UReverseRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterTestListInt8UReverseRequestParams
-	Arg1() obj.Object
-	SetArg1(arg1 obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRUnitTestingClusterTestListInt8UReverseRequestParamsable = (*MTRUnitTestingClusterTestListInt8UReverseRequestParams)(nil)
 
 // isMTRUnitTestingClusterTestListInt8UReverseRequestParams marks MTRUnitTestingClusterTestListInt8UReverseRequestParams — and, by embedding promotion, its
 // subclasses — as a member of the MTRUnitTestingClusterTestListInt8UReverseRequestParams hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRUnitTestingClusterTestListInt8UReverseRequestParams) isMTRUnitTestingClusterTestListInt8UReverseRequestParams() {
+func (mutctliurrp *MTRUnitTestingClusterTestListInt8UReverseRequestParams) isMTRUnitTestingClusterTestListInt8UReverseRequestParams() {
 }
 
 var _ MTRUnitTestingClusterTestListInt8UReverseRequestParamsProvider = (*MTRUnitTestingClusterTestListInt8UReverseRequestParams)(nil)

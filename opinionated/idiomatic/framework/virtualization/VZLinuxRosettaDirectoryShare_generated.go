@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,31 +51,16 @@ func NewLinuxRosettaDirectoryShare() *LinuxRosettaDirectoryShare {
 	return linuxRosettaDirectoryShareAdopt(_id)
 }
 
-// WithOptions the value that enables translation caching and configures the socket communication type for Rosetta.
-func (x *LinuxRosettaDirectoryShare) WithOptions(options LinuxRosettaCachingOptionsProvider) *LinuxRosettaDirectoryShare {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), objref.IDOf(options))
-	return x
+// WithOptions sets the value that enables translation caching and configures the socket communication type for Rosetta.
+func (lrds *LinuxRosettaDirectoryShare) WithOptions(options LinuxRosettaCachingOptionsProvider) *LinuxRosettaDirectoryShare {
+	objc.Send[objc.ID](objref.IDOf(lrds), objc.RegisterName("setOptions:"), objref.IDOf(options))
+	return lrds
 }
 
 // Options enable translation caching and configure the socket communication type for Rosetta.
-func (x *LinuxRosettaDirectoryShare) Options() *LinuxRosettaCachingOptions {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
+func (lrds *LinuxRosettaDirectoryShare) Options() *LinuxRosettaCachingOptions {
+	_r := objc.Send[objc.ID](objref.IDOf(lrds), objc.RegisterName("options"))
 	return LinuxRosettaCachingOptionsFromID(_r)
 }
-
-// SetOptions wraps the corresponding Objective-C method.
-func (x *LinuxRosettaDirectoryShare) SetOptions(options *LinuxRosettaCachingOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), objref.IDOf(options))
-}
-
-// LinuxRosettaDirectoryShareable is the interface implemented by [LinuxRosettaDirectoryShare], for mocking and DI.
-type LinuxRosettaDirectoryShareable interface {
-	obj.Object
-	WithOptions(options LinuxRosettaCachingOptionsProvider) *LinuxRosettaDirectoryShare
-	Options() *LinuxRosettaCachingOptions
-	SetOptions(options *LinuxRosettaCachingOptions)
-}
-
-var _ LinuxRosettaDirectoryShareable = (*LinuxRosettaDirectoryShare)(nil)
 
 var _ DirectoryShareProvider = (*LinuxRosettaDirectoryShare)(nil)

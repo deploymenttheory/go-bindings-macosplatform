@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,17 +53,9 @@ func NewBridgedNetworkDeviceAttachmentWithInterface(interface_ *BridgedNetworkIn
 }
 
 // Interface wraps the corresponding Objective-C method.
-func (x *BridgedNetworkDeviceAttachment) Interface() *BridgedNetworkInterface {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interface"))
+func (bnda *BridgedNetworkDeviceAttachment) Interface() *BridgedNetworkInterface {
+	_r := objc.Send[objc.ID](objref.IDOf(bnda), objc.RegisterName("interface"))
 	return BridgedNetworkInterfaceFromID(_r)
 }
-
-// BridgedNetworkDeviceAttachmentable is the interface implemented by [BridgedNetworkDeviceAttachment], for mocking and DI.
-type BridgedNetworkDeviceAttachmentable interface {
-	obj.Object
-	Interface() *BridgedNetworkInterface
-}
-
-var _ BridgedNetworkDeviceAttachmentable = (*BridgedNetworkDeviceAttachment)(nil)
 
 var _ NetworkDeviceAttachmentProvider = (*BridgedNetworkDeviceAttachment)(nil)

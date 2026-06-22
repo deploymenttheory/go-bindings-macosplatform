@@ -46,24 +46,24 @@ func editVoiceShortcutViewControllerAdopt(id objc.ID) *EditVoiceShortcutViewCont
 }
 
 // Description returns the object's -description text.
-func (x *EditVoiceShortcutViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (evsvc *EditVoiceShortcutViewController) Description() string {
+	return rt.Description(objref.IDOf(evsvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EditVoiceShortcutViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (evsvc *EditVoiceShortcutViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(evsvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EditVoiceShortcutViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (evsvc *EditVoiceShortcutViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(evsvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *EditVoiceShortcutViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (evsvc *EditVoiceShortcutViewController) String() string {
+	return rt.Description(objref.IDOf(evsvc))
 }
 
 // NewEditVoiceShortcutViewControllerWithVoiceShortcut creates a view controller with the shortcut to edit or remove.
@@ -72,10 +72,3 @@ func NewEditVoiceShortcutViewControllerWithVoiceShortcut(voiceShortcut obj.Objec
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithVoiceShortcut:"), objref.IDOf(voiceShortcut))
 	return editVoiceShortcutViewControllerAdopt(_id)
 }
-
-// EditVoiceShortcutViewControllerable is the interface implemented by [EditVoiceShortcutViewController], for mocking and DI.
-type EditVoiceShortcutViewControllerable interface {
-	obj.Object
-}
-
-var _ EditVoiceShortcutViewControllerable = (*EditVoiceShortcutViewController)(nil)

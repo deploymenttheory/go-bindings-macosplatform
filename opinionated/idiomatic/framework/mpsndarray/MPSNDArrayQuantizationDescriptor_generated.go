@@ -46,43 +46,35 @@ func arrayQuantizationDescriptorAdopt(id objc.ID) *ArrayQuantizationDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *ArrayQuantizationDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aqd *ArrayQuantizationDescriptor) Description() string {
+	return rt.Description(objref.IDOf(aqd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ArrayQuantizationDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aqd *ArrayQuantizationDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aqd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ArrayQuantizationDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aqd *ArrayQuantizationDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aqd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ArrayQuantizationDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aqd *ArrayQuantizationDescriptor) String() string {
+	return rt.Description(objref.IDOf(aqd))
 }
 
-// QuantizationScheme the quantization scheme for this descriptor. The default is MPSNDArrayQuantizationTypeNone.
-func (x *ArrayQuantizationDescriptor) QuantizationScheme() ArrayQuantizationScheme {
-	_r := objc.Send[ArrayQuantizationScheme](objref.IDOf(x), objc.RegisterName("quantizationScheme"))
+// QuantizationScheme returns the quantization scheme for this descriptor. The default is MPSNDArrayQuantizationTypeNone.
+func (aqd *ArrayQuantizationDescriptor) QuantizationScheme() ArrayQuantizationScheme {
+	_r := objc.Send[ArrayQuantizationScheme](objref.IDOf(aqd), objc.RegisterName("quantizationScheme"))
 	return _r
 }
-
-// ArrayQuantizationDescriptorable is the interface implemented by [ArrayQuantizationDescriptor], for mocking and DI.
-type ArrayQuantizationDescriptorable interface {
-	obj.Object
-	QuantizationScheme() ArrayQuantizationScheme
-}
-
-var _ ArrayQuantizationDescriptorable = (*ArrayQuantizationDescriptor)(nil)
 
 // isArrayQuantizationDescriptor marks ArrayQuantizationDescriptor — and, by embedding promotion, its
 // subclasses — as a member of the ArrayQuantizationDescriptor hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ArrayQuantizationDescriptor) isArrayQuantizationDescriptor() {}
+func (aqd *ArrayQuantizationDescriptor) isArrayQuantizationDescriptor() {}
 
 var _ ArrayQuantizationDescriptorProvider = (*ArrayQuantizationDescriptor)(nil)

@@ -46,24 +46,24 @@ func queryDescriptorAdopt(id objc.ID) *QueryDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *QueryDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (qd *QueryDescriptor) Description() string {
+	return rt.Description(objref.IDOf(qd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QueryDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (qd *QueryDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(qd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QueryDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (qd *QueryDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(qd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *QueryDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (qd *QueryDescriptor) String() string {
+	return rt.Description(objref.IDOf(qd))
 }
 
 // NewQueryDescriptorWithSampleTypePredicate creates a new descriptor for the data type and predicate you provided.
@@ -73,23 +73,14 @@ func NewQueryDescriptorWithSampleTypePredicate(sampleType *SampleType, predicate
 	return queryDescriptorAdopt(_id)
 }
 
-// SampleType the type of sample to retrieve in an HKQuery.
-func (x *QueryDescriptor) SampleType() *SampleType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleType"))
+// SampleType returns the type of sample to retrieve in an HKQuery.
+func (qd *QueryDescriptor) SampleType() *SampleType {
+	_r := objc.Send[objc.ID](objref.IDOf(qd), objc.RegisterName("sampleType"))
 	return SampleTypeFromID(_r)
 }
 
-// Predicate the predicate which samples should match.
-func (x *QueryDescriptor) Predicate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predicate"))
+// Predicate returns the predicate which samples should match.
+func (qd *QueryDescriptor) Predicate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(qd), objc.RegisterName("predicate"))
 	return obj.Wrap(_r)
 }
-
-// QueryDescriptorable is the interface implemented by [QueryDescriptor], for mocking and DI.
-type QueryDescriptorable interface {
-	obj.Object
-	SampleType() *SampleType
-	Predicate() obj.Object
-}
-
-var _ QueryDescriptorable = (*QueryDescriptor)(nil)

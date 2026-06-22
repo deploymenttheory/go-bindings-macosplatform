@@ -7,7 +7,6 @@ package cloudkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,17 +52,9 @@ func NewDatabaseNotification() *DatabaseNotification {
 }
 
 // DatabaseScope wraps the corresponding Objective-C method.
-func (x *DatabaseNotification) DatabaseScope() DatabaseScope {
-	_r := objc.Send[DatabaseScope](objref.IDOf(x), objc.RegisterName("databaseScope"))
+func (dn *DatabaseNotification) DatabaseScope() DatabaseScope {
+	_r := objc.Send[DatabaseScope](objref.IDOf(dn), objc.RegisterName("databaseScope"))
 	return _r
 }
-
-// DatabaseNotificationable is the interface implemented by [DatabaseNotification], for mocking and DI.
-type DatabaseNotificationable interface {
-	obj.Object
-	DatabaseScope() DatabaseScope
-}
-
-var _ DatabaseNotificationable = (*DatabaseNotification)(nil)
 
 var _ NotificationProvider = (*DatabaseNotification)(nil)

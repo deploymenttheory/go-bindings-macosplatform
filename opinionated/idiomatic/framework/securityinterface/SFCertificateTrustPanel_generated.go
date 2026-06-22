@@ -53,33 +53,23 @@ func NewCertificateTrustPanel() *CertificateTrustPanel {
 }
 
 // RunModalForTrustMessage displays a modal panel that shows the results of a certificate trust evaluation and that allows the user to edit trust settings.
-func (x *CertificateTrustPanel) RunModalForTrustMessage(trust obj.Object, message string) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModalForTrust:message:"), objref.IDOf(trust), purego.NSString(message))
+func (ctp *CertificateTrustPanel) RunModalForTrustMessage(trust obj.Object, message string) int {
+	_r := objc.Send[int](objref.IDOf(ctp), objc.RegisterName("runModalForTrust:message:"), objref.IDOf(trust), purego.NSString(message))
 	return _r
 }
 
 // SetInformativeText sets the (optional) informative text displayed in the panel.
-func (x *CertificateTrustPanel) SetInformativeText(informativeText string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInformativeText:"), purego.NSString(informativeText))
+func (ctp *CertificateTrustPanel) SetInformativeText(informativeText string) {
+	objc.Send[objc.ID](objref.IDOf(ctp), objc.RegisterName("setInformativeText:"), purego.NSString(informativeText))
 }
 
 // InformativeText returns the (optional) informative text currently displayed in the panel.
-func (x *CertificateTrustPanel) InformativeText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("informativeText"))
+func (ctp *CertificateTrustPanel) InformativeText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ctp), objc.RegisterName("informativeText"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// CertificateTrustPanelable is the interface implemented by [CertificateTrustPanel], for mocking and DI.
-type CertificateTrustPanelable interface {
-	obj.Object
-	RunModalForTrustMessage(trust obj.Object, message string) int
-	SetInformativeText(informativeText string)
-	InformativeText() string
-}
-
-var _ CertificateTrustPanelable = (*CertificateTrustPanel)(nil)
 
 var _ CertificatePanelProvider = (*CertificateTrustPanel)(nil)

@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,40 +52,29 @@ func NewGeneratePersonInstanceMaskRequest() *GeneratePersonInstanceMaskRequest {
 	return generatePersonInstanceMaskRequestAdopt(_id)
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *GeneratePersonInstanceMaskRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GeneratePersonInstanceMaskRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (gpimr *GeneratePersonInstanceMaskRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GeneratePersonInstanceMaskRequest {
+	objc.Send[objc.ID](objref.IDOf(gpimr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return gpimr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *GeneratePersonInstanceMaskRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GeneratePersonInstanceMaskRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (gpimr *GeneratePersonInstanceMaskRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GeneratePersonInstanceMaskRequest {
+	objc.Send[objc.ID](objref.IDOf(gpimr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return gpimr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *GeneratePersonInstanceMaskRequest) WithUsesCPUOnly(usesCPUOnly bool) *GeneratePersonInstanceMaskRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (gpimr *GeneratePersonInstanceMaskRequest) WithUsesCPUOnly(usesCPUOnly bool) *GeneratePersonInstanceMaskRequest {
+	objc.Send[objc.ID](objref.IDOf(gpimr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return gpimr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *GeneratePersonInstanceMaskRequest) WithRevision(revision int) *GeneratePersonInstanceMaskRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (gpimr *GeneratePersonInstanceMaskRequest) WithRevision(revision int) *GeneratePersonInstanceMaskRequest {
+	objc.Send[objc.ID](objref.IDOf(gpimr), objc.RegisterName("setRevision:"), revision)
+	return gpimr
 }
-
-// GeneratePersonInstanceMaskRequestable is the interface implemented by [GeneratePersonInstanceMaskRequest], for mocking and DI.
-type GeneratePersonInstanceMaskRequestable interface {
-	obj.Object
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *GeneratePersonInstanceMaskRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *GeneratePersonInstanceMaskRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *GeneratePersonInstanceMaskRequest
-	WithRevision(revision int) *GeneratePersonInstanceMaskRequest
-}
-
-var _ GeneratePersonInstanceMaskRequestable = (*GeneratePersonInstanceMaskRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*GeneratePersonInstanceMaskRequest)(nil)
 

@@ -46,24 +46,24 @@ func remoteCommandCenterAdopt(id objc.ID) *RemoteCommandCenter {
 }
 
 // Description returns the object's -description text.
-func (x *RemoteCommandCenter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rcc *RemoteCommandCenter) Description() string {
+	return rt.Description(objref.IDOf(rcc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RemoteCommandCenter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rcc *RemoteCommandCenter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rcc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RemoteCommandCenter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rcc *RemoteCommandCenter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rcc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RemoteCommandCenter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rcc *RemoteCommandCenter) String() string {
+	return rt.Description(objref.IDOf(rcc))
 }
 
 // NewRemoteCommandCenter creates a new RemoteCommandCenter.
@@ -73,148 +73,121 @@ func NewRemoteCommandCenter() *RemoteCommandCenter {
 }
 
 // PauseCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) PauseCommand() *RemoteCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseCommand"))
+func (rcc *RemoteCommandCenter) PauseCommand() *RemoteCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("pauseCommand"))
 	return RemoteCommandFromID(_r)
 }
 
 // PlayCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) PlayCommand() *RemoteCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playCommand"))
+func (rcc *RemoteCommandCenter) PlayCommand() *RemoteCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("playCommand"))
 	return RemoteCommandFromID(_r)
 }
 
 // StopCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) StopCommand() *RemoteCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopCommand"))
+func (rcc *RemoteCommandCenter) StopCommand() *RemoteCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("stopCommand"))
 	return RemoteCommandFromID(_r)
 }
 
 // TogglePlayPauseCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) TogglePlayPauseCommand() *RemoteCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("togglePlayPauseCommand"))
+func (rcc *RemoteCommandCenter) TogglePlayPauseCommand() *RemoteCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("togglePlayPauseCommand"))
 	return RemoteCommandFromID(_r)
 }
 
 // EnableLanguageOptionCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) EnableLanguageOptionCommand() *RemoteCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enableLanguageOptionCommand"))
+func (rcc *RemoteCommandCenter) EnableLanguageOptionCommand() *RemoteCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("enableLanguageOptionCommand"))
 	return RemoteCommandFromID(_r)
 }
 
 // DisableLanguageOptionCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) DisableLanguageOptionCommand() *RemoteCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disableLanguageOptionCommand"))
+func (rcc *RemoteCommandCenter) DisableLanguageOptionCommand() *RemoteCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("disableLanguageOptionCommand"))
 	return RemoteCommandFromID(_r)
 }
 
 // ChangePlaybackRateCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) ChangePlaybackRateCommand() *ChangePlaybackRateCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changePlaybackRateCommand"))
+func (rcc *RemoteCommandCenter) ChangePlaybackRateCommand() *ChangePlaybackRateCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("changePlaybackRateCommand"))
 	return ChangePlaybackRateCommandFromID(_r)
 }
 
 // ChangeRepeatModeCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) ChangeRepeatModeCommand() *ChangeRepeatModeCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeRepeatModeCommand"))
+func (rcc *RemoteCommandCenter) ChangeRepeatModeCommand() *ChangeRepeatModeCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("changeRepeatModeCommand"))
 	return ChangeRepeatModeCommandFromID(_r)
 }
 
 // ChangeShuffleModeCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) ChangeShuffleModeCommand() *ChangeShuffleModeCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeShuffleModeCommand"))
+func (rcc *RemoteCommandCenter) ChangeShuffleModeCommand() *ChangeShuffleModeCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("changeShuffleModeCommand"))
 	return ChangeShuffleModeCommandFromID(_r)
 }
 
 // NextTrackCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) NextTrackCommand() *RemoteCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextTrackCommand"))
+func (rcc *RemoteCommandCenter) NextTrackCommand() *RemoteCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("nextTrackCommand"))
 	return RemoteCommandFromID(_r)
 }
 
 // PreviousTrackCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) PreviousTrackCommand() *RemoteCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousTrackCommand"))
+func (rcc *RemoteCommandCenter) PreviousTrackCommand() *RemoteCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("previousTrackCommand"))
 	return RemoteCommandFromID(_r)
 }
 
 // SkipForwardCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) SkipForwardCommand() *SkipIntervalCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipForwardCommand"))
+func (rcc *RemoteCommandCenter) SkipForwardCommand() *SkipIntervalCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("skipForwardCommand"))
 	return SkipIntervalCommandFromID(_r)
 }
 
 // SkipBackwardCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) SkipBackwardCommand() *SkipIntervalCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipBackwardCommand"))
+func (rcc *RemoteCommandCenter) SkipBackwardCommand() *SkipIntervalCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("skipBackwardCommand"))
 	return SkipIntervalCommandFromID(_r)
 }
 
 // SeekForwardCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) SeekForwardCommand() *RemoteCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seekForwardCommand"))
+func (rcc *RemoteCommandCenter) SeekForwardCommand() *RemoteCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("seekForwardCommand"))
 	return RemoteCommandFromID(_r)
 }
 
 // SeekBackwardCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) SeekBackwardCommand() *RemoteCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seekBackwardCommand"))
+func (rcc *RemoteCommandCenter) SeekBackwardCommand() *RemoteCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("seekBackwardCommand"))
 	return RemoteCommandFromID(_r)
 }
 
 // ChangePlaybackPositionCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) ChangePlaybackPositionCommand() *ChangePlaybackPositionCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changePlaybackPositionCommand"))
+func (rcc *RemoteCommandCenter) ChangePlaybackPositionCommand() *ChangePlaybackPositionCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("changePlaybackPositionCommand"))
 	return ChangePlaybackPositionCommandFromID(_r)
 }
 
 // RatingCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) RatingCommand() *RatingCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ratingCommand"))
+func (rcc *RemoteCommandCenter) RatingCommand() *RatingCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("ratingCommand"))
 	return RatingCommandFromID(_r)
 }
 
 // LikeCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) LikeCommand() *FeedbackCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("likeCommand"))
+func (rcc *RemoteCommandCenter) LikeCommand() *FeedbackCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("likeCommand"))
 	return FeedbackCommandFromID(_r)
 }
 
 // DislikeCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) DislikeCommand() *FeedbackCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dislikeCommand"))
+func (rcc *RemoteCommandCenter) DislikeCommand() *FeedbackCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("dislikeCommand"))
 	return FeedbackCommandFromID(_r)
 }
 
 // BookmarkCommand wraps the corresponding Objective-C method.
-func (x *RemoteCommandCenter) BookmarkCommand() *FeedbackCommand {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bookmarkCommand"))
+func (rcc *RemoteCommandCenter) BookmarkCommand() *FeedbackCommand {
+	_r := objc.Send[objc.ID](objref.IDOf(rcc), objc.RegisterName("bookmarkCommand"))
 	return FeedbackCommandFromID(_r)
 }
-
-// RemoteCommandCenterable is the interface implemented by [RemoteCommandCenter], for mocking and DI.
-type RemoteCommandCenterable interface {
-	obj.Object
-	PauseCommand() *RemoteCommand
-	PlayCommand() *RemoteCommand
-	StopCommand() *RemoteCommand
-	TogglePlayPauseCommand() *RemoteCommand
-	EnableLanguageOptionCommand() *RemoteCommand
-	DisableLanguageOptionCommand() *RemoteCommand
-	ChangePlaybackRateCommand() *ChangePlaybackRateCommand
-	ChangeRepeatModeCommand() *ChangeRepeatModeCommand
-	ChangeShuffleModeCommand() *ChangeShuffleModeCommand
-	NextTrackCommand() *RemoteCommand
-	PreviousTrackCommand() *RemoteCommand
-	SkipForwardCommand() *SkipIntervalCommand
-	SkipBackwardCommand() *SkipIntervalCommand
-	SeekForwardCommand() *RemoteCommand
-	SeekBackwardCommand() *RemoteCommand
-	ChangePlaybackPositionCommand() *ChangePlaybackPositionCommand
-	RatingCommand() *RatingCommand
-	LikeCommand() *FeedbackCommand
-	DislikeCommand() *FeedbackCommand
-	BookmarkCommand() *FeedbackCommand
-}
-
-var _ RemoteCommandCenterable = (*RemoteCommandCenter)(nil)

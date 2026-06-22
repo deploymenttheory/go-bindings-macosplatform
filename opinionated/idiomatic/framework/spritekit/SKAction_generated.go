@@ -46,24 +46,24 @@ func actionAdopt(id objc.ID) *Action {
 }
 
 // Description returns the object's -description text.
-func (x *Action) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Action) Description() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Action) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (a *Action) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(a), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Action) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (a *Action) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(a), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Action) String() string {
-	return rt.Description(objref.IDOf(x))
+func (a *Action) String() string {
+	return rt.Description(objref.IDOf(a))
 }
 
 // NewAction creates a new Action.
@@ -72,76 +72,44 @@ func NewAction() *Action {
 	return actionAdopt(_id)
 }
 
-// WithDuration the duration required to complete an action.
-func (x *Action) WithDuration(duration float64) *Action {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
-	return x
+// WithDuration sets the duration required to complete an action.
+func (a *Action) WithDuration(duration float64) *Action {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setDuration:"), duration)
+	return a
 }
 
-// WithTimingMode a setting that controls the speed curve of an animation.
-func (x *Action) WithTimingMode(timingMode ActionTimingMode) *Action {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingMode:"), timingMode)
-	return x
+// WithTimingMode sets a setting that controls the speed curve of an animation.
+func (a *Action) WithTimingMode(timingMode ActionTimingMode) *Action {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setTimingMode:"), timingMode)
+	return a
 }
 
-// WithSpeed a speed factor that modifies how fast an action runs.
-func (x *Action) WithSpeed(speed float64) *Action {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
-	return x
+// WithSpeed sets a speed factor that modifies how fast an action runs.
+func (a *Action) WithSpeed(speed float64) *Action {
+	objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("setSpeed:"), speed)
+	return a
 }
 
 // ReversedAction creates an action that reverses the behavior of another action
-func (x *Action) ReversedAction() *Action {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reversedAction"))
+func (a *Action) ReversedAction() *Action {
+	_r := objc.Send[objc.ID](objref.IDOf(a), objc.RegisterName("reversedAction"))
 	return ActionFromID(_r)
 }
 
-// Duration the duration required to complete an action, in seconds.
-func (x *Action) Duration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+// Duration returns the duration required to complete an action, in seconds.
+func (a *Action) Duration() float64 {
+	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("duration"))
 	return _r
 }
 
-// SetDuration wraps the corresponding Objective-C method.
-func (x *Action) SetDuration(duration float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), duration)
-}
-
-// TimingMode the timing mode used to execute an action
-func (x *Action) TimingMode() ActionTimingMode {
-	_r := objc.Send[ActionTimingMode](objref.IDOf(x), objc.RegisterName("timingMode"))
+// TimingMode returns the timing mode used to execute an action
+func (a *Action) TimingMode() ActionTimingMode {
+	_r := objc.Send[ActionTimingMode](objref.IDOf(a), objc.RegisterName("timingMode"))
 	return _r
 }
 
-// SetTimingMode wraps the corresponding Objective-C method.
-func (x *Action) SetTimingMode(timingMode ActionTimingMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingMode:"), timingMode)
-}
-
-// Speed a speed factor that modifies how fast an action runs. Default value is 1.0
-func (x *Action) Speed() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("speed"))
+// Speed returns a speed factor that modifies how fast an action runs. Default value is 1.0
+func (a *Action) Speed() float64 {
+	_r := objc.Send[float64](objref.IDOf(a), objc.RegisterName("speed"))
 	return _r
 }
-
-// SetSpeed wraps the corresponding Objective-C method.
-func (x *Action) SetSpeed(speed float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
-}
-
-// Actionable is the interface implemented by [Action], for mocking and DI.
-type Actionable interface {
-	obj.Object
-	WithDuration(duration float64) *Action
-	WithTimingMode(timingMode ActionTimingMode) *Action
-	WithSpeed(speed float64) *Action
-	ReversedAction() *Action
-	Duration() float64
-	SetDuration(duration float64)
-	TimingMode() ActionTimingMode
-	SetTimingMode(timingMode ActionTimingMode)
-	Speed() float64
-	SetSpeed(speed float64)
-}
-
-var _ Actionable = (*Action)(nil)

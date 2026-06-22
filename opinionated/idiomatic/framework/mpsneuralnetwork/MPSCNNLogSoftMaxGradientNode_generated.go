@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,19 +52,11 @@ func NewCNNLogSoftMaxGradientNodeWithSourceGradientSourceImageGradientState(sour
 	return cNNLogSoftMaxGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNLogSoftMaxGradientNode) WithLabel(label string) *CNNLogSoftMaxGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (clsmgn *CNNLogSoftMaxGradientNode) WithLabel(label string) *CNNLogSoftMaxGradientNode {
+	objc.Send[objc.ID](objref.IDOf(clsmgn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return clsmgn
 }
-
-// CNNLogSoftMaxGradientNodeable is the interface implemented by [CNNLogSoftMaxGradientNode], for mocking and DI.
-type CNNLogSoftMaxGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNLogSoftMaxGradientNode
-}
-
-var _ CNNLogSoftMaxGradientNodeable = (*CNNLogSoftMaxGradientNode)(nil)
 
 var _ NNGradientFilterNodeProvider = (*CNNLogSoftMaxGradientNode)(nil)
 

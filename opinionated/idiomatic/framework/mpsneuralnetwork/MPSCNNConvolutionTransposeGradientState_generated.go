@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,19 +49,11 @@ func NewCNNConvolutionTransposeGradientState() *CNNConvolutionTransposeGradientS
 	return cNNConvolutionTransposeGradientStateAdopt(_id)
 }
 
-// ConvolutionTranspose the convolutionTranspose filter that produced the state.
-func (x *CNNConvolutionTransposeGradientState) ConvolutionTranspose() *CNNConvolutionTranspose {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolutionTranspose"))
+// ConvolutionTranspose returns the convolutionTranspose filter that produced the state.
+func (cctgs *CNNConvolutionTransposeGradientState) ConvolutionTranspose() *CNNConvolutionTranspose {
+	_r := objc.Send[objc.ID](objref.IDOf(cctgs), objc.RegisterName("convolutionTranspose"))
 	return CNNConvolutionTransposeFromID(_r)
 }
-
-// CNNConvolutionTransposeGradientStateable is the interface implemented by [CNNConvolutionTransposeGradientState], for mocking and DI.
-type CNNConvolutionTransposeGradientStateable interface {
-	obj.Object
-	ConvolutionTranspose() *CNNConvolutionTranspose
-}
-
-var _ CNNConvolutionTransposeGradientStateable = (*CNNConvolutionTransposeGradientState)(nil)
 
 var _ CNNConvolutionGradientStateProvider = (*CNNConvolutionTransposeGradientState)(nil)
 

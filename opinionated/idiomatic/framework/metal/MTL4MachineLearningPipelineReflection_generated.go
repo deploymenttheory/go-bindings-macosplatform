@@ -46,24 +46,24 @@ func mTL4MachineLearningPipelineReflectionAdopt(id objc.ID) *MTL4MachineLearning
 }
 
 // Description returns the object's -description text.
-func (x *MTL4MachineLearningPipelineReflection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmlpr *MTL4MachineLearningPipelineReflection) Description() string {
+	return rt.Description(objref.IDOf(mmlpr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTL4MachineLearningPipelineReflection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmlpr *MTL4MachineLearningPipelineReflection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmlpr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTL4MachineLearningPipelineReflection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmlpr *MTL4MachineLearningPipelineReflection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmlpr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTL4MachineLearningPipelineReflection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmlpr *MTL4MachineLearningPipelineReflection) String() string {
+	return rt.Description(objref.IDOf(mmlpr))
 }
 
 // NewMTL4MachineLearningPipelineReflection creates a new MTL4MachineLearningPipelineReflection.
@@ -73,15 +73,7 @@ func NewMTL4MachineLearningPipelineReflection() *MTL4MachineLearningPipelineRefl
 }
 
 // Bindings wraps the corresponding Objective-C method.
-func (x *MTL4MachineLearningPipelineReflection) Bindings() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bindings"))
+func (mmlpr *MTL4MachineLearningPipelineReflection) Bindings() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmlpr), objc.RegisterName("bindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// MTL4MachineLearningPipelineReflectionable is the interface implemented by [MTL4MachineLearningPipelineReflection], for mocking and DI.
-type MTL4MachineLearningPipelineReflectionable interface {
-	obj.Object
-	Bindings() []obj.Object
-}
-
-var _ MTL4MachineLearningPipelineReflectionable = (*MTL4MachineLearningPipelineReflection)(nil)

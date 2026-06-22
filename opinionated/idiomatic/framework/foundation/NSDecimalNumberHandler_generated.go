@@ -46,24 +46,24 @@ func decimalNumberHandlerAdopt(id objc.ID) *DecimalNumberHandler {
 }
 
 // Description returns the object's -description text.
-func (x *DecimalNumberHandler) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dnh *DecimalNumberHandler) Description() string {
+	return rt.Description(objref.IDOf(dnh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DecimalNumberHandler) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dnh *DecimalNumberHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dnh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DecimalNumberHandler) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dnh *DecimalNumberHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dnh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DecimalNumberHandler) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dnh *DecimalNumberHandler) String() string {
+	return rt.Description(objref.IDOf(dnh))
 }
 
 // NewDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflowRaiseOnUnderflowRaiseOnDivideByZero returns an NSDecimalNumberHandler object initialized so it behaves as specified by the method’s arguments.
@@ -74,15 +74,7 @@ func NewDecimalNumberHandlerWithRoundingModeScaleRaiseOnExactnessRaiseOnOverflow
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *DecimalNumberHandler) WithScriptingProperties(scriptingProperties obj.Object) *DecimalNumberHandler {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (dnh *DecimalNumberHandler) WithScriptingProperties(scriptingProperties obj.Object) *DecimalNumberHandler {
+	objc.Send[objc.ID](objref.IDOf(dnh), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return dnh
 }
-
-// DecimalNumberHandlerable is the interface implemented by [DecimalNumberHandler], for mocking and DI.
-type DecimalNumberHandlerable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *DecimalNumberHandler
-}
-
-var _ DecimalNumberHandlerable = (*DecimalNumberHandler)(nil)

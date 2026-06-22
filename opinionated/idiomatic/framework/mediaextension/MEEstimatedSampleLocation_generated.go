@@ -47,24 +47,24 @@ func estimatedSampleLocationAdopt(id objc.ID) *EstimatedSampleLocation {
 }
 
 // Description returns the object's -description text.
-func (x *EstimatedSampleLocation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (esl *EstimatedSampleLocation) Description() string {
+	return rt.Description(objref.IDOf(esl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EstimatedSampleLocation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (esl *EstimatedSampleLocation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(esl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EstimatedSampleLocation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (esl *EstimatedSampleLocation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(esl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *EstimatedSampleLocation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (esl *EstimatedSampleLocation) String() string {
+	return rt.Description(objref.IDOf(esl))
 }
 
 // NewEstimatedSampleLocationWithByteSourceEstimatedSampleLocationRefinementDataLocation creates an estimated sample location object with the byte source, sample location, and data location that you specify.
@@ -74,30 +74,20 @@ func NewEstimatedSampleLocationWithByteSourceEstimatedSampleLocationRefinementDa
 	return estimatedSampleLocationAdopt(_id)
 }
 
-// EstimatedSampleLocation the estimated starting file offset and size in bytes of the sample.
-func (x *EstimatedSampleLocation) EstimatedSampleLocation() avfoundation.AVSampleCursorStorageRange {
-	_r := objc.Send[avfoundation.AVSampleCursorStorageRange](objref.IDOf(x), objc.RegisterName("estimatedSampleLocation"))
+// EstimatedSampleLocation returns the estimated starting file offset and size in bytes of the sample.
+func (esl *EstimatedSampleLocation) EstimatedSampleLocation() avfoundation.AVSampleCursorStorageRange {
+	_r := objc.Send[avfoundation.AVSampleCursorStorageRange](objref.IDOf(esl), objc.RegisterName("estimatedSampleLocation"))
 	return _r
 }
 
-// RefinementDataLocation the starting file offset and size in bytes of the the data necessary to provide an accurate sample location. The refinement data can be provided to the MESampleCursor method refineSampleLocation to determine the exact sample location.
-func (x *EstimatedSampleLocation) RefinementDataLocation() avfoundation.AVSampleCursorStorageRange {
-	_r := objc.Send[avfoundation.AVSampleCursorStorageRange](objref.IDOf(x), objc.RegisterName("refinementDataLocation"))
+// RefinementDataLocation returns the starting file offset and size in bytes of the the data necessary to provide an accurate sample location. The refinement data can be provided to the MESampleCursor method refineSampleLocation to determine the exact sample location.
+func (esl *EstimatedSampleLocation) RefinementDataLocation() avfoundation.AVSampleCursorStorageRange {
+	_r := objc.Send[avfoundation.AVSampleCursorStorageRange](objref.IDOf(esl), objc.RegisterName("refinementDataLocation"))
 	return _r
 }
 
-// ByteSource the MEByteSource to be used to read the data for the sample.
-func (x *EstimatedSampleLocation) ByteSource() *ByteSource {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("byteSource"))
+// ByteSource returns the MEByteSource to be used to read the data for the sample.
+func (esl *EstimatedSampleLocation) ByteSource() *ByteSource {
+	_r := objc.Send[objc.ID](objref.IDOf(esl), objc.RegisterName("byteSource"))
 	return ByteSourceFromID(_r)
 }
-
-// EstimatedSampleLocationable is the interface implemented by [EstimatedSampleLocation], for mocking and DI.
-type EstimatedSampleLocationable interface {
-	obj.Object
-	EstimatedSampleLocation() avfoundation.AVSampleCursorStorageRange
-	RefinementDataLocation() avfoundation.AVSampleCursorStorageRange
-	ByteSource() *ByteSource
-}
-
-var _ EstimatedSampleLocationable = (*EstimatedSampleLocation)(nil)

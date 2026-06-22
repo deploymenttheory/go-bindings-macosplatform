@@ -46,24 +46,24 @@ func keyedUnarchiverAdopt(id objc.ID) *KeyedUnarchiver {
 }
 
 // Description returns the object's -description text.
-func (x *KeyedUnarchiver) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ku *KeyedUnarchiver) Description() string {
+	return rt.Description(objref.IDOf(ku))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *KeyedUnarchiver) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ku *KeyedUnarchiver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ku), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *KeyedUnarchiver) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ku *KeyedUnarchiver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ku), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *KeyedUnarchiver) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ku *KeyedUnarchiver) String() string {
+	return rt.Description(objref.IDOf(ku))
 }
 
 // NewKeyedUnarchiver creates a new KeyedUnarchiver.
@@ -71,10 +71,3 @@ func NewKeyedUnarchiver() *KeyedUnarchiver {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSKeyedUnarchiver")), objc.RegisterName("new"))
 	return keyedUnarchiverAdopt(_id)
 }
-
-// KeyedUnarchiverable is the interface implemented by [KeyedUnarchiver], for mocking and DI.
-type KeyedUnarchiverable interface {
-	obj.Object
-}
-
-var _ KeyedUnarchiverable = (*KeyedUnarchiver)(nil)

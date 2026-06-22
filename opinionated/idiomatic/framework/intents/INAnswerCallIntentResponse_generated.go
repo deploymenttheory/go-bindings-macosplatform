@@ -52,47 +52,30 @@ func NewAnswerCallIntentResponseWithCodeUserActivity(code AnswerCallIntentRespon
 }
 
 // WithCallRecords sets the property and returns the receiver so calls can be chained.
-func (x *AnswerCallIntentResponse) WithCallRecords(items ...*CallRecord) *AnswerCallIntentResponse {
+func (acir *AnswerCallIntentResponse) WithCallRecords(items ...*CallRecord) *AnswerCallIntentResponse {
 	_arr := purego.SliceToNSArray(items, func(_v *CallRecord) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCallRecords:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(acir), objc.RegisterName("setCallRecords:"), _arr)
+	return acir
 }
 
-// WithUserActivity the user activity object to use when launching the app.
-func (x *AnswerCallIntentResponse) WithUserActivity(userActivity obj.Object) *AnswerCallIntentResponse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets the user activity object to use when launching the app.
+func (acir *AnswerCallIntentResponse) WithUserActivity(userActivity obj.Object) *AnswerCallIntentResponse {
+	objc.Send[objc.ID](objref.IDOf(acir), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return acir
 }
 
 // Code wraps the corresponding Objective-C method.
-func (x *AnswerCallIntentResponse) Code() AnswerCallIntentResponseCode {
-	_r := objc.Send[AnswerCallIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
+func (acir *AnswerCallIntentResponse) Code() AnswerCallIntentResponseCode {
+	_r := objc.Send[AnswerCallIntentResponseCode](objref.IDOf(acir), objc.RegisterName("code"))
 	return _r
 }
 
 // CallRecords wraps the corresponding Objective-C method.
 //
 // CallRecords returns the collection as a Go slice.
-func (x *AnswerCallIntentResponse) CallRecords() []*CallRecord {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callRecords"))
+func (acir *AnswerCallIntentResponse) CallRecords() []*CallRecord {
+	_arr := objc.Send[objc.ID](objref.IDOf(acir), objc.RegisterName("callRecords"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CallRecord { return CallRecordFromID(_id) })
 }
-
-// SetCallRecords wraps the corresponding Objective-C method.
-func (x *AnswerCallIntentResponse) SetCallRecords(callRecords []*CallRecord) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCallRecords:"), purego.SliceToNSArray(callRecords, func(_v *CallRecord) objc.ID { return objref.IDOf(_v) }))
-}
-
-// AnswerCallIntentResponseable is the interface implemented by [AnswerCallIntentResponse], for mocking and DI.
-type AnswerCallIntentResponseable interface {
-	obj.Object
-	WithCallRecords(items ...*CallRecord) *AnswerCallIntentResponse
-	WithUserActivity(userActivity obj.Object) *AnswerCallIntentResponse
-	Code() AnswerCallIntentResponseCode
-	CallRecords() []*CallRecord
-	SetCallRecords(callRecords []*CallRecord)
-}
-
-var _ AnswerCallIntentResponseable = (*AnswerCallIntentResponse)(nil)
 
 var _ IntentResponseProvider = (*AnswerCallIntentResponse)(nil)

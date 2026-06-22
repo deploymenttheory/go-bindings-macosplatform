@@ -44,24 +44,24 @@ func messageReactionAdopt(id objc.ID) *MessageReaction {
 }
 
 // Description returns the object's -description text.
-func (x *MessageReaction) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mr *MessageReaction) Description() string {
+	return rt.Description(objref.IDOf(mr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MessageReaction) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mr *MessageReaction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MessageReaction) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mr *MessageReaction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MessageReaction) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mr *MessageReaction) String() string {
+	return rt.Description(objref.IDOf(mr))
 }
 
 // NewMessageReactionWithReactionTypeReactionDescriptionEmoji creates a new MessageReaction.
@@ -72,14 +72,14 @@ func NewMessageReactionWithReactionTypeReactionDescriptionEmoji(reactionType Mes
 }
 
 // ReactionType wraps the corresponding Objective-C method.
-func (x *MessageReaction) ReactionType() MessageReactionType {
-	_r := objc.Send[MessageReactionType](objref.IDOf(x), objc.RegisterName("reactionType"))
+func (mr *MessageReaction) ReactionType() MessageReactionType {
+	_r := objc.Send[MessageReactionType](objref.IDOf(mr), objc.RegisterName("reactionType"))
 	return _r
 }
 
 // ReactionDescription wraps the corresponding Objective-C method.
-func (x *MessageReaction) ReactionDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reactionDescription"))
+func (mr *MessageReaction) ReactionDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("reactionDescription"))
 	if _r == 0 {
 		return ""
 	}
@@ -87,20 +87,10 @@ func (x *MessageReaction) ReactionDescription() string {
 }
 
 // Emoji wraps the corresponding Objective-C method.
-func (x *MessageReaction) Emoji() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emoji"))
+func (mr *MessageReaction) Emoji() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mr), objc.RegisterName("emoji"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// MessageReactionable is the interface implemented by [MessageReaction], for mocking and DI.
-type MessageReactionable interface {
-	obj.Object
-	ReactionType() MessageReactionType
-	ReactionDescription() string
-	Emoji() string
-}
-
-var _ MessageReactionable = (*MessageReaction)(nil)

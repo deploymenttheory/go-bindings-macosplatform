@@ -5,6 +5,8 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -12,7 +14,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // RecognizedText is an idiomatic wrapper over the Objective-C class VNRecognizedText.
@@ -49,24 +50,24 @@ func recognizedTextAdopt(id objc.ID) *RecognizedText {
 }
 
 // Description returns the object's -description text.
-func (x *RecognizedText) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rt_ *RecognizedText) Description() string {
+	return rt.Description(objref.IDOf(rt_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RecognizedText) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rt_ *RecognizedText) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rt_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RecognizedText) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rt_ *RecognizedText) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rt_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RecognizedText) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rt_ *RecognizedText) String() string {
+	return rt.Description(objref.IDOf(rt_))
 }
 
 // NewRecognizedText creates a new RecognizedText.
@@ -76,26 +77,17 @@ func NewRecognizedText() *RecognizedText {
 }
 
 // BoundingBoxForRangeError calculates the bounding box around the characters in the range of a string.
-func (x *RecognizedText) BoundingBoxForRangeError(range_ foundation.NSRange) (result *RectangleObservation, err error) {
+func (rt_ *RecognizedText) BoundingBoxForRangeError(range_ foundation.NSRange) (result *RectangleObservation, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boundingBoxForRange:error:"), range_, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(rt_), objc.RegisterName("boundingBoxForRange:error:"), range_, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return RectangleObservationFromID(_r), nil
 }
 
-// Confidence the level of confidence normalized to [0.0, 1.0] where 1.0 is most confident
-func (x *RecognizedText) Confidence() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("confidence"))
+// Confidence returns the level of confidence normalized to [0.0, 1.0] where 1.0 is most confident
+func (rt_ *RecognizedText) Confidence() float32 {
+	_r := objc.Send[float32](objref.IDOf(rt_), objc.RegisterName("confidence"))
 	return _r
 }
-
-// RecognizedTextable is the interface implemented by [RecognizedText], for mocking and DI.
-type RecognizedTextable interface {
-	obj.Object
-	BoundingBoxForRangeError(range_ foundation.NSRange) (result *RectangleObservation, err error)
-	Confidence() float32
-}
-
-var _ RecognizedTextable = (*RecognizedText)(nil)

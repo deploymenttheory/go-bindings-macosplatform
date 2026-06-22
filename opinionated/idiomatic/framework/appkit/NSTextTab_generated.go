@@ -46,24 +46,24 @@ func textTabAdopt(id objc.ID) *TextTab {
 }
 
 // Description returns the object's -description text.
-func (x *TextTab) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tt *TextTab) Description() string {
+	return rt.Description(objref.IDOf(tt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextTab) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tt *TextTab) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextTab) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tt *TextTab) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextTab) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tt *TextTab) String() string {
+	return rt.Description(objref.IDOf(tt))
 }
 
 // NewTextTabWithTextAlignmentLocationOptions initializes a text tab with the specified text alignment, location, and options.
@@ -81,36 +81,25 @@ func NewTextTabWithTypeLocation(type_ TextTabType, loc float64) *TextTab {
 }
 
 // Location wraps the corresponding Objective-C method.
-func (x *TextTab) Location() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("location"))
+func (tt *TextTab) Location() float64 {
+	_r := objc.Send[float64](objref.IDOf(tt), objc.RegisterName("location"))
 	return _r
 }
 
 // Options wraps the corresponding Objective-C method.
-func (x *TextTab) Options() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
+func (tt *TextTab) Options() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tt), objc.RegisterName("options"))
 	return obj.Wrap(_r)
 }
 
 // Alignment wraps the corresponding Objective-C method.
-func (x *TextTab) Alignment() TextAlignment {
-	_r := objc.Send[TextAlignment](objref.IDOf(x), objc.RegisterName("alignment"))
+func (tt *TextTab) Alignment() TextAlignment {
+	_r := objc.Send[TextAlignment](objref.IDOf(tt), objc.RegisterName("alignment"))
 	return _r
 }
 
 // TabStopType wraps the corresponding Objective-C method.
-func (x *TextTab) TabStopType() TextTabType {
-	_r := objc.Send[TextTabType](objref.IDOf(x), objc.RegisterName("tabStopType"))
+func (tt *TextTab) TabStopType() TextTabType {
+	_r := objc.Send[TextTabType](objref.IDOf(tt), objc.RegisterName("tabStopType"))
 	return _r
 }
-
-// TextTabable is the interface implemented by [TextTab], for mocking and DI.
-type TextTabable interface {
-	obj.Object
-	Location() float64
-	Options() obj.Object
-	Alignment() TextAlignment
-	TabStopType() TextTabType
-}
-
-var _ TextTabable = (*TextTab)(nil)

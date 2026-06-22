@@ -54,273 +54,229 @@ func NewAnnotationMarkup() *AnnotationMarkup {
 	return annotationMarkupAdopt(_id)
 }
 
-// WithPage returns the page that the annotation is associated with.
-func (x *AnnotationMarkup) WithPage(page *Page) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPage:"), objref.IDOf(page))
-	return x
+// WithPage sets returns the page that the annotation is associated with.
+func (am *AnnotationMarkup) WithPage(page *Page) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setPage:"), objref.IDOf(page))
+	return am
 }
 
-// WithType returns the type of the annotation.
-func (x *AnnotationMarkup) WithType(type_ string) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
-	return x
+// WithType sets returns the type of the annotation.
+func (am *AnnotationMarkup) WithType(type_ string) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setType:"), purego.NSString(type_))
+	return am
 }
 
-// WithBounds returns the bounding box for the annotation in page space.
-func (x *AnnotationMarkup) WithBounds(bounds corefoundation.CGRect) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets returns the bounding box for the annotation in page space.
+func (am *AnnotationMarkup) WithBounds(bounds corefoundation.CGRect) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setBounds:"), bounds)
+	return am
 }
 
-// WithShouldDisplay returns a Boolean value indicating whether the annotation should be displayed.
-func (x *AnnotationMarkup) WithShouldDisplay(shouldDisplay bool) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldDisplay:"), shouldDisplay)
-	return x
+// WithShouldDisplay sets returns a Boolean value indicating whether the annotation should be displayed.
+func (am *AnnotationMarkup) WithShouldDisplay(shouldDisplay bool) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setShouldDisplay:"), shouldDisplay)
+	return am
 }
 
-// WithShouldPrint returns a Boolean value indicating whether the annotation should appear when the document is printed.
-func (x *AnnotationMarkup) WithShouldPrint(shouldPrint bool) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldPrint:"), shouldPrint)
-	return x
+// WithShouldPrint sets returns a Boolean value indicating whether the annotation should appear when the document is printed.
+func (am *AnnotationMarkup) WithShouldPrint(shouldPrint bool) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setShouldPrint:"), shouldPrint)
+	return am
 }
 
-// WithHighlighted a Boolean value that indicates whether the annotation is in a highlighted state, such as when the mouse is down on a link annotation.
-func (x *AnnotationMarkup) WithHighlighted(highlighted bool) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value that indicates whether the annotation is in a highlighted state, such as when the mouse is down on a link annotation.
+func (am *AnnotationMarkup) WithHighlighted(highlighted bool) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setHighlighted:"), highlighted)
+	return am
 }
 
-// WithFont the font the annotation uses to display text.
-func (x *AnnotationMarkup) WithFont(font obj.Object) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font the annotation uses to display text.
+func (am *AnnotationMarkup) WithFont(font obj.Object) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return am
 }
 
-// WithFontColor the font color the annotation uses to display text.
-func (x *AnnotationMarkup) WithFontColor(fontColor obj.Object) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
-	return x
+// WithFontColor sets the font color the annotation uses to display text.
+func (am *AnnotationMarkup) WithFontColor(fontColor obj.Object) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setFontColor:"), objref.IDOf(fontColor))
+	return am
 }
 
-// WithInteriorColor the fill color for drawing a circle, line, or square annotation.
-func (x *AnnotationMarkup) WithInteriorColor(interiorColor obj.Object) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
-	return x
+// WithInteriorColor sets the fill color for drawing a circle, line, or square annotation.
+func (am *AnnotationMarkup) WithInteriorColor(interiorColor obj.Object) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setInteriorColor:"), objref.IDOf(interiorColor))
+	return am
 }
 
-// WithStartPoint the point where a line begins, in annotation-space coordinates.
-func (x *AnnotationMarkup) WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartPoint:"), startPoint)
-	return x
+// WithStartPoint sets the point where a line begins, in annotation-space coordinates.
+func (am *AnnotationMarkup) WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setStartPoint:"), startPoint)
+	return am
 }
 
-// WithEndPoint the point where a line ends, in annotation-space coordinates.
-func (x *AnnotationMarkup) WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndPoint:"), endPoint)
-	return x
+// WithEndPoint sets the point where a line ends, in annotation-space coordinates.
+func (am *AnnotationMarkup) WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setEndPoint:"), endPoint)
+	return am
 }
 
-// WithStartLineStyle the style of the line annotation’s starting point, such as square or filled arrowhead.
-func (x *AnnotationMarkup) WithStartLineStyle(startLineStyle LineStyle) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartLineStyle:"), startLineStyle)
-	return x
+// WithStartLineStyle sets the style of the line annotation’s starting point, such as square or filled arrowhead.
+func (am *AnnotationMarkup) WithStartLineStyle(startLineStyle LineStyle) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setStartLineStyle:"), startLineStyle)
+	return am
 }
 
-// WithEndLineStyle the style of the line annotation’s ending point, such as square or filled arrowhead.
-func (x *AnnotationMarkup) WithEndLineStyle(endLineStyle LineStyle) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndLineStyle:"), endLineStyle)
-	return x
+// WithEndLineStyle sets the style of the line annotation’s ending point, such as square or filled arrowhead.
+func (am *AnnotationMarkup) WithEndLineStyle(endLineStyle LineStyle) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setEndLineStyle:"), endLineStyle)
+	return am
 }
 
-// WithIconType the type of icon to display for a pop-up text annotation.
-func (x *AnnotationMarkup) WithIconType(iconType TextAnnotationIconType) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIconType:"), iconType)
-	return x
+// WithIconType sets the type of icon to display for a pop-up text annotation.
+func (am *AnnotationMarkup) WithIconType(iconType TextAnnotationIconType) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setIconType:"), iconType)
+	return am
 }
 
-// WithQuadrilateralPoints an array of values that represents the points bounding the marked-up text.
-func (x *AnnotationMarkup) WithQuadrilateralPoints(items ...obj.Object) *AnnotationMarkup {
+// WithQuadrilateralPoints sets an array of values that represents the points bounding the marked-up text.
+func (am *AnnotationMarkup) WithQuadrilateralPoints(items ...obj.Object) *AnnotationMarkup {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuadrilateralPoints:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setQuadrilateralPoints:"), _arr)
+	return am
 }
 
-// WithMarkupType the markup type that the annotation displays, either highlight, strikethrough, underline, or redact.
-func (x *AnnotationMarkup) WithMarkupType(markupType MarkupType) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarkupType:"), markupType)
-	return x
+// WithMarkupType sets the markup type that the annotation displays, either highlight, strikethrough, underline, or redact.
+func (am *AnnotationMarkup) WithMarkupType(markupType MarkupType) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setMarkupType:"), markupType)
+	return am
 }
 
-// WithWidgetControlType the type of button widget control, either radio button, push button, or checkbox.
-func (x *AnnotationMarkup) WithWidgetControlType(widgetControlType WidgetControlType) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetControlType:"), widgetControlType)
-	return x
+// WithWidgetControlType sets the type of button widget control, either radio button, push button, or checkbox.
+func (am *AnnotationMarkup) WithWidgetControlType(widgetControlType WidgetControlType) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setWidgetControlType:"), widgetControlType)
+	return am
 }
 
-// WithMultiline a Boolean value that indicates whether the text widget annotation displays multiple lines.
-func (x *AnnotationMarkup) WithMultiline(multiline bool) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiline:"), multiline)
-	return x
+// WithMultiline sets a Boolean value that indicates whether the text widget annotation displays multiple lines.
+func (am *AnnotationMarkup) WithMultiline(multiline bool) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setMultiline:"), multiline)
+	return am
 }
 
-// WithComb a Boolean value that indicates whether the annotation divides the text widget’s bounds into equally spaced segments, such as in a form entry field.
-func (x *AnnotationMarkup) WithComb(comb bool) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComb:"), comb)
-	return x
+// WithComb sets a Boolean value that indicates whether the annotation divides the text widget’s bounds into equally spaced segments, such as in a form entry field.
+func (am *AnnotationMarkup) WithComb(comb bool) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setComb:"), comb)
+	return am
 }
 
-// WithMaximumLength the maximum number of characters the text widget annotation allows.
-func (x *AnnotationMarkup) WithMaximumLength(maximumLength int) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumLength:"), maximumLength)
-	return x
+// WithMaximumLength sets the maximum number of characters the text widget annotation allows.
+func (am *AnnotationMarkup) WithMaximumLength(maximumLength int) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setMaximumLength:"), maximumLength)
+	return am
 }
 
-// WithWidgetStringValue the string value of the widget annotation.
-func (x *AnnotationMarkup) WithWidgetStringValue(widgetStringValue string) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetStringValue:"), purego.NSString(widgetStringValue))
-	return x
+// WithWidgetStringValue sets the string value of the widget annotation.
+func (am *AnnotationMarkup) WithWidgetStringValue(widgetStringValue string) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setWidgetStringValue:"), purego.NSString(widgetStringValue))
+	return am
 }
 
-// WithWidgetDefaultStringValue the string value that the widget reverts to when performing a reset form action.
-func (x *AnnotationMarkup) WithWidgetDefaultStringValue(widgetDefaultStringValue string) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidgetDefaultStringValue:"), purego.NSString(widgetDefaultStringValue))
-	return x
+// WithWidgetDefaultStringValue sets the string value that the widget reverts to when performing a reset form action.
+func (am *AnnotationMarkup) WithWidgetDefaultStringValue(widgetDefaultStringValue string) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setWidgetDefaultStringValue:"), purego.NSString(widgetDefaultStringValue))
+	return am
 }
 
-// WithAllowsToggleToOff a Boolean value that indicates whether clicking or tapping a selected radio button toggles it to an unselected state.
-func (x *AnnotationMarkup) WithAllowsToggleToOff(allowsToggleToOff bool) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsToggleToOff:"), allowsToggleToOff)
-	return x
+// WithAllowsToggleToOff sets a Boolean value that indicates whether clicking or tapping a selected radio button toggles it to an unselected state.
+func (am *AnnotationMarkup) WithAllowsToggleToOff(allowsToggleToOff bool) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setAllowsToggleToOff:"), allowsToggleToOff)
+	return am
 }
 
-// WithRadiosInUnison a Boolean value that indicates whether radio buttons in a group turn on and off in unison.
-func (x *AnnotationMarkup) WithRadiosInUnison(radiosInUnison bool) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadiosInUnison:"), radiosInUnison)
-	return x
+// WithRadiosInUnison sets a Boolean value that indicates whether radio buttons in a group turn on and off in unison.
+func (am *AnnotationMarkup) WithRadiosInUnison(radiosInUnison bool) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setRadiosInUnison:"), radiosInUnison)
+	return am
 }
 
-// WithReadOnly a Boolean value that determines whether the widget is editable.
-func (x *AnnotationMarkup) WithReadOnly(readOnly bool) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadOnly:"), readOnly)
-	return x
+// WithReadOnly sets a Boolean value that determines whether the widget is editable.
+func (am *AnnotationMarkup) WithReadOnly(readOnly bool) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setReadOnly:"), readOnly)
+	return am
 }
 
-// WithListChoice a Boolean value that indicates whether the choice widget annotation is a list or a pop-up menu.
-func (x *AnnotationMarkup) WithListChoice(listChoice bool) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListChoice:"), listChoice)
-	return x
+// WithListChoice sets a Boolean value that indicates whether the choice widget annotation is a list or a pop-up menu.
+func (am *AnnotationMarkup) WithListChoice(listChoice bool) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setListChoice:"), listChoice)
+	return am
 }
 
-// WithChoices an array of strings that specifies the options in either a list or a pop-up menu.
-func (x *AnnotationMarkup) WithChoices(items ...obj.Object) *AnnotationMarkup {
+// WithChoices sets an array of strings that specifies the options in either a list or a pop-up menu.
+func (am *AnnotationMarkup) WithChoices(items ...obj.Object) *AnnotationMarkup {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChoices:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setChoices:"), _arr)
+	return am
 }
 
-// WithValues an array of strings that specifies the export values for items in a list or a pop-up menu.
-func (x *AnnotationMarkup) WithValues(items ...obj.Object) *AnnotationMarkup {
+// WithValues sets an array of strings that specifies the export values for items in a list or a pop-up menu.
+func (am *AnnotationMarkup) WithValues(items ...obj.Object) *AnnotationMarkup {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValues:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setValues:"), _arr)
+	return am
 }
 
-// WithButtonWidgetState the current state of the button widget annotation.
-func (x *AnnotationMarkup) WithButtonWidgetState(buttonWidgetState WidgetCellState) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonWidgetState:"), buttonWidgetState)
-	return x
+// WithButtonWidgetState sets the current state of the button widget annotation.
+func (am *AnnotationMarkup) WithButtonWidgetState(buttonWidgetState WidgetCellState) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setButtonWidgetState:"), buttonWidgetState)
+	return am
 }
 
-// WithButtonWidgetStateString a string value that differentiates button widgets in the same group, such as to identify mutually exclusive radio buttons from each other.
-func (x *AnnotationMarkup) WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonWidgetStateString:"), purego.NSString(buttonWidgetStateString))
-	return x
+// WithButtonWidgetStateString sets a string value that differentiates button widgets in the same group, such as to identify mutually exclusive radio buttons from each other.
+func (am *AnnotationMarkup) WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setButtonWidgetStateString:"), purego.NSString(buttonWidgetStateString))
+	return am
 }
 
-// WithOpen a Boolean value that indicates whether the pop-up annotation is in an opened state, displaying its text content, or in a closed state, displaying an icon.
-func (x *AnnotationMarkup) WithOpen(open bool) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpen:"), open)
-	return x
+// WithOpen sets a Boolean value that indicates whether the pop-up annotation is in an opened state, displaying its text content, or in a closed state, displaying an icon.
+func (am *AnnotationMarkup) WithOpen(open bool) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setOpen:"), open)
+	return am
 }
 
-// WithDestination the destination for a link annotation.
-func (x *AnnotationMarkup) WithDestination(destination *Destination) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), objref.IDOf(destination))
-	return x
+// WithDestination sets the destination for a link annotation.
+func (am *AnnotationMarkup) WithDestination(destination *Destination) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setDestination:"), objref.IDOf(destination))
+	return am
 }
 
-// WithURL a URL for a link annotation.
-func (x *AnnotationMarkup) WithURL(uRL string) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-	return x
+// WithURL sets a URL for a link annotation.
+func (am *AnnotationMarkup) WithURL(uRL string) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+	return am
 }
 
-// WithFieldName the widget identifier for form annotation actions and behaviors.
-func (x *AnnotationMarkup) WithFieldName(fieldName string) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFieldName:"), purego.NSString(fieldName))
-	return x
+// WithFieldName sets the widget identifier for form annotation actions and behaviors.
+func (am *AnnotationMarkup) WithFieldName(fieldName string) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setFieldName:"), purego.NSString(fieldName))
+	return am
 }
 
-// WithCaption the title of push button widget annotations.
-func (x *AnnotationMarkup) WithCaption(caption string) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaption:"), purego.NSString(caption))
-	return x
+// WithCaption sets the title of push button widget annotations.
+func (am *AnnotationMarkup) WithCaption(caption string) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setCaption:"), purego.NSString(caption))
+	return am
 }
 
-// WithBackgroundColor the color of the widget’s background.
-func (x *AnnotationMarkup) WithBackgroundColor(backgroundColor obj.Object) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the color of the widget’s background.
+func (am *AnnotationMarkup) WithBackgroundColor(backgroundColor obj.Object) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return am
 }
 
-// WithStampName the name of the stamp, a text or graphics annotation that emulates a rubber stamp effect.
-func (x *AnnotationMarkup) WithStampName(stampName string) *AnnotationMarkup {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStampName:"), purego.NSString(stampName))
-	return x
+// WithStampName sets the name of the stamp, a text or graphics annotation that emulates a rubber stamp effect.
+func (am *AnnotationMarkup) WithStampName(stampName string) *AnnotationMarkup {
+	objc.Send[objc.ID](objref.IDOf(am), objc.RegisterName("setStampName:"), purego.NSString(stampName))
+	return am
 }
-
-// AnnotationMarkupable is the interface implemented by [AnnotationMarkup], for mocking and DI.
-type AnnotationMarkupable interface {
-	obj.Object
-	WithPage(page *Page) *AnnotationMarkup
-	WithType(type_ string) *AnnotationMarkup
-	WithBounds(bounds corefoundation.CGRect) *AnnotationMarkup
-	WithShouldDisplay(shouldDisplay bool) *AnnotationMarkup
-	WithShouldPrint(shouldPrint bool) *AnnotationMarkup
-	WithHighlighted(highlighted bool) *AnnotationMarkup
-	WithFont(font obj.Object) *AnnotationMarkup
-	WithFontColor(fontColor obj.Object) *AnnotationMarkup
-	WithInteriorColor(interiorColor obj.Object) *AnnotationMarkup
-	WithStartPoint(startPoint corefoundation.CGPoint) *AnnotationMarkup
-	WithEndPoint(endPoint corefoundation.CGPoint) *AnnotationMarkup
-	WithStartLineStyle(startLineStyle LineStyle) *AnnotationMarkup
-	WithEndLineStyle(endLineStyle LineStyle) *AnnotationMarkup
-	WithIconType(iconType TextAnnotationIconType) *AnnotationMarkup
-	WithQuadrilateralPoints(items ...obj.Object) *AnnotationMarkup
-	WithMarkupType(markupType MarkupType) *AnnotationMarkup
-	WithWidgetControlType(widgetControlType WidgetControlType) *AnnotationMarkup
-	WithMultiline(multiline bool) *AnnotationMarkup
-	WithComb(comb bool) *AnnotationMarkup
-	WithMaximumLength(maximumLength int) *AnnotationMarkup
-	WithWidgetStringValue(widgetStringValue string) *AnnotationMarkup
-	WithWidgetDefaultStringValue(widgetDefaultStringValue string) *AnnotationMarkup
-	WithAllowsToggleToOff(allowsToggleToOff bool) *AnnotationMarkup
-	WithRadiosInUnison(radiosInUnison bool) *AnnotationMarkup
-	WithReadOnly(readOnly bool) *AnnotationMarkup
-	WithListChoice(listChoice bool) *AnnotationMarkup
-	WithChoices(items ...obj.Object) *AnnotationMarkup
-	WithValues(items ...obj.Object) *AnnotationMarkup
-	WithButtonWidgetState(buttonWidgetState WidgetCellState) *AnnotationMarkup
-	WithButtonWidgetStateString(buttonWidgetStateString string) *AnnotationMarkup
-	WithOpen(open bool) *AnnotationMarkup
-	WithDestination(destination *Destination) *AnnotationMarkup
-	WithURL(uRL string) *AnnotationMarkup
-	WithFieldName(fieldName string) *AnnotationMarkup
-	WithCaption(caption string) *AnnotationMarkup
-	WithBackgroundColor(backgroundColor obj.Object) *AnnotationMarkup
-	WithStampName(stampName string) *AnnotationMarkup
-}
-
-var _ AnnotationMarkupable = (*AnnotationMarkup)(nil)
 
 var _ AnnotationProvider = (*AnnotationMarkup)(nil)

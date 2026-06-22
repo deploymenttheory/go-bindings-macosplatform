@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,33 +50,23 @@ func NewCNNDilatedPoolingMaxGradientNodeWithSourceGradientSourceImageGradientSta
 	return cNNDilatedPoolingMaxGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNDilatedPoolingMaxGradientNode) WithLabel(label string) *CNNDilatedPoolingMaxGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cdpmgn *CNNDilatedPoolingMaxGradientNode) WithLabel(label string) *CNNDilatedPoolingMaxGradientNode {
+	objc.Send[objc.ID](objref.IDOf(cdpmgn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cdpmgn
 }
 
 // DilationRateX wraps the corresponding Objective-C method.
-func (x *CNNDilatedPoolingMaxGradientNode) DilationRateX() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateX"))
+func (cdpmgn *CNNDilatedPoolingMaxGradientNode) DilationRateX() int {
+	_r := objc.Send[int](objref.IDOf(cdpmgn), objc.RegisterName("dilationRateX"))
 	return _r
 }
 
 // DilationRateY wraps the corresponding Objective-C method.
-func (x *CNNDilatedPoolingMaxGradientNode) DilationRateY() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dilationRateY"))
+func (cdpmgn *CNNDilatedPoolingMaxGradientNode) DilationRateY() int {
+	_r := objc.Send[int](objref.IDOf(cdpmgn), objc.RegisterName("dilationRateY"))
 	return _r
 }
-
-// CNNDilatedPoolingMaxGradientNodeable is the interface implemented by [CNNDilatedPoolingMaxGradientNode], for mocking and DI.
-type CNNDilatedPoolingMaxGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNDilatedPoolingMaxGradientNode
-	DilationRateX() int
-	DilationRateY() int
-}
-
-var _ CNNDilatedPoolingMaxGradientNodeable = (*CNNDilatedPoolingMaxGradientNode)(nil)
 
 var _ CNNPoolingGradientNodeProvider = (*CNNDilatedPoolingMaxGradientNode)(nil)
 

@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,31 +52,16 @@ func NewSphereObstacleWithRadius(radius float32) *SphereObstacle {
 	return sphereObstacleAdopt(_id)
 }
 
-// WithRadius the radius of the obstacle.
-func (x *SphereObstacle) WithRadius(radius float32) *SphereObstacle {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
-	return x
+// WithRadius sets the radius of the obstacle.
+func (so *SphereObstacle) WithRadius(radius float32) *SphereObstacle {
+	objc.Send[objc.ID](objref.IDOf(so), objc.RegisterName("setRadius:"), radius)
+	return so
 }
 
-// Radius radius of the impassible circle
-func (x *SphereObstacle) Radius() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("radius"))
+// Radius returns radius of the impassible circle
+func (so *SphereObstacle) Radius() float32 {
+	_r := objc.Send[float32](objref.IDOf(so), objc.RegisterName("radius"))
 	return _r
 }
-
-// SetRadius wraps the corresponding Objective-C method.
-func (x *SphereObstacle) SetRadius(radius float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
-}
-
-// SphereObstacleable is the interface implemented by [SphereObstacle], for mocking and DI.
-type SphereObstacleable interface {
-	obj.Object
-	WithRadius(radius float32) *SphereObstacle
-	Radius() float32
-	SetRadius(radius float32)
-}
-
-var _ SphereObstacleable = (*SphereObstacle)(nil)
 
 var _ ObstacleProvider = (*SphereObstacle)(nil)

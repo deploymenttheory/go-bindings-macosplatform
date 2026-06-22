@@ -7,7 +7,6 @@ package scenekit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,52 +51,34 @@ func NewBillboardConstraint() *BillboardConstraint {
 	return billboardConstraintAdopt(_id)
 }
 
-// WithFreeAxes an option that specifies which degrees of freedom the constraint affects.
-func (x *BillboardConstraint) WithFreeAxes(freeAxes BillboardAxis) *BillboardConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeAxes:"), freeAxes)
-	return x
+// WithFreeAxes sets an option that specifies which degrees of freedom the constraint affects.
+func (bc *BillboardConstraint) WithFreeAxes(freeAxes BillboardAxis) *BillboardConstraint {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setFreeAxes:"), freeAxes)
+	return bc
 }
 
-// WithEnabled determines whether the constraint is enabled or not. Defaults to YES.
-func (x *BillboardConstraint) WithEnabled(enabled bool) *BillboardConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets determines whether the constraint is enabled or not. Defaults to YES.
+func (bc *BillboardConstraint) WithEnabled(enabled bool) *BillboardConstraint {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setEnabled:"), enabled)
+	return bc
 }
 
-// WithInfluenceFactor the influence of the constraint on the node’s transformation.
-func (x *BillboardConstraint) WithInfluenceFactor(influenceFactor float64) *BillboardConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
-	return x
+// WithInfluenceFactor sets the influence of the constraint on the node’s transformation.
+func (bc *BillboardConstraint) WithInfluenceFactor(influenceFactor float64) *BillboardConstraint {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
+	return bc
 }
 
-// WithIncremental specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
-func (x *BillboardConstraint) WithIncremental(incremental bool) *BillboardConstraint {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
-	return x
+// WithIncremental sets specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+func (bc *BillboardConstraint) WithIncremental(incremental bool) *BillboardConstraint {
+	objc.Send[objc.ID](objref.IDOf(bc), objc.RegisterName("setIncremental:"), incremental)
+	return bc
 }
 
 // FreeAxes wraps the corresponding Objective-C method.
-func (x *BillboardConstraint) FreeAxes() BillboardAxis {
-	_r := objc.Send[BillboardAxis](objref.IDOf(x), objc.RegisterName("freeAxes"))
+func (bc *BillboardConstraint) FreeAxes() BillboardAxis {
+	_r := objc.Send[BillboardAxis](objref.IDOf(bc), objc.RegisterName("freeAxes"))
 	return _r
 }
-
-// SetFreeAxes wraps the corresponding Objective-C method.
-func (x *BillboardConstraint) SetFreeAxes(freeAxes BillboardAxis) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFreeAxes:"), freeAxes)
-}
-
-// BillboardConstraintable is the interface implemented by [BillboardConstraint], for mocking and DI.
-type BillboardConstraintable interface {
-	obj.Object
-	WithFreeAxes(freeAxes BillboardAxis) *BillboardConstraint
-	WithEnabled(enabled bool) *BillboardConstraint
-	WithInfluenceFactor(influenceFactor float64) *BillboardConstraint
-	WithIncremental(incremental bool) *BillboardConstraint
-	FreeAxes() BillboardAxis
-	SetFreeAxes(freeAxes BillboardAxis)
-}
-
-var _ BillboardConstraintable = (*BillboardConstraint)(nil)
 
 var _ ConstraintProvider = (*BillboardConstraint)(nil)

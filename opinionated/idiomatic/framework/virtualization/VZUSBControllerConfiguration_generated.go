@@ -48,49 +48,40 @@ func uSBControllerConfigurationAdopt(id objc.ID) *USBControllerConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *USBControllerConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ucc *USBControllerConfiguration) Description() string {
+	return rt.Description(objref.IDOf(ucc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *USBControllerConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ucc *USBControllerConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ucc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *USBControllerConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ucc *USBControllerConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ucc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *USBControllerConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ucc *USBControllerConfiguration) String() string {
+	return rt.Description(objref.IDOf(ucc))
 }
 
-// UsbDevices wraps the corresponding Objective-C method.
-func (x *USBControllerConfiguration) UsbDevices() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("usbDevices"))
+// USBDevices wraps the corresponding Objective-C method.
+func (ucc *USBControllerConfiguration) USBDevices() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ucc), objc.RegisterName("usbDevices"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetUsbDevices wraps the corresponding Objective-C method.
-func (x *USBControllerConfiguration) SetUsbDevices(usbDevices []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsbDevices:"), purego.SliceToNSArray(usbDevices, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+// SetUSBDevices wraps the corresponding Objective-C method.
+func (ucc *USBControllerConfiguration) SetUSBDevices(usbDevices []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ucc), objc.RegisterName("setUsbDevices:"), purego.SliceToNSArray(usbDevices, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
-
-// USBControllerConfigurationable is the interface implemented by [USBControllerConfiguration], for mocking and DI.
-type USBControllerConfigurationable interface {
-	obj.Object
-	UsbDevices() []obj.Object
-	SetUsbDevices(usbDevices []obj.Object)
-}
-
-var _ USBControllerConfigurationable = (*USBControllerConfiguration)(nil)
 
 // isUSBControllerConfiguration marks USBControllerConfiguration — and, by embedding promotion, its
 // subclasses — as a member of the USBControllerConfiguration hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *USBControllerConfiguration) isUSBControllerConfiguration() {}
+func (ucc *USBControllerConfiguration) isUSBControllerConfiguration() {}
 
 var _ USBControllerConfigurationProvider = (*USBControllerConfiguration)(nil)

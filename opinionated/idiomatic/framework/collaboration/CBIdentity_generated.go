@@ -48,47 +48,47 @@ func identityAdopt(id objc.ID) *Identity {
 }
 
 // Description returns the object's -description text.
-func (x *Identity) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (i *Identity) Description() string {
+	return rt.Description(objref.IDOf(i))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Identity) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (i *Identity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(i), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Identity) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (i *Identity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(i), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Identity) String() string {
-	return rt.Description(objref.IDOf(x))
+func (i *Identity) String() string {
+	return rt.Description(objref.IDOf(i))
 }
 
 // IsMemberOfGroup returns a Boolean value indicating whether the identity is a member of the specified group.
-func (x *Identity) IsMemberOfGroup(group *GroupIdentity) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMemberOfGroup:"), objref.IDOf(group))
+func (i *Identity) IsMemberOfGroup(group *GroupIdentity) bool {
+	_r := objc.Send[bool](objref.IDOf(i), objc.RegisterName("isMemberOfGroup:"), objref.IDOf(group))
 	return _r
 }
 
 // Authority returns the identity authority where the identity is stored. - Returns: The identity authority where the identity is stored.
-func (x *Identity) Authority() *IdentityAuthority {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authority"))
+func (i *Identity) Authority() *IdentityAuthority {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("authority"))
 	return IdentityAuthorityFromID(_r)
 }
 
 // UniqueIdentifier wraps the corresponding Objective-C method.
-func (x *Identity) UniqueIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueIdentifier"))
+func (i *Identity) UniqueIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("uniqueIdentifier"))
 	return obj.Wrap(_r)
 }
 
 // UUIDString returns the UUID of the identity as a string. The UUID string is generated so it is unique across all identity authorities. When storing ACLs, one method is to store the UUID of each identity. However, it is recommended that you use a persistent data object instead (see “CBIdentity/persistentReference“). - Returns: The UUID string of the identity.
-func (x *Identity) UUIDString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUIDString"))
+func (i *Identity) UUIDString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("UUIDString"))
 	if _r == 0 {
 		return ""
 	}
@@ -96,8 +96,8 @@ func (x *Identity) UUIDString() string {
 }
 
 // FullName returns the full name of the identity. - Returns: The full name for the identity.
-func (x *Identity) FullName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullName"))
+func (i *Identity) FullName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("fullName"))
 	if _r == 0 {
 		return ""
 	}
@@ -105,8 +105,8 @@ func (x *Identity) FullName() string {
 }
 
 // PosixName returns the POSIX name of the identity. The POSIX name is also referred to as the “short name” for an identity. It can only contain the characters A-Z, a-z, 0-9, -, _, ., and
-func (x *Identity) PosixName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("posixName"))
+func (i *Identity) PosixName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("posixName"))
 	if _r == 0 {
 		return ""
 	}
@@ -116,14 +116,14 @@ func (x *Identity) PosixName() string {
 // Aliases returns an array of aliases (alternate names) for the identity. An identity can have zero or more aliases. Like the full and short names, two identities cannot share an alias. - Returns: An array of `NSString` objects containing the alternate names for the identity.
 //
 // Aliases returns the collection as a Go slice.
-func (x *Identity) Aliases() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("aliases"))
+func (i *Identity) Aliases() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("aliases"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // EmailAddress returns the email address of an identity. - Returns: The email address of an identity or `nil` if none exists.
-func (x *Identity) EmailAddress() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emailAddress"))
+func (i *Identity) EmailAddress() string {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("emailAddress"))
 	if _r == 0 {
 		return ""
 	}
@@ -131,51 +131,32 @@ func (x *Identity) EmailAddress() string {
 }
 
 // Image returns the image associated with an identity. - Returns: The image associated with an identity, or `nil` if none exists.
-func (x *Identity) Image() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+func (i *Identity) Image() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("image"))
 	return obj.Wrap(_r)
 }
 
 // PersistentReference returns a persistent reference to store a reference to an identity. A persistent reference data object is an object generated from an identity. Persistent data objects can be written to and read from a file, making them extremely useful for storing identities in an ACL. - Returns: A data object that uniquely references an identity.
-func (x *Identity) PersistentReference() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentReference"))
+func (i *Identity) PersistentReference() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("persistentReference"))
 	return obj.Wrap(_r)
 }
 
-// IsHidden returns a Boolean value indicating the state of the identity’s hidden property. A hidden identity does not show up in the Identity Picker. A hidden identity refers to system identities such as `root`, `www`, and `wheel`. - Returns: <doc://com.apple.documentation/documentation/objectivec/yes> if the identity is hidden; <doc://com.apple.documentation/documentation/objectivec/no> if it is not.
-func (x *Identity) IsHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+// IsHidden reports whether returns a Boolean value indicating the state of the identity’s hidden property. A hidden identity does not show up in the Identity Picker. A hidden identity refers to system identities such as `root`, `www`, and `wheel`. - Returns: <doc://com.apple.documentation/documentation/objectivec/yes> if the identity is hidden; <doc://com.apple.documentation/documentation/objectivec/no> if it is not.
+func (i *Identity) IsHidden() bool {
+	_r := objc.Send[bool](objref.IDOf(i), objc.RegisterName("isHidden"))
 	return _r
 }
 
 // CSIdentity returns an opaque object for use with the Core Services Identity API. This method, along with “CBIdentity/identityWithCSIdentity:“, is used for interoperability with the Core Services Identity API. - Returns: The opaque object for use with the Core Services Identity API.
-func (x *Identity) CSIdentity() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CSIdentity"))
+func (i *Identity) CSIdentity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("CSIdentity"))
 	return obj.Wrap(_r)
 }
-
-// Identityable is the interface implemented by [Identity], for mocking and DI.
-type Identityable interface {
-	obj.Object
-	IsMemberOfGroup(group *GroupIdentity) bool
-	Authority() *IdentityAuthority
-	UniqueIdentifier() obj.Object
-	UUIDString() string
-	FullName() string
-	PosixName() string
-	Aliases() []string
-	EmailAddress() string
-	Image() obj.Object
-	PersistentReference() obj.Object
-	IsHidden() bool
-	CSIdentity() obj.Object
-}
-
-var _ Identityable = (*Identity)(nil)
 
 // isIdentity marks Identity — and, by embedding promotion, its
 // subclasses — as a member of the Identity hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Identity) isIdentity() {}
+func (i *Identity) isIdentity() {}
 
 var _ IdentityProvider = (*Identity)(nil)

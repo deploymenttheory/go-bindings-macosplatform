@@ -47,24 +47,24 @@ func wKPDFConfigurationAdopt(id objc.ID) *WKPDFConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *WKPDFConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wc *WKPDFConfiguration) Description() string {
+	return rt.Description(objref.IDOf(wc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WKPDFConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wc *WKPDFConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WKPDFConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wc *WKPDFConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WKPDFConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wc *WKPDFConfiguration) String() string {
+	return rt.Description(objref.IDOf(wc))
 }
 
 // NewWKPDFConfiguration creates a new WKPDFConfiguration.
@@ -73,49 +73,26 @@ func NewWKPDFConfiguration() *WKPDFConfiguration {
 	return wKPDFConfigurationAdopt(_id)
 }
 
-// WithRect the portion of your web view to capture, specified as a rectangle in the view’s coordinate system.
-func (x *WKPDFConfiguration) WithRect(rect corefoundation.CGRect) *WKPDFConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRect:"), rect)
-	return x
+// WithRect sets the portion of your web view to capture, specified as a rectangle in the view’s coordinate system.
+func (wc *WKPDFConfiguration) WithRect(rect corefoundation.CGRect) *WKPDFConfiguration {
+	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setRect:"), rect)
+	return wc
 }
 
-// WithAllowTransparentBackground a Boolean value that indicates whether the PDF may have a transparent background.
-func (x *WKPDFConfiguration) WithAllowTransparentBackground(allowTransparentBackground bool) *WKPDFConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowTransparentBackground:"), allowTransparentBackground)
-	return x
+// WithAllowTransparentBackground sets a Boolean value that indicates whether the PDF may have a transparent background.
+func (wc *WKPDFConfiguration) WithAllowTransparentBackground(allowTransparentBackground bool) *WKPDFConfiguration {
+	objc.Send[objc.ID](objref.IDOf(wc), objc.RegisterName("setAllowTransparentBackground:"), allowTransparentBackground)
+	return wc
 }
 
-// Rect the rect to capture in web page coordinates If the rect is set to the null rect, the bounds of the currently displayed web page will be used. The initial value is the null rect.
-func (x *WKPDFConfiguration) Rect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rect"))
+// Rect returns the rect to capture in web page coordinates If the rect is set to the null rect, the bounds of the currently displayed web page will be used. The initial value is the null rect.
+func (wc *WKPDFConfiguration) Rect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(wc), objc.RegisterName("rect"))
 	return _r
 }
 
-// SetRect wraps the corresponding Objective-C method.
-func (x *WKPDFConfiguration) SetRect(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRect:"), rect)
-}
-
-// AllowTransparentBackground a Boolean value indicating whether the PDF should allow transparent backgrounds. The default value is `NO`.
-func (x *WKPDFConfiguration) AllowTransparentBackground() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowTransparentBackground"))
+// AllowTransparentBackground reports whether the PDF should allow transparent backgrounds. The default value is `NO`.
+func (wc *WKPDFConfiguration) AllowTransparentBackground() bool {
+	_r := objc.Send[bool](objref.IDOf(wc), objc.RegisterName("allowTransparentBackground"))
 	return _r
 }
-
-// SetAllowTransparentBackground wraps the corresponding Objective-C method.
-func (x *WKPDFConfiguration) SetAllowTransparentBackground(allowTransparentBackground bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowTransparentBackground:"), allowTransparentBackground)
-}
-
-// WKPDFConfigurationable is the interface implemented by [WKPDFConfiguration], for mocking and DI.
-type WKPDFConfigurationable interface {
-	obj.Object
-	WithRect(rect corefoundation.CGRect) *WKPDFConfiguration
-	WithAllowTransparentBackground(allowTransparentBackground bool) *WKPDFConfiguration
-	Rect() corefoundation.CGRect
-	SetRect(rect corefoundation.CGRect)
-	AllowTransparentBackground() bool
-	SetAllowTransparentBackground(allowTransparentBackground bool)
-}
-
-var _ WKPDFConfigurationable = (*WKPDFConfiguration)(nil)

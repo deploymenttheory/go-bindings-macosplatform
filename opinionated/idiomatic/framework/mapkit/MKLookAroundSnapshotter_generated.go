@@ -6,6 +6,7 @@ package mapkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func lookAroundSnapshotterAdopt(id objc.ID) *LookAroundSnapshotter {
 }
 
 // Description returns the object's -description text.
-func (x *LookAroundSnapshotter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (las *LookAroundSnapshotter) Description() string {
+	return rt.Description(objref.IDOf(las))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LookAroundSnapshotter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (las *LookAroundSnapshotter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(las), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LookAroundSnapshotter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (las *LookAroundSnapshotter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(las), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LookAroundSnapshotter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (las *LookAroundSnapshotter) String() string {
+	return rt.Description(objref.IDOf(las))
 }
 
 // NewLookAroundSnapshotterWithSceneOptions create a new snapshotter object with the scene and options you specify.
@@ -78,7 +79,7 @@ func NewLookAroundSnapshotterWithSceneOptions(scene *LookAroundScene, options *L
 // GetSnapshot requests a new snapshot and calls the completion handler you provide.
 //
 // GetSnapshot blocks until the operation completes or ctx is cancelled.
-func (x *LookAroundSnapshotter) GetSnapshot(ctx context.Context) (result *LookAroundSnapshot, err error) {
+func (las *LookAroundSnapshotter) GetSnapshot(ctx context.Context) (result *LookAroundSnapshot, err error) {
 	type _result struct {
 		val *LookAroundSnapshot
 		err error
@@ -90,7 +91,7 @@ func (x *LookAroundSnapshotter) GetSnapshot(ctx context.Context) (result *LookAr
 		_o.val = LookAroundSnapshotFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getSnapshotWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(las), objc.RegisterName("getSnapshotWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -101,22 +102,12 @@ func (x *LookAroundSnapshotter) GetSnapshot(ctx context.Context) (result *LookAr
 }
 
 // Cancel cancels an in-progress snapshot request.
-func (x *LookAroundSnapshotter) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (las *LookAroundSnapshotter) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(las), objc.RegisterName("cancel"))
 }
 
 // IsLoading wraps the corresponding Objective-C method.
-func (x *LookAroundSnapshotter) IsLoading() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoading"))
+func (las *LookAroundSnapshotter) IsLoading() bool {
+	_r := objc.Send[bool](objref.IDOf(las), objc.RegisterName("isLoading"))
 	return _r
 }
-
-// LookAroundSnapshotterable is the interface implemented by [LookAroundSnapshotter], for mocking and DI.
-type LookAroundSnapshotterable interface {
-	obj.Object
-	GetSnapshot(ctx context.Context) (*LookAroundSnapshot, error)
-	Cancel()
-	IsLoading() bool
-}
-
-var _ LookAroundSnapshotterable = (*LookAroundSnapshotter)(nil)

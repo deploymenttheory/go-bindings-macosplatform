@@ -6,16 +6,17 @@ package fileprovider
 
 import (
 	"context"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// BeforeFirstSyncComponent version component exposed by the system to denote a state that predates a version returned by the provider. In case an item was created by calling `createItemBasedOnTemplate` and the item returned by the provider in the completion handler of that call didn't match the item template passed by the system, the system will try to apply the changes asked by the provider to the disk. However, the system may detect conflicts when applying those content back to the disk, which will cause the system to send the new disk version to the extension, by calling `modifyItem` or `deleteItemWithIdentifier` with a `baseVersion` that represents the item as passed in the template of the `createItemBasedOnTemplate` call. This constant is used by the system to represent that specific version that was communicated by the system to the extension but does not have a corresponding version assigned by the extension.
+// BeforeFirstSyncComponent returns version component exposed by the system to denote a state that predates a version returned by the provider. In case an item was created by calling `createItemBasedOnTemplate` and the item returned by the provider in the completion handler of that call didn't match the item template passed by the system, the system will try to apply the changes asked by the provider to the disk. However, the system may detect conflicts when applying those content back to the disk, which will cause the system to send the new disk version to the extension, by calling `modifyItem` or `deleteItemWithIdentifier` with a `baseVersion` that represents the item as passed in the template of the `createItemBasedOnTemplate` call. This constant is used by the system to represent that specific version that was communicated by the system to the extension but does not have a corresponding version assigned by the extension.
 func BeforeFirstSyncComponent() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("NSFileProviderItemVersion")), objc.RegisterName("beforeFirstSyncComponent"))
 	return obj.Wrap(_r)

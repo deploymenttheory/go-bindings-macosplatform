@@ -46,24 +46,24 @@ func deletedObjectAdopt(id objc.ID) *DeletedObject {
 }
 
 // Description returns the object's -description text.
-func (x *DeletedObject) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (do *DeletedObject) Description() string {
+	return rt.Description(objref.IDOf(do))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DeletedObject) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (do *DeletedObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(do), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DeletedObject) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (do *DeletedObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(do), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DeletedObject) String() string {
-	return rt.Description(objref.IDOf(x))
+func (do *DeletedObject) String() string {
+	return rt.Description(objref.IDOf(do))
 }
 
 // NewDeletedObject creates a new DeletedObject.
@@ -72,23 +72,14 @@ func NewDeletedObject() *DeletedObject {
 	return deletedObjectAdopt(_id)
 }
 
-// UUID the unique identifier of the HKObject that was deleted from the HealthKit database.
-func (x *DeletedObject) UUID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
+// UUID returns the unique identifier of the HKObject that was deleted from the HealthKit database.
+func (do *DeletedObject) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)
 }
 
-// Metadata extra information describing properties of the receiver. Metadata retained from the deleted HKObject. Available keys: HKMetadataKeySyncIdentifier, HKMetadataKeySyncVersion
-func (x *DeletedObject) Metadata() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+// Metadata returns extra information describing properties of the receiver. Metadata retained from the deleted HKObject. Available keys: HKMetadataKeySyncIdentifier, HKMetadataKeySyncVersion
+func (do *DeletedObject) Metadata() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(do), objc.RegisterName("metadata"))
 	return obj.Wrap(_r)
 }
-
-// DeletedObjectable is the interface implemented by [DeletedObject], for mocking and DI.
-type DeletedObjectable interface {
-	obj.Object
-	UUID() obj.Object
-	Metadata() obj.Object
-}
-
-var _ DeletedObjectable = (*DeletedObject)(nil)

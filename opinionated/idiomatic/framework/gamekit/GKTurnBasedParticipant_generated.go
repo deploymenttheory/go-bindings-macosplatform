@@ -46,24 +46,24 @@ func turnBasedParticipantAdopt(id objc.ID) *TurnBasedParticipant {
 }
 
 // Description returns the object's -description text.
-func (x *TurnBasedParticipant) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tbp *TurnBasedParticipant) Description() string {
+	return rt.Description(objref.IDOf(tbp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TurnBasedParticipant) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tbp *TurnBasedParticipant) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tbp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TurnBasedParticipant) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tbp *TurnBasedParticipant) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tbp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TurnBasedParticipant) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tbp *TurnBasedParticipant) String() string {
+	return rt.Description(objref.IDOf(tbp))
 }
 
 // NewTurnBasedParticipant creates a new TurnBasedParticipant.
@@ -72,67 +72,47 @@ func NewTurnBasedParticipant() *TurnBasedParticipant {
 	return turnBasedParticipantAdopt(_id)
 }
 
-// WithMatchOutcome the conclusion or results of a participant in a match.
-func (x *TurnBasedParticipant) WithMatchOutcome(matchOutcome TurnBasedMatchOutcome) *TurnBasedParticipant {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchOutcome:"), matchOutcome)
-	return x
+// WithMatchOutcome sets the conclusion or results of a participant in a match.
+func (tbp *TurnBasedParticipant) WithMatchOutcome(matchOutcome TurnBasedMatchOutcome) *TurnBasedParticipant {
+	objc.Send[objc.ID](objref.IDOf(tbp), objc.RegisterName("setMatchOutcome:"), matchOutcome)
+	return tbp
 }
 
 // Player wraps the corresponding Objective-C method.
-func (x *TurnBasedParticipant) Player() *Player {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("player"))
+func (tbp *TurnBasedParticipant) Player() *Player {
+	_r := objc.Send[objc.ID](objref.IDOf(tbp), objc.RegisterName("player"))
 	return PlayerFromID(_r)
 }
 
 // LastTurnDate wraps the corresponding Objective-C method.
-func (x *TurnBasedParticipant) LastTurnDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastTurnDate"))
+func (tbp *TurnBasedParticipant) LastTurnDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tbp), objc.RegisterName("lastTurnDate"))
 	return obj.Wrap(_r)
 }
 
 // Status wraps the corresponding Objective-C method.
-func (x *TurnBasedParticipant) Status() TurnBasedParticipantStatus {
-	_r := objc.Send[TurnBasedParticipantStatus](objref.IDOf(x), objc.RegisterName("status"))
+func (tbp *TurnBasedParticipant) Status() TurnBasedParticipantStatus {
+	_r := objc.Send[TurnBasedParticipantStatus](objref.IDOf(tbp), objc.RegisterName("status"))
 	return _r
 }
 
 // MatchOutcome wraps the corresponding Objective-C method.
-func (x *TurnBasedParticipant) MatchOutcome() TurnBasedMatchOutcome {
-	_r := objc.Send[TurnBasedMatchOutcome](objref.IDOf(x), objc.RegisterName("matchOutcome"))
+func (tbp *TurnBasedParticipant) MatchOutcome() TurnBasedMatchOutcome {
+	_r := objc.Send[TurnBasedMatchOutcome](objref.IDOf(tbp), objc.RegisterName("matchOutcome"))
 	return _r
 }
 
-// SetMatchOutcome wraps the corresponding Objective-C method.
-func (x *TurnBasedParticipant) SetMatchOutcome(matchOutcome TurnBasedMatchOutcome) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMatchOutcome:"), matchOutcome)
-}
-
 // TimeoutDate wraps the corresponding Objective-C method.
-func (x *TurnBasedParticipant) TimeoutDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeoutDate"))
+func (tbp *TurnBasedParticipant) TimeoutDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(tbp), objc.RegisterName("timeoutDate"))
 	return obj.Wrap(_r)
 }
 
 // PlayerID wraps the corresponding Objective-C method.
-func (x *TurnBasedParticipant) PlayerID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerID"))
+func (tbp *TurnBasedParticipant) PlayerID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tbp), objc.RegisterName("playerID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// TurnBasedParticipantable is the interface implemented by [TurnBasedParticipant], for mocking and DI.
-type TurnBasedParticipantable interface {
-	obj.Object
-	WithMatchOutcome(matchOutcome TurnBasedMatchOutcome) *TurnBasedParticipant
-	Player() *Player
-	LastTurnDate() obj.Object
-	Status() TurnBasedParticipantStatus
-	MatchOutcome() TurnBasedMatchOutcome
-	SetMatchOutcome(matchOutcome TurnBasedMatchOutcome)
-	TimeoutDate() obj.Object
-	PlayerID() string
-}
-
-var _ TurnBasedParticipantable = (*TurnBasedParticipant)(nil)

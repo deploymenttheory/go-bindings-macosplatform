@@ -54,24 +54,15 @@ func NewInflectionRuleExplicitWithMorphology(morphology *Morphology) *Inflection
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *InflectionRuleExplicit) WithScriptingProperties(scriptingProperties obj.Object) *InflectionRuleExplicit {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ire *InflectionRuleExplicit) WithScriptingProperties(scriptingProperties obj.Object) *InflectionRuleExplicit {
+	objc.Send[objc.ID](objref.IDOf(ire), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ire
 }
 
 // Morphology wraps the corresponding Objective-C method.
-func (x *InflectionRuleExplicit) Morphology() *Morphology {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("morphology"))
+func (ire *InflectionRuleExplicit) Morphology() *Morphology {
+	_r := objc.Send[objc.ID](objref.IDOf(ire), objc.RegisterName("morphology"))
 	return MorphologyFromID(_r)
 }
-
-// InflectionRuleExplicitable is the interface implemented by [InflectionRuleExplicit], for mocking and DI.
-type InflectionRuleExplicitable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *InflectionRuleExplicit
-	Morphology() *Morphology
-}
-
-var _ InflectionRuleExplicitable = (*InflectionRuleExplicit)(nil)
 
 var _ InflectionRuleProvider = (*InflectionRuleExplicit)(nil)

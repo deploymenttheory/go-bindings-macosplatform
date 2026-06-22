@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,17 +52,9 @@ func NewVirtioConsoleDeviceConfiguration() *VirtioConsoleDeviceConfiguration {
 }
 
 // Ports wraps the corresponding Objective-C method.
-func (x *VirtioConsoleDeviceConfiguration) Ports() *VirtioConsolePortConfigurationArray {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ports"))
+func (vcdc *VirtioConsoleDeviceConfiguration) Ports() *VirtioConsolePortConfigurationArray {
+	_r := objc.Send[objc.ID](objref.IDOf(vcdc), objc.RegisterName("ports"))
 	return VirtioConsolePortConfigurationArrayFromID(_r)
 }
-
-// VirtioConsoleDeviceConfigurationable is the interface implemented by [VirtioConsoleDeviceConfiguration], for mocking and DI.
-type VirtioConsoleDeviceConfigurationable interface {
-	obj.Object
-	Ports() *VirtioConsolePortConfigurationArray
-}
-
-var _ VirtioConsoleDeviceConfigurationable = (*VirtioConsoleDeviceConfiguration)(nil)
 
 var _ ConsoleDeviceConfigurationProvider = (*VirtioConsoleDeviceConfiguration)(nil)

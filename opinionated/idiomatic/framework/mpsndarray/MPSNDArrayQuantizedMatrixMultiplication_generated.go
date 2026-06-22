@@ -7,7 +7,6 @@ package mpsndarray
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,26 +49,17 @@ func NewArrayQuantizedMatrixMultiplication() *ArrayQuantizedMatrixMultiplication
 	return arrayQuantizedMatrixMultiplicationAdopt(_id)
 }
 
-// WithAlpha the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-func (x *ArrayQuantizedMatrixMultiplication) WithAlpha(alpha float64) *ArrayQuantizedMatrixMultiplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the scale factor to apply to the product.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+func (aqmm *ArrayQuantizedMatrixMultiplication) WithAlpha(alpha float64) *ArrayQuantizedMatrixMultiplication {
+	objc.Send[objc.ID](objref.IDOf(aqmm), objc.RegisterName("setAlpha:"), alpha)
+	return aqmm
 }
 
-// WithBeta the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
-func (x *ArrayQuantizedMatrixMultiplication) WithBeta(beta float64) *ArrayQuantizedMatrixMultiplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
-	return x
+// WithBeta sets the scale factor to apply to the addend if available.  Specified in double precision.  Will be converted to the appropriate precision in the implementation subject to rounding and/or clamping as necessary. Defaults to 1.0 at initialization time.
+func (aqmm *ArrayQuantizedMatrixMultiplication) WithBeta(beta float64) *ArrayQuantizedMatrixMultiplication {
+	objc.Send[objc.ID](objref.IDOf(aqmm), objc.RegisterName("setBeta:"), beta)
+	return aqmm
 }
-
-// ArrayQuantizedMatrixMultiplicationable is the interface implemented by [ArrayQuantizedMatrixMultiplication], for mocking and DI.
-type ArrayQuantizedMatrixMultiplicationable interface {
-	obj.Object
-	WithAlpha(alpha float64) *ArrayQuantizedMatrixMultiplication
-	WithBeta(beta float64) *ArrayQuantizedMatrixMultiplication
-}
-
-var _ ArrayQuantizedMatrixMultiplicationable = (*ArrayQuantizedMatrixMultiplication)(nil)
 
 var _ ArrayMatrixMultiplicationProvider = (*ArrayQuantizedMatrixMultiplication)(nil)
 

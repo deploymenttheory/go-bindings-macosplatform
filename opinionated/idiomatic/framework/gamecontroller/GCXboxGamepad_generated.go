@@ -52,54 +52,41 @@ func NewXboxGamepad() *XboxGamepad {
 	return xboxGamepadAdopt(_id)
 }
 
-// WithValueDidChangeHandler the block that the profile calls when an element’s value changes.
-func (x *XboxGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *XboxGamepad {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
-	return x
+// WithValueDidChangeHandler sets the block that the profile calls when an element’s value changes.
+func (xg *XboxGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *XboxGamepad {
+	objc.Send[objc.ID](objref.IDOf(xg), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return xg
 }
 
-// PaddleButton1 some Xbox controller variants can support up to four additional buttons.
-func (x *XboxGamepad) PaddleButton1() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddleButton1"))
+// PaddleButton1 returns some Xbox controller variants can support up to four additional buttons.
+func (xg *XboxGamepad) PaddleButton1() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(xg), objc.RegisterName("paddleButton1"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // PaddleButton2 wraps the corresponding Objective-C method.
-func (x *XboxGamepad) PaddleButton2() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddleButton2"))
+func (xg *XboxGamepad) PaddleButton2() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(xg), objc.RegisterName("paddleButton2"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // PaddleButton3 wraps the corresponding Objective-C method.
-func (x *XboxGamepad) PaddleButton3() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddleButton3"))
+func (xg *XboxGamepad) PaddleButton3() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(xg), objc.RegisterName("paddleButton3"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // PaddleButton4 wraps the corresponding Objective-C method.
-func (x *XboxGamepad) PaddleButton4() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddleButton4"))
+func (xg *XboxGamepad) PaddleButton4() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(xg), objc.RegisterName("paddleButton4"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// ButtonShare some Xbox controller variants feature a Share button.
-func (x *XboxGamepad) ButtonShare() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonShare"))
+// ButtonShare returns some Xbox controller variants feature a Share button.
+func (xg *XboxGamepad) ButtonShare() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(xg), objc.RegisterName("buttonShare"))
 	return ControllerButtonInputFromID(_r)
 }
-
-// XboxGamepadable is the interface implemented by [XboxGamepad], for mocking and DI.
-type XboxGamepadable interface {
-	obj.Object
-	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *XboxGamepad
-	PaddleButton1() *ControllerButtonInput
-	PaddleButton2() *ControllerButtonInput
-	PaddleButton3() *ControllerButtonInput
-	PaddleButton4() *ControllerButtonInput
-	ButtonShare() *ControllerButtonInput
-}
-
-var _ XboxGamepadable = (*XboxGamepad)(nil)
 
 var _ ExtendedGamepadProvider = (*XboxGamepad)(nil)
 

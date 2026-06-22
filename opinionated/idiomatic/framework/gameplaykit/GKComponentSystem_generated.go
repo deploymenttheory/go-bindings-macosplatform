@@ -46,24 +46,24 @@ func componentSystemAdopt(id objc.ID) *ComponentSystem {
 }
 
 // Description returns the object's -description text.
-func (x *ComponentSystem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cs *ComponentSystem) Description() string {
+	return rt.Description(objref.IDOf(cs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ComponentSystem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cs *ComponentSystem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ComponentSystem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cs *ComponentSystem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ComponentSystem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cs *ComponentSystem) String() string {
+	return rt.Description(objref.IDOf(cs))
 }
 
 // NewComponentSystem creates a new ComponentSystem.
@@ -73,52 +73,38 @@ func NewComponentSystem() *ComponentSystem {
 }
 
 // ObjectAtIndexedSubscript returns the component at the specified index in the system’s list of components.
-func (x *ComponentSystem) ObjectAtIndexedSubscript(idx int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), idx)
+func (cs *ComponentSystem) ObjectAtIndexedSubscript(idx int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("objectAtIndexedSubscript:"), idx)
 	return obj.Wrap(_r)
 }
 
 // AddComponent adds a component instance to the component system.
-func (x *ComponentSystem) AddComponent(component obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addComponent:"), objref.IDOf(component))
+func (cs *ComponentSystem) AddComponent(component obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("addComponent:"), objref.IDOf(component))
 }
 
 // AddComponentWithEntity adds any instances of the component system’s component class in the specified entity to the component system.
-func (x *ComponentSystem) AddComponentWithEntity(entity *Entity) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addComponentWithEntity:"), objref.IDOf(entity))
+func (cs *ComponentSystem) AddComponentWithEntity(entity *Entity) {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("addComponentWithEntity:"), objref.IDOf(entity))
 }
 
 // RemoveComponentWithEntity removes any instances of the component system’s component class in the specified entity from the component system.
-func (x *ComponentSystem) RemoveComponentWithEntity(entity *Entity) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeComponentWithEntity:"), objref.IDOf(entity))
+func (cs *ComponentSystem) RemoveComponentWithEntity(entity *Entity) {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("removeComponentWithEntity:"), objref.IDOf(entity))
 }
 
 // RemoveComponent removes the specified component instance from the component system.
-func (x *ComponentSystem) RemoveComponent(component obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeComponent:"), objref.IDOf(component))
+func (cs *ComponentSystem) RemoveComponent(component obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("removeComponent:"), objref.IDOf(component))
 }
 
 // UpdateWithDeltaTime tells all component instances managed by the system to perform their custom periodic actions.
-func (x *ComponentSystem) UpdateWithDeltaTime(seconds float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updateWithDeltaTime:"), seconds)
+func (cs *ComponentSystem) UpdateWithDeltaTime(seconds float64) {
+	objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("updateWithDeltaTime:"), seconds)
 }
 
-// Components the array of components currently in the system.
-func (x *ComponentSystem) Components() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("components"))
+// Components returns the array of components currently in the system.
+func (cs *ComponentSystem) Components() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cs), objc.RegisterName("components"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// ComponentSystemable is the interface implemented by [ComponentSystem], for mocking and DI.
-type ComponentSystemable interface {
-	obj.Object
-	ObjectAtIndexedSubscript(idx int) obj.Object
-	AddComponent(component obj.Object)
-	AddComponentWithEntity(entity *Entity)
-	RemoveComponentWithEntity(entity *Entity)
-	RemoveComponent(component obj.Object)
-	UpdateWithDeltaTime(seconds float64)
-	Components() []obj.Object
-}
-
-var _ ComponentSystemable = (*ComponentSystem)(nil)

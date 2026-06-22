@@ -140,7 +140,7 @@ func buildParamConstructor(
 	}
 
 	return &ctorEntry{
-		goName:          "New" + goTypeName + strings.TrimPrefix(rawInit, "Init"),
+		goName:          applyInitialisms("New" + goTypeName + strings.TrimPrefix(rawInit, "Init")),
 		rawInitGoName:   rawInit,
 		rawInitSelector: method.Selector,
 		params:          params,

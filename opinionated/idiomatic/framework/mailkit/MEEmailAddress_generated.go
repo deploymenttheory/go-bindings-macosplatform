@@ -46,24 +46,24 @@ func emailAddressAdopt(id objc.ID) *EmailAddress {
 }
 
 // Description returns the object's -description text.
-func (x *EmailAddress) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ea *EmailAddress) Description() string {
+	return rt.Description(objref.IDOf(ea))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EmailAddress) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ea *EmailAddress) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ea), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EmailAddress) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ea *EmailAddress) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ea), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *EmailAddress) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ea *EmailAddress) String() string {
+	return rt.Description(objref.IDOf(ea))
 }
 
 // NewEmailAddressWithRawString creates a new EmailAddress.
@@ -73,29 +73,20 @@ func NewEmailAddressWithRawString(rawString string) *EmailAddress {
 	return emailAddressAdopt(_id)
 }
 
-// RawString the raw string for the email address.
-func (x *EmailAddress) RawString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rawString"))
+// RawString returns the raw string for the email address.
+func (ea *EmailAddress) RawString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ea), objc.RegisterName("rawString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// AddressString the simple address string portion of the raw string if it is valid. For example, the
-func (x *EmailAddress) AddressString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressString"))
+// AddressString returns the simple address string portion of the raw string if it is valid. For example, the
+func (ea *EmailAddress) AddressString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ea), objc.RegisterName("addressString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// EmailAddressable is the interface implemented by [EmailAddress], for mocking and DI.
-type EmailAddressable interface {
-	obj.Object
-	RawString() string
-	AddressString() string
-}
-
-var _ EmailAddressable = (*EmailAddress)(nil)

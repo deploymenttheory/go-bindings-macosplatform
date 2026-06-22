@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,19 +50,11 @@ func NewNNReshapeGradientNodeWithSourceGradientSourceImageGradientState(sourceGr
 	return nNReshapeGradientNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNReshapeGradientNode) WithLabel(label string) *NNReshapeGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nrgn *NNReshapeGradientNode) WithLabel(label string) *NNReshapeGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nrgn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nrgn
 }
-
-// NNReshapeGradientNodeable is the interface implemented by [NNReshapeGradientNode], for mocking and DI.
-type NNReshapeGradientNodeable interface {
-	obj.Object
-	WithLabel(label string) *NNReshapeGradientNode
-}
-
-var _ NNReshapeGradientNodeable = (*NNReshapeGradientNode)(nil)
 
 var _ NNGradientFilterNodeProvider = (*NNReshapeGradientNode)(nil)
 

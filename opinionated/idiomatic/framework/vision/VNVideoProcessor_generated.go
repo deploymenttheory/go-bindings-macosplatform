@@ -5,13 +5,14 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // VideoProcessor is an idiomatic wrapper over the Objective-C class VNVideoProcessor.
@@ -48,24 +49,24 @@ func videoProcessorAdopt(id objc.ID) *VideoProcessor {
 }
 
 // Description returns the object's -description text.
-func (x *VideoProcessor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vp *VideoProcessor) Description() string {
+	return rt.Description(objref.IDOf(vp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VideoProcessor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vp *VideoProcessor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VideoProcessor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vp *VideoProcessor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VideoProcessor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vp *VideoProcessor) String() string {
+	return rt.Description(objref.IDOf(vp))
 }
 
 // NewVideoProcessorWithURL creates a video processor to perform Vision requests against the specified video asset.
@@ -76,9 +77,9 @@ func NewVideoProcessorWithURL(videoURL string) *VideoProcessor {
 }
 
 // AddRequestProcessingOptions adds a request with processing options to the video processor.
-func (x *VideoProcessor) AddRequestProcessingOptions(request *Request, processingOptions *VideoProcessorRequestProcessingOptions) error {
+func (vp *VideoProcessor) AddRequestProcessingOptions(request *Request, processingOptions *VideoProcessorRequestProcessingOptions) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addRequest:processingOptions:error:"), objref.IDOf(request), objref.IDOf(processingOptions), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(vp), objc.RegisterName("addRequest:processingOptions:error:"), objref.IDOf(request), objref.IDOf(processingOptions), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -86,9 +87,9 @@ func (x *VideoProcessor) AddRequestProcessingOptions(request *Request, processin
 }
 
 // AddRequestWithProcessingOptions adds a Vision request to perform with the specified configuration.
-func (x *VideoProcessor) AddRequestWithProcessingOptions(request *Request, processingOptions obj.Object) error {
+func (vp *VideoProcessor) AddRequestWithProcessingOptions(request *Request, processingOptions obj.Object) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addRequest:withProcessingOptions:error:"), objref.IDOf(request), objref.IDOf(processingOptions), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(vp), objc.RegisterName("addRequest:withProcessingOptions:error:"), objref.IDOf(request), objref.IDOf(processingOptions), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -96,9 +97,9 @@ func (x *VideoProcessor) AddRequestWithProcessingOptions(request *Request, proce
 }
 
 // RemoveRequest removes a Vision request from the video processor’s request queue.
-func (x *VideoProcessor) RemoveRequest(request *Request) error {
+func (vp *VideoProcessor) RemoveRequest(request *Request) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeRequest:error:"), objref.IDOf(request), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(vp), objc.RegisterName("removeRequest:error:"), objref.IDOf(request), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -106,17 +107,6 @@ func (x *VideoProcessor) RemoveRequest(request *Request) error {
 }
 
 // Cancel cancels the video processing.
-func (x *VideoProcessor) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (vp *VideoProcessor) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(vp), objc.RegisterName("cancel"))
 }
-
-// VideoProcessorable is the interface implemented by [VideoProcessor], for mocking and DI.
-type VideoProcessorable interface {
-	obj.Object
-	AddRequestProcessingOptions(request *Request, processingOptions *VideoProcessorRequestProcessingOptions) error
-	AddRequestWithProcessingOptions(request *Request, processingOptions obj.Object) error
-	RemoveRequest(request *Request) error
-	Cancel()
-}
-
-var _ VideoProcessorable = (*VideoProcessor)(nil)

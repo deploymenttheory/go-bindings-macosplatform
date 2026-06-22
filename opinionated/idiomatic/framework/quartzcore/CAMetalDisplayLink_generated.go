@@ -46,24 +46,24 @@ func metalDisplayLinkAdopt(id objc.ID) *MetalDisplayLink {
 }
 
 // Description returns the object's -description text.
-func (x *MetalDisplayLink) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdl *MetalDisplayLink) Description() string {
+	return rt.Description(objref.IDOf(mdl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetalDisplayLink) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdl *MetalDisplayLink) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetalDisplayLink) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdl *MetalDisplayLink) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MetalDisplayLink) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdl *MetalDisplayLink) String() string {
+	return rt.Description(objref.IDOf(mdl))
 }
 
 // NewMetalDisplayLinkWithMetalLayer creates a display link for Metal from a Core Animation layer.
@@ -73,67 +73,41 @@ func NewMetalDisplayLinkWithMetalLayer(layer *MetalLayer) *MetalDisplayLink {
 	return metalDisplayLinkAdopt(_id)
 }
 
-// WithPreferredFrameLatency the amount of time, in frames, your app requests to render a frame.
-func (x *MetalDisplayLink) WithPreferredFrameLatency(preferredFrameLatency float32) *MetalDisplayLink {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredFrameLatency:"), preferredFrameLatency)
-	return x
+// WithPreferredFrameLatency sets the amount of time, in frames, your app requests to render a frame.
+func (mdl *MetalDisplayLink) WithPreferredFrameLatency(preferredFrameLatency float32) *MetalDisplayLink {
+	objc.Send[objc.ID](objref.IDOf(mdl), objc.RegisterName("setPreferredFrameLatency:"), preferredFrameLatency)
+	return mdl
 }
 
-// WithPaused a Boolean value that indicates whether the system suspends the display link’s notifications to the target.
-func (x *MetalDisplayLink) WithPaused(paused bool) *MetalDisplayLink {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
-	return x
+// WithPaused sets a Boolean value that indicates whether the system suspends the display link’s notifications to the target.
+func (mdl *MetalDisplayLink) WithPaused(paused bool) *MetalDisplayLink {
+	objc.Send[objc.ID](objref.IDOf(mdl), objc.RegisterName("setPaused:"), paused)
+	return mdl
 }
 
 // AddToRunLoopForMode registers the display link with a run loop.
-func (x *MetalDisplayLink) AddToRunLoopForMode(runloop obj.Object, mode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addToRunLoop:forMode:"), objref.IDOf(runloop), objref.IDOf(mode))
+func (mdl *MetalDisplayLink) AddToRunLoopForMode(runloop obj.Object, mode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mdl), objc.RegisterName("addToRunLoop:forMode:"), objref.IDOf(runloop), objref.IDOf(mode))
 }
 
 // RemoveFromRunLoopForMode removes a mode’s display link from a run loop.
-func (x *MetalDisplayLink) RemoveFromRunLoopForMode(runloop obj.Object, mode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(runloop), objref.IDOf(mode))
+func (mdl *MetalDisplayLink) RemoveFromRunLoopForMode(runloop obj.Object, mode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mdl), objc.RegisterName("removeFromRunLoop:forMode:"), objref.IDOf(runloop), objref.IDOf(mode))
 }
 
 // Invalidate removes the display link from all run loops for all modes.
-func (x *MetalDisplayLink) Invalidate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
+func (mdl *MetalDisplayLink) Invalidate() {
+	objc.Send[objc.ID](objref.IDOf(mdl), objc.RegisterName("invalidate"))
 }
 
 // PreferredFrameLatency wraps the corresponding Objective-C method.
-func (x *MetalDisplayLink) PreferredFrameLatency() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("preferredFrameLatency"))
+func (mdl *MetalDisplayLink) PreferredFrameLatency() float32 {
+	_r := objc.Send[float32](objref.IDOf(mdl), objc.RegisterName("preferredFrameLatency"))
 	return _r
-}
-
-// SetPreferredFrameLatency wraps the corresponding Objective-C method.
-func (x *MetalDisplayLink) SetPreferredFrameLatency(preferredFrameLatency float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredFrameLatency:"), preferredFrameLatency)
 }
 
 // IsPaused wraps the corresponding Objective-C method.
-func (x *MetalDisplayLink) IsPaused() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
+func (mdl *MetalDisplayLink) IsPaused() bool {
+	_r := objc.Send[bool](objref.IDOf(mdl), objc.RegisterName("isPaused"))
 	return _r
 }
-
-// SetPaused wraps the corresponding Objective-C method.
-func (x *MetalDisplayLink) SetPaused(paused bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
-}
-
-// MetalDisplayLinkable is the interface implemented by [MetalDisplayLink], for mocking and DI.
-type MetalDisplayLinkable interface {
-	obj.Object
-	WithPreferredFrameLatency(preferredFrameLatency float32) *MetalDisplayLink
-	WithPaused(paused bool) *MetalDisplayLink
-	AddToRunLoopForMode(runloop obj.Object, mode obj.Object)
-	RemoveFromRunLoopForMode(runloop obj.Object, mode obj.Object)
-	Invalidate()
-	PreferredFrameLatency() float32
-	SetPreferredFrameLatency(preferredFrameLatency float32)
-	IsPaused() bool
-	SetPaused(paused bool)
-}
-
-var _ MetalDisplayLinkable = (*MetalDisplayLink)(nil)

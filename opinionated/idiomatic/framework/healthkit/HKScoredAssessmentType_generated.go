@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,13 +48,6 @@ func NewScoredAssessmentType() *ScoredAssessmentType {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKScoredAssessmentType")), objc.RegisterName("new"))
 	return scoredAssessmentTypeAdopt(_id)
 }
-
-// ScoredAssessmentTypeable is the interface implemented by [ScoredAssessmentType], for mocking and DI.
-type ScoredAssessmentTypeable interface {
-	obj.Object
-}
-
-var _ ScoredAssessmentTypeable = (*ScoredAssessmentType)(nil)
 
 var _ SampleTypeProvider = (*ScoredAssessmentType)(nil)
 

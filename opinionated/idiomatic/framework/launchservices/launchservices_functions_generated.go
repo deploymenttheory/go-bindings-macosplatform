@@ -5,12 +5,13 @@
 package launchservices
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // LSCopyApplicationURLsForBundleIdentifier reports an error if the LaunchServices framework function LSCopyApplicationURLsForBundleIdentifier fails.

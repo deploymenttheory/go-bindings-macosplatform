@@ -48,24 +48,24 @@ func textElementAdopt(id objc.ID) *TextElement {
 }
 
 // Description returns the object's -description text.
-func (x *TextElement) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (te *TextElement) Description() string {
+	return rt.Description(objref.IDOf(te))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (te *TextElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(te), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (te *TextElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(te), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextElement) String() string {
-	return rt.Description(objref.IDOf(x))
+func (te *TextElement) String() string {
+	return rt.Description(objref.IDOf(te))
 }
 
 // NewTextElementWithTextContentManager creates a new text element with the content manager you provide.
@@ -75,79 +75,53 @@ func NewTextElementWithTextContentManager(textContentManager *TextContentManager
 	return textElementAdopt(_id)
 }
 
-// WithTextContentManager the value that represents the current content manager.
-func (x *TextElement) WithTextContentManager(textContentManager TextContentManagerProvider) *TextElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContentManager:"), objref.IDOf(textContentManager))
-	return x
+// WithTextContentManager sets the value that represents the current content manager.
+func (te *TextElement) WithTextContentManager(textContentManager TextContentManagerProvider) *TextElement {
+	objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("setTextContentManager:"), objref.IDOf(textContentManager))
+	return te
 }
 
-// WithElementRange a range value that represents the range of the element inside the document.
-func (x *TextElement) WithElementRange(elementRange *TextRange) *TextElement {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElementRange:"), objref.IDOf(elementRange))
-	return x
+// WithElementRange sets a range value that represents the range of the element inside the document.
+func (te *TextElement) WithElementRange(elementRange *TextRange) *TextElement {
+	objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("setElementRange:"), objref.IDOf(elementRange))
+	return te
 }
 
 // TextContentManager wraps the corresponding Objective-C method.
-func (x *TextElement) TextContentManager() *TextContentManager {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textContentManager"))
+func (te *TextElement) TextContentManager() *TextContentManager {
+	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("textContentManager"))
 	return TextContentManagerFromID(_r)
 }
 
-// SetTextContentManager wraps the corresponding Objective-C method.
-func (x *TextElement) SetTextContentManager(textContentManager *TextContentManager) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContentManager:"), objref.IDOf(textContentManager))
-}
-
 // ElementRange wraps the corresponding Objective-C method.
-func (x *TextElement) ElementRange() *TextRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementRange"))
+func (te *TextElement) ElementRange() *TextRange {
+	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("elementRange"))
 	return TextRangeFromID(_r)
-}
-
-// SetElementRange wraps the corresponding Objective-C method.
-func (x *TextElement) SetElementRange(elementRange *TextRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setElementRange:"), objref.IDOf(elementRange))
 }
 
 // ChildElements wraps the corresponding Objective-C method.
 //
 // ChildElements returns the collection as a Go slice.
-func (x *TextElement) ChildElements() []*TextElement {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("childElements"))
+func (te *TextElement) ChildElements() []*TextElement {
+	_arr := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("childElements"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TextElement { return TextElementFromID(_id) })
 }
 
 // ParentElement wraps the corresponding Objective-C method.
-func (x *TextElement) ParentElement() *TextElement {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentElement"))
+func (te *TextElement) ParentElement() *TextElement {
+	_r := objc.Send[objc.ID](objref.IDOf(te), objc.RegisterName("parentElement"))
 	return TextElementFromID(_r)
 }
 
 // IsRepresentedElement wraps the corresponding Objective-C method.
-func (x *TextElement) IsRepresentedElement() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRepresentedElement"))
+func (te *TextElement) IsRepresentedElement() bool {
+	_r := objc.Send[bool](objref.IDOf(te), objc.RegisterName("isRepresentedElement"))
 	return _r
 }
-
-// TextElementable is the interface implemented by [TextElement], for mocking and DI.
-type TextElementable interface {
-	obj.Object
-	WithTextContentManager(textContentManager TextContentManagerProvider) *TextElement
-	WithElementRange(elementRange *TextRange) *TextElement
-	TextContentManager() *TextContentManager
-	SetTextContentManager(textContentManager *TextContentManager)
-	ElementRange() *TextRange
-	SetElementRange(elementRange *TextRange)
-	ChildElements() []*TextElement
-	ParentElement() *TextElement
-	IsRepresentedElement() bool
-}
-
-var _ TextElementable = (*TextElement)(nil)
 
 // isTextElement marks TextElement — and, by embedding promotion, its
 // subclasses — as a member of the TextElement hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *TextElement) isTextElement() {}
+func (te *TextElement) isTextElement() {}
 
 var _ TextElementProvider = (*TextElement)(nil)

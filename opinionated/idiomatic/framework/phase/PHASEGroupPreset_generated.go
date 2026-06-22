@@ -46,24 +46,24 @@ func groupPresetAdopt(id objc.ID) *GroupPreset {
 }
 
 // Description returns the object's -description text.
-func (x *GroupPreset) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (gp *GroupPreset) Description() string {
+	return rt.Description(objref.IDOf(gp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GroupPreset) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (gp *GroupPreset) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(gp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GroupPreset) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (gp *GroupPreset) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(gp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GroupPreset) String() string {
-	return rt.Description(objref.IDOf(x))
+func (gp *GroupPreset) String() string {
+	return rt.Description(objref.IDOf(gp))
 }
 
 // NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset creates a group preset with the designated engine, settings, and fade parameters.
@@ -74,53 +74,39 @@ func NewGroupPresetWithEngineSettingsTimeToTargetTimeToReset(engine *Engine, set
 }
 
 // Activate applies settings to the designated groups.
-func (x *GroupPreset) Activate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activate"))
+func (gp *GroupPreset) Activate() {
+	objc.Send[objc.ID](objref.IDOf(gp), objc.RegisterName("activate"))
 }
 
 // ActivateWithTimeToTargetOverride applies settings with an overriden fade duration.
-func (x *GroupPreset) ActivateWithTimeToTargetOverride(timeToTargetOverride float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activateWithTimeToTargetOverride:"), timeToTargetOverride)
+func (gp *GroupPreset) ActivateWithTimeToTargetOverride(timeToTargetOverride float64) {
+	objc.Send[objc.ID](objref.IDOf(gp), objc.RegisterName("activateWithTimeToTargetOverride:"), timeToTargetOverride)
 }
 
 // Deactivate reverts settings for the preset’s groups.
-func (x *GroupPreset) Deactivate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deactivate"))
+func (gp *GroupPreset) Deactivate() {
+	objc.Send[objc.ID](objref.IDOf(gp), objc.RegisterName("deactivate"))
 }
 
 // DeactivateWithTimeToResetOverride reverts settings for the preset’s groups using a timed adjustment.
-func (x *GroupPreset) DeactivateWithTimeToResetOverride(timeToResetOverride float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deactivateWithTimeToResetOverride:"), timeToResetOverride)
+func (gp *GroupPreset) DeactivateWithTimeToResetOverride(timeToResetOverride float64) {
+	objc.Send[objc.ID](objref.IDOf(gp), objc.RegisterName("deactivateWithTimeToResetOverride:"), timeToResetOverride)
 }
 
-// Settings the collection of PHASEGroupPresetSetting objects to apply when this preset is activated.
-func (x *GroupPreset) Settings() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("settings"))
+// Settings returns the collection of PHASEGroupPresetSetting objects to apply when this preset is activated.
+func (gp *GroupPreset) Settings() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(gp), objc.RegisterName("settings"))
 	return obj.Wrap(_r)
 }
 
-// TimeToTarget the time interval that all group settings in this preset will take to gradually fade to the new value
-func (x *GroupPreset) TimeToTarget() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeToTarget"))
+// TimeToTarget returns the time interval that all group settings in this preset will take to gradually fade to the new value
+func (gp *GroupPreset) TimeToTarget() float64 {
+	_r := objc.Send[float64](objref.IDOf(gp), objc.RegisterName("timeToTarget"))
 	return _r
 }
 
-// TimeToReset the time interval that all group settings in this preset will take to gradually fade to the unity value
-func (x *GroupPreset) TimeToReset() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeToReset"))
+// TimeToReset returns the time interval that all group settings in this preset will take to gradually fade to the unity value
+func (gp *GroupPreset) TimeToReset() float64 {
+	_r := objc.Send[float64](objref.IDOf(gp), objc.RegisterName("timeToReset"))
 	return _r
 }
-
-// GroupPresetable is the interface implemented by [GroupPreset], for mocking and DI.
-type GroupPresetable interface {
-	obj.Object
-	Activate()
-	ActivateWithTimeToTargetOverride(timeToTargetOverride float64)
-	Deactivate()
-	DeactivateWithTimeToResetOverride(timeToResetOverride float64)
-	Settings() obj.Object
-	TimeToTarget() float64
-	TimeToReset() float64
-}
-
-var _ GroupPresetable = (*GroupPreset)(nil)

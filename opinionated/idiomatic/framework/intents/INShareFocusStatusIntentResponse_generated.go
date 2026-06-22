@@ -53,25 +53,16 @@ func NewShareFocusStatusIntentResponseWithCodeUserActivity(code ShareFocusStatus
 	return shareFocusStatusIntentResponseAdopt(_id)
 }
 
-// WithUserActivity the user activity object to use when launching the app.
-func (x *ShareFocusStatusIntentResponse) WithUserActivity(userActivity obj.Object) *ShareFocusStatusIntentResponse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets the user activity object to use when launching the app.
+func (sfsir *ShareFocusStatusIntentResponse) WithUserActivity(userActivity obj.Object) *ShareFocusStatusIntentResponse {
+	objc.Send[objc.ID](objref.IDOf(sfsir), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return sfsir
 }
 
 // Code wraps the corresponding Objective-C method.
-func (x *ShareFocusStatusIntentResponse) Code() ShareFocusStatusIntentResponseCode {
-	_r := objc.Send[ShareFocusStatusIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
+func (sfsir *ShareFocusStatusIntentResponse) Code() ShareFocusStatusIntentResponseCode {
+	_r := objc.Send[ShareFocusStatusIntentResponseCode](objref.IDOf(sfsir), objc.RegisterName("code"))
 	return _r
 }
-
-// ShareFocusStatusIntentResponseable is the interface implemented by [ShareFocusStatusIntentResponse], for mocking and DI.
-type ShareFocusStatusIntentResponseable interface {
-	obj.Object
-	WithUserActivity(userActivity obj.Object) *ShareFocusStatusIntentResponse
-	Code() ShareFocusStatusIntentResponseCode
-}
-
-var _ ShareFocusStatusIntentResponseable = (*ShareFocusStatusIntentResponse)(nil)
 
 var _ IntentResponseProvider = (*ShareFocusStatusIntentResponse)(nil)

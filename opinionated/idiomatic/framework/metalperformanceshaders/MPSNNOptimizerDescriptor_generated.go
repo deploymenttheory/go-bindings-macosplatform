@@ -46,24 +46,24 @@ func nNOptimizerDescriptorAdopt(id objc.ID) *NNOptimizerDescriptor {
 }
 
 // Description returns the object's -description text.
-func (x *NNOptimizerDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nod *NNOptimizerDescriptor) Description() string {
+	return rt.Description(objref.IDOf(nod))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNOptimizerDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nod *NNOptimizerDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nod), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNOptimizerDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nod *NNOptimizerDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nod), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NNOptimizerDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nod *NNOptimizerDescriptor) String() string {
+	return rt.Description(objref.IDOf(nod))
 }
 
 // NewNNOptimizerDescriptor creates a new NNOptimizerDescriptor.
@@ -72,129 +72,74 @@ func NewNNOptimizerDescriptor() *NNOptimizerDescriptor {
 	return nNOptimizerDescriptorAdopt(_id)
 }
 
-// WithLearningRate the learningRate at which we update values The default value is 0.001f
-func (x *NNOptimizerDescriptor) WithLearningRate(learningRate float32) *NNOptimizerDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
-	return x
+// WithLearningRate sets the learningRate at which we update values The default value is 0.001f
+func (nod *NNOptimizerDescriptor) WithLearningRate(learningRate float32) *NNOptimizerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(nod), objc.RegisterName("setLearningRate:"), learningRate)
+	return nod
 }
 
-// WithGradientRescale the gradientRescale at which we apply to incoming gradient values The default value is 1.0
-func (x *NNOptimizerDescriptor) WithGradientRescale(gradientRescale float32) *NNOptimizerDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGradientRescale:"), gradientRescale)
-	return x
+// WithGradientRescale sets the gradientRescale at which we apply to incoming gradient values The default value is 1.0
+func (nod *NNOptimizerDescriptor) WithGradientRescale(gradientRescale float32) *NNOptimizerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(nod), objc.RegisterName("setGradientRescale:"), gradientRescale)
+	return nod
 }
 
-// WithApplyGradientClipping a bool which decides if gradient will be clipped The default value is NO
-func (x *NNOptimizerDescriptor) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplyGradientClipping:"), applyGradientClipping)
-	return x
+// WithApplyGradientClipping sets a bool which decides if gradient will be clipped The default value is NO
+func (nod *NNOptimizerDescriptor) WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(nod), objc.RegisterName("setApplyGradientClipping:"), applyGradientClipping)
+	return nod
 }
 
-// WithGradientClipMax the maximum value at which incoming gradient will be clipped before rescaling, applyGradientClipping must be true
-func (x *NNOptimizerDescriptor) WithGradientClipMax(gradientClipMax float32) *NNOptimizerDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGradientClipMax:"), gradientClipMax)
-	return x
+// WithGradientClipMax sets the maximum value at which incoming gradient will be clipped before rescaling, applyGradientClipping must be true
+func (nod *NNOptimizerDescriptor) WithGradientClipMax(gradientClipMax float32) *NNOptimizerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(nod), objc.RegisterName("setGradientClipMax:"), gradientClipMax)
+	return nod
 }
 
-// WithGradientClipMin the minimum value at which incoming gradient will be clipped before rescaling, applyGradientClipping must be true
-func (x *NNOptimizerDescriptor) WithGradientClipMin(gradientClipMin float32) *NNOptimizerDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGradientClipMin:"), gradientClipMin)
-	return x
+// WithGradientClipMin sets the minimum value at which incoming gradient will be clipped before rescaling, applyGradientClipping must be true
+func (nod *NNOptimizerDescriptor) WithGradientClipMin(gradientClipMin float32) *NNOptimizerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(nod), objc.RegisterName("setGradientClipMin:"), gradientClipMin)
+	return nod
 }
 
-// WithRegularizationScale the regularizationScale at which we apply L1 or L2 regularization, it gets ignored if regularization is None The default value is 0.0
-func (x *NNOptimizerDescriptor) WithRegularizationScale(regularizationScale float32) *NNOptimizerDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegularizationScale:"), regularizationScale)
-	return x
+// WithRegularizationScale sets the regularizationScale at which we apply L1 or L2 regularization, it gets ignored if regularization is None The default value is 0.0
+func (nod *NNOptimizerDescriptor) WithRegularizationScale(regularizationScale float32) *NNOptimizerDescriptor {
+	objc.Send[objc.ID](objref.IDOf(nod), objc.RegisterName("setRegularizationScale:"), regularizationScale)
+	return nod
 }
 
-// LearningRate the learningRate at which we update values The default value is 0.001f
-func (x *NNOptimizerDescriptor) LearningRate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("learningRate"))
+// LearningRate returns the learningRate at which we update values The default value is 0.001f
+func (nod *NNOptimizerDescriptor) LearningRate() float32 {
+	_r := objc.Send[float32](objref.IDOf(nod), objc.RegisterName("learningRate"))
 	return _r
 }
 
-// SetLearningRate wraps the corresponding Objective-C method.
-func (x *NNOptimizerDescriptor) SetLearningRate(learningRate float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLearningRate:"), learningRate)
-}
-
-// GradientRescale the gradientRescale at which we apply to incoming gradient values The default value is 1.0
-func (x *NNOptimizerDescriptor) GradientRescale() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientRescale"))
+// GradientRescale returns the gradientRescale at which we apply to incoming gradient values The default value is 1.0
+func (nod *NNOptimizerDescriptor) GradientRescale() float32 {
+	_r := objc.Send[float32](objref.IDOf(nod), objc.RegisterName("gradientRescale"))
 	return _r
 }
 
-// SetGradientRescale wraps the corresponding Objective-C method.
-func (x *NNOptimizerDescriptor) SetGradientRescale(gradientRescale float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGradientRescale:"), gradientRescale)
-}
-
-// ApplyGradientClipping a bool which decides if gradient will be clipped The default value is NO
-func (x *NNOptimizerDescriptor) ApplyGradientClipping() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("applyGradientClipping"))
+// ApplyGradientClipping reports whether a bool which decides if gradient will be clipped The default value is false
+func (nod *NNOptimizerDescriptor) ApplyGradientClipping() bool {
+	_r := objc.Send[bool](objref.IDOf(nod), objc.RegisterName("applyGradientClipping"))
 	return _r
 }
 
-// SetApplyGradientClipping wraps the corresponding Objective-C method.
-func (x *NNOptimizerDescriptor) SetApplyGradientClipping(applyGradientClipping bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setApplyGradientClipping:"), applyGradientClipping)
-}
-
-// GradientClipMax the maximum value at which incoming gradient will be clipped before rescaling, applyGradientClipping must be true
-func (x *NNOptimizerDescriptor) GradientClipMax() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientClipMax"))
+// GradientClipMax returns the maximum value at which incoming gradient will be clipped before rescaling, applyGradientClipping must be true
+func (nod *NNOptimizerDescriptor) GradientClipMax() float32 {
+	_r := objc.Send[float32](objref.IDOf(nod), objc.RegisterName("gradientClipMax"))
 	return _r
 }
 
-// SetGradientClipMax wraps the corresponding Objective-C method.
-func (x *NNOptimizerDescriptor) SetGradientClipMax(gradientClipMax float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGradientClipMax:"), gradientClipMax)
-}
-
-// GradientClipMin the minimum value at which incoming gradient will be clipped before rescaling, applyGradientClipping must be true
-func (x *NNOptimizerDescriptor) GradientClipMin() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("gradientClipMin"))
+// GradientClipMin returns the minimum value at which incoming gradient will be clipped before rescaling, applyGradientClipping must be true
+func (nod *NNOptimizerDescriptor) GradientClipMin() float32 {
+	_r := objc.Send[float32](objref.IDOf(nod), objc.RegisterName("gradientClipMin"))
 	return _r
 }
 
-// SetGradientClipMin wraps the corresponding Objective-C method.
-func (x *NNOptimizerDescriptor) SetGradientClipMin(gradientClipMin float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGradientClipMin:"), gradientClipMin)
-}
-
-// RegularizationScale the regularizationScale at which we apply L1 or L2 regularization, it gets ignored if regularization is None The default value is 0.0
-func (x *NNOptimizerDescriptor) RegularizationScale() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("regularizationScale"))
+// RegularizationScale returns the regularizationScale at which we apply L1 or L2 regularization, it gets ignored if regularization is None The default value is 0.0
+func (nod *NNOptimizerDescriptor) RegularizationScale() float32 {
+	_r := objc.Send[float32](objref.IDOf(nod), objc.RegisterName("regularizationScale"))
 	return _r
 }
-
-// SetRegularizationScale wraps the corresponding Objective-C method.
-func (x *NNOptimizerDescriptor) SetRegularizationScale(regularizationScale float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegularizationScale:"), regularizationScale)
-}
-
-// NNOptimizerDescriptorable is the interface implemented by [NNOptimizerDescriptor], for mocking and DI.
-type NNOptimizerDescriptorable interface {
-	obj.Object
-	WithLearningRate(learningRate float32) *NNOptimizerDescriptor
-	WithGradientRescale(gradientRescale float32) *NNOptimizerDescriptor
-	WithApplyGradientClipping(applyGradientClipping bool) *NNOptimizerDescriptor
-	WithGradientClipMax(gradientClipMax float32) *NNOptimizerDescriptor
-	WithGradientClipMin(gradientClipMin float32) *NNOptimizerDescriptor
-	WithRegularizationScale(regularizationScale float32) *NNOptimizerDescriptor
-	LearningRate() float32
-	SetLearningRate(learningRate float32)
-	GradientRescale() float32
-	SetGradientRescale(gradientRescale float32)
-	ApplyGradientClipping() bool
-	SetApplyGradientClipping(applyGradientClipping bool)
-	GradientClipMax() float32
-	SetGradientClipMax(gradientClipMax float32)
-	GradientClipMin() float32
-	SetGradientClipMin(gradientClipMin float32)
-	RegularizationScale() float32
-	SetRegularizationScale(regularizationScale float32)
-}
-
-var _ NNOptimizerDescriptorable = (*NNOptimizerDescriptor)(nil)

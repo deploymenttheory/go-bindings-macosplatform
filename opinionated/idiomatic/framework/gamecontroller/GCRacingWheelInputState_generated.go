@@ -48,50 +48,41 @@ func racingWheelInputStateAdopt(id objc.ID) *RacingWheelInputState {
 }
 
 // Description returns the object's -description text.
-func (x *RacingWheelInputState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rwis *RacingWheelInputState) Description() string {
+	return rt.Description(objref.IDOf(rwis))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RacingWheelInputState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rwis *RacingWheelInputState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rwis), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RacingWheelInputState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rwis *RacingWheelInputState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rwis), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RacingWheelInputState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rwis *RacingWheelInputState) String() string {
+	return rt.Description(objref.IDOf(rwis))
 }
 
-// Wheel the steering wheel element.
-func (x *RacingWheelInputState) Wheel() *SteeringWheelElement {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wheel"))
+// Wheel returns the steering wheel element.
+func (rwis *RacingWheelInputState) Wheel() *SteeringWheelElement {
+	_r := objc.Send[objc.ID](objref.IDOf(rwis), objc.RegisterName("wheel"))
 	return SteeringWheelElementFromID(_r)
 }
 
-// Shifter the element representing an attached gear shifter accessory. Note that this element only represents an external gear shifter accessory. Many racing wheels have a pair of built in paddle buttons that can be used for sequential gear shifting.  Those buttons are can be looked up with the \c GCInputLeftPaddle and \c GCInputRightPaddle input names.
-func (x *RacingWheelInputState) Shifter() *GearShifterElement {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shifter"))
+// Shifter returns the element representing an attached gear shifter accessory. Note that this element only represents an external gear shifter accessory. Many racing wheels have a pair of built in paddle buttons that can be used for sequential gear shifting.  Those buttons are can be looked up with the \c GCInputLeftPaddle and \c GCInputRightPaddle input names.
+func (rwis *RacingWheelInputState) Shifter() *GearShifterElement {
+	_r := objc.Send[objc.ID](objref.IDOf(rwis), objc.RegisterName("shifter"))
 	return GearShifterElementFromID(_r)
 }
-
-// RacingWheelInputStateable is the interface implemented by [RacingWheelInputState], for mocking and DI.
-type RacingWheelInputStateable interface {
-	obj.Object
-	Wheel() *SteeringWheelElement
-	Shifter() *GearShifterElement
-}
-
-var _ RacingWheelInputStateable = (*RacingWheelInputState)(nil)
 
 // isRacingWheelInputState marks RacingWheelInputState — and, by embedding promotion, its
 // subclasses — as a member of the RacingWheelInputState hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *RacingWheelInputState) isRacingWheelInputState() {}
+func (rwis *RacingWheelInputState) isRacingWheelInputState() {}
 
 var _ RacingWheelInputStateProvider = (*RacingWheelInputState)(nil)

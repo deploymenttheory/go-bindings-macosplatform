@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,39 +51,28 @@ func NewScatterLayer() *ScatterLayer {
 	return scatterLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *ScatterLayer) WithLabel(label string) *ScatterLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (sl *ScatterLayer) WithLabel(label string) *ScatterLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return sl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *ScatterLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ScatterLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (sl *ScatterLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ScatterLayer {
+	objc.Send[objc.ID](objref.IDOf(sl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return sl
 }
 
-// Dimension the dimension along which to index
-func (x *ScatterLayer) Dimension() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dimension"))
+// Dimension returns the dimension along which to index
+func (sl *ScatterLayer) Dimension() int {
+	_r := objc.Send[int](objref.IDOf(sl), objc.RegisterName("dimension"))
 	return _r
 }
 
-// ReductionType the reduction type applied for all values in source tensor that are scattered to a specific location in the result tensor. Must be: MLCReductionTypeNone or MLCReductionTypeSum.
-func (x *ScatterLayer) ReductionType() ReductionType {
-	_r := objc.Send[ReductionType](objref.IDOf(x), objc.RegisterName("reductionType"))
+// ReductionType returns the reduction type applied for all values in source tensor that are scattered to a specific location in the result tensor. Must be: MLCReductionTypeNone or MLCReductionTypeSum.
+func (sl *ScatterLayer) ReductionType() ReductionType {
+	_r := objc.Send[ReductionType](objref.IDOf(sl), objc.RegisterName("reductionType"))
 	return _r
 }
-
-// ScatterLayerable is the interface implemented by [ScatterLayer], for mocking and DI.
-type ScatterLayerable interface {
-	obj.Object
-	WithLabel(label string) *ScatterLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ScatterLayer
-	Dimension() int
-	ReductionType() ReductionType
-}
-
-var _ ScatterLayerable = (*ScatterLayer)(nil)
 
 var _ LayerProvider = (*ScatterLayer)(nil)

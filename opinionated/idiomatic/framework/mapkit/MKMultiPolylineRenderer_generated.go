@@ -53,83 +53,66 @@ func NewMultiPolylineRendererWithMultiPolyline(multiPolyline *MultiPolyline) *Mu
 	return multiPolylineRendererAdopt(_id)
 }
 
-// WithFillColor the fill color to use for the path.
-func (x *MultiPolylineRenderer) WithFillColor(fillColor obj.Object) *MultiPolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
-	return x
+// WithFillColor sets the fill color to use for the path.
+func (mpr *MultiPolylineRenderer) WithFillColor(fillColor obj.Object) *MultiPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
+	return mpr
 }
 
-// WithStrokeColor the stroke color to use for the path.
-func (x *MultiPolylineRenderer) WithStrokeColor(strokeColor obj.Object) *MultiPolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
-	return x
+// WithStrokeColor sets the stroke color to use for the path.
+func (mpr *MultiPolylineRenderer) WithStrokeColor(strokeColor obj.Object) *MultiPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
+	return mpr
 }
 
-// WithLineWidth the stroke width to use for the path.
-func (x *MultiPolylineRenderer) WithLineWidth(lineWidth float64) *MultiPolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
-	return x
+// WithLineWidth sets the stroke width to use for the path.
+func (mpr *MultiPolylineRenderer) WithLineWidth(lineWidth float64) *MultiPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setLineWidth:"), lineWidth)
+	return mpr
 }
 
-// WithMiterLimit the limiting value that helps avoid spikes at junctions between connected line segments.
-func (x *MultiPolylineRenderer) WithMiterLimit(miterLimit float64) *MultiPolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
-	return x
+// WithMiterLimit sets the limiting value that helps avoid spikes at junctions between connected line segments.
+func (mpr *MultiPolylineRenderer) WithMiterLimit(miterLimit float64) *MultiPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setMiterLimit:"), miterLimit)
+	return mpr
 }
 
-// WithLineDashPhase the offset (in points) at which to start drawing the dash pattern.
-func (x *MultiPolylineRenderer) WithLineDashPhase(lineDashPhase float64) *MultiPolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
-	return x
+// WithLineDashPhase sets the offset (in points) at which to start drawing the dash pattern.
+func (mpr *MultiPolylineRenderer) WithLineDashPhase(lineDashPhase float64) *MultiPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setLineDashPhase:"), lineDashPhase)
+	return mpr
 }
 
-// WithLineDashPattern an array of numbers specifying the dash pattern to use for the path.
-func (x *MultiPolylineRenderer) WithLineDashPattern(items ...obj.Object) *MultiPolylineRenderer {
+// WithLineDashPattern sets an array of numbers specifying the dash pattern to use for the path.
+func (mpr *MultiPolylineRenderer) WithLineDashPattern(items ...obj.Object) *MultiPolylineRenderer {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineDashPattern:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setLineDashPattern:"), _arr)
+	return mpr
 }
 
-// WithShouldRasterize a Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
-func (x *MultiPolylineRenderer) WithShouldRasterize(shouldRasterize bool) *MultiPolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
-	return x
+// WithShouldRasterize sets a Boolean value that determines whether the overlay path renderer renders the overlay as a bitmap before compositing.
+func (mpr *MultiPolylineRenderer) WithShouldRasterize(shouldRasterize bool) *MultiPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	return mpr
 }
 
-// WithPath the path representing the overlay’s shape.
-func (x *MultiPolylineRenderer) WithPath(path obj.Object) *MultiPolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
-	return x
+// WithPath sets the path representing the overlay’s shape.
+func (mpr *MultiPolylineRenderer) WithPath(path obj.Object) *MultiPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setPath:"), objref.IDOf(path))
+	return mpr
 }
 
-// WithAlpha the amount of transparency to apply to the overlay.
-func (x *MultiPolylineRenderer) WithAlpha(alpha float64) *MultiPolylineRenderer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the amount of transparency to apply to the overlay.
+func (mpr *MultiPolylineRenderer) WithAlpha(alpha float64) *MultiPolylineRenderer {
+	objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("setAlpha:"), alpha)
+	return mpr
 }
 
 // MultiPolyline wraps the corresponding Objective-C method.
-func (x *MultiPolylineRenderer) MultiPolyline() *MultiPolyline {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiPolyline"))
+func (mpr *MultiPolylineRenderer) MultiPolyline() *MultiPolyline {
+	_r := objc.Send[objc.ID](objref.IDOf(mpr), objc.RegisterName("multiPolyline"))
 	return MultiPolylineFromID(_r)
 }
-
-// MultiPolylineRendererable is the interface implemented by [MultiPolylineRenderer], for mocking and DI.
-type MultiPolylineRendererable interface {
-	obj.Object
-	WithFillColor(fillColor obj.Object) *MultiPolylineRenderer
-	WithStrokeColor(strokeColor obj.Object) *MultiPolylineRenderer
-	WithLineWidth(lineWidth float64) *MultiPolylineRenderer
-	WithMiterLimit(miterLimit float64) *MultiPolylineRenderer
-	WithLineDashPhase(lineDashPhase float64) *MultiPolylineRenderer
-	WithLineDashPattern(items ...obj.Object) *MultiPolylineRenderer
-	WithShouldRasterize(shouldRasterize bool) *MultiPolylineRenderer
-	WithPath(path obj.Object) *MultiPolylineRenderer
-	WithAlpha(alpha float64) *MultiPolylineRenderer
-	MultiPolyline() *MultiPolyline
-}
-
-var _ MultiPolylineRendererable = (*MultiPolylineRenderer)(nil)
 
 var _ OverlayPathRendererProvider = (*MultiPolylineRenderer)(nil)
 

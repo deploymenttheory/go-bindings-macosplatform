@@ -53,25 +53,16 @@ func NewBlendKernel() *BlendKernel {
 }
 
 // ApplyWithForegroundBackground creates a new image using the blend kernel and specified foreground and background images.
-func (x *BlendKernel) ApplyWithForegroundBackground(foreground *Image, background *Image) *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyWithForeground:background:"), objref.IDOf(foreground), objref.IDOf(background))
+func (bk *BlendKernel) ApplyWithForegroundBackground(foreground *Image, background *Image) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(bk), objc.RegisterName("applyWithForeground:background:"), objref.IDOf(foreground), objref.IDOf(background))
 	return ImageFromID(_r)
 }
 
 // ApplyWithForegroundBackgroundColorSpace wraps the corresponding Objective-C method.
-func (x *BlendKernel) ApplyWithForegroundBackgroundColorSpace(foreground *Image, background *Image, colorSpace obj.Object) *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applyWithForeground:background:colorSpace:"), objref.IDOf(foreground), objref.IDOf(background), objref.IDOf(colorSpace))
+func (bk *BlendKernel) ApplyWithForegroundBackgroundColorSpace(foreground *Image, background *Image, colorSpace obj.Object) *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(bk), objc.RegisterName("applyWithForeground:background:colorSpace:"), objref.IDOf(foreground), objref.IDOf(background), objref.IDOf(colorSpace))
 	return ImageFromID(_r)
 }
-
-// BlendKernelable is the interface implemented by [BlendKernel], for mocking and DI.
-type BlendKernelable interface {
-	obj.Object
-	ApplyWithForegroundBackground(foreground *Image, background *Image) *Image
-	ApplyWithForegroundBackgroundColorSpace(foreground *Image, background *Image, colorSpace obj.Object) *Image
-}
-
-var _ BlendKernelable = (*BlendKernel)(nil)
 
 var _ ColorKernelProvider = (*BlendKernel)(nil)
 

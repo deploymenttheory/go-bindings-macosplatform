@@ -52,175 +52,124 @@ func NewPressGestureRecognizer() *PressGestureRecognizer {
 	return pressGestureRecognizerAdopt(_id)
 }
 
-// WithButtonMask a bit mask of the buttons required to recognize this press.
-func (x *PressGestureRecognizer) WithButtonMask(buttonMask int) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonMask:"), buttonMask)
-	return x
+// WithButtonMask sets a bit mask of the buttons required to recognize this press.
+func (pgr *PressGestureRecognizer) WithButtonMask(buttonMask int) *PressGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setButtonMask:"), buttonMask)
+	return pgr
 }
 
-// WithMinimumPressDuration the minimum time (in seconds) that the user must hold the mouse button in the view for a valid gesture.
-func (x *PressGestureRecognizer) WithMinimumPressDuration(minimumPressDuration float64) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumPressDuration:"), minimumPressDuration)
-	return x
+// WithMinimumPressDuration sets the minimum time (in seconds) that the user must hold the mouse button in the view for a valid gesture.
+func (pgr *PressGestureRecognizer) WithMinimumPressDuration(minimumPressDuration float64) *PressGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setMinimumPressDuration:"), minimumPressDuration)
+	return pgr
 }
 
-// WithAllowableMovement the maximum movement of the mouse in the view before the gesture fails.
-func (x *PressGestureRecognizer) WithAllowableMovement(allowableMovement float64) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowableMovement:"), allowableMovement)
-	return x
+// WithAllowableMovement sets the maximum movement of the mouse in the view before the gesture fails.
+func (pgr *PressGestureRecognizer) WithAllowableMovement(allowableMovement float64) *PressGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setAllowableMovement:"), allowableMovement)
+	return pgr
 }
 
-// WithNumberOfTouchesRequired the number of necessary touches on a Touch Bar for the gesture recognizer to match.
-func (x *PressGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequired int) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTouchesRequired:"), numberOfTouchesRequired)
-	return x
+// WithNumberOfTouchesRequired sets the number of necessary touches on a Touch Bar for the gesture recognizer to match.
+func (pgr *PressGestureRecognizer) WithNumberOfTouchesRequired(numberOfTouchesRequired int) *PressGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setNumberOfTouchesRequired:"), numberOfTouchesRequired)
+	return pgr
 }
 
-// WithTarget the object that implements the action method.
-func (x *PressGestureRecognizer) WithTarget(target obj.Object) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that implements the action method.
+func (pgr *PressGestureRecognizer) WithTarget(target obj.Object) *PressGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return pgr
 }
 
-// WithState the current state of the gesture recognizer.
-func (x *PressGestureRecognizer) WithState(state GestureRecognizerState) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the current state of the gesture recognizer.
+func (pgr *PressGestureRecognizer) WithState(state GestureRecognizerState) *PressGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setState:"), state)
+	return pgr
 }
 
-// WithEnabled a Boolean value indicating whether the gesture recognizer is able to handle events.
-func (x *PressGestureRecognizer) WithEnabled(enabled bool) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value indicating whether the gesture recognizer is able to handle events.
+func (pgr *PressGestureRecognizer) WithEnabled(enabled bool) *PressGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setEnabled:"), enabled)
+	return pgr
 }
 
-// WithPressureConfiguration configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
-func (x *PressGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+// WithPressureConfiguration sets configures the behavior and progression of the Force Touch trackpad when responding to recognized pressure gestures.
+func (pgr *PressGestureRecognizer) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PressGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return pgr
 }
 
-// WithDelaysPrimaryMouseButtonEvents a Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
-func (x *PressGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
-	return x
+// WithDelaysPrimaryMouseButtonEvents sets a Boolean value that indicates whether primary mouse button events are delivered only after gesture recognition fails.
+func (pgr *PressGestureRecognizer) WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *PressGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysPrimaryMouseButtonEvents:"), delaysPrimaryMouseButtonEvents)
+	return pgr
 }
 
-// WithDelaysSecondaryMouseButtonEvents a Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
-func (x *PressGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
-	return x
+// WithDelaysSecondaryMouseButtonEvents sets a Boolean value that indicates whether secondary mouse button events are delivered only after gesture recognition fails.
+func (pgr *PressGestureRecognizer) WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *PressGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysSecondaryMouseButtonEvents:"), delaysSecondaryMouseButtonEvents)
+	return pgr
 }
 
-// WithDelaysOtherMouseButtonEvents a Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
-func (x *PressGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
-	return x
+// WithDelaysOtherMouseButtonEvents sets a Boolean value that indicates whether other mouse button events are delivered only after gesture recognition fails.
+func (pgr *PressGestureRecognizer) WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *PressGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysOtherMouseButtonEvents:"), delaysOtherMouseButtonEvents)
+	return pgr
 }
 
-// WithDelaysKeyEvents a Boolean value that indicates whether key events are delivered only after gesture recognition fails.
-func (x *PressGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
-	return x
+// WithDelaysKeyEvents sets a Boolean value that indicates whether key events are delivered only after gesture recognition fails.
+func (pgr *PressGestureRecognizer) WithDelaysKeyEvents(delaysKeyEvents bool) *PressGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysKeyEvents:"), delaysKeyEvents)
+	return pgr
 }
 
-// WithDelaysMagnificationEvents a Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
-func (x *PressGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
-	return x
+// WithDelaysMagnificationEvents sets a Boolean value that indicates whether magnification events are delivered only after gesture recognition fails.
+func (pgr *PressGestureRecognizer) WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *PressGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysMagnificationEvents:"), delaysMagnificationEvents)
+	return pgr
 }
 
-// WithDelaysRotationEvents a Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
-func (x *PressGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
-	return x
+// WithDelaysRotationEvents sets a Boolean value that indicates whether rotation events are delivered only after gesture recognition fails.
+func (pgr *PressGestureRecognizer) WithDelaysRotationEvents(delaysRotationEvents bool) *PressGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setDelaysRotationEvents:"), delaysRotationEvents)
+	return pgr
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *PressGestureRecognizer) WithName(name string) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (pgr *PressGestureRecognizer) WithName(name string) *PressGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setName:"), purego.NSString(name))
+	return pgr
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *PressGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PressGestureRecognizer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (pgr *PressGestureRecognizer) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PressGestureRecognizer {
+	objc.Send[objc.ID](objref.IDOf(pgr), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return pgr
 }
 
 // ButtonMask wraps the corresponding Objective-C method.
-func (x *PressGestureRecognizer) ButtonMask() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("buttonMask"))
+func (pgr *PressGestureRecognizer) ButtonMask() int {
+	_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("buttonMask"))
 	return _r
-}
-
-// SetButtonMask wraps the corresponding Objective-C method.
-func (x *PressGestureRecognizer) SetButtonMask(buttonMask int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonMask:"), buttonMask)
 }
 
 // MinimumPressDuration wraps the corresponding Objective-C method.
-func (x *PressGestureRecognizer) MinimumPressDuration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumPressDuration"))
+func (pgr *PressGestureRecognizer) MinimumPressDuration() float64 {
+	_r := objc.Send[float64](objref.IDOf(pgr), objc.RegisterName("minimumPressDuration"))
 	return _r
-}
-
-// SetMinimumPressDuration wraps the corresponding Objective-C method.
-func (x *PressGestureRecognizer) SetMinimumPressDuration(minimumPressDuration float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumPressDuration:"), minimumPressDuration)
 }
 
 // AllowableMovement wraps the corresponding Objective-C method.
-func (x *PressGestureRecognizer) AllowableMovement() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("allowableMovement"))
+func (pgr *PressGestureRecognizer) AllowableMovement() float64 {
+	_r := objc.Send[float64](objref.IDOf(pgr), objc.RegisterName("allowableMovement"))
 	return _r
-}
-
-// SetAllowableMovement wraps the corresponding Objective-C method.
-func (x *PressGestureRecognizer) SetAllowableMovement(allowableMovement float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowableMovement:"), allowableMovement)
 }
 
 // NumberOfTouchesRequired wraps the corresponding Objective-C method.
-func (x *PressGestureRecognizer) NumberOfTouchesRequired() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfTouchesRequired"))
+func (pgr *PressGestureRecognizer) NumberOfTouchesRequired() int {
+	_r := objc.Send[int](objref.IDOf(pgr), objc.RegisterName("numberOfTouchesRequired"))
 	return _r
 }
-
-// SetNumberOfTouchesRequired wraps the corresponding Objective-C method.
-func (x *PressGestureRecognizer) SetNumberOfTouchesRequired(numberOfTouchesRequired int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTouchesRequired:"), numberOfTouchesRequired)
-}
-
-// PressGestureRecognizerable is the interface implemented by [PressGestureRecognizer], for mocking and DI.
-type PressGestureRecognizerable interface {
-	obj.Object
-	WithButtonMask(buttonMask int) *PressGestureRecognizer
-	WithMinimumPressDuration(minimumPressDuration float64) *PressGestureRecognizer
-	WithAllowableMovement(allowableMovement float64) *PressGestureRecognizer
-	WithNumberOfTouchesRequired(numberOfTouchesRequired int) *PressGestureRecognizer
-	WithTarget(target obj.Object) *PressGestureRecognizer
-	WithState(state GestureRecognizerState) *PressGestureRecognizer
-	WithEnabled(enabled bool) *PressGestureRecognizer
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *PressGestureRecognizer
-	WithDelaysPrimaryMouseButtonEvents(delaysPrimaryMouseButtonEvents bool) *PressGestureRecognizer
-	WithDelaysSecondaryMouseButtonEvents(delaysSecondaryMouseButtonEvents bool) *PressGestureRecognizer
-	WithDelaysOtherMouseButtonEvents(delaysOtherMouseButtonEvents bool) *PressGestureRecognizer
-	WithDelaysKeyEvents(delaysKeyEvents bool) *PressGestureRecognizer
-	WithDelaysMagnificationEvents(delaysMagnificationEvents bool) *PressGestureRecognizer
-	WithDelaysRotationEvents(delaysRotationEvents bool) *PressGestureRecognizer
-	WithName(name string) *PressGestureRecognizer
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *PressGestureRecognizer
-	ButtonMask() int
-	SetButtonMask(buttonMask int)
-	MinimumPressDuration() float64
-	SetMinimumPressDuration(minimumPressDuration float64)
-	AllowableMovement() float64
-	SetAllowableMovement(allowableMovement float64)
-	NumberOfTouchesRequired() int
-	SetNumberOfTouchesRequired(numberOfTouchesRequired int)
-}
-
-var _ PressGestureRecognizerable = (*PressGestureRecognizer)(nil)
 
 var _ GestureRecognizerProvider = (*PressGestureRecognizer)(nil)

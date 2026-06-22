@@ -15,7 +15,7 @@ func DefaultCenter() *NowPlayingInfoCenter {
 	return NowPlayingInfoCenterFromID(_r)
 }
 
-// SupportedAnimatedArtworkKeys keys related to animated artwork that are supported by the current platform. If you specify an instance of animated artwork (an `MPMediaItemAnimatedArtwork`) to `nowPlayingInfo` using any key not in this collection it will be ignored.
+// SupportedAnimatedArtworkKeys returns keys related to animated artwork that are supported by the current platform. If you specify an instance of animated artwork (an `MPMediaItemAnimatedArtwork`) to `nowPlayingInfo` using any key not in this collection it will be ignored.
 //
 // SupportedAnimatedArtworkKeys returns the collection as a Go slice.
 func SupportedAnimatedArtworkKeys() []string {

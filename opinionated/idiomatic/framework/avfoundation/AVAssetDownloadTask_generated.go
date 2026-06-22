@@ -46,24 +46,24 @@ func assetDownloadTaskAdopt(id objc.ID) *AssetDownloadTask {
 }
 
 // Description returns the object's -description text.
-func (x *AssetDownloadTask) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (adt *AssetDownloadTask) Description() string {
+	return rt.Description(objref.IDOf(adt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetDownloadTask) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (adt *AssetDownloadTask) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(adt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetDownloadTask) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (adt *AssetDownloadTask) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(adt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetDownloadTask) String() string {
-	return rt.Description(objref.IDOf(x))
+func (adt *AssetDownloadTask) String() string {
+	return rt.Description(objref.IDOf(adt))
 }
 
 // NewAssetDownloadTask creates a new AssetDownloadTask.
@@ -72,32 +72,22 @@ func NewAssetDownloadTask() *AssetDownloadTask {
 	return assetDownloadTaskAdopt(_id)
 }
 
-// URLAsset the asset supplied to the download task upon initialization.
-func (x *AssetDownloadTask) URLAsset() *URLAsset {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLAsset"))
+// URLAsset returns the asset supplied to the download task upon initialization.
+func (adt *AssetDownloadTask) URLAsset() *URLAsset {
+	_r := objc.Send[objc.ID](objref.IDOf(adt), objc.RegisterName("URLAsset"))
 	return URLAssetFromID(_r)
 }
 
-// Options the options supplied to the download task upon initialization.
-func (x *AssetDownloadTask) Options() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("options"))
+// Options returns the options supplied to the download task upon initialization.
+func (adt *AssetDownloadTask) Options() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(adt), objc.RegisterName("options"))
 	return obj.Wrap(_r)
 }
 
-// LoadedTimeRanges this property provides a collection of time ranges for which the download task has media data already downloaded and playable. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
+// LoadedTimeRanges returns this property provides a collection of time ranges for which the download task has media data already downloaded and playable. The ranges provided might be discontinuous. Returns an NSArray of NSValues containing CMTimeRanges.
 //
 // LoadedTimeRanges returns the collection as a Go slice.
-func (x *AssetDownloadTask) LoadedTimeRanges() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadedTimeRanges"))
+func (adt *AssetDownloadTask) LoadedTimeRanges() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(adt), objc.RegisterName("loadedTimeRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// AssetDownloadTaskable is the interface implemented by [AssetDownloadTask], for mocking and DI.
-type AssetDownloadTaskable interface {
-	obj.Object
-	URLAsset() *URLAsset
-	Options() obj.Object
-	LoadedTimeRanges() []obj.Object
-}
-
-var _ AssetDownloadTaskable = (*AssetDownloadTask)(nil)

@@ -46,24 +46,24 @@ func authenticationViewAdopt(id objc.ID) *AuthenticationView {
 }
 
 // Description returns the object's -description text.
-func (x *AuthenticationView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (av *AuthenticationView) Description() string {
+	return rt.Description(objref.IDOf(av))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthenticationView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (av *AuthenticationView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(av), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthenticationView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (av *AuthenticationView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(av), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthenticationView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (av *AuthenticationView) String() string {
+	return rt.Description(objref.IDOf(av))
 }
 
 // NewAuthenticationViewWithContext creates a new authentication icon that reflects the current authentication state.
@@ -74,15 +74,7 @@ func NewAuthenticationViewWithContext(context_ obj.Object) *AuthenticationView {
 }
 
 // Context wraps the corresponding Objective-C method.
-func (x *AuthenticationView) Context() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
+func (av *AuthenticationView) Context() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("context"))
 	return obj.Wrap(_r)
 }
-
-// AuthenticationViewable is the interface implemented by [AuthenticationView], for mocking and DI.
-type AuthenticationViewable interface {
-	obj.Object
-	Context() obj.Object
-}
-
-var _ AuthenticationViewable = (*AuthenticationView)(nil)

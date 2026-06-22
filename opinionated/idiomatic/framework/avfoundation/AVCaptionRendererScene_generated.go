@@ -46,24 +46,24 @@ func captionRendererSceneAdopt(id objc.ID) *CaptionRendererScene {
 }
 
 // Description returns the object's -description text.
-func (x *CaptionRendererScene) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (crs *CaptionRendererScene) Description() string {
+	return rt.Description(objref.IDOf(crs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptionRendererScene) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (crs *CaptionRendererScene) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(crs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptionRendererScene) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (crs *CaptionRendererScene) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(crs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptionRendererScene) String() string {
-	return rt.Description(objref.IDOf(x))
+func (crs *CaptionRendererScene) String() string {
+	return rt.Description(objref.IDOf(crs))
 }
 
 // NewCaptionRendererScene creates a new CaptionRendererScene.
@@ -72,23 +72,14 @@ func NewCaptionRendererScene() *CaptionRendererScene {
 	return captionRendererSceneAdopt(_id)
 }
 
-// HasActiveCaptions the scene contains one or more active captions. Clients should not use this to restrict their drawing and should call renderInContext:atTime: to draw "emptiness". However, this information may be useful for purposes such as scrubbing to times where captions are present, skipping scenes in which no captions are present.
-func (x *CaptionRendererScene) HasActiveCaptions() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasActiveCaptions"))
+// HasActiveCaptions reports whether the scene contains one or more active captions. Clients should not use this to restrict their drawing and should call renderInContext:atTime: to draw "emptiness". However, this information may be useful for purposes such as scrubbing to times where captions are present, skipping scenes in which no captions are present.
+func (crs *CaptionRendererScene) HasActiveCaptions() bool {
+	_r := objc.Send[bool](objref.IDOf(crs), objc.RegisterName("hasActiveCaptions"))
 	return _r
 }
 
-// NeedsPeriodicRefresh the scene may have embedded animations or other state where periodic redrawing while playing through this scene is needed. This property indicates if refreshing should occur if the client is progressing through the content. If the client is not progressing (i.e., it is treating playback as though the rate is 0.0), a single render at the current render time suffices. This property does not prescribe a refresh rate. A client is free to choose a refresh rate corresponding to rates of associated video frames or other timing appropriate for the client.
-func (x *CaptionRendererScene) NeedsPeriodicRefresh() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsPeriodicRefresh"))
+// NeedsPeriodicRefresh reports whether the scene may have embedded animations or other state where periodic redrawing while playing through this scene is needed. This property indicates if refreshing should occur if the client is progressing through the content. If the client is not progressing (i.e., it is treating playback as though the rate is 0.0), a single render at the current render time suffices. This property does not prescribe a refresh rate. A client is free to choose a refresh rate corresponding to rates of associated video frames or other timing appropriate for the client.
+func (crs *CaptionRendererScene) NeedsPeriodicRefresh() bool {
+	_r := objc.Send[bool](objref.IDOf(crs), objc.RegisterName("needsPeriodicRefresh"))
 	return _r
 }
-
-// CaptionRendererSceneable is the interface implemented by [CaptionRendererScene], for mocking and DI.
-type CaptionRendererSceneable interface {
-	obj.Object
-	HasActiveCaptions() bool
-	NeedsPeriodicRefresh() bool
-}
-
-var _ CaptionRendererSceneable = (*CaptionRendererScene)(nil)

@@ -44,24 +44,24 @@ func mTREnergyEVSEModeClusterModeOptionStructAdopt(id objc.ID) *MTREnergyEVSEMod
 }
 
 // Description returns the object's -description text.
-func (x *MTREnergyEVSEModeClusterModeOptionStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (meemcmos *MTREnergyEVSEModeClusterModeOptionStruct) Description() string {
+	return rt.Description(objref.IDOf(meemcmos))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTREnergyEVSEModeClusterModeOptionStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (meemcmos *MTREnergyEVSEModeClusterModeOptionStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(meemcmos), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTREnergyEVSEModeClusterModeOptionStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (meemcmos *MTREnergyEVSEModeClusterModeOptionStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(meemcmos), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTREnergyEVSEModeClusterModeOptionStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (meemcmos *MTREnergyEVSEModeClusterModeOptionStruct) String() string {
+	return rt.Description(objref.IDOf(meemcmos))
 }
 
 // NewMTREnergyEVSEModeClusterModeOptionStruct creates a new MTREnergyEVSEModeClusterModeOptionStruct.
@@ -71,64 +71,39 @@ func NewMTREnergyEVSEModeClusterModeOptionStruct() *MTREnergyEVSEModeClusterMode
 }
 
 // WithLabel sets the property and returns the receiver so calls can be chained.
-func (x *MTREnergyEVSEModeClusterModeOptionStruct) WithLabel(label string) *MTREnergyEVSEModeClusterModeOptionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+func (meemcmos *MTREnergyEVSEModeClusterModeOptionStruct) WithLabel(label string) *MTREnergyEVSEModeClusterModeOptionStruct {
+	objc.Send[objc.ID](objref.IDOf(meemcmos), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return meemcmos
 }
 
 // WithMode sets the property and returns the receiver so calls can be chained.
-func (x *MTREnergyEVSEModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTREnergyEVSEModeClusterModeOptionStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
-	return x
+func (meemcmos *MTREnergyEVSEModeClusterModeOptionStruct) WithMode(mode obj.Object) *MTREnergyEVSEModeClusterModeOptionStruct {
+	objc.Send[objc.ID](objref.IDOf(meemcmos), objc.RegisterName("setMode:"), objref.IDOf(mode))
+	return meemcmos
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEModeClusterModeOptionStruct) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (meemcmos *MTREnergyEVSEModeClusterModeOptionStruct) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcmos), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEModeClusterModeOptionStruct) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
 // Mode wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEModeClusterModeOptionStruct) Mode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mode"))
+func (meemcmos *MTREnergyEVSEModeClusterModeOptionStruct) Mode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcmos), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
-// SetMode wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEModeClusterModeOptionStruct) SetMode(mode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
-}
-
 // ModeTags wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEModeClusterModeOptionStruct) ModeTags() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modeTags"))
+func (meemcmos *MTREnergyEVSEModeClusterModeOptionStruct) ModeTags() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcmos), objc.RegisterName("modeTags"))
 	return obj.Wrap(_r)
 }
 
 // SetModeTags wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEModeClusterModeOptionStruct) SetModeTags(modeTags obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeTags:"), objref.IDOf(modeTags))
+func (meemcmos *MTREnergyEVSEModeClusterModeOptionStruct) SetModeTags(modeTags obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(meemcmos), objc.RegisterName("setModeTags:"), objref.IDOf(modeTags))
 }
-
-// MTREnergyEVSEModeClusterModeOptionStructable is the interface implemented by [MTREnergyEVSEModeClusterModeOptionStruct], for mocking and DI.
-type MTREnergyEVSEModeClusterModeOptionStructable interface {
-	obj.Object
-	WithLabel(label string) *MTREnergyEVSEModeClusterModeOptionStruct
-	WithMode(mode obj.Object) *MTREnergyEVSEModeClusterModeOptionStruct
-	Label() string
-	SetLabel(label string)
-	Mode() obj.Object
-	SetMode(mode obj.Object)
-	ModeTags() obj.Object
-	SetModeTags(modeTags obj.Object)
-}
-
-var _ MTREnergyEVSEModeClusterModeOptionStructable = (*MTREnergyEVSEModeClusterModeOptionStruct)(nil)

@@ -47,24 +47,24 @@ func mapViewAdopt(id objc.ID) *MapView {
 }
 
 // Description returns the object's -description text.
-func (x *MapView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mv *MapView) Description() string {
+	return rt.Description(objref.IDOf(mv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MapView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mv *MapView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MapView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mv *MapView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MapView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mv *MapView) String() string {
+	return rt.Description(objref.IDOf(mv))
 }
 
 // NewMapView creates a new MapView.
@@ -73,557 +73,362 @@ func NewMapView() *MapView {
 	return mapViewAdopt(_id)
 }
 
-// WithMapType the type of data the map view displays.
-func (x *MapView) WithMapType(mapType MapType) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapType:"), mapType)
-	return x
+// WithMapType sets the type of data the map view displays.
+func (mv *MapView) WithMapType(mapType MapType) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setMapType:"), mapType)
+	return mv
 }
 
-// WithPreferredConfiguration the characteristics of the map view, including the map type and features the map displays.
-func (x *MapView) WithPreferredConfiguration(preferredConfiguration MapConfigurationProvider) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredConfiguration:"), objref.IDOf(preferredConfiguration))
-	return x
+// WithPreferredConfiguration sets the characteristics of the map view, including the map type and features the map displays.
+func (mv *MapView) WithPreferredConfiguration(preferredConfiguration MapConfigurationProvider) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setPreferredConfiguration:"), objref.IDOf(preferredConfiguration))
+	return mv
 }
 
-// WithCamera the camera to use for determining the appearance of the map.
-func (x *MapView) WithCamera(camera *MapCamera) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCamera:"), objref.IDOf(camera))
-	return x
+// WithCamera sets the camera to use for determining the appearance of the map.
+func (mv *MapView) WithCamera(camera *MapCamera) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCamera:"), objref.IDOf(camera))
+	return mv
 }
 
-// WithCameraZoomRange the zoom range to apply to the map view.
-func (x *MapView) WithCameraZoomRange(cameraZoomRange *MapCameraZoomRange) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraZoomRange:"), objref.IDOf(cameraZoomRange))
-	return x
+// WithCameraZoomRange sets the zoom range to apply to the map view.
+func (mv *MapView) WithCameraZoomRange(cameraZoomRange *MapCameraZoomRange) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCameraZoomRange:"), objref.IDOf(cameraZoomRange))
+	return mv
 }
 
-// WithCameraBoundary the boundary of the area within which the map view’s center needs to remain.
-func (x *MapView) WithCameraBoundary(cameraBoundary *MapCameraBoundary) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraBoundary:"), objref.IDOf(cameraBoundary))
-	return x
+// WithCameraBoundary sets the boundary of the area within which the map view’s center needs to remain.
+func (mv *MapView) WithCameraBoundary(cameraBoundary *MapCameraBoundary) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCameraBoundary:"), objref.IDOf(cameraBoundary))
+	return mv
 }
 
-// WithZoomEnabled a Boolean value that determines whether the user may use pinch gestures to zoom in and out of the map.
-func (x *MapView) WithZoomEnabled(zoomEnabled bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZoomEnabled:"), zoomEnabled)
-	return x
+// WithZoomEnabled sets a Boolean value that determines whether the user may use pinch gestures to zoom in and out of the map.
+func (mv *MapView) WithZoomEnabled(zoomEnabled bool) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setZoomEnabled:"), zoomEnabled)
+	return mv
 }
 
-// WithScrollEnabled a Boolean value that determines whether the user may scroll around the map.
-func (x *MapView) WithScrollEnabled(scrollEnabled bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollEnabled:"), scrollEnabled)
-	return x
+// WithScrollEnabled sets a Boolean value that determines whether the user may scroll around the map.
+func (mv *MapView) WithScrollEnabled(scrollEnabled bool) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setScrollEnabled:"), scrollEnabled)
+	return mv
 }
 
-// WithRotateEnabled a Boolean value that indicates whether the map uses the camera’s heading information.
-func (x *MapView) WithRotateEnabled(rotateEnabled bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotateEnabled:"), rotateEnabled)
-	return x
+// WithRotateEnabled sets a Boolean value that indicates whether the map uses the camera’s heading information.
+func (mv *MapView) WithRotateEnabled(rotateEnabled bool) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setRotateEnabled:"), rotateEnabled)
+	return mv
 }
 
-// WithPitchEnabled a Boolean value that indicates whether the map uses the camera’s pitch information.
-func (x *MapView) WithPitchEnabled(pitchEnabled bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitchEnabled:"), pitchEnabled)
-	return x
+// WithPitchEnabled sets a Boolean value that indicates whether the map uses the camera’s pitch information.
+func (mv *MapView) WithPitchEnabled(pitchEnabled bool) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setPitchEnabled:"), pitchEnabled)
+	return mv
 }
 
-// WithShowsUserTrackingButton a Boolean value that indicates whether the map displays the user tracking button.
-func (x *MapView) WithShowsUserTrackingButton(showsUserTrackingButton bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsUserTrackingButton:"), showsUserTrackingButton)
-	return x
+// WithShowsUserTrackingButton sets a Boolean value that indicates whether the map displays the user tracking button.
+func (mv *MapView) WithShowsUserTrackingButton(showsUserTrackingButton bool) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsUserTrackingButton:"), showsUserTrackingButton)
+	return mv
 }
 
-// WithPitchButtonVisibility a value that indicates whether the map’s pitch button is visible.
-func (x *MapView) WithPitchButtonVisibility(pitchButtonVisibility FeatureVisibility) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitchButtonVisibility:"), pitchButtonVisibility)
-	return x
+// WithPitchButtonVisibility sets a value that indicates whether the map’s pitch button is visible.
+func (mv *MapView) WithPitchButtonVisibility(pitchButtonVisibility FeatureVisibility) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setPitchButtonVisibility:"), pitchButtonVisibility)
+	return mv
 }
 
-// WithShowsPitchControl a Boolean value that indicates whether the map displays the pitch control.
-func (x *MapView) WithShowsPitchControl(showsPitchControl bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsPitchControl:"), showsPitchControl)
-	return x
+// WithShowsPitchControl sets a Boolean value that indicates whether the map displays the pitch control.
+func (mv *MapView) WithShowsPitchControl(showsPitchControl bool) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsPitchControl:"), showsPitchControl)
+	return mv
 }
 
-// WithShowsZoomControls a Boolean value that indicates whether the map displays zoom controls.
-func (x *MapView) WithShowsZoomControls(showsZoomControls bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsZoomControls:"), showsZoomControls)
-	return x
+// WithShowsZoomControls sets a Boolean value that indicates whether the map displays zoom controls.
+func (mv *MapView) WithShowsZoomControls(showsZoomControls bool) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsZoomControls:"), showsZoomControls)
+	return mv
 }
 
-// WithShowsCompass a Boolean value that indicates whether the map displays a compass control.
-func (x *MapView) WithShowsCompass(showsCompass bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsCompass:"), showsCompass)
-	return x
+// WithShowsCompass sets a Boolean value that indicates whether the map displays a compass control.
+func (mv *MapView) WithShowsCompass(showsCompass bool) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsCompass:"), showsCompass)
+	return mv
 }
 
-// WithShowsScale a Boolean value that indicates whether the map shows scale information.
-func (x *MapView) WithShowsScale(showsScale bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsScale:"), showsScale)
-	return x
+// WithShowsScale sets a Boolean value that indicates whether the map shows scale information.
+func (mv *MapView) WithShowsScale(showsScale bool) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsScale:"), showsScale)
+	return mv
 }
 
-// WithPointOfInterestFilter the filter to use for determining the points of interest that appear on the map.
-func (x *MapView) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
-	return x
+// WithPointOfInterestFilter sets the filter to use for determining the points of interest that appear on the map.
+func (mv *MapView) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
+	return mv
 }
 
-// WithShowsPointsOfInterest a Boolean value that indicates whether the map displays point-of-interest information.
-func (x *MapView) WithShowsPointsOfInterest(showsPointsOfInterest bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsPointsOfInterest:"), showsPointsOfInterest)
-	return x
+// WithShowsPointsOfInterest sets a Boolean value that indicates whether the map displays point-of-interest information.
+func (mv *MapView) WithShowsPointsOfInterest(showsPointsOfInterest bool) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsPointsOfInterest:"), showsPointsOfInterest)
+	return mv
 }
 
-// WithShowsBuildings a Boolean value that indicates whether the map displays extruded building information on supported map types.
-func (x *MapView) WithShowsBuildings(showsBuildings bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsBuildings:"), showsBuildings)
-	return x
+// WithShowsBuildings sets a Boolean value that indicates whether the map displays extruded building information on supported map types.
+func (mv *MapView) WithShowsBuildings(showsBuildings bool) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsBuildings:"), showsBuildings)
+	return mv
 }
 
-// WithShowsTraffic a Boolean value that indicates whether the map displays traffic information.
-func (x *MapView) WithShowsTraffic(showsTraffic bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsTraffic:"), showsTraffic)
-	return x
+// WithShowsTraffic sets a Boolean value that indicates whether the map displays traffic information.
+func (mv *MapView) WithShowsTraffic(showsTraffic bool) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsTraffic:"), showsTraffic)
+	return mv
 }
 
-// WithShowsUserLocation a Boolean value that indicates whether the map tries to display the user’s location.
-func (x *MapView) WithShowsUserLocation(showsUserLocation bool) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsUserLocation:"), showsUserLocation)
-	return x
+// WithShowsUserLocation sets a Boolean value that indicates whether the map tries to display the user’s location.
+func (mv *MapView) WithShowsUserLocation(showsUserLocation bool) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setShowsUserLocation:"), showsUserLocation)
+	return mv
 }
 
-// WithUserTrackingMode the mode to use for tracking the user’s location.
-func (x *MapView) WithUserTrackingMode(userTrackingMode UserTrackingMode) *MapView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserTrackingMode:"), userTrackingMode)
-	return x
+// WithUserTrackingMode sets the mode to use for tracking the user’s location.
+func (mv *MapView) WithUserTrackingMode(userTrackingMode UserTrackingMode) *MapView {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setUserTrackingMode:"), userTrackingMode)
+	return mv
 }
 
 // SetCameraAnimated changes the camera to use for determining the map’s viewing parameters, and optionally animates the change.
-func (x *MapView) SetCameraAnimated(camera *MapCamera, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCamera:animated:"), objref.IDOf(camera), animated)
+func (mv *MapView) SetCameraAnimated(camera *MapCamera, animated bool) {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCamera:animated:"), objref.IDOf(camera), animated)
 }
 
 // SetCameraZoomRangeAnimated sets the camera zoom range for the map view, specifying whether to use animation.
-func (x *MapView) SetCameraZoomRangeAnimated(cameraZoomRange *MapCameraZoomRange, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraZoomRange:animated:"), objref.IDOf(cameraZoomRange), animated)
+func (mv *MapView) SetCameraZoomRangeAnimated(cameraZoomRange *MapCameraZoomRange, animated bool) {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCameraZoomRange:animated:"), objref.IDOf(cameraZoomRange), animated)
 }
 
 // SetCameraBoundaryAnimated sets the camera boundary for the map view, specifying whether to use animation.
-func (x *MapView) SetCameraBoundaryAnimated(cameraBoundary *MapCameraBoundary, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraBoundary:animated:"), objref.IDOf(cameraBoundary), animated)
+func (mv *MapView) SetCameraBoundaryAnimated(cameraBoundary *MapCameraBoundary, animated bool) {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setCameraBoundary:animated:"), objref.IDOf(cameraBoundary), animated)
 }
 
 // SetUserTrackingModeAnimated sets the mode to use for tracking the user’s location, with optional animation.
-func (x *MapView) SetUserTrackingModeAnimated(mode UserTrackingMode, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserTrackingMode:animated:"), mode, animated)
+func (mv *MapView) SetUserTrackingModeAnimated(mode UserTrackingMode, animated bool) {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setUserTrackingMode:animated:"), mode, animated)
 }
 
 // AddAnnotations adds an array of annotation objects to the map view.
-func (x *MapView) AddAnnotations(annotations []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addAnnotations:"), purego.SliceToNSArray(annotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (mv *MapView) AddAnnotations(annotations []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("addAnnotations:"), purego.SliceToNSArray(annotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // RemoveAnnotations removes an array of annotation objects from the map view.
-func (x *MapView) RemoveAnnotations(annotations []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAnnotations:"), purego.SliceToNSArray(annotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (mv *MapView) RemoveAnnotations(annotations []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("removeAnnotations:"), purego.SliceToNSArray(annotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // DequeueReusableAnnotationViewWithIdentifier returns a reusable annotation view using its identifier.
-func (x *MapView) DequeueReusableAnnotationViewWithIdentifier(identifier string) *AnnotationView {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dequeueReusableAnnotationViewWithIdentifier:"), purego.NSString(identifier))
+func (mv *MapView) DequeueReusableAnnotationViewWithIdentifier(identifier string) *AnnotationView {
+	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("dequeueReusableAnnotationViewWithIdentifier:"), purego.NSString(identifier))
 	return AnnotationViewFromID(_r)
 }
 
 // ShowAnnotationsAnimated sets the visible region so that the map displays the specified annotations.
-func (x *MapView) ShowAnnotationsAnimated(annotations []obj.Object, animated bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showAnnotations:animated:"), purego.SliceToNSArray(annotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), animated)
+func (mv *MapView) ShowAnnotationsAnimated(annotations []obj.Object, animated bool) {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("showAnnotations:animated:"), purego.SliceToNSArray(annotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), animated)
 }
 
 // MapType wraps the corresponding Objective-C method.
-func (x *MapView) MapType() MapType {
-	_r := objc.Send[MapType](objref.IDOf(x), objc.RegisterName("mapType"))
+func (mv *MapView) MapType() MapType {
+	_r := objc.Send[MapType](objref.IDOf(mv), objc.RegisterName("mapType"))
 	return _r
-}
-
-// SetMapType wraps the corresponding Objective-C method.
-func (x *MapView) SetMapType(mapType MapType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapType:"), mapType)
 }
 
 // PreferredConfiguration wraps the corresponding Objective-C method.
-func (x *MapView) PreferredConfiguration() *MapConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredConfiguration"))
+func (mv *MapView) PreferredConfiguration() *MapConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("preferredConfiguration"))
 	return MapConfigurationFromID(_r)
 }
 
-// SetPreferredConfiguration wraps the corresponding Objective-C method.
-func (x *MapView) SetPreferredConfiguration(preferredConfiguration *MapConfiguration) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredConfiguration:"), objref.IDOf(preferredConfiguration))
-}
-
 // Camera wraps the corresponding Objective-C method.
-func (x *MapView) Camera() *MapCamera {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("camera"))
+func (mv *MapView) Camera() *MapCamera {
+	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("camera"))
 	return MapCameraFromID(_r)
 }
 
-// SetCamera wraps the corresponding Objective-C method.
-func (x *MapView) SetCamera(camera *MapCamera) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCamera:"), objref.IDOf(camera))
-}
-
 // CameraZoomRange wraps the corresponding Objective-C method.
-func (x *MapView) CameraZoomRange() *MapCameraZoomRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cameraZoomRange"))
+func (mv *MapView) CameraZoomRange() *MapCameraZoomRange {
+	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("cameraZoomRange"))
 	return MapCameraZoomRangeFromID(_r)
 }
 
-// SetCameraZoomRange wraps the corresponding Objective-C method.
-func (x *MapView) SetCameraZoomRange(cameraZoomRange *MapCameraZoomRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraZoomRange:"), objref.IDOf(cameraZoomRange))
-}
-
 // CameraBoundary wraps the corresponding Objective-C method.
-func (x *MapView) CameraBoundary() *MapCameraBoundary {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cameraBoundary"))
+func (mv *MapView) CameraBoundary() *MapCameraBoundary {
+	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("cameraBoundary"))
 	return MapCameraBoundaryFromID(_r)
 }
 
-// SetCameraBoundary wraps the corresponding Objective-C method.
-func (x *MapView) SetCameraBoundary(cameraBoundary *MapCameraBoundary) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraBoundary:"), objref.IDOf(cameraBoundary))
-}
-
 // IsZoomEnabled wraps the corresponding Objective-C method.
-func (x *MapView) IsZoomEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isZoomEnabled"))
+func (mv *MapView) IsZoomEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isZoomEnabled"))
 	return _r
-}
-
-// SetZoomEnabled wraps the corresponding Objective-C method.
-func (x *MapView) SetZoomEnabled(zoomEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZoomEnabled:"), zoomEnabled)
 }
 
 // IsScrollEnabled wraps the corresponding Objective-C method.
-func (x *MapView) IsScrollEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isScrollEnabled"))
+func (mv *MapView) IsScrollEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isScrollEnabled"))
 	return _r
-}
-
-// SetScrollEnabled wraps the corresponding Objective-C method.
-func (x *MapView) SetScrollEnabled(scrollEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollEnabled:"), scrollEnabled)
 }
 
 // IsRotateEnabled wraps the corresponding Objective-C method.
-func (x *MapView) IsRotateEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRotateEnabled"))
+func (mv *MapView) IsRotateEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isRotateEnabled"))
 	return _r
-}
-
-// SetRotateEnabled wraps the corresponding Objective-C method.
-func (x *MapView) SetRotateEnabled(rotateEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotateEnabled:"), rotateEnabled)
 }
 
 // IsPitchEnabled wraps the corresponding Objective-C method.
-func (x *MapView) IsPitchEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPitchEnabled"))
+func (mv *MapView) IsPitchEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isPitchEnabled"))
 	return _r
-}
-
-// SetPitchEnabled wraps the corresponding Objective-C method.
-func (x *MapView) SetPitchEnabled(pitchEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitchEnabled:"), pitchEnabled)
 }
 
 // ShowsUserTrackingButton wraps the corresponding Objective-C method.
-func (x *MapView) ShowsUserTrackingButton() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsUserTrackingButton"))
+func (mv *MapView) ShowsUserTrackingButton() bool {
+	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsUserTrackingButton"))
 	return _r
-}
-
-// SetShowsUserTrackingButton wraps the corresponding Objective-C method.
-func (x *MapView) SetShowsUserTrackingButton(showsUserTrackingButton bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsUserTrackingButton:"), showsUserTrackingButton)
 }
 
 // PitchButtonVisibility wraps the corresponding Objective-C method.
-func (x *MapView) PitchButtonVisibility() FeatureVisibility {
-	_r := objc.Send[FeatureVisibility](objref.IDOf(x), objc.RegisterName("pitchButtonVisibility"))
+func (mv *MapView) PitchButtonVisibility() FeatureVisibility {
+	_r := objc.Send[FeatureVisibility](objref.IDOf(mv), objc.RegisterName("pitchButtonVisibility"))
 	return _r
-}
-
-// SetPitchButtonVisibility wraps the corresponding Objective-C method.
-func (x *MapView) SetPitchButtonVisibility(pitchButtonVisibility FeatureVisibility) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPitchButtonVisibility:"), pitchButtonVisibility)
 }
 
 // ShowsPitchControl wraps the corresponding Objective-C method.
-func (x *MapView) ShowsPitchControl() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsPitchControl"))
+func (mv *MapView) ShowsPitchControl() bool {
+	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsPitchControl"))
 	return _r
-}
-
-// SetShowsPitchControl wraps the corresponding Objective-C method.
-func (x *MapView) SetShowsPitchControl(showsPitchControl bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsPitchControl:"), showsPitchControl)
 }
 
 // ShowsZoomControls wraps the corresponding Objective-C method.
-func (x *MapView) ShowsZoomControls() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsZoomControls"))
+func (mv *MapView) ShowsZoomControls() bool {
+	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsZoomControls"))
 	return _r
-}
-
-// SetShowsZoomControls wraps the corresponding Objective-C method.
-func (x *MapView) SetShowsZoomControls(showsZoomControls bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsZoomControls:"), showsZoomControls)
 }
 
 // ShowsCompass wraps the corresponding Objective-C method.
-func (x *MapView) ShowsCompass() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsCompass"))
+func (mv *MapView) ShowsCompass() bool {
+	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsCompass"))
 	return _r
-}
-
-// SetShowsCompass wraps the corresponding Objective-C method.
-func (x *MapView) SetShowsCompass(showsCompass bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsCompass:"), showsCompass)
 }
 
 // ShowsScale wraps the corresponding Objective-C method.
-func (x *MapView) ShowsScale() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsScale"))
+func (mv *MapView) ShowsScale() bool {
+	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsScale"))
 	return _r
-}
-
-// SetShowsScale wraps the corresponding Objective-C method.
-func (x *MapView) SetShowsScale(showsScale bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsScale:"), showsScale)
 }
 
 // PointOfInterestFilter wraps the corresponding Objective-C method.
-func (x *MapView) PointOfInterestFilter() *PointOfInterestFilter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestFilter"))
+func (mv *MapView) PointOfInterestFilter() *PointOfInterestFilter {
+	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
-// SetPointOfInterestFilter wraps the corresponding Objective-C method.
-func (x *MapView) SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
-}
-
 // ShowsPointsOfInterest wraps the corresponding Objective-C method.
-func (x *MapView) ShowsPointsOfInterest() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsPointsOfInterest"))
+func (mv *MapView) ShowsPointsOfInterest() bool {
+	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsPointsOfInterest"))
 	return _r
-}
-
-// SetShowsPointsOfInterest wraps the corresponding Objective-C method.
-func (x *MapView) SetShowsPointsOfInterest(showsPointsOfInterest bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsPointsOfInterest:"), showsPointsOfInterest)
 }
 
 // ShowsBuildings wraps the corresponding Objective-C method.
-func (x *MapView) ShowsBuildings() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsBuildings"))
+func (mv *MapView) ShowsBuildings() bool {
+	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsBuildings"))
 	return _r
-}
-
-// SetShowsBuildings wraps the corresponding Objective-C method.
-func (x *MapView) SetShowsBuildings(showsBuildings bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsBuildings:"), showsBuildings)
 }
 
 // ShowsTraffic wraps the corresponding Objective-C method.
-func (x *MapView) ShowsTraffic() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsTraffic"))
+func (mv *MapView) ShowsTraffic() bool {
+	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsTraffic"))
 	return _r
-}
-
-// SetShowsTraffic wraps the corresponding Objective-C method.
-func (x *MapView) SetShowsTraffic(showsTraffic bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsTraffic:"), showsTraffic)
 }
 
 // ShowsUserLocation wraps the corresponding Objective-C method.
-func (x *MapView) ShowsUserLocation() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsUserLocation"))
+func (mv *MapView) ShowsUserLocation() bool {
+	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("showsUserLocation"))
 	return _r
 }
 
-// SetShowsUserLocation wraps the corresponding Objective-C method.
-func (x *MapView) SetShowsUserLocation(showsUserLocation bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsUserLocation:"), showsUserLocation)
-}
-
 // UserLocation wraps the corresponding Objective-C method.
-func (x *MapView) UserLocation() *UserLocation {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userLocation"))
+func (mv *MapView) UserLocation() *UserLocation {
+	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("userLocation"))
 	return UserLocationFromID(_r)
 }
 
 // UserTrackingMode wraps the corresponding Objective-C method.
-func (x *MapView) UserTrackingMode() UserTrackingMode {
-	_r := objc.Send[UserTrackingMode](objref.IDOf(x), objc.RegisterName("userTrackingMode"))
+func (mv *MapView) UserTrackingMode() UserTrackingMode {
+	_r := objc.Send[UserTrackingMode](objref.IDOf(mv), objc.RegisterName("userTrackingMode"))
 	return _r
 }
 
-// SetUserTrackingMode wraps the corresponding Objective-C method.
-func (x *MapView) SetUserTrackingMode(userTrackingMode UserTrackingMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserTrackingMode:"), userTrackingMode)
-}
-
 // IsUserLocationVisible wraps the corresponding Objective-C method.
-func (x *MapView) IsUserLocationVisible() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUserLocationVisible"))
+func (mv *MapView) IsUserLocationVisible() bool {
+	_r := objc.Send[bool](objref.IDOf(mv), objc.RegisterName("isUserLocationVisible"))
 	return _r
 }
 
 // Annotations wraps the corresponding Objective-C method.
-func (x *MapView) Annotations() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("annotations"))
+func (mv *MapView) Annotations() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("annotations"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SelectedAnnotations wraps the corresponding Objective-C method.
-func (x *MapView) SelectedAnnotations() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedAnnotations"))
+func (mv *MapView) SelectedAnnotations() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("selectedAnnotations"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetSelectedAnnotations wraps the corresponding Objective-C method.
-func (x *MapView) SetSelectedAnnotations(selectedAnnotations []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectedAnnotations:"), purego.SliceToNSArray(selectedAnnotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (mv *MapView) SetSelectedAnnotations(selectedAnnotations []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("setSelectedAnnotations:"), purego.SliceToNSArray(selectedAnnotations, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // AnnotationVisibleRect wraps the corresponding Objective-C method.
-func (x *MapView) AnnotationVisibleRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("annotationVisibleRect"))
+func (mv *MapView) AnnotationVisibleRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(mv), objc.RegisterName("annotationVisibleRect"))
 	return _r
 }
 
 // AddOverlaysLevel adds an array of overlay objects to the map at the specified level.
-func (x *MapView) AddOverlaysLevel(overlays []obj.Object, level OverlayLevel) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOverlays:level:"), purego.SliceToNSArray(overlays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), level)
+func (mv *MapView) AddOverlaysLevel(overlays []obj.Object, level OverlayLevel) {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("addOverlays:level:"), purego.SliceToNSArray(overlays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), level)
 }
 
 // RemoveOverlays removes one or more overlay objects from the map.
-func (x *MapView) RemoveOverlays(overlays []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeOverlays:"), purego.SliceToNSArray(overlays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (mv *MapView) RemoveOverlays(overlays []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("removeOverlays:"), purego.SliceToNSArray(overlays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // OverlaysInLevel returns overlay objects in the specified level of the map.
-func (x *MapView) OverlaysInLevel(level OverlayLevel) []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("overlaysInLevel:"), level)
+func (mv *MapView) OverlaysInLevel(level OverlayLevel) []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("overlaysInLevel:"), level)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AddOverlays adds an array of overlay objects to the map.
-func (x *MapView) AddOverlays(overlays []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOverlays:"), purego.SliceToNSArray(overlays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (mv *MapView) AddOverlays(overlays []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("addOverlays:"), purego.SliceToNSArray(overlays, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ExchangeOverlayAtIndexWithOverlayAtIndex exchanges the position of two overlay objects at the specified index.
-func (x *MapView) ExchangeOverlayAtIndexWithOverlayAtIndex(index1 int, index2 int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exchangeOverlayAtIndex:withOverlayAtIndex:"), index1, index2)
+func (mv *MapView) ExchangeOverlayAtIndexWithOverlayAtIndex(index1 int, index2 int) {
+	objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("exchangeOverlayAtIndex:withOverlayAtIndex:"), index1, index2)
 }
 
 // Overlays wraps the corresponding Objective-C method.
-func (x *MapView) Overlays() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("overlays"))
+func (mv *MapView) Overlays() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mv), objc.RegisterName("overlays"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// MapViewable is the interface implemented by [MapView], for mocking and DI.
-type MapViewable interface {
-	obj.Object
-	WithMapType(mapType MapType) *MapView
-	WithPreferredConfiguration(preferredConfiguration MapConfigurationProvider) *MapView
-	WithCamera(camera *MapCamera) *MapView
-	WithCameraZoomRange(cameraZoomRange *MapCameraZoomRange) *MapView
-	WithCameraBoundary(cameraBoundary *MapCameraBoundary) *MapView
-	WithZoomEnabled(zoomEnabled bool) *MapView
-	WithScrollEnabled(scrollEnabled bool) *MapView
-	WithRotateEnabled(rotateEnabled bool) *MapView
-	WithPitchEnabled(pitchEnabled bool) *MapView
-	WithShowsUserTrackingButton(showsUserTrackingButton bool) *MapView
-	WithPitchButtonVisibility(pitchButtonVisibility FeatureVisibility) *MapView
-	WithShowsPitchControl(showsPitchControl bool) *MapView
-	WithShowsZoomControls(showsZoomControls bool) *MapView
-	WithShowsCompass(showsCompass bool) *MapView
-	WithShowsScale(showsScale bool) *MapView
-	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *MapView
-	WithShowsPointsOfInterest(showsPointsOfInterest bool) *MapView
-	WithShowsBuildings(showsBuildings bool) *MapView
-	WithShowsTraffic(showsTraffic bool) *MapView
-	WithShowsUserLocation(showsUserLocation bool) *MapView
-	WithUserTrackingMode(userTrackingMode UserTrackingMode) *MapView
-	SetCameraAnimated(camera *MapCamera, animated bool)
-	SetCameraZoomRangeAnimated(cameraZoomRange *MapCameraZoomRange, animated bool)
-	SetCameraBoundaryAnimated(cameraBoundary *MapCameraBoundary, animated bool)
-	SetUserTrackingModeAnimated(mode UserTrackingMode, animated bool)
-	AddAnnotations(annotations []obj.Object)
-	RemoveAnnotations(annotations []obj.Object)
-	DequeueReusableAnnotationViewWithIdentifier(identifier string) *AnnotationView
-	ShowAnnotationsAnimated(annotations []obj.Object, animated bool)
-	MapType() MapType
-	SetMapType(mapType MapType)
-	PreferredConfiguration() *MapConfiguration
-	SetPreferredConfiguration(preferredConfiguration *MapConfiguration)
-	Camera() *MapCamera
-	SetCamera(camera *MapCamera)
-	CameraZoomRange() *MapCameraZoomRange
-	SetCameraZoomRange(cameraZoomRange *MapCameraZoomRange)
-	CameraBoundary() *MapCameraBoundary
-	SetCameraBoundary(cameraBoundary *MapCameraBoundary)
-	IsZoomEnabled() bool
-	SetZoomEnabled(zoomEnabled bool)
-	IsScrollEnabled() bool
-	SetScrollEnabled(scrollEnabled bool)
-	IsRotateEnabled() bool
-	SetRotateEnabled(rotateEnabled bool)
-	IsPitchEnabled() bool
-	SetPitchEnabled(pitchEnabled bool)
-	ShowsUserTrackingButton() bool
-	SetShowsUserTrackingButton(showsUserTrackingButton bool)
-	PitchButtonVisibility() FeatureVisibility
-	SetPitchButtonVisibility(pitchButtonVisibility FeatureVisibility)
-	ShowsPitchControl() bool
-	SetShowsPitchControl(showsPitchControl bool)
-	ShowsZoomControls() bool
-	SetShowsZoomControls(showsZoomControls bool)
-	ShowsCompass() bool
-	SetShowsCompass(showsCompass bool)
-	ShowsScale() bool
-	SetShowsScale(showsScale bool)
-	PointOfInterestFilter() *PointOfInterestFilter
-	SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter)
-	ShowsPointsOfInterest() bool
-	SetShowsPointsOfInterest(showsPointsOfInterest bool)
-	ShowsBuildings() bool
-	SetShowsBuildings(showsBuildings bool)
-	ShowsTraffic() bool
-	SetShowsTraffic(showsTraffic bool)
-	ShowsUserLocation() bool
-	SetShowsUserLocation(showsUserLocation bool)
-	UserLocation() *UserLocation
-	UserTrackingMode() UserTrackingMode
-	SetUserTrackingMode(userTrackingMode UserTrackingMode)
-	IsUserLocationVisible() bool
-	Annotations() []obj.Object
-	SelectedAnnotations() []obj.Object
-	SetSelectedAnnotations(selectedAnnotations []obj.Object)
-	AnnotationVisibleRect() corefoundation.CGRect
-	AddOverlaysLevel(overlays []obj.Object, level OverlayLevel)
-	RemoveOverlays(overlays []obj.Object)
-	OverlaysInLevel(level OverlayLevel) []obj.Object
-	AddOverlays(overlays []obj.Object)
-	ExchangeOverlayAtIndexWithOverlayAtIndex(index1 int, index2 int)
-	Overlays() []obj.Object
-}
-
-var _ MapViewable = (*MapView)(nil)

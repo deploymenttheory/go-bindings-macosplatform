@@ -51,24 +51,15 @@ func NewMTRNetworkCommissioningClusterNetworkInfo() *MTRNetworkCommissioningClus
 }
 
 // WithNetworkID sets the property and returns the receiver so calls can be chained.
-func (x *MTRNetworkCommissioningClusterNetworkInfo) WithNetworkID(networkID obj.Object) *MTRNetworkCommissioningClusterNetworkInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkID:"), objref.IDOf(networkID))
-	return x
+func (mnccni *MTRNetworkCommissioningClusterNetworkInfo) WithNetworkID(networkID obj.Object) *MTRNetworkCommissioningClusterNetworkInfo {
+	objc.Send[objc.ID](objref.IDOf(mnccni), objc.RegisterName("setNetworkID:"), objref.IDOf(networkID))
+	return mnccni
 }
 
 // WithConnected sets the property and returns the receiver so calls can be chained.
-func (x *MTRNetworkCommissioningClusterNetworkInfo) WithConnected(connected obj.Object) *MTRNetworkCommissioningClusterNetworkInfo {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnected:"), objref.IDOf(connected))
-	return x
+func (mnccni *MTRNetworkCommissioningClusterNetworkInfo) WithConnected(connected obj.Object) *MTRNetworkCommissioningClusterNetworkInfo {
+	objc.Send[objc.ID](objref.IDOf(mnccni), objc.RegisterName("setConnected:"), objref.IDOf(connected))
+	return mnccni
 }
-
-// MTRNetworkCommissioningClusterNetworkInfoable is the interface implemented by [MTRNetworkCommissioningClusterNetworkInfo], for mocking and DI.
-type MTRNetworkCommissioningClusterNetworkInfoable interface {
-	obj.Object
-	WithNetworkID(networkID obj.Object) *MTRNetworkCommissioningClusterNetworkInfo
-	WithConnected(connected obj.Object) *MTRNetworkCommissioningClusterNetworkInfo
-}
-
-var _ MTRNetworkCommissioningClusterNetworkInfoable = (*MTRNetworkCommissioningClusterNetworkInfo)(nil)
 
 var _ MTRNetworkCommissioningClusterNetworkInfoStructProvider = (*MTRNetworkCommissioningClusterNetworkInfo)(nil)

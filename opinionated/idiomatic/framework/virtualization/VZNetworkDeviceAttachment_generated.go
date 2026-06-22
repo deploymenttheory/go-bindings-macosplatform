@@ -48,36 +48,29 @@ func networkDeviceAttachmentAdopt(id objc.ID) *NetworkDeviceAttachment {
 }
 
 // Description returns the object's -description text.
-func (x *NetworkDeviceAttachment) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nda *NetworkDeviceAttachment) Description() string {
+	return rt.Description(objref.IDOf(nda))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NetworkDeviceAttachment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nda *NetworkDeviceAttachment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nda), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NetworkDeviceAttachment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nda *NetworkDeviceAttachment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nda), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NetworkDeviceAttachment) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nda *NetworkDeviceAttachment) String() string {
+	return rt.Description(objref.IDOf(nda))
 }
-
-// NetworkDeviceAttachmentable is the interface implemented by [NetworkDeviceAttachment], for mocking and DI.
-type NetworkDeviceAttachmentable interface {
-	obj.Object
-}
-
-var _ NetworkDeviceAttachmentable = (*NetworkDeviceAttachment)(nil)
 
 // isNetworkDeviceAttachment marks NetworkDeviceAttachment — and, by embedding promotion, its
 // subclasses — as a member of the NetworkDeviceAttachment hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NetworkDeviceAttachment) isNetworkDeviceAttachment() {}
+func (nda *NetworkDeviceAttachment) isNetworkDeviceAttachment() {}
 
 var _ NetworkDeviceAttachmentProvider = (*NetworkDeviceAttachment)(nil)

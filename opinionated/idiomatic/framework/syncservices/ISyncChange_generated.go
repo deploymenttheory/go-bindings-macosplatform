@@ -44,24 +44,24 @@ func iSyncChangeAdopt(id objc.ID) *ISyncChange {
 }
 
 // Description returns the object's -description text.
-func (x *ISyncChange) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (isc *ISyncChange) Description() string {
+	return rt.Description(objref.IDOf(isc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ISyncChange) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (isc *ISyncChange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(isc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ISyncChange) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (isc *ISyncChange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(isc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ISyncChange) String() string {
-	return rt.Description(objref.IDOf(x))
+func (isc *ISyncChange) String() string {
+	return rt.Description(objref.IDOf(isc))
 }
 
 // NewISyncChangeWithChangeTypeRecordIdentifierChanges creates a new ISyncChange.
@@ -72,14 +72,14 @@ func NewISyncChangeWithChangeTypeRecordIdentifierChanges(type_ int, recordIdenti
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *ISyncChange) Type() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("type"))
+func (isc *ISyncChange) Type() int {
+	_r := objc.Send[int](objref.IDOf(isc), objc.RegisterName("type"))
 	return _r
 }
 
 // RecordIdentifier wraps the corresponding Objective-C method.
-func (x *ISyncChange) RecordIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordIdentifier"))
+func (isc *ISyncChange) RecordIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("recordIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -87,24 +87,13 @@ func (x *ISyncChange) RecordIdentifier() string {
 }
 
 // Record wraps the corresponding Objective-C method.
-func (x *ISyncChange) Record() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("record"))
+func (isc *ISyncChange) Record() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("record"))
 	return obj.Wrap(_r)
 }
 
 // Changes wraps the corresponding Objective-C method.
-func (x *ISyncChange) Changes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changes"))
+func (isc *ISyncChange) Changes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(isc), objc.RegisterName("changes"))
 	return obj.Wrap(_r)
 }
-
-// ISyncChangeable is the interface implemented by [ISyncChange], for mocking and DI.
-type ISyncChangeable interface {
-	obj.Object
-	Type() int
-	RecordIdentifier() string
-	Record() obj.Object
-	Changes() obj.Object
-}
-
-var _ ISyncChangeable = (*ISyncChange)(nil)

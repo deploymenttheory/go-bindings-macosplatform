@@ -53,24 +53,15 @@ func NewPersistentCloudKitContainerEventResult() *PersistentCloudKitContainerEve
 }
 
 // Result wraps the corresponding Objective-C method.
-func (x *PersistentCloudKitContainerEventResult) Result() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("result"))
+func (pckcer *PersistentCloudKitContainerEventResult) Result() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pckcer), objc.RegisterName("result"))
 	return obj.Wrap(_r)
 }
 
 // ResultType wraps the corresponding Objective-C method.
-func (x *PersistentCloudKitContainerEventResult) ResultType() PersistentCloudKitContainerEventResultType {
-	_r := objc.Send[PersistentCloudKitContainerEventResultType](objref.IDOf(x), objc.RegisterName("resultType"))
+func (pckcer *PersistentCloudKitContainerEventResult) ResultType() PersistentCloudKitContainerEventResultType {
+	_r := objc.Send[PersistentCloudKitContainerEventResultType](objref.IDOf(pckcer), objc.RegisterName("resultType"))
 	return _r
 }
-
-// PersistentCloudKitContainerEventResultable is the interface implemented by [PersistentCloudKitContainerEventResult], for mocking and DI.
-type PersistentCloudKitContainerEventResultable interface {
-	obj.Object
-	Result() obj.Object
-	ResultType() PersistentCloudKitContainerEventResultType
-}
-
-var _ PersistentCloudKitContainerEventResultable = (*PersistentCloudKitContainerEventResult)(nil)
 
 var _ PersistentStoreResultProvider = (*PersistentCloudKitContainerEventResult)(nil)

@@ -6,6 +6,7 @@ package devicecheck
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func deviceAdopt(id objc.ID) *Device {
 }
 
 // Description returns the object's -description text.
-func (x *Device) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Device) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Device) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Device) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Device) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Device) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Device) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Device) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // NewDevice creates a new Device.
@@ -77,7 +78,7 @@ func NewDevice() *Device {
 // GenerateToken generates a token that identifies the current device.
 //
 // GenerateToken blocks until the operation completes or ctx is cancelled.
-func (x *Device) GenerateToken(ctx context.Context) (result obj.Object, err error) {
+func (d *Device) GenerateToken(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -89,7 +90,7 @@ func (x *Device) GenerateToken(ctx context.Context) (result obj.Object, err erro
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("generateTokenWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("generateTokenWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -99,17 +100,8 @@ func (x *Device) GenerateToken(ctx context.Context) (result obj.Object, err erro
 	}
 }
 
-// IsSupported a Boolean value that indicates whether the device supports the DeviceCheck API.
-func (x *Device) IsSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSupported"))
+// IsSupported reports whether the device supports the DeviceCheck API.
+func (d *Device) IsSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isSupported"))
 	return _r
 }
-
-// Deviceable is the interface implemented by [Device], for mocking and DI.
-type Deviceable interface {
-	obj.Object
-	GenerateToken(ctx context.Context) (obj.Object, error)
-	IsSupported() bool
-}
-
-var _ Deviceable = (*Device)(nil)

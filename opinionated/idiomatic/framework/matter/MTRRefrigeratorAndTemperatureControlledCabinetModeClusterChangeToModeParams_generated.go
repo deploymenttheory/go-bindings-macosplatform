@@ -44,24 +44,24 @@ func mTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams
 }
 
 // Description returns the object's -description text.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mratccmcctmp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) Description() string {
+	return rt.Description(objref.IDOf(mratccmcctmp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mratccmcctmp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mratccmcctmp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mratccmcctmp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mratccmcctmp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mratccmcctmp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) String() string {
+	return rt.Description(objref.IDOf(mratccmcctmp))
 }
 
 // NewMTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams creates a new MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams.
@@ -71,68 +71,37 @@ func NewMTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModePar
 }
 
 // WithNewMode sets the property and returns the receiver so calls can be chained.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
-	return x
+func (mratccmcctmp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(mratccmcctmp), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
+	return mratccmcctmp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mratccmcctmp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(mratccmcctmp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mratccmcctmp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mratccmcctmp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(mratccmcctmp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mratccmcctmp
 }
 
 // GetNewMode wraps the corresponding Objective-C method.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) GetNewMode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewMode"))
+func (mratccmcctmp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) GetNewMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mratccmcctmp), objc.RegisterName("getNewMode"))
 	return obj.Wrap(_r)
 }
 
-// SetNewMode wraps the corresponding Objective-C method.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) SetNewMode(newMode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mratccmcctmp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mratccmcctmp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mratccmcctmp *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mratccmcctmp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParamsable is the interface implemented by [MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams], for mocking and DI.
-type MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParamsable interface {
-	obj.Object
-	WithNewMode(newMode obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams
-	GetNewMode() obj.Object
-	SetNewMode(newMode obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParamsable = (*MTRRefrigeratorAndTemperatureControlledCabinetModeClusterChangeToModeParams)(nil)

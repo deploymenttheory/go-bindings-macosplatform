@@ -46,24 +46,24 @@ func searchElementAdopt(id objc.ID) *SearchElement {
 }
 
 // Description returns the object's -description text.
-func (x *SearchElement) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (se *SearchElement) Description() string {
+	return rt.Description(objref.IDOf(se))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SearchElement) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (se *SearchElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(se), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SearchElement) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (se *SearchElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(se), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SearchElement) String() string {
-	return rt.Description(objref.IDOf(x))
+func (se *SearchElement) String() string {
+	return rt.Description(objref.IDOf(se))
 }
 
 // NewSearchElement creates a new SearchElement.
@@ -73,15 +73,7 @@ func NewSearchElement() *SearchElement {
 }
 
 // MatchesRecord tests whether or not a record matches a search element.
-func (x *SearchElement) MatchesRecord(record *Record) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("matchesRecord:"), objref.IDOf(record))
+func (se *SearchElement) MatchesRecord(record *Record) bool {
+	_r := objc.Send[bool](objref.IDOf(se), objc.RegisterName("matchesRecord:"), objref.IDOf(record))
 	return _r
 }
-
-// SearchElementable is the interface implemented by [SearchElement], for mocking and DI.
-type SearchElementable interface {
-	obj.Object
-	MatchesRecord(record *Record) bool
-}
-
-var _ SearchElementable = (*SearchElement)(nil)

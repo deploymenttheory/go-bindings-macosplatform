@@ -6,6 +6,7 @@ package classkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func dataStoreAdopt(id objc.ID) *DataStore {
 }
 
 // Description returns the object's -description text.
-func (x *DataStore) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ds *DataStore) Description() string {
+	return rt.Description(objref.IDOf(ds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DataStore) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ds *DataStore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DataStore) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ds *DataStore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DataStore) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ds *DataStore) String() string {
+	return rt.Description(objref.IDOf(ds))
 }
 
 // NewDataStore creates a new DataStore.
@@ -77,14 +78,14 @@ func NewDataStore() *DataStore {
 // SaveWithCompletion saves any changes you’ve made in the data store.
 //
 // SaveWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *DataStore) SaveWithCompletion(ctx context.Context) error {
+func (ds *DataStore) SaveWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("saveWithCompletion:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -94,32 +95,32 @@ func (x *DataStore) SaveWithCompletion(ctx context.Context) error {
 }
 
 // CompleteAllAssignedActivitiesMatching marks all of the assigned and active activities for the given context path as complete.
-func (x *DataStore) CompleteAllAssignedActivitiesMatching(contextPath []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completeAllAssignedActivitiesMatching:"), purego.SliceToNSArray(contextPath, func(_v string) objc.ID { return purego.NSString(_v) }))
+func (ds *DataStore) CompleteAllAssignedActivitiesMatching(contextPath []string) {
+	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("completeAllAssignedActivitiesMatching:"), purego.SliceToNSArray(contextPath, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// MainAppContext fetch the top level context for the current app. The main context is automatically created. Add child contexts to this context to persist them in the data store.
-func (x *DataStore) MainAppContext() *Context {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mainAppContext"))
+// MainAppContext returns fetch the top level context for the current app. The main context is automatically created. Add child contexts to this context to persist them in the data store.
+func (ds *DataStore) MainAppContext() *Context {
+	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("mainAppContext"))
 	return ContextFromID(_r)
 }
 
 // ActiveContext returns the context that is currently active. If no context is active, this will return nil.
-func (x *DataStore) ActiveContext() *Context {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeContext"))
+func (ds *DataStore) ActiveContext() *Context {
+	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("activeContext"))
 	return ContextFromID(_r)
 }
 
 // RunningActivity returns the most recently started activity that is running.
-func (x *DataStore) RunningActivity() *Activity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runningActivity"))
+func (ds *DataStore) RunningActivity() *Activity {
+	_r := objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("runningActivity"))
 	return ActivityFromID(_r)
 }
 
 // ContextsMatchingPredicateCompletion fetches all the contexts matching a predicate.
 //
 // ContextsMatchingPredicateCompletion blocks until the operation completes or ctx is cancelled.
-func (x *DataStore) ContextsMatchingPredicateCompletion(ctx context.Context, predicate obj.Object) (result obj.Object, err error) {
+func (ds *DataStore) ContextsMatchingPredicateCompletion(ctx context.Context, predicate obj.Object) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -131,7 +132,7 @@ func (x *DataStore) ContextsMatchingPredicateCompletion(ctx context.Context, pre
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contextsMatchingPredicate:completion:"), objref.IDOf(predicate), _block)
+	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("contextsMatchingPredicate:completion:"), objref.IDOf(predicate), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -144,7 +145,7 @@ func (x *DataStore) ContextsMatchingPredicateCompletion(ctx context.Context, pre
 // ContextsMatchingIdentifierPathCompletion fetches all the contexts along a given identifier path.
 //
 // ContextsMatchingIdentifierPathCompletion blocks until the operation completes or ctx is cancelled.
-func (x *DataStore) ContextsMatchingIdentifierPathCompletion(ctx context.Context, identifierPath []string) (result obj.Object, err error) {
+func (ds *DataStore) ContextsMatchingIdentifierPathCompletion(ctx context.Context, identifierPath []string) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -156,7 +157,7 @@ func (x *DataStore) ContextsMatchingIdentifierPathCompletion(ctx context.Context
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contextsMatchingIdentifierPath:completion:"), purego.SliceToNSArray(identifierPath, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
+	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("contextsMatchingIdentifierPath:completion:"), purego.SliceToNSArray(identifierPath, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -167,14 +168,14 @@ func (x *DataStore) ContextsMatchingIdentifierPathCompletion(ctx context.Context
 }
 
 // RemoveContext marks a context for removal.
-func (x *DataStore) RemoveContext(context_ *Context) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeContext:"), objref.IDOf(context_))
+func (ds *DataStore) RemoveContext(context_ *Context) {
+	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("removeContext:"), objref.IDOf(context_))
 }
 
 // FetchActivityForURLCompletion fetches an activity for a given document so you can record progress on the associated task.
 //
 // FetchActivityForURLCompletion blocks until the operation completes or ctx is cancelled.
-func (x *DataStore) FetchActivityForURLCompletion(ctx context.Context, url string) (result *Activity, err error) {
+func (ds *DataStore) FetchActivityForURLCompletion(ctx context.Context, url string) (result *Activity, err error) {
 	type _result struct {
 		val *Activity
 		err error
@@ -186,7 +187,7 @@ func (x *DataStore) FetchActivityForURLCompletion(ctx context.Context, url strin
 		_o.val = ActivityFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchActivityForURL:completion:"), rt.FileURL(url), _block)
+	objc.Send[objc.ID](objref.IDOf(ds), objc.RegisterName("fetchActivityForURL:completion:"), rt.FileURL(url), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -195,19 +196,3 @@ func (x *DataStore) FetchActivityForURLCompletion(ctx context.Context, url strin
 		return _zero, ctx.Err()
 	}
 }
-
-// DataStoreable is the interface implemented by [DataStore], for mocking and DI.
-type DataStoreable interface {
-	obj.Object
-	SaveWithCompletion(ctx context.Context) error
-	CompleteAllAssignedActivitiesMatching(contextPath []string)
-	MainAppContext() *Context
-	ActiveContext() *Context
-	RunningActivity() *Activity
-	ContextsMatchingPredicateCompletion(ctx context.Context, predicate obj.Object) (obj.Object, error)
-	ContextsMatchingIdentifierPathCompletion(ctx context.Context, identifierPath []string) (obj.Object, error)
-	RemoveContext(context_ *Context)
-	FetchActivityForURLCompletion(ctx context.Context, url string) (*Activity, error)
-}
-
-var _ DataStoreable = (*DataStore)(nil)

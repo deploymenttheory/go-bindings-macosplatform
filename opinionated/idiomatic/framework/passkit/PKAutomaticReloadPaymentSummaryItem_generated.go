@@ -52,52 +52,34 @@ func NewAutomaticReloadPaymentSummaryItem() *AutomaticReloadPaymentSummaryItem {
 	return automaticReloadPaymentSummaryItemAdopt(_id)
 }
 
-// WithThresholdAmount the balance an account reaches before you apply the automatic reload amount.
-func (x *AutomaticReloadPaymentSummaryItem) WithThresholdAmount(thresholdAmount obj.Object) *AutomaticReloadPaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThresholdAmount:"), objref.IDOf(thresholdAmount))
-	return x
+// WithThresholdAmount sets the balance an account reaches before you apply the automatic reload amount.
+func (arpsi *AutomaticReloadPaymentSummaryItem) WithThresholdAmount(thresholdAmount obj.Object) *AutomaticReloadPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(arpsi), objc.RegisterName("setThresholdAmount:"), objref.IDOf(thresholdAmount))
+	return arpsi
 }
 
-// WithLabel a short, localized description of the item.
-func (x *AutomaticReloadPaymentSummaryItem) WithLabel(label string) *AutomaticReloadPaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a short, localized description of the item.
+func (arpsi *AutomaticReloadPaymentSummaryItem) WithLabel(label string) *AutomaticReloadPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(arpsi), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return arpsi
 }
 
-// WithAmount the summary item’s amount.
-func (x *AutomaticReloadPaymentSummaryItem) WithAmount(amount obj.Object) *AutomaticReloadPaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAmount:"), objref.IDOf(amount))
-	return x
+// WithAmount sets the summary item’s amount.
+func (arpsi *AutomaticReloadPaymentSummaryItem) WithAmount(amount obj.Object) *AutomaticReloadPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(arpsi), objc.RegisterName("setAmount:"), objref.IDOf(amount))
+	return arpsi
 }
 
-// WithType the summary item’s type that indicates whether the amount is final.
-func (x *AutomaticReloadPaymentSummaryItem) WithType(type_ PaymentSummaryItemType) *AutomaticReloadPaymentSummaryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the summary item’s type that indicates whether the amount is final.
+func (arpsi *AutomaticReloadPaymentSummaryItem) WithType(type_ PaymentSummaryItemType) *AutomaticReloadPaymentSummaryItem {
+	objc.Send[objc.ID](objref.IDOf(arpsi), objc.RegisterName("setType:"), type_)
+	return arpsi
 }
 
 // ThresholdAmount wraps the corresponding Objective-C method.
-func (x *AutomaticReloadPaymentSummaryItem) ThresholdAmount() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("thresholdAmount"))
+func (arpsi *AutomaticReloadPaymentSummaryItem) ThresholdAmount() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(arpsi), objc.RegisterName("thresholdAmount"))
 	return obj.Wrap(_r)
 }
-
-// SetThresholdAmount wraps the corresponding Objective-C method.
-func (x *AutomaticReloadPaymentSummaryItem) SetThresholdAmount(thresholdAmount obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThresholdAmount:"), objref.IDOf(thresholdAmount))
-}
-
-// AutomaticReloadPaymentSummaryItemable is the interface implemented by [AutomaticReloadPaymentSummaryItem], for mocking and DI.
-type AutomaticReloadPaymentSummaryItemable interface {
-	obj.Object
-	WithThresholdAmount(thresholdAmount obj.Object) *AutomaticReloadPaymentSummaryItem
-	WithLabel(label string) *AutomaticReloadPaymentSummaryItem
-	WithAmount(amount obj.Object) *AutomaticReloadPaymentSummaryItem
-	WithType(type_ PaymentSummaryItemType) *AutomaticReloadPaymentSummaryItem
-	ThresholdAmount() obj.Object
-	SetThresholdAmount(thresholdAmount obj.Object)
-}
-
-var _ AutomaticReloadPaymentSummaryItemable = (*AutomaticReloadPaymentSummaryItem)(nil)
 
 var _ PaymentSummaryItemProvider = (*AutomaticReloadPaymentSummaryItem)(nil)

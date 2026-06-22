@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,74 +52,58 @@ func NewNNAdditionGradientNode() *NNAdditionGradientNode {
 }
 
 // WithPrimaryScale sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionGradientNode) WithPrimaryScale(primaryScale float32) *NNAdditionGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
-	return x
+func (nagn *NNAdditionGradientNode) WithPrimaryScale(primaryScale float32) *NNAdditionGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setPrimaryScale:"), primaryScale)
+	return nagn
 }
 
 // WithSecondaryScale sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionGradientNode) WithSecondaryScale(secondaryScale float32) *NNAdditionGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
-	return x
+func (nagn *NNAdditionGradientNode) WithSecondaryScale(secondaryScale float32) *NNAdditionGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setSecondaryScale:"), secondaryScale)
+	return nagn
 }
 
 // WithBias sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionGradientNode) WithBias(bias float32) *NNAdditionGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
-	return x
+func (nagn *NNAdditionGradientNode) WithBias(bias float32) *NNAdditionGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setBias:"), bias)
+	return nagn
 }
 
 // WithSecondaryStrideInPixelsX sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionGradientNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNAdditionGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
-	return x
+func (nagn *NNAdditionGradientNode) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNAdditionGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
+	return nagn
 }
 
 // WithSecondaryStrideInPixelsY sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionGradientNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNAdditionGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
-	return x
+func (nagn *NNAdditionGradientNode) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNAdditionGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
+	return nagn
 }
 
 // WithSecondaryStrideInFeatureChannels sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionGradientNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNAdditionGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
-	return x
+func (nagn *NNAdditionGradientNode) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNAdditionGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
+	return nagn
 }
 
 // WithMinimumValue sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionGradientNode) WithMinimumValue(minimumValue float32) *NNAdditionGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
-	return x
+func (nagn *NNAdditionGradientNode) WithMinimumValue(minimumValue float32) *NNAdditionGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setMinimumValue:"), minimumValue)
+	return nagn
 }
 
 // WithMaximumValue sets the property and returns the receiver so calls can be chained.
-func (x *NNAdditionGradientNode) WithMaximumValue(maximumValue float32) *NNAdditionGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
-	return x
+func (nagn *NNAdditionGradientNode) WithMaximumValue(maximumValue float32) *NNAdditionGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setMaximumValue:"), maximumValue)
+	return nagn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNAdditionGradientNode) WithLabel(label string) *NNAdditionGradientNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nagn *NNAdditionGradientNode) WithLabel(label string) *NNAdditionGradientNode {
+	objc.Send[objc.ID](objref.IDOf(nagn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nagn
 }
-
-// NNAdditionGradientNodeable is the interface implemented by [NNAdditionGradientNode], for mocking and DI.
-type NNAdditionGradientNodeable interface {
-	obj.Object
-	WithPrimaryScale(primaryScale float32) *NNAdditionGradientNode
-	WithSecondaryScale(secondaryScale float32) *NNAdditionGradientNode
-	WithBias(bias float32) *NNAdditionGradientNode
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNAdditionGradientNode
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNAdditionGradientNode
-	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNAdditionGradientNode
-	WithMinimumValue(minimumValue float32) *NNAdditionGradientNode
-	WithMaximumValue(maximumValue float32) *NNAdditionGradientNode
-	WithLabel(label string) *NNAdditionGradientNode
-}
-
-var _ NNAdditionGradientNodeable = (*NNAdditionGradientNode)(nil)
 
 var _ NNArithmeticGradientNodeProvider = (*NNAdditionGradientNode)(nil)
 

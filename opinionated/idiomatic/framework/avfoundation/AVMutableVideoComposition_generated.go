@@ -53,141 +53,69 @@ func NewMutableVideoComposition() *MutableVideoComposition {
 	return mutableVideoCompositionAdopt(_id)
 }
 
-// WithSourceTrackIDForFrameTiming an identifier of the source track from which the video composition derives frame timing.
-func (x *MutableVideoComposition) WithSourceTrackIDForFrameTiming(sourceTrackIDForFrameTiming int32) *MutableVideoComposition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceTrackIDForFrameTiming:"), sourceTrackIDForFrameTiming)
-	return x
+// WithSourceTrackIDForFrameTiming sets an identifier of the source track from which the video composition derives frame timing.
+func (mvc *MutableVideoComposition) WithSourceTrackIDForFrameTiming(sourceTrackIDForFrameTiming int32) *MutableVideoComposition {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setSourceTrackIDForFrameTiming:"), sourceTrackIDForFrameTiming)
+	return mvc
 }
 
-// WithRenderSize the size at which the video composition should render.
-func (x *MutableVideoComposition) WithRenderSize(renderSize corefoundation.CGSize) *MutableVideoComposition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderSize:"), renderSize)
-	return x
+// WithRenderSize sets the size at which the video composition should render.
+func (mvc *MutableVideoComposition) WithRenderSize(renderSize corefoundation.CGSize) *MutableVideoComposition {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setRenderSize:"), renderSize)
+	return mvc
 }
 
-// WithRenderScale the scale at which the video composition should render.
-func (x *MutableVideoComposition) WithRenderScale(renderScale float32) *MutableVideoComposition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderScale:"), renderScale)
-	return x
+// WithRenderScale sets the scale at which the video composition should render.
+func (mvc *MutableVideoComposition) WithRenderScale(renderScale float32) *MutableVideoComposition {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setRenderScale:"), renderScale)
+	return mvc
 }
 
-// WithAnimationTool a video composition tool to use with Core Animation in offline rendering.
-func (x *MutableVideoComposition) WithAnimationTool(animationTool *VideoCompositionCoreAnimationTool) *MutableVideoComposition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationTool:"), objref.IDOf(animationTool))
-	return x
+// WithAnimationTool sets a video composition tool to use with Core Animation in offline rendering.
+func (mvc *MutableVideoComposition) WithAnimationTool(animationTool *VideoCompositionCoreAnimationTool) *MutableVideoComposition {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setAnimationTool:"), objref.IDOf(animationTool))
+	return mvc
 }
 
-// WithSourceSampleDataTrackIDs the identifiers of source sample data tracks in the composition that the object requires to compose frames.
-func (x *MutableVideoComposition) WithSourceSampleDataTrackIDs(items ...obj.Object) *MutableVideoComposition {
+// WithSourceSampleDataTrackIDs sets the identifiers of source sample data tracks in the composition that the object requires to compose frames.
+func (mvc *MutableVideoComposition) WithSourceSampleDataTrackIDs(items ...obj.Object) *MutableVideoComposition {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceSampleDataTrackIDs:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setSourceSampleDataTrackIDs:"), _arr)
+	return mvc
 }
 
-// WithColorPrimaries the color primaries used for video composition.
-func (x *MutableVideoComposition) WithColorPrimaries(colorPrimaries string) *MutableVideoComposition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorPrimaries:"), purego.NSString(colorPrimaries))
-	return x
+// WithColorPrimaries sets the color primaries used for video composition.
+func (mvc *MutableVideoComposition) WithColorPrimaries(colorPrimaries string) *MutableVideoComposition {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setColorPrimaries:"), purego.NSString(colorPrimaries))
+	return mvc
 }
 
-// WithColorYCbCrMatrix the YCbCr matrix used for video composition.
-func (x *MutableVideoComposition) WithColorYCbCrMatrix(colorYCbCrMatrix string) *MutableVideoComposition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorYCbCrMatrix:"), purego.NSString(colorYCbCrMatrix))
-	return x
+// WithColorYCbCrMatrix sets the YCbCr matrix used for video composition.
+func (mvc *MutableVideoComposition) WithColorYCbCrMatrix(colorYCbCrMatrix string) *MutableVideoComposition {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setColorYCbCrMatrix:"), purego.NSString(colorYCbCrMatrix))
+	return mvc
 }
 
-// WithColorTransferFunction the transfer function used for video composition.
-func (x *MutableVideoComposition) WithColorTransferFunction(colorTransferFunction string) *MutableVideoComposition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorTransferFunction:"), purego.NSString(colorTransferFunction))
-	return x
+// WithColorTransferFunction sets the transfer function used for video composition.
+func (mvc *MutableVideoComposition) WithColorTransferFunction(colorTransferFunction string) *MutableVideoComposition {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setColorTransferFunction:"), purego.NSString(colorTransferFunction))
+	return mvc
 }
 
-// WithPerFrameHDRDisplayMetadataPolicy configures the policy for display of HDR display metadata on the rendered frame.
-func (x *MutableVideoComposition) WithPerFrameHDRDisplayMetadataPolicy(perFrameHDRDisplayMetadataPolicy obj.Object) *MutableVideoComposition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerFrameHDRDisplayMetadataPolicy:"), objref.IDOf(perFrameHDRDisplayMetadataPolicy))
-	return x
-}
-
-// SetSourceTrackIDForFrameTiming wraps the corresponding Objective-C method.
-func (x *MutableVideoComposition) SetSourceTrackIDForFrameTiming(sourceTrackIDForFrameTiming int32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceTrackIDForFrameTiming:"), sourceTrackIDForFrameTiming)
-}
-
-// SetRenderSize wraps the corresponding Objective-C method.
-func (x *MutableVideoComposition) SetRenderSize(renderSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderSize:"), renderSize)
-}
-
-// SetRenderScale wraps the corresponding Objective-C method.
-func (x *MutableVideoComposition) SetRenderScale(renderScale float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderScale:"), renderScale)
+// WithPerFrameHDRDisplayMetadataPolicy sets configures the policy for display of HDR display metadata on the rendered frame.
+func (mvc *MutableVideoComposition) WithPerFrameHDRDisplayMetadataPolicy(perFrameHDRDisplayMetadataPolicy obj.Object) *MutableVideoComposition {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setPerFrameHDRDisplayMetadataPolicy:"), objref.IDOf(perFrameHDRDisplayMetadataPolicy))
+	return mvc
 }
 
 // SetInstructions wraps the corresponding Objective-C method.
-func (x *MutableVideoComposition) SetInstructions(instructions []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstructions:"), purego.SliceToNSArray(instructions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// SetAnimationTool wraps the corresponding Objective-C method.
-func (x *MutableVideoComposition) SetAnimationTool(animationTool *VideoCompositionCoreAnimationTool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnimationTool:"), objref.IDOf(animationTool))
-}
-
-// SetSourceSampleDataTrackIDs wraps the corresponding Objective-C method.
-func (x *MutableVideoComposition) SetSourceSampleDataTrackIDs(sourceSampleDataTrackIDs []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceSampleDataTrackIDs:"), purego.SliceToNSArray(sourceSampleDataTrackIDs, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (mvc *MutableVideoComposition) SetInstructions(instructions []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setInstructions:"), purego.SliceToNSArray(instructions, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // SetOutputBufferDescription wraps the corresponding Objective-C method.
-func (x *MutableVideoComposition) SetOutputBufferDescription(outputBufferDescription obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputBufferDescription:"), objref.IDOf(outputBufferDescription))
+func (mvc *MutableVideoComposition) SetOutputBufferDescription(outputBufferDescription obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mvc), objc.RegisterName("setOutputBufferDescription:"), objref.IDOf(outputBufferDescription))
 }
-
-// SetColorPrimaries wraps the corresponding Objective-C method.
-func (x *MutableVideoComposition) SetColorPrimaries(colorPrimaries string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorPrimaries:"), purego.NSString(colorPrimaries))
-}
-
-// SetColorYCbCrMatrix wraps the corresponding Objective-C method.
-func (x *MutableVideoComposition) SetColorYCbCrMatrix(colorYCbCrMatrix string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorYCbCrMatrix:"), purego.NSString(colorYCbCrMatrix))
-}
-
-// SetColorTransferFunction wraps the corresponding Objective-C method.
-func (x *MutableVideoComposition) SetColorTransferFunction(colorTransferFunction string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorTransferFunction:"), purego.NSString(colorTransferFunction))
-}
-
-// SetPerFrameHDRDisplayMetadataPolicy wraps the corresponding Objective-C method.
-func (x *MutableVideoComposition) SetPerFrameHDRDisplayMetadataPolicy(perFrameHDRDisplayMetadataPolicy obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPerFrameHDRDisplayMetadataPolicy:"), objref.IDOf(perFrameHDRDisplayMetadataPolicy))
-}
-
-// MutableVideoCompositionable is the interface implemented by [MutableVideoComposition], for mocking and DI.
-type MutableVideoCompositionable interface {
-	obj.Object
-	WithSourceTrackIDForFrameTiming(sourceTrackIDForFrameTiming int32) *MutableVideoComposition
-	WithRenderSize(renderSize corefoundation.CGSize) *MutableVideoComposition
-	WithRenderScale(renderScale float32) *MutableVideoComposition
-	WithAnimationTool(animationTool *VideoCompositionCoreAnimationTool) *MutableVideoComposition
-	WithSourceSampleDataTrackIDs(items ...obj.Object) *MutableVideoComposition
-	WithColorPrimaries(colorPrimaries string) *MutableVideoComposition
-	WithColorYCbCrMatrix(colorYCbCrMatrix string) *MutableVideoComposition
-	WithColorTransferFunction(colorTransferFunction string) *MutableVideoComposition
-	WithPerFrameHDRDisplayMetadataPolicy(perFrameHDRDisplayMetadataPolicy obj.Object) *MutableVideoComposition
-	SetSourceTrackIDForFrameTiming(sourceTrackIDForFrameTiming int32)
-	SetRenderSize(renderSize corefoundation.CGSize)
-	SetRenderScale(renderScale float32)
-	SetInstructions(instructions []obj.Object)
-	SetAnimationTool(animationTool *VideoCompositionCoreAnimationTool)
-	SetSourceSampleDataTrackIDs(sourceSampleDataTrackIDs []obj.Object)
-	SetOutputBufferDescription(outputBufferDescription obj.Object)
-	SetColorPrimaries(colorPrimaries string)
-	SetColorYCbCrMatrix(colorYCbCrMatrix string)
-	SetColorTransferFunction(colorTransferFunction string)
-	SetPerFrameHDRDisplayMetadataPolicy(perFrameHDRDisplayMetadataPolicy obj.Object)
-}
-
-var _ MutableVideoCompositionable = (*MutableVideoComposition)(nil)
 
 var _ VideoCompositionProvider = (*MutableVideoComposition)(nil)

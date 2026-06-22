@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// StandardOptions an object set to the most permissive sharing options. The `standardOptions` has “CKAllowedSharingOptions/allowedParticipantPermissionOptions“ set to “CKSharingParticipantPermissionOption/any“ and “CKAllowedSharingOptions/allowedParticipantAccessOptions“ set to “CKSharingParticipantAccessOption/any“.
+// StandardOptions returns an object set to the most permissive sharing options. The `standardOptions` has “CKAllowedSharingOptions/allowedParticipantPermissionOptions“ set to “CKSharingParticipantPermissionOption/any“ and “CKAllowedSharingOptions/allowedParticipantAccessOptions“ set to “CKSharingParticipantAccessOption/any“.
 func StandardOptions() *AllowedSharingOptions {
 	_r := objc.Send[objc.ID](objc.ID(_class("CKAllowedSharingOptions")), objc.RegisterName("standardOptions"))
 	return AllowedSharingOptionsFromID(_r)
@@ -65,7 +65,7 @@ func DefaultRecordZone() *RecordZone {
 	return RecordZoneFromID(_r)
 }
 
-// OneTimeURLParticipant generate a unique URL for inviting a participant without knowing their handle When a participant's email address / phone number / userRecordID isn't known up-front, you can add a “CKShareParticipant/oneTimeURLParticipant“ to the share. Once you save the share, you can get a custom invitation link or one-time URL for the added participant via “CKShare/oneTimeURL(for:)“. Any recipient user can use this custom link to fetch share metadata and accept the share. Note that a one-time URL participant in the “ParticipantAcceptanceStatus/pending“ state has empty “CKUserIdentity/nameComponents“ and a nil “CKUserIdentity/lookupInfo“.
+// OneTimeURLParticipant returns generate a unique URL for inviting a participant without knowing their handle When a participant's email address / phone number / userRecordID isn't known up-front, you can add a “CKShareParticipant/oneTimeURLParticipant“ to the share. Once you save the share, you can get a custom invitation link or one-time URL for the added participant via “CKShare/oneTimeURL(for:)“. Any recipient user can use this custom link to fetch share metadata and accept the share. Note that a one-time URL participant in the “ParticipantAcceptanceStatus/pending“ state has empty “CKUserIdentity/nameComponents“ and a nil “CKUserIdentity/lookupInfo“.
 func OneTimeURLParticipant() *ShareParticipant {
 	_r := objc.Send[objc.ID](objc.ID(_class("CKShareParticipant")), objc.RegisterName("oneTimeURLParticipant"))
 	return ShareParticipantFromID(_r)

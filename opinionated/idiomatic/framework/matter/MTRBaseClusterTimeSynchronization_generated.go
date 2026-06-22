@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -58,7 +59,7 @@ func NewMTRBaseClusterTimeSynchronizationWithDeviceEndpointIDQueue(device *MTRBa
 // SetTimeZoneWithParamsCompletion command SetTimeZone
 //
 // SetTimeZoneWithParamsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SetTimeZoneWithParamsCompletion(ctx context.Context, params *MTRTimeSynchronizationClusterSetTimeZoneParams) (result *MTRTimeSynchronizationClusterSetTimeZoneResponseParams, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SetTimeZoneWithParamsCompletion(ctx context.Context, params *MTRTimeSynchronizationClusterSetTimeZoneParams) (result *MTRTimeSynchronizationClusterSetTimeZoneResponseParams, err error) {
 	type _result struct {
 		val *MTRTimeSynchronizationClusterSetTimeZoneResponseParams
 		err error
@@ -70,7 +71,7 @@ func (x *MTRBaseClusterTimeSynchronization) SetTimeZoneWithParamsCompletion(ctx 
 		_o.val = MTRTimeSynchronizationClusterSetTimeZoneResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZoneWithParams:completion:"), objref.IDOf(params), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("setTimeZoneWithParams:completion:"), objref.IDOf(params), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -83,7 +84,7 @@ func (x *MTRBaseClusterTimeSynchronization) SetTimeZoneWithParamsCompletion(ctx 
 // ReadAttributeUTCTimeWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeUTCTimeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) ReadAttributeUTCTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeUTCTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -95,7 +96,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeUTCTimeWithCompletion(c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUTCTimeWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("readAttributeUTCTimeWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -108,7 +109,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeUTCTimeWithCompletion(c
 // SubscribeAttributeUTCTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeUTCTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeUTCTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeUTCTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -120,7 +121,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeUTCTimeWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeUTCTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeUTCTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -133,7 +134,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeUTCTimeWithParamsS
 // ReadAttributeGranularityWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeGranularityWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) ReadAttributeGranularityWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeGranularityWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -145,7 +146,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeGranularityWithCompleti
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGranularityWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("readAttributeGranularityWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -158,7 +159,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeGranularityWithCompleti
 // SubscribeAttributeGranularityWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGranularityWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeGranularityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeGranularityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -170,7 +171,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeGranularityWithPar
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGranularityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeGranularityWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -183,7 +184,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeGranularityWithPar
 // ReadAttributeTimeSourceWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTimeSourceWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) ReadAttributeTimeSourceWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeTimeSourceWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -195,7 +196,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeTimeSourceWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTimeSourceWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("readAttributeTimeSourceWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -208,7 +209,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeTimeSourceWithCompletio
 // SubscribeAttributeTimeSourceWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTimeSourceWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeSourceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeSourceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -220,7 +221,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeSourceWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTimeSourceWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeTimeSourceWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -233,7 +234,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeSourceWithPara
 // ReadAttributeTrustedTimeSourceWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTrustedTimeSourceWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) ReadAttributeTrustedTimeSourceWithCompletion(ctx context.Context) (result *MTRTimeSynchronizationClusterTrustedTimeSourceStruct, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeTrustedTimeSourceWithCompletion(ctx context.Context) (result *MTRTimeSynchronizationClusterTrustedTimeSourceStruct, err error) {
 	type _result struct {
 		val *MTRTimeSynchronizationClusterTrustedTimeSourceStruct
 		err error
@@ -245,7 +246,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeTrustedTimeSourceWithCo
 		_o.val = MTRTimeSynchronizationClusterTrustedTimeSourceStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTrustedTimeSourceWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("readAttributeTrustedTimeSourceWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -258,7 +259,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeTrustedTimeSourceWithCo
 // SubscribeAttributeTrustedTimeSourceWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTrustedTimeSourceWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeTrustedTimeSourceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRTimeSynchronizationClusterTrustedTimeSourceStruct, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeTrustedTimeSourceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result *MTRTimeSynchronizationClusterTrustedTimeSourceStruct, err error) {
 	type _result struct {
 		val *MTRTimeSynchronizationClusterTrustedTimeSourceStruct
 		err error
@@ -270,7 +271,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeTrustedTimeSourceW
 		_o.val = MTRTimeSynchronizationClusterTrustedTimeSourceStructFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTrustedTimeSourceWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeTrustedTimeSourceWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -283,7 +284,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeTrustedTimeSourceW
 // ReadAttributeDefaultNTPWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeDefaultNTPWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) ReadAttributeDefaultNTPWithCompletion(ctx context.Context) (result string, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeDefaultNTPWithCompletion(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -295,7 +296,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeDefaultNTPWithCompletio
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDefaultNTPWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("readAttributeDefaultNTPWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -308,7 +309,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeDefaultNTPWithCompletio
 // SubscribeAttributeDefaultNTPWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDefaultNTPWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeDefaultNTPWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeDefaultNTPWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -320,7 +321,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeDefaultNTPWithPara
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDefaultNTPWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeDefaultNTPWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -333,7 +334,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeDefaultNTPWithPara
 // ReadAttributeTimeZoneWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTimeZoneWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) ReadAttributeTimeZoneWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeTimeZoneWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -345,7 +346,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeTimeZoneWithCompletion(
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTimeZoneWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("readAttributeTimeZoneWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -358,7 +359,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeTimeZoneWithCompletion(
 // SubscribeAttributeTimeZoneWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTimeZoneWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeZoneWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeZoneWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -370,7 +371,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeZoneWithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTimeZoneWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeTimeZoneWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -383,7 +384,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeZoneWithParams
 // ReadAttributeDSTOffsetWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeDSTOffsetWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) ReadAttributeDSTOffsetWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeDSTOffsetWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -395,7 +396,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeDSTOffsetWithCompletion
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDSTOffsetWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("readAttributeDSTOffsetWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -408,7 +409,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeDSTOffsetWithCompletion
 // SubscribeAttributeDSTOffsetWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDSTOffsetWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeDSTOffsetWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeDSTOffsetWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -420,7 +421,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeDSTOffsetWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDSTOffsetWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeDSTOffsetWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -433,7 +434,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeDSTOffsetWithParam
 // ReadAttributeLocalTimeWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeLocalTimeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) ReadAttributeLocalTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeLocalTimeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -445,7 +446,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeLocalTimeWithCompletion
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLocalTimeWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("readAttributeLocalTimeWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -458,7 +459,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeLocalTimeWithCompletion
 // SubscribeAttributeLocalTimeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeLocalTimeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeLocalTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeLocalTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -470,7 +471,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeLocalTimeWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeLocalTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeLocalTimeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -483,7 +484,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeLocalTimeWithParam
 // ReadAttributeTimeZoneDatabaseWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTimeZoneDatabaseWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) ReadAttributeTimeZoneDatabaseWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeTimeZoneDatabaseWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -495,7 +496,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeTimeZoneDatabaseWithCom
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTimeZoneDatabaseWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("readAttributeTimeZoneDatabaseWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -508,7 +509,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeTimeZoneDatabaseWithCom
 // SubscribeAttributeTimeZoneDatabaseWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTimeZoneDatabaseWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeZoneDatabaseWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeZoneDatabaseWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -520,7 +521,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeZoneDatabaseWi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTimeZoneDatabaseWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeTimeZoneDatabaseWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -533,7 +534,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeZoneDatabaseWi
 // ReadAttributeNTPServerAvailableWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNTPServerAvailableWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) ReadAttributeNTPServerAvailableWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeNTPServerAvailableWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -545,7 +546,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeNTPServerAvailableWithC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNTPServerAvailableWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("readAttributeNTPServerAvailableWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -558,7 +559,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeNTPServerAvailableWithC
 // SubscribeAttributeNTPServerAvailableWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNTPServerAvailableWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeNTPServerAvailableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeNTPServerAvailableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -570,7 +571,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeNTPServerAvailable
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNTPServerAvailableWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeNTPServerAvailableWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -583,7 +584,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeNTPServerAvailable
 // ReadAttributeTimeZoneListMaxSizeWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTimeZoneListMaxSizeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) ReadAttributeTimeZoneListMaxSizeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeTimeZoneListMaxSizeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -595,7 +596,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeTimeZoneListMaxSizeWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTimeZoneListMaxSizeWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("readAttributeTimeZoneListMaxSizeWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -608,7 +609,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeTimeZoneListMaxSizeWith
 // SubscribeAttributeTimeZoneListMaxSizeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTimeZoneListMaxSizeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeZoneListMaxSizeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeZoneListMaxSizeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -620,7 +621,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeZoneListMaxSiz
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTimeZoneListMaxSizeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeTimeZoneListMaxSizeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -633,7 +634,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeTimeZoneListMaxSiz
 // ReadAttributeDSTOffsetListMaxSizeWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeDSTOffsetListMaxSizeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) ReadAttributeDSTOffsetListMaxSizeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeDSTOffsetListMaxSizeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -645,7 +646,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeDSTOffsetListMaxSizeWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDSTOffsetListMaxSizeWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("readAttributeDSTOffsetListMaxSizeWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -658,7 +659,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeDSTOffsetListMaxSizeWit
 // SubscribeAttributeDSTOffsetListMaxSizeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeDSTOffsetListMaxSizeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeDSTOffsetListMaxSizeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeDSTOffsetListMaxSizeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -670,7 +671,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeDSTOffsetListMaxSi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeDSTOffsetListMaxSizeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeDSTOffsetListMaxSizeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -683,7 +684,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeDSTOffsetListMaxSi
 // ReadAttributeSupportsDNSResolveWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeSupportsDNSResolveWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) ReadAttributeSupportsDNSResolveWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeSupportsDNSResolveWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -695,7 +696,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeSupportsDNSResolveWithC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportsDNSResolveWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("readAttributeSupportsDNSResolveWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -708,7 +709,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeSupportsDNSResolveWithC
 // SubscribeAttributeSupportsDNSResolveWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeSupportsDNSResolveWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeSupportsDNSResolveWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeSupportsDNSResolveWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -720,7 +721,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeSupportsDNSResolve
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeSupportsDNSResolveWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeSupportsDNSResolveWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -733,7 +734,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeSupportsDNSResolve
 // ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -745,7 +746,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeGeneratedCommandListWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -758,7 +759,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeGeneratedCommandListWit
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -770,7 +771,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeGeneratedCommandLi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -783,7 +784,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeGeneratedCommandLi
 // ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -795,7 +796,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeAcceptedCommandListWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -808,7 +809,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeAcceptedCommandListWith
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -820,7 +821,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeAcceptedCommandLis
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -833,7 +834,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeAcceptedCommandLis
 // ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -845,7 +846,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeAttributeListWithComple
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -858,7 +859,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeAttributeListWithComple
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -870,7 +871,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeAttributeListWithP
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -883,7 +884,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeAttributeListWithP
 // ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -895,7 +896,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeFeatureMapWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -908,7 +909,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeFeatureMapWithCompletio
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -920,7 +921,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeFeatureMapWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -933,7 +934,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeFeatureMapWithPara
 // ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -945,7 +946,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeClusterRevisionWithComp
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -958,7 +959,7 @@ func (x *MTRBaseClusterTimeSynchronization) ReadAttributeClusterRevisionWithComp
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcts *MTRBaseClusterTimeSynchronization) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -970,7 +971,7 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeClusterRevisionWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcts), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -979,50 +980,6 @@ func (x *MTRBaseClusterTimeSynchronization) SubscribeAttributeClusterRevisionWit
 		return _zero, ctx.Err()
 	}
 }
-
-// MTRBaseClusterTimeSynchronizationable is the interface implemented by [MTRBaseClusterTimeSynchronization], for mocking and DI.
-type MTRBaseClusterTimeSynchronizationable interface {
-	obj.Object
-	SetTimeZoneWithParamsCompletion(ctx context.Context, params *MTRTimeSynchronizationClusterSetTimeZoneParams) (*MTRTimeSynchronizationClusterSetTimeZoneResponseParams, error)
-	ReadAttributeUTCTimeWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeUTCTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeGranularityWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGranularityWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTimeSourceWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTimeSourceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTrustedTimeSourceWithCompletion(ctx context.Context) (*MTRTimeSynchronizationClusterTrustedTimeSourceStruct, error)
-	SubscribeAttributeTrustedTimeSourceWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (*MTRTimeSynchronizationClusterTrustedTimeSourceStruct, error)
-	ReadAttributeDefaultNTPWithCompletion(ctx context.Context) (string, error)
-	SubscribeAttributeDefaultNTPWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (string, error)
-	ReadAttributeTimeZoneWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTimeZoneWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeDSTOffsetWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeDSTOffsetWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeLocalTimeWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeLocalTimeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTimeZoneDatabaseWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTimeZoneDatabaseWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNTPServerAvailableWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNTPServerAvailableWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTimeZoneListMaxSizeWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTimeZoneListMaxSizeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeDSTOffsetListMaxSizeWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeDSTOffsetListMaxSizeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeSupportsDNSResolveWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeSupportsDNSResolveWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-}
-
-var _ MTRBaseClusterTimeSynchronizationable = (*MTRBaseClusterTimeSynchronization)(nil)
 
 var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterTimeSynchronization)(nil)
 

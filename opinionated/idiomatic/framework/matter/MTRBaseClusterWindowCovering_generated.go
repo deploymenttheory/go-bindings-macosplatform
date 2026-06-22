@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -63,7 +64,7 @@ func NewMTRBaseClusterWindowCoveringWithDeviceEndpointQueue(device *MTRBaseDevic
 // ReadAttributeTypeWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTypeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -75,7 +76,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeTypeWithCompletion(ctx conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTypeWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeTypeWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -88,7 +89,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeTypeWithCompletion(ctx conte
 // SubscribeAttributeTypeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTypeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -100,7 +101,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithParamsSubscript
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeTypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -113,7 +114,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithParamsSubscript
 // ReadAttributePhysicalClosedLimitLiftWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePhysicalClosedLimitLiftWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -125,7 +126,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLiftWithC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePhysicalClosedLimitLiftWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributePhysicalClosedLimitLiftWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -138,7 +139,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLiftWithC
 // SubscribeAttributePhysicalClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePhysicalClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -150,7 +151,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitLift
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePhysicalClosedLimitLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributePhysicalClosedLimitLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -163,7 +164,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitLift
 // ReadAttributePhysicalClosedLimitTiltWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributePhysicalClosedLimitTiltWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -175,7 +176,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTiltWithC
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePhysicalClosedLimitTiltWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributePhysicalClosedLimitTiltWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -188,7 +189,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTiltWithC
 // SubscribeAttributePhysicalClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePhysicalClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -200,7 +201,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitTilt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePhysicalClosedLimitTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributePhysicalClosedLimitTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -213,7 +214,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitTilt
 // ReadAttributeCurrentPositionLiftWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentPositionLiftWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -225,7 +226,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftWithCompl
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPositionLiftWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeCurrentPositionLiftWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -238,7 +239,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftWithCompl
 // SubscribeAttributeCurrentPositionLiftWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentPositionLiftWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -250,7 +251,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentPositionLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -263,7 +264,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftWith
 // ReadAttributeCurrentPositionTiltWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentPositionTiltWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -275,7 +276,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltWithCompl
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPositionTiltWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeCurrentPositionTiltWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -288,7 +289,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltWithCompl
 // SubscribeAttributeCurrentPositionTiltWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentPositionTiltWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -300,7 +301,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentPositionTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -313,7 +314,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltWith
 // ReadAttributeNumberOfActuationsLiftWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNumberOfActuationsLiftWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -325,7 +326,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLiftWithCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfActuationsLiftWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeNumberOfActuationsLiftWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -338,7 +339,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLiftWithCo
 // SubscribeAttributeNumberOfActuationsLiftWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNumberOfActuationsLiftWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -350,7 +351,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsLiftW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNumberOfActuationsLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeNumberOfActuationsLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -363,7 +364,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsLiftW
 // ReadAttributeNumberOfActuationsTiltWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeNumberOfActuationsTiltWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -375,7 +376,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTiltWithCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfActuationsTiltWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeNumberOfActuationsTiltWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -388,7 +389,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTiltWithCo
 // SubscribeAttributeNumberOfActuationsTiltWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNumberOfActuationsTiltWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -400,7 +401,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsTiltW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNumberOfActuationsTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeNumberOfActuationsTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -413,7 +414,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsTiltW
 // ReadAttributeConfigStatusWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeConfigStatusWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeConfigStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeConfigStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -425,7 +426,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeConfigStatusWithCompletion(c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeConfigStatusWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeConfigStatusWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -438,7 +439,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeConfigStatusWithCompletion(c
 // SubscribeAttributeConfigStatusWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeConfigStatusWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -450,7 +451,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeConfigStatusWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeConfigStatusWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -463,7 +464,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithParamsS
 // ReadAttributeCurrentPositionLiftPercentageWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentPositionLiftPercentageWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentageWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentageWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -475,7 +476,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentag
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPositionLiftPercentageWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeCurrentPositionLiftPercentageWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -488,7 +489,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentag
 // SubscribeAttributeCurrentPositionLiftPercentageWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentPositionLiftPercentageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercentageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercentageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -500,7 +501,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPerc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentPositionLiftPercentageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionLiftPercentageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -513,7 +514,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPerc
 // ReadAttributeCurrentPositionTiltPercentageWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentPositionTiltPercentageWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentageWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentageWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -525,7 +526,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentag
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPositionTiltPercentageWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeCurrentPositionTiltPercentageWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -538,7 +539,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentag
 // SubscribeAttributeCurrentPositionTiltPercentageWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentPositionTiltPercentageWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercentageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercentageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -550,7 +551,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPerc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentPositionTiltPercentageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionTiltPercentageWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -563,7 +564,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPerc
 // ReadAttributeOperationalStatusWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeOperationalStatusWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -575,7 +576,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatusWithComplet
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationalStatusWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeOperationalStatusWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -588,7 +589,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatusWithComplet
 // SubscribeAttributeOperationalStatusWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOperationalStatusWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -600,7 +601,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWithPa
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeOperationalStatusWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeOperationalStatusWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -613,7 +614,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWithPa
 // ReadAttributeTargetPositionLiftPercent100thsWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTargetPositionLiftPercent100thsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -625,7 +626,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTargetPositionLiftPercent100thsWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeTargetPositionLiftPercent100thsWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -638,7 +639,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100
 // SubscribeAttributeTargetPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTargetPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -650,7 +651,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftPerce
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTargetPositionLiftPercent100thsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeTargetPositionLiftPercent100thsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -663,7 +664,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftPerce
 // ReadAttributeTargetPositionTiltPercent100thsWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeTargetPositionTiltPercent100thsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -675,7 +676,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTargetPositionTiltPercent100thsWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeTargetPositionTiltPercent100thsWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -688,7 +689,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100
 // SubscribeAttributeTargetPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTargetPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -700,7 +701,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltPerce
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTargetPositionTiltPercent100thsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeTargetPositionTiltPercent100thsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -713,7 +714,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltPerce
 // ReadAttributeEndProductTypeWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeEndProductTypeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeEndProductTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeEndProductTypeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -725,7 +726,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeEndProductTypeWithCompletion
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEndProductTypeWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeEndProductTypeWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -738,7 +739,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeEndProductTypeWithCompletion
 // SubscribeAttributeEndProductTypeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEndProductTypeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -750,7 +751,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithParam
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeEndProductTypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeEndProductTypeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -763,7 +764,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithParam
 // ReadAttributeCurrentPositionLiftPercent100thsWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentPositionLiftPercent100thsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -775,7 +776,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent10
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPositionLiftPercent100thsWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeCurrentPositionLiftPercent100thsWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -788,7 +789,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent10
 // SubscribeAttributeCurrentPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -800,7 +801,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPerc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentPositionLiftPercent100thsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionLiftPercent100thsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -813,7 +814,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPerc
 // ReadAttributeCurrentPositionTiltPercent100thsWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentPositionTiltPercent100thsWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent100thsWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -825,7 +826,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent10
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPositionTiltPercent100thsWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeCurrentPositionTiltPercent100thsWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -838,7 +839,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent10
 // SubscribeAttributeCurrentPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -850,7 +851,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPerc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentPositionTiltPercent100thsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionTiltPercent100thsWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -863,7 +864,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPerc
 // ReadAttributeInstalledOpenLimitLiftWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInstalledOpenLimitLiftWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -875,7 +876,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLiftWithCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInstalledOpenLimitLiftWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeInstalledOpenLimitLiftWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -888,7 +889,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLiftWithCo
 // SubscribeAttributeInstalledOpenLimitLiftWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInstalledOpenLimitLiftWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -900,7 +901,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitLiftW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInstalledOpenLimitLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledOpenLimitLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -913,7 +914,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitLiftW
 // ReadAttributeInstalledClosedLimitLiftWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInstalledClosedLimitLiftWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLiftWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -925,7 +926,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLiftWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInstalledClosedLimitLiftWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeInstalledClosedLimitLiftWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -938,7 +939,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLiftWith
 // SubscribeAttributeInstalledClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInstalledClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -950,7 +951,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitLif
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInstalledClosedLimitLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledClosedLimitLiftWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -963,7 +964,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitLif
 // ReadAttributeInstalledOpenLimitTiltWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInstalledOpenLimitTiltWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -975,7 +976,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTiltWithCo
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInstalledOpenLimitTiltWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeInstalledOpenLimitTiltWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -988,7 +989,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTiltWithCo
 // SubscribeAttributeInstalledOpenLimitTiltWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInstalledOpenLimitTiltWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1000,7 +1001,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitTiltW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInstalledOpenLimitTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledOpenLimitTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1013,7 +1014,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitTiltW
 // ReadAttributeInstalledClosedLimitTiltWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeInstalledClosedLimitTiltWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTiltWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1025,7 +1026,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTiltWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInstalledClosedLimitTiltWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeInstalledClosedLimitTiltWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1038,7 +1039,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTiltWith
 // SubscribeAttributeInstalledClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInstalledClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1050,7 +1051,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitTil
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInstalledClosedLimitTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledClosedLimitTiltWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1063,7 +1064,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitTil
 // ReadAttributeModeWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeModeWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeModeWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1075,7 +1076,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeModeWithCompletion(ctx conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeModeWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeModeWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1088,7 +1089,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeModeWithCompletion(ctx conte
 // SubscribeAttributeModeWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeModeWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1100,7 +1101,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithParamsSubscript
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeModeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeModeWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1113,7 +1114,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithParamsSubscript
 // ReadAttributeSafetyStatusWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeSafetyStatusWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatusWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1125,7 +1126,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatusWithCompletion(c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSafetyStatusWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeSafetyStatusWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1138,7 +1139,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatusWithCompletion(c
 // SubscribeAttributeSafetyStatusWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeSafetyStatusWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1150,7 +1151,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithParamsS
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeSafetyStatusWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeSafetyStatusWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1163,7 +1164,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithParamsS
 // ReadAttributeGeneratedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeGeneratedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1175,7 +1176,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandListWithComp
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeGeneratedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1188,7 +1189,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandListWithComp
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1200,7 +1201,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandListWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1213,7 +1214,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandListWit
 // ReadAttributeAcceptedCommandListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAcceptedCommandListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1225,7 +1226,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandListWithCompl
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeAcceptedCommandListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1238,7 +1239,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandListWithCompl
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1250,7 +1251,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandListWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1263,7 +1264,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandListWith
 // ReadAttributeAttributeListWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeAttributeListWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeAttributeListWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1275,7 +1276,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeAttributeListWithCompletion(
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeAttributeListWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1288,7 +1289,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeAttributeListWithCompletion(
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1300,7 +1301,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithParams
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeAttributeListWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1313,7 +1314,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithParams
 // ReadAttributeFeatureMapWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeFeatureMapWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeFeatureMapWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1325,7 +1326,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeFeatureMapWithCompletion(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeFeatureMapWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1338,7 +1339,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeFeatureMapWithCompletion(ctx
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1350,7 +1351,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithParamsSub
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeFeatureMapWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1363,7 +1364,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithParamsSub
 // ReadAttributeClusterRevisionWithCompletion wraps the corresponding Objective-C method.
 //
 // ReadAttributeClusterRevisionWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1375,7 +1376,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeClusterRevisionWithCompletio
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeClusterRevisionWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1388,7 +1389,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeClusterRevisionWithCompletio
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1400,7 +1401,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWithPara
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeClusterRevisionWithParams:subscriptionEstablished:reportHandler:"), objref.IDOf(params), subscriptionEstablished, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1413,7 +1414,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWithPara
 // ReadAttributeType wraps the corresponding Objective-C method.
 //
 // ReadAttributeType blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeType(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeType(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1425,7 +1426,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeType(ctx context.Context) (r
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTypeWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeTypeWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1438,7 +1439,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeType(ctx context.Context) (r
 // SubscribeAttributeTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1450,7 +1451,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithMinIntervalMaxI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTypeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeTypeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1463,7 +1464,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTypeWithMinIntervalMaxI
 // ReadAttributePhysicalClosedLimitLift wraps the corresponding Objective-C method.
 //
 // ReadAttributePhysicalClosedLimitLift blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLift(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLift(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1475,7 +1476,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLift(ctx 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePhysicalClosedLimitLiftWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributePhysicalClosedLimitLiftWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1488,7 +1489,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitLift(ctx 
 // SubscribeAttributePhysicalClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePhysicalClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1500,7 +1501,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitLift
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePhysicalClosedLimitLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributePhysicalClosedLimitLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1513,7 +1514,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitLift
 // ReadAttributePhysicalClosedLimitTilt wraps the corresponding Objective-C method.
 //
 // ReadAttributePhysicalClosedLimitTilt blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTilt(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTilt(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1525,7 +1526,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTilt(ctx 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePhysicalClosedLimitTiltWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributePhysicalClosedLimitTiltWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1538,7 +1539,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributePhysicalClosedLimitTilt(ctx 
 // SubscribeAttributePhysicalClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributePhysicalClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1550,7 +1551,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitTilt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributePhysicalClosedLimitTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributePhysicalClosedLimitTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1563,7 +1564,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributePhysicalClosedLimitTilt
 // ReadAttributeCurrentPositionLift wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentPositionLift blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLift(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLift(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1575,7 +1576,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLift(ctx cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPositionLiftWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeCurrentPositionLiftWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1588,7 +1589,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLift(ctx cont
 // SubscribeAttributeCurrentPositionLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentPositionLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1600,7 +1601,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentPositionLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1613,7 +1614,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftWith
 // ReadAttributeCurrentPositionTilt wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentPositionTilt blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTilt(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTilt(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1625,7 +1626,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTilt(ctx cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPositionTiltWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeCurrentPositionTiltWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1638,7 +1639,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTilt(ctx cont
 // SubscribeAttributeCurrentPositionTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentPositionTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1650,7 +1651,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentPositionTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1663,7 +1664,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltWith
 // ReadAttributeNumberOfActuationsLift wraps the corresponding Objective-C method.
 //
 // ReadAttributeNumberOfActuationsLift blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLift(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLift(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1675,7 +1676,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLift(ctx c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfActuationsLiftWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeNumberOfActuationsLiftWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1688,7 +1689,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsLift(ctx c
 // SubscribeAttributeNumberOfActuationsLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNumberOfActuationsLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1700,7 +1701,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsLiftW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNumberOfActuationsLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeNumberOfActuationsLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1713,7 +1714,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsLiftW
 // ReadAttributeNumberOfActuationsTilt wraps the corresponding Objective-C method.
 //
 // ReadAttributeNumberOfActuationsTilt blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTilt(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTilt(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1725,7 +1726,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTilt(ctx c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNumberOfActuationsTiltWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeNumberOfActuationsTiltWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1738,7 +1739,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeNumberOfActuationsTilt(ctx c
 // SubscribeAttributeNumberOfActuationsTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeNumberOfActuationsTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1750,7 +1751,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsTiltW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeNumberOfActuationsTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeNumberOfActuationsTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1763,7 +1764,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeNumberOfActuationsTiltW
 // ReadAttributeConfigStatus wraps the corresponding Objective-C method.
 //
 // ReadAttributeConfigStatus blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeConfigStatus(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeConfigStatus(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1775,7 +1776,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeConfigStatus(ctx context.Con
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeConfigStatusWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeConfigStatusWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1788,7 +1789,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeConfigStatus(ctx context.Con
 // SubscribeAttributeConfigStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeConfigStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1800,7 +1801,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithMinInte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeConfigStatusWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeConfigStatusWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1813,7 +1814,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeConfigStatusWithMinInte
 // ReadAttributeCurrentPositionLiftPercentage wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentPositionLiftPercentage blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentage(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentage(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1825,7 +1826,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentag
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPositionLiftPercentageWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeCurrentPositionLiftPercentageWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1838,7 +1839,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercentag
 // SubscribeAttributeCurrentPositionLiftPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentPositionLiftPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1850,7 +1851,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPerc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentPositionLiftPercentageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionLiftPercentageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1863,7 +1864,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPerc
 // ReadAttributeCurrentPositionTiltPercentage wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentPositionTiltPercentage blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentage(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentage(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1875,7 +1876,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentag
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPositionTiltPercentageWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeCurrentPositionTiltPercentageWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1888,7 +1889,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercentag
 // SubscribeAttributeCurrentPositionTiltPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentPositionTiltPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1900,7 +1901,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPerc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentPositionTiltPercentageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionTiltPercentageWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1913,7 +1914,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPerc
 // ReadAttributeOperationalStatus wraps the corresponding Objective-C method.
 //
 // ReadAttributeOperationalStatus blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatus(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatus(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1925,7 +1926,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatus(ctx contex
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationalStatusWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeOperationalStatusWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1938,7 +1939,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeOperationalStatus(ctx contex
 // SubscribeAttributeOperationalStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeOperationalStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1950,7 +1951,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWithMi
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeOperationalStatusWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeOperationalStatusWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1963,7 +1964,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeOperationalStatusWithMi
 // ReadAttributeTargetPositionLiftPercent100ths wraps the corresponding Objective-C method.
 //
 // ReadAttributeTargetPositionLiftPercent100ths blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100ths(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100ths(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -1975,7 +1976,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTargetPositionLiftPercent100thsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeTargetPositionLiftPercent100thsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -1988,7 +1989,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionLiftPercent100
 // SubscribeAttributeTargetPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTargetPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2000,7 +2001,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftPerce
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTargetPositionLiftPercent100thsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeTargetPositionLiftPercent100thsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2013,7 +2014,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionLiftPerce
 // ReadAttributeTargetPositionTiltPercent100ths wraps the corresponding Objective-C method.
 //
 // ReadAttributeTargetPositionTiltPercent100ths blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100ths(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100ths(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2025,7 +2026,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTargetPositionTiltPercent100thsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeTargetPositionTiltPercent100thsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2038,7 +2039,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeTargetPositionTiltPercent100
 // SubscribeAttributeTargetPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeTargetPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2050,7 +2051,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltPerce
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeTargetPositionTiltPercent100thsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeTargetPositionTiltPercent100thsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2063,7 +2064,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeTargetPositionTiltPerce
 // ReadAttributeEndProductType wraps the corresponding Objective-C method.
 //
 // ReadAttributeEndProductType blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeEndProductType(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeEndProductType(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2075,7 +2076,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeEndProductType(ctx context.C
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEndProductTypeWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeEndProductTypeWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2088,7 +2089,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeEndProductType(ctx context.C
 // SubscribeAttributeEndProductTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeEndProductTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2100,7 +2101,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithMinIn
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeEndProductTypeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeEndProductTypeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2113,7 +2114,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeEndProductTypeWithMinIn
 // ReadAttributeCurrentPositionLiftPercent100ths wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentPositionLiftPercent100ths blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent100ths(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent100ths(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2125,7 +2126,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent10
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPositionLiftPercent100thsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeCurrentPositionLiftPercent100thsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2138,7 +2139,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionLiftPercent10
 // SubscribeAttributeCurrentPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2150,7 +2151,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPerc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentPositionLiftPercent100thsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionLiftPercent100thsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2163,7 +2164,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionLiftPerc
 // ReadAttributeCurrentPositionTiltPercent100ths wraps the corresponding Objective-C method.
 //
 // ReadAttributeCurrentPositionTiltPercent100ths blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent100ths(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent100ths(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2175,7 +2176,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent10
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPositionTiltPercent100thsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeCurrentPositionTiltPercent100thsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2188,7 +2189,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeCurrentPositionTiltPercent10
 // SubscribeAttributeCurrentPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeCurrentPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2200,7 +2201,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPerc
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeCurrentPositionTiltPercent100thsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeCurrentPositionTiltPercent100thsWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2213,7 +2214,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeCurrentPositionTiltPerc
 // ReadAttributeInstalledOpenLimitLift wraps the corresponding Objective-C method.
 //
 // ReadAttributeInstalledOpenLimitLift blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLift(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLift(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2225,7 +2226,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLift(ctx c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInstalledOpenLimitLiftWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeInstalledOpenLimitLiftWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2238,7 +2239,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitLift(ctx c
 // SubscribeAttributeInstalledOpenLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInstalledOpenLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2250,7 +2251,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitLiftW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInstalledOpenLimitLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledOpenLimitLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2263,7 +2264,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitLiftW
 // ReadAttributeInstalledClosedLimitLift wraps the corresponding Objective-C method.
 //
 // ReadAttributeInstalledClosedLimitLift blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLift(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLift(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2275,7 +2276,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLift(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInstalledClosedLimitLiftWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeInstalledClosedLimitLiftWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2288,7 +2289,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitLift(ctx
 // SubscribeAttributeInstalledClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInstalledClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2300,7 +2301,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitLif
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInstalledClosedLimitLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledClosedLimitLiftWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2313,7 +2314,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitLif
 // ReadAttributeInstalledOpenLimitTilt wraps the corresponding Objective-C method.
 //
 // ReadAttributeInstalledOpenLimitTilt blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTilt(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTilt(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2325,7 +2326,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTilt(ctx c
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInstalledOpenLimitTiltWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeInstalledOpenLimitTiltWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2338,7 +2339,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledOpenLimitTilt(ctx c
 // SubscribeAttributeInstalledOpenLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInstalledOpenLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2350,7 +2351,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitTiltW
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInstalledOpenLimitTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledOpenLimitTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2363,7 +2364,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledOpenLimitTiltW
 // ReadAttributeInstalledClosedLimitTilt wraps the corresponding Objective-C method.
 //
 // ReadAttributeInstalledClosedLimitTilt blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTilt(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTilt(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2375,7 +2376,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTilt(ctx
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInstalledClosedLimitTiltWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeInstalledClosedLimitTiltWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2388,7 +2389,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeInstalledClosedLimitTilt(ctx
 // SubscribeAttributeInstalledClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeInstalledClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2400,7 +2401,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitTil
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeInstalledClosedLimitTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeInstalledClosedLimitTiltWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2413,7 +2414,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeInstalledClosedLimitTil
 // ReadAttributeMode wraps the corresponding Objective-C method.
 //
 // ReadAttributeMode blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeMode(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeMode(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2425,7 +2426,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeMode(ctx context.Context) (r
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeModeWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeModeWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2438,7 +2439,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeMode(ctx context.Context) (r
 // SubscribeAttributeModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2450,7 +2451,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithMinIntervalMaxI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeModeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeModeWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2463,7 +2464,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeModeWithMinIntervalMaxI
 // ReadAttributeSafetyStatus wraps the corresponding Objective-C method.
 //
 // ReadAttributeSafetyStatus blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatus(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatus(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2475,7 +2476,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatus(ctx context.Con
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSafetyStatusWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeSafetyStatusWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2488,7 +2489,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeSafetyStatus(ctx context.Con
 // SubscribeAttributeSafetyStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeSafetyStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2500,7 +2501,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithMinInte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeSafetyStatusWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeSafetyStatusWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2513,7 +2514,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeSafetyStatusWithMinInte
 // ReadAttributeGeneratedCommandList wraps the corresponding Objective-C method.
 //
 // ReadAttributeGeneratedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2525,7 +2526,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandList(ctx con
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeGeneratedCommandListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2538,7 +2539,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeGeneratedCommandList(ctx con
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2550,7 +2551,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandListWit
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeGeneratedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2563,7 +2564,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeGeneratedCommandListWit
 // ReadAttributeAcceptedCommandList wraps the corresponding Objective-C method.
 //
 // ReadAttributeAcceptedCommandList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2575,7 +2576,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandList(ctx cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeAcceptedCommandListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2588,7 +2589,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeAcceptedCommandList(ctx cont
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2600,7 +2601,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandListWith
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeAcceptedCommandListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2613,7 +2614,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAcceptedCommandListWith
 // ReadAttributeAttributeList wraps the corresponding Objective-C method.
 //
 // ReadAttributeAttributeList blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeAttributeList(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2625,7 +2626,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeAttributeList(ctx context.Co
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeAttributeListWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2638,7 +2639,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeAttributeList(ctx context.Co
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2650,7 +2651,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithMinInt
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeAttributeListWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2663,7 +2664,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeAttributeListWithMinInt
 // ReadAttributeFeatureMap wraps the corresponding Objective-C method.
 //
 // ReadAttributeFeatureMap blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeFeatureMap(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2675,7 +2676,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeFeatureMap(ctx context.Conte
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeFeatureMapWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2688,7 +2689,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeFeatureMap(ctx context.Conte
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2700,7 +2701,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithMinInterv
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeFeatureMapWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2713,7 +2714,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeFeatureMapWithMinInterv
 // ReadAttributeClusterRevision wraps the corresponding Objective-C method.
 //
 // ReadAttributeClusterRevision blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) ReadAttributeClusterRevision(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2725,7 +2726,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeClusterRevision(ctx context.
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("readAttributeClusterRevisionWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2738,7 +2739,7 @@ func (x *MTRBaseClusterWindowCovering) ReadAttributeClusterRevision(ctx context.
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler wraps the corresponding Objective-C method.
 //
 // SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler blocks until the operation completes or ctx is cancelled.
-func (x *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
+func (mbcwc *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -2750,7 +2751,7 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWithMinI
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
+	objc.Send[objc.ID](objref.IDOf(mbcwc), objc.RegisterName("subscribeAttributeClusterRevisionWithMinInterval:maxInterval:params:subscriptionEstablished:reportHandler:"), objref.IDOf(minInterval), objref.IDOf(maxInterval), objref.IDOf(params), subscriptionEstablishedHandler, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -2759,121 +2760,6 @@ func (x *MTRBaseClusterWindowCovering) SubscribeAttributeClusterRevisionWithMinI
 		return _zero, ctx.Err()
 	}
 }
-
-// MTRBaseClusterWindowCoveringable is the interface implemented by [MTRBaseClusterWindowCovering], for mocking and DI.
-type MTRBaseClusterWindowCoveringable interface {
-	obj.Object
-	ReadAttributeTypeWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePhysicalClosedLimitLiftWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePhysicalClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributePhysicalClosedLimitTiltWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePhysicalClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeCurrentPositionLiftWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentPositionLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeCurrentPositionTiltWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentPositionTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNumberOfActuationsLiftWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNumberOfActuationsLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeNumberOfActuationsTiltWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNumberOfActuationsTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeConfigStatusWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeConfigStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeCurrentPositionLiftPercentageWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentPositionLiftPercentageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeCurrentPositionTiltPercentageWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentPositionTiltPercentageWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeOperationalStatusWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeOperationalStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTargetPositionLiftPercent100thsWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTargetPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeTargetPositionTiltPercent100thsWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTargetPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeEndProductTypeWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeEndProductTypeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeCurrentPositionLiftPercent100thsWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentPositionLiftPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeCurrentPositionTiltPercent100thsWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentPositionTiltPercent100thsWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInstalledOpenLimitLiftWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInstalledOpenLimitLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInstalledClosedLimitLiftWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInstalledClosedLimitLiftWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInstalledOpenLimitTiltWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInstalledOpenLimitTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeInstalledClosedLimitTiltWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInstalledClosedLimitTiltWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeModeWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeModeWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeSafetyStatusWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeSafetyStatusWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeGeneratedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneratedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAcceptedCommandListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAcceptedCommandListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeAttributeListWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttributeListWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeFeatureMapWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFeatureMapWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeClusterRevisionWithCompletion(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterRevisionWithParamsSubscriptionEstablishedReportHandler(ctx context.Context, params *MTRSubscribeParams, subscriptionEstablished func()) (obj.Object, error)
-	ReadAttributeType(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePhysicalClosedLimitLift(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePhysicalClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributePhysicalClosedLimitTilt(ctx context.Context) (obj.Object, error)
-	SubscribeAttributePhysicalClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeCurrentPositionLift(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentPositionLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeCurrentPositionTilt(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentPositionTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNumberOfActuationsLift(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNumberOfActuationsLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeNumberOfActuationsTilt(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeNumberOfActuationsTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeConfigStatus(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeConfigStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeCurrentPositionLiftPercentage(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentPositionLiftPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeCurrentPositionTiltPercentage(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentPositionTiltPercentageWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeOperationalStatus(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeOperationalStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTargetPositionLiftPercent100ths(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTargetPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeTargetPositionTiltPercent100ths(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeTargetPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeEndProductType(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeEndProductTypeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeCurrentPositionLiftPercent100ths(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentPositionLiftPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeCurrentPositionTiltPercent100ths(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeCurrentPositionTiltPercent100thsWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInstalledOpenLimitLift(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInstalledOpenLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInstalledClosedLimitLift(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInstalledClosedLimitLiftWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInstalledOpenLimitTilt(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInstalledOpenLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeInstalledClosedLimitTilt(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeInstalledClosedLimitTiltWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeMode(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeModeWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeSafetyStatus(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeSafetyStatusWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeGeneratedCommandList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeGeneratedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeAcceptedCommandList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAcceptedCommandListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeAttributeList(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeAttributeListWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeFeatureMap(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeFeatureMapWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-	ReadAttributeClusterRevision(ctx context.Context) (obj.Object, error)
-	SubscribeAttributeClusterRevisionWithMinIntervalMaxIntervalParamsSubscriptionEstablishedReportHandler(ctx context.Context, minInterval obj.Object, maxInterval obj.Object, params *MTRSubscribeParams, subscriptionEstablishedHandler func()) (obj.Object, error)
-}
-
-var _ MTRBaseClusterWindowCoveringable = (*MTRBaseClusterWindowCovering)(nil)
 
 var _ MTRGenericBaseClusterProvider = (*MTRBaseClusterWindowCovering)(nil)
 

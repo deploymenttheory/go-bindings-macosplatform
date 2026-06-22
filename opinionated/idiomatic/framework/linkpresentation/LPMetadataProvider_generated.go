@@ -6,6 +6,7 @@ package linkpresentation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func metadataProviderAdopt(id objc.ID) *MetadataProvider {
 }
 
 // Description returns the object's -description text.
-func (x *MetadataProvider) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mp *MetadataProvider) Description() string {
+	return rt.Description(objref.IDOf(mp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetadataProvider) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mp *MetadataProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetadataProvider) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mp *MetadataProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MetadataProvider) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mp *MetadataProvider) String() string {
+	return rt.Description(objref.IDOf(mp))
 }
 
 // NewMetadataProvider creates a new MetadataProvider.
@@ -74,22 +75,22 @@ func NewMetadataProvider() *MetadataProvider {
 	return metadataProviderAdopt(_id)
 }
 
-// WithShouldFetchSubresources a Boolean value indicating whether to download subresources specified by the metadata.
-func (x *MetadataProvider) WithShouldFetchSubresources(shouldFetchSubresources bool) *MetadataProvider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldFetchSubresources:"), shouldFetchSubresources)
-	return x
+// WithShouldFetchSubresources sets a Boolean value indicating whether to download subresources specified by the metadata.
+func (mp *MetadataProvider) WithShouldFetchSubresources(shouldFetchSubresources bool) *MetadataProvider {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setShouldFetchSubresources:"), shouldFetchSubresources)
+	return mp
 }
 
-// WithTimeout the time interval after which the request automatically fails if it hasn’t already completed.
-func (x *MetadataProvider) WithTimeout(timeout float64) *MetadataProvider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), timeout)
-	return x
+// WithTimeout sets the time interval after which the request automatically fails if it hasn’t already completed.
+func (mp *MetadataProvider) WithTimeout(timeout float64) *MetadataProvider {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setTimeout:"), timeout)
+	return mp
 }
 
 // StartFetchingMetadataForURL fetches metadata for the given URL.
 //
 // StartFetchingMetadataForURL blocks until the operation completes or ctx is cancelled.
-func (x *MetadataProvider) StartFetchingMetadataForURL(ctx context.Context, uRL string) (result *LinkMetadata, err error) {
+func (mp *MetadataProvider) StartFetchingMetadataForURL(ctx context.Context, uRL string) (result *LinkMetadata, err error) {
 	type _result struct {
 		val *LinkMetadata
 		err error
@@ -101,7 +102,7 @@ func (x *MetadataProvider) StartFetchingMetadataForURL(ctx context.Context, uRL 
 		_o.val = LinkMetadataFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startFetchingMetadataForURL:completionHandler:"), rt.FileURL(uRL), _block)
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("startFetchingMetadataForURL:completionHandler:"), rt.FileURL(uRL), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -114,7 +115,7 @@ func (x *MetadataProvider) StartFetchingMetadataForURL(ctx context.Context, uRL 
 // StartFetchingMetadataForRequest fetches metadata for the given NSURLRequest.
 //
 // StartFetchingMetadataForRequest blocks until the operation completes or ctx is cancelled.
-func (x *MetadataProvider) StartFetchingMetadataForRequest(ctx context.Context, request obj.Object) (result *LinkMetadata, err error) {
+func (mp *MetadataProvider) StartFetchingMetadataForRequest(ctx context.Context, request obj.Object) (result *LinkMetadata, err error) {
 	type _result struct {
 		val *LinkMetadata
 		err error
@@ -126,7 +127,7 @@ func (x *MetadataProvider) StartFetchingMetadataForRequest(ctx context.Context, 
 		_o.val = LinkMetadataFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startFetchingMetadataForRequest:completionHandler:"), objref.IDOf(request), _block)
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("startFetchingMetadataForRequest:completionHandler:"), objref.IDOf(request), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -137,44 +138,18 @@ func (x *MetadataProvider) StartFetchingMetadataForRequest(ctx context.Context, 
 }
 
 // Cancel cancels a metadata request.
-func (x *MetadataProvider) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (mp *MetadataProvider) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("cancel"))
 }
 
-// ShouldFetchSubresources a Boolean value indicating whether to download subresources specified by the metadata. Subresources include the icon, image, or video. When set to `false`, the returned “LPLinkMetadata“ object consists only of metadata retrieved from the main resource identified by the url passed to “LPMetadataProvider/startFetchingMetadataForURL:completionHandler:“. The default value is `true`.
-func (x *MetadataProvider) ShouldFetchSubresources() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldFetchSubresources"))
+// ShouldFetchSubresources reports whether to download subresources specified by the metadata. Subresources include the icon, image, or video. When set to `false`, the returned “LPLinkMetadata“ object consists only of metadata retrieved from the main resource identified by the url passed to “LPMetadataProvider/startFetchingMetadataForURL:completionHandler:“. The default value is `true`.
+func (mp *MetadataProvider) ShouldFetchSubresources() bool {
+	_r := objc.Send[bool](objref.IDOf(mp), objc.RegisterName("shouldFetchSubresources"))
 	return _r
 }
 
-// SetShouldFetchSubresources wraps the corresponding Objective-C method.
-func (x *MetadataProvider) SetShouldFetchSubresources(shouldFetchSubresources bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldFetchSubresources:"), shouldFetchSubresources)
-}
-
-// Timeout the time interval after which the request automatically fails if it hasn’t already completed. The default timeout interval is 30 seconds. If a metadata fetch takes longer than the timeout interval, the completion handler is called with the error code “LPErrorCode/LPErrorMetadataFetchTimedOut“.
-func (x *MetadataProvider) Timeout() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeout"))
+// Timeout returns the time interval after which the request automatically fails if it hasn’t already completed. The default timeout interval is 30 seconds. If a metadata fetch takes longer than the timeout interval, the completion handler is called with the error code “LPErrorCode/LPErrorMetadataFetchTimedOut“.
+func (mp *MetadataProvider) Timeout() float64 {
+	_r := objc.Send[float64](objref.IDOf(mp), objc.RegisterName("timeout"))
 	return _r
 }
-
-// SetTimeout wraps the corresponding Objective-C method.
-func (x *MetadataProvider) SetTimeout(timeout float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), timeout)
-}
-
-// MetadataProviderable is the interface implemented by [MetadataProvider], for mocking and DI.
-type MetadataProviderable interface {
-	obj.Object
-	WithShouldFetchSubresources(shouldFetchSubresources bool) *MetadataProvider
-	WithTimeout(timeout float64) *MetadataProvider
-	StartFetchingMetadataForURL(ctx context.Context, uRL string) (*LinkMetadata, error)
-	StartFetchingMetadataForRequest(ctx context.Context, request obj.Object) (*LinkMetadata, error)
-	Cancel()
-	ShouldFetchSubresources() bool
-	SetShouldFetchSubresources(shouldFetchSubresources bool)
-	Timeout() float64
-	SetTimeout(timeout float64)
-}
-
-var _ MetadataProviderable = (*MetadataProvider)(nil)

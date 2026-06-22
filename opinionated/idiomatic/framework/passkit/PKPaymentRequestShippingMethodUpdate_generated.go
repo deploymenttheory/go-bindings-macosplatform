@@ -7,7 +7,6 @@ package passkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,63 +51,49 @@ func NewPaymentRequestShippingMethodUpdate() *PaymentRequestShippingMethodUpdate
 	return paymentRequestShippingMethodUpdateAdopt(_id)
 }
 
-// WithStatus the status of the payment request that indicates whether authorization succeeds or fails.
-func (x *PaymentRequestShippingMethodUpdate) WithStatus(status PaymentAuthorizationStatus) *PaymentRequestShippingMethodUpdate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), status)
-	return x
+// WithStatus sets the status of the payment request that indicates whether authorization succeeds or fails.
+func (prsmu *PaymentRequestShippingMethodUpdate) WithStatus(status PaymentAuthorizationStatus) *PaymentRequestShippingMethodUpdate {
+	objc.Send[objc.ID](objref.IDOf(prsmu), objc.RegisterName("setStatus:"), status)
+	return prsmu
 }
 
-// WithPaymentSummaryItems the list of payment summary items for the instance.
-func (x *PaymentRequestShippingMethodUpdate) WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestShippingMethodUpdate {
+// WithPaymentSummaryItems sets the list of payment summary items for the instance.
+func (prsmu *PaymentRequestShippingMethodUpdate) WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestShippingMethodUpdate {
 	_arr := purego.SliceToNSArray(items, func(_v PaymentSummaryItemProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaymentSummaryItems:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(prsmu), objc.RegisterName("setPaymentSummaryItems:"), _arr)
+	return prsmu
 }
 
-// WithShippingMethods the list of shipping methods available for a payment request.
-func (x *PaymentRequestShippingMethodUpdate) WithShippingMethods(items ...*ShippingMethod) *PaymentRequestShippingMethodUpdate {
+// WithShippingMethods sets the list of shipping methods available for a payment request.
+func (prsmu *PaymentRequestShippingMethodUpdate) WithShippingMethods(items ...*ShippingMethod) *PaymentRequestShippingMethodUpdate {
 	_arr := purego.SliceToNSArray(items, func(_v *ShippingMethod) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShippingMethods:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(prsmu), objc.RegisterName("setShippingMethods:"), _arr)
+	return prsmu
 }
 
-// WithMultiTokenContexts an optional array of payment token contexts to request multiple payment tokens with one payment token per context.
-func (x *PaymentRequestShippingMethodUpdate) WithMultiTokenContexts(items ...*PaymentTokenContext) *PaymentRequestShippingMethodUpdate {
+// WithMultiTokenContexts sets an optional array of payment token contexts to request multiple payment tokens with one payment token per context.
+func (prsmu *PaymentRequestShippingMethodUpdate) WithMultiTokenContexts(items ...*PaymentTokenContext) *PaymentRequestShippingMethodUpdate {
 	_arr := purego.SliceToNSArray(items, func(_v *PaymentTokenContext) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMultiTokenContexts:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(prsmu), objc.RegisterName("setMultiTokenContexts:"), _arr)
+	return prsmu
 }
 
-// WithRecurringPaymentRequest the recurring payment request to update the payment request with.
-func (x *PaymentRequestShippingMethodUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestShippingMethodUpdate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurringPaymentRequest:"), objref.IDOf(recurringPaymentRequest))
-	return x
+// WithRecurringPaymentRequest sets the recurring payment request to update the payment request with.
+func (prsmu *PaymentRequestShippingMethodUpdate) WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestShippingMethodUpdate {
+	objc.Send[objc.ID](objref.IDOf(prsmu), objc.RegisterName("setRecurringPaymentRequest:"), objref.IDOf(recurringPaymentRequest))
+	return prsmu
 }
 
-// WithAutomaticReloadPaymentRequest the automatic reload payment request to update the payment request with.
-func (x *PaymentRequestShippingMethodUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestShippingMethodUpdate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticReloadPaymentRequest:"), objref.IDOf(automaticReloadPaymentRequest))
-	return x
+// WithAutomaticReloadPaymentRequest sets the automatic reload payment request to update the payment request with.
+func (prsmu *PaymentRequestShippingMethodUpdate) WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestShippingMethodUpdate {
+	objc.Send[objc.ID](objref.IDOf(prsmu), objc.RegisterName("setAutomaticReloadPaymentRequest:"), objref.IDOf(automaticReloadPaymentRequest))
+	return prsmu
 }
 
-// WithDeferredPaymentRequest the deferred payment request to update the payment request with.
-func (x *PaymentRequestShippingMethodUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestShippingMethodUpdate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredPaymentRequest:"), objref.IDOf(deferredPaymentRequest))
-	return x
+// WithDeferredPaymentRequest sets the deferred payment request to update the payment request with.
+func (prsmu *PaymentRequestShippingMethodUpdate) WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestShippingMethodUpdate {
+	objc.Send[objc.ID](objref.IDOf(prsmu), objc.RegisterName("setDeferredPaymentRequest:"), objref.IDOf(deferredPaymentRequest))
+	return prsmu
 }
-
-// PaymentRequestShippingMethodUpdateable is the interface implemented by [PaymentRequestShippingMethodUpdate], for mocking and DI.
-type PaymentRequestShippingMethodUpdateable interface {
-	obj.Object
-	WithStatus(status PaymentAuthorizationStatus) *PaymentRequestShippingMethodUpdate
-	WithPaymentSummaryItems(items ...PaymentSummaryItemProvider) *PaymentRequestShippingMethodUpdate
-	WithShippingMethods(items ...*ShippingMethod) *PaymentRequestShippingMethodUpdate
-	WithMultiTokenContexts(items ...*PaymentTokenContext) *PaymentRequestShippingMethodUpdate
-	WithRecurringPaymentRequest(recurringPaymentRequest *RecurringPaymentRequest) *PaymentRequestShippingMethodUpdate
-	WithAutomaticReloadPaymentRequest(automaticReloadPaymentRequest *AutomaticReloadPaymentRequest) *PaymentRequestShippingMethodUpdate
-	WithDeferredPaymentRequest(deferredPaymentRequest *DeferredPaymentRequest) *PaymentRequestShippingMethodUpdate
-}
-
-var _ PaymentRequestShippingMethodUpdateable = (*PaymentRequestShippingMethodUpdate)(nil)
 
 var _ PaymentRequestUpdateProvider = (*PaymentRequestShippingMethodUpdate)(nil)

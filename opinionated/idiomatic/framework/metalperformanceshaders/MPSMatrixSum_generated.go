@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,87 +52,64 @@ func NewMatrixSum() *MatrixSum {
 	return matrixSumAdopt(_id)
 }
 
-// WithResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.
-func (x *MatrixSum) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSum {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
-	return x
+// WithResultMatrixOrigin sets the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.
+func (ms *MatrixSum) WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSum {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
+	return ms
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *MatrixSum) WithLabel(label string) *MatrixSum {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ms *MatrixSum) WithLabel(label string) *MatrixSum {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ms
 }
 
-// Rows the number of rows to sum.
-func (x *MatrixSum) Rows() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rows"))
+// Rows returns the number of rows to sum.
+func (ms *MatrixSum) Rows() int {
+	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("rows"))
 	return _r
 }
 
-// Columns the number of columns to sum.
-func (x *MatrixSum) Columns() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("columns"))
+// Columns returns the number of columns to sum.
+func (ms *MatrixSum) Columns() int {
+	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("columns"))
 	return _r
 }
 
-// Count the number of matrices to sum.
-func (x *MatrixSum) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+// Count returns the number of matrices to sum.
+func (ms *MatrixSum) Count() int {
+	_r := objc.Send[int](objref.IDOf(ms), objc.RegisterName("count"))
 	return _r
 }
 
-// Transpose the transposition used to initialize the kernel.
-func (x *MatrixSum) Transpose() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("transpose"))
+// Transpose reports whether the transposition used to initialize the kernel.
+func (ms *MatrixSum) Transpose() bool {
+	_r := objc.Send[bool](objref.IDOf(ms), objc.RegisterName("transpose"))
 	return _r
 }
 
-// ResultMatrixOrigin the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.
-func (x *MatrixSum) ResultMatrixOrigin() metal.MTLOrigin {
-	_r := objc.Send[metal.MTLOrigin](objref.IDOf(x), objc.RegisterName("resultMatrixOrigin"))
+// ResultMatrixOrigin returns the origin, relative to [0, 0] in the result matrix, at which to start writing results.  This property is modifiable and defaults to [0, 0] at initialization time.  If a different origin is desired then this should be modified prior to encoding the kernel.
+func (ms *MatrixSum) ResultMatrixOrigin() metal.MTLOrigin {
+	_r := objc.Send[metal.MTLOrigin](objref.IDOf(ms), objc.RegisterName("resultMatrixOrigin"))
 	return _r
 }
 
-// SetResultMatrixOrigin wraps the corresponding Objective-C method.
-func (x *MatrixSum) SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultMatrixOrigin:"), resultMatrixOrigin)
-}
-
-// NeuronParameterA neuron parameter A.
-func (x *MatrixSum) NeuronParameterA() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterA"))
+// NeuronParameterA returns neuron parameter A.
+func (ms *MatrixSum) NeuronParameterA() float32 {
+	_r := objc.Send[float32](objref.IDOf(ms), objc.RegisterName("neuronParameterA"))
 	return _r
 }
 
-// NeuronParameterB neuron parameter B.
-func (x *MatrixSum) NeuronParameterB() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterB"))
+// NeuronParameterB returns neuron parameter B.
+func (ms *MatrixSum) NeuronParameterB() float32 {
+	_r := objc.Send[float32](objref.IDOf(ms), objc.RegisterName("neuronParameterB"))
 	return _r
 }
 
-// NeuronParameterC neuron parameter C.
-func (x *MatrixSum) NeuronParameterC() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("neuronParameterC"))
+// NeuronParameterC returns neuron parameter C.
+func (ms *MatrixSum) NeuronParameterC() float32 {
+	_r := objc.Send[float32](objref.IDOf(ms), objc.RegisterName("neuronParameterC"))
 	return _r
 }
-
-// MatrixSumable is the interface implemented by [MatrixSum], for mocking and DI.
-type MatrixSumable interface {
-	obj.Object
-	WithResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin) *MatrixSum
-	WithLabel(label string) *MatrixSum
-	Rows() int
-	Columns() int
-	Count() int
-	Transpose() bool
-	ResultMatrixOrigin() metal.MTLOrigin
-	SetResultMatrixOrigin(resultMatrixOrigin metal.MTLOrigin)
-	NeuronParameterA() float32
-	NeuronParameterB() float32
-	NeuronParameterC() float32
-}
-
-var _ MatrixSumable = (*MatrixSum)(nil)
 
 var _ KernelProvider = (*MatrixSum)(nil)

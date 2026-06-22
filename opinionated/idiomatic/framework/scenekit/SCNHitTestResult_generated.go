@@ -48,24 +48,24 @@ func hitTestResultAdopt(id objc.ID) *HitTestResult {
 }
 
 // Description returns the object's -description text.
-func (x *HitTestResult) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (htr *HitTestResult) Description() string {
+	return rt.Description(objref.IDOf(htr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HitTestResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (htr *HitTestResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(htr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HitTestResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (htr *HitTestResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(htr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HitTestResult) String() string {
-	return rt.Description(objref.IDOf(x))
+func (htr *HitTestResult) String() string {
+	return rt.Description(objref.IDOf(htr))
 }
 
 // NewHitTestResult creates a new HitTestResult.
@@ -75,50 +75,37 @@ func NewHitTestResult() *HitTestResult {
 }
 
 // TextureCoordinatesWithMappingChannel returns the texture coordinates at the point of intersection for the specified texture mapping channel.
-func (x *HitTestResult) TextureCoordinatesWithMappingChannel(channel int) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("textureCoordinatesWithMappingChannel:"), channel)
+func (htr *HitTestResult) TextureCoordinatesWithMappingChannel(channel int) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(htr), objc.RegisterName("textureCoordinatesWithMappingChannel:"), channel)
 	return _r
 }
 
-// Node the hit node.
-func (x *HitTestResult) Node() *Node {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("node"))
+// Node returns the hit node.
+func (htr *HitTestResult) Node() *Node {
+	_r := objc.Send[objc.ID](objref.IDOf(htr), objc.RegisterName("node"))
 	return NodeFromID(_r)
 }
 
-// GeometryIndex index of the hit geometry element.
-func (x *HitTestResult) GeometryIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("geometryIndex"))
+// GeometryIndex returns index of the hit geometry element.
+func (htr *HitTestResult) GeometryIndex() int {
+	_r := objc.Send[int](objref.IDOf(htr), objc.RegisterName("geometryIndex"))
 	return _r
 }
 
-// FaceIndex index of the hit primitive of the geometry element.
-func (x *HitTestResult) FaceIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("faceIndex"))
+// FaceIndex returns index of the hit primitive of the geometry element.
+func (htr *HitTestResult) FaceIndex() int {
+	_r := objc.Send[int](objref.IDOf(htr), objc.RegisterName("faceIndex"))
 	return _r
 }
 
-// ModelTransform world transform of the hit node.
-func (x *HitTestResult) ModelTransform() quartzcore.CATransform3D {
-	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(x), objc.RegisterName("modelTransform"))
+// ModelTransform returns world transform of the hit node.
+func (htr *HitTestResult) ModelTransform() quartzcore.CATransform3D {
+	_r := objc.Send[quartzcore.CATransform3D](objref.IDOf(htr), objc.RegisterName("modelTransform"))
 	return _r
 }
 
-// BoneNode the hit bone. Only available if the node hit has a SCNSkinner attached.
-func (x *HitTestResult) BoneNode() *Node {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boneNode"))
+// BoneNode returns the hit bone. Only available if the node hit has a SCNSkinner attached.
+func (htr *HitTestResult) BoneNode() *Node {
+	_r := objc.Send[objc.ID](objref.IDOf(htr), objc.RegisterName("boneNode"))
 	return NodeFromID(_r)
 }
-
-// HitTestResultable is the interface implemented by [HitTestResult], for mocking and DI.
-type HitTestResultable interface {
-	obj.Object
-	TextureCoordinatesWithMappingChannel(channel int) corefoundation.CGPoint
-	Node() *Node
-	GeometryIndex() int
-	FaceIndex() int
-	ModelTransform() quartzcore.CATransform3D
-	BoneNode() *Node
-}
-
-var _ HitTestResultable = (*HitTestResult)(nil)

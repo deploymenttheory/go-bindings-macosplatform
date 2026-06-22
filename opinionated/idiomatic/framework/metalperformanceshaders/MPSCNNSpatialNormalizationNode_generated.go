@@ -61,79 +61,52 @@ func NewCNNSpatialNormalizationNodeWithSource(sourceNode obj.Object) *CNNSpatial
 }
 
 // WithKernelWidth sets the property and returns the receiver so calls can be chained.
-func (x *CNNSpatialNormalizationNode) WithKernelWidth(kernelWidth int) *CNNSpatialNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
-	return x
+func (csnn *CNNSpatialNormalizationNode) WithKernelWidth(kernelWidth int) *CNNSpatialNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(csnn), objc.RegisterName("setKernelWidth:"), kernelWidth)
+	return csnn
 }
 
 // WithKernelHeight sets the property and returns the receiver so calls can be chained.
-func (x *CNNSpatialNormalizationNode) WithKernelHeight(kernelHeight int) *CNNSpatialNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
-	return x
+func (csnn *CNNSpatialNormalizationNode) WithKernelHeight(kernelHeight int) *CNNSpatialNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(csnn), objc.RegisterName("setKernelHeight:"), kernelHeight)
+	return csnn
 }
 
-// WithAlpha the value of alpha.  Default is 1.0. Must be non-negative.
-func (x *CNNSpatialNormalizationNode) WithAlpha(alpha float32) *CNNSpatialNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the value of alpha.  Default is 1.0. Must be non-negative.
+func (csnn *CNNSpatialNormalizationNode) WithAlpha(alpha float32) *CNNSpatialNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(csnn), objc.RegisterName("setAlpha:"), alpha)
+	return csnn
 }
 
-// WithBeta the value of beta.  Default is 5.0
-func (x *CNNSpatialNormalizationNode) WithBeta(beta float32) *CNNSpatialNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
-	return x
+// WithBeta sets the value of beta.  Default is 5.0
+func (csnn *CNNSpatialNormalizationNode) WithBeta(beta float32) *CNNSpatialNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(csnn), objc.RegisterName("setBeta:"), beta)
+	return csnn
 }
 
-// WithDelta the value of delta.  Default is 1.0
-func (x *CNNSpatialNormalizationNode) WithDelta(delta float32) *CNNSpatialNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
-	return x
+// WithDelta sets the value of delta.  Default is 1.0
+func (csnn *CNNSpatialNormalizationNode) WithDelta(delta float32) *CNNSpatialNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(csnn), objc.RegisterName("setDelta:"), delta)
+	return csnn
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNSpatialNormalizationNode) WithLabel(label string) *CNNSpatialNormalizationNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (csnn *CNNSpatialNormalizationNode) WithLabel(label string) *CNNSpatialNormalizationNode {
+	objc.Send[objc.ID](objref.IDOf(csnn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return csnn
 }
 
 // KernelWidth wraps the corresponding Objective-C method.
-func (x *CNNSpatialNormalizationNode) KernelWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+func (csnn *CNNSpatialNormalizationNode) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(csnn), objc.RegisterName("kernelWidth"))
 	return _r
-}
-
-// SetKernelWidth wraps the corresponding Objective-C method.
-func (x *CNNSpatialNormalizationNode) SetKernelWidth(kernelWidth int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
 }
 
 // KernelHeight wraps the corresponding Objective-C method.
-func (x *CNNSpatialNormalizationNode) KernelHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+func (csnn *CNNSpatialNormalizationNode) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(csnn), objc.RegisterName("kernelHeight"))
 	return _r
 }
-
-// SetKernelHeight wraps the corresponding Objective-C method.
-func (x *CNNSpatialNormalizationNode) SetKernelHeight(kernelHeight int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
-}
-
-// CNNSpatialNormalizationNodeable is the interface implemented by [CNNSpatialNormalizationNode], for mocking and DI.
-type CNNSpatialNormalizationNodeable interface {
-	obj.Object
-	WithKernelWidth(kernelWidth int) *CNNSpatialNormalizationNode
-	WithKernelHeight(kernelHeight int) *CNNSpatialNormalizationNode
-	WithAlpha(alpha float32) *CNNSpatialNormalizationNode
-	WithBeta(beta float32) *CNNSpatialNormalizationNode
-	WithDelta(delta float32) *CNNSpatialNormalizationNode
-	WithLabel(label string) *CNNSpatialNormalizationNode
-	KernelWidth() int
-	SetKernelWidth(kernelWidth int)
-	KernelHeight() int
-	SetKernelHeight(kernelHeight int)
-}
-
-var _ CNNSpatialNormalizationNodeable = (*CNNSpatialNormalizationNode)(nil)
 
 var _ CNNNormalizationNodeProvider = (*CNNSpatialNormalizationNode)(nil)
 

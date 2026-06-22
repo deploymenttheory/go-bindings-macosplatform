@@ -46,71 +46,51 @@ func bundleActionAdopt(id objc.ID) *BundleAction {
 	return x
 }
 
-// WithParameters the action’s parameters.
-func (x *BundleAction) WithParameters(parameters obj.Object) *BundleAction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
-	return x
+// WithParameters sets the action’s parameters.
+func (ba *BundleAction) WithParameters(parameters obj.Object) *BundleAction {
+	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
+	return ba
 }
 
-// WithProgressValue a float value between 0 and 1, which indicates how far along the action is while processing.
-func (x *BundleAction) WithProgressValue(progressValue float64) *BundleAction {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProgressValue:"), progressValue)
-	return x
+// WithProgressValue sets a float value between 0 and 1, which indicates how far along the action is while processing.
+func (ba *BundleAction) WithProgressValue(progressValue float64) *BundleAction {
+	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("setProgressValue:"), progressValue)
+	return ba
 }
 
 // AwakeFromBundle allows the action object to perform setup tasks requiring the presence of all bundle objects.
-func (x *BundleAction) AwakeFromBundle() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("awakeFromBundle"))
+func (ba *BundleAction) AwakeFromBundle() {
+	objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("awakeFromBundle"))
 }
 
 // HasView wraps the corresponding Objective-C method.
-func (x *BundleAction) HasView() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasView"))
+func (ba *BundleAction) HasView() bool {
+	_r := objc.Send[bool](objref.IDOf(ba), objc.RegisterName("hasView"))
 	return _r
 }
 
 // View wraps the corresponding Objective-C method.
-func (x *BundleAction) View() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+func (ba *BundleAction) View() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("view"))
 	return obj.Wrap(_r)
 }
 
 // Bundle wraps the corresponding Objective-C method.
-func (x *BundleAction) Bundle() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundle"))
+func (ba *BundleAction) Bundle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("bundle"))
 	return obj.Wrap(_r)
 }
 
 // Parameters wraps the corresponding Objective-C method.
-func (x *BundleAction) Parameters() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameters"))
+func (ba *BundleAction) Parameters() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ba), objc.RegisterName("parameters"))
 	return obj.Wrap(_r)
 }
-
-// SetParameters wraps the corresponding Objective-C method.
-func (x *BundleAction) SetParameters(parameters obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParameters:"), objref.IDOf(parameters))
-}
-
-// BundleActionable is the interface implemented by [BundleAction], for mocking and DI.
-type BundleActionable interface {
-	obj.Object
-	WithParameters(parameters obj.Object) *BundleAction
-	WithProgressValue(progressValue float64) *BundleAction
-	AwakeFromBundle()
-	HasView() bool
-	View() obj.Object
-	Bundle() obj.Object
-	Parameters() obj.Object
-	SetParameters(parameters obj.Object)
-}
-
-var _ BundleActionable = (*BundleAction)(nil)
 
 // isBundleAction marks BundleAction — and, by embedding promotion, its
 // subclasses — as a member of the BundleAction hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *BundleAction) isBundleAction() {}
+func (ba *BundleAction) isBundleAction() {}
 
 var _ BundleActionProvider = (*BundleAction)(nil)
 

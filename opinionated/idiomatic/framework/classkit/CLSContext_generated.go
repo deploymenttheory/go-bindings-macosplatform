@@ -6,6 +6,7 @@ package classkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -57,265 +58,210 @@ func NewContextWithTypeIdentifierTitle(type_ ContextType, identifier string, tit
 	return contextAdopt(_id)
 }
 
-// WithUniversalLinkURL a URL that leads to the content in your app associated with the current context.
-func (x *Context) WithUniversalLinkURL(universalLinkURL string) *Context {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniversalLinkURL:"), rt.FileURL(universalLinkURL))
-	return x
+// WithUniversalLinkURL sets a URL that leads to the content in your app associated with the current context.
+func (c *Context) WithUniversalLinkURL(universalLinkURL string) *Context {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setUniversalLinkURL:"), rt.FileURL(universalLinkURL))
+	return c
 }
 
-// WithType the kind of content a context represents.
-func (x *Context) WithType(type_ ContextType) *Context {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the kind of content a context represents.
+func (c *Context) WithType(type_ ContextType) *Context {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setType:"), type_)
+	return c
 }
 
-// WithCustomTypeName an optional name that the system presents to the user if you choose the custom context type.
-func (x *Context) WithCustomTypeName(customTypeName string) *Context {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomTypeName:"), purego.NSString(customTypeName))
-	return x
+// WithCustomTypeName sets an optional name that the system presents to the user if you choose the custom context type.
+func (c *Context) WithCustomTypeName(customTypeName string) *Context {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setCustomTypeName:"), purego.NSString(customTypeName))
+	return c
 }
 
-// WithTitle the name of the context as it appears to users.
-func (x *Context) WithTitle(title string) *Context {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the name of the context as it appears to users.
+func (c *Context) WithTitle(title string) *Context {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return c
 }
 
-// WithDisplayOrder the position of a context relative to its siblings.
-func (x *Context) WithDisplayOrder(displayOrder int) *Context {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayOrder:"), displayOrder)
-	return x
+// WithDisplayOrder sets the position of a context relative to its siblings.
+func (c *Context) WithDisplayOrder(displayOrder int) *Context {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setDisplayOrder:"), displayOrder)
+	return c
 }
 
-// WithTopic the area of study to which a context relates.
-func (x *Context) WithTopic(topic obj.Object) *Context {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopic:"), objref.IDOf(topic))
-	return x
+// WithTopic sets the area of study to which a context relates.
+func (c *Context) WithTopic(topic obj.Object) *Context {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setTopic:"), objref.IDOf(topic))
+	return c
 }
 
-// WithAssignable a Boolean that indicates whether teachers can assign the context as a task.
-func (x *Context) WithAssignable(assignable bool) *Context {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssignable:"), assignable)
-	return x
+// WithAssignable sets a Boolean that indicates whether teachers can assign the context as a task.
+func (c *Context) WithAssignable(assignable bool) *Context {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setAssignable:"), assignable)
+	return c
 }
 
-// WithSuggestedAge the range of ages, measured in years, for which you deem a context’s content suitable.
-func (x *Context) WithSuggestedAge(suggestedAge foundation.NSRange) *Context {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedAge:"), suggestedAge)
-	return x
+// WithSuggestedAge sets the range of ages, measured in years, for which you deem a context’s content suitable.
+func (c *Context) WithSuggestedAge(suggestedAge foundation.NSRange) *Context {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSuggestedAge:"), suggestedAge)
+	return c
 }
 
-// WithSuggestedCompletionTime a suggested time range to complete a task, measured in minutes.
-func (x *Context) WithSuggestedCompletionTime(suggestedCompletionTime foundation.NSRange) *Context {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedCompletionTime:"), suggestedCompletionTime)
-	return x
+// WithSuggestedCompletionTime sets a suggested time range to complete a task, measured in minutes.
+func (c *Context) WithSuggestedCompletionTime(suggestedCompletionTime foundation.NSRange) *Context {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSuggestedCompletionTime:"), suggestedCompletionTime)
+	return c
 }
 
-// WithSummary an optional, user-visible description of the context.
-func (x *Context) WithSummary(summary string) *Context {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSummary:"), purego.NSString(summary))
-	return x
+// WithSummary sets an optional, user-visible description of the context.
+func (c *Context) WithSummary(summary string) *Context {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setSummary:"), purego.NSString(summary))
+	return c
 }
 
-// WithThumbnail an optional thumbnail image associated with the context.
-func (x *Context) WithThumbnail(thumbnail obj.Object) *Context {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThumbnail:"), objref.IDOf(thumbnail))
-	return x
+// WithThumbnail sets an optional thumbnail image associated with the context.
+func (c *Context) WithThumbnail(thumbnail obj.Object) *Context {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("setThumbnail:"), objref.IDOf(thumbnail))
+	return c
 }
 
 // BecomeActive tells a context to become the active context.
-func (x *Context) BecomeActive() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("becomeActive"))
+func (c *Context) BecomeActive() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("becomeActive"))
 }
 
 // ResignActive tells a context to stop being the active context.
-func (x *Context) ResignActive() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resignActive"))
-}
-
-// SetType updates the kind of content that a context represents.
-func (x *Context) SetType(type_ ContextType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
+func (c *Context) ResignActive() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("resignActive"))
 }
 
 // AddProgressReportingCapabilities adds a progress reporting capability to the set of capabilities for the context.
-func (x *Context) AddProgressReportingCapabilities(capabilities obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addProgressReportingCapabilities:"), objref.IDOf(capabilities))
+func (c *Context) AddProgressReportingCapabilities(capabilities obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("addProgressReportingCapabilities:"), objref.IDOf(capabilities))
 }
 
 // ResetProgressReportingCapabilities resets the set of capabilities for the context.
-func (x *Context) ResetProgressReportingCapabilities() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetProgressReportingCapabilities"))
+func (c *Context) ResetProgressReportingCapabilities() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("resetProgressReportingCapabilities"))
 }
 
-// IdentifierPath context identifier path of this context. The identifier path starts with the main app context object and finishes with the identifier of this context. This is the identifier path that one would use in
+// IdentifierPath returns context identifier path of this context. The identifier path starts with the main app context object and finishes with the identifier of this context. This is the identifier path that one would use in
 //
 // IdentifierPath returns the collection as a Go slice.
-func (x *Context) IdentifierPath() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifierPath"))
+func (c *Context) IdentifierPath() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("identifierPath"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Identifier app-assigned identifier. This identifier should work across users and devices and be unique with regards to its siblings within its parent. The identifier could be used to embed information later used for deep linking. For example:
-func (x *Context) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns app-assigned identifier. This identifier should work across users and devices and be unique with regards to its siblings within its parent. The identifier could be used to embed information later used for deep linking. For example:
+func (c *Context) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// UniversalLinkURL alternative deep link URL using universal links. If your app supports universal links, you can supply them here to link the content this context represents.
-func (x *Context) UniversalLinkURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("universalLinkURL"))
+// UniversalLinkURL returns alternative deep link URL using universal links. If your app supports universal links, you can supply them here to link the content this context represents.
+func (c *Context) UniversalLinkURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("universalLinkURL"))
 	return obj.Wrap(_r)
 }
 
-// SetUniversalLinkURL wraps the corresponding Objective-C method.
-func (x *Context) SetUniversalLinkURL(universalLinkURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniversalLinkURL:"), rt.FileURL(universalLinkURL))
-}
-
-// Type type of this context The type that best describes this context.
-func (x *Context) Type() ContextType {
-	_r := objc.Send[ContextType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns type of this context The type that best describes this context.
+func (c *Context) Type() ContextType {
+	_r := objc.Send[ContextType](objref.IDOf(c), objc.RegisterName("type"))
 	return _r
 }
 
-// CustomTypeName an optional user-visible name for the context if its type is CLSContextTypeCustom. This property is relevant only if the type is CLSContextTypeCustom. This string should be localized. If this property is not set for a context of type CLSContextTypeCustom, Schoolwork app will use a default localized string ‘Custom’ as the name of the activity representing this context.
-func (x *Context) CustomTypeName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customTypeName"))
+// CustomTypeName returns an optional user-visible name for the context if its type is CLSContextTypeCustom. This property is relevant only if the type is CLSContextTypeCustom. This string should be localized. If this property is not set for a context of type CLSContextTypeCustom, Schoolwork app will use a default localized string ‘Custom’ as the name of the activity representing this context.
+func (c *Context) CustomTypeName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("customTypeName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetCustomTypeName wraps the corresponding Objective-C method.
-func (x *Context) SetCustomTypeName(customTypeName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomTypeName:"), purego.NSString(customTypeName))
-}
-
-// Title title of this context. For example:
-func (x *Context) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+// Title returns title of this context. For example:
+func (c *Context) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetTitle wraps the corresponding Objective-C method.
-func (x *Context) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-}
-
-// DisplayOrder the displayOrder is by default sorted ascending. Set the displayOrder if you want your contexts to be displayed in a particular order. The sort key is used as a way to sort sibling contexts in a particular order.
-func (x *Context) DisplayOrder() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("displayOrder"))
+// DisplayOrder returns the displayOrder is by default sorted ascending. Set the displayOrder if you want your contexts to be displayed in a particular order. The sort key is used as a way to sort sibling contexts in a particular order.
+func (c *Context) DisplayOrder() int {
+	_r := objc.Send[int](objref.IDOf(c), objc.RegisterName("displayOrder"))
 	return _r
 }
 
-// SetDisplayOrder wraps the corresponding Objective-C method.
-func (x *Context) SetDisplayOrder(displayOrder int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayOrder:"), displayOrder)
-}
-
-// Topic topic associated with this context. See above for valid, predefined topics.
-func (x *Context) Topic() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("topic"))
+// Topic returns topic associated with this context. See above for valid, predefined topics.
+func (c *Context) Topic() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("topic"))
 	return obj.Wrap(_r)
 }
 
-// SetTopic wraps the corresponding Objective-C method.
-func (x *Context) SetTopic(topic obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopic:"), objref.IDOf(topic))
-}
-
-// IsAssignable this property is true if the context can be assigned as an activity. The default value of this property is true. This should be set to false for a context that is used as a container for other contexts, but by itself, is not an assignable activity.
-func (x *Context) IsAssignable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAssignable"))
+// IsAssignable reports whether this property is true if the context can be assigned as an activity. The default value of this property is true. This should be set to false for a context that is used as a container for other contexts, but by itself, is not an assignable activity.
+func (c *Context) IsAssignable() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isAssignable"))
 	return _r
 }
 
-// SetAssignable wraps the corresponding Objective-C method.
-func (x *Context) SetAssignable(assignable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssignable:"), assignable)
-}
-
-// SuggestedAge suggested age range of students, expressed in years, for whom this context is suitable. This information is intended to help teachers to choose age-appropriate activities for their students. The default value is [0, NSIntegerMax - 1]. This is
-func (x *Context) SuggestedAge() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("suggestedAge"))
+// SuggestedAge returns suggested age range of students, expressed in years, for whom this context is suitable. This information is intended to help teachers to choose age-appropriate activities for their students. The default value is [0, NSIntegerMax - 1]. This is
+func (c *Context) SuggestedAge() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(c), objc.RegisterName("suggestedAge"))
 	return _r
 }
 
-// SetSuggestedAge wraps the corresponding Objective-C method.
-func (x *Context) SetSuggestedAge(suggestedAge foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedAge:"), suggestedAge)
-}
-
-// SuggestedCompletionTime suggested time range, expressed in minutes, to complete the activity. This information will help teachers as they choose activities for their students. The default value is [0, NSIntegerMax - 1]. This is
-func (x *Context) SuggestedCompletionTime() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("suggestedCompletionTime"))
+// SuggestedCompletionTime returns suggested time range, expressed in minutes, to complete the activity. This information will help teachers as they choose activities for their students. The default value is [0, NSIntegerMax - 1]. This is
+func (c *Context) SuggestedCompletionTime() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(c), objc.RegisterName("suggestedCompletionTime"))
 	return _r
-}
-
-// SetSuggestedCompletionTime wraps the corresponding Objective-C method.
-func (x *Context) SetSuggestedCompletionTime(suggestedCompletionTime foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuggestedCompletionTime:"), suggestedCompletionTime)
 }
 
 // ProgressReportingCapabilities specifies progress reporting capablities of the app for this context. This information is intended to help teachers as they choose activities for their students. By default a CLSContext will have one CLSProgressReportingCapability instance of kind CLSProgressReportingCapabilityKindDuration. More progress reporting capabilities can be specified via '-addProgressReportingCapabilities:' to customize this set.
-func (x *Context) ProgressReportingCapabilities() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("progressReportingCapabilities"))
+func (c *Context) ProgressReportingCapabilities() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("progressReportingCapabilities"))
 	return obj.Wrap(_r)
 }
 
-// Summary an optional user-visible summary describing the context limited to 4000 characters in length. This may be used to provide information about the types of activities available under a given context or the context itself. This string should be localized.
-func (x *Context) Summary() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("summary"))
+// Summary returns an optional user-visible summary describing the context limited to 4000 characters in length. This may be used to provide information about the types of activities available under a given context or the context itself. This string should be localized.
+func (c *Context) Summary() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("summary"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetSummary wraps the corresponding Objective-C method.
-func (x *Context) SetSummary(summary string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSummary:"), purego.NSString(summary))
-}
-
-// Thumbnail an optional thumbnail image associated with the context. The size of this image should be equal to or larger than 80x80 pixels and equal to or smaller than 330x330 pixels. Images larger than 330x330 pixels will be scaled down. Images with both dimensions smaller than 80x80 pixels will not be accepted.
-func (x *Context) Thumbnail() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("thumbnail"))
+// Thumbnail returns an optional thumbnail image associated with the context. The size of this image should be equal to or larger than 80x80 pixels and equal to or smaller than 330x330 pixels. Images larger than 330x330 pixels will be scaled down. Images with both dimensions smaller than 80x80 pixels will not be accepted.
+func (c *Context) Thumbnail() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("thumbnail"))
 	return obj.Wrap(_r)
 }
 
-// SetThumbnail wraps the corresponding Objective-C method.
-func (x *Context) SetThumbnail(thumbnail obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThumbnail:"), objref.IDOf(thumbnail))
-}
-
-// IsActive returns true if self is the active context.
-func (x *Context) IsActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+// IsActive reports whether self is the active context.
+func (c *Context) IsActive() bool {
+	_r := objc.Send[bool](objref.IDOf(c), objc.RegisterName("isActive"))
 	return _r
 }
 
 // RemoveFromParent removes the context from its parent.
-func (x *Context) RemoveFromParent() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeFromParent"))
+func (c *Context) RemoveFromParent() {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("removeFromParent"))
 }
 
 // AddChildContext adds the specifed context as a child of the context receiving the method call.
-func (x *Context) AddChildContext(child *Context) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addChildContext:"), objref.IDOf(child))
+func (c *Context) AddChildContext(child *Context) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("addChildContext:"), objref.IDOf(child))
 }
 
 // DescendantMatchingIdentifierPathCompletion finds the context with the given identifier path relative to this context.
 //
 // DescendantMatchingIdentifierPathCompletion blocks until the operation completes or ctx is cancelled.
-func (x *Context) DescendantMatchingIdentifierPathCompletion(ctx context.Context, identifierPath []string) (result *Context, err error) {
+func (c *Context) DescendantMatchingIdentifierPathCompletion(ctx context.Context, identifierPath []string) (result *Context, err error) {
 	type _result struct {
 		val *Context
 		err error
@@ -327,7 +273,7 @@ func (x *Context) DescendantMatchingIdentifierPathCompletion(ctx context.Context
 		_o.val = ContextFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descendantMatchingIdentifierPath:completion:"), purego.SliceToNSArray(identifierPath, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("descendantMatchingIdentifierPath:completion:"), purego.SliceToNSArray(identifierPath, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -338,96 +284,39 @@ func (x *Context) DescendantMatchingIdentifierPathCompletion(ctx context.Context
 }
 
 // AddNavigationChildContext adds a child context that users can navigate to from this context.
-func (x *Context) AddNavigationChildContext(child *Context) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addNavigationChildContext:"), objref.IDOf(child))
+func (c *Context) AddNavigationChildContext(child *Context) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("addNavigationChildContext:"), objref.IDOf(child))
 }
 
 // RemoveNavigationChildContext removes the specified context as a presentable child of this context.
-func (x *Context) RemoveNavigationChildContext(child *Context) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeNavigationChildContext:"), objref.IDOf(child))
+func (c *Context) RemoveNavigationChildContext(child *Context) {
+	objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("removeNavigationChildContext:"), objref.IDOf(child))
 }
 
 // Parent returns the parent of this context.
-func (x *Context) Parent() *Context {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
+func (c *Context) Parent() *Context {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("parent"))
 	return ContextFromID(_r)
 }
 
-// NavigationChildContexts child contexts that can be navigated to from this context. Returns all the child contexts added via
+// NavigationChildContexts returns child contexts that can be navigated to from this context. Returns all the child contexts added via
 //
 // NavigationChildContexts returns the collection as a Go slice.
-func (x *Context) NavigationChildContexts() []*Context {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("navigationChildContexts"))
+func (c *Context) NavigationChildContexts() []*Context {
+	_arr := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("navigationChildContexts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Context { return ContextFromID(_id) })
 }
 
 // CreateNewActivity creates and returns a new activity instance for the context.
-func (x *Context) CreateNewActivity() *Activity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createNewActivity"))
+func (c *Context) CreateNewActivity() *Activity {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("createNewActivity"))
 	return ActivityFromID(_r)
 }
 
 // CurrentActivity returns the current activity. Activity associated with a context.  If no activity was ever created this is nil. See:
-func (x *Context) CurrentActivity() *Activity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentActivity"))
+func (c *Context) CurrentActivity() *Activity {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("currentActivity"))
 	return ActivityFromID(_r)
 }
-
-// Contextable is the interface implemented by [Context], for mocking and DI.
-type Contextable interface {
-	obj.Object
-	WithUniversalLinkURL(universalLinkURL string) *Context
-	WithType(type_ ContextType) *Context
-	WithCustomTypeName(customTypeName string) *Context
-	WithTitle(title string) *Context
-	WithDisplayOrder(displayOrder int) *Context
-	WithTopic(topic obj.Object) *Context
-	WithAssignable(assignable bool) *Context
-	WithSuggestedAge(suggestedAge foundation.NSRange) *Context
-	WithSuggestedCompletionTime(suggestedCompletionTime foundation.NSRange) *Context
-	WithSummary(summary string) *Context
-	WithThumbnail(thumbnail obj.Object) *Context
-	BecomeActive()
-	ResignActive()
-	SetType(type_ ContextType)
-	AddProgressReportingCapabilities(capabilities obj.Object)
-	ResetProgressReportingCapabilities()
-	IdentifierPath() []string
-	Identifier() string
-	UniversalLinkURL() obj.Object
-	SetUniversalLinkURL(universalLinkURL string)
-	Type() ContextType
-	CustomTypeName() string
-	SetCustomTypeName(customTypeName string)
-	Title() string
-	SetTitle(title string)
-	DisplayOrder() int
-	SetDisplayOrder(displayOrder int)
-	Topic() obj.Object
-	SetTopic(topic obj.Object)
-	IsAssignable() bool
-	SetAssignable(assignable bool)
-	SuggestedAge() foundation.NSRange
-	SetSuggestedAge(suggestedAge foundation.NSRange)
-	SuggestedCompletionTime() foundation.NSRange
-	SetSuggestedCompletionTime(suggestedCompletionTime foundation.NSRange)
-	ProgressReportingCapabilities() obj.Object
-	Summary() string
-	SetSummary(summary string)
-	Thumbnail() obj.Object
-	SetThumbnail(thumbnail obj.Object)
-	IsActive() bool
-	RemoveFromParent()
-	AddChildContext(child *Context)
-	DescendantMatchingIdentifierPathCompletion(ctx context.Context, identifierPath []string) (*Context, error)
-	AddNavigationChildContext(child *Context)
-	RemoveNavigationChildContext(child *Context)
-	Parent() *Context
-	NavigationChildContexts() []*Context
-	CreateNewActivity() *Activity
-	CurrentActivity() *Activity
-}
-
-var _ Contextable = (*Context)(nil)
 
 var _ ObjectProvider = (*Context)(nil)

@@ -44,24 +44,24 @@ func mTRMicrowaveOvenModeClusterModeTagStructAdopt(id objc.ID) *MTRMicrowaveOven
 }
 
 // Description returns the object's -description text.
-func (x *MTRMicrowaveOvenModeClusterModeTagStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mmomcmts *MTRMicrowaveOvenModeClusterModeTagStruct) Description() string {
+	return rt.Description(objref.IDOf(mmomcmts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRMicrowaveOvenModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mmomcmts *MTRMicrowaveOvenModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mmomcmts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRMicrowaveOvenModeClusterModeTagStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mmomcmts *MTRMicrowaveOvenModeClusterModeTagStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mmomcmts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRMicrowaveOvenModeClusterModeTagStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mmomcmts *MTRMicrowaveOvenModeClusterModeTagStruct) String() string {
+	return rt.Description(objref.IDOf(mmomcmts))
 }
 
 // NewMTRMicrowaveOvenModeClusterModeTagStruct creates a new MTRMicrowaveOvenModeClusterModeTagStruct.
@@ -71,48 +71,25 @@ func NewMTRMicrowaveOvenModeClusterModeTagStruct() *MTRMicrowaveOvenModeClusterM
 }
 
 // WithMfgCode sets the property and returns the receiver so calls can be chained.
-func (x *MTRMicrowaveOvenModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRMicrowaveOvenModeClusterModeTagStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
-	return x
+func (mmomcmts *MTRMicrowaveOvenModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRMicrowaveOvenModeClusterModeTagStruct {
+	objc.Send[objc.ID](objref.IDOf(mmomcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
+	return mmomcmts
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRMicrowaveOvenModeClusterModeTagStruct) WithValue(value obj.Object) *MTRMicrowaveOvenModeClusterModeTagStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
+func (mmomcmts *MTRMicrowaveOvenModeClusterModeTagStruct) WithValue(value obj.Object) *MTRMicrowaveOvenModeClusterModeTagStruct {
+	objc.Send[objc.ID](objref.IDOf(mmomcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return mmomcmts
 }
 
 // MfgCode wraps the corresponding Objective-C method.
-func (x *MTRMicrowaveOvenModeClusterModeTagStruct) MfgCode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mfgCode"))
+func (mmomcmts *MTRMicrowaveOvenModeClusterModeTagStruct) MfgCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmomcmts), objc.RegisterName("mfgCode"))
 	return obj.Wrap(_r)
-}
-
-// SetMfgCode wraps the corresponding Objective-C method.
-func (x *MTRMicrowaveOvenModeClusterModeTagStruct) SetMfgCode(mfgCode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *MTRMicrowaveOvenModeClusterModeTagStruct) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (mmomcmts *MTRMicrowaveOvenModeClusterModeTagStruct) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mmomcmts), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *MTRMicrowaveOvenModeClusterModeTagStruct) SetValue(value obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-}
-
-// MTRMicrowaveOvenModeClusterModeTagStructable is the interface implemented by [MTRMicrowaveOvenModeClusterModeTagStruct], for mocking and DI.
-type MTRMicrowaveOvenModeClusterModeTagStructable interface {
-	obj.Object
-	WithMfgCode(mfgCode obj.Object) *MTRMicrowaveOvenModeClusterModeTagStruct
-	WithValue(value obj.Object) *MTRMicrowaveOvenModeClusterModeTagStruct
-	MfgCode() obj.Object
-	SetMfgCode(mfgCode obj.Object)
-	Value() obj.Object
-	SetValue(value obj.Object)
-}
-
-var _ MTRMicrowaveOvenModeClusterModeTagStructable = (*MTRMicrowaveOvenModeClusterModeTagStruct)(nil)

@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -47,23 +46,15 @@ func cumulativeQuantitySampleAdopt(id objc.ID) *CumulativeQuantitySample {
 }
 
 // SumQuantity wraps the corresponding Objective-C method.
-func (x *CumulativeQuantitySample) SumQuantity() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sumQuantity"))
+func (cqs *CumulativeQuantitySample) SumQuantity() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(cqs), objc.RegisterName("sumQuantity"))
 	return QuantityFromID(_r)
 }
-
-// CumulativeQuantitySampleable is the interface implemented by [CumulativeQuantitySample], for mocking and DI.
-type CumulativeQuantitySampleable interface {
-	obj.Object
-	SumQuantity() *Quantity
-}
-
-var _ CumulativeQuantitySampleable = (*CumulativeQuantitySample)(nil)
 
 // isCumulativeQuantitySample marks CumulativeQuantitySample — and, by embedding promotion, its
 // subclasses — as a member of the CumulativeQuantitySample hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *CumulativeQuantitySample) isCumulativeQuantitySample() {}
+func (cqs *CumulativeQuantitySample) isCumulativeQuantitySample() {}
 
 var _ CumulativeQuantitySampleProvider = (*CumulativeQuantitySample)(nil)
 

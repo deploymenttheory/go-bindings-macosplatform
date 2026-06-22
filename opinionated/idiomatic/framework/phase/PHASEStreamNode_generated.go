@@ -46,64 +46,53 @@ func streamNodeAdopt(id objc.ID) *StreamNode {
 }
 
 // Description returns the object's -description text.
-func (x *StreamNode) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sn *StreamNode) Description() string {
+	return rt.Description(objref.IDOf(sn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StreamNode) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sn *StreamNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StreamNode) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sn *StreamNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StreamNode) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sn *StreamNode) String() string {
+	return rt.Description(objref.IDOf(sn))
 }
 
-// GainMetaParameter if specified during construction, the metaparameter for controlling gain will be available here
-func (x *StreamNode) GainMetaParameter() *NumberMetaParameter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gainMetaParameter"))
+// GainMetaParameter returns if specified during construction, the metaparameter for controlling gain will be available here
+func (sn *StreamNode) GainMetaParameter() *NumberMetaParameter {
+	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("gainMetaParameter"))
 	return NumberMetaParameterFromID(_r)
 }
 
-// RateMetaParameter if specified during construction, the metaparameter for controlling rate/pitch will be available here
-func (x *StreamNode) RateMetaParameter() *NumberMetaParameter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rateMetaParameter"))
+// RateMetaParameter returns if specified during construction, the metaparameter for controlling rate/pitch will be available here
+func (sn *StreamNode) RateMetaParameter() *NumberMetaParameter {
+	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("rateMetaParameter"))
 	return NumberMetaParameterFromID(_r)
 }
 
-// Mixer the readonly property that returns the PHASEMixer this stream was created with and assigned to.
-func (x *StreamNode) Mixer() *Mixer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mixer"))
+// Mixer returns the readonly property that returns the PHASEMixer this stream was created with and assigned to.
+func (sn *StreamNode) Mixer() *Mixer {
+	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("mixer"))
 	return MixerFromID(_r)
 }
 
-// Format the readonly property that returns the AVAudioFormat that this stream was initialized with.
-func (x *StreamNode) Format() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("format"))
+// Format returns the readonly property that returns the AVAudioFormat that this stream was initialized with.
+func (sn *StreamNode) Format() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sn), objc.RegisterName("format"))
 	return obj.Wrap(_r)
 }
-
-// StreamNodeable is the interface implemented by [StreamNode], for mocking and DI.
-type StreamNodeable interface {
-	obj.Object
-	GainMetaParameter() *NumberMetaParameter
-	RateMetaParameter() *NumberMetaParameter
-	Mixer() *Mixer
-	Format() obj.Object
-}
-
-var _ StreamNodeable = (*StreamNode)(nil)
 
 // isStreamNode marks StreamNode — and, by embedding promotion, its
 // subclasses — as a member of the StreamNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *StreamNode) isStreamNode() {}
+func (sn *StreamNode) isStreamNode() {}
 
 var _ StreamNodeProvider = (*StreamNode)(nil)

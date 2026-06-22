@@ -46,24 +46,24 @@ func openGLLayerAdopt(id objc.ID) *OpenGLLayer {
 }
 
 // Description returns the object's -description text.
-func (x *OpenGLLayer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ogl *OpenGLLayer) Description() string {
+	return rt.Description(objref.IDOf(ogl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OpenGLLayer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ogl *OpenGLLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ogl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OpenGLLayer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ogl *OpenGLLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ogl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *OpenGLLayer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ogl *OpenGLLayer) String() string {
+	return rt.Description(objref.IDOf(ogl))
 }
 
 // NewOpenGLLayer creates a new OpenGLLayer.
@@ -72,83 +72,50 @@ func NewOpenGLLayer() *OpenGLLayer {
 	return openGLLayerAdopt(_id)
 }
 
-// WithView returns the view associated with the layer.
-func (x *OpenGLLayer) WithView(view ViewProvider) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
-	return x
+// WithView sets returns the view associated with the layer.
+func (ogl *OpenGLLayer) WithView(view ViewProvider) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setView:"), objref.IDOf(view))
+	return ogl
 }
 
-// WithOpenGLPixelFormat provides access to the layer’s associated OpenGL pixel format.
-func (x *OpenGLLayer) WithOpenGLPixelFormat(openGLPixelFormat *OpenGLPixelFormat) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpenGLPixelFormat:"), objref.IDOf(openGLPixelFormat))
-	return x
+// WithOpenGLPixelFormat sets provides access to the layer’s associated OpenGL pixel format.
+func (ogl *OpenGLLayer) WithOpenGLPixelFormat(openGLPixelFormat *OpenGLPixelFormat) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setOpenGLPixelFormat:"), objref.IDOf(openGLPixelFormat))
+	return ogl
 }
 
-// WithOpenGLContext the layer’s OpenGL context.
-func (x *OpenGLLayer) WithOpenGLContext(openGLContext *OpenGLContext) *OpenGLLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpenGLContext:"), objref.IDOf(openGLContext))
-	return x
+// WithOpenGLContext sets the layer’s OpenGL context.
+func (ogl *OpenGLLayer) WithOpenGLContext(openGLContext *OpenGLContext) *OpenGLLayer {
+	objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("setOpenGLContext:"), objref.IDOf(openGLContext))
+	return ogl
 }
 
 // OpenGLPixelFormatForDisplayMask returns the OpenGL pixel format suitable for the specified displays.
-func (x *OpenGLLayer) OpenGLPixelFormatForDisplayMask(mask uint32) *OpenGLPixelFormat {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLPixelFormatForDisplayMask:"), mask)
+func (ogl *OpenGLLayer) OpenGLPixelFormatForDisplayMask(mask uint32) *OpenGLPixelFormat {
+	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("openGLPixelFormatForDisplayMask:"), mask)
 	return OpenGLPixelFormatFromID(_r)
 }
 
 // OpenGLContextForPixelFormat returns the OpenGL context to use for the requested pixel format.
-func (x *OpenGLLayer) OpenGLContextForPixelFormat(pixelFormat *OpenGLPixelFormat) *OpenGLContext {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLContextForPixelFormat:"), objref.IDOf(pixelFormat))
+func (ogl *OpenGLLayer) OpenGLContextForPixelFormat(pixelFormat *OpenGLPixelFormat) *OpenGLContext {
+	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("openGLContextForPixelFormat:"), objref.IDOf(pixelFormat))
 	return OpenGLContextFromID(_r)
 }
 
 // View wraps the corresponding Objective-C method.
-func (x *OpenGLLayer) View() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+func (ogl *OpenGLLayer) View() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
-// SetView wraps the corresponding Objective-C method.
-func (x *OpenGLLayer) SetView(view *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
-}
-
 // OpenGLPixelFormat wraps the corresponding Objective-C method.
-func (x *OpenGLLayer) OpenGLPixelFormat() *OpenGLPixelFormat {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLPixelFormat"))
+func (ogl *OpenGLLayer) OpenGLPixelFormat() *OpenGLPixelFormat {
+	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("openGLPixelFormat"))
 	return OpenGLPixelFormatFromID(_r)
 }
 
-// SetOpenGLPixelFormat wraps the corresponding Objective-C method.
-func (x *OpenGLLayer) SetOpenGLPixelFormat(openGLPixelFormat *OpenGLPixelFormat) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpenGLPixelFormat:"), objref.IDOf(openGLPixelFormat))
-}
-
 // OpenGLContext wraps the corresponding Objective-C method.
-func (x *OpenGLLayer) OpenGLContext() *OpenGLContext {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLContext"))
+func (ogl *OpenGLLayer) OpenGLContext() *OpenGLContext {
+	_r := objc.Send[objc.ID](objref.IDOf(ogl), objc.RegisterName("openGLContext"))
 	return OpenGLContextFromID(_r)
 }
-
-// SetOpenGLContext wraps the corresponding Objective-C method.
-func (x *OpenGLLayer) SetOpenGLContext(openGLContext *OpenGLContext) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpenGLContext:"), objref.IDOf(openGLContext))
-}
-
-// OpenGLLayerable is the interface implemented by [OpenGLLayer], for mocking and DI.
-type OpenGLLayerable interface {
-	obj.Object
-	WithView(view ViewProvider) *OpenGLLayer
-	WithOpenGLPixelFormat(openGLPixelFormat *OpenGLPixelFormat) *OpenGLLayer
-	WithOpenGLContext(openGLContext *OpenGLContext) *OpenGLLayer
-	OpenGLPixelFormatForDisplayMask(mask uint32) *OpenGLPixelFormat
-	OpenGLContextForPixelFormat(pixelFormat *OpenGLPixelFormat) *OpenGLContext
-	View() *View
-	SetView(view *View)
-	OpenGLPixelFormat() *OpenGLPixelFormat
-	SetOpenGLPixelFormat(openGLPixelFormat *OpenGLPixelFormat)
-	OpenGLContext() *OpenGLContext
-	SetOpenGLContext(openGLContext *OpenGLContext)
-}
-
-var _ OpenGLLayerable = (*OpenGLLayer)(nil)

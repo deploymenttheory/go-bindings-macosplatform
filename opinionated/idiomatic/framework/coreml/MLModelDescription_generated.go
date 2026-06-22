@@ -46,24 +46,24 @@ func modelDescriptionAdopt(id objc.ID) *ModelDescription {
 }
 
 // Description returns the object's -description text.
-func (x *ModelDescription) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (md *ModelDescription) Description() string {
+	return rt.Description(objref.IDOf(md))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ModelDescription) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (md *ModelDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(md), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ModelDescription) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (md *ModelDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(md), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ModelDescription) String() string {
-	return rt.Description(objref.IDOf(x))
+func (md *ModelDescription) String() string {
+	return rt.Description(objref.IDOf(md))
 }
 
 // NewModelDescription creates a new ModelDescription.
@@ -72,85 +72,68 @@ func NewModelDescription() *ModelDescription {
 	return modelDescriptionAdopt(_id)
 }
 
-// InputDescriptionsByName description of the inputs to the model
-func (x *ModelDescription) InputDescriptionsByName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputDescriptionsByName"))
+// InputDescriptionsByName returns description of the inputs to the model
+func (md *ModelDescription) InputDescriptionsByName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("inputDescriptionsByName"))
 	return obj.Wrap(_r)
 }
 
-// OutputDescriptionsByName description of the outputs from the model
-func (x *ModelDescription) OutputDescriptionsByName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputDescriptionsByName"))
+// OutputDescriptionsByName returns description of the outputs from the model
+func (md *ModelDescription) OutputDescriptionsByName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("outputDescriptionsByName"))
 	return obj.Wrap(_r)
 }
 
-// StateDescriptionsByName description of the state features.
-func (x *ModelDescription) StateDescriptionsByName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateDescriptionsByName"))
+// StateDescriptionsByName returns description of the state features.
+func (md *ModelDescription) StateDescriptionsByName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("stateDescriptionsByName"))
 	return obj.Wrap(_r)
 }
 
-// PredictedFeatureName name of the primary target / predicted output feature in the output descriptions
-func (x *ModelDescription) PredictedFeatureName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predictedFeatureName"))
+// PredictedFeatureName returns name of the primary target / predicted output feature in the output descriptions
+func (md *ModelDescription) PredictedFeatureName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("predictedFeatureName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// PredictedProbabilitiesName key for all predicted probabilities stored as a MLFeatureTypeDictionary in the output descriptions
-func (x *ModelDescription) PredictedProbabilitiesName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("predictedProbabilitiesName"))
+// PredictedProbabilitiesName returns key for all predicted probabilities stored as a MLFeatureTypeDictionary in the output descriptions
+func (md *ModelDescription) PredictedProbabilitiesName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("predictedProbabilitiesName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Metadata optional metadata describing the model
-func (x *ModelDescription) Metadata() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+// Metadata returns optional metadata describing the model
+func (md *ModelDescription) Metadata() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("metadata"))
 	return obj.Wrap(_r)
 }
 
-// ClassLabels array to map a class index to the corresponding label, which is either Number or String. The property is populated from the classLabels entry specified in the model's protobuf message. When the model is a pipeline, which contains one or more sub models, the property value is calculated as follows. 1. If the pipeline model's proto message specifies predictedFeatureName parameter, use classLabels property value of the sub model with the output feature with the name. 2. Otherwise, if the pipeline model has only one sub model with non-nil classLabels property, use the property value. 3. Otherwise, the property is nil.
-func (x *ModelDescription) ClassLabels() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("classLabels"))
+// ClassLabels returns array to map a class index to the corresponding label, which is either Number or String. The property is populated from the classLabels entry specified in the model's protobuf message. When the model is a pipeline, which contains one or more sub models, the property value is calculated as follows. 1. If the pipeline model's proto message specifies predictedFeatureName parameter, use classLabels property value of the sub model with the output feature with the name. 2. Otherwise, if the pipeline model has only one sub model with non-nil classLabels property, use the property value. 3. Otherwise, the property is nil.
+func (md *ModelDescription) ClassLabels() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("classLabels"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // IsUpdatable wraps the corresponding Objective-C method.
-func (x *ModelDescription) IsUpdatable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUpdatable"))
+func (md *ModelDescription) IsUpdatable() bool {
+	_r := objc.Send[bool](objref.IDOf(md), objc.RegisterName("isUpdatable"))
 	return _r
 }
 
 // TrainingInputDescriptionsByName wraps the corresponding Objective-C method.
-func (x *ModelDescription) TrainingInputDescriptionsByName() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trainingInputDescriptionsByName"))
+func (md *ModelDescription) TrainingInputDescriptionsByName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("trainingInputDescriptionsByName"))
 	return obj.Wrap(_r)
 }
 
 // ParameterDescriptionsByKey wraps the corresponding Objective-C method.
-func (x *ModelDescription) ParameterDescriptionsByKey() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameterDescriptionsByKey"))
+func (md *ModelDescription) ParameterDescriptionsByKey() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(md), objc.RegisterName("parameterDescriptionsByKey"))
 	return obj.Wrap(_r)
 }
-
-// ModelDescriptionable is the interface implemented by [ModelDescription], for mocking and DI.
-type ModelDescriptionable interface {
-	obj.Object
-	InputDescriptionsByName() obj.Object
-	OutputDescriptionsByName() obj.Object
-	StateDescriptionsByName() obj.Object
-	PredictedFeatureName() string
-	PredictedProbabilitiesName() string
-	Metadata() obj.Object
-	ClassLabels() []obj.Object
-	IsUpdatable() bool
-	TrainingInputDescriptionsByName() obj.Object
-	ParameterDescriptionsByKey() obj.Object
-}
-
-var _ ModelDescriptionable = (*ModelDescription)(nil)

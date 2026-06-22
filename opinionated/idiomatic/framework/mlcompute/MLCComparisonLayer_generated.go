@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,32 +51,22 @@ func NewComparisonLayer() *ComparisonLayer {
 	return comparisonLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *ComparisonLayer) WithLabel(label string) *ComparisonLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (cl *ComparisonLayer) WithLabel(label string) *ComparisonLayer {
+	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *ComparisonLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ComparisonLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (cl *ComparisonLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ComparisonLayer {
+	objc.Send[objc.ID](objref.IDOf(cl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return cl
 }
 
 // Operation wraps the corresponding Objective-C method.
-func (x *ComparisonLayer) Operation() ComparisonOperation {
-	_r := objc.Send[ComparisonOperation](objref.IDOf(x), objc.RegisterName("operation"))
+func (cl *ComparisonLayer) Operation() ComparisonOperation {
+	_r := objc.Send[ComparisonOperation](objref.IDOf(cl), objc.RegisterName("operation"))
 	return _r
 }
-
-// ComparisonLayerable is the interface implemented by [ComparisonLayer], for mocking and DI.
-type ComparisonLayerable interface {
-	obj.Object
-	WithLabel(label string) *ComparisonLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ComparisonLayer
-	Operation() ComparisonOperation
-}
-
-var _ ComparisonLayerable = (*ComparisonLayer)(nil)
 
 var _ LayerProvider = (*ComparisonLayer)(nil)

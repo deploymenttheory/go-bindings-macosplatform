@@ -51,13 +51,6 @@ func NewMTRClusterWakeOnLanWithDeviceEndpointQueue(device *MTRDevice, endpoint u
 	return mTRClusterWakeOnLanAdopt(_id)
 }
 
-// MTRClusterWakeOnLanable is the interface implemented by [MTRClusterWakeOnLan], for mocking and DI.
-type MTRClusterWakeOnLanable interface {
-	obj.Object
-}
-
-var _ MTRClusterWakeOnLanable = (*MTRClusterWakeOnLan)(nil)
-
 var _ MTRClusterWakeOnLANProvider = (*MTRClusterWakeOnLan)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterWakeOnLan)(nil)

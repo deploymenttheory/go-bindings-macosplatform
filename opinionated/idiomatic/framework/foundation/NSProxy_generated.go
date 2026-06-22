@@ -48,64 +48,53 @@ func proxyAdopt(id objc.ID) *Proxy {
 }
 
 // Description returns the object's -description text.
-func (x *Proxy) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Proxy) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Proxy) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Proxy) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Proxy) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Proxy) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Proxy) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Proxy) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // ForwardInvocation passes a given invocation to the real object the proxy represents.
-func (x *Proxy) ForwardInvocation(invocation *Invocation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("forwardInvocation:"), objref.IDOf(invocation))
+func (p *Proxy) ForwardInvocation(invocation *Invocation) {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("forwardInvocation:"), objref.IDOf(invocation))
 }
 
 // Dealloc deallocates the memory occupied by the receiver.
-func (x *Proxy) Dealloc() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dealloc"))
+func (p *Proxy) Dealloc() {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("dealloc"))
 }
 
 // Finalize the garbage collector invokes this method on the receiver before disposing of the memory it uses.
-func (x *Proxy) Finalize() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finalize"))
+func (p *Proxy) Finalize() {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("finalize"))
 }
 
 // DebugDescription wraps the corresponding Objective-C method.
-func (x *Proxy) DebugDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("debugDescription"))
+func (p *Proxy) DebugDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("debugDescription"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Proxyable is the interface implemented by [Proxy], for mocking and DI.
-type Proxyable interface {
-	obj.Object
-	ForwardInvocation(invocation *Invocation)
-	Dealloc()
-	Finalize()
-	DebugDescription() string
-}
-
-var _ Proxyable = (*Proxy)(nil)
-
 // isProxy marks Proxy — and, by embedding promotion, its
 // subclasses — as a member of the Proxy hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Proxy) isProxy() {}
+func (p *Proxy) isProxy() {}
 
 var _ ProxyProvider = (*Proxy)(nil)

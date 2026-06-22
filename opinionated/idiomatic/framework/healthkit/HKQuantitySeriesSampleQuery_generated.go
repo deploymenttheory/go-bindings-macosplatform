@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,51 +51,28 @@ func NewQuantitySeriesSampleQuery() *QuantitySeriesSampleQuery {
 	return quantitySeriesSampleQueryAdopt(_id)
 }
 
-// WithIncludeSample a Boolean value that determines whether the query should return the series sample.
-func (x *QuantitySeriesSampleQuery) WithIncludeSample(includeSample bool) *QuantitySeriesSampleQuery {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeSample:"), includeSample)
-	return x
+// WithIncludeSample sets a Boolean value that determines whether the query should return the series sample.
+func (qssq *QuantitySeriesSampleQuery) WithIncludeSample(includeSample bool) *QuantitySeriesSampleQuery {
+	objc.Send[objc.ID](objref.IDOf(qssq), objc.RegisterName("setIncludeSample:"), includeSample)
+	return qssq
 }
 
-// WithOrderByQuantitySampleStartDate a Boolean value that determines whether the query groups the results based on the quantity sample’s start date.
-func (x *QuantitySeriesSampleQuery) WithOrderByQuantitySampleStartDate(orderByQuantitySampleStartDate bool) *QuantitySeriesSampleQuery {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderByQuantitySampleStartDate:"), orderByQuantitySampleStartDate)
-	return x
+// WithOrderByQuantitySampleStartDate sets a Boolean value that determines whether the query groups the results based on the quantity sample’s start date.
+func (qssq *QuantitySeriesSampleQuery) WithOrderByQuantitySampleStartDate(orderByQuantitySampleStartDate bool) *QuantitySeriesSampleQuery {
+	objc.Send[objc.ID](objref.IDOf(qssq), objc.RegisterName("setOrderByQuantitySampleStartDate:"), orderByQuantitySampleStartDate)
+	return qssq
 }
 
-// IncludeSample include owning HKQuantitySample in quantityHandler handler. Default value is NO. If includeSample is set then the quantitySample parameter of quantityHandler will be non-nil anytime the quantity parameter is non-nil. Specifying this option has a performance cost. This property may not be modified once the query has been executed.
-func (x *QuantitySeriesSampleQuery) IncludeSample() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeSample"))
+// IncludeSample reports whether include owning HKQuantitySample in quantityHandler handler. Default value is false. If includeSample is set then the quantitySample parameter of quantityHandler will be non-nil anytime the quantity parameter is non-nil. Specifying this option has a performance cost. This property may not be modified once the query has been executed.
+func (qssq *QuantitySeriesSampleQuery) IncludeSample() bool {
+	_r := objc.Send[bool](objref.IDOf(qssq), objc.RegisterName("includeSample"))
 	return _r
 }
 
-// SetIncludeSample wraps the corresponding Objective-C method.
-func (x *QuantitySeriesSampleQuery) SetIncludeSample(includeSample bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeSample:"), includeSample)
-}
-
-// OrderByQuantitySampleStartDate order enumerated results first by quantitySample.startDate, then by the quantity's dateInterval.startDate. Default value is NO. All quantities owned by a given quantitySample will be enumerated before any quantities owned by any other quantity sample, and the quantity samples will be enumerated in their startDate order. Note that individual quantities may not be returned in their dateInterval.startDate order if more than one quantitySample overlap in time. This property may not be modified once the query has been executed.
-func (x *QuantitySeriesSampleQuery) OrderByQuantitySampleStartDate() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("orderByQuantitySampleStartDate"))
+// OrderByQuantitySampleStartDate reports whether order enumerated results first by quantitySample.startDate, then by the quantity's dateInterval.startDate. Default value is false. All quantities owned by a given quantitySample will be enumerated before any quantities owned by any other quantity sample, and the quantity samples will be enumerated in their startDate order. Note that individual quantities may not be returned in their dateInterval.startDate order if more than one quantitySample overlap in time. This property may not be modified once the query has been executed.
+func (qssq *QuantitySeriesSampleQuery) OrderByQuantitySampleStartDate() bool {
+	_r := objc.Send[bool](objref.IDOf(qssq), objc.RegisterName("orderByQuantitySampleStartDate"))
 	return _r
 }
-
-// SetOrderByQuantitySampleStartDate wraps the corresponding Objective-C method.
-func (x *QuantitySeriesSampleQuery) SetOrderByQuantitySampleStartDate(orderByQuantitySampleStartDate bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrderByQuantitySampleStartDate:"), orderByQuantitySampleStartDate)
-}
-
-// QuantitySeriesSampleQueryable is the interface implemented by [QuantitySeriesSampleQuery], for mocking and DI.
-type QuantitySeriesSampleQueryable interface {
-	obj.Object
-	WithIncludeSample(includeSample bool) *QuantitySeriesSampleQuery
-	WithOrderByQuantitySampleStartDate(orderByQuantitySampleStartDate bool) *QuantitySeriesSampleQuery
-	IncludeSample() bool
-	SetIncludeSample(includeSample bool)
-	OrderByQuantitySampleStartDate() bool
-	SetOrderByQuantitySampleStartDate(orderByQuantitySampleStartDate bool)
-}
-
-var _ QuantitySeriesSampleQueryable = (*QuantitySeriesSampleQuery)(nil)
 
 var _ QueryProvider = (*QuantitySeriesSampleQuery)(nil)

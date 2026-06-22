@@ -54,502 +54,390 @@ func NewPathCell() *PathCell {
 	return pathCellAdopt(_id)
 }
 
-// WithPathStyle sets the receiver’s path style.
-func (x *PathCell) WithPathStyle(pathStyle PathStyle) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPathStyle:"), pathStyle)
-	return x
+// WithPathStyle sets sets the receiver’s path style.
+func (pc *PathCell) WithPathStyle(pathStyle PathStyle) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPathStyle:"), pathStyle)
+	return pc
 }
 
-// WithURL returns the path displayed by the receiver.
-func (x *PathCell) WithURL(uRL string) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-	return x
+// WithURL sets returns the path displayed by the receiver.
+func (pc *PathCell) WithURL(uRL string) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+	return pc
 }
 
-// WithAllowedTypes sets the component types allowed in the path when the cell is editable.
-func (x *PathCell) WithAllowedTypes(items ...obj.Object) *PathCell {
+// WithAllowedTypes sets sets the component types allowed in the path when the cell is editable.
+func (pc *PathCell) WithAllowedTypes(items ...obj.Object) *PathCell {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTypes:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowedTypes:"), _arr)
+	return pc
 }
 
-// WithPathComponentCells sets the array of NSPathComponentCell objects currently being displayed.
-func (x *PathCell) WithPathComponentCells(items ...*PathComponentCell) *PathCell {
+// WithPathComponentCells sets sets the array of NSPathComponentCell objects currently being displayed.
+func (pc *PathCell) WithPathComponentCells(items ...*PathComponentCell) *PathCell {
 	_arr := purego.SliceToNSArray(items, func(_v *PathComponentCell) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPathComponentCells:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPathComponentCells:"), _arr)
+	return pc
 }
 
-// WithBackgroundColor returns the current background color of the receiver.
-func (x *PathCell) WithBackgroundColor(backgroundColor *Color) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets returns the current background color of the receiver.
+func (pc *PathCell) WithBackgroundColor(backgroundColor *Color) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return pc
 }
 
-// WithPlaceholderString returns the placeholder string.
-func (x *PathCell) WithPlaceholderString(placeholderString string) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
-	return x
+// WithPlaceholderString sets returns the placeholder string.
+func (pc *PathCell) WithPlaceholderString(placeholderString string) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
+	return pc
 }
 
-// WithPlaceholderAttributedString sets the value of the placeholder attributed string.
-func (x *PathCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
-	return x
+// WithPlaceholderAttributedString sets sets the value of the placeholder attributed string.
+func (pc *PathCell) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
+	return pc
 }
 
-// WithControlView the view associated with the cell.
-func (x *PathCell) WithControlView(controlView ViewProvider) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
-	return x
+// WithControlView sets the view associated with the cell.
+func (pc *PathCell) WithControlView(controlView ViewProvider) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
+	return pc
 }
 
-// WithType the type of the cell.
-func (x *PathCell) WithType(type_ CellType) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
-	return x
+// WithType sets the type of the cell.
+func (pc *PathCell) WithType(type_ CellType) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setType:"), type_)
+	return pc
 }
 
-// WithState the cell’s current state.
-func (x *PathCell) WithState(state int) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
-	return x
+// WithState sets the cell’s current state.
+func (pc *PathCell) WithState(state int) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setState:"), state)
+	return pc
 }
 
-// WithTarget the object that receives the cell’s action messages.
-func (x *PathCell) WithTarget(target obj.Object) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that receives the cell’s action messages.
+func (pc *PathCell) WithTarget(target obj.Object) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return pc
 }
 
-// WithTag a tag for identifying the cell.
-func (x *PathCell) WithTag(tag int) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets a tag for identifying the cell.
+func (pc *PathCell) WithTag(tag int) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTag:"), tag)
+	return pc
 }
 
-// WithTitle the cell’s title text.
-func (x *PathCell) WithTitle(title string) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the cell’s title text.
+func (pc *PathCell) WithTitle(title string) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return pc
 }
 
-// WithEnabled a Boolean value indicating whether the cell is currently enabled.
-func (x *PathCell) WithEnabled(enabled bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value indicating whether the cell is currently enabled.
+func (pc *PathCell) WithEnabled(enabled bool) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setEnabled:"), enabled)
+	return pc
 }
 
-// WithContinuous a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
-func (x *PathCell) WithContinuous(continuous bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
-	return x
+// WithContinuous sets a Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
+func (pc *PathCell) WithContinuous(continuous bool) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setContinuous:"), continuous)
+	return pc
 }
 
-// WithEditable a Boolean value indicating whether the cell is editable.
-func (x *PathCell) WithEditable(editable bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
-	return x
+// WithEditable sets a Boolean value indicating whether the cell is editable.
+func (pc *PathCell) WithEditable(editable bool) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setEditable:"), editable)
+	return pc
 }
 
-// WithSelectable a Boolean value indicating whether the cell’s text can be selected.
-func (x *PathCell) WithSelectable(selectable bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
-	return x
+// WithSelectable sets a Boolean value indicating whether the cell’s text can be selected.
+func (pc *PathCell) WithSelectable(selectable bool) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSelectable:"), selectable)
+	return pc
 }
 
-// WithBordered a Boolean value indicating whether the cell draws itself outlined with a plain border.
-func (x *PathCell) WithBordered(bordered bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
-	return x
+// WithBordered sets a Boolean value indicating whether the cell draws itself outlined with a plain border.
+func (pc *PathCell) WithBordered(bordered bool) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBordered:"), bordered)
+	return pc
 }
 
-// WithBezeled a Boolean value indicating whether the cell has a bezeled border.
-func (x *PathCell) WithBezeled(bezeled bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
-	return x
+// WithBezeled sets a Boolean value indicating whether the cell has a bezeled border.
+func (pc *PathCell) WithBezeled(bezeled bool) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBezeled:"), bezeled)
+	return pc
 }
 
-// WithScrollable a Boolean value indicating whether excess text scrolls past the cell’s bounds.
-func (x *PathCell) WithScrollable(scrollable bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
-	return x
+// WithScrollable sets a Boolean value indicating whether excess text scrolls past the cell’s bounds.
+func (pc *PathCell) WithScrollable(scrollable bool) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setScrollable:"), scrollable)
+	return pc
 }
 
-// WithHighlighted a Boolean value indicating whether the cell has a highlighted appearance.
-func (x *PathCell) WithHighlighted(highlighted bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
-	return x
+// WithHighlighted sets a Boolean value indicating whether the cell has a highlighted appearance.
+func (pc *PathCell) WithHighlighted(highlighted bool) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setHighlighted:"), highlighted)
+	return pc
 }
 
-// WithAlignment the alignment of the cell’s text.
-func (x *PathCell) WithAlignment(alignment TextAlignment) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
-	return x
+// WithAlignment sets the alignment of the cell’s text.
+func (pc *PathCell) WithAlignment(alignment TextAlignment) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAlignment:"), alignment)
+	return pc
 }
 
-// WithWraps a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
-func (x *PathCell) WithWraps(wraps bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
-	return x
+// WithWraps sets a Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
+func (pc *PathCell) WithWraps(wraps bool) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setWraps:"), wraps)
+	return pc
 }
 
-// WithFont the font that the cell uses to display text.
-func (x *PathCell) WithFont(font *Font) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
-	return x
+// WithFont sets the font that the cell uses to display text.
+func (pc *PathCell) WithFont(font *Font) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFont:"), objref.IDOf(font))
+	return pc
 }
 
-// WithFormatter the cell’s formatter object.
-func (x *PathCell) WithFormatter(formatter obj.Object) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
-	return x
+// WithFormatter sets the cell’s formatter object.
+func (pc *PathCell) WithFormatter(formatter obj.Object) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
+	return pc
 }
 
-// WithObjectValue the cell’s value as an Objective-C object.
-func (x *PathCell) WithObjectValue(objectValue obj.Object) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
-	return x
+// WithObjectValue sets the cell’s value as an Objective-C object.
+func (pc *PathCell) WithObjectValue(objectValue obj.Object) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
+	return pc
 }
 
-// WithStringValue the cell’s value as a string.
-func (x *PathCell) WithStringValue(stringValue string) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
-	return x
+// WithStringValue sets the cell’s value as a string.
+func (pc *PathCell) WithStringValue(stringValue string) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
+	return pc
 }
 
-// WithIntValue the cell’s value as an integer.
-func (x *PathCell) WithIntValue(intValue int) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
-	return x
+// WithIntValue sets the cell’s value as an integer.
+func (pc *PathCell) WithIntValue(intValue int) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIntValue:"), intValue)
+	return pc
 }
 
-// WithFloatValue the cell’s value as a single-precision floating-point number.
-func (x *PathCell) WithFloatValue(floatValue float32) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the cell’s value as a single-precision floating-point number.
+func (pc *PathCell) WithFloatValue(floatValue float32) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFloatValue:"), floatValue)
+	return pc
 }
 
-// WithDoubleValue the cell’s value as a double-precision floating-point number.
-func (x *PathCell) WithDoubleValue(doubleValue float64) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
-	return x
+// WithDoubleValue sets the cell’s value as a double-precision floating-point number.
+func (pc *PathCell) WithDoubleValue(doubleValue float64) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setDoubleValue:"), doubleValue)
+	return pc
 }
 
-// WithIntegerValue the cell’s value as an integer value.
-func (x *PathCell) WithIntegerValue(integerValue int) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
-	return x
+// WithIntegerValue sets the cell’s value as an integer value.
+func (pc *PathCell) WithIntegerValue(integerValue int) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setIntegerValue:"), integerValue)
+	return pc
 }
 
-// WithImage the image displayed by the cell, if any.
-func (x *PathCell) WithImage(image *Image) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+// WithImage sets the image displayed by the cell, if any.
+func (pc *PathCell) WithImage(image *Image) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return pc
 }
 
-// WithControlSize the size of the cell.
-func (x *PathCell) WithControlSize(controlSize ControlSize) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
-	return x
+// WithControlSize sets the size of the cell.
+func (pc *PathCell) WithControlSize(controlSize ControlSize) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setControlSize:"), controlSize)
+	return pc
 }
 
-// WithRepresentedObject the object represented by the cell.
-func (x *PathCell) WithRepresentedObject(representedObject obj.Object) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
-	return x
+// WithRepresentedObject sets the object represented by the cell.
+func (pc *PathCell) WithRepresentedObject(representedObject obj.Object) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
+	return pc
 }
 
-// WithMenu the cell’s contextual menu.
-func (x *PathCell) WithMenu(menu *Menu) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets the cell’s contextual menu.
+func (pc *PathCell) WithMenu(menu *Menu) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return pc
 }
 
-// WithSendsActionOnEndEditing a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
-func (x *PathCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
-	return x
+// WithSendsActionOnEndEditing sets a Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
+func (pc *PathCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
+	return pc
 }
 
-// WithBaseWritingDirection the initial writing direction used to determine the actual writing direction for text.
-func (x *PathCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
-	return x
+// WithBaseWritingDirection sets the initial writing direction used to determine the actual writing direction for text.
+func (pc *PathCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
+	return pc
 }
 
-// WithLineBreakMode the line break mode to use when drawing text in the cell.
-func (x *PathCell) WithLineBreakMode(lineBreakMode LineBreakMode) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
-	return x
+// WithLineBreakMode sets the line break mode to use when drawing text in the cell.
+func (pc *PathCell) WithLineBreakMode(lineBreakMode LineBreakMode) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
+	return pc
 }
 
-// WithAllowsUndo a Boolean value indicating whether the cell assumes responsibility for undo operations.
-func (x *PathCell) WithAllowsUndo(allowsUndo bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
-	return x
+// WithAllowsUndo sets a Boolean value indicating whether the cell assumes responsibility for undo operations.
+func (pc *PathCell) WithAllowsUndo(allowsUndo bool) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowsUndo:"), allowsUndo)
+	return pc
 }
 
-// WithTruncatesLastVisibleLine a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
-func (x *PathCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
-	return x
+// WithTruncatesLastVisibleLine sets a Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
+func (pc *PathCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
+	return pc
 }
 
-// WithUserInterfaceLayoutDirection the layout direction of the user interface.
-func (x *PathCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+// WithUserInterfaceLayoutDirection sets the layout direction of the user interface.
+func (pc *PathCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return pc
 }
 
-// WithUsesSingleLineMode a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
-func (x *PathCell) WithUsesSingleLineMode(usesSingleLineMode bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
-	return x
+// WithUsesSingleLineMode sets a Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
+func (pc *PathCell) WithUsesSingleLineMode(usesSingleLineMode bool) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
+	return pc
 }
 
-// WithRefusesFirstResponder a Boolean value indicating whether the cell refuses the first responder status.
-func (x *PathCell) WithRefusesFirstResponder(refusesFirstResponder bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
-	return x
+// WithRefusesFirstResponder sets a Boolean value indicating whether the cell refuses the first responder status.
+func (pc *PathCell) WithRefusesFirstResponder(refusesFirstResponder bool) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
+	return pc
 }
 
-// WithShowsFirstResponder a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
-func (x *PathCell) WithShowsFirstResponder(showsFirstResponder bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
-	return x
+// WithShowsFirstResponder sets a Boolean value indicating whether the cell provides a visual indication that it is the first responder.
+func (pc *PathCell) WithShowsFirstResponder(showsFirstResponder bool) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
+	return pc
 }
 
-// WithFocusRingType the type of focus ring to use with the associated view.
-func (x *PathCell) WithFocusRingType(focusRingType FocusRingType) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+// WithFocusRingType sets the type of focus ring to use with the associated view.
+func (pc *PathCell) WithFocusRingType(focusRingType FocusRingType) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return pc
 }
 
-// WithAttributedStringValue the cell’s value as an attributed string.
-func (x *PathCell) WithAttributedStringValue(attributedStringValue obj.Object) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
-	return x
+// WithAttributedStringValue sets the cell’s value as an attributed string.
+func (pc *PathCell) WithAttributedStringValue(attributedStringValue obj.Object) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
+	return pc
 }
 
-// WithAllowsEditingTextAttributes a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
-func (x *PathCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
-	return x
+// WithAllowsEditingTextAttributes sets a Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
+func (pc *PathCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
+	return pc
 }
 
-// WithImportsGraphics a Boolean value indicating whether the cell supports the importation of images into its text.
-func (x *PathCell) WithImportsGraphics(importsGraphics bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
-	return x
+// WithImportsGraphics sets a Boolean value indicating whether the cell supports the importation of images into its text.
+func (pc *PathCell) WithImportsGraphics(importsGraphics bool) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setImportsGraphics:"), importsGraphics)
+	return pc
 }
 
-// WithAllowsMixedState a Boolean value indicating whether the cell supports three states instead of two.
-func (x *PathCell) WithAllowsMixedState(allowsMixedState bool) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
-	return x
+// WithAllowsMixedState sets a Boolean value indicating whether the cell supports three states instead of two.
+func (pc *PathCell) WithAllowsMixedState(allowsMixedState bool) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
+	return pc
 }
 
-// WithBackgroundStyle the cell’s background style.
-func (x *PathCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
-	return x
+// WithBackgroundStyle sets the cell’s background style.
+func (pc *PathCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
+	return pc
 }
 
-// WithControlTint the cell’s control tint.
-func (x *PathCell) WithControlTint(controlTint ControlTint) *PathCell {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
-	return x
+// WithControlTint sets the cell’s control tint.
+func (pc *PathCell) WithControlTint(controlTint ControlTint) *PathCell {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setControlTint:"), controlTint)
+	return pc
 }
 
 // RectOfPathComponentCellWithFrameInView returns the current rectangle being displayed for a given path component cell, with respect to a given frame in a given view.
-func (x *PathCell) RectOfPathComponentCellWithFrameInView(cell *PathComponentCell, frame corefoundation.CGRect, view *View) corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectOfPathComponentCell:withFrame:inView:"), objref.IDOf(cell), frame, objref.IDOf(view))
+func (pc *PathCell) RectOfPathComponentCellWithFrameInView(cell *PathComponentCell, frame corefoundation.CGRect, view *View) corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(pc), objc.RegisterName("rectOfPathComponentCell:withFrame:inView:"), objref.IDOf(cell), frame, objref.IDOf(view))
 	return _r
 }
 
 // PathComponentCellAtPointWithFrameInView returns the cell located at the given point within the given frame of the given view.
-func (x *PathCell) PathComponentCellAtPointWithFrameInView(point corefoundation.CGPoint, frame corefoundation.CGRect, view *View) *PathComponentCell {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathComponentCellAtPoint:withFrame:inView:"), point, frame, objref.IDOf(view))
+func (pc *PathCell) PathComponentCellAtPointWithFrameInView(point corefoundation.CGPoint, frame corefoundation.CGRect, view *View) *PathComponentCell {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("pathComponentCellAtPoint:withFrame:inView:"), point, frame, objref.IDOf(view))
 	return PathComponentCellFromID(_r)
 }
 
 // MouseEnteredWithFrameInView displays the cell component over which the mouse is hovering.
-func (x *PathCell) MouseEnteredWithFrameInView(event *Event, frame corefoundation.CGRect, view *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseEntered:withFrame:inView:"), objref.IDOf(event), frame, objref.IDOf(view))
+func (pc *PathCell) MouseEnteredWithFrameInView(event *Event, frame corefoundation.CGRect, view *View) {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("mouseEntered:withFrame:inView:"), objref.IDOf(event), frame, objref.IDOf(view))
 }
 
 // MouseExitedWithFrameInView hides the cell component over which the mouse is hovering.
-func (x *PathCell) MouseExitedWithFrameInView(event *Event, frame corefoundation.CGRect, view *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mouseExited:withFrame:inView:"), objref.IDOf(event), frame, objref.IDOf(view))
+func (pc *PathCell) MouseExitedWithFrameInView(event *Event, frame corefoundation.CGRect, view *View) {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("mouseExited:withFrame:inView:"), objref.IDOf(event), frame, objref.IDOf(view))
 }
 
 // PathStyle wraps the corresponding Objective-C method.
-func (x *PathCell) PathStyle() PathStyle {
-	_r := objc.Send[PathStyle](objref.IDOf(x), objc.RegisterName("pathStyle"))
+func (pc *PathCell) PathStyle() PathStyle {
+	_r := objc.Send[PathStyle](objref.IDOf(pc), objc.RegisterName("pathStyle"))
 	return _r
 }
 
-// SetPathStyle wraps the corresponding Objective-C method.
-func (x *PathCell) SetPathStyle(pathStyle PathStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPathStyle:"), pathStyle)
-}
-
 // URL wraps the corresponding Objective-C method.
-func (x *PathCell) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+func (pc *PathCell) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
-}
-
-// SetURL wraps the corresponding Objective-C method.
-func (x *PathCell) SetURL(uRL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 }
 
 // AllowedTypes wraps the corresponding Objective-C method.
 //
 // AllowedTypes returns the collection as a Go slice.
-func (x *PathCell) AllowedTypes() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allowedTypes"))
+func (pc *PathCell) AllowedTypes() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("allowedTypes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
-}
-
-// SetAllowedTypes wraps the corresponding Objective-C method.
-func (x *PathCell) SetAllowedTypes(allowedTypes []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTypes:"), purego.SliceToNSArray(allowedTypes, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
 // PathComponentCells wraps the corresponding Objective-C method.
 //
 // PathComponentCells returns the collection as a Go slice.
-func (x *PathCell) PathComponentCells() []*PathComponentCell {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathComponentCells"))
+func (pc *PathCell) PathComponentCells() []*PathComponentCell {
+	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("pathComponentCells"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PathComponentCell { return PathComponentCellFromID(_id) })
 }
 
-// SetPathComponentCells wraps the corresponding Objective-C method.
-func (x *PathCell) SetPathComponentCells(pathComponentCells []*PathComponentCell) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPathComponentCells:"), purego.SliceToNSArray(pathComponentCells, func(_v *PathComponentCell) objc.ID { return objref.IDOf(_v) }))
-}
-
 // ClickedPathComponentCell wraps the corresponding Objective-C method.
-func (x *PathCell) ClickedPathComponentCell() *PathComponentCell {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clickedPathComponentCell"))
+func (pc *PathCell) ClickedPathComponentCell() *PathComponentCell {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("clickedPathComponentCell"))
 	return PathComponentCellFromID(_r)
 }
 
 // BackgroundColor wraps the corresponding Objective-C method.
-func (x *PathCell) BackgroundColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+func (pc *PathCell) BackgroundColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("backgroundColor"))
 	return ColorFromID(_r)
 }
 
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *PathCell) SetBackgroundColor(backgroundColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-}
-
 // PlaceholderString wraps the corresponding Objective-C method.
-func (x *PathCell) PlaceholderString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderString"))
+func (pc *PathCell) PlaceholderString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("placeholderString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetPlaceholderString wraps the corresponding Objective-C method.
-func (x *PathCell) SetPlaceholderString(placeholderString string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
-}
-
 // PlaceholderAttributedString wraps the corresponding Objective-C method.
-func (x *PathCell) PlaceholderAttributedString() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderAttributedString"))
+func (pc *PathCell) PlaceholderAttributedString() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("placeholderAttributedString"))
 	return obj.Wrap(_r)
 }
-
-// SetPlaceholderAttributedString wraps the corresponding Objective-C method.
-func (x *PathCell) SetPlaceholderAttributedString(placeholderAttributedString obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
-}
-
-// PathCellable is the interface implemented by [PathCell], for mocking and DI.
-type PathCellable interface {
-	obj.Object
-	WithPathStyle(pathStyle PathStyle) *PathCell
-	WithURL(uRL string) *PathCell
-	WithAllowedTypes(items ...obj.Object) *PathCell
-	WithPathComponentCells(items ...*PathComponentCell) *PathCell
-	WithBackgroundColor(backgroundColor *Color) *PathCell
-	WithPlaceholderString(placeholderString string) *PathCell
-	WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *PathCell
-	WithControlView(controlView ViewProvider) *PathCell
-	WithType(type_ CellType) *PathCell
-	WithState(state int) *PathCell
-	WithTarget(target obj.Object) *PathCell
-	WithTag(tag int) *PathCell
-	WithTitle(title string) *PathCell
-	WithEnabled(enabled bool) *PathCell
-	WithContinuous(continuous bool) *PathCell
-	WithEditable(editable bool) *PathCell
-	WithSelectable(selectable bool) *PathCell
-	WithBordered(bordered bool) *PathCell
-	WithBezeled(bezeled bool) *PathCell
-	WithScrollable(scrollable bool) *PathCell
-	WithHighlighted(highlighted bool) *PathCell
-	WithAlignment(alignment TextAlignment) *PathCell
-	WithWraps(wraps bool) *PathCell
-	WithFont(font *Font) *PathCell
-	WithFormatter(formatter obj.Object) *PathCell
-	WithObjectValue(objectValue obj.Object) *PathCell
-	WithStringValue(stringValue string) *PathCell
-	WithIntValue(intValue int) *PathCell
-	WithFloatValue(floatValue float32) *PathCell
-	WithDoubleValue(doubleValue float64) *PathCell
-	WithIntegerValue(integerValue int) *PathCell
-	WithImage(image *Image) *PathCell
-	WithControlSize(controlSize ControlSize) *PathCell
-	WithRepresentedObject(representedObject obj.Object) *PathCell
-	WithMenu(menu *Menu) *PathCell
-	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *PathCell
-	WithBaseWritingDirection(baseWritingDirection WritingDirection) *PathCell
-	WithLineBreakMode(lineBreakMode LineBreakMode) *PathCell
-	WithAllowsUndo(allowsUndo bool) *PathCell
-	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *PathCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *PathCell
-	WithUsesSingleLineMode(usesSingleLineMode bool) *PathCell
-	WithRefusesFirstResponder(refusesFirstResponder bool) *PathCell
-	WithShowsFirstResponder(showsFirstResponder bool) *PathCell
-	WithFocusRingType(focusRingType FocusRingType) *PathCell
-	WithAttributedStringValue(attributedStringValue obj.Object) *PathCell
-	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *PathCell
-	WithImportsGraphics(importsGraphics bool) *PathCell
-	WithAllowsMixedState(allowsMixedState bool) *PathCell
-	WithBackgroundStyle(backgroundStyle BackgroundStyle) *PathCell
-	WithControlTint(controlTint ControlTint) *PathCell
-	RectOfPathComponentCellWithFrameInView(cell *PathComponentCell, frame corefoundation.CGRect, view *View) corefoundation.CGRect
-	PathComponentCellAtPointWithFrameInView(point corefoundation.CGPoint, frame corefoundation.CGRect, view *View) *PathComponentCell
-	MouseEnteredWithFrameInView(event *Event, frame corefoundation.CGRect, view *View)
-	MouseExitedWithFrameInView(event *Event, frame corefoundation.CGRect, view *View)
-	PathStyle() PathStyle
-	SetPathStyle(pathStyle PathStyle)
-	URL() obj.Object
-	SetURL(uRL string)
-	AllowedTypes() []string
-	SetAllowedTypes(allowedTypes []string)
-	PathComponentCells() []*PathComponentCell
-	SetPathComponentCells(pathComponentCells []*PathComponentCell)
-	ClickedPathComponentCell() *PathComponentCell
-	BackgroundColor() *Color
-	SetBackgroundColor(backgroundColor *Color)
-	PlaceholderString() string
-	SetPlaceholderString(placeholderString string)
-	PlaceholderAttributedString() obj.Object
-	SetPlaceholderAttributedString(placeholderAttributedString obj.Object)
-}
-
-var _ PathCellable = (*PathCell)(nil)
 
 var _ ActionCellProvider = (*PathCell)(nil)
 

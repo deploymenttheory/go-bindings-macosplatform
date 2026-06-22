@@ -7,7 +7,6 @@ package appkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,48 +51,31 @@ func NewCollectionLayoutDecorationItem() *CollectionLayoutDecorationItem {
 	return collectionLayoutDecorationItemAdopt(_id)
 }
 
-// WithZIndex the vertical stacking order of the decoration item in relation to other items in the section.
-func (x *CollectionLayoutDecorationItem) WithZIndex(zIndex int) *CollectionLayoutDecorationItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZIndex:"), zIndex)
-	return x
+// WithZIndex sets the vertical stacking order of the decoration item in relation to other items in the section.
+func (cldi *CollectionLayoutDecorationItem) WithZIndex(zIndex int) *CollectionLayoutDecorationItem {
+	objc.Send[objc.ID](objref.IDOf(cldi), objc.RegisterName("setZIndex:"), zIndex)
+	return cldi
 }
 
-// WithEdgeSpacing the amount of space added around the boundaries of the item between other items and this item’s container.
-func (x *CollectionLayoutDecorationItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutDecorationItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
-	return x
+// WithEdgeSpacing sets the amount of space added around the boundaries of the item between other items and this item’s container.
+func (cldi *CollectionLayoutDecorationItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutDecorationItem {
+	objc.Send[objc.ID](objref.IDOf(cldi), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
+	return cldi
 }
 
 // ZIndex wraps the corresponding Objective-C method.
-func (x *CollectionLayoutDecorationItem) ZIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("zIndex"))
+func (cldi *CollectionLayoutDecorationItem) ZIndex() int {
+	_r := objc.Send[int](objref.IDOf(cldi), objc.RegisterName("zIndex"))
 	return _r
 }
 
-// SetZIndex wraps the corresponding Objective-C method.
-func (x *CollectionLayoutDecorationItem) SetZIndex(zIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZIndex:"), zIndex)
-}
-
 // ElementKind wraps the corresponding Objective-C method.
-func (x *CollectionLayoutDecorationItem) ElementKind() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementKind"))
+func (cldi *CollectionLayoutDecorationItem) ElementKind() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cldi), objc.RegisterName("elementKind"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// CollectionLayoutDecorationItemable is the interface implemented by [CollectionLayoutDecorationItem], for mocking and DI.
-type CollectionLayoutDecorationItemable interface {
-	obj.Object
-	WithZIndex(zIndex int) *CollectionLayoutDecorationItem
-	WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutDecorationItem
-	ZIndex() int
-	SetZIndex(zIndex int)
-	ElementKind() string
-}
-
-var _ CollectionLayoutDecorationItemable = (*CollectionLayoutDecorationItem)(nil)
 
 var _ CollectionLayoutItemProvider = (*CollectionLayoutDecorationItem)(nil)

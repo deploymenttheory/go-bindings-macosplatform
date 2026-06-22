@@ -6,6 +6,7 @@ package passkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func passLibraryAdopt(id objc.ID) *PassLibrary {
 }
 
 // Description returns the object's -description text.
-func (x *PassLibrary) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pl *PassLibrary) Description() string {
+	return rt.Description(objref.IDOf(pl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PassLibrary) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pl *PassLibrary) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PassLibrary) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pl *PassLibrary) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PassLibrary) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pl *PassLibrary) String() string {
+	return rt.Description(objref.IDOf(pl))
 }
 
 // NewPassLibrary creates a new PassLibrary.
@@ -75,104 +76,104 @@ func NewPassLibrary() *PassLibrary {
 }
 
 // IsPaymentPassActivationAvailable wraps the corresponding Objective-C method.
-func (x *PassLibrary) IsPaymentPassActivationAvailable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaymentPassActivationAvailable"))
+func (pl *PassLibrary) IsPaymentPassActivationAvailable() bool {
+	_r := objc.Send[bool](objref.IDOf(pl), objc.RegisterName("isPaymentPassActivationAvailable"))
 	return _r
 }
 
 // Passes returns the passes in the user’s pass library that the app can access.
 //
 // Passes returns the collection as a Go slice.
-func (x *PassLibrary) Passes() []*Pass {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passes"))
+func (pl *PassLibrary) Passes() []*Pass {
+	_arr := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("passes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Pass { return PassFromID(_id) })
 }
 
 // PassWithPassTypeIdentifierSerialNumber returns the pass with the specified pass type identifier and serial number.
-func (x *PassLibrary) PassWithPassTypeIdentifierSerialNumber(identifier string, serialNumber string) *Pass {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passWithPassTypeIdentifier:serialNumber:"), purego.NSString(identifier), purego.NSString(serialNumber))
+func (pl *PassLibrary) PassWithPassTypeIdentifierSerialNumber(identifier string, serialNumber string) *Pass {
+	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("passWithPassTypeIdentifier:serialNumber:"), purego.NSString(identifier), purego.NSString(serialNumber))
 	return PassFromID(_r)
 }
 
 // PassesWithReaderIdentifier wraps the corresponding Objective-C method.
-func (x *PassLibrary) PassesWithReaderIdentifier(readerIdentifier string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passesWithReaderIdentifier:"), purego.NSString(readerIdentifier))
+func (pl *PassLibrary) PassesWithReaderIdentifier(readerIdentifier string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("passesWithReaderIdentifier:"), purego.NSString(readerIdentifier))
 	return obj.Wrap(_r)
 }
 
 // PassesOfType returns the passes of the specified pass type.
-func (x *PassLibrary) PassesOfType(passType PassType) []*Pass {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passesOfType:"), passType)
+func (pl *PassLibrary) PassesOfType(passType PassType) []*Pass {
+	_r := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("passesOfType:"), passType)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Pass { return PassFromID(_id) })
 }
 
 // RemotePaymentPasses wraps the corresponding Objective-C method.
 //
 // RemotePaymentPasses returns the collection as a Go slice.
-func (x *PassLibrary) RemotePaymentPasses() []*PaymentPass {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remotePaymentPasses"))
+func (pl *PassLibrary) RemotePaymentPasses() []*PaymentPass {
+	_arr := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("remotePaymentPasses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PaymentPass { return PaymentPassFromID(_id) })
 }
 
 // RemovePass removes the pass from the user’s pass library.
-func (x *PassLibrary) RemovePass(pass *Pass) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removePass:"), objref.IDOf(pass))
+func (pl *PassLibrary) RemovePass(pass *Pass) {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("removePass:"), objref.IDOf(pass))
 }
 
 // ContainsPass returns a Boolean value that indicates whether the user’s pass library contains the specified pass.
-func (x *PassLibrary) ContainsPass(pass *Pass) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsPass:"), objref.IDOf(pass))
+func (pl *PassLibrary) ContainsPass(pass *Pass) bool {
+	_r := objc.Send[bool](objref.IDOf(pl), objc.RegisterName("containsPass:"), objref.IDOf(pass))
 	return _r
 }
 
 // ReplacePassWithPass replaces a pass in the user’s pass library with the specified pass.
-func (x *PassLibrary) ReplacePassWithPass(pass *Pass) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("replacePassWithPass:"), objref.IDOf(pass))
+func (pl *PassLibrary) ReplacePassWithPass(pass *Pass) bool {
+	_r := objc.Send[bool](objref.IDOf(pl), objc.RegisterName("replacePassWithPass:"), objref.IDOf(pass))
 	return _r
 }
 
 // OpenPaymentSetup opens the user interface to set up credit cards for Apple Pay.
-func (x *PassLibrary) OpenPaymentSetup() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openPaymentSetup"))
+func (pl *PassLibrary) OpenPaymentSetup() {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("openPaymentSetup"))
 }
 
 // OpenPaymentSetupWithMerchantIdentifier wraps the corresponding Objective-C method.
-func (x *PassLibrary) OpenPaymentSetupWithMerchantIdentifier(merchantIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openPaymentSetupWithMerchantIdentifier:"), purego.NSString(merchantIdentifier))
+func (pl *PassLibrary) OpenPaymentSetupWithMerchantIdentifier(merchantIdentifier string) {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("openPaymentSetupWithMerchantIdentifier:"), purego.NSString(merchantIdentifier))
 }
 
 // PresentPaymentPass wraps the corresponding Objective-C method.
-func (x *PassLibrary) PresentPaymentPass(pass *PaymentPass) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentPaymentPass:"), objref.IDOf(pass))
+func (pl *PassLibrary) PresentPaymentPass(pass *PaymentPass) {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("presentPaymentPass:"), objref.IDOf(pass))
 }
 
 // PresentSecureElementPass presents a Secure Element pass.
-func (x *PassLibrary) PresentSecureElementPass(pass *SecureElementPass) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentSecureElementPass:"), objref.IDOf(pass))
+func (pl *PassLibrary) PresentSecureElementPass(pass *SecureElementPass) {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("presentSecureElementPass:"), objref.IDOf(pass))
 }
 
 // CanAddPaymentPassWithPrimaryAccountIdentifier wraps the corresponding Objective-C method.
-func (x *PassLibrary) CanAddPaymentPassWithPrimaryAccountIdentifier(primaryAccountIdentifier string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canAddPaymentPassWithPrimaryAccountIdentifier:"), purego.NSString(primaryAccountIdentifier))
+func (pl *PassLibrary) CanAddPaymentPassWithPrimaryAccountIdentifier(primaryAccountIdentifier string) bool {
+	_r := objc.Send[bool](objref.IDOf(pl), objc.RegisterName("canAddPaymentPassWithPrimaryAccountIdentifier:"), purego.NSString(primaryAccountIdentifier))
 	return _r
 }
 
 // CanAddSecureElementPassWithPrimaryAccountIdentifier returns a Boolean value that indicates whether PassKit can add a Secure Element pass for the specified account.
-func (x *PassLibrary) CanAddSecureElementPassWithPrimaryAccountIdentifier(primaryAccountIdentifier string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canAddSecureElementPassWithPrimaryAccountIdentifier:"), purego.NSString(primaryAccountIdentifier))
+func (pl *PassLibrary) CanAddSecureElementPassWithPrimaryAccountIdentifier(primaryAccountIdentifier string) bool {
+	_r := objc.Send[bool](objref.IDOf(pl), objc.RegisterName("canAddSecureElementPassWithPrimaryAccountIdentifier:"), purego.NSString(primaryAccountIdentifier))
 	return _r
 }
 
-// CanAddFelicaPass returns a Boolean value that indicates whether the library can add FeliCa™ passes.
-func (x *PassLibrary) CanAddFelicaPass() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canAddFelicaPass"))
+// CanAddFelicaPass reports whether returns a Boolean value that indicates whether the library can add FeliCa™ passes.
+func (pl *PassLibrary) CanAddFelicaPass() bool {
+	_r := objc.Send[bool](objref.IDOf(pl), objc.RegisterName("canAddFelicaPass"))
 	return _r
 }
 
 // ServiceProviderDataForSecureElementPassCompletion calls a completion handler that returns the custom data for a Secure Element pass.
 //
 // ServiceProviderDataForSecureElementPassCompletion blocks until the operation completes or ctx is cancelled.
-func (x *PassLibrary) ServiceProviderDataForSecureElementPassCompletion(ctx context.Context, secureElementPass *SecureElementPass) (result obj.Object, err error) {
+func (pl *PassLibrary) ServiceProviderDataForSecureElementPassCompletion(ctx context.Context, secureElementPass *SecureElementPass) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -184,7 +185,7 @@ func (x *PassLibrary) ServiceProviderDataForSecureElementPassCompletion(ctx cont
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceProviderDataForSecureElementPass:completion:"), objref.IDOf(secureElementPass), _block)
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("serviceProviderDataForSecureElementPass:completion:"), objref.IDOf(secureElementPass), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -195,48 +196,21 @@ func (x *PassLibrary) ServiceProviderDataForSecureElementPassCompletion(ctx cont
 }
 
 // AuthorizationStatusForCapability wraps the corresponding Objective-C method.
-func (x *PassLibrary) AuthorizationStatusForCapability(capability PassLibraryCapability) PassLibraryAuthorizationStatus {
-	_r := objc.Send[PassLibraryAuthorizationStatus](objref.IDOf(x), objc.RegisterName("authorizationStatusForCapability:"), capability)
+func (pl *PassLibrary) AuthorizationStatusForCapability(capability PassLibraryCapability) PassLibraryAuthorizationStatus {
+	_r := objc.Send[PassLibraryAuthorizationStatus](objref.IDOf(pl), objc.RegisterName("authorizationStatusForCapability:"), capability)
 	return _r
 }
 
 // IsSecureElementPassActivationAvailable wraps the corresponding Objective-C method.
-func (x *PassLibrary) IsSecureElementPassActivationAvailable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSecureElementPassActivationAvailable"))
+func (pl *PassLibrary) IsSecureElementPassActivationAvailable() bool {
+	_r := objc.Send[bool](objref.IDOf(pl), objc.RegisterName("isSecureElementPassActivationAvailable"))
 	return _r
 }
 
 // RemoteSecureElementPasses wraps the corresponding Objective-C method.
 //
 // RemoteSecureElementPasses returns the collection as a Go slice.
-func (x *PassLibrary) RemoteSecureElementPasses() []*SecureElementPass {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remoteSecureElementPasses"))
+func (pl *PassLibrary) RemoteSecureElementPasses() []*SecureElementPass {
+	_arr := objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("remoteSecureElementPasses"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SecureElementPass { return SecureElementPassFromID(_id) })
 }
-
-// PassLibraryable is the interface implemented by [PassLibrary], for mocking and DI.
-type PassLibraryable interface {
-	obj.Object
-	IsPaymentPassActivationAvailable() bool
-	Passes() []*Pass
-	PassWithPassTypeIdentifierSerialNumber(identifier string, serialNumber string) *Pass
-	PassesWithReaderIdentifier(readerIdentifier string) obj.Object
-	PassesOfType(passType PassType) []*Pass
-	RemotePaymentPasses() []*PaymentPass
-	RemovePass(pass *Pass)
-	ContainsPass(pass *Pass) bool
-	ReplacePassWithPass(pass *Pass) bool
-	OpenPaymentSetup()
-	OpenPaymentSetupWithMerchantIdentifier(merchantIdentifier string)
-	PresentPaymentPass(pass *PaymentPass)
-	PresentSecureElementPass(pass *SecureElementPass)
-	CanAddPaymentPassWithPrimaryAccountIdentifier(primaryAccountIdentifier string) bool
-	CanAddSecureElementPassWithPrimaryAccountIdentifier(primaryAccountIdentifier string) bool
-	CanAddFelicaPass() bool
-	ServiceProviderDataForSecureElementPassCompletion(ctx context.Context, secureElementPass *SecureElementPass) (obj.Object, error)
-	AuthorizationStatusForCapability(capability PassLibraryCapability) PassLibraryAuthorizationStatus
-	IsSecureElementPassActivationAvailable() bool
-	RemoteSecureElementPasses() []*SecureElementPass
-}
-
-var _ PassLibraryable = (*PassLibrary)(nil)

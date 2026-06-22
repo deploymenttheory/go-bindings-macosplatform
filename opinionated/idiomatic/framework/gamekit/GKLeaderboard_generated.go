@@ -6,6 +6,7 @@ package gamekit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/foundation"
@@ -49,24 +50,24 @@ func leaderboardAdopt(id objc.ID) *Leaderboard {
 }
 
 // Description returns the object's -description text.
-func (x *Leaderboard) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (l *Leaderboard) Description() string {
+	return rt.Description(objref.IDOf(l))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Leaderboard) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (l *Leaderboard) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(l), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Leaderboard) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (l *Leaderboard) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(l), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Leaderboard) String() string {
-	return rt.Description(objref.IDOf(x))
+func (l *Leaderboard) String() string {
+	return rt.Description(objref.IDOf(l))
 }
 
 // NewLeaderboard creates a new Leaderboard.
@@ -90,46 +91,46 @@ func NewLeaderboardWithPlayers(players []*Player) *Leaderboard {
 }
 
 // WithCategory sets the property and returns the receiver so calls can be chained.
-func (x *Leaderboard) WithCategory(category string) *Leaderboard {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
-	return x
+func (l *Leaderboard) WithCategory(category string) *Leaderboard {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setCategory:"), purego.NSString(category))
+	return l
 }
 
 // WithTimeScope sets the property and returns the receiver so calls can be chained.
-func (x *Leaderboard) WithTimeScope(timeScope LeaderboardTimeScope) *Leaderboard {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeScope:"), timeScope)
-	return x
+func (l *Leaderboard) WithTimeScope(timeScope LeaderboardTimeScope) *Leaderboard {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setTimeScope:"), timeScope)
+	return l
 }
 
-// WithPlayerScope filter on friends. Does not apply to leaderboard initialized with players.
-func (x *Leaderboard) WithPlayerScope(playerScope LeaderboardPlayerScope) *Leaderboard {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayerScope:"), playerScope)
-	return x
+// WithPlayerScope sets filter on friends. Does not apply to leaderboard initialized with players.
+func (l *Leaderboard) WithPlayerScope(playerScope LeaderboardPlayerScope) *Leaderboard {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setPlayerScope:"), playerScope)
+	return l
 }
 
-// WithIdentifier leaderboardID. If nil, fetch the aggregate leaderboard.
-func (x *Leaderboard) WithIdentifier(identifier string) *Leaderboard {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
-	return x
+// WithIdentifier sets leaderboardID. If nil, fetch the aggregate leaderboard.
+func (l *Leaderboard) WithIdentifier(identifier string) *Leaderboard {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
+	return l
 }
 
-// WithRange leaderboards start at index 1 and the length should be less than 100. Does not apply to leaderboards initialized with players.  Exception will be thrown if developer tries to set an invalid range.
-func (x *Leaderboard) WithRange(range_ foundation.NSRange) *Leaderboard {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRange:"), range_)
-	return x
+// WithRange sets leaderboards start at index 1 and the length should be less than 100. Does not apply to leaderboards initialized with players.  Exception will be thrown if developer tries to set an invalid range.
+func (l *Leaderboard) WithRange(range_ foundation.NSRange) *Leaderboard {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setRange:"), range_)
+	return l
 }
 
 // SubmitScoreContextPlayer submits a score to the leaderboard.
 //
 // SubmitScoreContextPlayer blocks until the operation completes or ctx is cancelled.
-func (x *Leaderboard) SubmitScoreContextPlayer(ctx context.Context, score int, context_ int, player *Player) error {
+func (l *Leaderboard) SubmitScoreContextPlayer(ctx context.Context, score int, context_ int, player *Player) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("submitScore:context:player:completionHandler:"), score, context_, objref.IDOf(player), _block)
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("submitScore:context:player:completionHandler:"), score, context_, objref.IDOf(player), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -138,9 +139,9 @@ func (x *Leaderboard) SubmitScoreContextPlayer(ctx context.Context, score int, c
 	}
 }
 
-// Title localized title
-func (x *Leaderboard) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+// Title returns localized title
+func (l *Leaderboard) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
@@ -148,87 +149,87 @@ func (x *Leaderboard) Title() string {
 }
 
 // GroupIdentifier set when leaderboards have been designated a game group; set when loadLeaderboardsWithCompletionHandler has been called for leaderboards that support game groups
-func (x *Leaderboard) GroupIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupIdentifier"))
+func (l *Leaderboard) GroupIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("groupIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// BaseLeaderboardID leaderboard ID defined in App Store Connect that this instance is associated with
-func (x *Leaderboard) BaseLeaderboardID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseLeaderboardID"))
+// BaseLeaderboardID returns leaderboard ID defined in App Store Connect that this instance is associated with
+func (l *Leaderboard) BaseLeaderboardID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("baseLeaderboardID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Type type of leaderboard
-func (x *Leaderboard) Type() LeaderboardType {
-	_r := objc.Send[LeaderboardType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns type of leaderboard
+func (l *Leaderboard) Type() LeaderboardType {
+	_r := objc.Send[LeaderboardType](objref.IDOf(l), objc.RegisterName("type"))
 	return _r
 }
 
-// StartDate date and time this instance started accepting score submissions (only applicable to recurring leaderboards)
-func (x *Leaderboard) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+// StartDate returns date and time this instance started accepting score submissions (only applicable to recurring leaderboards)
+func (l *Leaderboard) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// NextStartDate date and time the next instance will start accepting score submissions (only applicable to recurring leaderboards)
-func (x *Leaderboard) NextStartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextStartDate"))
+// NextStartDate returns date and time the next instance will start accepting score submissions (only applicable to recurring leaderboards)
+func (l *Leaderboard) NextStartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("nextStartDate"))
 	return obj.Wrap(_r)
 }
 
-// Duration duration from startDate during which this leaderboard instance accepts score submissions (only applicable to recurring leaderboards)
-func (x *Leaderboard) Duration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+// Duration returns duration from startDate during which this leaderboard instance accepts score submissions (only applicable to recurring leaderboards)
+func (l *Leaderboard) Duration() float64 {
+	_r := objc.Send[float64](objref.IDOf(l), objc.RegisterName("duration"))
 	return _r
 }
 
-// LeaderboardDescription the description of this Leaderboard as configured by the developer in App Store Connect.
-func (x *Leaderboard) LeaderboardDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leaderboardDescription"))
+// LeaderboardDescription returns the description of this Leaderboard as configured by the developer in App Store Connect.
+func (l *Leaderboard) LeaderboardDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("leaderboardDescription"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ReleaseState the release state of the leaderboard in App Store Connect.
-func (x *Leaderboard) ReleaseState() ReleaseState {
-	_r := objc.Send[ReleaseState](objref.IDOf(x), objc.RegisterName("releaseState"))
+// ReleaseState returns the release state of the leaderboard in App Store Connect.
+func (l *Leaderboard) ReleaseState() ReleaseState {
+	_r := objc.Send[ReleaseState](objref.IDOf(l), objc.RegisterName("releaseState"))
 	return _r
 }
 
-// ActivityIdentifier the identifier of the game activity associated with this leaderboard, as configured by the developer in App Store Connect.
-func (x *Leaderboard) ActivityIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activityIdentifier"))
+// ActivityIdentifier returns the identifier of the game activity associated with this leaderboard, as configured by the developer in App Store Connect.
+func (l *Leaderboard) ActivityIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("activityIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ActivityProperties the properties when associating this leaderboard with a game activity, as configured by the developer in App Store Connect.
-func (x *Leaderboard) ActivityProperties() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activityProperties"))
+// ActivityProperties returns the properties when associating this leaderboard with a game activity, as configured by the developer in App Store Connect.
+func (l *Leaderboard) ActivityProperties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("activityProperties"))
 	return obj.Wrap(_r)
 }
 
-// IsHidden a Boolean value that indicates whether the current leaderboard isn't visible in Game Center views. You can still submit scores to a hidden leaderboard.
-func (x *Leaderboard) IsHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+// IsHidden reports whether the current leaderboard isn't visible in Game Center views. You can still submit scores to a hidden leaderboard.
+func (l *Leaderboard) IsHidden() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("isHidden"))
 	return _r
 }
 
 // LoadScores load the scores for this leader board asynchronously. Error will be nil on success. Possible reasons for error: 1. Communications problem 2. Unauthenticated player
 //
 // LoadScores blocks until the operation completes or ctx is cancelled.
-func (x *Leaderboard) LoadScores(ctx context.Context) (result obj.Object, err error) {
+func (l *Leaderboard) LoadScores(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -240,7 +241,7 @@ func (x *Leaderboard) LoadScores(ctx context.Context) (result obj.Object, err er
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadScoresWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("loadScoresWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -251,96 +252,71 @@ func (x *Leaderboard) LoadScores(ctx context.Context) (result obj.Object, err er
 }
 
 // Category wraps the corresponding Objective-C method.
-func (x *Leaderboard) Category() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("category"))
+func (l *Leaderboard) Category() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("category"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetCategory wraps the corresponding Objective-C method.
-func (x *Leaderboard) SetCategory(category string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCategory:"), purego.NSString(category))
 }
 
 // TimeScope wraps the corresponding Objective-C method.
-func (x *Leaderboard) TimeScope() LeaderboardTimeScope {
-	_r := objc.Send[LeaderboardTimeScope](objref.IDOf(x), objc.RegisterName("timeScope"))
+func (l *Leaderboard) TimeScope() LeaderboardTimeScope {
+	_r := objc.Send[LeaderboardTimeScope](objref.IDOf(l), objc.RegisterName("timeScope"))
 	return _r
 }
 
-// SetTimeScope wraps the corresponding Objective-C method.
-func (x *Leaderboard) SetTimeScope(timeScope LeaderboardTimeScope) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeScope:"), timeScope)
-}
-
-// PlayerScope filter on friends. Does not apply to leaderboard initialized with players.
-func (x *Leaderboard) PlayerScope() LeaderboardPlayerScope {
-	_r := objc.Send[LeaderboardPlayerScope](objref.IDOf(x), objc.RegisterName("playerScope"))
+// PlayerScope returns filter on friends. Does not apply to leaderboard initialized with players.
+func (l *Leaderboard) PlayerScope() LeaderboardPlayerScope {
+	_r := objc.Send[LeaderboardPlayerScope](objref.IDOf(l), objc.RegisterName("playerScope"))
 	return _r
 }
 
-// SetPlayerScope wraps the corresponding Objective-C method.
-func (x *Leaderboard) SetPlayerScope(playerScope LeaderboardPlayerScope) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlayerScope:"), playerScope)
-}
-
-// Identifier leaderboardID. If nil, fetch the aggregate leaderboard.
-func (x *Leaderboard) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns leaderboardID. If nil, fetch the aggregate leaderboard.
+func (l *Leaderboard) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetIdentifier wraps the corresponding Objective-C method.
-func (x *Leaderboard) SetIdentifier(identifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), purego.NSString(identifier))
-}
-
-// Range leaderboards start at index 1 and the length should be less than 100. Does not apply to leaderboards initialized with players.  Exception will be thrown if developer tries to set an invalid range.
-func (x *Leaderboard) Range() foundation.NSRange {
-	_r := objc.Send[foundation.NSRange](objref.IDOf(x), objc.RegisterName("range"))
+// Range returns leaderboards start at index 1 and the length should be less than 100. Does not apply to leaderboards initialized with players.  Exception will be thrown if developer tries to set an invalid range.
+func (l *Leaderboard) Range() foundation.NSRange {
+	_r := objc.Send[foundation.NSRange](objref.IDOf(l), objc.RegisterName("range"))
 	return _r
 }
 
-// SetRange wraps the corresponding Objective-C method.
-func (x *Leaderboard) SetRange(range_ foundation.NSRange) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRange:"), range_)
-}
-
-// Scores scores are not valid until loadScores: has completed.
+// Scores returns scores are not valid until loadScores: has completed.
 //
 // Scores returns the collection as a Go slice.
-func (x *Leaderboard) Scores() []*Score {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scores"))
+func (l *Leaderboard) Scores() []*Score {
+	_arr := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("scores"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Score { return ScoreFromID(_id) })
 }
 
-// MaxRange the maxRange which represents the size of the leaderboard is not valid until loadScores: has completed.
-func (x *Leaderboard) MaxRange() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxRange"))
+// MaxRange returns the maxRange which represents the size of the leaderboard is not valid until loadScores: has completed.
+func (l *Leaderboard) MaxRange() int {
+	_r := objc.Send[int](objref.IDOf(l), objc.RegisterName("maxRange"))
 	return _r
 }
 
-// LocalPlayerScore the local player's score
-func (x *Leaderboard) LocalPlayerScore() *Score {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localPlayerScore"))
+// LocalPlayerScore returns the local player's score
+func (l *Leaderboard) LocalPlayerScore() *Score {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("localPlayerScore"))
 	return ScoreFromID(_r)
 }
 
-// IsLoading this property is true if the leaderboard is currently loading
-func (x *Leaderboard) IsLoading() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoading"))
+// IsLoading reports whether this property is true if the leaderboard is currently loading
+func (l *Leaderboard) IsLoading() bool {
+	_r := objc.Send[bool](objref.IDOf(l), objc.RegisterName("isLoading"))
 	return _r
 }
 
 // LoadImage loads the image for the leaderboard.
 //
 // LoadImage blocks until the operation completes or ctx is cancelled.
-func (x *Leaderboard) LoadImage(ctx context.Context) (result obj.Object, err error) {
+func (l *Leaderboard) LoadImage(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -352,7 +328,7 @@ func (x *Leaderboard) LoadImage(ctx context.Context) (result obj.Object, err err
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadImageWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("loadImageWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -361,44 +337,3 @@ func (x *Leaderboard) LoadImage(ctx context.Context) (result obj.Object, err err
 		return _zero, ctx.Err()
 	}
 }
-
-// Leaderboardable is the interface implemented by [Leaderboard], for mocking and DI.
-type Leaderboardable interface {
-	obj.Object
-	WithCategory(category string) *Leaderboard
-	WithTimeScope(timeScope LeaderboardTimeScope) *Leaderboard
-	WithPlayerScope(playerScope LeaderboardPlayerScope) *Leaderboard
-	WithIdentifier(identifier string) *Leaderboard
-	WithRange(range_ foundation.NSRange) *Leaderboard
-	SubmitScoreContextPlayer(ctx context.Context, score int, context_ int, player *Player) error
-	Title() string
-	GroupIdentifier() string
-	BaseLeaderboardID() string
-	Type() LeaderboardType
-	StartDate() obj.Object
-	NextStartDate() obj.Object
-	Duration() float64
-	LeaderboardDescription() string
-	ReleaseState() ReleaseState
-	ActivityIdentifier() string
-	ActivityProperties() obj.Object
-	IsHidden() bool
-	LoadScores(ctx context.Context) (obj.Object, error)
-	Category() string
-	SetCategory(category string)
-	TimeScope() LeaderboardTimeScope
-	SetTimeScope(timeScope LeaderboardTimeScope)
-	PlayerScope() LeaderboardPlayerScope
-	SetPlayerScope(playerScope LeaderboardPlayerScope)
-	Identifier() string
-	SetIdentifier(identifier string)
-	Range() foundation.NSRange
-	SetRange(range_ foundation.NSRange)
-	Scores() []*Score
-	MaxRange() int
-	LocalPlayerScore() *Score
-	IsLoading() bool
-	LoadImage(ctx context.Context) (obj.Object, error)
-}
-
-var _ Leaderboardable = (*Leaderboard)(nil)

@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,13 +50,6 @@ func NewClinicalType() *ClinicalType {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKClinicalType")), objc.RegisterName("new"))
 	return clinicalTypeAdopt(_id)
 }
-
-// ClinicalTypeable is the interface implemented by [ClinicalType], for mocking and DI.
-type ClinicalTypeable interface {
-	obj.Object
-}
-
-var _ ClinicalTypeable = (*ClinicalType)(nil)
 
 var _ SampleTypeProvider = (*ClinicalType)(nil)
 

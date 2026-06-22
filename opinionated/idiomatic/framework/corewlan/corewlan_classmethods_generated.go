@@ -11,7 +11,7 @@ import (
 	"github.com/ebitengine/purego/objc"
 )
 
-// CWConfigurationConfiguration convenience method for getting an empty CWConfiguration object.
+// CWConfigurationConfiguration returns convenience method for getting an empty CWConfiguration object.
 func CWConfigurationConfiguration() *Configuration {
 	_r := objc.Send[objc.ID](objc.ID(_class("CWConfiguration")), objc.RegisterName("configuration"))
 	return ConfigurationFromID(_r)
@@ -29,7 +29,7 @@ func InterfaceNames() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// CWInterfaceInterface convenience method for getting an CWInterface object for the default WLAN interface.
+// CWInterfaceInterface returns convenience method for getting an CWInterface object for the default WLAN interface.
 func CWInterfaceInterface() *Interface {
 	_r := objc.Send[objc.ID](objc.ID(_class("CWInterface")), objc.RegisterName("interface"))
 	return InterfaceFromID(_r)
@@ -41,7 +41,7 @@ func InterfaceWithName(name string) *Interface {
 	return InterfaceFromID(_r)
 }
 
-// CWNetworkProfileNetworkProfile convenience method for getting a CWNetworkProfile object.
+// CWNetworkProfileNetworkProfile returns convenience method for getting a CWNetworkProfile object.
 func CWNetworkProfileNetworkProfile() *NetworkProfile {
 	_r := objc.Send[objc.ID](objc.ID(_class("CWNetworkProfile")), objc.RegisterName("networkProfile"))
 	return NetworkProfileFromID(_r)
@@ -53,7 +53,7 @@ func NetworkProfileWithNetworkProfile(networkProfile *NetworkProfile) *NetworkPr
 	return NetworkProfileFromID(_r)
 }
 
-// SharedWiFiClient the shared Wi-Fi client object.
+// SharedWiFiClient returns the shared Wi-Fi client object.
 func SharedWiFiClient() *WiFiClient {
 	_r := objc.Send[objc.ID](objc.ID(_class("CWWiFiClient")), objc.RegisterName("sharedWiFiClient"))
 	return WiFiClientFromID(_r)

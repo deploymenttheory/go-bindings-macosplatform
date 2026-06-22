@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,54 +53,41 @@ func NewCNNNeuronSoftSign() *CNNNeuronSoftSign {
 	return cNNNeuronSoftSignAdopt(_id)
 }
 
-// WithOffset the position of the destination image’s clip rectangle origin, relative to the source image.
-func (x *CNNNeuronSoftSign) WithOffset(offset mpscore.MPSOffset) *CNNNeuronSoftSign {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination image’s clip rectangle origin, relative to the source image.
+func (cnss *CNNNeuronSoftSign) WithOffset(offset mpscore.MPSOffset) *CNNNeuronSoftSign {
+	objc.Send[objc.ID](objref.IDOf(cnss), objc.RegisterName("setOffset:"), offset)
+	return cnss
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-func (x *CNNNeuronSoftSign) WithClipRect(clipRect metal.MTLRegion) *CNNNeuronSoftSign {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
+func (cnss *CNNNeuronSoftSign) WithClipRect(clipRect metal.MTLRegion) *CNNNeuronSoftSign {
+	objc.Send[objc.ID](objref.IDOf(cnss), objc.RegisterName("setClipRect:"), clipRect)
+	return cnss
 }
 
-// WithDestinationFeatureChannelOffset the number of channels in the destination image to skip before writing output data.
-func (x *CNNNeuronSoftSign) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNNeuronSoftSign {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
-	return x
+// WithDestinationFeatureChannelOffset sets the number of channels in the destination image to skip before writing output data.
+func (cnss *CNNNeuronSoftSign) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNNeuronSoftSign {
+	objc.Send[objc.ID](objref.IDOf(cnss), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
+	return cnss
 }
 
-// WithSourceFeatureChannelOffset the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
-func (x *CNNNeuronSoftSign) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNNeuronSoftSign {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
-	return x
+// WithSourceFeatureChannelOffset sets the number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+func (cnss *CNNNeuronSoftSign) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNNeuronSoftSign {
+	objc.Send[objc.ID](objref.IDOf(cnss), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
+	return cnss
 }
 
-// WithSourceFeatureChannelMaxCount the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNNeuronSoftSign) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNNeuronSoftSign {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
-	return x
+// WithSourceFeatureChannelMaxCount sets the maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (cnss *CNNNeuronSoftSign) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNNeuronSoftSign {
+	objc.Send[objc.ID](objref.IDOf(cnss), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
+	return cnss
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *CNNNeuronSoftSign) WithLabel(label string) *CNNNeuronSoftSign {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (cnss *CNNNeuronSoftSign) WithLabel(label string) *CNNNeuronSoftSign {
+	objc.Send[objc.ID](objref.IDOf(cnss), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cnss
 }
-
-// CNNNeuronSoftSignable is the interface implemented by [CNNNeuronSoftSign], for mocking and DI.
-type CNNNeuronSoftSignable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *CNNNeuronSoftSign
-	WithClipRect(clipRect metal.MTLRegion) *CNNNeuronSoftSign
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNNeuronSoftSign
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNNeuronSoftSign
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNNeuronSoftSign
-	WithLabel(label string) *CNNNeuronSoftSign
-}
-
-var _ CNNNeuronSoftSignable = (*CNNNeuronSoftSign)(nil)
 
 var _ CNNNeuronProvider = (*CNNNeuronSoftSign)(nil)
 

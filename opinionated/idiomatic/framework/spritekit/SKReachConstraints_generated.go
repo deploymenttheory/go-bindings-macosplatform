@@ -46,24 +46,24 @@ func reachConstraintsAdopt(id objc.ID) *ReachConstraints {
 }
 
 // Description returns the object's -description text.
-func (x *ReachConstraints) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rc *ReachConstraints) Description() string {
+	return rt.Description(objref.IDOf(rc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ReachConstraints) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rc *ReachConstraints) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ReachConstraints) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rc *ReachConstraints) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ReachConstraints) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rc *ReachConstraints) String() string {
+	return rt.Description(objref.IDOf(rc))
 }
 
 // NewReachConstraintsWithLowerAngleLimitUpperAngleLimit initializes a new reach constraint object.
@@ -73,49 +73,26 @@ func NewReachConstraintsWithLowerAngleLimitUpperAngleLimit(lowerAngleLimit float
 	return reachConstraintsAdopt(_id)
 }
 
-// WithLowerAngleLimit the minimum angle that the node can have after it is rotated by a reach event.
-func (x *ReachConstraints) WithLowerAngleLimit(lowerAngleLimit float64) *ReachConstraints {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerAngleLimit:"), lowerAngleLimit)
-	return x
+// WithLowerAngleLimit sets the minimum angle that the node can have after it is rotated by a reach event.
+func (rc *ReachConstraints) WithLowerAngleLimit(lowerAngleLimit float64) *ReachConstraints {
+	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("setLowerAngleLimit:"), lowerAngleLimit)
+	return rc
 }
 
-// WithUpperAngleLimit the maximum angle that the node can have after it is rotated by a reach event.
-func (x *ReachConstraints) WithUpperAngleLimit(upperAngleLimit float64) *ReachConstraints {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperAngleLimit:"), upperAngleLimit)
-	return x
+// WithUpperAngleLimit sets the maximum angle that the node can have after it is rotated by a reach event.
+func (rc *ReachConstraints) WithUpperAngleLimit(upperAngleLimit float64) *ReachConstraints {
+	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("setUpperAngleLimit:"), upperAngleLimit)
+	return rc
 }
 
-// LowerAngleLimit lower angle limit in radians
-func (x *ReachConstraints) LowerAngleLimit() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lowerAngleLimit"))
+// LowerAngleLimit returns lower angle limit in radians
+func (rc *ReachConstraints) LowerAngleLimit() float64 {
+	_r := objc.Send[float64](objref.IDOf(rc), objc.RegisterName("lowerAngleLimit"))
 	return _r
 }
 
-// SetLowerAngleLimit wraps the corresponding Objective-C method.
-func (x *ReachConstraints) SetLowerAngleLimit(lowerAngleLimit float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerAngleLimit:"), lowerAngleLimit)
-}
-
-// UpperAngleLimit upper angle limit in radians
-func (x *ReachConstraints) UpperAngleLimit() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("upperAngleLimit"))
+// UpperAngleLimit returns upper angle limit in radians
+func (rc *ReachConstraints) UpperAngleLimit() float64 {
+	_r := objc.Send[float64](objref.IDOf(rc), objc.RegisterName("upperAngleLimit"))
 	return _r
 }
-
-// SetUpperAngleLimit wraps the corresponding Objective-C method.
-func (x *ReachConstraints) SetUpperAngleLimit(upperAngleLimit float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperAngleLimit:"), upperAngleLimit)
-}
-
-// ReachConstraintsable is the interface implemented by [ReachConstraints], for mocking and DI.
-type ReachConstraintsable interface {
-	obj.Object
-	WithLowerAngleLimit(lowerAngleLimit float64) *ReachConstraints
-	WithUpperAngleLimit(upperAngleLimit float64) *ReachConstraints
-	LowerAngleLimit() float64
-	SetLowerAngleLimit(lowerAngleLimit float64)
-	UpperAngleLimit() float64
-	SetUpperAngleLimit(upperAngleLimit float64)
-}
-
-var _ ReachConstraintsable = (*ReachConstraints)(nil)

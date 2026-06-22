@@ -5,12 +5,12 @@
 package virtualization
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // LinuxRosettaAbstractSocketCachingOptions is an idiomatic wrapper over the Objective-C class VZLinuxRosettaAbstractSocketCachingOptions.
@@ -59,21 +59,13 @@ func NewLinuxRosettaAbstractSocketCachingOptionsWithNameError(name string) (resu
 	return linuxRosettaAbstractSocketCachingOptionsAdopt(_id), nil
 }
 
-// Name name set by initWithName. This is the name of the Abstract Socket to be used by Rosetta.
-func (x *LinuxRosettaAbstractSocketCachingOptions) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns name set by initWithName. This is the name of the Abstract Socket to be used by Rosetta.
+func (lrasco *LinuxRosettaAbstractSocketCachingOptions) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(lrasco), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// LinuxRosettaAbstractSocketCachingOptionsable is the interface implemented by [LinuxRosettaAbstractSocketCachingOptions], for mocking and DI.
-type LinuxRosettaAbstractSocketCachingOptionsable interface {
-	obj.Object
-	Name() string
-}
-
-var _ LinuxRosettaAbstractSocketCachingOptionsable = (*LinuxRosettaAbstractSocketCachingOptions)(nil)
 
 var _ LinuxRosettaCachingOptionsProvider = (*LinuxRosettaAbstractSocketCachingOptions)(nil)

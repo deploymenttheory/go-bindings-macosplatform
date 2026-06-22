@@ -46,57 +46,42 @@ func mTRUnitTestingClusterTestFabricScopedEventEventAdopt(id objc.ID) *MTRUnitTe
 }
 
 // Description returns the object's -description text.
-func (x *MTRUnitTestingClusterTestFabricScopedEventEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mutctfsee *MTRUnitTestingClusterTestFabricScopedEventEvent) Description() string {
+	return rt.Description(objref.IDOf(mutctfsee))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRUnitTestingClusterTestFabricScopedEventEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mutctfsee *MTRUnitTestingClusterTestFabricScopedEventEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mutctfsee), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRUnitTestingClusterTestFabricScopedEventEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mutctfsee *MTRUnitTestingClusterTestFabricScopedEventEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mutctfsee), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRUnitTestingClusterTestFabricScopedEventEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mutctfsee *MTRUnitTestingClusterTestFabricScopedEventEvent) String() string {
+	return rt.Description(objref.IDOf(mutctfsee))
 }
 
 // WithFabricIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRUnitTestingClusterTestFabricScopedEventEvent) WithFabricIndex(fabricIndex obj.Object) *MTRUnitTestingClusterTestFabricScopedEventEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-	return x
+func (mutctfsee *MTRUnitTestingClusterTestFabricScopedEventEvent) WithFabricIndex(fabricIndex obj.Object) *MTRUnitTestingClusterTestFabricScopedEventEvent {
+	objc.Send[objc.ID](objref.IDOf(mutctfsee), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return mutctfsee
 }
 
 // FabricIndex wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestFabricScopedEventEvent) FabricIndex() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+func (mutctfsee *MTRUnitTestingClusterTestFabricScopedEventEvent) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mutctfsee), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
-
-// SetFabricIndex wraps the corresponding Objective-C method.
-func (x *MTRUnitTestingClusterTestFabricScopedEventEvent) SetFabricIndex(fabricIndex obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-}
-
-// MTRUnitTestingClusterTestFabricScopedEventEventable is the interface implemented by [MTRUnitTestingClusterTestFabricScopedEventEvent], for mocking and DI.
-type MTRUnitTestingClusterTestFabricScopedEventEventable interface {
-	obj.Object
-	WithFabricIndex(fabricIndex obj.Object) *MTRUnitTestingClusterTestFabricScopedEventEvent
-	FabricIndex() obj.Object
-	SetFabricIndex(fabricIndex obj.Object)
-}
-
-var _ MTRUnitTestingClusterTestFabricScopedEventEventable = (*MTRUnitTestingClusterTestFabricScopedEventEvent)(nil)
 
 // isMTRUnitTestingClusterTestFabricScopedEventEvent marks MTRUnitTestingClusterTestFabricScopedEventEvent — and, by embedding promotion, its
 // subclasses — as a member of the MTRUnitTestingClusterTestFabricScopedEventEvent hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRUnitTestingClusterTestFabricScopedEventEvent) isMTRUnitTestingClusterTestFabricScopedEventEvent() {
+func (mutctfsee *MTRUnitTestingClusterTestFabricScopedEventEvent) isMTRUnitTestingClusterTestFabricScopedEventEvent() {
 }
 
 var _ MTRUnitTestingClusterTestFabricScopedEventEventProvider = (*MTRUnitTestingClusterTestFabricScopedEventEvent)(nil)

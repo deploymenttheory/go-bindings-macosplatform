@@ -46,24 +46,24 @@ func assetVariantQualifierAdopt(id objc.ID) *AssetVariantQualifier {
 }
 
 // Description returns the object's -description text.
-func (x *AssetVariantQualifier) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (avq *AssetVariantQualifier) Description() string {
+	return rt.Description(objref.IDOf(avq))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetVariantQualifier) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (avq *AssetVariantQualifier) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(avq), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetVariantQualifier) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (avq *AssetVariantQualifier) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(avq), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetVariantQualifier) String() string {
-	return rt.Description(objref.IDOf(x))
+func (avq *AssetVariantQualifier) String() string {
+	return rt.Description(objref.IDOf(avq))
 }
 
 // NewAssetVariantQualifier creates a new AssetVariantQualifier.
@@ -71,10 +71,3 @@ func NewAssetVariantQualifier() *AssetVariantQualifier {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetVariantQualifier")), objc.RegisterName("new"))
 	return assetVariantQualifierAdopt(_id)
 }
-
-// AssetVariantQualifierable is the interface implemented by [AssetVariantQualifier], for mocking and DI.
-type AssetVariantQualifierable interface {
-	obj.Object
-}
-
-var _ AssetVariantQualifierable = (*AssetVariantQualifier)(nil)

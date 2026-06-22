@@ -46,24 +46,24 @@ func messageEncodingResultAdopt(id objc.ID) *MessageEncodingResult {
 }
 
 // Description returns the object's -description text.
-func (x *MessageEncodingResult) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mer *MessageEncodingResult) Description() string {
+	return rt.Description(objref.IDOf(mer))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MessageEncodingResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mer *MessageEncodingResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mer), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MessageEncodingResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mer *MessageEncodingResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mer), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MessageEncodingResult) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mer *MessageEncodingResult) String() string {
+	return rt.Description(objref.IDOf(mer))
 }
 
 // NewMessageEncodingResult creates a new MessageEncodingResult.
@@ -72,16 +72,8 @@ func NewMessageEncodingResult() *MessageEncodingResult {
 	return messageEncodingResultAdopt(_id)
 }
 
-// EncodedMessage the encoded message. Nil if no need to encode or an error occured while encoding
-func (x *MessageEncodingResult) EncodedMessage() *EncodedOutgoingMessage {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodedMessage"))
+// EncodedMessage returns the encoded message. Nil if no need to encode or an error occured while encoding
+func (mer *MessageEncodingResult) EncodedMessage() *EncodedOutgoingMessage {
+	_r := objc.Send[objc.ID](objref.IDOf(mer), objc.RegisterName("encodedMessage"))
 	return EncodedOutgoingMessageFromID(_r)
 }
-
-// MessageEncodingResultable is the interface implemented by [MessageEncodingResult], for mocking and DI.
-type MessageEncodingResultable interface {
-	obj.Object
-	EncodedMessage() *EncodedOutgoingMessage
-}
-
-var _ MessageEncodingResultable = (*MessageEncodingResult)(nil)

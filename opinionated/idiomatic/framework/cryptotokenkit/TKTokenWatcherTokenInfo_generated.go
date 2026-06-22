@@ -44,24 +44,24 @@ func tokenWatcherTokenInfoAdopt(id objc.ID) *TokenWatcherTokenInfo {
 }
 
 // Description returns the object's -description text.
-func (x *TokenWatcherTokenInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (twti *TokenWatcherTokenInfo) Description() string {
+	return rt.Description(objref.IDOf(twti))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TokenWatcherTokenInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (twti *TokenWatcherTokenInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(twti), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TokenWatcherTokenInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (twti *TokenWatcherTokenInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(twti), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TokenWatcherTokenInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (twti *TokenWatcherTokenInfo) String() string {
+	return rt.Description(objref.IDOf(twti))
 }
 
 // NewTokenWatcherTokenInfo creates a new TokenWatcherTokenInfo.
@@ -70,39 +70,29 @@ func NewTokenWatcherTokenInfo() *TokenWatcherTokenInfo {
 	return tokenWatcherTokenInfoAdopt(_id)
 }
 
-// TokenID tokenID
-func (x *TokenWatcherTokenInfo) TokenID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenID"))
+// TokenID returns tokenID
+func (twti *TokenWatcherTokenInfo) TokenID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(twti), objc.RegisterName("tokenID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SlotName the slot name (if available)
-func (x *TokenWatcherTokenInfo) SlotName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("slotName"))
+// SlotName returns the slot name (if available)
+func (twti *TokenWatcherTokenInfo) SlotName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(twti), objc.RegisterName("slotName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// DriverName localized driver name (if available)
-func (x *TokenWatcherTokenInfo) DriverName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("driverName"))
+// DriverName returns localized driver name (if available)
+func (twti *TokenWatcherTokenInfo) DriverName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(twti), objc.RegisterName("driverName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// TokenWatcherTokenInfoable is the interface implemented by [TokenWatcherTokenInfo], for mocking and DI.
-type TokenWatcherTokenInfoable interface {
-	obj.Object
-	TokenID() string
-	SlotName() string
-	DriverName() string
-}
-
-var _ TokenWatcherTokenInfoable = (*TokenWatcherTokenInfo)(nil)

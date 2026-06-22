@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,19 +51,11 @@ func NewCNNPoolingL2NormNode() *CNNPoolingL2NormNode {
 	return cNNPoolingL2NormNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNPoolingL2NormNode) WithLabel(label string) *CNNPoolingL2NormNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cplnn *CNNPoolingL2NormNode) WithLabel(label string) *CNNPoolingL2NormNode {
+	objc.Send[objc.ID](objref.IDOf(cplnn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cplnn
 }
-
-// CNNPoolingL2NormNodeable is the interface implemented by [CNNPoolingL2NormNode], for mocking and DI.
-type CNNPoolingL2NormNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNPoolingL2NormNode
-}
-
-var _ CNNPoolingL2NormNodeable = (*CNNPoolingL2NormNode)(nil)
 
 var _ CNNPoolingNodeProvider = (*CNNPoolingL2NormNode)(nil)
 

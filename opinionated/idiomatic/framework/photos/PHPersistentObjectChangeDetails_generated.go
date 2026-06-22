@@ -46,24 +46,24 @@ func persistentObjectChangeDetailsAdopt(id objc.ID) *PersistentObjectChangeDetai
 }
 
 // Description returns the object's -description text.
-func (x *PersistentObjectChangeDetails) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pocd *PersistentObjectChangeDetails) Description() string {
+	return rt.Description(objref.IDOf(pocd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersistentObjectChangeDetails) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pocd *PersistentObjectChangeDetails) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pocd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersistentObjectChangeDetails) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pocd *PersistentObjectChangeDetails) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pocd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PersistentObjectChangeDetails) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pocd *PersistentObjectChangeDetails) String() string {
+	return rt.Description(objref.IDOf(pocd))
 }
 
 // NewPersistentObjectChangeDetails creates a new PersistentObjectChangeDetails.
@@ -73,36 +73,25 @@ func NewPersistentObjectChangeDetails() *PersistentObjectChangeDetails {
 }
 
 // ObjectType wraps the corresponding Objective-C method.
-func (x *PersistentObjectChangeDetails) ObjectType() ObjectType {
-	_r := objc.Send[ObjectType](objref.IDOf(x), objc.RegisterName("objectType"))
+func (pocd *PersistentObjectChangeDetails) ObjectType() ObjectType {
+	_r := objc.Send[ObjectType](objref.IDOf(pocd), objc.RegisterName("objectType"))
 	return _r
 }
 
 // InsertedLocalIdentifiers wraps the corresponding Objective-C method.
-func (x *PersistentObjectChangeDetails) InsertedLocalIdentifiers() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertedLocalIdentifiers"))
+func (pocd *PersistentObjectChangeDetails) InsertedLocalIdentifiers() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pocd), objc.RegisterName("insertedLocalIdentifiers"))
 	return obj.Wrap(_r)
 }
 
 // UpdatedLocalIdentifiers wraps the corresponding Objective-C method.
-func (x *PersistentObjectChangeDetails) UpdatedLocalIdentifiers() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updatedLocalIdentifiers"))
+func (pocd *PersistentObjectChangeDetails) UpdatedLocalIdentifiers() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pocd), objc.RegisterName("updatedLocalIdentifiers"))
 	return obj.Wrap(_r)
 }
 
 // DeletedLocalIdentifiers wraps the corresponding Objective-C method.
-func (x *PersistentObjectChangeDetails) DeletedLocalIdentifiers() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deletedLocalIdentifiers"))
+func (pocd *PersistentObjectChangeDetails) DeletedLocalIdentifiers() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pocd), objc.RegisterName("deletedLocalIdentifiers"))
 	return obj.Wrap(_r)
 }
-
-// PersistentObjectChangeDetailsable is the interface implemented by [PersistentObjectChangeDetails], for mocking and DI.
-type PersistentObjectChangeDetailsable interface {
-	obj.Object
-	ObjectType() ObjectType
-	InsertedLocalIdentifiers() obj.Object
-	UpdatedLocalIdentifiers() obj.Object
-	DeletedLocalIdentifiers() obj.Object
-}
-
-var _ PersistentObjectChangeDetailsable = (*PersistentObjectChangeDetails)(nil)

@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -55,46 +54,34 @@ func NewImageLaplacianPyramidSubtract() *ImageLaplacianPyramidSubtract {
 }
 
 // WithLaplacianBias sets the property and returns the receiver so calls can be chained.
-func (x *ImageLaplacianPyramidSubtract) WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramidSubtract {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLaplacianBias:"), laplacianBias)
-	return x
+func (ilps *ImageLaplacianPyramidSubtract) WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramidSubtract {
+	objc.Send[objc.ID](objref.IDOf(ilps), objc.RegisterName("setLaplacianBias:"), laplacianBias)
+	return ilps
 }
 
 // WithLaplacianScale sets the property and returns the receiver so calls can be chained.
-func (x *ImageLaplacianPyramidSubtract) WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramidSubtract {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLaplacianScale:"), laplacianScale)
-	return x
+func (ilps *ImageLaplacianPyramidSubtract) WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramidSubtract {
+	objc.Send[objc.ID](objref.IDOf(ilps), objc.RegisterName("setLaplacianScale:"), laplacianScale)
+	return ilps
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageLaplacianPyramidSubtract) WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramidSubtract {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (ilps *ImageLaplacianPyramidSubtract) WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramidSubtract {
+	objc.Send[objc.ID](objref.IDOf(ilps), objc.RegisterName("setOffset:"), offset)
+	return ilps
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageLaplacianPyramidSubtract) WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramidSubtract {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (ilps *ImageLaplacianPyramidSubtract) WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramidSubtract {
+	objc.Send[objc.ID](objref.IDOf(ilps), objc.RegisterName("setClipRect:"), clipRect)
+	return ilps
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageLaplacianPyramidSubtract) WithLabel(label string) *ImageLaplacianPyramidSubtract {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ilps *ImageLaplacianPyramidSubtract) WithLabel(label string) *ImageLaplacianPyramidSubtract {
+	objc.Send[objc.ID](objref.IDOf(ilps), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ilps
 }
-
-// ImageLaplacianPyramidSubtractable is the interface implemented by [ImageLaplacianPyramidSubtract], for mocking and DI.
-type ImageLaplacianPyramidSubtractable interface {
-	obj.Object
-	WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramidSubtract
-	WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramidSubtract
-	WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramidSubtract
-	WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramidSubtract
-	WithLabel(label string) *ImageLaplacianPyramidSubtract
-}
-
-var _ ImageLaplacianPyramidSubtractable = (*ImageLaplacianPyramidSubtract)(nil)
 
 var _ ImageLaplacianPyramidProvider = (*ImageLaplacianPyramidSubtract)(nil)
 

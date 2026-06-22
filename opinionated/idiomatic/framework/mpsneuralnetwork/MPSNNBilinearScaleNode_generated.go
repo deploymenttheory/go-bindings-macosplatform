@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,19 +49,11 @@ func NewNNBilinearScaleNode() *NNBilinearScaleNode {
 	return nNBilinearScaleNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNBilinearScaleNode) WithLabel(label string) *NNBilinearScaleNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nbsn *NNBilinearScaleNode) WithLabel(label string) *NNBilinearScaleNode {
+	objc.Send[objc.ID](objref.IDOf(nbsn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nbsn
 }
-
-// NNBilinearScaleNodeable is the interface implemented by [NNBilinearScaleNode], for mocking and DI.
-type NNBilinearScaleNodeable interface {
-	obj.Object
-	WithLabel(label string) *NNBilinearScaleNode
-}
-
-var _ NNBilinearScaleNodeable = (*NNBilinearScaleNode)(nil)
 
 var _ NNScaleNodeProvider = (*NNBilinearScaleNode)(nil)
 

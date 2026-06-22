@@ -48,24 +48,24 @@ func networkProfileAdopt(id objc.ID) *NetworkProfile {
 }
 
 // Description returns the object's -description text.
-func (x *NetworkProfile) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (np *NetworkProfile) Description() string {
+	return rt.Description(objref.IDOf(np))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NetworkProfile) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (np *NetworkProfile) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(np), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NetworkProfile) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (np *NetworkProfile) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(np), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NetworkProfile) String() string {
-	return rt.Description(objref.IDOf(x))
+func (np *NetworkProfile) String() string {
+	return rt.Description(objref.IDOf(np))
 }
 
 // NewNetworkProfileWithNetworkProfile creates and returns a CWNetworkProfile object initialized with the given CWNetworkProfile object.
@@ -76,14 +76,14 @@ func NewNetworkProfileWithNetworkProfile(networkProfile *NetworkProfile) *Networ
 }
 
 // IsEqualToNetworkProfile determine CWNetworkProfile object equality.
-func (x *NetworkProfile) IsEqualToNetworkProfile(networkProfile *NetworkProfile) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToNetworkProfile:"), objref.IDOf(networkProfile))
+func (np *NetworkProfile) IsEqualToNetworkProfile(networkProfile *NetworkProfile) bool {
+	_r := objc.Send[bool](objref.IDOf(np), objc.RegisterName("isEqualToNetworkProfile:"), objref.IDOf(networkProfile))
 	return _r
 }
 
 // Ssid returns the service set identifier (SSID) for the Wi-Fi network profile, encoded as a string. Returns nil if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string.
-func (x *NetworkProfile) Ssid() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ssid"))
+func (np *NetworkProfile) Ssid() string {
+	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("ssid"))
 	if _r == 0 {
 		return ""
 	}
@@ -91,31 +91,20 @@ func (x *NetworkProfile) Ssid() string {
 }
 
 // SsidData returns the service set identifier (SSID) for the Wi-Fi network profile, encapsulated in an NSData object. The SSID is 1-32 octets.
-func (x *NetworkProfile) SsidData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ssidData"))
+func (np *NetworkProfile) SsidData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(np), objc.RegisterName("ssidData"))
 	return obj.Wrap(_r)
 }
 
 // Security returns the security type of the Wi-Fi network profile.
-func (x *NetworkProfile) Security() Security {
-	_r := objc.Send[Security](objref.IDOf(x), objc.RegisterName("security"))
+func (np *NetworkProfile) Security() Security {
+	_r := objc.Send[Security](objref.IDOf(np), objc.RegisterName("security"))
 	return _r
 }
-
-// NetworkProfileable is the interface implemented by [NetworkProfile], for mocking and DI.
-type NetworkProfileable interface {
-	obj.Object
-	IsEqualToNetworkProfile(networkProfile *NetworkProfile) bool
-	Ssid() string
-	SsidData() obj.Object
-	Security() Security
-}
-
-var _ NetworkProfileable = (*NetworkProfile)(nil)
 
 // isNetworkProfile marks NetworkProfile — and, by embedding promotion, its
 // subclasses — as a member of the NetworkProfile hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NetworkProfile) isNetworkProfile() {}
+func (np *NetworkProfile) isNetworkProfile() {}
 
 var _ NetworkProfileProvider = (*NetworkProfile)(nil)

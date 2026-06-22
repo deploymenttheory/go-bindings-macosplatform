@@ -44,24 +44,24 @@ func mTRDeviceEnergyManagementModeClusterChangeToModeParamsAdopt(id objc.ID) *MT
 }
 
 // Description returns the object's -description text.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemmcctmp *MTRDeviceEnergyManagementModeClusterChangeToModeParams) Description() string {
+	return rt.Description(objref.IDOf(mdemmcctmp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdemmcctmp *MTRDeviceEnergyManagementModeClusterChangeToModeParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdemmcctmp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdemmcctmp *MTRDeviceEnergyManagementModeClusterChangeToModeParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdemmcctmp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemmcctmp *MTRDeviceEnergyManagementModeClusterChangeToModeParams) String() string {
+	return rt.Description(objref.IDOf(mdemmcctmp))
 }
 
 // NewMTRDeviceEnergyManagementModeClusterChangeToModeParams creates a new MTRDeviceEnergyManagementModeClusterChangeToModeParams.
@@ -71,68 +71,37 @@ func NewMTRDeviceEnergyManagementModeClusterChangeToModeParams() *MTRDeviceEnerg
 }
 
 // WithNewMode sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTRDeviceEnergyManagementModeClusterChangeToModeParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
-	return x
+func (mdemmcctmp *MTRDeviceEnergyManagementModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTRDeviceEnergyManagementModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(mdemmcctmp), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
+	return mdemmcctmp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDeviceEnergyManagementModeClusterChangeToModeParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mdemmcctmp *MTRDeviceEnergyManagementModeClusterChangeToModeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDeviceEnergyManagementModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(mdemmcctmp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mdemmcctmp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDeviceEnergyManagementModeClusterChangeToModeParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mdemmcctmp *MTRDeviceEnergyManagementModeClusterChangeToModeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDeviceEnergyManagementModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(mdemmcctmp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mdemmcctmp
 }
 
 // GetNewMode wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeParams) GetNewMode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewMode"))
+func (mdemmcctmp *MTRDeviceEnergyManagementModeClusterChangeToModeParams) GetNewMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemmcctmp), objc.RegisterName("getNewMode"))
 	return obj.Wrap(_r)
 }
 
-// SetNewMode wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeParams) SetNewMode(newMode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mdemmcctmp *MTRDeviceEnergyManagementModeClusterChangeToModeParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemmcctmp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mdemmcctmp *MTRDeviceEnergyManagementModeClusterChangeToModeParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemmcctmp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRDeviceEnergyManagementModeClusterChangeToModeParamsable is the interface implemented by [MTRDeviceEnergyManagementModeClusterChangeToModeParams], for mocking and DI.
-type MTRDeviceEnergyManagementModeClusterChangeToModeParamsable interface {
-	obj.Object
-	WithNewMode(newMode obj.Object) *MTRDeviceEnergyManagementModeClusterChangeToModeParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRDeviceEnergyManagementModeClusterChangeToModeParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRDeviceEnergyManagementModeClusterChangeToModeParams
-	GetNewMode() obj.Object
-	SetNewMode(newMode obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRDeviceEnergyManagementModeClusterChangeToModeParamsable = (*MTRDeviceEnergyManagementModeClusterChangeToModeParams)(nil)

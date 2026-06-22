@@ -46,24 +46,24 @@ func certificateViewAdopt(id objc.ID) *CertificateView {
 }
 
 // Description returns the object's -description text.
-func (x *CertificateView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cv *CertificateView) Description() string {
+	return rt.Description(objref.IDOf(cv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CertificateView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cv *CertificateView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CertificateView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cv *CertificateView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CertificateView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cv *CertificateView) String() string {
+	return rt.Description(objref.IDOf(cv))
 }
 
 // NewCertificateView creates a new CertificateView.
@@ -73,105 +73,83 @@ func NewCertificateView() *CertificateView {
 }
 
 // SetCertificate specifies the certificate that’s displayed in the view.
-func (x *CertificateView) SetCertificate(certificate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificate:"), objref.IDOf(certificate))
+func (cv *CertificateView) SetCertificate(certificate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setCertificate:"), objref.IDOf(certificate))
 }
 
 // Certificate returns the certificate currently displayed in the view.
-func (x *CertificateView) Certificate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("certificate"))
+func (cv *CertificateView) Certificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("certificate"))
 	return obj.Wrap(_r)
 }
 
 // SetPolicies specifies the policies to use when evaluating this certificate’s status.
-func (x *CertificateView) SetPolicies(policies obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPolicies:"), objref.IDOf(policies))
+func (cv *CertificateView) SetPolicies(policies obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPolicies:"), objref.IDOf(policies))
 }
 
 // Policies returns an array of policies used to evaluate the status of the displayed certificate.
-func (x *CertificateView) Policies() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("policies"))
+func (cv *CertificateView) Policies() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("policies"))
 	return obj.Wrap(_r)
 }
 
 // SetEditableTrust specifies whether the user can edit the certificate’s trust settings.
-func (x *CertificateView) SetEditableTrust(editable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditableTrust:"), editable)
+func (cv *CertificateView) SetEditableTrust(editable bool) {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setEditableTrust:"), editable)
 }
 
-// IsEditable indicates if the view allows the user to edit the certificate’s trust.
-func (x *CertificateView) IsEditable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
+// IsEditable reports whether indicates if the view allows the user to edit the certificate’s trust.
+func (cv *CertificateView) IsEditable() bool {
+	_r := objc.Send[bool](objref.IDOf(cv), objc.RegisterName("isEditable"))
 	return _r
 }
 
 // SetDisplayTrust specifies whether the user can see the certificate’s trust settings.
-func (x *CertificateView) SetDisplayTrust(display bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayTrust:"), display)
+func (cv *CertificateView) SetDisplayTrust(display bool) {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDisplayTrust:"), display)
 }
 
-// IsTrustDisplayed indicates if the view currently shows the certificate’s trust settings.
-func (x *CertificateView) IsTrustDisplayed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTrustDisplayed"))
+// IsTrustDisplayed reports whether indicates if the view currently shows the certificate’s trust settings.
+func (cv *CertificateView) IsTrustDisplayed() bool {
+	_r := objc.Send[bool](objref.IDOf(cv), objc.RegisterName("isTrustDisplayed"))
 	return _r
 }
 
 // SaveTrustSettings saves the user’s current trust settings for the displayed certificate.
-func (x *CertificateView) SaveTrustSettings() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveTrustSettings"))
+func (cv *CertificateView) SaveTrustSettings() {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("saveTrustSettings"))
 }
 
 // SetDisplayDetails specifies whether the user can see the certificate details.
-func (x *CertificateView) SetDisplayDetails(display bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayDetails:"), display)
+func (cv *CertificateView) SetDisplayDetails(display bool) {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDisplayDetails:"), display)
 }
 
-// DetailsDisplayed indicates if the view currently shows the certificate’s details.
-func (x *CertificateView) DetailsDisplayed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("detailsDisplayed"))
+// DetailsDisplayed reports whether indicates if the view currently shows the certificate’s details.
+func (cv *CertificateView) DetailsDisplayed() bool {
+	_r := objc.Send[bool](objref.IDOf(cv), objc.RegisterName("detailsDisplayed"))
 	return _r
 }
 
 // SetDetailsDisclosed sets whether the certificate details subview is disclosed.
-func (x *CertificateView) SetDetailsDisclosed(disclosed bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDetailsDisclosed:"), disclosed)
+func (cv *CertificateView) SetDetailsDisclosed(disclosed bool) {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setDetailsDisclosed:"), disclosed)
 }
 
-// DetailsDisclosed returns whether the view currently shows the certificate’s details.
-func (x *CertificateView) DetailsDisclosed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("detailsDisclosed"))
+// DetailsDisclosed reports whether the view currently shows the certificate’s details.
+func (cv *CertificateView) DetailsDisclosed() bool {
+	_r := objc.Send[bool](objref.IDOf(cv), objc.RegisterName("detailsDisclosed"))
 	return _r
 }
 
 // SetPoliciesDisclosed specifies whether the trust policy settings subview is disclosed.
-func (x *CertificateView) SetPoliciesDisclosed(disclosed bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPoliciesDisclosed:"), disclosed)
+func (cv *CertificateView) SetPoliciesDisclosed(disclosed bool) {
+	objc.Send[objc.ID](objref.IDOf(cv), objc.RegisterName("setPoliciesDisclosed:"), disclosed)
 }
 
-// PoliciesDisclosed returns whether the trust policy subview is disclosed.
-func (x *CertificateView) PoliciesDisclosed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("policiesDisclosed"))
+// PoliciesDisclosed reports whether the trust policy subview is disclosed.
+func (cv *CertificateView) PoliciesDisclosed() bool {
+	_r := objc.Send[bool](objref.IDOf(cv), objc.RegisterName("policiesDisclosed"))
 	return _r
 }
-
-// CertificateViewable is the interface implemented by [CertificateView], for mocking and DI.
-type CertificateViewable interface {
-	obj.Object
-	SetCertificate(certificate obj.Object)
-	Certificate() obj.Object
-	SetPolicies(policies obj.Object)
-	Policies() obj.Object
-	SetEditableTrust(editable bool)
-	IsEditable() bool
-	SetDisplayTrust(display bool)
-	IsTrustDisplayed() bool
-	SaveTrustSettings()
-	SetDisplayDetails(display bool)
-	DetailsDisplayed() bool
-	SetDetailsDisclosed(disclosed bool)
-	DetailsDisclosed() bool
-	SetPoliciesDisclosed(disclosed bool)
-	PoliciesDisclosed() bool
-}
-
-var _ CertificateViewable = (*CertificateView)(nil)

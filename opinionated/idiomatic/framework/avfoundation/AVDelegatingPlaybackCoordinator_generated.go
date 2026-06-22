@@ -52,54 +52,41 @@ func NewDelegatingPlaybackCoordinator() *DelegatingPlaybackCoordinator {
 	return delegatingPlaybackCoordinatorAdopt(_id)
 }
 
-// WithSuspensionReasonsThatTriggerWaiting the reasons that cause a coordinator to suspend playback.
-func (x *DelegatingPlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...obj.Object) *DelegatingPlaybackCoordinator {
+// WithSuspensionReasonsThatTriggerWaiting sets the reasons that cause a coordinator to suspend playback.
+func (dpc *DelegatingPlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...obj.Object) *DelegatingPlaybackCoordinator {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionReasonsThatTriggerWaiting:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setSuspensionReasonsThatTriggerWaiting:"), _arr)
+	return dpc
 }
 
-// WithPauseSnapsToMediaTimeOfOriginator a Boolean value that indicates whether participants mirror the originator’s stop time when they pause.
-func (x *DelegatingPlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *DelegatingPlaybackCoordinator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPauseSnapsToMediaTimeOfOriginator:"), pauseSnapsToMediaTimeOfOriginator)
-	return x
+// WithPauseSnapsToMediaTimeOfOriginator sets a Boolean value that indicates whether participants mirror the originator’s stop time when they pause.
+func (dpc *DelegatingPlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *DelegatingPlaybackCoordinator {
+	objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("setPauseSnapsToMediaTimeOfOriginator:"), pauseSnapsToMediaTimeOfOriginator)
+	return dpc
 }
 
 // CoordinateRateChangeToRateOptions coordinates a rate change across all participants, waiting for others to become ready, if necessary.
-func (x *DelegatingPlaybackCoordinator) CoordinateRateChangeToRateOptions(rate float32, options DelegatingPlaybackCoordinatorRateChangeOptions) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("coordinateRateChangeToRate:options:"), rate, options)
+func (dpc *DelegatingPlaybackCoordinator) CoordinateRateChangeToRateOptions(rate float32, options DelegatingPlaybackCoordinatorRateChangeOptions) {
+	objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("coordinateRateChangeToRate:options:"), rate, options)
 }
 
 // TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase tells the coordinator to transition to a new item.
-func (x *DelegatingPlaybackCoordinator) TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase(itemIdentifier string, snapshotTimebase obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionToItemWithIdentifier:proposingInitialTimingBasedOnTimebase:"), purego.NSString(itemIdentifier), objref.IDOf(snapshotTimebase))
+func (dpc *DelegatingPlaybackCoordinator) TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase(itemIdentifier string, snapshotTimebase obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("transitionToItemWithIdentifier:proposingInitialTimingBasedOnTimebase:"), purego.NSString(itemIdentifier), objref.IDOf(snapshotTimebase))
 }
 
 // ReapplyCurrentItemStateToPlaybackControlDelegate tells the coordinator to reissue current play state commands to synchronize the current item to the state of other participants.
-func (x *DelegatingPlaybackCoordinator) ReapplyCurrentItemStateToPlaybackControlDelegate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reapplyCurrentItemStateToPlaybackControlDelegate"))
+func (dpc *DelegatingPlaybackCoordinator) ReapplyCurrentItemStateToPlaybackControlDelegate() {
+	objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("reapplyCurrentItemStateToPlaybackControlDelegate"))
 }
 
-// CurrentItemIdentifier the item identifier of the current item. Previously set by a call to transitionToItemWithIdentifier:proposingInitialTimingBasedOnTimebase:
-func (x *DelegatingPlaybackCoordinator) CurrentItemIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentItemIdentifier"))
+// CurrentItemIdentifier returns the item identifier of the current item. Previously set by a call to transitionToItemWithIdentifier:proposingInitialTimingBasedOnTimebase:
+func (dpc *DelegatingPlaybackCoordinator) CurrentItemIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dpc), objc.RegisterName("currentItemIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// DelegatingPlaybackCoordinatorable is the interface implemented by [DelegatingPlaybackCoordinator], for mocking and DI.
-type DelegatingPlaybackCoordinatorable interface {
-	obj.Object
-	WithSuspensionReasonsThatTriggerWaiting(items ...obj.Object) *DelegatingPlaybackCoordinator
-	WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *DelegatingPlaybackCoordinator
-	CoordinateRateChangeToRateOptions(rate float32, options DelegatingPlaybackCoordinatorRateChangeOptions)
-	TransitionToItemWithIdentifierProposingInitialTimingBasedOnTimebase(itemIdentifier string, snapshotTimebase obj.Object)
-	ReapplyCurrentItemStateToPlaybackControlDelegate()
-	CurrentItemIdentifier() string
-}
-
-var _ DelegatingPlaybackCoordinatorable = (*DelegatingPlaybackCoordinator)(nil)
 
 var _ PlaybackCoordinatorProvider = (*DelegatingPlaybackCoordinator)(nil)

@@ -46,24 +46,24 @@ func vertexBufferLayoutDescriptorAdopt(id objc.ID) *VertexBufferLayoutDescriptor
 }
 
 // Description returns the object's -description text.
-func (x *VertexBufferLayoutDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vbld *VertexBufferLayoutDescriptor) Description() string {
+	return rt.Description(objref.IDOf(vbld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VertexBufferLayoutDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vbld *VertexBufferLayoutDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vbld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VertexBufferLayoutDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vbld *VertexBufferLayoutDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vbld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VertexBufferLayoutDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vbld *VertexBufferLayoutDescriptor) String() string {
+	return rt.Description(objref.IDOf(vbld))
 }
 
 // NewVertexBufferLayoutDescriptor creates a new VertexBufferLayoutDescriptor.
@@ -72,69 +72,38 @@ func NewVertexBufferLayoutDescriptor() *VertexBufferLayoutDescriptor {
 	return vertexBufferLayoutDescriptorAdopt(_id)
 }
 
-// WithStride the number of bytes between the first byte of two consecutive vertices in a buffer.
-func (x *VertexBufferLayoutDescriptor) WithStride(stride int) *VertexBufferLayoutDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
-	return x
+// WithStride sets the number of bytes between the first byte of two consecutive vertices in a buffer.
+func (vbld *VertexBufferLayoutDescriptor) WithStride(stride int) *VertexBufferLayoutDescriptor {
+	objc.Send[objc.ID](objref.IDOf(vbld), objc.RegisterName("setStride:"), stride)
+	return vbld
 }
 
-// WithStepFunction the circumstances under which the vertex and its attributes are presented to the vertex function.
-func (x *VertexBufferLayoutDescriptor) WithStepFunction(stepFunction VertexStepFunction) *VertexBufferLayoutDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepFunction:"), stepFunction)
-	return x
+// WithStepFunction sets the circumstances under which the vertex and its attributes are presented to the vertex function.
+func (vbld *VertexBufferLayoutDescriptor) WithStepFunction(stepFunction VertexStepFunction) *VertexBufferLayoutDescriptor {
+	objc.Send[objc.ID](objref.IDOf(vbld), objc.RegisterName("setStepFunction:"), stepFunction)
+	return vbld
 }
 
-// WithStepRate the interval at which the vertex and its attributes are presented to the vertex function.
-func (x *VertexBufferLayoutDescriptor) WithStepRate(stepRate int) *VertexBufferLayoutDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepRate:"), stepRate)
-	return x
+// WithStepRate sets the interval at which the vertex and its attributes are presented to the vertex function.
+func (vbld *VertexBufferLayoutDescriptor) WithStepRate(stepRate int) *VertexBufferLayoutDescriptor {
+	objc.Send[objc.ID](objref.IDOf(vbld), objc.RegisterName("setStepRate:"), stepRate)
+	return vbld
 }
 
 // Stride wraps the corresponding Objective-C method.
-func (x *VertexBufferLayoutDescriptor) Stride() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stride"))
+func (vbld *VertexBufferLayoutDescriptor) Stride() int {
+	_r := objc.Send[int](objref.IDOf(vbld), objc.RegisterName("stride"))
 	return _r
-}
-
-// SetStride wraps the corresponding Objective-C method.
-func (x *VertexBufferLayoutDescriptor) SetStride(stride int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStride:"), stride)
 }
 
 // StepFunction wraps the corresponding Objective-C method.
-func (x *VertexBufferLayoutDescriptor) StepFunction() VertexStepFunction {
-	_r := objc.Send[VertexStepFunction](objref.IDOf(x), objc.RegisterName("stepFunction"))
+func (vbld *VertexBufferLayoutDescriptor) StepFunction() VertexStepFunction {
+	_r := objc.Send[VertexStepFunction](objref.IDOf(vbld), objc.RegisterName("stepFunction"))
 	return _r
-}
-
-// SetStepFunction wraps the corresponding Objective-C method.
-func (x *VertexBufferLayoutDescriptor) SetStepFunction(stepFunction VertexStepFunction) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepFunction:"), stepFunction)
 }
 
 // StepRate wraps the corresponding Objective-C method.
-func (x *VertexBufferLayoutDescriptor) StepRate() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stepRate"))
+func (vbld *VertexBufferLayoutDescriptor) StepRate() int {
+	_r := objc.Send[int](objref.IDOf(vbld), objc.RegisterName("stepRate"))
 	return _r
 }
-
-// SetStepRate wraps the corresponding Objective-C method.
-func (x *VertexBufferLayoutDescriptor) SetStepRate(stepRate int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStepRate:"), stepRate)
-}
-
-// VertexBufferLayoutDescriptorable is the interface implemented by [VertexBufferLayoutDescriptor], for mocking and DI.
-type VertexBufferLayoutDescriptorable interface {
-	obj.Object
-	WithStride(stride int) *VertexBufferLayoutDescriptor
-	WithStepFunction(stepFunction VertexStepFunction) *VertexBufferLayoutDescriptor
-	WithStepRate(stepRate int) *VertexBufferLayoutDescriptor
-	Stride() int
-	SetStride(stride int)
-	StepFunction() VertexStepFunction
-	SetStepFunction(stepFunction VertexStepFunction)
-	StepRate() int
-	SetStepRate(stepRate int)
-}
-
-var _ VertexBufferLayoutDescriptorable = (*VertexBufferLayoutDescriptor)(nil)

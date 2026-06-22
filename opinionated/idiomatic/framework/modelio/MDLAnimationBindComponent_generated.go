@@ -44,24 +44,24 @@ func animationBindComponentAdopt(id objc.ID) *AnimationBindComponent {
 }
 
 // Description returns the object's -description text.
-func (x *AnimationBindComponent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (abc *AnimationBindComponent) Description() string {
+	return rt.Description(objref.IDOf(abc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AnimationBindComponent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (abc *AnimationBindComponent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(abc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AnimationBindComponent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (abc *AnimationBindComponent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(abc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AnimationBindComponent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (abc *AnimationBindComponent) String() string {
+	return rt.Description(objref.IDOf(abc))
 }
 
 // NewAnimationBindComponent creates a new AnimationBindComponent.
@@ -71,51 +71,28 @@ func NewAnimationBindComponent() *AnimationBindComponent {
 }
 
 // WithSkeleton sets the property and returns the receiver so calls can be chained.
-func (x *AnimationBindComponent) WithSkeleton(skeleton *Skeleton) *AnimationBindComponent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkeleton:"), objref.IDOf(skeleton))
-	return x
+func (abc *AnimationBindComponent) WithSkeleton(skeleton *Skeleton) *AnimationBindComponent {
+	objc.Send[objc.ID](objref.IDOf(abc), objc.RegisterName("setSkeleton:"), objref.IDOf(skeleton))
+	return abc
 }
 
 // WithJointPaths sets the property and returns the receiver so calls can be chained.
-func (x *AnimationBindComponent) WithJointPaths(items ...obj.Object) *AnimationBindComponent {
+func (abc *AnimationBindComponent) WithJointPaths(items ...obj.Object) *AnimationBindComponent {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJointPaths:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(abc), objc.RegisterName("setJointPaths:"), _arr)
+	return abc
 }
 
 // Skeleton wraps the corresponding Objective-C method.
-func (x *AnimationBindComponent) Skeleton() *Skeleton {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skeleton"))
+func (abc *AnimationBindComponent) Skeleton() *Skeleton {
+	_r := objc.Send[objc.ID](objref.IDOf(abc), objc.RegisterName("skeleton"))
 	return SkeletonFromID(_r)
-}
-
-// SetSkeleton wraps the corresponding Objective-C method.
-func (x *AnimationBindComponent) SetSkeleton(skeleton *Skeleton) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSkeleton:"), objref.IDOf(skeleton))
 }
 
 // JointPaths wraps the corresponding Objective-C method.
 //
 // JointPaths returns the collection as a Go slice.
-func (x *AnimationBindComponent) JointPaths() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("jointPaths"))
+func (abc *AnimationBindComponent) JointPaths() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(abc), objc.RegisterName("jointPaths"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// SetJointPaths wraps the corresponding Objective-C method.
-func (x *AnimationBindComponent) SetJointPaths(jointPaths []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setJointPaths:"), purego.SliceToNSArray(jointPaths, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
-// AnimationBindComponentable is the interface implemented by [AnimationBindComponent], for mocking and DI.
-type AnimationBindComponentable interface {
-	obj.Object
-	WithSkeleton(skeleton *Skeleton) *AnimationBindComponent
-	WithJointPaths(items ...obj.Object) *AnimationBindComponent
-	Skeleton() *Skeleton
-	SetSkeleton(skeleton *Skeleton)
-	JointPaths() []string
-	SetJointPaths(jointPaths []string)
-}
-
-var _ AnimationBindComponentable = (*AnimationBindComponent)(nil)

@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -61,25 +60,16 @@ func NewMutableTextureWithSizePixelFormat(size corefoundation.CGSize, format int
 	return mutableTextureAdopt(_id)
 }
 
-// WithFilteringMode the filtering mode used when the size of a sprite drawn with the texture is not drawn at the texture’s native size.
-func (x *MutableTexture) WithFilteringMode(filteringMode TextureFilteringMode) *MutableTexture {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilteringMode:"), filteringMode)
-	return x
+// WithFilteringMode sets the filtering mode used when the size of a sprite drawn with the texture is not drawn at the texture’s native size.
+func (mt *MutableTexture) WithFilteringMode(filteringMode TextureFilteringMode) *MutableTexture {
+	objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("setFilteringMode:"), filteringMode)
+	return mt
 }
 
-// WithUsesMipmaps a Boolean value that indicates whether the texture attempts to generate mipmaps.
-func (x *MutableTexture) WithUsesMipmaps(usesMipmaps bool) *MutableTexture {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesMipmaps:"), usesMipmaps)
-	return x
+// WithUsesMipmaps sets a Boolean value that indicates whether the texture attempts to generate mipmaps.
+func (mt *MutableTexture) WithUsesMipmaps(usesMipmaps bool) *MutableTexture {
+	objc.Send[objc.ID](objref.IDOf(mt), objc.RegisterName("setUsesMipmaps:"), usesMipmaps)
+	return mt
 }
-
-// MutableTextureable is the interface implemented by [MutableTexture], for mocking and DI.
-type MutableTextureable interface {
-	obj.Object
-	WithFilteringMode(filteringMode TextureFilteringMode) *MutableTexture
-	WithUsesMipmaps(usesMipmaps bool) *MutableTexture
-}
-
-var _ MutableTextureable = (*MutableTexture)(nil)
 
 var _ TextureProvider = (*MutableTexture)(nil)

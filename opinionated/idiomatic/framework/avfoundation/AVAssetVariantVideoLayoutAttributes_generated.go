@@ -46,24 +46,24 @@ func assetVariantVideoLayoutAttributesAdopt(id objc.ID) *AssetVariantVideoLayout
 }
 
 // Description returns the object's -description text.
-func (x *AssetVariantVideoLayoutAttributes) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (avvla *AssetVariantVideoLayoutAttributes) Description() string {
+	return rt.Description(objref.IDOf(avvla))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetVariantVideoLayoutAttributes) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (avvla *AssetVariantVideoLayoutAttributes) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(avvla), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetVariantVideoLayoutAttributes) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (avvla *AssetVariantVideoLayoutAttributes) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(avvla), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetVariantVideoLayoutAttributes) String() string {
-	return rt.Description(objref.IDOf(x))
+func (avvla *AssetVariantVideoLayoutAttributes) String() string {
+	return rt.Description(objref.IDOf(avvla))
 }
 
 // NewAssetVariantVideoLayoutAttributes creates a new AssetVariantVideoLayoutAttributes.
@@ -71,10 +71,3 @@ func NewAssetVariantVideoLayoutAttributes() *AssetVariantVideoLayoutAttributes {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAssetVariantVideoLayoutAttributes")), objc.RegisterName("new"))
 	return assetVariantVideoLayoutAttributesAdopt(_id)
 }
-
-// AssetVariantVideoLayoutAttributesable is the interface implemented by [AssetVariantVideoLayoutAttributes], for mocking and DI.
-type AssetVariantVideoLayoutAttributesable interface {
-	obj.Object
-}
-
-var _ AssetVariantVideoLayoutAttributesable = (*AssetVariantVideoLayoutAttributes)(nil)

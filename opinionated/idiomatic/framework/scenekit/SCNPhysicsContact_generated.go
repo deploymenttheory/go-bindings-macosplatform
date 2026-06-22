@@ -46,24 +46,24 @@ func physicsContactAdopt(id objc.ID) *PhysicsContact {
 }
 
 // Description returns the object's -description text.
-func (x *PhysicsContact) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *PhysicsContact) Description() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PhysicsContact) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pc *PhysicsContact) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PhysicsContact) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pc *PhysicsContact) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PhysicsContact) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *PhysicsContact) String() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // NewPhysicsContact creates a new PhysicsContact.
@@ -73,43 +73,31 @@ func NewPhysicsContact() *PhysicsContact {
 }
 
 // NodeA wraps the corresponding Objective-C method.
-func (x *PhysicsContact) NodeA() *Node {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeA"))
+func (pc *PhysicsContact) NodeA() *Node {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("nodeA"))
 	return NodeFromID(_r)
 }
 
 // NodeB wraps the corresponding Objective-C method.
-func (x *PhysicsContact) NodeB() *Node {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeB"))
+func (pc *PhysicsContact) NodeB() *Node {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("nodeB"))
 	return NodeFromID(_r)
 }
 
 // CollisionImpulse wraps the corresponding Objective-C method.
-func (x *PhysicsContact) CollisionImpulse() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("collisionImpulse"))
+func (pc *PhysicsContact) CollisionImpulse() float64 {
+	_r := objc.Send[float64](objref.IDOf(pc), objc.RegisterName("collisionImpulse"))
 	return _r
 }
 
 // PenetrationDistance wraps the corresponding Objective-C method.
-func (x *PhysicsContact) PenetrationDistance() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("penetrationDistance"))
+func (pc *PhysicsContact) PenetrationDistance() float64 {
+	_r := objc.Send[float64](objref.IDOf(pc), objc.RegisterName("penetrationDistance"))
 	return _r
 }
 
 // SweepTestFraction wraps the corresponding Objective-C method.
-func (x *PhysicsContact) SweepTestFraction() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("sweepTestFraction"))
+func (pc *PhysicsContact) SweepTestFraction() float64 {
+	_r := objc.Send[float64](objref.IDOf(pc), objc.RegisterName("sweepTestFraction"))
 	return _r
 }
-
-// PhysicsContactable is the interface implemented by [PhysicsContact], for mocking and DI.
-type PhysicsContactable interface {
-	obj.Object
-	NodeA() *Node
-	NodeB() *Node
-	CollisionImpulse() float64
-	PenetrationDistance() float64
-	SweepTestFraction() float64
-}
-
-var _ PhysicsContactable = (*PhysicsContact)(nil)

@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,26 +51,12 @@ func NewMutableTimedMetadataGroup() *MutableTimedMetadataGroup {
 	return mutableTimedMetadataGroupAdopt(_id)
 }
 
-// WithItems an array of metadata items in the timed metadata group.
-func (x *MutableTimedMetadataGroup) WithItems(items ...MetadataItemProvider) *MutableTimedMetadataGroup {
+// WithItems sets an array of metadata items in the timed metadata group.
+func (mtmg *MutableTimedMetadataGroup) WithItems(items ...MetadataItemProvider) *MutableTimedMetadataGroup {
 	_arr := purego.SliceToNSArray(items, func(_v MetadataItemProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItems:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mtmg), objc.RegisterName("setItems:"), _arr)
+	return mtmg
 }
-
-// SetItems wraps the corresponding Objective-C method.
-func (x *MutableTimedMetadataGroup) SetItems(items []*MetadataItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setItems:"), purego.SliceToNSArray(items, func(_v *MetadataItem) objc.ID { return objref.IDOf(_v) }))
-}
-
-// MutableTimedMetadataGroupable is the interface implemented by [MutableTimedMetadataGroup], for mocking and DI.
-type MutableTimedMetadataGroupable interface {
-	obj.Object
-	WithItems(items ...MetadataItemProvider) *MutableTimedMetadataGroup
-	SetItems(items []*MetadataItem)
-}
-
-var _ MutableTimedMetadataGroupable = (*MutableTimedMetadataGroup)(nil)
 
 var _ TimedMetadataGroupProvider = (*MutableTimedMetadataGroup)(nil)
 

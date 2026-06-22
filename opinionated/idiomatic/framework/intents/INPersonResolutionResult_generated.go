@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,17 +45,10 @@ func personResolutionResultAdopt(id objc.ID) *PersonResolutionResult {
 	return x
 }
 
-// PersonResolutionResultable is the interface implemented by [PersonResolutionResult], for mocking and DI.
-type PersonResolutionResultable interface {
-	obj.Object
-}
-
-var _ PersonResolutionResultable = (*PersonResolutionResult)(nil)
-
 // isPersonResolutionResult marks PersonResolutionResult — and, by embedding promotion, its
 // subclasses — as a member of the PersonResolutionResult hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PersonResolutionResult) isPersonResolutionResult() {}
+func (prr *PersonResolutionResult) isPersonResolutionResult() {}
 
 var _ PersonResolutionResultProvider = (*PersonResolutionResult)(nil)
 

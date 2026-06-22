@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,26 +50,17 @@ func NewNNReductionFeatureChannelsMinNode() *NNReductionFeatureChannelsMinNode {
 	return nNReductionFeatureChannelsMinNodeAdopt(_id)
 }
 
-// WithClipRectSource the clip rectangle to apply to the source image.
-func (x *NNReductionFeatureChannelsMinNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsMinNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the clip rectangle to apply to the source image.
+func (nrfcmn *NNReductionFeatureChannelsMinNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsMinNode {
+	objc.Send[objc.ID](objref.IDOf(nrfcmn), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return nrfcmn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNReductionFeatureChannelsMinNode) WithLabel(label string) *NNReductionFeatureChannelsMinNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nrfcmn *NNReductionFeatureChannelsMinNode) WithLabel(label string) *NNReductionFeatureChannelsMinNode {
+	objc.Send[objc.ID](objref.IDOf(nrfcmn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nrfcmn
 }
-
-// NNReductionFeatureChannelsMinNodeable is the interface implemented by [NNReductionFeatureChannelsMinNode], for mocking and DI.
-type NNReductionFeatureChannelsMinNodeable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsMinNode
-	WithLabel(label string) *NNReductionFeatureChannelsMinNode
-}
-
-var _ NNReductionFeatureChannelsMinNodeable = (*NNReductionFeatureChannelsMinNode)(nil)
 
 var _ NNUnaryReductionNodeProvider = (*NNReductionFeatureChannelsMinNode)(nil)
 

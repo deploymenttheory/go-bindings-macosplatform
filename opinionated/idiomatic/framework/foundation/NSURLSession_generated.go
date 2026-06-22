@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func uRLSessionAdopt(id objc.ID) *URLSession {
 }
 
 // Description returns the object's -description text.
-func (x *URLSession) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (us *URLSession) Description() string {
+	return rt.Description(objref.IDOf(us))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *URLSession) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (us *URLSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(us), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *URLSession) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (us *URLSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(us), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *URLSession) String() string {
-	return rt.Description(objref.IDOf(x))
+func (us *URLSession) String() string {
+	return rt.Description(objref.IDOf(us))
 }
 
 // NewURLSession creates a new URLSession.
@@ -74,36 +75,36 @@ func NewURLSession() *URLSession {
 }
 
 // WithSessionDescription sets the property and returns the receiver so calls can be chained.
-func (x *URLSession) WithSessionDescription(sessionDescription StringProvider) *URLSession {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionDescription:"), objref.IDOf(sessionDescription))
-	return x
+func (us *URLSession) WithSessionDescription(sessionDescription StringProvider) *URLSession {
+	objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("setSessionDescription:"), objref.IDOf(sessionDescription))
+	return us
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *URLSession) WithScriptingProperties(scriptingProperties obj.Object) *URLSession {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (us *URLSession) WithScriptingProperties(scriptingProperties obj.Object) *URLSession {
+	objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return us
 }
 
 // FinishTasksAndInvalidate wraps the corresponding Objective-C method.
-func (x *URLSession) FinishTasksAndInvalidate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finishTasksAndInvalidate"))
+func (us *URLSession) FinishTasksAndInvalidate() {
+	objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("finishTasksAndInvalidate"))
 }
 
 // InvalidateAndCancel wraps the corresponding Objective-C method.
-func (x *URLSession) InvalidateAndCancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateAndCancel"))
+func (us *URLSession) InvalidateAndCancel() {
+	objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("invalidateAndCancel"))
 }
 
 // Reset wraps the corresponding Objective-C method.
 //
 // Reset blocks until the operation completes or ctx is cancelled.
-func (x *URLSession) Reset(ctx context.Context) error {
+func (us *URLSession) Reset(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("resetWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -115,12 +116,12 @@ func (x *URLSession) Reset(ctx context.Context) error {
 // Flush wraps the corresponding Objective-C method.
 //
 // Flush blocks until the operation completes or ctx is cancelled.
-func (x *URLSession) Flush(ctx context.Context) error {
+func (us *URLSession) Flush(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flushWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("flushWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -130,8 +131,8 @@ func (x *URLSession) Flush(ctx context.Context) error {
 }
 
 // GetTasksWithCompletionHandler wraps the corresponding Objective-C method.
-func (x *URLSession) GetTasksWithCompletionHandler(completionHandler func(obj.Object, obj.Object, obj.Object)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getTasksWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID) {
+func (us *URLSession) GetTasksWithCompletionHandler(completionHandler func(obj.Object, obj.Object, obj.Object)) {
+	objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("getTasksWithCompletionHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID, _b2 objc.ID) {
 		completionHandler(obj.Wrap(_b0), obj.Wrap(_b1), obj.Wrap(_b2))
 	}))
 }
@@ -139,7 +140,7 @@ func (x *URLSession) GetTasksWithCompletionHandler(completionHandler func(obj.Ob
 // GetAllTasks wraps the corresponding Objective-C method.
 //
 // GetAllTasks blocks until the operation completes or ctx is cancelled.
-func (x *URLSession) GetAllTasks(ctx context.Context) (result obj.Object, err error) {
+func (us *URLSession) GetAllTasks(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -150,7 +151,7 @@ func (x *URLSession) GetAllTasks(ctx context.Context) (result obj.Object, err er
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getAllTasksWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("getAllTasksWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -161,144 +162,106 @@ func (x *URLSession) GetAllTasks(ctx context.Context) (result obj.Object, err er
 }
 
 // DataTaskWithRequest wraps the corresponding Objective-C method.
-func (x *URLSession) DataTaskWithRequest(request *URLRequest) *URLSessionDataTask {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataTaskWithRequest:"), objref.IDOf(request))
+func (us *URLSession) DataTaskWithRequest(request *URLRequest) *URLSessionDataTask {
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("dataTaskWithRequest:"), objref.IDOf(request))
 	return URLSessionDataTaskFromID(_r)
 }
 
 // DataTaskWithURL wraps the corresponding Objective-C method.
-func (x *URLSession) DataTaskWithURL(url string) *URLSessionDataTask {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataTaskWithURL:"), rt.FileURL(url))
+func (us *URLSession) DataTaskWithURL(url string) *URLSessionDataTask {
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("dataTaskWithURL:"), rt.FileURL(url))
 	return URLSessionDataTaskFromID(_r)
 }
 
 // UploadTaskWithRequestFromFile wraps the corresponding Objective-C method.
-func (x *URLSession) UploadTaskWithRequestFromFile(request *URLRequest, fileURL string) *URLSessionUploadTask {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uploadTaskWithRequest:fromFile:"), objref.IDOf(request), rt.FileURL(fileURL))
+func (us *URLSession) UploadTaskWithRequestFromFile(request *URLRequest, fileURL string) *URLSessionUploadTask {
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("uploadTaskWithRequest:fromFile:"), objref.IDOf(request), rt.FileURL(fileURL))
 	return URLSessionUploadTaskFromID(_r)
 }
 
 // UploadTaskWithRequestFromData wraps the corresponding Objective-C method.
-func (x *URLSession) UploadTaskWithRequestFromData(request *URLRequest, bodyData *Data) *URLSessionUploadTask {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uploadTaskWithRequest:fromData:"), objref.IDOf(request), objref.IDOf(bodyData))
+func (us *URLSession) UploadTaskWithRequestFromData(request *URLRequest, bodyData *Data) *URLSessionUploadTask {
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("uploadTaskWithRequest:fromData:"), objref.IDOf(request), objref.IDOf(bodyData))
 	return URLSessionUploadTaskFromID(_r)
 }
 
 // UploadTaskWithResumeData creates an upload task from a resume data blob. Requires the server to support the latest resumable uploads Internet-Draft from the HTTP Working Group, found at https://datatracker.ietf.org/doc/draft-ietf-httpbis-resumable-upload/ If resuming from an upload file, the file must still exist and be unmodified. If the upload cannot be successfully resumed, URLSession:task:didCompleteWithError: will be called. - Parameter resumeData: Resume data blob from an incomplete upload, such as data returned by the cancelByProducingResumeData: method. - Returns: A new session upload task, or nil if the resumeData is invalid.
-func (x *URLSession) UploadTaskWithResumeData(resumeData *Data) *URLSessionUploadTask {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uploadTaskWithResumeData:"), objref.IDOf(resumeData))
+func (us *URLSession) UploadTaskWithResumeData(resumeData *Data) *URLSessionUploadTask {
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("uploadTaskWithResumeData:"), objref.IDOf(resumeData))
 	return URLSessionUploadTaskFromID(_r)
 }
 
 // UploadTaskWithStreamedRequest wraps the corresponding Objective-C method.
-func (x *URLSession) UploadTaskWithStreamedRequest(request *URLRequest) *URLSessionUploadTask {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uploadTaskWithStreamedRequest:"), objref.IDOf(request))
+func (us *URLSession) UploadTaskWithStreamedRequest(request *URLRequest) *URLSessionUploadTask {
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("uploadTaskWithStreamedRequest:"), objref.IDOf(request))
 	return URLSessionUploadTaskFromID(_r)
 }
 
 // DownloadTaskWithRequest wraps the corresponding Objective-C method.
-func (x *URLSession) DownloadTaskWithRequest(request *URLRequest) *URLSessionDownloadTask {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadTaskWithRequest:"), objref.IDOf(request))
+func (us *URLSession) DownloadTaskWithRequest(request *URLRequest) *URLSessionDownloadTask {
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("downloadTaskWithRequest:"), objref.IDOf(request))
 	return URLSessionDownloadTaskFromID(_r)
 }
 
 // DownloadTaskWithURL wraps the corresponding Objective-C method.
-func (x *URLSession) DownloadTaskWithURL(url string) *URLSessionDownloadTask {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadTaskWithURL:"), rt.FileURL(url))
+func (us *URLSession) DownloadTaskWithURL(url string) *URLSessionDownloadTask {
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("downloadTaskWithURL:"), rt.FileURL(url))
 	return URLSessionDownloadTaskFromID(_r)
 }
 
 // DownloadTaskWithResumeData wraps the corresponding Objective-C method.
-func (x *URLSession) DownloadTaskWithResumeData(resumeData *Data) *URLSessionDownloadTask {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadTaskWithResumeData:"), objref.IDOf(resumeData))
+func (us *URLSession) DownloadTaskWithResumeData(resumeData *Data) *URLSessionDownloadTask {
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("downloadTaskWithResumeData:"), objref.IDOf(resumeData))
 	return URLSessionDownloadTaskFromID(_r)
 }
 
 // StreamTaskWithHostNamePort wraps the corresponding Objective-C method.
-func (x *URLSession) StreamTaskWithHostNamePort(hostname string, port int) *URLSessionStreamTask {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("streamTaskWithHostName:port:"), purego.NSString(hostname), port)
+func (us *URLSession) StreamTaskWithHostNamePort(hostname string, port int) *URLSessionStreamTask {
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("streamTaskWithHostName:port:"), purego.NSString(hostname), port)
 	return URLSessionStreamTaskFromID(_r)
 }
 
 // StreamTaskWithNetService wraps the corresponding Objective-C method.
-func (x *URLSession) StreamTaskWithNetService(service *NetService) *URLSessionStreamTask {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("streamTaskWithNetService:"), objref.IDOf(service))
+func (us *URLSession) StreamTaskWithNetService(service *NetService) *URLSessionStreamTask {
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("streamTaskWithNetService:"), objref.IDOf(service))
 	return URLSessionStreamTaskFromID(_r)
 }
 
 // WebSocketTaskWithURL wraps the corresponding Objective-C method.
-func (x *URLSession) WebSocketTaskWithURL(url string) *URLSessionWebSocketTask {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webSocketTaskWithURL:"), rt.FileURL(url))
+func (us *URLSession) WebSocketTaskWithURL(url string) *URLSessionWebSocketTask {
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("webSocketTaskWithURL:"), rt.FileURL(url))
 	return URLSessionWebSocketTaskFromID(_r)
 }
 
 // WebSocketTaskWithURLProtocols wraps the corresponding Objective-C method.
-func (x *URLSession) WebSocketTaskWithURLProtocols(url string, protocols []string) *URLSessionWebSocketTask {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webSocketTaskWithURL:protocols:"), rt.FileURL(url), purego.SliceToNSArray(protocols, func(_v string) objc.ID { return purego.NSString(_v) }))
+func (us *URLSession) WebSocketTaskWithURLProtocols(url string, protocols []string) *URLSessionWebSocketTask {
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("webSocketTaskWithURL:protocols:"), rt.FileURL(url), purego.SliceToNSArray(protocols, func(_v string) objc.ID { return purego.NSString(_v) }))
 	return URLSessionWebSocketTaskFromID(_r)
 }
 
 // WebSocketTaskWithRequest wraps the corresponding Objective-C method.
-func (x *URLSession) WebSocketTaskWithRequest(request *URLRequest) *URLSessionWebSocketTask {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("webSocketTaskWithRequest:"), objref.IDOf(request))
+func (us *URLSession) WebSocketTaskWithRequest(request *URLRequest) *URLSessionWebSocketTask {
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("webSocketTaskWithRequest:"), objref.IDOf(request))
 	return URLSessionWebSocketTaskFromID(_r)
 }
 
 // DelegateQueue wraps the corresponding Objective-C method.
-func (x *URLSession) DelegateQueue() *OperationQueue {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateQueue"))
+func (us *URLSession) DelegateQueue() *OperationQueue {
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("delegateQueue"))
 	return OperationQueueFromID(_r)
 }
 
 // Configuration wraps the corresponding Objective-C method.
-func (x *URLSession) Configuration() *URLSessionConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
+func (us *URLSession) Configuration() *URLSessionConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("configuration"))
 	return URLSessionConfigurationFromID(_r)
 }
 
 // SessionDescription wraps the corresponding Objective-C method.
-func (x *URLSession) SessionDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sessionDescription"))
+func (us *URLSession) SessionDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(us), objc.RegisterName("sessionDescription"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetSessionDescription wraps the corresponding Objective-C method.
-func (x *URLSession) SetSessionDescription(sessionDescription string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionDescription:"), purego.NSString(sessionDescription))
-}
-
-// URLSessionable is the interface implemented by [URLSession], for mocking and DI.
-type URLSessionable interface {
-	obj.Object
-	WithSessionDescription(sessionDescription StringProvider) *URLSession
-	WithScriptingProperties(scriptingProperties obj.Object) *URLSession
-	FinishTasksAndInvalidate()
-	InvalidateAndCancel()
-	Reset(ctx context.Context) error
-	Flush(ctx context.Context) error
-	GetTasksWithCompletionHandler(completionHandler func(obj.Object, obj.Object, obj.Object))
-	GetAllTasks(ctx context.Context) (obj.Object, error)
-	DataTaskWithRequest(request *URLRequest) *URLSessionDataTask
-	DataTaskWithURL(url string) *URLSessionDataTask
-	UploadTaskWithRequestFromFile(request *URLRequest, fileURL string) *URLSessionUploadTask
-	UploadTaskWithRequestFromData(request *URLRequest, bodyData *Data) *URLSessionUploadTask
-	UploadTaskWithResumeData(resumeData *Data) *URLSessionUploadTask
-	UploadTaskWithStreamedRequest(request *URLRequest) *URLSessionUploadTask
-	DownloadTaskWithRequest(request *URLRequest) *URLSessionDownloadTask
-	DownloadTaskWithURL(url string) *URLSessionDownloadTask
-	DownloadTaskWithResumeData(resumeData *Data) *URLSessionDownloadTask
-	StreamTaskWithHostNamePort(hostname string, port int) *URLSessionStreamTask
-	StreamTaskWithNetService(service *NetService) *URLSessionStreamTask
-	WebSocketTaskWithURL(url string) *URLSessionWebSocketTask
-	WebSocketTaskWithURLProtocols(url string, protocols []string) *URLSessionWebSocketTask
-	WebSocketTaskWithRequest(request *URLRequest) *URLSessionWebSocketTask
-	DelegateQueue() *OperationQueue
-	Configuration() *URLSessionConfiguration
-	SessionDescription() string
-	SetSessionDescription(sessionDescription string)
-}
-
-var _ URLSessionable = (*URLSession)(nil)

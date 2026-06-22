@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,16 +52,8 @@ func NewMutableMediaSelection() *MutableMediaSelection {
 }
 
 // SelectMediaOptionInMediaSelectionGroup selects the media option in the specified media selection group.
-func (x *MutableMediaSelection) SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *MediaSelectionOption, mediaSelectionGroup *MediaSelectionGroup) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectMediaOption:inMediaSelectionGroup:"), objref.IDOf(mediaSelectionOption), objref.IDOf(mediaSelectionGroup))
+func (mms *MutableMediaSelection) SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *MediaSelectionOption, mediaSelectionGroup *MediaSelectionGroup) {
+	objc.Send[objc.ID](objref.IDOf(mms), objc.RegisterName("selectMediaOption:inMediaSelectionGroup:"), objref.IDOf(mediaSelectionOption), objref.IDOf(mediaSelectionGroup))
 }
-
-// MutableMediaSelectionable is the interface implemented by [MutableMediaSelection], for mocking and DI.
-type MutableMediaSelectionable interface {
-	obj.Object
-	SelectMediaOptionInMediaSelectionGroup(mediaSelectionOption *MediaSelectionOption, mediaSelectionGroup *MediaSelectionGroup)
-}
-
-var _ MutableMediaSelectionable = (*MutableMediaSelection)(nil)
 
 var _ MediaSelectionProvider = (*MutableMediaSelection)(nil)

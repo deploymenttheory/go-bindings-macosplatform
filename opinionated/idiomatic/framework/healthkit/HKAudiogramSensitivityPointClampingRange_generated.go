@@ -46,24 +46,24 @@ func audiogramSensitivityPointClampingRangeAdopt(id objc.ID) *AudiogramSensitivi
 }
 
 // Description returns the object's -description text.
-func (x *AudiogramSensitivityPointClampingRange) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aspcr *AudiogramSensitivityPointClampingRange) Description() string {
+	return rt.Description(objref.IDOf(aspcr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudiogramSensitivityPointClampingRange) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aspcr *AudiogramSensitivityPointClampingRange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aspcr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudiogramSensitivityPointClampingRange) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aspcr *AudiogramSensitivityPointClampingRange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aspcr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AudiogramSensitivityPointClampingRange) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aspcr *AudiogramSensitivityPointClampingRange) String() string {
+	return rt.Description(objref.IDOf(aspcr))
 }
 
 // NewAudiogramSensitivityPointClampingRange creates a new AudiogramSensitivityPointClampingRange.
@@ -72,23 +72,14 @@ func NewAudiogramSensitivityPointClampingRange() *AudiogramSensitivityPointClamp
 	return audiogramSensitivityPointClampingRangeAdopt(_id)
 }
 
-// LowerBound the lower bound of the clamping range, if any, in dBHL.
-func (x *AudiogramSensitivityPointClampingRange) LowerBound() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lowerBound"))
+// LowerBound returns the lower bound of the clamping range, if any, in dBHL.
+func (aspcr *AudiogramSensitivityPointClampingRange) LowerBound() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(aspcr), objc.RegisterName("lowerBound"))
 	return QuantityFromID(_r)
 }
 
-// UpperBound the upper bound of the clamping range, if any, in dBHL.
-func (x *AudiogramSensitivityPointClampingRange) UpperBound() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("upperBound"))
+// UpperBound returns the upper bound of the clamping range, if any, in dBHL.
+func (aspcr *AudiogramSensitivityPointClampingRange) UpperBound() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(aspcr), objc.RegisterName("upperBound"))
 	return QuantityFromID(_r)
 }
-
-// AudiogramSensitivityPointClampingRangeable is the interface implemented by [AudiogramSensitivityPointClampingRange], for mocking and DI.
-type AudiogramSensitivityPointClampingRangeable interface {
-	obj.Object
-	LowerBound() *Quantity
-	UpperBound() *Quantity
-}
-
-var _ AudiogramSensitivityPointClampingRangeable = (*AudiogramSensitivityPointClampingRange)(nil)

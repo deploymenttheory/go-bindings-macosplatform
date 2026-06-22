@@ -6,6 +6,7 @@ package networkextension
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -54,16 +55,16 @@ func NewNEAppProxyTCPFlow() *NEAppProxyTCPFlow {
 	return nEAppProxyTCPFlowAdopt(_id)
 }
 
-// WithNetworkInterface the network interface, if any, used by this flow.
-func (x *NEAppProxyTCPFlow) WithNetworkInterface(networkInterface obj.Object) *NEAppProxyTCPFlow {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkInterface:"), objref.IDOf(networkInterface))
-	return x
+// WithNetworkInterface sets the network interface, if any, used by this flow.
+func (naptf *NEAppProxyTCPFlow) WithNetworkInterface(networkInterface obj.Object) *NEAppProxyTCPFlow {
+	objc.Send[objc.ID](objref.IDOf(naptf), objc.RegisterName("setNetworkInterface:"), objref.IDOf(networkInterface))
+	return naptf
 }
 
 // ReadData read data from the flow.
 //
 // ReadData blocks until the operation completes or ctx is cancelled.
-func (x *NEAppProxyTCPFlow) ReadData(ctx context.Context) (result obj.Object, err error) {
+func (naptf *NEAppProxyTCPFlow) ReadData(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -75,7 +76,7 @@ func (x *NEAppProxyTCPFlow) ReadData(ctx context.Context) (result obj.Object, er
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readDataWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(naptf), objc.RegisterName("readDataWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -88,14 +89,14 @@ func (x *NEAppProxyTCPFlow) ReadData(ctx context.Context) (result obj.Object, er
 // WriteData write data to the flow.
 //
 // WriteData blocks until the operation completes or ctx is cancelled.
-func (x *NEAppProxyTCPFlow) WriteData(ctx context.Context, data obj.Object) error {
+func (naptf *NEAppProxyTCPFlow) WriteData(ctx context.Context, data obj.Object) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeData:withCompletionHandler:"), objref.IDOf(data), _block)
+	objc.Send[objc.ID](objref.IDOf(naptf), objc.RegisterName("writeData:withCompletionHandler:"), objref.IDOf(data), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -104,21 +105,10 @@ func (x *NEAppProxyTCPFlow) WriteData(ctx context.Context, data obj.Object) erro
 	}
 }
 
-// RemoteFlowEndpoint an `nw_endpoint_t` object containing information about the intended remote endpoint of the flow.
-func (x *NEAppProxyTCPFlow) RemoteFlowEndpoint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remoteFlowEndpoint"))
+// RemoteFlowEndpoint returns an `nw_endpoint_t` object containing information about the intended remote endpoint of the flow.
+func (naptf *NEAppProxyTCPFlow) RemoteFlowEndpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(naptf), objc.RegisterName("remoteFlowEndpoint"))
 	return obj.Wrap(_r)
 }
-
-// NEAppProxyTCPFlowable is the interface implemented by [NEAppProxyTCPFlow], for mocking and DI.
-type NEAppProxyTCPFlowable interface {
-	obj.Object
-	WithNetworkInterface(networkInterface obj.Object) *NEAppProxyTCPFlow
-	ReadData(ctx context.Context) (obj.Object, error)
-	WriteData(ctx context.Context, data obj.Object) error
-	RemoteFlowEndpoint() obj.Object
-}
-
-var _ NEAppProxyTCPFlowable = (*NEAppProxyTCPFlow)(nil)
 
 var _ NEAppProxyFlowProvider = (*NEAppProxyTCPFlow)(nil)

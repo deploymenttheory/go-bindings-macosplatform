@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,25 +50,16 @@ func NewDOMFileList() *DOMFileList {
 }
 
 // Item wraps the corresponding Objective-C method.
-func (x *DOMFileList) Item(index int) *DOMFile {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("item:"), index)
+func (dfl *DOMFileList) Item(index int) *DOMFile {
+	_r := objc.Send[objc.ID](objref.IDOf(dfl), objc.RegisterName("item:"), index)
 	return DOMFileFromID(_r)
 }
 
 // Length wraps the corresponding Objective-C method.
-func (x *DOMFileList) Length() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("length"))
+func (dfl *DOMFileList) Length() int {
+	_r := objc.Send[int](objref.IDOf(dfl), objc.RegisterName("length"))
 	return _r
 }
-
-// DOMFileListable is the interface implemented by [DOMFileList], for mocking and DI.
-type DOMFileListable interface {
-	obj.Object
-	Item(index int) *DOMFile
-	Length() int
-}
-
-var _ DOMFileListable = (*DOMFileList)(nil)
 
 var _ DOMObjectProvider = (*DOMFileList)(nil)
 

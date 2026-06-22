@@ -5,13 +5,14 @@
 package vision
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // RecognizeTextRequest is an idiomatic wrapper over the Objective-C class VNRecognizeTextRequest.
@@ -55,74 +56,74 @@ func NewRecognizeTextRequest() *RecognizeTextRequest {
 	return recognizeTextRequestAdopt(_id)
 }
 
-// WithRecognitionLanguages an array of languages to detect, in priority order.
-func (x *RecognizeTextRequest) WithRecognitionLanguages(items ...obj.Object) *RecognizeTextRequest {
+// WithRecognitionLanguages sets an array of languages to detect, in priority order.
+func (rtr *RecognizeTextRequest) WithRecognitionLanguages(items ...obj.Object) *RecognizeTextRequest {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecognitionLanguages:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(rtr), objc.RegisterName("setRecognitionLanguages:"), _arr)
+	return rtr
 }
 
-// WithCustomWords an array of strings to supplement the recognized languages at the word-recognition stage.
-func (x *RecognizeTextRequest) WithCustomWords(items ...obj.Object) *RecognizeTextRequest {
+// WithCustomWords sets an array of strings to supplement the recognized languages at the word-recognition stage.
+func (rtr *RecognizeTextRequest) WithCustomWords(items ...obj.Object) *RecognizeTextRequest {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomWords:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(rtr), objc.RegisterName("setCustomWords:"), _arr)
+	return rtr
 }
 
-// WithRecognitionLevel a value that determines whether the request prioritizes accuracy or speed in text recognition.
-func (x *RecognizeTextRequest) WithRecognitionLevel(recognitionLevel RequestTextRecognitionLevel) *RecognizeTextRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecognitionLevel:"), recognitionLevel)
-	return x
+// WithRecognitionLevel sets a value that determines whether the request prioritizes accuracy or speed in text recognition.
+func (rtr *RecognizeTextRequest) WithRecognitionLevel(recognitionLevel RequestTextRecognitionLevel) *RecognizeTextRequest {
+	objc.Send[objc.ID](objref.IDOf(rtr), objc.RegisterName("setRecognitionLevel:"), recognitionLevel)
+	return rtr
 }
 
-// WithUsesLanguageCorrection a Boolean value that indicates whether the request applies language correction during the recognition process.
-func (x *RecognizeTextRequest) WithUsesLanguageCorrection(usesLanguageCorrection bool) *RecognizeTextRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesLanguageCorrection:"), usesLanguageCorrection)
-	return x
+// WithUsesLanguageCorrection sets a Boolean value that indicates whether the request applies language correction during the recognition process.
+func (rtr *RecognizeTextRequest) WithUsesLanguageCorrection(usesLanguageCorrection bool) *RecognizeTextRequest {
+	objc.Send[objc.ID](objref.IDOf(rtr), objc.RegisterName("setUsesLanguageCorrection:"), usesLanguageCorrection)
+	return rtr
 }
 
-// WithAutomaticallyDetectsLanguage a Boolean value that indicates whether to attempt detecting the language to use the appropriate model for recognition and language correction.
-func (x *RecognizeTextRequest) WithAutomaticallyDetectsLanguage(automaticallyDetectsLanguage bool) *RecognizeTextRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyDetectsLanguage:"), automaticallyDetectsLanguage)
-	return x
+// WithAutomaticallyDetectsLanguage sets a Boolean value that indicates whether to attempt detecting the language to use the appropriate model for recognition and language correction.
+func (rtr *RecognizeTextRequest) WithAutomaticallyDetectsLanguage(automaticallyDetectsLanguage bool) *RecognizeTextRequest {
+	objc.Send[objc.ID](objref.IDOf(rtr), objc.RegisterName("setAutomaticallyDetectsLanguage:"), automaticallyDetectsLanguage)
+	return rtr
 }
 
-// WithMinimumTextHeight the minimum height, relative to the image height, of the text to recognize.
-func (x *RecognizeTextRequest) WithMinimumTextHeight(minimumTextHeight float32) *RecognizeTextRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumTextHeight:"), minimumTextHeight)
-	return x
+// WithMinimumTextHeight sets the minimum height, relative to the image height, of the text to recognize.
+func (rtr *RecognizeTextRequest) WithMinimumTextHeight(minimumTextHeight float32) *RecognizeTextRequest {
+	objc.Send[objc.ID](objref.IDOf(rtr), objc.RegisterName("setMinimumTextHeight:"), minimumTextHeight)
+	return rtr
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *RecognizeTextRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *RecognizeTextRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (rtr *RecognizeTextRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *RecognizeTextRequest {
+	objc.Send[objc.ID](objref.IDOf(rtr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return rtr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *RecognizeTextRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *RecognizeTextRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (rtr *RecognizeTextRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *RecognizeTextRequest {
+	objc.Send[objc.ID](objref.IDOf(rtr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return rtr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *RecognizeTextRequest) WithUsesCPUOnly(usesCPUOnly bool) *RecognizeTextRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (rtr *RecognizeTextRequest) WithUsesCPUOnly(usesCPUOnly bool) *RecognizeTextRequest {
+	objc.Send[objc.ID](objref.IDOf(rtr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return rtr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *RecognizeTextRequest) WithRevision(revision int) *RecognizeTextRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (rtr *RecognizeTextRequest) WithRevision(revision int) *RecognizeTextRequest {
+	objc.Send[objc.ID](objref.IDOf(rtr), objc.RegisterName("setRevision:"), revision)
+	return rtr
 }
 
 // SupportedRecognitionLanguages returns the identifiers of the languages that the request supports.
 //
 // SupportedRecognitionLanguages returns the collection as a Go slice.
-func (x *RecognizeTextRequest) SupportedRecognitionLanguages() (result []string, err error) {
+func (rtr *RecognizeTextRequest) SupportedRecognitionLanguages() (result []string, err error) {
 	var _nsErr uintptr
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedRecognitionLanguagesAndReturnError:"), unsafe.Pointer(&_nsErr))
+	_arr := objc.Send[objc.ID](objref.IDOf(rtr), objc.RegisterName("supportedRecognitionLanguagesAndReturnError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -132,102 +133,42 @@ func (x *RecognizeTextRequest) SupportedRecognitionLanguages() (result []string,
 // RecognitionLanguages specify the languages used for the detection. The order of the languages in the array defines the order in which languages will be used during the language processing. The languages are specified as ISO language codes.
 //
 // RecognitionLanguages returns the collection as a Go slice.
-func (x *RecognizeTextRequest) RecognitionLanguages() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recognitionLanguages"))
+func (rtr *RecognizeTextRequest) RecognitionLanguages() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(rtr), objc.RegisterName("recognitionLanguages"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetRecognitionLanguages wraps the corresponding Objective-C method.
-func (x *RecognizeTextRequest) SetRecognitionLanguages(recognitionLanguages []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecognitionLanguages:"), purego.SliceToNSArray(recognitionLanguages, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
-// CustomWords an array of strings that will be used at the word recognition stage in addition to the recognition languages. The customWords list takes precedence over the standard lexicon.
+// CustomWords returns an array of strings that will be used at the word recognition stage in addition to the recognition languages. The customWords list takes precedence over the standard lexicon.
 //
 // CustomWords returns the collection as a Go slice.
-func (x *RecognizeTextRequest) CustomWords() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customWords"))
+func (rtr *RecognizeTextRequest) CustomWords() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(rtr), objc.RegisterName("customWords"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetCustomWords wraps the corresponding Objective-C method.
-func (x *RecognizeTextRequest) SetCustomWords(customWords []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomWords:"), purego.SliceToNSArray(customWords, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
-// RecognitionLevel the recognition level selects which techniques will be used during the text recognition. There are trade-offs between performance and accuracy.
-func (x *RecognizeTextRequest) RecognitionLevel() RequestTextRecognitionLevel {
-	_r := objc.Send[RequestTextRecognitionLevel](objref.IDOf(x), objc.RegisterName("recognitionLevel"))
+// RecognitionLevel returns the recognition level selects which techniques will be used during the text recognition. There are trade-offs between performance and accuracy.
+func (rtr *RecognizeTextRequest) RecognitionLevel() RequestTextRecognitionLevel {
+	_r := objc.Send[RequestTextRecognitionLevel](objref.IDOf(rtr), objc.RegisterName("recognitionLevel"))
 	return _r
 }
 
-// SetRecognitionLevel wraps the corresponding Objective-C method.
-func (x *RecognizeTextRequest) SetRecognitionLevel(recognitionLevel RequestTextRecognitionLevel) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecognitionLevel:"), recognitionLevel)
-}
-
-// UsesLanguageCorrection determines whether language correction should be applied during the recognition process. Disabling this will return the raw recognition results providing performance benefits but less accurate results.
-func (x *RecognizeTextRequest) UsesLanguageCorrection() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesLanguageCorrection"))
+// UsesLanguageCorrection reports whether language correction should be applied during the recognition process. Disabling this will return the raw recognition results providing performance benefits but less accurate results.
+func (rtr *RecognizeTextRequest) UsesLanguageCorrection() bool {
+	_r := objc.Send[bool](objref.IDOf(rtr), objc.RegisterName("usesLanguageCorrection"))
 	return _r
 }
 
-// SetUsesLanguageCorrection wraps the corresponding Objective-C method.
-func (x *RecognizeTextRequest) SetUsesLanguageCorrection(usesLanguageCorrection bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesLanguageCorrection:"), usesLanguageCorrection)
-}
-
-// AutomaticallyDetectsLanguage language detection will try to automatically identify the script/langauge during the detection and use the appropiate model for recognition and language correction. This can be particularly helpful, if the nature of the content is unkown and with this flag being set it will for instance determine if text is latin vs chinese so you don't have to pick the language model in the first case. But as the language correction cannot always guarantee the correct detection, it is advisable to set the languages, if you have domain knowledge of what language to expect. The default value is NO. Also note that this feature is only available since VNRecognizeTextRequestRevision3 and is a no-op before that.
-func (x *RecognizeTextRequest) AutomaticallyDetectsLanguage() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyDetectsLanguage"))
+// AutomaticallyDetectsLanguage reports whether language detection will try to automatically identify the script/langauge during the detection and use the appropiate model for recognition and language correction. This can be particularly helpful, if the nature of the content is unkown and with this flag being set it will for instance determine if text is latin vs chinese so you don't have to pick the language model in the first case. But as the language correction cannot always guarantee the correct detection, it is advisable to set the languages, if you have domain knowledge of what language to expect. The default value is false. Also note that this feature is only available since VNRecognizeTextRequestRevision3 and is a no-op before that.
+func (rtr *RecognizeTextRequest) AutomaticallyDetectsLanguage() bool {
+	_r := objc.Send[bool](objref.IDOf(rtr), objc.RegisterName("automaticallyDetectsLanguage"))
 	return _r
-}
-
-// SetAutomaticallyDetectsLanguage wraps the corresponding Objective-C method.
-func (x *RecognizeTextRequest) SetAutomaticallyDetectsLanguage(automaticallyDetectsLanguage bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyDetectsLanguage:"), automaticallyDetectsLanguage)
 }
 
 // MinimumTextHeight wraps the corresponding Objective-C method.
-func (x *RecognizeTextRequest) MinimumTextHeight() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumTextHeight"))
+func (rtr *RecognizeTextRequest) MinimumTextHeight() float32 {
+	_r := objc.Send[float32](objref.IDOf(rtr), objc.RegisterName("minimumTextHeight"))
 	return _r
 }
-
-// SetMinimumTextHeight wraps the corresponding Objective-C method.
-func (x *RecognizeTextRequest) SetMinimumTextHeight(minimumTextHeight float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumTextHeight:"), minimumTextHeight)
-}
-
-// RecognizeTextRequestable is the interface implemented by [RecognizeTextRequest], for mocking and DI.
-type RecognizeTextRequestable interface {
-	obj.Object
-	WithRecognitionLanguages(items ...obj.Object) *RecognizeTextRequest
-	WithCustomWords(items ...obj.Object) *RecognizeTextRequest
-	WithRecognitionLevel(recognitionLevel RequestTextRecognitionLevel) *RecognizeTextRequest
-	WithUsesLanguageCorrection(usesLanguageCorrection bool) *RecognizeTextRequest
-	WithAutomaticallyDetectsLanguage(automaticallyDetectsLanguage bool) *RecognizeTextRequest
-	WithMinimumTextHeight(minimumTextHeight float32) *RecognizeTextRequest
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *RecognizeTextRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *RecognizeTextRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *RecognizeTextRequest
-	WithRevision(revision int) *RecognizeTextRequest
-	SupportedRecognitionLanguages() ([]string, error)
-	RecognitionLanguages() []string
-	SetRecognitionLanguages(recognitionLanguages []string)
-	CustomWords() []string
-	SetCustomWords(customWords []string)
-	RecognitionLevel() RequestTextRecognitionLevel
-	SetRecognitionLevel(recognitionLevel RequestTextRecognitionLevel)
-	UsesLanguageCorrection() bool
-	SetUsesLanguageCorrection(usesLanguageCorrection bool)
-	AutomaticallyDetectsLanguage() bool
-	SetAutomaticallyDetectsLanguage(automaticallyDetectsLanguage bool)
-	MinimumTextHeight() float32
-	SetMinimumTextHeight(minimumTextHeight float32)
-}
-
-var _ RecognizeTextRequestable = (*RecognizeTextRequest)(nil)
 
 var _ ImageBasedRequestProvider = (*RecognizeTextRequest)(nil)
 

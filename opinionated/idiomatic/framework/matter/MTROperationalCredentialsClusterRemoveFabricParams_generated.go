@@ -44,24 +44,24 @@ func mTROperationalCredentialsClusterRemoveFabricParamsAdopt(id objc.ID) *MTROpe
 }
 
 // Description returns the object's -description text.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) Description() string {
+	return rt.Description(objref.IDOf(moccrfp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(moccrfp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(moccrfp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) String() string {
+	return rt.Description(objref.IDOf(moccrfp))
 }
 
 // NewMTROperationalCredentialsClusterRemoveFabricParams creates a new MTROperationalCredentialsClusterRemoveFabricParams.
@@ -71,68 +71,37 @@ func NewMTROperationalCredentialsClusterRemoveFabricParams() *MTROperationalCred
 }
 
 // WithFabricIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-	return x
+func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams {
+	objc.Send[objc.ID](objref.IDOf(moccrfp), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return moccrfp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams {
+	objc.Send[objc.ID](objref.IDOf(moccrfp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return moccrfp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams {
+	objc.Send[objc.ID](objref.IDOf(moccrfp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return moccrfp
 }
 
 // FabricIndex wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) FabricIndex() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moccrfp), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
 
-// SetFabricIndex wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) SetFabricIndex(fabricIndex obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moccrfp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (moccrfp *MTROperationalCredentialsClusterRemoveFabricParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moccrfp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterRemoveFabricParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTROperationalCredentialsClusterRemoveFabricParamsable is the interface implemented by [MTROperationalCredentialsClusterRemoveFabricParams], for mocking and DI.
-type MTROperationalCredentialsClusterRemoveFabricParamsable interface {
-	obj.Object
-	WithFabricIndex(fabricIndex obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterRemoveFabricParams
-	FabricIndex() obj.Object
-	SetFabricIndex(fabricIndex obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTROperationalCredentialsClusterRemoveFabricParamsable = (*MTROperationalCredentialsClusterRemoveFabricParams)(nil)

@@ -6,6 +6,7 @@ package imagecapturecore
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -50,52 +51,52 @@ func deviceAdopt(id objc.ID) *Device {
 }
 
 // Description returns the object's -description text.
-func (x *Device) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Device) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Device) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Device) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Device) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Device) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Device) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Device) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // RequestOpenSession requests to open a session on the device.
-func (x *Device) RequestOpenSession() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestOpenSession"))
+func (d *Device) RequestOpenSession() {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("requestOpenSession"))
 }
 
 // RequestCloseSession requests to close an open session on the device.
-func (x *Device) RequestCloseSession() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestCloseSession"))
+func (d *Device) RequestCloseSession() {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("requestCloseSession"))
 }
 
 // RequestEject requests to eject the media if permitted by the device, or to disconnect from a remote device.
-func (x *Device) RequestEject() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestEject"))
+func (d *Device) RequestEject() {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("requestEject"))
 }
 
 // RequestOpenSessionWithOptionsCompletion requests to open a session on the device, then executes the completion handler.
 //
 // RequestOpenSessionWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *Device) RequestOpenSessionWithOptionsCompletion(ctx context.Context, options obj.Object) error {
+func (d *Device) RequestOpenSessionWithOptionsCompletion(ctx context.Context, options obj.Object) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestOpenSessionWithOptions:completion:"), objref.IDOf(options), _block)
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("requestOpenSessionWithOptions:completion:"), objref.IDOf(options), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -107,14 +108,14 @@ func (x *Device) RequestOpenSessionWithOptionsCompletion(ctx context.Context, op
 // RequestCloseSessionWithOptionsCompletion requests to close an open session on the device, then executes the completion handler.
 //
 // RequestCloseSessionWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *Device) RequestCloseSessionWithOptionsCompletion(ctx context.Context, options obj.Object) error {
+func (d *Device) RequestCloseSessionWithOptionsCompletion(ctx context.Context, options obj.Object) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestCloseSessionWithOptions:completion:"), objref.IDOf(options), _block)
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("requestCloseSessionWithOptions:completion:"), objref.IDOf(options), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -126,14 +127,14 @@ func (x *Device) RequestCloseSessionWithOptionsCompletion(ctx context.Context, o
 // RequestEjectWithCompletion requests to eject the media if permitted by the device, or to disconnect from a remote device, then executes the completion handler.
 //
 // RequestEjectWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *Device) RequestEjectWithCompletion(ctx context.Context) error {
+func (d *Device) RequestEjectWithCompletion(ctx context.Context) error {
 	_ch := make(chan error, 1)
 	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
 		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestEjectWithCompletion:"), _block)
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("requestEjectWithCompletion:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -143,155 +144,125 @@ func (x *Device) RequestEjectWithCompletion(ctx context.Context) error {
 }
 
 // RequestEjectOrDisconnect requests to eject the media if permitted by the device, or to disconnect from a remote device.
-func (x *Device) RequestEjectOrDisconnect() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestEjectOrDisconnect"))
+func (d *Device) RequestEjectOrDisconnect() {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("requestEjectOrDisconnect"))
 }
 
 // RequestYield requests that device module in control of this device yield control.
-func (x *Device) RequestYield() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestYield"))
+func (d *Device) RequestYield() {
+	objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("requestYield"))
 }
 
-// Type ￼The type of the device as defined by ICDeviceType OR'd with its ICDeviceLocationType.
-func (x *Device) Type() DeviceType {
-	_r := objc.Send[DeviceType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns ￼The type of the device as defined by ICDeviceType OR'd with its ICDeviceLocationType.
+func (d *Device) Type() DeviceType {
+	_r := objc.Send[DeviceType](objref.IDOf(d), objc.RegisterName("type"))
 	return _r
 }
 
-// Capabilities ￼The capabilities of the device as reported by the device module.
+// Capabilities returns ￼The capabilities of the device as reported by the device module.
 //
 // Capabilities returns the collection as a Go slice.
-func (x *Device) Capabilities() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("capabilities"))
+func (d *Device) Capabilities() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("capabilities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Name ￼Name of the device as reported by the device module or by the device transport when a device module is not in control of this device.
-func (x *Device) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns ￼Name of the device as reported by the device module or by the device transport when a device module is not in control of this device.
+func (d *Device) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ProductKind ￼Type of the device. Possible values are:
-func (x *Device) ProductKind() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productKind"))
+// ProductKind returns ￼Type of the device. Possible values are:
+func (d *Device) ProductKind() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("productKind"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Icon ￼Icon image for the device class.  If there is no custom icon present from a device manufacturer, this will be a rendered version of the system symbol for the device class.  Using a rendered system symbol instead of the systemSymbolName is discouraged.
-func (x *Device) Icon() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icon"))
+// Icon returns ￼Icon image for the device class.  If there is no custom icon present from a device manufacturer, this will be a rendered version of the system symbol for the device class.  Using a rendered system symbol instead of the systemSymbolName is discouraged.
+func (d *Device) Icon() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("icon"))
 	return obj.Wrap(_r)
 }
 
-// SystemSymbolName ￼Standard system symbol used to represent the device class.  Using the symbol to render an appropriate device icon will ensure proper scaling for high resolution devices.
-func (x *Device) SystemSymbolName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("systemSymbolName"))
+// SystemSymbolName returns ￼Standard system symbol used to represent the device class.  Using the symbol to render an appropriate device icon will ensure proper scaling for high resolution devices.
+func (d *Device) SystemSymbolName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("systemSymbolName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// TransportType ￼The transport type used by the device. The possible values are: ICTransportTypeUSB or ICTransportTypeMassStorage.
-func (x *Device) TransportType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transportType"))
+// TransportType returns ￼The transport type used by the device. The possible values are: ICTransportTypeUSB or ICTransportTypeMassStorage.
+func (d *Device) TransportType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("transportType"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// UUIDString ￼A string representation of the Universally Unique ID of the device.
-func (x *Device) UUIDString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUIDString"))
+// UUIDString returns ￼A string representation of the Universally Unique ID of the device.
+func (d *Device) UUIDString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("UUIDString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// HasOpenSession ￼Indicates whether the device has an open session.
-func (x *Device) HasOpenSession() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasOpenSession"))
+// HasOpenSession reports whether ￼Indicates whether the device has an open session.
+func (d *Device) HasOpenSession() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("hasOpenSession"))
 	return _r
 }
 
-// UserData ￼Client convenience bookkeeping object retained by the framework.
-func (x *Device) UserData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userData"))
+// UserData returns ￼Client convenience bookkeeping object retained by the framework.
+func (d *Device) UserData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("userData"))
 	return obj.Wrap(_r)
 }
 
-// UsbLocationID ￼The USB location of which the device is occupying.
-func (x *Device) UsbLocationID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("usbLocationID"))
+// USBLocationID returns ￼The USB location of which the device is occupying.
+func (d *Device) USBLocationID() int {
+	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("usbLocationID"))
 	return _r
 }
 
-// UsbProductID ￼The USB PID associated with the device attached.
-func (x *Device) UsbProductID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("usbProductID"))
+// USBProductID returns ￼The USB PID associated with the device attached.
+func (d *Device) USBProductID() int {
+	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("usbProductID"))
 	return _r
 }
 
-// UsbVendorID ￼The USB VID associated with the device attached.
-func (x *Device) UsbVendorID() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("usbVendorID"))
+// USBVendorID returns ￼The USB VID associated with the device attached.
+func (d *Device) USBVendorID() int {
+	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("usbVendorID"))
 	return _r
 }
 
-// IsRemote ￼Indicates whether the device is a remote device published by Image Capture device sharing facility. ￼Name of the device as reported by the device module or by the device transport when a device module is not in control of this device.
-func (x *Device) IsRemote() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRemote"))
+// IsRemote reports whether ￼Indicates whether the device is a remote device published by Image Capture device sharing facility. ￼Name of the device as reported by the device module or by the device transport when a device module is not in control of this device.
+func (d *Device) IsRemote() bool {
+	_r := objc.Send[bool](objref.IDOf(d), objc.RegisterName("isRemote"))
 	return _r
 }
 
-// ModuleExecutableArchitecture reports the device module servicing the requests executable architecture.
-func (x *Device) ModuleExecutableArchitecture() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("moduleExecutableArchitecture"))
+// ModuleExecutableArchitecture returns reports the device module servicing the requests executable architecture.
+func (d *Device) ModuleExecutableArchitecture() int {
+	_r := objc.Send[int](objref.IDOf(d), objc.RegisterName("moduleExecutableArchitecture"))
 	return _r
 }
-
-// Deviceable is the interface implemented by [Device], for mocking and DI.
-type Deviceable interface {
-	obj.Object
-	RequestOpenSession()
-	RequestCloseSession()
-	RequestEject()
-	RequestOpenSessionWithOptionsCompletion(ctx context.Context, options obj.Object) error
-	RequestCloseSessionWithOptionsCompletion(ctx context.Context, options obj.Object) error
-	RequestEjectWithCompletion(ctx context.Context) error
-	RequestEjectOrDisconnect()
-	RequestYield()
-	Type() DeviceType
-	Capabilities() []string
-	Name() string
-	ProductKind() string
-	Icon() obj.Object
-	SystemSymbolName() string
-	TransportType() string
-	UUIDString() string
-	HasOpenSession() bool
-	UserData() obj.Object
-	UsbLocationID() int
-	UsbProductID() int
-	UsbVendorID() int
-	IsRemote() bool
-	ModuleExecutableArchitecture() int
-}
-
-var _ Deviceable = (*Device)(nil)
 
 // isDevice marks Device — and, by embedding promotion, its
 // subclasses — as a member of the Device hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Device) isDevice() {}
+func (d *Device) isDevice() {}
 
 var _ DeviceProvider = (*Device)(nil)

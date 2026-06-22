@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -56,7 +57,7 @@ func NewMTRClusterUnitTestingWithDeviceEndpointIDQueue(device *MTRDevice, endpoi
 // TestSpecificWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // TestSpecificWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) TestSpecificWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestSpecificParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestSpecificResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) TestSpecificWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestSpecificParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestSpecificResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestSpecificResponseParams
 		err error
@@ -68,7 +69,7 @@ func (x *MTRClusterUnitTesting) TestSpecificWithParamsExpectedValuesExpectedValu
 		_o.val = MTRUnitTestingClusterTestSpecificResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testSpecificWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("testSpecificWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -81,7 +82,7 @@ func (x *MTRClusterUnitTesting) TestSpecificWithParamsExpectedValuesExpectedValu
 // TestSpecificWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // TestSpecificWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) TestSpecificWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestSpecificResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) TestSpecificWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestSpecificResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestSpecificResponseParams
 		err error
@@ -93,7 +94,7 @@ func (x *MTRClusterUnitTesting) TestSpecificWithExpectedValuesExpectedValueInter
 		_o.val = MTRUnitTestingClusterTestSpecificResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testSpecificWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("testSpecificWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -106,7 +107,7 @@ func (x *MTRClusterUnitTesting) TestSpecificWithExpectedValuesExpectedValueInter
 // TestAddArgumentsWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // TestAddArgumentsWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) TestAddArgumentsWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestAddArgumentsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestAddArgumentsResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) TestAddArgumentsWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestAddArgumentsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestAddArgumentsResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestAddArgumentsResponseParams
 		err error
@@ -118,7 +119,7 @@ func (x *MTRClusterUnitTesting) TestAddArgumentsWithParamsExpectedValuesExpected
 		_o.val = MTRUnitTestingClusterTestAddArgumentsResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testAddArgumentsWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("testAddArgumentsWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -131,7 +132,7 @@ func (x *MTRClusterUnitTesting) TestAddArgumentsWithParamsExpectedValuesExpected
 // TestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // TestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) TestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestSimpleArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestSimpleArgumentResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) TestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestSimpleArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestSimpleArgumentResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestSimpleArgumentResponseParams
 		err error
@@ -143,7 +144,7 @@ func (x *MTRClusterUnitTesting) TestSimpleArgumentRequestWithParamsExpectedValue
 		_o.val = MTRUnitTestingClusterTestSimpleArgumentResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testSimpleArgumentRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("testSimpleArgumentRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -156,7 +157,7 @@ func (x *MTRClusterUnitTesting) TestSimpleArgumentRequestWithParamsExpectedValue
 // TestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // TestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) TestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestStructArrayArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestStructArrayArgumentResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) TestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestStructArrayArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestStructArrayArgumentResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestStructArrayArgumentResponseParams
 		err error
@@ -168,7 +169,7 @@ func (x *MTRClusterUnitTesting) TestStructArrayArgumentRequestWithParamsExpected
 		_o.val = MTRUnitTestingClusterTestStructArrayArgumentResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testStructArrayArgumentRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("testStructArrayArgumentRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -181,7 +182,7 @@ func (x *MTRClusterUnitTesting) TestStructArrayArgumentRequestWithParamsExpected
 // TestStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // TestStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) TestStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) TestStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterBooleanResponseParams
 		err error
@@ -193,7 +194,7 @@ func (x *MTRClusterUnitTesting) TestStructArgumentRequestWithParamsExpectedValue
 		_o.val = MTRUnitTestingClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testStructArgumentRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("testStructArgumentRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -206,7 +207,7 @@ func (x *MTRClusterUnitTesting) TestStructArgumentRequestWithParamsExpectedValue
 // TestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // TestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) TestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNestedStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) TestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNestedStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterBooleanResponseParams
 		err error
@@ -218,7 +219,7 @@ func (x *MTRClusterUnitTesting) TestNestedStructArgumentRequestWithParamsExpecte
 		_o.val = MTRUnitTestingClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testNestedStructArgumentRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("testNestedStructArgumentRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -231,7 +232,7 @@ func (x *MTRClusterUnitTesting) TestNestedStructArgumentRequestWithParamsExpecte
 // TestListStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // TestListStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) TestListStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) TestListStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterBooleanResponseParams
 		err error
@@ -243,7 +244,7 @@ func (x *MTRClusterUnitTesting) TestListStructArgumentRequestWithParamsExpectedV
 		_o.val = MTRUnitTestingClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testListStructArgumentRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("testListStructArgumentRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -256,7 +257,7 @@ func (x *MTRClusterUnitTesting) TestListStructArgumentRequestWithParamsExpectedV
 // TestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // TestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) TestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListInt8UArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) TestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListInt8UArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterBooleanResponseParams
 		err error
@@ -268,7 +269,7 @@ func (x *MTRClusterUnitTesting) TestListInt8UArgumentRequestWithParamsExpectedVa
 		_o.val = MTRUnitTestingClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testListInt8UArgumentRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("testListInt8UArgumentRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -281,7 +282,7 @@ func (x *MTRClusterUnitTesting) TestListInt8UArgumentRequestWithParamsExpectedVa
 // TestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // TestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) TestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) TestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterBooleanResponseParams
 		err error
@@ -293,7 +294,7 @@ func (x *MTRClusterUnitTesting) TestNestedStructListArgumentRequestWithParamsExp
 		_o.val = MTRUnitTestingClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testNestedStructListArgumentRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("testNestedStructListArgumentRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -306,7 +307,7 @@ func (x *MTRClusterUnitTesting) TestNestedStructListArgumentRequestWithParamsExp
 // TestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // TestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) TestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) TestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterBooleanResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterBooleanResponseParams
 		err error
@@ -318,7 +319,7 @@ func (x *MTRClusterUnitTesting) TestListNestedStructListArgumentRequestWithParam
 		_o.val = MTRUnitTestingClusterBooleanResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testListNestedStructListArgumentRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("testListNestedStructListArgumentRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -331,7 +332,7 @@ func (x *MTRClusterUnitTesting) TestListNestedStructListArgumentRequestWithParam
 // TestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // TestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) TestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListInt8UReverseRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestListInt8UReverseResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) TestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListInt8UReverseRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestListInt8UReverseResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestListInt8UReverseResponseParams
 		err error
@@ -343,7 +344,7 @@ func (x *MTRClusterUnitTesting) TestListInt8UReverseRequestWithParamsExpectedVal
 		_o.val = MTRUnitTestingClusterTestListInt8UReverseResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testListInt8UReverseRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("testListInt8UReverseRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -356,7 +357,7 @@ func (x *MTRClusterUnitTesting) TestListInt8UReverseRequestWithParamsExpectedVal
 // TestEnumsRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // TestEnumsRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) TestEnumsRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEnumsRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestEnumsResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) TestEnumsRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEnumsRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestEnumsResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestEnumsResponseParams
 		err error
@@ -368,7 +369,7 @@ func (x *MTRClusterUnitTesting) TestEnumsRequestWithParamsExpectedValuesExpected
 		_o.val = MTRUnitTestingClusterTestEnumsResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testEnumsRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("testEnumsRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -381,7 +382,7 @@ func (x *MTRClusterUnitTesting) TestEnumsRequestWithParamsExpectedValuesExpected
 // TestNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // TestNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) TestNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNullableOptionalRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestNullableOptionalResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) TestNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNullableOptionalRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestNullableOptionalResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestNullableOptionalResponseParams
 		err error
@@ -393,7 +394,7 @@ func (x *MTRClusterUnitTesting) TestNullableOptionalRequestWithParamsExpectedVal
 		_o.val = MTRUnitTestingClusterTestNullableOptionalResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testNullableOptionalRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("testNullableOptionalRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -406,7 +407,7 @@ func (x *MTRClusterUnitTesting) TestNullableOptionalRequestWithParamsExpectedVal
 // TestNullableOptionalRequestWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // TestNullableOptionalRequestWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) TestNullableOptionalRequestWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestNullableOptionalResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) TestNullableOptionalRequestWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestNullableOptionalResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestNullableOptionalResponseParams
 		err error
@@ -418,7 +419,7 @@ func (x *MTRClusterUnitTesting) TestNullableOptionalRequestWithExpectedValuesExp
 		_o.val = MTRUnitTestingClusterTestNullableOptionalResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testNullableOptionalRequestWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("testNullableOptionalRequestWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -431,7 +432,7 @@ func (x *MTRClusterUnitTesting) TestNullableOptionalRequestWithExpectedValuesExp
 // TestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // TestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) TestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) TestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestComplexNullableOptionalResponseParams
 		err error
@@ -443,7 +444,7 @@ func (x *MTRClusterUnitTesting) TestComplexNullableOptionalRequestWithParamsExpe
 		_o.val = MTRUnitTestingClusterTestComplexNullableOptionalResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testComplexNullableOptionalRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("testComplexNullableOptionalRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -456,7 +457,7 @@ func (x *MTRClusterUnitTesting) TestComplexNullableOptionalRequestWithParamsExpe
 // SimpleStructEchoRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // SimpleStructEchoRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) SimpleStructEchoRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterSimpleStructEchoRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterSimpleStructResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) SimpleStructEchoRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterSimpleStructEchoRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterSimpleStructResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterSimpleStructResponseParams
 		err error
@@ -468,7 +469,7 @@ func (x *MTRClusterUnitTesting) SimpleStructEchoRequestWithParamsExpectedValuesE
 		_o.val = MTRUnitTestingClusterSimpleStructResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("simpleStructEchoRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("simpleStructEchoRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -481,7 +482,7 @@ func (x *MTRClusterUnitTesting) SimpleStructEchoRequestWithParamsExpectedValuesE
 // TestEmitTestEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // TestEmitTestEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) TestEmitTestEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEmitTestEventRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestEmitTestEventResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) TestEmitTestEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEmitTestEventRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestEmitTestEventResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestEmitTestEventResponseParams
 		err error
@@ -493,7 +494,7 @@ func (x *MTRClusterUnitTesting) TestEmitTestEventRequestWithParamsExpectedValues
 		_o.val = MTRUnitTestingClusterTestEmitTestEventResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testEmitTestEventRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("testEmitTestEventRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -506,7 +507,7 @@ func (x *MTRClusterUnitTesting) TestEmitTestEventRequestWithParamsExpectedValues
 // TestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // TestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterUnitTesting) TestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams, err error) {
+func (mcut *MTRClusterUnitTesting) TestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams, err error) {
 	type _result struct {
 		val *MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams
 		err error
@@ -518,7 +519,7 @@ func (x *MTRClusterUnitTesting) TestEmitTestFabricScopedEventRequestWithParamsEx
 		_o.val = MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("testEmitTestFabricScopedEventRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("testEmitTestFabricScopedEventRequestWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -529,1628 +530,1351 @@ func (x *MTRClusterUnitTesting) TestEmitTestFabricScopedEventRequestWithParamsEx
 }
 
 // ReadAttributeBooleanWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeBooleanWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBooleanWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeBooleanWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeBooleanWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeBooleanWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeBooleanWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeBooleanWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeBooleanWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeBooleanWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeBooleanWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeBooleanWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeBooleanWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeBooleanWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeBooleanWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeBitmap8WithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeBitmap8WithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBitmap8WithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeBitmap8WithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeBitmap8WithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeBitmap8WithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeBitmap8WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeBitmap8WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeBitmap8WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeBitmap8WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeBitmap8WithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeBitmap8WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeBitmap8WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeBitmap8WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeBitmap8WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeBitmap16WithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeBitmap16WithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBitmap16WithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeBitmap16WithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeBitmap16WithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeBitmap16WithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeBitmap16WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeBitmap16WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeBitmap16WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeBitmap16WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeBitmap16WithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeBitmap16WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeBitmap16WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeBitmap16WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeBitmap16WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeBitmap32WithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeBitmap32WithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBitmap32WithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeBitmap32WithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeBitmap32WithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeBitmap32WithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeBitmap32WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeBitmap32WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeBitmap32WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeBitmap32WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeBitmap32WithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeBitmap32WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeBitmap32WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeBitmap32WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeBitmap32WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeBitmap64WithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeBitmap64WithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBitmap64WithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeBitmap64WithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeBitmap64WithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeBitmap64WithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeBitmap64WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeBitmap64WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeBitmap64WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeBitmap64WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeBitmap64WithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeBitmap64WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeBitmap64WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeBitmap64WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeBitmap64WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeInt8uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeInt8uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt8uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeInt8uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeInt8uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeInt8uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt8uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt8uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt8uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt8uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeInt8uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt8uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt8uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt8uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt8uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeInt16uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeInt16uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt16uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeInt16uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeInt16uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeInt16uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt16uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt16uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt16uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt16uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeInt16uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt16uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt16uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt16uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt16uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeInt24uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeInt24uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt24uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeInt24uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeInt24uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeInt24uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt24uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt24uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt24uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt24uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeInt24uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt24uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt24uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt24uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt24uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeInt32uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeInt32uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt32uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeInt32uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeInt32uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeInt32uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt32uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt32uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt32uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt32uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeInt32uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt32uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt32uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt32uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt32uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeInt40uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeInt40uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt40uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeInt40uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeInt40uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeInt40uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt40uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt40uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt40uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt40uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeInt40uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt40uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt40uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt40uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt40uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeInt48uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeInt48uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt48uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeInt48uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeInt48uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeInt48uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt48uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt48uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt48uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt48uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeInt48uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt48uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt48uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt48uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt48uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeInt56uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeInt56uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt56uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeInt56uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeInt56uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeInt56uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt56uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt56uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt56uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt56uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeInt56uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt56uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt56uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt56uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt56uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeInt64uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeInt64uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt64uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeInt64uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeInt64uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeInt64uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt64uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt64uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt64uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt64uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeInt64uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt64uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt64uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt64uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt64uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeInt8sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeInt8sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt8sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeInt8sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeInt8sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeInt8sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt8sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt8sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt8sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt8sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeInt8sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt8sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt8sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt8sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt8sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeInt16sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeInt16sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt16sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeInt16sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeInt16sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeInt16sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt16sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt16sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt16sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt16sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeInt16sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt16sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt16sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt16sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt16sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeInt24sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeInt24sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt24sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeInt24sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeInt24sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeInt24sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt24sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt24sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt24sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt24sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeInt24sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt24sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt24sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt24sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt24sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeInt32sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeInt32sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt32sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeInt32sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeInt32sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeInt32sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt32sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt32sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt32sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt32sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeInt32sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt32sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt32sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt32sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt32sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeInt40sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeInt40sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt40sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeInt40sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeInt40sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeInt40sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt40sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt40sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt40sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt40sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeInt40sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt40sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt40sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt40sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt40sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeInt48sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeInt48sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt48sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeInt48sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeInt48sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeInt48sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt48sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt48sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt48sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt48sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeInt48sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt48sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt48sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt48sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt48sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeInt56sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeInt56sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt56sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeInt56sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeInt56sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeInt56sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt56sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt56sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt56sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt56sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeInt56sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt56sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt56sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt56sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt56sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeInt64sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeInt64sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeInt64sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeInt64sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeInt64sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeInt64sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt64sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt64sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt64sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt64sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeInt64sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeInt64sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeInt64sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeInt64sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeInt64sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeEnum8WithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeEnum8WithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEnum8WithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeEnum8WithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeEnum8WithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeEnum8WithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeEnum8WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEnum8WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeEnum8WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeEnum8WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeEnum8WithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeEnum8WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEnum8WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeEnum8WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeEnum8WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeEnum16WithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeEnum16WithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEnum16WithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeEnum16WithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeEnum16WithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeEnum16WithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeEnum16WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEnum16WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeEnum16WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeEnum16WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeEnum16WithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeEnum16WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEnum16WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeEnum16WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeEnum16WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeFloatSingleWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeFloatSingleWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFloatSingleWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeFloatSingleWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeFloatSingleWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeFloatSingleWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeFloatSingleWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeFloatSingleWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeFloatSingleWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeFloatSingleWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeFloatSingleWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeFloatSingleWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeFloatSingleWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeFloatSingleWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeFloatSingleWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeFloatDoubleWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeFloatDoubleWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFloatDoubleWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeFloatDoubleWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeFloatDoubleWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeFloatDoubleWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeFloatDoubleWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeFloatDoubleWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeFloatDoubleWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeFloatDoubleWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeFloatDoubleWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeFloatDoubleWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeFloatDoubleWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeFloatDoubleWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeFloatDoubleWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOctetStringWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeOctetStringWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOctetStringWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeOctetStringWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeOctetStringWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeOctetStringWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeOctetStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOctetStringWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeOctetStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeOctetStringWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOctetStringWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeOctetStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOctetStringWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeOctetStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeOctetStringWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeListInt8uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeListInt8uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeListInt8uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeListInt8uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeListInt8uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeListInt8uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeListInt8uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeListInt8uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeListInt8uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeListInt8uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeListInt8uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeListInt8uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeListInt8uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeListInt8uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeListInt8uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeListOctetStringWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeListOctetStringWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeListOctetStringWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeListOctetStringWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeListOctetStringWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeListOctetStringWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeListOctetStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeListOctetStringWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeListOctetStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeListOctetStringWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeListOctetStringWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeListOctetStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeListOctetStringWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeListOctetStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeListOctetStringWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeListStructOctetStringWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeListStructOctetStringWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeListStructOctetStringWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeListStructOctetStringWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeListStructOctetStringWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeListStructOctetStringWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeListStructOctetStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeListStructOctetStringWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeListStructOctetStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeListStructOctetStringWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeListStructOctetStringWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeListStructOctetStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeListStructOctetStringWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeListStructOctetStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeListStructOctetStringWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeLongOctetStringWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeLongOctetStringWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLongOctetStringWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeLongOctetStringWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeLongOctetStringWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeLongOctetStringWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeLongOctetStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLongOctetStringWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeLongOctetStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeLongOctetStringWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeLongOctetStringWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeLongOctetStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLongOctetStringWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeLongOctetStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeLongOctetStringWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeCharStringWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeCharStringWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCharStringWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeCharStringWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeCharStringWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeCharStringWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeCharStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeCharStringWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeCharStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeCharStringWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeCharStringWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeCharStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeCharStringWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeCharStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeCharStringWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeLongCharStringWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeLongCharStringWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLongCharStringWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeLongCharStringWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeLongCharStringWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeLongCharStringWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeLongCharStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLongCharStringWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeLongCharStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeLongCharStringWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeLongCharStringWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeLongCharStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeLongCharStringWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeLongCharStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeLongCharStringWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeEpochUsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeEpochUsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEpochUsWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeEpochUsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeEpochUsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeEpochUsWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeEpochUsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEpochUsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeEpochUsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeEpochUsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeEpochUsWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeEpochUsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEpochUsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeEpochUsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeEpochUsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeEpochSWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeEpochSWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEpochSWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeEpochSWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeEpochSWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeEpochSWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeEpochSWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEpochSWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeEpochSWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeEpochSWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeEpochSWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeEpochSWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEpochSWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeEpochSWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeEpochSWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeVendorIdWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeVendorIdWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeVendorIdWithParams:"), objref.IDOf(params))
+// ReadAttributeVendorIDWithParams wraps the corresponding Objective-C method.
+func (mcut *MTRClusterUnitTesting) ReadAttributeVendorIDWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeVendorIdWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
-// WriteAttributeVendorIdWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeVendorIdWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeVendorIdWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+// WriteAttributeVendorIDWithValueExpectedValueInterval wraps the corresponding Objective-C method.
+func (mcut *MTRClusterUnitTesting) WriteAttributeVendorIDWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeVendorIdWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributeVendorIdWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeVendorIdWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeVendorIdWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+// WriteAttributeVendorIDWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
+func (mcut *MTRClusterUnitTesting) WriteAttributeVendorIDWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeVendorIdWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeListNullablesAndOptionalsStructWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeListNullablesAndOptionalsStructWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeListNullablesAndOptionalsStructWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeListNullablesAndOptionalsStructWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeListNullablesAndOptionalsStructWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeListNullablesAndOptionalsStructWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeListNullablesAndOptionalsStructWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeListNullablesAndOptionalsStructWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeListNullablesAndOptionalsStructWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeListNullablesAndOptionalsStructWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeListNullablesAndOptionalsStructWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeListNullablesAndOptionalsStructWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeListNullablesAndOptionalsStructWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeListNullablesAndOptionalsStructWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeListNullablesAndOptionalsStructWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeEnumAttrWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeEnumAttrWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeEnumAttrWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeEnumAttrWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeEnumAttrWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeEnumAttrWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeEnumAttrWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEnumAttrWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeEnumAttrWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeEnumAttrWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeEnumAttrWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeEnumAttrWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeEnumAttrWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeEnumAttrWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeEnumAttrWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeStructAttrWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeStructAttrWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStructAttrWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeStructAttrWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeStructAttrWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeStructAttrWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeStructAttrWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeStructAttrWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeStructAttrWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeStructAttrWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeStructAttrWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeStructAttrWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeStructAttrWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeStructAttrWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeStructAttrWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeRangeRestrictedInt8uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeRangeRestrictedInt8uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRangeRestrictedInt8uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeRangeRestrictedInt8uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeRangeRestrictedInt8uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeRangeRestrictedInt8uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeRangeRestrictedInt8uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRangeRestrictedInt8uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeRangeRestrictedInt8uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeRangeRestrictedInt8uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeRangeRestrictedInt8uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeRangeRestrictedInt8uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRangeRestrictedInt8uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeRangeRestrictedInt8uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeRangeRestrictedInt8uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeRangeRestrictedInt8sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeRangeRestrictedInt8sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRangeRestrictedInt8sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeRangeRestrictedInt8sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeRangeRestrictedInt8sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeRangeRestrictedInt8sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeRangeRestrictedInt8sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRangeRestrictedInt8sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeRangeRestrictedInt8sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeRangeRestrictedInt8sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeRangeRestrictedInt8sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeRangeRestrictedInt8sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRangeRestrictedInt8sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeRangeRestrictedInt8sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeRangeRestrictedInt8sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeRangeRestrictedInt16uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeRangeRestrictedInt16uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRangeRestrictedInt16uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeRangeRestrictedInt16uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeRangeRestrictedInt16uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeRangeRestrictedInt16uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeRangeRestrictedInt16uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRangeRestrictedInt16uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeRangeRestrictedInt16uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeRangeRestrictedInt16uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeRangeRestrictedInt16uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeRangeRestrictedInt16uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRangeRestrictedInt16uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeRangeRestrictedInt16uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeRangeRestrictedInt16uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeRangeRestrictedInt16sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeRangeRestrictedInt16sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRangeRestrictedInt16sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeRangeRestrictedInt16sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeRangeRestrictedInt16sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeRangeRestrictedInt16sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeRangeRestrictedInt16sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRangeRestrictedInt16sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeRangeRestrictedInt16sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeRangeRestrictedInt16sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeRangeRestrictedInt16sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeRangeRestrictedInt16sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeRangeRestrictedInt16sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeRangeRestrictedInt16sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeRangeRestrictedInt16sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeListLongOctetStringWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeListLongOctetStringWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeListLongOctetStringWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeListLongOctetStringWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeListLongOctetStringWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeListLongOctetStringWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeListLongOctetStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeListLongOctetStringWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeListLongOctetStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeListLongOctetStringWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeListLongOctetStringWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeListLongOctetStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeListLongOctetStringWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeListLongOctetStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeListLongOctetStringWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeListFabricScopedWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeListFabricScopedWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeListFabricScopedWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeListFabricScopedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeListFabricScopedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeListFabricScopedWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeListFabricScopedWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeListFabricScopedWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeListFabricScopedWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeListFabricScopedWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeListFabricScopedWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeListFabricScopedWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeListFabricScopedWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeListFabricScopedWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeListFabricScopedWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeTimedWriteBooleanWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeTimedWriteBooleanWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTimedWriteBooleanWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeTimedWriteBooleanWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeTimedWriteBooleanWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeTimedWriteBooleanWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeTimedWriteBooleanWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeTimedWriteBooleanWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeTimedWriteBooleanWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeTimedWriteBooleanWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeTimedWriteBooleanWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeTimedWriteBooleanWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeTimedWriteBooleanWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeTimedWriteBooleanWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeTimedWriteBooleanWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeGeneralErrorBooleanWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeGeneralErrorBooleanWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneralErrorBooleanWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeGeneralErrorBooleanWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeGeneralErrorBooleanWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeGeneralErrorBooleanWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeGeneralErrorBooleanWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeGeneralErrorBooleanWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeGeneralErrorBooleanWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeGeneralErrorBooleanWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeGeneralErrorBooleanWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeGeneralErrorBooleanWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeGeneralErrorBooleanWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeGeneralErrorBooleanWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeGeneralErrorBooleanWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeClusterErrorBooleanWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeClusterErrorBooleanWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterErrorBooleanWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeClusterErrorBooleanWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeClusterErrorBooleanWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeClusterErrorBooleanWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeClusterErrorBooleanWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeClusterErrorBooleanWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeClusterErrorBooleanWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeClusterErrorBooleanWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeClusterErrorBooleanWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeClusterErrorBooleanWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeClusterErrorBooleanWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeClusterErrorBooleanWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeClusterErrorBooleanWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeUnsupportedWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeUnsupportedWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeUnsupportedWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeUnsupportedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeUnsupportedWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeUnsupportedWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeUnsupportedWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeUnsupportedWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeUnsupportedWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeUnsupportedWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeUnsupportedWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeUnsupportedWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeUnsupportedWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeUnsupportedWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeUnsupportedWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableBooleanWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableBooleanWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableBooleanWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableBooleanWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableBooleanWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableBooleanWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableBooleanWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableBooleanWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableBooleanWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableBooleanWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableBooleanWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableBooleanWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableBooleanWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableBooleanWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableBooleanWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableBitmap8WithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableBitmap8WithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableBitmap8WithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableBitmap8WithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableBitmap8WithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableBitmap8WithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableBitmap8WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableBitmap8WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableBitmap8WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableBitmap8WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableBitmap8WithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableBitmap8WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableBitmap8WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableBitmap8WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableBitmap8WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableBitmap16WithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableBitmap16WithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableBitmap16WithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableBitmap16WithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableBitmap16WithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableBitmap16WithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableBitmap16WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableBitmap16WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableBitmap16WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableBitmap16WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableBitmap16WithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableBitmap16WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableBitmap16WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableBitmap16WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableBitmap16WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableBitmap32WithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableBitmap32WithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableBitmap32WithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableBitmap32WithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableBitmap32WithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableBitmap32WithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableBitmap32WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableBitmap32WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableBitmap32WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableBitmap32WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableBitmap32WithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableBitmap32WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableBitmap32WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableBitmap32WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableBitmap32WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableBitmap64WithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableBitmap64WithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableBitmap64WithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableBitmap64WithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableBitmap64WithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableBitmap64WithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableBitmap64WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableBitmap64WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableBitmap64WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableBitmap64WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableBitmap64WithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableBitmap64WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableBitmap64WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableBitmap64WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableBitmap64WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableInt8uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableInt8uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt8uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableInt8uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableInt8uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableInt8uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt8uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt8uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt8uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt8uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableInt8uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt8uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt8uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt8uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt8uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableInt16uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableInt16uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt16uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableInt16uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableInt16uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableInt16uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt16uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt16uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt16uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt16uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableInt16uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt16uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt16uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt16uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt16uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableInt24uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableInt24uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt24uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableInt24uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableInt24uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableInt24uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt24uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt24uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt24uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt24uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableInt24uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt24uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt24uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt24uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt24uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableInt32uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableInt32uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt32uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableInt32uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableInt32uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableInt32uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt32uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt32uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt32uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt32uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableInt32uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt32uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt32uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt32uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt32uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableInt40uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableInt40uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt40uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableInt40uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableInt40uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableInt40uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt40uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt40uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt40uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt40uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableInt40uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt40uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt40uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt40uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt40uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableInt48uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableInt48uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt48uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableInt48uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableInt48uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableInt48uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt48uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt48uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt48uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt48uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableInt48uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt48uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt48uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt48uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt48uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableInt56uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableInt56uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt56uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableInt56uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableInt56uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableInt56uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt56uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt56uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt56uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt56uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableInt56uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt56uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt56uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt56uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt56uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableInt64uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableInt64uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt64uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableInt64uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableInt64uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableInt64uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt64uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt64uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt64uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt64uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableInt64uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt64uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt64uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt64uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt64uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableInt8sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableInt8sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt8sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableInt8sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableInt8sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableInt8sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt8sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt8sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt8sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt8sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableInt8sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt8sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt8sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt8sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt8sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableInt16sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableInt16sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt16sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableInt16sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableInt16sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableInt16sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt16sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt16sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt16sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt16sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableInt16sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt16sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt16sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt16sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt16sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableInt24sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableInt24sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt24sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableInt24sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableInt24sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableInt24sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt24sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt24sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt24sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt24sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableInt24sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt24sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt24sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt24sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt24sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableInt32sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableInt32sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt32sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableInt32sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableInt32sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableInt32sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt32sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt32sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt32sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt32sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableInt32sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt32sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt32sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt32sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt32sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableInt40sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableInt40sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt40sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableInt40sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableInt40sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableInt40sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt40sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt40sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt40sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt40sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableInt40sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt40sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt40sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt40sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt40sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableInt48sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableInt48sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt48sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableInt48sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableInt48sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableInt48sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt48sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt48sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt48sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt48sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableInt48sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt48sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt48sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt48sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt48sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableInt56sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableInt56sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt56sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableInt56sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableInt56sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableInt56sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt56sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt56sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt56sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt56sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableInt56sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt56sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt56sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt56sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt56sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableInt64sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableInt64sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableInt64sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableInt64sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableInt64sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableInt64sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt64sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt64sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt64sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt64sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableInt64sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableInt64sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableInt64sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableInt64sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableInt64sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableEnum8WithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableEnum8WithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableEnum8WithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableEnum8WithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableEnum8WithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableEnum8WithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableEnum8WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableEnum8WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableEnum8WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableEnum8WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableEnum8WithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableEnum8WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableEnum8WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableEnum8WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableEnum8WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableEnum16WithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableEnum16WithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableEnum16WithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableEnum16WithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableEnum16WithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableEnum16WithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableEnum16WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableEnum16WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableEnum16WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableEnum16WithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableEnum16WithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableEnum16WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableEnum16WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableEnum16WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableEnum16WithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableFloatSingleWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableFloatSingleWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableFloatSingleWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableFloatSingleWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableFloatSingleWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableFloatSingleWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableFloatSingleWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableFloatSingleWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableFloatSingleWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableFloatSingleWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableFloatSingleWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableFloatSingleWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableFloatSingleWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableFloatSingleWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableFloatSingleWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableFloatDoubleWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableFloatDoubleWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableFloatDoubleWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableFloatDoubleWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableFloatDoubleWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableFloatDoubleWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableFloatDoubleWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableFloatDoubleWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableFloatDoubleWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableFloatDoubleWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableFloatDoubleWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableFloatDoubleWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableFloatDoubleWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableFloatDoubleWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableFloatDoubleWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableOctetStringWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableOctetStringWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableOctetStringWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableOctetStringWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableOctetStringWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableOctetStringWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableOctetStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableOctetStringWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableOctetStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableOctetStringWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableOctetStringWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableOctetStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableOctetStringWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableOctetStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableOctetStringWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableCharStringWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableCharStringWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableCharStringWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableCharStringWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableCharStringWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableCharStringWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableCharStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableCharStringWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableCharStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableCharStringWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableCharStringWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableCharStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableCharStringWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableCharStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableCharStringWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableEnumAttrWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableEnumAttrWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableEnumAttrWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableEnumAttrWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableEnumAttrWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableEnumAttrWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableEnumAttrWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableEnumAttrWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableEnumAttrWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableEnumAttrWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableEnumAttrWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableEnumAttrWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableEnumAttrWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableEnumAttrWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableEnumAttrWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableStructWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableStructWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableStructWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableStructWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableStructWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableStructWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableStructWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableStructWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableStructWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableStructWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableStructWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableStructWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableStructWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableStructWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableStructWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableRangeRestrictedInt8uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableRangeRestrictedInt8uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableRangeRestrictedInt8uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableRangeRestrictedInt8uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt8uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableRangeRestrictedInt8uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt8uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableRangeRestrictedInt8uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableRangeRestrictedInt8uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt8uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableRangeRestrictedInt8uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt8uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableRangeRestrictedInt8uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableRangeRestrictedInt8sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableRangeRestrictedInt8sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt8sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableRangeRestrictedInt8sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableRangeRestrictedInt8sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt8sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableRangeRestrictedInt8sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt8sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableRangeRestrictedInt8sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableRangeRestrictedInt8sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt8sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableRangeRestrictedInt8sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt8sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableRangeRestrictedInt8sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableRangeRestrictedInt16uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt16uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableRangeRestrictedInt16uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt16uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableRangeRestrictedInt16uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableRangeRestrictedInt16uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt16uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableRangeRestrictedInt16uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt16uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableRangeRestrictedInt16uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableRangeRestrictedInt16uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt16uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableRangeRestrictedInt16uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt16uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableRangeRestrictedInt16uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeNullableRangeRestrictedInt16sWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt16sWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNullableRangeRestrictedInt16sWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeNullableRangeRestrictedInt16sWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeNullableRangeRestrictedInt16sWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeNullableRangeRestrictedInt16sWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt16sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableRangeRestrictedInt16sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt16sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableRangeRestrictedInt16sWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeNullableRangeRestrictedInt16sWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt16sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeNullableRangeRestrictedInt16sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeNullableRangeRestrictedInt16sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeNullableRangeRestrictedInt16sWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeWriteOnlyInt8uWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeWriteOnlyInt8uWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWriteOnlyInt8uWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeWriteOnlyInt8uWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeWriteOnlyInt8uWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeWriteOnlyInt8uWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeWriteOnlyInt8uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeWriteOnlyInt8uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcut *MTRClusterUnitTesting) WriteAttributeWriteOnlyInt8uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeWriteOnlyInt8uWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeWriteOnlyInt8uWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) WriteAttributeWriteOnlyInt8uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeWriteOnlyInt8uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) WriteAttributeWriteOnlyInt8uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("writeAttributeWriteOnlyInt8uWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterUnitTesting) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mcut *MTRClusterUnitTesting) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcut), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
-
-// MTRClusterUnitTestingable is the interface implemented by [MTRClusterUnitTesting], for mocking and DI.
-type MTRClusterUnitTestingable interface {
-	obj.Object
-	TestSpecificWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestSpecificParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterTestSpecificResponseParams, error)
-	TestSpecificWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterTestSpecificResponseParams, error)
-	TestAddArgumentsWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestAddArgumentsParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterTestAddArgumentsResponseParams, error)
-	TestSimpleArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestSimpleArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterTestSimpleArgumentResponseParams, error)
-	TestStructArrayArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestStructArrayArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterTestStructArrayArgumentResponseParams, error)
-	TestStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterBooleanResponseParams, error)
-	TestNestedStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNestedStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterBooleanResponseParams, error)
-	TestListStructArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListStructArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterBooleanResponseParams, error)
-	TestListInt8UArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListInt8UArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterBooleanResponseParams, error)
-	TestNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNestedStructListArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterBooleanResponseParams, error)
-	TestListNestedStructListArgumentRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListNestedStructListArgumentRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterBooleanResponseParams, error)
-	TestListInt8UReverseRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestListInt8UReverseRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterTestListInt8UReverseResponseParams, error)
-	TestEnumsRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEnumsRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterTestEnumsResponseParams, error)
-	TestNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestNullableOptionalRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterTestNullableOptionalResponseParams, error)
-	TestNullableOptionalRequestWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterTestNullableOptionalResponseParams, error)
-	TestComplexNullableOptionalRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestComplexNullableOptionalRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterTestComplexNullableOptionalResponseParams, error)
-	SimpleStructEchoRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterSimpleStructEchoRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterSimpleStructResponseParams, error)
-	TestEmitTestEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEmitTestEventRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterTestEmitTestEventResponseParams, error)
-	TestEmitTestFabricScopedEventRequestWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRUnitTestingClusterTestEmitTestFabricScopedEventRequestParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRUnitTestingClusterTestEmitTestFabricScopedEventResponseParams, error)
-	ReadAttributeBooleanWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeBooleanWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeBooleanWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeBitmap8WithParams(params *MTRReadParams) obj.Object
-	WriteAttributeBitmap8WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeBitmap8WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeBitmap16WithParams(params *MTRReadParams) obj.Object
-	WriteAttributeBitmap16WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeBitmap16WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeBitmap32WithParams(params *MTRReadParams) obj.Object
-	WriteAttributeBitmap32WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeBitmap32WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeBitmap64WithParams(params *MTRReadParams) obj.Object
-	WriteAttributeBitmap64WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeBitmap64WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeInt8uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeInt8uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeInt8uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeInt16uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeInt16uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeInt16uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeInt24uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeInt24uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeInt24uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeInt32uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeInt32uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeInt32uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeInt40uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeInt40uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeInt40uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeInt48uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeInt48uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeInt48uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeInt56uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeInt56uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeInt56uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeInt64uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeInt64uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeInt64uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeInt8sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeInt8sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeInt8sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeInt16sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeInt16sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeInt16sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeInt24sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeInt24sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeInt24sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeInt32sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeInt32sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeInt32sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeInt40sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeInt40sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeInt40sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeInt48sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeInt48sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeInt48sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeInt56sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeInt56sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeInt56sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeInt64sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeInt64sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeInt64sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeEnum8WithParams(params *MTRReadParams) obj.Object
-	WriteAttributeEnum8WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeEnum8WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeEnum16WithParams(params *MTRReadParams) obj.Object
-	WriteAttributeEnum16WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeEnum16WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeFloatSingleWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeFloatSingleWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeFloatSingleWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeFloatDoubleWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeFloatDoubleWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeFloatDoubleWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeOctetStringWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeOctetStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeOctetStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeListInt8uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeListInt8uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeListInt8uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeListOctetStringWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeListOctetStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeListOctetStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeListStructOctetStringWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeListStructOctetStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeListStructOctetStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeLongOctetStringWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeLongOctetStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeLongOctetStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeCharStringWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeCharStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeCharStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeLongCharStringWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeLongCharStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeLongCharStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeEpochUsWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeEpochUsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeEpochUsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeEpochSWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeEpochSWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeEpochSWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeVendorIdWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeVendorIdWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeVendorIdWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeListNullablesAndOptionalsStructWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeListNullablesAndOptionalsStructWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeListNullablesAndOptionalsStructWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeEnumAttrWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeEnumAttrWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeEnumAttrWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeStructAttrWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeStructAttrWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeStructAttrWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeRangeRestrictedInt8uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeRangeRestrictedInt8uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeRangeRestrictedInt8uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeRangeRestrictedInt8sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeRangeRestrictedInt8sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeRangeRestrictedInt8sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeRangeRestrictedInt16uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeRangeRestrictedInt16uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeRangeRestrictedInt16uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeRangeRestrictedInt16sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeRangeRestrictedInt16sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeRangeRestrictedInt16sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeListLongOctetStringWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeListLongOctetStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeListLongOctetStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeListFabricScopedWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeListFabricScopedWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeListFabricScopedWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeTimedWriteBooleanWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeTimedWriteBooleanWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeTimedWriteBooleanWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeGeneralErrorBooleanWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeGeneralErrorBooleanWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeGeneralErrorBooleanWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeClusterErrorBooleanWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeClusterErrorBooleanWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeClusterErrorBooleanWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeUnsupportedWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeUnsupportedWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeUnsupportedWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableBooleanWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableBooleanWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableBooleanWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableBitmap8WithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableBitmap8WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableBitmap8WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableBitmap16WithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableBitmap16WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableBitmap16WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableBitmap32WithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableBitmap32WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableBitmap32WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableBitmap64WithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableBitmap64WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableBitmap64WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableInt8uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableInt8uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableInt8uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableInt16uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableInt16uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableInt16uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableInt24uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableInt24uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableInt24uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableInt32uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableInt32uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableInt32uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableInt40uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableInt40uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableInt40uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableInt48uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableInt48uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableInt48uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableInt56uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableInt56uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableInt56uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableInt64uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableInt64uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableInt64uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableInt8sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableInt8sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableInt8sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableInt16sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableInt16sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableInt16sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableInt24sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableInt24sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableInt24sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableInt32sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableInt32sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableInt32sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableInt40sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableInt40sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableInt40sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableInt48sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableInt48sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableInt48sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableInt56sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableInt56sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableInt56sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableInt64sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableInt64sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableInt64sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableEnum8WithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableEnum8WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableEnum8WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableEnum16WithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableEnum16WithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableEnum16WithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableFloatSingleWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableFloatSingleWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableFloatSingleWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableFloatDoubleWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableFloatDoubleWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableFloatDoubleWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableOctetStringWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableOctetStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableOctetStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableCharStringWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableCharStringWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableCharStringWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableEnumAttrWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableEnumAttrWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableEnumAttrWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableStructWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableStructWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableStructWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableRangeRestrictedInt8uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableRangeRestrictedInt8uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableRangeRestrictedInt8uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableRangeRestrictedInt8sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableRangeRestrictedInt8sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableRangeRestrictedInt8sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableRangeRestrictedInt16uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableRangeRestrictedInt16uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableRangeRestrictedInt16uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeNullableRangeRestrictedInt16sWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeNullableRangeRestrictedInt16sWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeNullableRangeRestrictedInt16sWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeWriteOnlyInt8uWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeWriteOnlyInt8uWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeWriteOnlyInt8uWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-}
-
-var _ MTRClusterUnitTestingable = (*MTRClusterUnitTesting)(nil)
 
 // isMTRClusterUnitTesting marks MTRClusterUnitTesting — and, by embedding promotion, its
 // subclasses — as a member of the MTRClusterUnitTesting hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRClusterUnitTesting) isMTRClusterUnitTesting() {}
+func (mcut *MTRClusterUnitTesting) isMTRClusterUnitTesting() {}
 
 var _ MTRClusterUnitTestingProvider = (*MTRClusterUnitTesting)(nil)
 

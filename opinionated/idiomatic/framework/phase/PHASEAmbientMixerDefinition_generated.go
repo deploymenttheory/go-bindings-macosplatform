@@ -52,33 +52,23 @@ func NewAmbientMixerDefinition() *AmbientMixerDefinition {
 	return ambientMixerDefinitionAdopt(_id)
 }
 
-// WithGain the mixer’s volume.
-func (x *AmbientMixerDefinition) WithGain(gain float64) *AmbientMixerDefinition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGain:"), gain)
-	return x
+// WithGain sets the mixer’s volume.
+func (amd *AmbientMixerDefinition) WithGain(gain float64) *AmbientMixerDefinition {
+	objc.Send[objc.ID](objref.IDOf(amd), objc.RegisterName("setGain:"), gain)
+	return amd
 }
 
-// WithGainMetaParameterDefinition a template for a parameter that changes the mixer’s volume gradually over a period of time.
-func (x *AmbientMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *AmbientMixerDefinition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
-	return x
+// WithGainMetaParameterDefinition sets a template for a parameter that changes the mixer’s volume gradually over a period of time.
+func (amd *AmbientMixerDefinition) WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *AmbientMixerDefinition {
+	objc.Send[objc.ID](objref.IDOf(amd), objc.RegisterName("setGainMetaParameterDefinition:"), objref.IDOf(gainMetaParameterDefinition))
+	return amd
 }
 
-// InputChannelLayout a readonly value of the input channel layout this mixer was initialized with.
-func (x *AmbientMixerDefinition) InputChannelLayout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputChannelLayout"))
+// InputChannelLayout returns a readonly value of the input channel layout this mixer was initialized with.
+func (amd *AmbientMixerDefinition) InputChannelLayout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(amd), objc.RegisterName("inputChannelLayout"))
 	return obj.Wrap(_r)
 }
-
-// AmbientMixerDefinitionable is the interface implemented by [AmbientMixerDefinition], for mocking and DI.
-type AmbientMixerDefinitionable interface {
-	obj.Object
-	WithGain(gain float64) *AmbientMixerDefinition
-	WithGainMetaParameterDefinition(gainMetaParameterDefinition NumberMetaParameterDefinitionProvider) *AmbientMixerDefinition
-	InputChannelLayout() obj.Object
-}
-
-var _ AmbientMixerDefinitionable = (*AmbientMixerDefinition)(nil)
 
 var _ MixerDefinitionProvider = (*AmbientMixerDefinition)(nil)
 

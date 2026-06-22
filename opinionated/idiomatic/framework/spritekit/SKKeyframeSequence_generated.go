@@ -46,24 +46,24 @@ func keyframeSequenceAdopt(id objc.ID) *KeyframeSequence {
 }
 
 // Description returns the object's -description text.
-func (x *KeyframeSequence) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ks *KeyframeSequence) Description() string {
+	return rt.Description(objref.IDOf(ks))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *KeyframeSequence) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ks *KeyframeSequence) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ks), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *KeyframeSequence) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ks *KeyframeSequence) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ks), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *KeyframeSequence) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ks *KeyframeSequence) String() string {
+	return rt.Description(objref.IDOf(ks))
 }
 
 // NewKeyframeSequenceWithKeyframeValuesTimes initializes a keyframe sequence with an initial set of values and times.
@@ -87,113 +87,80 @@ func NewKeyframeSequenceWithCoder(aDecoder obj.Object) *KeyframeSequence {
 	return keyframeSequenceAdopt(_id)
 }
 
-// WithInterpolationMode the mode used to determine how values for times between the keyframes are calculated.
-func (x *KeyframeSequence) WithInterpolationMode(interpolationMode InterpolationMode) *KeyframeSequence {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolationMode:"), interpolationMode)
-	return x
+// WithInterpolationMode sets the mode used to determine how values for times between the keyframes are calculated.
+func (ks *KeyframeSequence) WithInterpolationMode(interpolationMode InterpolationMode) *KeyframeSequence {
+	objc.Send[objc.ID](objref.IDOf(ks), objc.RegisterName("setInterpolationMode:"), interpolationMode)
+	return ks
 }
 
-// WithRepeatMode the mode used to determine how the keyframe sequence repeats.
-func (x *KeyframeSequence) WithRepeatMode(repeatMode RepeatMode) *KeyframeSequence {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepeatMode:"), repeatMode)
-	return x
+// WithRepeatMode sets the mode used to determine how the keyframe sequence repeats.
+func (ks *KeyframeSequence) WithRepeatMode(repeatMode RepeatMode) *KeyframeSequence {
+	objc.Send[objc.ID](objref.IDOf(ks), objc.RegisterName("setRepeatMode:"), repeatMode)
+	return ks
 }
 
-// Count the number of keyframes in the sequence.
-func (x *KeyframeSequence) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+// Count returns the number of keyframes in the sequence.
+func (ks *KeyframeSequence) Count() int {
+	_r := objc.Send[int](objref.IDOf(ks), objc.RegisterName("count"))
 	return _r
 }
 
 // AddKeyframeValueTime adds a keyframe to the sequence.
-func (x *KeyframeSequence) AddKeyframeValueTime(value obj.Object, time_ float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addKeyframeValue:time:"), objref.IDOf(value), time_)
+func (ks *KeyframeSequence) AddKeyframeValueTime(value obj.Object, time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(ks), objc.RegisterName("addKeyframeValue:time:"), objref.IDOf(value), time_)
 }
 
 // RemoveLastKeyframe removes the last value in the sequence.
-func (x *KeyframeSequence) RemoveLastKeyframe() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeLastKeyframe"))
+func (ks *KeyframeSequence) RemoveLastKeyframe() {
+	objc.Send[objc.ID](objref.IDOf(ks), objc.RegisterName("removeLastKeyframe"))
 }
 
 // RemoveKeyframeAtIndex removes a keyframe from the sequence.
-func (x *KeyframeSequence) RemoveKeyframeAtIndex(index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeKeyframeAtIndex:"), index)
+func (ks *KeyframeSequence) RemoveKeyframeAtIndex(index int) {
+	objc.Send[objc.ID](objref.IDOf(ks), objc.RegisterName("removeKeyframeAtIndex:"), index)
 }
 
 // SetKeyframeValueForIndex changes the value for a specific keyframe.
-func (x *KeyframeSequence) SetKeyframeValueForIndex(value obj.Object, index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyframeValue:forIndex:"), objref.IDOf(value), index)
+func (ks *KeyframeSequence) SetKeyframeValueForIndex(value obj.Object, index int) {
+	objc.Send[objc.ID](objref.IDOf(ks), objc.RegisterName("setKeyframeValue:forIndex:"), objref.IDOf(value), index)
 }
 
 // SetKeyframeTimeForIndex changes the time for a specific keyframe.
-func (x *KeyframeSequence) SetKeyframeTimeForIndex(time_ float64, index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyframeTime:forIndex:"), time_, index)
+func (ks *KeyframeSequence) SetKeyframeTimeForIndex(time_ float64, index int) {
+	objc.Send[objc.ID](objref.IDOf(ks), objc.RegisterName("setKeyframeTime:forIndex:"), time_, index)
 }
 
 // SetKeyframeValueTimeForIndex replaces a keyframe in the sequence with a new keyframe.
-func (x *KeyframeSequence) SetKeyframeValueTimeForIndex(value obj.Object, time_ float64, index int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyframeValue:time:forIndex:"), objref.IDOf(value), time_, index)
+func (ks *KeyframeSequence) SetKeyframeValueTimeForIndex(value obj.Object, time_ float64, index int) {
+	objc.Send[objc.ID](objref.IDOf(ks), objc.RegisterName("setKeyframeValue:time:forIndex:"), objref.IDOf(value), time_, index)
 }
 
 // GetKeyframeValueForIndex gets the value for a keyframe in the sequence.
-func (x *KeyframeSequence) GetKeyframeValueForIndex(index int) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getKeyframeValueForIndex:"), index)
+func (ks *KeyframeSequence) GetKeyframeValueForIndex(index int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ks), objc.RegisterName("getKeyframeValueForIndex:"), index)
 	return obj.Wrap(_r)
 }
 
 // GetKeyframeTimeForIndex gets the time for a keyframe in the sequence.
-func (x *KeyframeSequence) GetKeyframeTimeForIndex(index int) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("getKeyframeTimeForIndex:"), index)
+func (ks *KeyframeSequence) GetKeyframeTimeForIndex(index int) float64 {
+	_r := objc.Send[float64](objref.IDOf(ks), objc.RegisterName("getKeyframeTimeForIndex:"), index)
 	return _r
 }
 
 // SampleAtTime calculates the sample at a particular time.
-func (x *KeyframeSequence) SampleAtTime(time_ float64) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleAtTime:"), time_)
+func (ks *KeyframeSequence) SampleAtTime(time_ float64) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ks), objc.RegisterName("sampleAtTime:"), time_)
 	return obj.Wrap(_r)
 }
 
 // InterpolationMode wraps the corresponding Objective-C method.
-func (x *KeyframeSequence) InterpolationMode() InterpolationMode {
-	_r := objc.Send[InterpolationMode](objref.IDOf(x), objc.RegisterName("interpolationMode"))
+func (ks *KeyframeSequence) InterpolationMode() InterpolationMode {
+	_r := objc.Send[InterpolationMode](objref.IDOf(ks), objc.RegisterName("interpolationMode"))
 	return _r
-}
-
-// SetInterpolationMode wraps the corresponding Objective-C method.
-func (x *KeyframeSequence) SetInterpolationMode(interpolationMode InterpolationMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolationMode:"), interpolationMode)
 }
 
 // RepeatMode wraps the corresponding Objective-C method.
-func (x *KeyframeSequence) RepeatMode() RepeatMode {
-	_r := objc.Send[RepeatMode](objref.IDOf(x), objc.RegisterName("repeatMode"))
+func (ks *KeyframeSequence) RepeatMode() RepeatMode {
+	_r := objc.Send[RepeatMode](objref.IDOf(ks), objc.RegisterName("repeatMode"))
 	return _r
 }
-
-// SetRepeatMode wraps the corresponding Objective-C method.
-func (x *KeyframeSequence) SetRepeatMode(repeatMode RepeatMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepeatMode:"), repeatMode)
-}
-
-// KeyframeSequenceable is the interface implemented by [KeyframeSequence], for mocking and DI.
-type KeyframeSequenceable interface {
-	obj.Object
-	WithInterpolationMode(interpolationMode InterpolationMode) *KeyframeSequence
-	WithRepeatMode(repeatMode RepeatMode) *KeyframeSequence
-	Count() int
-	AddKeyframeValueTime(value obj.Object, time_ float64)
-	RemoveLastKeyframe()
-	RemoveKeyframeAtIndex(index int)
-	SetKeyframeValueForIndex(value obj.Object, index int)
-	SetKeyframeTimeForIndex(time_ float64, index int)
-	SetKeyframeValueTimeForIndex(value obj.Object, time_ float64, index int)
-	GetKeyframeValueForIndex(index int) obj.Object
-	GetKeyframeTimeForIndex(index int) float64
-	SampleAtTime(time_ float64) obj.Object
-	InterpolationMode() InterpolationMode
-	SetInterpolationMode(interpolationMode InterpolationMode)
-	RepeatMode() RepeatMode
-	SetRepeatMode(repeatMode RepeatMode)
-}
-
-var _ KeyframeSequenceable = (*KeyframeSequence)(nil)

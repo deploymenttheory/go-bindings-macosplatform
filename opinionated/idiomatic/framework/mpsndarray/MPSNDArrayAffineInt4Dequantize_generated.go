@@ -7,7 +7,6 @@ package mpsndarray
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,13 +48,6 @@ func NewArrayAffineInt4Dequantize() *ArrayAffineInt4Dequantize {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayAffineInt4Dequantize")), objc.RegisterName("new"))
 	return arrayAffineInt4DequantizeAdopt(_id)
 }
-
-// ArrayAffineInt4Dequantizeable is the interface implemented by [ArrayAffineInt4Dequantize], for mocking and DI.
-type ArrayAffineInt4Dequantizeable interface {
-	obj.Object
-}
-
-var _ ArrayAffineInt4Dequantizeable = (*ArrayAffineInt4Dequantize)(nil)
 
 var _ ArrayMultiaryKernelProvider = (*ArrayAffineInt4Dequantize)(nil)
 

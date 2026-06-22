@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,39 +52,28 @@ func NewImageLaplacianPyramidAdd() *ImageLaplacianPyramidAdd {
 }
 
 // WithLaplacianBias sets the property and returns the receiver so calls can be chained.
-func (x *ImageLaplacianPyramidAdd) WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramidAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLaplacianBias:"), laplacianBias)
-	return x
+func (ilpa *ImageLaplacianPyramidAdd) WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramidAdd {
+	objc.Send[objc.ID](objref.IDOf(ilpa), objc.RegisterName("setLaplacianBias:"), laplacianBias)
+	return ilpa
 }
 
 // WithLaplacianScale sets the property and returns the receiver so calls can be chained.
-func (x *ImageLaplacianPyramidAdd) WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramidAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLaplacianScale:"), laplacianScale)
-	return x
+func (ilpa *ImageLaplacianPyramidAdd) WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramidAdd {
+	objc.Send[objc.ID](objref.IDOf(ilpa), objc.RegisterName("setLaplacianScale:"), laplacianScale)
+	return ilpa
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
-func (x *ImageLaplacianPyramidAdd) WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramidAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (ilpa *ImageLaplacianPyramidAdd) WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramidAdd {
+	objc.Send[objc.ID](objref.IDOf(ilpa), objc.RegisterName("setOffset:"), offset)
+	return ilpa
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
-func (x *ImageLaplacianPyramidAdd) WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramidAdd {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (ilpa *ImageLaplacianPyramidAdd) WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramidAdd {
+	objc.Send[objc.ID](objref.IDOf(ilpa), objc.RegisterName("setClipRect:"), clipRect)
+	return ilpa
 }
-
-// ImageLaplacianPyramidAddable is the interface implemented by [ImageLaplacianPyramidAdd], for mocking and DI.
-type ImageLaplacianPyramidAddable interface {
-	obj.Object
-	WithLaplacianBias(laplacianBias float32) *ImageLaplacianPyramidAdd
-	WithLaplacianScale(laplacianScale float32) *ImageLaplacianPyramidAdd
-	WithOffset(offset mpscore.MPSOffset) *ImageLaplacianPyramidAdd
-	WithClipRect(clipRect metal.MTLRegion) *ImageLaplacianPyramidAdd
-}
-
-var _ ImageLaplacianPyramidAddable = (*ImageLaplacianPyramidAdd)(nil)
 
 var _ ImageLaplacianPyramidProvider = (*ImageLaplacianPyramidAdd)(nil)
 

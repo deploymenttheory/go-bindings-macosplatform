@@ -46,24 +46,24 @@ func glyphInfoAdopt(id objc.ID) *GlyphInfo {
 }
 
 // Description returns the object's -description text.
-func (x *GlyphInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (gi *GlyphInfo) Description() string {
+	return rt.Description(objref.IDOf(gi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GlyphInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (gi *GlyphInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(gi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GlyphInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (gi *GlyphInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(gi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GlyphInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (gi *GlyphInfo) String() string {
+	return rt.Description(objref.IDOf(gi))
 }
 
 // NewGlyphInfo creates a new GlyphInfo.
@@ -73,14 +73,14 @@ func NewGlyphInfo() *GlyphInfo {
 }
 
 // GlyphID wraps the corresponding Objective-C method.
-func (x *GlyphInfo) GlyphID() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("glyphID"))
+func (gi *GlyphInfo) GlyphID() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(gi), objc.RegisterName("glyphID"))
 	return _r
 }
 
 // BaseString wraps the corresponding Objective-C method.
-func (x *GlyphInfo) BaseString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseString"))
+func (gi *GlyphInfo) BaseString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(gi), objc.RegisterName("baseString"))
 	if _r == 0 {
 		return ""
 	}
@@ -88,8 +88,8 @@ func (x *GlyphInfo) BaseString() string {
 }
 
 // GlyphName wraps the corresponding Objective-C method.
-func (x *GlyphInfo) GlyphName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("glyphName"))
+func (gi *GlyphInfo) GlyphName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(gi), objc.RegisterName("glyphName"))
 	if _r == 0 {
 		return ""
 	}
@@ -97,25 +97,13 @@ func (x *GlyphInfo) GlyphName() string {
 }
 
 // CharacterIdentifier wraps the corresponding Objective-C method.
-func (x *GlyphInfo) CharacterIdentifier() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("characterIdentifier"))
+func (gi *GlyphInfo) CharacterIdentifier() int {
+	_r := objc.Send[int](objref.IDOf(gi), objc.RegisterName("characterIdentifier"))
 	return _r
 }
 
 // CharacterCollection wraps the corresponding Objective-C method.
-func (x *GlyphInfo) CharacterCollection() CharacterCollection {
-	_r := objc.Send[CharacterCollection](objref.IDOf(x), objc.RegisterName("characterCollection"))
+func (gi *GlyphInfo) CharacterCollection() CharacterCollection {
+	_r := objc.Send[CharacterCollection](objref.IDOf(gi), objc.RegisterName("characterCollection"))
 	return _r
 }
-
-// GlyphInfoable is the interface implemented by [GlyphInfo], for mocking and DI.
-type GlyphInfoable interface {
-	obj.Object
-	GlyphID() uint16
-	BaseString() string
-	GlyphName() string
-	CharacterIdentifier() int
-	CharacterCollection() CharacterCollection
-}
-
-var _ GlyphInfoable = (*GlyphInfo)(nil)

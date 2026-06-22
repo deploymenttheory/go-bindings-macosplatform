@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,67 +53,47 @@ func NewImageConvolution() *ImageConvolution {
 	return imageConvolutionAdopt(_id)
 }
 
-// WithBias the value added to a convolved pixel before it is converted back to its intended storage format.
-func (x *ImageConvolution) WithBias(bias float32) *ImageConvolution {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
-	return x
+// WithBias sets the value added to a convolved pixel before it is converted back to its intended storage format.
+func (ic *ImageConvolution) WithBias(bias float32) *ImageConvolution {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setBias:"), bias)
+	return ic
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageConvolution) WithOffset(offset mpscore.MPSOffset) *ImageConvolution {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (ic *ImageConvolution) WithOffset(offset mpscore.MPSOffset) *ImageConvolution {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setOffset:"), offset)
+	return ic
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageConvolution) WithClipRect(clipRect metal.MTLRegion) *ImageConvolution {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (ic *ImageConvolution) WithClipRect(clipRect metal.MTLRegion) *ImageConvolution {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setClipRect:"), clipRect)
+	return ic
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageConvolution) WithLabel(label string) *ImageConvolution {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (ic *ImageConvolution) WithLabel(label string) *ImageConvolution {
+	objc.Send[objc.ID](objref.IDOf(ic), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ic
 }
 
-// KernelHeight the height of the filter window. Must be an odd number.
-func (x *ImageConvolution) KernelHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+// KernelHeight returns the height of the filter window. Must be an odd number.
+func (ic *ImageConvolution) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(ic), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
-// KernelWidth the width of the filter window. Must be an odd number.
-func (x *ImageConvolution) KernelWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+// KernelWidth returns the width of the filter window. Must be an odd number.
+func (ic *ImageConvolution) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(ic), objc.RegisterName("kernelWidth"))
 	return _r
 }
 
-// Bias the bias is a value to be added to convolved pixel before it is converted back to the storage format. It can be used to convert negative values into a representable range for a unsigned MTLPixelFormat. For example, many edge detection filters produce results in the range [-k,k]. By scaling the filter weights by 0.5/k and adding 0.5, the results will be in range [0,1] suitable for use with unorm formats. It can be used in combination with renormalization of the filter weights to do video ranging as part of the convolution effect. It can also just be used to increase the brightness of the image. Default value is 0.0f.
-func (x *ImageConvolution) Bias() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bias"))
+// Bias returns the bias is a value to be added to convolved pixel before it is converted back to the storage format. It can be used to convert negative values into a representable range for a unsigned MTLPixelFormat. For example, many edge detection filters produce results in the range [-k,k]. By scaling the filter weights by 0.5/k and adding 0.5, the results will be in range [0,1] suitable for use with unorm formats. It can be used in combination with renormalization of the filter weights to do video ranging as part of the convolution effect. It can also just be used to increase the brightness of the image. Default value is 0.0f.
+func (ic *ImageConvolution) Bias() float32 {
+	_r := objc.Send[float32](objref.IDOf(ic), objc.RegisterName("bias"))
 	return _r
 }
-
-// SetBias wraps the corresponding Objective-C method.
-func (x *ImageConvolution) SetBias(bias float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
-}
-
-// ImageConvolutionable is the interface implemented by [ImageConvolution], for mocking and DI.
-type ImageConvolutionable interface {
-	obj.Object
-	WithBias(bias float32) *ImageConvolution
-	WithOffset(offset mpscore.MPSOffset) *ImageConvolution
-	WithClipRect(clipRect metal.MTLRegion) *ImageConvolution
-	WithLabel(label string) *ImageConvolution
-	KernelHeight() int
-	KernelWidth() int
-	Bias() float32
-	SetBias(bias float32)
-}
-
-var _ ImageConvolutionable = (*ImageConvolution)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageConvolution)(nil)
 

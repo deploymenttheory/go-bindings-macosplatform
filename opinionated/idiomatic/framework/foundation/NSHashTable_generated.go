@@ -46,24 +46,24 @@ func hashTableAdopt(id objc.ID) *HashTable {
 }
 
 // Description returns the object's -description text.
-func (x *HashTable) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ht *HashTable) Description() string {
+	return rt.Description(objref.IDOf(ht))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HashTable) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ht *HashTable) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ht), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HashTable) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ht *HashTable) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ht), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HashTable) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ht *HashTable) String() string {
+	return rt.Description(objref.IDOf(ht))
 }
 
 // NewHashTableWithOptionsCapacity returns a hash table initialized with the given attributes.
@@ -81,128 +81,103 @@ func NewHashTableWithPointerFunctionsCapacity(functions *PointerFunctions, initi
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *HashTable) WithScriptingProperties(scriptingProperties obj.Object) *HashTable {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ht *HashTable) WithScriptingProperties(scriptingProperties obj.Object) *HashTable {
+	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ht
 }
 
 // Member determines whether the hash table contains a given object, and returns that object if it is present
-func (x *HashTable) Member(object obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("member:"), objref.IDOf(object))
+func (ht *HashTable) Member(object obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("member:"), objref.IDOf(object))
 	return obj.Wrap(_r)
 }
 
 // ObjectEnumerator returns an enumerator object that lets you access each object in the hash table.
-func (x *HashTable) ObjectEnumerator() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectEnumerator"))
+func (ht *HashTable) ObjectEnumerator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("objectEnumerator"))
 	return obj.Wrap(_r)
 }
 
 // AddObject adds a given object to the hash table.
-func (x *HashTable) AddObject(object obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObject:"), objref.IDOf(object))
+func (ht *HashTable) AddObject(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("addObject:"), objref.IDOf(object))
 }
 
 // RemoveObject removes a given object from the hash table.
-func (x *HashTable) RemoveObject(object obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObject:"), objref.IDOf(object))
+func (ht *HashTable) RemoveObject(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("removeObject:"), objref.IDOf(object))
 }
 
 // RemoveAllObjects removes all objects from the hash table.
-func (x *HashTable) RemoveAllObjects() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllObjects"))
+func (ht *HashTable) RemoveAllObjects() {
+	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("removeAllObjects"))
 }
 
 // ContainsObject returns a Boolean value that indicates whether the hash table contains a given object.
-func (x *HashTable) ContainsObject(anObject obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsObject:"), objref.IDOf(anObject))
+func (ht *HashTable) ContainsObject(anObject obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(ht), objc.RegisterName("containsObject:"), objref.IDOf(anObject))
 	return _r
 }
 
 // IntersectsHashTable returns a Boolean value that indicates whether a given hash table intersects with the receiving hash table.
-func (x *HashTable) IntersectsHashTable(other obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("intersectsHashTable:"), objref.IDOf(other))
+func (ht *HashTable) IntersectsHashTable(other obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(ht), objc.RegisterName("intersectsHashTable:"), objref.IDOf(other))
 	return _r
 }
 
 // IsEqualToHashTable returns a Boolean value that indicates whether a given hash table is equal to the receiving hash table.
-func (x *HashTable) IsEqualToHashTable(other obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToHashTable:"), objref.IDOf(other))
+func (ht *HashTable) IsEqualToHashTable(other obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(ht), objc.RegisterName("isEqualToHashTable:"), objref.IDOf(other))
 	return _r
 }
 
 // IsSubsetOfHashTable returns a Boolean value that indicates whether every element in the receiving hash table is also present in another given hash table.
-func (x *HashTable) IsSubsetOfHashTable(other obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSubsetOfHashTable:"), objref.IDOf(other))
+func (ht *HashTable) IsSubsetOfHashTable(other obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(ht), objc.RegisterName("isSubsetOfHashTable:"), objref.IDOf(other))
 	return _r
 }
 
 // IntersectHashTable removes from the receiving hash table each element that isn’t a member of another given hash table.
-func (x *HashTable) IntersectHashTable(other obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("intersectHashTable:"), objref.IDOf(other))
+func (ht *HashTable) IntersectHashTable(other obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("intersectHashTable:"), objref.IDOf(other))
 }
 
 // UnionHashTable adds each element in another given hash table to the receiving hash table, if not present.
-func (x *HashTable) UnionHashTable(other obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unionHashTable:"), objref.IDOf(other))
+func (ht *HashTable) UnionHashTable(other obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("unionHashTable:"), objref.IDOf(other))
 }
 
 // MinusHashTable removes each element in another given hash table from the receiving hash table, if present.
-func (x *HashTable) MinusHashTable(other obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minusHashTable:"), objref.IDOf(other))
+func (ht *HashTable) MinusHashTable(other obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("minusHashTable:"), objref.IDOf(other))
 }
 
 // PointerFunctions wraps the corresponding Objective-C method.
-func (x *HashTable) PointerFunctions() *PointerFunctions {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointerFunctions"))
+func (ht *HashTable) PointerFunctions() *PointerFunctions {
+	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("pointerFunctions"))
 	return PointerFunctionsFromID(_r)
 }
 
 // Count wraps the corresponding Objective-C method.
-func (x *HashTable) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+func (ht *HashTable) Count() int {
+	_r := objc.Send[int](objref.IDOf(ht), objc.RegisterName("count"))
 	return _r
 }
 
 // AllObjects wraps the corresponding Objective-C method.
-func (x *HashTable) AllObjects() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allObjects"))
+func (ht *HashTable) AllObjects() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("allObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AnyObject wraps the corresponding Objective-C method.
-func (x *HashTable) AnyObject() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("anyObject"))
+func (ht *HashTable) AnyObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("anyObject"))
 	return obj.Wrap(_r)
 }
 
 // SetRepresentation wraps the corresponding Objective-C method.
-func (x *HashTable) SetRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentation"))
+func (ht *HashTable) SetRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ht), objc.RegisterName("setRepresentation"))
 	return obj.Wrap(_r)
 }
-
-// HashTableable is the interface implemented by [HashTable], for mocking and DI.
-type HashTableable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *HashTable
-	Member(object obj.Object) obj.Object
-	ObjectEnumerator() obj.Object
-	AddObject(object obj.Object)
-	RemoveObject(object obj.Object)
-	RemoveAllObjects()
-	ContainsObject(anObject obj.Object) bool
-	IntersectsHashTable(other obj.Object) bool
-	IsEqualToHashTable(other obj.Object) bool
-	IsSubsetOfHashTable(other obj.Object) bool
-	IntersectHashTable(other obj.Object)
-	UnionHashTable(other obj.Object)
-	MinusHashTable(other obj.Object)
-	PointerFunctions() *PointerFunctions
-	Count() int
-	AllObjects() []obj.Object
-	AnyObject() obj.Object
-	SetRepresentation() obj.Object
-}
-
-var _ HashTableable = (*HashTable)(nil)

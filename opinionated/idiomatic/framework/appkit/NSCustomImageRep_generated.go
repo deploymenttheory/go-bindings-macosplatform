@@ -53,74 +53,58 @@ func NewCustomImageRep() *CustomImageRep {
 	return customImageRepAdopt(_id)
 }
 
-// WithSize the size of the image representation, measured in points in the user coordinate space.
-func (x *CustomImageRep) WithSize(size corefoundation.CGSize) *CustomImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
-	return x
+// WithSize sets the size of the image representation, measured in points in the user coordinate space.
+func (cir *CustomImageRep) WithSize(size corefoundation.CGSize) *CustomImageRep {
+	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setSize:"), size)
+	return cir
 }
 
-// WithAlpha a Boolean value that indicates whether the image data has an alpha channel.
-func (x *CustomImageRep) WithAlpha(alpha bool) *CustomImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets a Boolean value that indicates whether the image data has an alpha channel.
+func (cir *CustomImageRep) WithAlpha(alpha bool) *CustomImageRep {
+	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setAlpha:"), alpha)
+	return cir
 }
 
-// WithOpaque a Boolean value that indicates whether the image is opaque.
-func (x *CustomImageRep) WithOpaque(opaque bool) *CustomImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets a Boolean value that indicates whether the image is opaque.
+func (cir *CustomImageRep) WithOpaque(opaque bool) *CustomImageRep {
+	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setOpaque:"), opaque)
+	return cir
 }
 
-// WithColorSpaceName the name of the color space used by the image data.
-func (x *CustomImageRep) WithColorSpaceName(colorSpaceName obj.Object) *CustomImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
-	return x
+// WithColorSpaceName sets the name of the color space used by the image data.
+func (cir *CustomImageRep) WithColorSpaceName(colorSpaceName obj.Object) *CustomImageRep {
+	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
+	return cir
 }
 
-// WithBitsPerSample the number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
-func (x *CustomImageRep) WithBitsPerSample(bitsPerSample int) *CustomImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
-	return x
+// WithBitsPerSample sets the number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
+func (cir *CustomImageRep) WithBitsPerSample(bitsPerSample int) *CustomImageRep {
+	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
+	return cir
 }
 
-// WithPixelsWide the width of the image, measured in pixels.
-func (x *CustomImageRep) WithPixelsWide(pixelsWide int) *CustomImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsWide:"), pixelsWide)
-	return x
+// WithPixelsWide sets the width of the image, measured in pixels.
+func (cir *CustomImageRep) WithPixelsWide(pixelsWide int) *CustomImageRep {
+	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setPixelsWide:"), pixelsWide)
+	return cir
 }
 
-// WithPixelsHigh the height of the image, measured in pixels.
-func (x *CustomImageRep) WithPixelsHigh(pixelsHigh int) *CustomImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
-	return x
+// WithPixelsHigh sets the height of the image, measured in pixels.
+func (cir *CustomImageRep) WithPixelsHigh(pixelsHigh int) *CustomImageRep {
+	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
+	return cir
 }
 
-// WithLayoutDirection the layout direction for the image.
-func (x *CustomImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *CustomImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutDirection:"), layoutDirection)
-	return x
+// WithLayoutDirection sets the layout direction for the image.
+func (cir *CustomImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *CustomImageRep {
+	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setLayoutDirection:"), layoutDirection)
+	return cir
 }
 
 // Delegate wraps the corresponding Objective-C method.
-func (x *CustomImageRep) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+func (cir *CustomImageRep) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
-
-// CustomImageRepable is the interface implemented by [CustomImageRep], for mocking and DI.
-type CustomImageRepable interface {
-	obj.Object
-	WithSize(size corefoundation.CGSize) *CustomImageRep
-	WithAlpha(alpha bool) *CustomImageRep
-	WithOpaque(opaque bool) *CustomImageRep
-	WithColorSpaceName(colorSpaceName obj.Object) *CustomImageRep
-	WithBitsPerSample(bitsPerSample int) *CustomImageRep
-	WithPixelsWide(pixelsWide int) *CustomImageRep
-	WithPixelsHigh(pixelsHigh int) *CustomImageRep
-	WithLayoutDirection(layoutDirection ImageLayoutDirection) *CustomImageRep
-	Delegate() obj.Object
-}
-
-var _ CustomImageRepable = (*CustomImageRep)(nil)
 
 var _ ImageRepProvider = (*CustomImageRep)(nil)

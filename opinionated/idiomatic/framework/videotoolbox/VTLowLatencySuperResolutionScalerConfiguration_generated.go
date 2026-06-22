@@ -46,24 +46,24 @@ func lowLatencySuperResolutionScalerConfigurationAdopt(id objc.ID) *LowLatencySu
 }
 
 // Description returns the object's -description text.
-func (x *LowLatencySuperResolutionScalerConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (llsrsc *LowLatencySuperResolutionScalerConfiguration) Description() string {
+	return rt.Description(objref.IDOf(llsrsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LowLatencySuperResolutionScalerConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (llsrsc *LowLatencySuperResolutionScalerConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(llsrsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LowLatencySuperResolutionScalerConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (llsrsc *LowLatencySuperResolutionScalerConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(llsrsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LowLatencySuperResolutionScalerConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (llsrsc *LowLatencySuperResolutionScalerConfiguration) String() string {
+	return rt.Description(objref.IDOf(llsrsc))
 }
 
 // NewLowLatencySuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactor creates a new low-latency super-resolution scaler configuration with specified frame width and height.
@@ -73,53 +73,40 @@ func NewLowLatencySuperResolutionScalerConfigurationWithFrameWidthFrameHeightSca
 	return lowLatencySuperResolutionScalerConfigurationAdopt(_id)
 }
 
-// FrameWidth width of source frame in pixels.
-func (x *LowLatencySuperResolutionScalerConfiguration) FrameWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameWidth"))
+// FrameWidth returns width of source frame in pixels.
+func (llsrsc *LowLatencySuperResolutionScalerConfiguration) FrameWidth() int {
+	_r := objc.Send[int](objref.IDOf(llsrsc), objc.RegisterName("frameWidth"))
 	return _r
 }
 
-// FrameHeight height of source frame in pixels.
-func (x *LowLatencySuperResolutionScalerConfiguration) FrameHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameHeight"))
+// FrameHeight returns height of source frame in pixels.
+func (llsrsc *LowLatencySuperResolutionScalerConfiguration) FrameHeight() int {
+	_r := objc.Send[int](objref.IDOf(llsrsc), objc.RegisterName("frameHeight"))
 	return _r
 }
 
-// FrameSupportedPixelFormats available supported pixel formats for source frames for current configuration.
+// FrameSupportedPixelFormats returns available supported pixel formats for source frames for current configuration.
 //
 // FrameSupportedPixelFormats returns the collection as a Go slice.
-func (x *LowLatencySuperResolutionScalerConfiguration) FrameSupportedPixelFormats() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frameSupportedPixelFormats"))
+func (llsrsc *LowLatencySuperResolutionScalerConfiguration) FrameSupportedPixelFormats() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(llsrsc), objc.RegisterName("frameSupportedPixelFormats"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SourcePixelBufferAttributes pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-func (x *LowLatencySuperResolutionScalerConfiguration) SourcePixelBufferAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourcePixelBufferAttributes"))
+// SourcePixelBufferAttributes returns pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+func (llsrsc *LowLatencySuperResolutionScalerConfiguration) SourcePixelBufferAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(llsrsc), objc.RegisterName("sourcePixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
 
-// DestinationPixelBufferAttributes pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-func (x *LowLatencySuperResolutionScalerConfiguration) DestinationPixelBufferAttributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationPixelBufferAttributes"))
+// DestinationPixelBufferAttributes returns pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
+func (llsrsc *LowLatencySuperResolutionScalerConfiguration) DestinationPixelBufferAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(llsrsc), objc.RegisterName("destinationPixelBufferAttributes"))
 	return obj.Wrap(_r)
 }
 
-// ScaleFactor scale factor with which you initialized the configuration.
-func (x *LowLatencySuperResolutionScalerConfiguration) ScaleFactor() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("scaleFactor"))
+// ScaleFactor returns scale factor with which you initialized the configuration.
+func (llsrsc *LowLatencySuperResolutionScalerConfiguration) ScaleFactor() float32 {
+	_r := objc.Send[float32](objref.IDOf(llsrsc), objc.RegisterName("scaleFactor"))
 	return _r
 }
-
-// LowLatencySuperResolutionScalerConfigurationable is the interface implemented by [LowLatencySuperResolutionScalerConfiguration], for mocking and DI.
-type LowLatencySuperResolutionScalerConfigurationable interface {
-	obj.Object
-	FrameWidth() int
-	FrameHeight() int
-	FrameSupportedPixelFormats() []obj.Object
-	SourcePixelBufferAttributes() obj.Object
-	DestinationPixelBufferAttributes() obj.Object
-	ScaleFactor() float32
-}
-
-var _ LowLatencySuperResolutionScalerConfigurationable = (*LowLatencySuperResolutionScalerConfiguration)(nil)

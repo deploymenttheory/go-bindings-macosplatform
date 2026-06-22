@@ -46,24 +46,24 @@ func composeServiceViewControllerAdopt(id objc.ID) *ComposeServiceViewController
 }
 
 // Description returns the object's -description text.
-func (x *ComposeServiceViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (csvc *ComposeServiceViewController) Description() string {
+	return rt.Description(objref.IDOf(csvc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ComposeServiceViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (csvc *ComposeServiceViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(csvc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ComposeServiceViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (csvc *ComposeServiceViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(csvc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ComposeServiceViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (csvc *ComposeServiceViewController) String() string {
+	return rt.Description(objref.IDOf(csvc))
 }
 
 // NewComposeServiceViewController creates a new ComposeServiceViewController.
@@ -72,58 +72,58 @@ func NewComposeServiceViewController() *ComposeServiceViewController {
 	return composeServiceViewControllerAdopt(_id)
 }
 
-// WithPlaceholder a string that’s displayed in the compose view’s text view when the text view is empty.
-func (x *ComposeServiceViewController) WithPlaceholder(placeholder string) *ComposeServiceViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholder:"), purego.NSString(placeholder))
-	return x
+// WithPlaceholder sets a string that’s displayed in the compose view’s text view when the text view is empty.
+func (csvc *ComposeServiceViewController) WithPlaceholder(placeholder string) *ComposeServiceViewController {
+	objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("setPlaceholder:"), purego.NSString(placeholder))
+	return csvc
 }
 
-// WithCharactersRemaining the number of characters remaining in a custom character limit.
-func (x *ComposeServiceViewController) WithCharactersRemaining(charactersRemaining obj.Object) *ComposeServiceViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharactersRemaining:"), objref.IDOf(charactersRemaining))
-	return x
+// WithCharactersRemaining sets the number of characters remaining in a custom character limit.
+func (csvc *ComposeServiceViewController) WithCharactersRemaining(charactersRemaining obj.Object) *ComposeServiceViewController {
+	objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("setCharactersRemaining:"), objref.IDOf(charactersRemaining))
+	return csvc
 }
 
 // PresentationAnimationDidFinish tells the compose view controller that the presentation animation is finished.
-func (x *ComposeServiceViewController) PresentationAnimationDidFinish() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presentationAnimationDidFinish"))
+func (csvc *ComposeServiceViewController) PresentationAnimationDidFinish() {
+	objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("presentationAnimationDidFinish"))
 }
 
 // DidSelectPost sent to the compose view after the post animation finishes.
-func (x *ComposeServiceViewController) DidSelectPost() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didSelectPost"))
+func (csvc *ComposeServiceViewController) DidSelectPost() {
+	objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("didSelectPost"))
 }
 
 // DidSelectCancel sent to the compose view after the cancel animation finishes.
-func (x *ComposeServiceViewController) DidSelectCancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didSelectCancel"))
+func (csvc *ComposeServiceViewController) DidSelectCancel() {
+	objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("didSelectCancel"))
 }
 
 // Cancel starts the animated dismissal of the compose view.
-func (x *ComposeServiceViewController) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (csvc *ComposeServiceViewController) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("cancel"))
 }
 
-// IsContentValid a Boolean value that indicates whether the current content and attachments are valid.
-func (x *ComposeServiceViewController) IsContentValid() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isContentValid"))
+// IsContentValid reports whether the current content and attachments are valid.
+func (csvc *ComposeServiceViewController) IsContentValid() bool {
+	_r := objc.Send[bool](objref.IDOf(csvc), objc.RegisterName("isContentValid"))
 	return _r
 }
 
 // ValidateContent performs validation of the current content and updates the state of the Post button, if appropriate.
-func (x *ComposeServiceViewController) ValidateContent() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validateContent"))
+func (csvc *ComposeServiceViewController) ValidateContent() {
+	objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("validateContent"))
 }
 
 // TextView wraps the corresponding Objective-C method.
-func (x *ComposeServiceViewController) TextView() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textView"))
+func (csvc *ComposeServiceViewController) TextView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("textView"))
 	return obj.Wrap(_r)
 }
 
 // ContentText wraps the corresponding Objective-C method.
-func (x *ComposeServiceViewController) ContentText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentText"))
+func (csvc *ComposeServiceViewController) ContentText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("contentText"))
 	if _r == 0 {
 		return ""
 	}
@@ -131,47 +131,16 @@ func (x *ComposeServiceViewController) ContentText() string {
 }
 
 // Placeholder wraps the corresponding Objective-C method.
-func (x *ComposeServiceViewController) Placeholder() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholder"))
+func (csvc *ComposeServiceViewController) Placeholder() string {
+	_r := objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("placeholder"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetPlaceholder wraps the corresponding Objective-C method.
-func (x *ComposeServiceViewController) SetPlaceholder(placeholder string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholder:"), purego.NSString(placeholder))
-}
-
 // CharactersRemaining wraps the corresponding Objective-C method.
-func (x *ComposeServiceViewController) CharactersRemaining() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("charactersRemaining"))
+func (csvc *ComposeServiceViewController) CharactersRemaining() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(csvc), objc.RegisterName("charactersRemaining"))
 	return obj.Wrap(_r)
 }
-
-// SetCharactersRemaining wraps the corresponding Objective-C method.
-func (x *ComposeServiceViewController) SetCharactersRemaining(charactersRemaining obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharactersRemaining:"), objref.IDOf(charactersRemaining))
-}
-
-// ComposeServiceViewControllerable is the interface implemented by [ComposeServiceViewController], for mocking and DI.
-type ComposeServiceViewControllerable interface {
-	obj.Object
-	WithPlaceholder(placeholder string) *ComposeServiceViewController
-	WithCharactersRemaining(charactersRemaining obj.Object) *ComposeServiceViewController
-	PresentationAnimationDidFinish()
-	DidSelectPost()
-	DidSelectCancel()
-	Cancel()
-	IsContentValid() bool
-	ValidateContent()
-	TextView() obj.Object
-	ContentText() string
-	Placeholder() string
-	SetPlaceholder(placeholder string)
-	CharactersRemaining() obj.Object
-	SetCharactersRemaining(charactersRemaining obj.Object)
-}
-
-var _ ComposeServiceViewControllerable = (*ComposeServiceViewController)(nil)

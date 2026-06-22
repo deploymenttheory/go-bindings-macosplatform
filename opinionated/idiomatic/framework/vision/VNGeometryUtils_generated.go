@@ -46,24 +46,24 @@ func geometryUtilsAdopt(id objc.ID) *GeometryUtils {
 }
 
 // Description returns the object's -description text.
-func (x *GeometryUtils) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (gu *GeometryUtils) Description() string {
+	return rt.Description(objref.IDOf(gu))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GeometryUtils) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (gu *GeometryUtils) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(gu), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GeometryUtils) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (gu *GeometryUtils) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(gu), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GeometryUtils) String() string {
-	return rt.Description(objref.IDOf(x))
+func (gu *GeometryUtils) String() string {
+	return rt.Description(objref.IDOf(gu))
 }
 
 // NewGeometryUtils creates a new GeometryUtils.
@@ -71,10 +71,3 @@ func NewGeometryUtils() *GeometryUtils {
 	_id := objc.Send[objc.ID](objc.ID(_class("VNGeometryUtils")), objc.RegisterName("new"))
 	return geometryUtilsAdopt(_id)
 }
-
-// GeometryUtilsable is the interface implemented by [GeometryUtils], for mocking and DI.
-type GeometryUtilsable interface {
-	obj.Object
-}
-
-var _ GeometryUtilsable = (*GeometryUtils)(nil)

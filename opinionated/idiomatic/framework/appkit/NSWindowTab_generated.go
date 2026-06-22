@@ -46,24 +46,24 @@ func windowTabAdopt(id objc.ID) *WindowTab {
 }
 
 // Description returns the object's -description text.
-func (x *WindowTab) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wt *WindowTab) Description() string {
+	return rt.Description(objref.IDOf(wt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WindowTab) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wt *WindowTab) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WindowTab) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wt *WindowTab) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WindowTab) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wt *WindowTab) String() string {
+	return rt.Description(objref.IDOf(wt))
 }
 
 // NewWindowTab creates a new WindowTab.
@@ -72,95 +72,56 @@ func NewWindowTab() *WindowTab {
 	return windowTabAdopt(_id)
 }
 
-// WithTitle the title for the window tab.
-func (x *WindowTab) WithTitle(title string) *WindowTab {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title for the window tab.
+func (wt *WindowTab) WithTitle(title string) *WindowTab {
+	objc.Send[objc.ID](objref.IDOf(wt), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return wt
 }
 
-// WithAttributedTitle the title for the window tab, specified as an attributed string.
-func (x *WindowTab) WithAttributedTitle(attributedTitle obj.Object) *WindowTab {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
-	return x
+// WithAttributedTitle sets the title for the window tab, specified as an attributed string.
+func (wt *WindowTab) WithAttributedTitle(attributedTitle obj.Object) *WindowTab {
+	objc.Send[objc.ID](objref.IDOf(wt), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
+	return wt
 }
 
-// WithToolTip the tooltip for this window tab.
-func (x *WindowTab) WithToolTip(toolTip string) *WindowTab {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+// WithToolTip sets the tooltip for this window tab.
+func (wt *WindowTab) WithToolTip(toolTip string) *WindowTab {
+	objc.Send[objc.ID](objref.IDOf(wt), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return wt
 }
 
-// WithAccessoryView an optional accessory view for the tab.
-func (x *WindowTab) WithAccessoryView(accessoryView ViewProvider) *WindowTab {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
-	return x
+// WithAccessoryView sets an optional accessory view for the tab.
+func (wt *WindowTab) WithAccessoryView(accessoryView ViewProvider) *WindowTab {
+	objc.Send[objc.ID](objref.IDOf(wt), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
+	return wt
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *WindowTab) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (wt *WindowTab) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wt), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetTitle wraps the corresponding Objective-C method.
-func (x *WindowTab) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
 // AttributedTitle wraps the corresponding Objective-C method.
-func (x *WindowTab) AttributedTitle() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedTitle"))
+func (wt *WindowTab) AttributedTitle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wt), objc.RegisterName("attributedTitle"))
 	return obj.Wrap(_r)
 }
 
-// SetAttributedTitle wraps the corresponding Objective-C method.
-func (x *WindowTab) SetAttributedTitle(attributedTitle obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
-}
-
 // ToolTip wraps the corresponding Objective-C method.
-func (x *WindowTab) ToolTip() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolTip"))
+func (wt *WindowTab) ToolTip() string {
+	_r := objc.Send[objc.ID](objref.IDOf(wt), objc.RegisterName("toolTip"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetToolTip wraps the corresponding Objective-C method.
-func (x *WindowTab) SetToolTip(toolTip string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-}
-
 // AccessoryView wraps the corresponding Objective-C method.
-func (x *WindowTab) AccessoryView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryView"))
+func (wt *WindowTab) AccessoryView() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(wt), objc.RegisterName("accessoryView"))
 	return ViewFromID(_r)
 }
-
-// SetAccessoryView wraps the corresponding Objective-C method.
-func (x *WindowTab) SetAccessoryView(accessoryView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
-}
-
-// WindowTabable is the interface implemented by [WindowTab], for mocking and DI.
-type WindowTabable interface {
-	obj.Object
-	WithTitle(title string) *WindowTab
-	WithAttributedTitle(attributedTitle obj.Object) *WindowTab
-	WithToolTip(toolTip string) *WindowTab
-	WithAccessoryView(accessoryView ViewProvider) *WindowTab
-	Title() string
-	SetTitle(title string)
-	AttributedTitle() obj.Object
-	SetAttributedTitle(attributedTitle obj.Object)
-	ToolTip() string
-	SetToolTip(toolTip string)
-	AccessoryView() *View
-	SetAccessoryView(accessoryView *View)
-}
-
-var _ WindowTabable = (*WindowTab)(nil)

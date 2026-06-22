@@ -44,24 +44,24 @@ func environmentAdopt(id objc.ID) *Environment {
 }
 
 // Description returns the object's -description text.
-func (x *Environment) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Environment) Description() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Environment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (e *Environment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Environment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (e *Environment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Environment) String() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Environment) String() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // NewEnvironment creates a new Environment.
@@ -70,16 +70,8 @@ func NewEnvironment() *Environment {
 	return environmentAdopt(_id)
 }
 
-// State the environment state information.
-func (x *Environment) State() *EnvironmentState {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
+// State returns the environment state information.
+func (e *Environment) State() *EnvironmentState {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("state"))
 	return EnvironmentStateFromID(_r)
 }
-
-// Environmentable is the interface implemented by [Environment], for mocking and DI.
-type Environmentable interface {
-	obj.Object
-	State() *EnvironmentState
-}
-
-var _ Environmentable = (*Environment)(nil)

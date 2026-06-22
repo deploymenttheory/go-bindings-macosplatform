@@ -44,24 +44,24 @@ func mTRAccessControlClusterAccessRestrictionEntryStructAdopt(id objc.ID) *MTRAc
 }
 
 // Description returns the object's -description text.
-func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) Description() string {
+	return rt.Description(objref.IDOf(maccares))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(maccares), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(maccares), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) String() string {
+	return rt.Description(objref.IDOf(maccares))
 }
 
 // NewMTRAccessControlClusterAccessRestrictionEntryStruct creates a new MTRAccessControlClusterAccessRestrictionEntryStruct.
@@ -71,81 +71,48 @@ func NewMTRAccessControlClusterAccessRestrictionEntryStruct() *MTRAccessControlC
 }
 
 // WithEndpoint sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterAccessRestrictionEntryStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
-	return x
+func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterAccessRestrictionEntryStruct {
+	objc.Send[objc.ID](objref.IDOf(maccares), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
+	return maccares
 }
 
 // WithCluster sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) WithCluster(cluster obj.Object) *MTRAccessControlClusterAccessRestrictionEntryStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
-	return x
+func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) WithCluster(cluster obj.Object) *MTRAccessControlClusterAccessRestrictionEntryStruct {
+	objc.Send[objc.ID](objref.IDOf(maccares), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
+	return maccares
 }
 
 // WithFabricIndex sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessRestrictionEntryStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-	return x
+func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessRestrictionEntryStruct {
+	objc.Send[objc.ID](objref.IDOf(maccares), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
+	return maccares
 }
 
 // Endpoint wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) Endpoint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
+func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) Endpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccares), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
-}
-
-// SetEndpoint wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) SetEndpoint(endpoint obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 }
 
 // Cluster wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) Cluster() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cluster"))
+func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) Cluster() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccares), objc.RegisterName("cluster"))
 	return obj.Wrap(_r)
 }
 
-// SetCluster wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) SetCluster(cluster obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
-}
-
 // Restrictions wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) Restrictions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restrictions"))
+func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) Restrictions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccares), objc.RegisterName("restrictions"))
 	return obj.Wrap(_r)
 }
 
 // SetRestrictions wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) SetRestrictions(restrictions obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestrictions:"), objref.IDOf(restrictions))
+func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) SetRestrictions(restrictions obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(maccares), objc.RegisterName("setRestrictions:"), objref.IDOf(restrictions))
 }
 
 // FabricIndex wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) FabricIndex() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fabricIndex"))
+func (maccares *MTRAccessControlClusterAccessRestrictionEntryStruct) FabricIndex() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccares), objc.RegisterName("fabricIndex"))
 	return obj.Wrap(_r)
 }
-
-// SetFabricIndex wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterAccessRestrictionEntryStruct) SetFabricIndex(fabricIndex obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFabricIndex:"), objref.IDOf(fabricIndex))
-}
-
-// MTRAccessControlClusterAccessRestrictionEntryStructable is the interface implemented by [MTRAccessControlClusterAccessRestrictionEntryStruct], for mocking and DI.
-type MTRAccessControlClusterAccessRestrictionEntryStructable interface {
-	obj.Object
-	WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterAccessRestrictionEntryStruct
-	WithCluster(cluster obj.Object) *MTRAccessControlClusterAccessRestrictionEntryStruct
-	WithFabricIndex(fabricIndex obj.Object) *MTRAccessControlClusterAccessRestrictionEntryStruct
-	Endpoint() obj.Object
-	SetEndpoint(endpoint obj.Object)
-	Cluster() obj.Object
-	SetCluster(cluster obj.Object)
-	Restrictions() obj.Object
-	SetRestrictions(restrictions obj.Object)
-	FabricIndex() obj.Object
-	SetFabricIndex(fabricIndex obj.Object)
-}
-
-var _ MTRAccessControlClusterAccessRestrictionEntryStructable = (*MTRAccessControlClusterAccessRestrictionEntryStruct)(nil)

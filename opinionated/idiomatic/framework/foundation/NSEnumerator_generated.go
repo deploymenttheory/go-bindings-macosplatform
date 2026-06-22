@@ -48,57 +48,47 @@ func enumeratorAdopt(id objc.ID) *Enumerator {
 }
 
 // Description returns the object's -description text.
-func (x *Enumerator) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Enumerator) Description() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Enumerator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (e *Enumerator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(e), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Enumerator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (e *Enumerator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(e), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Enumerator) String() string {
-	return rt.Description(objref.IDOf(x))
+func (e *Enumerator) String() string {
+	return rt.Description(objref.IDOf(e))
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Enumerator) WithScriptingProperties(scriptingProperties obj.Object) *Enumerator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (e *Enumerator) WithScriptingProperties(scriptingProperties obj.Object) *Enumerator {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return e
 }
 
 // NextObject returns the next object from the collection being enumerated.
-func (x *Enumerator) NextObject() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextObject"))
+func (e *Enumerator) NextObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("nextObject"))
 	return obj.Wrap(_r)
 }
 
 // AllObjects wraps the corresponding Objective-C method.
-func (x *Enumerator) AllObjects() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allObjects"))
+func (e *Enumerator) AllObjects() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("allObjects"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// Enumeratorable is the interface implemented by [Enumerator], for mocking and DI.
-type Enumeratorable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Enumerator
-	NextObject() obj.Object
-	AllObjects() []obj.Object
-}
-
-var _ Enumeratorable = (*Enumerator)(nil)
 
 // isEnumerator marks Enumerator — and, by embedding promotion, its
 // subclasses — as a member of the Enumerator hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Enumerator) isEnumerator() {}
+func (e *Enumerator) isEnumerator() {}
 
 var _ EnumeratorProvider = (*Enumerator)(nil)

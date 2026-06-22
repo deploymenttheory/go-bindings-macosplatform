@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,17 +52,9 @@ func NewMacGraphicsDisplay() *MacGraphicsDisplay {
 }
 
 // PixelsPerInch wraps the corresponding Objective-C method.
-func (x *MacGraphicsDisplay) PixelsPerInch() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pixelsPerInch"))
+func (mgd *MacGraphicsDisplay) PixelsPerInch() int {
+	_r := objc.Send[int](objref.IDOf(mgd), objc.RegisterName("pixelsPerInch"))
 	return _r
 }
-
-// MacGraphicsDisplayable is the interface implemented by [MacGraphicsDisplay], for mocking and DI.
-type MacGraphicsDisplayable interface {
-	obj.Object
-	PixelsPerInch() int
-}
-
-var _ MacGraphicsDisplayable = (*MacGraphicsDisplay)(nil)
 
 var _ GraphicsDisplayProvider = (*MacGraphicsDisplay)(nil)

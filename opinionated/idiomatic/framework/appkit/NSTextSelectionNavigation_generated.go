@@ -46,24 +46,24 @@ func textSelectionNavigationAdopt(id objc.ID) *TextSelectionNavigation {
 }
 
 // Description returns the object's -description text.
-func (x *TextSelectionNavigation) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tsn *TextSelectionNavigation) Description() string {
+	return rt.Description(objref.IDOf(tsn))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TextSelectionNavigation) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tsn *TextSelectionNavigation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tsn), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TextSelectionNavigation) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tsn *TextSelectionNavigation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tsn), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TextSelectionNavigation) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tsn *TextSelectionNavigation) String() string {
+	return rt.Description(objref.IDOf(tsn))
 }
 
 // NewTextSelectionNavigation creates a new TextSelectionNavigation.
@@ -72,76 +72,49 @@ func NewTextSelectionNavigation() *TextSelectionNavigation {
 	return textSelectionNavigationAdopt(_id)
 }
 
-// WithAllowsNonContiguousRanges determines if the instance could produce selections with multiple noncontiguous selections.
-func (x *TextSelectionNavigation) WithAllowsNonContiguousRanges(allowsNonContiguousRanges bool) *TextSelectionNavigation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsNonContiguousRanges:"), allowsNonContiguousRanges)
-	return x
+// WithAllowsNonContiguousRanges sets determines if the instance could produce selections with multiple noncontiguous selections.
+func (tsn *TextSelectionNavigation) WithAllowsNonContiguousRanges(allowsNonContiguousRanges bool) *TextSelectionNavigation {
+	objc.Send[objc.ID](objref.IDOf(tsn), objc.RegisterName("setAllowsNonContiguousRanges:"), allowsNonContiguousRanges)
+	return tsn
 }
 
-// WithRotatesCoordinateSystemForLayoutOrientation determines if the framework rotates the coordinate system to match the layout orientation.
-func (x *TextSelectionNavigation) WithRotatesCoordinateSystemForLayoutOrientation(rotatesCoordinateSystemForLayoutOrientation bool) *TextSelectionNavigation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotatesCoordinateSystemForLayoutOrientation:"), rotatesCoordinateSystemForLayoutOrientation)
-	return x
+// WithRotatesCoordinateSystemForLayoutOrientation sets determines if the framework rotates the coordinate system to match the layout orientation.
+func (tsn *TextSelectionNavigation) WithRotatesCoordinateSystemForLayoutOrientation(rotatesCoordinateSystemForLayoutOrientation bool) *TextSelectionNavigation {
+	objc.Send[objc.ID](objref.IDOf(tsn), objc.RegisterName("setRotatesCoordinateSystemForLayoutOrientation:"), rotatesCoordinateSystemForLayoutOrientation)
+	return tsn
 }
 
 // FlushLayoutCache flushes cached layout information.
-func (x *TextSelectionNavigation) FlushLayoutCache() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flushLayoutCache"))
+func (tsn *TextSelectionNavigation) FlushLayoutCache() {
+	objc.Send[objc.ID](objref.IDOf(tsn), objc.RegisterName("flushLayoutCache"))
 }
 
 // DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined returns a new selection that results from applying the navigation operations you specify to the text selection you provide.
-func (x *TextSelectionNavigation) DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined(textSelection *TextSelection, direction TextSelectionNavigationDirection, destination TextSelectionNavigationDestination, extending bool, confined bool) *TextSelection {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationSelectionForTextSelection:direction:destination:extending:confined:"), objref.IDOf(textSelection), direction, destination, extending, confined)
+func (tsn *TextSelectionNavigation) DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined(textSelection *TextSelection, direction TextSelectionNavigationDirection, destination TextSelectionNavigationDestination, extending bool, confined bool) *TextSelection {
+	_r := objc.Send[objc.ID](objref.IDOf(tsn), objc.RegisterName("destinationSelectionForTextSelection:direction:destination:extending:confined:"), objref.IDOf(textSelection), direction, destination, extending, confined)
 	return TextSelectionFromID(_r)
 }
 
 // TextSelectionForSelectionGranularityEnclosingTextSelection returns a text selection expanded to the nearest boundaries for the selection granularity and enclosing text selection text ranges you specify.
-func (x *TextSelectionNavigation) TextSelectionForSelectionGranularityEnclosingTextSelection(selectionGranularity TextSelectionGranularity, textSelection *TextSelection) *TextSelection {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textSelectionForSelectionGranularity:enclosingTextSelection:"), selectionGranularity, objref.IDOf(textSelection))
+func (tsn *TextSelectionNavigation) TextSelectionForSelectionGranularityEnclosingTextSelection(selectionGranularity TextSelectionGranularity, textSelection *TextSelection) *TextSelection {
+	_r := objc.Send[objc.ID](objref.IDOf(tsn), objc.RegisterName("textSelectionForSelectionGranularity:enclosingTextSelection:"), selectionGranularity, objref.IDOf(textSelection))
 	return TextSelectionFromID(_r)
 }
 
 // DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition returns the ranges for deleting the text based on the current selection and movement arguments.
-func (x *TextSelectionNavigation) DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition(textSelection *TextSelection, direction TextSelectionNavigationDirection, destination TextSelectionNavigationDestination, allowsDecomposition bool) []*TextRange {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deletionRangesForTextSelection:direction:destination:allowsDecomposition:"), objref.IDOf(textSelection), direction, destination, allowsDecomposition)
+func (tsn *TextSelectionNavigation) DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition(textSelection *TextSelection, direction TextSelectionNavigationDirection, destination TextSelectionNavigationDestination, allowsDecomposition bool) []*TextRange {
+	_r := objc.Send[objc.ID](objref.IDOf(tsn), objc.RegisterName("deletionRangesForTextSelection:direction:destination:allowsDecomposition:"), objref.IDOf(textSelection), direction, destination, allowsDecomposition)
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) *TextRange { return TextRangeFromID(_id) })
 }
 
 // AllowsNonContiguousRanges wraps the corresponding Objective-C method.
-func (x *TextSelectionNavigation) AllowsNonContiguousRanges() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsNonContiguousRanges"))
+func (tsn *TextSelectionNavigation) AllowsNonContiguousRanges() bool {
+	_r := objc.Send[bool](objref.IDOf(tsn), objc.RegisterName("allowsNonContiguousRanges"))
 	return _r
-}
-
-// SetAllowsNonContiguousRanges wraps the corresponding Objective-C method.
-func (x *TextSelectionNavigation) SetAllowsNonContiguousRanges(allowsNonContiguousRanges bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsNonContiguousRanges:"), allowsNonContiguousRanges)
 }
 
 // RotatesCoordinateSystemForLayoutOrientation wraps the corresponding Objective-C method.
-func (x *TextSelectionNavigation) RotatesCoordinateSystemForLayoutOrientation() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("rotatesCoordinateSystemForLayoutOrientation"))
+func (tsn *TextSelectionNavigation) RotatesCoordinateSystemForLayoutOrientation() bool {
+	_r := objc.Send[bool](objref.IDOf(tsn), objc.RegisterName("rotatesCoordinateSystemForLayoutOrientation"))
 	return _r
 }
-
-// SetRotatesCoordinateSystemForLayoutOrientation wraps the corresponding Objective-C method.
-func (x *TextSelectionNavigation) SetRotatesCoordinateSystemForLayoutOrientation(rotatesCoordinateSystemForLayoutOrientation bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotatesCoordinateSystemForLayoutOrientation:"), rotatesCoordinateSystemForLayoutOrientation)
-}
-
-// TextSelectionNavigationable is the interface implemented by [TextSelectionNavigation], for mocking and DI.
-type TextSelectionNavigationable interface {
-	obj.Object
-	WithAllowsNonContiguousRanges(allowsNonContiguousRanges bool) *TextSelectionNavigation
-	WithRotatesCoordinateSystemForLayoutOrientation(rotatesCoordinateSystemForLayoutOrientation bool) *TextSelectionNavigation
-	FlushLayoutCache()
-	DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined(textSelection *TextSelection, direction TextSelectionNavigationDirection, destination TextSelectionNavigationDestination, extending bool, confined bool) *TextSelection
-	TextSelectionForSelectionGranularityEnclosingTextSelection(selectionGranularity TextSelectionGranularity, textSelection *TextSelection) *TextSelection
-	DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition(textSelection *TextSelection, direction TextSelectionNavigationDirection, destination TextSelectionNavigationDestination, allowsDecomposition bool) []*TextRange
-	AllowsNonContiguousRanges() bool
-	SetAllowsNonContiguousRanges(allowsNonContiguousRanges bool)
-	RotatesCoordinateSystemForLayoutOrientation() bool
-	SetRotatesCoordinateSystemForLayoutOrientation(rotatesCoordinateSystemForLayoutOrientation bool)
-}
-
-var _ TextSelectionNavigationable = (*TextSelectionNavigation)(nil)

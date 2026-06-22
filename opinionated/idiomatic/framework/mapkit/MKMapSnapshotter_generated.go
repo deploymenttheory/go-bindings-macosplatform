@@ -46,24 +46,24 @@ func mapSnapshotterAdopt(id objc.ID) *MapSnapshotter {
 }
 
 // Description returns the object's -description text.
-func (x *MapSnapshotter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ms *MapSnapshotter) Description() string {
+	return rt.Description(objref.IDOf(ms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MapSnapshotter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ms *MapSnapshotter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MapSnapshotter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ms *MapSnapshotter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MapSnapshotter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ms *MapSnapshotter) String() string {
+	return rt.Description(objref.IDOf(ms))
 }
 
 // NewMapSnapshotterWithOptions creates and returns a snapshotter object based on the specified options.
@@ -74,21 +74,12 @@ func NewMapSnapshotterWithOptions(options *MapSnapshotOptions) *MapSnapshotter {
 }
 
 // Cancel cancels the request to create a snapshot.
-func (x *MapSnapshotter) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (ms *MapSnapshotter) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(ms), objc.RegisterName("cancel"))
 }
 
 // IsLoading wraps the corresponding Objective-C method.
-func (x *MapSnapshotter) IsLoading() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoading"))
+func (ms *MapSnapshotter) IsLoading() bool {
+	_r := objc.Send[bool](objref.IDOf(ms), objc.RegisterName("isLoading"))
 	return _r
 }
-
-// MapSnapshotterable is the interface implemented by [MapSnapshotter], for mocking and DI.
-type MapSnapshotterable interface {
-	obj.Object
-	Cancel()
-	IsLoading() bool
-}
-
-var _ MapSnapshotterable = (*MapSnapshotter)(nil)

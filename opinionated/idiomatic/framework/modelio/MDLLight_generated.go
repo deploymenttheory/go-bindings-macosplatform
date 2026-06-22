@@ -7,7 +7,6 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,81 +45,55 @@ func lightAdopt(id objc.ID) *Light {
 	return x
 }
 
-// WithLightType the type of the light.
-func (x *Light) WithLightType(lightType LightType) *Light {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightType:"), lightType)
-	return x
+// WithLightType sets the type of the light.
+func (l *Light) WithLightType(lightType LightType) *Light {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setLightType:"), lightType)
+	return l
 }
 
-// WithColorSpace the name of the Core Graphics color space to be used for interpreting the light’s color information.
-func (x *Light) WithColorSpace(colorSpace string) *Light {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
-	return x
+// WithColorSpace sets the name of the Core Graphics color space to be used for interpreting the light’s color information.
+func (l *Light) WithColorSpace(colorSpace string) *Light {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
+	return l
 }
 
-// WithParent the parent object that contains this object.
-func (x *Light) WithParent(parent ObjectProvider) *Light {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParent:"), objref.IDOf(parent))
-	return x
+// WithParent sets the parent object that contains this object.
+func (l *Light) WithParent(parent ObjectProvider) *Light {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setParent:"), objref.IDOf(parent))
+	return l
 }
 
-// WithInstance the primary object, if applicable, of which this object is an instance.
-func (x *Light) WithInstance(instance ObjectProvider) *Light {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInstance:"), objref.IDOf(instance))
-	return x
+// WithInstance sets the primary object, if applicable, of which this object is an instance.
+func (l *Light) WithInstance(instance ObjectProvider) *Light {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setInstance:"), objref.IDOf(instance))
+	return l
 }
 
-// WithHidden a Boolean value indicating whether this object should be used in rendering.
-func (x *Light) WithHidden(hidden bool) *Light {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value indicating whether this object should be used in rendering.
+func (l *Light) WithHidden(hidden bool) *Light {
+	objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("setHidden:"), hidden)
+	return l
 }
 
 // LightType wraps the corresponding Objective-C method.
-func (x *Light) LightType() LightType {
-	_r := objc.Send[LightType](objref.IDOf(x), objc.RegisterName("lightType"))
+func (l *Light) LightType() LightType {
+	_r := objc.Send[LightType](objref.IDOf(l), objc.RegisterName("lightType"))
 	return _r
 }
 
-// SetLightType wraps the corresponding Objective-C method.
-func (x *Light) SetLightType(lightType LightType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightType:"), lightType)
-}
-
 // ColorSpace wraps the corresponding Objective-C method.
-func (x *Light) ColorSpace() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorSpace"))
+func (l *Light) ColorSpace() string {
+	_r := objc.Send[objc.ID](objref.IDOf(l), objc.RegisterName("colorSpace"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetColorSpace wraps the corresponding Objective-C method.
-func (x *Light) SetColorSpace(colorSpace string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpace:"), purego.NSString(colorSpace))
-}
-
-// Lightable is the interface implemented by [Light], for mocking and DI.
-type Lightable interface {
-	obj.Object
-	WithLightType(lightType LightType) *Light
-	WithColorSpace(colorSpace string) *Light
-	WithParent(parent ObjectProvider) *Light
-	WithInstance(instance ObjectProvider) *Light
-	WithHidden(hidden bool) *Light
-	LightType() LightType
-	SetLightType(lightType LightType)
-	ColorSpace() string
-	SetColorSpace(colorSpace string)
-}
-
-var _ Lightable = (*Light)(nil)
-
 // isLight marks Light — and, by embedding promotion, its
 // subclasses — as a member of the Light hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Light) isLight() {}
+func (l *Light) isLight() {}
 
 var _ LightProvider = (*Light)(nil)
 

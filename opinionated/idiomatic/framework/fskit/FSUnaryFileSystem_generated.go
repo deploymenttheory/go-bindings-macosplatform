@@ -46,24 +46,24 @@ func unaryFileSystemAdopt(id objc.ID) *UnaryFileSystem {
 }
 
 // Description returns the object's -description text.
-func (x *UnaryFileSystem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ufs *UnaryFileSystem) Description() string {
+	return rt.Description(objref.IDOf(ufs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UnaryFileSystem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ufs *UnaryFileSystem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ufs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UnaryFileSystem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ufs *UnaryFileSystem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ufs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *UnaryFileSystem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ufs *UnaryFileSystem) String() string {
+	return rt.Description(objref.IDOf(ufs))
 }
 
 // NewUnaryFileSystem creates a new UnaryFileSystem.
@@ -71,10 +71,3 @@ func NewUnaryFileSystem() *UnaryFileSystem {
 	_id := objc.Send[objc.ID](objc.ID(_class("FSUnaryFileSystem")), objc.RegisterName("new"))
 	return unaryFileSystemAdopt(_id)
 }
-
-// UnaryFileSystemable is the interface implemented by [UnaryFileSystem], for mocking and DI.
-type UnaryFileSystemable interface {
-	obj.Object
-}
-
-var _ UnaryFileSystemable = (*UnaryFileSystem)(nil)

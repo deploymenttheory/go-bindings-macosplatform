@@ -46,24 +46,24 @@ func nEProxyServerAdopt(id objc.ID) *NEProxyServer {
 }
 
 // Description returns the object's -description text.
-func (x *NEProxyServer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nps *NEProxyServer) Description() string {
+	return rt.Description(objref.IDOf(nps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEProxyServer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nps *NEProxyServer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEProxyServer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nps *NEProxyServer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEProxyServer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nps *NEProxyServer) String() string {
+	return rt.Description(objref.IDOf(nps))
 }
 
 // NewNEProxyServerWithAddressPort initialize a newly-allocated NEProxyServer object
@@ -73,92 +73,59 @@ func NewNEProxyServerWithAddressPort(address string, port int) *NEProxyServer {
 	return nEProxyServerAdopt(_id)
 }
 
-// WithAuthenticationRequired a Boolean indicating if the server requires authentication credentials.
-func (x *NEProxyServer) WithAuthenticationRequired(authenticationRequired bool) *NEProxyServer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthenticationRequired:"), authenticationRequired)
-	return x
+// WithAuthenticationRequired sets a Boolean indicating if the server requires authentication credentials.
+func (nps *NEProxyServer) WithAuthenticationRequired(authenticationRequired bool) *NEProxyServer {
+	objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("setAuthenticationRequired:"), authenticationRequired)
+	return nps
 }
 
-// WithUsername the username portion of the authentication credential to be used to authenticate with the proxy server.
-func (x *NEProxyServer) WithUsername(username string) *NEProxyServer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsername:"), purego.NSString(username))
-	return x
+// WithUsername sets the username portion of the authentication credential to be used to authenticate with the proxy server.
+func (nps *NEProxyServer) WithUsername(username string) *NEProxyServer {
+	objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("setUsername:"), purego.NSString(username))
+	return nps
 }
 
-// WithPassword the password portion of the authentication credential to be used to authenticate with the proxy server.
-func (x *NEProxyServer) WithPassword(password string) *NEProxyServer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassword:"), purego.NSString(password))
-	return x
+// WithPassword sets the password portion of the authentication credential to be used to authenticate with the proxy server.
+func (nps *NEProxyServer) WithPassword(password string) *NEProxyServer {
+	objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("setPassword:"), purego.NSString(password))
+	return nps
 }
 
-// Address the string representation of the proxy server IP address.
-func (x *NEProxyServer) Address() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("address"))
+// Address returns the string representation of the proxy server IP address.
+func (nps *NEProxyServer) Address() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("address"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Port the TCP port of the proxy server.
-func (x *NEProxyServer) Port() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("port"))
+// Port returns the TCP port of the proxy server.
+func (nps *NEProxyServer) Port() int {
+	_r := objc.Send[int](objref.IDOf(nps), objc.RegisterName("port"))
 	return _r
 }
 
-// AuthenticationRequired a flag indicating if the server requires authentication credentials.
-func (x *NEProxyServer) AuthenticationRequired() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("authenticationRequired"))
+// AuthenticationRequired reports whether a flag indicating if the server requires authentication credentials.
+func (nps *NEProxyServer) AuthenticationRequired() bool {
+	_r := objc.Send[bool](objref.IDOf(nps), objc.RegisterName("authenticationRequired"))
 	return _r
 }
 
-// SetAuthenticationRequired wraps the corresponding Objective-C method.
-func (x *NEProxyServer) SetAuthenticationRequired(authenticationRequired bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthenticationRequired:"), authenticationRequired)
-}
-
-// Username the username portion of the authentication credential to use when communicating with the proxy server.
-func (x *NEProxyServer) Username() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("username"))
+// Username returns the username portion of the authentication credential to use when communicating with the proxy server.
+func (nps *NEProxyServer) Username() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("username"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetUsername wraps the corresponding Objective-C method.
-func (x *NEProxyServer) SetUsername(username string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsername:"), purego.NSString(username))
-}
-
-// Password the password portion of the authentication credential to use when communicating with the proxy server. This property is only saved persistently if the username property is non-nil and non-empty and if the authenticationRequired flag is set.
-func (x *NEProxyServer) Password() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("password"))
+// Password returns the password portion of the authentication credential to use when communicating with the proxy server. This property is only saved persistently if the username property is non-nil and non-empty and if the authenticationRequired flag is set.
+func (nps *NEProxyServer) Password() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nps), objc.RegisterName("password"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetPassword wraps the corresponding Objective-C method.
-func (x *NEProxyServer) SetPassword(password string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassword:"), purego.NSString(password))
-}
-
-// NEProxyServerable is the interface implemented by [NEProxyServer], for mocking and DI.
-type NEProxyServerable interface {
-	obj.Object
-	WithAuthenticationRequired(authenticationRequired bool) *NEProxyServer
-	WithUsername(username string) *NEProxyServer
-	WithPassword(password string) *NEProxyServer
-	Address() string
-	Port() int
-	AuthenticationRequired() bool
-	SetAuthenticationRequired(authenticationRequired bool)
-	Username() string
-	SetUsername(username string)
-	Password() string
-	SetPassword(password string)
-}
-
-var _ NEProxyServerable = (*NEProxyServer)(nil)

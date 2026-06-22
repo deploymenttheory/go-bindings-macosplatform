@@ -47,53 +47,41 @@ func assetCollectionAdopt(id objc.ID) *AssetCollection {
 }
 
 // AssetCollectionType wraps the corresponding Objective-C method.
-func (x *AssetCollection) AssetCollectionType() AssetCollectionType {
-	_r := objc.Send[AssetCollectionType](objref.IDOf(x), objc.RegisterName("assetCollectionType"))
+func (ac *AssetCollection) AssetCollectionType() AssetCollectionType {
+	_r := objc.Send[AssetCollectionType](objref.IDOf(ac), objc.RegisterName("assetCollectionType"))
 	return _r
 }
 
 // EstimatedAssetCount wraps the corresponding Objective-C method.
-func (x *AssetCollection) EstimatedAssetCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("estimatedAssetCount"))
+func (ac *AssetCollection) EstimatedAssetCount() int {
+	_r := objc.Send[int](objref.IDOf(ac), objc.RegisterName("estimatedAssetCount"))
 	return _r
 }
 
 // StartDate wraps the corresponding Objective-C method.
-func (x *AssetCollection) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+func (ac *AssetCollection) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
 // EndDate wraps the corresponding Objective-C method.
-func (x *AssetCollection) EndDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+func (ac *AssetCollection) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
 // LocalizedLocationNames wraps the corresponding Objective-C method.
 //
 // LocalizedLocationNames returns the collection as a Go slice.
-func (x *AssetCollection) LocalizedLocationNames() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedLocationNames"))
+func (ac *AssetCollection) LocalizedLocationNames() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(ac), objc.RegisterName("localizedLocationNames"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// AssetCollectionable is the interface implemented by [AssetCollection], for mocking and DI.
-type AssetCollectionable interface {
-	obj.Object
-	AssetCollectionType() AssetCollectionType
-	EstimatedAssetCount() int
-	StartDate() obj.Object
-	EndDate() obj.Object
-	LocalizedLocationNames() []string
-}
-
-var _ AssetCollectionable = (*AssetCollection)(nil)
 
 // isAssetCollection marks AssetCollection — and, by embedding promotion, its
 // subclasses — as a member of the AssetCollection hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *AssetCollection) isAssetCollection() {}
+func (ac *AssetCollection) isAssetCollection() {}
 
 var _ AssetCollectionProvider = (*AssetCollection)(nil)
 

@@ -46,24 +46,24 @@ func spatialPipelineEntryAdopt(id objc.ID) *SpatialPipelineEntry {
 }
 
 // Description returns the object's -description text.
-func (x *SpatialPipelineEntry) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (spe *SpatialPipelineEntry) Description() string {
+	return rt.Description(objref.IDOf(spe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpatialPipelineEntry) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (spe *SpatialPipelineEntry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(spe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpatialPipelineEntry) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (spe *SpatialPipelineEntry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(spe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SpatialPipelineEntry) String() string {
-	return rt.Description(objref.IDOf(x))
+func (spe *SpatialPipelineEntry) String() string {
+	return rt.Description(objref.IDOf(spe))
 }
 
 // NewSpatialPipelineEntry creates a new SpatialPipelineEntry.
@@ -72,49 +72,26 @@ func NewSpatialPipelineEntry() *SpatialPipelineEntry {
 	return spatialPipelineEntryAdopt(_id)
 }
 
-// WithSendLevel the amount of audio signal to add to the output.
-func (x *SpatialPipelineEntry) WithSendLevel(sendLevel float64) *SpatialPipelineEntry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendLevel:"), sendLevel)
-	return x
+// WithSendLevel sets the amount of audio signal to add to the output.
+func (spe *SpatialPipelineEntry) WithSendLevel(sendLevel float64) *SpatialPipelineEntry {
+	objc.Send[objc.ID](objref.IDOf(spe), objc.RegisterName("setSendLevel:"), sendLevel)
+	return spe
 }
 
-// WithSendLevelMetaParameterDefinition a parameter that gradually updates the amount of audio signal that passes through to the output.
-func (x *SpatialPipelineEntry) WithSendLevelMetaParameterDefinition(sendLevelMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SpatialPipelineEntry {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendLevelMetaParameterDefinition:"), objref.IDOf(sendLevelMetaParameterDefinition))
-	return x
+// WithSendLevelMetaParameterDefinition sets a parameter that gradually updates the amount of audio signal that passes through to the output.
+func (spe *SpatialPipelineEntry) WithSendLevelMetaParameterDefinition(sendLevelMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SpatialPipelineEntry {
+	objc.Send[objc.ID](objref.IDOf(spe), objc.RegisterName("setSendLevelMetaParameterDefinition:"), objref.IDOf(sendLevelMetaParameterDefinition))
+	return spe
 }
 
-// SendLevel send level.
-func (x *SpatialPipelineEntry) SendLevel() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("sendLevel"))
+// SendLevel returns send level.
+func (spe *SpatialPipelineEntry) SendLevel() float64 {
+	_r := objc.Send[float64](objref.IDOf(spe), objc.RegisterName("sendLevel"))
 	return _r
 }
 
-// SetSendLevel wraps the corresponding Objective-C method.
-func (x *SpatialPipelineEntry) SetSendLevel(sendLevel float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendLevel:"), sendLevel)
-}
-
-// SendLevelMetaParameterDefinition an optional metaparameter used to drive the send level during playback.
-func (x *SpatialPipelineEntry) SendLevelMetaParameterDefinition() *NumberMetaParameterDefinition {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendLevelMetaParameterDefinition"))
+// SendLevelMetaParameterDefinition returns an optional metaparameter used to drive the send level during playback.
+func (spe *SpatialPipelineEntry) SendLevelMetaParameterDefinition() *NumberMetaParameterDefinition {
+	_r := objc.Send[objc.ID](objref.IDOf(spe), objc.RegisterName("sendLevelMetaParameterDefinition"))
 	return NumberMetaParameterDefinitionFromID(_r)
 }
-
-// SetSendLevelMetaParameterDefinition wraps the corresponding Objective-C method.
-func (x *SpatialPipelineEntry) SetSendLevelMetaParameterDefinition(sendLevelMetaParameterDefinition *NumberMetaParameterDefinition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendLevelMetaParameterDefinition:"), objref.IDOf(sendLevelMetaParameterDefinition))
-}
-
-// SpatialPipelineEntryable is the interface implemented by [SpatialPipelineEntry], for mocking and DI.
-type SpatialPipelineEntryable interface {
-	obj.Object
-	WithSendLevel(sendLevel float64) *SpatialPipelineEntry
-	WithSendLevelMetaParameterDefinition(sendLevelMetaParameterDefinition NumberMetaParameterDefinitionProvider) *SpatialPipelineEntry
-	SendLevel() float64
-	SetSendLevel(sendLevel float64)
-	SendLevelMetaParameterDefinition() *NumberMetaParameterDefinition
-	SetSendLevelMetaParameterDefinition(sendLevelMetaParameterDefinition *NumberMetaParameterDefinition)
-}
-
-var _ SpatialPipelineEntryable = (*SpatialPipelineEntry)(nil)

@@ -44,24 +44,24 @@ func mTROperationalCredentialsClusterAddTrustedRootCertificateParamsAdopt(id obj
 }
 
 // Description returns the object's -description text.
-func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (moccatrcp *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) Description() string {
+	return rt.Description(objref.IDOf(moccatrcp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (moccatrcp *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(moccatrcp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (moccatrcp *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(moccatrcp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (moccatrcp *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) String() string {
+	return rt.Description(objref.IDOf(moccatrcp))
 }
 
 // NewMTROperationalCredentialsClusterAddTrustedRootCertificateParams creates a new MTROperationalCredentialsClusterAddTrustedRootCertificateParams.
@@ -71,88 +71,49 @@ func NewMTROperationalCredentialsClusterAddTrustedRootCertificateParams() *MTROp
 }
 
 // WithRootCACertificate sets the property and returns the receiver so calls can be chained.
-func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) WithRootCACertificate(rootCACertificate obj.Object) *MTROperationalCredentialsClusterAddTrustedRootCertificateParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootCACertificate:"), objref.IDOf(rootCACertificate))
-	return x
+func (moccatrcp *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) WithRootCACertificate(rootCACertificate obj.Object) *MTROperationalCredentialsClusterAddTrustedRootCertificateParams {
+	objc.Send[objc.ID](objref.IDOf(moccatrcp), objc.RegisterName("setRootCACertificate:"), objref.IDOf(rootCACertificate))
+	return moccatrcp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterAddTrustedRootCertificateParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (moccatrcp *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterAddTrustedRootCertificateParams {
+	objc.Send[objc.ID](objref.IDOf(moccatrcp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return moccatrcp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterAddTrustedRootCertificateParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (moccatrcp *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterAddTrustedRootCertificateParams {
+	objc.Send[objc.ID](objref.IDOf(moccatrcp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return moccatrcp
 }
 
 // WithRootCertificate sets the property and returns the receiver so calls can be chained.
-func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) WithRootCertificate(rootCertificate obj.Object) *MTROperationalCredentialsClusterAddTrustedRootCertificateParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootCertificate:"), objref.IDOf(rootCertificate))
-	return x
+func (moccatrcp *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) WithRootCertificate(rootCertificate obj.Object) *MTROperationalCredentialsClusterAddTrustedRootCertificateParams {
+	objc.Send[objc.ID](objref.IDOf(moccatrcp), objc.RegisterName("setRootCertificate:"), objref.IDOf(rootCertificate))
+	return moccatrcp
 }
 
 // RootCACertificate wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) RootCACertificate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootCACertificate"))
+func (moccatrcp *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) RootCACertificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moccatrcp), objc.RegisterName("rootCACertificate"))
 	return obj.Wrap(_r)
 }
 
-// SetRootCACertificate wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) SetRootCACertificate(rootCACertificate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootCACertificate:"), objref.IDOf(rootCACertificate))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (moccatrcp *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moccatrcp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (moccatrcp *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moccatrcp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
-}
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // RootCertificate wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) RootCertificate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rootCertificate"))
+func (moccatrcp *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) RootCertificate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moccatrcp), objc.RegisterName("rootCertificate"))
 	return obj.Wrap(_r)
 }
-
-// SetRootCertificate wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterAddTrustedRootCertificateParams) SetRootCertificate(rootCertificate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRootCertificate:"), objref.IDOf(rootCertificate))
-}
-
-// MTROperationalCredentialsClusterAddTrustedRootCertificateParamsable is the interface implemented by [MTROperationalCredentialsClusterAddTrustedRootCertificateParams], for mocking and DI.
-type MTROperationalCredentialsClusterAddTrustedRootCertificateParamsable interface {
-	obj.Object
-	WithRootCACertificate(rootCACertificate obj.Object) *MTROperationalCredentialsClusterAddTrustedRootCertificateParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterAddTrustedRootCertificateParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterAddTrustedRootCertificateParams
-	WithRootCertificate(rootCertificate obj.Object) *MTROperationalCredentialsClusterAddTrustedRootCertificateParams
-	RootCACertificate() obj.Object
-	SetRootCACertificate(rootCACertificate obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-	RootCertificate() obj.Object
-	SetRootCertificate(rootCertificate obj.Object)
-}
-
-var _ MTROperationalCredentialsClusterAddTrustedRootCertificateParamsable = (*MTROperationalCredentialsClusterAddTrustedRootCertificateParams)(nil)

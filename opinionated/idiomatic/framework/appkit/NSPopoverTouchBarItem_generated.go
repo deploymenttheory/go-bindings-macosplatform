@@ -52,173 +52,107 @@ func NewPopoverTouchBarItem() *PopoverTouchBarItem {
 	return popoverTouchBarItemAdopt(_id)
 }
 
-// WithPopoverTouchBar the bar displayed when this item is “popped.”
-func (x *PopoverTouchBarItem) WithPopoverTouchBar(popoverTouchBar *TouchBar) *PopoverTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPopoverTouchBar:"), objref.IDOf(popoverTouchBar))
-	return x
+// WithPopoverTouchBar sets the bar displayed when this item is “popped.”
+func (ptbi *PopoverTouchBarItem) WithPopoverTouchBar(popoverTouchBar *TouchBar) *PopoverTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setPopoverTouchBar:"), objref.IDOf(popoverTouchBar))
+	return ptbi
 }
 
-// WithCustomizationLabel the user-visible string identifying this item during bar customization.
-func (x *PopoverTouchBarItem) WithCustomizationLabel(customizationLabel string) *PopoverTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
-	return x
+// WithCustomizationLabel sets the user-visible string identifying this item during bar customization.
+func (ptbi *PopoverTouchBarItem) WithCustomizationLabel(customizationLabel string) *PopoverTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
+	return ptbi
 }
 
-// WithCollapsedRepresentation the view displayed when this item is displayed in its parent bar.
-func (x *PopoverTouchBarItem) WithCollapsedRepresentation(collapsedRepresentation ViewProvider) *PopoverTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsedRepresentation:"), objref.IDOf(collapsedRepresentation))
-	return x
+// WithCollapsedRepresentation sets the view displayed when this item is displayed in its parent bar.
+func (ptbi *PopoverTouchBarItem) WithCollapsedRepresentation(collapsedRepresentation ViewProvider) *PopoverTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setCollapsedRepresentation:"), objref.IDOf(collapsedRepresentation))
+	return ptbi
 }
 
-// WithCollapsedRepresentationImage the image displayed by the button for the default collapsed representation.
-func (x *PopoverTouchBarItem) WithCollapsedRepresentationImage(collapsedRepresentationImage *Image) *PopoverTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsedRepresentationImage:"), objref.IDOf(collapsedRepresentationImage))
-	return x
+// WithCollapsedRepresentationImage sets the image displayed by the button for the default collapsed representation.
+func (ptbi *PopoverTouchBarItem) WithCollapsedRepresentationImage(collapsedRepresentationImage *Image) *PopoverTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setCollapsedRepresentationImage:"), objref.IDOf(collapsedRepresentationImage))
+	return ptbi
 }
 
-// WithCollapsedRepresentationLabel the localized string displayed by the button for the default collapsed representation.
-func (x *PopoverTouchBarItem) WithCollapsedRepresentationLabel(collapsedRepresentationLabel string) *PopoverTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsedRepresentationLabel:"), purego.NSString(collapsedRepresentationLabel))
-	return x
+// WithCollapsedRepresentationLabel sets the localized string displayed by the button for the default collapsed representation.
+func (ptbi *PopoverTouchBarItem) WithCollapsedRepresentationLabel(collapsedRepresentationLabel string) *PopoverTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setCollapsedRepresentationLabel:"), purego.NSString(collapsedRepresentationLabel))
+	return ptbi
 }
 
-// WithPressAndHoldTouchBar the bar that is displayed when a user press-and-holds on the popover item.
-func (x *PopoverTouchBarItem) WithPressAndHoldTouchBar(pressAndHoldTouchBar *TouchBar) *PopoverTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressAndHoldTouchBar:"), objref.IDOf(pressAndHoldTouchBar))
-	return x
+// WithPressAndHoldTouchBar sets the bar that is displayed when a user press-and-holds on the popover item.
+func (ptbi *PopoverTouchBarItem) WithPressAndHoldTouchBar(pressAndHoldTouchBar *TouchBar) *PopoverTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setPressAndHoldTouchBar:"), objref.IDOf(pressAndHoldTouchBar))
+	return ptbi
 }
 
-// WithShowsCloseButton a Boolean value that determines whether a close button should be shown on the popover bar.
-func (x *PopoverTouchBarItem) WithShowsCloseButton(showsCloseButton bool) *PopoverTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsCloseButton:"), showsCloseButton)
-	return x
+// WithShowsCloseButton sets a Boolean value that determines whether a close button should be shown on the popover bar.
+func (ptbi *PopoverTouchBarItem) WithShowsCloseButton(showsCloseButton bool) *PopoverTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setShowsCloseButton:"), showsCloseButton)
+	return ptbi
 }
 
-// WithVisibilityPriority determines which items are shown in a bar when space is limited.
-func (x *PopoverTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *PopoverTouchBarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
-	return x
+// WithVisibilityPriority sets determines which items are shown in a bar when space is limited.
+func (ptbi *PopoverTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *PopoverTouchBarItem {
+	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	return ptbi
 }
 
 // ShowPopover replaces the main bar with this item’s popover bar.
-func (x *PopoverTouchBarItem) ShowPopover(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("showPopover:"), objref.IDOf(sender))
+func (ptbi *PopoverTouchBarItem) ShowPopover(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("showPopover:"), objref.IDOf(sender))
 }
 
 // DismissPopover restores the previously visible main bar.
-func (x *PopoverTouchBarItem) DismissPopover(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dismissPopover:"), objref.IDOf(sender))
+func (ptbi *PopoverTouchBarItem) DismissPopover(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("dismissPopover:"), objref.IDOf(sender))
 }
 
 // MakeStandardActivatePopoverGestureRecognizer returns a gesture recognizer, configured to invoke the showPopover: method.
-func (x *PopoverTouchBarItem) MakeStandardActivatePopoverGestureRecognizer() *GestureRecognizer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeStandardActivatePopoverGestureRecognizer"))
+func (ptbi *PopoverTouchBarItem) MakeStandardActivatePopoverGestureRecognizer() *GestureRecognizer {
+	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("makeStandardActivatePopoverGestureRecognizer"))
 	return GestureRecognizerFromID(_r)
 }
 
 // PopoverTouchBar wraps the corresponding Objective-C method.
-func (x *PopoverTouchBarItem) PopoverTouchBar() *TouchBar {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("popoverTouchBar"))
+func (ptbi *PopoverTouchBarItem) PopoverTouchBar() *TouchBar {
+	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("popoverTouchBar"))
 	return TouchBarFromID(_r)
 }
 
-// SetPopoverTouchBar wraps the corresponding Objective-C method.
-func (x *PopoverTouchBarItem) SetPopoverTouchBar(popoverTouchBar *TouchBar) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPopoverTouchBar:"), objref.IDOf(popoverTouchBar))
-}
-
-// SetCustomizationLabel wraps the corresponding Objective-C method.
-func (x *PopoverTouchBarItem) SetCustomizationLabel(customizationLabel string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomizationLabel:"), purego.NSString(customizationLabel))
-}
-
 // CollapsedRepresentation wraps the corresponding Objective-C method.
-func (x *PopoverTouchBarItem) CollapsedRepresentation() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collapsedRepresentation"))
+func (ptbi *PopoverTouchBarItem) CollapsedRepresentation() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("collapsedRepresentation"))
 	return ViewFromID(_r)
 }
 
-// SetCollapsedRepresentation wraps the corresponding Objective-C method.
-func (x *PopoverTouchBarItem) SetCollapsedRepresentation(collapsedRepresentation *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsedRepresentation:"), objref.IDOf(collapsedRepresentation))
-}
-
 // CollapsedRepresentationImage wraps the corresponding Objective-C method.
-func (x *PopoverTouchBarItem) CollapsedRepresentationImage() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collapsedRepresentationImage"))
+func (ptbi *PopoverTouchBarItem) CollapsedRepresentationImage() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("collapsedRepresentationImage"))
 	return ImageFromID(_r)
 }
 
-// SetCollapsedRepresentationImage wraps the corresponding Objective-C method.
-func (x *PopoverTouchBarItem) SetCollapsedRepresentationImage(collapsedRepresentationImage *Image) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsedRepresentationImage:"), objref.IDOf(collapsedRepresentationImage))
-}
-
 // CollapsedRepresentationLabel wraps the corresponding Objective-C method.
-func (x *PopoverTouchBarItem) CollapsedRepresentationLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collapsedRepresentationLabel"))
+func (ptbi *PopoverTouchBarItem) CollapsedRepresentationLabel() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("collapsedRepresentationLabel"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetCollapsedRepresentationLabel wraps the corresponding Objective-C method.
-func (x *PopoverTouchBarItem) SetCollapsedRepresentationLabel(collapsedRepresentationLabel string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollapsedRepresentationLabel:"), purego.NSString(collapsedRepresentationLabel))
-}
-
 // PressAndHoldTouchBar wraps the corresponding Objective-C method.
-func (x *PopoverTouchBarItem) PressAndHoldTouchBar() *TouchBar {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pressAndHoldTouchBar"))
+func (ptbi *PopoverTouchBarItem) PressAndHoldTouchBar() *TouchBar {
+	_r := objc.Send[objc.ID](objref.IDOf(ptbi), objc.RegisterName("pressAndHoldTouchBar"))
 	return TouchBarFromID(_r)
 }
 
-// SetPressAndHoldTouchBar wraps the corresponding Objective-C method.
-func (x *PopoverTouchBarItem) SetPressAndHoldTouchBar(pressAndHoldTouchBar *TouchBar) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressAndHoldTouchBar:"), objref.IDOf(pressAndHoldTouchBar))
-}
-
 // ShowsCloseButton wraps the corresponding Objective-C method.
-func (x *PopoverTouchBarItem) ShowsCloseButton() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsCloseButton"))
+func (ptbi *PopoverTouchBarItem) ShowsCloseButton() bool {
+	_r := objc.Send[bool](objref.IDOf(ptbi), objc.RegisterName("showsCloseButton"))
 	return _r
 }
-
-// SetShowsCloseButton wraps the corresponding Objective-C method.
-func (x *PopoverTouchBarItem) SetShowsCloseButton(showsCloseButton bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsCloseButton:"), showsCloseButton)
-}
-
-// PopoverTouchBarItemable is the interface implemented by [PopoverTouchBarItem], for mocking and DI.
-type PopoverTouchBarItemable interface {
-	obj.Object
-	WithPopoverTouchBar(popoverTouchBar *TouchBar) *PopoverTouchBarItem
-	WithCustomizationLabel(customizationLabel string) *PopoverTouchBarItem
-	WithCollapsedRepresentation(collapsedRepresentation ViewProvider) *PopoverTouchBarItem
-	WithCollapsedRepresentationImage(collapsedRepresentationImage *Image) *PopoverTouchBarItem
-	WithCollapsedRepresentationLabel(collapsedRepresentationLabel string) *PopoverTouchBarItem
-	WithPressAndHoldTouchBar(pressAndHoldTouchBar *TouchBar) *PopoverTouchBarItem
-	WithShowsCloseButton(showsCloseButton bool) *PopoverTouchBarItem
-	WithVisibilityPriority(visibilityPriority float32) *PopoverTouchBarItem
-	ShowPopover(sender obj.Object)
-	DismissPopover(sender obj.Object)
-	MakeStandardActivatePopoverGestureRecognizer() *GestureRecognizer
-	PopoverTouchBar() *TouchBar
-	SetPopoverTouchBar(popoverTouchBar *TouchBar)
-	SetCustomizationLabel(customizationLabel string)
-	CollapsedRepresentation() *View
-	SetCollapsedRepresentation(collapsedRepresentation *View)
-	CollapsedRepresentationImage() *Image
-	SetCollapsedRepresentationImage(collapsedRepresentationImage *Image)
-	CollapsedRepresentationLabel() string
-	SetCollapsedRepresentationLabel(collapsedRepresentationLabel string)
-	PressAndHoldTouchBar() *TouchBar
-	SetPressAndHoldTouchBar(pressAndHoldTouchBar *TouchBar)
-	ShowsCloseButton() bool
-	SetShowsCloseButton(showsCloseButton bool)
-}
-
-var _ PopoverTouchBarItemable = (*PopoverTouchBarItem)(nil)
 
 var _ TouchBarItemProvider = (*PopoverTouchBarItem)(nil)

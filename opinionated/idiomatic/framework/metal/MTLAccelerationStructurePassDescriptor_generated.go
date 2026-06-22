@@ -44,24 +44,24 @@ func accelerationStructurePassDescriptorAdopt(id objc.ID) *AccelerationStructure
 }
 
 // Description returns the object's -description text.
-func (x *AccelerationStructurePassDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aspd *AccelerationStructurePassDescriptor) Description() string {
+	return rt.Description(objref.IDOf(aspd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccelerationStructurePassDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aspd *AccelerationStructurePassDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aspd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccelerationStructurePassDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aspd *AccelerationStructurePassDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aspd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AccelerationStructurePassDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aspd *AccelerationStructurePassDescriptor) String() string {
+	return rt.Description(objref.IDOf(aspd))
 }
 
 // NewAccelerationStructurePassDescriptor creates a new AccelerationStructurePassDescriptor.
@@ -71,15 +71,7 @@ func NewAccelerationStructurePassDescriptor() *AccelerationStructurePassDescript
 }
 
 // SampleBufferAttachments wraps the corresponding Objective-C method.
-func (x *AccelerationStructurePassDescriptor) SampleBufferAttachments() *AccelerationStructurePassSampleBufferAttachmentDescriptorArray {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferAttachments"))
+func (aspd *AccelerationStructurePassDescriptor) SampleBufferAttachments() *AccelerationStructurePassSampleBufferAttachmentDescriptorArray {
+	_r := objc.Send[objc.ID](objref.IDOf(aspd), objc.RegisterName("sampleBufferAttachments"))
 	return AccelerationStructurePassSampleBufferAttachmentDescriptorArrayFromID(_r)
 }
-
-// AccelerationStructurePassDescriptorable is the interface implemented by [AccelerationStructurePassDescriptor], for mocking and DI.
-type AccelerationStructurePassDescriptorable interface {
-	obj.Object
-	SampleBufferAttachments() *AccelerationStructurePassSampleBufferAttachmentDescriptorArray
-}
-
-var _ AccelerationStructurePassDescriptorable = (*AccelerationStructurePassDescriptor)(nil)

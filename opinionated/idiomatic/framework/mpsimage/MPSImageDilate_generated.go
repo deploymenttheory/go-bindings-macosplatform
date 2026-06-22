@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,45 +45,34 @@ func imageDilateAdopt(id objc.ID) *ImageDilate {
 	return x
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
-func (x *ImageDilate) WithOffset(offset mpscore.MPSOffset) *ImageDilate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (id_ *ImageDilate) WithOffset(offset mpscore.MPSOffset) *ImageDilate {
+	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setOffset:"), offset)
+	return id_
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
-func (x *ImageDilate) WithClipRect(clipRect metal.MTLRegion) *ImageDilate {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (id_ *ImageDilate) WithClipRect(clipRect metal.MTLRegion) *ImageDilate {
+	objc.Send[objc.ID](objref.IDOf(id_), objc.RegisterName("setClipRect:"), clipRect)
+	return id_
 }
 
-// KernelHeight the height of the filter window. Must be an odd number.
-func (x *ImageDilate) KernelHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+// KernelHeight returns the height of the filter window. Must be an odd number.
+func (id_ *ImageDilate) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(id_), objc.RegisterName("kernelHeight"))
 	return _r
 }
 
-// KernelWidth the width of the filter window. Must be an odd number.
-func (x *ImageDilate) KernelWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+// KernelWidth returns the width of the filter window. Must be an odd number.
+func (id_ *ImageDilate) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(id_), objc.RegisterName("kernelWidth"))
 	return _r
 }
-
-// ImageDilateable is the interface implemented by [ImageDilate], for mocking and DI.
-type ImageDilateable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageDilate
-	WithClipRect(clipRect metal.MTLRegion) *ImageDilate
-	KernelHeight() int
-	KernelWidth() int
-}
-
-var _ ImageDilateable = (*ImageDilate)(nil)
 
 // isImageDilate marks ImageDilate — and, by embedding promotion, its
 // subclasses — as a member of the ImageDilate hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ImageDilate) isImageDilate() {}
+func (id_ *ImageDilate) isImageDilate() {}
 
 var _ ImageDilateProvider = (*ImageDilate)(nil)
 

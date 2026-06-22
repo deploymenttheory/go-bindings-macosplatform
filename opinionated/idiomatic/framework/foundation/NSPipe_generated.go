@@ -46,24 +46,24 @@ func pipeAdopt(id objc.ID) *Pipe {
 }
 
 // Description returns the object's -description text.
-func (x *Pipe) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Pipe) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Pipe) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Pipe) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Pipe) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Pipe) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Pipe) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Pipe) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // NewPipe creates a new Pipe.
@@ -73,29 +73,19 @@ func NewPipe() *Pipe {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Pipe) WithScriptingProperties(scriptingProperties obj.Object) *Pipe {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (p *Pipe) WithScriptingProperties(scriptingProperties obj.Object) *Pipe {
+	objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return p
 }
 
 // FileHandleForReading wraps the corresponding Objective-C method.
-func (x *Pipe) FileHandleForReading() *FileHandle {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileHandleForReading"))
+func (p *Pipe) FileHandleForReading() *FileHandle {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileHandleForReading"))
 	return FileHandleFromID(_r)
 }
 
 // FileHandleForWriting wraps the corresponding Objective-C method.
-func (x *Pipe) FileHandleForWriting() *FileHandle {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileHandleForWriting"))
+func (p *Pipe) FileHandleForWriting() *FileHandle {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("fileHandleForWriting"))
 	return FileHandleFromID(_r)
 }
-
-// Pipeable is the interface implemented by [Pipe], for mocking and DI.
-type Pipeable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Pipe
-	FileHandleForReading() *FileHandle
-	FileHandleForWriting() *FileHandle
-}
-
-var _ Pipeable = (*Pipe)(nil)

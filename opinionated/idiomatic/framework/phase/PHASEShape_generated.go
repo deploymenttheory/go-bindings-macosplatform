@@ -46,24 +46,24 @@ func shapeAdopt(id objc.ID) *Shape {
 }
 
 // Description returns the object's -description text.
-func (x *Shape) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Shape) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Shape) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Shape) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Shape) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Shape) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Shape) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Shape) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewShapeWithEngineMesh creates an object that the given geometric data shapes.
@@ -83,15 +83,7 @@ func NewShapeWithEngineMeshMaterials(engine *Engine, mesh obj.Object, materials 
 // Elements wraps the corresponding Objective-C method.
 //
 // Elements returns the collection as a Go slice.
-func (x *Shape) Elements() []*ShapeElement {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elements"))
+func (s *Shape) Elements() []*ShapeElement {
+	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("elements"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ShapeElement { return ShapeElementFromID(_id) })
 }
-
-// Shapeable is the interface implemented by [Shape], for mocking and DI.
-type Shapeable interface {
-	obj.Object
-	Elements() []*ShapeElement
-}
-
-var _ Shapeable = (*Shape)(nil)

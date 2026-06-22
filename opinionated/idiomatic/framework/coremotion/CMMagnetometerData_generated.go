@@ -7,7 +7,6 @@ package coremotion
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewMagnetometerData() *MagnetometerData {
 	_id := objc.Send[objc.ID](objc.ID(_class("CMMagnetometerData")), objc.RegisterName("new"))
 	return magnetometerDataAdopt(_id)
 }
-
-// MagnetometerDataable is the interface implemented by [MagnetometerData], for mocking and DI.
-type MagnetometerDataable interface {
-	obj.Object
-}
-
-var _ MagnetometerDataable = (*MagnetometerData)(nil)
 
 var _ LogItemProvider = (*MagnetometerData)(nil)

@@ -46,24 +46,24 @@ func attributedStringMarkdownSourcePositionAdopt(id objc.ID) *AttributedStringMa
 }
 
 // Description returns the object's -description text.
-func (x *AttributedStringMarkdownSourcePosition) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (asmsp *AttributedStringMarkdownSourcePosition) Description() string {
+	return rt.Description(objref.IDOf(asmsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AttributedStringMarkdownSourcePosition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (asmsp *AttributedStringMarkdownSourcePosition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(asmsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AttributedStringMarkdownSourcePosition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (asmsp *AttributedStringMarkdownSourcePosition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(asmsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AttributedStringMarkdownSourcePosition) String() string {
-	return rt.Description(objref.IDOf(x))
+func (asmsp *AttributedStringMarkdownSourcePosition) String() string {
+	return rt.Description(objref.IDOf(asmsp))
 }
 
 // NewAttributedStringMarkdownSourcePositionWithStartLineStartColumnEndLineEndColumn creates a Markdown source position instance from its start and end line and column.
@@ -74,43 +74,31 @@ func NewAttributedStringMarkdownSourcePositionWithStartLineStartColumnEndLineEnd
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *AttributedStringMarkdownSourcePosition) WithScriptingProperties(scriptingProperties obj.Object) *AttributedStringMarkdownSourcePosition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (asmsp *AttributedStringMarkdownSourcePosition) WithScriptingProperties(scriptingProperties obj.Object) *AttributedStringMarkdownSourcePosition {
+	objc.Send[objc.ID](objref.IDOf(asmsp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return asmsp
 }
 
 // StartLine wraps the corresponding Objective-C method.
-func (x *AttributedStringMarkdownSourcePosition) StartLine() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startLine"))
+func (asmsp *AttributedStringMarkdownSourcePosition) StartLine() int {
+	_r := objc.Send[int](objref.IDOf(asmsp), objc.RegisterName("startLine"))
 	return _r
 }
 
 // StartColumn wraps the corresponding Objective-C method.
-func (x *AttributedStringMarkdownSourcePosition) StartColumn() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startColumn"))
+func (asmsp *AttributedStringMarkdownSourcePosition) StartColumn() int {
+	_r := objc.Send[int](objref.IDOf(asmsp), objc.RegisterName("startColumn"))
 	return _r
 }
 
 // EndLine wraps the corresponding Objective-C method.
-func (x *AttributedStringMarkdownSourcePosition) EndLine() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("endLine"))
+func (asmsp *AttributedStringMarkdownSourcePosition) EndLine() int {
+	_r := objc.Send[int](objref.IDOf(asmsp), objc.RegisterName("endLine"))
 	return _r
 }
 
 // EndColumn wraps the corresponding Objective-C method.
-func (x *AttributedStringMarkdownSourcePosition) EndColumn() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("endColumn"))
+func (asmsp *AttributedStringMarkdownSourcePosition) EndColumn() int {
+	_r := objc.Send[int](objref.IDOf(asmsp), objc.RegisterName("endColumn"))
 	return _r
 }
-
-// AttributedStringMarkdownSourcePositionable is the interface implemented by [AttributedStringMarkdownSourcePosition], for mocking and DI.
-type AttributedStringMarkdownSourcePositionable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *AttributedStringMarkdownSourcePosition
-	StartLine() int
-	StartColumn() int
-	EndLine() int
-	EndColumn() int
-}
-
-var _ AttributedStringMarkdownSourcePositionable = (*AttributedStringMarkdownSourcePosition)(nil)

@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTREnergyEVSEClusterGetTargetsResponseParams is an idiomatic wrapper over the Objective-C class MTREnergyEVSEClusterGetTargetsResponseParams.
@@ -46,24 +47,24 @@ func mTREnergyEVSEClusterGetTargetsResponseParamsAdopt(id objc.ID) *MTREnergyEVS
 }
 
 // Description returns the object's -description text.
-func (x *MTREnergyEVSEClusterGetTargetsResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (meecgtrp *MTREnergyEVSEClusterGetTargetsResponseParams) Description() string {
+	return rt.Description(objref.IDOf(meecgtrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTREnergyEVSEClusterGetTargetsResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (meecgtrp *MTREnergyEVSEClusterGetTargetsResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(meecgtrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTREnergyEVSEClusterGetTargetsResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (meecgtrp *MTREnergyEVSEClusterGetTargetsResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(meecgtrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTREnergyEVSEClusterGetTargetsResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (meecgtrp *MTREnergyEVSEClusterGetTargetsResponseParams) String() string {
+	return rt.Description(objref.IDOf(meecgtrp))
 }
 
 // NewMTREnergyEVSEClusterGetTargetsResponseParamsWithResponseValueError initialize an MTREnergyEVSEClusterGetTargetsResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
@@ -78,21 +79,12 @@ func NewMTREnergyEVSEClusterGetTargetsResponseParamsWithResponseValueError(respo
 }
 
 // ChargingTargetSchedules wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterGetTargetsResponseParams) ChargingTargetSchedules() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chargingTargetSchedules"))
+func (meecgtrp *MTREnergyEVSEClusterGetTargetsResponseParams) ChargingTargetSchedules() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meecgtrp), objc.RegisterName("chargingTargetSchedules"))
 	return obj.Wrap(_r)
 }
 
 // SetChargingTargetSchedules wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterGetTargetsResponseParams) SetChargingTargetSchedules(chargingTargetSchedules obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChargingTargetSchedules:"), objref.IDOf(chargingTargetSchedules))
+func (meecgtrp *MTREnergyEVSEClusterGetTargetsResponseParams) SetChargingTargetSchedules(chargingTargetSchedules obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(meecgtrp), objc.RegisterName("setChargingTargetSchedules:"), objref.IDOf(chargingTargetSchedules))
 }
-
-// MTREnergyEVSEClusterGetTargetsResponseParamsable is the interface implemented by [MTREnergyEVSEClusterGetTargetsResponseParams], for mocking and DI.
-type MTREnergyEVSEClusterGetTargetsResponseParamsable interface {
-	obj.Object
-	ChargingTargetSchedules() obj.Object
-	SetChargingTargetSchedules(chargingTargetSchedules obj.Object)
-}
-
-var _ MTREnergyEVSEClusterGetTargetsResponseParamsable = (*MTREnergyEVSEClusterGetTargetsResponseParams)(nil)

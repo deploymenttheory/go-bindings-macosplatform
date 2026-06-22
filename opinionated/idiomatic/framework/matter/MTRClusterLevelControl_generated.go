@@ -59,228 +59,188 @@ func NewMTRClusterLevelControlWithDeviceEndpointQueue(device *MTRDevice, endpoin
 }
 
 // ReadAttributeCurrentLevelWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeCurrentLevelWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentLevelWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeCurrentLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeCurrentLevelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeRemainingTimeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeRemainingTimeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRemainingTimeWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeRemainingTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeRemainingTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeMinLevelWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeMinLevelWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinLevelWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeMinLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeMinLevelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeMaxLevelWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeMaxLevelWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxLevelWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeMaxLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeMaxLevelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeCurrentFrequencyWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeCurrentFrequencyWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentFrequencyWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeCurrentFrequencyWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeCurrentFrequencyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeMinFrequencyWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeMinFrequencyWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMinFrequencyWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeMinFrequencyWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeMinFrequencyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeMaxFrequencyWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeMaxFrequencyWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMaxFrequencyWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeMaxFrequencyWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeMaxFrequencyWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeOptionsWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeOptionsWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOptionsWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeOptionsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeOptionsWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeOptionsWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) WriteAttributeOptionsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOptionsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mclc *MTRClusterLevelControl) WriteAttributeOptionsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOptionsWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOptionsWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) WriteAttributeOptionsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOptionsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) WriteAttributeOptionsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOptionsWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOnOffTransitionTimeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeOnOffTransitionTimeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOnOffTransitionTimeWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeOnOffTransitionTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeOnOffTransitionTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeOnOffTransitionTimeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) WriteAttributeOnOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOnOffTransitionTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mclc *MTRClusterLevelControl) WriteAttributeOnOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOnOffTransitionTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOnOffTransitionTimeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) WriteAttributeOnOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOnOffTransitionTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) WriteAttributeOnOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOnOffTransitionTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOnLevelWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeOnLevelWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOnLevelWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeOnLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeOnLevelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeOnLevelWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) WriteAttributeOnLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOnLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mclc *MTRClusterLevelControl) WriteAttributeOnLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOnLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOnLevelWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) WriteAttributeOnLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOnLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) WriteAttributeOnLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOnLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOnTransitionTimeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeOnTransitionTimeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOnTransitionTimeWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeOnTransitionTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeOnTransitionTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeOnTransitionTimeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) WriteAttributeOnTransitionTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOnTransitionTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mclc *MTRClusterLevelControl) WriteAttributeOnTransitionTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOnTransitionTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOnTransitionTimeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) WriteAttributeOnTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOnTransitionTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) WriteAttributeOnTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOnTransitionTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeOffTransitionTimeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeOffTransitionTimeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOffTransitionTimeWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeOffTransitionTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeOffTransitionTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeOffTransitionTimeWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) WriteAttributeOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOffTransitionTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mclc *MTRClusterLevelControl) WriteAttributeOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOffTransitionTimeWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeOffTransitionTimeWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) WriteAttributeOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeOffTransitionTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) WriteAttributeOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeOffTransitionTimeWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeDefaultMoveRateWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeDefaultMoveRateWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDefaultMoveRateWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeDefaultMoveRateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeDefaultMoveRateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeDefaultMoveRateWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) WriteAttributeDefaultMoveRateWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeDefaultMoveRateWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mclc *MTRClusterLevelControl) WriteAttributeDefaultMoveRateWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeDefaultMoveRateWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeDefaultMoveRateWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) WriteAttributeDefaultMoveRateWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeDefaultMoveRateWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) WriteAttributeDefaultMoveRateWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeDefaultMoveRateWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeStartUpCurrentLevelWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeStartUpCurrentLevelWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStartUpCurrentLevelWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeStartUpCurrentLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeStartUpCurrentLevelWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeStartUpCurrentLevelWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) WriteAttributeStartUpCurrentLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeStartUpCurrentLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mclc *MTRClusterLevelControl) WriteAttributeStartUpCurrentLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeStartUpCurrentLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeStartUpCurrentLevelWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) WriteAttributeStartUpCurrentLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeStartUpCurrentLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) WriteAttributeStartUpCurrentLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("writeAttributeStartUpCurrentLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterLevelControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mclc *MTRClusterLevelControl) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
-
-// MTRClusterLevelControlable is the interface implemented by [MTRClusterLevelControl], for mocking and DI.
-type MTRClusterLevelControlable interface {
-	obj.Object
-	ReadAttributeCurrentLevelWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeRemainingTimeWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeMinLevelWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeMaxLevelWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeCurrentFrequencyWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeMinFrequencyWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeMaxFrequencyWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeOptionsWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeOptionsWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeOptionsWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeOnOffTransitionTimeWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeOnOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeOnOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeOnLevelWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeOnLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeOnLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeOnTransitionTimeWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeOnTransitionTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeOnTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeOffTransitionTimeWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeOffTransitionTimeWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeOffTransitionTimeWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeDefaultMoveRateWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeDefaultMoveRateWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeDefaultMoveRateWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeStartUpCurrentLevelWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeStartUpCurrentLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeStartUpCurrentLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-}
-
-var _ MTRClusterLevelControlable = (*MTRClusterLevelControl)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterLevelControl)(nil)
 

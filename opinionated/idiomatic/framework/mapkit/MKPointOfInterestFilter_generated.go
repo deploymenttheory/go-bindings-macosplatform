@@ -46,24 +46,24 @@ func pointOfInterestFilterAdopt(id objc.ID) *PointOfInterestFilter {
 }
 
 // Description returns the object's -description text.
-func (x *PointOfInterestFilter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (poif *PointOfInterestFilter) Description() string {
+	return rt.Description(objref.IDOf(poif))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PointOfInterestFilter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (poif *PointOfInterestFilter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(poif), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PointOfInterestFilter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (poif *PointOfInterestFilter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(poif), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PointOfInterestFilter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (poif *PointOfInterestFilter) String() string {
+	return rt.Description(objref.IDOf(poif))
 }
 
 // NewPointOfInterestFilterIncludingCategories initialize the point of interest filter with a list of categories to include.
@@ -81,22 +81,13 @@ func NewPointOfInterestFilterExcludingCategories(categories []obj.Object) *Point
 }
 
 // IncludesCategory returns a Boolean value indicating whether the filter includes the point of interest category.
-func (x *PointOfInterestFilter) IncludesCategory(category obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesCategory:"), objref.IDOf(category))
+func (poif *PointOfInterestFilter) IncludesCategory(category obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(poif), objc.RegisterName("includesCategory:"), objref.IDOf(category))
 	return _r
 }
 
 // ExcludesCategory returns a Boolean value indicating whether the filter excludes the point of interest category.
-func (x *PointOfInterestFilter) ExcludesCategory(category obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("excludesCategory:"), objref.IDOf(category))
+func (poif *PointOfInterestFilter) ExcludesCategory(category obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(poif), objc.RegisterName("excludesCategory:"), objref.IDOf(category))
 	return _r
 }
-
-// PointOfInterestFilterable is the interface implemented by [PointOfInterestFilter], for mocking and DI.
-type PointOfInterestFilterable interface {
-	obj.Object
-	IncludesCategory(category obj.Object) bool
-	ExcludesCategory(category obj.Object) bool
-}
-
-var _ PointOfInterestFilterable = (*PointOfInterestFilter)(nil)

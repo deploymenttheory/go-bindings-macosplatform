@@ -44,24 +44,24 @@ func mTROperationalCredentialsClusterUpdateFabricLabelParamsAdopt(id objc.ID) *M
 }
 
 // Description returns the object's -description text.
-func (x *MTROperationalCredentialsClusterUpdateFabricLabelParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (moccuflp *MTROperationalCredentialsClusterUpdateFabricLabelParams) Description() string {
+	return rt.Description(objref.IDOf(moccuflp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROperationalCredentialsClusterUpdateFabricLabelParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (moccuflp *MTROperationalCredentialsClusterUpdateFabricLabelParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(moccuflp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROperationalCredentialsClusterUpdateFabricLabelParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (moccuflp *MTROperationalCredentialsClusterUpdateFabricLabelParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(moccuflp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTROperationalCredentialsClusterUpdateFabricLabelParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (moccuflp *MTROperationalCredentialsClusterUpdateFabricLabelParams) String() string {
+	return rt.Description(objref.IDOf(moccuflp))
 }
 
 // NewMTROperationalCredentialsClusterUpdateFabricLabelParams creates a new MTROperationalCredentialsClusterUpdateFabricLabelParams.
@@ -71,71 +71,40 @@ func NewMTROperationalCredentialsClusterUpdateFabricLabelParams() *MTROperationa
 }
 
 // WithLabel sets the property and returns the receiver so calls can be chained.
-func (x *MTROperationalCredentialsClusterUpdateFabricLabelParams) WithLabel(label string) *MTROperationalCredentialsClusterUpdateFabricLabelParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+func (moccuflp *MTROperationalCredentialsClusterUpdateFabricLabelParams) WithLabel(label string) *MTROperationalCredentialsClusterUpdateFabricLabelParams {
+	objc.Send[objc.ID](objref.IDOf(moccuflp), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return moccuflp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTROperationalCredentialsClusterUpdateFabricLabelParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterUpdateFabricLabelParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (moccuflp *MTROperationalCredentialsClusterUpdateFabricLabelParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterUpdateFabricLabelParams {
+	objc.Send[objc.ID](objref.IDOf(moccuflp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return moccuflp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTROperationalCredentialsClusterUpdateFabricLabelParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterUpdateFabricLabelParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (moccuflp *MTROperationalCredentialsClusterUpdateFabricLabelParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterUpdateFabricLabelParams {
+	objc.Send[objc.ID](objref.IDOf(moccuflp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return moccuflp
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterUpdateFabricLabelParams) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (moccuflp *MTROperationalCredentialsClusterUpdateFabricLabelParams) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(moccuflp), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterUpdateFabricLabelParams) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTROperationalCredentialsClusterUpdateFabricLabelParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (moccuflp *MTROperationalCredentialsClusterUpdateFabricLabelParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moccuflp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterUpdateFabricLabelParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTROperationalCredentialsClusterUpdateFabricLabelParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (moccuflp *MTROperationalCredentialsClusterUpdateFabricLabelParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(moccuflp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTROperationalCredentialsClusterUpdateFabricLabelParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTROperationalCredentialsClusterUpdateFabricLabelParamsable is the interface implemented by [MTROperationalCredentialsClusterUpdateFabricLabelParams], for mocking and DI.
-type MTROperationalCredentialsClusterUpdateFabricLabelParamsable interface {
-	obj.Object
-	WithLabel(label string) *MTROperationalCredentialsClusterUpdateFabricLabelParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterUpdateFabricLabelParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROperationalCredentialsClusterUpdateFabricLabelParams
-	Label() string
-	SetLabel(label string)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTROperationalCredentialsClusterUpdateFabricLabelParamsable = (*MTROperationalCredentialsClusterUpdateFabricLabelParams)(nil)

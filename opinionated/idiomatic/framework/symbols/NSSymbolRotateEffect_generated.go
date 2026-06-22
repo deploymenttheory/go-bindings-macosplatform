@@ -7,7 +7,6 @@ package symbols
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,24 +52,15 @@ func NewSymbolRotateEffect() *SymbolRotateEffect {
 }
 
 // EffectWithByLayer returns a copy of the effect that animates incrementally, by layer.
-func (x *SymbolRotateEffect) EffectWithByLayer() *SymbolRotateEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithByLayer"))
+func (sre *SymbolRotateEffect) EffectWithByLayer() *SymbolRotateEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sre), objc.RegisterName("effectWithByLayer"))
 	return SymbolRotateEffectFromID(_r)
 }
 
 // EffectWithWholeSymbol returns a copy of the effect that animates all layers of the symbol simultaneously.
-func (x *SymbolRotateEffect) EffectWithWholeSymbol() *SymbolRotateEffect {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("effectWithWholeSymbol"))
+func (sre *SymbolRotateEffect) EffectWithWholeSymbol() *SymbolRotateEffect {
+	_r := objc.Send[objc.ID](objref.IDOf(sre), objc.RegisterName("effectWithWholeSymbol"))
 	return SymbolRotateEffectFromID(_r)
 }
-
-// SymbolRotateEffectable is the interface implemented by [SymbolRotateEffect], for mocking and DI.
-type SymbolRotateEffectable interface {
-	obj.Object
-	EffectWithByLayer() *SymbolRotateEffect
-	EffectWithWholeSymbol() *SymbolRotateEffect
-}
-
-var _ SymbolRotateEffectable = (*SymbolRotateEffect)(nil)
 
 var _ SymbolEffectProvider = (*SymbolRotateEffect)(nil)

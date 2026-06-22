@@ -48,110 +48,77 @@ func binaryImageKernelAdopt(id objc.ID) *BinaryImageKernel {
 }
 
 // Description returns the object's -description text.
-func (x *BinaryImageKernel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bik *BinaryImageKernel) Description() string {
+	return rt.Description(objref.IDOf(bik))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BinaryImageKernel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bik *BinaryImageKernel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bik), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BinaryImageKernel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bik *BinaryImageKernel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bik), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BinaryImageKernel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bik *BinaryImageKernel) String() string {
+	return rt.Description(objref.IDOf(bik))
 }
 
-// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. See Also:
-func (x *BinaryImageKernel) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *BinaryImageKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
-	return x
+// WithPrimaryOffset sets the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. See Also:
+func (bik *BinaryImageKernel) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *BinaryImageKernel {
+	objc.Send[objc.ID](objref.IDOf(bik), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
+	return bik
 }
 
-// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. See Also:
-func (x *BinaryImageKernel) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *BinaryImageKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
-	return x
+// WithSecondaryOffset sets the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. See Also:
+func (bik *BinaryImageKernel) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *BinaryImageKernel {
+	objc.Send[objc.ID](objref.IDOf(bik), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
+	return bik
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
-func (x *BinaryImageKernel) WithClipRect(clipRect metal.MTLRegion) *BinaryImageKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (bik *BinaryImageKernel) WithClipRect(clipRect metal.MTLRegion) *BinaryImageKernel {
+	objc.Send[objc.ID](objref.IDOf(bik), objc.RegisterName("setClipRect:"), clipRect)
+	return bik
 }
 
 // PrimarySourceRegionForDestinationSize primarySourceRegionForDestinationSize: is used to determine which region of the primaryTexture will be read by encodeToCommandBuffer:primaryTexture:secondaryTexture:destinationTexture (and in-place variants) when the filter runs. This information may be needed if the primary source image is broken into multiple textures.  The size of the full (untiled) destination image is provided. The region of the full (untiled) source image that will be read is returned. You can then piece together an appropriate texture containing that information for use in your tiled context. The function will consult the MPSBinaryImageKernel primaryOffset and clipRect parameters, to determine the full region read by the function. Other parameters such as kernelHeight and kernelWidth will be consulted as necessary. All properties should be set to intended values prior to calling primarySourceRegionForDestinationSize:. Caution: This function operates using global image coordinates, but -encodeToCommandBuffer:... uses coordinates local to the source and destination image textures. Consequently, the primaryOffset and clipRect attached to this object will need to be updated using a global to local coordinate transform before -encodeToCommandBuffer:... is called. Determine the region of the source texture that will be read for a encode operation
-func (x *BinaryImageKernel) PrimarySourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion {
-	_r := objc.Send[mpscore.MPSRegion](objref.IDOf(x), objc.RegisterName("primarySourceRegionForDestinationSize:"), destinationSize)
+func (bik *BinaryImageKernel) PrimarySourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion {
+	_r := objc.Send[mpscore.MPSRegion](objref.IDOf(bik), objc.RegisterName("primarySourceRegionForDestinationSize:"), destinationSize)
 	return _r
 }
 
 // SecondarySourceRegionForDestinationSize secondarySourceRegionForDestinationSize: is used to determine which region of the sourceTexture will be read by encodeToCommandBuffer:primaryTexture:secondaryTexture:destinationTexture (and in-place variants) when the filter runs. This information may be needed if the secondary source image is broken into multiple textures.  The size of the full (untiled) destination image is provided. The region of the full (untiled) secondary source image that will be read is returned. You can then piece together an appropriate texture containing that information for use in your tiled context. The function will consult the MPSBinaryImageKernel secondaryOffset and clipRect parameters, to determine the full region read by the function. Other parameters such as kernelHeight and kernelWidth will be consulted as necessary.  All properties should be set to intended values prior to calling secondarySourceRegionForDestinationSize:. Caution: This function operates using global image coordinates, but -encodeToCommandBuffer:... uses coordinates local to the source and destination image textures. Consequently, the secondaryOffset and clipRect attached to this object will need to be updated using a global to local coordinate transform before -encodeToCommandBuffer:... is called. Determine the region of the source texture that will be read for a encode operation
-func (x *BinaryImageKernel) SecondarySourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion {
-	_r := objc.Send[mpscore.MPSRegion](objref.IDOf(x), objc.RegisterName("secondarySourceRegionForDestinationSize:"), destinationSize)
+func (bik *BinaryImageKernel) SecondarySourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion {
+	_r := objc.Send[mpscore.MPSRegion](objref.IDOf(bik), objc.RegisterName("secondarySourceRegionForDestinationSize:"), destinationSize)
 	return _r
 }
 
-// PrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. See Also:
-func (x *BinaryImageKernel) PrimaryOffset() mpscore.MPSOffset {
-	_r := objc.Send[mpscore.MPSOffset](objref.IDOf(x), objc.RegisterName("primaryOffset"))
+// PrimaryOffset returns the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. See Also:
+func (bik *BinaryImageKernel) PrimaryOffset() mpscore.MPSOffset {
+	_r := objc.Send[mpscore.MPSOffset](objref.IDOf(bik), objc.RegisterName("primaryOffset"))
 	return _r
 }
 
-// SetPrimaryOffset wraps the corresponding Objective-C method.
-func (x *BinaryImageKernel) SetPrimaryOffset(primaryOffset mpscore.MPSOffset) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
-}
-
-// SecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. See Also:
-func (x *BinaryImageKernel) SecondaryOffset() mpscore.MPSOffset {
-	_r := objc.Send[mpscore.MPSOffset](objref.IDOf(x), objc.RegisterName("secondaryOffset"))
+// SecondaryOffset returns the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. See Also:
+func (bik *BinaryImageKernel) SecondaryOffset() mpscore.MPSOffset {
+	_r := objc.Send[mpscore.MPSOffset](objref.IDOf(bik), objc.RegisterName("secondaryOffset"))
 	return _r
 }
 
-// SetSecondaryOffset wraps the corresponding Objective-C method.
-func (x *BinaryImageKernel) SetSecondaryOffset(secondaryOffset mpscore.MPSOffset) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
-}
-
-// ClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
-func (x *BinaryImageKernel) ClipRect() metal.MTLRegion {
-	_r := objc.Send[metal.MTLRegion](objref.IDOf(x), objc.RegisterName("clipRect"))
+// ClipRect returns an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (bik *BinaryImageKernel) ClipRect() metal.MTLRegion {
+	_r := objc.Send[metal.MTLRegion](objref.IDOf(bik), objc.RegisterName("clipRect"))
 	return _r
 }
-
-// SetClipRect wraps the corresponding Objective-C method.
-func (x *BinaryImageKernel) SetClipRect(clipRect metal.MTLRegion) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-}
-
-// BinaryImageKernelable is the interface implemented by [BinaryImageKernel], for mocking and DI.
-type BinaryImageKernelable interface {
-	obj.Object
-	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *BinaryImageKernel
-	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *BinaryImageKernel
-	WithClipRect(clipRect metal.MTLRegion) *BinaryImageKernel
-	PrimarySourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion
-	SecondarySourceRegionForDestinationSize(destinationSize metal.MTLSize) mpscore.MPSRegion
-	PrimaryOffset() mpscore.MPSOffset
-	SetPrimaryOffset(primaryOffset mpscore.MPSOffset)
-	SecondaryOffset() mpscore.MPSOffset
-	SetSecondaryOffset(secondaryOffset mpscore.MPSOffset)
-	ClipRect() metal.MTLRegion
-	SetClipRect(clipRect metal.MTLRegion)
-}
-
-var _ BinaryImageKernelable = (*BinaryImageKernel)(nil)
 
 // isBinaryImageKernel marks BinaryImageKernel — and, by embedding promotion, its
 // subclasses — as a member of the BinaryImageKernel hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *BinaryImageKernel) isBinaryImageKernel() {}
+func (bik *BinaryImageKernel) isBinaryImageKernel() {}
 
 var _ BinaryImageKernelProvider = (*BinaryImageKernel)(nil)

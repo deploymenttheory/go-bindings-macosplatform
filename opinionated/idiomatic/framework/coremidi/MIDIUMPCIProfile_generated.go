@@ -5,13 +5,14 @@
 package coremidi
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // UMPCIProfile is an idiomatic wrapper over the Objective-C class MIDIUMPCIProfile.
@@ -46,24 +47,24 @@ func uMPCIProfileAdopt(id objc.ID) *UMPCIProfile {
 }
 
 // Description returns the object's -description text.
-func (x *UMPCIProfile) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (up *UMPCIProfile) Description() string {
+	return rt.Description(objref.IDOf(up))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *UMPCIProfile) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (up *UMPCIProfile) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(up), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *UMPCIProfile) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (up *UMPCIProfile) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(up), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *UMPCIProfile) String() string {
-	return rt.Description(objref.IDOf(x))
+func (up *UMPCIProfile) String() string {
+	return rt.Description(objref.IDOf(up))
 }
 
 // NewUMPCIProfile creates a new UMPCIProfile.
@@ -73,71 +74,56 @@ func NewUMPCIProfile() *UMPCIProfile {
 }
 
 // SetProfileStateEnabledChannelCount issue a Set Profile On or Set Profile Off request on this profile using the MIDI server's MUID. The result of this operation, if any, is received via the profile notification posted by the MIDICIDeviceManager. Returns YES if the request is valid and the request was dispatched.
-func (x *UMPCIProfile) SetProfileStateEnabledChannelCount(isEnabled bool, enabledChannelCount uint16) error {
+func (up *UMPCIProfile) SetProfileStateEnabledChannelCount(isEnabled bool, enabledChannelCount uint16) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setProfileState:enabledChannelCount:error:"), isEnabled, enabledChannelCount, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(up), objc.RegisterName("setProfileState:enabledChannelCount:error:"), isEnabled, enabledChannelCount, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// Name the name of the MIDI-CI proifle.
-func (x *UMPCIProfile) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns the name of the MIDI-CI proifle.
+func (up *UMPCIProfile) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(up), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ProfileType the type of MIDI-CI Profile, i.e., single-channel, multichannel, Group, or Function Block.
-func (x *UMPCIProfile) ProfileType() CIProfileType {
-	_r := objc.Send[CIProfileType](objref.IDOf(x), objc.RegisterName("profileType"))
+// ProfileType returns the type of MIDI-CI Profile, i.e., single-channel, multichannel, Group, or Function Block.
+func (up *UMPCIProfile) ProfileType() CIProfileType {
+	_r := objc.Send[CIProfileType](objref.IDOf(up), objc.RegisterName("profileType"))
 	return _r
 }
 
-// GroupOffset for Group profiles defined on Function Blocks, the value to be added to the lowest Function Block UMP Group for messaging (e.g., a Group Profile defined on the second Group of a Function Block has a groupOffset of 1).
-func (x *UMPCIProfile) GroupOffset() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("groupOffset"))
+// GroupOffset returns for Group profiles defined on Function Blocks, the value to be added to the lowest Function Block UMP Group for messaging (e.g., a Group Profile defined on the second Group of a Function Block has a groupOffset of 1).
+func (up *UMPCIProfile) GroupOffset() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(up), objc.RegisterName("groupOffset"))
 	return _r
 }
 
-// FirstChannel the first channel number supported on the Profile.
-func (x *UMPCIProfile) FirstChannel() uint8 {
-	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("firstChannel"))
+// FirstChannel returns the first channel number supported on the Profile.
+func (up *UMPCIProfile) FirstChannel() uint8 {
+	_r := objc.Send[uint8](objref.IDOf(up), objc.RegisterName("firstChannel"))
 	return _r
 }
 
-// EnabledChannelCount the number of channels currently enabled on the Profile. When the profile is disabled, this value is set to 0.
-func (x *UMPCIProfile) EnabledChannelCount() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("enabledChannelCount"))
+// EnabledChannelCount returns the number of channels currently enabled on the Profile. When the profile is disabled, this value is set to 0.
+func (up *UMPCIProfile) EnabledChannelCount() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(up), objc.RegisterName("enabledChannelCount"))
 	return _r
 }
 
-// TotalChannelCount the total number of channels supported by the Profile.
-func (x *UMPCIProfile) TotalChannelCount() uint16 {
-	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("totalChannelCount"))
+// TotalChannelCount returns the total number of channels supported by the Profile.
+func (up *UMPCIProfile) TotalChannelCount() uint16 {
+	_r := objc.Send[uint16](objref.IDOf(up), objc.RegisterName("totalChannelCount"))
 	return _r
 }
 
-// IsEnabled the enable state of the Profile.
-func (x *UMPCIProfile) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+// IsEnabled reports whether the enable state of the Profile.
+func (up *UMPCIProfile) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(up), objc.RegisterName("isEnabled"))
 	return _r
 }
-
-// UMPCIProfileable is the interface implemented by [UMPCIProfile], for mocking and DI.
-type UMPCIProfileable interface {
-	obj.Object
-	SetProfileStateEnabledChannelCount(isEnabled bool, enabledChannelCount uint16) error
-	Name() string
-	ProfileType() CIProfileType
-	GroupOffset() uint8
-	FirstChannel() uint8
-	EnabledChannelCount() uint16
-	TotalChannelCount() uint16
-	IsEnabled() bool
-}
-
-var _ UMPCIProfileable = (*UMPCIProfile)(nil)

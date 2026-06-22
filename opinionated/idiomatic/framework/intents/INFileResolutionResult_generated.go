@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewFileResolutionResult() *FileResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INFileResolutionResult")), objc.RegisterName("new"))
 	return fileResolutionResultAdopt(_id)
 }
-
-// FileResolutionResultable is the interface implemented by [FileResolutionResult], for mocking and DI.
-type FileResolutionResultable interface {
-	obj.Object
-}
-
-var _ FileResolutionResultable = (*FileResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*FileResolutionResult)(nil)

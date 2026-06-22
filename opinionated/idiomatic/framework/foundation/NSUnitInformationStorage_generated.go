@@ -53,18 +53,10 @@ func NewUnitInformationStorage() *UnitInformationStorage {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitInformationStorage) WithScriptingProperties(scriptingProperties obj.Object) *UnitInformationStorage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (uis *UnitInformationStorage) WithScriptingProperties(scriptingProperties obj.Object) *UnitInformationStorage {
+	objc.Send[objc.ID](objref.IDOf(uis), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return uis
 }
-
-// UnitInformationStorageable is the interface implemented by [UnitInformationStorage], for mocking and DI.
-type UnitInformationStorageable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitInformationStorage
-}
-
-var _ UnitInformationStorageable = (*UnitInformationStorage)(nil)
 
 var _ DimensionProvider = (*UnitInformationStorage)(nil)
 

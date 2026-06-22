@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRTimeSynchronizationClusterSetTimeZoneResponseParams is an idiomatic wrapper over the Objective-C class MTRTimeSynchronizationClusterSetTimeZoneResponseParams.
@@ -46,24 +47,24 @@ func mTRTimeSynchronizationClusterSetTimeZoneResponseParamsAdopt(id objc.ID) *MT
 }
 
 // Description returns the object's -description text.
-func (x *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtscstzrp *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) Description() string {
+	return rt.Description(objref.IDOf(mtscstzrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtscstzrp *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtscstzrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtscstzrp *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtscstzrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtscstzrp *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) String() string {
+	return rt.Description(objref.IDOf(mtscstzrp))
 }
 
 // NewMTRTimeSynchronizationClusterSetTimeZoneResponseParamsWithResponseValueError initialize an MTRTimeSynchronizationClusterSetTimeZoneResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
@@ -78,28 +79,13 @@ func NewMTRTimeSynchronizationClusterSetTimeZoneResponseParamsWithResponseValueE
 }
 
 // WithDstOffsetRequired sets the property and returns the receiver so calls can be chained.
-func (x *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) WithDstOffsetRequired(dstOffsetRequired obj.Object) *MTRTimeSynchronizationClusterSetTimeZoneResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDstOffsetRequired:"), objref.IDOf(dstOffsetRequired))
-	return x
+func (mtscstzrp *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) WithDstOffsetRequired(dstOffsetRequired obj.Object) *MTRTimeSynchronizationClusterSetTimeZoneResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mtscstzrp), objc.RegisterName("setDstOffsetRequired:"), objref.IDOf(dstOffsetRequired))
+	return mtscstzrp
 }
 
 // DstOffsetRequired wraps the corresponding Objective-C method.
-func (x *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) DstOffsetRequired() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dstOffsetRequired"))
+func (mtscstzrp *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) DstOffsetRequired() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtscstzrp), objc.RegisterName("dstOffsetRequired"))
 	return obj.Wrap(_r)
 }
-
-// SetDstOffsetRequired wraps the corresponding Objective-C method.
-func (x *MTRTimeSynchronizationClusterSetTimeZoneResponseParams) SetDstOffsetRequired(dstOffsetRequired obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDstOffsetRequired:"), objref.IDOf(dstOffsetRequired))
-}
-
-// MTRTimeSynchronizationClusterSetTimeZoneResponseParamsable is the interface implemented by [MTRTimeSynchronizationClusterSetTimeZoneResponseParams], for mocking and DI.
-type MTRTimeSynchronizationClusterSetTimeZoneResponseParamsable interface {
-	obj.Object
-	WithDstOffsetRequired(dstOffsetRequired obj.Object) *MTRTimeSynchronizationClusterSetTimeZoneResponseParams
-	DstOffsetRequired() obj.Object
-	SetDstOffsetRequired(dstOffsetRequired obj.Object)
-}
-
-var _ MTRTimeSynchronizationClusterSetTimeZoneResponseParamsable = (*MTRTimeSynchronizationClusterSetTimeZoneResponseParams)(nil)

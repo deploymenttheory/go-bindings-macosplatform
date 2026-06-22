@@ -46,24 +46,24 @@ func extensionStreamAdopt(id objc.ID) *ExtensionStream {
 }
 
 // Description returns the object's -description text.
-func (x *ExtensionStream) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (es *ExtensionStream) Description() string {
+	return rt.Description(objref.IDOf(es))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExtensionStream) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (es *ExtensionStream) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(es), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExtensionStream) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (es *ExtensionStream) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(es), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExtensionStream) String() string {
-	return rt.Description(objref.IDOf(x))
+func (es *ExtensionStream) String() string {
+	return rt.Description(objref.IDOf(es))
 }
 
 // NewExtensionStream creates a new ExtensionStream.
@@ -73,73 +73,57 @@ func NewExtensionStream() *ExtensionStream {
 }
 
 // NotifyPropertiesChanged notifies clients about stream property changes.
-func (x *ExtensionStream) NotifyPropertiesChanged(propertyStates obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notifyPropertiesChanged:"), objref.IDOf(propertyStates))
+func (es *ExtensionStream) NotifyPropertiesChanged(propertyStates obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("notifyPropertiesChanged:"), objref.IDOf(propertyStates))
 }
 
 // SendSampleBufferDiscontinuityHostTimeInNanoseconds sends a media sample to stream client.
-func (x *ExtensionStream) SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer obj.Object, discontinuity ExtensionStreamDiscontinuityFlags, hostTimeInNanoseconds uint64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendSampleBuffer:discontinuity:hostTimeInNanoseconds:"), objref.IDOf(sampleBuffer), discontinuity, hostTimeInNanoseconds)
+func (es *ExtensionStream) SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer obj.Object, discontinuity ExtensionStreamDiscontinuityFlags, hostTimeInNanoseconds uint64) {
+	objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("sendSampleBuffer:discontinuity:hostTimeInNanoseconds:"), objref.IDOf(sampleBuffer), discontinuity, hostTimeInNanoseconds)
 }
 
 // NotifyScheduledOutputChanged notifies clients when a particular buffer is output.
-func (x *ExtensionStream) NotifyScheduledOutputChanged(scheduledOutput *ExtensionScheduledOutput) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notifyScheduledOutputChanged:"), objref.IDOf(scheduledOutput))
+func (es *ExtensionStream) NotifyScheduledOutputChanged(scheduledOutput *ExtensionScheduledOutput) {
+	objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("notifyScheduledOutputChanged:"), objref.IDOf(scheduledOutput))
 }
 
-// LocalizedName the localized name of the stream.
-func (x *ExtensionStream) LocalizedName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+// LocalizedName returns the localized name of the stream.
+func (es *ExtensionStream) LocalizedName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("localizedName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// StreamID the stream identifier.
-func (x *ExtensionStream) StreamID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("streamID"))
+// StreamID returns the stream identifier.
+func (es *ExtensionStream) StreamID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("streamID"))
 	return obj.Wrap(_r)
 }
 
-// Direction the stream direction.
-func (x *ExtensionStream) Direction() ExtensionStreamDirection {
-	_r := objc.Send[ExtensionStreamDirection](objref.IDOf(x), objc.RegisterName("direction"))
+// Direction returns the stream direction.
+func (es *ExtensionStream) Direction() ExtensionStreamDirection {
+	_r := objc.Send[ExtensionStreamDirection](objref.IDOf(es), objc.RegisterName("direction"))
 	return _r
 }
 
-// ClockType the stream clock type. If the stream was specified with a custom clock configuration, the returned value will be CMIOExtensionStreamClockTypeCustom.
-func (x *ExtensionStream) ClockType() ExtensionStreamClockType {
-	_r := objc.Send[ExtensionStreamClockType](objref.IDOf(x), objc.RegisterName("clockType"))
+// ClockType returns the stream clock type. If the stream was specified with a custom clock configuration, the returned value will be CMIOExtensionStreamClockTypeCustom.
+func (es *ExtensionStream) ClockType() ExtensionStreamClockType {
+	_r := objc.Send[ExtensionStreamClockType](objref.IDOf(es), objc.RegisterName("clockType"))
 	return _r
 }
 
-// CustomClockConfiguration custom clock configuration. If the stream was specified using a clockType, the returned value will be nil.
-func (x *ExtensionStream) CustomClockConfiguration() *ExtensionStreamCustomClockConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("customClockConfiguration"))
+// CustomClockConfiguration returns custom clock configuration. If the stream was specified using a clockType, the returned value will be nil.
+func (es *ExtensionStream) CustomClockConfiguration() *ExtensionStreamCustomClockConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("customClockConfiguration"))
 	return ExtensionStreamCustomClockConfigurationFromID(_r)
 }
 
-// StreamingClients the array of streaming clients. This property is key-value observable.
+// StreamingClients returns the array of streaming clients. This property is key-value observable.
 //
 // StreamingClients returns the collection as a Go slice.
-func (x *ExtensionStream) StreamingClients() []*ExtensionClient {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("streamingClients"))
+func (es *ExtensionStream) StreamingClients() []*ExtensionClient {
+	_arr := objc.Send[objc.ID](objref.IDOf(es), objc.RegisterName("streamingClients"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExtensionClient { return ExtensionClientFromID(_id) })
 }
-
-// ExtensionStreamable is the interface implemented by [ExtensionStream], for mocking and DI.
-type ExtensionStreamable interface {
-	obj.Object
-	NotifyPropertiesChanged(propertyStates obj.Object)
-	SendSampleBufferDiscontinuityHostTimeInNanoseconds(sampleBuffer obj.Object, discontinuity ExtensionStreamDiscontinuityFlags, hostTimeInNanoseconds uint64)
-	NotifyScheduledOutputChanged(scheduledOutput *ExtensionScheduledOutput)
-	LocalizedName() string
-	StreamID() obj.Object
-	Direction() ExtensionStreamDirection
-	ClockType() ExtensionStreamClockType
-	CustomClockConfiguration() *ExtensionStreamCustomClockConfiguration
-	StreamingClients() []*ExtensionClient
-}
-
-var _ ExtensionStreamable = (*ExtensionStream)(nil)

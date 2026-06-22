@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRRVCOperationalStateClusterOperationalCommandResponseParams is an idiomatic wrapper over the Objective-C class MTRRVCOperationalStateClusterOperationalCommandResponseParams.
@@ -46,24 +47,24 @@ func mTRRVCOperationalStateClusterOperationalCommandResponseParamsAdopt(id objc.
 }
 
 // Description returns the object's -description text.
-func (x *MTRRVCOperationalStateClusterOperationalCommandResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (moscocrp *MTRRVCOperationalStateClusterOperationalCommandResponseParams) Description() string {
+	return rt.Description(objref.IDOf(moscocrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRRVCOperationalStateClusterOperationalCommandResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (moscocrp *MTRRVCOperationalStateClusterOperationalCommandResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(moscocrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRRVCOperationalStateClusterOperationalCommandResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (moscocrp *MTRRVCOperationalStateClusterOperationalCommandResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(moscocrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRRVCOperationalStateClusterOperationalCommandResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (moscocrp *MTRRVCOperationalStateClusterOperationalCommandResponseParams) String() string {
+	return rt.Description(objref.IDOf(moscocrp))
 }
 
 // NewMTRRVCOperationalStateClusterOperationalCommandResponseParamsWithResponseValueError initialize an MTRRVCOperationalStateClusterOperationalCommandResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
@@ -78,28 +79,13 @@ func NewMTRRVCOperationalStateClusterOperationalCommandResponseParamsWithRespons
 }
 
 // WithCommandResponseState sets the property and returns the receiver so calls can be chained.
-func (x *MTRRVCOperationalStateClusterOperationalCommandResponseParams) WithCommandResponseState(commandResponseState *MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalCommandResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandResponseState:"), objref.IDOf(commandResponseState))
-	return x
+func (moscocrp *MTRRVCOperationalStateClusterOperationalCommandResponseParams) WithCommandResponseState(commandResponseState *MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalCommandResponseParams {
+	objc.Send[objc.ID](objref.IDOf(moscocrp), objc.RegisterName("setCommandResponseState:"), objref.IDOf(commandResponseState))
+	return moscocrp
 }
 
 // CommandResponseState wraps the corresponding Objective-C method.
-func (x *MTRRVCOperationalStateClusterOperationalCommandResponseParams) CommandResponseState() *MTRRVCOperationalStateClusterErrorStateStruct {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commandResponseState"))
+func (moscocrp *MTRRVCOperationalStateClusterOperationalCommandResponseParams) CommandResponseState() *MTRRVCOperationalStateClusterErrorStateStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(moscocrp), objc.RegisterName("commandResponseState"))
 	return MTRRVCOperationalStateClusterErrorStateStructFromID(_r)
 }
-
-// SetCommandResponseState wraps the corresponding Objective-C method.
-func (x *MTRRVCOperationalStateClusterOperationalCommandResponseParams) SetCommandResponseState(commandResponseState *MTRRVCOperationalStateClusterErrorStateStruct) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommandResponseState:"), objref.IDOf(commandResponseState))
-}
-
-// MTRRVCOperationalStateClusterOperationalCommandResponseParamsable is the interface implemented by [MTRRVCOperationalStateClusterOperationalCommandResponseParams], for mocking and DI.
-type MTRRVCOperationalStateClusterOperationalCommandResponseParamsable interface {
-	obj.Object
-	WithCommandResponseState(commandResponseState *MTRRVCOperationalStateClusterErrorStateStruct) *MTRRVCOperationalStateClusterOperationalCommandResponseParams
-	CommandResponseState() *MTRRVCOperationalStateClusterErrorStateStruct
-	SetCommandResponseState(commandResponseState *MTRRVCOperationalStateClusterErrorStateStruct)
-}
-
-var _ MTRRVCOperationalStateClusterOperationalCommandResponseParamsable = (*MTRRVCOperationalStateClusterOperationalCommandResponseParams)(nil)

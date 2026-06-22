@@ -46,24 +46,24 @@ func suggestionAdopt(id objc.ID) *Suggestion {
 }
 
 // Description returns the object's -description text.
-func (x *Suggestion) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Suggestion) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Suggestion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Suggestion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Suggestion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Suggestion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Suggestion) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Suggestion) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewSuggestion creates a new Suggestion.
@@ -73,22 +73,13 @@ func NewSuggestion() *Suggestion {
 }
 
 // LocalizedAttributedSuggestion wraps the corresponding Objective-C method.
-func (x *Suggestion) LocalizedAttributedSuggestion() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedAttributedSuggestion"))
+func (s *Suggestion) LocalizedAttributedSuggestion() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("localizedAttributedSuggestion"))
 	return obj.Wrap(_r)
 }
 
 // SuggestionKind wraps the corresponding Objective-C method.
-func (x *Suggestion) SuggestionKind() SuggestionKind {
-	_r := objc.Send[SuggestionKind](objref.IDOf(x), objc.RegisterName("suggestionKind"))
+func (s *Suggestion) SuggestionKind() SuggestionKind {
+	_r := objc.Send[SuggestionKind](objref.IDOf(s), objc.RegisterName("suggestionKind"))
 	return _r
 }
-
-// Suggestionable is the interface implemented by [Suggestion], for mocking and DI.
-type Suggestionable interface {
-	obj.Object
-	LocalizedAttributedSuggestion() obj.Object
-	SuggestionKind() SuggestionKind
-}
-
-var _ Suggestionable = (*Suggestion)(nil)

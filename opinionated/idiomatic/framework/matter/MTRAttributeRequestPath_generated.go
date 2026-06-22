@@ -44,24 +44,24 @@ func mTRAttributeRequestPathAdopt(id objc.ID) *MTRAttributeRequestPath {
 }
 
 // Description returns the object's -description text.
-func (x *MTRAttributeRequestPath) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (marp *MTRAttributeRequestPath) Description() string {
+	return rt.Description(objref.IDOf(marp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAttributeRequestPath) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (marp *MTRAttributeRequestPath) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(marp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAttributeRequestPath) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (marp *MTRAttributeRequestPath) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(marp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAttributeRequestPath) String() string {
-	return rt.Description(objref.IDOf(x))
+func (marp *MTRAttributeRequestPath) String() string {
+	return rt.Description(objref.IDOf(marp))
 }
 
 // NewMTRAttributeRequestPath creates a new MTRAttributeRequestPath.
@@ -71,29 +71,19 @@ func NewMTRAttributeRequestPath() *MTRAttributeRequestPath {
 }
 
 // Endpoint wraps the corresponding Objective-C method.
-func (x *MTRAttributeRequestPath) Endpoint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
+func (marp *MTRAttributeRequestPath) Endpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(marp), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
 }
 
 // Cluster wraps the corresponding Objective-C method.
-func (x *MTRAttributeRequestPath) Cluster() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cluster"))
+func (marp *MTRAttributeRequestPath) Cluster() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(marp), objc.RegisterName("cluster"))
 	return obj.Wrap(_r)
 }
 
 // Attribute wraps the corresponding Objective-C method.
-func (x *MTRAttributeRequestPath) Attribute() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attribute"))
+func (marp *MTRAttributeRequestPath) Attribute() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(marp), objc.RegisterName("attribute"))
 	return obj.Wrap(_r)
 }
-
-// MTRAttributeRequestPathable is the interface implemented by [MTRAttributeRequestPath], for mocking and DI.
-type MTRAttributeRequestPathable interface {
-	obj.Object
-	Endpoint() obj.Object
-	Cluster() obj.Object
-	Attribute() obj.Object
-}
-
-var _ MTRAttributeRequestPathable = (*MTRAttributeRequestPath)(nil)

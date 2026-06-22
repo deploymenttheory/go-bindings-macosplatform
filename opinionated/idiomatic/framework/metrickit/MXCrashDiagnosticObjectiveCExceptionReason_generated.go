@@ -46,24 +46,24 @@ func crashDiagnosticObjectiveCExceptionReasonAdopt(id objc.ID) *CrashDiagnosticO
 }
 
 // Description returns the object's -description text.
-func (x *CrashDiagnosticObjectiveCExceptionReason) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cdocer *CrashDiagnosticObjectiveCExceptionReason) Description() string {
+	return rt.Description(objref.IDOf(cdocer))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CrashDiagnosticObjectiveCExceptionReason) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cdocer *CrashDiagnosticObjectiveCExceptionReason) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cdocer), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CrashDiagnosticObjectiveCExceptionReason) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cdocer *CrashDiagnosticObjectiveCExceptionReason) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cdocer), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CrashDiagnosticObjectiveCExceptionReason) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cdocer *CrashDiagnosticObjectiveCExceptionReason) String() string {
+	return rt.Description(objref.IDOf(cdocer))
 }
 
 // NewCrashDiagnosticObjectiveCExceptionReason creates a new CrashDiagnosticObjectiveCExceptionReason.
@@ -73,71 +73,57 @@ func NewCrashDiagnosticObjectiveCExceptionReason() *CrashDiagnosticObjectiveCExc
 }
 
 // JSONRepresentation returns the contents of the exception reason in JSON format.
-func (x *CrashDiagnosticObjectiveCExceptionReason) JSONRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
+func (cdocer *CrashDiagnosticObjectiveCExceptionReason) JSONRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cdocer), objc.RegisterName("JSONRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// DictionaryRepresentation convenience method to return a NSDictionary representation of this MXCrashDiagnosticObjectiveCExceptionReason object.
-func (x *CrashDiagnosticObjectiveCExceptionReason) DictionaryRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
+// DictionaryRepresentation returns convenience method to return a NSDictionary representation of this MXCrashDiagnosticObjectiveCExceptionReason object.
+func (cdocer *CrashDiagnosticObjectiveCExceptionReason) DictionaryRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cdocer), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// ComposedMessage a human-readable message string summarizing the reason for the exception.
-func (x *CrashDiagnosticObjectiveCExceptionReason) ComposedMessage() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("composedMessage"))
+// ComposedMessage returns a human-readable message string summarizing the reason for the exception.
+func (cdocer *CrashDiagnosticObjectiveCExceptionReason) ComposedMessage() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cdocer), objc.RegisterName("composedMessage"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// FormatString a string representing the exception message before arguments are substituted into the message
-func (x *CrashDiagnosticObjectiveCExceptionReason) FormatString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formatString"))
+// FormatString returns a string representing the exception message before arguments are substituted into the message
+func (cdocer *CrashDiagnosticObjectiveCExceptionReason) FormatString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cdocer), objc.RegisterName("formatString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Arguments an NSArray of strings representing arguments passed to the formatString.
+// Arguments returns an NSArray of strings representing arguments passed to the formatString.
 //
 // Arguments returns the collection as a Go slice.
-func (x *CrashDiagnosticObjectiveCExceptionReason) Arguments() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arguments"))
+func (cdocer *CrashDiagnosticObjectiveCExceptionReason) Arguments() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(cdocer), objc.RegisterName("arguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// ExceptionType a human-readable string denoting type of the exception
-func (x *CrashDiagnosticObjectiveCExceptionReason) ExceptionType() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exceptionType"))
+// ExceptionType returns a human-readable string denoting type of the exception
+func (cdocer *CrashDiagnosticObjectiveCExceptionReason) ExceptionType() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cdocer), objc.RegisterName("exceptionType"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// ExceptionName a string representing name of the exception This will align with the "name" field of the NSException
-func (x *CrashDiagnosticObjectiveCExceptionReason) ExceptionName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exceptionName"))
+// ExceptionName returns a string representing name of the exception This will align with the "name" field of the NSException
+func (cdocer *CrashDiagnosticObjectiveCExceptionReason) ExceptionName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cdocer), objc.RegisterName("exceptionName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// CrashDiagnosticObjectiveCExceptionReasonable is the interface implemented by [CrashDiagnosticObjectiveCExceptionReason], for mocking and DI.
-type CrashDiagnosticObjectiveCExceptionReasonable interface {
-	obj.Object
-	JSONRepresentation() obj.Object
-	DictionaryRepresentation() obj.Object
-	ComposedMessage() string
-	FormatString() string
-	Arguments() []string
-	ExceptionType() string
-	ExceptionName() string
-}
-
-var _ CrashDiagnosticObjectiveCExceptionReasonable = (*CrashDiagnosticObjectiveCExceptionReason)(nil)

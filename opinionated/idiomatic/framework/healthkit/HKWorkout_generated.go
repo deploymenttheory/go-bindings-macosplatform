@@ -53,85 +53,68 @@ func NewWorkout() *Workout {
 }
 
 // StatisticsForType returns the workout’s statistics for the provided quantity type.
-func (x *Workout) StatisticsForType(quantityType *QuantityType) *Statistics {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statisticsForType:"), objref.IDOf(quantityType))
+func (w *Workout) StatisticsForType(quantityType *QuantityType) *Statistics {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("statisticsForType:"), objref.IDOf(quantityType))
 	return StatisticsFromID(_r)
 }
 
 // WorkoutActivityType represents the activity that the user was performing during a workout
-func (x *Workout) WorkoutActivityType() WorkoutActivityType {
-	_r := objc.Send[WorkoutActivityType](objref.IDOf(x), objc.RegisterName("workoutActivityType"))
+func (w *Workout) WorkoutActivityType() WorkoutActivityType {
+	_r := objc.Send[WorkoutActivityType](objref.IDOf(w), objc.RegisterName("workoutActivityType"))
 	return _r
 }
 
-// WorkoutEvents an array of HKWorkoutEvents that occurred during a workout. These events will be ordered by date in ascending order. All events must take place between the start date and end date of the workout. The first workout event should never be a resume event because it is assumed that the workout begins in a running state.
+// WorkoutEvents returns an array of HKWorkoutEvents that occurred during a workout. These events will be ordered by date in ascending order. All events must take place between the start date and end date of the workout. The first workout event should never be a resume event because it is assumed that the workout begins in a running state.
 //
 // WorkoutEvents returns the collection as a Go slice.
-func (x *Workout) WorkoutEvents() []*WorkoutEvent {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workoutEvents"))
+func (w *Workout) WorkoutEvents() []*WorkoutEvent {
+	_arr := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("workoutEvents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WorkoutEvent { return WorkoutEventFromID(_id) })
 }
 
-// WorkoutActivities an array of HKWorkoutActivities that were performed during a workout. These activities will be ordered by date in ascending order. All activities must take place between the start date and end date of the workout.
+// WorkoutActivities returns an array of HKWorkoutActivities that were performed during a workout. These activities will be ordered by date in ascending order. All activities must take place between the start date and end date of the workout.
 //
 // WorkoutActivities returns the collection as a Go slice.
-func (x *Workout) WorkoutActivities() []*WorkoutActivity {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workoutActivities"))
+func (w *Workout) WorkoutActivities() []*WorkoutActivity {
+	_arr := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("workoutActivities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WorkoutActivity { return WorkoutActivityFromID(_id) })
 }
 
-// Duration the length of time that a workout was recording The duration is derived from the start and end dates of the workout and takes into account periods that the workout was paused. Periods that the workout was paused are based off of the workoutEvents property.
-func (x *Workout) Duration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+// Duration returns the length of time that a workout was recording The duration is derived from the start and end dates of the workout and takes into account periods that the workout was paused. Periods that the workout was paused are based off of the workoutEvents property.
+func (w *Workout) Duration() float64 {
+	_r := objc.Send[float64](objref.IDOf(w), objc.RegisterName("duration"))
 	return _r
 }
 
-// TotalEnergyBurned the amount of energy that was burned during a workout This metric should represent the total active energy burned during the course of the workout. It should be a quantity with a unit representing energy.
-func (x *Workout) TotalEnergyBurned() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalEnergyBurned"))
+// TotalEnergyBurned returns the amount of energy that was burned during a workout This metric should represent the total active energy burned during the course of the workout. It should be a quantity with a unit representing energy.
+func (w *Workout) TotalEnergyBurned() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("totalEnergyBurned"))
 	return QuantityFromID(_r)
 }
 
-// TotalDistance the total distance that was traveled during a workout This metric should represent the total distance traveled during the course of the workout. It should be a quantity with a unit representing length.
-func (x *Workout) TotalDistance() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalDistance"))
+// TotalDistance returns the total distance that was traveled during a workout This metric should represent the total distance traveled during the course of the workout. It should be a quantity with a unit representing length.
+func (w *Workout) TotalDistance() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("totalDistance"))
 	return QuantityFromID(_r)
 }
 
-// TotalSwimmingStrokeCount the total count of swimming strokes that was accumulated during a workout This metric should represent the total count of swimming strokes accumulated during the course of the workout. It should be a quantity with a unit representing count.
-func (x *Workout) TotalSwimmingStrokeCount() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalSwimmingStrokeCount"))
+// TotalSwimmingStrokeCount returns the total count of swimming strokes that was accumulated during a workout This metric should represent the total count of swimming strokes accumulated during the course of the workout. It should be a quantity with a unit representing count.
+func (w *Workout) TotalSwimmingStrokeCount() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("totalSwimmingStrokeCount"))
 	return QuantityFromID(_r)
 }
 
-// TotalFlightsClimbed the total count of flights climbed during a workout This metric should represent the total count of flights accumulated during the course of the workout. It should be a quantity with a unit representing count.
-func (x *Workout) TotalFlightsClimbed() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("totalFlightsClimbed"))
+// TotalFlightsClimbed returns the total count of flights climbed during a workout This metric should represent the total count of flights accumulated during the course of the workout. It should be a quantity with a unit representing count.
+func (w *Workout) TotalFlightsClimbed() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("totalFlightsClimbed"))
 	return QuantityFromID(_r)
 }
 
-// AllStatistics a dictionary of statistics per quantity type during the workout This dictionary will contain HKStatistics objects containing the statistics by quantity sample type for all of the samples that have been added to the workout.
-func (x *Workout) AllStatistics() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allStatistics"))
+// AllStatistics returns a dictionary of statistics per quantity type during the workout This dictionary will contain HKStatistics objects containing the statistics by quantity sample type for all of the samples that have been added to the workout.
+func (w *Workout) AllStatistics() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(w), objc.RegisterName("allStatistics"))
 	return obj.Wrap(_r)
 }
-
-// Workoutable is the interface implemented by [Workout], for mocking and DI.
-type Workoutable interface {
-	obj.Object
-	StatisticsForType(quantityType *QuantityType) *Statistics
-	WorkoutActivityType() WorkoutActivityType
-	WorkoutEvents() []*WorkoutEvent
-	WorkoutActivities() []*WorkoutActivity
-	Duration() float64
-	TotalEnergyBurned() *Quantity
-	TotalDistance() *Quantity
-	TotalSwimmingStrokeCount() *Quantity
-	TotalFlightsClimbed() *Quantity
-	AllStatistics() obj.Object
-}
-
-var _ Workoutable = (*Workout)(nil)
 
 var _ SampleProvider = (*Workout)(nil)
 

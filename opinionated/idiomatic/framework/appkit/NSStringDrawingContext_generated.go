@@ -47,24 +47,24 @@ func stringDrawingContextAdopt(id objc.ID) *StringDrawingContext {
 }
 
 // Description returns the object's -description text.
-func (x *StringDrawingContext) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sdc *StringDrawingContext) Description() string {
+	return rt.Description(objref.IDOf(sdc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StringDrawingContext) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sdc *StringDrawingContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sdc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StringDrawingContext) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sdc *StringDrawingContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sdc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StringDrawingContext) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sdc *StringDrawingContext) String() string {
+	return rt.Description(objref.IDOf(sdc))
 }
 
 // NewStringDrawingContext creates a new StringDrawingContext.
@@ -73,43 +73,26 @@ func NewStringDrawingContext() *StringDrawingContext {
 	return stringDrawingContextAdopt(_id)
 }
 
-// WithMinimumScaleFactor the scale factor that determines the smallest font size to use during drawing.
-func (x *StringDrawingContext) WithMinimumScaleFactor(minimumScaleFactor float64) *StringDrawingContext {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumScaleFactor:"), minimumScaleFactor)
-	return x
+// WithMinimumScaleFactor sets the scale factor that determines the smallest font size to use during drawing.
+func (sdc *StringDrawingContext) WithMinimumScaleFactor(minimumScaleFactor float64) *StringDrawingContext {
+	objc.Send[objc.ID](objref.IDOf(sdc), objc.RegisterName("setMinimumScaleFactor:"), minimumScaleFactor)
+	return sdc
 }
 
 // MinimumScaleFactor wraps the corresponding Objective-C method.
-func (x *StringDrawingContext) MinimumScaleFactor() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minimumScaleFactor"))
+func (sdc *StringDrawingContext) MinimumScaleFactor() float64 {
+	_r := objc.Send[float64](objref.IDOf(sdc), objc.RegisterName("minimumScaleFactor"))
 	return _r
 }
 
-// SetMinimumScaleFactor wraps the corresponding Objective-C method.
-func (x *StringDrawingContext) SetMinimumScaleFactor(minimumScaleFactor float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumScaleFactor:"), minimumScaleFactor)
-}
-
 // ActualScaleFactor wraps the corresponding Objective-C method.
-func (x *StringDrawingContext) ActualScaleFactor() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("actualScaleFactor"))
+func (sdc *StringDrawingContext) ActualScaleFactor() float64 {
+	_r := objc.Send[float64](objref.IDOf(sdc), objc.RegisterName("actualScaleFactor"))
 	return _r
 }
 
 // TotalBounds wraps the corresponding Objective-C method.
-func (x *StringDrawingContext) TotalBounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("totalBounds"))
+func (sdc *StringDrawingContext) TotalBounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(sdc), objc.RegisterName("totalBounds"))
 	return _r
 }
-
-// StringDrawingContextable is the interface implemented by [StringDrawingContext], for mocking and DI.
-type StringDrawingContextable interface {
-	obj.Object
-	WithMinimumScaleFactor(minimumScaleFactor float64) *StringDrawingContext
-	MinimumScaleFactor() float64
-	SetMinimumScaleFactor(minimumScaleFactor float64)
-	ActualScaleFactor() float64
-	TotalBounds() corefoundation.CGRect
-}
-
-var _ StringDrawingContextable = (*StringDrawingContext)(nil)

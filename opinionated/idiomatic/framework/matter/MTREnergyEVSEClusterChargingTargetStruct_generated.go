@@ -44,24 +44,24 @@ func mTREnergyEVSEClusterChargingTargetStructAdopt(id objc.ID) *MTREnergyEVSEClu
 }
 
 // Description returns the object's -description text.
-func (x *MTREnergyEVSEClusterChargingTargetStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) Description() string {
+	return rt.Description(objref.IDOf(meeccts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTREnergyEVSEClusterChargingTargetStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(meeccts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTREnergyEVSEClusterChargingTargetStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(meeccts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTREnergyEVSEClusterChargingTargetStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) String() string {
+	return rt.Description(objref.IDOf(meeccts))
 }
 
 // NewMTREnergyEVSEClusterChargingTargetStruct creates a new MTREnergyEVSEClusterChargingTargetStruct.
@@ -71,68 +71,37 @@ func NewMTREnergyEVSEClusterChargingTargetStruct() *MTREnergyEVSEClusterCharging
 }
 
 // WithTargetTimeMinutesPastMidnight sets the property and returns the receiver so calls can be chained.
-func (x *MTREnergyEVSEClusterChargingTargetStruct) WithTargetTimeMinutesPastMidnight(targetTimeMinutesPastMidnight obj.Object) *MTREnergyEVSEClusterChargingTargetStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetTimeMinutesPastMidnight:"), objref.IDOf(targetTimeMinutesPastMidnight))
-	return x
+func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) WithTargetTimeMinutesPastMidnight(targetTimeMinutesPastMidnight obj.Object) *MTREnergyEVSEClusterChargingTargetStruct {
+	objc.Send[objc.ID](objref.IDOf(meeccts), objc.RegisterName("setTargetTimeMinutesPastMidnight:"), objref.IDOf(targetTimeMinutesPastMidnight))
+	return meeccts
 }
 
 // WithTargetSoC sets the property and returns the receiver so calls can be chained.
-func (x *MTREnergyEVSEClusterChargingTargetStruct) WithTargetSoC(targetSoC obj.Object) *MTREnergyEVSEClusterChargingTargetStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetSoC:"), objref.IDOf(targetSoC))
-	return x
+func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) WithTargetSoC(targetSoC obj.Object) *MTREnergyEVSEClusterChargingTargetStruct {
+	objc.Send[objc.ID](objref.IDOf(meeccts), objc.RegisterName("setTargetSoC:"), objref.IDOf(targetSoC))
+	return meeccts
 }
 
 // WithAddedEnergy sets the property and returns the receiver so calls can be chained.
-func (x *MTREnergyEVSEClusterChargingTargetStruct) WithAddedEnergy(addedEnergy obj.Object) *MTREnergyEVSEClusterChargingTargetStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddedEnergy:"), objref.IDOf(addedEnergy))
-	return x
+func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) WithAddedEnergy(addedEnergy obj.Object) *MTREnergyEVSEClusterChargingTargetStruct {
+	objc.Send[objc.ID](objref.IDOf(meeccts), objc.RegisterName("setAddedEnergy:"), objref.IDOf(addedEnergy))
+	return meeccts
 }
 
 // TargetTimeMinutesPastMidnight wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterChargingTargetStruct) TargetTimeMinutesPastMidnight() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetTimeMinutesPastMidnight"))
+func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) TargetTimeMinutesPastMidnight() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meeccts), objc.RegisterName("targetTimeMinutesPastMidnight"))
 	return obj.Wrap(_r)
-}
-
-// SetTargetTimeMinutesPastMidnight wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterChargingTargetStruct) SetTargetTimeMinutesPastMidnight(targetTimeMinutesPastMidnight obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetTimeMinutesPastMidnight:"), objref.IDOf(targetTimeMinutesPastMidnight))
 }
 
 // TargetSoC wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterChargingTargetStruct) TargetSoC() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetSoC"))
+func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) TargetSoC() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meeccts), objc.RegisterName("targetSoC"))
 	return obj.Wrap(_r)
-}
-
-// SetTargetSoC wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterChargingTargetStruct) SetTargetSoC(targetSoC obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTargetSoC:"), objref.IDOf(targetSoC))
 }
 
 // AddedEnergy wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterChargingTargetStruct) AddedEnergy() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addedEnergy"))
+func (meeccts *MTREnergyEVSEClusterChargingTargetStruct) AddedEnergy() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meeccts), objc.RegisterName("addedEnergy"))
 	return obj.Wrap(_r)
 }
-
-// SetAddedEnergy wraps the corresponding Objective-C method.
-func (x *MTREnergyEVSEClusterChargingTargetStruct) SetAddedEnergy(addedEnergy obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddedEnergy:"), objref.IDOf(addedEnergy))
-}
-
-// MTREnergyEVSEClusterChargingTargetStructable is the interface implemented by [MTREnergyEVSEClusterChargingTargetStruct], for mocking and DI.
-type MTREnergyEVSEClusterChargingTargetStructable interface {
-	obj.Object
-	WithTargetTimeMinutesPastMidnight(targetTimeMinutesPastMidnight obj.Object) *MTREnergyEVSEClusterChargingTargetStruct
-	WithTargetSoC(targetSoC obj.Object) *MTREnergyEVSEClusterChargingTargetStruct
-	WithAddedEnergy(addedEnergy obj.Object) *MTREnergyEVSEClusterChargingTargetStruct
-	TargetTimeMinutesPastMidnight() obj.Object
-	SetTargetTimeMinutesPastMidnight(targetTimeMinutesPastMidnight obj.Object)
-	TargetSoC() obj.Object
-	SetTargetSoC(targetSoC obj.Object)
-	AddedEnergy() obj.Object
-	SetAddedEnergy(addedEnergy obj.Object)
-}
-
-var _ MTREnergyEVSEClusterChargingTargetStructable = (*MTREnergyEVSEClusterChargingTargetStruct)(nil)

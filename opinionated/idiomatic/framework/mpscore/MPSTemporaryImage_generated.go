@@ -7,7 +7,6 @@ package mpscore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,37 +50,21 @@ func NewTemporaryImage() *TemporaryImage {
 }
 
 // WithReadCount sets the property and returns the receiver so calls can be chained.
-func (x *TemporaryImage) WithReadCount(readCount int) *TemporaryImage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-	return x
+func (ti *TemporaryImage) WithReadCount(readCount int) *TemporaryImage {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setReadCount:"), readCount)
+	return ti
 }
 
-// WithLabel a string to help identify this object.
-func (x *TemporaryImage) WithLabel(label string) *TemporaryImage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (ti *TemporaryImage) WithLabel(label string) *TemporaryImage {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ti
 }
 
 // ReadCount wraps the corresponding Objective-C method.
-func (x *TemporaryImage) ReadCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("readCount"))
+func (ti *TemporaryImage) ReadCount() int {
+	_r := objc.Send[int](objref.IDOf(ti), objc.RegisterName("readCount"))
 	return _r
 }
-
-// SetReadCount wraps the corresponding Objective-C method.
-func (x *TemporaryImage) SetReadCount(readCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-}
-
-// TemporaryImageable is the interface implemented by [TemporaryImage], for mocking and DI.
-type TemporaryImageable interface {
-	obj.Object
-	WithReadCount(readCount int) *TemporaryImage
-	WithLabel(label string) *TemporaryImage
-	ReadCount() int
-	SetReadCount(readCount int)
-}
-
-var _ TemporaryImageable = (*TemporaryImage)(nil)
 
 var _ ImageProvider = (*TemporaryImage)(nil)

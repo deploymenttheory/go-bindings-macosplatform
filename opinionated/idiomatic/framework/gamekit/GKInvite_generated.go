@@ -46,24 +46,24 @@ func inviteAdopt(id objc.ID) *Invite {
 }
 
 // Description returns the object's -description text.
-func (x *Invite) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (i *Invite) Description() string {
+	return rt.Description(objref.IDOf(i))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Invite) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (i *Invite) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(i), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Invite) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (i *Invite) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(i), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Invite) String() string {
-	return rt.Description(objref.IDOf(x))
+func (i *Invite) String() string {
+	return rt.Description(objref.IDOf(i))
 }
 
 // NewInvite creates a new Invite.
@@ -73,46 +73,34 @@ func NewInvite() *Invite {
 }
 
 // Sender wraps the corresponding Objective-C method.
-func (x *Invite) Sender() *Player {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sender"))
+func (i *Invite) Sender() *Player {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("sender"))
 	return PlayerFromID(_r)
 }
 
 // IsHosted wraps the corresponding Objective-C method.
-func (x *Invite) IsHosted() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHosted"))
+func (i *Invite) IsHosted() bool {
+	_r := objc.Send[bool](objref.IDOf(i), objc.RegisterName("isHosted"))
 	return _r
 }
 
-// PlayerGroup player group from inviter's match request
-func (x *Invite) PlayerGroup() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("playerGroup"))
+// PlayerGroup returns player group from inviter's match request
+func (i *Invite) PlayerGroup() int {
+	_r := objc.Send[int](objref.IDOf(i), objc.RegisterName("playerGroup"))
 	return _r
 }
 
-// PlayerAttributes player attributes from inviter's match request
-func (x *Invite) PlayerAttributes() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("playerAttributes"))
+// PlayerAttributes returns player attributes from inviter's match request
+func (i *Invite) PlayerAttributes() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(i), objc.RegisterName("playerAttributes"))
 	return _r
 }
 
-// Inviter * This property is obsolete. **
-func (x *Invite) Inviter() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inviter"))
+// Inviter returns * This property is obsolete. **
+func (i *Invite) Inviter() string {
+	_r := objc.Send[objc.ID](objref.IDOf(i), objc.RegisterName("inviter"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Inviteable is the interface implemented by [Invite], for mocking and DI.
-type Inviteable interface {
-	obj.Object
-	Sender() *Player
-	IsHosted() bool
-	PlayerGroup() int
-	PlayerAttributes() uint32
-	Inviter() string
-}
-
-var _ Inviteable = (*Invite)(nil)

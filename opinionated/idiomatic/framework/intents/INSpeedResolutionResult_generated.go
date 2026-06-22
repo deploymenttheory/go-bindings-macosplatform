@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewSpeedResolutionResult() *SpeedResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INSpeedResolutionResult")), objc.RegisterName("new"))
 	return speedResolutionResultAdopt(_id)
 }
-
-// SpeedResolutionResultable is the interface implemented by [SpeedResolutionResult], for mocking and DI.
-type SpeedResolutionResultable interface {
-	obj.Object
-}
-
-var _ SpeedResolutionResultable = (*SpeedResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*SpeedResolutionResult)(nil)

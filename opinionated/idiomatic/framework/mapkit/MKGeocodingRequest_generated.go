@@ -6,6 +6,7 @@ package mapkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -48,24 +49,24 @@ func geocodingRequestAdopt(id objc.ID) *GeocodingRequest {
 }
 
 // Description returns the object's -description text.
-func (x *GeocodingRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (gr *GeocodingRequest) Description() string {
+	return rt.Description(objref.IDOf(gr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *GeocodingRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (gr *GeocodingRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(gr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *GeocodingRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (gr *GeocodingRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(gr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *GeocodingRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (gr *GeocodingRequest) String() string {
+	return rt.Description(objref.IDOf(gr))
 }
 
 // NewGeocodingRequestWithAddressString initializes a new geocoder request object with the provided address string.
@@ -75,16 +76,16 @@ func NewGeocodingRequestWithAddressString(addressString string) *GeocodingReques
 	return geocodingRequestAdopt(_id)
 }
 
-// WithPreferredLocale a value that indicates the default locale the geocoder should use when processing requests.
-func (x *GeocodingRequest) WithPreferredLocale(preferredLocale obj.Object) *GeocodingRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredLocale:"), objref.IDOf(preferredLocale))
-	return x
+// WithPreferredLocale sets a value that indicates the default locale the geocoder should use when processing requests.
+func (gr *GeocodingRequest) WithPreferredLocale(preferredLocale obj.Object) *GeocodingRequest {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("setPreferredLocale:"), objref.IDOf(preferredLocale))
+	return gr
 }
 
 // GetMapItems returns the map items relevant to the geocoded location.
 //
 // GetMapItems blocks until the operation completes or ctx is cancelled.
-func (x *GeocodingRequest) GetMapItems(ctx context.Context) (result obj.Object, err error) {
+func (gr *GeocodingRequest) GetMapItems(ctx context.Context) (result obj.Object, err error) {
 	type _result struct {
 		val obj.Object
 		err error
@@ -96,7 +97,7 @@ func (x *GeocodingRequest) GetMapItems(ctx context.Context) (result obj.Object, 
 		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getMapItemsWithCompletionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("getMapItemsWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -107,25 +108,25 @@ func (x *GeocodingRequest) GetMapItems(ctx context.Context) (result obj.Object, 
 }
 
 // Cancel a function you call to cancel a geocoding request that’s in progress.
-func (x *GeocodingRequest) Cancel() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
+func (gr *GeocodingRequest) Cancel() {
+	objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("cancel"))
 }
 
 // IsCancelled wraps the corresponding Objective-C method.
-func (x *GeocodingRequest) IsCancelled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCancelled"))
+func (gr *GeocodingRequest) IsCancelled() bool {
+	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("isCancelled"))
 	return _r
 }
 
 // IsLoading wraps the corresponding Objective-C method.
-func (x *GeocodingRequest) IsLoading() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLoading"))
+func (gr *GeocodingRequest) IsLoading() bool {
+	_r := objc.Send[bool](objref.IDOf(gr), objc.RegisterName("isLoading"))
 	return _r
 }
 
 // AddressString wraps the corresponding Objective-C method.
-func (x *GeocodingRequest) AddressString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressString"))
+func (gr *GeocodingRequest) AddressString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("addressString"))
 	if _r == 0 {
 		return ""
 	}
@@ -133,27 +134,7 @@ func (x *GeocodingRequest) AddressString() string {
 }
 
 // PreferredLocale wraps the corresponding Objective-C method.
-func (x *GeocodingRequest) PreferredLocale() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredLocale"))
+func (gr *GeocodingRequest) PreferredLocale() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(gr), objc.RegisterName("preferredLocale"))
 	return obj.Wrap(_r)
 }
-
-// SetPreferredLocale wraps the corresponding Objective-C method.
-func (x *GeocodingRequest) SetPreferredLocale(preferredLocale obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredLocale:"), objref.IDOf(preferredLocale))
-}
-
-// GeocodingRequestable is the interface implemented by [GeocodingRequest], for mocking and DI.
-type GeocodingRequestable interface {
-	obj.Object
-	WithPreferredLocale(preferredLocale obj.Object) *GeocodingRequest
-	GetMapItems(ctx context.Context) (obj.Object, error)
-	Cancel()
-	IsCancelled() bool
-	IsLoading() bool
-	AddressString() string
-	PreferredLocale() obj.Object
-	SetPreferredLocale(preferredLocale obj.Object)
-}
-
-var _ GeocodingRequestable = (*GeocodingRequest)(nil)

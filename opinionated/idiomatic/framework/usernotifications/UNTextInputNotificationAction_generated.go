@@ -7,7 +7,6 @@ package usernotifications
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,8 +52,8 @@ func NewTextInputNotificationAction() *TextInputNotificationAction {
 }
 
 // TextInputButtonTitle wraps the corresponding Objective-C method.
-func (x *TextInputNotificationAction) TextInputButtonTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textInputButtonTitle"))
+func (tina *TextInputNotificationAction) TextInputButtonTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tina), objc.RegisterName("textInputButtonTitle"))
 	if _r == 0 {
 		return ""
 	}
@@ -62,21 +61,12 @@ func (x *TextInputNotificationAction) TextInputButtonTitle() string {
 }
 
 // TextInputPlaceholder wraps the corresponding Objective-C method.
-func (x *TextInputNotificationAction) TextInputPlaceholder() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textInputPlaceholder"))
+func (tina *TextInputNotificationAction) TextInputPlaceholder() string {
+	_r := objc.Send[objc.ID](objref.IDOf(tina), objc.RegisterName("textInputPlaceholder"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// TextInputNotificationActionable is the interface implemented by [TextInputNotificationAction], for mocking and DI.
-type TextInputNotificationActionable interface {
-	obj.Object
-	TextInputButtonTitle() string
-	TextInputPlaceholder() string
-}
-
-var _ TextInputNotificationActionable = (*TextInputNotificationAction)(nil)
 
 var _ NotificationActionProvider = (*TextInputNotificationAction)(nil)

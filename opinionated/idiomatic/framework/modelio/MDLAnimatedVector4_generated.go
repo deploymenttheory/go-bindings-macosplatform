@@ -7,7 +7,6 @@ package modelio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,17 +50,9 @@ func NewAnimatedVector4() *AnimatedVector4 {
 }
 
 // WithInterpolation sets the property and returns the receiver so calls can be chained.
-func (x *AnimatedVector4) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector4 {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
-	return x
+func (av *AnimatedVector4) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector4 {
+	objc.Send[objc.ID](objref.IDOf(av), objc.RegisterName("setInterpolation:"), interpolation)
+	return av
 }
-
-// AnimatedVector4able is the interface implemented by [AnimatedVector4], for mocking and DI.
-type AnimatedVector4able interface {
-	obj.Object
-	WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedVector4
-}
-
-var _ AnimatedVector4able = (*AnimatedVector4)(nil)
 
 var _ AnimatedValueProvider = (*AnimatedVector4)(nil)

@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,114 +51,82 @@ func NewRenderPassStencilAttachmentDescriptor() *RenderPassStencilAttachmentDesc
 	return renderPassStencilAttachmentDescriptorAdopt(_id)
 }
 
-// WithClearStencil the value to use when clearing the stencil attachment.
-func (x *RenderPassStencilAttachmentDescriptor) WithClearStencil(clearStencil uint32) *RenderPassStencilAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearStencil:"), clearStencil)
-	return x
+// WithClearStencil sets the value to use when clearing the stencil attachment.
+func (rpsad *RenderPassStencilAttachmentDescriptor) WithClearStencil(clearStencil uint32) *RenderPassStencilAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpsad), objc.RegisterName("setClearStencil:"), clearStencil)
+	return rpsad
 }
 
-// WithStencilResolveFilter the filter used for stencil multisample resolve.
-func (x *RenderPassStencilAttachmentDescriptor) WithStencilResolveFilter(stencilResolveFilter MultisampleStencilResolveFilter) *RenderPassStencilAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStencilResolveFilter:"), stencilResolveFilter)
-	return x
+// WithStencilResolveFilter sets the filter used for stencil multisample resolve.
+func (rpsad *RenderPassStencilAttachmentDescriptor) WithStencilResolveFilter(stencilResolveFilter MultisampleStencilResolveFilter) *RenderPassStencilAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpsad), objc.RegisterName("setStencilResolveFilter:"), stencilResolveFilter)
+	return rpsad
 }
 
-// WithLevel the mipmap level of the texture used for rendering to the attachment.
-func (x *RenderPassStencilAttachmentDescriptor) WithLevel(level int) *RenderPassStencilAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
-	return x
+// WithLevel sets the mipmap level of the texture used for rendering to the attachment.
+func (rpsad *RenderPassStencilAttachmentDescriptor) WithLevel(level int) *RenderPassStencilAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpsad), objc.RegisterName("setLevel:"), level)
+	return rpsad
 }
 
-// WithSlice the slice of the texture used for rendering to the attachment.
-func (x *RenderPassStencilAttachmentDescriptor) WithSlice(slice int) *RenderPassStencilAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSlice:"), slice)
-	return x
+// WithSlice sets the slice of the texture used for rendering to the attachment.
+func (rpsad *RenderPassStencilAttachmentDescriptor) WithSlice(slice int) *RenderPassStencilAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpsad), objc.RegisterName("setSlice:"), slice)
+	return rpsad
 }
 
-// WithDepthPlane the depth plane of the texture used for rendering to the attachment.
-func (x *RenderPassStencilAttachmentDescriptor) WithDepthPlane(depthPlane int) *RenderPassStencilAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthPlane:"), depthPlane)
-	return x
+// WithDepthPlane sets the depth plane of the texture used for rendering to the attachment.
+func (rpsad *RenderPassStencilAttachmentDescriptor) WithDepthPlane(depthPlane int) *RenderPassStencilAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpsad), objc.RegisterName("setDepthPlane:"), depthPlane)
+	return rpsad
 }
 
-// WithResolveLevel the mipmap level of the texture used for the multisample resolve action.
-func (x *RenderPassStencilAttachmentDescriptor) WithResolveLevel(resolveLevel int) *RenderPassStencilAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolveLevel:"), resolveLevel)
-	return x
+// WithResolveLevel sets the mipmap level of the texture used for the multisample resolve action.
+func (rpsad *RenderPassStencilAttachmentDescriptor) WithResolveLevel(resolveLevel int) *RenderPassStencilAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpsad), objc.RegisterName("setResolveLevel:"), resolveLevel)
+	return rpsad
 }
 
-// WithResolveSlice the slice of the texture used for the multisample resolve action.
-func (x *RenderPassStencilAttachmentDescriptor) WithResolveSlice(resolveSlice int) *RenderPassStencilAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolveSlice:"), resolveSlice)
-	return x
+// WithResolveSlice sets the slice of the texture used for the multisample resolve action.
+func (rpsad *RenderPassStencilAttachmentDescriptor) WithResolveSlice(resolveSlice int) *RenderPassStencilAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpsad), objc.RegisterName("setResolveSlice:"), resolveSlice)
+	return rpsad
 }
 
-// WithResolveDepthPlane the depth plane of the texture used for the multisample resolve action.
-func (x *RenderPassStencilAttachmentDescriptor) WithResolveDepthPlane(resolveDepthPlane int) *RenderPassStencilAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolveDepthPlane:"), resolveDepthPlane)
-	return x
+// WithResolveDepthPlane sets the depth plane of the texture used for the multisample resolve action.
+func (rpsad *RenderPassStencilAttachmentDescriptor) WithResolveDepthPlane(resolveDepthPlane int) *RenderPassStencilAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpsad), objc.RegisterName("setResolveDepthPlane:"), resolveDepthPlane)
+	return rpsad
 }
 
-// WithLoadAction the action performed by this attachment at the start of a rendering pass for a render command encoder.
-func (x *RenderPassStencilAttachmentDescriptor) WithLoadAction(loadAction LoadAction) *RenderPassStencilAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLoadAction:"), loadAction)
-	return x
+// WithLoadAction sets the action performed by this attachment at the start of a rendering pass for a render command encoder.
+func (rpsad *RenderPassStencilAttachmentDescriptor) WithLoadAction(loadAction LoadAction) *RenderPassStencilAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpsad), objc.RegisterName("setLoadAction:"), loadAction)
+	return rpsad
 }
 
-// WithStoreAction the action performed by this attachment at the end of a rendering pass for a render command encoder.
-func (x *RenderPassStencilAttachmentDescriptor) WithStoreAction(storeAction StoreAction) *RenderPassStencilAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreAction:"), storeAction)
-	return x
+// WithStoreAction sets the action performed by this attachment at the end of a rendering pass for a render command encoder.
+func (rpsad *RenderPassStencilAttachmentDescriptor) WithStoreAction(storeAction StoreAction) *RenderPassStencilAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpsad), objc.RegisterName("setStoreAction:"), storeAction)
+	return rpsad
 }
 
-// WithStoreActionOptions the options that modify the store action performed by this attachment.
-func (x *RenderPassStencilAttachmentDescriptor) WithStoreActionOptions(storeActionOptions StoreActionOptions) *RenderPassStencilAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStoreActionOptions:"), storeActionOptions)
-	return x
+// WithStoreActionOptions sets the options that modify the store action performed by this attachment.
+func (rpsad *RenderPassStencilAttachmentDescriptor) WithStoreActionOptions(storeActionOptions StoreActionOptions) *RenderPassStencilAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(rpsad), objc.RegisterName("setStoreActionOptions:"), storeActionOptions)
+	return rpsad
 }
 
-// ClearStencil the clear stencil value to be used if the loadAction property is MTLLoadActionClear
-func (x *RenderPassStencilAttachmentDescriptor) ClearStencil() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("clearStencil"))
+// ClearStencil returns the clear stencil value to be used if the loadAction property is MTLLoadActionClear
+func (rpsad *RenderPassStencilAttachmentDescriptor) ClearStencil() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(rpsad), objc.RegisterName("clearStencil"))
 	return _r
 }
 
-// SetClearStencil wraps the corresponding Objective-C method.
-func (x *RenderPassStencilAttachmentDescriptor) SetClearStencil(clearStencil uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearStencil:"), clearStencil)
-}
-
-// StencilResolveFilter the filter to be used for stencil multisample resolve. Defaults to MTLMultisampleStencilResolveFilterSample0.
-func (x *RenderPassStencilAttachmentDescriptor) StencilResolveFilter() MultisampleStencilResolveFilter {
-	_r := objc.Send[MultisampleStencilResolveFilter](objref.IDOf(x), objc.RegisterName("stencilResolveFilter"))
+// StencilResolveFilter returns the filter to be used for stencil multisample resolve. Defaults to MTLMultisampleStencilResolveFilterSample0.
+func (rpsad *RenderPassStencilAttachmentDescriptor) StencilResolveFilter() MultisampleStencilResolveFilter {
+	_r := objc.Send[MultisampleStencilResolveFilter](objref.IDOf(rpsad), objc.RegisterName("stencilResolveFilter"))
 	return _r
 }
-
-// SetStencilResolveFilter wraps the corresponding Objective-C method.
-func (x *RenderPassStencilAttachmentDescriptor) SetStencilResolveFilter(stencilResolveFilter MultisampleStencilResolveFilter) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStencilResolveFilter:"), stencilResolveFilter)
-}
-
-// RenderPassStencilAttachmentDescriptorable is the interface implemented by [RenderPassStencilAttachmentDescriptor], for mocking and DI.
-type RenderPassStencilAttachmentDescriptorable interface {
-	obj.Object
-	WithClearStencil(clearStencil uint32) *RenderPassStencilAttachmentDescriptor
-	WithStencilResolveFilter(stencilResolveFilter MultisampleStencilResolveFilter) *RenderPassStencilAttachmentDescriptor
-	WithLevel(level int) *RenderPassStencilAttachmentDescriptor
-	WithSlice(slice int) *RenderPassStencilAttachmentDescriptor
-	WithDepthPlane(depthPlane int) *RenderPassStencilAttachmentDescriptor
-	WithResolveLevel(resolveLevel int) *RenderPassStencilAttachmentDescriptor
-	WithResolveSlice(resolveSlice int) *RenderPassStencilAttachmentDescriptor
-	WithResolveDepthPlane(resolveDepthPlane int) *RenderPassStencilAttachmentDescriptor
-	WithLoadAction(loadAction LoadAction) *RenderPassStencilAttachmentDescriptor
-	WithStoreAction(storeAction StoreAction) *RenderPassStencilAttachmentDescriptor
-	WithStoreActionOptions(storeActionOptions StoreActionOptions) *RenderPassStencilAttachmentDescriptor
-	ClearStencil() uint32
-	SetClearStencil(clearStencil uint32)
-	StencilResolveFilter() MultisampleStencilResolveFilter
-	SetStencilResolveFilter(stencilResolveFilter MultisampleStencilResolveFilter)
-}
-
-var _ RenderPassStencilAttachmentDescriptorable = (*RenderPassStencilAttachmentDescriptor)(nil)
 
 var _ RenderPassAttachmentDescriptorProvider = (*RenderPassStencilAttachmentDescriptor)(nil)

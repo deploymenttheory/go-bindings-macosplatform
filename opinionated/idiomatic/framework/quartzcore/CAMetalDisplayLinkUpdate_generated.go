@@ -46,24 +46,24 @@ func metalDisplayLinkUpdateAdopt(id objc.ID) *MetalDisplayLinkUpdate {
 }
 
 // Description returns the object's -description text.
-func (x *MetalDisplayLinkUpdate) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdlu *MetalDisplayLinkUpdate) Description() string {
+	return rt.Description(objref.IDOf(mdlu))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetalDisplayLinkUpdate) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdlu *MetalDisplayLinkUpdate) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdlu), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetalDisplayLinkUpdate) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdlu *MetalDisplayLinkUpdate) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdlu), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MetalDisplayLinkUpdate) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdlu *MetalDisplayLinkUpdate) String() string {
+	return rt.Description(objref.IDOf(mdlu))
 }
 
 // NewMetalDisplayLinkUpdate creates a new MetalDisplayLinkUpdate.
@@ -73,22 +73,13 @@ func NewMetalDisplayLinkUpdate() *MetalDisplayLinkUpdate {
 }
 
 // TargetTimestamp wraps the corresponding Objective-C method.
-func (x *MetalDisplayLinkUpdate) TargetTimestamp() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("targetTimestamp"))
+func (mdlu *MetalDisplayLinkUpdate) TargetTimestamp() float64 {
+	_r := objc.Send[float64](objref.IDOf(mdlu), objc.RegisterName("targetTimestamp"))
 	return _r
 }
 
 // TargetPresentationTimestamp wraps the corresponding Objective-C method.
-func (x *MetalDisplayLinkUpdate) TargetPresentationTimestamp() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("targetPresentationTimestamp"))
+func (mdlu *MetalDisplayLinkUpdate) TargetPresentationTimestamp() float64 {
+	_r := objc.Send[float64](objref.IDOf(mdlu), objc.RegisterName("targetPresentationTimestamp"))
 	return _r
 }
-
-// MetalDisplayLinkUpdateable is the interface implemented by [MetalDisplayLinkUpdate], for mocking and DI.
-type MetalDisplayLinkUpdateable interface {
-	obj.Object
-	TargetTimestamp() float64
-	TargetPresentationTimestamp() float64
-}
-
-var _ MetalDisplayLinkUpdateable = (*MetalDisplayLinkUpdate)(nil)

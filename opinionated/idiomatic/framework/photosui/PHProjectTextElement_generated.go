@@ -52,35 +52,25 @@ func NewProjectTextElement() *ProjectTextElement {
 	return projectTextElementAdopt(_id)
 }
 
-// Text unformatted, raw string for the text element
-func (x *ProjectTextElement) Text() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("text"))
+// Text returns unformatted, raw string for the text element
+func (pte *ProjectTextElement) Text() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pte), objc.RegisterName("text"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// AttributedText if the text was presented to the user in a stylized manner in Photos, attributedText will provide access to those same attributes.
-func (x *ProjectTextElement) AttributedText() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedText"))
+// AttributedText returns if the text was presented to the user in a stylized manner in Photos, attributedText will provide access to those same attributes.
+func (pte *ProjectTextElement) AttributedText() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pte), objc.RegisterName("attributedText"))
 	return obj.Wrap(_r)
 }
 
 // TextElementType wraps the corresponding Objective-C method.
-func (x *ProjectTextElement) TextElementType() ProjectTextElementType {
-	_r := objc.Send[ProjectTextElementType](objref.IDOf(x), objc.RegisterName("textElementType"))
+func (pte *ProjectTextElement) TextElementType() ProjectTextElementType {
+	_r := objc.Send[ProjectTextElementType](objref.IDOf(pte), objc.RegisterName("textElementType"))
 	return _r
 }
-
-// ProjectTextElementable is the interface implemented by [ProjectTextElement], for mocking and DI.
-type ProjectTextElementable interface {
-	obj.Object
-	Text() string
-	AttributedText() obj.Object
-	TextElementType() ProjectTextElementType
-}
-
-var _ ProjectTextElementable = (*ProjectTextElement)(nil)
 
 var _ ProjectElementProvider = (*ProjectTextElement)(nil)

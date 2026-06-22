@@ -50,51 +50,39 @@ func NewStateOfMind() *StateOfMind {
 	return stateOfMindAdopt(_id)
 }
 
-// Kind a description of the kind of feeling type captured by this state of mind. Feeling types can be understood by the timeframe considered to create this log, possibly indicated by the context used to create it. For example, a `momentary emotion` log might be in response to 'how are you feeling right now?' while a `daily mood` log might be in response to 'how have you been feeling today?'.
-func (x *StateOfMind) Kind() StateOfMindKind {
-	_r := objc.Send[StateOfMindKind](objref.IDOf(x), objc.RegisterName("kind"))
+// Kind returns a description of the kind of feeling type captured by this state of mind. Feeling types can be understood by the timeframe considered to create this log, possibly indicated by the context used to create it. For example, a `momentary emotion` log might be in response to 'how are you feeling right now?' while a `daily mood` log might be in response to 'how have you been feeling today?'.
+func (som *StateOfMind) Kind() StateOfMindKind {
+	_r := objc.Send[StateOfMindKind](objref.IDOf(som), objc.RegisterName("kind"))
 	return _r
 }
 
-// Valence a signed, self-reported measure of how positive or negative one is feeling, on a continuous scale from -1 to +1.
-func (x *StateOfMind) Valence() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("valence"))
+// Valence returns a signed, self-reported measure of how positive or negative one is feeling, on a continuous scale from -1 to +1.
+func (som *StateOfMind) Valence() float64 {
+	_r := objc.Send[float64](objref.IDOf(som), objc.RegisterName("valence"))
 	return _r
 }
 
-// ValenceClassification a general region of pleasantness based on this sample's valence value.
-func (x *StateOfMind) ValenceClassification() StateOfMindValenceClassification {
-	_r := objc.Send[StateOfMindValenceClassification](objref.IDOf(x), objc.RegisterName("valenceClassification"))
+// ValenceClassification returns a general region of pleasantness based on this sample's valence value.
+func (som *StateOfMind) ValenceClassification() StateOfMindValenceClassification {
+	_r := objc.Send[StateOfMindValenceClassification](objref.IDOf(som), objc.RegisterName("valenceClassification"))
 	return _r
 }
 
-// Labels zero or more specific sentiments selected to represent a felt experience.
+// Labels returns zero or more specific sentiments selected to represent a felt experience.
 //
 // Labels returns the collection as a Go slice.
-func (x *StateOfMind) Labels() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labels"))
+func (som *StateOfMind) Labels() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(som), objc.RegisterName("labels"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Associations zero or more facets of life with which this felt experience is associated.
+// Associations returns zero or more facets of life with which this felt experience is associated.
 //
 // Associations returns the collection as a Go slice.
-func (x *StateOfMind) Associations() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("associations"))
+func (som *StateOfMind) Associations() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(som), objc.RegisterName("associations"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// StateOfMindable is the interface implemented by [StateOfMind], for mocking and DI.
-type StateOfMindable interface {
-	obj.Object
-	Kind() StateOfMindKind
-	Valence() float64
-	ValenceClassification() StateOfMindValenceClassification
-	Labels() []obj.Object
-	Associations() []obj.Object
-}
-
-var _ StateOfMindable = (*StateOfMind)(nil)
 
 var _ SampleProvider = (*StateOfMind)(nil)
 

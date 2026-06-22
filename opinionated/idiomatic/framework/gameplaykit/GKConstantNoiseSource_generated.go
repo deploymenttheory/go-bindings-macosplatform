@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,31 +52,16 @@ func NewConstantNoiseSourceWithValue(value float64) *ConstantNoiseSource {
 	return constantNoiseSourceAdopt(_id)
 }
 
-// WithValue the constant value for the generated noise.
-func (x *ConstantNoiseSource) WithValue(value float64) *ConstantNoiseSource {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-	return x
+// WithValue sets the constant value for the generated noise.
+func (cns *ConstantNoiseSource) WithValue(value float64) *ConstantNoiseSource {
+	objc.Send[objc.ID](objref.IDOf(cns), objc.RegisterName("setValue:"), value)
+	return cns
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *ConstantNoiseSource) Value() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("value"))
+func (cns *ConstantNoiseSource) Value() float64 {
+	_r := objc.Send[float64](objref.IDOf(cns), objc.RegisterName("value"))
 	return _r
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *ConstantNoiseSource) SetValue(value float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-}
-
-// ConstantNoiseSourceable is the interface implemented by [ConstantNoiseSource], for mocking and DI.
-type ConstantNoiseSourceable interface {
-	obj.Object
-	WithValue(value float64) *ConstantNoiseSource
-	Value() float64
-	SetValue(value float64)
-}
-
-var _ ConstantNoiseSourceable = (*ConstantNoiseSource)(nil)
 
 var _ NoiseSourceProvider = (*ConstantNoiseSource)(nil)

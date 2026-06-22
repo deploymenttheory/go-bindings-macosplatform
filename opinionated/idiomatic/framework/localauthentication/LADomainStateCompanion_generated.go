@@ -44,24 +44,24 @@ func domainStateCompanionAdopt(id objc.ID) *DomainStateCompanion {
 }
 
 // Description returns the object's -description text.
-func (x *DomainStateCompanion) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (dsc *DomainStateCompanion) Description() string {
+	return rt.Description(objref.IDOf(dsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DomainStateCompanion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (dsc *DomainStateCompanion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(dsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DomainStateCompanion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (dsc *DomainStateCompanion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(dsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DomainStateCompanion) String() string {
-	return rt.Description(objref.IDOf(x))
+func (dsc *DomainStateCompanion) String() string {
+	return rt.Description(objref.IDOf(dsc))
 }
 
 // NewDomainStateCompanion creates a new DomainStateCompanion.
@@ -71,29 +71,19 @@ func NewDomainStateCompanion() *DomainStateCompanion {
 }
 
 // StateHashForCompanionType returns state hash data for the given companion type.
-func (x *DomainStateCompanion) StateHashForCompanionType(companionType CompanionType) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateHashForCompanionType:"), companionType)
+func (dsc *DomainStateCompanion) StateHashForCompanionType(companionType CompanionType) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dsc), objc.RegisterName("stateHashForCompanionType:"), companionType)
 	return obj.Wrap(_r)
 }
 
 // AvailableCompanionTypes indicates types of companions paired with the device. The elements are NSNumber-wrapped instances of
-func (x *DomainStateCompanion) AvailableCompanionTypes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableCompanionTypes"))
+func (dsc *DomainStateCompanion) AvailableCompanionTypes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dsc), objc.RegisterName("availableCompanionTypes"))
 	return obj.Wrap(_r)
 }
 
 // StateHash contains combined state hash data for all available companion types. . Returns `nil` if no companion devices are paired. As long as database of paired companion devices doesn't change, `stateHash` stays the same for the same set of `availableCompanions`. If database of paired companion devices was modified, `stateHash` data will change. Nature of such database changes cannot be determined but comparing data of `stateHash` after different policy evaluation will reveal the fact database was changed between calls. If you are interested in a state hash for a specific companion type you can use `stateHashForCompanionType` method.
-func (x *DomainStateCompanion) StateHash() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateHash"))
+func (dsc *DomainStateCompanion) StateHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dsc), objc.RegisterName("stateHash"))
 	return obj.Wrap(_r)
 }
-
-// DomainStateCompanionable is the interface implemented by [DomainStateCompanion], for mocking and DI.
-type DomainStateCompanionable interface {
-	obj.Object
-	StateHashForCompanionType(companionType CompanionType) obj.Object
-	AvailableCompanionTypes() obj.Object
-	StateHash() obj.Object
-}
-
-var _ DomainStateCompanionable = (*DomainStateCompanion)(nil)

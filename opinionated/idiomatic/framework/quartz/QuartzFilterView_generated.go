@@ -44,24 +44,24 @@ func quartzFilterViewAdopt(id objc.ID) *QuartzFilterView {
 }
 
 // Description returns the object's -description text.
-func (x *QuartzFilterView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (qfv *QuartzFilterView) Description() string {
+	return rt.Description(objref.IDOf(qfv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *QuartzFilterView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (qfv *QuartzFilterView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(qfv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *QuartzFilterView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (qfv *QuartzFilterView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(qfv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *QuartzFilterView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (qfv *QuartzFilterView) String() string {
+	return rt.Description(objref.IDOf(qfv))
 }
 
 // NewQuartzFilterView creates a new QuartzFilterView.
@@ -71,14 +71,6 @@ func NewQuartzFilterView() *QuartzFilterView {
 }
 
 // SizeToFit wraps the corresponding Objective-C method.
-func (x *QuartzFilterView) SizeToFit() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sizeToFit"))
+func (qfv *QuartzFilterView) SizeToFit() {
+	objc.Send[objc.ID](objref.IDOf(qfv), objc.RegisterName("sizeToFit"))
 }
-
-// QuartzFilterViewable is the interface implemented by [QuartzFilterView], for mocking and DI.
-type QuartzFilterViewable interface {
-	obj.Object
-	SizeToFit()
-}
-
-var _ QuartzFilterViewable = (*QuartzFilterView)(nil)

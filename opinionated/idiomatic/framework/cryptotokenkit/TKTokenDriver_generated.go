@@ -48,36 +48,29 @@ func tokenDriverAdopt(id objc.ID) *TokenDriver {
 }
 
 // Description returns the object's -description text.
-func (x *TokenDriver) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (td *TokenDriver) Description() string {
+	return rt.Description(objref.IDOf(td))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TokenDriver) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (td *TokenDriver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(td), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TokenDriver) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (td *TokenDriver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(td), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TokenDriver) String() string {
-	return rt.Description(objref.IDOf(x))
+func (td *TokenDriver) String() string {
+	return rt.Description(objref.IDOf(td))
 }
-
-// TokenDriverable is the interface implemented by [TokenDriver], for mocking and DI.
-type TokenDriverable interface {
-	obj.Object
-}
-
-var _ TokenDriverable = (*TokenDriver)(nil)
 
 // isTokenDriver marks TokenDriver — and, by embedding promotion, its
 // subclasses — as a member of the TokenDriver hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *TokenDriver) isTokenDriver() {}
+func (td *TokenDriver) isTokenDriver() {}
 
 var _ TokenDriverProvider = (*TokenDriver)(nil)

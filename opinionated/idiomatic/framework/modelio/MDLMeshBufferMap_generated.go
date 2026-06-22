@@ -46,24 +46,24 @@ func meshBufferMapAdopt(id objc.ID) *MeshBufferMap {
 }
 
 // Description returns the object's -description text.
-func (x *MeshBufferMap) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbm *MeshBufferMap) Description() string {
+	return rt.Description(objref.IDOf(mbm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MeshBufferMap) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbm *MeshBufferMap) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MeshBufferMap) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbm *MeshBufferMap) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MeshBufferMap) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbm *MeshBufferMap) String() string {
+	return rt.Description(objref.IDOf(mbm))
 }
 
 // NewMeshBufferMap creates a new MeshBufferMap.
@@ -71,10 +71,3 @@ func NewMeshBufferMap() *MeshBufferMap {
 	_id := objc.Send[objc.ID](objc.ID(_class("MDLMeshBufferMap")), objc.RegisterName("new"))
 	return meshBufferMapAdopt(_id)
 }
-
-// MeshBufferMapable is the interface implemented by [MeshBufferMap], for mocking and DI.
-type MeshBufferMapable interface {
-	obj.Object
-}
-
-var _ MeshBufferMapable = (*MeshBufferMap)(nil)

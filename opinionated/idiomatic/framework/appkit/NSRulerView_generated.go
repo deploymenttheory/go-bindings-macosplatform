@@ -62,619 +62,474 @@ func NewRulerViewWithScrollViewOrientation(scrollView *ScrollView, orientation R
 	return rulerViewAdopt(_id)
 }
 
-// WithScrollView the NSScrollView that owns the receiver to scrollView, without retaining it.
-func (x *RulerView) WithScrollView(scrollView *ScrollView) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollView:"), objref.IDOf(scrollView))
-	return x
+// WithScrollView sets the NSScrollView that owns the receiver to scrollView, without retaining it.
+func (rv *RulerView) WithScrollView(scrollView *ScrollView) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setScrollView:"), objref.IDOf(scrollView))
+	return rv
 }
 
-// WithOrientation the orientation of the receiver to orientation.
-func (x *RulerView) WithOrientation(orientation RulerOrientation) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrientation:"), orientation)
-	return x
+// WithOrientation sets the orientation of the receiver to orientation.
+func (rv *RulerView) WithOrientation(orientation RulerOrientation) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setOrientation:"), orientation)
+	return rv
 }
 
-// WithRuleThickness the thickness of the area where ruler hash marks and labels are drawn.
-func (x *RulerView) WithRuleThickness(ruleThickness float64) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRuleThickness:"), ruleThickness)
-	return x
+// WithRuleThickness sets the thickness of the area where ruler hash marks and labels are drawn.
+func (rv *RulerView) WithRuleThickness(ruleThickness float64) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setRuleThickness:"), ruleThickness)
+	return rv
 }
 
-// WithReservedThicknessForMarkers the room available for ruler markers to thickness.
-func (x *RulerView) WithReservedThicknessForMarkers(reservedThicknessForMarkers float64) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReservedThicknessForMarkers:"), reservedThicknessForMarkers)
-	return x
+// WithReservedThicknessForMarkers sets the room available for ruler markers to thickness.
+func (rv *RulerView) WithReservedThicknessForMarkers(reservedThicknessForMarkers float64) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setReservedThicknessForMarkers:"), reservedThicknessForMarkers)
+	return rv
 }
 
-// WithReservedThicknessForAccessoryView the room available for the receiver’s accessory view to thickness.
-func (x *RulerView) WithReservedThicknessForAccessoryView(reservedThicknessForAccessoryView float64) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReservedThicknessForAccessoryView:"), reservedThicknessForAccessoryView)
-	return x
+// WithReservedThicknessForAccessoryView sets the room available for the receiver’s accessory view to thickness.
+func (rv *RulerView) WithReservedThicknessForAccessoryView(reservedThicknessForAccessoryView float64) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setReservedThicknessForAccessoryView:"), reservedThicknessForAccessoryView)
+	return rv
 }
 
-// WithMeasurementUnits the measurement units used by the ruler to unitName.
-func (x *RulerView) WithMeasurementUnits(measurementUnits obj.Object) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeasurementUnits:"), objref.IDOf(measurementUnits))
-	return x
+// WithMeasurementUnits sets the measurement units used by the ruler to unitName.
+func (rv *RulerView) WithMeasurementUnits(measurementUnits obj.Object) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setMeasurementUnits:"), objref.IDOf(measurementUnits))
+	return rv
 }
 
-// WithOriginOffset the distance to the zero hash mark from the bounds origin of the NSScrollView’s document view (not of the receiver’s client view), in the document view’s coordinate system.
-func (x *RulerView) WithOriginOffset(originOffset float64) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOriginOffset:"), originOffset)
-	return x
+// WithOriginOffset sets the distance to the zero hash mark from the bounds origin of the NSScrollView’s document view (not of the receiver’s client view), in the document view’s coordinate system.
+func (rv *RulerView) WithOriginOffset(originOffset float64) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setOriginOffset:"), originOffset)
+	return rv
 }
 
-// WithClientView the receiver’s client view, if it has one.
-func (x *RulerView) WithClientView(clientView ViewProvider) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClientView:"), objref.IDOf(clientView))
-	return x
+// WithClientView sets the receiver’s client view, if it has one.
+func (rv *RulerView) WithClientView(clientView ViewProvider) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setClientView:"), objref.IDOf(clientView))
+	return rv
 }
 
-// WithMarkers the receiver’s ruler markers to markers, removing any existing ruler markers and not consulting with the client view about the new markers.
-func (x *RulerView) WithMarkers(items ...*RulerMarker) *RulerView {
+// WithMarkers sets the receiver’s ruler markers to markers, removing any existing ruler markers and not consulting with the client view about the new markers.
+func (rv *RulerView) WithMarkers(items ...*RulerMarker) *RulerView {
 	_arr := purego.SliceToNSArray(items, func(_v *RulerMarker) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarkers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setMarkers:"), _arr)
+	return rv
 }
 
-// WithAccessoryView the receiver’s accessory view to aView.
-func (x *RulerView) WithAccessoryView(accessoryView ViewProvider) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
-	return x
+// WithAccessoryView sets the receiver’s accessory view to aView.
+func (rv *RulerView) WithAccessoryView(accessoryView ViewProvider) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
+	return rv
 }
 
 // WithSubviews sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithSubviews(items ...ViewProvider) *RulerView {
+func (rv *RulerView) WithSubviews(items ...ViewProvider) *RulerView {
 	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setSubviews:"), _arr)
+	return rv
 }
 
 // WithHidden sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithHidden(hidden bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+func (rv *RulerView) WithHidden(hidden bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setHidden:"), hidden)
+	return rv
 }
 
 // WithPostsFrameChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
-	return x
+func (rv *RulerView) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
+	return rv
 }
 
 // WithAutoresizesSubviews sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithAutoresizesSubviews(autoresizesSubviews bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
-	return x
+func (rv *RulerView) WithAutoresizesSubviews(autoresizesSubviews bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
+	return rv
 }
 
 // WithAutoresizingMask sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
-	return x
+func (rv *RulerView) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
+	return rv
 }
 
-// WithFrame the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-func (x *RulerView) WithFrame(frame corefoundation.CGRect) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrame:"), frame)
-	return x
+// WithFrame sets the view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
+func (rv *RulerView) WithFrame(frame corefoundation.CGRect) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setFrame:"), frame)
+	return rv
 }
 
 // WithFrameRotation sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithFrameRotation(frameRotation float64) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
-	return x
+func (rv *RulerView) WithFrameRotation(frameRotation float64) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setFrameRotation:"), frameRotation)
+	return rv
 }
 
 // WithFrameCenterRotation sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithFrameCenterRotation(frameCenterRotation float64) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
-	return x
+func (rv *RulerView) WithFrameCenterRotation(frameCenterRotation float64) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
+	return rv
 }
 
 // WithBoundsRotation sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithBoundsRotation(boundsRotation float64) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
-	return x
+func (rv *RulerView) WithBoundsRotation(boundsRotation float64) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setBoundsRotation:"), boundsRotation)
+	return rv
 }
 
-// WithBounds the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-func (x *RulerView) WithBounds(bounds corefoundation.CGRect) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBounds:"), bounds)
-	return x
+// WithBounds sets the view’s bounds rectangle, which expresses its location and size in its own coordinate system.
+func (rv *RulerView) WithBounds(bounds corefoundation.CGRect) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setBounds:"), bounds)
+	return rv
 }
 
 // WithCanDrawConcurrently sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithCanDrawConcurrently(canDrawConcurrently bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
-	return x
+func (rv *RulerView) WithCanDrawConcurrently(canDrawConcurrently bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
+	return rv
 }
 
-// WithNeedsDisplay a Boolean value that determines whether the view needs to be redrawn before being displayed.
-func (x *RulerView) WithNeedsDisplay(needsDisplay bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
-	return x
+// WithNeedsDisplay sets a Boolean value that determines whether the view needs to be redrawn before being displayed.
+func (rv *RulerView) WithNeedsDisplay(needsDisplay bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
+	return rv
 }
 
 // WithAcceptsTouchEvents sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
-	return x
+func (rv *RulerView) WithAcceptsTouchEvents(acceptsTouchEvents bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
+	return rv
 }
 
 // WithWantsRestingTouches sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithWantsRestingTouches(wantsRestingTouches bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
-	return x
+func (rv *RulerView) WithWantsRestingTouches(wantsRestingTouches bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
+	return rv
 }
 
 // WithLayerContentsRedrawPolicy sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
-	return x
+func (rv *RulerView) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
+	return rv
 }
 
 // WithLayerContentsPlacement sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
-	return x
+func (rv *RulerView) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
+	return rv
 }
 
 // WithWantsLayer sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithWantsLayer(wantsLayer bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
-	return x
+func (rv *RulerView) WithWantsLayer(wantsLayer bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setWantsLayer:"), wantsLayer)
+	return rv
 }
 
 // WithLayer sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithLayer(layer obj.Object) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
-	return x
+func (rv *RulerView) WithLayer(layer obj.Object) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setLayer:"), objref.IDOf(layer))
+	return rv
 }
 
 // WithCanDrawSubviewsIntoLayer sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
-	return x
+func (rv *RulerView) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
+	return rv
 }
 
 // WithNeedsLayout sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithNeedsLayout(needsLayout bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
-	return x
+func (rv *RulerView) WithNeedsLayout(needsLayout bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setNeedsLayout:"), needsLayout)
+	return rv
 }
 
 // WithAlphaValue sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithAlphaValue(alphaValue float64) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
-	return x
+func (rv *RulerView) WithAlphaValue(alphaValue float64) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setAlphaValue:"), alphaValue)
+	return rv
 }
 
 // WithLayerUsesCoreImageFilters sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
-	return x
+func (rv *RulerView) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
+	return rv
 }
 
 // WithBackgroundFilters sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithBackgroundFilters(items ...obj.Object) *RulerView {
+func (rv *RulerView) WithBackgroundFilters(items ...obj.Object) *RulerView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setBackgroundFilters:"), _arr)
+	return rv
 }
 
 // WithCompositingFilter sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithCompositingFilter(compositingFilter obj.Object) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
-	return x
+func (rv *RulerView) WithCompositingFilter(compositingFilter obj.Object) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
+	return rv
 }
 
 // WithContentFilters sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithContentFilters(items ...obj.Object) *RulerView {
+func (rv *RulerView) WithContentFilters(items ...obj.Object) *RulerView {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setContentFilters:"), _arr)
+	return rv
 }
 
 // WithShadow sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithShadow(shadow *Shadow) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
-	return x
+func (rv *RulerView) WithShadow(shadow *Shadow) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
+	return rv
 }
 
 // WithClipsToBounds sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithClipsToBounds(clipsToBounds bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
-	return x
+func (rv *RulerView) WithClipsToBounds(clipsToBounds bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
+	return rv
 }
 
 // WithPostsBoundsChangedNotifications sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
-	return x
+func (rv *RulerView) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
+	return rv
 }
 
 // WithToolTip sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithToolTip(toolTip string) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+func (rv *RulerView) WithToolTip(toolTip string) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return rv
 }
 
 // WithUserInterfaceLayoutDirection sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
-	return x
+func (rv *RulerView) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
+	return rv
 }
 
 // WithPreparedContentRect sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
-	return x
+func (rv *RulerView) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setPreparedContentRect:"), preparedContentRect)
+	return rv
 }
 
 // WithNextKeyView sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithNextKeyView(nextKeyView ViewProvider) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
-	return x
+func (rv *RulerView) WithNextKeyView(nextKeyView ViewProvider) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
+	return rv
 }
 
 // WithFocusRingType sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithFocusRingType(focusRingType FocusRingType) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
-	return x
+func (rv *RulerView) WithFocusRingType(focusRingType FocusRingType) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setFocusRingType:"), focusRingType)
+	return rv
 }
 
 // WithGestureRecognizers sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithGestureRecognizers(items ...GestureRecognizerProvider) *RulerView {
+func (rv *RulerView) WithGestureRecognizers(items ...GestureRecognizerProvider) *RulerView {
 	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setGestureRecognizers:"), _arr)
+	return rv
 }
 
 // WithAllowedTouchTypes sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
-	return x
+func (rv *RulerView) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
+	return rv
 }
 
 // WithAdditionalSafeAreaInsets sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
-	return x
+func (rv *RulerView) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setAdditionalSafeAreaInsets:"), additionalSafeAreaInsets)
+	return rv
 }
 
-// WithPrefersCompactControlSizeMetrics when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
-func (x *RulerView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
-	return x
+// WithPrefersCompactControlSizeMetrics sets when this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
+func (rv *RulerView) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
+	return rv
 }
 
 // WithWritingToolsCoordinator sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
-	return x
+func (rv *RulerView) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
+	return rv
 }
 
 // WithNeedsUpdateConstraints sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
-	return x
+func (rv *RulerView) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
+	return rv
 }
 
 // WithTranslatesAutoresizingMaskIntoConstraints sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
-	return x
+func (rv *RulerView) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
+	return rv
 }
 
 // WithHorizontalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
-	return x
+func (rv *RulerView) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
+	return rv
 }
 
 // WithVerticalContentSizeConstraintActive sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
-	return x
+func (rv *RulerView) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
+	return rv
 }
 
 // WithWantsBestResolutionOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
-	return x
+func (rv *RulerView) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
+	return rv
 }
 
 // WithWantsExtendedDynamicRangeOpenGLSurface sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
-	return x
+func (rv *RulerView) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
+	return rv
 }
 
 // WithPressureConfiguration sets the property and returns the receiver so calls can be chained.
-func (x *RulerView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
-	return x
+func (rv *RulerView) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
+	return rv
 }
 
-// WithNextResponder the next responder after this one, or nil if it has none.
-func (x *RulerView) WithNextResponder(nextResponder ResponderProvider) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
-	return x
+// WithNextResponder sets the next responder after this one, or nil if it has none.
+func (rv *RulerView) WithNextResponder(nextResponder ResponderProvider) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
+	return rv
 }
 
-// WithMenu returns the responder’s menu.
-func (x *RulerView) WithMenu(menu *Menu) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
-	return x
+// WithMenu sets returns the responder’s menu.
+func (rv *RulerView) WithMenu(menu *Menu) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setMenu:"), objref.IDOf(menu))
+	return rv
 }
 
-// WithUserActivity an object encapsulating a user activity supported by this responder.
-func (x *RulerView) WithUserActivity(userActivity obj.Object) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets an object encapsulating a user activity supported by this responder.
+func (rv *RulerView) WithUserActivity(userActivity obj.Object) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return rv
 }
 
-// WithTouchBar the NSTouchBar object associated with the responder.
-func (x *RulerView) WithTouchBar(touchBar *TouchBar) *RulerView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
-	return x
+// WithTouchBar sets the NSTouchBar object associated with the responder.
+func (rv *RulerView) WithTouchBar(touchBar *TouchBar) *RulerView {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
+	return rv
 }
 
 // AddMarker adds aMarker to the receiver, without consulting the client view for approval.
-func (x *RulerView) AddMarker(marker *RulerMarker) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addMarker:"), objref.IDOf(marker))
+func (rv *RulerView) AddMarker(marker *RulerMarker) {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("addMarker:"), objref.IDOf(marker))
 }
 
 // RemoveMarker removes aMarker from the receiver, without consulting the client view for approval.
-func (x *RulerView) RemoveMarker(marker *RulerMarker) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeMarker:"), objref.IDOf(marker))
+func (rv *RulerView) RemoveMarker(marker *RulerMarker) {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("removeMarker:"), objref.IDOf(marker))
 }
 
 // TrackMarkerWithMouseEvent tracks the mouse to add aMarker based on the initial mouse-down or mouse-dragged event theEvent.
-func (x *RulerView) TrackMarkerWithMouseEvent(marker *RulerMarker, event *Event) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("trackMarker:withMouseEvent:"), objref.IDOf(marker), objref.IDOf(event))
+func (rv *RulerView) TrackMarkerWithMouseEvent(marker *RulerMarker, event *Event) bool {
+	_r := objc.Send[bool](objref.IDOf(rv), objc.RegisterName("trackMarker:withMouseEvent:"), objref.IDOf(marker), objref.IDOf(event))
 	return _r
 }
 
 // MoveRulerlineFromLocationToLocation draws temporary lines in the ruler area.
-func (x *RulerView) MoveRulerlineFromLocationToLocation(oldLocation float64, newLocation float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveRulerlineFromLocation:toLocation:"), oldLocation, newLocation)
+func (rv *RulerView) MoveRulerlineFromLocationToLocation(oldLocation float64, newLocation float64) {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("moveRulerlineFromLocation:toLocation:"), oldLocation, newLocation)
 }
 
 // InvalidateHashMarks forces recalculation of the hash mark spacing for the next time the receiver is displayed.
-func (x *RulerView) InvalidateHashMarks() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidateHashMarks"))
+func (rv *RulerView) InvalidateHashMarks() {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("invalidateHashMarks"))
 }
 
 // DrawHashMarksAndLabelsInRect draws the receiver’s hash marks and labels in aRect, which is expressed in the receiver’s coordinate system.
-func (x *RulerView) DrawHashMarksAndLabelsInRect(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawHashMarksAndLabelsInRect:"), rect)
+func (rv *RulerView) DrawHashMarksAndLabelsInRect(rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("drawHashMarksAndLabelsInRect:"), rect)
 }
 
 // DrawMarkersInRect draws the receiver’s markers in aRect, which is expressed in the receiver’s coordinate system.
-func (x *RulerView) DrawMarkersInRect(rect corefoundation.CGRect) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawMarkersInRect:"), rect)
+func (rv *RulerView) DrawMarkersInRect(rect corefoundation.CGRect) {
+	objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("drawMarkersInRect:"), rect)
 }
 
 // ScrollView wraps the corresponding Objective-C method.
-func (x *RulerView) ScrollView() *ScrollView {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollView"))
+func (rv *RulerView) ScrollView() *ScrollView {
+	_r := objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("scrollView"))
 	return ScrollViewFromID(_r)
 }
 
-// SetScrollView wraps the corresponding Objective-C method.
-func (x *RulerView) SetScrollView(scrollView *ScrollView) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollView:"), objref.IDOf(scrollView))
-}
-
 // Orientation wraps the corresponding Objective-C method.
-func (x *RulerView) Orientation() RulerOrientation {
-	_r := objc.Send[RulerOrientation](objref.IDOf(x), objc.RegisterName("orientation"))
+func (rv *RulerView) Orientation() RulerOrientation {
+	_r := objc.Send[RulerOrientation](objref.IDOf(rv), objc.RegisterName("orientation"))
 	return _r
 }
 
-// SetOrientation wraps the corresponding Objective-C method.
-func (x *RulerView) SetOrientation(orientation RulerOrientation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrientation:"), orientation)
-}
-
 // BaselineLocation wraps the corresponding Objective-C method.
-func (x *RulerView) BaselineLocation() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("baselineLocation"))
+func (rv *RulerView) BaselineLocation() float64 {
+	_r := objc.Send[float64](objref.IDOf(rv), objc.RegisterName("baselineLocation"))
 	return _r
 }
 
 // RequiredThickness wraps the corresponding Objective-C method.
-func (x *RulerView) RequiredThickness() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("requiredThickness"))
+func (rv *RulerView) RequiredThickness() float64 {
+	_r := objc.Send[float64](objref.IDOf(rv), objc.RegisterName("requiredThickness"))
 	return _r
 }
 
 // RuleThickness wraps the corresponding Objective-C method.
-func (x *RulerView) RuleThickness() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("ruleThickness"))
+func (rv *RulerView) RuleThickness() float64 {
+	_r := objc.Send[float64](objref.IDOf(rv), objc.RegisterName("ruleThickness"))
 	return _r
-}
-
-// SetRuleThickness wraps the corresponding Objective-C method.
-func (x *RulerView) SetRuleThickness(ruleThickness float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRuleThickness:"), ruleThickness)
 }
 
 // ReservedThicknessForMarkers wraps the corresponding Objective-C method.
-func (x *RulerView) ReservedThicknessForMarkers() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("reservedThicknessForMarkers"))
+func (rv *RulerView) ReservedThicknessForMarkers() float64 {
+	_r := objc.Send[float64](objref.IDOf(rv), objc.RegisterName("reservedThicknessForMarkers"))
 	return _r
-}
-
-// SetReservedThicknessForMarkers wraps the corresponding Objective-C method.
-func (x *RulerView) SetReservedThicknessForMarkers(reservedThicknessForMarkers float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReservedThicknessForMarkers:"), reservedThicknessForMarkers)
 }
 
 // ReservedThicknessForAccessoryView wraps the corresponding Objective-C method.
-func (x *RulerView) ReservedThicknessForAccessoryView() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("reservedThicknessForAccessoryView"))
+func (rv *RulerView) ReservedThicknessForAccessoryView() float64 {
+	_r := objc.Send[float64](objref.IDOf(rv), objc.RegisterName("reservedThicknessForAccessoryView"))
 	return _r
-}
-
-// SetReservedThicknessForAccessoryView wraps the corresponding Objective-C method.
-func (x *RulerView) SetReservedThicknessForAccessoryView(reservedThicknessForAccessoryView float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReservedThicknessForAccessoryView:"), reservedThicknessForAccessoryView)
 }
 
 // MeasurementUnits wraps the corresponding Objective-C method.
-func (x *RulerView) MeasurementUnits() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("measurementUnits"))
+func (rv *RulerView) MeasurementUnits() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("measurementUnits"))
 	return obj.Wrap(_r)
 }
 
-// SetMeasurementUnits wraps the corresponding Objective-C method.
-func (x *RulerView) SetMeasurementUnits(measurementUnits obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMeasurementUnits:"), objref.IDOf(measurementUnits))
-}
-
 // OriginOffset wraps the corresponding Objective-C method.
-func (x *RulerView) OriginOffset() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("originOffset"))
+func (rv *RulerView) OriginOffset() float64 {
+	_r := objc.Send[float64](objref.IDOf(rv), objc.RegisterName("originOffset"))
 	return _r
 }
 
-// SetOriginOffset wraps the corresponding Objective-C method.
-func (x *RulerView) SetOriginOffset(originOffset float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOriginOffset:"), originOffset)
-}
-
 // ClientView wraps the corresponding Objective-C method.
-func (x *RulerView) ClientView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientView"))
+func (rv *RulerView) ClientView() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("clientView"))
 	return ViewFromID(_r)
-}
-
-// SetClientView wraps the corresponding Objective-C method.
-func (x *RulerView) SetClientView(clientView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClientView:"), objref.IDOf(clientView))
 }
 
 // Markers wraps the corresponding Objective-C method.
 //
 // Markers returns the collection as a Go slice.
-func (x *RulerView) Markers() []*RulerMarker {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markers"))
+func (rv *RulerView) Markers() []*RulerMarker {
+	_arr := objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("markers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RulerMarker { return RulerMarkerFromID(_id) })
 }
 
-// SetMarkers wraps the corresponding Objective-C method.
-func (x *RulerView) SetMarkers(markers []*RulerMarker) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMarkers:"), purego.SliceToNSArray(markers, func(_v *RulerMarker) objc.ID { return objref.IDOf(_v) }))
-}
-
 // AccessoryView wraps the corresponding Objective-C method.
-func (x *RulerView) AccessoryView() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryView"))
+func (rv *RulerView) AccessoryView() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(rv), objc.RegisterName("accessoryView"))
 	return ViewFromID(_r)
 }
-
-// SetAccessoryView wraps the corresponding Objective-C method.
-func (x *RulerView) SetAccessoryView(accessoryView *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
-}
-
-// RulerViewable is the interface implemented by [RulerView], for mocking and DI.
-type RulerViewable interface {
-	obj.Object
-	WithScrollView(scrollView *ScrollView) *RulerView
-	WithOrientation(orientation RulerOrientation) *RulerView
-	WithRuleThickness(ruleThickness float64) *RulerView
-	WithReservedThicknessForMarkers(reservedThicknessForMarkers float64) *RulerView
-	WithReservedThicknessForAccessoryView(reservedThicknessForAccessoryView float64) *RulerView
-	WithMeasurementUnits(measurementUnits obj.Object) *RulerView
-	WithOriginOffset(originOffset float64) *RulerView
-	WithClientView(clientView ViewProvider) *RulerView
-	WithMarkers(items ...*RulerMarker) *RulerView
-	WithAccessoryView(accessoryView ViewProvider) *RulerView
-	WithSubviews(items ...ViewProvider) *RulerView
-	WithHidden(hidden bool) *RulerView
-	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *RulerView
-	WithAutoresizesSubviews(autoresizesSubviews bool) *RulerView
-	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *RulerView
-	WithFrame(frame corefoundation.CGRect) *RulerView
-	WithFrameRotation(frameRotation float64) *RulerView
-	WithFrameCenterRotation(frameCenterRotation float64) *RulerView
-	WithBoundsRotation(boundsRotation float64) *RulerView
-	WithBounds(bounds corefoundation.CGRect) *RulerView
-	WithCanDrawConcurrently(canDrawConcurrently bool) *RulerView
-	WithNeedsDisplay(needsDisplay bool) *RulerView
-	WithAcceptsTouchEvents(acceptsTouchEvents bool) *RulerView
-	WithWantsRestingTouches(wantsRestingTouches bool) *RulerView
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *RulerView
-	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *RulerView
-	WithWantsLayer(wantsLayer bool) *RulerView
-	WithLayer(layer obj.Object) *RulerView
-	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *RulerView
-	WithNeedsLayout(needsLayout bool) *RulerView
-	WithAlphaValue(alphaValue float64) *RulerView
-	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *RulerView
-	WithBackgroundFilters(items ...obj.Object) *RulerView
-	WithCompositingFilter(compositingFilter obj.Object) *RulerView
-	WithContentFilters(items ...obj.Object) *RulerView
-	WithShadow(shadow *Shadow) *RulerView
-	WithClipsToBounds(clipsToBounds bool) *RulerView
-	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *RulerView
-	WithToolTip(toolTip string) *RulerView
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *RulerView
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *RulerView
-	WithNextKeyView(nextKeyView ViewProvider) *RulerView
-	WithFocusRingType(focusRingType FocusRingType) *RulerView
-	WithGestureRecognizers(items ...GestureRecognizerProvider) *RulerView
-	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *RulerView
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *RulerView
-	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *RulerView
-	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *RulerView
-	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *RulerView
-	WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *RulerView
-	WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *RulerView
-	WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *RulerView
-	WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *RulerView
-	WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *RulerView
-	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *RulerView
-	WithNextResponder(nextResponder ResponderProvider) *RulerView
-	WithMenu(menu *Menu) *RulerView
-	WithUserActivity(userActivity obj.Object) *RulerView
-	WithTouchBar(touchBar *TouchBar) *RulerView
-	AddMarker(marker *RulerMarker)
-	RemoveMarker(marker *RulerMarker)
-	TrackMarkerWithMouseEvent(marker *RulerMarker, event *Event) bool
-	MoveRulerlineFromLocationToLocation(oldLocation float64, newLocation float64)
-	InvalidateHashMarks()
-	DrawHashMarksAndLabelsInRect(rect corefoundation.CGRect)
-	DrawMarkersInRect(rect corefoundation.CGRect)
-	ScrollView() *ScrollView
-	SetScrollView(scrollView *ScrollView)
-	Orientation() RulerOrientation
-	SetOrientation(orientation RulerOrientation)
-	BaselineLocation() float64
-	RequiredThickness() float64
-	RuleThickness() float64
-	SetRuleThickness(ruleThickness float64)
-	ReservedThicknessForMarkers() float64
-	SetReservedThicknessForMarkers(reservedThicknessForMarkers float64)
-	ReservedThicknessForAccessoryView() float64
-	SetReservedThicknessForAccessoryView(reservedThicknessForAccessoryView float64)
-	MeasurementUnits() obj.Object
-	SetMeasurementUnits(measurementUnits obj.Object)
-	OriginOffset() float64
-	SetOriginOffset(originOffset float64)
-	ClientView() *View
-	SetClientView(clientView *View)
-	Markers() []*RulerMarker
-	SetMarkers(markers []*RulerMarker)
-	AccessoryView() *View
-	SetAccessoryView(accessoryView *View)
-}
-
-var _ RulerViewable = (*RulerView)(nil)
 
 var _ ViewProvider = (*RulerView)(nil)
 

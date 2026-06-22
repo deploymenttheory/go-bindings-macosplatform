@@ -53,18 +53,10 @@ func NewUnitMass() *UnitMass {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *UnitMass) WithScriptingProperties(scriptingProperties obj.Object) *UnitMass {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (um *UnitMass) WithScriptingProperties(scriptingProperties obj.Object) *UnitMass {
+	objc.Send[objc.ID](objref.IDOf(um), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return um
 }
-
-// UnitMassable is the interface implemented by [UnitMass], for mocking and DI.
-type UnitMassable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *UnitMass
-}
-
-var _ UnitMassable = (*UnitMass)(nil)
 
 var _ DimensionProvider = (*UnitMass)(nil)
 

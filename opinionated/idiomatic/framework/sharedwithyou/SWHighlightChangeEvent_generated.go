@@ -46,24 +46,24 @@ func highlightChangeEventAdopt(id objc.ID) *HighlightChangeEvent {
 }
 
 // Description returns the object's -description text.
-func (x *HighlightChangeEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hce *HighlightChangeEvent) Description() string {
+	return rt.Description(objref.IDOf(hce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HighlightChangeEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hce *HighlightChangeEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HighlightChangeEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hce *HighlightChangeEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HighlightChangeEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hce *HighlightChangeEvent) String() string {
+	return rt.Description(objref.IDOf(hce))
 }
 
 // NewHighlightChangeEventWithHighlightTrigger creates and initializes a change event.
@@ -74,22 +74,13 @@ func NewHighlightChangeEventWithHighlightTrigger(highlight *Highlight, trigger H
 }
 
 // ChangeEventTrigger wraps the corresponding Objective-C method.
-func (x *HighlightChangeEvent) ChangeEventTrigger() HighlightChangeEventTrigger {
-	_r := objc.Send[HighlightChangeEventTrigger](objref.IDOf(x), objc.RegisterName("changeEventTrigger"))
+func (hce *HighlightChangeEvent) ChangeEventTrigger() HighlightChangeEventTrigger {
+	_r := objc.Send[HighlightChangeEventTrigger](objref.IDOf(hce), objc.RegisterName("changeEventTrigger"))
 	return _r
 }
 
 // HighlightURL wraps the corresponding Objective-C method.
-func (x *HighlightChangeEvent) HighlightURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("highlightURL"))
+func (hce *HighlightChangeEvent) HighlightURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(hce), objc.RegisterName("highlightURL"))
 	return obj.Wrap(_r)
 }
-
-// HighlightChangeEventable is the interface implemented by [HighlightChangeEvent], for mocking and DI.
-type HighlightChangeEventable interface {
-	obj.Object
-	ChangeEventTrigger() HighlightChangeEventTrigger
-	HighlightURL() obj.Object
-}
-
-var _ HighlightChangeEventable = (*HighlightChangeEvent)(nil)

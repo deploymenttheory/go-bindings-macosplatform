@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewActivitySummaryQuery() *ActivitySummaryQuery {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKActivitySummaryQuery")), objc.RegisterName("new"))
 	return activitySummaryQueryAdopt(_id)
 }
-
-// ActivitySummaryQueryable is the interface implemented by [ActivitySummaryQuery], for mocking and DI.
-type ActivitySummaryQueryable interface {
-	obj.Object
-}
-
-var _ ActivitySummaryQueryable = (*ActivitySummaryQuery)(nil)
 
 var _ QueryProvider = (*ActivitySummaryQuery)(nil)

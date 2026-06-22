@@ -46,24 +46,24 @@ func flashingLightsProcessorAdopt(id objc.ID) *FlashingLightsProcessor {
 }
 
 // Description returns the object's -description text.
-func (x *FlashingLightsProcessor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (flp *FlashingLightsProcessor) Description() string {
+	return rt.Description(objref.IDOf(flp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FlashingLightsProcessor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (flp *FlashingLightsProcessor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(flp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FlashingLightsProcessor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (flp *FlashingLightsProcessor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(flp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FlashingLightsProcessor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (flp *FlashingLightsProcessor) String() string {
+	return rt.Description(objref.IDOf(flp))
 }
 
 // NewFlashingLightsProcessor creates a new FlashingLightsProcessor.
@@ -73,22 +73,13 @@ func NewFlashingLightsProcessor() *FlashingLightsProcessor {
 }
 
 // CanProcessSurface returns a Boolean value that indicates whether the flashing lights processor can process the content in the surface for sequences of flashing lights.
-func (x *FlashingLightsProcessor) CanProcessSurface(surface obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canProcessSurface:"), objref.IDOf(surface))
+func (flp *FlashingLightsProcessor) CanProcessSurface(surface obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(flp), objc.RegisterName("canProcessSurface:"), objref.IDOf(surface))
 	return _r
 }
 
 // ProcessSurfaceOutSurfaceTimestampOptions processes a surface by analyzing pixels for sequences of flashing lights and mitigates them by dimming the content.
-func (x *FlashingLightsProcessor) ProcessSurfaceOutSurfaceTimestampOptions(inSurface obj.Object, outSurface obj.Object, timestamp float64, options obj.Object) *FlashingLightsProcessorResult {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processSurface:outSurface:timestamp:options:"), objref.IDOf(inSurface), objref.IDOf(outSurface), timestamp, objref.IDOf(options))
+func (flp *FlashingLightsProcessor) ProcessSurfaceOutSurfaceTimestampOptions(inSurface obj.Object, outSurface obj.Object, timestamp float64, options obj.Object) *FlashingLightsProcessorResult {
+	_r := objc.Send[objc.ID](objref.IDOf(flp), objc.RegisterName("processSurface:outSurface:timestamp:options:"), objref.IDOf(inSurface), objref.IDOf(outSurface), timestamp, objref.IDOf(options))
 	return FlashingLightsProcessorResultFromID(_r)
 }
-
-// FlashingLightsProcessorable is the interface implemented by [FlashingLightsProcessor], for mocking and DI.
-type FlashingLightsProcessorable interface {
-	obj.Object
-	CanProcessSurface(surface obj.Object) bool
-	ProcessSurfaceOutSurfaceTimestampOptions(inSurface obj.Object, outSurface obj.Object, timestamp float64, options obj.Object) *FlashingLightsProcessorResult
-}
-
-var _ FlashingLightsProcessorable = (*FlashingLightsProcessor)(nil)

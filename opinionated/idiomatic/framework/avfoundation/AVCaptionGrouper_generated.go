@@ -46,24 +46,24 @@ func captionGrouperAdopt(id objc.ID) *CaptionGrouper {
 }
 
 // Description returns the object's -description text.
-func (x *CaptionGrouper) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cg *CaptionGrouper) Description() string {
+	return rt.Description(objref.IDOf(cg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptionGrouper) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cg *CaptionGrouper) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptionGrouper) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cg *CaptionGrouper) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptionGrouper) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cg *CaptionGrouper) String() string {
+	return rt.Description(objref.IDOf(cg))
 }
 
 // NewCaptionGrouper creates a new CaptionGrouper.
@@ -73,14 +73,6 @@ func NewCaptionGrouper() *CaptionGrouper {
 }
 
 // AddCaption adds a caption to the pending group.
-func (x *CaptionGrouper) AddCaption(input *Caption) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addCaption:"), objref.IDOf(input))
+func (cg *CaptionGrouper) AddCaption(input *Caption) {
+	objc.Send[objc.ID](objref.IDOf(cg), objc.RegisterName("addCaption:"), objref.IDOf(input))
 }
-
-// CaptionGrouperable is the interface implemented by [CaptionGrouper], for mocking and DI.
-type CaptionGrouperable interface {
-	obj.Object
-	AddCaption(input *Caption)
-}
-
-var _ CaptionGrouperable = (*CaptionGrouper)(nil)

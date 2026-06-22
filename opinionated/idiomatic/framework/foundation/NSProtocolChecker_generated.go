@@ -46,24 +46,24 @@ func protocolCheckerAdopt(id objc.ID) *ProtocolChecker {
 }
 
 // Description returns the object's -description text.
-func (x *ProtocolChecker) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *ProtocolChecker) Description() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ProtocolChecker) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pc *ProtocolChecker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ProtocolChecker) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pc *ProtocolChecker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ProtocolChecker) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *ProtocolChecker) String() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // NewProtocolChecker creates a new ProtocolChecker.
@@ -73,15 +73,7 @@ func NewProtocolChecker() *ProtocolChecker {
 }
 
 // Target wraps the corresponding Objective-C method.
-func (x *ProtocolChecker) Target() *Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+func (pc *ProtocolChecker) Target() *Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("target"))
 	return ObjectFromID(_r)
 }
-
-// ProtocolCheckerable is the interface implemented by [ProtocolChecker], for mocking and DI.
-type ProtocolCheckerable interface {
-	obj.Object
-	Target() *Object
-}
-
-var _ ProtocolCheckerable = (*ProtocolChecker)(nil)

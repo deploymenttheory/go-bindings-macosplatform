@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,35 +50,35 @@ func NewDOMEntity() *DOMEntity {
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMEntity) WithNodeValue(nodeValue string) *DOMEntity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (de *DOMEntity) WithNodeValue(nodeValue string) *DOMEntity {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return de
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMEntity) WithPrefix(prefix string) *DOMEntity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (de *DOMEntity) WithPrefix(prefix string) *DOMEntity {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return de
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMEntity) WithTextContent(textContent string) *DOMEntity {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (de *DOMEntity) WithTextContent(textContent string) *DOMEntity {
+	objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return de
 }
 
-// PublicId wraps the corresponding Objective-C method.
-func (x *DOMEntity) PublicId() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicId"))
+// PublicID wraps the corresponding Objective-C method.
+func (de *DOMEntity) PublicID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("publicId"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SystemId wraps the corresponding Objective-C method.
-func (x *DOMEntity) SystemId() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("systemId"))
+// SystemID wraps the corresponding Objective-C method.
+func (de *DOMEntity) SystemID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("systemId"))
 	if _r == 0 {
 		return ""
 	}
@@ -87,26 +86,13 @@ func (x *DOMEntity) SystemId() string {
 }
 
 // NotationName wraps the corresponding Objective-C method.
-func (x *DOMEntity) NotationName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notationName"))
+func (de *DOMEntity) NotationName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(de), objc.RegisterName("notationName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// DOMEntityable is the interface implemented by [DOMEntity], for mocking and DI.
-type DOMEntityable interface {
-	obj.Object
-	WithNodeValue(nodeValue string) *DOMEntity
-	WithPrefix(prefix string) *DOMEntity
-	WithTextContent(textContent string) *DOMEntity
-	PublicId() string
-	SystemId() string
-	NotationName() string
-}
-
-var _ DOMEntityable = (*DOMEntity)(nil)
 
 var _ DOMNodeProvider = (*DOMEntity)(nil)
 

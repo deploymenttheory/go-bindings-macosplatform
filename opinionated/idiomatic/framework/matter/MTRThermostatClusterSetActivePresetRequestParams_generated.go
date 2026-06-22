@@ -44,24 +44,24 @@ func mTRThermostatClusterSetActivePresetRequestParamsAdopt(id objc.ID) *MTRTherm
 }
 
 // Description returns the object's -description text.
-func (x *MTRThermostatClusterSetActivePresetRequestParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtcsaprp *MTRThermostatClusterSetActivePresetRequestParams) Description() string {
+	return rt.Description(objref.IDOf(mtcsaprp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRThermostatClusterSetActivePresetRequestParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtcsaprp *MTRThermostatClusterSetActivePresetRequestParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtcsaprp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRThermostatClusterSetActivePresetRequestParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtcsaprp *MTRThermostatClusterSetActivePresetRequestParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtcsaprp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRThermostatClusterSetActivePresetRequestParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtcsaprp *MTRThermostatClusterSetActivePresetRequestParams) String() string {
+	return rt.Description(objref.IDOf(mtcsaprp))
 }
 
 // NewMTRThermostatClusterSetActivePresetRequestParams creates a new MTRThermostatClusterSetActivePresetRequestParams.
@@ -71,68 +71,37 @@ func NewMTRThermostatClusterSetActivePresetRequestParams() *MTRThermostatCluster
 }
 
 // WithPresetHandle sets the property and returns the receiver so calls can be chained.
-func (x *MTRThermostatClusterSetActivePresetRequestParams) WithPresetHandle(presetHandle obj.Object) *MTRThermostatClusterSetActivePresetRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresetHandle:"), objref.IDOf(presetHandle))
-	return x
+func (mtcsaprp *MTRThermostatClusterSetActivePresetRequestParams) WithPresetHandle(presetHandle obj.Object) *MTRThermostatClusterSetActivePresetRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcsaprp), objc.RegisterName("setPresetHandle:"), objref.IDOf(presetHandle))
+	return mtcsaprp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRThermostatClusterSetActivePresetRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterSetActivePresetRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mtcsaprp *MTRThermostatClusterSetActivePresetRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterSetActivePresetRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcsaprp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mtcsaprp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRThermostatClusterSetActivePresetRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThermostatClusterSetActivePresetRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mtcsaprp *MTRThermostatClusterSetActivePresetRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThermostatClusterSetActivePresetRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mtcsaprp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mtcsaprp
 }
 
 // PresetHandle wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterSetActivePresetRequestParams) PresetHandle() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("presetHandle"))
+func (mtcsaprp *MTRThermostatClusterSetActivePresetRequestParams) PresetHandle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcsaprp), objc.RegisterName("presetHandle"))
 	return obj.Wrap(_r)
 }
 
-// SetPresetHandle wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterSetActivePresetRequestParams) SetPresetHandle(presetHandle obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresetHandle:"), objref.IDOf(presetHandle))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRThermostatClusterSetActivePresetRequestParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mtcsaprp *MTRThermostatClusterSetActivePresetRequestParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcsaprp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterSetActivePresetRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRThermostatClusterSetActivePresetRequestParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mtcsaprp *MTRThermostatClusterSetActivePresetRequestParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtcsaprp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRThermostatClusterSetActivePresetRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRThermostatClusterSetActivePresetRequestParamsable is the interface implemented by [MTRThermostatClusterSetActivePresetRequestParams], for mocking and DI.
-type MTRThermostatClusterSetActivePresetRequestParamsable interface {
-	obj.Object
-	WithPresetHandle(presetHandle obj.Object) *MTRThermostatClusterSetActivePresetRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterSetActivePresetRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThermostatClusterSetActivePresetRequestParams
-	PresetHandle() obj.Object
-	SetPresetHandle(presetHandle obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRThermostatClusterSetActivePresetRequestParamsable = (*MTRThermostatClusterSetActivePresetRequestParams)(nil)

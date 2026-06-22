@@ -44,24 +44,24 @@ func imageEditPanelAdopt(id objc.ID) *ImageEditPanel {
 }
 
 // Description returns the object's -description text.
-func (x *ImageEditPanel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (iep *ImageEditPanel) Description() string {
+	return rt.Description(objref.IDOf(iep))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ImageEditPanel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (iep *ImageEditPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(iep), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ImageEditPanel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (iep *ImageEditPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(iep), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ImageEditPanel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (iep *ImageEditPanel) String() string {
+	return rt.Description(objref.IDOf(iep))
 }
 
 // NewImageEditPanel creates a new ImageEditPanel.
@@ -71,21 +71,12 @@ func NewImageEditPanel() *ImageEditPanel {
 }
 
 // ReloadData reloads the data from the data associated with an image editing panel.
-func (x *ImageEditPanel) ReloadData() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reloadData"))
+func (iep *ImageEditPanel) ReloadData() {
+	objc.Send[objc.ID](objref.IDOf(iep), objc.RegisterName("reloadData"))
 }
 
-// FilterArray array of filters reflecting the current user adjustments in the adjust or effects tab.
-func (x *ImageEditPanel) FilterArray() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterArray"))
+// FilterArray returns array of filters reflecting the current user adjustments in the adjust or effects tab.
+func (iep *ImageEditPanel) FilterArray() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(iep), objc.RegisterName("filterArray"))
 	return obj.Wrap(_r)
 }
-
-// ImageEditPanelable is the interface implemented by [ImageEditPanel], for mocking and DI.
-type ImageEditPanelable interface {
-	obj.Object
-	ReloadData()
-	FilterArray() obj.Object
-}
-
-var _ ImageEditPanelable = (*ImageEditPanel)(nil)

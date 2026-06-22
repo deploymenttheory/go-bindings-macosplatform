@@ -44,24 +44,24 @@ func mTRNetworkCommissioningClusterRemoveNetworkParamsAdopt(id objc.ID) *MTRNetw
 }
 
 // Description returns the object's -description text.
-func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mnccrnp *MTRNetworkCommissioningClusterRemoveNetworkParams) Description() string {
+	return rt.Description(objref.IDOf(mnccrnp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mnccrnp *MTRNetworkCommissioningClusterRemoveNetworkParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mnccrnp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mnccrnp *MTRNetworkCommissioningClusterRemoveNetworkParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mnccrnp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mnccrnp *MTRNetworkCommissioningClusterRemoveNetworkParams) String() string {
+	return rt.Description(objref.IDOf(mnccrnp))
 }
 
 // NewMTRNetworkCommissioningClusterRemoveNetworkParams creates a new MTRNetworkCommissioningClusterRemoveNetworkParams.
@@ -71,88 +71,49 @@ func NewMTRNetworkCommissioningClusterRemoveNetworkParams() *MTRNetworkCommissio
 }
 
 // WithNetworkID sets the property and returns the receiver so calls can be chained.
-func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) WithNetworkID(networkID obj.Object) *MTRNetworkCommissioningClusterRemoveNetworkParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkID:"), objref.IDOf(networkID))
-	return x
+func (mnccrnp *MTRNetworkCommissioningClusterRemoveNetworkParams) WithNetworkID(networkID obj.Object) *MTRNetworkCommissioningClusterRemoveNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(mnccrnp), objc.RegisterName("setNetworkID:"), objref.IDOf(networkID))
+	return mnccrnp
 }
 
 // WithBreadcrumb sets the property and returns the receiver so calls can be chained.
-func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) WithBreadcrumb(breadcrumb obj.Object) *MTRNetworkCommissioningClusterRemoveNetworkParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
-	return x
+func (mnccrnp *MTRNetworkCommissioningClusterRemoveNetworkParams) WithBreadcrumb(breadcrumb obj.Object) *MTRNetworkCommissioningClusterRemoveNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(mnccrnp), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
+	return mnccrnp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterRemoveNetworkParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mnccrnp *MTRNetworkCommissioningClusterRemoveNetworkParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterRemoveNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(mnccrnp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mnccrnp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRNetworkCommissioningClusterRemoveNetworkParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mnccrnp *MTRNetworkCommissioningClusterRemoveNetworkParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRNetworkCommissioningClusterRemoveNetworkParams {
+	objc.Send[objc.ID](objref.IDOf(mnccrnp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mnccrnp
 }
 
 // NetworkID wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) NetworkID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkID"))
+func (mnccrnp *MTRNetworkCommissioningClusterRemoveNetworkParams) NetworkID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mnccrnp), objc.RegisterName("networkID"))
 	return obj.Wrap(_r)
-}
-
-// SetNetworkID wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) SetNetworkID(networkID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkID:"), objref.IDOf(networkID))
 }
 
 // Breadcrumb wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) Breadcrumb() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("breadcrumb"))
+func (mnccrnp *MTRNetworkCommissioningClusterRemoveNetworkParams) Breadcrumb() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mnccrnp), objc.RegisterName("breadcrumb"))
 	return obj.Wrap(_r)
 }
 
-// SetBreadcrumb wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) SetBreadcrumb(breadcrumb obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBreadcrumb:"), objref.IDOf(breadcrumb))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mnccrnp *MTRNetworkCommissioningClusterRemoveNetworkParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mnccrnp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mnccrnp *MTRNetworkCommissioningClusterRemoveNetworkParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mnccrnp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRNetworkCommissioningClusterRemoveNetworkParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRNetworkCommissioningClusterRemoveNetworkParamsable is the interface implemented by [MTRNetworkCommissioningClusterRemoveNetworkParams], for mocking and DI.
-type MTRNetworkCommissioningClusterRemoveNetworkParamsable interface {
-	obj.Object
-	WithNetworkID(networkID obj.Object) *MTRNetworkCommissioningClusterRemoveNetworkParams
-	WithBreadcrumb(breadcrumb obj.Object) *MTRNetworkCommissioningClusterRemoveNetworkParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRNetworkCommissioningClusterRemoveNetworkParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRNetworkCommissioningClusterRemoveNetworkParams
-	NetworkID() obj.Object
-	SetNetworkID(networkID obj.Object)
-	Breadcrumb() obj.Object
-	SetBreadcrumb(breadcrumb obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRNetworkCommissioningClusterRemoveNetworkParamsable = (*MTRNetworkCommissioningClusterRemoveNetworkParams)(nil)

@@ -6,6 +6,7 @@ package cryptotokenkit
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func tokenWatcherAdopt(id objc.ID) *TokenWatcher {
 }
 
 // Description returns the object's -description text.
-func (x *TokenWatcher) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tw *TokenWatcher) Description() string {
+	return rt.Description(objref.IDOf(tw))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TokenWatcher) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tw *TokenWatcher) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tw), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TokenWatcher) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tw *TokenWatcher) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tw), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TokenWatcher) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tw *TokenWatcher) String() string {
+	return rt.Description(objref.IDOf(tw))
 }
 
 // NewTokenWatcher creates a new TokenWatcher.
@@ -83,7 +84,7 @@ func NewTokenWatcherWithInsertionHandler(insertionHandler func(obj.Object)) *Tok
 // SetInsertionHandler sets an insertion handler closure to be called when a new token is inserted into the system.
 //
 // SetInsertionHandler blocks until the operation completes or ctx is cancelled.
-func (x *TokenWatcher) SetInsertionHandler(ctx context.Context) (result string, err error) {
+func (tw *TokenWatcher) SetInsertionHandler(ctx context.Context) (result string, err error) {
 	type _result struct {
 		val string
 		err error
@@ -94,7 +95,7 @@ func (x *TokenWatcher) SetInsertionHandler(ctx context.Context) (result string, 
 		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInsertionHandler:"), _block)
+	objc.Send[objc.ID](objref.IDOf(tw), objc.RegisterName("setInsertionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -105,31 +106,20 @@ func (x *TokenWatcher) SetInsertionHandler(ctx context.Context) (result string, 
 }
 
 // AddRemovalHandlerForTokenID adds a removal handler for the specified token ID.
-func (x *TokenWatcher) AddRemovalHandlerForTokenID(removalHandler func(obj.Object), tokenID string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addRemovalHandler:forTokenID:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { removalHandler(obj.Wrap(_b0)) }), purego.NSString(tokenID))
+func (tw *TokenWatcher) AddRemovalHandlerForTokenID(removalHandler func(obj.Object), tokenID string) {
+	objc.Send[objc.ID](objref.IDOf(tw), objc.RegisterName("addRemovalHandler:forTokenID:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { removalHandler(obj.Wrap(_b0)) }), purego.NSString(tokenID))
 }
 
 // TokenInfoForTokenID return TokenInfo for specific tokenID
-func (x *TokenWatcher) TokenInfoForTokenID(tokenID string) *TokenWatcherTokenInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenInfoForTokenID:"), purego.NSString(tokenID))
+func (tw *TokenWatcher) TokenInfoForTokenID(tokenID string) *TokenWatcherTokenInfo {
+	_r := objc.Send[objc.ID](objref.IDOf(tw), objc.RegisterName("tokenInfoForTokenID:"), purego.NSString(tokenID))
 	return TokenWatcherTokenInfoFromID(_r)
 }
 
-// TokenIDs array of currently known TokenIDs in the system.  Tokens are identified by instance's names. It is possible to use KVO to be notified about token arrivals and removals.
+// TokenIDs returns array of currently known TokenIDs in the system.  Tokens are identified by instance's names. It is possible to use KVO to be notified about token arrivals and removals.
 //
 // TokenIDs returns the collection as a Go slice.
-func (x *TokenWatcher) TokenIDs() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tokenIDs"))
+func (tw *TokenWatcher) TokenIDs() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(tw), objc.RegisterName("tokenIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-// TokenWatcherable is the interface implemented by [TokenWatcher], for mocking and DI.
-type TokenWatcherable interface {
-	obj.Object
-	SetInsertionHandler(ctx context.Context) (string, error)
-	AddRemovalHandlerForTokenID(removalHandler func(obj.Object), tokenID string)
-	TokenInfoForTokenID(tokenID string) *TokenWatcherTokenInfo
-	TokenIDs() []string
-}
-
-var _ TokenWatcherable = (*TokenWatcher)(nil)

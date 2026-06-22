@@ -7,7 +7,6 @@ package contacts
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,24 +52,15 @@ func NewChangeHistoryRemoveMemberFromGroupEvent() *ChangeHistoryRemoveMemberFrom
 }
 
 // Member wraps the corresponding Objective-C method.
-func (x *ChangeHistoryRemoveMemberFromGroupEvent) Member() *Contact {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("member"))
+func (chrmfge *ChangeHistoryRemoveMemberFromGroupEvent) Member() *Contact {
+	_r := objc.Send[objc.ID](objref.IDOf(chrmfge), objc.RegisterName("member"))
 	return ContactFromID(_r)
 }
 
 // Group wraps the corresponding Objective-C method.
-func (x *ChangeHistoryRemoveMemberFromGroupEvent) Group() *Group {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("group"))
+func (chrmfge *ChangeHistoryRemoveMemberFromGroupEvent) Group() *Group {
+	_r := objc.Send[objc.ID](objref.IDOf(chrmfge), objc.RegisterName("group"))
 	return GroupFromID(_r)
 }
-
-// ChangeHistoryRemoveMemberFromGroupEventable is the interface implemented by [ChangeHistoryRemoveMemberFromGroupEvent], for mocking and DI.
-type ChangeHistoryRemoveMemberFromGroupEventable interface {
-	obj.Object
-	Member() *Contact
-	Group() *Group
-}
-
-var _ ChangeHistoryRemoveMemberFromGroupEventable = (*ChangeHistoryRemoveMemberFromGroupEvent)(nil)
 
 var _ ChangeHistoryEventProvider = (*ChangeHistoryRemoveMemberFromGroupEvent)(nil)

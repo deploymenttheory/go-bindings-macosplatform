@@ -59,38 +59,22 @@ func NewRandomNodeDefinitionWithIdentifier(identifier string) *RandomNodeDefinit
 	return randomNodeDefinitionAdopt(_id)
 }
 
-// WithUniqueSelectionQueueLength the length of the unique selection queue.
-func (x *RandomNodeDefinition) WithUniqueSelectionQueueLength(uniqueSelectionQueueLength int) *RandomNodeDefinition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniqueSelectionQueueLength:"), uniqueSelectionQueueLength)
-	return x
+// WithUniqueSelectionQueueLength sets the length of the unique selection queue.
+func (rnd *RandomNodeDefinition) WithUniqueSelectionQueueLength(uniqueSelectionQueueLength int) *RandomNodeDefinition {
+	objc.Send[objc.ID](objref.IDOf(rnd), objc.RegisterName("setUniqueSelectionQueueLength:"), uniqueSelectionQueueLength)
+	return rnd
 }
 
 // AddSubtreeWeight adds a node tree that’s one of the random-selection options.
-func (x *RandomNodeDefinition) AddSubtreeWeight(subtree *SoundEventNodeDefinition, weight obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addSubtree:weight:"), objref.IDOf(subtree), objref.IDOf(weight))
+func (rnd *RandomNodeDefinition) AddSubtreeWeight(subtree *SoundEventNodeDefinition, weight obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(rnd), objc.RegisterName("addSubtree:weight:"), objref.IDOf(subtree), objref.IDOf(weight))
 }
 
 // UniqueSelectionQueueLength wraps the corresponding Objective-C method.
-func (x *RandomNodeDefinition) UniqueSelectionQueueLength() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("uniqueSelectionQueueLength"))
+func (rnd *RandomNodeDefinition) UniqueSelectionQueueLength() int {
+	_r := objc.Send[int](objref.IDOf(rnd), objc.RegisterName("uniqueSelectionQueueLength"))
 	return _r
 }
-
-// SetUniqueSelectionQueueLength wraps the corresponding Objective-C method.
-func (x *RandomNodeDefinition) SetUniqueSelectionQueueLength(uniqueSelectionQueueLength int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUniqueSelectionQueueLength:"), uniqueSelectionQueueLength)
-}
-
-// RandomNodeDefinitionable is the interface implemented by [RandomNodeDefinition], for mocking and DI.
-type RandomNodeDefinitionable interface {
-	obj.Object
-	WithUniqueSelectionQueueLength(uniqueSelectionQueueLength int) *RandomNodeDefinition
-	AddSubtreeWeight(subtree *SoundEventNodeDefinition, weight obj.Object)
-	UniqueSelectionQueueLength() int
-	SetUniqueSelectionQueueLength(uniqueSelectionQueueLength int)
-}
-
-var _ RandomNodeDefinitionable = (*RandomNodeDefinition)(nil)
 
 var _ SoundEventNodeDefinitionProvider = (*RandomNodeDefinition)(nil)
 

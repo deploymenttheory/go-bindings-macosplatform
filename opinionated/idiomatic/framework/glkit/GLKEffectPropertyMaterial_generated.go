@@ -7,7 +7,6 @@ package glkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,31 +51,16 @@ func NewEffectPropertyMaterial() *EffectPropertyMaterial {
 	return effectPropertyMaterialAdopt(_id)
 }
 
-// WithShininess the shininess of the material, used when calculating specular lighting effects.
-func (x *EffectPropertyMaterial) WithShininess(shininess float32) *EffectPropertyMaterial {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShininess:"), shininess)
-	return x
+// WithShininess sets the shininess of the material, used when calculating specular lighting effects.
+func (epm *EffectPropertyMaterial) WithShininess(shininess float32) *EffectPropertyMaterial {
+	objc.Send[objc.ID](objref.IDOf(epm), objc.RegisterName("setShininess:"), shininess)
+	return epm
 }
 
 // Shininess wraps the corresponding Objective-C method.
-func (x *EffectPropertyMaterial) Shininess() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("shininess"))
+func (epm *EffectPropertyMaterial) Shininess() float32 {
+	_r := objc.Send[float32](objref.IDOf(epm), objc.RegisterName("shininess"))
 	return _r
 }
-
-// SetShininess wraps the corresponding Objective-C method.
-func (x *EffectPropertyMaterial) SetShininess(shininess float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShininess:"), shininess)
-}
-
-// EffectPropertyMaterialable is the interface implemented by [EffectPropertyMaterial], for mocking and DI.
-type EffectPropertyMaterialable interface {
-	obj.Object
-	WithShininess(shininess float32) *EffectPropertyMaterial
-	Shininess() float32
-	SetShininess(shininess float32)
-}
-
-var _ EffectPropertyMaterialable = (*EffectPropertyMaterial)(nil)
 
 var _ EffectPropertyProvider = (*EffectPropertyMaterial)(nil)

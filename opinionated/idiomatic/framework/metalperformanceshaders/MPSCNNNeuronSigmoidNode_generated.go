@@ -53,19 +53,11 @@ func NewCNNNeuronSigmoidNodeWithSource(sourceNode obj.Object) *CNNNeuronSigmoidN
 	return cNNNeuronSigmoidNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNNeuronSigmoidNode) WithLabel(label string) *CNNNeuronSigmoidNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cnsn *CNNNeuronSigmoidNode) WithLabel(label string) *CNNNeuronSigmoidNode {
+	objc.Send[objc.ID](objref.IDOf(cnsn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cnsn
 }
-
-// CNNNeuronSigmoidNodeable is the interface implemented by [CNNNeuronSigmoidNode], for mocking and DI.
-type CNNNeuronSigmoidNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNNeuronSigmoidNode
-}
-
-var _ CNNNeuronSigmoidNodeable = (*CNNNeuronSigmoidNode)(nil)
 
 var _ CNNNeuronNodeProvider = (*CNNNeuronSigmoidNode)(nil)
 

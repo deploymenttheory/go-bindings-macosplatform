@@ -53,45 +53,28 @@ func NewMutableComposition() *MutableComposition {
 	return mutableCompositionAdopt(_id)
 }
 
-// WithNaturalSize the encoded or authored size of the visual portion of the asset.
-func (x *MutableComposition) WithNaturalSize(naturalSize corefoundation.CGSize) *MutableComposition {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNaturalSize:"), naturalSize)
-	return x
-}
-
-// SetNaturalSize wraps the corresponding Objective-C method.
-func (x *MutableComposition) SetNaturalSize(naturalSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNaturalSize:"), naturalSize)
+// WithNaturalSize sets the encoded or authored size of the visual portion of the asset.
+func (mc *MutableComposition) WithNaturalSize(naturalSize corefoundation.CGSize) *MutableComposition {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("setNaturalSize:"), naturalSize)
+	return mc
 }
 
 // AddMutableTrackWithMediaTypePreferredTrackID adds an empty track to a composition.
-func (x *MutableComposition) AddMutableTrackWithMediaTypePreferredTrackID(mediaType obj.Object, preferredTrackID int32) *MutableCompositionTrack {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addMutableTrackWithMediaType:preferredTrackID:"), objref.IDOf(mediaType), preferredTrackID)
+func (mc *MutableComposition) AddMutableTrackWithMediaTypePreferredTrackID(mediaType obj.Object, preferredTrackID int32) *MutableCompositionTrack {
+	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("addMutableTrackWithMediaType:preferredTrackID:"), objref.IDOf(mediaType), preferredTrackID)
 	return MutableCompositionTrackFromID(_r)
 }
 
 // RemoveTrack removes a specified track from the composition.
-func (x *MutableComposition) RemoveTrack(track *CompositionTrack) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTrack:"), objref.IDOf(track))
+func (mc *MutableComposition) RemoveTrack(track *CompositionTrack) {
+	objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("removeTrack:"), objref.IDOf(track))
 }
 
 // MutableTrackCompatibleWithTrack returns a composition track into which you can insert any time range of the specified asset track.
-func (x *MutableComposition) MutableTrackCompatibleWithTrack(track *AssetTrack) *MutableCompositionTrack {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mutableTrackCompatibleWithTrack:"), objref.IDOf(track))
+func (mc *MutableComposition) MutableTrackCompatibleWithTrack(track *AssetTrack) *MutableCompositionTrack {
+	_r := objc.Send[objc.ID](objref.IDOf(mc), objc.RegisterName("mutableTrackCompatibleWithTrack:"), objref.IDOf(track))
 	return MutableCompositionTrackFromID(_r)
 }
-
-// MutableCompositionable is the interface implemented by [MutableComposition], for mocking and DI.
-type MutableCompositionable interface {
-	obj.Object
-	WithNaturalSize(naturalSize corefoundation.CGSize) *MutableComposition
-	SetNaturalSize(naturalSize corefoundation.CGSize)
-	AddMutableTrackWithMediaTypePreferredTrackID(mediaType obj.Object, preferredTrackID int32) *MutableCompositionTrack
-	RemoveTrack(track *CompositionTrack)
-	MutableTrackCompatibleWithTrack(track *AssetTrack) *MutableCompositionTrack
-}
-
-var _ MutableCompositionable = (*MutableComposition)(nil)
 
 var _ CompositionProvider = (*MutableComposition)(nil)
 

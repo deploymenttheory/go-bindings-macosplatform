@@ -46,24 +46,24 @@ func syncEngineFetchedZoneDeletionAdopt(id objc.ID) *SyncEngineFetchedZoneDeleti
 }
 
 // Description returns the object's -description text.
-func (x *SyncEngineFetchedZoneDeletion) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sefzd *SyncEngineFetchedZoneDeletion) Description() string {
+	return rt.Description(objref.IDOf(sefzd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEngineFetchedZoneDeletion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sefzd *SyncEngineFetchedZoneDeletion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sefzd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEngineFetchedZoneDeletion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sefzd *SyncEngineFetchedZoneDeletion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sefzd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SyncEngineFetchedZoneDeletion) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sefzd *SyncEngineFetchedZoneDeletion) String() string {
+	return rt.Description(objref.IDOf(sefzd))
 }
 
 // NewSyncEngineFetchedZoneDeletion creates a new SyncEngineFetchedZoneDeletion.
@@ -72,23 +72,14 @@ func NewSyncEngineFetchedZoneDeletion() *SyncEngineFetchedZoneDeletion {
 	return syncEngineFetchedZoneDeletionAdopt(_id)
 }
 
-// ZoneID the identifier of the deleted record zone.
-func (x *SyncEngineFetchedZoneDeletion) ZoneID() *RecordZoneID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneID"))
+// ZoneID returns the identifier of the deleted record zone.
+func (sefzd *SyncEngineFetchedZoneDeletion) ZoneID() *RecordZoneID {
+	_r := objc.Send[objc.ID](objref.IDOf(sefzd), objc.RegisterName("zoneID"))
 	return RecordZoneIDFromID(_r)
 }
 
-// Reason the reason for the deletion.
-func (x *SyncEngineFetchedZoneDeletion) Reason() SyncEngineZoneDeletionReason {
-	_r := objc.Send[SyncEngineZoneDeletionReason](objref.IDOf(x), objc.RegisterName("reason"))
+// Reason returns the reason for the deletion.
+func (sefzd *SyncEngineFetchedZoneDeletion) Reason() SyncEngineZoneDeletionReason {
+	_r := objc.Send[SyncEngineZoneDeletionReason](objref.IDOf(sefzd), objc.RegisterName("reason"))
 	return _r
 }
-
-// SyncEngineFetchedZoneDeletionable is the interface implemented by [SyncEngineFetchedZoneDeletion], for mocking and DI.
-type SyncEngineFetchedZoneDeletionable interface {
-	obj.Object
-	ZoneID() *RecordZoneID
-	Reason() SyncEngineZoneDeletionReason
-}
-
-var _ SyncEngineFetchedZoneDeletionable = (*SyncEngineFetchedZoneDeletion)(nil)

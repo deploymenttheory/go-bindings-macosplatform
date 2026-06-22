@@ -53,60 +53,45 @@ func NewMutableAttributedString() *MutableAttributedString {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *MutableAttributedString) WithScriptingProperties(scriptingProperties obj.Object) *MutableAttributedString {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (mas *MutableAttributedString) WithScriptingProperties(scriptingProperties obj.Object) *MutableAttributedString {
+	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return mas
 }
 
 // InsertAttributedStringAtIndex inserts the characters and attributes of the given attributed string into the receiver at the given index.
-func (x *MutableAttributedString) InsertAttributedStringAtIndex(attrString *AttributedString, loc int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertAttributedString:atIndex:"), objref.IDOf(attrString), loc)
+func (mas *MutableAttributedString) InsertAttributedStringAtIndex(attrString *AttributedString, loc int) {
+	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("insertAttributedString:atIndex:"), objref.IDOf(attrString), loc)
 }
 
 // AppendAttributedString adds the characters and attributes of a given attributed string to the end of the receiver.
-func (x *MutableAttributedString) AppendAttributedString(attrString *AttributedString) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendAttributedString:"), objref.IDOf(attrString))
+func (mas *MutableAttributedString) AppendAttributedString(attrString *AttributedString) {
+	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("appendAttributedString:"), objref.IDOf(attrString))
 }
 
 // SetAttributedString replaces the receiver’s entire contents with the characters and attributes of the given attributed string.
-func (x *MutableAttributedString) SetAttributedString(attrString *AttributedString) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedString:"), objref.IDOf(attrString))
+func (mas *MutableAttributedString) SetAttributedString(attrString *AttributedString) {
+	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("setAttributedString:"), objref.IDOf(attrString))
 }
 
 // BeginEditing begins the buffering of changes to the string’s characters and attributes.
-func (x *MutableAttributedString) BeginEditing() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginEditing"))
+func (mas *MutableAttributedString) BeginEditing() {
+	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("beginEditing"))
 }
 
 // EndEditing ends the buffering of changes to the string’s characters and attributes.
-func (x *MutableAttributedString) EndEditing() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endEditing"))
+func (mas *MutableAttributedString) EndEditing() {
+	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("endEditing"))
 }
 
 // MutableString wraps the corresponding Objective-C method.
-func (x *MutableAttributedString) MutableString() *MutableString {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mutableString"))
+func (mas *MutableAttributedString) MutableString() *MutableString {
+	_r := objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("mutableString"))
 	return MutableStringFromID(_r)
 }
 
 // AppendLocalizedFormat formats the specified string and arguments with the current locale, then appends the result to the receiver.
-func (x *MutableAttributedString) AppendLocalizedFormat(format *AttributedString) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("appendLocalizedFormat:"), objref.IDOf(format))
+func (mas *MutableAttributedString) AppendLocalizedFormat(format *AttributedString) {
+	objc.Send[objc.ID](objref.IDOf(mas), objc.RegisterName("appendLocalizedFormat:"), objref.IDOf(format))
 }
-
-// MutableAttributedStringable is the interface implemented by [MutableAttributedString], for mocking and DI.
-type MutableAttributedStringable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *MutableAttributedString
-	InsertAttributedStringAtIndex(attrString *AttributedString, loc int)
-	AppendAttributedString(attrString *AttributedString)
-	SetAttributedString(attrString *AttributedString)
-	BeginEditing()
-	EndEditing()
-	MutableString() *MutableString
-	AppendLocalizedFormat(format *AttributedString)
-}
-
-var _ MutableAttributedStringable = (*MutableAttributedString)(nil)
 
 var _ AttributedStringProvider = (*MutableAttributedString)(nil)

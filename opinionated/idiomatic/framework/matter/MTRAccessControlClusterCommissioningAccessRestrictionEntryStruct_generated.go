@@ -44,24 +44,24 @@ func mTRAccessControlClusterCommissioningAccessRestrictionEntryStructAdopt(id ob
 }
 
 // Description returns the object's -description text.
-func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Description() string {
+	return rt.Description(objref.IDOf(macccares))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(macccares), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(macccares), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) String() string {
+	return rt.Description(objref.IDOf(macccares))
 }
 
 // NewMTRAccessControlClusterCommissioningAccessRestrictionEntryStruct creates a new MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct.
@@ -71,61 +71,36 @@ func NewMTRAccessControlClusterCommissioningAccessRestrictionEntryStruct() *MTRA
 }
 
 // WithEndpoint sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
-	return x
+func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct {
+	objc.Send[objc.ID](objref.IDOf(macccares), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
+	return macccares
 }
 
 // WithCluster sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) WithCluster(cluster obj.Object) *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
-	return x
+func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) WithCluster(cluster obj.Object) *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct {
+	objc.Send[objc.ID](objref.IDOf(macccares), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
+	return macccares
 }
 
 // Endpoint wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Endpoint() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
+func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Endpoint() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(macccares), objc.RegisterName("endpoint"))
 	return obj.Wrap(_r)
-}
-
-// SetEndpoint wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) SetEndpoint(endpoint obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndpoint:"), objref.IDOf(endpoint))
 }
 
 // Cluster wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Cluster() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cluster"))
+func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Cluster() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(macccares), objc.RegisterName("cluster"))
 	return obj.Wrap(_r)
 }
 
-// SetCluster wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) SetCluster(cluster obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCluster:"), objref.IDOf(cluster))
-}
-
 // Restrictions wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Restrictions() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("restrictions"))
+func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) Restrictions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(macccares), objc.RegisterName("restrictions"))
 	return obj.Wrap(_r)
 }
 
 // SetRestrictions wraps the corresponding Objective-C method.
-func (x *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) SetRestrictions(restrictions obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRestrictions:"), objref.IDOf(restrictions))
+func (macccares *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct) SetRestrictions(restrictions obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(macccares), objc.RegisterName("setRestrictions:"), objref.IDOf(restrictions))
 }
-
-// MTRAccessControlClusterCommissioningAccessRestrictionEntryStructable is the interface implemented by [MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct], for mocking and DI.
-type MTRAccessControlClusterCommissioningAccessRestrictionEntryStructable interface {
-	obj.Object
-	WithEndpoint(endpoint obj.Object) *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct
-	WithCluster(cluster obj.Object) *MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct
-	Endpoint() obj.Object
-	SetEndpoint(endpoint obj.Object)
-	Cluster() obj.Object
-	SetCluster(cluster obj.Object)
-	Restrictions() obj.Object
-	SetRestrictions(restrictions obj.Object)
-}
-
-var _ MTRAccessControlClusterCommissioningAccessRestrictionEntryStructable = (*MTRAccessControlClusterCommissioningAccessRestrictionEntryStruct)(nil)

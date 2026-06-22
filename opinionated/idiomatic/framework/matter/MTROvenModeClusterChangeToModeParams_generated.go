@@ -44,24 +44,24 @@ func mTROvenModeClusterChangeToModeParamsAdopt(id objc.ID) *MTROvenModeClusterCh
 }
 
 // Description returns the object's -description text.
-func (x *MTROvenModeClusterChangeToModeParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (momcctmp *MTROvenModeClusterChangeToModeParams) Description() string {
+	return rt.Description(objref.IDOf(momcctmp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTROvenModeClusterChangeToModeParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (momcctmp *MTROvenModeClusterChangeToModeParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(momcctmp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTROvenModeClusterChangeToModeParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (momcctmp *MTROvenModeClusterChangeToModeParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(momcctmp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTROvenModeClusterChangeToModeParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (momcctmp *MTROvenModeClusterChangeToModeParams) String() string {
+	return rt.Description(objref.IDOf(momcctmp))
 }
 
 // NewMTROvenModeClusterChangeToModeParams creates a new MTROvenModeClusterChangeToModeParams.
@@ -71,68 +71,37 @@ func NewMTROvenModeClusterChangeToModeParams() *MTROvenModeClusterChangeToModePa
 }
 
 // WithNewMode sets the property and returns the receiver so calls can be chained.
-func (x *MTROvenModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTROvenModeClusterChangeToModeParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
-	return x
+func (momcctmp *MTROvenModeClusterChangeToModeParams) WithNewMode(newMode obj.Object) *MTROvenModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(momcctmp), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
+	return momcctmp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTROvenModeClusterChangeToModeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROvenModeClusterChangeToModeParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (momcctmp *MTROvenModeClusterChangeToModeParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROvenModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(momcctmp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return momcctmp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTROvenModeClusterChangeToModeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROvenModeClusterChangeToModeParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (momcctmp *MTROvenModeClusterChangeToModeParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROvenModeClusterChangeToModeParams {
+	objc.Send[objc.ID](objref.IDOf(momcctmp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return momcctmp
 }
 
 // GetNewMode wraps the corresponding Objective-C method.
-func (x *MTROvenModeClusterChangeToModeParams) GetNewMode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewMode"))
+func (momcctmp *MTROvenModeClusterChangeToModeParams) GetNewMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(momcctmp), objc.RegisterName("getNewMode"))
 	return obj.Wrap(_r)
 }
 
-// SetNewMode wraps the corresponding Objective-C method.
-func (x *MTROvenModeClusterChangeToModeParams) SetNewMode(newMode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewMode:"), objref.IDOf(newMode))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTROvenModeClusterChangeToModeParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (momcctmp *MTROvenModeClusterChangeToModeParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(momcctmp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTROvenModeClusterChangeToModeParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTROvenModeClusterChangeToModeParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (momcctmp *MTROvenModeClusterChangeToModeParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(momcctmp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTROvenModeClusterChangeToModeParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTROvenModeClusterChangeToModeParamsable is the interface implemented by [MTROvenModeClusterChangeToModeParams], for mocking and DI.
-type MTROvenModeClusterChangeToModeParamsable interface {
-	obj.Object
-	WithNewMode(newMode obj.Object) *MTROvenModeClusterChangeToModeParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROvenModeClusterChangeToModeParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROvenModeClusterChangeToModeParams
-	GetNewMode() obj.Object
-	SetNewMode(newMode obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTROvenModeClusterChangeToModeParamsable = (*MTROvenModeClusterChangeToModeParams)(nil)

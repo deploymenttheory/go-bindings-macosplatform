@@ -44,24 +44,24 @@ func oneTimeCodeCredentialRequestAdopt(id objc.ID) *OneTimeCodeCredentialRequest
 }
 
 // Description returns the object's -description text.
-func (x *OneTimeCodeCredentialRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (otccr *OneTimeCodeCredentialRequest) Description() string {
+	return rt.Description(objref.IDOf(otccr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OneTimeCodeCredentialRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (otccr *OneTimeCodeCredentialRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(otccr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OneTimeCodeCredentialRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (otccr *OneTimeCodeCredentialRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(otccr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *OneTimeCodeCredentialRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (otccr *OneTimeCodeCredentialRequest) String() string {
+	return rt.Description(objref.IDOf(otccr))
 }
 
 // NewOneTimeCodeCredentialRequestWithCredentialIdentity initializes an instance of ASOneTimeCodeCredentialRequest.
@@ -70,10 +70,3 @@ func NewOneTimeCodeCredentialRequestWithCredentialIdentity(credentialIdentity *O
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCredentialIdentity:"), objref.IDOf(credentialIdentity))
 	return oneTimeCodeCredentialRequestAdopt(_id)
 }
-
-// OneTimeCodeCredentialRequestable is the interface implemented by [OneTimeCodeCredentialRequest], for mocking and DI.
-type OneTimeCodeCredentialRequestable interface {
-	obj.Object
-}
-
-var _ OneTimeCodeCredentialRequestable = (*OneTimeCodeCredentialRequest)(nil)

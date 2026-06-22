@@ -46,77 +46,54 @@ func mTRBasicInformationClusterCapabilityMinimaStructAdopt(id objc.ID) *MTRBasic
 }
 
 // Description returns the object's -description text.
-func (x *MTRBasicInformationClusterCapabilityMinimaStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) Description() string {
+	return rt.Description(objref.IDOf(mbiccms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBasicInformationClusterCapabilityMinimaStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbiccms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBasicInformationClusterCapabilityMinimaStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbiccms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRBasicInformationClusterCapabilityMinimaStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) String() string {
+	return rt.Description(objref.IDOf(mbiccms))
 }
 
 // WithCaseSessionsPerFabric sets the property and returns the receiver so calls can be chained.
-func (x *MTRBasicInformationClusterCapabilityMinimaStruct) WithCaseSessionsPerFabric(caseSessionsPerFabric obj.Object) *MTRBasicInformationClusterCapabilityMinimaStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseSessionsPerFabric:"), objref.IDOf(caseSessionsPerFabric))
-	return x
+func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) WithCaseSessionsPerFabric(caseSessionsPerFabric obj.Object) *MTRBasicInformationClusterCapabilityMinimaStruct {
+	objc.Send[objc.ID](objref.IDOf(mbiccms), objc.RegisterName("setCaseSessionsPerFabric:"), objref.IDOf(caseSessionsPerFabric))
+	return mbiccms
 }
 
 // WithSubscriptionsPerFabric sets the property and returns the receiver so calls can be chained.
-func (x *MTRBasicInformationClusterCapabilityMinimaStruct) WithSubscriptionsPerFabric(subscriptionsPerFabric obj.Object) *MTRBasicInformationClusterCapabilityMinimaStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionsPerFabric:"), objref.IDOf(subscriptionsPerFabric))
-	return x
+func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) WithSubscriptionsPerFabric(subscriptionsPerFabric obj.Object) *MTRBasicInformationClusterCapabilityMinimaStruct {
+	objc.Send[objc.ID](objref.IDOf(mbiccms), objc.RegisterName("setSubscriptionsPerFabric:"), objref.IDOf(subscriptionsPerFabric))
+	return mbiccms
 }
 
 // CaseSessionsPerFabric wraps the corresponding Objective-C method.
-func (x *MTRBasicInformationClusterCapabilityMinimaStruct) CaseSessionsPerFabric() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("caseSessionsPerFabric"))
+func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) CaseSessionsPerFabric() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbiccms), objc.RegisterName("caseSessionsPerFabric"))
 	return obj.Wrap(_r)
-}
-
-// SetCaseSessionsPerFabric wraps the corresponding Objective-C method.
-func (x *MTRBasicInformationClusterCapabilityMinimaStruct) SetCaseSessionsPerFabric(caseSessionsPerFabric obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaseSessionsPerFabric:"), objref.IDOf(caseSessionsPerFabric))
 }
 
 // SubscriptionsPerFabric wraps the corresponding Objective-C method.
-func (x *MTRBasicInformationClusterCapabilityMinimaStruct) SubscriptionsPerFabric() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptionsPerFabric"))
+func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) SubscriptionsPerFabric() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbiccms), objc.RegisterName("subscriptionsPerFabric"))
 	return obj.Wrap(_r)
 }
-
-// SetSubscriptionsPerFabric wraps the corresponding Objective-C method.
-func (x *MTRBasicInformationClusterCapabilityMinimaStruct) SetSubscriptionsPerFabric(subscriptionsPerFabric obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubscriptionsPerFabric:"), objref.IDOf(subscriptionsPerFabric))
-}
-
-// MTRBasicInformationClusterCapabilityMinimaStructable is the interface implemented by [MTRBasicInformationClusterCapabilityMinimaStruct], for mocking and DI.
-type MTRBasicInformationClusterCapabilityMinimaStructable interface {
-	obj.Object
-	WithCaseSessionsPerFabric(caseSessionsPerFabric obj.Object) *MTRBasicInformationClusterCapabilityMinimaStruct
-	WithSubscriptionsPerFabric(subscriptionsPerFabric obj.Object) *MTRBasicInformationClusterCapabilityMinimaStruct
-	CaseSessionsPerFabric() obj.Object
-	SetCaseSessionsPerFabric(caseSessionsPerFabric obj.Object)
-	SubscriptionsPerFabric() obj.Object
-	SetSubscriptionsPerFabric(subscriptionsPerFabric obj.Object)
-}
-
-var _ MTRBasicInformationClusterCapabilityMinimaStructable = (*MTRBasicInformationClusterCapabilityMinimaStruct)(nil)
 
 // isMTRBasicInformationClusterCapabilityMinimaStruct marks MTRBasicInformationClusterCapabilityMinimaStruct — and, by embedding promotion, its
 // subclasses — as a member of the MTRBasicInformationClusterCapabilityMinimaStruct hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRBasicInformationClusterCapabilityMinimaStruct) isMTRBasicInformationClusterCapabilityMinimaStruct() {
+func (mbiccms *MTRBasicInformationClusterCapabilityMinimaStruct) isMTRBasicInformationClusterCapabilityMinimaStruct() {
 }
 
 var _ MTRBasicInformationClusterCapabilityMinimaStructProvider = (*MTRBasicInformationClusterCapabilityMinimaStruct)(nil)

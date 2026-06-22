@@ -46,92 +46,68 @@ func mTRContentLauncherClusterParameterStructAdopt(id objc.ID) *MTRContentLaunch
 }
 
 // Description returns the object's -description text.
-func (x *MTRContentLauncherClusterParameterStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mclcps *MTRContentLauncherClusterParameterStruct) Description() string {
+	return rt.Description(objref.IDOf(mclcps))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRContentLauncherClusterParameterStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mclcps *MTRContentLauncherClusterParameterStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mclcps), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRContentLauncherClusterParameterStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mclcps *MTRContentLauncherClusterParameterStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mclcps), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRContentLauncherClusterParameterStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mclcps *MTRContentLauncherClusterParameterStruct) String() string {
+	return rt.Description(objref.IDOf(mclcps))
 }
 
 // WithType sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterParameterStruct) WithType(type_ obj.Object) *MTRContentLauncherClusterParameterStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
-	return x
+func (mclcps *MTRContentLauncherClusterParameterStruct) WithType(type_ obj.Object) *MTRContentLauncherClusterParameterStruct {
+	objc.Send[objc.ID](objref.IDOf(mclcps), objc.RegisterName("setType:"), objref.IDOf(type_))
+	return mclcps
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRContentLauncherClusterParameterStruct) WithValue(value string) *MTRContentLauncherClusterParameterStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
-	return x
+func (mclcps *MTRContentLauncherClusterParameterStruct) WithValue(value string) *MTRContentLauncherClusterParameterStruct {
+	objc.Send[objc.ID](objref.IDOf(mclcps), objc.RegisterName("setValue:"), purego.NSString(value))
+	return mclcps
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *MTRContentLauncherClusterParameterStruct) Type() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+func (mclcps *MTRContentLauncherClusterParameterStruct) Type() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclcps), objc.RegisterName("type"))
 	return obj.Wrap(_r)
 }
 
-// SetType wraps the corresponding Objective-C method.
-func (x *MTRContentLauncherClusterParameterStruct) SetType(type_ obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), objref.IDOf(type_))
-}
-
 // Value wraps the corresponding Objective-C method.
-func (x *MTRContentLauncherClusterParameterStruct) Value() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (mclcps *MTRContentLauncherClusterParameterStruct) Value() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mclcps), objc.RegisterName("value"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetValue wraps the corresponding Objective-C method.
-func (x *MTRContentLauncherClusterParameterStruct) SetValue(value string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), purego.NSString(value))
-}
-
 // ExternalIDList wraps the corresponding Objective-C method.
-func (x *MTRContentLauncherClusterParameterStruct) ExternalIDList() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("externalIDList"))
+func (mclcps *MTRContentLauncherClusterParameterStruct) ExternalIDList() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mclcps), objc.RegisterName("externalIDList"))
 	return obj.Wrap(_r)
 }
 
 // SetExternalIDList wraps the corresponding Objective-C method.
-func (x *MTRContentLauncherClusterParameterStruct) SetExternalIDList(externalIDList obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExternalIDList:"), objref.IDOf(externalIDList))
+func (mclcps *MTRContentLauncherClusterParameterStruct) SetExternalIDList(externalIDList obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mclcps), objc.RegisterName("setExternalIDList:"), objref.IDOf(externalIDList))
 }
-
-// MTRContentLauncherClusterParameterStructable is the interface implemented by [MTRContentLauncherClusterParameterStruct], for mocking and DI.
-type MTRContentLauncherClusterParameterStructable interface {
-	obj.Object
-	WithType(type_ obj.Object) *MTRContentLauncherClusterParameterStruct
-	WithValue(value string) *MTRContentLauncherClusterParameterStruct
-	Type() obj.Object
-	SetType(type_ obj.Object)
-	Value() string
-	SetValue(value string)
-	ExternalIDList() obj.Object
-	SetExternalIDList(externalIDList obj.Object)
-}
-
-var _ MTRContentLauncherClusterParameterStructable = (*MTRContentLauncherClusterParameterStruct)(nil)
 
 // isMTRContentLauncherClusterParameterStruct marks MTRContentLauncherClusterParameterStruct — and, by embedding promotion, its
 // subclasses — as a member of the MTRContentLauncherClusterParameterStruct hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *MTRContentLauncherClusterParameterStruct) isMTRContentLauncherClusterParameterStruct() {}
+func (mclcps *MTRContentLauncherClusterParameterStruct) isMTRContentLauncherClusterParameterStruct() {
+}
 
 var _ MTRContentLauncherClusterParameterStructProvider = (*MTRContentLauncherClusterParameterStruct)(nil)

@@ -46,24 +46,24 @@ func audioRoutingArbiterAdopt(id objc.ID) *AudioRoutingArbiter {
 }
 
 // Description returns the object's -description text.
-func (x *AudioRoutingArbiter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ara *AudioRoutingArbiter) Description() string {
+	return rt.Description(objref.IDOf(ara))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AudioRoutingArbiter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ara *AudioRoutingArbiter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ara), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AudioRoutingArbiter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ara *AudioRoutingArbiter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ara), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AudioRoutingArbiter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ara *AudioRoutingArbiter) String() string {
+	return rt.Description(objref.IDOf(ara))
 }
 
 // NewAudioRoutingArbiter creates a new AudioRoutingArbiter.
@@ -73,14 +73,6 @@ func NewAudioRoutingArbiter() *AudioRoutingArbiter {
 }
 
 // LeaveArbitration stops an app’s participation in audio routing arbitration.
-func (x *AudioRoutingArbiter) LeaveArbitration() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leaveArbitration"))
+func (ara *AudioRoutingArbiter) LeaveArbitration() {
+	objc.Send[objc.ID](objref.IDOf(ara), objc.RegisterName("leaveArbitration"))
 }
-
-// AudioRoutingArbiterable is the interface implemented by [AudioRoutingArbiter], for mocking and DI.
-type AudioRoutingArbiterable interface {
-	obj.Object
-	LeaveArbitration()
-}
-
-var _ AudioRoutingArbiterable = (*AudioRoutingArbiter)(nil)

@@ -46,24 +46,24 @@ func colorAdopt(id objc.ID) *Color {
 }
 
 // Description returns the object's -description text.
-func (x *Color) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Color) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Color) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Color) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Color) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Color) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Color) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Color) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewColorWithRedGreenBlue creates a color with the specified red, green, and blue values.
@@ -74,29 +74,19 @@ func NewColorWithRedGreenBlue(red float32, green float32, blue float32) *Color {
 }
 
 // Red wraps the corresponding Objective-C method.
-func (x *Color) Red() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("red"))
+func (c *Color) Red() float32 {
+	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("red"))
 	return _r
 }
 
 // Green wraps the corresponding Objective-C method.
-func (x *Color) Green() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("green"))
+func (c *Color) Green() float32 {
+	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("green"))
 	return _r
 }
 
 // Blue wraps the corresponding Objective-C method.
-func (x *Color) Blue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("blue"))
+func (c *Color) Blue() float32 {
+	_r := objc.Send[float32](objref.IDOf(c), objc.RegisterName("blue"))
 	return _r
 }
-
-// Colorable is the interface implemented by [Color], for mocking and DI.
-type Colorable interface {
-	obj.Object
-	Red() float32
-	Green() float32
-	Blue() float32
-}
-
-var _ Colorable = (*Color)(nil)

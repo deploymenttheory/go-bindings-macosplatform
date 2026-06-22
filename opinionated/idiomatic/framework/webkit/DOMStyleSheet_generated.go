@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,14 +44,14 @@ func dOMStyleSheetAdopt(id objc.ID) *DOMStyleSheet {
 }
 
 // WithDisabled sets the property and returns the receiver so calls can be chained.
-func (x *DOMStyleSheet) WithDisabled(disabled bool) *DOMStyleSheet {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
-	return x
+func (dss *DOMStyleSheet) WithDisabled(disabled bool) *DOMStyleSheet {
+	objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("setDisabled:"), disabled)
+	return dss
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *DOMStyleSheet) Type() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+func (dss *DOMStyleSheet) Type() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("type"))
 	if _r == 0 {
 		return ""
 	}
@@ -60,31 +59,26 @@ func (x *DOMStyleSheet) Type() string {
 }
 
 // Disabled wraps the corresponding Objective-C method.
-func (x *DOMStyleSheet) Disabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("disabled"))
+func (dss *DOMStyleSheet) Disabled() bool {
+	_r := objc.Send[bool](objref.IDOf(dss), objc.RegisterName("disabled"))
 	return _r
 }
 
-// SetDisabled wraps the corresponding Objective-C method.
-func (x *DOMStyleSheet) SetDisabled(disabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
-}
-
 // OwnerNode wraps the corresponding Objective-C method.
-func (x *DOMStyleSheet) OwnerNode() *DOMNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerNode"))
+func (dss *DOMStyleSheet) OwnerNode() *DOMNode {
+	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("ownerNode"))
 	return DOMNodeFromID(_r)
 }
 
 // ParentStyleSheet wraps the corresponding Objective-C method.
-func (x *DOMStyleSheet) ParentStyleSheet() *DOMStyleSheet {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentStyleSheet"))
+func (dss *DOMStyleSheet) ParentStyleSheet() *DOMStyleSheet {
+	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("parentStyleSheet"))
 	return DOMStyleSheetFromID(_r)
 }
 
 // Href wraps the corresponding Objective-C method.
-func (x *DOMStyleSheet) Href() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("href"))
+func (dss *DOMStyleSheet) Href() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("href"))
 	if _r == 0 {
 		return ""
 	}
@@ -92,8 +86,8 @@ func (x *DOMStyleSheet) Href() string {
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *DOMStyleSheet) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (dss *DOMStyleSheet) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
@@ -101,31 +95,15 @@ func (x *DOMStyleSheet) Title() string {
 }
 
 // Media wraps the corresponding Objective-C method.
-func (x *DOMStyleSheet) Media() *DOMMediaList {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("media"))
+func (dss *DOMStyleSheet) Media() *DOMMediaList {
+	_r := objc.Send[objc.ID](objref.IDOf(dss), objc.RegisterName("media"))
 	return DOMMediaListFromID(_r)
 }
-
-// DOMStyleSheetable is the interface implemented by [DOMStyleSheet], for mocking and DI.
-type DOMStyleSheetable interface {
-	obj.Object
-	WithDisabled(disabled bool) *DOMStyleSheet
-	Type() string
-	Disabled() bool
-	SetDisabled(disabled bool)
-	OwnerNode() *DOMNode
-	ParentStyleSheet() *DOMStyleSheet
-	Href() string
-	Title() string
-	Media() *DOMMediaList
-}
-
-var _ DOMStyleSheetable = (*DOMStyleSheet)(nil)
 
 // isDOMStyleSheet marks DOMStyleSheet — and, by embedding promotion, its
 // subclasses — as a member of the DOMStyleSheet hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DOMStyleSheet) isDOMStyleSheet() {}
+func (dss *DOMStyleSheet) isDOMStyleSheet() {}
 
 var _ DOMStyleSheetProvider = (*DOMStyleSheet)(nil)
 

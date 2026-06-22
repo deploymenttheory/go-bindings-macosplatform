@@ -44,24 +44,24 @@ func nNMultiaryGradientStateAdopt(id objc.ID) *NNMultiaryGradientState {
 }
 
 // Description returns the object's -description text.
-func (x *NNMultiaryGradientState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nmgs *NNMultiaryGradientState) Description() string {
+	return rt.Description(objref.IDOf(nmgs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NNMultiaryGradientState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nmgs *NNMultiaryGradientState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nmgs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NNMultiaryGradientState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nmgs *NNMultiaryGradientState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nmgs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NNMultiaryGradientState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nmgs *NNMultiaryGradientState) String() string {
+	return rt.Description(objref.IDOf(nmgs))
 }
 
 // NewNNMultiaryGradientState creates a new NNMultiaryGradientState.
@@ -69,10 +69,3 @@ func NewNNMultiaryGradientState() *NNMultiaryGradientState {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNMultiaryGradientState")), objc.RegisterName("new"))
 	return nNMultiaryGradientStateAdopt(_id)
 }
-
-// NNMultiaryGradientStateable is the interface implemented by [NNMultiaryGradientState], for mocking and DI.
-type NNMultiaryGradientStateable interface {
-	obj.Object
-}
-
-var _ NNMultiaryGradientStateable = (*NNMultiaryGradientState)(nil)

@@ -53,23 +53,14 @@ func NewEraseSetupPanel() *EraseSetupPanel {
 }
 
 // EraseObject creates and returns a new DRErase object that's configured to erase the disc in the currently selected device. The new DRErase object is configured based on the settings in the setup panel when the user clicks the OK button. Do not invoke this method within a modal session (
-func (x *EraseSetupPanel) EraseObject() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eraseObject"))
+func (esp *EraseSetupPanel) EraseObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("eraseObject"))
 	return obj.Wrap(_r)
 }
 
 // EraseType invoked when the user clicks one of the panel's erase type radio buttons.
-func (x *EraseSetupPanel) EraseType(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eraseType:"), objref.IDOf(sender))
+func (esp *EraseSetupPanel) EraseType(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(esp), objc.RegisterName("eraseType:"), objref.IDOf(sender))
 }
-
-// EraseSetupPanelable is the interface implemented by [EraseSetupPanel], for mocking and DI.
-type EraseSetupPanelable interface {
-	obj.Object
-	EraseObject() obj.Object
-	EraseType(sender obj.Object)
-}
-
-var _ EraseSetupPanelable = (*EraseSetupPanel)(nil)
 
 var _ SetupPanelProvider = (*EraseSetupPanel)(nil)

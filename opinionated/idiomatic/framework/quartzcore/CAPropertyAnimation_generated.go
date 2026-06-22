@@ -7,7 +7,6 @@ package quartzcore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,114 +45,73 @@ func propertyAnimationAdopt(id objc.ID) *PropertyAnimation {
 	return x
 }
 
-// WithKeyPath specifies the key path the receiver animates.
-func (x *PropertyAnimation) WithKeyPath(keyPath string) *PropertyAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyPath:"), purego.NSString(keyPath))
-	return x
+// WithKeyPath sets specifies the key path the receiver animates.
+func (pa *PropertyAnimation) WithKeyPath(keyPath string) *PropertyAnimation {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setKeyPath:"), purego.NSString(keyPath))
+	return pa
 }
 
-// WithAdditive determines if the value specified by the animation is added to the current render tree value to produce the new render tree value.
-func (x *PropertyAnimation) WithAdditive(additive bool) *PropertyAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditive:"), additive)
-	return x
+// WithAdditive sets determines if the value specified by the animation is added to the current render tree value to produce the new render tree value.
+func (pa *PropertyAnimation) WithAdditive(additive bool) *PropertyAnimation {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setAdditive:"), additive)
+	return pa
 }
 
-// WithCumulative determines if the value of the property is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle.
-func (x *PropertyAnimation) WithCumulative(cumulative bool) *PropertyAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCumulative:"), cumulative)
-	return x
+// WithCumulative sets determines if the value of the property is the value at the end of the previous repeat cycle, plus the value of the current repeat cycle.
+func (pa *PropertyAnimation) WithCumulative(cumulative bool) *PropertyAnimation {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setCumulative:"), cumulative)
+	return pa
 }
 
-// WithValueFunction an optional value function that is applied to interpolated values.
-func (x *PropertyAnimation) WithValueFunction(valueFunction *ValueFunction) *PropertyAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueFunction:"), objref.IDOf(valueFunction))
-	return x
+// WithValueFunction sets an optional value function that is applied to interpolated values.
+func (pa *PropertyAnimation) WithValueFunction(valueFunction *ValueFunction) *PropertyAnimation {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setValueFunction:"), objref.IDOf(valueFunction))
+	return pa
 }
 
-// WithTimingFunction an optional timing function defining the pacing of the animation.
-func (x *PropertyAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *PropertyAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
-	return x
+// WithTimingFunction sets an optional timing function defining the pacing of the animation.
+func (pa *PropertyAnimation) WithTimingFunction(timingFunction *MediaTimingFunction) *PropertyAnimation {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setTimingFunction:"), objref.IDOf(timingFunction))
+	return pa
 }
 
-// WithRemovedOnCompletion determines if the animation is removed from the target layer’s animations upon completion.
-func (x *PropertyAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *PropertyAnimation {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
-	return x
+// WithRemovedOnCompletion sets determines if the animation is removed from the target layer’s animations upon completion.
+func (pa *PropertyAnimation) WithRemovedOnCompletion(removedOnCompletion bool) *PropertyAnimation {
+	objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("setRemovedOnCompletion:"), removedOnCompletion)
+	return pa
 }
 
 // KeyPath wraps the corresponding Objective-C method.
-func (x *PropertyAnimation) KeyPath() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyPath"))
+func (pa *PropertyAnimation) KeyPath() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("keyPath"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetKeyPath wraps the corresponding Objective-C method.
-func (x *PropertyAnimation) SetKeyPath(keyPath string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyPath:"), purego.NSString(keyPath))
-}
-
 // IsAdditive wraps the corresponding Objective-C method.
-func (x *PropertyAnimation) IsAdditive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAdditive"))
+func (pa *PropertyAnimation) IsAdditive() bool {
+	_r := objc.Send[bool](objref.IDOf(pa), objc.RegisterName("isAdditive"))
 	return _r
-}
-
-// SetAdditive wraps the corresponding Objective-C method.
-func (x *PropertyAnimation) SetAdditive(additive bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAdditive:"), additive)
 }
 
 // IsCumulative wraps the corresponding Objective-C method.
-func (x *PropertyAnimation) IsCumulative() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCumulative"))
+func (pa *PropertyAnimation) IsCumulative() bool {
+	_r := objc.Send[bool](objref.IDOf(pa), objc.RegisterName("isCumulative"))
 	return _r
 }
 
-// SetCumulative wraps the corresponding Objective-C method.
-func (x *PropertyAnimation) SetCumulative(cumulative bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCumulative:"), cumulative)
-}
-
 // ValueFunction wraps the corresponding Objective-C method.
-func (x *PropertyAnimation) ValueFunction() *ValueFunction {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueFunction"))
+func (pa *PropertyAnimation) ValueFunction() *ValueFunction {
+	_r := objc.Send[objc.ID](objref.IDOf(pa), objc.RegisterName("valueFunction"))
 	return ValueFunctionFromID(_r)
 }
-
-// SetValueFunction wraps the corresponding Objective-C method.
-func (x *PropertyAnimation) SetValueFunction(valueFunction *ValueFunction) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueFunction:"), objref.IDOf(valueFunction))
-}
-
-// PropertyAnimationable is the interface implemented by [PropertyAnimation], for mocking and DI.
-type PropertyAnimationable interface {
-	obj.Object
-	WithKeyPath(keyPath string) *PropertyAnimation
-	WithAdditive(additive bool) *PropertyAnimation
-	WithCumulative(cumulative bool) *PropertyAnimation
-	WithValueFunction(valueFunction *ValueFunction) *PropertyAnimation
-	WithTimingFunction(timingFunction *MediaTimingFunction) *PropertyAnimation
-	WithRemovedOnCompletion(removedOnCompletion bool) *PropertyAnimation
-	KeyPath() string
-	SetKeyPath(keyPath string)
-	IsAdditive() bool
-	SetAdditive(additive bool)
-	IsCumulative() bool
-	SetCumulative(cumulative bool)
-	ValueFunction() *ValueFunction
-	SetValueFunction(valueFunction *ValueFunction)
-}
-
-var _ PropertyAnimationable = (*PropertyAnimation)(nil)
 
 // isPropertyAnimation marks PropertyAnimation — and, by embedding promotion, its
 // subclasses — as a member of the PropertyAnimation hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PropertyAnimation) isPropertyAnimation() {}
+func (pa *PropertyAnimation) isPropertyAnimation() {}
 
 var _ PropertyAnimationProvider = (*PropertyAnimation)(nil)
 

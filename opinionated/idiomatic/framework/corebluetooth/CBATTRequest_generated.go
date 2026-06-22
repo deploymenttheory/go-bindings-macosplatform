@@ -46,24 +46,24 @@ func aTTRequestAdopt(id objc.ID) *ATTRequest {
 }
 
 // Description returns the object's -description text.
-func (x *ATTRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ar *ATTRequest) Description() string {
+	return rt.Description(objref.IDOf(ar))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ATTRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ar *ATTRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ar), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ATTRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ar *ATTRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ar), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ATTRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ar *ATTRequest) String() string {
+	return rt.Description(objref.IDOf(ar))
 }
 
 // NewATTRequest creates a new ATTRequest.
@@ -72,50 +72,32 @@ func NewATTRequest() *ATTRequest {
 	return aTTRequestAdopt(_id)
 }
 
-// WithValue the data that the central reads from or writes to the peripheral.
-func (x *ATTRequest) WithValue(value obj.Object) *ATTRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
+// WithValue sets the data that the central reads from or writes to the peripheral.
+func (ar *ATTRequest) WithValue(value obj.Object) *ATTRequest {
+	objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return ar
 }
 
-// Central the central that originated the request.
-func (x *ATTRequest) Central() *Central {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("central"))
+// Central returns the central that originated the request.
+func (ar *ATTRequest) Central() *Central {
+	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("central"))
 	return CentralFromID(_r)
 }
 
-// Characteristic the characteristic whose value will be read or written.
-func (x *ATTRequest) Characteristic() *Characteristic {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("characteristic"))
+// Characteristic returns the characteristic whose value will be read or written.
+func (ar *ATTRequest) Characteristic() *Characteristic {
+	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("characteristic"))
 	return CharacteristicFromID(_r)
 }
 
-// Offset the zero-based index of the first byte for the read or write.
-func (x *ATTRequest) Offset() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("offset"))
+// Offset returns the zero-based index of the first byte for the read or write.
+func (ar *ATTRequest) Offset() int {
+	_r := objc.Send[int](objref.IDOf(ar), objc.RegisterName("offset"))
 	return _r
 }
 
-// Value the data being read or written. For read requests, <i>value</i> will be nil and should be set before responding via
-func (x *ATTRequest) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+// Value returns the data being read or written. For read requests, <i>value</i> will be nil and should be set before responding via
+func (ar *ATTRequest) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ar), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *ATTRequest) SetValue(value obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-}
-
-// ATTRequestable is the interface implemented by [ATTRequest], for mocking and DI.
-type ATTRequestable interface {
-	obj.Object
-	WithValue(value obj.Object) *ATTRequest
-	Central() *Central
-	Characteristic() *Characteristic
-	Offset() int
-	Value() obj.Object
-	SetValue(value obj.Object)
-}
-
-var _ ATTRequestable = (*ATTRequest)(nil)

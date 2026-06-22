@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewAnchoredObjectQuery() *AnchoredObjectQuery {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKAnchoredObjectQuery")), objc.RegisterName("new"))
 	return anchoredObjectQueryAdopt(_id)
 }
-
-// AnchoredObjectQueryable is the interface implemented by [AnchoredObjectQuery], for mocking and DI.
-type AnchoredObjectQueryable interface {
-	obj.Object
-}
-
-var _ AnchoredObjectQueryable = (*AnchoredObjectQuery)(nil)
 
 var _ QueryProvider = (*AnchoredObjectQuery)(nil)

@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,31 +51,16 @@ func NewSpiceAgentPortAttachment() *SpiceAgentPortAttachment {
 	return spiceAgentPortAttachmentAdopt(_id)
 }
 
-// WithSharesClipboard a Boolean value that indicates whether the framework needs to share the clipboard between the host and the VM.
-func (x *SpiceAgentPortAttachment) WithSharesClipboard(sharesClipboard bool) *SpiceAgentPortAttachment {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharesClipboard:"), sharesClipboard)
-	return x
+// WithSharesClipboard sets a Boolean value that indicates whether the framework needs to share the clipboard between the host and the VM.
+func (sapa *SpiceAgentPortAttachment) WithSharesClipboard(sharesClipboard bool) *SpiceAgentPortAttachment {
+	objc.Send[objc.ID](objref.IDOf(sapa), objc.RegisterName("setSharesClipboard:"), sharesClipboard)
+	return sapa
 }
 
-// SharesClipboard enable the Spice agent clipboard sharing capability. If enabled, the clipboard capability will be advertised to the Spice guest agent. Copy and paste events will be shared between the host and the virtual machine. This property is enabled by default.
-func (x *SpiceAgentPortAttachment) SharesClipboard() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sharesClipboard"))
+// SharesClipboard reports whether enable the Spice agent clipboard sharing capability. If enabled, the clipboard capability will be advertised to the Spice guest agent. Copy and paste events will be shared between the host and the virtual machine. This property is enabled by default.
+func (sapa *SpiceAgentPortAttachment) SharesClipboard() bool {
+	_r := objc.Send[bool](objref.IDOf(sapa), objc.RegisterName("sharesClipboard"))
 	return _r
 }
-
-// SetSharesClipboard wraps the corresponding Objective-C method.
-func (x *SpiceAgentPortAttachment) SetSharesClipboard(sharesClipboard bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharesClipboard:"), sharesClipboard)
-}
-
-// SpiceAgentPortAttachmentable is the interface implemented by [SpiceAgentPortAttachment], for mocking and DI.
-type SpiceAgentPortAttachmentable interface {
-	obj.Object
-	WithSharesClipboard(sharesClipboard bool) *SpiceAgentPortAttachment
-	SharesClipboard() bool
-	SetSharesClipboard(sharesClipboard bool)
-}
-
-var _ SpiceAgentPortAttachmentable = (*SpiceAgentPortAttachment)(nil)
 
 var _ SerialPortAttachmentProvider = (*SpiceAgentPortAttachment)(nil)

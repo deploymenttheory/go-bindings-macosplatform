@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -58,7 +59,7 @@ func NewMTRClusterOvenCavityOperationalStateWithDeviceEndpointIDQueue(device *MT
 // StopWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // StopWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOvenCavityOperationalState) StopWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROvenCavityOperationalStateClusterStopParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, err error) {
+func (mcocos *MTRClusterOvenCavityOperationalState) StopWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROvenCavityOperationalStateClusterStopParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, err error) {
 	type _result struct {
 		val *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -70,7 +71,7 @@ func (x *MTRClusterOvenCavityOperationalState) StopWithParamsExpectedValuesExpec
 		_o.val = MTROvenCavityOperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("stopWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -83,7 +84,7 @@ func (x *MTRClusterOvenCavityOperationalState) StopWithParamsExpectedValuesExpec
 // StopWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // StopWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOvenCavityOperationalState) StopWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, err error) {
+func (mcocos *MTRClusterOvenCavityOperationalState) StopWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, err error) {
 	type _result struct {
 		val *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -95,7 +96,7 @@ func (x *MTRClusterOvenCavityOperationalState) StopWithExpectedValuesExpectedVal
 		_o.val = MTROvenCavityOperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("stopWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -108,7 +109,7 @@ func (x *MTRClusterOvenCavityOperationalState) StopWithExpectedValuesExpectedVal
 // StartWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // StartWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOvenCavityOperationalState) StartWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROvenCavityOperationalStateClusterStartParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, err error) {
+func (mcocos *MTRClusterOvenCavityOperationalState) StartWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROvenCavityOperationalStateClusterStartParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, err error) {
 	type _result struct {
 		val *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -120,7 +121,7 @@ func (x *MTRClusterOvenCavityOperationalState) StartWithParamsExpectedValuesExpe
 		_o.val = MTROvenCavityOperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("startWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -133,7 +134,7 @@ func (x *MTRClusterOvenCavityOperationalState) StartWithParamsExpectedValuesExpe
 // StartWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // StartWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterOvenCavityOperationalState) StartWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, err error) {
+func (mcocos *MTRClusterOvenCavityOperationalState) StartWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, err error) {
 	type _result struct {
 		val *MTROvenCavityOperationalStateClusterOperationalCommandResponseParams
 		err error
@@ -145,7 +146,7 @@ func (x *MTRClusterOvenCavityOperationalState) StartWithExpectedValuesExpectedVa
 		_o.val = MTROvenCavityOperationalStateClusterOperationalCommandResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("startWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -156,92 +157,70 @@ func (x *MTRClusterOvenCavityOperationalState) StartWithExpectedValuesExpectedVa
 }
 
 // ReadAttributePhaseListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOvenCavityOperationalState) ReadAttributePhaseListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePhaseListWithParams:"), objref.IDOf(params))
+func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributePhaseListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributePhaseListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeCurrentPhaseWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOvenCavityOperationalState) ReadAttributeCurrentPhaseWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentPhaseWithParams:"), objref.IDOf(params))
+func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeCurrentPhaseWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeCurrentPhaseWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeCountdownTimeWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOvenCavityOperationalState) ReadAttributeCountdownTimeWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCountdownTimeWithParams:"), objref.IDOf(params))
+func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeCountdownTimeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeCountdownTimeWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeOperationalStateListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOvenCavityOperationalState) ReadAttributeOperationalStateListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationalStateListWithParams:"), objref.IDOf(params))
+func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeOperationalStateListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeOperationalStateListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeOperationalStateWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOvenCavityOperationalState) ReadAttributeOperationalStateWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationalStateWithParams:"), objref.IDOf(params))
+func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeOperationalStateWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeOperationalStateWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeOperationalErrorWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOvenCavityOperationalState) ReadAttributeOperationalErrorWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationalErrorWithParams:"), objref.IDOf(params))
+func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeOperationalErrorWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeOperationalErrorWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOvenCavityOperationalState) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOvenCavityOperationalState) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOvenCavityOperationalState) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOvenCavityOperationalState) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterOvenCavityOperationalState) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mcocos *MTRClusterOvenCavityOperationalState) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcocos), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
-
-// MTRClusterOvenCavityOperationalStateable is the interface implemented by [MTRClusterOvenCavityOperationalState], for mocking and DI.
-type MTRClusterOvenCavityOperationalStateable interface {
-	obj.Object
-	StopWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROvenCavityOperationalStateClusterStopParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, error)
-	StopWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, error)
-	StartWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTROvenCavityOperationalStateClusterStartParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, error)
-	StartWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTROvenCavityOperationalStateClusterOperationalCommandResponseParams, error)
-	ReadAttributePhaseListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeCurrentPhaseWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeCountdownTimeWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeOperationalStateListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeOperationalStateWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeOperationalErrorWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-}
-
-var _ MTRClusterOvenCavityOperationalStateable = (*MTRClusterOvenCavityOperationalState)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterOvenCavityOperationalState)(nil)
 

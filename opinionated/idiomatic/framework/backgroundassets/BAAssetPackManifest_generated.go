@@ -5,13 +5,14 @@
 package backgroundassets
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // AssetPackManifest is an idiomatic wrapper over the Objective-C class BAAssetPackManifest.
@@ -48,24 +49,24 @@ func assetPackManifestAdopt(id objc.ID) *AssetPackManifest {
 }
 
 // Description returns the object's -description text.
-func (x *AssetPackManifest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (apm *AssetPackManifest) Description() string {
+	return rt.Description(objref.IDOf(apm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetPackManifest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (apm *AssetPackManifest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(apm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetPackManifest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (apm *AssetPackManifest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(apm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetPackManifest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (apm *AssetPackManifest) String() string {
+	return rt.Description(objref.IDOf(apm))
 }
 
 // NewAssetPackManifestWithContentsOfURLApplicationGroupIdentifierError initializes a representation of a manifest in memory given a URL to the manifest’s representation as a JSON file on disk.
@@ -91,29 +92,19 @@ func NewAssetPackManifestFromDataApplicationGroupIdentifierError(data obj.Object
 }
 
 // AllDownloads creates download objects for every asset pack in this manifest.
-func (x *AssetPackManifest) AllDownloads() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allDownloads"))
+func (apm *AssetPackManifest) AllDownloads() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("allDownloads"))
 	return obj.Wrap(_r)
 }
 
 // AllDownloadsForContentRequest creates download objects for every asset pack in this manifest.
-func (x *AssetPackManifest) AllDownloadsForContentRequest(contentRequest ContentRequest) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allDownloadsForContentRequest:"), contentRequest)
+func (apm *AssetPackManifest) AllDownloadsForContentRequest(contentRequest ContentRequest) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("allDownloadsForContentRequest:"), contentRequest)
 	return obj.Wrap(_r)
 }
 
-// AssetPacks the asset packs that are available to download.
-func (x *AssetPackManifest) AssetPacks() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assetPacks"))
+// AssetPacks returns the asset packs that are available to download.
+func (apm *AssetPackManifest) AssetPacks() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apm), objc.RegisterName("assetPacks"))
 	return obj.Wrap(_r)
 }
-
-// AssetPackManifestable is the interface implemented by [AssetPackManifest], for mocking and DI.
-type AssetPackManifestable interface {
-	obj.Object
-	AllDownloads() obj.Object
-	AllDownloadsForContentRequest(contentRequest ContentRequest) obj.Object
-	AssetPacks() obj.Object
-}
-
-var _ AssetPackManifestable = (*AssetPackManifest)(nil)

@@ -46,24 +46,24 @@ func oneTimeCodeCredentialAdopt(id objc.ID) *OneTimeCodeCredential {
 }
 
 // Description returns the object's -description text.
-func (x *OneTimeCodeCredential) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (otcc *OneTimeCodeCredential) Description() string {
+	return rt.Description(objref.IDOf(otcc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *OneTimeCodeCredential) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (otcc *OneTimeCodeCredential) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(otcc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *OneTimeCodeCredential) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (otcc *OneTimeCodeCredential) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(otcc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *OneTimeCodeCredential) String() string {
-	return rt.Description(objref.IDOf(x))
+func (otcc *OneTimeCodeCredential) String() string {
+	return rt.Description(objref.IDOf(otcc))
 }
 
 // NewOneTimeCodeCredentialWithCode creates a one-time passcode (OTP) credential.
@@ -74,18 +74,10 @@ func NewOneTimeCodeCredentialWithCode(code string) *OneTimeCodeCredential {
 }
 
 // Code wraps the corresponding Objective-C method.
-func (x *OneTimeCodeCredential) Code() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("code"))
+func (otcc *OneTimeCodeCredential) Code() string {
+	_r := objc.Send[objc.ID](objref.IDOf(otcc), objc.RegisterName("code"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// OneTimeCodeCredentialable is the interface implemented by [OneTimeCodeCredential], for mocking and DI.
-type OneTimeCodeCredentialable interface {
-	obj.Object
-	Code() string
-}
-
-var _ OneTimeCodeCredentialable = (*OneTimeCodeCredential)(nil)

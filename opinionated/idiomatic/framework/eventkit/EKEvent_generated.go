@@ -53,177 +53,152 @@ func NewEvent() *Event {
 	return eventAdopt(_id)
 }
 
-// WithAllDay a Boolean value that indicates whether the event is an all-day event.
-func (x *Event) WithAllDay(allDay bool) *Event {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllDay:"), allDay)
-	return x
+// WithAllDay sets a Boolean value that indicates whether the event is an all-day event.
+func (e *Event) WithAllDay(allDay bool) *Event {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setAllDay:"), allDay)
+	return e
 }
 
-// WithStartDate the start date of the event.
-func (x *Event) WithStartDate(startDate obj.Object) *Event {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
-	return x
+// WithStartDate sets the start date of the event.
+func (e *Event) WithStartDate(startDate obj.Object) *Event {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
+	return e
 }
 
-// WithEndDate the end date for the event.
-func (x *Event) WithEndDate(endDate obj.Object) *Event {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
-	return x
+// WithEndDate sets the end date for the event.
+func (e *Event) WithEndDate(endDate obj.Object) *Event {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
+	return e
 }
 
-// WithStructuredLocation the event’s location with a potential geocoordinate.
-func (x *Event) WithStructuredLocation(structuredLocation *StructuredLocation) *Event {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStructuredLocation:"), objref.IDOf(structuredLocation))
-	return x
+// WithStructuredLocation sets the event’s location with a potential geocoordinate.
+func (e *Event) WithStructuredLocation(structuredLocation *StructuredLocation) *Event {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setStructuredLocation:"), objref.IDOf(structuredLocation))
+	return e
 }
 
-// WithAvailability the availability setting for the event.
-func (x *Event) WithAvailability(availability EventAvailability) *Event {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvailability:"), availability)
-	return x
+// WithAvailability sets the availability setting for the event.
+func (e *Event) WithAvailability(availability EventAvailability) *Event {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setAvailability:"), availability)
+	return e
 }
 
-// WithCalendar the calendar for the calendar item.
-func (x *Event) WithCalendar(calendar *Calendar) *Event {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
-	return x
+// WithCalendar sets the calendar for the calendar item.
+func (e *Event) WithCalendar(calendar *Calendar) *Event {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
+	return e
 }
 
-// WithTitle the title for the calendar item.
-func (x *Event) WithTitle(title string) *Event {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title for the calendar item.
+func (e *Event) WithTitle(title string) *Event {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return e
 }
 
-// WithLocation the location associated with the calendar item.
-func (x *Event) WithLocation(location string) *Event {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocation:"), purego.NSString(location))
-	return x
+// WithLocation sets the location associated with the calendar item.
+func (e *Event) WithLocation(location string) *Event {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setLocation:"), purego.NSString(location))
+	return e
 }
 
-// WithNotes the notes associated with the calendar item.
-func (x *Event) WithNotes(notes string) *Event {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotes:"), purego.NSString(notes))
-	return x
+// WithNotes sets the notes associated with the calendar item.
+func (e *Event) WithNotes(notes string) *Event {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setNotes:"), purego.NSString(notes))
+	return e
 }
 
-// WithURL the URL for the calendar item.
-func (x *Event) WithURL(uRL string) *Event {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
-	return x
+// WithURL sets the URL for the calendar item.
+func (e *Event) WithURL(uRL string) *Event {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setURL:"), rt.FileURL(uRL))
+	return e
 }
 
-// WithTimeZone the time zone for the calendar item.
-func (x *Event) WithTimeZone(timeZone obj.Object) *Event {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
-	return x
+// WithTimeZone sets the time zone for the calendar item.
+func (e *Event) WithTimeZone(timeZone obj.Object) *Event {
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setTimeZone:"), objref.IDOf(timeZone))
+	return e
 }
 
-// WithAlarms the alarms associated with the calendar item, as an array of EKAlarm objects.
-func (x *Event) WithAlarms(items ...*Alarm) *Event {
+// WithAlarms sets the alarms associated with the calendar item, as an array of EKAlarm objects.
+func (e *Event) WithAlarms(items ...*Alarm) *Event {
 	_arr := purego.SliceToNSArray(items, func(_v *Alarm) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarms:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setAlarms:"), _arr)
+	return e
 }
 
-// WithRecurrenceRules the recurrence rules for the calendar item.
-func (x *Event) WithRecurrenceRules(items ...*RecurrenceRule) *Event {
+// WithRecurrenceRules sets the recurrence rules for the calendar item.
+func (e *Event) WithRecurrenceRules(items ...*RecurrenceRule) *Event {
 	_arr := purego.SliceToNSArray(items, func(_v *RecurrenceRule) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecurrenceRules:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("setRecurrenceRules:"), _arr)
+	return e
 }
 
-// EventIdentifier a unique identifier for this event. This identifier can be used to look the event up using [EKEventStore eventWithIdentifier:]. You can use this not only to simply fetch the event, but also to validate the event has not been deleted out from under you when you get an external change notification via the EKEventStore database changed notification. If eventWithIdentifier: returns nil, the event was deleted. Please note that if you change the calendar of an event, this ID will likely change. It is currently also possible for the ID to change due to a sync operation. For example, if a user moved an event on a different client to another calendar, we'd see it as a completely new event here. This may be nil for events that have not been saved.
-func (x *Event) EventIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eventIdentifier"))
+// EventIdentifier returns a unique identifier for this event. This identifier can be used to look the event up using [EKEventStore eventWithIdentifier:]. You can use this not only to simply fetch the event, but also to validate the event has not been deleted out from under you when you get an external change notification via the EKEventStore database changed notification. If eventWithIdentifier: returns nil, the event was deleted. Please note that if you change the calendar of an event, this ID will likely change. It is currently also possible for the ID to change due to a sync operation. For example, if a user moved an event on a different client to another calendar, we'd see it as a completely new event here. This may be nil for events that have not been saved.
+func (e *Event) EventIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("eventIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// IsAllDay indicates this event is an 'all day' event.
-func (x *Event) IsAllDay() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAllDay"))
+// IsAllDay reports whether indicates this event is an 'all day' event.
+func (e *Event) IsAllDay() bool {
+	_r := objc.Send[bool](objref.IDOf(e), objc.RegisterName("isAllDay"))
 	return _r
 }
 
-// SetAllDay wraps the corresponding Objective-C method.
-func (x *Event) SetAllDay(allDay bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllDay:"), allDay)
-}
-
-// StartDate the start date for the event. This property represents the start date for this event. Floating events (such as all-day events) are currently always returned in the default time zone. ([NSTimeZone defaultTimeZone]) This will be nil for new events until you set it.
-func (x *Event) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+// StartDate returns the start date for the event. This property represents the start date for this event. Floating events (such as all-day events) are currently always returned in the default time zone. ([NSTimeZone defaultTimeZone]) This will be nil for new events until you set it.
+func (e *Event) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
-}
-
-// SetStartDate wraps the corresponding Objective-C method.
-func (x *Event) SetStartDate(startDate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartDate:"), objref.IDOf(startDate))
 }
 
 // EndDate wraps the corresponding Objective-C method.
-func (x *Event) EndDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+func (e *Event) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// SetEndDate wraps the corresponding Objective-C method.
-func (x *Event) SetEndDate(endDate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndDate:"), objref.IDOf(endDate))
-}
-
-// StructuredLocation allows you to set a structured location (a location with a potential geo-coordinate) on an event. The getter for EKEvent’s location property just returns the structured location’s title. The setter for EKEvent’s location property is equivalent to [event setStructuredLocation:[EKStructuredLocation locationWithTitle:…]].
-func (x *Event) StructuredLocation() *StructuredLocation {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("structuredLocation"))
+// StructuredLocation returns allows you to set a structured location (a location with a potential geo-coordinate) on an event. The getter for EKEvent’s location property just returns the structured location’s title. The setter for EKEvent’s location property is equivalent to [event setStructuredLocation:[EKStructuredLocation locationWithTitle:…]].
+func (e *Event) StructuredLocation() *StructuredLocation {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("structuredLocation"))
 	return StructuredLocationFromID(_r)
 }
 
-// SetStructuredLocation wraps the corresponding Objective-C method.
-func (x *Event) SetStructuredLocation(structuredLocation *StructuredLocation) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStructuredLocation:"), objref.IDOf(structuredLocation))
-}
-
-// Organizer the organizer of this event, or nil.
-func (x *Event) Organizer() *Participant {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("organizer"))
+// Organizer returns the organizer of this event, or nil.
+func (e *Event) Organizer() *Participant {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("organizer"))
 	return ParticipantFromID(_r)
 }
 
-// Availability the availability setting for this event. The availability setting is used by CalDAV and Exchange servers to indicate how the time should be treated for scheduling. If the calendar the event is currently in does not support event availability, EKEventAvailabilityNotSupported is returned.
-func (x *Event) Availability() EventAvailability {
-	_r := objc.Send[EventAvailability](objref.IDOf(x), objc.RegisterName("availability"))
+// Availability returns the availability setting for this event. The availability setting is used by CalDAV and Exchange servers to indicate how the time should be treated for scheduling. If the calendar the event is currently in does not support event availability, EKEventAvailabilityNotSupported is returned.
+func (e *Event) Availability() EventAvailability {
+	_r := objc.Send[EventAvailability](objref.IDOf(e), objc.RegisterName("availability"))
 	return _r
 }
 
-// SetAvailability wraps the corresponding Objective-C method.
-func (x *Event) SetAvailability(availability EventAvailability) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAvailability:"), availability)
-}
-
-// Status the status of the event. While the status offers four different values in the EKEventStatus enumeration, in practice, the only actionable and reliable status is canceled. Any other status should be considered informational at best. You cannot set this property. If you wish to cancel an event, you should simply remove it using removeEvent:.
-func (x *Event) Status() EventStatus {
-	_r := objc.Send[EventStatus](objref.IDOf(x), objc.RegisterName("status"))
+// Status returns the status of the event. While the status offers four different values in the EKEventStatus enumeration, in practice, the only actionable and reliable status is canceled. Any other status should be considered informational at best. You cannot set this property. If you wish to cancel an event, you should simply remove it using removeEvent:.
+func (e *Event) Status() EventStatus {
+	_r := objc.Send[EventStatus](objref.IDOf(e), objc.RegisterName("status"))
 	return _r
 }
 
-// IsDetached represents whether this event is detached from a recurring series. If this EKEvent is an instance of a repeating event, and an attribute of this EKEvent has been changed from the default value generated by the repeating event, isDetached will return YES. If the EKEvent is unchanged from its default state, or is not a repeating event, isDetached returns NO.
-func (x *Event) IsDetached() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDetached"))
+// IsDetached reports whether this event is detached from a recurring series. If this EKEvent is an instance of a repeating event, and an attribute of this EKEvent has been changed from the default value generated by the repeating event, isDetached will return true. If the EKEvent is unchanged from its default state, or is not a repeating event, isDetached returns false.
+func (e *Event) IsDetached() bool {
+	_r := objc.Send[bool](objref.IDOf(e), objc.RegisterName("isDetached"))
 	return _r
 }
 
-// OccurrenceDate the occurrence date of an event if it is part of a recurring series. This is only set if the event is part of a recurring series. It returns the date on which this event was originally scheduled to occur. For occurrences that are unmodified from the recurring series, this is the same as the start date. This value will remain the same even if the event has been detached and its start date has changed. Floating events (such as all-day events) are currently returned in the default time zone. ([NSTimeZone defaultTimeZone]) This will be nil for new events until you set startDate.
-func (x *Event) OccurrenceDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("occurrenceDate"))
+// OccurrenceDate returns the occurrence date of an event if it is part of a recurring series. This is only set if the event is part of a recurring series. It returns the date on which this event was originally scheduled to occur. For occurrences that are unmodified from the recurring series, this is the same as the start date. This value will remain the same even if the event has been detached and its start date has changed. Floating events (such as all-day events) are currently returned in the default time zone. ([NSTimeZone defaultTimeZone]) This will be nil for new events until you set startDate.
+func (e *Event) OccurrenceDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("occurrenceDate"))
 	return obj.Wrap(_r)
 }
 
 // BirthdayContactIdentifier specifies the contact identifier of the person this event was created for. This property is only valid for events in the built-in Birthdays calendar. It specifies the contact identifier (for use with the Contacts framework) of the person this event was created for. For any other type of event, this property returns nil.
-func (x *Event) BirthdayContactIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("birthdayContactIdentifier"))
+func (e *Event) BirthdayContactIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("birthdayContactIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -231,50 +206,13 @@ func (x *Event) BirthdayContactIdentifier() string {
 }
 
 // BirthdayPersonUniqueID specifies the address book unique ID of the person this event was created for. This property is only valid for events in the built-in Birthdays calendar. It specifies the Address Book unique ID of the person this event was created for. For any other type of event, this property returns nil.
-func (x *Event) BirthdayPersonUniqueID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("birthdayPersonUniqueID"))
+func (e *Event) BirthdayPersonUniqueID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(e), objc.RegisterName("birthdayPersonUniqueID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Eventable is the interface implemented by [Event], for mocking and DI.
-type Eventable interface {
-	obj.Object
-	WithAllDay(allDay bool) *Event
-	WithStartDate(startDate obj.Object) *Event
-	WithEndDate(endDate obj.Object) *Event
-	WithStructuredLocation(structuredLocation *StructuredLocation) *Event
-	WithAvailability(availability EventAvailability) *Event
-	WithCalendar(calendar *Calendar) *Event
-	WithTitle(title string) *Event
-	WithLocation(location string) *Event
-	WithNotes(notes string) *Event
-	WithURL(uRL string) *Event
-	WithTimeZone(timeZone obj.Object) *Event
-	WithAlarms(items ...*Alarm) *Event
-	WithRecurrenceRules(items ...*RecurrenceRule) *Event
-	EventIdentifier() string
-	IsAllDay() bool
-	SetAllDay(allDay bool)
-	StartDate() obj.Object
-	SetStartDate(startDate obj.Object)
-	EndDate() obj.Object
-	SetEndDate(endDate obj.Object)
-	StructuredLocation() *StructuredLocation
-	SetStructuredLocation(structuredLocation *StructuredLocation)
-	Organizer() *Participant
-	Availability() EventAvailability
-	SetAvailability(availability EventAvailability)
-	Status() EventStatus
-	IsDetached() bool
-	OccurrenceDate() obj.Object
-	BirthdayContactIdentifier() string
-	BirthdayPersonUniqueID() string
-}
-
-var _ Eventable = (*Event)(nil)
 
 var _ CalendarItemProvider = (*Event)(nil)
 

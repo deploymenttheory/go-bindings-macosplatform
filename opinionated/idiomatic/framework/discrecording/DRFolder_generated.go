@@ -61,42 +61,30 @@ func NewFolderWithName(name string) *Folder {
 }
 
 // MakeVirtual changes the real DRFolder object into a virtual DRFolder object. The virtual folder created in this way is a snapshot of the on-disk folder at the moment of the call.  The newly created virtual folder will contain <b>real</b> folder and file objects corresponding to the on-disk children of the original on-disk folder. If the on-disk folder is modified (eg, if the folder attributes change, or if children are added to or removed from the on-disk tree): <i>during</i> this call, the virtual folder <b>may or may not</b> reflect the changes. If modified <i>after</i> this call, the virtual folder <b>will</b> not reflect the changes.
-func (x *Folder) MakeVirtual() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("makeVirtual"))
+func (f *Folder) MakeVirtual() {
+	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("makeVirtual"))
 }
 
 // AddChild adds an object reference (either a file or folder) as a child of a virtual folder object. This method only applies to virtual folders.  Real folders are considered leaf nodes and cannot have children.
-func (x *Folder) AddChild(child *FSObject) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addChild:"), objref.IDOf(child))
+func (f *Folder) AddChild(child *FSObject) {
+	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("addChild:"), objref.IDOf(child))
 }
 
 // RemoveChild removes an object reference (either a file or folder) as a child of a virtual folder object. This method only applies to virtual folders.  Real folders are considered leaf nodes and cannot have children.
-func (x *Folder) RemoveChild(child *FSObject) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeChild:"), objref.IDOf(child))
+func (f *Folder) RemoveChild(child *FSObject) {
+	objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("removeChild:"), objref.IDOf(child))
 }
 
 // Count returns the number of children of a virtual folder. This method returns a shallow count of only those children that are immediately contained within the virtual folder. This method only applies to virtual folders.  Real folders are considered leaf nodes and should not be messaged with this call.
-func (x *Folder) Count() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+func (f *Folder) Count() int {
+	_r := objc.Send[int](objref.IDOf(f), objc.RegisterName("count"))
 	return _r
 }
 
 // Children returns an array containing the children of a virtual folder. The order of children in the array is arbitrary -- since the various filesystems being generated may have different sorting requirements, there is no one true way to sort the children.  The ordering will change only when children are added or removed.  You should sort the children according to the needs of your display, and in a consistent manner. This function only applies to virtual folders.  Real folders are considered leaf nodes and should not be passed into this call.
-func (x *Folder) Children() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("children"))
+func (f *Folder) Children() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(f), objc.RegisterName("children"))
 	return obj.Wrap(_r)
 }
-
-// Folderable is the interface implemented by [Folder], for mocking and DI.
-type Folderable interface {
-	obj.Object
-	MakeVirtual()
-	AddChild(child *FSObject)
-	RemoveChild(child *FSObject)
-	Count() int
-	Children() obj.Object
-}
-
-var _ Folderable = (*Folder)(nil)
 
 var _ FSObjectProvider = (*Folder)(nil)

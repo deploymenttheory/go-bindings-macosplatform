@@ -5,10 +5,11 @@
 package adservices
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // AttributionTokenWithError generates a token.

@@ -7,7 +7,6 @@ package accessibility
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,35 +51,25 @@ func NewMathExpressionSubSuperscriptWithBaseExpressionSubscriptExpressionsSupers
 }
 
 // BaseExpression wraps the corresponding Objective-C method.
-func (x *MathExpressionSubSuperscript) BaseExpression() *MathExpression {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseExpression"))
+func (mess *MathExpressionSubSuperscript) BaseExpression() *MathExpression {
+	_r := objc.Send[objc.ID](objref.IDOf(mess), objc.RegisterName("baseExpression"))
 	return MathExpressionFromID(_r)
 }
 
 // SubscriptExpressions wraps the corresponding Objective-C method.
 //
 // SubscriptExpressions returns the collection as a Go slice.
-func (x *MathExpressionSubSuperscript) SubscriptExpressions() []*MathExpression {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subscriptExpressions"))
+func (mess *MathExpressionSubSuperscript) SubscriptExpressions() []*MathExpression {
+	_arr := objc.Send[objc.ID](objref.IDOf(mess), objc.RegisterName("subscriptExpressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
 
 // SuperscriptExpressions wraps the corresponding Objective-C method.
 //
 // SuperscriptExpressions returns the collection as a Go slice.
-func (x *MathExpressionSubSuperscript) SuperscriptExpressions() []*MathExpression {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("superscriptExpressions"))
+func (mess *MathExpressionSubSuperscript) SuperscriptExpressions() []*MathExpression {
+	_arr := objc.Send[objc.ID](objref.IDOf(mess), objc.RegisterName("superscriptExpressions"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
-
-// MathExpressionSubSuperscriptable is the interface implemented by [MathExpressionSubSuperscript], for mocking and DI.
-type MathExpressionSubSuperscriptable interface {
-	obj.Object
-	BaseExpression() *MathExpression
-	SubscriptExpressions() []*MathExpression
-	SuperscriptExpressions() []*MathExpression
-}
-
-var _ MathExpressionSubSuperscriptable = (*MathExpressionSubSuperscript)(nil)
 
 var _ MathExpressionProvider = (*MathExpressionSubSuperscript)(nil)

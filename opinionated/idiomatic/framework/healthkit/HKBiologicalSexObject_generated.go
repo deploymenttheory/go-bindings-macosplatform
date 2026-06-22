@@ -46,24 +46,24 @@ func biologicalSexObjectAdopt(id objc.ID) *BiologicalSexObject {
 }
 
 // Description returns the object's -description text.
-func (x *BiologicalSexObject) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (bso *BiologicalSexObject) Description() string {
+	return rt.Description(objref.IDOf(bso))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *BiologicalSexObject) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (bso *BiologicalSexObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(bso), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *BiologicalSexObject) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (bso *BiologicalSexObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(bso), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *BiologicalSexObject) String() string {
-	return rt.Description(objref.IDOf(x))
+func (bso *BiologicalSexObject) String() string {
+	return rt.Description(objref.IDOf(bso))
 }
 
 // NewBiologicalSexObject creates a new BiologicalSexObject.
@@ -73,15 +73,7 @@ func NewBiologicalSexObject() *BiologicalSexObject {
 }
 
 // BiologicalSex wraps the corresponding Objective-C method.
-func (x *BiologicalSexObject) BiologicalSex() BiologicalSex {
-	_r := objc.Send[BiologicalSex](objref.IDOf(x), objc.RegisterName("biologicalSex"))
+func (bso *BiologicalSexObject) BiologicalSex() BiologicalSex {
+	_r := objc.Send[BiologicalSex](objref.IDOf(bso), objc.RegisterName("biologicalSex"))
 	return _r
 }
-
-// BiologicalSexObjectable is the interface implemented by [BiologicalSexObject], for mocking and DI.
-type BiologicalSexObjectable interface {
-	obj.Object
-	BiologicalSex() BiologicalSex
-}
-
-var _ BiologicalSexObjectable = (*BiologicalSexObject)(nil)

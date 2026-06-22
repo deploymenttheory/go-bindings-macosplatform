@@ -7,7 +7,6 @@ package metalperformanceshadersgraph
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,13 +50,6 @@ func NewGraphShapedType() *GraphShapedType {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphShapedType")), objc.RegisterName("new"))
 	return graphShapedTypeAdopt(_id)
 }
-
-// GraphShapedTypeable is the interface implemented by [GraphShapedType], for mocking and DI.
-type GraphShapedTypeable interface {
-	obj.Object
-}
-
-var _ GraphShapedTypeable = (*GraphShapedType)(nil)
 
 var _ GraphTypeProvider = (*GraphShapedType)(nil)
 

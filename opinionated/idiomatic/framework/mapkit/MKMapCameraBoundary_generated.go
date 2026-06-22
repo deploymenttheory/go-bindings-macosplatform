@@ -46,24 +46,24 @@ func mapCameraBoundaryAdopt(id objc.ID) *MapCameraBoundary {
 }
 
 // Description returns the object's -description text.
-func (x *MapCameraBoundary) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mcb *MapCameraBoundary) Description() string {
+	return rt.Description(objref.IDOf(mcb))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MapCameraBoundary) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mcb *MapCameraBoundary) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mcb), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MapCameraBoundary) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mcb *MapCameraBoundary) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mcb), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MapCameraBoundary) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mcb *MapCameraBoundary) String() string {
+	return rt.Description(objref.IDOf(mcb))
 }
 
 // NewMapCameraBoundaryWithCoder creates a new MapCameraBoundary.
@@ -72,10 +72,3 @@ func NewMapCameraBoundaryWithCoder(coder obj.Object) *MapCameraBoundary {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return mapCameraBoundaryAdopt(_id)
 }
-
-// MapCameraBoundaryable is the interface implemented by [MapCameraBoundary], for mocking and DI.
-type MapCameraBoundaryable interface {
-	obj.Object
-}
-
-var _ MapCameraBoundaryable = (*MapCameraBoundary)(nil)

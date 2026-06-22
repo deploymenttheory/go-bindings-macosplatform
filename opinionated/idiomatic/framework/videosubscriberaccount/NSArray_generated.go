@@ -44,24 +44,24 @@ func nSArrayAdopt(id objc.ID) *NSArray {
 }
 
 // Description returns the object's -description text.
-func (x *NSArray) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (na *NSArray) Description() string {
+	return rt.Description(objref.IDOf(na))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NSArray) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (na *NSArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(na), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NSArray) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (na *NSArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(na), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NSArray) String() string {
-	return rt.Description(objref.IDOf(x))
+func (na *NSArray) String() string {
+	return rt.Description(objref.IDOf(na))
 }
 
 // NewNSArray creates a new NSArray.
@@ -69,10 +69,3 @@ func NewNSArray() *NSArray {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSArray")), objc.RegisterName("new"))
 	return nSArrayAdopt(_id)
 }
-
-// NSArrayable is the interface implemented by [NSArray], for mocking and DI.
-type NSArrayable interface {
-	obj.Object
-}
-
-var _ NSArrayable = (*NSArray)(nil)

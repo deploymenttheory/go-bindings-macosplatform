@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -46,24 +45,16 @@ func nNGradientFilterNodeAdopt(id objc.ID) *NNGradientFilterNode {
 	return x
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNGradientFilterNode) WithLabel(label string) *NNGradientFilterNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (ngfn *NNGradientFilterNode) WithLabel(label string) *NNGradientFilterNode {
+	objc.Send[objc.ID](objref.IDOf(ngfn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ngfn
 }
-
-// NNGradientFilterNodeable is the interface implemented by [NNGradientFilterNode], for mocking and DI.
-type NNGradientFilterNodeable interface {
-	obj.Object
-	WithLabel(label string) *NNGradientFilterNode
-}
-
-var _ NNGradientFilterNodeable = (*NNGradientFilterNode)(nil)
 
 // isNNGradientFilterNode marks NNGradientFilterNode — and, by embedding promotion, its
 // subclasses — as a member of the NNGradientFilterNode hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NNGradientFilterNode) isNNGradientFilterNode() {}
+func (ngfn *NNGradientFilterNode) isNNGradientFilterNode() {}
 
 var _ NNGradientFilterNodeProvider = (*NNGradientFilterNode)(nil)
 

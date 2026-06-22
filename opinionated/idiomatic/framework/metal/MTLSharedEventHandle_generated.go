@@ -46,24 +46,24 @@ func sharedEventHandleAdopt(id objc.ID) *SharedEventHandle {
 }
 
 // Description returns the object's -description text.
-func (x *SharedEventHandle) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (seh *SharedEventHandle) Description() string {
+	return rt.Description(objref.IDOf(seh))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SharedEventHandle) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (seh *SharedEventHandle) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(seh), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SharedEventHandle) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (seh *SharedEventHandle) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(seh), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SharedEventHandle) String() string {
-	return rt.Description(objref.IDOf(x))
+func (seh *SharedEventHandle) String() string {
+	return rt.Description(objref.IDOf(seh))
 }
 
 // NewSharedEventHandle creates a new SharedEventHandle.
@@ -73,18 +73,10 @@ func NewSharedEventHandle() *SharedEventHandle {
 }
 
 // Label wraps the corresponding Objective-C method.
-func (x *SharedEventHandle) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+func (seh *SharedEventHandle) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(seh), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SharedEventHandleable is the interface implemented by [SharedEventHandle], for mocking and DI.
-type SharedEventHandleable interface {
-	obj.Object
-	Label() string
-}
-
-var _ SharedEventHandleable = (*SharedEventHandle)(nil)

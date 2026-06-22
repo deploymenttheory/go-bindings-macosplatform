@@ -46,24 +46,24 @@ func mapItemRequestAdopt(id objc.ID) *MapItemRequest {
 }
 
 // Description returns the object's -description text.
-func (x *MapItemRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mir *MapItemRequest) Description() string {
+	return rt.Description(objref.IDOf(mir))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MapItemRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mir *MapItemRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mir), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MapItemRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mir *MapItemRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mir), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MapItemRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mir *MapItemRequest) String() string {
+	return rt.Description(objref.IDOf(mir))
 }
 
 // NewMapItemRequestWithMapItemIdentifier create a request with a map item identifier.
@@ -74,15 +74,7 @@ func NewMapItemRequestWithMapItemIdentifier(identifier *MapItemIdentifier) *MapI
 }
 
 // MapItemIdentifier wraps the corresponding Objective-C method.
-func (x *MapItemRequest) MapItemIdentifier() *MapItemIdentifier {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapItemIdentifier"))
+func (mir *MapItemRequest) MapItemIdentifier() *MapItemIdentifier {
+	_r := objc.Send[objc.ID](objref.IDOf(mir), objc.RegisterName("mapItemIdentifier"))
 	return MapItemIdentifierFromID(_r)
 }
-
-// MapItemRequestable is the interface implemented by [MapItemRequest], for mocking and DI.
-type MapItemRequestable interface {
-	obj.Object
-	MapItemIdentifier() *MapItemIdentifier
-}
-
-var _ MapItemRequestable = (*MapItemRequest)(nil)

@@ -53,24 +53,15 @@ func NewCorrelationQuery() *CorrelationQuery {
 }
 
 // CorrelationType wraps the corresponding Objective-C method.
-func (x *CorrelationQuery) CorrelationType() *CorrelationType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("correlationType"))
+func (cq *CorrelationQuery) CorrelationType() *CorrelationType {
+	_r := objc.Send[objc.ID](objref.IDOf(cq), objc.RegisterName("correlationType"))
 	return CorrelationTypeFromID(_r)
 }
 
-// SamplePredicates a dictionary of predicates for the HKCorrelation's objects samplePredicates maps HKSampleTypes to NSPredicates. The predicate value will apply to objects of the key type.
-func (x *CorrelationQuery) SamplePredicates() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("samplePredicates"))
+// SamplePredicates returns a dictionary of predicates for the HKCorrelation's objects samplePredicates maps HKSampleTypes to NSPredicates. The predicate value will apply to objects of the key type.
+func (cq *CorrelationQuery) SamplePredicates() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cq), objc.RegisterName("samplePredicates"))
 	return obj.Wrap(_r)
 }
-
-// CorrelationQueryable is the interface implemented by [CorrelationQuery], for mocking and DI.
-type CorrelationQueryable interface {
-	obj.Object
-	CorrelationType() *CorrelationType
-	SamplePredicates() obj.Object
-}
-
-var _ CorrelationQueryable = (*CorrelationQuery)(nil)
 
 var _ QueryProvider = (*CorrelationQuery)(nil)

@@ -5,13 +5,14 @@
 package virtualization
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // FileSerialPortAttachment is an idiomatic wrapper over the Objective-C class VZFileSerialPortAttachment.
@@ -60,25 +61,16 @@ func NewFileSerialPortAttachmentWithURLAppendError(url string, shouldAppend bool
 	return fileSerialPortAttachmentAdopt(_id), nil
 }
 
-// URL the URL of the file for the attachment on the local file system.
-func (x *FileSerialPortAttachment) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+// URL returns the URL of the file for the attachment on the local file system.
+func (fspa *FileSerialPortAttachment) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fspa), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// Append true if the file should be opened in append mode, false otherwise.
-func (x *FileSerialPortAttachment) Append() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("append"))
+// Append reports whether the file should be opened in append mode.
+func (fspa *FileSerialPortAttachment) Append() bool {
+	_r := objc.Send[bool](objref.IDOf(fspa), objc.RegisterName("append"))
 	return _r
 }
-
-// FileSerialPortAttachmentable is the interface implemented by [FileSerialPortAttachment], for mocking and DI.
-type FileSerialPortAttachmentable interface {
-	obj.Object
-	URL() obj.Object
-	Append() bool
-}
-
-var _ FileSerialPortAttachmentable = (*FileSerialPortAttachment)(nil)
 
 var _ SerialPortAttachmentProvider = (*FileSerialPortAttachment)(nil)

@@ -44,24 +44,24 @@ func mTRElectricalEnergyMeasurementClusterEnergyMeasurementStructAdopt(id objc.I
 }
 
 // Description returns the object's -description text.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) Description() string {
+	return rt.Description(objref.IDOf(meemcems))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(meemcems), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(meemcems), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) String() string {
+	return rt.Description(objref.IDOf(meemcems))
 }
 
 // NewMTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct creates a new MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct.
@@ -71,108 +71,61 @@ func NewMTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct() *MTRElect
 }
 
 // WithEnergy sets the property and returns the receiver so calls can be chained.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithEnergy(energy obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnergy:"), objref.IDOf(energy))
-	return x
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithEnergy(energy obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
+	objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("setEnergy:"), objref.IDOf(energy))
+	return meemcems
 }
 
 // WithStartTimestamp sets the property and returns the receiver so calls can be chained.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithStartTimestamp(startTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTimestamp:"), objref.IDOf(startTimestamp))
-	return x
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithStartTimestamp(startTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
+	objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("setStartTimestamp:"), objref.IDOf(startTimestamp))
+	return meemcems
 }
 
 // WithEndTimestamp sets the property and returns the receiver so calls can be chained.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithEndTimestamp(endTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndTimestamp:"), objref.IDOf(endTimestamp))
-	return x
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithEndTimestamp(endTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
+	objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("setEndTimestamp:"), objref.IDOf(endTimestamp))
+	return meemcems
 }
 
 // WithStartSystime sets the property and returns the receiver so calls can be chained.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithStartSystime(startSystime obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSystime:"), objref.IDOf(startSystime))
-	return x
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithStartSystime(startSystime obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
+	objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("setStartSystime:"), objref.IDOf(startSystime))
+	return meemcems
 }
 
 // WithEndSystime sets the property and returns the receiver so calls can be chained.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithEndSystime(endSystime obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndSystime:"), objref.IDOf(endSystime))
-	return x
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) WithEndSystime(endSystime obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct {
+	objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("setEndSystime:"), objref.IDOf(endSystime))
+	return meemcems
 }
 
 // Energy wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) Energy() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("energy"))
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) Energy() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("energy"))
 	return obj.Wrap(_r)
-}
-
-// SetEnergy wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) SetEnergy(energy obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnergy:"), objref.IDOf(energy))
 }
 
 // StartTimestamp wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) StartTimestamp() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTimestamp"))
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) StartTimestamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("startTimestamp"))
 	return obj.Wrap(_r)
-}
-
-// SetStartTimestamp wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) SetStartTimestamp(startTimestamp obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTimestamp:"), objref.IDOf(startTimestamp))
 }
 
 // EndTimestamp wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) EndTimestamp() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endTimestamp"))
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) EndTimestamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("endTimestamp"))
 	return obj.Wrap(_r)
-}
-
-// SetEndTimestamp wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) SetEndTimestamp(endTimestamp obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndTimestamp:"), objref.IDOf(endTimestamp))
 }
 
 // StartSystime wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) StartSystime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startSystime"))
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) StartSystime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("startSystime"))
 	return obj.Wrap(_r)
-}
-
-// SetStartSystime wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) SetStartSystime(startSystime obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSystime:"), objref.IDOf(startSystime))
 }
 
 // EndSystime wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) EndSystime() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endSystime"))
+func (meemcems *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) EndSystime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(meemcems), objc.RegisterName("endSystime"))
 	return obj.Wrap(_r)
 }
-
-// SetEndSystime wraps the corresponding Objective-C method.
-func (x *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct) SetEndSystime(endSystime obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndSystime:"), objref.IDOf(endSystime))
-}
-
-// MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructable is the interface implemented by [MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct], for mocking and DI.
-type MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructable interface {
-	obj.Object
-	WithEnergy(energy obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
-	WithStartTimestamp(startTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
-	WithEndTimestamp(endTimestamp obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
-	WithStartSystime(startSystime obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
-	WithEndSystime(endSystime obj.Object) *MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct
-	Energy() obj.Object
-	SetEnergy(energy obj.Object)
-	StartTimestamp() obj.Object
-	SetStartTimestamp(startTimestamp obj.Object)
-	EndTimestamp() obj.Object
-	SetEndTimestamp(endTimestamp obj.Object)
-	StartSystime() obj.Object
-	SetStartSystime(startSystime obj.Object)
-	EndSystime() obj.Object
-	SetEndSystime(endSystime obj.Object)
-}
-
-var _ MTRElectricalEnergyMeasurementClusterEnergyMeasurementStructable = (*MTRElectricalEnergyMeasurementClusterEnergyMeasurementStruct)(nil)

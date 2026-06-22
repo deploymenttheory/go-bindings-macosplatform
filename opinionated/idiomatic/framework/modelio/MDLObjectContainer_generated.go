@@ -46,24 +46,24 @@ func objectContainerAdopt(id objc.ID) *ObjectContainer {
 }
 
 // Description returns the object's -description text.
-func (x *ObjectContainer) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (oc *ObjectContainer) Description() string {
+	return rt.Description(objref.IDOf(oc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ObjectContainer) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (oc *ObjectContainer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(oc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ObjectContainer) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (oc *ObjectContainer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(oc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ObjectContainer) String() string {
-	return rt.Description(objref.IDOf(x))
+func (oc *ObjectContainer) String() string {
+	return rt.Description(objref.IDOf(oc))
 }
 
 // NewObjectContainer creates a new ObjectContainer.
@@ -71,10 +71,3 @@ func NewObjectContainer() *ObjectContainer {
 	_id := objc.Send[objc.ID](objc.ID(_class("MDLObjectContainer")), objc.RegisterName("new"))
 	return objectContainerAdopt(_id)
 }
-
-// ObjectContainerable is the interface implemented by [ObjectContainer], for mocking and DI.
-type ObjectContainerable interface {
-	obj.Object
-}
-
-var _ ObjectContainerable = (*ObjectContainer)(nil)

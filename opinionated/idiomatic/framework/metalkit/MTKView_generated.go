@@ -48,24 +48,24 @@ func viewAdopt(id objc.ID) *View {
 }
 
 // Description returns the object's -description text.
-func (x *View) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *View) Description() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *View) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (v_ *View) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *View) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (v_ *View) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *View) String() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *View) String() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // NewViewWithCoder initializes a view from data in a given unarchiver.
@@ -75,282 +75,174 @@ func NewViewWithCoder(coder obj.Object) *View {
 	return viewAdopt(_id)
 }
 
-// WithFramebufferOnly a Boolean value that determines whether the drawable’s textures are used only for rendering.
-func (x *View) WithFramebufferOnly(framebufferOnly bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFramebufferOnly:"), framebufferOnly)
-	return x
+// WithFramebufferOnly sets a Boolean value that determines whether the drawable’s textures are used only for rendering.
+func (v_ *View) WithFramebufferOnly(framebufferOnly bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setFramebufferOnly:"), framebufferOnly)
+	return v_
 }
 
-// WithPresentsWithTransaction a Boolean value that determines whether the view presents its content using a Core Animation transaction.
-func (x *View) WithPresentsWithTransaction(presentsWithTransaction bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresentsWithTransaction:"), presentsWithTransaction)
-	return x
+// WithPresentsWithTransaction sets a Boolean value that determines whether the view presents its content using a Core Animation transaction.
+func (v_ *View) WithPresentsWithTransaction(presentsWithTransaction bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPresentsWithTransaction:"), presentsWithTransaction)
+	return v_
 }
 
-// WithSampleCount the sample count used to generate the multisampleColorTexture object.
-func (x *View) WithSampleCount(sampleCount int) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleCount:"), sampleCount)
-	return x
+// WithSampleCount sets the sample count used to generate the multisampleColorTexture object.
+func (v_ *View) WithSampleCount(sampleCount int) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setSampleCount:"), sampleCount)
+	return v_
 }
 
-// WithClearColor the color to use to clear the color target when creating a render pass descriptor.
-func (x *View) WithClearColor(clearColor metal.MTLClearColor) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearColor:"), clearColor)
-	return x
+// WithClearColor sets the color to use to clear the color target when creating a render pass descriptor.
+func (v_ *View) WithClearColor(clearColor metal.MTLClearColor) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setClearColor:"), clearColor)
+	return v_
 }
 
-// WithClearDepth the depth value to use to clear the depth target when creating a render pass descriptor.
-func (x *View) WithClearDepth(clearDepth float64) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearDepth:"), clearDepth)
-	return x
+// WithClearDepth sets the depth value to use to clear the depth target when creating a render pass descriptor.
+func (v_ *View) WithClearDepth(clearDepth float64) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setClearDepth:"), clearDepth)
+	return v_
 }
 
-// WithClearStencil the stencil value to use to clear the stencil target when creating a render pass descriptor.
-func (x *View) WithClearStencil(clearStencil uint32) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearStencil:"), clearStencil)
-	return x
+// WithClearStencil sets the stencil value to use to clear the stencil target when creating a render pass descriptor.
+func (v_ *View) WithClearStencil(clearStencil uint32) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setClearStencil:"), clearStencil)
+	return v_
 }
 
-// WithPreferredFramesPerSecond the rate at which the view redraws its contents.
-func (x *View) WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredFramesPerSecond:"), preferredFramesPerSecond)
-	return x
+// WithPreferredFramesPerSecond sets the rate at which the view redraws its contents.
+func (v_ *View) WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPreferredFramesPerSecond:"), preferredFramesPerSecond)
+	return v_
 }
 
-// WithEnableSetNeedsDisplay a Boolean value that indicates whether the view responds to setNeedsDisplay.
-func (x *View) WithEnableSetNeedsDisplay(enableSetNeedsDisplay bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableSetNeedsDisplay:"), enableSetNeedsDisplay)
-	return x
+// WithEnableSetNeedsDisplay sets a Boolean value that indicates whether the view responds to setNeedsDisplay.
+func (v_ *View) WithEnableSetNeedsDisplay(enableSetNeedsDisplay bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setEnableSetNeedsDisplay:"), enableSetNeedsDisplay)
+	return v_
 }
 
-// WithAutoResizeDrawable a Boolean value that controls whether to resize the drawable as the view changes size.
-func (x *View) WithAutoResizeDrawable(autoResizeDrawable bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoResizeDrawable:"), autoResizeDrawable)
-	return x
+// WithAutoResizeDrawable sets a Boolean value that controls whether to resize the drawable as the view changes size.
+func (v_ *View) WithAutoResizeDrawable(autoResizeDrawable bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAutoResizeDrawable:"), autoResizeDrawable)
+	return v_
 }
 
-// WithDrawableSize the current size of drawable textures.
-func (x *View) WithDrawableSize(drawableSize corefoundation.CGSize) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawableSize:"), drawableSize)
-	return x
+// WithDrawableSize sets the current size of drawable textures.
+func (v_ *View) WithDrawableSize(drawableSize corefoundation.CGSize) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setDrawableSize:"), drawableSize)
+	return v_
 }
 
-// WithPaused a Boolean value that indicates whether the draw loop is paused.
-func (x *View) WithPaused(paused bool) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
-	return x
+// WithPaused sets a Boolean value that indicates whether the draw loop is paused.
+func (v_ *View) WithPaused(paused bool) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setPaused:"), paused)
+	return v_
 }
 
-// WithColorspace the color space of the rendered content.
-func (x *View) WithColorspace(colorspace obj.Object) *View {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace))
-	return x
+// WithColorspace sets the color space of the rendered content.
+func (v_ *View) WithColorspace(colorspace obj.Object) *View {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace))
+	return v_
 }
 
 // ReleaseDrawables releases the depthStencilTexture and multisampleColorTexture objects.
-func (x *View) ReleaseDrawables() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("releaseDrawables"))
+func (v_ *View) ReleaseDrawables() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("releaseDrawables"))
 }
 
 // Draw redraws the view’s contents immediately.
-func (x *View) Draw() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("draw"))
+func (v_ *View) Draw() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("draw"))
 }
 
-// FramebufferOnly if the currentDrawable can be used for sampling or texture read operations This defaults to YES. This property controls whether or not the returned drawables' MTLTextures may only be used for framebuffer attachments (YES) or whether they may also be used for texture sampling and pixel read/write operations (NO). A value of YES allows the CAMetalLayer to allocate the MTLTexture objects in ways that are optimized for display purposes that makes them unsuitable for sampling. The recommended value for most applications is YES.
-func (x *View) FramebufferOnly() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("framebufferOnly"))
+// FramebufferOnly reports whether if the currentDrawable can be used for sampling or texture read operations This defaults to true. This property controls whether or not the returned drawables' MTLTextures may only be used for framebuffer attachments (YES) or whether they may also be used for texture sampling and pixel read/write operations (NO). A value of true allows the CAMetalLayer to allocate the MTLTexture objects in ways that are optimized for display purposes that makes them unsuitable for sampling. The recommended value for most applications is true.
+func (v_ *View) FramebufferOnly() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("framebufferOnly"))
 	return _r
 }
 
-// SetFramebufferOnly wraps the corresponding Objective-C method.
-func (x *View) SetFramebufferOnly(framebufferOnly bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFramebufferOnly:"), framebufferOnly)
-}
-
-// PresentsWithTransaction if the layer should be presented synchronously Defaults to NO. When NO, changes to the layer's render buffer appear on-screen asynchronously to normal layer updates. When YES, changes to the MTL content are sent to the screen via the standard CATransaction mechanisms.
-func (x *View) PresentsWithTransaction() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("presentsWithTransaction"))
+// PresentsWithTransaction reports whether if the layer should be presented synchronously Defaults to false. When false, changes to the layer's render buffer appear on-screen asynchronously to normal layer updates. When true, changes to the MTL content are sent to the screen via the standard CATransaction mechanisms.
+func (v_ *View) PresentsWithTransaction() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("presentsWithTransaction"))
 	return _r
 }
 
-// SetPresentsWithTransaction wraps the corresponding Objective-C method.
-func (x *View) SetPresentsWithTransaction(presentsWithTransaction bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPresentsWithTransaction:"), presentsWithTransaction)
-}
-
-// SampleCount the sample count used to to create multisampleColorTexture This defaults to 1.  If sampleCount is greater than 1 a multisampled color texture will be created and the currentDrawable's texture will be set as the resolve texture in the currentRenderPassDescriptor and the store action will be set to MTLStoreActionMultisampleResolve
-func (x *View) SampleCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sampleCount"))
+// SampleCount returns the sample count used to to create multisampleColorTexture This defaults to 1.  If sampleCount is greater than 1 a multisampled color texture will be created and the currentDrawable's texture will be set as the resolve texture in the currentRenderPassDescriptor and the store action will be set to MTLStoreActionMultisampleResolve
+func (v_ *View) SampleCount() int {
+	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("sampleCount"))
 	return _r
 }
 
-// SetSampleCount wraps the corresponding Objective-C method.
-func (x *View) SetSampleCount(sampleCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampleCount:"), sampleCount)
-}
-
-// ClearColor the clear color value used to generate the currentRenderPassDescriptor This defaults to (0.0, 0.0, 0.0, 1.0)
-func (x *View) ClearColor() metal.MTLClearColor {
-	_r := objc.Send[metal.MTLClearColor](objref.IDOf(x), objc.RegisterName("clearColor"))
+// ClearColor returns the clear color value used to generate the currentRenderPassDescriptor This defaults to (0.0, 0.0, 0.0, 1.0)
+func (v_ *View) ClearColor() metal.MTLClearColor {
+	_r := objc.Send[metal.MTLClearColor](objref.IDOf(v_), objc.RegisterName("clearColor"))
 	return _r
 }
 
-// SetClearColor wraps the corresponding Objective-C method.
-func (x *View) SetClearColor(clearColor metal.MTLClearColor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearColor:"), clearColor)
-}
-
-// ClearDepth the clear depth value used to generate the currentRenderPassDescriptor This defaults to 1.0
-func (x *View) ClearDepth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("clearDepth"))
+// ClearDepth returns the clear depth value used to generate the currentRenderPassDescriptor This defaults to 1.0
+func (v_ *View) ClearDepth() float64 {
+	_r := objc.Send[float64](objref.IDOf(v_), objc.RegisterName("clearDepth"))
 	return _r
 }
 
-// SetClearDepth wraps the corresponding Objective-C method.
-func (x *View) SetClearDepth(clearDepth float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearDepth:"), clearDepth)
-}
-
-// ClearStencil the clear stencil value used to generate currentRenderPassDescriptor This defaults to 0
-func (x *View) ClearStencil() uint32 {
-	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("clearStencil"))
+// ClearStencil returns the clear stencil value used to generate currentRenderPassDescriptor This defaults to 0
+func (v_ *View) ClearStencil() uint32 {
+	_r := objc.Send[uint32](objref.IDOf(v_), objc.RegisterName("clearStencil"))
 	return _r
 }
 
-// SetClearStencil wraps the corresponding Objective-C method.
-func (x *View) SetClearStencil(clearStencil uint32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClearStencil:"), clearStencil)
-}
-
-// CurrentRenderPassDescriptor a render pass descriptor generated from the currentDrawable's texture and the view's depth, stencil, and sample buffers and clear values. This is a convience property.  The view does not use this descriptor and there is no requirement for an app to use this descriptor.
-func (x *View) CurrentRenderPassDescriptor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentRenderPassDescriptor"))
+// CurrentRenderPassDescriptor returns a render pass descriptor generated from the currentDrawable's texture and the view's depth, stencil, and sample buffers and clear values. This is a convience property.  The view does not use this descriptor and there is no requirement for an app to use this descriptor.
+func (v_ *View) CurrentRenderPassDescriptor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("currentRenderPassDescriptor"))
 	return obj.Wrap(_r)
 }
 
-// CurrentMTL4RenderPassDescriptor a render pass descriptor generated from the currentDrawable's texture and the view's depth, stencil, and sample buffers and clear values. This is a convience property.  The view does not use this descriptor and there is no requirement for an app to use this descriptor.
-func (x *View) CurrentMTL4RenderPassDescriptor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentMTL4RenderPassDescriptor"))
+// CurrentMTL4RenderPassDescriptor returns a render pass descriptor generated from the currentDrawable's texture and the view's depth, stencil, and sample buffers and clear values. This is a convience property.  The view does not use this descriptor and there is no requirement for an app to use this descriptor.
+func (v_ *View) CurrentMTL4RenderPassDescriptor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("currentMTL4RenderPassDescriptor"))
 	return obj.Wrap(_r)
 }
 
-// PreferredFramesPerSecond the rate you want the view to redraw its contents. When your application sets its preferred frame rate, the view chooses a frame rate as close to that as possible based on the capabilities of the screen the view is displayed on. The actual frame rate chosen is usually a factor of the maximum refresh rate of the screen to provide a consistent frame rate. For example, if the maximum refresh rate of the screen is 60 frames per second, that is also the highest frame rate the view sets as the actual frame rate. However, if you ask for a lower frame rate, it might choose 30, 20, 15 or some other factor to be the actual frame rate. Your application should choose a frame rate that it can consistently maintain. The default value is 60 frames per second.
-func (x *View) PreferredFramesPerSecond() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("preferredFramesPerSecond"))
+// PreferredFramesPerSecond returns the rate you want the view to redraw its contents. When your application sets its preferred frame rate, the view chooses a frame rate as close to that as possible based on the capabilities of the screen the view is displayed on. The actual frame rate chosen is usually a factor of the maximum refresh rate of the screen to provide a consistent frame rate. For example, if the maximum refresh rate of the screen is 60 frames per second, that is also the highest frame rate the view sets as the actual frame rate. However, if you ask for a lower frame rate, it might choose 30, 20, 15 or some other factor to be the actual frame rate. Your application should choose a frame rate that it can consistently maintain. The default value is 60 frames per second.
+func (v_ *View) PreferredFramesPerSecond() int {
+	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("preferredFramesPerSecond"))
 	return _r
 }
 
-// SetPreferredFramesPerSecond wraps the corresponding Objective-C method.
-func (x *View) SetPreferredFramesPerSecond(preferredFramesPerSecond int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredFramesPerSecond:"), preferredFramesPerSecond)
-}
-
-// EnableSetNeedsDisplay controls whether the view responds to setNeedsDisplay. If true, then the view behaves similarily to a UIView or NSView, responding to calls to setNeedsDisplay. When the view has been marked for display, the view is automatically redisplayed on each pass through the application’s event loop. Setting enableSetNeedsDisplay to true will also pause the MTKView's internal render loop and updates will instead be event driven. The default value is false.
-func (x *View) EnableSetNeedsDisplay() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enableSetNeedsDisplay"))
+// EnableSetNeedsDisplay reports whether controls whether the view responds to setNeedsDisplay. If true, then the view behaves similarily to a UIView or NSView, responding to calls to setNeedsDisplay. When the view has been marked for display, the view is automatically redisplayed on each pass through the application’s event loop. Setting enableSetNeedsDisplay to true will also pause the MTKView's internal render loop and updates will instead be event driven. The default value is false.
+func (v_ *View) EnableSetNeedsDisplay() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("enableSetNeedsDisplay"))
 	return _r
 }
 
-// SetEnableSetNeedsDisplay wraps the corresponding Objective-C method.
-func (x *View) SetEnableSetNeedsDisplay(enableSetNeedsDisplay bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableSetNeedsDisplay:"), enableSetNeedsDisplay)
-}
-
-// AutoResizeDrawable controls whether to resize the drawable as the view changes size. If true, the size of the currentDrawable's texture, depthStencilTexture, and multisampleColorTexture will automatically resize as the view resizes.  If false, these textures will take on the size of drawableSize and drawableSize will not change. The default value is true.
-func (x *View) AutoResizeDrawable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autoResizeDrawable"))
+// AutoResizeDrawable reports whether controls whether to resize the drawable as the view changes size. If true, the size of the currentDrawable's texture, depthStencilTexture, and multisampleColorTexture will automatically resize as the view resizes. If false, these textures will take on the size of drawableSize and drawableSize will not change. The default value is true.
+func (v_ *View) AutoResizeDrawable() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("autoResizeDrawable"))
 	return _r
 }
 
-// SetAutoResizeDrawable wraps the corresponding Objective-C method.
-func (x *View) SetAutoResizeDrawable(autoResizeDrawable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoResizeDrawable:"), autoResizeDrawable)
-}
-
-// DrawableSize the current size of drawable textures The size currentDrawable's texture, depthStencilTexture, and multisampleColorTexture.  If autoResizeDrawable is true this value will be updated as the view's size changes. If autoResizeDrawable is false, this can be set to fix the size of the drawable textures.
-func (x *View) DrawableSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("drawableSize"))
+// DrawableSize returns the current size of drawable textures The size currentDrawable's texture, depthStencilTexture, and multisampleColorTexture.  If autoResizeDrawable is true this value will be updated as the view's size changes. If autoResizeDrawable is false, this can be set to fix the size of the drawable textures.
+func (v_ *View) DrawableSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(v_), objc.RegisterName("drawableSize"))
 	return _r
 }
 
-// SetDrawableSize wraps the corresponding Objective-C method.
-func (x *View) SetDrawableSize(drawableSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawableSize:"), drawableSize)
-}
-
-// PreferredDrawableSize the preferred drawable size reported by the backing NSView to match a NSView's native resolution. this value can be observed via key-value observation to determine if the current native drawable size has changed.
-func (x *View) PreferredDrawableSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("preferredDrawableSize"))
+// PreferredDrawableSize returns the preferred drawable size reported by the backing NSView to match a NSView's native resolution. this value can be observed via key-value observation to determine if the current native drawable size has changed.
+func (v_ *View) PreferredDrawableSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(v_), objc.RegisterName("preferredDrawableSize"))
 	return _r
 }
 
-// IsPaused controls whether the draw methods should countinue at preferredFramesPerSecond If true, the delegate will receive drawInMTKView: messages or the subclass will receive drawRect: messages at a rate of preferredFramesPerSecond based on an internal timer. The default value is false.
-func (x *View) IsPaused() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPaused"))
+// IsPaused reports whether controls whether the draw methods should countinue at preferredFramesPerSecond If true, the delegate will receive drawInMTKView: messages or the subclass will receive drawRect: messages at a rate of preferredFramesPerSecond based on an internal timer. The default value is false.
+func (v_ *View) IsPaused() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isPaused"))
 	return _r
 }
 
-// SetPaused wraps the corresponding Objective-C method.
-func (x *View) SetPaused(paused bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
-}
-
-// Colorspace the colorspace of the rendered frames. ' If nil, no colormatching occurs.  If non-nil, the rendered content will be colormatched to the colorspace of the context containing this layer (typically the display's colorspace).  This property aliases the olorspace property or the view's CAMetalLayer
-func (x *View) Colorspace() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorspace"))
+// Colorspace returns the colorspace of the rendered frames. ' If nil, no colormatching occurs.  If non-nil, the rendered content will be colormatched to the colorspace of the context containing this layer (typically the display's colorspace).  This property aliases the olorspace property or the view's CAMetalLayer
+func (v_ *View) Colorspace() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("colorspace"))
 	return obj.Wrap(_r)
 }
-
-// SetColorspace wraps the corresponding Objective-C method.
-func (x *View) SetColorspace(colorspace obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorspace:"), objref.IDOf(colorspace))
-}
-
-// Viewable is the interface implemented by [View], for mocking and DI.
-type Viewable interface {
-	obj.Object
-	WithFramebufferOnly(framebufferOnly bool) *View
-	WithPresentsWithTransaction(presentsWithTransaction bool) *View
-	WithSampleCount(sampleCount int) *View
-	WithClearColor(clearColor metal.MTLClearColor) *View
-	WithClearDepth(clearDepth float64) *View
-	WithClearStencil(clearStencil uint32) *View
-	WithPreferredFramesPerSecond(preferredFramesPerSecond int) *View
-	WithEnableSetNeedsDisplay(enableSetNeedsDisplay bool) *View
-	WithAutoResizeDrawable(autoResizeDrawable bool) *View
-	WithDrawableSize(drawableSize corefoundation.CGSize) *View
-	WithPaused(paused bool) *View
-	WithColorspace(colorspace obj.Object) *View
-	ReleaseDrawables()
-	Draw()
-	FramebufferOnly() bool
-	SetFramebufferOnly(framebufferOnly bool)
-	PresentsWithTransaction() bool
-	SetPresentsWithTransaction(presentsWithTransaction bool)
-	SampleCount() int
-	SetSampleCount(sampleCount int)
-	ClearColor() metal.MTLClearColor
-	SetClearColor(clearColor metal.MTLClearColor)
-	ClearDepth() float64
-	SetClearDepth(clearDepth float64)
-	ClearStencil() uint32
-	SetClearStencil(clearStencil uint32)
-	CurrentRenderPassDescriptor() obj.Object
-	CurrentMTL4RenderPassDescriptor() obj.Object
-	PreferredFramesPerSecond() int
-	SetPreferredFramesPerSecond(preferredFramesPerSecond int)
-	EnableSetNeedsDisplay() bool
-	SetEnableSetNeedsDisplay(enableSetNeedsDisplay bool)
-	AutoResizeDrawable() bool
-	SetAutoResizeDrawable(autoResizeDrawable bool)
-	DrawableSize() corefoundation.CGSize
-	SetDrawableSize(drawableSize corefoundation.CGSize)
-	PreferredDrawableSize() corefoundation.CGSize
-	IsPaused() bool
-	SetPaused(paused bool)
-	Colorspace() obj.Object
-	SetColorspace(colorspace obj.Object)
-}
-
-var _ Viewable = (*View)(nil)

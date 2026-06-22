@@ -46,24 +46,24 @@ func uRLSessionConfigurationAdopt(id objc.ID) *URLSessionConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *URLSessionConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (usc *URLSessionConfiguration) Description() string {
+	return rt.Description(objref.IDOf(usc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *URLSessionConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (usc *URLSessionConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(usc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *URLSessionConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (usc *URLSessionConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(usc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *URLSessionConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (usc *URLSessionConfiguration) String() string {
+	return rt.Description(objref.IDOf(usc))
 }
 
 // NewURLSessionConfiguration creates a new URLSessionConfiguration.
@@ -73,164 +73,164 @@ func NewURLSessionConfiguration() *URLSessionConfiguration {
 }
 
 // WithRequestCachePolicy sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithRequestCachePolicy(requestCachePolicy URLRequestCachePolicy) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestCachePolicy:"), requestCachePolicy)
-	return x
+func (usc *URLSessionConfiguration) WithRequestCachePolicy(requestCachePolicy URLRequestCachePolicy) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setRequestCachePolicy:"), requestCachePolicy)
+	return usc
 }
 
 // WithTimeoutIntervalForRequest sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
-	return x
+func (usc *URLSessionConfiguration) WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
+	return usc
 }
 
 // WithTimeoutIntervalForResource sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
-	return x
+func (usc *URLSessionConfiguration) WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
+	return usc
 }
 
 // WithNetworkServiceType sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithNetworkServiceType(networkServiceType URLRequestNetworkServiceType) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkServiceType:"), networkServiceType)
-	return x
+func (usc *URLSessionConfiguration) WithNetworkServiceType(networkServiceType URLRequestNetworkServiceType) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setNetworkServiceType:"), networkServiceType)
+	return usc
 }
 
 // WithAllowsCellularAccess sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithAllowsCellularAccess(allowsCellularAccess bool) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
-	return x
+func (usc *URLSessionConfiguration) WithAllowsCellularAccess(allowsCellularAccess bool) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
+	return usc
 }
 
 // WithAllowsExpensiveNetworkAccess sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpensiveNetworkAccess:"), allowsExpensiveNetworkAccess)
-	return x
+func (usc *URLSessionConfiguration) WithAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setAllowsExpensiveNetworkAccess:"), allowsExpensiveNetworkAccess)
+	return usc
 }
 
 // WithAllowsConstrainedNetworkAccess sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsConstrainedNetworkAccess:"), allowsConstrainedNetworkAccess)
-	return x
+func (usc *URLSessionConfiguration) WithAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setAllowsConstrainedNetworkAccess:"), allowsConstrainedNetworkAccess)
+	return usc
 }
 
 // WithAllowsUltraConstrainedNetworkAccess sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUltraConstrainedNetworkAccess:"), allowsUltraConstrainedNetworkAccess)
-	return x
+func (usc *URLSessionConfiguration) WithAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setAllowsUltraConstrainedNetworkAccess:"), allowsUltraConstrainedNetworkAccess)
+	return usc
 }
 
 // WithRequiresDNSSECValidation sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithRequiresDNSSECValidation(requiresDNSSECValidation bool) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresDNSSECValidation:"), requiresDNSSECValidation)
-	return x
+func (usc *URLSessionConfiguration) WithRequiresDNSSECValidation(requiresDNSSECValidation bool) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setRequiresDNSSECValidation:"), requiresDNSSECValidation)
+	return usc
 }
 
 // WithWaitsForConnectivity sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithWaitsForConnectivity(waitsForConnectivity bool) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaitsForConnectivity:"), waitsForConnectivity)
-	return x
+func (usc *URLSessionConfiguration) WithWaitsForConnectivity(waitsForConnectivity bool) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setWaitsForConnectivity:"), waitsForConnectivity)
+	return usc
 }
 
 // WithDiscretionary sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithDiscretionary(discretionary bool) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscretionary:"), discretionary)
-	return x
+func (usc *URLSessionConfiguration) WithDiscretionary(discretionary bool) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setDiscretionary:"), discretionary)
+	return usc
 }
 
 // WithSharedContainerIdentifier sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithSharedContainerIdentifier(sharedContainerIdentifier StringProvider) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharedContainerIdentifier:"), objref.IDOf(sharedContainerIdentifier))
-	return x
+func (usc *URLSessionConfiguration) WithSharedContainerIdentifier(sharedContainerIdentifier StringProvider) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setSharedContainerIdentifier:"), objref.IDOf(sharedContainerIdentifier))
+	return usc
 }
 
 // WithSessionSendsLaunchEvents sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithSessionSendsLaunchEvents(sessionSendsLaunchEvents bool) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionSendsLaunchEvents:"), sessionSendsLaunchEvents)
-	return x
+func (usc *URLSessionConfiguration) WithSessionSendsLaunchEvents(sessionSendsLaunchEvents bool) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setSessionSendsLaunchEvents:"), sessionSendsLaunchEvents)
+	return usc
 }
 
 // WithConnectionProxyDictionary sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithConnectionProxyDictionary(connectionProxyDictionary obj.Object) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionProxyDictionary:"), objref.IDOf(connectionProxyDictionary))
-	return x
+func (usc *URLSessionConfiguration) WithConnectionProxyDictionary(connectionProxyDictionary obj.Object) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setConnectionProxyDictionary:"), objref.IDOf(connectionProxyDictionary))
+	return usc
 }
 
 // WithHTTPShouldUsePipelining sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPShouldUsePipelining:"), hTTPShouldUsePipelining)
-	return x
+func (usc *URLSessionConfiguration) WithHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPShouldUsePipelining:"), hTTPShouldUsePipelining)
+	return usc
 }
 
 // WithHTTPShouldSetCookies sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithHTTPShouldSetCookies(hTTPShouldSetCookies bool) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPShouldSetCookies:"), hTTPShouldSetCookies)
-	return x
+func (usc *URLSessionConfiguration) WithHTTPShouldSetCookies(hTTPShouldSetCookies bool) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPShouldSetCookies:"), hTTPShouldSetCookies)
+	return usc
 }
 
 // WithHTTPCookieAcceptPolicy sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy HTTPCookieAcceptPolicy) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPCookieAcceptPolicy:"), hTTPCookieAcceptPolicy)
-	return x
+func (usc *URLSessionConfiguration) WithHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy HTTPCookieAcceptPolicy) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPCookieAcceptPolicy:"), hTTPCookieAcceptPolicy)
+	return usc
 }
 
 // WithHTTPAdditionalHeaders sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithHTTPAdditionalHeaders(hTTPAdditionalHeaders obj.Object) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPAdditionalHeaders:"), objref.IDOf(hTTPAdditionalHeaders))
-	return x
+func (usc *URLSessionConfiguration) WithHTTPAdditionalHeaders(hTTPAdditionalHeaders obj.Object) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPAdditionalHeaders:"), objref.IDOf(hTTPAdditionalHeaders))
+	return usc
 }
 
 // WithHTTPMaximumConnectionsPerHost sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithHTTPMaximumConnectionsPerHost(hTTPMaximumConnectionsPerHost int) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPMaximumConnectionsPerHost:"), hTTPMaximumConnectionsPerHost)
-	return x
+func (usc *URLSessionConfiguration) WithHTTPMaximumConnectionsPerHost(hTTPMaximumConnectionsPerHost int) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPMaximumConnectionsPerHost:"), hTTPMaximumConnectionsPerHost)
+	return usc
 }
 
 // WithHTTPCookieStorage sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithHTTPCookieStorage(hTTPCookieStorage *HTTPCookieStorage) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPCookieStorage:"), objref.IDOf(hTTPCookieStorage))
-	return x
+func (usc *URLSessionConfiguration) WithHTTPCookieStorage(hTTPCookieStorage *HTTPCookieStorage) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setHTTPCookieStorage:"), objref.IDOf(hTTPCookieStorage))
+	return usc
 }
 
 // WithURLCredentialStorage sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithURLCredentialStorage(uRLCredentialStorage *URLCredentialStorage) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURLCredentialStorage:"), objref.IDOf(uRLCredentialStorage))
-	return x
+func (usc *URLSessionConfiguration) WithURLCredentialStorage(uRLCredentialStorage *URLCredentialStorage) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setURLCredentialStorage:"), objref.IDOf(uRLCredentialStorage))
+	return usc
 }
 
 // WithURLCache sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithURLCache(uRLCache *URLCache) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURLCache:"), objref.IDOf(uRLCache))
-	return x
+func (usc *URLSessionConfiguration) WithURLCache(uRLCache *URLCache) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setURLCache:"), objref.IDOf(uRLCache))
+	return usc
 }
 
 // WithShouldUseExtendedBackgroundIdleMode sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithShouldUseExtendedBackgroundIdleMode(shouldUseExtendedBackgroundIdleMode bool) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldUseExtendedBackgroundIdleMode:"), shouldUseExtendedBackgroundIdleMode)
-	return x
+func (usc *URLSessionConfiguration) WithShouldUseExtendedBackgroundIdleMode(shouldUseExtendedBackgroundIdleMode bool) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setShouldUseExtendedBackgroundIdleMode:"), shouldUseExtendedBackgroundIdleMode)
+	return usc
 }
 
 // WithUsesClassicLoadingMode sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithUsesClassicLoadingMode(usesClassicLoadingMode bool) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesClassicLoadingMode:"), usesClassicLoadingMode)
-	return x
+func (usc *URLSessionConfiguration) WithUsesClassicLoadingMode(usesClassicLoadingMode bool) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setUsesClassicLoadingMode:"), usesClassicLoadingMode)
+	return usc
 }
 
 // WithEnablesEarlyData sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithEnablesEarlyData(enablesEarlyData bool) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnablesEarlyData:"), enablesEarlyData)
-	return x
+func (usc *URLSessionConfiguration) WithEnablesEarlyData(enablesEarlyData bool) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setEnablesEarlyData:"), enablesEarlyData)
+	return usc
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *URLSessionConfiguration) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (usc *URLSessionConfiguration) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionConfiguration {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return usc
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (usc *URLSessionConfiguration) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -238,376 +238,165 @@ func (x *URLSessionConfiguration) Identifier() string {
 }
 
 // RequestCachePolicy wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) RequestCachePolicy() URLRequestCachePolicy {
-	_r := objc.Send[URLRequestCachePolicy](objref.IDOf(x), objc.RegisterName("requestCachePolicy"))
+func (usc *URLSessionConfiguration) RequestCachePolicy() URLRequestCachePolicy {
+	_r := objc.Send[URLRequestCachePolicy](objref.IDOf(usc), objc.RegisterName("requestCachePolicy"))
 	return _r
-}
-
-// SetRequestCachePolicy wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetRequestCachePolicy(requestCachePolicy URLRequestCachePolicy) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestCachePolicy:"), requestCachePolicy)
 }
 
 // TimeoutIntervalForRequest wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) TimeoutIntervalForRequest() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeoutIntervalForRequest"))
+func (usc *URLSessionConfiguration) TimeoutIntervalForRequest() float64 {
+	_r := objc.Send[float64](objref.IDOf(usc), objc.RegisterName("timeoutIntervalForRequest"))
 	return _r
-}
-
-// SetTimeoutIntervalForRequest wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetTimeoutIntervalForRequest(timeoutIntervalForRequest float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForRequest:"), timeoutIntervalForRequest)
 }
 
 // TimeoutIntervalForResource wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) TimeoutIntervalForResource() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeoutIntervalForResource"))
+func (usc *URLSessionConfiguration) TimeoutIntervalForResource() float64 {
+	_r := objc.Send[float64](objref.IDOf(usc), objc.RegisterName("timeoutIntervalForResource"))
 	return _r
-}
-
-// SetTimeoutIntervalForResource wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetTimeoutIntervalForResource(timeoutIntervalForResource float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutIntervalForResource:"), timeoutIntervalForResource)
 }
 
 // NetworkServiceType wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) NetworkServiceType() URLRequestNetworkServiceType {
-	_r := objc.Send[URLRequestNetworkServiceType](objref.IDOf(x), objc.RegisterName("networkServiceType"))
+func (usc *URLSessionConfiguration) NetworkServiceType() URLRequestNetworkServiceType {
+	_r := objc.Send[URLRequestNetworkServiceType](objref.IDOf(usc), objc.RegisterName("networkServiceType"))
 	return _r
-}
-
-// SetNetworkServiceType wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetNetworkServiceType(networkServiceType URLRequestNetworkServiceType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkServiceType:"), networkServiceType)
 }
 
 // AllowsCellularAccess wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) AllowsCellularAccess() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsCellularAccess"))
+func (usc *URLSessionConfiguration) AllowsCellularAccess() bool {
+	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("allowsCellularAccess"))
 	return _r
-}
-
-// SetAllowsCellularAccess wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetAllowsCellularAccess(allowsCellularAccess bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCellularAccess:"), allowsCellularAccess)
 }
 
 // AllowsExpensiveNetworkAccess wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) AllowsExpensiveNetworkAccess() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsExpensiveNetworkAccess"))
+func (usc *URLSessionConfiguration) AllowsExpensiveNetworkAccess() bool {
+	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("allowsExpensiveNetworkAccess"))
 	return _r
-}
-
-// SetAllowsExpensiveNetworkAccess wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpensiveNetworkAccess:"), allowsExpensiveNetworkAccess)
 }
 
 // AllowsConstrainedNetworkAccess wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) AllowsConstrainedNetworkAccess() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsConstrainedNetworkAccess"))
+func (usc *URLSessionConfiguration) AllowsConstrainedNetworkAccess() bool {
+	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("allowsConstrainedNetworkAccess"))
 	return _r
-}
-
-// SetAllowsConstrainedNetworkAccess wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsConstrainedNetworkAccess:"), allowsConstrainedNetworkAccess)
 }
 
 // AllowsUltraConstrainedNetworkAccess wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) AllowsUltraConstrainedNetworkAccess() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsUltraConstrainedNetworkAccess"))
+func (usc *URLSessionConfiguration) AllowsUltraConstrainedNetworkAccess() bool {
+	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("allowsUltraConstrainedNetworkAccess"))
 	return _r
-}
-
-// SetAllowsUltraConstrainedNetworkAccess wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUltraConstrainedNetworkAccess:"), allowsUltraConstrainedNetworkAccess)
 }
 
 // RequiresDNSSECValidation wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) RequiresDNSSECValidation() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresDNSSECValidation"))
+func (usc *URLSessionConfiguration) RequiresDNSSECValidation() bool {
+	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("requiresDNSSECValidation"))
 	return _r
-}
-
-// SetRequiresDNSSECValidation wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetRequiresDNSSECValidation(requiresDNSSECValidation bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresDNSSECValidation:"), requiresDNSSECValidation)
 }
 
 // WaitsForConnectivity wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) WaitsForConnectivity() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("waitsForConnectivity"))
+func (usc *URLSessionConfiguration) WaitsForConnectivity() bool {
+	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("waitsForConnectivity"))
 	return _r
-}
-
-// SetWaitsForConnectivity wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetWaitsForConnectivity(waitsForConnectivity bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWaitsForConnectivity:"), waitsForConnectivity)
 }
 
 // IsDiscretionary wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) IsDiscretionary() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDiscretionary"))
+func (usc *URLSessionConfiguration) IsDiscretionary() bool {
+	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("isDiscretionary"))
 	return _r
 }
 
-// SetDiscretionary wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetDiscretionary(discretionary bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscretionary:"), discretionary)
-}
-
 // SharedContainerIdentifier wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SharedContainerIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sharedContainerIdentifier"))
+func (usc *URLSessionConfiguration) SharedContainerIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("sharedContainerIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetSharedContainerIdentifier wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetSharedContainerIdentifier(sharedContainerIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSharedContainerIdentifier:"), purego.NSString(sharedContainerIdentifier))
-}
-
 // SessionSendsLaunchEvents wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SessionSendsLaunchEvents() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sessionSendsLaunchEvents"))
+func (usc *URLSessionConfiguration) SessionSendsLaunchEvents() bool {
+	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("sessionSendsLaunchEvents"))
 	return _r
-}
-
-// SetSessionSendsLaunchEvents wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetSessionSendsLaunchEvents(sessionSendsLaunchEvents bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSessionSendsLaunchEvents:"), sessionSendsLaunchEvents)
 }
 
 // ConnectionProxyDictionary wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) ConnectionProxyDictionary() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectionProxyDictionary"))
+func (usc *URLSessionConfiguration) ConnectionProxyDictionary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("connectionProxyDictionary"))
 	return obj.Wrap(_r)
-}
-
-// SetConnectionProxyDictionary wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetConnectionProxyDictionary(connectionProxyDictionary obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionProxyDictionary:"), objref.IDOf(connectionProxyDictionary))
 }
 
 // HTTPShouldUsePipelining wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) HTTPShouldUsePipelining() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("HTTPShouldUsePipelining"))
+func (usc *URLSessionConfiguration) HTTPShouldUsePipelining() bool {
+	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("HTTPShouldUsePipelining"))
 	return _r
-}
-
-// SetHTTPShouldUsePipelining wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPShouldUsePipelining:"), hTTPShouldUsePipelining)
 }
 
 // HTTPShouldSetCookies wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) HTTPShouldSetCookies() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("HTTPShouldSetCookies"))
+func (usc *URLSessionConfiguration) HTTPShouldSetCookies() bool {
+	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("HTTPShouldSetCookies"))
 	return _r
-}
-
-// SetHTTPShouldSetCookies wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetHTTPShouldSetCookies(hTTPShouldSetCookies bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPShouldSetCookies:"), hTTPShouldSetCookies)
 }
 
 // HTTPCookieAcceptPolicy wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) HTTPCookieAcceptPolicy() HTTPCookieAcceptPolicy {
-	_r := objc.Send[HTTPCookieAcceptPolicy](objref.IDOf(x), objc.RegisterName("HTTPCookieAcceptPolicy"))
+func (usc *URLSessionConfiguration) HTTPCookieAcceptPolicy() HTTPCookieAcceptPolicy {
+	_r := objc.Send[HTTPCookieAcceptPolicy](objref.IDOf(usc), objc.RegisterName("HTTPCookieAcceptPolicy"))
 	return _r
-}
-
-// SetHTTPCookieAcceptPolicy wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy HTTPCookieAcceptPolicy) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPCookieAcceptPolicy:"), hTTPCookieAcceptPolicy)
 }
 
 // HTTPAdditionalHeaders wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) HTTPAdditionalHeaders() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("HTTPAdditionalHeaders"))
+func (usc *URLSessionConfiguration) HTTPAdditionalHeaders() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("HTTPAdditionalHeaders"))
 	return obj.Wrap(_r)
 }
 
-// SetHTTPAdditionalHeaders wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetHTTPAdditionalHeaders(hTTPAdditionalHeaders obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPAdditionalHeaders:"), objref.IDOf(hTTPAdditionalHeaders))
-}
-
 // HTTPMaximumConnectionsPerHost wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) HTTPMaximumConnectionsPerHost() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("HTTPMaximumConnectionsPerHost"))
+func (usc *URLSessionConfiguration) HTTPMaximumConnectionsPerHost() int {
+	_r := objc.Send[int](objref.IDOf(usc), objc.RegisterName("HTTPMaximumConnectionsPerHost"))
 	return _r
-}
-
-// SetHTTPMaximumConnectionsPerHost wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetHTTPMaximumConnectionsPerHost(hTTPMaximumConnectionsPerHost int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPMaximumConnectionsPerHost:"), hTTPMaximumConnectionsPerHost)
 }
 
 // HTTPCookieStorage wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) HTTPCookieStorage() *HTTPCookieStorage {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("HTTPCookieStorage"))
+func (usc *URLSessionConfiguration) HTTPCookieStorage() *HTTPCookieStorage {
+	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("HTTPCookieStorage"))
 	return HTTPCookieStorageFromID(_r)
 }
 
-// SetHTTPCookieStorage wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetHTTPCookieStorage(hTTPCookieStorage *HTTPCookieStorage) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHTTPCookieStorage:"), objref.IDOf(hTTPCookieStorage))
-}
-
 // URLCredentialStorage wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) URLCredentialStorage() *URLCredentialStorage {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLCredentialStorage"))
+func (usc *URLSessionConfiguration) URLCredentialStorage() *URLCredentialStorage {
+	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("URLCredentialStorage"))
 	return URLCredentialStorageFromID(_r)
 }
 
-// SetURLCredentialStorage wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetURLCredentialStorage(uRLCredentialStorage *URLCredentialStorage) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURLCredentialStorage:"), objref.IDOf(uRLCredentialStorage))
-}
-
 // URLCache wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) URLCache() *URLCache {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLCache"))
+func (usc *URLSessionConfiguration) URLCache() *URLCache {
+	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("URLCache"))
 	return URLCacheFromID(_r)
 }
 
-// SetURLCache wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetURLCache(uRLCache *URLCache) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURLCache:"), objref.IDOf(uRLCache))
-}
-
 // ShouldUseExtendedBackgroundIdleMode wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) ShouldUseExtendedBackgroundIdleMode() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldUseExtendedBackgroundIdleMode"))
+func (usc *URLSessionConfiguration) ShouldUseExtendedBackgroundIdleMode() bool {
+	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("shouldUseExtendedBackgroundIdleMode"))
 	return _r
 }
 
-// SetShouldUseExtendedBackgroundIdleMode wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetShouldUseExtendedBackgroundIdleMode(shouldUseExtendedBackgroundIdleMode bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldUseExtendedBackgroundIdleMode:"), shouldUseExtendedBackgroundIdleMode)
-}
-
 // ProtocolClasses wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) ProtocolClasses() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocolClasses"))
+func (usc *URLSessionConfiguration) ProtocolClasses() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("protocolClasses"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetProtocolClasses wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetProtocolClasses(protocolClasses []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocolClasses:"), purego.SliceToNSArray(protocolClasses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
+func (usc *URLSessionConfiguration) SetProtocolClasses(protocolClasses []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(usc), objc.RegisterName("setProtocolClasses:"), purego.SliceToNSArray(protocolClasses, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // UsesClassicLoadingMode wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) UsesClassicLoadingMode() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesClassicLoadingMode"))
+func (usc *URLSessionConfiguration) UsesClassicLoadingMode() bool {
+	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("usesClassicLoadingMode"))
 	return _r
-}
-
-// SetUsesClassicLoadingMode wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetUsesClassicLoadingMode(usesClassicLoadingMode bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesClassicLoadingMode:"), usesClassicLoadingMode)
 }
 
 // EnablesEarlyData wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) EnablesEarlyData() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enablesEarlyData"))
+func (usc *URLSessionConfiguration) EnablesEarlyData() bool {
+	_r := objc.Send[bool](objref.IDOf(usc), objc.RegisterName("enablesEarlyData"))
 	return _r
 }
-
-// SetEnablesEarlyData wraps the corresponding Objective-C method.
-func (x *URLSessionConfiguration) SetEnablesEarlyData(enablesEarlyData bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnablesEarlyData:"), enablesEarlyData)
-}
-
-// URLSessionConfigurationable is the interface implemented by [URLSessionConfiguration], for mocking and DI.
-type URLSessionConfigurationable interface {
-	obj.Object
-	WithRequestCachePolicy(requestCachePolicy URLRequestCachePolicy) *URLSessionConfiguration
-	WithTimeoutIntervalForRequest(timeoutIntervalForRequest float64) *URLSessionConfiguration
-	WithTimeoutIntervalForResource(timeoutIntervalForResource float64) *URLSessionConfiguration
-	WithNetworkServiceType(networkServiceType URLRequestNetworkServiceType) *URLSessionConfiguration
-	WithAllowsCellularAccess(allowsCellularAccess bool) *URLSessionConfiguration
-	WithAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool) *URLSessionConfiguration
-	WithAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool) *URLSessionConfiguration
-	WithAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool) *URLSessionConfiguration
-	WithRequiresDNSSECValidation(requiresDNSSECValidation bool) *URLSessionConfiguration
-	WithWaitsForConnectivity(waitsForConnectivity bool) *URLSessionConfiguration
-	WithDiscretionary(discretionary bool) *URLSessionConfiguration
-	WithSharedContainerIdentifier(sharedContainerIdentifier StringProvider) *URLSessionConfiguration
-	WithSessionSendsLaunchEvents(sessionSendsLaunchEvents bool) *URLSessionConfiguration
-	WithConnectionProxyDictionary(connectionProxyDictionary obj.Object) *URLSessionConfiguration
-	WithHTTPShouldUsePipelining(hTTPShouldUsePipelining bool) *URLSessionConfiguration
-	WithHTTPShouldSetCookies(hTTPShouldSetCookies bool) *URLSessionConfiguration
-	WithHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy HTTPCookieAcceptPolicy) *URLSessionConfiguration
-	WithHTTPAdditionalHeaders(hTTPAdditionalHeaders obj.Object) *URLSessionConfiguration
-	WithHTTPMaximumConnectionsPerHost(hTTPMaximumConnectionsPerHost int) *URLSessionConfiguration
-	WithHTTPCookieStorage(hTTPCookieStorage *HTTPCookieStorage) *URLSessionConfiguration
-	WithURLCredentialStorage(uRLCredentialStorage *URLCredentialStorage) *URLSessionConfiguration
-	WithURLCache(uRLCache *URLCache) *URLSessionConfiguration
-	WithShouldUseExtendedBackgroundIdleMode(shouldUseExtendedBackgroundIdleMode bool) *URLSessionConfiguration
-	WithUsesClassicLoadingMode(usesClassicLoadingMode bool) *URLSessionConfiguration
-	WithEnablesEarlyData(enablesEarlyData bool) *URLSessionConfiguration
-	WithScriptingProperties(scriptingProperties obj.Object) *URLSessionConfiguration
-	Identifier() string
-	RequestCachePolicy() URLRequestCachePolicy
-	SetRequestCachePolicy(requestCachePolicy URLRequestCachePolicy)
-	TimeoutIntervalForRequest() float64
-	SetTimeoutIntervalForRequest(timeoutIntervalForRequest float64)
-	TimeoutIntervalForResource() float64
-	SetTimeoutIntervalForResource(timeoutIntervalForResource float64)
-	NetworkServiceType() URLRequestNetworkServiceType
-	SetNetworkServiceType(networkServiceType URLRequestNetworkServiceType)
-	AllowsCellularAccess() bool
-	SetAllowsCellularAccess(allowsCellularAccess bool)
-	AllowsExpensiveNetworkAccess() bool
-	SetAllowsExpensiveNetworkAccess(allowsExpensiveNetworkAccess bool)
-	AllowsConstrainedNetworkAccess() bool
-	SetAllowsConstrainedNetworkAccess(allowsConstrainedNetworkAccess bool)
-	AllowsUltraConstrainedNetworkAccess() bool
-	SetAllowsUltraConstrainedNetworkAccess(allowsUltraConstrainedNetworkAccess bool)
-	RequiresDNSSECValidation() bool
-	SetRequiresDNSSECValidation(requiresDNSSECValidation bool)
-	WaitsForConnectivity() bool
-	SetWaitsForConnectivity(waitsForConnectivity bool)
-	IsDiscretionary() bool
-	SetDiscretionary(discretionary bool)
-	SharedContainerIdentifier() string
-	SetSharedContainerIdentifier(sharedContainerIdentifier string)
-	SessionSendsLaunchEvents() bool
-	SetSessionSendsLaunchEvents(sessionSendsLaunchEvents bool)
-	ConnectionProxyDictionary() obj.Object
-	SetConnectionProxyDictionary(connectionProxyDictionary obj.Object)
-	HTTPShouldUsePipelining() bool
-	SetHTTPShouldUsePipelining(hTTPShouldUsePipelining bool)
-	HTTPShouldSetCookies() bool
-	SetHTTPShouldSetCookies(hTTPShouldSetCookies bool)
-	HTTPCookieAcceptPolicy() HTTPCookieAcceptPolicy
-	SetHTTPCookieAcceptPolicy(hTTPCookieAcceptPolicy HTTPCookieAcceptPolicy)
-	HTTPAdditionalHeaders() obj.Object
-	SetHTTPAdditionalHeaders(hTTPAdditionalHeaders obj.Object)
-	HTTPMaximumConnectionsPerHost() int
-	SetHTTPMaximumConnectionsPerHost(hTTPMaximumConnectionsPerHost int)
-	HTTPCookieStorage() *HTTPCookieStorage
-	SetHTTPCookieStorage(hTTPCookieStorage *HTTPCookieStorage)
-	URLCredentialStorage() *URLCredentialStorage
-	SetURLCredentialStorage(uRLCredentialStorage *URLCredentialStorage)
-	URLCache() *URLCache
-	SetURLCache(uRLCache *URLCache)
-	ShouldUseExtendedBackgroundIdleMode() bool
-	SetShouldUseExtendedBackgroundIdleMode(shouldUseExtendedBackgroundIdleMode bool)
-	ProtocolClasses() []obj.Object
-	SetProtocolClasses(protocolClasses []obj.Object)
-	UsesClassicLoadingMode() bool
-	SetUsesClassicLoadingMode(usesClassicLoadingMode bool)
-	EnablesEarlyData() bool
-	SetEnablesEarlyData(enablesEarlyData bool)
-}
-
-var _ URLSessionConfigurationable = (*URLSessionConfiguration)(nil)

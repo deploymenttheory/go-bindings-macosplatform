@@ -7,7 +7,6 @@ package virtualization
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,36 +51,21 @@ func NewVirtioGraphicsDeviceConfiguration() *VirtioGraphicsDeviceConfiguration {
 	return virtioGraphicsDeviceConfigurationAdopt(_id)
 }
 
-// WithScanouts the array of output devices.
-func (x *VirtioGraphicsDeviceConfiguration) WithScanouts(items ...*VirtioGraphicsScanoutConfiguration) *VirtioGraphicsDeviceConfiguration {
+// WithScanouts sets the array of output devices.
+func (vgdc *VirtioGraphicsDeviceConfiguration) WithScanouts(items ...*VirtioGraphicsScanoutConfiguration) *VirtioGraphicsDeviceConfiguration {
 	_arr := purego.SliceToNSArray(items, func(_v *VirtioGraphicsScanoutConfiguration) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanouts:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(vgdc), objc.RegisterName("setScanouts:"), _arr)
+	return vgdc
 }
 
 // Scanouts wraps the corresponding Objective-C method.
 //
 // Scanouts returns the collection as a Go slice.
-func (x *VirtioGraphicsDeviceConfiguration) Scanouts() []*VirtioGraphicsScanoutConfiguration {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scanouts"))
+func (vgdc *VirtioGraphicsDeviceConfiguration) Scanouts() []*VirtioGraphicsScanoutConfiguration {
+	_arr := objc.Send[objc.ID](objref.IDOf(vgdc), objc.RegisterName("scanouts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *VirtioGraphicsScanoutConfiguration {
 		return VirtioGraphicsScanoutConfigurationFromID(_id)
 	})
 }
-
-// SetScanouts wraps the corresponding Objective-C method.
-func (x *VirtioGraphicsDeviceConfiguration) SetScanouts(scanouts []*VirtioGraphicsScanoutConfiguration) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanouts:"), purego.SliceToNSArray(scanouts, func(_v *VirtioGraphicsScanoutConfiguration) objc.ID { return objref.IDOf(_v) }))
-}
-
-// VirtioGraphicsDeviceConfigurationable is the interface implemented by [VirtioGraphicsDeviceConfiguration], for mocking and DI.
-type VirtioGraphicsDeviceConfigurationable interface {
-	obj.Object
-	WithScanouts(items ...*VirtioGraphicsScanoutConfiguration) *VirtioGraphicsDeviceConfiguration
-	Scanouts() []*VirtioGraphicsScanoutConfiguration
-	SetScanouts(scanouts []*VirtioGraphicsScanoutConfiguration)
-}
-
-var _ VirtioGraphicsDeviceConfigurationable = (*VirtioGraphicsDeviceConfiguration)(nil)
 
 var _ GraphicsDeviceConfigurationProvider = (*VirtioGraphicsDeviceConfiguration)(nil)

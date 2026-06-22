@@ -46,24 +46,24 @@ func paymentAdopt(id objc.ID) *Payment {
 }
 
 // Description returns the object's -description text.
-func (x *Payment) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Payment) Description() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Payment) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (p *Payment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(p), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Payment) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (p *Payment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(p), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Payment) String() string {
-	return rt.Description(objref.IDOf(x))
+func (p *Payment) String() string {
+	return rt.Description(objref.IDOf(p))
 }
 
 // NewPayment creates a new Payment.
@@ -73,36 +73,25 @@ func NewPayment() *Payment {
 }
 
 // Token wraps the corresponding Objective-C method.
-func (x *Payment) Token() *PaymentToken {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("token"))
+func (p *Payment) Token() *PaymentToken {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("token"))
 	return PaymentTokenFromID(_r)
 }
 
 // BillingContact wraps the corresponding Objective-C method.
-func (x *Payment) BillingContact() *Contact {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("billingContact"))
+func (p *Payment) BillingContact() *Contact {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("billingContact"))
 	return ContactFromID(_r)
 }
 
 // ShippingContact wraps the corresponding Objective-C method.
-func (x *Payment) ShippingContact() *Contact {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shippingContact"))
+func (p *Payment) ShippingContact() *Contact {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("shippingContact"))
 	return ContactFromID(_r)
 }
 
 // ShippingMethod wraps the corresponding Objective-C method.
-func (x *Payment) ShippingMethod() *ShippingMethod {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shippingMethod"))
+func (p *Payment) ShippingMethod() *ShippingMethod {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("shippingMethod"))
 	return ShippingMethodFromID(_r)
 }
-
-// Paymentable is the interface implemented by [Payment], for mocking and DI.
-type Paymentable interface {
-	obj.Object
-	Token() *PaymentToken
-	BillingContact() *Contact
-	ShippingContact() *Contact
-	ShippingMethod() *ShippingMethod
-}
-
-var _ Paymentable = (*Payment)(nil)

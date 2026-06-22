@@ -46,24 +46,24 @@ func collectionLayoutDimensionAdopt(id objc.ID) *CollectionLayoutDimension {
 }
 
 // Description returns the object's -description text.
-func (x *CollectionLayoutDimension) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cld *CollectionLayoutDimension) Description() string {
+	return rt.Description(objref.IDOf(cld))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionLayoutDimension) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cld *CollectionLayoutDimension) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cld), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionLayoutDimension) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cld *CollectionLayoutDimension) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cld), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CollectionLayoutDimension) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cld *CollectionLayoutDimension) String() string {
+	return rt.Description(objref.IDOf(cld))
 }
 
 // NewCollectionLayoutDimension creates a new CollectionLayoutDimension.
@@ -73,43 +73,31 @@ func NewCollectionLayoutDimension() *CollectionLayoutDimension {
 }
 
 // IsFractionalWidth wraps the corresponding Objective-C method.
-func (x *CollectionLayoutDimension) IsFractionalWidth() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFractionalWidth"))
+func (cld *CollectionLayoutDimension) IsFractionalWidth() bool {
+	_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("isFractionalWidth"))
 	return _r
 }
 
 // IsFractionalHeight wraps the corresponding Objective-C method.
-func (x *CollectionLayoutDimension) IsFractionalHeight() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFractionalHeight"))
+func (cld *CollectionLayoutDimension) IsFractionalHeight() bool {
+	_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("isFractionalHeight"))
 	return _r
 }
 
 // IsAbsolute wraps the corresponding Objective-C method.
-func (x *CollectionLayoutDimension) IsAbsolute() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAbsolute"))
+func (cld *CollectionLayoutDimension) IsAbsolute() bool {
+	_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("isAbsolute"))
 	return _r
 }
 
 // IsEstimated wraps the corresponding Objective-C method.
-func (x *CollectionLayoutDimension) IsEstimated() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEstimated"))
+func (cld *CollectionLayoutDimension) IsEstimated() bool {
+	_r := objc.Send[bool](objref.IDOf(cld), objc.RegisterName("isEstimated"))
 	return _r
 }
 
 // Dimension wraps the corresponding Objective-C method.
-func (x *CollectionLayoutDimension) Dimension() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("dimension"))
+func (cld *CollectionLayoutDimension) Dimension() float64 {
+	_r := objc.Send[float64](objref.IDOf(cld), objc.RegisterName("dimension"))
 	return _r
 }
-
-// CollectionLayoutDimensionable is the interface implemented by [CollectionLayoutDimension], for mocking and DI.
-type CollectionLayoutDimensionable interface {
-	obj.Object
-	IsFractionalWidth() bool
-	IsFractionalHeight() bool
-	IsAbsolute() bool
-	IsEstimated() bool
-	Dimension() float64
-}
-
-var _ CollectionLayoutDimensionable = (*CollectionLayoutDimension)(nil)

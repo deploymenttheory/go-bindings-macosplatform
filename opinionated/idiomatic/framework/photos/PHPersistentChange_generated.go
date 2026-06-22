@@ -5,13 +5,14 @@
 package photos
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // PersistentChange is an idiomatic wrapper over the Objective-C class PHPersistentChange.
@@ -48,24 +49,24 @@ func persistentChangeAdopt(id objc.ID) *PersistentChange {
 }
 
 // Description returns the object's -description text.
-func (x *PersistentChange) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *PersistentChange) Description() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersistentChange) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pc *PersistentChange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersistentChange) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pc *PersistentChange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PersistentChange) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *PersistentChange) String() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // NewPersistentChange creates a new PersistentChange.
@@ -75,9 +76,9 @@ func NewPersistentChange() *PersistentChange {
 }
 
 // ChangeDetailsForObjectTypeError returns the change history that contains the local identifiers for object inserts, updates, and deletes.
-func (x *PersistentChange) ChangeDetailsForObjectTypeError(objectType ObjectType) (result *PersistentObjectChangeDetails, err error) {
+func (pc *PersistentChange) ChangeDetailsForObjectTypeError(objectType ObjectType) (result *PersistentObjectChangeDetails, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeDetailsForObjectType:error:"), objectType, unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("changeDetailsForObjectType:error:"), objectType, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -85,16 +86,7 @@ func (x *PersistentChange) ChangeDetailsForObjectTypeError(objectType ObjectType
 }
 
 // ChangeToken wraps the corresponding Objective-C method.
-func (x *PersistentChange) ChangeToken() *PersistentChangeToken {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changeToken"))
+func (pc *PersistentChange) ChangeToken() *PersistentChangeToken {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("changeToken"))
 	return PersistentChangeTokenFromID(_r)
 }
-
-// PersistentChangeable is the interface implemented by [PersistentChange], for mocking and DI.
-type PersistentChangeable interface {
-	obj.Object
-	ChangeDetailsForObjectTypeError(objectType ObjectType) (result *PersistentObjectChangeDetails, err error)
-	ChangeToken() *PersistentChangeToken
-}
-
-var _ PersistentChangeable = (*PersistentChange)(nil)

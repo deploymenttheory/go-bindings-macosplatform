@@ -5,7 +5,6 @@
 package corespotlight
 
 import (
-	"context"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -54,77 +53,39 @@ func NewUserQueryWithUserQueryStringUserQueryContext(userQueryString string, use
 	return userQueryAdopt(_id)
 }
 
-// WithFoundSuggestionsHandler the block to execute when the query delivers a new batch of suggested items.
-func (x *UserQuery) WithFoundSuggestionsHandler(foundSuggestionsHandler func(obj.Object)) *UserQuery {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFoundSuggestionsHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { foundSuggestionsHandler(obj.Wrap(_b0)) }))
-	return x
+// WithFoundSuggestionsHandler sets the block to execute when the query delivers a new batch of suggested items.
+func (uq *UserQuery) WithFoundSuggestionsHandler(foundSuggestionsHandler func(obj.Object)) *UserQuery {
+	objc.Send[objc.ID](objref.IDOf(uq), objc.RegisterName("setFoundSuggestionsHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { foundSuggestionsHandler(obj.Wrap(_b0)) }))
+	return uq
 }
 
-// WithFoundItemsHandler the block to execute when the query delivers a new batch of matching items.
-func (x *UserQuery) WithFoundItemsHandler(foundItemsHandler func(obj.Object)) *UserQuery {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFoundItemsHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { foundItemsHandler(obj.Wrap(_b0)) }))
-	return x
+// WithFoundItemsHandler sets the block to execute when the query delivers a new batch of matching items.
+func (uq *UserQuery) WithFoundItemsHandler(foundItemsHandler func(obj.Object)) *UserQuery {
+	objc.Send[objc.ID](objref.IDOf(uq), objc.RegisterName("setFoundItemsHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { foundItemsHandler(obj.Wrap(_b0)) }))
+	return uq
 }
 
-// WithProtectionClasses the protection types of the indexes you want to search.
-func (x *UserQuery) WithProtectionClasses(items ...obj.Object) *UserQuery {
+// WithProtectionClasses sets the protection types of the indexes you want to search.
+func (uq *UserQuery) WithProtectionClasses(items ...obj.Object) *UserQuery {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtectionClasses:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(uq), objc.RegisterName("setProtectionClasses:"), _arr)
+	return uq
 }
 
 // UserEngagedWithItemVisibleItemsUserInteractionType wraps the corresponding Objective-C method.
-func (x *UserQuery) UserEngagedWithItemVisibleItemsUserInteractionType(item *SearchableItem, visibleItems []*SearchableItem, userInteractionType UserInteraction) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userEngagedWithItem:visibleItems:userInteractionType:"), objref.IDOf(item), purego.SliceToNSArray(visibleItems, func(_v *SearchableItem) objc.ID { return objref.IDOf(_v) }), userInteractionType)
+func (uq *UserQuery) UserEngagedWithItemVisibleItemsUserInteractionType(item *SearchableItem, visibleItems []*SearchableItem, userInteractionType UserInteraction) {
+	objc.Send[objc.ID](objref.IDOf(uq), objc.RegisterName("userEngagedWithItem:visibleItems:userInteractionType:"), objref.IDOf(item), purego.SliceToNSArray(visibleItems, func(_v *SearchableItem) objc.ID { return objref.IDOf(_v) }), userInteractionType)
 }
 
 // UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType wraps the corresponding Objective-C method.
-func (x *UserQuery) UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion *Suggestion, visibleSuggestions []*Suggestion, userInteractionType UserInteraction) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userEngagedWithSuggestion:visibleSuggestions:userInteractionType:"), objref.IDOf(suggestion), purego.SliceToNSArray(visibleSuggestions, func(_v *Suggestion) objc.ID { return objref.IDOf(_v) }), userInteractionType)
+func (uq *UserQuery) UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion *Suggestion, visibleSuggestions []*Suggestion, userInteractionType UserInteraction) {
+	objc.Send[objc.ID](objref.IDOf(uq), objc.RegisterName("userEngagedWithSuggestion:visibleSuggestions:userInteractionType:"), objref.IDOf(suggestion), purego.SliceToNSArray(visibleSuggestions, func(_v *Suggestion) objc.ID { return objref.IDOf(_v) }), userInteractionType)
 }
 
 // FoundSuggestionCount wraps the corresponding Objective-C method.
-func (x *UserQuery) FoundSuggestionCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("foundSuggestionCount"))
+func (uq *UserQuery) FoundSuggestionCount() int {
+	_r := objc.Send[int](objref.IDOf(uq), objc.RegisterName("foundSuggestionCount"))
 	return _r
 }
-
-// SetFoundSuggestionsHandler wraps the corresponding Objective-C method.
-//
-// SetFoundSuggestionsHandler blocks until the operation completes or ctx is cancelled.
-func (x *UserQuery) SetFoundSuggestionsHandler(ctx context.Context) (result obj.Object, err error) {
-	type _result struct {
-		val obj.Object
-		err error
-	}
-	_ch := make(chan _result, 1)
-	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
-		var _o _result
-		_o.val = obj.Wrap(_p0)
-		_ch <- _o
-	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFoundSuggestionsHandler:"), _block)
-	select {
-	case _o := <-_ch:
-		return _o.val, _o.err
-	case <-ctx.Done():
-		var _zero obj.Object
-		return _zero, ctx.Err()
-	}
-}
-
-// UserQueryable is the interface implemented by [UserQuery], for mocking and DI.
-type UserQueryable interface {
-	obj.Object
-	WithFoundSuggestionsHandler(foundSuggestionsHandler func(obj.Object)) *UserQuery
-	WithFoundItemsHandler(foundItemsHandler func(obj.Object)) *UserQuery
-	WithProtectionClasses(items ...obj.Object) *UserQuery
-	UserEngagedWithItemVisibleItemsUserInteractionType(item *SearchableItem, visibleItems []*SearchableItem, userInteractionType UserInteraction)
-	UserEngagedWithSuggestionVisibleSuggestionsUserInteractionType(suggestion *Suggestion, visibleSuggestions []*Suggestion, userInteractionType UserInteraction)
-	FoundSuggestionCount() int
-	SetFoundSuggestionsHandler(ctx context.Context) (obj.Object, error)
-}
-
-var _ UserQueryable = (*UserQuery)(nil)
 
 var _ SearchQueryProvider = (*UserQuery)(nil)

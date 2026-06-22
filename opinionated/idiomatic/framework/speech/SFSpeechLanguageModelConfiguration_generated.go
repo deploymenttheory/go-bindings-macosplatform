@@ -46,24 +46,24 @@ func speechLanguageModelConfigurationAdopt(id objc.ID) *SpeechLanguageModelConfi
 }
 
 // Description returns the object's -description text.
-func (x *SpeechLanguageModelConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (slmc *SpeechLanguageModelConfiguration) Description() string {
+	return rt.Description(objref.IDOf(slmc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpeechLanguageModelConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (slmc *SpeechLanguageModelConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(slmc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpeechLanguageModelConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (slmc *SpeechLanguageModelConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(slmc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SpeechLanguageModelConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (slmc *SpeechLanguageModelConfiguration) String() string {
+	return rt.Description(objref.IDOf(slmc))
 }
 
 // NewSpeechLanguageModelConfigurationWithLanguageModel creates a configuration with the location of a language model file.
@@ -87,30 +87,20 @@ func NewSpeechLanguageModelConfigurationWithLanguageModelVocabularyWeight(langua
 	return speechLanguageModelConfigurationAdopt(_id)
 }
 
-// LanguageModel the location of a compiled language model file.
-func (x *SpeechLanguageModelConfiguration) LanguageModel() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("languageModel"))
+// LanguageModel returns the location of a compiled language model file.
+func (slmc *SpeechLanguageModelConfiguration) LanguageModel() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(slmc), objc.RegisterName("languageModel"))
 	return obj.Wrap(_r)
 }
 
-// Vocabulary the location of a compiled vocabulary file.
-func (x *SpeechLanguageModelConfiguration) Vocabulary() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vocabulary"))
+// Vocabulary returns the location of a compiled vocabulary file.
+func (slmc *SpeechLanguageModelConfiguration) Vocabulary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(slmc), objc.RegisterName("vocabulary"))
 	return obj.Wrap(_r)
 }
 
-// Weight the relative weight of the language model customization. Value must be between 0.0 and 1.0 inclusive.
-func (x *SpeechLanguageModelConfiguration) Weight() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("weight"))
+// Weight returns the relative weight of the language model customization. Value must be between 0.0 and 1.0 inclusive.
+func (slmc *SpeechLanguageModelConfiguration) Weight() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(slmc), objc.RegisterName("weight"))
 	return obj.Wrap(_r)
 }
-
-// SpeechLanguageModelConfigurationable is the interface implemented by [SpeechLanguageModelConfiguration], for mocking and DI.
-type SpeechLanguageModelConfigurationable interface {
-	obj.Object
-	LanguageModel() obj.Object
-	Vocabulary() obj.Object
-	Weight() obj.Object
-}
-
-var _ SpeechLanguageModelConfigurationable = (*SpeechLanguageModelConfiguration)(nil)

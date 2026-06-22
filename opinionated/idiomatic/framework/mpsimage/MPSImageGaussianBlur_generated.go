@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,32 +51,22 @@ func NewImageGaussianBlur() *ImageGaussianBlur {
 	return imageGaussianBlurAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
-func (x *ImageGaussianBlur) WithOffset(offset mpscore.MPSOffset) *ImageGaussianBlur {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also:
+func (igb *ImageGaussianBlur) WithOffset(offset mpscore.MPSOffset) *ImageGaussianBlur {
+	objc.Send[objc.ID](objref.IDOf(igb), objc.RegisterName("setOffset:"), offset)
+	return igb
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
-func (x *ImageGaussianBlur) WithClipRect(clipRect metal.MTLRegion) *ImageGaussianBlur {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also:
+func (igb *ImageGaussianBlur) WithClipRect(clipRect metal.MTLRegion) *ImageGaussianBlur {
+	objc.Send[objc.ID](objref.IDOf(igb), objc.RegisterName("setClipRect:"), clipRect)
+	return igb
 }
 
-// Sigma read-only sigma value with which filter was created
-func (x *ImageGaussianBlur) Sigma() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("sigma"))
+// Sigma returns read-only sigma value with which filter was created
+func (igb *ImageGaussianBlur) Sigma() float32 {
+	_r := objc.Send[float32](objref.IDOf(igb), objc.RegisterName("sigma"))
 	return _r
 }
-
-// ImageGaussianBlurable is the interface implemented by [ImageGaussianBlur], for mocking and DI.
-type ImageGaussianBlurable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageGaussianBlur
-	WithClipRect(clipRect metal.MTLRegion) *ImageGaussianBlur
-	Sigma() float32
-}
-
-var _ ImageGaussianBlurable = (*ImageGaussianBlur)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageGaussianBlur)(nil)

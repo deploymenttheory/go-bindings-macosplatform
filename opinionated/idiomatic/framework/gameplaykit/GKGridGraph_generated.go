@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,37 +52,26 @@ func NewGridGraph() *GridGraph {
 }
 
 // ConnectNodeToAdjacentNodes adds the specified node to the graph, connecting it to its nearest neighbors in the grid.
-func (x *GridGraph) ConnectNodeToAdjacentNodes(node *GridGraphNode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectNodeToAdjacentNodes:"), objref.IDOf(node))
+func (gg *GridGraph) ConnectNodeToAdjacentNodes(node *GridGraphNode) {
+	objc.Send[objc.ID](objref.IDOf(gg), objc.RegisterName("connectNodeToAdjacentNodes:"), objref.IDOf(node))
 }
 
 // GridWidth wraps the corresponding Objective-C method.
-func (x *GridGraph) GridWidth() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("gridWidth"))
+func (gg *GridGraph) GridWidth() int {
+	_r := objc.Send[int](objref.IDOf(gg), objc.RegisterName("gridWidth"))
 	return _r
 }
 
 // GridHeight wraps the corresponding Objective-C method.
-func (x *GridGraph) GridHeight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("gridHeight"))
+func (gg *GridGraph) GridHeight() int {
+	_r := objc.Send[int](objref.IDOf(gg), objc.RegisterName("gridHeight"))
 	return _r
 }
 
 // DiagonalsAllowed wraps the corresponding Objective-C method.
-func (x *GridGraph) DiagonalsAllowed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("diagonalsAllowed"))
+func (gg *GridGraph) DiagonalsAllowed() bool {
+	_r := objc.Send[bool](objref.IDOf(gg), objc.RegisterName("diagonalsAllowed"))
 	return _r
 }
-
-// GridGraphable is the interface implemented by [GridGraph], for mocking and DI.
-type GridGraphable interface {
-	obj.Object
-	ConnectNodeToAdjacentNodes(node *GridGraphNode)
-	GridWidth() int
-	GridHeight() int
-	DiagonalsAllowed() bool
-}
-
-var _ GridGraphable = (*GridGraph)(nil)
 
 var _ GraphProvider = (*GridGraph)(nil)

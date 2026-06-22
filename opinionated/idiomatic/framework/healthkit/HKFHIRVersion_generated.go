@@ -46,24 +46,24 @@ func fHIRVersionAdopt(id objc.ID) *FHIRVersion {
 }
 
 // Description returns the object's -description text.
-func (x *FHIRVersion) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fv *FHIRVersion) Description() string {
+	return rt.Description(objref.IDOf(fv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FHIRVersion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fv *FHIRVersion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FHIRVersion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fv *FHIRVersion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FHIRVersion) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fv *FHIRVersion) String() string {
+	return rt.Description(objref.IDOf(fv))
 }
 
 // NewFHIRVersion creates a new FHIRVersion.
@@ -73,46 +73,34 @@ func NewFHIRVersion() *FHIRVersion {
 }
 
 // MajorVersion wraps the corresponding Objective-C method.
-func (x *FHIRVersion) MajorVersion() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("majorVersion"))
+func (fv *FHIRVersion) MajorVersion() int {
+	_r := objc.Send[int](objref.IDOf(fv), objc.RegisterName("majorVersion"))
 	return _r
 }
 
 // MinorVersion wraps the corresponding Objective-C method.
-func (x *FHIRVersion) MinorVersion() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minorVersion"))
+func (fv *FHIRVersion) MinorVersion() int {
+	_r := objc.Send[int](objref.IDOf(fv), objc.RegisterName("minorVersion"))
 	return _r
 }
 
 // PatchVersion wraps the corresponding Objective-C method.
-func (x *FHIRVersion) PatchVersion() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("patchVersion"))
+func (fv *FHIRVersion) PatchVersion() int {
+	_r := objc.Send[int](objref.IDOf(fv), objc.RegisterName("patchVersion"))
 	return _r
 }
 
 // FHIRRelease wraps the corresponding Objective-C method.
-func (x *FHIRVersion) FHIRRelease() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("FHIRRelease"))
+func (fv *FHIRVersion) FHIRRelease() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("FHIRRelease"))
 	return obj.Wrap(_r)
 }
 
-// StringRepresentation a string representation in the format "{major}.{minor}.{patch}".
-func (x *FHIRVersion) StringRepresentation() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringRepresentation"))
+// StringRepresentation returns a string representation in the format "{major}.{minor}.{patch}".
+func (fv *FHIRVersion) StringRepresentation() string {
+	_r := objc.Send[objc.ID](objref.IDOf(fv), objc.RegisterName("stringRepresentation"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// FHIRVersionable is the interface implemented by [FHIRVersion], for mocking and DI.
-type FHIRVersionable interface {
-	obj.Object
-	MajorVersion() int
-	MinorVersion() int
-	PatchVersion() int
-	FHIRRelease() obj.Object
-	StringRepresentation() string
-}
-
-var _ FHIRVersionable = (*FHIRVersion)(nil)

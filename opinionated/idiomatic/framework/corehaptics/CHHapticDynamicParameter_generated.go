@@ -46,24 +46,24 @@ func hapticDynamicParameterAdopt(id objc.ID) *HapticDynamicParameter {
 }
 
 // Description returns the object's -description text.
-func (x *HapticDynamicParameter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hdp *HapticDynamicParameter) Description() string {
+	return rt.Description(objref.IDOf(hdp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HapticDynamicParameter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hdp *HapticDynamicParameter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hdp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HapticDynamicParameter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hdp *HapticDynamicParameter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hdp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HapticDynamicParameter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hdp *HapticDynamicParameter) String() string {
+	return rt.Description(objref.IDOf(hdp))
 }
 
 // NewHapticDynamicParameterWithParameterIDValueRelativeTime creates a dynamic parameter from its ID, value, and start time.
@@ -73,56 +73,32 @@ func NewHapticDynamicParameterWithParameterIDValueRelativeTime(parameterID obj.O
 	return hapticDynamicParameterAdopt(_id)
 }
 
-// WithValue the value of the dynamic parameter.
-func (x *HapticDynamicParameter) WithValue(value float32) *HapticDynamicParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
-	return x
+// WithValue sets the value of the dynamic parameter.
+func (hdp *HapticDynamicParameter) WithValue(value float32) *HapticDynamicParameter {
+	objc.Send[objc.ID](objref.IDOf(hdp), objc.RegisterName("setValue:"), value)
+	return hdp
 }
 
-// WithRelativeTime the time at which this dynamic parameter is applied, relative to the start time of the pattern.
-func (x *HapticDynamicParameter) WithRelativeTime(relativeTime float64) *HapticDynamicParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativeTime:"), relativeTime)
-	return x
+// WithRelativeTime sets the time at which this dynamic parameter is applied, relative to the start time of the pattern.
+func (hdp *HapticDynamicParameter) WithRelativeTime(relativeTime float64) *HapticDynamicParameter {
+	objc.Send[objc.ID](objref.IDOf(hdp), objc.RegisterName("setRelativeTime:"), relativeTime)
+	return hdp
 }
 
 // ParameterID wraps the corresponding Objective-C method.
-func (x *HapticDynamicParameter) ParameterID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameterID"))
+func (hdp *HapticDynamicParameter) ParameterID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(hdp), objc.RegisterName("parameterID"))
 	return obj.Wrap(_r)
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *HapticDynamicParameter) Value() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("value"))
+func (hdp *HapticDynamicParameter) Value() float32 {
+	_r := objc.Send[float32](objref.IDOf(hdp), objc.RegisterName("value"))
 	return _r
-}
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *HapticDynamicParameter) SetValue(value float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 }
 
 // RelativeTime wraps the corresponding Objective-C method.
-func (x *HapticDynamicParameter) RelativeTime() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("relativeTime"))
+func (hdp *HapticDynamicParameter) RelativeTime() float64 {
+	_r := objc.Send[float64](objref.IDOf(hdp), objc.RegisterName("relativeTime"))
 	return _r
 }
-
-// SetRelativeTime wraps the corresponding Objective-C method.
-func (x *HapticDynamicParameter) SetRelativeTime(relativeTime float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativeTime:"), relativeTime)
-}
-
-// HapticDynamicParameterable is the interface implemented by [HapticDynamicParameter], for mocking and DI.
-type HapticDynamicParameterable interface {
-	obj.Object
-	WithValue(value float32) *HapticDynamicParameter
-	WithRelativeTime(relativeTime float64) *HapticDynamicParameter
-	ParameterID() obj.Object
-	Value() float32
-	SetValue(value float32)
-	RelativeTime() float64
-	SetRelativeTime(relativeTime float64)
-}
-
-var _ HapticDynamicParameterable = (*HapticDynamicParameter)(nil)

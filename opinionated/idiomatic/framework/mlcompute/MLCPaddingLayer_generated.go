@@ -7,7 +7,6 @@ package mlcompute
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,67 +51,52 @@ func NewPaddingLayer() *PaddingLayer {
 	return paddingLayerAdopt(_id)
 }
 
-// WithLabel a string that helps identify this layer.
-func (x *PaddingLayer) WithLabel(label string) *PaddingLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string that helps identify this layer.
+func (pl *PaddingLayer) WithLabel(label string) *PaddingLayer {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return pl
 }
 
-// WithIsDebuggingEnabled a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
-func (x *PaddingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *PaddingLayer {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
-	return x
+// WithIsDebuggingEnabled sets a Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
+func (pl *PaddingLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *PaddingLayer {
+	objc.Send[objc.ID](objref.IDOf(pl), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
+	return pl
 }
 
-// PaddingType the padding type i.e. constant, zero, reflect or symmetric
-func (x *PaddingLayer) PaddingType() PaddingType {
-	_r := objc.Send[PaddingType](objref.IDOf(x), objc.RegisterName("paddingType"))
+// PaddingType returns the padding type i.e. constant, zero, reflect or symmetric
+func (pl *PaddingLayer) PaddingType() PaddingType {
+	_r := objc.Send[PaddingType](objref.IDOf(pl), objc.RegisterName("paddingType"))
 	return _r
 }
 
-// PaddingLeft the left padding size
-func (x *PaddingLayer) PaddingLeft() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingLeft"))
+// PaddingLeft returns the left padding size
+func (pl *PaddingLayer) PaddingLeft() int {
+	_r := objc.Send[int](objref.IDOf(pl), objc.RegisterName("paddingLeft"))
 	return _r
 }
 
-// PaddingRight the right padding size
-func (x *PaddingLayer) PaddingRight() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingRight"))
+// PaddingRight returns the right padding size
+func (pl *PaddingLayer) PaddingRight() int {
+	_r := objc.Send[int](objref.IDOf(pl), objc.RegisterName("paddingRight"))
 	return _r
 }
 
-// PaddingTop the top padding size
-func (x *PaddingLayer) PaddingTop() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingTop"))
+// PaddingTop returns the top padding size
+func (pl *PaddingLayer) PaddingTop() int {
+	_r := objc.Send[int](objref.IDOf(pl), objc.RegisterName("paddingTop"))
 	return _r
 }
 
-// PaddingBottom the bottom padding size
-func (x *PaddingLayer) PaddingBottom() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("paddingBottom"))
+// PaddingBottom returns the bottom padding size
+func (pl *PaddingLayer) PaddingBottom() int {
+	_r := objc.Send[int](objref.IDOf(pl), objc.RegisterName("paddingBottom"))
 	return _r
 }
 
-// ConstantValue the constant value to use if padding type is constant.
-func (x *PaddingLayer) ConstantValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("constantValue"))
+// ConstantValue returns the constant value to use if padding type is constant.
+func (pl *PaddingLayer) ConstantValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(pl), objc.RegisterName("constantValue"))
 	return _r
 }
-
-// PaddingLayerable is the interface implemented by [PaddingLayer], for mocking and DI.
-type PaddingLayerable interface {
-	obj.Object
-	WithLabel(label string) *PaddingLayer
-	WithIsDebuggingEnabled(isDebuggingEnabled bool) *PaddingLayer
-	PaddingType() PaddingType
-	PaddingLeft() int
-	PaddingRight() int
-	PaddingTop() int
-	PaddingBottom() int
-	ConstantValue() float32
-}
-
-var _ PaddingLayerable = (*PaddingLayer)(nil)
 
 var _ LayerProvider = (*PaddingLayer)(nil)

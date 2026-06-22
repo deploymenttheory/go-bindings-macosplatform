@@ -46,24 +46,24 @@ func localSearchCompletionAdopt(id objc.ID) *LocalSearchCompletion {
 }
 
 // Description returns the object's -description text.
-func (x *LocalSearchCompletion) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lsc *LocalSearchCompletion) Description() string {
+	return rt.Description(objref.IDOf(lsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LocalSearchCompletion) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lsc *LocalSearchCompletion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LocalSearchCompletion) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lsc *LocalSearchCompletion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LocalSearchCompletion) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lsc *LocalSearchCompletion) String() string {
+	return rt.Description(objref.IDOf(lsc))
 }
 
 // NewLocalSearchCompletion creates a new LocalSearchCompletion.
@@ -73,8 +73,8 @@ func NewLocalSearchCompletion() *LocalSearchCompletion {
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *LocalSearchCompletion) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (lsc *LocalSearchCompletion) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
@@ -84,14 +84,14 @@ func (x *LocalSearchCompletion) Title() string {
 // TitleHighlightRanges wraps the corresponding Objective-C method.
 //
 // TitleHighlightRanges returns the collection as a Go slice.
-func (x *LocalSearchCompletion) TitleHighlightRanges() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("titleHighlightRanges"))
+func (lsc *LocalSearchCompletion) TitleHighlightRanges() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("titleHighlightRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Subtitle wraps the corresponding Objective-C method.
-func (x *LocalSearchCompletion) Subtitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
+func (lsc *LocalSearchCompletion) Subtitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("subtitle"))
 	if _r == 0 {
 		return ""
 	}
@@ -101,18 +101,7 @@ func (x *LocalSearchCompletion) Subtitle() string {
 // SubtitleHighlightRanges wraps the corresponding Objective-C method.
 //
 // SubtitleHighlightRanges returns the collection as a Go slice.
-func (x *LocalSearchCompletion) SubtitleHighlightRanges() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitleHighlightRanges"))
+func (lsc *LocalSearchCompletion) SubtitleHighlightRanges() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(lsc), objc.RegisterName("subtitleHighlightRanges"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// LocalSearchCompletionable is the interface implemented by [LocalSearchCompletion], for mocking and DI.
-type LocalSearchCompletionable interface {
-	obj.Object
-	Title() string
-	TitleHighlightRanges() []obj.Object
-	Subtitle() string
-	SubtitleHighlightRanges() []obj.Object
-}
-
-var _ LocalSearchCompletionable = (*LocalSearchCompletion)(nil)

@@ -46,24 +46,24 @@ func aUPannerViewAdopt(id objc.ID) *AUPannerView {
 }
 
 // Description returns the object's -description text.
-func (x *AUPannerView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (apv *AUPannerView) Description() string {
+	return rt.Description(objref.IDOf(apv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AUPannerView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (apv *AUPannerView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(apv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AUPannerView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (apv *AUPannerView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(apv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AUPannerView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (apv *AUPannerView) String() string {
+	return rt.Description(objref.IDOf(apv))
 }
 
 // NewAUPannerView creates a new AUPannerView.
@@ -71,10 +71,3 @@ func NewAUPannerView() *AUPannerView {
 	_id := objc.Send[objc.ID](objc.ID(_class("AUPannerView")), objc.RegisterName("new"))
 	return aUPannerViewAdopt(_id)
 }
-
-// AUPannerViewable is the interface implemented by [AUPannerView], for mocking and DI.
-type AUPannerViewable interface {
-	obj.Object
-}
-
-var _ AUPannerViewable = (*AUPannerView)(nil)

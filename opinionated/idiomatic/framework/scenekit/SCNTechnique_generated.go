@@ -46,24 +46,24 @@ func techniqueAdopt(id objc.ID) *Technique {
 }
 
 // Description returns the object's -description text.
-func (x *Technique) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Technique) Description() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Technique) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (t *Technique) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Technique) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (t *Technique) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Technique) String() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Technique) String() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // NewTechnique creates a new Technique.
@@ -73,22 +73,13 @@ func NewTechnique() *Technique {
 }
 
 // ObjectForKeyedSubscript returns the value associated with the specified GLSL uniform variable or attribute name, using subscript syntax.
-func (x *Technique) ObjectForKeyedSubscript(key obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
+func (t *Technique) ObjectForKeyedSubscript(key obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
 	return obj.Wrap(_r)
 }
 
 // DictionaryRepresentation returns the dictionary representation of the technique.
-func (x *Technique) DictionaryRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
+func (t *Technique) DictionaryRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
-
-// Techniqueable is the interface implemented by [Technique], for mocking and DI.
-type Techniqueable interface {
-	obj.Object
-	ObjectForKeyedSubscript(key obj.Object) obj.Object
-	DictionaryRepresentation() obj.Object
-}
-
-var _ Techniqueable = (*Technique)(nil)

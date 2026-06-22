@@ -51,46 +51,34 @@ func NewDOMRGBColor() *DOMRGBColor {
 }
 
 // Red wraps the corresponding Objective-C method.
-func (x *DOMRGBColor) Red() *DOMCSSPrimitiveValue {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("red"))
+func (dc *DOMRGBColor) Red() *DOMCSSPrimitiveValue {
+	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("red"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
 // Green wraps the corresponding Objective-C method.
-func (x *DOMRGBColor) Green() *DOMCSSPrimitiveValue {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("green"))
+func (dc *DOMRGBColor) Green() *DOMCSSPrimitiveValue {
+	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("green"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
 // Blue wraps the corresponding Objective-C method.
-func (x *DOMRGBColor) Blue() *DOMCSSPrimitiveValue {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("blue"))
+func (dc *DOMRGBColor) Blue() *DOMCSSPrimitiveValue {
+	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("blue"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
 // Alpha wraps the corresponding Objective-C method.
-func (x *DOMRGBColor) Alpha() *DOMCSSPrimitiveValue {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alpha"))
+func (dc *DOMRGBColor) Alpha() *DOMCSSPrimitiveValue {
+	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("alpha"))
 	return DOMCSSPrimitiveValueFromID(_r)
 }
 
 // Color wraps the corresponding Objective-C method.
-func (x *DOMRGBColor) Color() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+func (dc *DOMRGBColor) Color() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(dc), objc.RegisterName("color"))
 	return obj.Wrap(_r)
 }
-
-// DOMRGBColorable is the interface implemented by [DOMRGBColor], for mocking and DI.
-type DOMRGBColorable interface {
-	obj.Object
-	Red() *DOMCSSPrimitiveValue
-	Green() *DOMCSSPrimitiveValue
-	Blue() *DOMCSSPrimitiveValue
-	Alpha() *DOMCSSPrimitiveValue
-	Color() obj.Object
-}
-
-var _ DOMRGBColorable = (*DOMRGBColor)(nil)
 
 var _ DOMObjectProvider = (*DOMRGBColor)(nil)
 

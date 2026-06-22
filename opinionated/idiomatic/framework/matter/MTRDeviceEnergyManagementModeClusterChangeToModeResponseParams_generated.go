@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams is an idiomatic wrapper over the Objective-C class MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams.
@@ -46,24 +47,24 @@ func mTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsAdopt(id objc
 }
 
 // Description returns the object's -description text.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemmcctmrp *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) Description() string {
+	return rt.Description(objref.IDOf(mdemmcctmrp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdemmcctmrp *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdemmcctmrp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdemmcctmrp *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdemmcctmrp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdemmcctmrp *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) String() string {
+	return rt.Description(objref.IDOf(mdemmcctmrp))
 }
 
 // NewMTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsWithResponseValueError initialize an MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive.
@@ -78,51 +79,28 @@ func NewMTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsWithRespon
 }
 
 // WithStatus sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
-	return x
+func (mdemmcctmrp *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) WithStatus(status obj.Object) *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mdemmcctmrp), objc.RegisterName("setStatus:"), objref.IDOf(status))
+	return mdemmcctmrp
 }
 
 // WithStatusText sets the property and returns the receiver so calls can be chained.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) WithStatusText(statusText string) *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
-	return x
+func (mdemmcctmrp *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) WithStatusText(statusText string) *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams {
+	objc.Send[objc.ID](objref.IDOf(mdemmcctmrp), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
+	return mdemmcctmrp
 }
 
 // Status wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) Status() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+func (mdemmcctmrp *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) Status() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemmcctmrp), objc.RegisterName("status"))
 	return obj.Wrap(_r)
 }
 
-// SetStatus wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) SetStatus(status obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
-}
-
 // StatusText wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) StatusText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statusText"))
+func (mdemmcctmrp *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) StatusText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mdemmcctmrp), objc.RegisterName("statusText"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetStatusText wraps the corresponding Objective-C method.
-func (x *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams) SetStatusText(statusText string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatusText:"), purego.NSString(statusText))
-}
-
-// MTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsable is the interface implemented by [MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams], for mocking and DI.
-type MTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsable interface {
-	obj.Object
-	WithStatus(status obj.Object) *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams
-	WithStatusText(statusText string) *MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams
-	Status() obj.Object
-	SetStatus(status obj.Object)
-	StatusText() string
-	SetStatusText(statusText string)
-}
-
-var _ MTRDeviceEnergyManagementModeClusterChangeToModeResponseParamsable = (*MTRDeviceEnergyManagementModeClusterChangeToModeResponseParams)(nil)

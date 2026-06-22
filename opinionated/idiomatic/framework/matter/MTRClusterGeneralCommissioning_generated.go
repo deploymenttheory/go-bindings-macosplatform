@@ -6,6 +6,7 @@ package matter
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -63,7 +64,7 @@ func NewMTRClusterGeneralCommissioningWithDeviceEndpointQueue(device *MTRDevice,
 // ArmFailSafeWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // ArmFailSafeWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGeneralCommissioning) ArmFailSafeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGeneralCommissioningClusterArmFailSafeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralCommissioningClusterArmFailSafeResponseParams, err error) {
+func (mcgc *MTRClusterGeneralCommissioning) ArmFailSafeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGeneralCommissioningClusterArmFailSafeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralCommissioningClusterArmFailSafeResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterArmFailSafeResponseParams
 		err error
@@ -75,7 +76,7 @@ func (x *MTRClusterGeneralCommissioning) ArmFailSafeWithParamsExpectedValuesExpe
 		_o.val = MTRGeneralCommissioningClusterArmFailSafeResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("armFailSafeWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("armFailSafeWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -88,7 +89,7 @@ func (x *MTRClusterGeneralCommissioning) ArmFailSafeWithParamsExpectedValuesExpe
 // SetRegulatoryConfigWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // SetRegulatoryConfigWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGeneralCommissioning) SetRegulatoryConfigWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGeneralCommissioningClusterSetRegulatoryConfigParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, err error) {
+func (mcgc *MTRClusterGeneralCommissioning) SetRegulatoryConfigWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGeneralCommissioningClusterSetRegulatoryConfigParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
 		err error
@@ -100,7 +101,7 @@ func (x *MTRClusterGeneralCommissioning) SetRegulatoryConfigWithParamsExpectedVa
 		_o.val = MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegulatoryConfigWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("setRegulatoryConfigWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -113,7 +114,7 @@ func (x *MTRClusterGeneralCommissioning) SetRegulatoryConfigWithParamsExpectedVa
 // CommissioningCompleteWithParamsExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // CommissioningCompleteWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGeneralCommissioning) CommissioningCompleteWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGeneralCommissioningClusterCommissioningCompleteParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, err error) {
+func (mcgc *MTRClusterGeneralCommissioning) CommissioningCompleteWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGeneralCommissioningClusterCommissioningCompleteParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
 		err error
@@ -125,7 +126,7 @@ func (x *MTRClusterGeneralCommissioning) CommissioningCompleteWithParamsExpected
 		_o.val = MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commissioningCompleteWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("commissioningCompleteWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -138,7 +139,7 @@ func (x *MTRClusterGeneralCommissioning) CommissioningCompleteWithParamsExpected
 // CommissioningCompleteWithExpectedValuesExpectedValueIntervalCompletion wraps the corresponding Objective-C method.
 //
 // CommissioningCompleteWithExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGeneralCommissioning) CommissioningCompleteWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, err error) {
+func (mcgc *MTRClusterGeneralCommissioning) CommissioningCompleteWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
 		err error
@@ -150,7 +151,7 @@ func (x *MTRClusterGeneralCommissioning) CommissioningCompleteWithExpectedValues
 		_o.val = MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commissioningCompleteWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("commissioningCompleteWithExpectedValues:expectedValueInterval:completion:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -161,79 +162,79 @@ func (x *MTRClusterGeneralCommissioning) CommissioningCompleteWithExpectedValues
 }
 
 // ReadAttributeBreadcrumbWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterGeneralCommissioning) ReadAttributeBreadcrumbWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBreadcrumbWithParams:"), objref.IDOf(params))
+func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeBreadcrumbWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeBreadcrumbWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // WriteAttributeBreadcrumbWithValueExpectedValueInterval wraps the corresponding Objective-C method.
-func (x *MTRClusterGeneralCommissioning) WriteAttributeBreadcrumbWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeBreadcrumbWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
+func (mcgc *MTRClusterGeneralCommissioning) WriteAttributeBreadcrumbWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("writeAttributeBreadcrumbWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
 // WriteAttributeBreadcrumbWithValueExpectedValueIntervalParams wraps the corresponding Objective-C method.
-func (x *MTRClusterGeneralCommissioning) WriteAttributeBreadcrumbWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeBreadcrumbWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
+func (mcgc *MTRClusterGeneralCommissioning) WriteAttributeBreadcrumbWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("writeAttributeBreadcrumbWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
 // ReadAttributeBasicCommissioningInfoWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterGeneralCommissioning) ReadAttributeBasicCommissioningInfoWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBasicCommissioningInfoWithParams:"), objref.IDOf(params))
+func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeBasicCommissioningInfoWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeBasicCommissioningInfoWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeRegulatoryConfigWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterGeneralCommissioning) ReadAttributeRegulatoryConfigWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRegulatoryConfigWithParams:"), objref.IDOf(params))
+func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeRegulatoryConfigWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeRegulatoryConfigWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeLocationCapabilityWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterGeneralCommissioning) ReadAttributeLocationCapabilityWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLocationCapabilityWithParams:"), objref.IDOf(params))
+func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeLocationCapabilityWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeLocationCapabilityWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeSupportsConcurrentConnectionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterGeneralCommissioning) ReadAttributeSupportsConcurrentConnectionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportsConcurrentConnectionWithParams:"), objref.IDOf(params))
+func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeSupportsConcurrentConnectionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeSupportsConcurrentConnectionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeGeneratedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterGeneralCommissioning) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAcceptedCommandListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterGeneralCommissioning) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeAttributeListWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterGeneralCommissioning) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeFeatureMapWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterGeneralCommissioning) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ReadAttributeClusterRevisionWithParams wraps the corresponding Objective-C method.
-func (x *MTRClusterGeneralCommissioning) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+func (mcgc *MTRClusterGeneralCommissioning) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
 	return obj.Wrap(_r)
 }
 
 // ArmFailSafeWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // ArmFailSafeWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGeneralCommissioning) ArmFailSafeWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGeneralCommissioningClusterArmFailSafeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralCommissioningClusterArmFailSafeResponseParams, err error) {
+func (mcgc *MTRClusterGeneralCommissioning) ArmFailSafeWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGeneralCommissioningClusterArmFailSafeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralCommissioningClusterArmFailSafeResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterArmFailSafeResponseParams
 		err error
@@ -245,7 +246,7 @@ func (x *MTRClusterGeneralCommissioning) ArmFailSafeWithParamsExpectedValuesExpe
 		_o.val = MTRGeneralCommissioningClusterArmFailSafeResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("armFailSafeWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("armFailSafeWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -258,7 +259,7 @@ func (x *MTRClusterGeneralCommissioning) ArmFailSafeWithParamsExpectedValuesExpe
 // SetRegulatoryConfigWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // SetRegulatoryConfigWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGeneralCommissioning) SetRegulatoryConfigWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGeneralCommissioningClusterSetRegulatoryConfigParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, err error) {
+func (mcgc *MTRClusterGeneralCommissioning) SetRegulatoryConfigWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGeneralCommissioningClusterSetRegulatoryConfigParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams
 		err error
@@ -270,7 +271,7 @@ func (x *MTRClusterGeneralCommissioning) SetRegulatoryConfigWithParamsExpectedVa
 		_o.val = MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegulatoryConfigWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("setRegulatoryConfigWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -283,7 +284,7 @@ func (x *MTRClusterGeneralCommissioning) SetRegulatoryConfigWithParamsExpectedVa
 // CommissioningCompleteWithParamsExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // CommissioningCompleteWithParamsExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGeneralCommissioning) CommissioningCompleteWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGeneralCommissioningClusterCommissioningCompleteParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, err error) {
+func (mcgc *MTRClusterGeneralCommissioning) CommissioningCompleteWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGeneralCommissioningClusterCommissioningCompleteParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
 		err error
@@ -295,7 +296,7 @@ func (x *MTRClusterGeneralCommissioning) CommissioningCompleteWithParamsExpected
 		_o.val = MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commissioningCompleteWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("commissioningCompleteWithParams:expectedValues:expectedValueInterval:completionHandler:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -308,7 +309,7 @@ func (x *MTRClusterGeneralCommissioning) CommissioningCompleteWithParamsExpected
 // CommissioningCompleteWithExpectedValuesExpectedValueInterval wraps the corresponding Objective-C method.
 //
 // CommissioningCompleteWithExpectedValuesExpectedValueInterval blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterGeneralCommissioning) CommissioningCompleteWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, err error) {
+func (mcgc *MTRClusterGeneralCommissioning) CommissioningCompleteWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (result *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, err error) {
 	type _result struct {
 		val *MTRGeneralCommissioningClusterCommissioningCompleteResponseParams
 		err error
@@ -320,7 +321,7 @@ func (x *MTRClusterGeneralCommissioning) CommissioningCompleteWithExpectedValues
 		_o.val = MTRGeneralCommissioningClusterCommissioningCompleteResponseParamsFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commissioningCompleteWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
+	objc.Send[objc.ID](objref.IDOf(mcgc), objc.RegisterName("commissioningCompleteWithExpectedValues:expectedValueInterval:completionHandler:"), purego.SliceToNSArray(expectedValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -329,33 +330,6 @@ func (x *MTRClusterGeneralCommissioning) CommissioningCompleteWithExpectedValues
 		return _zero, ctx.Err()
 	}
 }
-
-// MTRClusterGeneralCommissioningable is the interface implemented by [MTRClusterGeneralCommissioning], for mocking and DI.
-type MTRClusterGeneralCommissioningable interface {
-	obj.Object
-	ArmFailSafeWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGeneralCommissioningClusterArmFailSafeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGeneralCommissioningClusterArmFailSafeResponseParams, error)
-	SetRegulatoryConfigWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGeneralCommissioningClusterSetRegulatoryConfigParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, error)
-	CommissioningCompleteWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRGeneralCommissioningClusterCommissioningCompleteParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error)
-	CommissioningCompleteWithExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error)
-	ReadAttributeBreadcrumbWithParams(params *MTRReadParams) obj.Object
-	WriteAttributeBreadcrumbWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
-	WriteAttributeBreadcrumbWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
-	ReadAttributeBasicCommissioningInfoWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeRegulatoryConfigWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeLocationCapabilityWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeSupportsConcurrentConnectionWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
-	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
-	ArmFailSafeWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGeneralCommissioningClusterArmFailSafeParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGeneralCommissioningClusterArmFailSafeResponseParams, error)
-	SetRegulatoryConfigWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGeneralCommissioningClusterSetRegulatoryConfigParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGeneralCommissioningClusterSetRegulatoryConfigResponseParams, error)
-	CommissioningCompleteWithParamsExpectedValuesExpectedValueInterval(ctx context.Context, params *MTRGeneralCommissioningClusterCommissioningCompleteParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error)
-	CommissioningCompleteWithExpectedValuesExpectedValueInterval(ctx context.Context, expectedValues []obj.Object, expectedValueIntervalMs obj.Object) (*MTRGeneralCommissioningClusterCommissioningCompleteResponseParams, error)
-}
-
-var _ MTRClusterGeneralCommissioningable = (*MTRClusterGeneralCommissioning)(nil)
 
 var _ MTRGenericClusterProvider = (*MTRClusterGeneralCommissioning)(nil)
 

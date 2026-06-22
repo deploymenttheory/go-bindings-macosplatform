@@ -44,24 +44,24 @@ func externalSyncDeviceDiscoverySessionAdopt(id objc.ID) *ExternalSyncDeviceDisc
 }
 
 // Description returns the object's -description text.
-func (x *ExternalSyncDeviceDiscoverySession) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (esdds *ExternalSyncDeviceDiscoverySession) Description() string {
+	return rt.Description(objref.IDOf(esdds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExternalSyncDeviceDiscoverySession) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (esdds *ExternalSyncDeviceDiscoverySession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(esdds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExternalSyncDeviceDiscoverySession) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (esdds *ExternalSyncDeviceDiscoverySession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(esdds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExternalSyncDeviceDiscoverySession) String() string {
-	return rt.Description(objref.IDOf(x))
+func (esdds *ExternalSyncDeviceDiscoverySession) String() string {
+	return rt.Description(objref.IDOf(esdds))
 }
 
 // NewExternalSyncDeviceDiscoverySession creates a new ExternalSyncDeviceDiscoverySession.
@@ -70,18 +70,10 @@ func NewExternalSyncDeviceDiscoverySession() *ExternalSyncDeviceDiscoverySession
 	return externalSyncDeviceDiscoverySessionAdopt(_id)
 }
 
-// Devices an array of external sync devices connected to this host. The list is updated when external sync devices are connected to the host and they remain in the list until they become unavailable. This property is key-value observable.
+// Devices returns an array of external sync devices connected to this host. The list is updated when external sync devices are connected to the host and they remain in the list until they become unavailable. This property is key-value observable.
 //
 // Devices returns the collection as a Go slice.
-func (x *ExternalSyncDeviceDiscoverySession) Devices() []*ExternalSyncDevice {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("devices"))
+func (esdds *ExternalSyncDeviceDiscoverySession) Devices() []*ExternalSyncDevice {
+	_arr := objc.Send[objc.ID](objref.IDOf(esdds), objc.RegisterName("devices"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExternalSyncDevice { return ExternalSyncDeviceFromID(_id) })
 }
-
-// ExternalSyncDeviceDiscoverySessionable is the interface implemented by [ExternalSyncDeviceDiscoverySession], for mocking and DI.
-type ExternalSyncDeviceDiscoverySessionable interface {
-	obj.Object
-	Devices() []*ExternalSyncDevice
-}
-
-var _ ExternalSyncDeviceDiscoverySessionable = (*ExternalSyncDeviceDiscoverySession)(nil)

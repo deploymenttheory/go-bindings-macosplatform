@@ -5,12 +5,13 @@
 package launchservices
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 var _fnLSCopyApplicationForMIMEType func(objc.ID, LSRolesMask, unsafe.Pointer) int32

@@ -49,24 +49,24 @@ func valueAdopt(id objc.ID) *Value {
 }
 
 // Description returns the object's -description text.
-func (x *Value) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *Value) Description() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Value) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (v_ *Value) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Value) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (v_ *Value) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Value) String() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *Value) String() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // NewValueWithCoder creates a new Value.
@@ -77,57 +77,44 @@ func NewValueWithCoder(coder *Coder) *Value {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *Value) WithScriptingProperties(scriptingProperties obj.Object) *Value {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (v_ *Value) WithScriptingProperties(scriptingProperties obj.Object) *Value {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return v_
 }
 
 // IsEqualToValue returns a Boolean value that indicates whether the value object and another value object are equal.
-func (x *Value) IsEqualToValue(value *Value) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToValue:"), objref.IDOf(value))
+func (v_ *Value) IsEqualToValue(value *Value) bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isEqualToValue:"), objref.IDOf(value))
 	return _r
 }
 
 // NonretainedObjectValue wraps the corresponding Objective-C method.
-func (x *Value) NonretainedObjectValue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nonretainedObjectValue"))
+func (v_ *Value) NonretainedObjectValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("nonretainedObjectValue"))
 	return obj.Wrap(_r)
 }
 
 // PointValue wraps the corresponding Objective-C method.
-func (x *Value) PointValue() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("pointValue"))
+func (v_ *Value) PointValue() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(v_), objc.RegisterName("pointValue"))
 	return _r
 }
 
 // SizeValue wraps the corresponding Objective-C method.
-func (x *Value) SizeValue() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("sizeValue"))
+func (v_ *Value) SizeValue() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(v_), objc.RegisterName("sizeValue"))
 	return _r
 }
 
 // RectValue wraps the corresponding Objective-C method.
-func (x *Value) RectValue() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("rectValue"))
+func (v_ *Value) RectValue() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(v_), objc.RegisterName("rectValue"))
 	return _r
 }
-
-// Valueable is the interface implemented by [Value], for mocking and DI.
-type Valueable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *Value
-	IsEqualToValue(value *Value) bool
-	NonretainedObjectValue() obj.Object
-	PointValue() corefoundation.CGPoint
-	SizeValue() corefoundation.CGSize
-	RectValue() corefoundation.CGRect
-}
-
-var _ Valueable = (*Value)(nil)
 
 // isValue marks Value — and, by embedding promotion, its
 // subclasses — as a member of the Value hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Value) isValue() {}
+func (v_ *Value) isValue() {}
 
 var _ ValueProvider = (*Value)(nil)

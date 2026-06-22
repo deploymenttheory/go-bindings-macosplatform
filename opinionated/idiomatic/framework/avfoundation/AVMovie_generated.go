@@ -5,13 +5,14 @@
 package avfoundation
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Movie is an idiomatic wrapper over the Objective-C class AVMovie.
@@ -63,40 +64,40 @@ func NewMovieWithDataOptions(data obj.Object, options obj.Object) *Movie {
 	return movieAdopt(_id)
 }
 
-// URL the URL with which the instance of AVMovie was initialized; may be nil.
-func (x *Movie) URL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+// URL returns the URL with which the instance of AVMovie was initialized; may be nil.
+func (m *Movie) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("URL"))
 	return obj.Wrap(_r)
 }
 
-// Data the data block with which the instance of AVMovie was initialized; may be nil.
-func (x *Movie) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+// Data returns the data block with which the instance of AVMovie was initialized; may be nil.
+func (m *Movie) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// DefaultMediaDataStorage the default storage container for media data added to a movie. The value of this property is an AVMediaDataStorage object that indicates where sample data that is added to a movie should be written by default.
-func (x *Movie) DefaultMediaDataStorage() *MediaDataStorage {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultMediaDataStorage"))
+// DefaultMediaDataStorage returns the default storage container for media data added to a movie. The value of this property is an AVMediaDataStorage object that indicates where sample data that is added to a movie should be written by default.
+func (m *Movie) DefaultMediaDataStorage() *MediaDataStorage {
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("defaultMediaDataStorage"))
 	return MediaDataStorageFromID(_r)
 }
 
-// CanContainMovieFragments indicates whether the movie file is capable of being extended by fragments. The value of this property is YES if an 'mvex' box is present in the 'moov' box. The 'mvex' box is necessary in order to signal the possible presence of later 'moof' boxes.
-func (x *Movie) CanContainMovieFragments() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canContainMovieFragments"))
+// CanContainMovieFragments reports whether the movie file is capable of being extended by fragments. The value of this property is true if an 'mvex' box is present in the 'moov' box. The 'mvex' box is necessary in order to signal the possible presence of later 'moof' boxes.
+func (m *Movie) CanContainMovieFragments() bool {
+	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("canContainMovieFragments"))
 	return _r
 }
 
-// ContainsMovieFragments indicates whether the movie file is extended by at least one movie fragment. The value of this property is YES if canContainMovieFragments is YES and at least one 'moof' box is present after the 'moov' box.
-func (x *Movie) ContainsMovieFragments() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsMovieFragments"))
+// ContainsMovieFragments reports whether the movie file is extended by at least one movie fragment. The value of this property is true if canContainMovieFragments is true and at least one 'moof' box is present after the 'moov' box.
+func (m *Movie) ContainsMovieFragments() bool {
+	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("containsMovieFragments"))
 	return _r
 }
 
 // MovieHeaderWithFileTypeError creates a header for a movie for the specified file type.
-func (x *Movie) MovieHeaderWithFileTypeError(fileType obj.Object) (result obj.Object, err error) {
+func (m *Movie) MovieHeaderWithFileTypeError(fileType obj.Object) (result obj.Object, err error) {
 	var _nsErr uintptr
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("movieHeaderWithFileType:error:"), objref.IDOf(fileType), unsafe.Pointer(&_nsErr))
+	_r := objc.Send[objc.ID](objref.IDOf(m), objc.RegisterName("movieHeaderWithFileType:error:"), objref.IDOf(fileType), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -104,9 +105,9 @@ func (x *Movie) MovieHeaderWithFileTypeError(fileType obj.Object) (result obj.Ob
 }
 
 // WriteMovieHeaderToURLFileTypeOptions writes the movie header to the specified URL.
-func (x *Movie) WriteMovieHeaderToURLFileTypeOptions(uRL string, fileType obj.Object, options MovieWritingOptions) error {
+func (m *Movie) WriteMovieHeaderToURLFileTypeOptions(uRL string, fileType obj.Object, options MovieWritingOptions) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("writeMovieHeaderToURL:fileType:options:error:"), rt.FileURL(uRL), objref.IDOf(fileType), options, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(m), objc.RegisterName("writeMovieHeaderToURL:fileType:options:error:"), rt.FileURL(uRL), objref.IDOf(fileType), options, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -114,30 +115,15 @@ func (x *Movie) WriteMovieHeaderToURLFileTypeOptions(uRL string, fileType obj.Ob
 }
 
 // IsCompatibleWithFileType returns a Boolean value that indicates whether the system can create a movie header of the specified type.
-func (x *Movie) IsCompatibleWithFileType(fileType obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompatibleWithFileType:"), objref.IDOf(fileType))
+func (m *Movie) IsCompatibleWithFileType(fileType obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(m), objc.RegisterName("isCompatibleWithFileType:"), objref.IDOf(fileType))
 	return _r
 }
-
-// Movieable is the interface implemented by [Movie], for mocking and DI.
-type Movieable interface {
-	obj.Object
-	URL() obj.Object
-	Data() obj.Object
-	DefaultMediaDataStorage() *MediaDataStorage
-	CanContainMovieFragments() bool
-	ContainsMovieFragments() bool
-	MovieHeaderWithFileTypeError(fileType obj.Object) (result obj.Object, err error)
-	WriteMovieHeaderToURLFileTypeOptions(uRL string, fileType obj.Object, options MovieWritingOptions) error
-	IsCompatibleWithFileType(fileType obj.Object) bool
-}
-
-var _ Movieable = (*Movie)(nil)
 
 // isMovie marks Movie — and, by embedding promotion, its
 // subclasses — as a member of the Movie hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *Movie) isMovie() {}
+func (m *Movie) isMovie() {}
 
 var _ MovieProvider = (*Movie)(nil)
 

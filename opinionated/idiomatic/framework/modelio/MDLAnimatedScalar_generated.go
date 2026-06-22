@@ -5,11 +5,11 @@
 package modelio
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // AnimatedScalar is an idiomatic wrapper over the Objective-C class MDLAnimatedScalar.
@@ -52,77 +52,61 @@ func NewAnimatedScalar() *AnimatedScalar {
 }
 
 // WithInterpolation sets the property and returns the receiver so calls can be chained.
-func (x *AnimatedScalar) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedScalar {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolation:"), interpolation)
-	return x
+func (as *AnimatedScalar) WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedScalar {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setInterpolation:"), interpolation)
+	return as
 }
 
 // SetFloatAtTime wraps the corresponding Objective-C method.
-func (x *AnimatedScalar) SetFloatAtTime(value float32, time_ float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloat:atTime:"), value, time_)
+func (as *AnimatedScalar) SetFloatAtTime(value float32, time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setFloat:atTime:"), value, time_)
 }
 
 // SetDoubleAtTime wraps the corresponding Objective-C method.
-func (x *AnimatedScalar) SetDoubleAtTime(value float64, time_ float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDouble:atTime:"), value, time_)
+func (as *AnimatedScalar) SetDoubleAtTime(value float64, time_ float64) {
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("setDouble:atTime:"), value, time_)
 }
 
 // FloatAtTime wraps the corresponding Objective-C method.
-func (x *AnimatedScalar) FloatAtTime(time_ float64) float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("floatAtTime:"), time_)
+func (as *AnimatedScalar) FloatAtTime(time_ float64) float32 {
+	_r := objc.Send[float32](objref.IDOf(as), objc.RegisterName("floatAtTime:"), time_)
 	return _r
 }
 
 // DoubleAtTime wraps the corresponding Objective-C method.
-func (x *AnimatedScalar) DoubleAtTime(time_ float64) float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("doubleAtTime:"), time_)
+func (as *AnimatedScalar) DoubleAtTime(time_ float64) float64 {
+	_r := objc.Send[float64](objref.IDOf(as), objc.RegisterName("doubleAtTime:"), time_)
 	return _r
 }
 
 // ResetWithFloatArrayAtTimesCount wraps the corresponding Objective-C method.
-func (x *AnimatedScalar) ResetWithFloatArrayAtTimesCount(count int) (valuesArray float32, timesArray float64) {
+func (as *AnimatedScalar) ResetWithFloatArrayAtTimesCount(count int) (valuesArray float32, timesArray float64) {
 	var _out0 float32
 	var _out1 float64
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetWithFloatArray:atTimes:count:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), count)
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("resetWithFloatArray:atTimes:count:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), count)
 	return _out0, _out1
 }
 
 // ResetWithDoubleArrayAtTimesCount wraps the corresponding Objective-C method.
-func (x *AnimatedScalar) ResetWithDoubleArrayAtTimesCount(count int) (valuesArray float64, timesArray float64) {
+func (as *AnimatedScalar) ResetWithDoubleArrayAtTimesCount(count int) (valuesArray float64, timesArray float64) {
 	var _out0 float64
 	var _out1 float64
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resetWithDoubleArray:atTimes:count:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), count)
+	objc.Send[objc.ID](objref.IDOf(as), objc.RegisterName("resetWithDoubleArray:atTimes:count:"), unsafe.Pointer(&_out0), unsafe.Pointer(&_out1), count)
 	return _out0, _out1
 }
 
 // GetFloatArrayMaxCount wraps the corresponding Objective-C method.
-func (x *AnimatedScalar) GetFloatArrayMaxCount(maxCount int) (result int, valuesArray float32) {
+func (as *AnimatedScalar) GetFloatArrayMaxCount(maxCount int) (result int, valuesArray float32) {
 	var _out0 float32
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getFloatArray:maxCount:"), unsafe.Pointer(&_out0), maxCount)
+	_r := objc.Send[int](objref.IDOf(as), objc.RegisterName("getFloatArray:maxCount:"), unsafe.Pointer(&_out0), maxCount)
 	return _r, _out0
 }
 
 // GetDoubleArrayMaxCount wraps the corresponding Objective-C method.
-func (x *AnimatedScalar) GetDoubleArrayMaxCount(maxCount int) (result int, valuesArray float64) {
+func (as *AnimatedScalar) GetDoubleArrayMaxCount(maxCount int) (result int, valuesArray float64) {
 	var _out0 float64
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("getDoubleArray:maxCount:"), unsafe.Pointer(&_out0), maxCount)
+	_r := objc.Send[int](objref.IDOf(as), objc.RegisterName("getDoubleArray:maxCount:"), unsafe.Pointer(&_out0), maxCount)
 	return _r, _out0
 }
-
-// AnimatedScalarable is the interface implemented by [AnimatedScalar], for mocking and DI.
-type AnimatedScalarable interface {
-	obj.Object
-	WithInterpolation(interpolation AnimatedValueInterpolation) *AnimatedScalar
-	SetFloatAtTime(value float32, time_ float64)
-	SetDoubleAtTime(value float64, time_ float64)
-	FloatAtTime(time_ float64) float32
-	DoubleAtTime(time_ float64) float64
-	ResetWithFloatArrayAtTimesCount(count int) (valuesArray float32, timesArray float64)
-	ResetWithDoubleArrayAtTimesCount(count int) (valuesArray float64, timesArray float64)
-	GetFloatArrayMaxCount(maxCount int) (result int, valuesArray float32)
-	GetDoubleArrayMaxCount(maxCount int) (result int, valuesArray float64)
-}
-
-var _ AnimatedScalarable = (*AnimatedScalar)(nil)
 
 var _ AnimatedValueProvider = (*AnimatedScalar)(nil)

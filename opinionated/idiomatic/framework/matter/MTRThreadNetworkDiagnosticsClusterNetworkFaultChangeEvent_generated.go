@@ -44,24 +44,24 @@ func mTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventAdopt(id objc.ID) 
 }
 
 // Description returns the object's -description text.
-func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Description() string {
+	return rt.Description(objref.IDOf(mtndcnfce))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtndcnfce), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtndcnfce), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) String() string {
+	return rt.Description(objref.IDOf(mtndcnfce))
 }
 
 // NewMTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent creates a new MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent.
@@ -71,34 +71,23 @@ func NewMTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent() *MTRThreadNe
 }
 
 // Current wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Current() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("current"))
+func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Current() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndcnfce), objc.RegisterName("current"))
 	return obj.Wrap(_r)
 }
 
 // SetCurrent wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) SetCurrent(current obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrent:"), objref.IDOf(current))
+func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) SetCurrent(current obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mtndcnfce), objc.RegisterName("setCurrent:"), objref.IDOf(current))
 }
 
 // Previous wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Previous() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previous"))
+func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) Previous() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndcnfce), objc.RegisterName("previous"))
 	return obj.Wrap(_r)
 }
 
 // SetPrevious wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) SetPrevious(previous obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
+func (mtndcnfce *MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent) SetPrevious(previous obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(mtndcnfce), objc.RegisterName("setPrevious:"), objref.IDOf(previous))
 }
-
-// MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventable is the interface implemented by [MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent], for mocking and DI.
-type MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventable interface {
-	obj.Object
-	Current() obj.Object
-	SetCurrent(current obj.Object)
-	Previous() obj.Object
-	SetPrevious(previous obj.Object)
-}
-
-var _ MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEventable = (*MTRThreadNetworkDiagnosticsClusterNetworkFaultChangeEvent)(nil)

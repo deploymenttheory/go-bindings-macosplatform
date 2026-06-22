@@ -46,24 +46,24 @@ func iKCameraDeviceViewAdopt(id objc.ID) *IKCameraDeviceView {
 }
 
 // Description returns the object's -description text.
-func (x *IKCameraDeviceView) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (icdv *IKCameraDeviceView) Description() string {
+	return rt.Description(objref.IDOf(icdv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IKCameraDeviceView) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (icdv *IKCameraDeviceView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(icdv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IKCameraDeviceView) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (icdv *IKCameraDeviceView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(icdv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IKCameraDeviceView) String() string {
-	return rt.Description(objref.IDOf(x))
+func (icdv *IKCameraDeviceView) String() string {
+	return rt.Description(objref.IDOf(icdv))
 }
 
 // NewIKCameraDeviceView creates a new IKCameraDeviceView.
@@ -72,382 +72,254 @@ func NewIKCameraDeviceView() *IKCameraDeviceView {
 	return iKCameraDeviceViewAdopt(_id)
 }
 
-// WithDelegate the camera device view delegate.
-func (x *IKCameraDeviceView) WithDelegate(delegate obj.Object) *IKCameraDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
-	return x
+// WithDelegate sets the camera device view delegate.
+func (icdv *IKCameraDeviceView) WithDelegate(delegate obj.Object) *IKCameraDeviceView {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
+	return icdv
 }
 
-// WithCameraDevice the current camera device.
-func (x *IKCameraDeviceView) WithCameraDevice(cameraDevice obj.Object) *IKCameraDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraDevice:"), objref.IDOf(cameraDevice))
-	return x
+// WithCameraDevice sets the current camera device.
+func (icdv *IKCameraDeviceView) WithCameraDevice(cameraDevice obj.Object) *IKCameraDeviceView {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setCameraDevice:"), objref.IDOf(cameraDevice))
+	return icdv
 }
 
-// WithMode specifies the display mode of the camera device view.
-func (x *IKCameraDeviceView) WithMode(mode obj.Object) *IKCameraDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
-	return x
+// WithMode sets specifies the display mode of the camera device view.
+func (icdv *IKCameraDeviceView) WithMode(mode obj.Object) *IKCameraDeviceView {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setMode:"), objref.IDOf(mode))
+	return icdv
 }
 
-// WithHasDisplayModeTable returns whether the device view is being displayed in table mode.
-func (x *IKCameraDeviceView) WithHasDisplayModeTable(hasDisplayModeTable bool) *IKCameraDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDisplayModeTable:"), hasDisplayModeTable)
-	return x
+// WithHasDisplayModeTable sets returns whether the device view is being displayed in table mode.
+func (icdv *IKCameraDeviceView) WithHasDisplayModeTable(hasDisplayModeTable bool) *IKCameraDeviceView {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setHasDisplayModeTable:"), hasDisplayModeTable)
+	return icdv
 }
 
-// WithHasDisplayModeIcon returns whether the device view is being displayed in icon mode.
-func (x *IKCameraDeviceView) WithHasDisplayModeIcon(hasDisplayModeIcon bool) *IKCameraDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDisplayModeIcon:"), hasDisplayModeIcon)
-	return x
+// WithHasDisplayModeIcon sets returns whether the device view is being displayed in icon mode.
+func (icdv *IKCameraDeviceView) WithHasDisplayModeIcon(hasDisplayModeIcon bool) *IKCameraDeviceView {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setHasDisplayModeIcon:"), hasDisplayModeIcon)
+	return icdv
 }
 
-// WithDownloadAllControlLabel allows the “Download All” control to be renamed.
-func (x *IKCameraDeviceView) WithDownloadAllControlLabel(downloadAllControlLabel string) *IKCameraDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownloadAllControlLabel:"), purego.NSString(downloadAllControlLabel))
-	return x
+// WithDownloadAllControlLabel sets allows the “Download All” control to be renamed.
+func (icdv *IKCameraDeviceView) WithDownloadAllControlLabel(downloadAllControlLabel string) *IKCameraDeviceView {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setDownloadAllControlLabel:"), purego.NSString(downloadAllControlLabel))
+	return icdv
 }
 
-// WithDownloadSelectedControlLabel allows the “Download Selected” control to be renamed.
-func (x *IKCameraDeviceView) WithDownloadSelectedControlLabel(downloadSelectedControlLabel string) *IKCameraDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownloadSelectedControlLabel:"), purego.NSString(downloadSelectedControlLabel))
-	return x
+// WithDownloadSelectedControlLabel sets allows the “Download Selected” control to be renamed.
+func (icdv *IKCameraDeviceView) WithDownloadSelectedControlLabel(downloadSelectedControlLabel string) *IKCameraDeviceView {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setDownloadSelectedControlLabel:"), purego.NSString(downloadSelectedControlLabel))
+	return icdv
 }
 
-// WithIconSize specifies the icon size.
-func (x *IKCameraDeviceView) WithIconSize(iconSize int) *IKCameraDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIconSize:"), iconSize)
-	return x
+// WithIconSize sets specifies the icon size.
+func (icdv *IKCameraDeviceView) WithIconSize(iconSize int) *IKCameraDeviceView {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setIconSize:"), iconSize)
+	return icdv
 }
 
-// WithTransferMode determines how the contents are saved by the delegate.
-func (x *IKCameraDeviceView) WithTransferMode(transferMode obj.Object) *IKCameraDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransferMode:"), objref.IDOf(transferMode))
-	return x
+// WithTransferMode sets determines how the contents are saved by the delegate.
+func (icdv *IKCameraDeviceView) WithTransferMode(transferMode obj.Object) *IKCameraDeviceView {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setTransferMode:"), objref.IDOf(transferMode))
+	return icdv
 }
 
-// WithDisplaysDownloadsDirectoryControl specifies whether the downloads directory control should be displayed.
-func (x *IKCameraDeviceView) WithDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) *IKCameraDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysDownloadsDirectoryControl:"), displaysDownloadsDirectoryControl)
-	return x
+// WithDisplaysDownloadsDirectoryControl sets specifies whether the downloads directory control should be displayed.
+func (icdv *IKCameraDeviceView) WithDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) *IKCameraDeviceView {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setDisplaysDownloadsDirectoryControl:"), displaysDownloadsDirectoryControl)
+	return icdv
 }
 
-// WithDownloadsDirectory specifies the directory where files are downloaded
-func (x *IKCameraDeviceView) WithDownloadsDirectory(downloadsDirectory string) *IKCameraDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownloadsDirectory:"), rt.FileURL(downloadsDirectory))
-	return x
+// WithDownloadsDirectory sets specifies the directory where files are downloaded
+func (icdv *IKCameraDeviceView) WithDownloadsDirectory(downloadsDirectory string) *IKCameraDeviceView {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setDownloadsDirectory:"), rt.FileURL(downloadsDirectory))
+	return icdv
 }
 
-// WithDisplaysPostProcessApplicationControl displays whether the post process application control should be displayed.
-func (x *IKCameraDeviceView) WithDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) *IKCameraDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysPostProcessApplicationControl:"), displaysPostProcessApplicationControl)
-	return x
+// WithDisplaysPostProcessApplicationControl sets displays whether the post process application control should be displayed.
+func (icdv *IKCameraDeviceView) WithDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) *IKCameraDeviceView {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setDisplaysPostProcessApplicationControl:"), displaysPostProcessApplicationControl)
+	return icdv
 }
 
-// WithPostProcessApplication the URL of the application used to post process the image.
-func (x *IKCameraDeviceView) WithPostProcessApplication(postProcessApplication string) *IKCameraDeviceView {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostProcessApplication:"), rt.FileURL(postProcessApplication))
-	return x
+// WithPostProcessApplication sets the URL of the application used to post process the image.
+func (icdv *IKCameraDeviceView) WithPostProcessApplication(postProcessApplication string) *IKCameraDeviceView {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setPostProcessApplication:"), rt.FileURL(postProcessApplication))
+	return icdv
 }
 
-// SelectedIndexes the selected indexes of the camera files.
-func (x *IKCameraDeviceView) SelectedIndexes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectedIndexes"))
+// SelectedIndexes returns the selected indexes of the camera files.
+func (icdv *IKCameraDeviceView) SelectedIndexes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("selectedIndexes"))
 	return obj.Wrap(_r)
 }
 
 // SelectIndexesByExtendingSelection invoked to select the specified files, extending the selection if specified.
-func (x *IKCameraDeviceView) SelectIndexesByExtendingSelection(indexes obj.Object, extend bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectIndexes:byExtendingSelection:"), objref.IDOf(indexes), extend)
+func (icdv *IKCameraDeviceView) SelectIndexesByExtendingSelection(indexes obj.Object, extend bool) {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("selectIndexes:byExtendingSelection:"), objref.IDOf(indexes), extend)
 }
 
 // RotateLeft rotates the selected image to the left.
-func (x *IKCameraDeviceView) RotateLeft(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rotateLeft:"), objref.IDOf(sender))
+func (icdv *IKCameraDeviceView) RotateLeft(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("rotateLeft:"), objref.IDOf(sender))
 }
 
 // RotateRight rotates the selected image to the right.
-func (x *IKCameraDeviceView) RotateRight(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rotateRight:"), objref.IDOf(sender))
+func (icdv *IKCameraDeviceView) RotateRight(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("rotateRight:"), objref.IDOf(sender))
 }
 
 // DeleteSelectedItems deletes the currently selected items.
-func (x *IKCameraDeviceView) DeleteSelectedItems(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteSelectedItems:"), objref.IDOf(sender))
+func (icdv *IKCameraDeviceView) DeleteSelectedItems(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("deleteSelectedItems:"), objref.IDOf(sender))
 }
 
 // DownloadSelectedItems deletes the selected items from the camera.
-func (x *IKCameraDeviceView) DownloadSelectedItems(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadSelectedItems:"), objref.IDOf(sender))
+func (icdv *IKCameraDeviceView) DownloadSelectedItems(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("downloadSelectedItems:"), objref.IDOf(sender))
 }
 
 // DownloadAllItems downloads all the items.
-func (x *IKCameraDeviceView) DownloadAllItems(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadAllItems:"), objref.IDOf(sender))
+func (icdv *IKCameraDeviceView) DownloadAllItems(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("downloadAllItems:"), objref.IDOf(sender))
 }
 
 // SetCustomIconSizeSlider provide your own NSSlider to resize item thumbnails
-func (x *IKCameraDeviceView) SetCustomIconSizeSlider(slider obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomIconSizeSlider:"), objref.IDOf(slider))
+func (icdv *IKCameraDeviceView) SetCustomIconSizeSlider(slider obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setCustomIconSizeSlider:"), objref.IDOf(slider))
 }
 
 // SetCustomModeControl provide your own control to toggle between IKCameraDeviceViewDisplayMode table / icon
-func (x *IKCameraDeviceView) SetCustomModeControl(control obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomModeControl:"), objref.IDOf(control))
+func (icdv *IKCameraDeviceView) SetCustomModeControl(control obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setCustomModeControl:"), objref.IDOf(control))
 }
 
 // SetCustomActionControl provide your own control to toggle between IKCameraDeviceViewDisplayMode table / icon
-func (x *IKCameraDeviceView) SetCustomActionControl(control obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomActionControl:"), objref.IDOf(control))
+func (icdv *IKCameraDeviceView) SetCustomActionControl(control obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setCustomActionControl:"), objref.IDOf(control))
 }
 
 // SetCustomRotateControl provide your own control to rotate items (multiple of 90º)
-func (x *IKCameraDeviceView) SetCustomRotateControl(control obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomRotateControl:"), objref.IDOf(control))
+func (icdv *IKCameraDeviceView) SetCustomRotateControl(control obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setCustomRotateControl:"), objref.IDOf(control))
 }
 
 // SetCustomDeleteControl provide your own control to delete selected items
-func (x *IKCameraDeviceView) SetCustomDeleteControl(control obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCustomDeleteControl:"), objref.IDOf(control))
+func (icdv *IKCameraDeviceView) SetCustomDeleteControl(control obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setCustomDeleteControl:"), objref.IDOf(control))
 }
 
 // SetShowStatusInfoAsWindowSubtitle display status info as window subtitle
-func (x *IKCameraDeviceView) SetShowStatusInfoAsWindowSubtitle(value bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowStatusInfoAsWindowSubtitle:"), value)
+func (icdv *IKCameraDeviceView) SetShowStatusInfoAsWindowSubtitle(value bool) {
+	objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("setShowStatusInfoAsWindowSubtitle:"), value)
 }
 
-// Delegate delegate of the IKCameraDeviceView.
-func (x *IKCameraDeviceView) Delegate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegate"))
+// Delegate returns delegate of the IKCameraDeviceView.
+func (icdv *IKCameraDeviceView) Delegate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("delegate"))
 	return obj.Wrap(_r)
 }
 
-// SetDelegate wraps the corresponding Objective-C method.
-func (x *IKCameraDeviceView) SetDelegate(delegate obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelegate:"), objref.IDOf(delegate))
-}
-
-// CameraDevice the camera device.
-func (x *IKCameraDeviceView) CameraDevice() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cameraDevice"))
+// CameraDevice returns the camera device.
+func (icdv *IKCameraDeviceView) CameraDevice() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("cameraDevice"))
 	return obj.Wrap(_r)
 }
 
-// SetCameraDevice wraps the corresponding Objective-C method.
-func (x *IKCameraDeviceView) SetCameraDevice(cameraDevice obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCameraDevice:"), objref.IDOf(cameraDevice))
-}
-
-// Mode current display mode.
-func (x *IKCameraDeviceView) Mode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mode"))
+// Mode returns current display mode.
+func (icdv *IKCameraDeviceView) Mode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("mode"))
 	return obj.Wrap(_r)
 }
 
-// SetMode wraps the corresponding Objective-C method.
-func (x *IKCameraDeviceView) SetMode(mode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMode:"), objref.IDOf(mode))
-}
-
-// HasDisplayModeTable support table view display mode.
-func (x *IKCameraDeviceView) HasDisplayModeTable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasDisplayModeTable"))
+// HasDisplayModeTable reports whether support table view display mode.
+func (icdv *IKCameraDeviceView) HasDisplayModeTable() bool {
+	_r := objc.Send[bool](objref.IDOf(icdv), objc.RegisterName("hasDisplayModeTable"))
 	return _r
 }
 
-// SetHasDisplayModeTable wraps the corresponding Objective-C method.
-func (x *IKCameraDeviceView) SetHasDisplayModeTable(hasDisplayModeTable bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDisplayModeTable:"), hasDisplayModeTable)
-}
-
-// HasDisplayModeIcon support icon view display mode.
-func (x *IKCameraDeviceView) HasDisplayModeIcon() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasDisplayModeIcon"))
+// HasDisplayModeIcon reports whether support icon view display mode.
+func (icdv *IKCameraDeviceView) HasDisplayModeIcon() bool {
+	_r := objc.Send[bool](objref.IDOf(icdv), objc.RegisterName("hasDisplayModeIcon"))
 	return _r
 }
 
-// SetHasDisplayModeIcon wraps the corresponding Objective-C method.
-func (x *IKCameraDeviceView) SetHasDisplayModeIcon(hasDisplayModeIcon bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasDisplayModeIcon:"), hasDisplayModeIcon)
-}
-
-// DownloadAllControlLabel label for the 'Download All' control - allows for example renaming to 'Import All'.
-func (x *IKCameraDeviceView) DownloadAllControlLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadAllControlLabel"))
+// DownloadAllControlLabel returns label for the 'Download All' control - allows for example renaming to 'Import All'.
+func (icdv *IKCameraDeviceView) DownloadAllControlLabel() string {
+	_r := objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("downloadAllControlLabel"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetDownloadAllControlLabel wraps the corresponding Objective-C method.
-func (x *IKCameraDeviceView) SetDownloadAllControlLabel(downloadAllControlLabel string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownloadAllControlLabel:"), purego.NSString(downloadAllControlLabel))
-}
-
-// DownloadSelectedControlLabel label for the 'Download Selected' control.
-func (x *IKCameraDeviceView) DownloadSelectedControlLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadSelectedControlLabel"))
+// DownloadSelectedControlLabel returns label for the 'Download Selected' control.
+func (icdv *IKCameraDeviceView) DownloadSelectedControlLabel() string {
+	_r := objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("downloadSelectedControlLabel"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetDownloadSelectedControlLabel wraps the corresponding Objective-C method.
-func (x *IKCameraDeviceView) SetDownloadSelectedControlLabel(downloadSelectedControlLabel string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownloadSelectedControlLabel:"), purego.NSString(downloadSelectedControlLabel))
-}
-
-// IconSize in icon mode: size of the image thumbnails.
-func (x *IKCameraDeviceView) IconSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("iconSize"))
+// IconSize returns in icon mode: size of the image thumbnails.
+func (icdv *IKCameraDeviceView) IconSize() int {
+	_r := objc.Send[int](objref.IDOf(icdv), objc.RegisterName("iconSize"))
 	return _r
 }
 
-// SetIconSize wraps the corresponding Objective-C method.
-func (x *IKCameraDeviceView) SetIconSize(iconSize int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIconSize:"), iconSize)
-}
-
-// TransferMode transfer mode either file based - or - in memory.
-func (x *IKCameraDeviceView) TransferMode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transferMode"))
+// TransferMode returns transfer mode either file based - or - in memory.
+func (icdv *IKCameraDeviceView) TransferMode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("transferMode"))
 	return obj.Wrap(_r)
 }
 
-// SetTransferMode wraps the corresponding Objective-C method.
-func (x *IKCameraDeviceView) SetTransferMode(transferMode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransferMode:"), objref.IDOf(transferMode))
-}
-
-// DisplaysDownloadsDirectoryControl show a downloads directory control.
-func (x *IKCameraDeviceView) DisplaysDownloadsDirectoryControl() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysDownloadsDirectoryControl"))
+// DisplaysDownloadsDirectoryControl reports whether show a downloads directory control.
+func (icdv *IKCameraDeviceView) DisplaysDownloadsDirectoryControl() bool {
+	_r := objc.Send[bool](objref.IDOf(icdv), objc.RegisterName("displaysDownloadsDirectoryControl"))
 	return _r
 }
 
-// SetDisplaysDownloadsDirectoryControl wraps the corresponding Objective-C method.
-func (x *IKCameraDeviceView) SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysDownloadsDirectoryControl:"), displaysDownloadsDirectoryControl)
-}
-
-// DownloadsDirectory downloads directory.
-func (x *IKCameraDeviceView) DownloadsDirectory() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadsDirectory"))
+// DownloadsDirectory returns downloads directory.
+func (icdv *IKCameraDeviceView) DownloadsDirectory() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("downloadsDirectory"))
 	return obj.Wrap(_r)
 }
 
-// SetDownloadsDirectory wraps the corresponding Objective-C method.
-func (x *IKCameraDeviceView) SetDownloadsDirectory(downloadsDirectory string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDownloadsDirectory:"), rt.FileURL(downloadsDirectory))
-}
-
-// DisplaysPostProcessApplicationControl show a postprocessing application control.
-func (x *IKCameraDeviceView) DisplaysPostProcessApplicationControl() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysPostProcessApplicationControl"))
+// DisplaysPostProcessApplicationControl reports whether show a postprocessing application control.
+func (icdv *IKCameraDeviceView) DisplaysPostProcessApplicationControl() bool {
+	_r := objc.Send[bool](objref.IDOf(icdv), objc.RegisterName("displaysPostProcessApplicationControl"))
 	return _r
 }
 
-// SetDisplaysPostProcessApplicationControl wraps the corresponding Objective-C method.
-func (x *IKCameraDeviceView) SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysPostProcessApplicationControl:"), displaysPostProcessApplicationControl)
-}
-
-// PostProcessApplication postprocessing application.
-func (x *IKCameraDeviceView) PostProcessApplication() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postProcessApplication"))
+// PostProcessApplication returns postprocessing application.
+func (icdv *IKCameraDeviceView) PostProcessApplication() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(icdv), objc.RegisterName("postProcessApplication"))
 	return obj.Wrap(_r)
 }
 
-// SetPostProcessApplication wraps the corresponding Objective-C method.
-func (x *IKCameraDeviceView) SetPostProcessApplication(postProcessApplication string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostProcessApplication:"), rt.FileURL(postProcessApplication))
-}
-
-// CanRotateSelectedItemsLeft indicates if the user selected items can be rotated left.
-func (x *IKCameraDeviceView) CanRotateSelectedItemsLeft() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canRotateSelectedItemsLeft"))
+// CanRotateSelectedItemsLeft reports whether indicates if the user selected items can be rotated left.
+func (icdv *IKCameraDeviceView) CanRotateSelectedItemsLeft() bool {
+	_r := objc.Send[bool](objref.IDOf(icdv), objc.RegisterName("canRotateSelectedItemsLeft"))
 	return _r
 }
 
-// CanRotateSelectedItemsRight indicates if the user selected items can be rotated right.
-func (x *IKCameraDeviceView) CanRotateSelectedItemsRight() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canRotateSelectedItemsRight"))
+// CanRotateSelectedItemsRight reports whether indicates if the user selected items can be rotated right.
+func (icdv *IKCameraDeviceView) CanRotateSelectedItemsRight() bool {
+	_r := objc.Send[bool](objref.IDOf(icdv), objc.RegisterName("canRotateSelectedItemsRight"))
 	return _r
 }
 
-// CanDeleteSelectedItems indicates if the user selected items can be deleted.
-func (x *IKCameraDeviceView) CanDeleteSelectedItems() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canDeleteSelectedItems"))
+// CanDeleteSelectedItems reports whether indicates if the user selected items can be deleted.
+func (icdv *IKCameraDeviceView) CanDeleteSelectedItems() bool {
+	_r := objc.Send[bool](objref.IDOf(icdv), objc.RegisterName("canDeleteSelectedItems"))
 	return _r
 }
 
-// CanDownloadSelectedItems indicates if the user selected items can be downloaded.
-func (x *IKCameraDeviceView) CanDownloadSelectedItems() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canDownloadSelectedItems"))
+// CanDownloadSelectedItems reports whether indicates if the user selected items can be downloaded.
+func (icdv *IKCameraDeviceView) CanDownloadSelectedItems() bool {
+	_r := objc.Send[bool](objref.IDOf(icdv), objc.RegisterName("canDownloadSelectedItems"))
 	return _r
 }
-
-// IKCameraDeviceViewable is the interface implemented by [IKCameraDeviceView], for mocking and DI.
-type IKCameraDeviceViewable interface {
-	obj.Object
-	WithDelegate(delegate obj.Object) *IKCameraDeviceView
-	WithCameraDevice(cameraDevice obj.Object) *IKCameraDeviceView
-	WithMode(mode obj.Object) *IKCameraDeviceView
-	WithHasDisplayModeTable(hasDisplayModeTable bool) *IKCameraDeviceView
-	WithHasDisplayModeIcon(hasDisplayModeIcon bool) *IKCameraDeviceView
-	WithDownloadAllControlLabel(downloadAllControlLabel string) *IKCameraDeviceView
-	WithDownloadSelectedControlLabel(downloadSelectedControlLabel string) *IKCameraDeviceView
-	WithIconSize(iconSize int) *IKCameraDeviceView
-	WithTransferMode(transferMode obj.Object) *IKCameraDeviceView
-	WithDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool) *IKCameraDeviceView
-	WithDownloadsDirectory(downloadsDirectory string) *IKCameraDeviceView
-	WithDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool) *IKCameraDeviceView
-	WithPostProcessApplication(postProcessApplication string) *IKCameraDeviceView
-	SelectedIndexes() obj.Object
-	SelectIndexesByExtendingSelection(indexes obj.Object, extend bool)
-	RotateLeft(sender obj.Object)
-	RotateRight(sender obj.Object)
-	DeleteSelectedItems(sender obj.Object)
-	DownloadSelectedItems(sender obj.Object)
-	DownloadAllItems(sender obj.Object)
-	SetCustomIconSizeSlider(slider obj.Object)
-	SetCustomModeControl(control obj.Object)
-	SetCustomActionControl(control obj.Object)
-	SetCustomRotateControl(control obj.Object)
-	SetCustomDeleteControl(control obj.Object)
-	SetShowStatusInfoAsWindowSubtitle(value bool)
-	Delegate() obj.Object
-	SetDelegate(delegate obj.Object)
-	CameraDevice() obj.Object
-	SetCameraDevice(cameraDevice obj.Object)
-	Mode() obj.Object
-	SetMode(mode obj.Object)
-	HasDisplayModeTable() bool
-	SetHasDisplayModeTable(hasDisplayModeTable bool)
-	HasDisplayModeIcon() bool
-	SetHasDisplayModeIcon(hasDisplayModeIcon bool)
-	DownloadAllControlLabel() string
-	SetDownloadAllControlLabel(downloadAllControlLabel string)
-	DownloadSelectedControlLabel() string
-	SetDownloadSelectedControlLabel(downloadSelectedControlLabel string)
-	IconSize() int
-	SetIconSize(iconSize int)
-	TransferMode() obj.Object
-	SetTransferMode(transferMode obj.Object)
-	DisplaysDownloadsDirectoryControl() bool
-	SetDisplaysDownloadsDirectoryControl(displaysDownloadsDirectoryControl bool)
-	DownloadsDirectory() obj.Object
-	SetDownloadsDirectory(downloadsDirectory string)
-	DisplaysPostProcessApplicationControl() bool
-	SetDisplaysPostProcessApplicationControl(displaysPostProcessApplicationControl bool)
-	PostProcessApplication() obj.Object
-	SetPostProcessApplication(postProcessApplication string)
-	CanRotateSelectedItemsLeft() bool
-	CanRotateSelectedItemsRight() bool
-	CanDeleteSelectedItems() bool
-	CanDownloadSelectedItems() bool
-}
-
-var _ IKCameraDeviceViewable = (*IKCameraDeviceView)(nil)

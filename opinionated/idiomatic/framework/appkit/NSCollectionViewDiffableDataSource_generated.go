@@ -46,24 +46,24 @@ func collectionViewDiffableDataSourceAdopt(id objc.ID) *CollectionViewDiffableDa
 }
 
 // Description returns the object's -description text.
-func (x *CollectionViewDiffableDataSource) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cvdds *CollectionViewDiffableDataSource) Description() string {
+	return rt.Description(objref.IDOf(cvdds))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CollectionViewDiffableDataSource) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cvdds *CollectionViewDiffableDataSource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cvdds), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CollectionViewDiffableDataSource) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cvdds *CollectionViewDiffableDataSource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cvdds), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CollectionViewDiffableDataSource) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cvdds *CollectionViewDiffableDataSource) String() string {
+	return rt.Description(objref.IDOf(cvdds))
 }
 
 // NewCollectionViewDiffableDataSource creates a new CollectionViewDiffableDataSource.
@@ -73,35 +73,24 @@ func NewCollectionViewDiffableDataSource() *CollectionViewDiffableDataSource {
 }
 
 // Snapshot wraps the corresponding Objective-C method.
-func (x *CollectionViewDiffableDataSource) Snapshot() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshot"))
+func (cvdds *CollectionViewDiffableDataSource) Snapshot() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cvdds), objc.RegisterName("snapshot"))
 	return obj.Wrap(_r)
 }
 
 // ApplySnapshotAnimatingDifferences wraps the corresponding Objective-C method.
-func (x *CollectionViewDiffableDataSource) ApplySnapshotAnimatingDifferences(snapshot obj.Object, animatingDifferences bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applySnapshot:animatingDifferences:"), objref.IDOf(snapshot), animatingDifferences)
+func (cvdds *CollectionViewDiffableDataSource) ApplySnapshotAnimatingDifferences(snapshot obj.Object, animatingDifferences bool) {
+	objc.Send[objc.ID](objref.IDOf(cvdds), objc.RegisterName("applySnapshot:animatingDifferences:"), objref.IDOf(snapshot), animatingDifferences)
 }
 
 // ItemIdentifierForIndexPath wraps the corresponding Objective-C method.
-func (x *CollectionViewDiffableDataSource) ItemIdentifierForIndexPath(indexPath obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemIdentifierForIndexPath:"), objref.IDOf(indexPath))
+func (cvdds *CollectionViewDiffableDataSource) ItemIdentifierForIndexPath(indexPath obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cvdds), objc.RegisterName("itemIdentifierForIndexPath:"), objref.IDOf(indexPath))
 	return obj.Wrap(_r)
 }
 
 // IndexPathForItemIdentifier wraps the corresponding Objective-C method.
-func (x *CollectionViewDiffableDataSource) IndexPathForItemIdentifier(identifier obj.Object) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPathForItemIdentifier:"), objref.IDOf(identifier))
+func (cvdds *CollectionViewDiffableDataSource) IndexPathForItemIdentifier(identifier obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cvdds), objc.RegisterName("indexPathForItemIdentifier:"), objref.IDOf(identifier))
 	return obj.Wrap(_r)
 }
-
-// CollectionViewDiffableDataSourceable is the interface implemented by [CollectionViewDiffableDataSource], for mocking and DI.
-type CollectionViewDiffableDataSourceable interface {
-	obj.Object
-	Snapshot() obj.Object
-	ApplySnapshotAnimatingDifferences(snapshot obj.Object, animatingDifferences bool)
-	ItemIdentifierForIndexPath(indexPath obj.Object) obj.Object
-	IndexPathForItemIdentifier(identifier obj.Object) obj.Object
-}
-
-var _ CollectionViewDiffableDataSourceable = (*CollectionViewDiffableDataSource)(nil)

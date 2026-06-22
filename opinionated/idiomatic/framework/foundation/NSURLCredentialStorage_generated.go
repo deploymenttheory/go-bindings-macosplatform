@@ -6,6 +6,7 @@ package foundation
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
@@ -47,24 +48,24 @@ func uRLCredentialStorageAdopt(id objc.ID) *URLCredentialStorage {
 }
 
 // Description returns the object's -description text.
-func (x *URLCredentialStorage) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ucs *URLCredentialStorage) Description() string {
+	return rt.Description(objref.IDOf(ucs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *URLCredentialStorage) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ucs *URLCredentialStorage) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ucs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *URLCredentialStorage) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ucs *URLCredentialStorage) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ucs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *URLCredentialStorage) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ucs *URLCredentialStorage) String() string {
+	return rt.Description(objref.IDOf(ucs))
 }
 
 // NewURLCredentialStorage creates a new URLCredentialStorage.
@@ -74,68 +75,68 @@ func NewURLCredentialStorage() *URLCredentialStorage {
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *URLCredentialStorage) WithScriptingProperties(scriptingProperties obj.Object) *URLCredentialStorage {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (ucs *URLCredentialStorage) WithScriptingProperties(scriptingProperties obj.Object) *URLCredentialStorage {
+	objc.Send[objc.ID](objref.IDOf(ucs), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return ucs
 }
 
 // CredentialsForProtectionSpace get a dictionary mapping usernames to credentials for the specified protection space.
-func (x *URLCredentialStorage) CredentialsForProtectionSpace(space *URLProtectionSpace) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialsForProtectionSpace:"), objref.IDOf(space))
+func (ucs *URLCredentialStorage) CredentialsForProtectionSpace(space *URLProtectionSpace) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ucs), objc.RegisterName("credentialsForProtectionSpace:"), objref.IDOf(space))
 	return obj.Wrap(_r)
 }
 
 // SetCredentialForProtectionSpace add a new credential to the set for the specified protection space or replace an existing one. Multiple credentials may be set for a given protection space, but each must have a distinct user. If a credential with the same user is already set for the protection space, the new one will replace it.
-func (x *URLCredentialStorage) SetCredentialForProtectionSpace(credential *URLCredential, space *URLProtectionSpace) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredential:forProtectionSpace:"), objref.IDOf(credential), objref.IDOf(space))
+func (ucs *URLCredentialStorage) SetCredentialForProtectionSpace(credential *URLCredential, space *URLProtectionSpace) {
+	objc.Send[objc.ID](objref.IDOf(ucs), objc.RegisterName("setCredential:forProtectionSpace:"), objref.IDOf(credential), objref.IDOf(space))
 }
 
 // RemoveCredentialForProtectionSpace remove the credential from the set for the specified protection space. The credential is removed from both persistent and temporary storage. A credential that has a persistence policy of NSURLCredentialPersistenceSynchronizable will fail. See removeCredential:forProtectionSpace:options.
-func (x *URLCredentialStorage) RemoveCredentialForProtectionSpace(credential *URLCredential, space *URLProtectionSpace) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeCredential:forProtectionSpace:"), objref.IDOf(credential), objref.IDOf(space))
+func (ucs *URLCredentialStorage) RemoveCredentialForProtectionSpace(credential *URLCredential, space *URLProtectionSpace) {
+	objc.Send[objc.ID](objref.IDOf(ucs), objc.RegisterName("removeCredential:forProtectionSpace:"), objref.IDOf(credential), objref.IDOf(space))
 }
 
 // RemoveCredentialForProtectionSpaceOptions remove the credential from the set for the specified protection space based on options. The credential is removed from both persistent and temporary storage.
-func (x *URLCredentialStorage) RemoveCredentialForProtectionSpaceOptions(credential *URLCredential, space *URLProtectionSpace, options obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeCredential:forProtectionSpace:options:"), objref.IDOf(credential), objref.IDOf(space), objref.IDOf(options))
+func (ucs *URLCredentialStorage) RemoveCredentialForProtectionSpaceOptions(credential *URLCredential, space *URLProtectionSpace, options obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ucs), objc.RegisterName("removeCredential:forProtectionSpace:options:"), objref.IDOf(credential), objref.IDOf(space), objref.IDOf(options))
 }
 
 // DefaultCredentialForProtectionSpace get the default credential for the specified protection space.
-func (x *URLCredentialStorage) DefaultCredentialForProtectionSpace(space *URLProtectionSpace) *URLCredential {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultCredentialForProtectionSpace:"), objref.IDOf(space))
+func (ucs *URLCredentialStorage) DefaultCredentialForProtectionSpace(space *URLProtectionSpace) *URLCredential {
+	_r := objc.Send[objc.ID](objref.IDOf(ucs), objc.RegisterName("defaultCredentialForProtectionSpace:"), objref.IDOf(space))
 	return URLCredentialFromID(_r)
 }
 
 // SetDefaultCredentialForProtectionSpace set the default credential for the specified protection space. If the credential is not yet in the set for the protection space, it will be added to it.
-func (x *URLCredentialStorage) SetDefaultCredentialForProtectionSpace(credential *URLCredential, space *URLProtectionSpace) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultCredential:forProtectionSpace:"), objref.IDOf(credential), objref.IDOf(space))
+func (ucs *URLCredentialStorage) SetDefaultCredentialForProtectionSpace(credential *URLCredential, space *URLProtectionSpace) {
+	objc.Send[objc.ID](objref.IDOf(ucs), objc.RegisterName("setDefaultCredential:forProtectionSpace:"), objref.IDOf(credential), objref.IDOf(space))
 }
 
 // AllCredentials get a dictionary mapping NSURLProtectionSpaces to dictionaries which map usernames to NSURLCredentials
-func (x *URLCredentialStorage) AllCredentials() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allCredentials"))
+func (ucs *URLCredentialStorage) AllCredentials() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ucs), objc.RegisterName("allCredentials"))
 	return obj.Wrap(_r)
 }
 
 // GetCredentialsForProtectionSpaceTaskCompletionHandler wraps the corresponding Objective-C method.
-func (x *URLCredentialStorage) GetCredentialsForProtectionSpaceTaskCompletionHandler(protectionSpace *URLProtectionSpace, task *URLSessionTask, completionHandler func(obj.Object)) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getCredentialsForProtectionSpace:task:completionHandler:"), objref.IDOf(protectionSpace), objref.IDOf(task), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completionHandler(obj.Wrap(_b0)) }))
+func (ucs *URLCredentialStorage) GetCredentialsForProtectionSpaceTaskCompletionHandler(protectionSpace *URLProtectionSpace, task *URLSessionTask, completionHandler func(obj.Object)) {
+	objc.Send[objc.ID](objref.IDOf(ucs), objc.RegisterName("getCredentialsForProtectionSpace:task:completionHandler:"), objref.IDOf(protectionSpace), objref.IDOf(task), objc.NewBlock(func(_ objc.Block, _b0 objc.ID) { completionHandler(obj.Wrap(_b0)) }))
 }
 
 // SetCredentialForProtectionSpaceTask wraps the corresponding Objective-C method.
-func (x *URLCredentialStorage) SetCredentialForProtectionSpaceTask(credential *URLCredential, protectionSpace *URLProtectionSpace, task *URLSessionTask) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCredential:forProtectionSpace:task:"), objref.IDOf(credential), objref.IDOf(protectionSpace), objref.IDOf(task))
+func (ucs *URLCredentialStorage) SetCredentialForProtectionSpaceTask(credential *URLCredential, protectionSpace *URLProtectionSpace, task *URLSessionTask) {
+	objc.Send[objc.ID](objref.IDOf(ucs), objc.RegisterName("setCredential:forProtectionSpace:task:"), objref.IDOf(credential), objref.IDOf(protectionSpace), objref.IDOf(task))
 }
 
 // RemoveCredentialForProtectionSpaceOptionsTask wraps the corresponding Objective-C method.
-func (x *URLCredentialStorage) RemoveCredentialForProtectionSpaceOptionsTask(credential *URLCredential, protectionSpace *URLProtectionSpace, options obj.Object, task *URLSessionTask) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeCredential:forProtectionSpace:options:task:"), objref.IDOf(credential), objref.IDOf(protectionSpace), objref.IDOf(options), objref.IDOf(task))
+func (ucs *URLCredentialStorage) RemoveCredentialForProtectionSpaceOptionsTask(credential *URLCredential, protectionSpace *URLProtectionSpace, options obj.Object, task *URLSessionTask) {
+	objc.Send[objc.ID](objref.IDOf(ucs), objc.RegisterName("removeCredential:forProtectionSpace:options:task:"), objref.IDOf(credential), objref.IDOf(protectionSpace), objref.IDOf(options), objref.IDOf(task))
 }
 
 // GetDefaultCredentialForProtectionSpaceTask wraps the corresponding Objective-C method.
 //
 // GetDefaultCredentialForProtectionSpaceTask blocks until the operation completes or ctx is cancelled.
-func (x *URLCredentialStorage) GetDefaultCredentialForProtectionSpaceTask(ctx context.Context, space *URLProtectionSpace, task *URLSessionTask) (result *URLCredential, err error) {
+func (ucs *URLCredentialStorage) GetDefaultCredentialForProtectionSpaceTask(ctx context.Context, space *URLProtectionSpace, task *URLSessionTask) (result *URLCredential, err error) {
 	type _result struct {
 		val *URLCredential
 		err error
@@ -146,7 +147,7 @@ func (x *URLCredentialStorage) GetDefaultCredentialForProtectionSpaceTask(ctx co
 		_o.val = URLCredentialFromID(_p0)
 		_ch <- _o
 	})
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getDefaultCredentialForProtectionSpace:task:completionHandler:"), objref.IDOf(space), objref.IDOf(task), _block)
+	objc.Send[objc.ID](objref.IDOf(ucs), objc.RegisterName("getDefaultCredentialForProtectionSpace:task:completionHandler:"), objref.IDOf(space), objref.IDOf(task), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -157,26 +158,6 @@ func (x *URLCredentialStorage) GetDefaultCredentialForProtectionSpaceTask(ctx co
 }
 
 // SetDefaultCredentialForProtectionSpaceTask wraps the corresponding Objective-C method.
-func (x *URLCredentialStorage) SetDefaultCredentialForProtectionSpaceTask(credential *URLCredential, protectionSpace *URLProtectionSpace, task *URLSessionTask) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultCredential:forProtectionSpace:task:"), objref.IDOf(credential), objref.IDOf(protectionSpace), objref.IDOf(task))
+func (ucs *URLCredentialStorage) SetDefaultCredentialForProtectionSpaceTask(credential *URLCredential, protectionSpace *URLProtectionSpace, task *URLSessionTask) {
+	objc.Send[objc.ID](objref.IDOf(ucs), objc.RegisterName("setDefaultCredential:forProtectionSpace:task:"), objref.IDOf(credential), objref.IDOf(protectionSpace), objref.IDOf(task))
 }
-
-// URLCredentialStorageable is the interface implemented by [URLCredentialStorage], for mocking and DI.
-type URLCredentialStorageable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *URLCredentialStorage
-	CredentialsForProtectionSpace(space *URLProtectionSpace) obj.Object
-	SetCredentialForProtectionSpace(credential *URLCredential, space *URLProtectionSpace)
-	RemoveCredentialForProtectionSpace(credential *URLCredential, space *URLProtectionSpace)
-	RemoveCredentialForProtectionSpaceOptions(credential *URLCredential, space *URLProtectionSpace, options obj.Object)
-	DefaultCredentialForProtectionSpace(space *URLProtectionSpace) *URLCredential
-	SetDefaultCredentialForProtectionSpace(credential *URLCredential, space *URLProtectionSpace)
-	AllCredentials() obj.Object
-	GetCredentialsForProtectionSpaceTaskCompletionHandler(protectionSpace *URLProtectionSpace, task *URLSessionTask, completionHandler func(obj.Object))
-	SetCredentialForProtectionSpaceTask(credential *URLCredential, protectionSpace *URLProtectionSpace, task *URLSessionTask)
-	RemoveCredentialForProtectionSpaceOptionsTask(credential *URLCredential, protectionSpace *URLProtectionSpace, options obj.Object, task *URLSessionTask)
-	GetDefaultCredentialForProtectionSpaceTask(ctx context.Context, space *URLProtectionSpace, task *URLSessionTask) (*URLCredential, error)
-	SetDefaultCredentialForProtectionSpaceTask(credential *URLCredential, protectionSpace *URLProtectionSpace, task *URLSessionTask)
-}
-
-var _ URLCredentialStorageable = (*URLCredentialStorage)(nil)

@@ -7,7 +7,6 @@ package mpsndarray
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,13 +48,6 @@ func NewArrayLUTDequantize() *ArrayLUTDequantize {
 	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayLUTDequantize")), objc.RegisterName("new"))
 	return arrayLUTDequantizeAdopt(_id)
 }
-
-// ArrayLUTDequantizeable is the interface implemented by [ArrayLUTDequantize], for mocking and DI.
-type ArrayLUTDequantizeable interface {
-	obj.Object
-}
-
-var _ ArrayLUTDequantizeable = (*ArrayLUTDequantize)(nil)
 
 var _ ArrayMultiaryKernelProvider = (*ArrayLUTDequantize)(nil)
 

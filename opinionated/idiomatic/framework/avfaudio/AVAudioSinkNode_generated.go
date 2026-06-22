@@ -7,7 +7,6 @@ package avfaudio
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewAudioSinkNode() *AudioSinkNode {
 	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioSinkNode")), objc.RegisterName("new"))
 	return audioSinkNodeAdopt(_id)
 }
-
-// AudioSinkNodeable is the interface implemented by [AudioSinkNode], for mocking and DI.
-type AudioSinkNodeable interface {
-	obj.Object
-}
-
-var _ AudioSinkNodeable = (*AudioSinkNode)(nil)
 
 var _ AudioNodeProvider = (*AudioSinkNode)(nil)

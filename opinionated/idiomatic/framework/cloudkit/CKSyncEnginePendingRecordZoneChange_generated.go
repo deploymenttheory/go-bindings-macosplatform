@@ -46,24 +46,24 @@ func syncEnginePendingRecordZoneChangeAdopt(id objc.ID) *SyncEnginePendingRecord
 }
 
 // Description returns the object's -description text.
-func (x *SyncEnginePendingRecordZoneChange) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (seprzc *SyncEnginePendingRecordZoneChange) Description() string {
+	return rt.Description(objref.IDOf(seprzc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SyncEnginePendingRecordZoneChange) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (seprzc *SyncEnginePendingRecordZoneChange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(seprzc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SyncEnginePendingRecordZoneChange) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (seprzc *SyncEnginePendingRecordZoneChange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(seprzc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SyncEnginePendingRecordZoneChange) String() string {
-	return rt.Description(objref.IDOf(x))
+func (seprzc *SyncEnginePendingRecordZoneChange) String() string {
+	return rt.Description(objref.IDOf(seprzc))
 }
 
 // NewSyncEnginePendingRecordZoneChangeWithRecordIDType creates a record zone change of the specified type for the given record.
@@ -73,23 +73,14 @@ func NewSyncEnginePendingRecordZoneChangeWithRecordIDType(recordID *RecordID, ty
 	return syncEnginePendingRecordZoneChangeAdopt(_id)
 }
 
-// RecordID the identifier of the modified record.
-func (x *SyncEnginePendingRecordZoneChange) RecordID() *RecordID {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordID"))
+// RecordID returns the identifier of the modified record.
+func (seprzc *SyncEnginePendingRecordZoneChange) RecordID() *RecordID {
+	_r := objc.Send[objc.ID](objref.IDOf(seprzc), objc.RegisterName("recordID"))
 	return RecordIDFromID(_r)
 }
 
-// Type the type of change to make.
-func (x *SyncEnginePendingRecordZoneChange) Type() SyncEnginePendingRecordZoneChangeType {
-	_r := objc.Send[SyncEnginePendingRecordZoneChangeType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns the type of change to make.
+func (seprzc *SyncEnginePendingRecordZoneChange) Type() SyncEnginePendingRecordZoneChangeType {
+	_r := objc.Send[SyncEnginePendingRecordZoneChangeType](objref.IDOf(seprzc), objc.RegisterName("type"))
 	return _r
 }
-
-// SyncEnginePendingRecordZoneChangeable is the interface implemented by [SyncEnginePendingRecordZoneChange], for mocking and DI.
-type SyncEnginePendingRecordZoneChangeable interface {
-	obj.Object
-	RecordID() *RecordID
-	Type() SyncEnginePendingRecordZoneChangeType
-}
-
-var _ SyncEnginePendingRecordZoneChangeable = (*SyncEnginePendingRecordZoneChange)(nil)

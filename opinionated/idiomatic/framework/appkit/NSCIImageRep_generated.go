@@ -54,74 +54,58 @@ func NewCIImageRepWithCIImage(image obj.Object) *CIImageRep {
 	return cIImageRepAdopt(_id)
 }
 
-// WithSize the size of the image representation, measured in points in the user coordinate space.
-func (x *CIImageRep) WithSize(size corefoundation.CGSize) *CIImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
-	return x
+// WithSize sets the size of the image representation, measured in points in the user coordinate space.
+func (cir *CIImageRep) WithSize(size corefoundation.CGSize) *CIImageRep {
+	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setSize:"), size)
+	return cir
 }
 
-// WithAlpha a Boolean value that indicates whether the image data has an alpha channel.
-func (x *CIImageRep) WithAlpha(alpha bool) *CIImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets a Boolean value that indicates whether the image data has an alpha channel.
+func (cir *CIImageRep) WithAlpha(alpha bool) *CIImageRep {
+	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setAlpha:"), alpha)
+	return cir
 }
 
-// WithOpaque a Boolean value that indicates whether the image is opaque.
-func (x *CIImageRep) WithOpaque(opaque bool) *CIImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOpaque:"), opaque)
-	return x
+// WithOpaque sets a Boolean value that indicates whether the image is opaque.
+func (cir *CIImageRep) WithOpaque(opaque bool) *CIImageRep {
+	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setOpaque:"), opaque)
+	return cir
 }
 
-// WithColorSpaceName the name of the color space used by the image data.
-func (x *CIImageRep) WithColorSpaceName(colorSpaceName obj.Object) *CIImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
-	return x
+// WithColorSpaceName sets the name of the color space used by the image data.
+func (cir *CIImageRep) WithColorSpaceName(colorSpaceName obj.Object) *CIImageRep {
+	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setColorSpaceName:"), objref.IDOf(colorSpaceName))
+	return cir
 }
 
-// WithBitsPerSample the number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
-func (x *CIImageRep) WithBitsPerSample(bitsPerSample int) *CIImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
-	return x
+// WithBitsPerSample sets the number of bits per sample in the object (if the object is a planar image, this property contains the number of bits per sample per plane).
+func (cir *CIImageRep) WithBitsPerSample(bitsPerSample int) *CIImageRep {
+	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setBitsPerSample:"), bitsPerSample)
+	return cir
 }
 
-// WithPixelsWide the width of the image, measured in pixels.
-func (x *CIImageRep) WithPixelsWide(pixelsWide int) *CIImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsWide:"), pixelsWide)
-	return x
+// WithPixelsWide sets the width of the image, measured in pixels.
+func (cir *CIImageRep) WithPixelsWide(pixelsWide int) *CIImageRep {
+	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setPixelsWide:"), pixelsWide)
+	return cir
 }
 
-// WithPixelsHigh the height of the image, measured in pixels.
-func (x *CIImageRep) WithPixelsHigh(pixelsHigh int) *CIImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
-	return x
+// WithPixelsHigh sets the height of the image, measured in pixels.
+func (cir *CIImageRep) WithPixelsHigh(pixelsHigh int) *CIImageRep {
+	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setPixelsHigh:"), pixelsHigh)
+	return cir
 }
 
-// WithLayoutDirection the layout direction for the image.
-func (x *CIImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *CIImageRep {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayoutDirection:"), layoutDirection)
-	return x
+// WithLayoutDirection sets the layout direction for the image.
+func (cir *CIImageRep) WithLayoutDirection(layoutDirection ImageLayoutDirection) *CIImageRep {
+	objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("setLayoutDirection:"), layoutDirection)
+	return cir
 }
 
 // CIImage wraps the corresponding Objective-C method.
-func (x *CIImageRep) CIImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CIImage"))
+func (cir *CIImageRep) CIImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cir), objc.RegisterName("CIImage"))
 	return obj.Wrap(_r)
 }
-
-// CIImageRepable is the interface implemented by [CIImageRep], for mocking and DI.
-type CIImageRepable interface {
-	obj.Object
-	WithSize(size corefoundation.CGSize) *CIImageRep
-	WithAlpha(alpha bool) *CIImageRep
-	WithOpaque(opaque bool) *CIImageRep
-	WithColorSpaceName(colorSpaceName obj.Object) *CIImageRep
-	WithBitsPerSample(bitsPerSample int) *CIImageRep
-	WithPixelsWide(pixelsWide int) *CIImageRep
-	WithPixelsHigh(pixelsHigh int) *CIImageRep
-	WithLayoutDirection(layoutDirection ImageLayoutDirection) *CIImageRep
-	CIImage() obj.Object
-}
-
-var _ CIImageRepable = (*CIImageRep)(nil)
 
 var _ ImageRepProvider = (*CIImageRep)(nil)

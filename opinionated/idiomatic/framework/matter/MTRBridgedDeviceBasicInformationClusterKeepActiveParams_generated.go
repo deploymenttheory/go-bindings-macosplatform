@@ -44,24 +44,24 @@ func mTRBridgedDeviceBasicInformationClusterKeepActiveParamsAdopt(id objc.ID) *M
 }
 
 // Description returns the object's -description text.
-func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) Description() string {
+	return rt.Description(objref.IDOf(mbdbickap))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mbdbickap), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mbdbickap), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) String() string {
+	return rt.Description(objref.IDOf(mbdbickap))
 }
 
 // NewMTRBridgedDeviceBasicInformationClusterKeepActiveParams creates a new MTRBridgedDeviceBasicInformationClusterKeepActiveParams.
@@ -71,88 +71,49 @@ func NewMTRBridgedDeviceBasicInformationClusterKeepActiveParams() *MTRBridgedDev
 }
 
 // WithStayActiveDuration sets the property and returns the receiver so calls can be chained.
-func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) WithStayActiveDuration(stayActiveDuration obj.Object) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStayActiveDuration:"), objref.IDOf(stayActiveDuration))
-	return x
+func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) WithStayActiveDuration(stayActiveDuration obj.Object) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams {
+	objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("setStayActiveDuration:"), objref.IDOf(stayActiveDuration))
+	return mbdbickap
 }
 
 // WithTimeoutMs sets the property and returns the receiver so calls can be chained.
-func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) WithTimeoutMs(timeoutMs obj.Object) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutMs:"), objref.IDOf(timeoutMs))
-	return x
+func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) WithTimeoutMs(timeoutMs obj.Object) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams {
+	objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("setTimeoutMs:"), objref.IDOf(timeoutMs))
+	return mbdbickap
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke).
-func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke).
+func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams {
+	objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mbdbickap
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command.
-func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command.
+func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams {
+	objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mbdbickap
 }
 
 // StayActiveDuration wraps the corresponding Objective-C method.
-func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) StayActiveDuration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stayActiveDuration"))
+func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) StayActiveDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("stayActiveDuration"))
 	return obj.Wrap(_r)
-}
-
-// SetStayActiveDuration wraps the corresponding Objective-C method.
-func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) SetStayActiveDuration(stayActiveDuration obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStayActiveDuration:"), objref.IDOf(stayActiveDuration))
 }
 
 // TimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) TimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeoutMs"))
+func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) TimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("timeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) SetTimeoutMs(timeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeoutMs:"), objref.IDOf(timeoutMs))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mbdbickap *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mbdbickap), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
 }
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRBridgedDeviceBasicInformationClusterKeepActiveParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-}
-
-// MTRBridgedDeviceBasicInformationClusterKeepActiveParamsable is the interface implemented by [MTRBridgedDeviceBasicInformationClusterKeepActiveParams], for mocking and DI.
-type MTRBridgedDeviceBasicInformationClusterKeepActiveParamsable interface {
-	obj.Object
-	WithStayActiveDuration(stayActiveDuration obj.Object) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams
-	WithTimeoutMs(timeoutMs obj.Object) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRBridgedDeviceBasicInformationClusterKeepActiveParams
-	StayActiveDuration() obj.Object
-	SetStayActiveDuration(stayActiveDuration obj.Object)
-	TimeoutMs() obj.Object
-	SetTimeoutMs(timeoutMs obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-}
-
-var _ MTRBridgedDeviceBasicInformationClusterKeepActiveParamsable = (*MTRBridgedDeviceBasicInformationClusterKeepActiveParams)(nil)

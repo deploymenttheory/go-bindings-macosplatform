@@ -7,7 +7,6 @@ package healthkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -49,13 +48,6 @@ func NewStateOfMindType() *StateOfMindType {
 	_id := objc.Send[objc.ID](objc.ID(_class("HKStateOfMindType")), objc.RegisterName("new"))
 	return stateOfMindTypeAdopt(_id)
 }
-
-// StateOfMindTypeable is the interface implemented by [StateOfMindType], for mocking and DI.
-type StateOfMindTypeable interface {
-	obj.Object
-}
-
-var _ StateOfMindTypeable = (*StateOfMindType)(nil)
 
 var _ SampleTypeProvider = (*StateOfMindType)(nil)
 

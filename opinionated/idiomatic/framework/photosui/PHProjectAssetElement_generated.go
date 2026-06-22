@@ -53,58 +53,45 @@ func NewProjectAssetElement() *ProjectAssetElement {
 	return projectAssetElementAdopt(_id)
 }
 
-// CloudAssetIdentifier cloud identifier for the underlying PHAsset. This identifier must be converted to a localIdentifier before fetching, but if archiving the identifier in project data the provided PHCloudIdentifier should always be used.
-func (x *ProjectAssetElement) CloudAssetIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cloudAssetIdentifier"))
+// CloudAssetIdentifier returns cloud identifier for the underlying PHAsset. This identifier must be converted to a localIdentifier before fetching, but if archiving the identifier in project data the provided PHCloudIdentifier should always be used.
+func (pae *ProjectAssetElement) CloudAssetIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pae), objc.RegisterName("cloudAssetIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// Annotation if a user has explicitly annotated an asset (e.g., caption) that value will be provided in this property.
-func (x *ProjectAssetElement) Annotation() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("annotation"))
+// Annotation returns if a user has explicitly annotated an asset (e.g., caption) that value will be provided in this property.
+func (pae *ProjectAssetElement) Annotation() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pae), objc.RegisterName("annotation"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// CropRect if the asset was presented to the user in a cropped manner in Photos either automatically or through user manipulation (pan & zoom) before the creation of the project, the visible image area shown to the user will be provided as a crop rect. As a fallback, Photos may suggest a general "safe crop" based on image content through this property. The rect is in unit coordinates with an upper left origin. Default value: {(0.0, 0.0), (1.0,1.0)}
-func (x *ProjectAssetElement) CropRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("cropRect"))
+// CropRect returns if the asset was presented to the user in a cropped manner in Photos either automatically or through user manipulation (pan & zoom) before the creation of the project, the visible image area shown to the user will be provided as a crop rect. As a fallback, Photos may suggest a general "safe crop" based on image content through this property. The rect is in unit coordinates with an upper left origin. Default value: {(0.0, 0.0), (1.0,1.0)}
+func (pae *ProjectAssetElement) CropRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(pae), objc.RegisterName("cropRect"))
 	return _r
 }
 
-// RegionsOfInterest array of regions of interest (faces, objects, etc.) in the assets. Note: Photos will filter out features of an asset that it doesn't believe to be meaningful in the context of the user's full library. For example, random faces in a crowd.
+// RegionsOfInterest returns array of regions of interest (faces, objects, etc.) in the assets. Note: Photos will filter out features of an asset that it doesn't believe to be meaningful in the context of the user's full library. For example, random faces in a crowd.
 //
 // RegionsOfInterest returns the collection as a Go slice.
-func (x *ProjectAssetElement) RegionsOfInterest() []*ProjectRegionOfInterest {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("regionsOfInterest"))
+func (pae *ProjectAssetElement) RegionsOfInterest() []*ProjectRegionOfInterest {
+	_arr := objc.Send[objc.ID](objref.IDOf(pae), objc.RegisterName("regionsOfInterest"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ProjectRegionOfInterest { return ProjectRegionOfInterestFromID(_id) })
 }
 
-// HorizontallyFlipped the following properties are only used when the user creates a new project from an existing Apple Print Product. YES if the asset was presented horizontally flipped in the originating project.
-func (x *ProjectAssetElement) HorizontallyFlipped() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("horizontallyFlipped"))
+// HorizontallyFlipped reports whether the following properties are only used when the user creates a new project from an existing Apple Print Product. true if the asset was presented horizontally flipped in the originating project.
+func (pae *ProjectAssetElement) HorizontallyFlipped() bool {
+	_r := objc.Send[bool](objref.IDOf(pae), objc.RegisterName("horizontallyFlipped"))
 	return _r
 }
 
-// VerticallyFlipped YES if the asset was presented vertically flipped in the originating project.
-func (x *ProjectAssetElement) VerticallyFlipped() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("verticallyFlipped"))
+// VerticallyFlipped reports whether the asset was presented vertically flipped in the originating project.
+func (pae *ProjectAssetElement) VerticallyFlipped() bool {
+	_r := objc.Send[bool](objref.IDOf(pae), objc.RegisterName("verticallyFlipped"))
 	return _r
 }
-
-// ProjectAssetElementable is the interface implemented by [ProjectAssetElement], for mocking and DI.
-type ProjectAssetElementable interface {
-	obj.Object
-	CloudAssetIdentifier() obj.Object
-	Annotation() string
-	CropRect() corefoundation.CGRect
-	RegionsOfInterest() []*ProjectRegionOfInterest
-	HorizontallyFlipped() bool
-	VerticallyFlipped() bool
-}
-
-var _ ProjectAssetElementable = (*ProjectAssetElement)(nil)
 
 var _ ProjectElementProvider = (*ProjectAssetElement)(nil)

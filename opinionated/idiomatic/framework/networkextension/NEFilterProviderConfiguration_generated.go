@@ -46,24 +46,24 @@ func nEFilterProviderConfigurationAdopt(id objc.ID) *NEFilterProviderConfigurati
 }
 
 // Description returns the object's -description text.
-func (x *NEFilterProviderConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nfpc *NEFilterProviderConfiguration) Description() string {
+	return rt.Description(objref.IDOf(nfpc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEFilterProviderConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nfpc *NEFilterProviderConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nfpc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEFilterProviderConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nfpc *NEFilterProviderConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nfpc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEFilterProviderConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nfpc *NEFilterProviderConfiguration) String() string {
+	return rt.Description(objref.IDOf(nfpc))
 }
 
 // NewNEFilterProviderConfiguration creates a new NEFilterProviderConfiguration.
@@ -72,244 +72,149 @@ func NewNEFilterProviderConfiguration() *NEFilterProviderConfiguration {
 	return nEFilterProviderConfigurationAdopt(_id)
 }
 
-// WithFilterBrowsers a Boolean value that indicates that the system applies the filter to flows of network data originated from WebKit browser objects.
-func (x *NEFilterProviderConfiguration) WithFilterBrowsers(filterBrowsers bool) *NEFilterProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterBrowsers:"), filterBrowsers)
-	return x
+// WithFilterBrowsers sets a Boolean value that indicates that the system applies the filter to flows of network data originated from WebKit browser objects.
+func (nfpc *NEFilterProviderConfiguration) WithFilterBrowsers(filterBrowsers bool) *NEFilterProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("setFilterBrowsers:"), filterBrowsers)
+	return nfpc
 }
 
-// WithFilterSockets a Boolean value that indicates that the system applies the filter to flows of network data originated from sockets.
-func (x *NEFilterProviderConfiguration) WithFilterSockets(filterSockets bool) *NEFilterProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterSockets:"), filterSockets)
-	return x
+// WithFilterSockets sets a Boolean value that indicates that the system applies the filter to flows of network data originated from sockets.
+func (nfpc *NEFilterProviderConfiguration) WithFilterSockets(filterSockets bool) *NEFilterProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("setFilterSockets:"), filterSockets)
+	return nfpc
 }
 
-// WithFilterPackets a Boolean value that indicates that the system applies the filter to packets of network data.
-func (x *NEFilterProviderConfiguration) WithFilterPackets(filterPackets bool) *NEFilterProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterPackets:"), filterPackets)
-	return x
+// WithFilterPackets sets a Boolean value that indicates that the system applies the filter to packets of network data.
+func (nfpc *NEFilterProviderConfiguration) WithFilterPackets(filterPackets bool) *NEFilterProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("setFilterPackets:"), filterPackets)
+	return nfpc
 }
 
-// WithVendorConfiguration a dictionary of provider-specific configuration settings.
-func (x *NEFilterProviderConfiguration) WithVendorConfiguration(vendorConfiguration obj.Object) *NEFilterProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorConfiguration:"), objref.IDOf(vendorConfiguration))
-	return x
+// WithVendorConfiguration sets a dictionary of provider-specific configuration settings.
+func (nfpc *NEFilterProviderConfiguration) WithVendorConfiguration(vendorConfiguration obj.Object) *NEFilterProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("setVendorConfiguration:"), objref.IDOf(vendorConfiguration))
+	return nfpc
 }
 
-// WithServerAddress the address of a server that the Filter Control Provider may contact for rules and other configuration information.
-func (x *NEFilterProviderConfiguration) WithServerAddress(serverAddress string) *NEFilterProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerAddress:"), purego.NSString(serverAddress))
-	return x
+// WithServerAddress sets the address of a server that the Filter Control Provider may contact for rules and other configuration information.
+func (nfpc *NEFilterProviderConfiguration) WithServerAddress(serverAddress string) *NEFilterProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("setServerAddress:"), purego.NSString(serverAddress))
+	return nfpc
 }
 
-// WithUsername a string that identifies the user.
-func (x *NEFilterProviderConfiguration) WithUsername(username string) *NEFilterProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsername:"), purego.NSString(username))
-	return x
+// WithUsername sets a string that identifies the user.
+func (nfpc *NEFilterProviderConfiguration) WithUsername(username string) *NEFilterProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("setUsername:"), purego.NSString(username))
+	return nfpc
 }
 
-// WithOrganization a string that identifies the organization that administers the filter.
-func (x *NEFilterProviderConfiguration) WithOrganization(organization string) *NEFilterProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrganization:"), purego.NSString(organization))
-	return x
+// WithOrganization sets a string that identifies the organization that administers the filter.
+func (nfpc *NEFilterProviderConfiguration) WithOrganization(organization string) *NEFilterProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("setOrganization:"), purego.NSString(organization))
+	return nfpc
 }
 
-// WithPasswordReference a persistent reference to a keychain item containing a password associated with the filter.
-func (x *NEFilterProviderConfiguration) WithPasswordReference(passwordReference obj.Object) *NEFilterProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPasswordReference:"), objref.IDOf(passwordReference))
-	return x
+// WithPasswordReference sets a persistent reference to a keychain item containing a password associated with the filter.
+func (nfpc *NEFilterProviderConfiguration) WithPasswordReference(passwordReference obj.Object) *NEFilterProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("setPasswordReference:"), objref.IDOf(passwordReference))
+	return nfpc
 }
 
-// WithIdentityReference a persistent reference to a keychain item containing a certificate and private key associated with the filter.
-func (x *NEFilterProviderConfiguration) WithIdentityReference(identityReference obj.Object) *NEFilterProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
-	return x
+// WithIdentityReference sets a persistent reference to a keychain item containing a certificate and private key associated with the filter.
+func (nfpc *NEFilterProviderConfiguration) WithIdentityReference(identityReference obj.Object) *NEFilterProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
+	return nfpc
 }
 
-// WithFilterDataProviderBundleIdentifier the bundle identifier of the filter data provider system extension.
-func (x *NEFilterProviderConfiguration) WithFilterDataProviderBundleIdentifier(filterDataProviderBundleIdentifier string) *NEFilterProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterDataProviderBundleIdentifier:"), purego.NSString(filterDataProviderBundleIdentifier))
-	return x
+// WithFilterDataProviderBundleIdentifier sets the bundle identifier of the filter data provider system extension.
+func (nfpc *NEFilterProviderConfiguration) WithFilterDataProviderBundleIdentifier(filterDataProviderBundleIdentifier string) *NEFilterProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("setFilterDataProviderBundleIdentifier:"), purego.NSString(filterDataProviderBundleIdentifier))
+	return nfpc
 }
 
-// WithFilterPacketProviderBundleIdentifier the bundle identifier of the filter packet provider system extension.
-func (x *NEFilterProviderConfiguration) WithFilterPacketProviderBundleIdentifier(filterPacketProviderBundleIdentifier string) *NEFilterProviderConfiguration {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterPacketProviderBundleIdentifier:"), purego.NSString(filterPacketProviderBundleIdentifier))
-	return x
+// WithFilterPacketProviderBundleIdentifier sets the bundle identifier of the filter packet provider system extension.
+func (nfpc *NEFilterProviderConfiguration) WithFilterPacketProviderBundleIdentifier(filterPacketProviderBundleIdentifier string) *NEFilterProviderConfiguration {
+	objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("setFilterPacketProviderBundleIdentifier:"), purego.NSString(filterPacketProviderBundleIdentifier))
+	return nfpc
 }
 
-// FilterBrowsers if YES, the filter plugin will be allowed to filter browser traffic. If NO, the filter plugin will not see any browser flows. Defaults to NO. At least one of filterBrowsers and filterSockets should be set to YES to make the filter take effect.
-func (x *NEFilterProviderConfiguration) FilterBrowsers() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("filterBrowsers"))
+// FilterBrowsers reports whether if true, the filter plugin will be allowed to filter browser traffic. If false, the filter plugin will not see any browser flows. Defaults to false. At least one of filterBrowsers and filterSockets should be set to true to make the filter take effect.
+func (nfpc *NEFilterProviderConfiguration) FilterBrowsers() bool {
+	_r := objc.Send[bool](objref.IDOf(nfpc), objc.RegisterName("filterBrowsers"))
 	return _r
 }
 
-// SetFilterBrowsers wraps the corresponding Objective-C method.
-func (x *NEFilterProviderConfiguration) SetFilterBrowsers(filterBrowsers bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterBrowsers:"), filterBrowsers)
-}
-
-// FilterSockets if YES, the filter plugin will be allowed to filter socket traffic. If NO, the filter plugin will not see any socket flows. Defaults to NO. At least one of filterBrowsers and filterSockets should be set to YES to make the filter take effect.
-func (x *NEFilterProviderConfiguration) FilterSockets() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("filterSockets"))
+// FilterSockets reports whether if true, the filter plugin will be allowed to filter socket traffic. If false, the filter plugin will not see any socket flows. Defaults to false. At least one of filterBrowsers and filterSockets should be set to true to make the filter take effect.
+func (nfpc *NEFilterProviderConfiguration) FilterSockets() bool {
+	_r := objc.Send[bool](objref.IDOf(nfpc), objc.RegisterName("filterSockets"))
 	return _r
 }
 
-// SetFilterSockets wraps the corresponding Objective-C method.
-func (x *NEFilterProviderConfiguration) SetFilterSockets(filterSockets bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterSockets:"), filterSockets)
-}
-
-// FilterPackets if YES, a NEFilterPacketProvider will be instantiated and will be allowed to filter packets.
-func (x *NEFilterProviderConfiguration) FilterPackets() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("filterPackets"))
+// FilterPackets reports whether if true, a NEFilterPacketProvider will be instantiated and will be allowed to filter packets.
+func (nfpc *NEFilterProviderConfiguration) FilterPackets() bool {
+	_r := objc.Send[bool](objref.IDOf(nfpc), objc.RegisterName("filterPackets"))
 	return _r
 }
 
-// SetFilterPackets wraps the corresponding Objective-C method.
-func (x *NEFilterProviderConfiguration) SetFilterPackets(filterPackets bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterPackets:"), filterPackets)
-}
-
-// VendorConfiguration an optional dictionary of plugin-specific keys to be passed to the plugin.
-func (x *NEFilterProviderConfiguration) VendorConfiguration() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("vendorConfiguration"))
+// VendorConfiguration returns an optional dictionary of plugin-specific keys to be passed to the plugin.
+func (nfpc *NEFilterProviderConfiguration) VendorConfiguration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("vendorConfiguration"))
 	return obj.Wrap(_r)
 }
 
-// SetVendorConfiguration wraps the corresponding Objective-C method.
-func (x *NEFilterProviderConfiguration) SetVendorConfiguration(vendorConfiguration obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVendorConfiguration:"), objref.IDOf(vendorConfiguration))
-}
-
-// ServerAddress the optional address of the server used to support the filter.
-func (x *NEFilterProviderConfiguration) ServerAddress() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverAddress"))
+// ServerAddress returns the optional address of the server used to support the filter.
+func (nfpc *NEFilterProviderConfiguration) ServerAddress() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("serverAddress"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetServerAddress wraps the corresponding Objective-C method.
-func (x *NEFilterProviderConfiguration) SetServerAddress(serverAddress string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerAddress:"), purego.NSString(serverAddress))
-}
-
-// Username the optional username associated with the filter.
-func (x *NEFilterProviderConfiguration) Username() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("username"))
+// Username returns the optional username associated with the filter.
+func (nfpc *NEFilterProviderConfiguration) Username() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("username"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetUsername wraps the corresponding Objective-C method.
-func (x *NEFilterProviderConfiguration) SetUsername(username string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsername:"), purego.NSString(username))
-}
-
-// Organization the optional organization associated with the filter.
-func (x *NEFilterProviderConfiguration) Organization() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("organization"))
+// Organization returns the optional organization associated with the filter.
+func (nfpc *NEFilterProviderConfiguration) Organization() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("organization"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetOrganization wraps the corresponding Objective-C method.
-func (x *NEFilterProviderConfiguration) SetOrganization(organization string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrganization:"), purego.NSString(organization))
-}
-
-// PasswordReference the optional password keychain reference associated with the filter.
-func (x *NEFilterProviderConfiguration) PasswordReference() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passwordReference"))
+// PasswordReference returns the optional password keychain reference associated with the filter.
+func (nfpc *NEFilterProviderConfiguration) PasswordReference() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("passwordReference"))
 	return obj.Wrap(_r)
 }
 
-// SetPasswordReference wraps the corresponding Objective-C method.
-func (x *NEFilterProviderConfiguration) SetPasswordReference(passwordReference obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPasswordReference:"), objref.IDOf(passwordReference))
-}
-
-// IdentityReference the optional certificate identity keychain reference associated with the filter.
-func (x *NEFilterProviderConfiguration) IdentityReference() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identityReference"))
+// IdentityReference returns the optional certificate identity keychain reference associated with the filter.
+func (nfpc *NEFilterProviderConfiguration) IdentityReference() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("identityReference"))
 	return obj.Wrap(_r)
 }
 
-// SetIdentityReference wraps the corresponding Objective-C method.
-func (x *NEFilterProviderConfiguration) SetIdentityReference(identityReference obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentityReference:"), objref.IDOf(identityReference))
-}
-
-// FilterDataProviderBundleIdentifier a string containing the bundle identifier of the NEFilterDataProvider app extension or system extension. If this property is nil, then the bundle identifier of the NEFilterDataProvider extension in the calling app's bundle is used, and if the calling app's bundle contains more than one NEFilterDataProvider extension then which one will be used is undefined.
-func (x *NEFilterProviderConfiguration) FilterDataProviderBundleIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterDataProviderBundleIdentifier"))
+// FilterDataProviderBundleIdentifier returns a string containing the bundle identifier of the NEFilterDataProvider app extension or system extension. If this property is nil, then the bundle identifier of the NEFilterDataProvider extension in the calling app's bundle is used, and if the calling app's bundle contains more than one NEFilterDataProvider extension then which one will be used is undefined.
+func (nfpc *NEFilterProviderConfiguration) FilterDataProviderBundleIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("filterDataProviderBundleIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetFilterDataProviderBundleIdentifier wraps the corresponding Objective-C method.
-func (x *NEFilterProviderConfiguration) SetFilterDataProviderBundleIdentifier(filterDataProviderBundleIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterDataProviderBundleIdentifier:"), purego.NSString(filterDataProviderBundleIdentifier))
-}
-
-// FilterPacketProviderBundleIdentifier a string containing the bundle identifier of the NEFilterPacketProvider app extension or system extension. If this property is nil, then the bundle identifier of the NEFilterPacketProvider extension in the calling app's bundle is used, and if the calling app's bundle contains more than one NEFilterPacketProvider extension then which one will be used is undefined.
-func (x *NEFilterProviderConfiguration) FilterPacketProviderBundleIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filterPacketProviderBundleIdentifier"))
+// FilterPacketProviderBundleIdentifier returns a string containing the bundle identifier of the NEFilterPacketProvider app extension or system extension. If this property is nil, then the bundle identifier of the NEFilterPacketProvider extension in the calling app's bundle is used, and if the calling app's bundle contains more than one NEFilterPacketProvider extension then which one will be used is undefined.
+func (nfpc *NEFilterProviderConfiguration) FilterPacketProviderBundleIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(nfpc), objc.RegisterName("filterPacketProviderBundleIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetFilterPacketProviderBundleIdentifier wraps the corresponding Objective-C method.
-func (x *NEFilterProviderConfiguration) SetFilterPacketProviderBundleIdentifier(filterPacketProviderBundleIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterPacketProviderBundleIdentifier:"), purego.NSString(filterPacketProviderBundleIdentifier))
-}
-
-// NEFilterProviderConfigurationable is the interface implemented by [NEFilterProviderConfiguration], for mocking and DI.
-type NEFilterProviderConfigurationable interface {
-	obj.Object
-	WithFilterBrowsers(filterBrowsers bool) *NEFilterProviderConfiguration
-	WithFilterSockets(filterSockets bool) *NEFilterProviderConfiguration
-	WithFilterPackets(filterPackets bool) *NEFilterProviderConfiguration
-	WithVendorConfiguration(vendorConfiguration obj.Object) *NEFilterProviderConfiguration
-	WithServerAddress(serverAddress string) *NEFilterProviderConfiguration
-	WithUsername(username string) *NEFilterProviderConfiguration
-	WithOrganization(organization string) *NEFilterProviderConfiguration
-	WithPasswordReference(passwordReference obj.Object) *NEFilterProviderConfiguration
-	WithIdentityReference(identityReference obj.Object) *NEFilterProviderConfiguration
-	WithFilterDataProviderBundleIdentifier(filterDataProviderBundleIdentifier string) *NEFilterProviderConfiguration
-	WithFilterPacketProviderBundleIdentifier(filterPacketProviderBundleIdentifier string) *NEFilterProviderConfiguration
-	FilterBrowsers() bool
-	SetFilterBrowsers(filterBrowsers bool)
-	FilterSockets() bool
-	SetFilterSockets(filterSockets bool)
-	FilterPackets() bool
-	SetFilterPackets(filterPackets bool)
-	VendorConfiguration() obj.Object
-	SetVendorConfiguration(vendorConfiguration obj.Object)
-	ServerAddress() string
-	SetServerAddress(serverAddress string)
-	Username() string
-	SetUsername(username string)
-	Organization() string
-	SetOrganization(organization string)
-	PasswordReference() obj.Object
-	SetPasswordReference(passwordReference obj.Object)
-	IdentityReference() obj.Object
-	SetIdentityReference(identityReference obj.Object)
-	FilterDataProviderBundleIdentifier() string
-	SetFilterDataProviderBundleIdentifier(filterDataProviderBundleIdentifier string)
-	FilterPacketProviderBundleIdentifier() string
-	SetFilterPacketProviderBundleIdentifier(filterPacketProviderBundleIdentifier string)
-}
-
-var _ NEFilterProviderConfigurationable = (*NEFilterProviderConfiguration)(nil)

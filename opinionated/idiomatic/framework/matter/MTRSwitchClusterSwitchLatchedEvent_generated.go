@@ -44,24 +44,24 @@ func mTRSwitchClusterSwitchLatchedEventAdopt(id objc.ID) *MTRSwitchClusterSwitch
 }
 
 // Description returns the object's -description text.
-func (x *MTRSwitchClusterSwitchLatchedEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mscsle *MTRSwitchClusterSwitchLatchedEvent) Description() string {
+	return rt.Description(objref.IDOf(mscsle))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRSwitchClusterSwitchLatchedEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mscsle *MTRSwitchClusterSwitchLatchedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mscsle), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRSwitchClusterSwitchLatchedEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mscsle *MTRSwitchClusterSwitchLatchedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mscsle), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRSwitchClusterSwitchLatchedEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mscsle *MTRSwitchClusterSwitchLatchedEvent) String() string {
+	return rt.Description(objref.IDOf(mscsle))
 }
 
 // NewMTRSwitchClusterSwitchLatchedEvent creates a new MTRSwitchClusterSwitchLatchedEvent.
@@ -71,28 +71,13 @@ func NewMTRSwitchClusterSwitchLatchedEvent() *MTRSwitchClusterSwitchLatchedEvent
 }
 
 // WithNewPosition sets the property and returns the receiver so calls can be chained.
-func (x *MTRSwitchClusterSwitchLatchedEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterSwitchLatchedEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
-	return x
+func (mscsle *MTRSwitchClusterSwitchLatchedEvent) WithNewPosition(newPosition obj.Object) *MTRSwitchClusterSwitchLatchedEvent {
+	objc.Send[objc.ID](objref.IDOf(mscsle), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
+	return mscsle
 }
 
 // GetNewPosition wraps the corresponding Objective-C method.
-func (x *MTRSwitchClusterSwitchLatchedEvent) GetNewPosition() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewPosition"))
+func (mscsle *MTRSwitchClusterSwitchLatchedEvent) GetNewPosition() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mscsle), objc.RegisterName("getNewPosition"))
 	return obj.Wrap(_r)
 }
-
-// SetNewPosition wraps the corresponding Objective-C method.
-func (x *MTRSwitchClusterSwitchLatchedEvent) SetNewPosition(newPosition obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewPosition:"), objref.IDOf(newPosition))
-}
-
-// MTRSwitchClusterSwitchLatchedEventable is the interface implemented by [MTRSwitchClusterSwitchLatchedEvent], for mocking and DI.
-type MTRSwitchClusterSwitchLatchedEventable interface {
-	obj.Object
-	WithNewPosition(newPosition obj.Object) *MTRSwitchClusterSwitchLatchedEvent
-	GetNewPosition() obj.Object
-	SetNewPosition(newPosition obj.Object)
-}
-
-var _ MTRSwitchClusterSwitchLatchedEventable = (*MTRSwitchClusterSwitchLatchedEvent)(nil)

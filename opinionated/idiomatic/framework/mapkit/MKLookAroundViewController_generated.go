@@ -46,24 +46,24 @@ func lookAroundViewControllerAdopt(id objc.ID) *LookAroundViewController {
 }
 
 // Description returns the object's -description text.
-func (x *LookAroundViewController) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (lavc *LookAroundViewController) Description() string {
+	return rt.Description(objref.IDOf(lavc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LookAroundViewController) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (lavc *LookAroundViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(lavc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LookAroundViewController) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (lavc *LookAroundViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(lavc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LookAroundViewController) String() string {
-	return rt.Description(objref.IDOf(x))
+func (lavc *LookAroundViewController) String() string {
+	return rt.Description(objref.IDOf(lavc))
 }
 
 // NewLookAroundViewControllerWithScene creates a new LookAround view controller with the specified scene.
@@ -87,109 +87,62 @@ func NewLookAroundViewControllerWithCoder(coder obj.Object) *LookAroundViewContr
 	return lookAroundViewControllerAdopt(_id)
 }
 
-// WithScene the LookAround scene.
-func (x *LookAroundViewController) WithScene(scene *LookAroundScene) *LookAroundViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
-	return x
+// WithScene sets the LookAround scene.
+func (lavc *LookAroundViewController) WithScene(scene *LookAroundScene) *LookAroundViewController {
+	objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("setScene:"), objref.IDOf(scene))
+	return lavc
 }
 
-// WithNavigationEnabled a Boolean value that indicates whether the map’s navigation controls are visible.
-func (x *LookAroundViewController) WithNavigationEnabled(navigationEnabled bool) *LookAroundViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNavigationEnabled:"), navigationEnabled)
-	return x
+// WithNavigationEnabled sets a Boolean value that indicates whether the map’s navigation controls are visible.
+func (lavc *LookAroundViewController) WithNavigationEnabled(navigationEnabled bool) *LookAroundViewController {
+	objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("setNavigationEnabled:"), navigationEnabled)
+	return lavc
 }
 
-// WithShowsRoadLabels a Boolean value that indicates whether the map display road labels.
-func (x *LookAroundViewController) WithShowsRoadLabels(showsRoadLabels bool) *LookAroundViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsRoadLabels:"), showsRoadLabels)
-	return x
+// WithShowsRoadLabels sets a Boolean value that indicates whether the map display road labels.
+func (lavc *LookAroundViewController) WithShowsRoadLabels(showsRoadLabels bool) *LookAroundViewController {
+	objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("setShowsRoadLabels:"), showsRoadLabels)
+	return lavc
 }
 
-// WithPointOfInterestFilter the filter used to determine the points of interest shown on the map.
-func (x *LookAroundViewController) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
-	return x
+// WithPointOfInterestFilter sets the filter used to determine the points of interest shown on the map.
+func (lavc *LookAroundViewController) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundViewController {
+	objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
+	return lavc
 }
 
-// WithBadgePosition a value that indicates the badge’s position on the LookAround view.
-func (x *LookAroundViewController) WithBadgePosition(badgePosition LookAroundBadgePosition) *LookAroundViewController {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadgePosition:"), badgePosition)
-	return x
+// WithBadgePosition sets a value that indicates the badge’s position on the LookAround view.
+func (lavc *LookAroundViewController) WithBadgePosition(badgePosition LookAroundBadgePosition) *LookAroundViewController {
+	objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("setBadgePosition:"), badgePosition)
+	return lavc
 }
 
 // Scene wraps the corresponding Objective-C method.
-func (x *LookAroundViewController) Scene() *LookAroundScene {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scene"))
+func (lavc *LookAroundViewController) Scene() *LookAroundScene {
+	_r := objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("scene"))
 	return LookAroundSceneFromID(_r)
 }
 
-// SetScene wraps the corresponding Objective-C method.
-func (x *LookAroundViewController) SetScene(scene *LookAroundScene) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScene:"), objref.IDOf(scene))
-}
-
 // IsNavigationEnabled wraps the corresponding Objective-C method.
-func (x *LookAroundViewController) IsNavigationEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNavigationEnabled"))
+func (lavc *LookAroundViewController) IsNavigationEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(lavc), objc.RegisterName("isNavigationEnabled"))
 	return _r
-}
-
-// SetNavigationEnabled wraps the corresponding Objective-C method.
-func (x *LookAroundViewController) SetNavigationEnabled(navigationEnabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNavigationEnabled:"), navigationEnabled)
 }
 
 // ShowsRoadLabels wraps the corresponding Objective-C method.
-func (x *LookAroundViewController) ShowsRoadLabels() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("showsRoadLabels"))
+func (lavc *LookAroundViewController) ShowsRoadLabels() bool {
+	_r := objc.Send[bool](objref.IDOf(lavc), objc.RegisterName("showsRoadLabels"))
 	return _r
-}
-
-// SetShowsRoadLabels wraps the corresponding Objective-C method.
-func (x *LookAroundViewController) SetShowsRoadLabels(showsRoadLabels bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsRoadLabels:"), showsRoadLabels)
 }
 
 // PointOfInterestFilter wraps the corresponding Objective-C method.
-func (x *LookAroundViewController) PointOfInterestFilter() *PointOfInterestFilter {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestFilter"))
+func (lavc *LookAroundViewController) PointOfInterestFilter() *PointOfInterestFilter {
+	_r := objc.Send[objc.ID](objref.IDOf(lavc), objc.RegisterName("pointOfInterestFilter"))
 	return PointOfInterestFilterFromID(_r)
 }
 
-// SetPointOfInterestFilter wraps the corresponding Objective-C method.
-func (x *LookAroundViewController) SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
-}
-
 // BadgePosition wraps the corresponding Objective-C method.
-func (x *LookAroundViewController) BadgePosition() LookAroundBadgePosition {
-	_r := objc.Send[LookAroundBadgePosition](objref.IDOf(x), objc.RegisterName("badgePosition"))
+func (lavc *LookAroundViewController) BadgePosition() LookAroundBadgePosition {
+	_r := objc.Send[LookAroundBadgePosition](objref.IDOf(lavc), objc.RegisterName("badgePosition"))
 	return _r
 }
-
-// SetBadgePosition wraps the corresponding Objective-C method.
-func (x *LookAroundViewController) SetBadgePosition(badgePosition LookAroundBadgePosition) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadgePosition:"), badgePosition)
-}
-
-// LookAroundViewControllerable is the interface implemented by [LookAroundViewController], for mocking and DI.
-type LookAroundViewControllerable interface {
-	obj.Object
-	WithScene(scene *LookAroundScene) *LookAroundViewController
-	WithNavigationEnabled(navigationEnabled bool) *LookAroundViewController
-	WithShowsRoadLabels(showsRoadLabels bool) *LookAroundViewController
-	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LookAroundViewController
-	WithBadgePosition(badgePosition LookAroundBadgePosition) *LookAroundViewController
-	Scene() *LookAroundScene
-	SetScene(scene *LookAroundScene)
-	IsNavigationEnabled() bool
-	SetNavigationEnabled(navigationEnabled bool)
-	ShowsRoadLabels() bool
-	SetShowsRoadLabels(showsRoadLabels bool)
-	PointOfInterestFilter() *PointOfInterestFilter
-	SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter)
-	BadgePosition() LookAroundBadgePosition
-	SetBadgePosition(badgePosition LookAroundBadgePosition)
-}
-
-var _ LookAroundViewControllerable = (*LookAroundViewController)(nil)

@@ -44,24 +44,24 @@ func mTRPumpConfigurationAndControlClusterPowerMissingPhaseEventAdopt(id objc.ID
 }
 
 // Description returns the object's -description text.
-func (x *MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccpmpe *MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent) Description() string {
+	return rt.Description(objref.IDOf(mpcaccpmpe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpcaccpmpe *MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpcaccpmpe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpcaccpmpe *MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpcaccpmpe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccpmpe *MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent) String() string {
+	return rt.Description(objref.IDOf(mpcaccpmpe))
 }
 
 // NewMTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent creates a new MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent.
@@ -69,10 +69,3 @@ func NewMTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent() *MTRPumpCo
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent")), objc.RegisterName("new"))
 	return mTRPumpConfigurationAndControlClusterPowerMissingPhaseEventAdopt(_id)
 }
-
-// MTRPumpConfigurationAndControlClusterPowerMissingPhaseEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent], for mocking and DI.
-type MTRPumpConfigurationAndControlClusterPowerMissingPhaseEventable interface {
-	obj.Object
-}
-
-var _ MTRPumpConfigurationAndControlClusterPowerMissingPhaseEventable = (*MTRPumpConfigurationAndControlClusterPowerMissingPhaseEvent)(nil)

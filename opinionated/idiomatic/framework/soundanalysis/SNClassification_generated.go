@@ -46,24 +46,24 @@ func classificationAdopt(id objc.ID) *Classification {
 }
 
 // Description returns the object's -description text.
-func (x *Classification) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Classification) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Classification) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Classification) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Classification) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Classification) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Classification) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Classification) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewClassification creates a new Classification.
@@ -72,26 +72,17 @@ func NewClassification() *Classification {
 	return classificationAdopt(_id)
 }
 
-// Identifier the identifier of a classification request. An example classification could be a string like 'laughter' or 'applause'. The string is defined in the model that was used for the classification. Usually these are technical labels that are not localized and not meant to be used directly to be presented to an end user in the UI.
-func (x *Classification) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+// Identifier returns the identifier of a classification request. An example classification could be a string like 'laughter' or 'applause'. The string is defined in the model that was used for the classification. Usually these are technical labels that are not localized and not meant to be used directly to be presented to an end user in the UI.
+func (c *Classification) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Confidence the level of confidence normalized to [0, 1], where 1 is most confident
-func (x *Classification) Confidence() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("confidence"))
+// Confidence returns the level of confidence normalized to [0, 1], where 1 is most confident
+func (c *Classification) Confidence() float64 {
+	_r := objc.Send[float64](objref.IDOf(c), objc.RegisterName("confidence"))
 	return _r
 }
-
-// Classificationable is the interface implemented by [Classification], for mocking and DI.
-type Classificationable interface {
-	obj.Object
-	Identifier() string
-	Confidence() float64
-}
-
-var _ Classificationable = (*Classification)(nil)

@@ -46,24 +46,24 @@ func webHistoryItemAdopt(id objc.ID) *WebHistoryItem {
 }
 
 // Description returns the object's -description text.
-func (x *WebHistoryItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (whi *WebHistoryItem) Description() string {
+	return rt.Description(objref.IDOf(whi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WebHistoryItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (whi *WebHistoryItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(whi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WebHistoryItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (whi *WebHistoryItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(whi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WebHistoryItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (whi *WebHistoryItem) String() string {
+	return rt.Description(objref.IDOf(whi))
 }
 
 // NewWebHistoryItemWithURLStringTitleLastVisitedTimeInterval initializes the receiver with a URL,URLString, a title specified by title and the last time this item was visited specified by time title, and time last visited.
@@ -73,76 +73,56 @@ func NewWebHistoryItemWithURLStringTitleLastVisitedTimeInterval(uRLString string
 	return webHistoryItemAdopt(_id)
 }
 
-// WithAlternateTitle an alternate title that may be used in place of the receiver’s page title.
-func (x *WebHistoryItem) WithAlternateTitle(alternateTitle string) *WebHistoryItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateTitle:"), purego.NSString(alternateTitle))
-	return x
+// WithAlternateTitle sets an alternate title that may be used in place of the receiver’s page title.
+func (whi *WebHistoryItem) WithAlternateTitle(alternateTitle string) *WebHistoryItem {
+	objc.Send[objc.ID](objref.IDOf(whi), objc.RegisterName("setAlternateTitle:"), purego.NSString(alternateTitle))
+	return whi
 }
 
-// OriginalURLString the string representation of the initial URL of this item. This value is normally set by the WebKit.
-func (x *WebHistoryItem) OriginalURLString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalURLString"))
+// OriginalURLString returns the string representation of the initial URL of this item. This value is normally set by the WebKit.
+func (whi *WebHistoryItem) OriginalURLString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(whi), objc.RegisterName("originalURLString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// URLString the string representation of the URL represented by this item. The URLString may be different than the originalURLString if the page redirected to a new location.  This value is normally set by the WebKit.
-func (x *WebHistoryItem) URLString() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLString"))
+// URLString returns the string representation of the URL represented by this item. The URLString may be different than the originalURLString if the page redirected to a new location.  This value is normally set by the WebKit.
+func (whi *WebHistoryItem) URLString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(whi), objc.RegisterName("URLString"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Title the title of the page represented by this item. This title cannot be changed by the client.  This value is normally set by the WebKit when a page title for the item is received.
-func (x *WebHistoryItem) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+// Title returns the title of the page represented by this item. This title cannot be changed by the client.  This value is normally set by the WebKit when a page title for the item is received.
+func (whi *WebHistoryItem) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(whi), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// LastVisitedTimeInterval the last time the page represented by this item was visited. The interval is since the reference date as determined by NSDate.  This value is normally set by the WebKit.
-func (x *WebHistoryItem) LastVisitedTimeInterval() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lastVisitedTimeInterval"))
+// LastVisitedTimeInterval returns the last time the page represented by this item was visited. The interval is since the reference date as determined by NSDate.  This value is normally set by the WebKit.
+func (whi *WebHistoryItem) LastVisitedTimeInterval() float64 {
+	_r := objc.Send[float64](objref.IDOf(whi), objc.RegisterName("lastVisitedTimeInterval"))
 	return _r
 }
 
 // AlternateTitle wraps the corresponding Objective-C method.
-func (x *WebHistoryItem) AlternateTitle() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alternateTitle"))
+func (whi *WebHistoryItem) AlternateTitle() string {
+	_r := objc.Send[objc.ID](objref.IDOf(whi), objc.RegisterName("alternateTitle"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetAlternateTitle wraps the corresponding Objective-C method.
-func (x *WebHistoryItem) SetAlternateTitle(alternateTitle string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateTitle:"), purego.NSString(alternateTitle))
-}
-
-// Icon the favorite icon of the page represented by this item. This icon returned will be determined by the WebKit.
-func (x *WebHistoryItem) Icon() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("icon"))
+// Icon returns the favorite icon of the page represented by this item. This icon returned will be determined by the WebKit.
+func (whi *WebHistoryItem) Icon() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(whi), objc.RegisterName("icon"))
 	return obj.Wrap(_r)
 }
-
-// WebHistoryItemable is the interface implemented by [WebHistoryItem], for mocking and DI.
-type WebHistoryItemable interface {
-	obj.Object
-	WithAlternateTitle(alternateTitle string) *WebHistoryItem
-	OriginalURLString() string
-	URLString() string
-	Title() string
-	LastVisitedTimeInterval() float64
-	AlternateTitle() string
-	SetAlternateTitle(alternateTitle string)
-	Icon() obj.Object
-}
-
-var _ WebHistoryItemable = (*WebHistoryItem)(nil)

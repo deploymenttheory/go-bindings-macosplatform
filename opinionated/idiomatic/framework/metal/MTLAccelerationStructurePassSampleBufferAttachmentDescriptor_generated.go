@@ -44,24 +44,24 @@ func accelerationStructurePassSampleBufferAttachmentDescriptorAdopt(id objc.ID) 
 }
 
 // Description returns the object's -description text.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aspsbad *AccelerationStructurePassSampleBufferAttachmentDescriptor) Description() string {
+	return rt.Description(objref.IDOf(aspsbad))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aspsbad *AccelerationStructurePassSampleBufferAttachmentDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aspsbad), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aspsbad *AccelerationStructurePassSampleBufferAttachmentDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aspsbad), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aspsbad *AccelerationStructurePassSampleBufferAttachmentDescriptor) String() string {
+	return rt.Description(objref.IDOf(aspsbad))
 }
 
 // NewAccelerationStructurePassSampleBufferAttachmentDescriptor creates a new AccelerationStructurePassSampleBufferAttachmentDescriptor.
@@ -70,49 +70,26 @@ func NewAccelerationStructurePassSampleBufferAttachmentDescriptor() *Acceleratio
 	return accelerationStructurePassSampleBufferAttachmentDescriptorAdopt(_id)
 }
 
-// WithStartOfEncoderSampleIndex the sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of an acceleration structure pass will fail.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) WithStartOfEncoderSampleIndex(startOfEncoderSampleIndex int) *AccelerationStructurePassSampleBufferAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartOfEncoderSampleIndex:"), startOfEncoderSampleIndex)
-	return x
+// WithStartOfEncoderSampleIndex sets the sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of an acceleration structure pass will fail.
+func (aspsbad *AccelerationStructurePassSampleBufferAttachmentDescriptor) WithStartOfEncoderSampleIndex(startOfEncoderSampleIndex int) *AccelerationStructurePassSampleBufferAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(aspsbad), objc.RegisterName("setStartOfEncoderSampleIndex:"), startOfEncoderSampleIndex)
+	return aspsbad
 }
 
-// WithEndOfEncoderSampleIndex the sample index to use to store the sample taken at the end of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of an acceleration structure pass will fail.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) WithEndOfEncoderSampleIndex(endOfEncoderSampleIndex int) *AccelerationStructurePassSampleBufferAttachmentDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndOfEncoderSampleIndex:"), endOfEncoderSampleIndex)
-	return x
+// WithEndOfEncoderSampleIndex sets the sample index to use to store the sample taken at the end of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of an acceleration structure pass will fail.
+func (aspsbad *AccelerationStructurePassSampleBufferAttachmentDescriptor) WithEndOfEncoderSampleIndex(endOfEncoderSampleIndex int) *AccelerationStructurePassSampleBufferAttachmentDescriptor {
+	objc.Send[objc.ID](objref.IDOf(aspsbad), objc.RegisterName("setEndOfEncoderSampleIndex:"), endOfEncoderSampleIndex)
+	return aspsbad
 }
 
-// StartOfEncoderSampleIndex the sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of an acceleration structure pass will fail.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) StartOfEncoderSampleIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startOfEncoderSampleIndex"))
+// StartOfEncoderSampleIndex returns the sample index to use to store the sample taken at the start of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of an acceleration structure pass will fail.
+func (aspsbad *AccelerationStructurePassSampleBufferAttachmentDescriptor) StartOfEncoderSampleIndex() int {
+	_r := objc.Send[int](objref.IDOf(aspsbad), objc.RegisterName("startOfEncoderSampleIndex"))
 	return _r
 }
 
-// SetStartOfEncoderSampleIndex wraps the corresponding Objective-C method.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartOfEncoderSampleIndex:"), startOfEncoderSampleIndex)
-}
-
-// EndOfEncoderSampleIndex the sample index to use to store the sample taken at the end of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of an acceleration structure pass will fail.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) EndOfEncoderSampleIndex() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("endOfEncoderSampleIndex"))
+// EndOfEncoderSampleIndex returns the sample index to use to store the sample taken at the end of command encoder processing.  Setting the value to MTLCounterDontSample will cause this sample to be omitted. On devices where MTLCounterSamplingPointAtStageBoundary is unsupported, this sample index is invalid and must be set to MTLCounterDontSample or creation of an acceleration structure pass will fail.
+func (aspsbad *AccelerationStructurePassSampleBufferAttachmentDescriptor) EndOfEncoderSampleIndex() int {
+	_r := objc.Send[int](objref.IDOf(aspsbad), objc.RegisterName("endOfEncoderSampleIndex"))
 	return _r
 }
-
-// SetEndOfEncoderSampleIndex wraps the corresponding Objective-C method.
-func (x *AccelerationStructurePassSampleBufferAttachmentDescriptor) SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndOfEncoderSampleIndex:"), endOfEncoderSampleIndex)
-}
-
-// AccelerationStructurePassSampleBufferAttachmentDescriptorable is the interface implemented by [AccelerationStructurePassSampleBufferAttachmentDescriptor], for mocking and DI.
-type AccelerationStructurePassSampleBufferAttachmentDescriptorable interface {
-	obj.Object
-	WithStartOfEncoderSampleIndex(startOfEncoderSampleIndex int) *AccelerationStructurePassSampleBufferAttachmentDescriptor
-	WithEndOfEncoderSampleIndex(endOfEncoderSampleIndex int) *AccelerationStructurePassSampleBufferAttachmentDescriptor
-	StartOfEncoderSampleIndex() int
-	SetStartOfEncoderSampleIndex(startOfEncoderSampleIndex int)
-	EndOfEncoderSampleIndex() int
-	SetEndOfEncoderSampleIndex(endOfEncoderSampleIndex int)
-}
-
-var _ AccelerationStructurePassSampleBufferAttachmentDescriptorable = (*AccelerationStructurePassSampleBufferAttachmentDescriptor)(nil)

@@ -48,36 +48,29 @@ func virtioSoundDeviceStreamConfigurationAdopt(id objc.ID) *VirtioSoundDeviceStr
 }
 
 // Description returns the object's -description text.
-func (x *VirtioSoundDeviceStreamConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (vsdsc *VirtioSoundDeviceStreamConfiguration) Description() string {
+	return rt.Description(objref.IDOf(vsdsc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *VirtioSoundDeviceStreamConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (vsdsc *VirtioSoundDeviceStreamConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(vsdsc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *VirtioSoundDeviceStreamConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (vsdsc *VirtioSoundDeviceStreamConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(vsdsc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *VirtioSoundDeviceStreamConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (vsdsc *VirtioSoundDeviceStreamConfiguration) String() string {
+	return rt.Description(objref.IDOf(vsdsc))
 }
-
-// VirtioSoundDeviceStreamConfigurationable is the interface implemented by [VirtioSoundDeviceStreamConfiguration], for mocking and DI.
-type VirtioSoundDeviceStreamConfigurationable interface {
-	obj.Object
-}
-
-var _ VirtioSoundDeviceStreamConfigurationable = (*VirtioSoundDeviceStreamConfiguration)(nil)
 
 // isVirtioSoundDeviceStreamConfiguration marks VirtioSoundDeviceStreamConfiguration — and, by embedding promotion, its
 // subclasses — as a member of the VirtioSoundDeviceStreamConfiguration hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *VirtioSoundDeviceStreamConfiguration) isVirtioSoundDeviceStreamConfiguration() {}
+func (vsdsc *VirtioSoundDeviceStreamConfiguration) isVirtioSoundDeviceStreamConfiguration() {}
 
 var _ VirtioSoundDeviceStreamConfigurationProvider = (*VirtioSoundDeviceStreamConfiguration)(nil)

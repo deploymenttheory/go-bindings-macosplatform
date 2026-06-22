@@ -46,24 +46,24 @@ func assetTrackGroupAdopt(id objc.ID) *AssetTrackGroup {
 }
 
 // Description returns the object's -description text.
-func (x *AssetTrackGroup) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (atg *AssetTrackGroup) Description() string {
+	return rt.Description(objref.IDOf(atg))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssetTrackGroup) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (atg *AssetTrackGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(atg), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssetTrackGroup) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (atg *AssetTrackGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(atg), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssetTrackGroup) String() string {
-	return rt.Description(objref.IDOf(x))
+func (atg *AssetTrackGroup) String() string {
+	return rt.Description(objref.IDOf(atg))
 }
 
 // NewAssetTrackGroup creates a new AssetTrackGroup.
@@ -75,15 +75,7 @@ func NewAssetTrackGroup() *AssetTrackGroup {
 // TrackIDs wraps the corresponding Objective-C method.
 //
 // TrackIDs returns the collection as a Go slice.
-func (x *AssetTrackGroup) TrackIDs() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trackIDs"))
+func (atg *AssetTrackGroup) TrackIDs() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(atg), objc.RegisterName("trackIDs"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// AssetTrackGroupable is the interface implemented by [AssetTrackGroup], for mocking and DI.
-type AssetTrackGroupable interface {
-	obj.Object
-	TrackIDs() []obj.Object
-}
-
-var _ AssetTrackGroupable = (*AssetTrackGroup)(nil)

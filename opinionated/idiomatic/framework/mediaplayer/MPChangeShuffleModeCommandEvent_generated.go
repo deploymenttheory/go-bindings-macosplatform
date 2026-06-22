@@ -7,7 +7,6 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,25 +51,16 @@ func NewChangeShuffleModeCommandEvent() *ChangeShuffleModeCommandEvent {
 	return changeShuffleModeCommandEventAdopt(_id)
 }
 
-// ShuffleType the desired shuffle type to use when fulfilling the request.
-func (x *ChangeShuffleModeCommandEvent) ShuffleType() ShuffleType {
-	_r := objc.Send[ShuffleType](objref.IDOf(x), objc.RegisterName("shuffleType"))
+// ShuffleType returns the desired shuffle type to use when fulfilling the request.
+func (csmce *ChangeShuffleModeCommandEvent) ShuffleType() ShuffleType {
+	_r := objc.Send[ShuffleType](objref.IDOf(csmce), objc.RegisterName("shuffleType"))
 	return _r
 }
 
-// PreservesShuffleMode whether or not the selection should be preserved between playback sessions
-func (x *ChangeShuffleModeCommandEvent) PreservesShuffleMode() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("preservesShuffleMode"))
+// PreservesShuffleMode reports whether the selection should be preserved between playback sessions
+func (csmce *ChangeShuffleModeCommandEvent) PreservesShuffleMode() bool {
+	_r := objc.Send[bool](objref.IDOf(csmce), objc.RegisterName("preservesShuffleMode"))
 	return _r
 }
-
-// ChangeShuffleModeCommandEventable is the interface implemented by [ChangeShuffleModeCommandEvent], for mocking and DI.
-type ChangeShuffleModeCommandEventable interface {
-	obj.Object
-	ShuffleType() ShuffleType
-	PreservesShuffleMode() bool
-}
-
-var _ ChangeShuffleModeCommandEventable = (*ChangeShuffleModeCommandEvent)(nil)
 
 var _ RemoteCommandEventProvider = (*ChangeShuffleModeCommandEvent)(nil)

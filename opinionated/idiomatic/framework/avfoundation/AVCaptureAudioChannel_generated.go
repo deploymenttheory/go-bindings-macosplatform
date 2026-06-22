@@ -46,24 +46,24 @@ func captureAudioChannelAdopt(id objc.ID) *CaptureAudioChannel {
 }
 
 // Description returns the object's -description text.
-func (x *CaptureAudioChannel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cac *CaptureAudioChannel) Description() string {
+	return rt.Description(objref.IDOf(cac))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *CaptureAudioChannel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cac *CaptureAudioChannel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cac), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *CaptureAudioChannel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cac *CaptureAudioChannel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cac), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *CaptureAudioChannel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cac *CaptureAudioChannel) String() string {
+	return rt.Description(objref.IDOf(cac))
 }
 
 // NewCaptureAudioChannel creates a new CaptureAudioChannel.
@@ -72,63 +72,38 @@ func NewCaptureAudioChannel() *CaptureAudioChannel {
 	return captureAudioChannelAdopt(_id)
 }
 
-// WithVolume the current volume (gain) of the channel.
-func (x *CaptureAudioChannel) WithVolume(volume float32) *CaptureAudioChannel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
-	return x
+// WithVolume sets the current volume (gain) of the channel.
+func (cac *CaptureAudioChannel) WithVolume(volume float32) *CaptureAudioChannel {
+	objc.Send[objc.ID](objref.IDOf(cac), objc.RegisterName("setVolume:"), volume)
+	return cac
 }
 
-// WithEnabled a Boolean value that indicates whether the channel is in an enabled state.
-func (x *CaptureAudioChannel) WithEnabled(enabled bool) *CaptureAudioChannel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the channel is in an enabled state.
+func (cac *CaptureAudioChannel) WithEnabled(enabled bool) *CaptureAudioChannel {
+	objc.Send[objc.ID](objref.IDOf(cac), objc.RegisterName("setEnabled:"), enabled)
+	return cac
 }
 
-// AveragePowerLevel a measurement of the instantaneous average power level of the audio flowing through the receiver. A client may poll an AVCaptureAudioChannel object for its current averagePowerLevel to get its instantaneous average power level in decibels. This property is not key-value observable.
-func (x *CaptureAudioChannel) AveragePowerLevel() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("averagePowerLevel"))
+// AveragePowerLevel returns a measurement of the instantaneous average power level of the audio flowing through the receiver. A client may poll an AVCaptureAudioChannel object for its current averagePowerLevel to get its instantaneous average power level in decibels. This property is not key-value observable.
+func (cac *CaptureAudioChannel) AveragePowerLevel() float32 {
+	_r := objc.Send[float32](objref.IDOf(cac), objc.RegisterName("averagePowerLevel"))
 	return _r
 }
 
-// PeakHoldLevel a measurement of the peak/hold level of the audio flowing through the receiver. A client may poll an AVCaptureAudioChannel object for its current peakHoldLevel to get its most recent peak hold level in decibels. This property is not key-value observable.
-func (x *CaptureAudioChannel) PeakHoldLevel() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("peakHoldLevel"))
+// PeakHoldLevel returns a measurement of the peak/hold level of the audio flowing through the receiver. A client may poll an AVCaptureAudioChannel object for its current peakHoldLevel to get its most recent peak hold level in decibels. This property is not key-value observable.
+func (cac *CaptureAudioChannel) PeakHoldLevel() float32 {
+	_r := objc.Send[float32](objref.IDOf(cac), objc.RegisterName("peakHoldLevel"))
 	return _r
 }
 
-// Volume a property indicating the current volume (gain) of the receiver. The volume property indicates the current volume or gain of the receiver as a floating point value between 0.0 -> 1.0. If you desire to boost the gain in software, you may specify a a value greater than 1.0.
-func (x *CaptureAudioChannel) Volume() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("volume"))
+// Volume returns a property indicating the current volume (gain) of the receiver. The volume property indicates the current volume or gain of the receiver as a floating point value between 0.0 -> 1.0. If you desire to boost the gain in software, you may specify a a value greater than 1.0.
+func (cac *CaptureAudioChannel) Volume() float32 {
+	_r := objc.Send[float32](objref.IDOf(cac), objc.RegisterName("volume"))
 	return _r
 }
 
-// SetVolume wraps the corresponding Objective-C method.
-func (x *CaptureAudioChannel) SetVolume(volume float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVolume:"), volume)
-}
-
-// IsEnabled a property indicating whether the receiver is currently enabled for data capture. By default, all AVCaptureAudioChannel objects exposed by a connection are enabled. You may set enabled to NO to stop the flow of data for a particular AVCaptureAudioChannel.
-func (x *CaptureAudioChannel) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+// IsEnabled reports whether a property indicating whether the receiver is currently enabled for data capture. By default, all AVCaptureAudioChannel objects exposed by a connection are enabled. You may set enabled to false to stop the flow of data for a particular AVCaptureAudioChannel.
+func (cac *CaptureAudioChannel) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cac), objc.RegisterName("isEnabled"))
 	return _r
 }
-
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *CaptureAudioChannel) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-}
-
-// CaptureAudioChannelable is the interface implemented by [CaptureAudioChannel], for mocking and DI.
-type CaptureAudioChannelable interface {
-	obj.Object
-	WithVolume(volume float32) *CaptureAudioChannel
-	WithEnabled(enabled bool) *CaptureAudioChannel
-	AveragePowerLevel() float32
-	PeakHoldLevel() float32
-	Volume() float32
-	SetVolume(volume float32)
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-}
-
-var _ CaptureAudioChannelable = (*CaptureAudioChannel)(nil)

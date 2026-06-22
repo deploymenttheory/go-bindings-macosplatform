@@ -46,24 +46,24 @@ func contentBlockerStateAdopt(id objc.ID) *ContentBlockerState {
 }
 
 // Description returns the object's -description text.
-func (x *ContentBlockerState) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cbs *ContentBlockerState) Description() string {
+	return rt.Description(objref.IDOf(cbs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContentBlockerState) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cbs *ContentBlockerState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cbs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContentBlockerState) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cbs *ContentBlockerState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cbs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ContentBlockerState) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cbs *ContentBlockerState) String() string {
+	return rt.Description(objref.IDOf(cbs))
 }
 
 // NewContentBlockerState creates a new ContentBlockerState.
@@ -73,15 +73,7 @@ func NewContentBlockerState() *ContentBlockerState {
 }
 
 // IsEnabled wraps the corresponding Objective-C method.
-func (x *ContentBlockerState) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+func (cbs *ContentBlockerState) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(cbs), objc.RegisterName("isEnabled"))
 	return _r
 }
-
-// ContentBlockerStateable is the interface implemented by [ContentBlockerState], for mocking and DI.
-type ContentBlockerStateable interface {
-	obj.Object
-	IsEnabled() bool
-}
-
-var _ ContentBlockerStateable = (*ContentBlockerState)(nil)

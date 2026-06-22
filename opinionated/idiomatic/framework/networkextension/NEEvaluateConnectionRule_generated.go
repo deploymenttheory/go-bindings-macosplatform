@@ -46,24 +46,24 @@ func nEEvaluateConnectionRuleAdopt(id objc.ID) *NEEvaluateConnectionRule {
 }
 
 // Description returns the object's -description text.
-func (x *NEEvaluateConnectionRule) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (necr *NEEvaluateConnectionRule) Description() string {
+	return rt.Description(objref.IDOf(necr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NEEvaluateConnectionRule) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (necr *NEEvaluateConnectionRule) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(necr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NEEvaluateConnectionRule) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (necr *NEEvaluateConnectionRule) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(necr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NEEvaluateConnectionRule) String() string {
-	return rt.Description(objref.IDOf(x))
+func (necr *NEEvaluateConnectionRule) String() string {
+	return rt.Description(objref.IDOf(necr))
 }
 
 // NewNEEvaluateConnectionRuleWithMatchDomainsAndAction initialize an NEEvaluateConnectionRule instance with a list of destination host domains and an action.
@@ -73,68 +73,43 @@ func NewNEEvaluateConnectionRuleWithMatchDomainsAndAction(domains []string, acti
 	return nEEvaluateConnectionRuleAdopt(_id)
 }
 
-// WithUseDNSServers if the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded, the DNS servers specified in this array are used to resolve the destination hostname of the connection while evaluating connectivity to the destination of the connection. If the resolution fails for any reason, the VPN is started.
-func (x *NEEvaluateConnectionRule) WithUseDNSServers(items ...obj.Object) *NEEvaluateConnectionRule {
+// WithUseDNSServers sets if the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded, the DNS servers specified in this array are used to resolve the destination hostname of the connection while evaluating connectivity to the destination of the connection. If the resolution fails for any reason, the VPN is started.
+func (necr *NEEvaluateConnectionRule) WithUseDNSServers(items ...obj.Object) *NEEvaluateConnectionRule {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseDNSServers:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(necr), objc.RegisterName("setUseDNSServers:"), _arr)
+	return necr
 }
 
-// WithProbeURL an HTTP or HTTPS URL. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded and a request sent to this URL results in a response with an HTTP response code other than 200, then the VPN is started.
-func (x *NEEvaluateConnectionRule) WithProbeURL(probeURL string) *NEEvaluateConnectionRule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
-	return x
+// WithProbeURL sets an HTTP or HTTPS URL. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded and a request sent to this URL results in a response with an HTTP response code other than 200, then the VPN is started.
+func (necr *NEEvaluateConnectionRule) WithProbeURL(probeURL string) *NEEvaluateConnectionRule {
+	objc.Send[objc.ID](objref.IDOf(necr), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
+	return necr
 }
 
-// Action the action to take if the properties of the network connection being established match the rule.
-func (x *NEEvaluateConnectionRule) Action() NEEvaluateConnectionRuleAction {
-	_r := objc.Send[NEEvaluateConnectionRuleAction](objref.IDOf(x), objc.RegisterName("action"))
+// Action returns the action to take if the properties of the network connection being established match the rule.
+func (necr *NEEvaluateConnectionRule) Action() NEEvaluateConnectionRuleAction {
+	_r := objc.Send[NEEvaluateConnectionRuleAction](objref.IDOf(necr), objc.RegisterName("action"))
 	return _r
 }
 
-// MatchDomains an array of NSString objects. If the host name of the destination of the network connection being established shares a suffix with one of the strings in this array, then the rule matches.
+// MatchDomains returns an array of NSString objects. If the host name of the destination of the network connection being established shares a suffix with one of the strings in this array, then the rule matches.
 //
 // MatchDomains returns the collection as a Go slice.
-func (x *NEEvaluateConnectionRule) MatchDomains() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("matchDomains"))
+func (necr *NEEvaluateConnectionRule) MatchDomains() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(necr), objc.RegisterName("matchDomains"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// UseDNSServers an array of NSString objects. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded, the DNS servers specified in this array are used to resolve the host name of the destination while evaluating connectivity to the destination. If the resolution fails for any reason, the VPN is started.
+// UseDNSServers returns an array of NSString objects. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded, the DNS servers specified in this array are used to resolve the host name of the destination while evaluating connectivity to the destination. If the resolution fails for any reason, the VPN is started.
 //
 // UseDNSServers returns the collection as a Go slice.
-func (x *NEEvaluateConnectionRule) UseDNSServers() []string {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("useDNSServers"))
+func (necr *NEEvaluateConnectionRule) UseDNSServers() []string {
+	_arr := objc.Send[objc.ID](objref.IDOf(necr), objc.RegisterName("useDNSServers"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetUseDNSServers wraps the corresponding Objective-C method.
-func (x *NEEvaluateConnectionRule) SetUseDNSServers(useDNSServers []string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUseDNSServers:"), purego.SliceToNSArray(useDNSServers, func(_v string) objc.ID { return purego.NSString(_v) }))
-}
-
-// ProbeURL an HTTP or HTTPS URL. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded and a request sent to this URL results in a response with an HTTP response code other than 200, then the VPN is started.
-func (x *NEEvaluateConnectionRule) ProbeURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("probeURL"))
+// ProbeURL returns an HTTP or HTTPS URL. If the rule matches the connection being established and the action is NEEvaluateConnectionRuleActionConnectIfNeeded and a request sent to this URL results in a response with an HTTP response code other than 200, then the VPN is started.
+func (necr *NEEvaluateConnectionRule) ProbeURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(necr), objc.RegisterName("probeURL"))
 	return obj.Wrap(_r)
 }
-
-// SetProbeURL wraps the corresponding Objective-C method.
-func (x *NEEvaluateConnectionRule) SetProbeURL(probeURL string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
-}
-
-// NEEvaluateConnectionRuleable is the interface implemented by [NEEvaluateConnectionRule], for mocking and DI.
-type NEEvaluateConnectionRuleable interface {
-	obj.Object
-	WithUseDNSServers(items ...obj.Object) *NEEvaluateConnectionRule
-	WithProbeURL(probeURL string) *NEEvaluateConnectionRule
-	Action() NEEvaluateConnectionRuleAction
-	MatchDomains() []string
-	UseDNSServers() []string
-	SetUseDNSServers(useDNSServers []string)
-	ProbeURL() obj.Object
-	SetProbeURL(probeURL string)
-}
-
-var _ NEEvaluateConnectionRuleable = (*NEEvaluateConnectionRule)(nil)

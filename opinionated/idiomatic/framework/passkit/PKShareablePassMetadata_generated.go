@@ -46,24 +46,24 @@ func shareablePassMetadataAdopt(id objc.ID) *ShareablePassMetadata {
 }
 
 // Description returns the object's -description text.
-func (x *ShareablePassMetadata) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (spm *ShareablePassMetadata) Description() string {
+	return rt.Description(objref.IDOf(spm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ShareablePassMetadata) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (spm *ShareablePassMetadata) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(spm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ShareablePassMetadata) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (spm *ShareablePassMetadata) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(spm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ShareablePassMetadata) String() string {
-	return rt.Description(objref.IDOf(x))
+func (spm *ShareablePassMetadata) String() string {
+	return rt.Description(objref.IDOf(spm))
 }
 
 // NewShareablePassMetadataWithProvisioningCredentialIdentifierCardConfigurationIdentifierSharingInstanceIdentifierPassThumbnailImageOwnerDisplayNameLocalizedDescription creates a shareable pass metadata object.
@@ -95,32 +95,32 @@ func NewShareablePassMetadataWithProvisioningCredentialIdentifierSharingInstance
 }
 
 // WithRequiresUnifiedAccessCapableDevice sets the property and returns the receiver so calls can be chained.
-func (x *ShareablePassMetadata) WithRequiresUnifiedAccessCapableDevice(requiresUnifiedAccessCapableDevice bool) *ShareablePassMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresUnifiedAccessCapableDevice:"), requiresUnifiedAccessCapableDevice)
-	return x
+func (spm *ShareablePassMetadata) WithRequiresUnifiedAccessCapableDevice(requiresUnifiedAccessCapableDevice bool) *ShareablePassMetadata {
+	objc.Send[objc.ID](objref.IDOf(spm), objc.RegisterName("setRequiresUnifiedAccessCapableDevice:"), requiresUnifiedAccessCapableDevice)
+	return spm
 }
 
 // WithServerEnvironmentIdentifier sets the property and returns the receiver so calls can be chained.
-func (x *ShareablePassMetadata) WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *ShareablePassMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerEnvironmentIdentifier:"), purego.NSString(serverEnvironmentIdentifier))
-	return x
+func (spm *ShareablePassMetadata) WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *ShareablePassMetadata {
+	objc.Send[objc.ID](objref.IDOf(spm), objc.RegisterName("setServerEnvironmentIdentifier:"), purego.NSString(serverEnvironmentIdentifier))
+	return spm
 }
 
-// WithAccountHash an Apple Push Notification push token.
-func (x *ShareablePassMetadata) WithAccountHash(accountHash string) *ShareablePassMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountHash:"), purego.NSString(accountHash))
-	return x
+// WithAccountHash sets an Apple Push Notification push token.
+func (spm *ShareablePassMetadata) WithAccountHash(accountHash string) *ShareablePassMetadata {
+	objc.Send[objc.ID](objref.IDOf(spm), objc.RegisterName("setAccountHash:"), purego.NSString(accountHash))
+	return spm
 }
 
-// WithRelyingPartyIdentifier an identifier used in push notifications.
-func (x *ShareablePassMetadata) WithRelyingPartyIdentifier(relyingPartyIdentifier string) *ShareablePassMetadata {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelyingPartyIdentifier:"), purego.NSString(relyingPartyIdentifier))
-	return x
+// WithRelyingPartyIdentifier sets an identifier used in push notifications.
+func (spm *ShareablePassMetadata) WithRelyingPartyIdentifier(relyingPartyIdentifier string) *ShareablePassMetadata {
+	objc.Send[objc.ID](objref.IDOf(spm), objc.RegisterName("setRelyingPartyIdentifier:"), purego.NSString(relyingPartyIdentifier))
+	return spm
 }
 
 // CredentialIdentifier wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadata) CredentialIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialIdentifier"))
+func (spm *ShareablePassMetadata) CredentialIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(spm), objc.RegisterName("credentialIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -128,8 +128,8 @@ func (x *ShareablePassMetadata) CredentialIdentifier() string {
 }
 
 // SharingInstanceIdentifier wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadata) SharingInstanceIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sharingInstanceIdentifier"))
+func (spm *ShareablePassMetadata) SharingInstanceIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(spm), objc.RegisterName("sharingInstanceIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -137,8 +137,8 @@ func (x *ShareablePassMetadata) SharingInstanceIdentifier() string {
 }
 
 // CardTemplateIdentifier wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadata) CardTemplateIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cardTemplateIdentifier"))
+func (spm *ShareablePassMetadata) CardTemplateIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(spm), objc.RegisterName("cardTemplateIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -146,8 +146,8 @@ func (x *ShareablePassMetadata) CardTemplateIdentifier() string {
 }
 
 // CardConfigurationIdentifier wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadata) CardConfigurationIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cardConfigurationIdentifier"))
+func (spm *ShareablePassMetadata) CardConfigurationIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(spm), objc.RegisterName("cardConfigurationIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -155,45 +155,35 @@ func (x *ShareablePassMetadata) CardConfigurationIdentifier() string {
 }
 
 // RequiresUnifiedAccessCapableDevice wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadata) RequiresUnifiedAccessCapableDevice() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresUnifiedAccessCapableDevice"))
+func (spm *ShareablePassMetadata) RequiresUnifiedAccessCapableDevice() bool {
+	_r := objc.Send[bool](objref.IDOf(spm), objc.RegisterName("requiresUnifiedAccessCapableDevice"))
 	return _r
 }
 
-// SetRequiresUnifiedAccessCapableDevice wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadata) SetRequiresUnifiedAccessCapableDevice(requiresUnifiedAccessCapableDevice bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresUnifiedAccessCapableDevice:"), requiresUnifiedAccessCapableDevice)
-}
-
 // ServerEnvironmentIdentifier wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadata) ServerEnvironmentIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverEnvironmentIdentifier"))
+func (spm *ShareablePassMetadata) ServerEnvironmentIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(spm), objc.RegisterName("serverEnvironmentIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetServerEnvironmentIdentifier wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadata) SetServerEnvironmentIdentifier(serverEnvironmentIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerEnvironmentIdentifier:"), purego.NSString(serverEnvironmentIdentifier))
-}
-
 // Preview wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadata) Preview() *ShareablePassMetadataPreview {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preview"))
+func (spm *ShareablePassMetadata) Preview() *ShareablePassMetadataPreview {
+	_r := objc.Send[objc.ID](objref.IDOf(spm), objc.RegisterName("preview"))
 	return ShareablePassMetadataPreviewFromID(_r)
 }
 
 // PassThumbnailImage wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadata) PassThumbnailImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("passThumbnailImage"))
+func (spm *ShareablePassMetadata) PassThumbnailImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(spm), objc.RegisterName("passThumbnailImage"))
 	return obj.Wrap(_r)
 }
 
 // LocalizedDescription wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadata) LocalizedDescription() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDescription"))
+func (spm *ShareablePassMetadata) LocalizedDescription() string {
+	_r := objc.Send[objc.ID](objref.IDOf(spm), objc.RegisterName("localizedDescription"))
 	if _r == 0 {
 		return ""
 	}
@@ -201,8 +191,8 @@ func (x *ShareablePassMetadata) LocalizedDescription() string {
 }
 
 // OwnerDisplayName wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadata) OwnerDisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerDisplayName"))
+func (spm *ShareablePassMetadata) OwnerDisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(spm), objc.RegisterName("ownerDisplayName"))
 	if _r == 0 {
 		return ""
 	}
@@ -210,56 +200,19 @@ func (x *ShareablePassMetadata) OwnerDisplayName() string {
 }
 
 // AccountHash wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadata) AccountHash() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountHash"))
+func (spm *ShareablePassMetadata) AccountHash() string {
+	_r := objc.Send[objc.ID](objref.IDOf(spm), objc.RegisterName("accountHash"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
-}
-
-// SetAccountHash wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadata) SetAccountHash(accountHash string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccountHash:"), purego.NSString(accountHash))
 }
 
 // RelyingPartyIdentifier wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadata) RelyingPartyIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relyingPartyIdentifier"))
+func (spm *ShareablePassMetadata) RelyingPartyIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(spm), objc.RegisterName("relyingPartyIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetRelyingPartyIdentifier wraps the corresponding Objective-C method.
-func (x *ShareablePassMetadata) SetRelyingPartyIdentifier(relyingPartyIdentifier string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelyingPartyIdentifier:"), purego.NSString(relyingPartyIdentifier))
-}
-
-// ShareablePassMetadataable is the interface implemented by [ShareablePassMetadata], for mocking and DI.
-type ShareablePassMetadataable interface {
-	obj.Object
-	WithRequiresUnifiedAccessCapableDevice(requiresUnifiedAccessCapableDevice bool) *ShareablePassMetadata
-	WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *ShareablePassMetadata
-	WithAccountHash(accountHash string) *ShareablePassMetadata
-	WithRelyingPartyIdentifier(relyingPartyIdentifier string) *ShareablePassMetadata
-	CredentialIdentifier() string
-	SharingInstanceIdentifier() string
-	CardTemplateIdentifier() string
-	CardConfigurationIdentifier() string
-	RequiresUnifiedAccessCapableDevice() bool
-	SetRequiresUnifiedAccessCapableDevice(requiresUnifiedAccessCapableDevice bool)
-	ServerEnvironmentIdentifier() string
-	SetServerEnvironmentIdentifier(serverEnvironmentIdentifier string)
-	Preview() *ShareablePassMetadataPreview
-	PassThumbnailImage() obj.Object
-	LocalizedDescription() string
-	OwnerDisplayName() string
-	AccountHash() string
-	SetAccountHash(accountHash string)
-	RelyingPartyIdentifier() string
-	SetRelyingPartyIdentifier(relyingPartyIdentifier string)
-}
-
-var _ ShareablePassMetadataable = (*ShareablePassMetadata)(nil)

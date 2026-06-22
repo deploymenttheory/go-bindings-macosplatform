@@ -46,24 +46,24 @@ func uniformAdopt(id objc.ID) *Uniform {
 }
 
 // Description returns the object's -description text.
-func (x *Uniform) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (u *Uniform) Description() string {
+	return rt.Description(objref.IDOf(u))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Uniform) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (u *Uniform) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(u), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Uniform) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (u *Uniform) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(u), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Uniform) String() string {
-	return rt.Description(objref.IDOf(x))
+func (u *Uniform) String() string {
+	return rt.Description(objref.IDOf(u))
 }
 
 // NewUniformWithName initializes a new uniform object.
@@ -87,21 +87,21 @@ func NewUniformWithNameFloat(name string, value float32) *Uniform {
 	return uniformAdopt(_id)
 }
 
-// WithTextureValue the receiver’s value as a SpriteKit texture.
-func (x *Uniform) WithTextureValue(textureValue TextureProvider) *Uniform {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureValue:"), objref.IDOf(textureValue))
-	return x
+// WithTextureValue sets the receiver’s value as a SpriteKit texture.
+func (u *Uniform) WithTextureValue(textureValue TextureProvider) *Uniform {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setTextureValue:"), objref.IDOf(textureValue))
+	return u
 }
 
-// WithFloatValue the receiver’s value as a floating-point value.
-func (x *Uniform) WithFloatValue(floatValue float32) *Uniform {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-	return x
+// WithFloatValue sets the receiver’s value as a floating-point value.
+func (u *Uniform) WithFloatValue(floatValue float32) *Uniform {
+	objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("setFloatValue:"), floatValue)
+	return u
 }
 
 // Name wraps the corresponding Objective-C method.
-func (x *Uniform) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (u *Uniform) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
@@ -109,44 +109,19 @@ func (x *Uniform) Name() string {
 }
 
 // UniformType wraps the corresponding Objective-C method.
-func (x *Uniform) UniformType() UniformType {
-	_r := objc.Send[UniformType](objref.IDOf(x), objc.RegisterName("uniformType"))
+func (u *Uniform) UniformType() UniformType {
+	_r := objc.Send[UniformType](objref.IDOf(u), objc.RegisterName("uniformType"))
 	return _r
 }
 
 // TextureValue wraps the corresponding Objective-C method.
-func (x *Uniform) TextureValue() *Texture {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureValue"))
+func (u *Uniform) TextureValue() *Texture {
+	_r := objc.Send[objc.ID](objref.IDOf(u), objc.RegisterName("textureValue"))
 	return TextureFromID(_r)
 }
 
-// SetTextureValue wraps the corresponding Objective-C method.
-func (x *Uniform) SetTextureValue(textureValue *Texture) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextureValue:"), objref.IDOf(textureValue))
-}
-
 // FloatValue wraps the corresponding Objective-C method.
-func (x *Uniform) FloatValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("floatValue"))
+func (u *Uniform) FloatValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(u), objc.RegisterName("floatValue"))
 	return _r
 }
-
-// SetFloatValue wraps the corresponding Objective-C method.
-func (x *Uniform) SetFloatValue(floatValue float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
-}
-
-// Uniformable is the interface implemented by [Uniform], for mocking and DI.
-type Uniformable interface {
-	obj.Object
-	WithTextureValue(textureValue TextureProvider) *Uniform
-	WithFloatValue(floatValue float32) *Uniform
-	Name() string
-	UniformType() UniformType
-	TextureValue() *Texture
-	SetTextureValue(textureValue *Texture)
-	FloatValue() float32
-	SetFloatValue(floatValue float32)
-}
-
-var _ Uniformable = (*Uniform)(nil)

@@ -6,12 +6,13 @@ package matter
 
 import (
 	"context"
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // AccessGrantForNodeIDPrivilege grant access at the provided level to a specific node on the fabric.  The provided nodeID must be an operational node identifier.
@@ -69109,7 +69110,7 @@ func XpcInterfaceForClientProtocol() obj.Object {
 	return obj.Wrap(_r)
 }
 
-// MTRDeviceControllerFactorySharedInstance return the single MTRDeviceControllerFactory we support existing.  It starts off in a "not started" state.
+// MTRDeviceControllerFactorySharedInstance returns the single MTRDeviceControllerFactory we support existing.  It starts off in a "not started" state.
 func MTRDeviceControllerFactorySharedInstance() *MTRDeviceControllerFactory {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTRDeviceControllerFactory")), objc.RegisterName("sharedInstance"))
 	return MTRDeviceControllerFactoryFromID(_r)
@@ -69189,13 +69190,13 @@ func NewDescriptorCluster() *MTRServerCluster {
 	return MTRServerClusterFromID(_r)
 }
 
-// GenerateRandomPIN generate a random Matter-valid setup PIN.
+// GenerateRandomPIN returns generate a random Matter-valid setup PIN.
 func GenerateRandomPIN() int {
 	_r := objc.Send[int](objc.ID(_class("MTRSetupPayload")), objc.RegisterName("generateRandomPIN"))
 	return _r
 }
 
-// GenerateRandomSetupPasscode generate a random Matter-valid setup passcode.
+// GenerateRandomSetupPasscode returns generate a random Matter-valid setup passcode.
 func GenerateRandomSetupPasscode() obj.Object {
 	_r := objc.Send[objc.ID](objc.ID(_class("MTRSetupPayload")), objc.RegisterName("generateRandomSetupPasscode"))
 	return obj.Wrap(_r)

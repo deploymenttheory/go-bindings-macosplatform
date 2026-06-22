@@ -7,7 +7,6 @@ package intents
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewIntegerResolutionResult() *IntegerResolutionResult {
 	_id := objc.Send[objc.ID](objc.ID(_class("INIntegerResolutionResult")), objc.RegisterName("new"))
 	return integerResolutionResultAdopt(_id)
 }
-
-// IntegerResolutionResultable is the interface implemented by [IntegerResolutionResult], for mocking and DI.
-type IntegerResolutionResultable interface {
-	obj.Object
-}
-
-var _ IntegerResolutionResultable = (*IntegerResolutionResult)(nil)
 
 var _ IntentResolutionResultProvider = (*IntegerResolutionResult)(nil)

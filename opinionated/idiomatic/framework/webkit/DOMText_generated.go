@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -45,68 +44,54 @@ func dOMTextAdopt(id objc.ID) *DOMText {
 }
 
 // WithData sets the property and returns the receiver so calls can be chained.
-func (x *DOMText) WithData(data string) *DOMText {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
-	return x
+func (dt *DOMText) WithData(data string) *DOMText {
+	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("setData:"), purego.NSString(data))
+	return dt
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMText) WithNodeValue(nodeValue string) *DOMText {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (dt *DOMText) WithNodeValue(nodeValue string) *DOMText {
+	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return dt
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMText) WithPrefix(prefix string) *DOMText {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (dt *DOMText) WithPrefix(prefix string) *DOMText {
+	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return dt
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMText) WithTextContent(textContent string) *DOMText {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (dt *DOMText) WithTextContent(textContent string) *DOMText {
+	objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return dt
 }
 
 // SplitText wraps the corresponding Objective-C method.
-func (x *DOMText) SplitText(offset int) *DOMText {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("splitText:"), offset)
+func (dt *DOMText) SplitText(offset int) *DOMText {
+	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("splitText:"), offset)
 	return DOMTextFromID(_r)
 }
 
 // ReplaceWholeText wraps the corresponding Objective-C method.
-func (x *DOMText) ReplaceWholeText(content string) *DOMText {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replaceWholeText:"), purego.NSString(content))
+func (dt *DOMText) ReplaceWholeText(content string) *DOMText {
+	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("replaceWholeText:"), purego.NSString(content))
 	return DOMTextFromID(_r)
 }
 
 // WholeText wraps the corresponding Objective-C method.
-func (x *DOMText) WholeText() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wholeText"))
+func (dt *DOMText) WholeText() string {
+	_r := objc.Send[objc.ID](objref.IDOf(dt), objc.RegisterName("wholeText"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// DOMTextable is the interface implemented by [DOMText], for mocking and DI.
-type DOMTextable interface {
-	obj.Object
-	WithData(data string) *DOMText
-	WithNodeValue(nodeValue string) *DOMText
-	WithPrefix(prefix string) *DOMText
-	WithTextContent(textContent string) *DOMText
-	SplitText(offset int) *DOMText
-	ReplaceWholeText(content string) *DOMText
-	WholeText() string
-}
-
-var _ DOMTextable = (*DOMText)(nil)
-
 // isDOMText marks DOMText — and, by embedding promotion, its
 // subclasses — as a member of the DOMText hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *DOMText) isDOMText() {}
+func (dt *DOMText) isDOMText() {}
 
 var _ DOMTextProvider = (*DOMText)(nil)
 

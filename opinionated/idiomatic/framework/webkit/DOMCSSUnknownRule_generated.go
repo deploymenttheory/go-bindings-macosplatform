@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -50,19 +49,11 @@ func NewDOMCSSUnknownRule() *DOMCSSUnknownRule {
 	return dOMCSSUnknownRuleAdopt(_id)
 }
 
-// WithCssText sets the property and returns the receiver so calls can be chained.
-func (x *DOMCSSUnknownRule) WithCssText(cssText string) *DOMCSSUnknownRule {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCssText:"), purego.NSString(cssText))
-	return x
+// WithCSSText sets the property and returns the receiver so calls can be chained.
+func (dur *DOMCSSUnknownRule) WithCSSText(cssText string) *DOMCSSUnknownRule {
+	objc.Send[objc.ID](objref.IDOf(dur), objc.RegisterName("setCssText:"), purego.NSString(cssText))
+	return dur
 }
-
-// DOMCSSUnknownRuleable is the interface implemented by [DOMCSSUnknownRule], for mocking and DI.
-type DOMCSSUnknownRuleable interface {
-	obj.Object
-	WithCssText(cssText string) *DOMCSSUnknownRule
-}
-
-var _ DOMCSSUnknownRuleable = (*DOMCSSUnknownRule)(nil)
 
 var _ DOMCSSRuleProvider = (*DOMCSSUnknownRule)(nil)
 

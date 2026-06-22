@@ -7,7 +7,6 @@ package gameplaykit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,74 +51,53 @@ func NewAgent2D() *Agent2D {
 	return agent2DAdopt(_id)
 }
 
-// WithRotation the rotation of the agent around the z-axis.
-func (x *Agent2D) WithRotation(rotation float32) *Agent2D {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotation:"), rotation)
-	return x
+// WithRotation sets the rotation of the agent around the z-axis.
+func (ad *Agent2D) WithRotation(rotation float32) *Agent2D {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setRotation:"), rotation)
+	return ad
 }
 
-// WithBehavior a weighted collection of goals that influence the agent’s movement.
-func (x *Agent2D) WithBehavior(behavior BehaviorProvider) *Agent2D {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
-	return x
+// WithBehavior sets a weighted collection of goals that influence the agent’s movement.
+func (ad *Agent2D) WithBehavior(behavior BehaviorProvider) *Agent2D {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setBehavior:"), objref.IDOf(behavior))
+	return ad
 }
 
-// WithMass the resistance of the agent to changes in speed or direction.
-func (x *Agent2D) WithMass(mass float32) *Agent2D {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMass:"), mass)
-	return x
+// WithMass sets the resistance of the agent to changes in speed or direction.
+func (ad *Agent2D) WithMass(mass float32) *Agent2D {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setMass:"), mass)
+	return ad
 }
 
-// WithRadius the agent’s radius.
-func (x *Agent2D) WithRadius(radius float32) *Agent2D {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
-	return x
+// WithRadius sets the agent’s radius.
+func (ad *Agent2D) WithRadius(radius float32) *Agent2D {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setRadius:"), radius)
+	return ad
 }
 
-// WithSpeed the agent’s current forward speed, in units per second.
-func (x *Agent2D) WithSpeed(speed float32) *Agent2D {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
-	return x
+// WithSpeed sets the agent’s current forward speed, in units per second.
+func (ad *Agent2D) WithSpeed(speed float32) *Agent2D {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setSpeed:"), speed)
+	return ad
 }
 
-// WithMaxAcceleration the upper limit to changes in the agent’s speed or direction.
-func (x *Agent2D) WithMaxAcceleration(maxAcceleration float32) *Agent2D {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxAcceleration:"), maxAcceleration)
-	return x
+// WithMaxAcceleration sets the upper limit to changes in the agent’s speed or direction.
+func (ad *Agent2D) WithMaxAcceleration(maxAcceleration float32) *Agent2D {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setMaxAcceleration:"), maxAcceleration)
+	return ad
 }
 
-// WithMaxSpeed the agent’s maximum forward speed, in units per second.
-func (x *Agent2D) WithMaxSpeed(maxSpeed float32) *Agent2D {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSpeed:"), maxSpeed)
-	return x
+// WithMaxSpeed sets the agent’s maximum forward speed, in units per second.
+func (ad *Agent2D) WithMaxSpeed(maxSpeed float32) *Agent2D {
+	objc.Send[objc.ID](objref.IDOf(ad), objc.RegisterName("setMaxSpeed:"), maxSpeed)
+	return ad
 }
 
-// Rotation z rotation of the agent on the logical XY plane
-func (x *Agent2D) Rotation() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rotation"))
+// Rotation returns z rotation of the agent on the logical XY plane
+func (ad *Agent2D) Rotation() float32 {
+	_r := objc.Send[float32](objref.IDOf(ad), objc.RegisterName("rotation"))
 	return _r
 }
-
-// SetRotation wraps the corresponding Objective-C method.
-func (x *Agent2D) SetRotation(rotation float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotation:"), rotation)
-}
-
-// Agent2Dable is the interface implemented by [Agent2D], for mocking and DI.
-type Agent2Dable interface {
-	obj.Object
-	WithRotation(rotation float32) *Agent2D
-	WithBehavior(behavior BehaviorProvider) *Agent2D
-	WithMass(mass float32) *Agent2D
-	WithRadius(radius float32) *Agent2D
-	WithSpeed(speed float32) *Agent2D
-	WithMaxAcceleration(maxAcceleration float32) *Agent2D
-	WithMaxSpeed(maxSpeed float32) *Agent2D
-	Rotation() float32
-	SetRotation(rotation float32)
-}
-
-var _ Agent2Dable = (*Agent2D)(nil)
 
 var _ AgentProvider = (*Agent2D)(nil)
 

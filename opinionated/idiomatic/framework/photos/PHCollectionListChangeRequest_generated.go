@@ -52,53 +52,35 @@ func NewCollectionListChangeRequest() *CollectionListChangeRequest {
 	return collectionListChangeRequestAdopt(_id)
 }
 
-// WithTitle the displayed name of the collection list.
-func (x *CollectionListChangeRequest) WithTitle(title string) *CollectionListChangeRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the displayed name of the collection list.
+func (clcr *CollectionListChangeRequest) WithTitle(title string) *CollectionListChangeRequest {
+	objc.Send[objc.ID](objref.IDOf(clcr), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return clcr
 }
 
 // RemoveChildCollectionsAtIndexes removes the child collections at the specified indexes from the collection list.
-func (x *CollectionListChangeRequest) RemoveChildCollectionsAtIndexes(indexes obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeChildCollectionsAtIndexes:"), objref.IDOf(indexes))
+func (clcr *CollectionListChangeRequest) RemoveChildCollectionsAtIndexes(indexes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(clcr), objc.RegisterName("removeChildCollectionsAtIndexes:"), objref.IDOf(indexes))
 }
 
 // MoveChildCollectionsAtIndexesToIndex moves the child collections at the specified indexes in the collection list to a new index.
-func (x *CollectionListChangeRequest) MoveChildCollectionsAtIndexesToIndex(indexes obj.Object, toIndex int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveChildCollectionsAtIndexes:toIndex:"), objref.IDOf(indexes), toIndex)
+func (clcr *CollectionListChangeRequest) MoveChildCollectionsAtIndexesToIndex(indexes obj.Object, toIndex int) {
+	objc.Send[objc.ID](objref.IDOf(clcr), objc.RegisterName("moveChildCollectionsAtIndexes:toIndex:"), objref.IDOf(indexes), toIndex)
 }
 
 // PlaceholderForCreatedCollectionList wraps the corresponding Objective-C method.
-func (x *CollectionListChangeRequest) PlaceholderForCreatedCollectionList() *ObjectPlaceholder {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderForCreatedCollectionList"))
+func (clcr *CollectionListChangeRequest) PlaceholderForCreatedCollectionList() *ObjectPlaceholder {
+	_r := objc.Send[objc.ID](objref.IDOf(clcr), objc.RegisterName("placeholderForCreatedCollectionList"))
 	return ObjectPlaceholderFromID(_r)
 }
 
 // Title wraps the corresponding Objective-C method.
-func (x *CollectionListChangeRequest) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (clcr *CollectionListChangeRequest) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(clcr), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetTitle wraps the corresponding Objective-C method.
-func (x *CollectionListChangeRequest) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-}
-
-// CollectionListChangeRequestable is the interface implemented by [CollectionListChangeRequest], for mocking and DI.
-type CollectionListChangeRequestable interface {
-	obj.Object
-	WithTitle(title string) *CollectionListChangeRequest
-	RemoveChildCollectionsAtIndexes(indexes obj.Object)
-	MoveChildCollectionsAtIndexesToIndex(indexes obj.Object, toIndex int)
-	PlaceholderForCreatedCollectionList() *ObjectPlaceholder
-	Title() string
-	SetTitle(title string)
-}
-
-var _ CollectionListChangeRequestable = (*CollectionListChangeRequest)(nil)
 
 var _ ChangeRequestProvider = (*CollectionListChangeRequest)(nil)

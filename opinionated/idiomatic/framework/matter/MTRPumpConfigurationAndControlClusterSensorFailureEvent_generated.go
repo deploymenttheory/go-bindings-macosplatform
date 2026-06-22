@@ -44,24 +44,24 @@ func mTRPumpConfigurationAndControlClusterSensorFailureEventAdopt(id objc.ID) *M
 }
 
 // Description returns the object's -description text.
-func (x *MTRPumpConfigurationAndControlClusterSensorFailureEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccsfe *MTRPumpConfigurationAndControlClusterSensorFailureEvent) Description() string {
+	return rt.Description(objref.IDOf(mpcaccsfe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRPumpConfigurationAndControlClusterSensorFailureEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mpcaccsfe *MTRPumpConfigurationAndControlClusterSensorFailureEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mpcaccsfe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRPumpConfigurationAndControlClusterSensorFailureEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mpcaccsfe *MTRPumpConfigurationAndControlClusterSensorFailureEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mpcaccsfe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRPumpConfigurationAndControlClusterSensorFailureEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mpcaccsfe *MTRPumpConfigurationAndControlClusterSensorFailureEvent) String() string {
+	return rt.Description(objref.IDOf(mpcaccsfe))
 }
 
 // NewMTRPumpConfigurationAndControlClusterSensorFailureEvent creates a new MTRPumpConfigurationAndControlClusterSensorFailureEvent.
@@ -69,10 +69,3 @@ func NewMTRPumpConfigurationAndControlClusterSensorFailureEvent() *MTRPumpConfig
 	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterSensorFailureEvent")), objc.RegisterName("new"))
 	return mTRPumpConfigurationAndControlClusterSensorFailureEventAdopt(_id)
 }
-
-// MTRPumpConfigurationAndControlClusterSensorFailureEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterSensorFailureEvent], for mocking and DI.
-type MTRPumpConfigurationAndControlClusterSensorFailureEventable interface {
-	obj.Object
-}
-
-var _ MTRPumpConfigurationAndControlClusterSensorFailureEventable = (*MTRPumpConfigurationAndControlClusterSensorFailureEvent)(nil)

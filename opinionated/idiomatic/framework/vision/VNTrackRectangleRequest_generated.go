@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/corefoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,61 +53,47 @@ func NewTrackRectangleRequestWithRectangleObservation(observation *RectangleObse
 	return trackRectangleRequestAdopt(_id)
 }
 
-// WithInputObservation the observation object defining a region to track.
-func (x *TrackRectangleRequest) WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackRectangleRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputObservation:"), objref.IDOf(inputObservation))
-	return x
+// WithInputObservation sets the observation object defining a region to track.
+func (trr *TrackRectangleRequest) WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackRectangleRequest {
+	objc.Send[objc.ID](objref.IDOf(trr), objc.RegisterName("setInputObservation:"), objref.IDOf(inputObservation))
+	return trr
 }
 
-// WithTrackingLevel a value for specifying whether to prioritize speed or location accuracy.
-func (x *TrackRectangleRequest) WithTrackingLevel(trackingLevel RequestTrackingLevel) *TrackRectangleRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTrackingLevel:"), trackingLevel)
-	return x
+// WithTrackingLevel sets a value for specifying whether to prioritize speed or location accuracy.
+func (trr *TrackRectangleRequest) WithTrackingLevel(trackingLevel RequestTrackingLevel) *TrackRectangleRequest {
+	objc.Send[objc.ID](objref.IDOf(trr), objc.RegisterName("setTrackingLevel:"), trackingLevel)
+	return trr
 }
 
-// WithLastFrame a Boolean that indicates the last frame in a tracking sequence.
-func (x *TrackRectangleRequest) WithLastFrame(lastFrame bool) *TrackRectangleRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLastFrame:"), lastFrame)
-	return x
+// WithLastFrame sets a Boolean that indicates the last frame in a tracking sequence.
+func (trr *TrackRectangleRequest) WithLastFrame(lastFrame bool) *TrackRectangleRequest {
+	objc.Send[objc.ID](objref.IDOf(trr), objc.RegisterName("setLastFrame:"), lastFrame)
+	return trr
 }
 
-// WithRegionOfInterest the region of the image in which Vision will perform the request.
-func (x *TrackRectangleRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackRectangleRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
-	return x
+// WithRegionOfInterest sets the region of the image in which Vision will perform the request.
+func (trr *TrackRectangleRequest) WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackRectangleRequest {
+	objc.Send[objc.ID](objref.IDOf(trr), objc.RegisterName("setRegionOfInterest:"), regionOfInterest)
+	return trr
 }
 
-// WithPreferBackgroundProcessing a hint to minimize the resource burden of the request.
-func (x *TrackRectangleRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackRectangleRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
-	return x
+// WithPreferBackgroundProcessing sets a hint to minimize the resource burden of the request.
+func (trr *TrackRectangleRequest) WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackRectangleRequest {
+	objc.Send[objc.ID](objref.IDOf(trr), objc.RegisterName("setPreferBackgroundProcessing:"), preferBackgroundProcessing)
+	return trr
 }
 
-// WithUsesCPUOnly a Boolean signifying that the Vision request should execute exclusively on the CPU.
-func (x *TrackRectangleRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackRectangleRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
-	return x
+// WithUsesCPUOnly sets a Boolean signifying that the Vision request should execute exclusively on the CPU.
+func (trr *TrackRectangleRequest) WithUsesCPUOnly(usesCPUOnly bool) *TrackRectangleRequest {
+	objc.Send[objc.ID](objref.IDOf(trr), objc.RegisterName("setUsesCPUOnly:"), usesCPUOnly)
+	return trr
 }
 
-// WithRevision the specific algorithm or implementation revision that’s used to perform the request.
-func (x *TrackRectangleRequest) WithRevision(revision int) *TrackRectangleRequest {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRevision:"), revision)
-	return x
+// WithRevision sets the specific algorithm or implementation revision that’s used to perform the request.
+func (trr *TrackRectangleRequest) WithRevision(revision int) *TrackRectangleRequest {
+	objc.Send[objc.ID](objref.IDOf(trr), objc.RegisterName("setRevision:"), revision)
+	return trr
 }
-
-// TrackRectangleRequestable is the interface implemented by [TrackRectangleRequest], for mocking and DI.
-type TrackRectangleRequestable interface {
-	obj.Object
-	WithInputObservation(inputObservation DetectedObjectObservationProvider) *TrackRectangleRequest
-	WithTrackingLevel(trackingLevel RequestTrackingLevel) *TrackRectangleRequest
-	WithLastFrame(lastFrame bool) *TrackRectangleRequest
-	WithRegionOfInterest(regionOfInterest corefoundation.CGRect) *TrackRectangleRequest
-	WithPreferBackgroundProcessing(preferBackgroundProcessing bool) *TrackRectangleRequest
-	WithUsesCPUOnly(usesCPUOnly bool) *TrackRectangleRequest
-	WithRevision(revision int) *TrackRectangleRequest
-}
-
-var _ TrackRectangleRequestable = (*TrackRectangleRequest)(nil)
 
 var _ TrackingRequestProvider = (*TrackRectangleRequest)(nil)
 

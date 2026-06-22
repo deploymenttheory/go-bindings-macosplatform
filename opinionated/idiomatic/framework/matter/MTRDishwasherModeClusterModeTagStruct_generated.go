@@ -44,24 +44,24 @@ func mTRDishwasherModeClusterModeTagStructAdopt(id objc.ID) *MTRDishwasherModeCl
 }
 
 // Description returns the object's -description text.
-func (x *MTRDishwasherModeClusterModeTagStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) Description() string {
+	return rt.Description(objref.IDOf(mdmcmts))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRDishwasherModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mdmcmts), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRDishwasherModeClusterModeTagStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mdmcmts), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRDishwasherModeClusterModeTagStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) String() string {
+	return rt.Description(objref.IDOf(mdmcmts))
 }
 
 // NewMTRDishwasherModeClusterModeTagStruct creates a new MTRDishwasherModeClusterModeTagStruct.
@@ -71,48 +71,25 @@ func NewMTRDishwasherModeClusterModeTagStruct() *MTRDishwasherModeClusterModeTag
 }
 
 // WithMfgCode sets the property and returns the receiver so calls can be chained.
-func (x *MTRDishwasherModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRDishwasherModeClusterModeTagStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
-	return x
+func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) WithMfgCode(mfgCode obj.Object) *MTRDishwasherModeClusterModeTagStruct {
+	objc.Send[objc.ID](objref.IDOf(mdmcmts), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
+	return mdmcmts
 }
 
 // WithValue sets the property and returns the receiver so calls can be chained.
-func (x *MTRDishwasherModeClusterModeTagStruct) WithValue(value obj.Object) *MTRDishwasherModeClusterModeTagStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-	return x
+func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) WithValue(value obj.Object) *MTRDishwasherModeClusterModeTagStruct {
+	objc.Send[objc.ID](objref.IDOf(mdmcmts), objc.RegisterName("setValue:"), objref.IDOf(value))
+	return mdmcmts
 }
 
 // MfgCode wraps the corresponding Objective-C method.
-func (x *MTRDishwasherModeClusterModeTagStruct) MfgCode() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mfgCode"))
+func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) MfgCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdmcmts), objc.RegisterName("mfgCode"))
 	return obj.Wrap(_r)
-}
-
-// SetMfgCode wraps the corresponding Objective-C method.
-func (x *MTRDishwasherModeClusterModeTagStruct) SetMfgCode(mfgCode obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMfgCode:"), objref.IDOf(mfgCode))
 }
 
 // Value wraps the corresponding Objective-C method.
-func (x *MTRDishwasherModeClusterModeTagStruct) Value() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+func (mdmcmts *MTRDishwasherModeClusterModeTagStruct) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdmcmts), objc.RegisterName("value"))
 	return obj.Wrap(_r)
 }
-
-// SetValue wraps the corresponding Objective-C method.
-func (x *MTRDishwasherModeClusterModeTagStruct) SetValue(value obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), objref.IDOf(value))
-}
-
-// MTRDishwasherModeClusterModeTagStructable is the interface implemented by [MTRDishwasherModeClusterModeTagStruct], for mocking and DI.
-type MTRDishwasherModeClusterModeTagStructable interface {
-	obj.Object
-	WithMfgCode(mfgCode obj.Object) *MTRDishwasherModeClusterModeTagStruct
-	WithValue(value obj.Object) *MTRDishwasherModeClusterModeTagStruct
-	MfgCode() obj.Object
-	SetMfgCode(mfgCode obj.Object)
-	Value() obj.Object
-	SetValue(value obj.Object)
-}
-
-var _ MTRDishwasherModeClusterModeTagStructable = (*MTRDishwasherModeClusterModeTagStruct)(nil)

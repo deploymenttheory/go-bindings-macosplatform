@@ -46,24 +46,24 @@ func contentEditingInputAdopt(id objc.ID) *ContentEditingInput {
 }
 
 // Description returns the object's -description text.
-func (x *ContentEditingInput) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cei *ContentEditingInput) Description() string {
+	return rt.Description(objref.IDOf(cei))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContentEditingInput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cei *ContentEditingInput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cei), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContentEditingInput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cei *ContentEditingInput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cei), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ContentEditingInput) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cei *ContentEditingInput) String() string {
+	return rt.Description(objref.IDOf(cei))
 }
 
 // NewContentEditingInput creates a new ContentEditingInput.
@@ -73,32 +73,32 @@ func NewContentEditingInput() *ContentEditingInput {
 }
 
 // MediaType wraps the corresponding Objective-C method.
-func (x *ContentEditingInput) MediaType() AssetMediaType {
-	_r := objc.Send[AssetMediaType](objref.IDOf(x), objc.RegisterName("mediaType"))
+func (cei *ContentEditingInput) MediaType() AssetMediaType {
+	_r := objc.Send[AssetMediaType](objref.IDOf(cei), objc.RegisterName("mediaType"))
 	return _r
 }
 
 // MediaSubtypes wraps the corresponding Objective-C method.
-func (x *ContentEditingInput) MediaSubtypes() AssetMediaSubtype {
-	_r := objc.Send[AssetMediaSubtype](objref.IDOf(x), objc.RegisterName("mediaSubtypes"))
+func (cei *ContentEditingInput) MediaSubtypes() AssetMediaSubtype {
+	_r := objc.Send[AssetMediaSubtype](objref.IDOf(cei), objc.RegisterName("mediaSubtypes"))
 	return _r
 }
 
 // CreationDate wraps the corresponding Objective-C method.
-func (x *ContentEditingInput) CreationDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
+func (cei *ContentEditingInput) CreationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("creationDate"))
 	return obj.Wrap(_r)
 }
 
-// ContentType the type of data provided as the asset's content editing input image or video.
-func (x *ContentEditingInput) ContentType() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
+// ContentType returns the type of data provided as the asset's content editing input image or video.
+func (cei *ContentEditingInput) ContentType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("contentType"))
 	return obj.Wrap(_r)
 }
 
 // UniformTypeIdentifier wraps the corresponding Objective-C method.
-func (x *ContentEditingInput) UniformTypeIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniformTypeIdentifier"))
+func (cei *ContentEditingInput) UniformTypeIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("uniformTypeIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -106,62 +106,43 @@ func (x *ContentEditingInput) UniformTypeIdentifier() string {
 }
 
 // PlaybackStyle wraps the corresponding Objective-C method.
-func (x *ContentEditingInput) PlaybackStyle() AssetPlaybackStyle {
-	_r := objc.Send[AssetPlaybackStyle](objref.IDOf(x), objc.RegisterName("playbackStyle"))
+func (cei *ContentEditingInput) PlaybackStyle() AssetPlaybackStyle {
+	_r := objc.Send[AssetPlaybackStyle](objref.IDOf(cei), objc.RegisterName("playbackStyle"))
 	return _r
 }
 
 // AdjustmentData wraps the corresponding Objective-C method.
-func (x *ContentEditingInput) AdjustmentData() *AdjustmentData {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustmentData"))
+func (cei *ContentEditingInput) AdjustmentData() *AdjustmentData {
+	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("adjustmentData"))
 	return AdjustmentDataFromID(_r)
 }
 
 // DisplaySizeImage wraps the corresponding Objective-C method.
-func (x *ContentEditingInput) DisplaySizeImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displaySizeImage"))
+func (cei *ContentEditingInput) DisplaySizeImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("displaySizeImage"))
 	return obj.Wrap(_r)
 }
 
 // FullSizeImageURL wraps the corresponding Objective-C method.
-func (x *ContentEditingInput) FullSizeImageURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullSizeImageURL"))
+func (cei *ContentEditingInput) FullSizeImageURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("fullSizeImageURL"))
 	return obj.Wrap(_r)
 }
 
 // FullSizeImageOrientation wraps the corresponding Objective-C method.
-func (x *ContentEditingInput) FullSizeImageOrientation() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fullSizeImageOrientation"))
+func (cei *ContentEditingInput) FullSizeImageOrientation() int {
+	_r := objc.Send[int](objref.IDOf(cei), objc.RegisterName("fullSizeImageOrientation"))
 	return _r
 }
 
 // AudiovisualAsset wraps the corresponding Objective-C method.
-func (x *ContentEditingInput) AudiovisualAsset() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audiovisualAsset"))
+func (cei *ContentEditingInput) AudiovisualAsset() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("audiovisualAsset"))
 	return obj.Wrap(_r)
 }
 
 // LivePhoto wraps the corresponding Objective-C method.
-func (x *ContentEditingInput) LivePhoto() *LivePhoto {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("livePhoto"))
+func (cei *ContentEditingInput) LivePhoto() *LivePhoto {
+	_r := objc.Send[objc.ID](objref.IDOf(cei), objc.RegisterName("livePhoto"))
 	return LivePhotoFromID(_r)
 }
-
-// ContentEditingInputable is the interface implemented by [ContentEditingInput], for mocking and DI.
-type ContentEditingInputable interface {
-	obj.Object
-	MediaType() AssetMediaType
-	MediaSubtypes() AssetMediaSubtype
-	CreationDate() obj.Object
-	ContentType() obj.Object
-	UniformTypeIdentifier() string
-	PlaybackStyle() AssetPlaybackStyle
-	AdjustmentData() *AdjustmentData
-	DisplaySizeImage() obj.Object
-	FullSizeImageURL() obj.Object
-	FullSizeImageOrientation() int
-	AudiovisualAsset() obj.Object
-	LivePhoto() *LivePhoto
-}
-
-var _ ContentEditingInputable = (*ContentEditingInput)(nil)

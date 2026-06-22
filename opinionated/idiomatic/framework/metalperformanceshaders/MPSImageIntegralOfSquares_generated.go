@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -54,33 +53,23 @@ func NewImageIntegralOfSquares() *ImageIntegralOfSquares {
 	return imageIntegralOfSquaresAdopt(_id)
 }
 
-// WithOffset the position of the destination clip rectangle origin relative to the source buffer.
-func (x *ImageIntegralOfSquares) WithOffset(offset mpscore.MPSOffset) *ImageIntegralOfSquares {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOffset:"), offset)
-	return x
+// WithOffset sets the position of the destination clip rectangle origin relative to the source buffer.
+func (iios *ImageIntegralOfSquares) WithOffset(offset mpscore.MPSOffset) *ImageIntegralOfSquares {
+	objc.Send[objc.ID](objref.IDOf(iios), objc.RegisterName("setOffset:"), offset)
+	return iios
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-func (x *ImageIntegralOfSquares) WithClipRect(clipRect metal.MTLRegion) *ImageIntegralOfSquares {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
+func (iios *ImageIntegralOfSquares) WithClipRect(clipRect metal.MTLRegion) *ImageIntegralOfSquares {
+	objc.Send[objc.ID](objref.IDOf(iios), objc.RegisterName("setClipRect:"), clipRect)
+	return iios
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *ImageIntegralOfSquares) WithLabel(label string) *ImageIntegralOfSquares {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (iios *ImageIntegralOfSquares) WithLabel(label string) *ImageIntegralOfSquares {
+	objc.Send[objc.ID](objref.IDOf(iios), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return iios
 }
-
-// ImageIntegralOfSquaresable is the interface implemented by [ImageIntegralOfSquares], for mocking and DI.
-type ImageIntegralOfSquaresable interface {
-	obj.Object
-	WithOffset(offset mpscore.MPSOffset) *ImageIntegralOfSquares
-	WithClipRect(clipRect metal.MTLRegion) *ImageIntegralOfSquares
-	WithLabel(label string) *ImageIntegralOfSquares
-}
-
-var _ ImageIntegralOfSquaresable = (*ImageIntegralOfSquares)(nil)
 
 var _ UnaryImageKernelProvider = (*ImageIntegralOfSquares)(nil)
 

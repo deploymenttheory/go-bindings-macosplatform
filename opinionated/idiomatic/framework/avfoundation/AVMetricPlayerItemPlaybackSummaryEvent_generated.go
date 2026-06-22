@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,80 +52,63 @@ func NewMetricPlayerItemPlaybackSummaryEvent() *MetricPlayerItemPlaybackSummaryE
 }
 
 // ErrorEvent returns the error event if any. If no value is available, returns nil.
-func (x *MetricPlayerItemPlaybackSummaryEvent) ErrorEvent() *MetricErrorEvent {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorEvent"))
+func (mpipse *MetricPlayerItemPlaybackSummaryEvent) ErrorEvent() *MetricErrorEvent {
+	_r := objc.Send[objc.ID](objref.IDOf(mpipse), objc.RegisterName("errorEvent"))
 	return MetricErrorEventFromID(_r)
 }
 
 // RecoverableErrorCount returns the total count of recoverable errors encountered during playback. If no errors were encountered, returns 0.
-func (x *MetricPlayerItemPlaybackSummaryEvent) RecoverableErrorCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("recoverableErrorCount"))
+func (mpipse *MetricPlayerItemPlaybackSummaryEvent) RecoverableErrorCount() int {
+	_r := objc.Send[int](objref.IDOf(mpipse), objc.RegisterName("recoverableErrorCount"))
 	return _r
 }
 
 // StallCount returns the total count of stalls encountered during playback. If no stalls were encountered, returns 0.
-func (x *MetricPlayerItemPlaybackSummaryEvent) StallCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("stallCount"))
+func (mpipse *MetricPlayerItemPlaybackSummaryEvent) StallCount() int {
+	_r := objc.Send[int](objref.IDOf(mpipse), objc.RegisterName("stallCount"))
 	return _r
 }
 
 // VariantSwitchCount returns the total count of variant switch encountered during playback.
-func (x *MetricPlayerItemPlaybackSummaryEvent) VariantSwitchCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("variantSwitchCount"))
+func (mpipse *MetricPlayerItemPlaybackSummaryEvent) VariantSwitchCount() int {
+	_r := objc.Send[int](objref.IDOf(mpipse), objc.RegisterName("variantSwitchCount"))
 	return _r
 }
 
 // PlaybackDuration returns the total duration of playback in seconds.
-func (x *MetricPlayerItemPlaybackSummaryEvent) PlaybackDuration() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("playbackDuration"))
+func (mpipse *MetricPlayerItemPlaybackSummaryEvent) PlaybackDuration() int {
+	_r := objc.Send[int](objref.IDOf(mpipse), objc.RegisterName("playbackDuration"))
 	return _r
 }
 
 // MediaResourceRequestCount returns the total number of media requests performed by the player. This includes playlist requests, media segment requests, and content key requests.
-func (x *MetricPlayerItemPlaybackSummaryEvent) MediaResourceRequestCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("mediaResourceRequestCount"))
+func (mpipse *MetricPlayerItemPlaybackSummaryEvent) MediaResourceRequestCount() int {
+	_r := objc.Send[int](objref.IDOf(mpipse), objc.RegisterName("mediaResourceRequestCount"))
 	return _r
 }
 
 // TimeSpentRecoveringFromStall returns the total time spent recovering from a stall event.
-func (x *MetricPlayerItemPlaybackSummaryEvent) TimeSpentRecoveringFromStall() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeSpentRecoveringFromStall"))
+func (mpipse *MetricPlayerItemPlaybackSummaryEvent) TimeSpentRecoveringFromStall() float64 {
+	_r := objc.Send[float64](objref.IDOf(mpipse), objc.RegisterName("timeSpentRecoveringFromStall"))
 	return _r
 }
 
 // TimeSpentInInitialStartup returns the total time spent in initial startup of playback.
-func (x *MetricPlayerItemPlaybackSummaryEvent) TimeSpentInInitialStartup() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeSpentInInitialStartup"))
+func (mpipse *MetricPlayerItemPlaybackSummaryEvent) TimeSpentInInitialStartup() float64 {
+	_r := objc.Send[float64](objref.IDOf(mpipse), objc.RegisterName("timeSpentInInitialStartup"))
 	return _r
 }
 
 // TimeWeightedAverageBitrate returns the playtime weighted average bitrate played in bits / second.
-func (x *MetricPlayerItemPlaybackSummaryEvent) TimeWeightedAverageBitrate() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeWeightedAverageBitrate"))
+func (mpipse *MetricPlayerItemPlaybackSummaryEvent) TimeWeightedAverageBitrate() int {
+	_r := objc.Send[int](objref.IDOf(mpipse), objc.RegisterName("timeWeightedAverageBitrate"))
 	return _r
 }
 
 // TimeWeightedPeakBitrate returns the playtime weighted peak bitrate played in bits / second.
-func (x *MetricPlayerItemPlaybackSummaryEvent) TimeWeightedPeakBitrate() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("timeWeightedPeakBitrate"))
+func (mpipse *MetricPlayerItemPlaybackSummaryEvent) TimeWeightedPeakBitrate() int {
+	_r := objc.Send[int](objref.IDOf(mpipse), objc.RegisterName("timeWeightedPeakBitrate"))
 	return _r
 }
-
-// MetricPlayerItemPlaybackSummaryEventable is the interface implemented by [MetricPlayerItemPlaybackSummaryEvent], for mocking and DI.
-type MetricPlayerItemPlaybackSummaryEventable interface {
-	obj.Object
-	ErrorEvent() *MetricErrorEvent
-	RecoverableErrorCount() int
-	StallCount() int
-	VariantSwitchCount() int
-	PlaybackDuration() int
-	MediaResourceRequestCount() int
-	TimeSpentRecoveringFromStall() float64
-	TimeSpentInInitialStartup() float64
-	TimeWeightedAverageBitrate() int
-	TimeWeightedPeakBitrate() int
-}
-
-var _ MetricPlayerItemPlaybackSummaryEventable = (*MetricPlayerItemPlaybackSummaryEvent)(nil)
 
 var _ MetricEventProvider = (*MetricPlayerItemPlaybackSummaryEvent)(nil)

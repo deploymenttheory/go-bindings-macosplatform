@@ -54,17 +54,9 @@ func NewReceiptRefreshRequestWithReceiptProperties(properties obj.Object) *Recei
 }
 
 // ReceiptProperties wraps the corresponding Objective-C method.
-func (x *ReceiptRefreshRequest) ReceiptProperties() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("receiptProperties"))
+func (rrr *ReceiptRefreshRequest) ReceiptProperties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(rrr), objc.RegisterName("receiptProperties"))
 	return obj.Wrap(_r)
 }
-
-// ReceiptRefreshRequestable is the interface implemented by [ReceiptRefreshRequest], for mocking and DI.
-type ReceiptRefreshRequestable interface {
-	obj.Object
-	ReceiptProperties() obj.Object
-}
-
-var _ ReceiptRefreshRequestable = (*ReceiptRefreshRequest)(nil)
 
 var _ RequestProvider = (*ReceiptRefreshRequest)(nil)

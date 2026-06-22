@@ -7,7 +7,6 @@ package mediaplayer
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,58 +51,34 @@ func NewRatingCommand() *RatingCommand {
 	return ratingCommandAdopt(_id)
 }
 
-// WithMinimumRating the minimum rating for a command.
-func (x *RatingCommand) WithMinimumRating(minimumRating float32) *RatingCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumRating:"), minimumRating)
-	return x
+// WithMinimumRating sets the minimum rating for a command.
+func (rc *RatingCommand) WithMinimumRating(minimumRating float32) *RatingCommand {
+	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("setMinimumRating:"), minimumRating)
+	return rc
 }
 
-// WithMaximumRating the maximum rating for a command.
-func (x *RatingCommand) WithMaximumRating(maximumRating float32) *RatingCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumRating:"), maximumRating)
-	return x
+// WithMaximumRating sets the maximum rating for a command.
+func (rc *RatingCommand) WithMaximumRating(maximumRating float32) *RatingCommand {
+	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("setMaximumRating:"), maximumRating)
+	return rc
 }
 
-// WithEnabled a Boolean value that indicates whether a user can interact with the displayed element.
-func (x *RatingCommand) WithEnabled(enabled bool) *RatingCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether a user can interact with the displayed element.
+func (rc *RatingCommand) WithEnabled(enabled bool) *RatingCommand {
+	objc.Send[objc.ID](objref.IDOf(rc), objc.RegisterName("setEnabled:"), enabled)
+	return rc
 }
 
-// MinimumRating minimum rating for the command.
-func (x *RatingCommand) MinimumRating() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumRating"))
+// MinimumRating returns minimum rating for the command.
+func (rc *RatingCommand) MinimumRating() float32 {
+	_r := objc.Send[float32](objref.IDOf(rc), objc.RegisterName("minimumRating"))
 	return _r
 }
 
-// SetMinimumRating wraps the corresponding Objective-C method.
-func (x *RatingCommand) SetMinimumRating(minimumRating float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumRating:"), minimumRating)
-}
-
-// MaximumRating maximum rating for the command.
-func (x *RatingCommand) MaximumRating() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumRating"))
+// MaximumRating returns maximum rating for the command.
+func (rc *RatingCommand) MaximumRating() float32 {
+	_r := objc.Send[float32](objref.IDOf(rc), objc.RegisterName("maximumRating"))
 	return _r
 }
-
-// SetMaximumRating wraps the corresponding Objective-C method.
-func (x *RatingCommand) SetMaximumRating(maximumRating float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumRating:"), maximumRating)
-}
-
-// RatingCommandable is the interface implemented by [RatingCommand], for mocking and DI.
-type RatingCommandable interface {
-	obj.Object
-	WithMinimumRating(minimumRating float32) *RatingCommand
-	WithMaximumRating(maximumRating float32) *RatingCommand
-	WithEnabled(enabled bool) *RatingCommand
-	MinimumRating() float32
-	SetMinimumRating(minimumRating float32)
-	MaximumRating() float32
-	SetMaximumRating(maximumRating float32)
-}
-
-var _ RatingCommandable = (*RatingCommand)(nil)
 
 var _ RemoteCommandProvider = (*RatingCommand)(nil)

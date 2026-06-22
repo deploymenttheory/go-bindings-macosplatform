@@ -46,24 +46,24 @@ func assessmentApplicationAdopt(id objc.ID) *AssessmentApplication {
 }
 
 // Description returns the object's -description text.
-func (x *AssessmentApplication) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (aa *AssessmentApplication) Description() string {
+	return rt.Description(objref.IDOf(aa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AssessmentApplication) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (aa *AssessmentApplication) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(aa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AssessmentApplication) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (aa *AssessmentApplication) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(aa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AssessmentApplication) String() string {
-	return rt.Description(objref.IDOf(x))
+func (aa *AssessmentApplication) String() string {
+	return rt.Description(objref.IDOf(aa))
 }
 
 // NewAssessmentApplicationWithBundleIdentifier creates a representation of an app using its bundle identifier.
@@ -80,15 +80,15 @@ func NewAssessmentApplicationWithBundleIdentifierTeamIdentifier(bundleIdentifier
 	return assessmentApplicationAdopt(_id)
 }
 
-// WithRequiresSignatureValidation a Boolean that indicates whether the session requires the app to have a valid code signature to run.
-func (x *AssessmentApplication) WithRequiresSignatureValidation(requiresSignatureValidation bool) *AssessmentApplication {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSignatureValidation:"), requiresSignatureValidation)
-	return x
+// WithRequiresSignatureValidation sets a Boolean that indicates whether the session requires the app to have a valid code signature to run.
+func (aa *AssessmentApplication) WithRequiresSignatureValidation(requiresSignatureValidation bool) *AssessmentApplication {
+	objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("setRequiresSignatureValidation:"), requiresSignatureValidation)
+	return aa
 }
 
 // BundleIdentifier wraps the corresponding Objective-C method.
-func (x *AssessmentApplication) BundleIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
+func (aa *AssessmentApplication) BundleIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("bundleIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -96,8 +96,8 @@ func (x *AssessmentApplication) BundleIdentifier() string {
 }
 
 // TeamIdentifier wraps the corresponding Objective-C method.
-func (x *AssessmentApplication) TeamIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("teamIdentifier"))
+func (aa *AssessmentApplication) TeamIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(aa), objc.RegisterName("teamIdentifier"))
 	if _r == 0 {
 		return ""
 	}
@@ -105,24 +105,7 @@ func (x *AssessmentApplication) TeamIdentifier() string {
 }
 
 // RequiresSignatureValidation wraps the corresponding Objective-C method.
-func (x *AssessmentApplication) RequiresSignatureValidation() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("requiresSignatureValidation"))
+func (aa *AssessmentApplication) RequiresSignatureValidation() bool {
+	_r := objc.Send[bool](objref.IDOf(aa), objc.RegisterName("requiresSignatureValidation"))
 	return _r
 }
-
-// SetRequiresSignatureValidation wraps the corresponding Objective-C method.
-func (x *AssessmentApplication) SetRequiresSignatureValidation(requiresSignatureValidation bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequiresSignatureValidation:"), requiresSignatureValidation)
-}
-
-// AssessmentApplicationable is the interface implemented by [AssessmentApplication], for mocking and DI.
-type AssessmentApplicationable interface {
-	obj.Object
-	WithRequiresSignatureValidation(requiresSignatureValidation bool) *AssessmentApplication
-	BundleIdentifier() string
-	TeamIdentifier() string
-	RequiresSignatureValidation() bool
-	SetRequiresSignatureValidation(requiresSignatureValidation bool)
-}
-
-var _ AssessmentApplicationable = (*AssessmentApplication)(nil)

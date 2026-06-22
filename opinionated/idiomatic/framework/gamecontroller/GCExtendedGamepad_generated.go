@@ -46,156 +46,129 @@ func extendedGamepadAdopt(id objc.ID) *ExtendedGamepad {
 	return x
 }
 
-// WithValueDidChangeHandler the block that the profile calls when an element’s value changes.
-func (x *ExtendedGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *ExtendedGamepad {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
-	return x
+// WithValueDidChangeHandler sets the block that the profile calls when an element’s value changes.
+func (eg *ExtendedGamepad) WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *ExtendedGamepad {
+	objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("setValueDidChangeHandler:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 objc.ID) { valueDidChangeHandler(obj.Wrap(_b0), obj.Wrap(_b1)) }))
+	return eg
 }
 
-// SaveSnapshot saves a snapshot of all of the profile’s elements.
-func (x *ExtendedGamepad) SaveSnapshot() *ExtendedGamepadSnapshot {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("saveSnapshot"))
+// SaveSnapshot returns saves a snapshot of all of the profile’s elements.
+func (eg *ExtendedGamepad) SaveSnapshot() *ExtendedGamepadSnapshot {
+	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("saveSnapshot"))
 	return ExtendedGamepadSnapshotFromID(_r)
 }
 
 // SetStateFromExtendedGamepad copies the input values from a specified extended gamepad to a snapshot of an extended gamepad.
-func (x *ExtendedGamepad) SetStateFromExtendedGamepad(extendedGamepad *ExtendedGamepad) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStateFromExtendedGamepad:"), objref.IDOf(extendedGamepad))
+func (eg *ExtendedGamepad) SetStateFromExtendedGamepad(extendedGamepad *ExtendedGamepad) {
+	objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("setStateFromExtendedGamepad:"), objref.IDOf(extendedGamepad))
 }
 
-// Controller a profile keeps a reference to the controller that this profile is mapping input from.
-func (x *ExtendedGamepad) Controller() *Controller {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controller"))
+// Controller returns a profile keeps a reference to the controller that this profile is mapping input from.
+func (eg *ExtendedGamepad) Controller() *Controller {
+	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("controller"))
 	return ControllerFromID(_r)
 }
 
-// Dpad required to be analog in the Extended profile. All the elements of this directional input are thus analog.
-func (x *ExtendedGamepad) Dpad() *ControllerDirectionPad {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dpad"))
+// Dpad returns required to be analog in the Extended profile. All the elements of this directional input are thus analog.
+func (eg *ExtendedGamepad) Dpad() *ControllerDirectionPad {
+	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("dpad"))
 	return ControllerDirectionPadFromID(_r)
 }
 
-// ButtonA all face buttons are required to be analog in the Extended profile. These must be arranged in the diamond pattern given below: Y / \ X   B \ / A
-func (x *ExtendedGamepad) ButtonA() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonA"))
+// ButtonA returns all face buttons are required to be analog in the Extended profile. These must be arranged in the diamond pattern given below: Y / \ X   B \ / A
+func (eg *ExtendedGamepad) ButtonA() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("buttonA"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ButtonB wraps the corresponding Objective-C method.
-func (x *ExtendedGamepad) ButtonB() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonB"))
+func (eg *ExtendedGamepad) ButtonB() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("buttonB"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ButtonX wraps the corresponding Objective-C method.
-func (x *ExtendedGamepad) ButtonX() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonX"))
+func (eg *ExtendedGamepad) ButtonX() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("buttonX"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // ButtonY wraps the corresponding Objective-C method.
-func (x *ExtendedGamepad) ButtonY() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonY"))
+func (eg *ExtendedGamepad) ButtonY() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("buttonY"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// ButtonMenu button menu is the primary menu button, and should be used to enter the main menu and pause the game.
-func (x *ExtendedGamepad) ButtonMenu() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonMenu"))
+// ButtonMenu returns button menu is the primary menu button, and should be used to enter the main menu and pause the game.
+func (eg *ExtendedGamepad) ButtonMenu() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("buttonMenu"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// ButtonOptions button options is the secondary menu button. It should be used to enter a secondary menu, such as graphics and sound configuration, and pause the game.
-func (x *ExtendedGamepad) ButtonOptions() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonOptions"))
+// ButtonOptions returns button options is the secondary menu button. It should be used to enter a secondary menu, such as graphics and sound configuration, and pause the game.
+func (eg *ExtendedGamepad) ButtonOptions() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("buttonOptions"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// ButtonHome button home is a special menu button. If the system does not consume button home events, they will be passed to your application and should be used to enter a secondary menu, and pause the game.
-func (x *ExtendedGamepad) ButtonHome() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonHome"))
+// ButtonHome returns button home is a special menu button. If the system does not consume button home events, they will be passed to your application and should be used to enter a secondary menu, and pause the game.
+func (eg *ExtendedGamepad) ButtonHome() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("buttonHome"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// LeftThumbstick a thumbstick is a 2-axis control that is physically required to be analog. All the elements of this directional input are thus analog.
-func (x *ExtendedGamepad) LeftThumbstick() *ControllerDirectionPad {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftThumbstick"))
+// LeftThumbstick returns a thumbstick is a 2-axis control that is physically required to be analog. All the elements of this directional input are thus analog.
+func (eg *ExtendedGamepad) LeftThumbstick() *ControllerDirectionPad {
+	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("leftThumbstick"))
 	return ControllerDirectionPadFromID(_r)
 }
 
-// RightThumbstick a thumbstick is a 2-axis control that is physically required to be analog. All the elements of this directional input are thus analog.
-func (x *ExtendedGamepad) RightThumbstick() *ControllerDirectionPad {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightThumbstick"))
+// RightThumbstick returns a thumbstick is a 2-axis control that is physically required to be analog. All the elements of this directional input are thus analog.
+func (eg *ExtendedGamepad) RightThumbstick() *ControllerDirectionPad {
+	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("rightThumbstick"))
 	return ControllerDirectionPadFromID(_r)
 }
 
-// LeftShoulder shoulder buttons are required to be analog inputs.
-func (x *ExtendedGamepad) LeftShoulder() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftShoulder"))
+// LeftShoulder returns shoulder buttons are required to be analog inputs.
+func (eg *ExtendedGamepad) LeftShoulder() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("leftShoulder"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// RightShoulder shoulder buttons are required to be analog inputs.
-func (x *ExtendedGamepad) RightShoulder() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightShoulder"))
+// RightShoulder returns shoulder buttons are required to be analog inputs.
+func (eg *ExtendedGamepad) RightShoulder() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("rightShoulder"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// LeftTrigger triggers are required to be analog inputs. Common uses would be acceleration and decelleration in a driving game for example.
-func (x *ExtendedGamepad) LeftTrigger() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftTrigger"))
+// LeftTrigger returns triggers are required to be analog inputs. Common uses would be acceleration and decelleration in a driving game for example.
+func (eg *ExtendedGamepad) LeftTrigger() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("leftTrigger"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // RightTrigger wraps the corresponding Objective-C method.
-func (x *ExtendedGamepad) RightTrigger() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightTrigger"))
+func (eg *ExtendedGamepad) RightTrigger() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("rightTrigger"))
 	return ControllerButtonInputFromID(_r)
 }
 
-// LeftThumbstickButton a thumbstick may also have a clickable component, which is treated as a non-analog button.
-func (x *ExtendedGamepad) LeftThumbstickButton() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("leftThumbstickButton"))
+// LeftThumbstickButton returns a thumbstick may also have a clickable component, which is treated as a non-analog button.
+func (eg *ExtendedGamepad) LeftThumbstickButton() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("leftThumbstickButton"))
 	return ControllerButtonInputFromID(_r)
 }
 
 // RightThumbstickButton wraps the corresponding Objective-C method.
-func (x *ExtendedGamepad) RightThumbstickButton() *ControllerButtonInput {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rightThumbstickButton"))
+func (eg *ExtendedGamepad) RightThumbstickButton() *ControllerButtonInput {
+	_r := objc.Send[objc.ID](objref.IDOf(eg), objc.RegisterName("rightThumbstickButton"))
 	return ControllerButtonInputFromID(_r)
 }
-
-// ExtendedGamepadable is the interface implemented by [ExtendedGamepad], for mocking and DI.
-type ExtendedGamepadable interface {
-	obj.Object
-	WithValueDidChangeHandler(valueDidChangeHandler func(obj.Object, obj.Object)) *ExtendedGamepad
-	SaveSnapshot() *ExtendedGamepadSnapshot
-	SetStateFromExtendedGamepad(extendedGamepad *ExtendedGamepad)
-	Controller() *Controller
-	Dpad() *ControllerDirectionPad
-	ButtonA() *ControllerButtonInput
-	ButtonB() *ControllerButtonInput
-	ButtonX() *ControllerButtonInput
-	ButtonY() *ControllerButtonInput
-	ButtonMenu() *ControllerButtonInput
-	ButtonOptions() *ControllerButtonInput
-	ButtonHome() *ControllerButtonInput
-	LeftThumbstick() *ControllerDirectionPad
-	RightThumbstick() *ControllerDirectionPad
-	LeftShoulder() *ControllerButtonInput
-	RightShoulder() *ControllerButtonInput
-	LeftTrigger() *ControllerButtonInput
-	RightTrigger() *ControllerButtonInput
-	LeftThumbstickButton() *ControllerButtonInput
-	RightThumbstickButton() *ControllerButtonInput
-}
-
-var _ ExtendedGamepadable = (*ExtendedGamepad)(nil)
 
 // isExtendedGamepad marks ExtendedGamepad — and, by embedding promotion, its
 // subclasses — as a member of the ExtendedGamepad hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ExtendedGamepad) isExtendedGamepad() {}
+func (eg *ExtendedGamepad) isExtendedGamepad() {}
 
 var _ ExtendedGamepadProvider = (*ExtendedGamepad)(nil)
 

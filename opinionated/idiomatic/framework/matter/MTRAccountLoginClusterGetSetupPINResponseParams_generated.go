@@ -5,13 +5,14 @@
 package matter
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // MTRAccountLoginClusterGetSetupPINResponseParams is an idiomatic wrapper over the Objective-C class MTRAccountLoginClusterGetSetupPINResponseParams.
@@ -46,24 +47,24 @@ func mTRAccountLoginClusterGetSetupPINResponseParamsAdopt(id objc.ID) *MTRAccoun
 }
 
 // Description returns the object's -description text.
-func (x *MTRAccountLoginClusterGetSetupPINResponseParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) Description() string {
+	return rt.Description(objref.IDOf(malcgsprp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAccountLoginClusterGetSetupPINResponseParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(malcgsprp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAccountLoginClusterGetSetupPINResponseParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(malcgsprp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAccountLoginClusterGetSetupPINResponseParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) String() string {
+	return rt.Description(objref.IDOf(malcgsprp))
 }
 
 // NewMTRAccountLoginClusterGetSetupPINResponseParamsWithResponseValueError initialize an MTRAccountLoginClusterGetSetupPINResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
@@ -78,51 +79,28 @@ func NewMTRAccountLoginClusterGetSetupPINResponseParamsWithResponseValueError(re
 }
 
 // WithSetupPIN sets the property and returns the receiver so calls can be chained.
-func (x *MTRAccountLoginClusterGetSetupPINResponseParams) WithSetupPIN(setupPIN string) *MTRAccountLoginClusterGetSetupPINResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSetupPIN:"), purego.NSString(setupPIN))
-	return x
+func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) WithSetupPIN(setupPIN string) *MTRAccountLoginClusterGetSetupPINResponseParams {
+	objc.Send[objc.ID](objref.IDOf(malcgsprp), objc.RegisterName("setSetupPIN:"), purego.NSString(setupPIN))
+	return malcgsprp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRAccountLoginClusterGetSetupPINResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAccountLoginClusterGetSetupPINResponseParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAccountLoginClusterGetSetupPINResponseParams {
+	objc.Send[objc.ID](objref.IDOf(malcgsprp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return malcgsprp
 }
 
 // SetupPIN wraps the corresponding Objective-C method.
-func (x *MTRAccountLoginClusterGetSetupPINResponseParams) SetupPIN() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setupPIN"))
+func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) SetupPIN() string {
+	_r := objc.Send[objc.ID](objref.IDOf(malcgsprp), objc.RegisterName("setupPIN"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetSetupPIN wraps the corresponding Objective-C method.
-func (x *MTRAccountLoginClusterGetSetupPINResponseParams) SetSetupPIN(setupPIN string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSetupPIN:"), purego.NSString(setupPIN))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRAccountLoginClusterGetSetupPINResponseParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (malcgsprp *MTRAccountLoginClusterGetSetupPINResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(malcgsprp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
-
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRAccountLoginClusterGetSetupPINResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// MTRAccountLoginClusterGetSetupPINResponseParamsable is the interface implemented by [MTRAccountLoginClusterGetSetupPINResponseParams], for mocking and DI.
-type MTRAccountLoginClusterGetSetupPINResponseParamsable interface {
-	obj.Object
-	WithSetupPIN(setupPIN string) *MTRAccountLoginClusterGetSetupPINResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAccountLoginClusterGetSetupPINResponseParams
-	SetupPIN() string
-	SetSetupPIN(setupPIN string)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-}
-
-var _ MTRAccountLoginClusterGetSetupPINResponseParamsable = (*MTRAccountLoginClusterGetSetupPINResponseParams)(nil)

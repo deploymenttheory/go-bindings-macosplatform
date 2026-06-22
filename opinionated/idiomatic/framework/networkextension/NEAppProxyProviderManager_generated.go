@@ -52,111 +52,91 @@ func NewNEAppProxyProviderManager() *NEAppProxyProviderManager {
 	return nEAppProxyProviderManagerAdopt(_id)
 }
 
-// WithSafariDomains the website domains that the system routes connections from the Safari app through a per-app VPN.
-func (x *NEAppProxyProviderManager) WithSafariDomains(items ...obj.Object) *NEAppProxyProviderManager {
+// WithSafariDomains sets the website domains that the system routes connections from the Safari app through a per-app VPN.
+func (nappm *NEAppProxyProviderManager) WithSafariDomains(items ...obj.Object) *NEAppProxyProviderManager {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSafariDomains:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nappm), objc.RegisterName("setSafariDomains:"), _arr)
+	return nappm
 }
 
-// WithMailDomains the mail servers that the system routes connections from the Mail app through for a per-app VPN.
-func (x *NEAppProxyProviderManager) WithMailDomains(items ...obj.Object) *NEAppProxyProviderManager {
+// WithMailDomains sets the mail servers that the system routes connections from the Mail app through for a per-app VPN.
+func (nappm *NEAppProxyProviderManager) WithMailDomains(items ...obj.Object) *NEAppProxyProviderManager {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMailDomains:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nappm), objc.RegisterName("setMailDomains:"), _arr)
+	return nappm
 }
 
-// WithCalendarDomains the calendar servers that the system routes connections from the Calendar app through for a per-app VPN.
-func (x *NEAppProxyProviderManager) WithCalendarDomains(items ...obj.Object) *NEAppProxyProviderManager {
+// WithCalendarDomains sets the calendar servers that the system routes connections from the Calendar app through for a per-app VPN.
+func (nappm *NEAppProxyProviderManager) WithCalendarDomains(items ...obj.Object) *NEAppProxyProviderManager {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendarDomains:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nappm), objc.RegisterName("setCalendarDomains:"), _arr)
+	return nappm
 }
 
-// WithContactsDomains the contacts servers that the system routes connections from the Contacts app through for a per-app VPN.
-func (x *NEAppProxyProviderManager) WithContactsDomains(items ...obj.Object) *NEAppProxyProviderManager {
+// WithContactsDomains sets the contacts servers that the system routes connections from the Contacts app through for a per-app VPN.
+func (nappm *NEAppProxyProviderManager) WithContactsDomains(items ...obj.Object) *NEAppProxyProviderManager {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContactsDomains:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nappm), objc.RegisterName("setContactsDomains:"), _arr)
+	return nappm
 }
 
-// WithAppRules the rules for specific apps in a per-app VPN.
-func (x *NEAppProxyProviderManager) WithAppRules(items ...*NEAppRule) *NEAppProxyProviderManager {
+// WithAppRules sets the rules for specific apps in a per-app VPN.
+func (nappm *NEAppProxyProviderManager) WithAppRules(items ...*NEAppRule) *NEAppProxyProviderManager {
 	_arr := purego.SliceToNSArray(items, func(_v *NEAppRule) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAppRules:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nappm), objc.RegisterName("setAppRules:"), _arr)
+	return nappm
 }
 
-// WithExcludedDomains the domains that the system excludes from a per-app VPN.
-func (x *NEAppProxyProviderManager) WithExcludedDomains(items ...obj.Object) *NEAppProxyProviderManager {
+// WithExcludedDomains sets the domains that the system excludes from a per-app VPN.
+func (nappm *NEAppProxyProviderManager) WithExcludedDomains(items ...obj.Object) *NEAppProxyProviderManager {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExcludedDomains:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nappm), objc.RegisterName("setExcludedDomains:"), _arr)
+	return nappm
 }
 
-// WithAssociatedDomains the domains that the system routes network traffic through for a per-app VPN.
-func (x *NEAppProxyProviderManager) WithAssociatedDomains(items ...obj.Object) *NEAppProxyProviderManager {
+// WithAssociatedDomains sets the domains that the system routes network traffic through for a per-app VPN.
+func (nappm *NEAppProxyProviderManager) WithAssociatedDomains(items ...obj.Object) *NEAppProxyProviderManager {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAssociatedDomains:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nappm), objc.RegisterName("setAssociatedDomains:"), _arr)
+	return nappm
 }
 
-// WithOnDemandRules an ordered list of Connect On Demand rules.
-func (x *NEAppProxyProviderManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEAppProxyProviderManager {
+// WithOnDemandRules sets an ordered list of Connect On Demand rules.
+func (nappm *NEAppProxyProviderManager) WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEAppProxyProviderManager {
 	_arr := purego.SliceToNSArray(items, func(_v NEOnDemandRuleProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandRules:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nappm), objc.RegisterName("setOnDemandRules:"), _arr)
+	return nappm
 }
 
-// WithOnDemandEnabled a Boolean used to toggle the Connect On Demand capability.
-func (x *NEAppProxyProviderManager) WithOnDemandEnabled(onDemandEnabled bool) *NEAppProxyProviderManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOnDemandEnabled:"), onDemandEnabled)
-	return x
+// WithOnDemandEnabled sets a Boolean used to toggle the Connect On Demand capability.
+func (nappm *NEAppProxyProviderManager) WithOnDemandEnabled(onDemandEnabled bool) *NEAppProxyProviderManager {
+	objc.Send[objc.ID](objref.IDOf(nappm), objc.RegisterName("setOnDemandEnabled:"), onDemandEnabled)
+	return nappm
 }
 
-// WithLocalizedDescription a string containing the display name of the VPN configuration.
-func (x *NEAppProxyProviderManager) WithLocalizedDescription(localizedDescription string) *NEAppProxyProviderManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
-	return x
+// WithLocalizedDescription sets a string containing the display name of the VPN configuration.
+func (nappm *NEAppProxyProviderManager) WithLocalizedDescription(localizedDescription string) *NEAppProxyProviderManager {
+	objc.Send[objc.ID](objref.IDOf(nappm), objc.RegisterName("setLocalizedDescription:"), purego.NSString(localizedDescription))
+	return nappm
 }
 
-// WithProtocol an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
-func (x *NEAppProxyProviderManager) WithProtocol(protocol NEVPNProtocolProvider) *NEAppProxyProviderManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocol:"), objref.IDOf(protocol))
-	return x
+// WithProtocol sets an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
+func (nappm *NEAppProxyProviderManager) WithProtocol(protocol NEVPNProtocolProvider) *NEAppProxyProviderManager {
+	objc.Send[objc.ID](objref.IDOf(nappm), objc.RegisterName("setProtocol:"), objref.IDOf(protocol))
+	return nappm
 }
 
-// WithProtocolConfiguration an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
-func (x *NEAppProxyProviderManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NEAppProxyProviderManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProtocolConfiguration:"), objref.IDOf(protocolConfiguration))
-	return x
+// WithProtocolConfiguration sets an NEVPNProtocol object containing the configuration settings of the VPN tunneling protocol.
+func (nappm *NEAppProxyProviderManager) WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NEAppProxyProviderManager {
+	objc.Send[objc.ID](objref.IDOf(nappm), objc.RegisterName("setProtocolConfiguration:"), objref.IDOf(protocolConfiguration))
+	return nappm
 }
 
-// WithEnabled a Boolean used to toggle the enabled state of the VPN configuration.
-func (x *NEAppProxyProviderManager) WithEnabled(enabled bool) *NEAppProxyProviderManager {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean used to toggle the enabled state of the VPN configuration.
+func (nappm *NEAppProxyProviderManager) WithEnabled(enabled bool) *NEAppProxyProviderManager {
+	objc.Send[objc.ID](objref.IDOf(nappm), objc.RegisterName("setEnabled:"), enabled)
+	return nappm
 }
-
-// NEAppProxyProviderManagerable is the interface implemented by [NEAppProxyProviderManager], for mocking and DI.
-type NEAppProxyProviderManagerable interface {
-	obj.Object
-	WithSafariDomains(items ...obj.Object) *NEAppProxyProviderManager
-	WithMailDomains(items ...obj.Object) *NEAppProxyProviderManager
-	WithCalendarDomains(items ...obj.Object) *NEAppProxyProviderManager
-	WithContactsDomains(items ...obj.Object) *NEAppProxyProviderManager
-	WithAppRules(items ...*NEAppRule) *NEAppProxyProviderManager
-	WithExcludedDomains(items ...obj.Object) *NEAppProxyProviderManager
-	WithAssociatedDomains(items ...obj.Object) *NEAppProxyProviderManager
-	WithOnDemandRules(items ...NEOnDemandRuleProvider) *NEAppProxyProviderManager
-	WithOnDemandEnabled(onDemandEnabled bool) *NEAppProxyProviderManager
-	WithLocalizedDescription(localizedDescription string) *NEAppProxyProviderManager
-	WithProtocol(protocol NEVPNProtocolProvider) *NEAppProxyProviderManager
-	WithProtocolConfiguration(protocolConfiguration NEVPNProtocolProvider) *NEAppProxyProviderManager
-	WithEnabled(enabled bool) *NEAppProxyProviderManager
-}
-
-var _ NEAppProxyProviderManagerable = (*NEAppProxyProviderManager)(nil)
 
 var _ NETunnelProviderManagerProvider = (*NEAppProxyProviderManager)(nil)
 

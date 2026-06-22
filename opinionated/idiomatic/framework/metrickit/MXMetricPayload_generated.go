@@ -46,24 +46,24 @@ func metricPayloadAdopt(id objc.ID) *MetricPayload {
 }
 
 // Description returns the object's -description text.
-func (x *MetricPayload) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mp *MetricPayload) Description() string {
+	return rt.Description(objref.IDOf(mp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MetricPayload) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mp *MetricPayload) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MetricPayload) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mp *MetricPayload) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MetricPayload) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mp *MetricPayload) String() string {
+	return rt.Description(objref.IDOf(mp))
 }
 
 // NewMetricPayload creates a new MetricPayload.
@@ -73,20 +73,20 @@ func NewMetricPayload() *MetricPayload {
 }
 
 // JSONRepresentation returns the contents of the payload in JSON format.
-func (x *MetricPayload) JSONRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("JSONRepresentation"))
+func (mp *MetricPayload) JSONRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("JSONRepresentation"))
 	return obj.Wrap(_r)
 }
 
 // DictionaryRepresentation returns the results of the payload as a dictionary.
-func (x *MetricPayload) DictionaryRepresentation() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionaryRepresentation"))
+func (mp *MetricPayload) DictionaryRepresentation() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("dictionaryRepresentation"))
 	return obj.Wrap(_r)
 }
 
-// LatestApplicationVersion an NSString representation of the application version from which this payload was generated. If the application version was changed during the aggregation of this data, this value will reflect the latest application version at the time of retrieval.
-func (x *MetricPayload) LatestApplicationVersion() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("latestApplicationVersion"))
+// LatestApplicationVersion returns an NSString representation of the application version from which this payload was generated. If the application version was changed during the aggregation of this data, this value will reflect the latest application version at the time of retrieval.
+func (mp *MetricPayload) LatestApplicationVersion() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("latestApplicationVersion"))
 	if _r == 0 {
 		return ""
 	}
@@ -94,146 +94,117 @@ func (x *MetricPayload) LatestApplicationVersion() string {
 }
 
 // IncludesMultipleApplicationVersions wraps the corresponding Objective-C method.
-func (x *MetricPayload) IncludesMultipleApplicationVersions() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includesMultipleApplicationVersions"))
+func (mp *MetricPayload) IncludesMultipleApplicationVersions() bool {
+	_r := objc.Send[bool](objref.IDOf(mp), objc.RegisterName("includesMultipleApplicationVersions"))
 	return _r
 }
 
-// TimeStampBegin an NSDate object that indicates the time which the payload was generated.
-func (x *MetricPayload) TimeStampBegin() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeStampBegin"))
+// TimeStampBegin returns an NSDate object that indicates the time which the payload was generated.
+func (mp *MetricPayload) TimeStampBegin() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("timeStampBegin"))
 	return obj.Wrap(_r)
 }
 
-// TimeStampEnd an NSDate object that indicates the time which the payload was generated.
-func (x *MetricPayload) TimeStampEnd() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeStampEnd"))
+// TimeStampEnd returns an NSDate object that indicates the time which the payload was generated.
+func (mp *MetricPayload) TimeStampEnd() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("timeStampEnd"))
 	return obj.Wrap(_r)
 }
 
-// CpuMetrics an object containing CPU metrics for this application.
-func (x *MetricPayload) CpuMetrics() *CPUMetric {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cpuMetrics"))
+// CPUMetrics returns an object containing CPU metrics for this application.
+func (mp *MetricPayload) CPUMetrics() *CPUMetric {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("cpuMetrics"))
 	return CPUMetricFromID(_r)
 }
 
-// GpuMetrics an object containing GPU metrics for this application.
-func (x *MetricPayload) GpuMetrics() *GPUMetric {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gpuMetrics"))
+// GPUMetrics returns an object containing GPU metrics for this application.
+func (mp *MetricPayload) GPUMetrics() *GPUMetric {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("gpuMetrics"))
 	return GPUMetricFromID(_r)
 }
 
-// CellularConditionMetrics an object containing a cellular condition metrics for this application.
-func (x *MetricPayload) CellularConditionMetrics() *CellularConditionMetric {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cellularConditionMetrics"))
+// CellularConditionMetrics returns an object containing a cellular condition metrics for this application.
+func (mp *MetricPayload) CellularConditionMetrics() *CellularConditionMetric {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("cellularConditionMetrics"))
 	return CellularConditionMetricFromID(_r)
 }
 
-// ApplicationTimeMetrics an object containing running mode metrics for this application.
-func (x *MetricPayload) ApplicationTimeMetrics() *AppRunTimeMetric {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationTimeMetrics"))
+// ApplicationTimeMetrics returns an object containing running mode metrics for this application.
+func (mp *MetricPayload) ApplicationTimeMetrics() *AppRunTimeMetric {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("applicationTimeMetrics"))
 	return AppRunTimeMetricFromID(_r)
 }
 
-// LocationActivityMetrics an object containing location activity metrics for this application.
-func (x *MetricPayload) LocationActivityMetrics() *LocationActivityMetric {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locationActivityMetrics"))
+// LocationActivityMetrics returns an object containing location activity metrics for this application.
+func (mp *MetricPayload) LocationActivityMetrics() *LocationActivityMetric {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("locationActivityMetrics"))
 	return LocationActivityMetricFromID(_r)
 }
 
-// NetworkTransferMetrics an object containing network transfer metrics for this application.
-func (x *MetricPayload) NetworkTransferMetrics() *NetworkTransferMetric {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkTransferMetrics"))
+// NetworkTransferMetrics returns an object containing network transfer metrics for this application.
+func (mp *MetricPayload) NetworkTransferMetrics() *NetworkTransferMetric {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("networkTransferMetrics"))
 	return NetworkTransferMetricFromID(_r)
 }
 
-// ApplicationLaunchMetrics an object containing launch metrics for this application.
-func (x *MetricPayload) ApplicationLaunchMetrics() *AppLaunchMetric {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationLaunchMetrics"))
+// ApplicationLaunchMetrics returns an object containing launch metrics for this application.
+func (mp *MetricPayload) ApplicationLaunchMetrics() *AppLaunchMetric {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("applicationLaunchMetrics"))
 	return AppLaunchMetricFromID(_r)
 }
 
-// ApplicationResponsivenessMetrics an object containing hang metrics for this application.
-func (x *MetricPayload) ApplicationResponsivenessMetrics() *AppResponsivenessMetric {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationResponsivenessMetrics"))
+// ApplicationResponsivenessMetrics returns an object containing hang metrics for this application.
+func (mp *MetricPayload) ApplicationResponsivenessMetrics() *AppResponsivenessMetric {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("applicationResponsivenessMetrics"))
 	return AppResponsivenessMetricFromID(_r)
 }
 
-// DiskIOMetrics an object containing disk IO metrics for this application.
-func (x *MetricPayload) DiskIOMetrics() *DiskIOMetric {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("diskIOMetrics"))
+// DiskIOMetrics returns an object containing disk IO metrics for this application.
+func (mp *MetricPayload) DiskIOMetrics() *DiskIOMetric {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("diskIOMetrics"))
 	return DiskIOMetricFromID(_r)
 }
 
-// MemoryMetrics an object containing memory metrics for this application.
-func (x *MetricPayload) MemoryMetrics() *MemoryMetric {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("memoryMetrics"))
+// MemoryMetrics returns an object containing memory metrics for this application.
+func (mp *MetricPayload) MemoryMetrics() *MemoryMetric {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("memoryMetrics"))
 	return MemoryMetricFromID(_r)
 }
 
-// DisplayMetrics an object containing display metrics for this application.
-func (x *MetricPayload) DisplayMetrics() *DisplayMetric {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayMetrics"))
+// DisplayMetrics returns an object containing display metrics for this application.
+func (mp *MetricPayload) DisplayMetrics() *DisplayMetric {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("displayMetrics"))
 	return DisplayMetricFromID(_r)
 }
 
-// AnimationMetrics an object containing animation metrics for this application.
-func (x *MetricPayload) AnimationMetrics() *AnimationMetric {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("animationMetrics"))
+// AnimationMetrics returns an object containing animation metrics for this application.
+func (mp *MetricPayload) AnimationMetrics() *AnimationMetric {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("animationMetrics"))
 	return AnimationMetricFromID(_r)
 }
 
-// ApplicationExitMetrics an object containing exit metrics for this application.
-func (x *MetricPayload) ApplicationExitMetrics() *AppExitMetric {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applicationExitMetrics"))
+// ApplicationExitMetrics returns an object containing exit metrics for this application.
+func (mp *MetricPayload) ApplicationExitMetrics() *AppExitMetric {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("applicationExitMetrics"))
 	return AppExitMetricFromID(_r)
 }
 
-// DiskSpaceUsageMetrics an object containing disk space usage metrics for this application.
-func (x *MetricPayload) DiskSpaceUsageMetrics() *DiskSpaceUsageMetric {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("diskSpaceUsageMetrics"))
+// DiskSpaceUsageMetrics returns an object containing disk space usage metrics for this application.
+func (mp *MetricPayload) DiskSpaceUsageMetrics() *DiskSpaceUsageMetric {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("diskSpaceUsageMetrics"))
 	return DiskSpaceUsageMetricFromID(_r)
 }
 
-// SignpostMetrics an array containing signpost metrics for this application.
+// SignpostMetrics returns an array containing signpost metrics for this application.
 //
 // SignpostMetrics returns the collection as a Go slice.
-func (x *MetricPayload) SignpostMetrics() []*SignpostMetric {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signpostMetrics"))
+func (mp *MetricPayload) SignpostMetrics() []*SignpostMetric {
+	_arr := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("signpostMetrics"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *SignpostMetric { return SignpostMetricFromID(_id) })
 }
 
-// MetaData an object containing extra metadata for this payload.
-func (x *MetricPayload) MetaData() *MetaData {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metaData"))
+// MetaData returns an object containing extra metadata for this payload.
+func (mp *MetricPayload) MetaData() *MetaData {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("metaData"))
 	return MetaDataFromID(_r)
 }
-
-// MetricPayloadable is the interface implemented by [MetricPayload], for mocking and DI.
-type MetricPayloadable interface {
-	obj.Object
-	JSONRepresentation() obj.Object
-	DictionaryRepresentation() obj.Object
-	LatestApplicationVersion() string
-	IncludesMultipleApplicationVersions() bool
-	TimeStampBegin() obj.Object
-	TimeStampEnd() obj.Object
-	CpuMetrics() *CPUMetric
-	GpuMetrics() *GPUMetric
-	CellularConditionMetrics() *CellularConditionMetric
-	ApplicationTimeMetrics() *AppRunTimeMetric
-	LocationActivityMetrics() *LocationActivityMetric
-	NetworkTransferMetrics() *NetworkTransferMetric
-	ApplicationLaunchMetrics() *AppLaunchMetric
-	ApplicationResponsivenessMetrics() *AppResponsivenessMetric
-	DiskIOMetrics() *DiskIOMetric
-	MemoryMetrics() *MemoryMetric
-	DisplayMetrics() *DisplayMetric
-	AnimationMetrics() *AnimationMetric
-	ApplicationExitMetrics() *AppExitMetric
-	DiskSpaceUsageMetrics() *DiskSpaceUsageMetric
-	SignpostMetrics() []*SignpostMetric
-	MetaData() *MetaData
-}
-
-var _ MetricPayloadable = (*MetricPayload)(nil)

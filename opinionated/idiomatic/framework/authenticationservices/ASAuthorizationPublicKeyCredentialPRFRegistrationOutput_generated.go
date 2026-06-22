@@ -46,24 +46,24 @@ func authorizationPublicKeyCredentialPRFRegistrationOutputAdopt(id objc.ID) *Aut
 }
 
 // Description returns the object's -description text.
-func (x *AuthorizationPublicKeyCredentialPRFRegistrationOutput) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) Description() string {
+	return rt.Description(objref.IDOf(apkcpro))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *AuthorizationPublicKeyCredentialPRFRegistrationOutput) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(apkcpro), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *AuthorizationPublicKeyCredentialPRFRegistrationOutput) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(apkcpro), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *AuthorizationPublicKeyCredentialPRFRegistrationOutput) String() string {
-	return rt.Description(objref.IDOf(x))
+func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) String() string {
+	return rt.Description(objref.IDOf(apkcpro))
 }
 
 // NewAuthorizationPublicKeyCredentialPRFRegistrationOutput creates a new AuthorizationPublicKeyCredentialPRFRegistrationOutput.
@@ -73,29 +73,19 @@ func NewAuthorizationPublicKeyCredentialPRFRegistrationOutput() *AuthorizationPu
 }
 
 // IsSupported wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialPRFRegistrationOutput) IsSupported() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSupported"))
+func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) IsSupported() bool {
+	_r := objc.Send[bool](objref.IDOf(apkcpro), objc.RegisterName("isSupported"))
 	return _r
 }
 
 // First wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialPRFRegistrationOutput) First() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("first"))
+func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) First() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apkcpro), objc.RegisterName("first"))
 	return obj.Wrap(_r)
 }
 
 // Second wraps the corresponding Objective-C method.
-func (x *AuthorizationPublicKeyCredentialPRFRegistrationOutput) Second() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("second"))
+func (apkcpro *AuthorizationPublicKeyCredentialPRFRegistrationOutput) Second() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(apkcpro), objc.RegisterName("second"))
 	return obj.Wrap(_r)
 }
-
-// AuthorizationPublicKeyCredentialPRFRegistrationOutputable is the interface implemented by [AuthorizationPublicKeyCredentialPRFRegistrationOutput], for mocking and DI.
-type AuthorizationPublicKeyCredentialPRFRegistrationOutputable interface {
-	obj.Object
-	IsSupported() bool
-	First() obj.Object
-	Second() obj.Object
-}
-
-var _ AuthorizationPublicKeyCredentialPRFRegistrationOutputable = (*AuthorizationPublicKeyCredentialPRFRegistrationOutput)(nil)

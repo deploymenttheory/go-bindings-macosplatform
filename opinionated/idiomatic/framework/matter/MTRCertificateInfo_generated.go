@@ -44,24 +44,24 @@ func mTRCertificateInfoAdopt(id objc.ID) *MTRCertificateInfo {
 }
 
 // Description returns the object's -description text.
-func (x *MTRCertificateInfo) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mci *MTRCertificateInfo) Description() string {
+	return rt.Description(objref.IDOf(mci))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRCertificateInfo) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mci *MTRCertificateInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mci), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRCertificateInfo) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mci *MTRCertificateInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mci), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRCertificateInfo) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mci *MTRCertificateInfo) String() string {
+	return rt.Description(objref.IDOf(mci))
 }
 
 // NewMTRCertificateInfoWithTLVBytes initializes the receiver with an operational certificate in Matter TLV format. This can be a node operational certificate, a Matter intermediate certificate, or a Matter root certificate.
@@ -71,44 +71,32 @@ func NewMTRCertificateInfoWithTLVBytes(bytes_ obj.Object) *MTRCertificateInfo {
 	return mTRCertificateInfoAdopt(_id)
 }
 
-// Issuer the Distinguished Name of the issuer of the certificate. For a node operational certificate, the issuer will match the subject of the root certificate or intermediate certificate that represents the entity that issued the node operational certificate. For an intermediate certificate, the issuer will match the subject of the root certificate. Matter root certificates are self-signed, i.e. the issuer and the subject are the same.
-func (x *MTRCertificateInfo) Issuer() *MTRDistinguishedNameInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuer"))
+// Issuer returns the Distinguished Name of the issuer of the certificate. For a node operational certificate, the issuer will match the subject of the root certificate or intermediate certificate that represents the entity that issued the node operational certificate. For an intermediate certificate, the issuer will match the subject of the root certificate. Matter root certificates are self-signed, i.e. the issuer and the subject are the same.
+func (mci *MTRCertificateInfo) Issuer() *MTRDistinguishedNameInfo {
+	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("issuer"))
 	return MTRDistinguishedNameInfoFromID(_r)
 }
 
-// Subject the Distinguished Name of the entity represented by the certificate.
-func (x *MTRCertificateInfo) Subject() *MTRDistinguishedNameInfo {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subject"))
+// Subject returns the Distinguished Name of the entity represented by the certificate.
+func (mci *MTRCertificateInfo) Subject() *MTRDistinguishedNameInfo {
+	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("subject"))
 	return MTRDistinguishedNameInfoFromID(_r)
 }
 
 // NotBefore wraps the corresponding Objective-C method.
-func (x *MTRCertificateInfo) NotBefore() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notBefore"))
+func (mci *MTRCertificateInfo) NotBefore() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("notBefore"))
 	return obj.Wrap(_r)
 }
 
 // NotAfter wraps the corresponding Objective-C method.
-func (x *MTRCertificateInfo) NotAfter() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notAfter"))
+func (mci *MTRCertificateInfo) NotAfter() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("notAfter"))
 	return obj.Wrap(_r)
 }
 
-// PublicKeyData public key data for this certificate
-func (x *MTRCertificateInfo) PublicKeyData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("publicKeyData"))
+// PublicKeyData returns public key data for this certificate
+func (mci *MTRCertificateInfo) PublicKeyData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mci), objc.RegisterName("publicKeyData"))
 	return obj.Wrap(_r)
 }
-
-// MTRCertificateInfoable is the interface implemented by [MTRCertificateInfo], for mocking and DI.
-type MTRCertificateInfoable interface {
-	obj.Object
-	Issuer() *MTRDistinguishedNameInfo
-	Subject() *MTRDistinguishedNameInfo
-	NotBefore() obj.Object
-	NotAfter() obj.Object
-	PublicKeyData() obj.Object
-}
-
-var _ MTRCertificateInfoable = (*MTRCertificateInfo)(nil)

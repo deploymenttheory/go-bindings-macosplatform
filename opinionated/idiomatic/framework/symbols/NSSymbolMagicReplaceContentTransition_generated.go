@@ -7,7 +7,6 @@ package symbols
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,12 +50,5 @@ func NewSymbolMagicReplaceContentTransition() *SymbolMagicReplaceContentTransiti
 	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolMagicReplaceContentTransition")), objc.RegisterName("new"))
 	return symbolMagicReplaceContentTransitionAdopt(_id)
 }
-
-// SymbolMagicReplaceContentTransitionable is the interface implemented by [SymbolMagicReplaceContentTransition], for mocking and DI.
-type SymbolMagicReplaceContentTransitionable interface {
-	obj.Object
-}
-
-var _ SymbolMagicReplaceContentTransitionable = (*SymbolMagicReplaceContentTransition)(nil)
 
 var _ SymbolContentTransitionProvider = (*SymbolMagicReplaceContentTransition)(nil)

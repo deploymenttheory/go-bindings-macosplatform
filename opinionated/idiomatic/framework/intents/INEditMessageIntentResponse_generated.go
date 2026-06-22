@@ -51,25 +51,16 @@ func NewEditMessageIntentResponseWithCodeUserActivity(code EditMessageIntentResp
 	return editMessageIntentResponseAdopt(_id)
 }
 
-// WithUserActivity the user activity object to use when launching the app.
-func (x *EditMessageIntentResponse) WithUserActivity(userActivity obj.Object) *EditMessageIntentResponse {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
-	return x
+// WithUserActivity sets the user activity object to use when launching the app.
+func (emir *EditMessageIntentResponse) WithUserActivity(userActivity obj.Object) *EditMessageIntentResponse {
+	objc.Send[objc.ID](objref.IDOf(emir), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
+	return emir
 }
 
 // Code wraps the corresponding Objective-C method.
-func (x *EditMessageIntentResponse) Code() EditMessageIntentResponseCode {
-	_r := objc.Send[EditMessageIntentResponseCode](objref.IDOf(x), objc.RegisterName("code"))
+func (emir *EditMessageIntentResponse) Code() EditMessageIntentResponseCode {
+	_r := objc.Send[EditMessageIntentResponseCode](objref.IDOf(emir), objc.RegisterName("code"))
 	return _r
 }
-
-// EditMessageIntentResponseable is the interface implemented by [EditMessageIntentResponse], for mocking and DI.
-type EditMessageIntentResponseable interface {
-	obj.Object
-	WithUserActivity(userActivity obj.Object) *EditMessageIntentResponse
-	Code() EditMessageIntentResponseCode
-}
-
-var _ EditMessageIntentResponseable = (*EditMessageIntentResponse)(nil)
 
 var _ IntentResponseProvider = (*EditMessageIntentResponse)(nil)

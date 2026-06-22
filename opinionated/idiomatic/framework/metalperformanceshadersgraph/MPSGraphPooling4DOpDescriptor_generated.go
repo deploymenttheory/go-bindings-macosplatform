@@ -52,183 +52,112 @@ func NewGraphPooling4DOpDescriptor() *GraphPooling4DOpDescriptor {
 	return graphPooling4DOpDescriptorAdopt(_id)
 }
 
-// WithKernelSizes defines the pooling window size.
-func (x *GraphPooling4DOpDescriptor) WithKernelSizes(items ...obj.Object) *GraphPooling4DOpDescriptor {
+// WithKernelSizes sets defines the pooling window size.
+func (gpdod *GraphPooling4DOpDescriptor) WithKernelSizes(items ...obj.Object) *GraphPooling4DOpDescriptor {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelSizes:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(gpdod), objc.RegisterName("setKernelSizes:"), _arr)
+	return gpdod
 }
 
-// WithStrides defines strides for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last.
-func (x *GraphPooling4DOpDescriptor) WithStrides(items ...obj.Object) *GraphPooling4DOpDescriptor {
+// WithStrides sets defines strides for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last.
+func (gpdod *GraphPooling4DOpDescriptor) WithStrides(items ...obj.Object) *GraphPooling4DOpDescriptor {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrides:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(gpdod), objc.RegisterName("setStrides:"), _arr)
+	return gpdod
 }
 
-// WithDilationRates defines dilation rates for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last.
-func (x *GraphPooling4DOpDescriptor) WithDilationRates(items ...obj.Object) *GraphPooling4DOpDescriptor {
+// WithDilationRates sets defines dilation rates for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last.
+func (gpdod *GraphPooling4DOpDescriptor) WithDilationRates(items ...obj.Object) *GraphPooling4DOpDescriptor {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRates:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(gpdod), objc.RegisterName("setDilationRates:"), _arr)
+	return gpdod
 }
 
-// WithPaddingValues defines padding values for spatial dimensions which must be eight numbers, two for each spatial dimension.
-func (x *GraphPooling4DOpDescriptor) WithPaddingValues(items ...obj.Object) *GraphPooling4DOpDescriptor {
+// WithPaddingValues sets defines padding values for spatial dimensions which must be eight numbers, two for each spatial dimension.
+func (gpdod *GraphPooling4DOpDescriptor) WithPaddingValues(items ...obj.Object) *GraphPooling4DOpDescriptor {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingValues:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(gpdod), objc.RegisterName("setPaddingValues:"), _arr)
+	return gpdod
 }
 
-// WithPaddingStyle defines what kind of padding graph applies to the operation.
-func (x *GraphPooling4DOpDescriptor) WithPaddingStyle(paddingStyle GraphPaddingStyle) *GraphPooling4DOpDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingStyle:"), paddingStyle)
-	return x
+// WithPaddingStyle sets defines what kind of padding graph applies to the operation.
+func (gpdod *GraphPooling4DOpDescriptor) WithPaddingStyle(paddingStyle GraphPaddingStyle) *GraphPooling4DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gpdod), objc.RegisterName("setPaddingStyle:"), paddingStyle)
+	return gpdod
 }
 
-// WithCeilMode affects how MPSGraph computes the output size: if set to YES then output size is computed by rounding up instead of down when dividing input size by stride.
-func (x *GraphPooling4DOpDescriptor) WithCeilMode(ceilMode bool) *GraphPooling4DOpDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCeilMode:"), ceilMode)
-	return x
+// WithCeilMode sets affects how MPSGraph computes the output size: if set to YES then output size is computed by rounding up instead of down when dividing input size by stride.
+func (gpdod *GraphPooling4DOpDescriptor) WithCeilMode(ceilMode bool) *GraphPooling4DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gpdod), objc.RegisterName("setCeilMode:"), ceilMode)
+	return gpdod
 }
 
-// WithIncludeZeroPadToAverage defines a mode for average pooling, where samples outside the input tensor count as zeroes in the average computation.
-func (x *GraphPooling4DOpDescriptor) WithIncludeZeroPadToAverage(includeZeroPadToAverage bool) *GraphPooling4DOpDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeZeroPadToAverage:"), includeZeroPadToAverage)
-	return x
+// WithIncludeZeroPadToAverage sets defines a mode for average pooling, where samples outside the input tensor count as zeroes in the average computation.
+func (gpdod *GraphPooling4DOpDescriptor) WithIncludeZeroPadToAverage(includeZeroPadToAverage bool) *GraphPooling4DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gpdod), objc.RegisterName("setIncludeZeroPadToAverage:"), includeZeroPadToAverage)
+	return gpdod
 }
 
-// WithReturnIndicesMode defines the mode for returned indices of maximum values within each pooling window.
-func (x *GraphPooling4DOpDescriptor) WithReturnIndicesMode(returnIndicesMode GraphPoolingReturnIndicesMode) *GraphPooling4DOpDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnIndicesMode:"), returnIndicesMode)
-	return x
+// WithReturnIndicesMode sets defines the mode for returned indices of maximum values within each pooling window.
+func (gpdod *GraphPooling4DOpDescriptor) WithReturnIndicesMode(returnIndicesMode GraphPoolingReturnIndicesMode) *GraphPooling4DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(gpdod), objc.RegisterName("setReturnIndicesMode:"), returnIndicesMode)
+	return gpdod
 }
 
 // KernelSizes defines the pooling window size. Must be four numbers, one for each spatial dimension, fastest running index last.
 //
 // KernelSizes returns the collection as a Go slice.
-func (x *GraphPooling4DOpDescriptor) KernelSizes() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("kernelSizes"))
+func (gpdod *GraphPooling4DOpDescriptor) KernelSizes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(gpdod), objc.RegisterName("kernelSizes"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
-}
-
-// SetKernelSizes wraps the corresponding Objective-C method.
-func (x *GraphPooling4DOpDescriptor) SetKernelSizes(kernelSizes []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Strides defines strides for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last. Default value: `
 //
 // Strides returns the collection as a Go slice.
-func (x *GraphPooling4DOpDescriptor) Strides() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("strides"))
+func (gpdod *GraphPooling4DOpDescriptor) Strides() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(gpdod), objc.RegisterName("strides"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
-}
-
-// SetStrides wraps the corresponding Objective-C method.
-func (x *GraphPooling4DOpDescriptor) SetStrides(strides []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrides:"), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // DilationRates defines dilation rates for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last. Default value: `
 //
 // DilationRates returns the collection as a Go slice.
-func (x *GraphPooling4DOpDescriptor) DilationRates() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dilationRates"))
+func (gpdod *GraphPooling4DOpDescriptor) DilationRates() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(gpdod), objc.RegisterName("dilationRates"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
-}
-
-// SetDilationRates wraps the corresponding Objective-C method.
-func (x *GraphPooling4DOpDescriptor) SetDilationRates(dilationRates []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRates:"), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // PaddingValues defines padding values for spatial dimensions which must be eight numbers, two for each spatial dimension. For example `paddingValues[0]` defines the explicit padding amount before the first spatial dimension (slowest running index of spatial dimensions), `paddingValues[1]` defines the padding amount after the first spatial dimension etc. Used only when `paddingStyle = MPSGraphPaddingStyleExplicit`. Default value: `
 //
 // PaddingValues returns the collection as a Go slice.
-func (x *GraphPooling4DOpDescriptor) PaddingValues() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddingValues"))
+func (gpdod *GraphPooling4DOpDescriptor) PaddingValues() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(gpdod), objc.RegisterName("paddingValues"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetPaddingValues wraps the corresponding Objective-C method.
-func (x *GraphPooling4DOpDescriptor) SetPaddingValues(paddingValues []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingValues:"), purego.SliceToNSArray(paddingValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
 // PaddingStyle defines what kind of padding graph applies to the operation. Default value: `MPSGraphPaddingStyleExplicit`.
-func (x *GraphPooling4DOpDescriptor) PaddingStyle() GraphPaddingStyle {
-	_r := objc.Send[GraphPaddingStyle](objref.IDOf(x), objc.RegisterName("paddingStyle"))
+func (gpdod *GraphPooling4DOpDescriptor) PaddingStyle() GraphPaddingStyle {
+	_r := objc.Send[GraphPaddingStyle](objref.IDOf(gpdod), objc.RegisterName("paddingStyle"))
 	return _r
 }
 
-// SetPaddingStyle wraps the corresponding Objective-C method.
-func (x *GraphPooling4DOpDescriptor) SetPaddingStyle(paddingStyle GraphPaddingStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingStyle:"), paddingStyle)
-}
-
-// CeilMode affects how MPSGraph computes the output size: if set to `YES` then output size is computed by rounding up instead of down when dividing input size by stride. Default value: `NO`.
-func (x *GraphPooling4DOpDescriptor) CeilMode() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ceilMode"))
+// CeilMode reports whether affects how MPSGraph computes the output size: if set to `YES` then output size is computed by rounding up instead of down when dividing input size by stride. Default value: `NO`.
+func (gpdod *GraphPooling4DOpDescriptor) CeilMode() bool {
+	_r := objc.Send[bool](objref.IDOf(gpdod), objc.RegisterName("ceilMode"))
 	return _r
 }
 
-// SetCeilMode wraps the corresponding Objective-C method.
-func (x *GraphPooling4DOpDescriptor) SetCeilMode(ceilMode bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCeilMode:"), ceilMode)
-}
-
-// IncludeZeroPadToAverage defines a mode for average pooling, where samples outside the input tensor count as zeroes in the average computation. Otherwise the result is sum over samples divided by number of samples that didn't come from padding. Default value: `NO`.
-func (x *GraphPooling4DOpDescriptor) IncludeZeroPadToAverage() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeZeroPadToAverage"))
+// IncludeZeroPadToAverage reports whether defines a mode for average pooling, where samples outside the input tensor count as zeroes in the average computation. Otherwise the result is sum over samples divided by number of samples that didn't come from padding. Default value: `NO`.
+func (gpdod *GraphPooling4DOpDescriptor) IncludeZeroPadToAverage() bool {
+	_r := objc.Send[bool](objref.IDOf(gpdod), objc.RegisterName("includeZeroPadToAverage"))
 	return _r
-}
-
-// SetIncludeZeroPadToAverage wraps the corresponding Objective-C method.
-func (x *GraphPooling4DOpDescriptor) SetIncludeZeroPadToAverage(includeZeroPadToAverage bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeZeroPadToAverage:"), includeZeroPadToAverage)
 }
 
 // ReturnIndicesMode defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
-func (x *GraphPooling4DOpDescriptor) ReturnIndicesMode() GraphPoolingReturnIndicesMode {
-	_r := objc.Send[GraphPoolingReturnIndicesMode](objref.IDOf(x), objc.RegisterName("returnIndicesMode"))
+func (gpdod *GraphPooling4DOpDescriptor) ReturnIndicesMode() GraphPoolingReturnIndicesMode {
+	_r := objc.Send[GraphPoolingReturnIndicesMode](objref.IDOf(gpdod), objc.RegisterName("returnIndicesMode"))
 	return _r
 }
-
-// SetReturnIndicesMode defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
-func (x *GraphPooling4DOpDescriptor) SetReturnIndicesMode(returnIndicesMode GraphPoolingReturnIndicesMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnIndicesMode:"), returnIndicesMode)
-}
-
-// GraphPooling4DOpDescriptorable is the interface implemented by [GraphPooling4DOpDescriptor], for mocking and DI.
-type GraphPooling4DOpDescriptorable interface {
-	obj.Object
-	WithKernelSizes(items ...obj.Object) *GraphPooling4DOpDescriptor
-	WithStrides(items ...obj.Object) *GraphPooling4DOpDescriptor
-	WithDilationRates(items ...obj.Object) *GraphPooling4DOpDescriptor
-	WithPaddingValues(items ...obj.Object) *GraphPooling4DOpDescriptor
-	WithPaddingStyle(paddingStyle GraphPaddingStyle) *GraphPooling4DOpDescriptor
-	WithCeilMode(ceilMode bool) *GraphPooling4DOpDescriptor
-	WithIncludeZeroPadToAverage(includeZeroPadToAverage bool) *GraphPooling4DOpDescriptor
-	WithReturnIndicesMode(returnIndicesMode GraphPoolingReturnIndicesMode) *GraphPooling4DOpDescriptor
-	KernelSizes() []obj.Object
-	SetKernelSizes(kernelSizes []obj.Object)
-	Strides() []obj.Object
-	SetStrides(strides []obj.Object)
-	DilationRates() []obj.Object
-	SetDilationRates(dilationRates []obj.Object)
-	PaddingValues() []obj.Object
-	SetPaddingValues(paddingValues []obj.Object)
-	PaddingStyle() GraphPaddingStyle
-	SetPaddingStyle(paddingStyle GraphPaddingStyle)
-	CeilMode() bool
-	SetCeilMode(ceilMode bool)
-	IncludeZeroPadToAverage() bool
-	SetIncludeZeroPadToAverage(includeZeroPadToAverage bool)
-	ReturnIndicesMode() GraphPoolingReturnIndicesMode
-	SetReturnIndicesMode(returnIndicesMode GraphPoolingReturnIndicesMode)
-}
-
-var _ GraphPooling4DOpDescriptorable = (*GraphPooling4DOpDescriptor)(nil)
 
 var _ GraphObjectProvider = (*GraphPooling4DOpDescriptor)(nil)

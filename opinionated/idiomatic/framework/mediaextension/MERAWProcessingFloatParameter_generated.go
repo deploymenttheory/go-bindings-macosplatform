@@ -5,11 +5,11 @@
 package mediaextension
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // RAWProcessingFloatParameter is an idiomatic wrapper over the Objective-C class MERAWProcessingFloatParameter.
@@ -79,68 +79,48 @@ func NewRAWProcessingFloatParameterWithNameKeyDescriptionInitialValueMaximumMini
 	return rAWProcessingFloatParameterAdopt(_id)
 }
 
-// WithCurrentValue get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
-func (x *RAWProcessingFloatParameter) WithCurrentValue(currentValue float32) *RAWProcessingFloatParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
-	return x
+// WithCurrentValue sets get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
+func (rpfp *RAWProcessingFloatParameter) WithCurrentValue(currentValue float32) *RAWProcessingFloatParameter {
+	objc.Send[objc.ID](objref.IDOf(rpfp), objc.RegisterName("setCurrentValue:"), currentValue)
+	return rpfp
 }
 
-// WithEnabled a Boolean value that indicates whether the extension enables the parameter.
-func (x *RAWProcessingFloatParameter) WithEnabled(enabled bool) *RAWProcessingFloatParameter {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the extension enables the parameter.
+func (rpfp *RAWProcessingFloatParameter) WithEnabled(enabled bool) *RAWProcessingFloatParameter {
+	objc.Send[objc.ID](objref.IDOf(rpfp), objc.RegisterName("setEnabled:"), enabled)
+	return rpfp
 }
 
 // HasNeutralValue return value indicates whether the MERAWProcessingFloatParameter has an optional declared Neutral value. If the return value is YES and outNeutralValue is not nil, the value held by outNeutralValue will be set to the neutral value. If the return value is NO and outNeutralValue is not nil, the value held by outNeutralValue will be set to 0.
-func (x *RAWProcessingFloatParameter) HasNeutralValue() (ok bool, outNeutralValue float32) {
+func (rpfp *RAWProcessingFloatParameter) HasNeutralValue() (ok bool, outNeutralValue float32) {
 	var _out0 float32
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasNeutralValue:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(rpfp), objc.RegisterName("hasNeutralValue:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
 // HasCameraValue return value indicates whether the MERAWProcessingFloatParameter has an optional declared Camera value. If the return value is YES and outCameraValue is not nil, the value held by outCameraValue will be set to the camera value. If the return value is NO and outCameraValue is not nil, the value held by outCameraValue will be set to 0.
-func (x *RAWProcessingFloatParameter) HasCameraValue() (ok bool, outCameraValue float32) {
+func (rpfp *RAWProcessingFloatParameter) HasCameraValue() (ok bool, outCameraValue float32) {
 	var _out0 float32
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasCameraValue:"), unsafe.Pointer(&_out0))
+	_r := objc.Send[bool](objref.IDOf(rpfp), objc.RegisterName("hasCameraValue:"), unsafe.Pointer(&_out0))
 	return _r, _out0
 }
 
-// MaximumValue the maximum value for this parameter.
-func (x *RAWProcessingFloatParameter) MaximumValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumValue"))
+// MaximumValue returns the maximum value for this parameter.
+func (rpfp *RAWProcessingFloatParameter) MaximumValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(rpfp), objc.RegisterName("maximumValue"))
 	return _r
 }
 
-// MinimumValue the minimum value for this parameter.
-func (x *RAWProcessingFloatParameter) MinimumValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumValue"))
+// MinimumValue returns the minimum value for this parameter.
+func (rpfp *RAWProcessingFloatParameter) MinimumValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(rpfp), objc.RegisterName("minimumValue"))
 	return _r
 }
 
 // CurrentValue get or set the current value for this parameter. This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
-func (x *RAWProcessingFloatParameter) CurrentValue() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("currentValue"))
+func (rpfp *RAWProcessingFloatParameter) CurrentValue() float32 {
+	_r := objc.Send[float32](objref.IDOf(rpfp), objc.RegisterName("currentValue"))
 	return _r
 }
-
-// SetCurrentValue wraps the corresponding Objective-C method.
-func (x *RAWProcessingFloatParameter) SetCurrentValue(currentValue float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
-}
-
-// RAWProcessingFloatParameterable is the interface implemented by [RAWProcessingFloatParameter], for mocking and DI.
-type RAWProcessingFloatParameterable interface {
-	obj.Object
-	WithCurrentValue(currentValue float32) *RAWProcessingFloatParameter
-	WithEnabled(enabled bool) *RAWProcessingFloatParameter
-	HasNeutralValue() (ok bool, outNeutralValue float32)
-	HasCameraValue() (ok bool, outCameraValue float32)
-	MaximumValue() float32
-	MinimumValue() float32
-	CurrentValue() float32
-	SetCurrentValue(currentValue float32)
-}
-
-var _ RAWProcessingFloatParameterable = (*RAWProcessingFloatParameter)(nil)
 
 var _ RAWProcessingParameterProvider = (*RAWProcessingFloatParameter)(nil)

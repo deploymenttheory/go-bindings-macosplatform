@@ -44,24 +44,24 @@ func nSDictionaryAdopt(id objc.ID) *NSDictionary {
 }
 
 // Description returns the object's -description text.
-func (x *NSDictionary) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nd *NSDictionary) Description() string {
+	return rt.Description(objref.IDOf(nd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NSDictionary) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nd *NSDictionary) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NSDictionary) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nd *NSDictionary) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NSDictionary) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nd *NSDictionary) String() string {
+	return rt.Description(objref.IDOf(nd))
 }
 
 // NewNSDictionary creates a new NSDictionary.
@@ -69,10 +69,3 @@ func NewNSDictionary() *NSDictionary {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSDictionary")), objc.RegisterName("new"))
 	return nSDictionaryAdopt(_id)
 }
-
-// NSDictionaryable is the interface implemented by [NSDictionary], for mocking and DI.
-type NSDictionaryable interface {
-	obj.Object
-}
-
-var _ NSDictionaryable = (*NSDictionary)(nil)

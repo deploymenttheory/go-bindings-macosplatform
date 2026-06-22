@@ -17,7 +17,7 @@ func DataForTag(tag uint64) obj.Object {
 	return obj.Wrap(_r)
 }
 
-// DefaultManager global pool of SmartCard reader slots. macOS: Note that defaultManager instance is accessible only if the calling application has 'com.apple.security.smartcard' entitlement set to Boolean:YES.  If the calling application does not have this entitlement, defaultManager is always set to nil. iOS: The defaultManager instance is always accessible.
+// DefaultManager returns global pool of SmartCard reader slots. macOS: Note that defaultManager instance is accessible only if the calling application has 'com.apple.security.smartcard' entitlement set to Boolean:YES.  If the calling application does not have this entitlement, defaultManager is always set to nil. iOS: The defaultManager instance is always accessible.
 func DefaultManager() *SmartCardSlotManager {
 	_r := objc.Send[objc.ID](objc.ID(_class("TKSmartCardSlotManager")), objc.RegisterName("defaultManager"))
 	return SmartCardSlotManagerFromID(_r)

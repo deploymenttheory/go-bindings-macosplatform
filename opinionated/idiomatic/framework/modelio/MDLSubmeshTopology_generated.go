@@ -46,24 +46,24 @@ func submeshTopologyAdopt(id objc.ID) *SubmeshTopology {
 }
 
 // Description returns the object's -description text.
-func (x *SubmeshTopology) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (st *SubmeshTopology) Description() string {
+	return rt.Description(objref.IDOf(st))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SubmeshTopology) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (st *SubmeshTopology) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(st), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SubmeshTopology) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (st *SubmeshTopology) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(st), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SubmeshTopology) String() string {
-	return rt.Description(objref.IDOf(x))
+func (st *SubmeshTopology) String() string {
+	return rt.Description(objref.IDOf(st))
 }
 
 // NewSubmeshTopologyWithSubmesh create a topology object corresponding to the topology in the submesh
@@ -73,89 +73,50 @@ func NewSubmeshTopologyWithSubmesh(submesh *Submesh) *SubmeshTopology {
 	return submeshTopologyAdopt(_id)
 }
 
-// WithFaceCount the number of faces in the submesh’s face topology buffer.
-func (x *SubmeshTopology) WithFaceCount(faceCount int) *SubmeshTopology {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFaceCount:"), faceCount)
-	return x
+// WithFaceCount sets the number of faces in the submesh’s face topology buffer.
+func (st *SubmeshTopology) WithFaceCount(faceCount int) *SubmeshTopology {
+	objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("setFaceCount:"), faceCount)
+	return st
 }
 
-// WithVertexCreaseCount the number of entries in the vertex creases buffers.
-func (x *SubmeshTopology) WithVertexCreaseCount(vertexCreaseCount int) *SubmeshTopology {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexCreaseCount:"), vertexCreaseCount)
-	return x
+// WithVertexCreaseCount sets the number of entries in the vertex creases buffers.
+func (st *SubmeshTopology) WithVertexCreaseCount(vertexCreaseCount int) *SubmeshTopology {
+	objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("setVertexCreaseCount:"), vertexCreaseCount)
+	return st
 }
 
-// WithEdgeCreaseCount the number of entries in the edge creases buffers.
-func (x *SubmeshTopology) WithEdgeCreaseCount(edgeCreaseCount int) *SubmeshTopology {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreaseCount:"), edgeCreaseCount)
-	return x
+// WithEdgeCreaseCount sets the number of entries in the edge creases buffers.
+func (st *SubmeshTopology) WithEdgeCreaseCount(edgeCreaseCount int) *SubmeshTopology {
+	objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("setEdgeCreaseCount:"), edgeCreaseCount)
+	return st
 }
 
-// WithHoleCount the number of entries in the holes buffer.
-func (x *SubmeshTopology) WithHoleCount(holeCount int) *SubmeshTopology {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoleCount:"), holeCount)
-	return x
+// WithHoleCount sets the number of entries in the holes buffer.
+func (st *SubmeshTopology) WithHoleCount(holeCount int) *SubmeshTopology {
+	objc.Send[objc.ID](objref.IDOf(st), objc.RegisterName("setHoleCount:"), holeCount)
+	return st
 }
 
-// FaceCount the number of faces encoded in faceTopologyBuffer
-func (x *SubmeshTopology) FaceCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("faceCount"))
+// FaceCount returns the number of faces encoded in faceTopologyBuffer
+func (st *SubmeshTopology) FaceCount() int {
+	_r := objc.Send[int](objref.IDOf(st), objc.RegisterName("faceCount"))
 	return _r
 }
 
-// SetFaceCount wraps the corresponding Objective-C method.
-func (x *SubmeshTopology) SetFaceCount(faceCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFaceCount:"), faceCount)
-}
-
-// VertexCreaseCount the number of vertex creases encoded in vertexCreases
-func (x *SubmeshTopology) VertexCreaseCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("vertexCreaseCount"))
+// VertexCreaseCount returns the number of vertex creases encoded in vertexCreases
+func (st *SubmeshTopology) VertexCreaseCount() int {
+	_r := objc.Send[int](objref.IDOf(st), objc.RegisterName("vertexCreaseCount"))
 	return _r
 }
 
-// SetVertexCreaseCount wraps the corresponding Objective-C method.
-func (x *SubmeshTopology) SetVertexCreaseCount(vertexCreaseCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVertexCreaseCount:"), vertexCreaseCount)
-}
-
-// EdgeCreaseCount the number of edge creases encoded in edgeCreases
-func (x *SubmeshTopology) EdgeCreaseCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("edgeCreaseCount"))
+// EdgeCreaseCount returns the number of edge creases encoded in edgeCreases
+func (st *SubmeshTopology) EdgeCreaseCount() int {
+	_r := objc.Send[int](objref.IDOf(st), objc.RegisterName("edgeCreaseCount"))
 	return _r
 }
 
-// SetEdgeCreaseCount wraps the corresponding Objective-C method.
-func (x *SubmeshTopology) SetEdgeCreaseCount(edgeCreaseCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreaseCount:"), edgeCreaseCount)
-}
-
-// HoleCount the number of holes encoded in holes
-func (x *SubmeshTopology) HoleCount() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("holeCount"))
+// HoleCount returns the number of holes encoded in holes
+func (st *SubmeshTopology) HoleCount() int {
+	_r := objc.Send[int](objref.IDOf(st), objc.RegisterName("holeCount"))
 	return _r
 }
-
-// SetHoleCount wraps the corresponding Objective-C method.
-func (x *SubmeshTopology) SetHoleCount(holeCount int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHoleCount:"), holeCount)
-}
-
-// SubmeshTopologyable is the interface implemented by [SubmeshTopology], for mocking and DI.
-type SubmeshTopologyable interface {
-	obj.Object
-	WithFaceCount(faceCount int) *SubmeshTopology
-	WithVertexCreaseCount(vertexCreaseCount int) *SubmeshTopology
-	WithEdgeCreaseCount(edgeCreaseCount int) *SubmeshTopology
-	WithHoleCount(holeCount int) *SubmeshTopology
-	FaceCount() int
-	SetFaceCount(faceCount int)
-	VertexCreaseCount() int
-	SetVertexCreaseCount(vertexCreaseCount int)
-	EdgeCreaseCount() int
-	SetEdgeCreaseCount(edgeCreaseCount int)
-	HoleCount() int
-	SetHoleCount(holeCount int)
-}
-
-var _ SubmeshTopologyable = (*SubmeshTopology)(nil)

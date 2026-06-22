@@ -46,24 +46,24 @@ func deviceAdopt(id objc.ID) *Device {
 }
 
 // Description returns the object's -description text.
-func (x *Device) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Device) Description() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Device) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (d *Device) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(d), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Device) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (d *Device) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(d), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Device) String() string {
-	return rt.Description(objref.IDOf(x))
+func (d *Device) String() string {
+	return rt.Description(objref.IDOf(d))
 }
 
 // NewDevice creates a new Device.
@@ -72,30 +72,20 @@ func NewDevice() *Device {
 	return deviceAdopt(_id)
 }
 
-// Type the type specified when the device is created Recommend that developers use MLCDeviceTypeAny as the device type. This will ensure that MLCompute will select the best device to execute the neural network. If developers want to be able to control device selection, they can select CPU or GPU and for the GPU, they can also select a specific Metal device.
-func (x *Device) Type() DeviceType {
-	_r := objc.Send[DeviceType](objref.IDOf(x), objc.RegisterName("type"))
+// Type returns the type specified when the device is created Recommend that developers use MLCDeviceTypeAny as the device type. This will ensure that MLCompute will select the best device to execute the neural network. If developers want to be able to control device selection, they can select CPU or GPU and for the GPU, they can also select a specific Metal device.
+func (d *Device) Type() DeviceType {
+	_r := objc.Send[DeviceType](objref.IDOf(d), objc.RegisterName("type"))
 	return _r
 }
 
-// ActualDeviceType the specific device selected. This can be CPU, GPU or ANE.  If type is MLCDeviceTypeAny, this property can be used to find out the specific device type that is selected.
-func (x *Device) ActualDeviceType() DeviceType {
-	_r := objc.Send[DeviceType](objref.IDOf(x), objc.RegisterName("actualDeviceType"))
+// ActualDeviceType returns the specific device selected. This can be CPU, GPU or ANE.  If type is MLCDeviceTypeAny, this property can be used to find out the specific device type that is selected.
+func (d *Device) ActualDeviceType() DeviceType {
+	_r := objc.Send[DeviceType](objref.IDOf(d), objc.RegisterName("actualDeviceType"))
 	return _r
 }
 
-// GpuDevices wraps the corresponding Objective-C method.
-func (x *Device) GpuDevices() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gpuDevices"))
+// GPUDevices wraps the corresponding Objective-C method.
+func (d *Device) GPUDevices() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(d), objc.RegisterName("gpuDevices"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// Deviceable is the interface implemented by [Device], for mocking and DI.
-type Deviceable interface {
-	obj.Object
-	Type() DeviceType
-	ActualDeviceType() DeviceType
-	GpuDevices() []obj.Object
-}
-
-var _ Deviceable = (*Device)(nil)

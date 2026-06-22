@@ -7,7 +7,6 @@ package avfoundation
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -60,18 +59,10 @@ func NewCaptureSystemExposureBiasSliderWithDeviceAction(device *CaptureDevice, a
 	return captureSystemExposureBiasSliderAdopt(_id)
 }
 
-// WithEnabled a Boolean value that indicates whether this control supports user interaction.
-func (x *CaptureSystemExposureBiasSlider) WithEnabled(enabled bool) *CaptureSystemExposureBiasSlider {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether this control supports user interaction.
+func (csebs *CaptureSystemExposureBiasSlider) WithEnabled(enabled bool) *CaptureSystemExposureBiasSlider {
+	objc.Send[objc.ID](objref.IDOf(csebs), objc.RegisterName("setEnabled:"), enabled)
+	return csebs
 }
-
-// CaptureSystemExposureBiasSliderable is the interface implemented by [CaptureSystemExposureBiasSlider], for mocking and DI.
-type CaptureSystemExposureBiasSliderable interface {
-	obj.Object
-	WithEnabled(enabled bool) *CaptureSystemExposureBiasSlider
-}
-
-var _ CaptureSystemExposureBiasSliderable = (*CaptureSystemExposureBiasSlider)(nil)
 
 var _ CaptureControlProvider = (*CaptureSystemExposureBiasSlider)(nil)

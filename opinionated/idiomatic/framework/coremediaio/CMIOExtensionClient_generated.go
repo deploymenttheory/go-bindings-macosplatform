@@ -46,24 +46,24 @@ func extensionClientAdopt(id objc.ID) *ExtensionClient {
 }
 
 // Description returns the object's -description text.
-func (x *ExtensionClient) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ec *ExtensionClient) Description() string {
+	return rt.Description(objref.IDOf(ec))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExtensionClient) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ec *ExtensionClient) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ec), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExtensionClient) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ec *ExtensionClient) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ec), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExtensionClient) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ec *ExtensionClient) String() string {
+	return rt.Description(objref.IDOf(ec))
 }
 
 // NewExtensionClient creates a new ExtensionClient.
@@ -72,33 +72,23 @@ func NewExtensionClient() *ExtensionClient {
 	return extensionClientAdopt(_id)
 }
 
-// ClientID the client unique identifier.
-func (x *ExtensionClient) ClientID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clientID"))
+// ClientID returns the client unique identifier.
+func (ec *ExtensionClient) ClientID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("clientID"))
 	return obj.Wrap(_r)
 }
 
-// SigningID the client's signing identifier.
-func (x *ExtensionClient) SigningID() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signingID"))
+// SigningID returns the client's signing identifier.
+func (ec *ExtensionClient) SigningID() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ec), objc.RegisterName("signingID"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Pid the pid of the client application.
-func (x *ExtensionClient) Pid() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("pid"))
+// Pid returns the pid of the client application.
+func (ec *ExtensionClient) Pid() int {
+	_r := objc.Send[int](objref.IDOf(ec), objc.RegisterName("pid"))
 	return _r
 }
-
-// ExtensionClientable is the interface implemented by [ExtensionClient], for mocking and DI.
-type ExtensionClientable interface {
-	obj.Object
-	ClientID() obj.Object
-	SigningID() string
-	Pid() int
-}
-
-var _ ExtensionClientable = (*ExtensionClient)(nil)

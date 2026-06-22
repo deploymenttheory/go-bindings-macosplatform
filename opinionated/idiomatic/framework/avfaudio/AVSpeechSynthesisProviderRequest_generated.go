@@ -46,24 +46,24 @@ func speechSynthesisProviderRequestAdopt(id objc.ID) *SpeechSynthesisProviderReq
 }
 
 // Description returns the object's -description text.
-func (x *SpeechSynthesisProviderRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sspr *SpeechSynthesisProviderRequest) Description() string {
+	return rt.Description(objref.IDOf(sspr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SpeechSynthesisProviderRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sspr *SpeechSynthesisProviderRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sspr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SpeechSynthesisProviderRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sspr *SpeechSynthesisProviderRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sspr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SpeechSynthesisProviderRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sspr *SpeechSynthesisProviderRequest) String() string {
+	return rt.Description(objref.IDOf(sspr))
 }
 
 // NewSpeechSynthesisProviderRequestWithSSMLRepresentationVoice creates a request with a voice and a description.
@@ -73,26 +73,17 @@ func NewSpeechSynthesisProviderRequestWithSSMLRepresentationVoice(text string, v
 	return speechSynthesisProviderRequestAdopt(_id)
 }
 
-// SsmlRepresentation the SSML representation of the text to be synthesized with the corresponding speech synthesis attributes for customization of pitch, rate, intonation, and more.
-func (x *SpeechSynthesisProviderRequest) SsmlRepresentation() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ssmlRepresentation"))
+// SsmlRepresentation returns the SSML representation of the text to be synthesized with the corresponding speech synthesis attributes for customization of pitch, rate, intonation, and more.
+func (sspr *SpeechSynthesisProviderRequest) SsmlRepresentation() string {
+	_r := objc.Send[objc.ID](objref.IDOf(sspr), objc.RegisterName("ssmlRepresentation"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// Voice the voice to be used in this speech request
-func (x *SpeechSynthesisProviderRequest) Voice() *SpeechSynthesisProviderVoice {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voice"))
+// Voice returns the voice to be used in this speech request
+func (sspr *SpeechSynthesisProviderRequest) Voice() *SpeechSynthesisProviderVoice {
+	_r := objc.Send[objc.ID](objref.IDOf(sspr), objc.RegisterName("voice"))
 	return SpeechSynthesisProviderVoiceFromID(_r)
 }
-
-// SpeechSynthesisProviderRequestable is the interface implemented by [SpeechSynthesisProviderRequest], for mocking and DI.
-type SpeechSynthesisProviderRequestable interface {
-	obj.Object
-	SsmlRepresentation() string
-	Voice() *SpeechSynthesisProviderVoice
-}
-
-var _ SpeechSynthesisProviderRequestable = (*SpeechSynthesisProviderRequest)(nil)

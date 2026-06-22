@@ -46,24 +46,24 @@ func dataAssetAdopt(id objc.ID) *DataAsset {
 }
 
 // Description returns the object's -description text.
-func (x *DataAsset) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (da *DataAsset) Description() string {
+	return rt.Description(objref.IDOf(da))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *DataAsset) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (da *DataAsset) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(da), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *DataAsset) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (da *DataAsset) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(da), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *DataAsset) String() string {
-	return rt.Description(objref.IDOf(x))
+func (da *DataAsset) String() string {
+	return rt.Description(objref.IDOf(da))
 }
 
 // NewDataAssetWithName initializes and returns an object with a reference to the named data asset in an asset catalog.
@@ -80,33 +80,23 @@ func NewDataAssetWithNameBundle(name obj.Object, bundle obj.Object) *DataAsset {
 	return dataAssetAdopt(_id)
 }
 
-// Name the name used to reference the data asset
-func (x *DataAsset) Name() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+// Name returns the name used to reference the data asset
+func (da *DataAsset) Name() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("name"))
 	return obj.Wrap(_r)
 }
 
-// Data the data for this asset, as stored in the asset catalog
-func (x *DataAsset) Data() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+// Data returns the data for this asset, as stored in the asset catalog
+func (da *DataAsset) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("data"))
 	return obj.Wrap(_r)
 }
 
-// TypeIdentifier the Uniform Type Identifier for this data object.
-func (x *DataAsset) TypeIdentifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("typeIdentifier"))
+// TypeIdentifier returns the Uniform Type Identifier for this data object.
+func (da *DataAsset) TypeIdentifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(da), objc.RegisterName("typeIdentifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// DataAssetable is the interface implemented by [DataAsset], for mocking and DI.
-type DataAssetable interface {
-	obj.Object
-	Name() obj.Object
-	Data() obj.Object
-	TypeIdentifier() string
-}
-
-var _ DataAssetable = (*DataAsset)(nil)

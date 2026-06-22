@@ -46,24 +46,24 @@ func workoutActivityAdopt(id objc.ID) *WorkoutActivity {
 }
 
 // Description returns the object's -description text.
-func (x *WorkoutActivity) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (wa *WorkoutActivity) Description() string {
+	return rt.Description(objref.IDOf(wa))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *WorkoutActivity) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (wa *WorkoutActivity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(wa), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *WorkoutActivity) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (wa *WorkoutActivity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(wa), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *WorkoutActivity) String() string {
-	return rt.Description(objref.IDOf(x))
+func (wa *WorkoutActivity) String() string {
+	return rt.Description(objref.IDOf(wa))
 }
 
 // NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata creates a workout activity using the provided configuration, start date, end date, and metadata.
@@ -74,73 +74,57 @@ func NewWorkoutActivityWithWorkoutConfigurationStartDateEndDateMetadata(workoutC
 }
 
 // StatisticsForType returns the activity’s statistics for the provided quantity type.
-func (x *WorkoutActivity) StatisticsForType(quantityType *QuantityType) *Statistics {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("statisticsForType:"), objref.IDOf(quantityType))
+func (wa *WorkoutActivity) StatisticsForType(quantityType *QuantityType) *Statistics {
+	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("statisticsForType:"), objref.IDOf(quantityType))
 	return StatisticsFromID(_r)
 }
 
-// UUID a unique identifier of the activity in the HealthKit database.
-func (x *WorkoutActivity) UUID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
+// UUID returns a unique identifier of the activity in the HealthKit database.
+func (wa *WorkoutActivity) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("UUID"))
 	return obj.Wrap(_r)
 }
 
-// WorkoutConfiguration the configuration object describing the workout activity.
-func (x *WorkoutActivity) WorkoutConfiguration() *WorkoutConfiguration {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workoutConfiguration"))
+// WorkoutConfiguration returns the configuration object describing the workout activity.
+func (wa *WorkoutActivity) WorkoutConfiguration() *WorkoutConfiguration {
+	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("workoutConfiguration"))
 	return WorkoutConfigurationFromID(_r)
 }
 
-// StartDate the point in time when the workout activity was started.
-func (x *WorkoutActivity) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+// StartDate returns the point in time when the workout activity was started.
+func (wa *WorkoutActivity) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
-// EndDate the point in time when the workout activity was ended. This value is nil when a workout activity is in progress.
-func (x *WorkoutActivity) EndDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+// EndDate returns the point in time when the workout activity was ended. This value is nil when a workout activity is in progress.
+func (wa *WorkoutActivity) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
-// Metadata extra information describing properties of the workout activity. Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
-func (x *WorkoutActivity) Metadata() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+// Metadata returns extra information describing properties of the workout activity. Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
+func (wa *WorkoutActivity) Metadata() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("metadata"))
 	return obj.Wrap(_r)
 }
 
-// Duration the length of time that the workout activity was recording The duration is derived from the start and end dates of the activity and takes into account periods that the activity was paused. Periods that the activity was paused are based off of the workoutEvents property of the parent workout object.
-func (x *WorkoutActivity) Duration() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+// Duration returns the length of time that the workout activity was recording The duration is derived from the start and end dates of the activity and takes into account periods that the activity was paused. Periods that the activity was paused are based off of the workoutEvents property of the parent workout object.
+func (wa *WorkoutActivity) Duration() float64 {
+	_r := objc.Send[float64](objref.IDOf(wa), objc.RegisterName("duration"))
 	return _r
 }
 
-// WorkoutEvents an array of HKWorkoutEvents that occurred during the workout activity. These events will be ordered by date in ascending order. These events are a subset of the workout events that take place between the start date and end date of the activity. This includes any event that overlaps the activity, even partially. Consequently, some events may be included in more than one activity.
+// WorkoutEvents returns an array of HKWorkoutEvents that occurred during the workout activity. These events will be ordered by date in ascending order. These events are a subset of the workout events that take place between the start date and end date of the activity. This includes any event that overlaps the activity, even partially. Consequently, some events may be included in more than one activity.
 //
 // WorkoutEvents returns the collection as a Go slice.
-func (x *WorkoutActivity) WorkoutEvents() []*WorkoutEvent {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("workoutEvents"))
+func (wa *WorkoutActivity) WorkoutEvents() []*WorkoutEvent {
+	_arr := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("workoutEvents"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *WorkoutEvent { return WorkoutEventFromID(_id) })
 }
 
-// AllStatistics a dictionary of statistics per quantity type during the activity This dictionary will contain HKStatistics objects containing the statistics by quantity sample type for all of the samples that have been added to the workout within the date interval of this activity.
-func (x *WorkoutActivity) AllStatistics() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allStatistics"))
+// AllStatistics returns a dictionary of statistics per quantity type during the activity This dictionary will contain HKStatistics objects containing the statistics by quantity sample type for all of the samples that have been added to the workout within the date interval of this activity.
+func (wa *WorkoutActivity) AllStatistics() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(wa), objc.RegisterName("allStatistics"))
 	return obj.Wrap(_r)
 }
-
-// WorkoutActivityable is the interface implemented by [WorkoutActivity], for mocking and DI.
-type WorkoutActivityable interface {
-	obj.Object
-	StatisticsForType(quantityType *QuantityType) *Statistics
-	UUID() obj.Object
-	WorkoutConfiguration() *WorkoutConfiguration
-	StartDate() obj.Object
-	EndDate() obj.Object
-	Metadata() obj.Object
-	Duration() float64
-	WorkoutEvents() []*WorkoutEvent
-	AllStatistics() obj.Object
-}
-
-var _ WorkoutActivityable = (*WorkoutActivity)(nil)

@@ -45,24 +45,24 @@ func inputManagerAdopt(id objc.ID) *InputManager {
 }
 
 // Description returns the object's -description text.
-func (x *InputManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (im *InputManager) Description() string {
+	return rt.Description(objref.IDOf(im))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *InputManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (im *InputManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(im), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *InputManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (im *InputManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(im), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *InputManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (im *InputManager) String() string {
+	return rt.Description(objref.IDOf(im))
 }
 
 // NewInputManagerWithNameHost creates a new InputManager.
@@ -73,8 +73,8 @@ func NewInputManagerWithNameHost(inputServerName string, hostName string) *Input
 }
 
 // LocalizedInputManagerName wraps the corresponding Objective-C method.
-func (x *InputManager) LocalizedInputManagerName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedInputManagerName"))
+func (im *InputManager) LocalizedInputManagerName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("localizedInputManagerName"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,24 +82,24 @@ func (x *InputManager) LocalizedInputManagerName() string {
 }
 
 // MarkedTextAbandoned wraps the corresponding Objective-C method.
-func (x *InputManager) MarkedTextAbandoned(cli obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markedTextAbandoned:"), objref.IDOf(cli))
+func (im *InputManager) MarkedTextAbandoned(cli obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("markedTextAbandoned:"), objref.IDOf(cli))
 }
 
 // MarkedTextSelectionChangedClient wraps the corresponding Objective-C method.
-func (x *InputManager) MarkedTextSelectionChangedClient(newSel foundation.NSRange, cli obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("markedTextSelectionChanged:client:"), newSel, objref.IDOf(cli))
+func (im *InputManager) MarkedTextSelectionChangedClient(newSel foundation.NSRange, cli obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("markedTextSelectionChanged:client:"), newSel, objref.IDOf(cli))
 }
 
 // WantsToInterpretAllKeystrokes wraps the corresponding Objective-C method.
-func (x *InputManager) WantsToInterpretAllKeystrokes() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsToInterpretAllKeystrokes"))
+func (im *InputManager) WantsToInterpretAllKeystrokes() bool {
+	_r := objc.Send[bool](objref.IDOf(im), objc.RegisterName("wantsToInterpretAllKeystrokes"))
 	return _r
 }
 
 // Language wraps the corresponding Objective-C method.
-func (x *InputManager) Language() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
+func (im *InputManager) Language() string {
+	_r := objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("language"))
 	if _r == 0 {
 		return ""
 	}
@@ -107,48 +107,31 @@ func (x *InputManager) Language() string {
 }
 
 // Image wraps the corresponding Objective-C method.
-func (x *InputManager) Image() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+func (im *InputManager) Image() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
 // Server wraps the corresponding Objective-C method.
-func (x *InputManager) Server() *InputServer {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("server"))
+func (im *InputManager) Server() *InputServer {
+	_r := objc.Send[objc.ID](objref.IDOf(im), objc.RegisterName("server"))
 	return InputServerFromID(_r)
 }
 
 // WantsToHandleMouseEvents wraps the corresponding Objective-C method.
-func (x *InputManager) WantsToHandleMouseEvents() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsToHandleMouseEvents"))
+func (im *InputManager) WantsToHandleMouseEvents() bool {
+	_r := objc.Send[bool](objref.IDOf(im), objc.RegisterName("wantsToHandleMouseEvents"))
 	return _r
 }
 
 // HandleMouseEvent wraps the corresponding Objective-C method.
-func (x *InputManager) HandleMouseEvent(mouseEvent *Event) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("handleMouseEvent:"), objref.IDOf(mouseEvent))
+func (im *InputManager) HandleMouseEvent(mouseEvent *Event) bool {
+	_r := objc.Send[bool](objref.IDOf(im), objc.RegisterName("handleMouseEvent:"), objref.IDOf(mouseEvent))
 	return _r
 }
 
 // WantsToDelayTextChangeNotifications wraps the corresponding Objective-C method.
-func (x *InputManager) WantsToDelayTextChangeNotifications() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wantsToDelayTextChangeNotifications"))
+func (im *InputManager) WantsToDelayTextChangeNotifications() bool {
+	_r := objc.Send[bool](objref.IDOf(im), objc.RegisterName("wantsToDelayTextChangeNotifications"))
 	return _r
 }
-
-// InputManagerable is the interface implemented by [InputManager], for mocking and DI.
-type InputManagerable interface {
-	obj.Object
-	LocalizedInputManagerName() string
-	MarkedTextAbandoned(cli obj.Object)
-	MarkedTextSelectionChangedClient(newSel foundation.NSRange, cli obj.Object)
-	WantsToInterpretAllKeystrokes() bool
-	Language() string
-	Image() *Image
-	Server() *InputServer
-	WantsToHandleMouseEvents() bool
-	HandleMouseEvent(mouseEvent *Event) bool
-	WantsToDelayTextChangeNotifications() bool
-}
-
-var _ InputManagerable = (*InputManager)(nil)

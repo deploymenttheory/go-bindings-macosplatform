@@ -7,7 +7,6 @@ package metal
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,151 +51,93 @@ func NewMTL4ComputePipelineDescriptor() *MTL4ComputePipelineDescriptor {
 	return mTL4ComputePipelineDescriptorAdopt(_id)
 }
 
-// WithComputeFunctionDescriptor a descriptor representing the compute pipeline’s function.
-func (x *MTL4ComputePipelineDescriptor) WithComputeFunctionDescriptor(computeFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4ComputePipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComputeFunctionDescriptor:"), objref.IDOf(computeFunctionDescriptor))
-	return x
+// WithComputeFunctionDescriptor sets a descriptor representing the compute pipeline’s function.
+func (mcpd *MTL4ComputePipelineDescriptor) WithComputeFunctionDescriptor(computeFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("setComputeFunctionDescriptor:"), objref.IDOf(computeFunctionDescriptor))
+	return mcpd
 }
 
-// WithThreadGroupSizeIsMultipleOfThreadExecutionWidth a boolean value indicating whether each dimension of the threadgroup size is a multiple of its corresponding thread execution width.
-func (x *MTL4ComputePipelineDescriptor) WithThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth bool) *MTL4ComputePipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadGroupSizeIsMultipleOfThreadExecutionWidth:"), threadGroupSizeIsMultipleOfThreadExecutionWidth)
-	return x
+// WithThreadGroupSizeIsMultipleOfThreadExecutionWidth sets a boolean value indicating whether each dimension of the threadgroup size is a multiple of its corresponding thread execution width.
+func (mcpd *MTL4ComputePipelineDescriptor) WithThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth bool) *MTL4ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("setThreadGroupSizeIsMultipleOfThreadExecutionWidth:"), threadGroupSizeIsMultipleOfThreadExecutionWidth)
+	return mcpd
 }
 
-// WithMaxTotalThreadsPerThreadgroup the maximum total number of threads that Metal can execute in a single threadgroup for the compute function.
-func (x *MTL4ComputePipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup int) *MTL4ComputePipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTotalThreadsPerThreadgroup:"), maxTotalThreadsPerThreadgroup)
-	return x
+// WithMaxTotalThreadsPerThreadgroup sets the maximum total number of threads that Metal can execute in a single threadgroup for the compute function.
+func (mcpd *MTL4ComputePipelineDescriptor) WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup int) *MTL4ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("setMaxTotalThreadsPerThreadgroup:"), maxTotalThreadsPerThreadgroup)
+	return mcpd
 }
 
-// WithSupportBinaryLinking a boolean value indicating whether the compute pipeline supports linking binary functions.
-func (x *MTL4ComputePipelineDescriptor) WithSupportBinaryLinking(supportBinaryLinking bool) *MTL4ComputePipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportBinaryLinking:"), supportBinaryLinking)
-	return x
+// WithSupportBinaryLinking sets a boolean value indicating whether the compute pipeline supports linking binary functions.
+func (mcpd *MTL4ComputePipelineDescriptor) WithSupportBinaryLinking(supportBinaryLinking bool) *MTL4ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("setSupportBinaryLinking:"), supportBinaryLinking)
+	return mcpd
 }
 
-// WithStaticLinkingDescriptor an object that contains information about functions to link to the compute pipeline.
-func (x *MTL4ComputePipelineDescriptor) WithStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4ComputePipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStaticLinkingDescriptor:"), objref.IDOf(staticLinkingDescriptor))
-	return x
+// WithStaticLinkingDescriptor sets an object that contains information about functions to link to the compute pipeline.
+func (mcpd *MTL4ComputePipelineDescriptor) WithStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("setStaticLinkingDescriptor:"), objref.IDOf(staticLinkingDescriptor))
+	return mcpd
 }
 
-// WithSupportIndirectCommandBuffers a value indicating whether the pipeline supports Metal indirect command buffers.
-func (x *MTL4ComputePipelineDescriptor) WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers MTL4IndirectCommandBufferSupportState) *MTL4ComputePipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportIndirectCommandBuffers:"), supportIndirectCommandBuffers)
-	return x
+// WithSupportIndirectCommandBuffers sets a value indicating whether the pipeline supports Metal indirect command buffers.
+func (mcpd *MTL4ComputePipelineDescriptor) WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers MTL4IndirectCommandBufferSupportState) *MTL4ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("setSupportIndirectCommandBuffers:"), supportIndirectCommandBuffers)
+	return mcpd
 }
 
-// WithLabel assigns an optional string that uniquely identifies a pipeline descriptor.
-func (x *MTL4ComputePipelineDescriptor) WithLabel(label string) *MTL4ComputePipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets assigns an optional string that uniquely identifies a pipeline descriptor.
+func (mcpd *MTL4ComputePipelineDescriptor) WithLabel(label string) *MTL4ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return mcpd
 }
 
-// WithOptions provides compile-time options when you build the pipeline.
-func (x *MTL4ComputePipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4ComputePipelineDescriptor {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptions:"), objref.IDOf(options))
-	return x
+// WithOptions sets provides compile-time options when you build the pipeline.
+func (mcpd *MTL4ComputePipelineDescriptor) WithOptions(options *MTL4PipelineOptions) *MTL4ComputePipelineDescriptor {
+	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("setOptions:"), objref.IDOf(options))
+	return mcpd
 }
 
 // Reset resets the descriptor to its default values.
-func (x *MTL4ComputePipelineDescriptor) Reset() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
+func (mcpd *MTL4ComputePipelineDescriptor) Reset() {
+	objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("reset"))
 }
 
-// ComputeFunctionDescriptor a descriptor representing the compute pipeline's function. You don't assign instances of “MTL4FunctionDescriptor“ to this property directly, instead assign an instance of one of its subclasses, such as “MTL4LibraryFunctionDescriptor“, which represents a function from a Metal library.
-func (x *MTL4ComputePipelineDescriptor) ComputeFunctionDescriptor() *MTL4FunctionDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("computeFunctionDescriptor"))
+// ComputeFunctionDescriptor returns a descriptor representing the compute pipeline's function. You don't assign instances of “MTL4FunctionDescriptor“ to this property directly, instead assign an instance of one of its subclasses, such as “MTL4LibraryFunctionDescriptor“, which represents a function from a Metal library.
+func (mcpd *MTL4ComputePipelineDescriptor) ComputeFunctionDescriptor() *MTL4FunctionDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("computeFunctionDescriptor"))
 	return MTL4FunctionDescriptorFromID(_r)
 }
 
-// SetComputeFunctionDescriptor wraps the corresponding Objective-C method.
-func (x *MTL4ComputePipelineDescriptor) SetComputeFunctionDescriptor(computeFunctionDescriptor *MTL4FunctionDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComputeFunctionDescriptor:"), objref.IDOf(computeFunctionDescriptor))
-}
-
-// ThreadGroupSizeIsMultipleOfThreadExecutionWidth a boolean value indicating whether each dimension of the threadgroup size is a multiple of its corresponding thread execution width.
-func (x *MTL4ComputePipelineDescriptor) ThreadGroupSizeIsMultipleOfThreadExecutionWidth() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("threadGroupSizeIsMultipleOfThreadExecutionWidth"))
+// ThreadGroupSizeIsMultipleOfThreadExecutionWidth reports whether each dimension of the threadgroup size is a multiple of its corresponding thread execution width.
+func (mcpd *MTL4ComputePipelineDescriptor) ThreadGroupSizeIsMultipleOfThreadExecutionWidth() bool {
+	_r := objc.Send[bool](objref.IDOf(mcpd), objc.RegisterName("threadGroupSizeIsMultipleOfThreadExecutionWidth"))
 	return _r
 }
 
-// SetThreadGroupSizeIsMultipleOfThreadExecutionWidth wraps the corresponding Objective-C method.
-func (x *MTL4ComputePipelineDescriptor) SetThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadGroupSizeIsMultipleOfThreadExecutionWidth:"), threadGroupSizeIsMultipleOfThreadExecutionWidth)
-}
-
-// MaxTotalThreadsPerThreadgroup the maximum total number of threads that Metal can execute in a single threadgroup for the compute function.
-func (x *MTL4ComputePipelineDescriptor) MaxTotalThreadsPerThreadgroup() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxTotalThreadsPerThreadgroup"))
+// MaxTotalThreadsPerThreadgroup returns the maximum total number of threads that Metal can execute in a single threadgroup for the compute function.
+func (mcpd *MTL4ComputePipelineDescriptor) MaxTotalThreadsPerThreadgroup() int {
+	_r := objc.Send[int](objref.IDOf(mcpd), objc.RegisterName("maxTotalThreadsPerThreadgroup"))
 	return _r
 }
 
-// SetMaxTotalThreadsPerThreadgroup wraps the corresponding Objective-C method.
-func (x *MTL4ComputePipelineDescriptor) SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxTotalThreadsPerThreadgroup:"), maxTotalThreadsPerThreadgroup)
-}
-
-// SupportBinaryLinking a boolean value indicating whether the compute pipeline supports linking binary functions.
-func (x *MTL4ComputePipelineDescriptor) SupportBinaryLinking() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportBinaryLinking"))
+// SupportBinaryLinking reports whether the compute pipeline supports linking binary functions.
+func (mcpd *MTL4ComputePipelineDescriptor) SupportBinaryLinking() bool {
+	_r := objc.Send[bool](objref.IDOf(mcpd), objc.RegisterName("supportBinaryLinking"))
 	return _r
 }
 
-// SetSupportBinaryLinking wraps the corresponding Objective-C method.
-func (x *MTL4ComputePipelineDescriptor) SetSupportBinaryLinking(supportBinaryLinking bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportBinaryLinking:"), supportBinaryLinking)
-}
-
-// StaticLinkingDescriptor an object that contains information about functions to link to the compute pipeline.
-func (x *MTL4ComputePipelineDescriptor) StaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("staticLinkingDescriptor"))
+// StaticLinkingDescriptor returns an object that contains information about functions to link to the compute pipeline.
+func (mcpd *MTL4ComputePipelineDescriptor) StaticLinkingDescriptor() *MTL4StaticLinkingDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(mcpd), objc.RegisterName("staticLinkingDescriptor"))
 	return MTL4StaticLinkingDescriptorFromID(_r)
 }
 
-// SetStaticLinkingDescriptor wraps the corresponding Objective-C method.
-func (x *MTL4ComputePipelineDescriptor) SetStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStaticLinkingDescriptor:"), objref.IDOf(staticLinkingDescriptor))
-}
-
-// SupportIndirectCommandBuffers a value indicating whether the pipeline supports Metal indirect command buffers.
-func (x *MTL4ComputePipelineDescriptor) SupportIndirectCommandBuffers() MTL4IndirectCommandBufferSupportState {
-	_r := objc.Send[MTL4IndirectCommandBufferSupportState](objref.IDOf(x), objc.RegisterName("supportIndirectCommandBuffers"))
+// SupportIndirectCommandBuffers returns a value indicating whether the pipeline supports Metal indirect command buffers.
+func (mcpd *MTL4ComputePipelineDescriptor) SupportIndirectCommandBuffers() MTL4IndirectCommandBufferSupportState {
+	_r := objc.Send[MTL4IndirectCommandBufferSupportState](objref.IDOf(mcpd), objc.RegisterName("supportIndirectCommandBuffers"))
 	return _r
 }
-
-// SetSupportIndirectCommandBuffers wraps the corresponding Objective-C method.
-func (x *MTL4ComputePipelineDescriptor) SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers MTL4IndirectCommandBufferSupportState) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportIndirectCommandBuffers:"), supportIndirectCommandBuffers)
-}
-
-// MTL4ComputePipelineDescriptorable is the interface implemented by [MTL4ComputePipelineDescriptor], for mocking and DI.
-type MTL4ComputePipelineDescriptorable interface {
-	obj.Object
-	WithComputeFunctionDescriptor(computeFunctionDescriptor MTL4FunctionDescriptorProvider) *MTL4ComputePipelineDescriptor
-	WithThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth bool) *MTL4ComputePipelineDescriptor
-	WithMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup int) *MTL4ComputePipelineDescriptor
-	WithSupportBinaryLinking(supportBinaryLinking bool) *MTL4ComputePipelineDescriptor
-	WithStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor) *MTL4ComputePipelineDescriptor
-	WithSupportIndirectCommandBuffers(supportIndirectCommandBuffers MTL4IndirectCommandBufferSupportState) *MTL4ComputePipelineDescriptor
-	WithLabel(label string) *MTL4ComputePipelineDescriptor
-	WithOptions(options *MTL4PipelineOptions) *MTL4ComputePipelineDescriptor
-	Reset()
-	ComputeFunctionDescriptor() *MTL4FunctionDescriptor
-	SetComputeFunctionDescriptor(computeFunctionDescriptor *MTL4FunctionDescriptor)
-	ThreadGroupSizeIsMultipleOfThreadExecutionWidth() bool
-	SetThreadGroupSizeIsMultipleOfThreadExecutionWidth(threadGroupSizeIsMultipleOfThreadExecutionWidth bool)
-	MaxTotalThreadsPerThreadgroup() int
-	SetMaxTotalThreadsPerThreadgroup(maxTotalThreadsPerThreadgroup int)
-	SupportBinaryLinking() bool
-	SetSupportBinaryLinking(supportBinaryLinking bool)
-	StaticLinkingDescriptor() *MTL4StaticLinkingDescriptor
-	SetStaticLinkingDescriptor(staticLinkingDescriptor *MTL4StaticLinkingDescriptor)
-	SupportIndirectCommandBuffers() MTL4IndirectCommandBufferSupportState
-	SetSupportIndirectCommandBuffers(supportIndirectCommandBuffers MTL4IndirectCommandBufferSupportState)
-}
-
-var _ MTL4ComputePipelineDescriptorable = (*MTL4ComputePipelineDescriptor)(nil)
 
 var _ MTL4PipelineDescriptorProvider = (*MTL4ComputePipelineDescriptor)(nil)

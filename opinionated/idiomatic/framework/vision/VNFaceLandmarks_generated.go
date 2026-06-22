@@ -48,43 +48,35 @@ func faceLandmarksAdopt(id objc.ID) *FaceLandmarks {
 }
 
 // Description returns the object's -description text.
-func (x *FaceLandmarks) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fl *FaceLandmarks) Description() string {
+	return rt.Description(objref.IDOf(fl))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FaceLandmarks) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fl *FaceLandmarks) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fl), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FaceLandmarks) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fl *FaceLandmarks) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fl), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FaceLandmarks) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fl *FaceLandmarks) String() string {
+	return rt.Description(objref.IDOf(fl))
 }
 
 // Confidence wraps the corresponding Objective-C method.
-func (x *FaceLandmarks) Confidence() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("confidence"))
+func (fl *FaceLandmarks) Confidence() float32 {
+	_r := objc.Send[float32](objref.IDOf(fl), objc.RegisterName("confidence"))
 	return _r
 }
-
-// FaceLandmarksable is the interface implemented by [FaceLandmarks], for mocking and DI.
-type FaceLandmarksable interface {
-	obj.Object
-	Confidence() float32
-}
-
-var _ FaceLandmarksable = (*FaceLandmarks)(nil)
 
 // isFaceLandmarks marks FaceLandmarks — and, by embedding promotion, its
 // subclasses — as a member of the FaceLandmarks hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *FaceLandmarks) isFaceLandmarks() {}
+func (fl *FaceLandmarks) isFaceLandmarks() {}
 
 var _ FaceLandmarksProvider = (*FaceLandmarks)(nil)

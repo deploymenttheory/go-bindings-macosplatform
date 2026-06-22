@@ -46,24 +46,24 @@ func functionReflectionAdopt(id objc.ID) *FunctionReflection {
 }
 
 // Description returns the object's -description text.
-func (x *FunctionReflection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fr *FunctionReflection) Description() string {
+	return rt.Description(objref.IDOf(fr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FunctionReflection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fr *FunctionReflection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FunctionReflection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fr *FunctionReflection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FunctionReflection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fr *FunctionReflection) String() string {
+	return rt.Description(objref.IDOf(fr))
 }
 
 // NewFunctionReflection creates a new FunctionReflection.
@@ -73,25 +73,16 @@ func NewFunctionReflection() *FunctionReflection {
 }
 
 // Bindings provides a list of inputs and outputs of the function.
-func (x *FunctionReflection) Bindings() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bindings"))
+func (fr *FunctionReflection) Bindings() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("bindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// UserAnnotation the string passed to the user annotation attribute for this function. Null if no user annotation is present for this function.
-func (x *FunctionReflection) UserAnnotation() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userAnnotation"))
+// UserAnnotation returns the string passed to the user annotation attribute for this function. Null if no user annotation is present for this function.
+func (fr *FunctionReflection) UserAnnotation() string {
+	_r := objc.Send[objc.ID](objref.IDOf(fr), objc.RegisterName("userAnnotation"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// FunctionReflectionable is the interface implemented by [FunctionReflection], for mocking and DI.
-type FunctionReflectionable interface {
-	obj.Object
-	Bindings() []obj.Object
-	UserAnnotation() string
-}
-
-var _ FunctionReflectionable = (*FunctionReflection)(nil)

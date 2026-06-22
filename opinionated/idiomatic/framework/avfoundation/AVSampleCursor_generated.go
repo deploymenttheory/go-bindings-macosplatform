@@ -46,24 +46,24 @@ func sampleCursorAdopt(id objc.ID) *SampleCursor {
 }
 
 // Description returns the object's -description text.
-func (x *SampleCursor) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sc *SampleCursor) Description() string {
+	return rt.Description(objref.IDOf(sc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *SampleCursor) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sc *SampleCursor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *SampleCursor) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sc *SampleCursor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *SampleCursor) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sc *SampleCursor) String() string {
+	return rt.Description(objref.IDOf(sc))
 }
 
 // NewSampleCursor creates a new SampleCursor.
@@ -73,71 +73,55 @@ func NewSampleCursor() *SampleCursor {
 }
 
 // StepInDecodeOrderByCount moves the cursor a given number of samples in decode order.
-func (x *SampleCursor) StepInDecodeOrderByCount(stepCount int64) int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("stepInDecodeOrderByCount:"), stepCount)
+func (sc *SampleCursor) StepInDecodeOrderByCount(stepCount int64) int64 {
+	_r := objc.Send[int64](objref.IDOf(sc), objc.RegisterName("stepInDecodeOrderByCount:"), stepCount)
 	return _r
 }
 
 // StepInPresentationOrderByCount moves the cursor a given number of samples in presentation order.
-func (x *SampleCursor) StepInPresentationOrderByCount(stepCount int64) int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("stepInPresentationOrderByCount:"), stepCount)
+func (sc *SampleCursor) StepInPresentationOrderByCount(stepCount int64) int64 {
+	_r := objc.Send[int64](objref.IDOf(sc), objc.RegisterName("stepInPresentationOrderByCount:"), stepCount)
 	return _r
 }
 
 // SamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor determines whether a sample earlier in decode order can have a presentation timestamp later than that of the specified sample cursor.
-func (x *SampleCursor) SamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor(cursor *SampleCursor) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("samplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor:"), objref.IDOf(cursor))
+func (sc *SampleCursor) SamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor(cursor *SampleCursor) bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("samplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor:"), objref.IDOf(cursor))
 	return _r
 }
 
 // SamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor determines whether a sample later in decode order can have a presentation timestamp earlier than that of the specified sample cursor.
-func (x *SampleCursor) SamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor(cursor *SampleCursor) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("samplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor:"), objref.IDOf(cursor))
+func (sc *SampleCursor) SamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor(cursor *SampleCursor) bool {
+	_r := objc.Send[bool](objref.IDOf(sc), objc.RegisterName("samplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor:"), objref.IDOf(cursor))
 	return _r
 }
 
 // CopyCurrentSampleFormatDescription returns the format description of the sample at the cursor’s current position.
-func (x *SampleCursor) CopyCurrentSampleFormatDescription() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copyCurrentSampleFormatDescription"))
+func (sc *SampleCursor) CopyCurrentSampleFormatDescription() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("copyCurrentSampleFormatDescription"))
 	return obj.Wrap(_r)
 }
 
 // CurrentSampleDependencyAttachments provides a dictionary containing dependency related sample buffer attachments, if known.  See kCMSampleAttachmentKey_... in CoreMedia/CMSampleBuffer.h.
-func (x *SampleCursor) CurrentSampleDependencyAttachments() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentSampleDependencyAttachments"))
+func (sc *SampleCursor) CurrentSampleDependencyAttachments() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("currentSampleDependencyAttachments"))
 	return obj.Wrap(_r)
 }
 
-// SamplesRequiredForDecoderRefresh count of samples prior to the current sample, in decode order, that the decoder requires in order to achieve fully coherent output at the current decode time, as after a seek. Zero will be returned if no samples are required for decoder refresh or if the track does not contain this information. Some sample sequences that do not indicate sample dependencies may instead indicate that in order for a specific sample to be decoded with all available accuracy, samples prior to that sample in decode order must be decoded before the specific sample is decoded. In order to position a sample cursor at the first sample that the decoder requires for a full refresh, you can use code like the following: NSInteger samplesPriorToCurrentSampleToFeedToDecoder = [mySampleCursor samplesRequiredForDecoderRefresh]; AVSampleCursor *cursorForObtainingRefreshSamples = [mySampleCursor copy]; [cursorForObtainingRefreshSamples stepInDecodeOrderByCount: -samplesPriorToCurrentSampleToFeedToDecoder ]; // cursorForObtainingRefreshSamples is now positioned at the first sample that must be provided to the decoder // in order to decode the sample at the position of mySampleCursor in full
-func (x *SampleCursor) SamplesRequiredForDecoderRefresh() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("samplesRequiredForDecoderRefresh"))
+// SamplesRequiredForDecoderRefresh returns count of samples prior to the current sample, in decode order, that the decoder requires in order to achieve fully coherent output at the current decode time, as after a seek. Zero will be returned if no samples are required for decoder refresh or if the track does not contain this information. Some sample sequences that do not indicate sample dependencies may instead indicate that in order for a specific sample to be decoded with all available accuracy, samples prior to that sample in decode order must be decoded before the specific sample is decoded. In order to position a sample cursor at the first sample that the decoder requires for a full refresh, you can use code like the following: NSInteger samplesPriorToCurrentSampleToFeedToDecoder = [mySampleCursor samplesRequiredForDecoderRefresh]; AVSampleCursor *cursorForObtainingRefreshSamples = [mySampleCursor copy]; [cursorForObtainingRefreshSamples stepInDecodeOrderByCount: -samplesPriorToCurrentSampleToFeedToDecoder ]; // cursorForObtainingRefreshSamples is now positioned at the first sample that must be provided to the decoder // in order to decode the sample at the position of mySampleCursor in full
+func (sc *SampleCursor) SamplesRequiredForDecoderRefresh() int {
+	_r := objc.Send[int](objref.IDOf(sc), objc.RegisterName("samplesRequiredForDecoderRefresh"))
 	return _r
 }
 
-// CurrentChunkStorageURL the URL of the storage container of the current sample, as well as other samples that are intended to be loaded in the same operation as a "chunk". May be nil; if nil, the storage location of the chunk is the URL of the sample cursor's track's asset, if it has one.
-func (x *SampleCursor) CurrentChunkStorageURL() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentChunkStorageURL"))
+// CurrentChunkStorageURL returns the URL of the storage container of the current sample, as well as other samples that are intended to be loaded in the same operation as a "chunk". May be nil; if nil, the storage location of the chunk is the URL of the sample cursor's track's asset, if it has one.
+func (sc *SampleCursor) CurrentChunkStorageURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(sc), objc.RegisterName("currentChunkStorageURL"))
 	return obj.Wrap(_r)
 }
 
-// CurrentSampleIndexInChunk the index of the current sample within the chunk to which it belongs.
-func (x *SampleCursor) CurrentSampleIndexInChunk() int64 {
-	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("currentSampleIndexInChunk"))
+// CurrentSampleIndexInChunk returns the index of the current sample within the chunk to which it belongs.
+func (sc *SampleCursor) CurrentSampleIndexInChunk() int64 {
+	_r := objc.Send[int64](objref.IDOf(sc), objc.RegisterName("currentSampleIndexInChunk"))
 	return _r
 }
-
-// SampleCursorable is the interface implemented by [SampleCursor], for mocking and DI.
-type SampleCursorable interface {
-	obj.Object
-	StepInDecodeOrderByCount(stepCount int64) int64
-	StepInPresentationOrderByCount(stepCount int64) int64
-	SamplesWithEarlierDecodeTimeStampsMayHaveLaterPresentationTimeStampsThanCursor(cursor *SampleCursor) bool
-	SamplesWithLaterDecodeTimeStampsMayHaveEarlierPresentationTimeStampsThanCursor(cursor *SampleCursor) bool
-	CopyCurrentSampleFormatDescription() obj.Object
-	CurrentSampleDependencyAttachments() obj.Object
-	SamplesRequiredForDecoderRefresh() int
-	CurrentChunkStorageURL() obj.Object
-	CurrentSampleIndexInChunk() int64
-}
-
-var _ SampleCursorable = (*SampleCursor)(nil)

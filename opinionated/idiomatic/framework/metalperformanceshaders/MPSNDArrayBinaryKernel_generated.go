@@ -7,7 +7,6 @@ package metalperformanceshaders
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -44,24 +43,16 @@ func nDArrayBinaryKernelAdopt(id objc.ID) *NDArrayBinaryKernel {
 	return x
 }
 
-// WithLabel the string that identifies the kernel.
-func (x *NDArrayBinaryKernel) WithLabel(label string) *NDArrayBinaryKernel {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the string that identifies the kernel.
+func (nabk *NDArrayBinaryKernel) WithLabel(label string) *NDArrayBinaryKernel {
+	objc.Send[objc.ID](objref.IDOf(nabk), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nabk
 }
-
-// NDArrayBinaryKernelable is the interface implemented by [NDArrayBinaryKernel], for mocking and DI.
-type NDArrayBinaryKernelable interface {
-	obj.Object
-	WithLabel(label string) *NDArrayBinaryKernel
-}
-
-var _ NDArrayBinaryKernelable = (*NDArrayBinaryKernel)(nil)
 
 // isNDArrayBinaryKernel marks NDArrayBinaryKernel — and, by embedding promotion, its
 // subclasses — as a member of the NDArrayBinaryKernel hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *NDArrayBinaryKernel) isNDArrayBinaryKernel() {}
+func (nabk *NDArrayBinaryKernel) isNDArrayBinaryKernel() {}
 
 var _ NDArrayBinaryKernelProvider = (*NDArrayBinaryKernel)(nil)
 

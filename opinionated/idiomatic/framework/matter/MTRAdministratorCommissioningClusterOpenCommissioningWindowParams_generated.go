@@ -44,24 +44,24 @@ func mTRAdministratorCommissioningClusterOpenCommissioningWindowParamsAdopt(id o
 }
 
 // Description returns the object's -description text.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Description() string {
+	return rt.Description(objref.IDOf(maccocwp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(maccocwp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(maccocwp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) String() string {
-	return rt.Description(objref.IDOf(x))
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) String() string {
+	return rt.Description(objref.IDOf(maccocwp))
 }
 
 // NewMTRAdministratorCommissioningClusterOpenCommissioningWindowParams creates a new MTRAdministratorCommissioningClusterOpenCommissioningWindowParams.
@@ -71,168 +71,97 @@ func NewMTRAdministratorCommissioningClusterOpenCommissioningWindowParams() *MTR
 }
 
 // WithCommissioningTimeout sets the property and returns the receiver so calls can be chained.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithCommissioningTimeout(commissioningTimeout obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommissioningTimeout:"), objref.IDOf(commissioningTimeout))
-	return x
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithCommissioningTimeout(commissioningTimeout obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
+	objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("setCommissioningTimeout:"), objref.IDOf(commissioningTimeout))
+	return maccocwp
 }
 
 // WithPakePasscodeVerifier sets the property and returns the receiver so calls can be chained.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithPakePasscodeVerifier(pakePasscodeVerifier obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPakePasscodeVerifier:"), objref.IDOf(pakePasscodeVerifier))
-	return x
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithPakePasscodeVerifier(pakePasscodeVerifier obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
+	objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("setPakePasscodeVerifier:"), objref.IDOf(pakePasscodeVerifier))
+	return maccocwp
 }
 
 // WithDiscriminator sets the property and returns the receiver so calls can be chained.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithDiscriminator(discriminator obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscriminator:"), objref.IDOf(discriminator))
-	return x
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithDiscriminator(discriminator obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
+	objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("setDiscriminator:"), objref.IDOf(discriminator))
+	return maccocwp
 }
 
 // WithIterations sets the property and returns the receiver so calls can be chained.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithIterations(iterations obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIterations:"), objref.IDOf(iterations))
-	return x
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithIterations(iterations obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
+	objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("setIterations:"), objref.IDOf(iterations))
+	return maccocwp
 }
 
 // WithSalt sets the property and returns the receiver so calls can be chained.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithSalt(salt obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSalt:"), objref.IDOf(salt))
-	return x
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithSalt(salt obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
+	objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("setSalt:"), objref.IDOf(salt))
+	return maccocwp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
+	objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return maccocwp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
+	objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return maccocwp
 }
 
 // WithPakeVerifier sets the property and returns the receiver so calls can be chained.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithPakeVerifier(pakeVerifier obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPakeVerifier:"), objref.IDOf(pakeVerifier))
-	return x
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) WithPakeVerifier(pakeVerifier obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams {
+	objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("setPakeVerifier:"), objref.IDOf(pakeVerifier))
+	return maccocwp
 }
 
 // CommissioningTimeout wraps the corresponding Objective-C method.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) CommissioningTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("commissioningTimeout"))
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) CommissioningTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("commissioningTimeout"))
 	return obj.Wrap(_r)
-}
-
-// SetCommissioningTimeout wraps the corresponding Objective-C method.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetCommissioningTimeout(commissioningTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCommissioningTimeout:"), objref.IDOf(commissioningTimeout))
 }
 
 // PakePasscodeVerifier wraps the corresponding Objective-C method.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) PakePasscodeVerifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pakePasscodeVerifier"))
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) PakePasscodeVerifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("pakePasscodeVerifier"))
 	return obj.Wrap(_r)
-}
-
-// SetPakePasscodeVerifier wraps the corresponding Objective-C method.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetPakePasscodeVerifier(pakePasscodeVerifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPakePasscodeVerifier:"), objref.IDOf(pakePasscodeVerifier))
 }
 
 // Discriminator wraps the corresponding Objective-C method.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Discriminator() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discriminator"))
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Discriminator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("discriminator"))
 	return obj.Wrap(_r)
-}
-
-// SetDiscriminator wraps the corresponding Objective-C method.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetDiscriminator(discriminator obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscriminator:"), objref.IDOf(discriminator))
 }
 
 // Iterations wraps the corresponding Objective-C method.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Iterations() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("iterations"))
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Iterations() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("iterations"))
 	return obj.Wrap(_r)
-}
-
-// SetIterations wraps the corresponding Objective-C method.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetIterations(iterations obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIterations:"), objref.IDOf(iterations))
 }
 
 // Salt wraps the corresponding Objective-C method.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Salt() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("salt"))
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) Salt() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("salt"))
 	return obj.Wrap(_r)
 }
 
-// SetSalt wraps the corresponding Objective-C method.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetSalt(salt obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSalt:"), objref.IDOf(salt))
-}
-
-// TimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) TimedInvokeTimeoutMs() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+// TimedInvokeTimeoutMs returns controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("timedInvokeTimeoutMs"))
 	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs wraps the corresponding Objective-C method.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-}
-
-// ServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) ServerSideProcessingTimeout() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+// ServerSideProcessingTimeout returns controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("serverSideProcessingTimeout"))
 	return obj.Wrap(_r)
-}
-
-// SetServerSideProcessingTimeout wraps the corresponding Objective-C method.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // PakeVerifier wraps the corresponding Objective-C method.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) PakeVerifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pakeVerifier"))
+func (maccocwp *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) PakeVerifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(maccocwp), objc.RegisterName("pakeVerifier"))
 	return obj.Wrap(_r)
 }
-
-// SetPakeVerifier wraps the corresponding Objective-C method.
-func (x *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams) SetPakeVerifier(pakeVerifier obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPakeVerifier:"), objref.IDOf(pakeVerifier))
-}
-
-// MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsable is the interface implemented by [MTRAdministratorCommissioningClusterOpenCommissioningWindowParams], for mocking and DI.
-type MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsable interface {
-	obj.Object
-	WithCommissioningTimeout(commissioningTimeout obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
-	WithPakePasscodeVerifier(pakePasscodeVerifier obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
-	WithDiscriminator(discriminator obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
-	WithIterations(iterations obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
-	WithSalt(salt obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
-	WithPakeVerifier(pakeVerifier obj.Object) *MTRAdministratorCommissioningClusterOpenCommissioningWindowParams
-	CommissioningTimeout() obj.Object
-	SetCommissioningTimeout(commissioningTimeout obj.Object)
-	PakePasscodeVerifier() obj.Object
-	SetPakePasscodeVerifier(pakePasscodeVerifier obj.Object)
-	Discriminator() obj.Object
-	SetDiscriminator(discriminator obj.Object)
-	Iterations() obj.Object
-	SetIterations(iterations obj.Object)
-	Salt() obj.Object
-	SetSalt(salt obj.Object)
-	TimedInvokeTimeoutMs() obj.Object
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
-	ServerSideProcessingTimeout() obj.Object
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
-	PakeVerifier() obj.Object
-	SetPakeVerifier(pakeVerifier obj.Object)
-}
-
-var _ MTRAdministratorCommissioningClusterOpenCommissioningWindowParamsable = (*MTRAdministratorCommissioningClusterOpenCommissioningWindowParams)(nil)

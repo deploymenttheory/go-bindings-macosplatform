@@ -48,117 +48,89 @@ func playbackCoordinatorAdopt(id objc.ID) *PlaybackCoordinator {
 }
 
 // Description returns the object's -description text.
-func (x *PlaybackCoordinator) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *PlaybackCoordinator) Description() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PlaybackCoordinator) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pc *PlaybackCoordinator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PlaybackCoordinator) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pc *PlaybackCoordinator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PlaybackCoordinator) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pc *PlaybackCoordinator) String() string {
+	return rt.Description(objref.IDOf(pc))
 }
 
-// WithSuspensionReasonsThatTriggerWaiting the reasons that cause a coordinator to suspend playback.
-func (x *PlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...obj.Object) *PlaybackCoordinator {
+// WithSuspensionReasonsThatTriggerWaiting sets the reasons that cause a coordinator to suspend playback.
+func (pc *PlaybackCoordinator) WithSuspensionReasonsThatTriggerWaiting(items ...obj.Object) *PlaybackCoordinator {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionReasonsThatTriggerWaiting:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setSuspensionReasonsThatTriggerWaiting:"), _arr)
+	return pc
 }
 
-// WithPauseSnapsToMediaTimeOfOriginator a Boolean value that indicates whether participants mirror the originator’s stop time when they pause.
-func (x *PlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *PlaybackCoordinator {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPauseSnapsToMediaTimeOfOriginator:"), pauseSnapsToMediaTimeOfOriginator)
-	return x
+// WithPauseSnapsToMediaTimeOfOriginator sets a Boolean value that indicates whether participants mirror the originator’s stop time when they pause.
+func (pc *PlaybackCoordinator) WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *PlaybackCoordinator {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setPauseSnapsToMediaTimeOfOriginator:"), pauseSnapsToMediaTimeOfOriginator)
+	return pc
 }
 
 // BeginSuspensionForReason tells the coordinator to stop sending playback commands temporarily when the playback object disconnects from the group activity.
-func (x *PlaybackCoordinator) BeginSuspensionForReason(suspensionReason obj.Object) *CoordinatedPlaybackSuspension {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("beginSuspensionForReason:"), objref.IDOf(suspensionReason))
+func (pc *PlaybackCoordinator) BeginSuspensionForReason(suspensionReason obj.Object) *CoordinatedPlaybackSuspension {
+	_r := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("beginSuspensionForReason:"), objref.IDOf(suspensionReason))
 	return CoordinatedPlaybackSuspensionFromID(_r)
 }
 
-// OtherParticipants the playback states of the other participants in the group. Use this property to create UI informing the local user about the state of other participants in the group. - NOTE: The coordinator posts AVPlaybackCoordinatorOtherParticipantsDidChangeNotification when the contents of the array changes.
+// OtherParticipants returns the playback states of the other participants in the group. Use this property to create UI informing the local user about the state of other participants in the group. - NOTE: The coordinator posts AVPlaybackCoordinatorOtherParticipantsDidChangeNotification when the contents of the array changes.
 //
 // OtherParticipants returns the collection as a Go slice.
-func (x *PlaybackCoordinator) OtherParticipants() []*CoordinatedPlaybackParticipant {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("otherParticipants"))
+func (pc *PlaybackCoordinator) OtherParticipants() []*CoordinatedPlaybackParticipant {
+	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("otherParticipants"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CoordinatedPlaybackParticipant { return CoordinatedPlaybackParticipantFromID(_id) })
 }
 
 // SuspensionReasons describes why the coordinator is currently not able to participate in group playback. If the list of reasons is non-empty, the coordinator will not react to any changes of group playback state.
 //
 // SuspensionReasons returns the collection as a Go slice.
-func (x *PlaybackCoordinator) SuspensionReasons() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suspensionReasons"))
+func (pc *PlaybackCoordinator) SuspensionReasons() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("suspensionReasons"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // SetParticipantLimitForWaitingOutSuspensionsWithReason sets a limit on the number of partipants that a group may contain before the coordinator stops waiting on suspensions that occur for a particular reason.
-func (x *PlaybackCoordinator) SetParticipantLimitForWaitingOutSuspensionsWithReason(participantLimit int, reason obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParticipantLimit:forWaitingOutSuspensionsWithReason:"), participantLimit, objref.IDOf(reason))
+func (pc *PlaybackCoordinator) SetParticipantLimitForWaitingOutSuspensionsWithReason(participantLimit int, reason obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("setParticipantLimit:forWaitingOutSuspensionsWithReason:"), participantLimit, objref.IDOf(reason))
 }
 
 // ParticipantLimitForWaitingOutSuspensionsWithReason returns the limit on the number of partipants that a group may contain before the coordinator stops waiting on suspensions that occur for a particular reason.
-func (x *PlaybackCoordinator) ParticipantLimitForWaitingOutSuspensionsWithReason(reason obj.Object) int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("participantLimitForWaitingOutSuspensionsWithReason:"), objref.IDOf(reason))
+func (pc *PlaybackCoordinator) ParticipantLimitForWaitingOutSuspensionsWithReason(reason obj.Object) int {
+	_r := objc.Send[int](objref.IDOf(pc), objc.RegisterName("participantLimitForWaitingOutSuspensionsWithReason:"), objref.IDOf(reason))
 	return _r
 }
 
-// SuspensionReasonsThatTriggerWaiting if the coordinator decides to delay playback to wait for others, it will wait out these reasons, but not others.
+// SuspensionReasonsThatTriggerWaiting returns if the coordinator decides to delay playback to wait for others, it will wait out these reasons, but not others.
 //
 // SuspensionReasonsThatTriggerWaiting returns the collection as a Go slice.
-func (x *PlaybackCoordinator) SuspensionReasonsThatTriggerWaiting() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suspensionReasonsThatTriggerWaiting"))
+func (pc *PlaybackCoordinator) SuspensionReasonsThatTriggerWaiting() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(pc), objc.RegisterName("suspensionReasonsThatTriggerWaiting"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetSuspensionReasonsThatTriggerWaiting wraps the corresponding Objective-C method.
-func (x *PlaybackCoordinator) SetSuspensionReasonsThatTriggerWaiting(suspensionReasonsThatTriggerWaiting []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspensionReasonsThatTriggerWaiting:"), purego.SliceToNSArray(suspensionReasonsThatTriggerWaiting, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// PauseSnapsToMediaTimeOfOriginator determines if participants should mirror the originator's stop time when pausing. If YES, all participants will seek to the originator's stop time after they pause. Use this if it is desirable to counteract any network delay incurred by communicating the originator's pause to the other participants. If NO, it's acceptable for participants to stop at slightly different offsets and a pause will not cause other participants' time to jump back.
-func (x *PlaybackCoordinator) PauseSnapsToMediaTimeOfOriginator() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pauseSnapsToMediaTimeOfOriginator"))
+// PauseSnapsToMediaTimeOfOriginator reports whether determines if participants should mirror the originator's stop time when pausing. If true, all participants will seek to the originator's stop time after they pause. Use this if it is desirable to counteract any network delay incurred by communicating the originator's pause to the other participants. If false, it's acceptable for participants to stop at slightly different offsets and a pause will not cause other participants' time to jump back.
+func (pc *PlaybackCoordinator) PauseSnapsToMediaTimeOfOriginator() bool {
+	_r := objc.Send[bool](objref.IDOf(pc), objc.RegisterName("pauseSnapsToMediaTimeOfOriginator"))
 	return _r
 }
-
-// SetPauseSnapsToMediaTimeOfOriginator wraps the corresponding Objective-C method.
-func (x *PlaybackCoordinator) SetPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPauseSnapsToMediaTimeOfOriginator:"), pauseSnapsToMediaTimeOfOriginator)
-}
-
-// PlaybackCoordinatorable is the interface implemented by [PlaybackCoordinator], for mocking and DI.
-type PlaybackCoordinatorable interface {
-	obj.Object
-	WithSuspensionReasonsThatTriggerWaiting(items ...obj.Object) *PlaybackCoordinator
-	WithPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool) *PlaybackCoordinator
-	BeginSuspensionForReason(suspensionReason obj.Object) *CoordinatedPlaybackSuspension
-	OtherParticipants() []*CoordinatedPlaybackParticipant
-	SuspensionReasons() []obj.Object
-	SetParticipantLimitForWaitingOutSuspensionsWithReason(participantLimit int, reason obj.Object)
-	ParticipantLimitForWaitingOutSuspensionsWithReason(reason obj.Object) int
-	SuspensionReasonsThatTriggerWaiting() []obj.Object
-	SetSuspensionReasonsThatTriggerWaiting(suspensionReasonsThatTriggerWaiting []obj.Object)
-	PauseSnapsToMediaTimeOfOriginator() bool
-	SetPauseSnapsToMediaTimeOfOriginator(pauseSnapsToMediaTimeOfOriginator bool)
-}
-
-var _ PlaybackCoordinatorable = (*PlaybackCoordinator)(nil)
 
 // isPlaybackCoordinator marks PlaybackCoordinator — and, by embedding promotion, its
 // subclasses — as a member of the PlaybackCoordinator hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PlaybackCoordinator) isPlaybackCoordinator() {}
+func (pc *PlaybackCoordinator) isPlaybackCoordinator() {}
 
 var _ PlaybackCoordinatorProvider = (*PlaybackCoordinator)(nil)

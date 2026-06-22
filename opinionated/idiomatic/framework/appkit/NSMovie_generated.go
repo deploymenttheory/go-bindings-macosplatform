@@ -44,24 +44,24 @@ func movieAdopt(id objc.ID) *Movie {
 }
 
 // Description returns the object's -description text.
-func (x *Movie) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Movie) Description() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Movie) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (m *Movie) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(m), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Movie) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (m *Movie) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(m), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Movie) String() string {
-	return rt.Description(objref.IDOf(x))
+func (m *Movie) String() string {
+	return rt.Description(objref.IDOf(m))
 }
 
 // NewMovie creates a new Movie.
@@ -76,10 +76,3 @@ func NewMovieWithCoder(coder obj.Object) *Movie {
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
 	return movieAdopt(_id)
 }
-
-// Movieable is the interface implemented by [Movie], for mocking and DI.
-type Movieable interface {
-	obj.Object
-}
-
-var _ Movieable = (*Movie)(nil)

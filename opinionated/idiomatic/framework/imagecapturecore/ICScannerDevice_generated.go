@@ -7,7 +7,6 @@ package imagecapturecore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,81 +51,53 @@ func NewScannerDevice() *ScannerDevice {
 	return scannerDeviceAdopt(_id)
 }
 
-// WithTransferMode the transfer mode for the scanned document.
-func (x *ScannerDevice) WithTransferMode(transferMode ScannerTransferMode) *ScannerDevice {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransferMode:"), transferMode)
-	return x
+// WithTransferMode sets the transfer mode for the scanned document.
+func (sd *ScannerDevice) WithTransferMode(transferMode ScannerTransferMode) *ScannerDevice {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setTransferMode:"), transferMode)
+	return sd
 }
 
-// WithMaxMemoryBandSize the total maximum band size requested when performing a memory-based transfer.
-func (x *ScannerDevice) WithMaxMemoryBandSize(maxMemoryBandSize int) *ScannerDevice {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxMemoryBandSize:"), maxMemoryBandSize)
-	return x
+// WithMaxMemoryBandSize sets the total maximum band size requested when performing a memory-based transfer.
+func (sd *ScannerDevice) WithMaxMemoryBandSize(maxMemoryBandSize int) *ScannerDevice {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("setMaxMemoryBandSize:"), maxMemoryBandSize)
+	return sd
 }
 
 // RequestOpenSessionWithCredentialsPassword opens a session on the protected device with the authorized username and passcode.
-func (x *ScannerDevice) RequestOpenSessionWithCredentialsPassword(username string, password string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestOpenSessionWithCredentials:password:"), purego.NSString(username), purego.NSString(password))
+func (sd *ScannerDevice) RequestOpenSessionWithCredentialsPassword(username string, password string) {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("requestOpenSessionWithCredentials:password:"), purego.NSString(username), purego.NSString(password))
 }
 
 // RequestSelectFunctionalUnit requests to select a functional unit on the scanner.
-func (x *ScannerDevice) RequestSelectFunctionalUnit(type_ ScannerFunctionalUnitType) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestSelectFunctionalUnit:"), type_)
+func (sd *ScannerDevice) RequestSelectFunctionalUnit(type_ ScannerFunctionalUnitType) {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("requestSelectFunctionalUnit:"), type_)
 }
 
 // RequestOverviewScan starts an overview scan on the selected functional unit.
-func (x *ScannerDevice) RequestOverviewScan() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestOverviewScan"))
+func (sd *ScannerDevice) RequestOverviewScan() {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("requestOverviewScan"))
 }
 
 // RequestScan starts a scan on the selected functional unit.
-func (x *ScannerDevice) RequestScan() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestScan"))
+func (sd *ScannerDevice) RequestScan() {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("requestScan"))
 }
 
 // CancelScan cancels the current scan.
-func (x *ScannerDevice) CancelScan() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelScan"))
+func (sd *ScannerDevice) CancelScan() {
+	objc.Send[objc.ID](objref.IDOf(sd), objc.RegisterName("cancelScan"))
 }
 
-// TransferMode ￼The transfer mode for scanned document.
-func (x *ScannerDevice) TransferMode() ScannerTransferMode {
-	_r := objc.Send[ScannerTransferMode](objref.IDOf(x), objc.RegisterName("transferMode"))
+// TransferMode returns ￼The transfer mode for scanned document.
+func (sd *ScannerDevice) TransferMode() ScannerTransferMode {
+	_r := objc.Send[ScannerTransferMode](objref.IDOf(sd), objc.RegisterName("transferMode"))
 	return _r
 }
 
-// SetTransferMode wraps the corresponding Objective-C method.
-func (x *ScannerDevice) SetTransferMode(transferMode ScannerTransferMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransferMode:"), transferMode)
-}
-
-// MaxMemoryBandSize ￼The total maximum band size requested when performing a ICScannerTransferModeMemoryBased.
-func (x *ScannerDevice) MaxMemoryBandSize() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxMemoryBandSize"))
+// MaxMemoryBandSize returns ￼The total maximum band size requested when performing a ICScannerTransferModeMemoryBased.
+func (sd *ScannerDevice) MaxMemoryBandSize() int {
+	_r := objc.Send[int](objref.IDOf(sd), objc.RegisterName("maxMemoryBandSize"))
 	return _r
 }
-
-// SetMaxMemoryBandSize wraps the corresponding Objective-C method.
-func (x *ScannerDevice) SetMaxMemoryBandSize(maxMemoryBandSize int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxMemoryBandSize:"), maxMemoryBandSize)
-}
-
-// ScannerDeviceable is the interface implemented by [ScannerDevice], for mocking and DI.
-type ScannerDeviceable interface {
-	obj.Object
-	WithTransferMode(transferMode ScannerTransferMode) *ScannerDevice
-	WithMaxMemoryBandSize(maxMemoryBandSize int) *ScannerDevice
-	RequestOpenSessionWithCredentialsPassword(username string, password string)
-	RequestSelectFunctionalUnit(type_ ScannerFunctionalUnitType)
-	RequestOverviewScan()
-	RequestScan()
-	CancelScan()
-	TransferMode() ScannerTransferMode
-	SetTransferMode(transferMode ScannerTransferMode)
-	MaxMemoryBandSize() int
-	SetMaxMemoryBandSize(maxMemoryBandSize int)
-}
-
-var _ ScannerDeviceable = (*ScannerDevice)(nil)
 
 var _ DeviceProvider = (*ScannerDevice)(nil)

@@ -44,24 +44,24 @@ func mTRThreadNetworkDirectoryClusterThreadNetworkStructAdopt(id objc.ID) *MTRTh
 }
 
 // Description returns the object's -description text.
-func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) Description() string {
+	return rt.Description(objref.IDOf(mtndctns))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mtndctns), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mtndctns), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) String() string {
+	return rt.Description(objref.IDOf(mtndctns))
 }
 
 // NewMTRThreadNetworkDirectoryClusterThreadNetworkStruct creates a new MTRThreadNetworkDirectoryClusterThreadNetworkStruct.
@@ -71,91 +71,52 @@ func NewMTRThreadNetworkDirectoryClusterThreadNetworkStruct() *MTRThreadNetworkD
 }
 
 // WithExtendedPanID sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithExtendedPanID(extendedPanID obj.Object) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedPanID:"), objref.IDOf(extendedPanID))
-	return x
+func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithExtendedPanID(extendedPanID obj.Object) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
+	objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("setExtendedPanID:"), objref.IDOf(extendedPanID))
+	return mtndctns
 }
 
 // WithNetworkName sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithNetworkName(networkName string) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkName:"), purego.NSString(networkName))
-	return x
+func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithNetworkName(networkName string) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
+	objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("setNetworkName:"), purego.NSString(networkName))
+	return mtndctns
 }
 
 // WithChannel sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithChannel(channel obj.Object) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), objref.IDOf(channel))
-	return x
+func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithChannel(channel obj.Object) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
+	objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("setChannel:"), objref.IDOf(channel))
+	return mtndctns
 }
 
 // WithActiveTimestamp sets the property and returns the receiver so calls can be chained.
-func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithActiveTimestamp(activeTimestamp obj.Object) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveTimestamp:"), objref.IDOf(activeTimestamp))
-	return x
+func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) WithActiveTimestamp(activeTimestamp obj.Object) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct {
+	objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("setActiveTimestamp:"), objref.IDOf(activeTimestamp))
+	return mtndctns
 }
 
 // ExtendedPanID wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) ExtendedPanID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("extendedPanID"))
+func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) ExtendedPanID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("extendedPanID"))
 	return obj.Wrap(_r)
 }
 
-// SetExtendedPanID wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) SetExtendedPanID(extendedPanID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExtendedPanID:"), objref.IDOf(extendedPanID))
-}
-
 // NetworkName wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) NetworkName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("networkName"))
+func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) NetworkName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("networkName"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetNetworkName wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) SetNetworkName(networkName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNetworkName:"), purego.NSString(networkName))
-}
-
 // Channel wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) Channel() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("channel"))
+func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) Channel() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("channel"))
 	return obj.Wrap(_r)
-}
-
-// SetChannel wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) SetChannel(channel obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChannel:"), objref.IDOf(channel))
 }
 
 // ActiveTimestamp wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) ActiveTimestamp() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activeTimestamp"))
+func (mtndctns *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) ActiveTimestamp() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mtndctns), objc.RegisterName("activeTimestamp"))
 	return obj.Wrap(_r)
 }
-
-// SetActiveTimestamp wraps the corresponding Objective-C method.
-func (x *MTRThreadNetworkDirectoryClusterThreadNetworkStruct) SetActiveTimestamp(activeTimestamp obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActiveTimestamp:"), objref.IDOf(activeTimestamp))
-}
-
-// MTRThreadNetworkDirectoryClusterThreadNetworkStructable is the interface implemented by [MTRThreadNetworkDirectoryClusterThreadNetworkStruct], for mocking and DI.
-type MTRThreadNetworkDirectoryClusterThreadNetworkStructable interface {
-	obj.Object
-	WithExtendedPanID(extendedPanID obj.Object) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct
-	WithNetworkName(networkName string) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct
-	WithChannel(channel obj.Object) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct
-	WithActiveTimestamp(activeTimestamp obj.Object) *MTRThreadNetworkDirectoryClusterThreadNetworkStruct
-	ExtendedPanID() obj.Object
-	SetExtendedPanID(extendedPanID obj.Object)
-	NetworkName() string
-	SetNetworkName(networkName string)
-	Channel() obj.Object
-	SetChannel(channel obj.Object)
-	ActiveTimestamp() obj.Object
-	SetActiveTimestamp(activeTimestamp obj.Object)
-}
-
-var _ MTRThreadNetworkDirectoryClusterThreadNetworkStructable = (*MTRThreadNetworkDirectoryClusterThreadNetworkStruct)(nil)

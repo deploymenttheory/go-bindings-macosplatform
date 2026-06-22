@@ -52,74 +52,58 @@ func NewCloneCommand() *CloneCommand {
 	return cloneCommandAdopt(_id)
 }
 
-// WithDirectParameter sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
-func (x *CloneCommand) WithDirectParameter(directParameter obj.Object) *CloneCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
-	return x
+// WithDirectParameter sets sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
+func (cc *CloneCommand) WithDirectParameter(directParameter obj.Object) *CloneCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
+	return cc
 }
 
-// WithReceiversSpecifier sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
-func (x *CloneCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *CloneCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
-	return x
+// WithReceiversSpecifier sets sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
+func (cc *CloneCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *CloneCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
+	return cc
 }
 
-// WithArguments sets the arguments of the command to args.
-func (x *CloneCommand) WithArguments(arguments obj.Object) *CloneCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
-	return x
+// WithArguments sets sets the arguments of the command to args.
+func (cc *CloneCommand) WithArguments(arguments obj.Object) *CloneCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
+	return cc
 }
 
-// WithScriptErrorNumber sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
-func (x *CloneCommand) WithScriptErrorNumber(scriptErrorNumber int) *CloneCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorNumber:"), scriptErrorNumber)
-	return x
+// WithScriptErrorNumber sets sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
+func (cc *CloneCommand) WithScriptErrorNumber(scriptErrorNumber int) *CloneCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptErrorNumber:"), scriptErrorNumber)
+	return cc
 }
 
-// WithScriptErrorOffendingObjectDescriptor sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
-func (x *CloneCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *CloneCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
-	return x
+// WithScriptErrorOffendingObjectDescriptor sets sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
+func (cc *CloneCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *CloneCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
+	return cc
 }
 
-// WithScriptErrorExpectedTypeDescriptor sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
-func (x *CloneCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *CloneCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
-	return x
+// WithScriptErrorExpectedTypeDescriptor sets sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
+func (cc *CloneCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *CloneCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
+	return cc
 }
 
-// WithScriptErrorString sets a script error string that is associated with execution of the command.
-func (x *CloneCommand) WithScriptErrorString(scriptErrorString StringProvider) *CloneCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
-	return x
+// WithScriptErrorString sets sets a script error string that is associated with execution of the command.
+func (cc *CloneCommand) WithScriptErrorString(scriptErrorString StringProvider) *CloneCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
+	return cc
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *CloneCommand) WithScriptingProperties(scriptingProperties obj.Object) *CloneCommand {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (cc *CloneCommand) WithScriptingProperties(scriptingProperties obj.Object) *CloneCommand {
+	objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return cc
 }
 
 // KeySpecifier wraps the corresponding Objective-C method.
-func (x *CloneCommand) KeySpecifier() *ScriptObjectSpecifier {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keySpecifier"))
+func (cc *CloneCommand) KeySpecifier() *ScriptObjectSpecifier {
+	_r := objc.Send[objc.ID](objref.IDOf(cc), objc.RegisterName("keySpecifier"))
 	return ScriptObjectSpecifierFromID(_r)
 }
-
-// CloneCommandable is the interface implemented by [CloneCommand], for mocking and DI.
-type CloneCommandable interface {
-	obj.Object
-	WithDirectParameter(directParameter obj.Object) *CloneCommand
-	WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *CloneCommand
-	WithArguments(arguments obj.Object) *CloneCommand
-	WithScriptErrorNumber(scriptErrorNumber int) *CloneCommand
-	WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *CloneCommand
-	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *CloneCommand
-	WithScriptErrorString(scriptErrorString StringProvider) *CloneCommand
-	WithScriptingProperties(scriptingProperties obj.Object) *CloneCommand
-	KeySpecifier() *ScriptObjectSpecifier
-}
-
-var _ CloneCommandable = (*CloneCommand)(nil)
 
 var _ ScriptCommandProvider = (*CloneCommand)(nil)

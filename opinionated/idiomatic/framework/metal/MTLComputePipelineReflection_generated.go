@@ -46,24 +46,24 @@ func computePipelineReflectionAdopt(id objc.ID) *ComputePipelineReflection {
 }
 
 // Description returns the object's -description text.
-func (x *ComputePipelineReflection) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cpr *ComputePipelineReflection) Description() string {
+	return rt.Description(objref.IDOf(cpr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ComputePipelineReflection) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cpr *ComputePipelineReflection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cpr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ComputePipelineReflection) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cpr *ComputePipelineReflection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cpr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ComputePipelineReflection) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cpr *ComputePipelineReflection) String() string {
+	return rt.Description(objref.IDOf(cpr))
 }
 
 // NewComputePipelineReflection creates a new ComputePipelineReflection.
@@ -73,24 +73,15 @@ func NewComputePipelineReflection() *ComputePipelineReflection {
 }
 
 // Bindings wraps the corresponding Objective-C method.
-func (x *ComputePipelineReflection) Bindings() []obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bindings"))
+func (cpr *ComputePipelineReflection) Bindings() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cpr), objc.RegisterName("bindings"))
 	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Arguments wraps the corresponding Objective-C method.
 //
 // Arguments returns the collection as a Go slice.
-func (x *ComputePipelineReflection) Arguments() []*Argument {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arguments"))
+func (cpr *ComputePipelineReflection) Arguments() []*Argument {
+	_arr := objc.Send[objc.ID](objref.IDOf(cpr), objc.RegisterName("arguments"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Argument { return ArgumentFromID(_id) })
 }
-
-// ComputePipelineReflectionable is the interface implemented by [ComputePipelineReflection], for mocking and DI.
-type ComputePipelineReflectionable interface {
-	obj.Object
-	Bindings() []obj.Object
-	Arguments() []*Argument
-}
-
-var _ ComputePipelineReflectionable = (*ComputePipelineReflection)(nil)

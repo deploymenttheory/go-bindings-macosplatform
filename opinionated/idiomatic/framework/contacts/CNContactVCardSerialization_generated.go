@@ -46,24 +46,24 @@ func contactVCardSerializationAdopt(id objc.ID) *ContactVCardSerialization {
 }
 
 // Description returns the object's -description text.
-func (x *ContactVCardSerialization) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cvcs *ContactVCardSerialization) Description() string {
+	return rt.Description(objref.IDOf(cvcs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ContactVCardSerialization) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cvcs *ContactVCardSerialization) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cvcs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ContactVCardSerialization) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cvcs *ContactVCardSerialization) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cvcs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ContactVCardSerialization) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cvcs *ContactVCardSerialization) String() string {
+	return rt.Description(objref.IDOf(cvcs))
 }
 
 // NewContactVCardSerialization creates a new ContactVCardSerialization.
@@ -71,10 +71,3 @@ func NewContactVCardSerialization() *ContactVCardSerialization {
 	_id := objc.Send[objc.ID](objc.ID(_class("CNContactVCardSerialization")), objc.RegisterName("new"))
 	return contactVCardSerializationAdopt(_id)
 }
-
-// ContactVCardSerializationable is the interface implemented by [ContactVCardSerialization], for mocking and DI.
-type ContactVCardSerializationable interface {
-	obj.Object
-}
-
-var _ ContactVCardSerializationable = (*ContactVCardSerialization)(nil)

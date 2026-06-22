@@ -53,25 +53,16 @@ func NewProject() *Project {
 }
 
 // ProjectExtensionData wraps the corresponding Objective-C method.
-func (x *Project) ProjectExtensionData() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("projectExtensionData"))
+func (p *Project) ProjectExtensionData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(p), objc.RegisterName("projectExtensionData"))
 	return obj.Wrap(_r)
 }
 
-// HasProjectPreview property to determine if a project preview was previously set. Use -[PHProjectChangeRequest setProjectPreviewImage:] to set a project preview.
-func (x *Project) HasProjectPreview() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasProjectPreview"))
+// HasProjectPreview reports whether property to determine if a project preview was previously set. Use -[PHProjectChangeRequest setProjectPreviewImage:] to set a project preview.
+func (p *Project) HasProjectPreview() bool {
+	_r := objc.Send[bool](objref.IDOf(p), objc.RegisterName("hasProjectPreview"))
 	return _r
 }
-
-// Projectable is the interface implemented by [Project], for mocking and DI.
-type Projectable interface {
-	obj.Object
-	ProjectExtensionData() obj.Object
-	HasProjectPreview() bool
-}
-
-var _ Projectable = (*Project)(nil)
 
 var _ AssetCollectionProvider = (*Project)(nil)
 

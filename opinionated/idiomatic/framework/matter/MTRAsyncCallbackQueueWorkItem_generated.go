@@ -44,24 +44,24 @@ func mTRAsyncCallbackQueueWorkItemAdopt(id objc.ID) *MTRAsyncCallbackQueueWorkIt
 }
 
 // Description returns the object's -description text.
-func (x *MTRAsyncCallbackQueueWorkItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (macqwi *MTRAsyncCallbackQueueWorkItem) Description() string {
+	return rt.Description(objref.IDOf(macqwi))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRAsyncCallbackQueueWorkItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (macqwi *MTRAsyncCallbackQueueWorkItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(macqwi), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRAsyncCallbackQueueWorkItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (macqwi *MTRAsyncCallbackQueueWorkItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(macqwi), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRAsyncCallbackQueueWorkItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (macqwi *MTRAsyncCallbackQueueWorkItem) String() string {
+	return rt.Description(objref.IDOf(macqwi))
 }
 
 // NewMTRAsyncCallbackQueueWorkItemWithQueue creates a new MTRAsyncCallbackQueueWorkItem.
@@ -72,33 +72,17 @@ func NewMTRAsyncCallbackQueueWorkItemWithQueue(queue obj.Object) *MTRAsyncCallba
 }
 
 // WithCancelHandler sets the property and returns the receiver so calls can be chained.
-func (x *MTRAsyncCallbackQueueWorkItem) WithCancelHandler(cancelHandler func()) *MTRAsyncCallbackQueueWorkItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelHandler:"), cancelHandler)
-	return x
+func (macqwi *MTRAsyncCallbackQueueWorkItem) WithCancelHandler(cancelHandler func()) *MTRAsyncCallbackQueueWorkItem {
+	objc.Send[objc.ID](objref.IDOf(macqwi), objc.RegisterName("setCancelHandler:"), cancelHandler)
+	return macqwi
 }
 
 // EndWork wraps the corresponding Objective-C method.
-func (x *MTRAsyncCallbackQueueWorkItem) EndWork() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endWork"))
+func (macqwi *MTRAsyncCallbackQueueWorkItem) EndWork() {
+	objc.Send[objc.ID](objref.IDOf(macqwi), objc.RegisterName("endWork"))
 }
 
 // RetryWork wraps the corresponding Objective-C method.
-func (x *MTRAsyncCallbackQueueWorkItem) RetryWork() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("retryWork"))
+func (macqwi *MTRAsyncCallbackQueueWorkItem) RetryWork() {
+	objc.Send[objc.ID](objref.IDOf(macqwi), objc.RegisterName("retryWork"))
 }
-
-// SetCancelHandler wraps the corresponding Objective-C method.
-func (x *MTRAsyncCallbackQueueWorkItem) SetCancelHandler(cancelHandler func()) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelHandler:"), cancelHandler)
-}
-
-// MTRAsyncCallbackQueueWorkItemable is the interface implemented by [MTRAsyncCallbackQueueWorkItem], for mocking and DI.
-type MTRAsyncCallbackQueueWorkItemable interface {
-	obj.Object
-	WithCancelHandler(cancelHandler func()) *MTRAsyncCallbackQueueWorkItem
-	EndWork()
-	RetryWork()
-	SetCancelHandler(cancelHandler func())
-}
-
-var _ MTRAsyncCallbackQueueWorkItemable = (*MTRAsyncCallbackQueueWorkItem)(nil)

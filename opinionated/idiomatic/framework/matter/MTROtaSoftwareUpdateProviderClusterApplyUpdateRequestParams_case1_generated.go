@@ -51,38 +51,27 @@ func NewMTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams() *MTROtaSof
 }
 
 // WithUpdateToken sets the property and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithUpdateToken(updateToken obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdateToken:"), objref.IDOf(updateToken))
-	return x
+func (mosupcaurp *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithUpdateToken(updateToken obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mosupcaurp), objc.RegisterName("setUpdateToken:"), objref.IDOf(updateToken))
+	return mosupcaurp
 }
 
 // WithNewVersion sets the property and returns the receiver so calls can be chained.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithNewVersion(newVersion obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewVersion:"), objref.IDOf(newVersion))
-	return x
+func (mosupcaurp *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithNewVersion(newVersion obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mosupcaurp), objc.RegisterName("setNewVersion:"), objref.IDOf(newVersion))
+	return mosupcaurp
 }
 
-// WithTimedInvokeTimeoutMs controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
-	return x
+// WithTimedInvokeTimeoutMs sets controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
+func (mosupcaurp *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mosupcaurp), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
+	return mosupcaurp
 }
 
-// WithServerSideProcessingTimeout controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
-	return x
+// WithServerSideProcessingTimeout sets controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
+func (mosupcaurp *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	objc.Send[objc.ID](objref.IDOf(mosupcaurp), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
+	return mosupcaurp
 }
-
-// MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsable is the interface implemented by [MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams], for mocking and DI.
-type MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsable interface {
-	obj.Object
-	WithUpdateToken(updateToken obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
-	WithNewVersion(newVersion obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
-}
-
-var _ MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsable = (*MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams)(nil)
 
 var _ MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParamsProvider = (*MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams)(nil)

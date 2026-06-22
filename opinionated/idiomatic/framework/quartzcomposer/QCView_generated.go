@@ -44,24 +44,24 @@ func viewAdopt(id objc.ID) *View {
 }
 
 // Description returns the object's -description text.
-func (x *View) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *View) Description() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *View) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (v_ *View) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(v_), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *View) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (v_ *View) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(v_), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *View) String() string {
-	return rt.Description(objref.IDOf(x))
+func (v_ *View) String() string {
+	return rt.Description(objref.IDOf(v_))
 }
 
 // NewView creates a new View.
@@ -71,185 +71,151 @@ func NewView() *View {
 }
 
 // LoadCompositionFromFile wraps the corresponding Objective-C method.
-func (x *View) LoadCompositionFromFile(path string) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadCompositionFromFile:"), purego.NSString(path))
+func (v_ *View) LoadCompositionFromFile(path string) bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("loadCompositionFromFile:"), purego.NSString(path))
 	return _r
 }
 
 // LoadComposition wraps the corresponding Objective-C method.
-func (x *View) LoadComposition(composition obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("loadComposition:"), objref.IDOf(composition))
+func (v_ *View) LoadComposition(composition obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("loadComposition:"), objref.IDOf(composition))
 	return _r
 }
 
 // LoadedComposition wraps the corresponding Objective-C method.
-func (x *View) LoadedComposition() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadedComposition"))
+func (v_ *View) LoadedComposition() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("loadedComposition"))
 	return obj.Wrap(_r)
 }
 
 // UnloadComposition wraps the corresponding Objective-C method.
-func (x *View) UnloadComposition() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unloadComposition"))
+func (v_ *View) UnloadComposition() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("unloadComposition"))
 }
 
 // SetAutostartsRendering wraps the corresponding Objective-C method.
-func (x *View) SetAutostartsRendering(flag bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutostartsRendering:"), flag)
+func (v_ *View) SetAutostartsRendering(flag bool) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setAutostartsRendering:"), flag)
 }
 
 // AutostartsRendering wraps the corresponding Objective-C method.
-func (x *View) AutostartsRendering() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autostartsRendering"))
+func (v_ *View) AutostartsRendering() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("autostartsRendering"))
 	return _r
 }
 
 // SetEraseColor wraps the corresponding Objective-C method.
-func (x *View) SetEraseColor(color obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEraseColor:"), objref.IDOf(color))
+func (v_ *View) SetEraseColor(color obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setEraseColor:"), objref.IDOf(color))
 }
 
 // EraseColor wraps the corresponding Objective-C method.
-func (x *View) EraseColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("eraseColor"))
+func (v_ *View) EraseColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("eraseColor"))
 	return obj.Wrap(_r)
 }
 
 // SetEventForwardingMask wraps the corresponding Objective-C method.
-func (x *View) SetEventForwardingMask(mask int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEventForwardingMask:"), mask)
+func (v_ *View) SetEventForwardingMask(mask int) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setEventForwardingMask:"), mask)
 }
 
 // EventForwardingMask wraps the corresponding Objective-C method.
-func (x *View) EventForwardingMask() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("eventForwardingMask"))
+func (v_ *View) EventForwardingMask() int {
+	_r := objc.Send[int](objref.IDOf(v_), objc.RegisterName("eventForwardingMask"))
 	return _r
 }
 
 // SetMaxRenderingFrameRate wraps the corresponding Objective-C method.
-func (x *View) SetMaxRenderingFrameRate(maxFPS float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxRenderingFrameRate:"), maxFPS)
+func (v_ *View) SetMaxRenderingFrameRate(maxFPS float32) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("setMaxRenderingFrameRate:"), maxFPS)
 }
 
 // MaxRenderingFrameRate wraps the corresponding Objective-C method.
-func (x *View) MaxRenderingFrameRate() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maxRenderingFrameRate"))
+func (v_ *View) MaxRenderingFrameRate() float32 {
+	_r := objc.Send[float32](objref.IDOf(v_), objc.RegisterName("maxRenderingFrameRate"))
 	return _r
 }
 
 // Erase wraps the corresponding Objective-C method.
-func (x *View) Erase() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("erase"))
+func (v_ *View) Erase() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("erase"))
 }
 
 // StartRendering wraps the corresponding Objective-C method.
-func (x *View) StartRendering() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startRendering"))
+func (v_ *View) StartRendering() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("startRendering"))
 	return _r
 }
 
 // RenderAtTimeArguments wraps the corresponding Objective-C method.
-func (x *View) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("renderAtTime:arguments:"), time_, objref.IDOf(arguments))
+func (v_ *View) RenderAtTimeArguments(time_ float64, arguments obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("renderAtTime:arguments:"), time_, objref.IDOf(arguments))
 	return _r
 }
 
 // PauseRendering wraps the corresponding Objective-C method.
-func (x *View) PauseRendering() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseRendering"))
+func (v_ *View) PauseRendering() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("pauseRendering"))
 }
 
 // IsPausedRendering wraps the corresponding Objective-C method.
-func (x *View) IsPausedRendering() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPausedRendering"))
+func (v_ *View) IsPausedRendering() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isPausedRendering"))
 	return _r
 }
 
 // ResumeRendering wraps the corresponding Objective-C method.
-func (x *View) ResumeRendering() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeRendering"))
+func (v_ *View) ResumeRendering() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("resumeRendering"))
 }
 
 // StopRendering wraps the corresponding Objective-C method.
-func (x *View) StopRendering() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopRendering"))
+func (v_ *View) StopRendering() {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("stopRendering"))
 }
 
 // IsRendering wraps the corresponding Objective-C method.
-func (x *View) IsRendering() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRendering"))
+func (v_ *View) IsRendering() bool {
+	_r := objc.Send[bool](objref.IDOf(v_), objc.RegisterName("isRendering"))
 	return _r
 }
 
 // SnapshotImage wraps the corresponding Objective-C method.
-func (x *View) SnapshotImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("snapshotImage"))
+func (v_ *View) SnapshotImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("snapshotImage"))
 	return obj.Wrap(_r)
 }
 
 // CreateSnapshotImageOfType wraps the corresponding Objective-C method.
-func (x *View) CreateSnapshotImageOfType(type_ string) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createSnapshotImageOfType:"), purego.NSString(type_))
+func (v_ *View) CreateSnapshotImageOfType(type_ string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("createSnapshotImageOfType:"), purego.NSString(type_))
 	return obj.Wrap(_r)
 }
 
 // OpenGLContext wraps the corresponding Objective-C method.
-func (x *View) OpenGLContext() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLContext"))
+func (v_ *View) OpenGLContext() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("openGLContext"))
 	return obj.Wrap(_r)
 }
 
 // OpenGLPixelFormat wraps the corresponding Objective-C method.
-func (x *View) OpenGLPixelFormat() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openGLPixelFormat"))
+func (v_ *View) OpenGLPixelFormat() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("openGLPixelFormat"))
 	return obj.Wrap(_r)
 }
 
 // Start wraps the corresponding Objective-C method.
-func (x *View) Start(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("start:"), objref.IDOf(sender))
+func (v_ *View) Start(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("start:"), objref.IDOf(sender))
 }
 
 // Stop wraps the corresponding Objective-C method.
-func (x *View) Stop(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop:"), objref.IDOf(sender))
+func (v_ *View) Stop(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("stop:"), objref.IDOf(sender))
 }
 
 // Play wraps the corresponding Objective-C method.
-func (x *View) Play(sender obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("play:"), objref.IDOf(sender))
+func (v_ *View) Play(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(v_), objc.RegisterName("play:"), objref.IDOf(sender))
 }
-
-// Viewable is the interface implemented by [View], for mocking and DI.
-type Viewable interface {
-	obj.Object
-	LoadCompositionFromFile(path string) bool
-	LoadComposition(composition obj.Object) bool
-	LoadedComposition() obj.Object
-	UnloadComposition()
-	SetAutostartsRendering(flag bool)
-	AutostartsRendering() bool
-	SetEraseColor(color obj.Object)
-	EraseColor() obj.Object
-	SetEventForwardingMask(mask int)
-	EventForwardingMask() int
-	SetMaxRenderingFrameRate(maxFPS float32)
-	MaxRenderingFrameRate() float32
-	Erase()
-	StartRendering() bool
-	RenderAtTimeArguments(time_ float64, arguments obj.Object) bool
-	PauseRendering()
-	IsPausedRendering() bool
-	ResumeRendering()
-	StopRendering()
-	IsRendering() bool
-	SnapshotImage() obj.Object
-	CreateSnapshotImageOfType(type_ string) obj.Object
-	OpenGLContext() obj.Object
-	OpenGLPixelFormat() obj.Object
-	Start(sender obj.Object)
-	Stop(sender obj.Object)
-	Play(sender obj.Object)
-}
-
-var _ Viewable = (*View)(nil)

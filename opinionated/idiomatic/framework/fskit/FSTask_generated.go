@@ -46,24 +46,24 @@ func taskAdopt(id objc.ID) *Task {
 }
 
 // Description returns the object's -description text.
-func (x *Task) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Task) Description() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Task) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (t *Task) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(t), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Task) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (t *Task) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(t), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Task) String() string {
-	return rt.Description(objref.IDOf(x))
+func (t *Task) String() string {
+	return rt.Description(objref.IDOf(t))
 }
 
 // NewTask creates a new Task.
@@ -73,14 +73,6 @@ func NewTask() *Task {
 }
 
 // LogMessage logs the given string to the initiating client.
-func (x *Task) LogMessage(str string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("logMessage:"), purego.NSString(str))
+func (t *Task) LogMessage(str string) {
+	objc.Send[objc.ID](objref.IDOf(t), objc.RegisterName("logMessage:"), purego.NSString(str))
 }
-
-// Taskable is the interface implemented by [Task], for mocking and DI.
-type Taskable interface {
-	obj.Object
-	LogMessage(str string)
-}
-
-var _ Taskable = (*Task)(nil)

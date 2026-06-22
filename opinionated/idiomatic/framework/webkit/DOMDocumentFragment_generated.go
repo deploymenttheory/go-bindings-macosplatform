@@ -7,7 +7,6 @@ package webkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,32 +50,22 @@ func NewDOMDocumentFragment() *DOMDocumentFragment {
 }
 
 // WithNodeValue sets the property and returns the receiver so calls can be chained.
-func (x *DOMDocumentFragment) WithNodeValue(nodeValue string) *DOMDocumentFragment {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
-	return x
+func (ddf *DOMDocumentFragment) WithNodeValue(nodeValue string) *DOMDocumentFragment {
+	objc.Send[objc.ID](objref.IDOf(ddf), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
+	return ddf
 }
 
 // WithPrefix sets the property and returns the receiver so calls can be chained.
-func (x *DOMDocumentFragment) WithPrefix(prefix string) *DOMDocumentFragment {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
-	return x
+func (ddf *DOMDocumentFragment) WithPrefix(prefix string) *DOMDocumentFragment {
+	objc.Send[objc.ID](objref.IDOf(ddf), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
+	return ddf
 }
 
 // WithTextContent sets the property and returns the receiver so calls can be chained.
-func (x *DOMDocumentFragment) WithTextContent(textContent string) *DOMDocumentFragment {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
-	return x
+func (ddf *DOMDocumentFragment) WithTextContent(textContent string) *DOMDocumentFragment {
+	objc.Send[objc.ID](objref.IDOf(ddf), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
+	return ddf
 }
-
-// DOMDocumentFragmentable is the interface implemented by [DOMDocumentFragment], for mocking and DI.
-type DOMDocumentFragmentable interface {
-	obj.Object
-	WithNodeValue(nodeValue string) *DOMDocumentFragment
-	WithPrefix(prefix string) *DOMDocumentFragment
-	WithTextContent(textContent string) *DOMDocumentFragment
-}
-
-var _ DOMDocumentFragmentable = (*DOMDocumentFragment)(nil)
 
 var _ DOMNodeProvider = (*DOMDocumentFragment)(nil)
 

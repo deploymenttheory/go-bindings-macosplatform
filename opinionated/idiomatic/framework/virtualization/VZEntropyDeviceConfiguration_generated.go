@@ -48,36 +48,29 @@ func entropyDeviceConfigurationAdopt(id objc.ID) *EntropyDeviceConfiguration {
 }
 
 // Description returns the object's -description text.
-func (x *EntropyDeviceConfiguration) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (edc *EntropyDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(edc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *EntropyDeviceConfiguration) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (edc *EntropyDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(edc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *EntropyDeviceConfiguration) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (edc *EntropyDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(edc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *EntropyDeviceConfiguration) String() string {
-	return rt.Description(objref.IDOf(x))
+func (edc *EntropyDeviceConfiguration) String() string {
+	return rt.Description(objref.IDOf(edc))
 }
-
-// EntropyDeviceConfigurationable is the interface implemented by [EntropyDeviceConfiguration], for mocking and DI.
-type EntropyDeviceConfigurationable interface {
-	obj.Object
-}
-
-var _ EntropyDeviceConfigurationable = (*EntropyDeviceConfiguration)(nil)
 
 // isEntropyDeviceConfiguration marks EntropyDeviceConfiguration — and, by embedding promotion, its
 // subclasses — as a member of the EntropyDeviceConfiguration hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *EntropyDeviceConfiguration) isEntropyDeviceConfiguration() {}
+func (edc *EntropyDeviceConfiguration) isEntropyDeviceConfiguration() {}
 
 var _ EntropyDeviceConfigurationProvider = (*EntropyDeviceConfiguration)(nil)

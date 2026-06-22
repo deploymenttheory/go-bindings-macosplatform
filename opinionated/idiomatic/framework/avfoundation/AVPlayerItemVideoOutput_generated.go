@@ -60,31 +60,21 @@ func NewPlayerItemVideoOutputWithOutputSettings(outputSettings obj.Object) *Play
 	return playerItemVideoOutputAdopt(_id)
 }
 
-// WithSuppressesPlayerRendering a Boolean value that indicates whether the player object renders the receiver’s output.
-func (x *PlayerItemVideoOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemVideoOutput {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
-	return x
+// WithSuppressesPlayerRendering sets a Boolean value that indicates whether the player object renders the receiver’s output.
+func (pivo *PlayerItemVideoOutput) WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemVideoOutput {
+	objc.Send[objc.ID](objref.IDOf(pivo), objc.RegisterName("setSuppressesPlayerRendering:"), suppressesPlayerRendering)
+	return pivo
 }
 
 // RequestNotificationOfMediaDataChangeWithAdvanceInterval tells the receiver that the video out put client is entering a quiescent state.
-func (x *PlayerItemVideoOutput) RequestNotificationOfMediaDataChangeWithAdvanceInterval(interval float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestNotificationOfMediaDataChangeWithAdvanceInterval:"), interval)
+func (pivo *PlayerItemVideoOutput) RequestNotificationOfMediaDataChangeWithAdvanceInterval(interval float64) {
+	objc.Send[objc.ID](objref.IDOf(pivo), objc.RegisterName("requestNotificationOfMediaDataChangeWithAdvanceInterval:"), interval)
 }
 
 // DelegateQueue wraps the corresponding Objective-C method.
-func (x *PlayerItemVideoOutput) DelegateQueue() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("delegateQueue"))
+func (pivo *PlayerItemVideoOutput) DelegateQueue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pivo), objc.RegisterName("delegateQueue"))
 	return obj.Wrap(_r)
 }
-
-// PlayerItemVideoOutputable is the interface implemented by [PlayerItemVideoOutput], for mocking and DI.
-type PlayerItemVideoOutputable interface {
-	obj.Object
-	WithSuppressesPlayerRendering(suppressesPlayerRendering bool) *PlayerItemVideoOutput
-	RequestNotificationOfMediaDataChangeWithAdvanceInterval(interval float64)
-	DelegateQueue() obj.Object
-}
-
-var _ PlayerItemVideoOutputable = (*PlayerItemVideoOutput)(nil)
 
 var _ PlayerItemOutputProvider = (*PlayerItemVideoOutput)(nil)

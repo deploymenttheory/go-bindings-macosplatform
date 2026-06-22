@@ -46,24 +46,24 @@ func fileProviderStringSearchRequestAdopt(id objc.ID) *FileProviderStringSearchR
 }
 
 // Description returns the object's -description text.
-func (x *FileProviderStringSearchRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fpssr *FileProviderStringSearchRequest) Description() string {
+	return rt.Description(objref.IDOf(fpssr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FileProviderStringSearchRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fpssr *FileProviderStringSearchRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fpssr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FileProviderStringSearchRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fpssr *FileProviderStringSearchRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fpssr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FileProviderStringSearchRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fpssr *FileProviderStringSearchRequest) String() string {
+	return rt.Description(objref.IDOf(fpssr))
 }
 
 // NewFileProviderStringSearchRequest creates a new FileProviderStringSearchRequest.
@@ -72,26 +72,17 @@ func NewFileProviderStringSearchRequest() *FileProviderStringSearchRequest {
 	return fileProviderStringSearchRequestAdopt(_id)
 }
 
-// Query a plaintext string, representing the query the user entered into the system search UI.
-func (x *FileProviderStringSearchRequest) Query() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("query"))
+// Query returns a plaintext string, representing the query the user entered into the system search UI.
+func (fpssr *FileProviderStringSearchRequest) Query() string {
+	_r := objc.Send[objc.ID](objref.IDOf(fpssr), objc.RegisterName("query"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// DesiredNumberOfResults how many results the system is requesting. This is a hint to the extension, to help avoid unnecessary work. The extension may return more results than this.
-func (x *FileProviderStringSearchRequest) DesiredNumberOfResults() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("desiredNumberOfResults"))
+// DesiredNumberOfResults returns how many results the system is requesting. This is a hint to the extension, to help avoid unnecessary work. The extension may return more results than this.
+func (fpssr *FileProviderStringSearchRequest) DesiredNumberOfResults() int {
+	_r := objc.Send[int](objref.IDOf(fpssr), objc.RegisterName("desiredNumberOfResults"))
 	return _r
 }
-
-// FileProviderStringSearchRequestable is the interface implemented by [FileProviderStringSearchRequest], for mocking and DI.
-type FileProviderStringSearchRequestable interface {
-	obj.Object
-	Query() string
-	DesiredNumberOfResults() int
-}
-
-var _ FileProviderStringSearchRequestable = (*FileProviderStringSearchRequest)(nil)

@@ -54,439 +54,339 @@ func NewSceneWithSize(size corefoundation.CGSize) *Scene {
 	return sceneAdopt(_id)
 }
 
-// WithSize the dimensions of the scene, in points.
-func (x *Scene) WithSize(size corefoundation.CGSize) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
-	return x
+// WithSize sets the dimensions of the scene, in points.
+func (s *Scene) WithSize(size corefoundation.CGSize) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSize:"), size)
+	return s
 }
 
-// WithScaleMode a setting that defines how the scene is mapped to the view that presents it.
-func (x *Scene) WithScaleMode(scaleMode SceneScaleMode) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleMode:"), scaleMode)
-	return x
+// WithScaleMode sets a setting that defines how the scene is mapped to the view that presents it.
+func (s *Scene) WithScaleMode(scaleMode SceneScaleMode) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setScaleMode:"), scaleMode)
+	return s
 }
 
-// WithCamera the camera node in the scene that determines what part of the scene’s coordinate space is visible in the view.
-func (x *Scene) WithCamera(camera *CameraNode) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCamera:"), objref.IDOf(camera))
-	return x
+// WithCamera sets the camera node in the scene that determines what part of the scene’s coordinate space is visible in the view.
+func (s *Scene) WithCamera(camera *CameraNode) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setCamera:"), objref.IDOf(camera))
+	return s
 }
 
-// WithListener a node used to determine the position of the listener for positional audio in the scene.
-func (x *Scene) WithListener(listener NodeProvider) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListener:"), objref.IDOf(listener))
-	return x
+// WithListener sets a node used to determine the position of the listener for positional audio in the scene.
+func (s *Scene) WithListener(listener NodeProvider) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setListener:"), objref.IDOf(listener))
+	return s
 }
 
-// WithBackgroundColor the background color of the scene.
-func (x *Scene) WithBackgroundColor(backgroundColor obj.Object) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-	return x
+// WithBackgroundColor sets the background color of the scene.
+func (s *Scene) WithBackgroundColor(backgroundColor obj.Object) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
+	return s
 }
 
-// WithAnchorPoint the point in the view’s frame that corresponds to the scene’s origin.
-func (x *Scene) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
-	return x
+// WithAnchorPoint sets the point in the view’s frame that corresponds to the scene’s origin.
+func (s *Scene) WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAnchorPoint:"), anchorPoint)
+	return s
 }
 
-// WithFilter the Core Image filter to apply.
-func (x *Scene) WithFilter(filter obj.Object) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilter:"), objref.IDOf(filter))
-	return x
+// WithFilter sets the Core Image filter to apply.
+func (s *Scene) WithFilter(filter obj.Object) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setFilter:"), objref.IDOf(filter))
+	return s
 }
 
-// WithShouldCenterFilter a Boolean value that determines whether the effect node automatically sets the filter’s image center.
-func (x *Scene) WithShouldCenterFilter(shouldCenterFilter bool) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCenterFilter:"), shouldCenterFilter)
-	return x
+// WithShouldCenterFilter sets a Boolean value that determines whether the effect node automatically sets the filter’s image center.
+func (s *Scene) WithShouldCenterFilter(shouldCenterFilter bool) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShouldCenterFilter:"), shouldCenterFilter)
+	return s
 }
 
-// WithShouldEnableEffects a Boolean value that determines whether the effect node applies the filter to its children as they are drawn.
-func (x *Scene) WithShouldEnableEffects(shouldEnableEffects bool) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldEnableEffects:"), shouldEnableEffects)
-	return x
+// WithShouldEnableEffects sets a Boolean value that determines whether the effect node applies the filter to its children as they are drawn.
+func (s *Scene) WithShouldEnableEffects(shouldEnableEffects bool) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShouldEnableEffects:"), shouldEnableEffects)
+	return s
 }
 
-// WithShouldRasterize a Boolean value that indicates whether the results of rendering the child nodes should be cached.
-func (x *Scene) WithShouldRasterize(shouldRasterize bool) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
-	return x
+// WithShouldRasterize sets a Boolean value that indicates whether the results of rendering the child nodes should be cached.
+func (s *Scene) WithShouldRasterize(shouldRasterize bool) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShouldRasterize:"), shouldRasterize)
+	return s
 }
 
-// WithBlendMode the blend mode used to draw the node’s contents into its parent’s framebuffer.
-func (x *Scene) WithBlendMode(blendMode BlendMode) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendMode:"), blendMode)
-	return x
+// WithBlendMode sets the blend mode used to draw the node’s contents into its parent’s framebuffer.
+func (s *Scene) WithBlendMode(blendMode BlendMode) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setBlendMode:"), blendMode)
+	return s
 }
 
-// WithShader a custom shader that is called when the effect node is blended into the parent’s framebuffer.
-func (x *Scene) WithShader(shader *Shader) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShader:"), objref.IDOf(shader))
-	return x
+// WithShader sets a custom shader that is called when the effect node is blended into the parent’s framebuffer.
+func (s *Scene) WithShader(shader *Shader) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setShader:"), objref.IDOf(shader))
+	return s
 }
 
-// WithPosition the position of the node in its parent’s coordinate system.
-func (x *Scene) WithPosition(position corefoundation.CGPoint) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPosition:"), position)
-	return x
+// WithPosition sets the position of the node in its parent’s coordinate system.
+func (s *Scene) WithPosition(position corefoundation.CGPoint) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPosition:"), position)
+	return s
 }
 
-// WithZPosition the height of the node relative to its parent.
-func (x *Scene) WithZPosition(zPosition float64) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
-	return x
+// WithZPosition sets the height of the node relative to its parent.
+func (s *Scene) WithZPosition(zPosition float64) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setZPosition:"), zPosition)
+	return s
 }
 
-// WithZRotation the Euler rotation about the z axis (in radians).
-func (x *Scene) WithZRotation(zRotation float64) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
-	return x
+// WithZRotation sets the Euler rotation about the z axis (in radians).
+func (s *Scene) WithZRotation(zRotation float64) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setZRotation:"), zRotation)
+	return s
 }
 
-// WithXScale a scaling factor that multiplies the width of a node and its children.
-func (x *Scene) WithXScale(xScale float64) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
-	return x
+// WithXScale sets a scaling factor that multiplies the width of a node and its children.
+func (s *Scene) WithXScale(xScale float64) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setXScale:"), xScale)
+	return s
 }
 
-// WithYScale a scaling factor that multiplies the height of a node and its children.
-func (x *Scene) WithYScale(yScale float64) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
-	return x
+// WithYScale sets a scaling factor that multiplies the height of a node and its children.
+func (s *Scene) WithYScale(yScale float64) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setYScale:"), yScale)
+	return s
 }
 
-// WithSpeed a speed modifier applied to all actions executed by a node and its descendants.
-func (x *Scene) WithSpeed(speed float64) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
-	return x
+// WithSpeed sets a speed modifier applied to all actions executed by a node and its descendants.
+func (s *Scene) WithSpeed(speed float64) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setSpeed:"), speed)
+	return s
 }
 
-// WithAlpha the transparency value applied to the node’s contents.
-func (x *Scene) WithAlpha(alpha float64) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the transparency value applied to the node’s contents.
+func (s *Scene) WithAlpha(alpha float64) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAlpha:"), alpha)
+	return s
 }
 
-// WithPaused a Boolean value that determines whether actions on the node and its descendants are processed.
-func (x *Scene) WithPaused(paused bool) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
-	return x
+// WithPaused sets a Boolean value that determines whether actions on the node and its descendants are processed.
+func (s *Scene) WithPaused(paused bool) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPaused:"), paused)
+	return s
 }
 
-// WithHidden a Boolean value that determines whether a node and its descendants are rendered.
-func (x *Scene) WithHidden(hidden bool) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets a Boolean value that determines whether a node and its descendants are rendered.
+func (s *Scene) WithHidden(hidden bool) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setHidden:"), hidden)
+	return s
 }
 
-// WithUserInteractionEnabled a Boolean value that indicates whether the node receives touch events.
-func (x *Scene) WithUserInteractionEnabled(userInteractionEnabled bool) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
-	return x
+// WithUserInteractionEnabled sets a Boolean value that indicates whether the node receives touch events.
+func (s *Scene) WithUserInteractionEnabled(userInteractionEnabled bool) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
+	return s
 }
 
-// WithName the node’s assignable name.
-func (x *Scene) WithName(name string) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+// WithName sets the node’s assignable name.
+func (s *Scene) WithName(name string) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setName:"), purego.NSString(name))
+	return s
 }
 
-// WithPhysicsBody the physics body associated with the node.
-func (x *Scene) WithPhysicsBody(physicsBody *PhysicsBody) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
-	return x
+// WithPhysicsBody sets the physics body associated with the node.
+func (s *Scene) WithPhysicsBody(physicsBody *PhysicsBody) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
+	return s
 }
 
-// WithUserData a dictionary containing arbitrary data.
-func (x *Scene) WithUserData(userData obj.Object) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
-	return x
+// WithUserData sets a dictionary containing arbitrary data.
+func (s *Scene) WithUserData(userData obj.Object) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setUserData:"), objref.IDOf(userData))
+	return s
 }
 
-// WithReachConstraints the reach constraints to apply to the node when executing a reach action.
-func (x *Scene) WithReachConstraints(reachConstraints *ReachConstraints) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
-	return x
+// WithReachConstraints sets the reach constraints to apply to the node when executing a reach action.
+func (s *Scene) WithReachConstraints(reachConstraints *ReachConstraints) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
+	return s
 }
 
-// WithConstraints a list of constraints to apply to the node.
-func (x *Scene) WithConstraints(items ...*Constraint) *Scene {
+// WithConstraints sets a list of constraints to apply to the node.
+func (s *Scene) WithConstraints(items ...*Constraint) *Scene {
 	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setConstraints:"), _arr)
+	return s
 }
 
-// WithAttributeValues the values of each attribute associated with the node’s attached shader.
-func (x *Scene) WithAttributeValues(attributeValues obj.Object) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
-	return x
+// WithAttributeValues sets the values of each attribute associated with the node’s attached shader.
+func (s *Scene) WithAttributeValues(attributeValues obj.Object) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
+	return s
 }
 
-// WithAccessibilityElement a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
-func (x *Scene) WithAccessibilityElement(accessibilityElement bool) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
-	return x
+// WithAccessibilityElement sets a toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
+func (s *Scene) WithAccessibilityElement(accessibilityElement bool) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
+	return s
 }
 
-// WithAccessibilityRole a string value describing the user interface element type; for example, a button.
-func (x *Scene) WithAccessibilityRole(accessibilityRole string) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
-	return x
+// WithAccessibilityRole sets a string value describing the user interface element type; for example, a button.
+func (s *Scene) WithAccessibilityRole(accessibilityRole string) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
+	return s
 }
 
-// WithAccessibilityRoleDescription a string value describing the user interface element name and type; for example, the Buy button.
-func (x *Scene) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
-	return x
+// WithAccessibilityRoleDescription sets a string value describing the user interface element name and type; for example, the Buy button.
+func (s *Scene) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
+	return s
 }
 
-// WithAccessibilitySubrole a string that defines this user interface element’s subrole; for example, a full-screen button.
-func (x *Scene) WithAccessibilitySubrole(accessibilitySubrole string) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
-	return x
+// WithAccessibilitySubrole sets a string that defines this user interface element’s subrole; for example, a full-screen button.
+func (s *Scene) WithAccessibilitySubrole(accessibilitySubrole string) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
+	return s
 }
 
-// WithAccessibilityFrame the size of this user interface element, in screen points.
-func (x *Scene) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
-	return x
+// WithAccessibilityFrame sets the size of this user interface element, in screen points.
+func (s *Scene) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityFrame:"), accessibilityFrame)
+	return s
 }
 
-// WithAccessibilityParent the user interface element that contains this element.
-func (x *Scene) WithAccessibilityParent(accessibilityParent obj.Object) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
-	return x
+// WithAccessibilityParent sets the user interface element that contains this element.
+func (s *Scene) WithAccessibilityParent(accessibilityParent obj.Object) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
+	return s
 }
 
-// WithAccessibilityHelp the help description of this user interface element; for example, the text shown in a tooltip.
-func (x *Scene) WithAccessibilityHelp(accessibilityHelp string) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
-	return x
+// WithAccessibilityHelp sets the help description of this user interface element; for example, the text shown in a tooltip.
+func (s *Scene) WithAccessibilityHelp(accessibilityHelp string) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
+	return s
 }
 
-// WithAccessibilityLabel a short description of this user interface element.
-func (x *Scene) WithAccessibilityLabel(accessibilityLabel string) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
-	return x
+// WithAccessibilityLabel sets a short description of this user interface element.
+func (s *Scene) WithAccessibilityLabel(accessibilityLabel string) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
+	return s
 }
 
-// WithAccessibilityEnabled a toggle you implement to indicate to the system whether this user interface element should respond to user input.
-func (x *Scene) WithAccessibilityEnabled(accessibilityEnabled bool) *Scene {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
-	return x
+// WithAccessibilityEnabled sets a toggle you implement to indicate to the system whether this user interface element should respond to user input.
+func (s *Scene) WithAccessibilityEnabled(accessibilityEnabled bool) *Scene {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
+	return s
 }
 
 // SceneDidLoad tells you when the scene is presented.
-func (x *Scene) SceneDidLoad() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sceneDidLoad"))
+func (s *Scene) SceneDidLoad() {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("sceneDidLoad"))
 }
 
 // ConvertPointFromView converts a point from view coordinates to scene coordinates.
-func (x *Scene) ConvertPointFromView(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPointFromView:"), point)
+func (s *Scene) ConvertPointFromView(point corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(s), objc.RegisterName("convertPointFromView:"), point)
 	return _r
 }
 
 // ConvertPointToView converts a point from scene coordinates to view coordinates.
-func (x *Scene) ConvertPointToView(point corefoundation.CGPoint) corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("convertPointToView:"), point)
+func (s *Scene) ConvertPointToView(point corefoundation.CGPoint) corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(s), objc.RegisterName("convertPointToView:"), point)
 	return _r
 }
 
 // Update tells your app to perform any app-specific logic to update your scene.
-func (x *Scene) Update(currentTime float64) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("update:"), currentTime)
+func (s *Scene) Update(currentTime float64) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("update:"), currentTime)
 }
 
 // DidEvaluateActions tells your app to peform any necessary logic after scene actions are evaluated.
-func (x *Scene) DidEvaluateActions() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didEvaluateActions"))
+func (s *Scene) DidEvaluateActions() {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didEvaluateActions"))
 }
 
 // DidSimulatePhysics tells your app to peform any necessary logic after physics simulations are performed.
-func (x *Scene) DidSimulatePhysics() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didSimulatePhysics"))
+func (s *Scene) DidSimulatePhysics() {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didSimulatePhysics"))
 }
 
 // DidApplyConstraints tells your app to peform any necessary logic after constraints are applied.
-func (x *Scene) DidApplyConstraints() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didApplyConstraints"))
+func (s *Scene) DidApplyConstraints() {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didApplyConstraints"))
 }
 
 // DidFinishUpdate tells your app to peform any necessary logic after the scene has finished all of the steps required to process animations.
-func (x *Scene) DidFinishUpdate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didFinishUpdate"))
+func (s *Scene) DidFinishUpdate() {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didFinishUpdate"))
 }
 
 // DidMoveToView tells you when the scene is presented by a view.
-func (x *Scene) DidMoveToView(view *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didMoveToView:"), objref.IDOf(view))
+func (s *Scene) DidMoveToView(view *View) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didMoveToView:"), objref.IDOf(view))
 }
 
 // WillMoveFromView tells you when the scene is about to be removed from a view.
-func (x *Scene) WillMoveFromView(view *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willMoveFromView:"), objref.IDOf(view))
+func (s *Scene) WillMoveFromView(view *View) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("willMoveFromView:"), objref.IDOf(view))
 }
 
 // DidChangeSize tells you when the scene’s size has changed.
-func (x *Scene) DidChangeSize(oldSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didChangeSize:"), oldSize)
+func (s *Scene) DidChangeSize(oldSize corefoundation.CGSize) {
+	objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("didChangeSize:"), oldSize)
 }
 
 // Size wraps the corresponding Objective-C method.
-func (x *Scene) Size() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+func (s *Scene) Size() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(s), objc.RegisterName("size"))
 	return _r
 }
 
-// SetSize wraps the corresponding Objective-C method.
-func (x *Scene) SetSize(size corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), size)
-}
-
-// ScaleMode used to determine how to scale the scene to match the SKView it is being displayed in.
-func (x *Scene) ScaleMode() SceneScaleMode {
-	_r := objc.Send[SceneScaleMode](objref.IDOf(x), objc.RegisterName("scaleMode"))
+// ScaleMode returns used to determine how to scale the scene to match the SKView it is being displayed in.
+func (s *Scene) ScaleMode() SceneScaleMode {
+	_r := objc.Send[SceneScaleMode](objref.IDOf(s), objc.RegisterName("scaleMode"))
 	return _r
 }
 
-// SetScaleMode wraps the corresponding Objective-C method.
-func (x *Scene) SetScaleMode(scaleMode SceneScaleMode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleMode:"), scaleMode)
-}
-
-// Camera the camera that is used to obtain the view scale and translation based on where the camera is in relation to the scene.
-func (x *Scene) Camera() *CameraNode {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("camera"))
+// Camera returns the camera that is used to obtain the view scale and translation based on where the camera is in relation to the scene.
+func (s *Scene) Camera() *CameraNode {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("camera"))
 	return CameraNodeFromID(_r)
 }
 
-// SetCamera wraps the corresponding Objective-C method.
-func (x *Scene) SetCamera(camera *CameraNode) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCamera:"), objref.IDOf(camera))
-}
-
-// Listener the node that is currently the listener for positional audio coming from SKAudioNodes
-func (x *Scene) Listener() *Node {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("listener"))
+// Listener returns the node that is currently the listener for positional audio coming from SKAudioNodes
+func (s *Scene) Listener() *Node {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("listener"))
 	return NodeFromID(_r)
 }
 
-// SetListener wraps the corresponding Objective-C method.
-func (x *Scene) SetListener(listener *Node) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setListener:"), objref.IDOf(listener))
-}
-
 // AudioEngine wraps the corresponding Objective-C method.
-func (x *Scene) AudioEngine() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioEngine"))
+func (s *Scene) AudioEngine() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("audioEngine"))
 	return obj.Wrap(_r)
 }
 
-// BackgroundColor background color, defaults to gray
-func (x *Scene) BackgroundColor() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+// BackgroundColor returns background color, defaults to gray
+func (s *Scene) BackgroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("backgroundColor"))
 	return obj.Wrap(_r)
 }
 
-// SetBackgroundColor wraps the corresponding Objective-C method.
-func (x *Scene) SetBackgroundColor(backgroundColor obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
-}
-
-// AnchorPoint used to choose the origin of the scene's coordinate system
-func (x *Scene) AnchorPoint() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("anchorPoint"))
+// AnchorPoint returns used to choose the origin of the scene's coordinate system
+func (s *Scene) AnchorPoint() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(s), objc.RegisterName("anchorPoint"))
 	return _r
 }
 
-// SetAnchorPoint wraps the corresponding Objective-C method.
-func (x *Scene) SetAnchorPoint(anchorPoint corefoundation.CGPoint) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAnchorPoint:"), anchorPoint)
-}
-
-// PhysicsWorld physics simulation functionality
-func (x *Scene) PhysicsWorld() *PhysicsWorld {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("physicsWorld"))
+// PhysicsWorld returns physics simulation functionality
+func (s *Scene) PhysicsWorld() *PhysicsWorld {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("physicsWorld"))
 	return PhysicsWorldFromID(_r)
 }
 
-// View the SKView this scene is currently presented in, or nil if it is not being presented.
-func (x *Scene) View() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+// View returns the SKView this scene is currently presented in, or nil if it is not being presented.
+func (s *Scene) View() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
-
-// Sceneable is the interface implemented by [Scene], for mocking and DI.
-type Sceneable interface {
-	obj.Object
-	WithSize(size corefoundation.CGSize) *Scene
-	WithScaleMode(scaleMode SceneScaleMode) *Scene
-	WithCamera(camera *CameraNode) *Scene
-	WithListener(listener NodeProvider) *Scene
-	WithBackgroundColor(backgroundColor obj.Object) *Scene
-	WithAnchorPoint(anchorPoint corefoundation.CGPoint) *Scene
-	WithFilter(filter obj.Object) *Scene
-	WithShouldCenterFilter(shouldCenterFilter bool) *Scene
-	WithShouldEnableEffects(shouldEnableEffects bool) *Scene
-	WithShouldRasterize(shouldRasterize bool) *Scene
-	WithBlendMode(blendMode BlendMode) *Scene
-	WithShader(shader *Shader) *Scene
-	WithPosition(position corefoundation.CGPoint) *Scene
-	WithZPosition(zPosition float64) *Scene
-	WithZRotation(zRotation float64) *Scene
-	WithXScale(xScale float64) *Scene
-	WithYScale(yScale float64) *Scene
-	WithSpeed(speed float64) *Scene
-	WithAlpha(alpha float64) *Scene
-	WithPaused(paused bool) *Scene
-	WithHidden(hidden bool) *Scene
-	WithUserInteractionEnabled(userInteractionEnabled bool) *Scene
-	WithName(name string) *Scene
-	WithPhysicsBody(physicsBody *PhysicsBody) *Scene
-	WithUserData(userData obj.Object) *Scene
-	WithReachConstraints(reachConstraints *ReachConstraints) *Scene
-	WithConstraints(items ...*Constraint) *Scene
-	WithAttributeValues(attributeValues obj.Object) *Scene
-	WithAccessibilityElement(accessibilityElement bool) *Scene
-	WithAccessibilityRole(accessibilityRole string) *Scene
-	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *Scene
-	WithAccessibilitySubrole(accessibilitySubrole string) *Scene
-	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *Scene
-	WithAccessibilityParent(accessibilityParent obj.Object) *Scene
-	WithAccessibilityHelp(accessibilityHelp string) *Scene
-	WithAccessibilityLabel(accessibilityLabel string) *Scene
-	WithAccessibilityEnabled(accessibilityEnabled bool) *Scene
-	SceneDidLoad()
-	ConvertPointFromView(point corefoundation.CGPoint) corefoundation.CGPoint
-	ConvertPointToView(point corefoundation.CGPoint) corefoundation.CGPoint
-	Update(currentTime float64)
-	DidEvaluateActions()
-	DidSimulatePhysics()
-	DidApplyConstraints()
-	DidFinishUpdate()
-	DidMoveToView(view *View)
-	WillMoveFromView(view *View)
-	DidChangeSize(oldSize corefoundation.CGSize)
-	Size() corefoundation.CGSize
-	SetSize(size corefoundation.CGSize)
-	ScaleMode() SceneScaleMode
-	SetScaleMode(scaleMode SceneScaleMode)
-	Camera() *CameraNode
-	SetCamera(camera *CameraNode)
-	Listener() *Node
-	SetListener(listener *Node)
-	AudioEngine() obj.Object
-	BackgroundColor() obj.Object
-	SetBackgroundColor(backgroundColor obj.Object)
-	AnchorPoint() corefoundation.CGPoint
-	SetAnchorPoint(anchorPoint corefoundation.CGPoint)
-	PhysicsWorld() *PhysicsWorld
-	View() *View
-}
-
-var _ Sceneable = (*Scene)(nil)
 
 var _ EffectNodeProvider = (*Scene)(nil)
 

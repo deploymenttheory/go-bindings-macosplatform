@@ -46,24 +46,24 @@ func hapticFeedbackManagerAdopt(id objc.ID) *HapticFeedbackManager {
 }
 
 // Description returns the object's -description text.
-func (x *HapticFeedbackManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hfm *HapticFeedbackManager) Description() string {
+	return rt.Description(objref.IDOf(hfm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HapticFeedbackManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hfm *HapticFeedbackManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hfm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HapticFeedbackManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hfm *HapticFeedbackManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hfm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HapticFeedbackManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hfm *HapticFeedbackManager) String() string {
+	return rt.Description(objref.IDOf(hfm))
 }
 
 // NewHapticFeedbackManager creates a new HapticFeedbackManager.
@@ -71,10 +71,3 @@ func NewHapticFeedbackManager() *HapticFeedbackManager {
 	_id := objc.Send[objc.ID](objc.ID(_class("NSHapticFeedbackManager")), objc.RegisterName("new"))
 	return hapticFeedbackManagerAdopt(_id)
 }
-
-// HapticFeedbackManagerable is the interface implemented by [HapticFeedbackManager], for mocking and DI.
-type HapticFeedbackManagerable interface {
-	obj.Object
-}
-
-var _ HapticFeedbackManagerable = (*HapticFeedbackManager)(nil)

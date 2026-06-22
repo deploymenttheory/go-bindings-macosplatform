@@ -49,24 +49,24 @@ func toolbarItemAdopt(id objc.ID) *ToolbarItem {
 }
 
 // Description returns the object's -description text.
-func (x *ToolbarItem) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ti *ToolbarItem) Description() string {
+	return rt.Description(objref.IDOf(ti))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ToolbarItem) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ti *ToolbarItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ti), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ToolbarItem) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ti *ToolbarItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ti), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ToolbarItem) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ti *ToolbarItem) String() string {
+	return rt.Description(objref.IDOf(ti))
 }
 
 // NewToolbarItemWithItemIdentifier creates a toolbar item with the specified identifier.
@@ -76,482 +76,302 @@ func NewToolbarItemWithItemIdentifier(itemIdentifier obj.Object) *ToolbarItem {
 	return toolbarItemAdopt(_id)
 }
 
-// WithLabel the label that appears for this item in the toolbar.
-func (x *ToolbarItem) WithLabel(label string) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets the label that appears for this item in the toolbar.
+func (ti *ToolbarItem) WithLabel(label string) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return ti
 }
 
-// WithPaletteLabel the label that appears when the toolbar item is in the customization palette.
-func (x *ToolbarItem) WithPaletteLabel(paletteLabel string) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaletteLabel:"), purego.NSString(paletteLabel))
-	return x
+// WithPaletteLabel sets the label that appears when the toolbar item is in the customization palette.
+func (ti *ToolbarItem) WithPaletteLabel(paletteLabel string) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setPaletteLabel:"), purego.NSString(paletteLabel))
+	return ti
 }
 
-// WithPossibleLabels the set of labels that the item might display.
-func (x *ToolbarItem) WithPossibleLabels(possibleLabels obj.Object) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
-	return x
+// WithPossibleLabels sets the set of labels that the item might display.
+func (ti *ToolbarItem) WithPossibleLabels(possibleLabels obj.Object) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
+	return ti
 }
 
-// WithToolTip the tooltip to display when someone hovers over the item in the toolbar.
-func (x *ToolbarItem) WithToolTip(toolTip string) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-	return x
+// WithToolTip sets the tooltip to display when someone hovers over the item in the toolbar.
+func (ti *ToolbarItem) WithToolTip(toolTip string) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
+	return ti
 }
 
-// WithMenuFormRepresentation the menu item to use when the toolbar item is in the overflow menu.
-func (x *ToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
-	return x
+// WithMenuFormRepresentation sets the menu item to use when the toolbar item is in the overflow menu.
+func (ti *ToolbarItem) WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
+	return ti
 }
 
-// WithTag an integer tag you can use to identify the toolbar item.
-func (x *ToolbarItem) WithTag(tag int) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
-	return x
+// WithTag sets an integer tag you can use to identify the toolbar item.
+func (ti *ToolbarItem) WithTag(tag int) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setTag:"), tag)
+	return ti
 }
 
-// WithTarget the object that defines the action method the toolbar item calls when clicked.
-func (x *ToolbarItem) WithTarget(target obj.Object) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-	return x
+// WithTarget sets the object that defines the action method the toolbar item calls when clicked.
+func (ti *ToolbarItem) WithTarget(target obj.Object) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setTarget:"), objref.IDOf(target))
+	return ti
 }
 
-// WithEnabled a Boolean value that indicates whether the item is enabled.
-func (x *ToolbarItem) WithEnabled(enabled bool) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-	return x
+// WithEnabled sets a Boolean value that indicates whether the item is enabled.
+func (ti *ToolbarItem) WithEnabled(enabled bool) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setEnabled:"), enabled)
+	return ti
 }
 
-// WithImage the image to display for the toolbar item.
-func (x *ToolbarItem) WithImage(image *Image) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-	return x
+// WithImage sets the image to display for the toolbar item.
+func (ti *ToolbarItem) WithImage(image *Image) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setImage:"), objref.IDOf(image))
+	return ti
 }
 
-// WithTitle the title of the toolbar item.
-func (x *ToolbarItem) WithTitle(title string) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-	return x
+// WithTitle sets the title of the toolbar item.
+func (ti *ToolbarItem) WithTitle(title string) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setTitle:"), purego.NSString(title))
+	return ti
 }
 
-// WithBordered a Boolean value that indicates whether the toolbar item has a bordered style.
-func (x *ToolbarItem) WithBordered(bordered bool) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
-	return x
+// WithBordered sets a Boolean value that indicates whether the toolbar item has a bordered style.
+func (ti *ToolbarItem) WithBordered(bordered bool) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setBordered:"), bordered)
+	return ti
 }
 
 // WithBackgroundTintColor sets the property and returns the receiver so calls can be chained.
-func (x *ToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
-	return x
+func (ti *ToolbarItem) WithBackgroundTintColor(backgroundTintColor *Color) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
+	return ti
 }
 
-// WithStyle defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
-func (x *ToolbarItem) WithStyle(style ToolbarItemStyle) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
-	return x
+// WithStyle sets defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items’ background.
+func (ti *ToolbarItem) WithStyle(style ToolbarItemStyle) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setStyle:"), style)
+	return ti
 }
 
-// WithNavigational a Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
-func (x *ToolbarItem) WithNavigational(navigational bool) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNavigational:"), navigational)
-	return x
+// WithNavigational sets a Boolean value that indicates whether the item behaves as a navigation item in the toolbar.
+func (ti *ToolbarItem) WithNavigational(navigational bool) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setNavigational:"), navigational)
+	return ti
 }
 
-// WithView the custom view you use to draw the toolbar item.
-func (x *ToolbarItem) WithView(view ViewProvider) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
-	return x
+// WithView sets the custom view you use to draw the toolbar item.
+func (ti *ToolbarItem) WithView(view ViewProvider) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setView:"), objref.IDOf(view))
+	return ti
 }
 
-// WithHidden determines whether an item is visible in the toolbar.
-func (x *ToolbarItem) WithHidden(hidden bool) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-	return x
+// WithHidden sets determines whether an item is visible in the toolbar.
+func (ti *ToolbarItem) WithHidden(hidden bool) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setHidden:"), hidden)
+	return ti
 }
 
-// WithMinSize the toolbar item’s minimum size.
-func (x *ToolbarItem) WithMinSize(minSize corefoundation.CGSize) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinSize:"), minSize)
-	return x
+// WithMinSize sets the toolbar item’s minimum size.
+func (ti *ToolbarItem) WithMinSize(minSize corefoundation.CGSize) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setMinSize:"), minSize)
+	return ti
 }
 
-// WithMaxSize the toolbar item’s maximum size.
-func (x *ToolbarItem) WithMaxSize(maxSize corefoundation.CGSize) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSize:"), maxSize)
-	return x
+// WithMaxSize sets the toolbar item’s maximum size.
+func (ti *ToolbarItem) WithMaxSize(maxSize corefoundation.CGSize) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setMaxSize:"), maxSize)
+	return ti
 }
 
-// WithVisibilityPriority the display priority associated with the toolbar item.
-func (x *ToolbarItem) WithVisibilityPriority(visibilityPriority int) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
-	return x
+// WithVisibilityPriority sets the display priority associated with the toolbar item.
+func (ti *ToolbarItem) WithVisibilityPriority(visibilityPriority int) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
+	return ti
 }
 
-// WithBadge a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
-func (x *ToolbarItem) WithBadge(badge *ItemBadge) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadge:"), objref.IDOf(badge))
-	return x
+// WithBadge sets a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
+func (ti *ToolbarItem) WithBadge(badge *ItemBadge) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setBadge:"), objref.IDOf(badge))
+	return ti
 }
 
-// WithAutovalidates a Boolean value that indicates whether the toolbar automatically validates the item.
-func (x *ToolbarItem) WithAutovalidates(autovalidates bool) *ToolbarItem {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutovalidates:"), autovalidates)
-	return x
+// WithAutovalidates sets a Boolean value that indicates whether the toolbar automatically validates the item.
+func (ti *ToolbarItem) WithAutovalidates(autovalidates bool) *ToolbarItem {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("setAutovalidates:"), autovalidates)
+	return ti
 }
 
 // Validate validates the toolbar item’s menu and its ability to perfrom its action.
-func (x *ToolbarItem) Validate() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validate"))
+func (ti *ToolbarItem) Validate() {
+	objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("validate"))
 }
 
 // ItemIdentifier wraps the corresponding Objective-C method.
-func (x *ToolbarItem) ItemIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("itemIdentifier"))
+func (ti *ToolbarItem) ItemIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("itemIdentifier"))
 	return obj.Wrap(_r)
 }
 
-// Toolbar use this to determine the toolbar in which an item is currently displayed.
-func (x *ToolbarItem) Toolbar() *Toolbar {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolbar"))
+// Toolbar returns use this to determine the toolbar in which an item is currently displayed.
+func (ti *ToolbarItem) Toolbar() *Toolbar {
+	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("toolbar"))
 	return ToolbarFromID(_r)
 }
 
-// Label use this to set the item's label that appears in the toolbar. The label may also be used for the default `menuFormRepresentation` of the item. Also, developers should make sure the length of the label is appropriate and not too long.
-func (x *ToolbarItem) Label() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+// Label returns use this to set the item's label that appears in the toolbar. The label may also be used for the default `menuFormRepresentation` of the item. Also, developers should make sure the length of the label is appropriate and not too long.
+func (ti *ToolbarItem) Label() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("label"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetLabel wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetLabel(label string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-}
-
-// PaletteLabel use this to set the item's label that appears when the item is in the customization palette. All Items must have a palette label, and for most things it is reasonable to set them to the same string as the label used in the toolbar.
-func (x *ToolbarItem) PaletteLabel() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paletteLabel"))
+// PaletteLabel returns use this to set the item's label that appears when the item is in the customization palette. All Items must have a palette label, and for most things it is reasonable to set them to the same string as the label used in the toolbar.
+func (ti *ToolbarItem) PaletteLabel() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("paletteLabel"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetPaletteLabel wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetPaletteLabel(paletteLabel string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaletteLabel:"), purego.NSString(paletteLabel))
-}
-
-// PossibleLabels an array of all alternate labels this item may display. The item will use the size of the longest label to prevent resizing when the label is changed.
-func (x *ToolbarItem) PossibleLabels() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("possibleLabels"))
+// PossibleLabels returns an array of all alternate labels this item may display. The item will use the size of the longest label to prevent resizing when the label is changed.
+func (ti *ToolbarItem) PossibleLabels() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("possibleLabels"))
 	return obj.Wrap(_r)
 }
 
-// SetPossibleLabels wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetPossibleLabels(possibleLabels obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPossibleLabels:"), objref.IDOf(possibleLabels))
-}
-
-// ToolTip use this to set a tooltip to be used when the item is displayed in the toolbar. (forwards to `-view` if it responds)
-func (x *ToolbarItem) ToolTip() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolTip"))
+// ToolTip returns use this to set a tooltip to be used when the item is displayed in the toolbar. (forwards to `-view` if it responds)
+func (ti *ToolbarItem) ToolTip() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("toolTip"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetToolTip wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetToolTip(toolTip string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
-}
-
-// MenuFormRepresentation the menu form of a toolbar item's purpose is twofold. First, when the window is too small to display an item, it will be clipped but remain accessible from a "clipped items" menu containing the menu item returned here. Second, in text only mode, the menu returned will be used to create the displayed items. Singleton menu items will be clickable, while submenu items will be represented as a pull down. For instance, say you want a button that allows you to switch between modes A, B, and C. You could represent this as a menu by: a menu item "mode" with three submenu items "A", "B", and "C". By default, this method returns a singleton menu item with item label as the title. For standard items, the target, action is set.
-func (x *ToolbarItem) MenuFormRepresentation() *MenuItem {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuFormRepresentation"))
+// MenuFormRepresentation returns the menu form of a toolbar item's purpose is twofold. First, when the window is too small to display an item, it will be clipped but remain accessible from a "clipped items" menu containing the menu item returned here. Second, in text only mode, the menu returned will be used to create the displayed items. Singleton menu items will be clickable, while submenu items will be represented as a pull down. For instance, say you want a button that allows you to switch between modes A, B, and C. You could represent this as a menu by: a menu item "mode" with three submenu items "A", "B", and "C". By default, this method returns a singleton menu item with item label as the title. For standard items, the target, action is set.
+func (ti *ToolbarItem) MenuFormRepresentation() *MenuItem {
+	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("menuFormRepresentation"))
 	return MenuItemFromID(_r)
 }
 
-// SetMenuFormRepresentation wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetMenuFormRepresentation(menuFormRepresentation *MenuItem) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuFormRepresentation:"), objref.IDOf(menuFormRepresentation))
-}
-
-// Tag tag for your own custom purpose. (forwards to `-view` if it responds)
-func (x *ToolbarItem) Tag() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tag"))
+// Tag returns tag for your own custom purpose. (forwards to `-view` if it responds)
+func (ti *ToolbarItem) Tag() int {
+	_r := objc.Send[int](objref.IDOf(ti), objc.RegisterName("tag"))
 	return _r
-}
-
-// SetTag wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetTag(tag int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 }
 
 // Target set and get the action of an item. (forwards to `-view` if it responds)
-func (x *ToolbarItem) Target() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+func (ti *ToolbarItem) Target() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("target"))
 	return obj.Wrap(_r)
 }
 
-// SetTarget wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetTarget(target obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
-}
-
-// IsEnabled set and get the enabled flag of an item. For custom views, this method will call `-setEnabled:` on the view if it responds. (forwards to `-view` if it responds)
-func (x *ToolbarItem) IsEnabled() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+// IsEnabled reports whether set and get the enabled flag of an item. For custom views, this method will call `-setEnabled:` on the view if it responds. (forwards to `-view` if it responds)
+func (ti *ToolbarItem) IsEnabled() bool {
+	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("isEnabled"))
 	return _r
 }
 
-// SetEnabled wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetEnabled(enabled bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
-}
-
 // Image wraps the corresponding Objective-C method.
-func (x *ToolbarItem) Image() *Image {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("image"))
+func (ti *ToolbarItem) Image() *Image {
+	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("image"))
 	return ImageFromID(_r)
 }
 
-// SetImage wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetImage(image *Image) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
-}
-
 // Title set and get the title of an item. For custom views, this method will call `-setTitle:` on the view if it responds. (forwards to `-view` if it responds)
-func (x *ToolbarItem) Title() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+func (ti *ToolbarItem) Title() string {
+	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("title"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
 
-// SetTitle wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetTitle(title string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
-}
-
-// IsBordered when set on an item without a custom view, the button produced will have a bordered style. Defaults to NO.
-func (x *ToolbarItem) IsBordered() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isBordered"))
+// IsBordered reports whether when set on an item without a custom view, the button produced will have a bordered style. Defaults to false.
+func (ti *ToolbarItem) IsBordered() bool {
+	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("isBordered"))
 	return _r
-}
-
-// SetBordered wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetBordered(bordered bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 }
 
 // BackgroundTintColor wraps the corresponding Objective-C method.
-func (x *ToolbarItem) BackgroundTintColor() *Color {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundTintColor"))
+func (ti *ToolbarItem) BackgroundTintColor() *Color {
+	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("backgroundTintColor"))
 	return ColorFromID(_r)
 }
 
-// SetBackgroundTintColor wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetBackgroundTintColor(backgroundTintColor *Color) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundTintColor:"), objref.IDOf(backgroundTintColor))
-}
-
 // Style defines the toolbar item’s appearance. The default style is plain. Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items, it moves to its own to avoid tinting other items' background.
-func (x *ToolbarItem) Style() ToolbarItemStyle {
-	_r := objc.Send[ToolbarItemStyle](objref.IDOf(x), objc.RegisterName("style"))
+func (ti *ToolbarItem) Style() ToolbarItemStyle {
+	_r := objc.Send[ToolbarItemStyle](objref.IDOf(ti), objc.RegisterName("style"))
 	return _r
 }
 
-// SetStyle wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetStyle(style ToolbarItemStyle) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
-}
-
-// IsNavigational whether or not the item behaves as a navigation item (i.e. back/forward) in the toolbar. Navigation items may be specially positioned by the system outside the normal list of items of the toolbar in the order specified by `-toolbarDefaultItemIdentifiers:`. Defaults to NO.
-func (x *ToolbarItem) IsNavigational() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNavigational"))
+// IsNavigational reports whether the item behaves as a navigation item (i.e. back/forward) in the toolbar. Navigation items may be specially positioned by the system outside the normal list of items of the toolbar in the order specified by `-toolbarDefaultItemIdentifiers:`. Defaults to false.
+func (ti *ToolbarItem) IsNavigational() bool {
+	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("isNavigational"))
 	return _r
 }
 
-// SetNavigational wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetNavigational(navigational bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNavigational:"), navigational)
-}
-
-// View items with automatically generated views will return nil from this getter. Custom views may be provided but not all `NSToolbarItem` subclasses support custom views. Note that, by default, many of the set/get methods will be implemented by calls forwarded to the view you set, if it responds to it.
-func (x *ToolbarItem) View() *View {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("view"))
+// View returns items with automatically generated views will return nil from this getter. Custom views may be provided but not all `NSToolbarItem` subclasses support custom views. Note that, by default, many of the set/get methods will be implemented by calls forwarded to the view you set, if it responds to it.
+func (ti *ToolbarItem) View() *View {
+	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("view"))
 	return ViewFromID(_r)
 }
 
-// SetView wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetView(view *View) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setView:"), objref.IDOf(view))
-}
-
-// IsVisible an item is visible if it is present in the NSToolbar and not in the overflow menu. This property is key value observable.
-func (x *ToolbarItem) IsVisible() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVisible"))
+// IsVisible reports whether an item is visible if it is present in the NSToolbar and not in the overflow menu. This property is key value observable.
+func (ti *ToolbarItem) IsVisible() bool {
+	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("isVisible"))
 	return _r
 }
 
-// IsHidden determines whether an item is visible in the toolbar. The item will still be visible in the customization panel. Because hidden items may be visible during user customization, use the `visible` property to determine if an item is currently displayed. Note that even hidden toolbar items are sync'd to other toolbars with a shared identifier, but its `hidden` state can be unique to each instance. Use this property to show a toolbar item in one toolbar instance but not another.
-func (x *ToolbarItem) IsHidden() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+// IsHidden reports whether an item is visible in the toolbar. The item will still be visible in the customization panel. Because hidden items may be visible during user customization, use the `visible` property to determine if an item is currently displayed. Note that even hidden toolbar items are sync'd to other toolbars with a shared identifier, but its `hidden` state can be unique to each instance. Use this property to show a toolbar item in one toolbar instance but not another.
+func (ti *ToolbarItem) IsHidden() bool {
+	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("isHidden"))
 	return _r
 }
 
-// SetHidden wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetHidden(hidden bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
-}
-
-// MinSize unless you have already set your own custom view, you should not call these methods. The min size should be small enough to look nice in all display modes. If you do not set a min/max size, the view's size properties will be calculated using constraints. Apps linked before 10.14 will use the view's current size. In general, apps should rely on the automatic measurements and constraints to define min/max sizes rather than setting these properties since this will account for localizations.
-func (x *ToolbarItem) MinSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("minSize"))
+// MinSize returns unless you have already set your own custom view, you should not call these methods. The min size should be small enough to look nice in all display modes. If you do not set a min/max size, the view's size properties will be calculated using constraints. Apps linked before 10.14 will use the view's current size. In general, apps should rely on the automatic measurements and constraints to define min/max sizes rather than setting these properties since this will account for localizations.
+func (ti *ToolbarItem) MinSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ti), objc.RegisterName("minSize"))
 	return _r
-}
-
-// SetMinSize wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetMinSize(minSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinSize:"), minSize)
 }
 
 // MaxSize wraps the corresponding Objective-C method.
-func (x *ToolbarItem) MaxSize() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("maxSize"))
+func (ti *ToolbarItem) MaxSize() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(ti), objc.RegisterName("maxSize"))
 	return _r
 }
 
-// SetMaxSize wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetMaxSize(maxSize corefoundation.CGSize) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxSize:"), maxSize)
-}
-
-// VisibilityPriority when a toolbar does not have enough space to fit all its items, it must push some into the overflow menu. Items with the highest `visibilityPriority` level are chosen last for the overflow menu. The default `visibilityPriority` value is `NSToolbarItemVisibilityPriorityStandard`. To suggest that an item always remain visible, give it a value greater than `NSToolbarItemVisibilityPriorityStandard`, but less than `NSToolbarItemVisibilityPriorityUser`. In 10.7, users can no longer modify the toolbar item visibility priority.
-func (x *ToolbarItem) VisibilityPriority() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("visibilityPriority"))
+// VisibilityPriority returns when a toolbar does not have enough space to fit all its items, it must push some into the overflow menu. Items with the highest `visibilityPriority` level are chosen last for the overflow menu. The default `visibilityPriority` value is `NSToolbarItemVisibilityPriorityStandard`. To suggest that an item always remain visible, give it a value greater than `NSToolbarItemVisibilityPriorityStandard`, but less than `NSToolbarItemVisibilityPriorityUser`. In 10.7, users can no longer modify the toolbar item visibility priority.
+func (ti *ToolbarItem) VisibilityPriority() int {
+	_r := objc.Send[int](objref.IDOf(ti), objc.RegisterName("visibilityPriority"))
 	return _r
 }
 
-// SetVisibilityPriority wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetVisibilityPriority(visibilityPriority int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
-}
-
-// Badge a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
-func (x *ToolbarItem) Badge() *ItemBadge {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("badge"))
+// Badge returns a badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
+func (ti *ToolbarItem) Badge() *ItemBadge {
+	_r := objc.Send[objc.ID](objref.IDOf(ti), objc.RegisterName("badge"))
 	return ItemBadgeFromID(_r)
 }
 
-// SetBadge wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetBadge(badge *ItemBadge) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBadge:"), objref.IDOf(badge))
-}
-
-// Autovalidates this property only affects automatic validation performed by NSToolbar. Explicit validation requests, such as the `-[NSToolbar validateVisibleItems]` method, will invoke the `-validate` method even if `autovalidates` is `NO`. Defaults to YES.
-func (x *ToolbarItem) Autovalidates() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autovalidates"))
+// Autovalidates reports whether this property only affects automatic validation performed by NSToolbar. Explicit validation requests, such as the `-[NSToolbar validateVisibleItems]` method, will invoke the `-validate` method even if `autovalidates` is `NO`. Defaults to true.
+func (ti *ToolbarItem) Autovalidates() bool {
+	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("autovalidates"))
 	return _r
 }
 
-// SetAutovalidates wraps the corresponding Objective-C method.
-func (x *ToolbarItem) SetAutovalidates(autovalidates bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutovalidates:"), autovalidates)
-}
-
-// AllowsDuplicatesInToolbar duplicate items outside of spaces are not allowed.
-func (x *ToolbarItem) AllowsDuplicatesInToolbar() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDuplicatesInToolbar"))
+// AllowsDuplicatesInToolbar reports whether duplicate items outside of spaces are not allowed.
+func (ti *ToolbarItem) AllowsDuplicatesInToolbar() bool {
+	_r := objc.Send[bool](objref.IDOf(ti), objc.RegisterName("allowsDuplicatesInToolbar"))
 	return _r
 }
-
-// ToolbarItemable is the interface implemented by [ToolbarItem], for mocking and DI.
-type ToolbarItemable interface {
-	obj.Object
-	WithLabel(label string) *ToolbarItem
-	WithPaletteLabel(paletteLabel string) *ToolbarItem
-	WithPossibleLabels(possibleLabels obj.Object) *ToolbarItem
-	WithToolTip(toolTip string) *ToolbarItem
-	WithMenuFormRepresentation(menuFormRepresentation *MenuItem) *ToolbarItem
-	WithTag(tag int) *ToolbarItem
-	WithTarget(target obj.Object) *ToolbarItem
-	WithEnabled(enabled bool) *ToolbarItem
-	WithImage(image *Image) *ToolbarItem
-	WithTitle(title string) *ToolbarItem
-	WithBordered(bordered bool) *ToolbarItem
-	WithBackgroundTintColor(backgroundTintColor *Color) *ToolbarItem
-	WithStyle(style ToolbarItemStyle) *ToolbarItem
-	WithNavigational(navigational bool) *ToolbarItem
-	WithView(view ViewProvider) *ToolbarItem
-	WithHidden(hidden bool) *ToolbarItem
-	WithMinSize(minSize corefoundation.CGSize) *ToolbarItem
-	WithMaxSize(maxSize corefoundation.CGSize) *ToolbarItem
-	WithVisibilityPriority(visibilityPriority int) *ToolbarItem
-	WithBadge(badge *ItemBadge) *ToolbarItem
-	WithAutovalidates(autovalidates bool) *ToolbarItem
-	Validate()
-	ItemIdentifier() obj.Object
-	Toolbar() *Toolbar
-	Label() string
-	SetLabel(label string)
-	PaletteLabel() string
-	SetPaletteLabel(paletteLabel string)
-	PossibleLabels() obj.Object
-	SetPossibleLabels(possibleLabels obj.Object)
-	ToolTip() string
-	SetToolTip(toolTip string)
-	MenuFormRepresentation() *MenuItem
-	SetMenuFormRepresentation(menuFormRepresentation *MenuItem)
-	Tag() int
-	SetTag(tag int)
-	Target() obj.Object
-	SetTarget(target obj.Object)
-	IsEnabled() bool
-	SetEnabled(enabled bool)
-	Image() *Image
-	SetImage(image *Image)
-	Title() string
-	SetTitle(title string)
-	IsBordered() bool
-	SetBordered(bordered bool)
-	BackgroundTintColor() *Color
-	SetBackgroundTintColor(backgroundTintColor *Color)
-	Style() ToolbarItemStyle
-	SetStyle(style ToolbarItemStyle)
-	IsNavigational() bool
-	SetNavigational(navigational bool)
-	View() *View
-	SetView(view *View)
-	IsVisible() bool
-	IsHidden() bool
-	SetHidden(hidden bool)
-	MinSize() corefoundation.CGSize
-	SetMinSize(minSize corefoundation.CGSize)
-	MaxSize() corefoundation.CGSize
-	SetMaxSize(maxSize corefoundation.CGSize)
-	VisibilityPriority() int
-	SetVisibilityPriority(visibilityPriority int)
-	Badge() *ItemBadge
-	SetBadge(badge *ItemBadge)
-	Autovalidates() bool
-	SetAutovalidates(autovalidates bool)
-	AllowsDuplicatesInToolbar() bool
-}
-
-var _ ToolbarItemable = (*ToolbarItem)(nil)
 
 // isToolbarItem marks ToolbarItem — and, by embedding promotion, its
 // subclasses — as a member of the ToolbarItem hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ToolbarItem) isToolbarItem() {}
+func (ti *ToolbarItem) isToolbarItem() {}
 
 var _ ToolbarItemProvider = (*ToolbarItem)(nil)

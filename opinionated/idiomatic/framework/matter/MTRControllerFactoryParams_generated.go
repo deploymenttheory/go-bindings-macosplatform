@@ -51,106 +51,71 @@ func NewMTRControllerFactoryParams() *MTRControllerFactoryParams {
 }
 
 // WithStartServer sets the property and returns the receiver so calls can be chained.
-func (x *MTRControllerFactoryParams) WithStartServer(startServer bool) *MTRControllerFactoryParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartServer:"), startServer)
-	return x
+func (mcfp *MTRControllerFactoryParams) WithStartServer(startServer bool) *MTRControllerFactoryParams {
+	objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("setStartServer:"), startServer)
+	return mcfp
 }
 
 // WithPaaCerts sets the property and returns the receiver so calls can be chained.
-func (x *MTRControllerFactoryParams) WithPaaCerts(items ...obj.Object) *MTRControllerFactoryParams {
+func (mcfp *MTRControllerFactoryParams) WithPaaCerts(items ...obj.Object) *MTRControllerFactoryParams {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaaCerts:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("setPaaCerts:"), _arr)
+	return mcfp
 }
 
 // WithCdCerts sets the property and returns the receiver so calls can be chained.
-func (x *MTRControllerFactoryParams) WithCdCerts(items ...obj.Object) *MTRControllerFactoryParams {
+func (mcfp *MTRControllerFactoryParams) WithCdCerts(items ...obj.Object) *MTRControllerFactoryParams {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCdCerts:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("setCdCerts:"), _arr)
+	return mcfp
 }
 
 // WithProductAttestationAuthorityCertificates sets the property and returns the receiver so calls can be chained.
-func (x *MTRControllerFactoryParams) WithProductAttestationAuthorityCertificates(items ...obj.Object) *MTRControllerFactoryParams {
+func (mcfp *MTRControllerFactoryParams) WithProductAttestationAuthorityCertificates(items ...obj.Object) *MTRControllerFactoryParams {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductAttestationAuthorityCertificates:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("setProductAttestationAuthorityCertificates:"), _arr)
+	return mcfp
 }
 
 // WithCertificationDeclarationCertificates sets the property and returns the receiver so calls can be chained.
-func (x *MTRControllerFactoryParams) WithCertificationDeclarationCertificates(items ...obj.Object) *MTRControllerFactoryParams {
+func (mcfp *MTRControllerFactoryParams) WithCertificationDeclarationCertificates(items ...obj.Object) *MTRControllerFactoryParams {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCertificationDeclarationCertificates:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("setCertificationDeclarationCertificates:"), _arr)
+	return mcfp
 }
 
 // WithPort sets the property and returns the receiver so calls can be chained.
-func (x *MTRControllerFactoryParams) WithPort(port obj.Object) *MTRControllerFactoryParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPort:"), objref.IDOf(port))
-	return x
+func (mcfp *MTRControllerFactoryParams) WithPort(port obj.Object) *MTRControllerFactoryParams {
+	objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("setPort:"), objref.IDOf(port))
+	return mcfp
 }
 
 // WithShouldStartServer sets the property and returns the receiver so calls can be chained.
-func (x *MTRControllerFactoryParams) WithShouldStartServer(shouldStartServer bool) *MTRControllerFactoryParams {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldStartServer:"), shouldStartServer)
-	return x
+func (mcfp *MTRControllerFactoryParams) WithShouldStartServer(shouldStartServer bool) *MTRControllerFactoryParams {
+	objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("setShouldStartServer:"), shouldStartServer)
+	return mcfp
 }
 
 // StartServer wraps the corresponding Objective-C method.
-func (x *MTRControllerFactoryParams) StartServer() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startServer"))
+func (mcfp *MTRControllerFactoryParams) StartServer() bool {
+	_r := objc.Send[bool](objref.IDOf(mcfp), objc.RegisterName("startServer"))
 	return _r
-}
-
-// SetStartServer wraps the corresponding Objective-C method.
-func (x *MTRControllerFactoryParams) SetStartServer(startServer bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartServer:"), startServer)
 }
 
 // PaaCerts wraps the corresponding Objective-C method.
 //
 // PaaCerts returns the collection as a Go slice.
-func (x *MTRControllerFactoryParams) PaaCerts() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paaCerts"))
+func (mcfp *MTRControllerFactoryParams) PaaCerts() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("paaCerts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
-}
-
-// SetPaaCerts wraps the corresponding Objective-C method.
-func (x *MTRControllerFactoryParams) SetPaaCerts(paaCerts []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaaCerts:"), purego.SliceToNSArray(paaCerts, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // CdCerts wraps the corresponding Objective-C method.
 //
 // CdCerts returns the collection as a Go slice.
-func (x *MTRControllerFactoryParams) CdCerts() []obj.Object {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cdCerts"))
+func (mcfp *MTRControllerFactoryParams) CdCerts() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(mcfp), objc.RegisterName("cdCerts"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-// SetCdCerts wraps the corresponding Objective-C method.
-func (x *MTRControllerFactoryParams) SetCdCerts(cdCerts []obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCdCerts:"), purego.SliceToNSArray(cdCerts, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
-}
-
-// MTRControllerFactoryParamsable is the interface implemented by [MTRControllerFactoryParams], for mocking and DI.
-type MTRControllerFactoryParamsable interface {
-	obj.Object
-	WithStartServer(startServer bool) *MTRControllerFactoryParams
-	WithPaaCerts(items ...obj.Object) *MTRControllerFactoryParams
-	WithCdCerts(items ...obj.Object) *MTRControllerFactoryParams
-	WithProductAttestationAuthorityCertificates(items ...obj.Object) *MTRControllerFactoryParams
-	WithCertificationDeclarationCertificates(items ...obj.Object) *MTRControllerFactoryParams
-	WithPort(port obj.Object) *MTRControllerFactoryParams
-	WithShouldStartServer(shouldStartServer bool) *MTRControllerFactoryParams
-	StartServer() bool
-	SetStartServer(startServer bool)
-	PaaCerts() []obj.Object
-	SetPaaCerts(paaCerts []obj.Object)
-	CdCerts() []obj.Object
-	SetCdCerts(cdCerts []obj.Object)
-}
-
-var _ MTRControllerFactoryParamsable = (*MTRControllerFactoryParams)(nil)
 
 var _ MTRDeviceControllerFactoryParamsProvider = (*MTRControllerFactoryParams)(nil)

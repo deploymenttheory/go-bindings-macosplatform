@@ -50,25 +50,16 @@ func NewMTRXPCDeviceControllerParameters() *MTRXPCDeviceControllerParameters {
 	return mTRXPCDeviceControllerParametersAdopt(_id)
 }
 
-// WithStartSuspended whether the controller should start out suspended.
-func (x *MTRXPCDeviceControllerParameters) WithStartSuspended(startSuspended bool) *MTRXPCDeviceControllerParameters {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSuspended:"), startSuspended)
-	return x
+// WithStartSuspended sets whether the controller should start out suspended.
+func (mdcp *MTRXPCDeviceControllerParameters) WithStartSuspended(startSuspended bool) *MTRXPCDeviceControllerParameters {
+	objc.Send[objc.ID](objref.IDOf(mdcp), objc.RegisterName("setStartSuspended:"), startSuspended)
+	return mdcp
 }
 
 // UniqueIdentifier wraps the corresponding Objective-C method.
-func (x *MTRXPCDeviceControllerParameters) UniqueIdentifier() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniqueIdentifier"))
+func (mdcp *MTRXPCDeviceControllerParameters) UniqueIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mdcp), objc.RegisterName("uniqueIdentifier"))
 	return obj.Wrap(_r)
 }
-
-// MTRXPCDeviceControllerParametersable is the interface implemented by [MTRXPCDeviceControllerParameters], for mocking and DI.
-type MTRXPCDeviceControllerParametersable interface {
-	obj.Object
-	WithStartSuspended(startSuspended bool) *MTRXPCDeviceControllerParameters
-	UniqueIdentifier() obj.Object
-}
-
-var _ MTRXPCDeviceControllerParametersable = (*MTRXPCDeviceControllerParameters)(nil)
 
 var _ MTRDeviceControllerAbstractParametersProvider = (*MTRXPCDeviceControllerParameters)(nil)

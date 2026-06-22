@@ -51,38 +51,27 @@ func NewMTRTestClusterClusterTestEventEvent() *MTRTestClusterClusterTestEventEve
 }
 
 // WithArg1 sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestEventEvent) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestEventEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
-	return x
+func (mtcctee *MTRTestClusterClusterTestEventEvent) WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestEventEvent {
+	objc.Send[objc.ID](objref.IDOf(mtcctee), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
+	return mtcctee
 }
 
 // WithArg2 sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestEventEvent) WithArg2(arg2 obj.Object) *MTRTestClusterClusterTestEventEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
-	return x
+func (mtcctee *MTRTestClusterClusterTestEventEvent) WithArg2(arg2 obj.Object) *MTRTestClusterClusterTestEventEvent {
+	objc.Send[objc.ID](objref.IDOf(mtcctee), objc.RegisterName("setArg2:"), objref.IDOf(arg2))
+	return mtcctee
 }
 
 // WithArg3 sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestEventEvent) WithArg3(arg3 obj.Object) *MTRTestClusterClusterTestEventEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg3:"), objref.IDOf(arg3))
-	return x
+func (mtcctee *MTRTestClusterClusterTestEventEvent) WithArg3(arg3 obj.Object) *MTRTestClusterClusterTestEventEvent {
+	objc.Send[objc.ID](objref.IDOf(mtcctee), objc.RegisterName("setArg3:"), objref.IDOf(arg3))
+	return mtcctee
 }
 
 // WithArg4 sets the property and returns the receiver so calls can be chained.
-func (x *MTRTestClusterClusterTestEventEvent) WithArg4(arg4 MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestEventEvent {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg4:"), objref.IDOf(arg4))
-	return x
+func (mtcctee *MTRTestClusterClusterTestEventEvent) WithArg4(arg4 MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestEventEvent {
+	objc.Send[objc.ID](objref.IDOf(mtcctee), objc.RegisterName("setArg4:"), objref.IDOf(arg4))
+	return mtcctee
 }
-
-// MTRTestClusterClusterTestEventEventable is the interface implemented by [MTRTestClusterClusterTestEventEvent], for mocking and DI.
-type MTRTestClusterClusterTestEventEventable interface {
-	obj.Object
-	WithArg1(arg1 obj.Object) *MTRTestClusterClusterTestEventEvent
-	WithArg2(arg2 obj.Object) *MTRTestClusterClusterTestEventEvent
-	WithArg3(arg3 obj.Object) *MTRTestClusterClusterTestEventEvent
-	WithArg4(arg4 MTRUnitTestingClusterSimpleStructProvider) *MTRTestClusterClusterTestEventEvent
-}
-
-var _ MTRTestClusterClusterTestEventEventable = (*MTRTestClusterClusterTestEventEvent)(nil)
 
 var _ MTRUnitTestingClusterTestEventEventProvider = (*MTRTestClusterClusterTestEventEvent)(nil)

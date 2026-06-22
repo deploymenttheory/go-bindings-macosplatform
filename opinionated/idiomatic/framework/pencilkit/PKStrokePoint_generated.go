@@ -47,24 +47,24 @@ func strokePointAdopt(id objc.ID) *StrokePoint {
 }
 
 // Description returns the object's -description text.
-func (x *StrokePoint) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (sp *StrokePoint) Description() string {
+	return rt.Description(objref.IDOf(sp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *StrokePoint) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (sp *StrokePoint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(sp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *StrokePoint) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (sp *StrokePoint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(sp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *StrokePoint) String() string {
-	return rt.Description(objref.IDOf(x))
+func (sp *StrokePoint) String() string {
+	return rt.Description(objref.IDOf(sp))
 }
 
 // NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitude create a new point with the provided properties.
@@ -88,72 +88,56 @@ func NewStrokePointWithLocationTimeOffsetSizeOpacityForceAzimuthAltitudeSecondar
 	return strokePointAdopt(_id)
 }
 
-// Location location of the point.
-func (x *StrokePoint) Location() corefoundation.CGPoint {
-	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(x), objc.RegisterName("location"))
+// Location returns location of the point.
+func (sp *StrokePoint) Location() corefoundation.CGPoint {
+	_r := objc.Send[corefoundation.CGPoint](objref.IDOf(sp), objc.RegisterName("location"))
 	return _r
 }
 
-// TimeOffset time offset since the start of the stroke path in seconds.
-func (x *StrokePoint) TimeOffset() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("timeOffset"))
+// TimeOffset returns time offset since the start of the stroke path in seconds.
+func (sp *StrokePoint) TimeOffset() float64 {
+	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("timeOffset"))
 	return _r
 }
 
-// Size size of the point.
-func (x *StrokePoint) Size() corefoundation.CGSize {
-	_r := objc.Send[corefoundation.CGSize](objref.IDOf(x), objc.RegisterName("size"))
+// Size returns size of the point.
+func (sp *StrokePoint) Size() corefoundation.CGSize {
+	_r := objc.Send[corefoundation.CGSize](objref.IDOf(sp), objc.RegisterName("size"))
 	return _r
 }
 
-// Opacity opacity of the point 0-2.
-func (x *StrokePoint) Opacity() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("opacity"))
+// Opacity returns opacity of the point 0-2.
+func (sp *StrokePoint) Opacity() float64 {
+	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("opacity"))
 	return _r
 }
 
-// Azimuth azimuth of the point in radians, 0.0-2π radians
-func (x *StrokePoint) Azimuth() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("azimuth"))
+// Azimuth returns azimuth of the point in radians, 0.0-2π radians
+func (sp *StrokePoint) Azimuth() float64 {
+	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("azimuth"))
 	return _r
 }
 
-// Force force used to create this point.
-func (x *StrokePoint) Force() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("force"))
+// Force returns force used to create this point.
+func (sp *StrokePoint) Force() float64 {
+	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("force"))
 	return _r
 }
 
-// Altitude altitude used to create this point in radians, 0.0-π/2 radians
-func (x *StrokePoint) Altitude() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("altitude"))
+// Altitude returns altitude used to create this point in radians, 0.0-π/2 radians
+func (sp *StrokePoint) Altitude() float64 {
+	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("altitude"))
 	return _r
 }
 
-// SecondaryScale the scaling of the point for secondary effects. For example the scaling of the pigment in the watercolor ink.
-func (x *StrokePoint) SecondaryScale() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("secondaryScale"))
+// SecondaryScale returns the scaling of the point for secondary effects. For example the scaling of the pigment in the watercolor ink.
+func (sp *StrokePoint) SecondaryScale() float64 {
+	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("secondaryScale"))
 	return _r
 }
 
-// Threshold the threshold for clipping the stroke rendering. When rendering only pixels with an alpha greater than the threshold are drawn. A threshold of 0 has no affect on rendering, a threshold of 1 does not draw anything. Thresholds are only used for some inks, eg. `PKInkIdentifierReed`.
-func (x *StrokePoint) Threshold() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("threshold"))
+// Threshold returns the threshold for clipping the stroke rendering. When rendering only pixels with an alpha greater than the threshold are drawn. A threshold of 0 has no affect on rendering, a threshold of 1 does not draw anything. Thresholds are only used for some inks, eg. `PKInkIdentifierReed`.
+func (sp *StrokePoint) Threshold() float64 {
+	_r := objc.Send[float64](objref.IDOf(sp), objc.RegisterName("threshold"))
 	return _r
 }
-
-// StrokePointable is the interface implemented by [StrokePoint], for mocking and DI.
-type StrokePointable interface {
-	obj.Object
-	Location() corefoundation.CGPoint
-	TimeOffset() float64
-	Size() corefoundation.CGSize
-	Opacity() float64
-	Azimuth() float64
-	Force() float64
-	Altitude() float64
-	SecondaryScale() float64
-	Threshold() float64
-}
-
-var _ StrokePointable = (*StrokePoint)(nil)

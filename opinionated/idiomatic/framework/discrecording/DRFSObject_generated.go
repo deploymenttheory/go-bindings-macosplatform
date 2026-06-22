@@ -48,35 +48,35 @@ func fSObjectAdopt(id objc.ID) *FSObject {
 }
 
 // Description returns the object's -description text.
-func (x *FSObject) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (fo *FSObject) Description() string {
+	return rt.Description(objref.IDOf(fo))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FSObject) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (fo *FSObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(fo), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FSObject) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (fo *FSObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(fo), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FSObject) String() string {
-	return rt.Description(objref.IDOf(x))
+func (fo *FSObject) String() string {
+	return rt.Description(objref.IDOf(fo))
 }
 
-// IsVirtual indicates whether the receiver is real or virtual.
-func (x *FSObject) IsVirtual() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVirtual"))
+// IsVirtual reports whether the receiver is real or virtual.
+func (fo *FSObject) IsVirtual() bool {
+	_r := objc.Send[bool](objref.IDOf(fo), objc.RegisterName("isVirtual"))
 	return _r
 }
 
 // SourcePath returns the path to a real object. This method only applies to DRFSObjects pointing to real objects.
-func (x *FSObject) SourcePath() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourcePath"))
+func (fo *FSObject) SourcePath() string {
+	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("sourcePath"))
 	if _r == 0 {
 		return ""
 	}
@@ -84,14 +84,14 @@ func (x *FSObject) SourcePath() string {
 }
 
 // Parent returns the parent folder (if any) of the receiver in the content hierarchy.
-func (x *FSObject) Parent() *Folder {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
+func (fo *FSObject) Parent() *Folder {
+	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("parent"))
 	return FolderFromID(_r)
 }
 
 // BaseName returns the base name for the receiver. The base name is the name from which any necessary filesystem-specific names are automatically generated. Because the content creation API is able to generate multiple filesystems which require multiple varied naming conventions, a sensible system for naming is required.  Thus each file has a base name which corresponds to its default name in any filesystem. Whenever possible, the base name will be used in the generated filesystem without modification.  If the name cannot be used as-is (if, for example, it contains illegal characters, exceeds the length requirements, doesn't meet the required format, or a name collision is detected) then an acceptable name that meets the filesystem's criteria will be generated automatically from the base name. The default base name for a real file or folder is the actual on-disk name of the item.
-func (x *FSObject) BaseName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseName"))
+func (fo *FSObject) BaseName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("baseName"))
 	if _r == 0 {
 		return ""
 	}
@@ -99,13 +99,13 @@ func (x *FSObject) BaseName() string {
 }
 
 // SetBaseName sets the base name for the receiver. The base name is the name from which any necessary filesystem-specific names are automatically generated. Because the content creation API is able to generate multiple filesystems which require multiple varied naming conventions, a sensible system for naming is required.  Thus each file has a base name which corresponds to its default name in any filesystem. Whenever possible, the base name will be used in the generated filesystem without modification.  If the name cannot be used as-is (if, for example, it contains illegal characters, exceeds the length requirements, doesn't meet the required format, or a name collision is detected) then an acceptable name that meets the filesystem's criteria will be generated automatically from the base name. The default base name for a real file or folder is the actual on-disk name of the item.
-func (x *FSObject) SetBaseName(baseName string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseName:"), purego.NSString(baseName))
+func (fo *FSObject) SetBaseName(baseName string) {
+	objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("setBaseName:"), purego.NSString(baseName))
 }
 
 // SpecificNameForFilesystem returns a single filesystem-specific name for the receiver.
-func (x *FSObject) SpecificNameForFilesystem(filesystem string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("specificNameForFilesystem:"), purego.NSString(filesystem))
+func (fo *FSObject) SpecificNameForFilesystem(filesystem string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("specificNameForFilesystem:"), purego.NSString(filesystem))
 	if _r == 0 {
 		return ""
 	}
@@ -113,24 +113,24 @@ func (x *FSObject) SpecificNameForFilesystem(filesystem string) string {
 }
 
 // SpecificNames returns all the filesystem-specific names for the receiver.
-func (x *FSObject) SpecificNames() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("specificNames"))
+func (fo *FSObject) SpecificNames() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("specificNames"))
 	return obj.Wrap(_r)
 }
 
 // SetSpecificNameForFilesystem sets the name used for the receiver in a particular filesystem. Every effort will be made to use the name passed in.  However, if a name is illegal, it will be modified to fit the rules for the filesystem's names.  Because of this, you should always call
-func (x *FSObject) SetSpecificNameForFilesystem(name string, filesystem string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpecificName:forFilesystem:"), purego.NSString(name), purego.NSString(filesystem))
+func (fo *FSObject) SetSpecificNameForFilesystem(name string, filesystem string) {
+	objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("setSpecificName:forFilesystem:"), purego.NSString(name), purego.NSString(filesystem))
 }
 
 // SetSpecificNames sets the names used for the receiver in the different filesystems all at once. Takes an NSDictionary of filesystem keys with corresponding name strings as their values for each specific filesystem name that should be set. Every effort will be made to use the names passed in.  However, if a name is illegal, it will be modified to fit the rules for that filesystem's names.  Because of this, you should always call
-func (x *FSObject) SetSpecificNames(specificNames obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpecificNames:"), objref.IDOf(specificNames))
+func (fo *FSObject) SetSpecificNames(specificNames obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("setSpecificNames:"), objref.IDOf(specificNames))
 }
 
 // MangledNameForFilesystem returns a single filesystem-specific name for the receiver, mangled for uniqueness. The string will be mangled for uniqueness amongst its siblings; if the burn were to happen immediately after this call, this is the name which would be used on the resulting disc.
-func (x *FSObject) MangledNameForFilesystem(filesystem string) string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mangledNameForFilesystem:"), purego.NSString(filesystem))
+func (fo *FSObject) MangledNameForFilesystem(filesystem string) string {
+	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("mangledNameForFilesystem:"), purego.NSString(filesystem))
 	if _r == 0 {
 		return ""
 	}
@@ -138,78 +138,53 @@ func (x *FSObject) MangledNameForFilesystem(filesystem string) string {
 }
 
 // MangledNames returns a dictionary containing all of the filesystem-specific names for the receiver, each one mangled for uniqueness. The dictionary will return only the names which are indicated by the receiver's effective mask.  If the receiver's effective mask is zero, an empty dictionary is returned.
-func (x *FSObject) MangledNames() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mangledNames"))
+func (fo *FSObject) MangledNames() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("mangledNames"))
 	return obj.Wrap(_r)
 }
 
 // PropertyForKeyInFilesystemMergeWithOtherFilesystems returns a file/folder property specified by key for the specified filesystem. Normally you would call this method with merge set to <i>YES</i> since you are interested in the property that will be used when writing the object to disc. But if you have a need to determine what property is set just for a specific filesystem, then pass in <i>NO</i> for merge. In this case only the specific filesystem is checked. So if
-func (x *FSObject) PropertyForKeyInFilesystemMergeWithOtherFilesystems(key string, filesystem string, merge bool) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyForKey:inFilesystem:mergeWithOtherFilesystems:"), purego.NSString(key), purego.NSString(filesystem), merge)
+func (fo *FSObject) PropertyForKeyInFilesystemMergeWithOtherFilesystems(key string, filesystem string, merge bool) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("propertyForKey:inFilesystem:mergeWithOtherFilesystems:"), purego.NSString(key), purego.NSString(filesystem), merge)
 	return obj.Wrap(_r)
 }
 
 // PropertiesForFilesystemMergeWithOtherFilesystems returns all the filesystem properties set for the specified filesystem. Normally you would call this method with merge set to <i>YES</i> since you are interested in the set of properties that will be used when writing the object to disc. But if you have a need to determine what properties are set just for a specific filesystem, then pass in <i>NO</i> for merge. In this case only the specific filesystem is checked. So if filesystem is set to
-func (x *FSObject) PropertiesForFilesystemMergeWithOtherFilesystems(filesystem string, merge bool) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertiesForFilesystem:mergeWithOtherFilesystems:"), purego.NSString(filesystem), merge)
+func (fo *FSObject) PropertiesForFilesystemMergeWithOtherFilesystems(filesystem string, merge bool) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("propertiesForFilesystem:mergeWithOtherFilesystems:"), purego.NSString(filesystem), merge)
 	return obj.Wrap(_r)
 }
 
 // SetPropertyForKeyInFilesystem sets the value of the receiver's property specified by key for the specific filesystem. The property is set only in the filesystem dictionary specified by filesystem.
-func (x *FSObject) SetPropertyForKeyInFilesystem(property obj.Object, key string, filesystem string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperty:forKey:inFilesystem:"), objref.IDOf(property), purego.NSString(key), purego.NSString(filesystem))
+func (fo *FSObject) SetPropertyForKeyInFilesystem(property obj.Object, key string, filesystem string) {
+	objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("setProperty:forKey:inFilesystem:"), objref.IDOf(property), purego.NSString(key), purego.NSString(filesystem))
 }
 
 // SetPropertiesInFilesystem sets the value of all the receiver's properties specified by the keys in properties for the specific filesystem. The properties are set only in the filesystem dictionary specified by filesystem.
-func (x *FSObject) SetPropertiesInFilesystem(properties obj.Object, filesystem string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProperties:inFilesystem:"), objref.IDOf(properties), purego.NSString(filesystem))
+func (fo *FSObject) SetPropertiesInFilesystem(properties obj.Object, filesystem string) {
+	objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("setProperties:inFilesystem:"), objref.IDOf(properties), purego.NSString(filesystem))
 }
 
 // ExplicitFilesystemMask returns the explicit filesystem mask set for the reciever. The explicit mask is one that has been explicitly set by a client through the
-func (x *FSObject) ExplicitFilesystemMask() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("explicitFilesystemMask"))
+func (fo *FSObject) ExplicitFilesystemMask() int {
+	_r := objc.Send[int](objref.IDOf(fo), objc.RegisterName("explicitFilesystemMask"))
 	return _r
 }
 
 // SetExplicitFilesystemMask sets the filesystems the receiver will be included on. The effective mask for an item cannot be more inclusive than the effective mask of it's parent. If the mask set for a child is more inclusive than its parent's mask, those filesystems not allowed by the parent will be stripped from the resulting effective mask of the child.
-func (x *FSObject) SetExplicitFilesystemMask(mask int) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExplicitFilesystemMask:"), mask)
+func (fo *FSObject) SetExplicitFilesystemMask(mask int) {
+	objc.Send[objc.ID](objref.IDOf(fo), objc.RegisterName("setExplicitFilesystemMask:"), mask)
 }
 
 // EffectiveFilesystemMask returns the effective filesystem mask set for the reciever. The parent filesystem mask is taken into account for the receiver.
-func (x *FSObject) EffectiveFilesystemMask() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("effectiveFilesystemMask"))
+func (fo *FSObject) EffectiveFilesystemMask() int {
+	_r := objc.Send[int](objref.IDOf(fo), objc.RegisterName("effectiveFilesystemMask"))
 	return _r
 }
-
-// FSObjectable is the interface implemented by [FSObject], for mocking and DI.
-type FSObjectable interface {
-	obj.Object
-	IsVirtual() bool
-	SourcePath() string
-	Parent() *Folder
-	BaseName() string
-	SetBaseName(baseName string)
-	SpecificNameForFilesystem(filesystem string) string
-	SpecificNames() obj.Object
-	SetSpecificNameForFilesystem(name string, filesystem string)
-	SetSpecificNames(specificNames obj.Object)
-	MangledNameForFilesystem(filesystem string) string
-	MangledNames() obj.Object
-	PropertyForKeyInFilesystemMergeWithOtherFilesystems(key string, filesystem string, merge bool) obj.Object
-	PropertiesForFilesystemMergeWithOtherFilesystems(filesystem string, merge bool) obj.Object
-	SetPropertyForKeyInFilesystem(property obj.Object, key string, filesystem string)
-	SetPropertiesInFilesystem(properties obj.Object, filesystem string)
-	ExplicitFilesystemMask() int
-	SetExplicitFilesystemMask(mask int)
-	EffectiveFilesystemMask() int
-}
-
-var _ FSObjectable = (*FSObject)(nil)
 
 // isFSObject marks FSObject — and, by embedding promotion, its
 // subclasses — as a member of the FSObject hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *FSObject) isFSObject() {}
+func (fo *FSObject) isFSObject() {}
 
 var _ FSObjectProvider = (*FSObject)(nil)

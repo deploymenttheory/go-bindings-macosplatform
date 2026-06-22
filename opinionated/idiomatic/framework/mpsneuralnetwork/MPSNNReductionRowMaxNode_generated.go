@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,26 +50,17 @@ func NewNNReductionRowMaxNode() *NNReductionRowMaxNode {
 	return nNReductionRowMaxNodeAdopt(_id)
 }
 
-// WithClipRectSource the clip rectangle to apply to the source image.
-func (x *NNReductionRowMaxNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowMaxNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the clip rectangle to apply to the source image.
+func (nrrmn *NNReductionRowMaxNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowMaxNode {
+	objc.Send[objc.ID](objref.IDOf(nrrmn), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return nrrmn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNReductionRowMaxNode) WithLabel(label string) *NNReductionRowMaxNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nrrmn *NNReductionRowMaxNode) WithLabel(label string) *NNReductionRowMaxNode {
+	objc.Send[objc.ID](objref.IDOf(nrrmn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nrrmn
 }
-
-// NNReductionRowMaxNodeable is the interface implemented by [NNReductionRowMaxNode], for mocking and DI.
-type NNReductionRowMaxNodeable interface {
-	obj.Object
-	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionRowMaxNode
-	WithLabel(label string) *NNReductionRowMaxNode
-}
-
-var _ NNReductionRowMaxNodeable = (*NNReductionRowMaxNode)(nil)
 
 var _ NNUnaryReductionNodeProvider = (*NNReductionRowMaxNode)(nil)
 

@@ -9,7 +9,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,230 +51,161 @@ func NewCNNLocalContrastNormalizationGradient() *CNNLocalContrastNormalizationGr
 	return cNNLocalContrastNormalizationGradientAdopt(_id)
 }
 
-// WithAlpha the value of alpha.  Default is 0.0 The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
-func (x *CNNLocalContrastNormalizationGradient) WithAlpha(alpha float32) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-	return x
+// WithAlpha sets the value of alpha.  Default is 0.0 The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
+func (clcng *CNNLocalContrastNormalizationGradient) WithAlpha(alpha float32) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setAlpha:"), alpha)
+	return clcng
 }
 
-// WithBeta the value of beta.  Default is 0.5
-func (x *CNNLocalContrastNormalizationGradient) WithBeta(beta float32) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
-	return x
+// WithBeta sets the value of beta.  Default is 0.5
+func (clcng *CNNLocalContrastNormalizationGradient) WithBeta(beta float32) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setBeta:"), beta)
+	return clcng
 }
 
-// WithDelta the value of delta.  Default is 1/1024
-func (x *CNNLocalContrastNormalizationGradient) WithDelta(delta float32) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
-	return x
+// WithDelta sets the value of delta.  Default is 1/1024
+func (clcng *CNNLocalContrastNormalizationGradient) WithDelta(delta float32) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setDelta:"), delta)
+	return clcng
 }
 
-// WithP0 the value of p0.  Default is 1.0
-func (x *CNNLocalContrastNormalizationGradient) WithP0(p0 float32) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setP0:"), p0)
-	return x
+// WithP0 sets the value of p0.  Default is 1.0
+func (clcng *CNNLocalContrastNormalizationGradient) WithP0(p0 float32) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setP0:"), p0)
+	return clcng
 }
 
-// WithPm the value of pm.  Default is 0.0
-func (x *CNNLocalContrastNormalizationGradient) WithPm(pm float32) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPm:"), pm)
-	return x
+// WithPm sets the value of pm.  Default is 0.0
+func (clcng *CNNLocalContrastNormalizationGradient) WithPm(pm float32) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setPm:"), pm)
+	return clcng
 }
 
-// WithPs the value of ps.  Default is 1.0
-func (x *CNNLocalContrastNormalizationGradient) WithPs(ps float32) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPs:"), ps)
-	return x
+// WithPs sets the value of ps.  Default is 1.0
+func (clcng *CNNLocalContrastNormalizationGradient) WithPs(ps float32) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setPs:"), ps)
+	return clcng
 }
 
-// WithKernelOffsetX offset in the kernel reference frame to position the kernel in the X dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
-func (x *CNNLocalContrastNormalizationGradient) WithKernelOffsetX(kernelOffsetX int) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelOffsetX:"), kernelOffsetX)
-	return x
+// WithKernelOffsetX sets offset in the kernel reference frame to position the kernel in the X dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
+func (clcng *CNNLocalContrastNormalizationGradient) WithKernelOffsetX(kernelOffsetX int) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setKernelOffsetX:"), kernelOffsetX)
+	return clcng
 }
 
-// WithKernelOffsetY offset in the kernel reference frame to position the kernel in the Y dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
-func (x *CNNLocalContrastNormalizationGradient) WithKernelOffsetY(kernelOffsetY int) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelOffsetY:"), kernelOffsetY)
-	return x
+// WithKernelOffsetY sets offset in the kernel reference frame to position the kernel in the Y dimension In some cases, the input gradient must be upsampled with zero insertion to account for things like strides in the forward MPSCNNKernel pass. As such, the offset, which describes a X,Y offset in the source coordinate space is insufficient to fully describe the offset applied to a kernel. The kernel offset is the offset after upsampling. Both the source offset and kernel offset are additive:  effective offset = source offset * stride + kernel offset. The offset is applied to the (upsampled) source gradient
+func (clcng *CNNLocalContrastNormalizationGradient) WithKernelOffsetY(kernelOffsetY int) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setKernelOffsetY:"), kernelOffsetY)
+	return clcng
 }
 
-// WithPrimaryOffset the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
-func (x *CNNLocalContrastNormalizationGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
-	return x
+// WithPrimaryOffset sets the position of the destination clip rectangle origin relative to the primary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (clcng *CNNLocalContrastNormalizationGradient) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setPrimaryOffset:"), primaryOffset)
+	return clcng
 }
 
-// WithSecondaryOffset the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
-func (x *CNNLocalContrastNormalizationGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
-	return x
+// WithSecondaryOffset sets the position of the destination clip rectangle origin relative to the secondary source buffer. The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also:
+func (clcng *CNNLocalContrastNormalizationGradient) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setSecondaryOffset:"), secondaryOffset)
+	return clcng
 }
 
-// WithClipRect an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
-func (x *CNNLocalContrastNormalizationGradient) WithClipRect(clipRect metal.MTLRegion) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRect:"), clipRect)
-	return x
+// WithClipRect sets an optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also:
+func (clcng *CNNLocalContrastNormalizationGradient) WithClipRect(clipRect metal.MTLRegion) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setClipRect:"), clipRect)
+	return clcng
 }
 
-// WithDestinationFeatureChannelOffset the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
-func (x *CNNLocalContrastNormalizationGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
-	return x
+// WithDestinationFeatureChannelOffset sets the number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+func (clcng *CNNLocalContrastNormalizationGradient) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
+	return clcng
 }
 
-// WithPrimarySourceFeatureChannelOffset the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-func (x *CNNLocalContrastNormalizationGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
-	return x
+// WithPrimarySourceFeatureChannelOffset sets the number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (clcng *CNNLocalContrastNormalizationGradient) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
+	return clcng
 }
 
-// WithSecondarySourceFeatureChannelOffset the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
-func (x *CNNLocalContrastNormalizationGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
-	return x
+// WithSecondarySourceFeatureChannelOffset sets the number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+func (clcng *CNNLocalContrastNormalizationGradient) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
+	return clcng
 }
 
-// WithPrimarySourceFeatureChannelMaxCount the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNLocalContrastNormalizationGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
-	return x
+// WithPrimarySourceFeatureChannelMaxCount sets the maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (clcng *CNNLocalContrastNormalizationGradient) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
+	return clcng
 }
 
-// WithSecondarySourceFeatureChannelMaxCount the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
-func (x *CNNLocalContrastNormalizationGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
-	return x
+// WithSecondarySourceFeatureChannelMaxCount sets the maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+func (clcng *CNNLocalContrastNormalizationGradient) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
+	return clcng
 }
 
-// WithPrimaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNLocalContrastNormalizationGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
-	return x
+// WithPrimaryStrideInPixelsX sets the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (clcng *CNNLocalContrastNormalizationGradient) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
+	return clcng
 }
 
-// WithPrimaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNLocalContrastNormalizationGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
-	return x
+// WithPrimaryStrideInPixelsY sets the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
+func (clcng *CNNLocalContrastNormalizationGradient) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
+	return clcng
 }
 
-// WithSecondaryStrideInPixelsX the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNLocalContrastNormalizationGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
-	return x
+// WithSecondaryStrideInPixelsX sets the downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (clcng *CNNLocalContrastNormalizationGradient) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
+	return clcng
 }
 
-// WithSecondaryStrideInPixelsY the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
-func (x *CNNLocalContrastNormalizationGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNLocalContrastNormalizationGradient {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
-	return x
+// WithSecondaryStrideInPixelsY sets the downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
+func (clcng *CNNLocalContrastNormalizationGradient) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNLocalContrastNormalizationGradient {
+	objc.Send[objc.ID](objref.IDOf(clcng), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
+	return clcng
 }
 
-// Alpha the value of alpha.  Default is 0.0 The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
-func (x *CNNLocalContrastNormalizationGradient) Alpha() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("alpha"))
+// Alpha returns the value of alpha.  Default is 0.0 The default value 0.0 is not recommended and is preserved for backwards compatibility. With alpha 0, it performs a local mean subtraction. The MPSCNNLocalContrastNormalizationNode used with the MPSNNGraph uses 1.0 as a default.
+func (clcng *CNNLocalContrastNormalizationGradient) Alpha() float32 {
+	_r := objc.Send[float32](objref.IDOf(clcng), objc.RegisterName("alpha"))
 	return _r
 }
 
-// SetAlpha wraps the corresponding Objective-C method.
-func (x *CNNLocalContrastNormalizationGradient) SetAlpha(alpha float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
-}
-
-// Beta the value of beta.  Default is 0.5
-func (x *CNNLocalContrastNormalizationGradient) Beta() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("beta"))
+// Beta returns the value of beta.  Default is 0.5
+func (clcng *CNNLocalContrastNormalizationGradient) Beta() float32 {
+	_r := objc.Send[float32](objref.IDOf(clcng), objc.RegisterName("beta"))
 	return _r
 }
 
-// SetBeta wraps the corresponding Objective-C method.
-func (x *CNNLocalContrastNormalizationGradient) SetBeta(beta float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBeta:"), beta)
-}
-
-// Delta the value of delta.  Default is 1/1024
-func (x *CNNLocalContrastNormalizationGradient) Delta() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("delta"))
+// Delta returns the value of delta.  Default is 1/1024
+func (clcng *CNNLocalContrastNormalizationGradient) Delta() float32 {
+	_r := objc.Send[float32](objref.IDOf(clcng), objc.RegisterName("delta"))
 	return _r
 }
 
-// SetDelta wraps the corresponding Objective-C method.
-func (x *CNNLocalContrastNormalizationGradient) SetDelta(delta float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDelta:"), delta)
-}
-
-// P0 the value of p0.  Default is 1.0
-func (x *CNNLocalContrastNormalizationGradient) P0() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("p0"))
+// P0 returns the value of p0.  Default is 1.0
+func (clcng *CNNLocalContrastNormalizationGradient) P0() float32 {
+	_r := objc.Send[float32](objref.IDOf(clcng), objc.RegisterName("p0"))
 	return _r
 }
 
-// SetP0 wraps the corresponding Objective-C method.
-func (x *CNNLocalContrastNormalizationGradient) SetP0(p0 float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setP0:"), p0)
-}
-
-// Pm the value of pm.  Default is 0.0
-func (x *CNNLocalContrastNormalizationGradient) Pm() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("pm"))
+// Pm returns the value of pm.  Default is 0.0
+func (clcng *CNNLocalContrastNormalizationGradient) Pm() float32 {
+	_r := objc.Send[float32](objref.IDOf(clcng), objc.RegisterName("pm"))
 	return _r
 }
 
-// SetPm wraps the corresponding Objective-C method.
-func (x *CNNLocalContrastNormalizationGradient) SetPm(pm float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPm:"), pm)
-}
-
-// Ps the value of ps.  Default is 1.0
-func (x *CNNLocalContrastNormalizationGradient) Ps() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("ps"))
+// Ps returns the value of ps.  Default is 1.0
+func (clcng *CNNLocalContrastNormalizationGradient) Ps() float32 {
+	_r := objc.Send[float32](objref.IDOf(clcng), objc.RegisterName("ps"))
 	return _r
 }
-
-// SetPs wraps the corresponding Objective-C method.
-func (x *CNNLocalContrastNormalizationGradient) SetPs(ps float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPs:"), ps)
-}
-
-// CNNLocalContrastNormalizationGradientable is the interface implemented by [CNNLocalContrastNormalizationGradient], for mocking and DI.
-type CNNLocalContrastNormalizationGradientable interface {
-	obj.Object
-	WithAlpha(alpha float32) *CNNLocalContrastNormalizationGradient
-	WithBeta(beta float32) *CNNLocalContrastNormalizationGradient
-	WithDelta(delta float32) *CNNLocalContrastNormalizationGradient
-	WithP0(p0 float32) *CNNLocalContrastNormalizationGradient
-	WithPm(pm float32) *CNNLocalContrastNormalizationGradient
-	WithPs(ps float32) *CNNLocalContrastNormalizationGradient
-	WithKernelOffsetX(kernelOffsetX int) *CNNLocalContrastNormalizationGradient
-	WithKernelOffsetY(kernelOffsetY int) *CNNLocalContrastNormalizationGradient
-	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *CNNLocalContrastNormalizationGradient
-	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *CNNLocalContrastNormalizationGradient
-	WithClipRect(clipRect metal.MTLRegion) *CNNLocalContrastNormalizationGradient
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNLocalContrastNormalizationGradient
-	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *CNNLocalContrastNormalizationGradient
-	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *CNNLocalContrastNormalizationGradient
-	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *CNNLocalContrastNormalizationGradient
-	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *CNNLocalContrastNormalizationGradient
-	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *CNNLocalContrastNormalizationGradient
-	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *CNNLocalContrastNormalizationGradient
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *CNNLocalContrastNormalizationGradient
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *CNNLocalContrastNormalizationGradient
-	Alpha() float32
-	SetAlpha(alpha float32)
-	Beta() float32
-	SetBeta(beta float32)
-	Delta() float32
-	SetDelta(delta float32)
-	P0() float32
-	SetP0(p0 float32)
-	Pm() float32
-	SetPm(pm float32)
-	Ps() float32
-	SetPs(ps float32)
-}
-
-var _ CNNLocalContrastNormalizationGradientable = (*CNNLocalContrastNormalizationGradient)(nil)
 
 var _ CNNGradientKernelProvider = (*CNNLocalContrastNormalizationGradient)(nil)
 

@@ -7,7 +7,6 @@ package mpsneuralnetwork
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,32 +52,22 @@ func NewCNNUpsamplingNearestNodeWithSourceIntegerScaleFactorXIntegerScaleFactorY
 	return cNNUpsamplingNearestNodeAdopt(_id)
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNUpsamplingNearestNode) WithLabel(label string) *CNNUpsamplingNearestNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cunn *CNNUpsamplingNearestNode) WithLabel(label string) *CNNUpsamplingNearestNode {
+	objc.Send[objc.ID](objref.IDOf(cunn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cunn
 }
 
 // ScaleFactorX wraps the corresponding Objective-C method.
-func (x *CNNUpsamplingNearestNode) ScaleFactorX() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorX"))
+func (cunn *CNNUpsamplingNearestNode) ScaleFactorX() float64 {
+	_r := objc.Send[float64](objref.IDOf(cunn), objc.RegisterName("scaleFactorX"))
 	return _r
 }
 
 // ScaleFactorY wraps the corresponding Objective-C method.
-func (x *CNNUpsamplingNearestNode) ScaleFactorY() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorY"))
+func (cunn *CNNUpsamplingNearestNode) ScaleFactorY() float64 {
+	_r := objc.Send[float64](objref.IDOf(cunn), objc.RegisterName("scaleFactorY"))
 	return _r
 }
-
-// CNNUpsamplingNearestNodeable is the interface implemented by [CNNUpsamplingNearestNode], for mocking and DI.
-type CNNUpsamplingNearestNodeable interface {
-	obj.Object
-	WithLabel(label string) *CNNUpsamplingNearestNode
-	ScaleFactorX() float64
-	ScaleFactorY() float64
-}
-
-var _ CNNUpsamplingNearestNodeable = (*CNNUpsamplingNearestNode)(nil)
 
 var _ NNFilterNodeProvider = (*CNNUpsamplingNearestNode)(nil)

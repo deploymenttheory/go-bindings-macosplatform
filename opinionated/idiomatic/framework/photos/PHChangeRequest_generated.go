@@ -48,36 +48,29 @@ func changeRequestAdopt(id objc.ID) *ChangeRequest {
 }
 
 // Description returns the object's -description text.
-func (x *ChangeRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (cr *ChangeRequest) Description() string {
+	return rt.Description(objref.IDOf(cr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ChangeRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (cr *ChangeRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(cr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ChangeRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (cr *ChangeRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(cr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ChangeRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (cr *ChangeRequest) String() string {
+	return rt.Description(objref.IDOf(cr))
 }
-
-// ChangeRequestable is the interface implemented by [ChangeRequest], for mocking and DI.
-type ChangeRequestable interface {
-	obj.Object
-}
-
-var _ ChangeRequestable = (*ChangeRequest)(nil)
 
 // isChangeRequest marks ChangeRequest — and, by embedding promotion, its
 // subclasses — as a member of the ChangeRequest hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *ChangeRequest) isChangeRequest() {}
+func (cr *ChangeRequest) isChangeRequest() {}
 
 var _ ChangeRequestProvider = (*ChangeRequest)(nil)

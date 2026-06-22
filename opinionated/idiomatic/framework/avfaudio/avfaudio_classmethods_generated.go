@@ -6,6 +6,7 @@ package avfaudio
 
 import (
 	"context"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
@@ -102,7 +103,7 @@ func UpdateSpeechVoices() {
 	objc.Send[objc.ID](objc.ID(_class("AVSpeechSynthesisProviderVoice")), objc.RegisterName("updateSpeechVoices"))
 }
 
-// SpeechVoices retrieves all available voices on the device.
+// SpeechVoices returns retrieves all available voices on the device.
 //
 // SpeechVoices returns the collection as a Go slice.
 func SpeechVoices() []*SpeechSynthesisVoice {

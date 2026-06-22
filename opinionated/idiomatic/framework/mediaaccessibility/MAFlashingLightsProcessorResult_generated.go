@@ -46,24 +46,24 @@ func flashingLightsProcessorResultAdopt(id objc.ID) *FlashingLightsProcessorResu
 }
 
 // Description returns the object's -description text.
-func (x *FlashingLightsProcessorResult) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (flpr *FlashingLightsProcessorResult) Description() string {
+	return rt.Description(objref.IDOf(flpr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *FlashingLightsProcessorResult) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (flpr *FlashingLightsProcessorResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(flpr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *FlashingLightsProcessorResult) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (flpr *FlashingLightsProcessorResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(flpr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *FlashingLightsProcessorResult) String() string {
-	return rt.Description(objref.IDOf(x))
+func (flpr *FlashingLightsProcessorResult) String() string {
+	return rt.Description(objref.IDOf(flpr))
 }
 
 // NewFlashingLightsProcessorResult creates a new FlashingLightsProcessorResult.
@@ -73,29 +73,19 @@ func NewFlashingLightsProcessorResult() *FlashingLightsProcessorResult {
 }
 
 // SurfaceProcessed wraps the corresponding Objective-C method.
-func (x *FlashingLightsProcessorResult) SurfaceProcessed() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("surfaceProcessed"))
+func (flpr *FlashingLightsProcessorResult) SurfaceProcessed() bool {
+	_r := objc.Send[bool](objref.IDOf(flpr), objc.RegisterName("surfaceProcessed"))
 	return _r
 }
 
 // MitigationLevel wraps the corresponding Objective-C method.
-func (x *FlashingLightsProcessorResult) MitigationLevel() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("mitigationLevel"))
+func (flpr *FlashingLightsProcessorResult) MitigationLevel() float32 {
+	_r := objc.Send[float32](objref.IDOf(flpr), objc.RegisterName("mitigationLevel"))
 	return _r
 }
 
 // IntensityLevel wraps the corresponding Objective-C method.
-func (x *FlashingLightsProcessorResult) IntensityLevel() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("intensityLevel"))
+func (flpr *FlashingLightsProcessorResult) IntensityLevel() float32 {
+	_r := objc.Send[float32](objref.IDOf(flpr), objc.RegisterName("intensityLevel"))
 	return _r
 }
-
-// FlashingLightsProcessorResultable is the interface implemented by [FlashingLightsProcessorResult], for mocking and DI.
-type FlashingLightsProcessorResultable interface {
-	obj.Object
-	SurfaceProcessed() bool
-	MitigationLevel() float32
-	IntensityLevel() float32
-}
-
-var _ FlashingLightsProcessorResultable = (*FlashingLightsProcessorResult)(nil)

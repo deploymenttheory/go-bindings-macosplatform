@@ -46,24 +46,24 @@ func tokenKeyAlgorithmAdopt(id objc.ID) *TokenKeyAlgorithm {
 }
 
 // Description returns the object's -description text.
-func (x *TokenKeyAlgorithm) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (tka *TokenKeyAlgorithm) Description() string {
+	return rt.Description(objref.IDOf(tka))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *TokenKeyAlgorithm) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (tka *TokenKeyAlgorithm) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(tka), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *TokenKeyAlgorithm) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (tka *TokenKeyAlgorithm) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(tka), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *TokenKeyAlgorithm) String() string {
-	return rt.Description(objref.IDOf(x))
+func (tka *TokenKeyAlgorithm) String() string {
+	return rt.Description(objref.IDOf(tka))
 }
 
 // NewTokenKeyAlgorithm creates a new TokenKeyAlgorithm.
@@ -71,10 +71,3 @@ func NewTokenKeyAlgorithm() *TokenKeyAlgorithm {
 	_id := objc.Send[objc.ID](objc.ID(_class("TKTokenKeyAlgorithm")), objc.RegisterName("new"))
 	return tokenKeyAlgorithmAdopt(_id)
 }
-
-// TokenKeyAlgorithmable is the interface implemented by [TokenKeyAlgorithm], for mocking and DI.
-type TokenKeyAlgorithmable interface {
-	obj.Object
-}
-
-var _ TokenKeyAlgorithmable = (*TokenKeyAlgorithm)(nil)

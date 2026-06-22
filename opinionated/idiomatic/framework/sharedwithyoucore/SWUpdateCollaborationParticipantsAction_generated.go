@@ -7,7 +7,6 @@ package sharedwithyoucore
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -53,35 +52,25 @@ func NewUpdateCollaborationParticipantsAction() *UpdateCollaborationParticipants
 }
 
 // CollaborationMetadata wraps the corresponding Objective-C method.
-func (x *UpdateCollaborationParticipantsAction) CollaborationMetadata() *CollaborationMetadata {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("collaborationMetadata"))
+func (ucpa *UpdateCollaborationParticipantsAction) CollaborationMetadata() *CollaborationMetadata {
+	_r := objc.Send[objc.ID](objref.IDOf(ucpa), objc.RegisterName("collaborationMetadata"))
 	return CollaborationMetadataFromID(_r)
 }
 
 // AddedIdentities wraps the corresponding Objective-C method.
 //
 // AddedIdentities returns the collection as a Go slice.
-func (x *UpdateCollaborationParticipantsAction) AddedIdentities() []*PersonIdentity {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addedIdentities"))
+func (ucpa *UpdateCollaborationParticipantsAction) AddedIdentities() []*PersonIdentity {
+	_arr := objc.Send[objc.ID](objref.IDOf(ucpa), objc.RegisterName("addedIdentities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersonIdentity { return PersonIdentityFromID(_id) })
 }
 
 // RemovedIdentities wraps the corresponding Objective-C method.
 //
 // RemovedIdentities returns the collection as a Go slice.
-func (x *UpdateCollaborationParticipantsAction) RemovedIdentities() []*PersonIdentity {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removedIdentities"))
+func (ucpa *UpdateCollaborationParticipantsAction) RemovedIdentities() []*PersonIdentity {
+	_arr := objc.Send[objc.ID](objref.IDOf(ucpa), objc.RegisterName("removedIdentities"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersonIdentity { return PersonIdentityFromID(_id) })
 }
-
-// UpdateCollaborationParticipantsActionable is the interface implemented by [UpdateCollaborationParticipantsAction], for mocking and DI.
-type UpdateCollaborationParticipantsActionable interface {
-	obj.Object
-	CollaborationMetadata() *CollaborationMetadata
-	AddedIdentities() []*PersonIdentity
-	RemovedIdentities() []*PersonIdentity
-}
-
-var _ UpdateCollaborationParticipantsActionable = (*UpdateCollaborationParticipantsAction)(nil)
 
 var _ ActionProvider = (*UpdateCollaborationParticipantsAction)(nil)

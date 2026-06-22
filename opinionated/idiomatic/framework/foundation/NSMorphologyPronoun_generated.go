@@ -46,24 +46,24 @@ func morphologyPronounAdopt(id objc.ID) *MorphologyPronoun {
 }
 
 // Description returns the object's -description text.
-func (x *MorphologyPronoun) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mp *MorphologyPronoun) Description() string {
+	return rt.Description(objref.IDOf(mp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MorphologyPronoun) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mp *MorphologyPronoun) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MorphologyPronoun) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mp *MorphologyPronoun) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MorphologyPronoun) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mp *MorphologyPronoun) String() string {
+	return rt.Description(objref.IDOf(mp))
 }
 
 // NewMorphologyPronounWithPronounMorphologyDependentMorphology creates a new MorphologyPronoun.
@@ -74,14 +74,14 @@ func NewMorphologyPronounWithPronounMorphologyDependentMorphology(pronoun string
 }
 
 // WithScriptingProperties sets the property and returns the receiver so calls can be chained.
-func (x *MorphologyPronoun) WithScriptingProperties(scriptingProperties obj.Object) *MorphologyPronoun {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
-	return x
+func (mp *MorphologyPronoun) WithScriptingProperties(scriptingProperties obj.Object) *MorphologyPronoun {
+	objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return mp
 }
 
 // Pronoun wraps the corresponding Objective-C method.
-func (x *MorphologyPronoun) Pronoun() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pronoun"))
+func (mp *MorphologyPronoun) Pronoun() string {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("pronoun"))
 	if _r == 0 {
 		return ""
 	}
@@ -89,24 +89,13 @@ func (x *MorphologyPronoun) Pronoun() string {
 }
 
 // Morphology wraps the corresponding Objective-C method.
-func (x *MorphologyPronoun) Morphology() *Morphology {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("morphology"))
+func (mp *MorphologyPronoun) Morphology() *Morphology {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("morphology"))
 	return MorphologyFromID(_r)
 }
 
 // DependentMorphology wraps the corresponding Objective-C method.
-func (x *MorphologyPronoun) DependentMorphology() *Morphology {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dependentMorphology"))
+func (mp *MorphologyPronoun) DependentMorphology() *Morphology {
+	_r := objc.Send[objc.ID](objref.IDOf(mp), objc.RegisterName("dependentMorphology"))
 	return MorphologyFromID(_r)
 }
-
-// MorphologyPronounable is the interface implemented by [MorphologyPronoun], for mocking and DI.
-type MorphologyPronounable interface {
-	obj.Object
-	WithScriptingProperties(scriptingProperties obj.Object) *MorphologyPronoun
-	Pronoun() string
-	Morphology() *Morphology
-	DependentMorphology() *Morphology
-}
-
-var _ MorphologyPronounable = (*MorphologyPronoun)(nil)

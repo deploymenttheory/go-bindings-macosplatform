@@ -46,24 +46,24 @@ func statisticsAdopt(id objc.ID) *Statistics {
 }
 
 // Description returns the object's -description text.
-func (x *Statistics) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Statistics) Description() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Statistics) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (s *Statistics) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(s), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Statistics) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (s *Statistics) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(s), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Statistics) String() string {
-	return rt.Description(objref.IDOf(x))
+func (s *Statistics) String() string {
+	return rt.Description(objref.IDOf(s))
 }
 
 // NewStatistics creates a new Statistics.
@@ -73,136 +73,111 @@ func NewStatistics() *Statistics {
 }
 
 // AverageQuantityForSource returns the average value from all the samples that match the query and that were created by the specified source.
-func (x *Statistics) AverageQuantityForSource(source *Source) *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("averageQuantityForSource:"), objref.IDOf(source))
+func (s *Statistics) AverageQuantityForSource(source *Source) *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("averageQuantityForSource:"), objref.IDOf(source))
 	return QuantityFromID(_r)
 }
 
 // AverageQuantity returns the average value from all the samples that match the query.
-func (x *Statistics) AverageQuantity() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("averageQuantity"))
+func (s *Statistics) AverageQuantity() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("averageQuantity"))
 	return QuantityFromID(_r)
 }
 
 // MinimumQuantityForSource returns the minimum value from all the samples that match the query and that were created by the specified source.
-func (x *Statistics) MinimumQuantityForSource(source *Source) *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minimumQuantityForSource:"), objref.IDOf(source))
+func (s *Statistics) MinimumQuantityForSource(source *Source) *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("minimumQuantityForSource:"), objref.IDOf(source))
 	return QuantityFromID(_r)
 }
 
 // MinimumQuantity returns the minimum value from all the samples that match the query.
-func (x *Statistics) MinimumQuantity() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("minimumQuantity"))
+func (s *Statistics) MinimumQuantity() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("minimumQuantity"))
 	return QuantityFromID(_r)
 }
 
 // MaximumQuantityForSource returns the maximum value from all the samples that match the query and that were created by the specified source.
-func (x *Statistics) MaximumQuantityForSource(source *Source) *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumQuantityForSource:"), objref.IDOf(source))
+func (s *Statistics) MaximumQuantityForSource(source *Source) *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("maximumQuantityForSource:"), objref.IDOf(source))
 	return QuantityFromID(_r)
 }
 
 // MaximumQuantity returns the maximum value from all the samples that match the query.
-func (x *Statistics) MaximumQuantity() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("maximumQuantity"))
+func (s *Statistics) MaximumQuantity() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("maximumQuantity"))
 	return QuantityFromID(_r)
 }
 
 // MostRecentQuantityForSource returns the most recent value from all the samples that match the query and were created by the specified source.
-func (x *Statistics) MostRecentQuantityForSource(source *Source) *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mostRecentQuantityForSource:"), objref.IDOf(source))
+func (s *Statistics) MostRecentQuantityForSource(source *Source) *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("mostRecentQuantityForSource:"), objref.IDOf(source))
 	return QuantityFromID(_r)
 }
 
 // MostRecentQuantity returns the most recent value from all the samples that match the query.
-func (x *Statistics) MostRecentQuantity() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mostRecentQuantity"))
+func (s *Statistics) MostRecentQuantity() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("mostRecentQuantity"))
 	return QuantityFromID(_r)
 }
 
 // MostRecentQuantityDateIntervalForSource returns the date interval of the most recent sample that matches the query and was created by the specified source.
-func (x *Statistics) MostRecentQuantityDateIntervalForSource(source *Source) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mostRecentQuantityDateIntervalForSource:"), objref.IDOf(source))
+func (s *Statistics) MostRecentQuantityDateIntervalForSource(source *Source) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("mostRecentQuantityDateIntervalForSource:"), objref.IDOf(source))
 	return obj.Wrap(_r)
 }
 
 // MostRecentQuantityDateInterval returns the date interval of the most recent sample that matches the query.
-func (x *Statistics) MostRecentQuantityDateInterval() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mostRecentQuantityDateInterval"))
+func (s *Statistics) MostRecentQuantityDateInterval() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("mostRecentQuantityDateInterval"))
 	return obj.Wrap(_r)
 }
 
 // SumQuantityForSource returns the sum of all the samples that match the query and that were created by the specified source.
-func (x *Statistics) SumQuantityForSource(source *Source) *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sumQuantityForSource:"), objref.IDOf(source))
+func (s *Statistics) SumQuantityForSource(source *Source) *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("sumQuantityForSource:"), objref.IDOf(source))
 	return QuantityFromID(_r)
 }
 
 // SumQuantity returns the sum of all the samples that match the query.
-func (x *Statistics) SumQuantity() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sumQuantity"))
+func (s *Statistics) SumQuantity() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("sumQuantity"))
 	return QuantityFromID(_r)
 }
 
 // Duration returns the total duration covering all the samples that match the query.
-func (x *Statistics) Duration() *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
+func (s *Statistics) Duration() *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("duration"))
 	return QuantityFromID(_r)
 }
 
 // DurationForSource returns the total duration covering all the samples created by the specified source that also match the query.
-func (x *Statistics) DurationForSource(source *Source) *Quantity {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("durationForSource:"), objref.IDOf(source))
+func (s *Statistics) DurationForSource(source *Source) *Quantity {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("durationForSource:"), objref.IDOf(source))
 	return QuantityFromID(_r)
 }
 
 // QuantityType wraps the corresponding Objective-C method.
-func (x *Statistics) QuantityType() *QuantityType {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("quantityType"))
+func (s *Statistics) QuantityType() *QuantityType {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("quantityType"))
 	return QuantityTypeFromID(_r)
 }
 
 // StartDate wraps the corresponding Objective-C method.
-func (x *Statistics) StartDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDate"))
+func (s *Statistics) StartDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("startDate"))
 	return obj.Wrap(_r)
 }
 
 // EndDate wraps the corresponding Objective-C method.
-func (x *Statistics) EndDate() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endDate"))
+func (s *Statistics) EndDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("endDate"))
 	return obj.Wrap(_r)
 }
 
 // Sources wraps the corresponding Objective-C method.
 //
 // Sources returns the collection as a Go slice.
-func (x *Statistics) Sources() []*Source {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sources"))
+func (s *Statistics) Sources() []*Source {
+	_arr := objc.Send[objc.ID](objref.IDOf(s), objc.RegisterName("sources"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Source { return SourceFromID(_id) })
 }
-
-// Statisticsable is the interface implemented by [Statistics], for mocking and DI.
-type Statisticsable interface {
-	obj.Object
-	AverageQuantityForSource(source *Source) *Quantity
-	AverageQuantity() *Quantity
-	MinimumQuantityForSource(source *Source) *Quantity
-	MinimumQuantity() *Quantity
-	MaximumQuantityForSource(source *Source) *Quantity
-	MaximumQuantity() *Quantity
-	MostRecentQuantityForSource(source *Source) *Quantity
-	MostRecentQuantity() *Quantity
-	MostRecentQuantityDateIntervalForSource(source *Source) obj.Object
-	MostRecentQuantityDateInterval() obj.Object
-	SumQuantityForSource(source *Source) *Quantity
-	SumQuantity() *Quantity
-	Duration() *Quantity
-	DurationForSource(source *Source) *Quantity
-	QuantityType() *QuantityType
-	StartDate() obj.Object
-	EndDate() obj.Object
-	Sources() []*Source
-}
-
-var _ Statisticsable = (*Statistics)(nil)

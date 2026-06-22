@@ -46,24 +46,24 @@ func pedometerEventAdopt(id objc.ID) *PedometerEvent {
 }
 
 // Description returns the object's -description text.
-func (x *PedometerEvent) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pe *PedometerEvent) Description() string {
+	return rt.Description(objref.IDOf(pe))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PedometerEvent) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pe *PedometerEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pe), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PedometerEvent) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pe *PedometerEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pe), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PedometerEvent) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pe *PedometerEvent) String() string {
+	return rt.Description(objref.IDOf(pe))
 }
 
 // NewPedometerEvent creates a new PedometerEvent.
@@ -73,22 +73,13 @@ func NewPedometerEvent() *PedometerEvent {
 }
 
 // Date wraps the corresponding Objective-C method.
-func (x *PedometerEvent) Date() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+func (pe *PedometerEvent) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pe), objc.RegisterName("date"))
 	return obj.Wrap(_r)
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *PedometerEvent) Type() PedometerEventType {
-	_r := objc.Send[PedometerEventType](objref.IDOf(x), objc.RegisterName("type"))
+func (pe *PedometerEvent) Type() PedometerEventType {
+	_r := objc.Send[PedometerEventType](objref.IDOf(pe), objc.RegisterName("type"))
 	return _r
 }
-
-// PedometerEventable is the interface implemented by [PedometerEvent], for mocking and DI.
-type PedometerEventable interface {
-	obj.Object
-	Date() obj.Object
-	Type() PedometerEventType
-}
-
-var _ PedometerEventable = (*PedometerEvent)(nil)

@@ -53,49 +53,37 @@ func NewNEOnDemandRuleIgnore() *NEOnDemandRuleIgnore {
 	return nEOnDemandRuleIgnoreAdopt(_id)
 }
 
-// WithDNSSearchDomainMatch DNS search domains that identify a network.
-func (x *NEOnDemandRuleIgnore) WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRuleIgnore {
+// WithDNSSearchDomainMatch sets DNS search domains that identify a network.
+func (nodri *NEOnDemandRuleIgnore) WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRuleIgnore {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSSearchDomainMatch:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nodri), objc.RegisterName("setDNSSearchDomainMatch:"), _arr)
+	return nodri
 }
 
-// WithDNSServerAddressMatch DNS server addresses that identify a network.
-func (x *NEOnDemandRuleIgnore) WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRuleIgnore {
+// WithDNSServerAddressMatch sets DNS server addresses that identify a network.
+func (nodri *NEOnDemandRuleIgnore) WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRuleIgnore {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSServerAddressMatch:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nodri), objc.RegisterName("setDNSServerAddressMatch:"), _arr)
+	return nodri
 }
 
-// WithInterfaceTypeMatch an interface type to identify a network.
-func (x *NEOnDemandRuleIgnore) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleIgnore {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterfaceTypeMatch:"), interfaceTypeMatch)
-	return x
+// WithInterfaceTypeMatch sets an interface type to identify a network.
+func (nodri *NEOnDemandRuleIgnore) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleIgnore {
+	objc.Send[objc.ID](objref.IDOf(nodri), objc.RegisterName("setInterfaceTypeMatch:"), interfaceTypeMatch)
+	return nodri
 }
 
-// WithSSIDMatch SSIDs that identify a network.
-func (x *NEOnDemandRuleIgnore) WithSSIDMatch(items ...obj.Object) *NEOnDemandRuleIgnore {
+// WithSSIDMatch sets SSIDs that identify a network.
+func (nodri *NEOnDemandRuleIgnore) WithSSIDMatch(items ...obj.Object) *NEOnDemandRuleIgnore {
 	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSSIDMatch:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(nodri), objc.RegisterName("setSSIDMatch:"), _arr)
+	return nodri
 }
 
-// WithProbeURL a URL to probe when all other network identifiers match to validate that an expected resource is available.
-func (x *NEOnDemandRuleIgnore) WithProbeURL(probeURL string) *NEOnDemandRuleIgnore {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
-	return x
+// WithProbeURL sets a URL to probe when all other network identifiers match to validate that an expected resource is available.
+func (nodri *NEOnDemandRuleIgnore) WithProbeURL(probeURL string) *NEOnDemandRuleIgnore {
+	objc.Send[objc.ID](objref.IDOf(nodri), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
+	return nodri
 }
-
-// NEOnDemandRuleIgnoreable is the interface implemented by [NEOnDemandRuleIgnore], for mocking and DI.
-type NEOnDemandRuleIgnoreable interface {
-	obj.Object
-	WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRuleIgnore
-	WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRuleIgnore
-	WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleIgnore
-	WithSSIDMatch(items ...obj.Object) *NEOnDemandRuleIgnore
-	WithProbeURL(probeURL string) *NEOnDemandRuleIgnore
-}
-
-var _ NEOnDemandRuleIgnoreable = (*NEOnDemandRuleIgnore)(nil)
 
 var _ NEOnDemandRuleProvider = (*NEOnDemandRuleIgnore)(nil)

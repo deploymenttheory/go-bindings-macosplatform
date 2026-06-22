@@ -46,24 +46,24 @@ func headphoneMotionManagerAdopt(id objc.ID) *HeadphoneMotionManager {
 }
 
 // Description returns the object's -description text.
-func (x *HeadphoneMotionManager) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (hmm *HeadphoneMotionManager) Description() string {
+	return rt.Description(objref.IDOf(hmm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *HeadphoneMotionManager) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (hmm *HeadphoneMotionManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(hmm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *HeadphoneMotionManager) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (hmm *HeadphoneMotionManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(hmm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *HeadphoneMotionManager) String() string {
-	return rt.Description(objref.IDOf(x))
+func (hmm *HeadphoneMotionManager) String() string {
+	return rt.Description(objref.IDOf(hmm))
 }
 
 // NewHeadphoneMotionManager creates a new HeadphoneMotionManager.
@@ -73,60 +73,45 @@ func NewHeadphoneMotionManager() *HeadphoneMotionManager {
 }
 
 // StartDeviceMotionUpdates starts device-motion updates.
-func (x *HeadphoneMotionManager) StartDeviceMotionUpdates() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startDeviceMotionUpdates"))
+func (hmm *HeadphoneMotionManager) StartDeviceMotionUpdates() {
+	objc.Send[objc.ID](objref.IDOf(hmm), objc.RegisterName("startDeviceMotionUpdates"))
 }
 
 // StopDeviceMotionUpdates stops device-motion updates.
-func (x *HeadphoneMotionManager) StopDeviceMotionUpdates() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopDeviceMotionUpdates"))
+func (hmm *HeadphoneMotionManager) StopDeviceMotionUpdates() {
+	objc.Send[objc.ID](objref.IDOf(hmm), objc.RegisterName("stopDeviceMotionUpdates"))
 }
 
 // StartConnectionStatusUpdates wraps the corresponding Objective-C method.
-func (x *HeadphoneMotionManager) StartConnectionStatusUpdates() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startConnectionStatusUpdates"))
+func (hmm *HeadphoneMotionManager) StartConnectionStatusUpdates() {
+	objc.Send[objc.ID](objref.IDOf(hmm), objc.RegisterName("startConnectionStatusUpdates"))
 }
 
 // StopConnectionStatusUpdates wraps the corresponding Objective-C method.
-func (x *HeadphoneMotionManager) StopConnectionStatusUpdates() {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopConnectionStatusUpdates"))
+func (hmm *HeadphoneMotionManager) StopConnectionStatusUpdates() {
+	objc.Send[objc.ID](objref.IDOf(hmm), objc.RegisterName("stopConnectionStatusUpdates"))
 }
 
 // IsConnectionStatusActive wraps the corresponding Objective-C method.
-func (x *HeadphoneMotionManager) IsConnectionStatusActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isConnectionStatusActive"))
+func (hmm *HeadphoneMotionManager) IsConnectionStatusActive() bool {
+	_r := objc.Send[bool](objref.IDOf(hmm), objc.RegisterName("isConnectionStatusActive"))
 	return _r
 }
 
 // IsDeviceMotionAvailable wraps the corresponding Objective-C method.
-func (x *HeadphoneMotionManager) IsDeviceMotionAvailable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDeviceMotionAvailable"))
+func (hmm *HeadphoneMotionManager) IsDeviceMotionAvailable() bool {
+	_r := objc.Send[bool](objref.IDOf(hmm), objc.RegisterName("isDeviceMotionAvailable"))
 	return _r
 }
 
 // IsDeviceMotionActive wraps the corresponding Objective-C method.
-func (x *HeadphoneMotionManager) IsDeviceMotionActive() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDeviceMotionActive"))
+func (hmm *HeadphoneMotionManager) IsDeviceMotionActive() bool {
+	_r := objc.Send[bool](objref.IDOf(hmm), objc.RegisterName("isDeviceMotionActive"))
 	return _r
 }
 
 // DeviceMotion wraps the corresponding Objective-C method.
-func (x *HeadphoneMotionManager) DeviceMotion() *DeviceMotion {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceMotion"))
+func (hmm *HeadphoneMotionManager) DeviceMotion() *DeviceMotion {
+	_r := objc.Send[objc.ID](objref.IDOf(hmm), objc.RegisterName("deviceMotion"))
 	return DeviceMotionFromID(_r)
 }
-
-// HeadphoneMotionManagerable is the interface implemented by [HeadphoneMotionManager], for mocking and DI.
-type HeadphoneMotionManagerable interface {
-	obj.Object
-	StartDeviceMotionUpdates()
-	StopDeviceMotionUpdates()
-	StartConnectionStatusUpdates()
-	StopConnectionStatusUpdates()
-	IsConnectionStatusActive() bool
-	IsDeviceMotionAvailable() bool
-	IsDeviceMotionActive() bool
-	DeviceMotion() *DeviceMotion
-}
-
-var _ HeadphoneMotionManagerable = (*HeadphoneMotionManager)(nil)

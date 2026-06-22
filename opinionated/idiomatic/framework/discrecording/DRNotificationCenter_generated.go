@@ -46,24 +46,24 @@ func notificationCenterAdopt(id objc.ID) *NotificationCenter {
 }
 
 // Description returns the object's -description text.
-func (x *NotificationCenter) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nc *NotificationCenter) Description() string {
+	return rt.Description(objref.IDOf(nc))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NotificationCenter) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nc *NotificationCenter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nc), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NotificationCenter) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nc *NotificationCenter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nc), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NotificationCenter) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nc *NotificationCenter) String() string {
+	return rt.Description(objref.IDOf(nc))
 }
 
 // NewNotificationCenter creates a new NotificationCenter.
@@ -73,14 +73,6 @@ func NewNotificationCenter() *NotificationCenter {
 }
 
 // RemoveObserverNameObject removes anObserver from receiving notifications. Removes anObserver as the observer of notifications with the name notificationName and object anObject from the receiver. Be sure to invoke this method before deallocating the observer object or any object specified in
-func (x *NotificationCenter) RemoveObserverNameObject(observer obj.Object, aName string, anObject obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObserver:name:object:"), objref.IDOf(observer), purego.NSString(aName), objref.IDOf(anObject))
+func (nc *NotificationCenter) RemoveObserverNameObject(observer obj.Object, aName string, anObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(nc), objc.RegisterName("removeObserver:name:object:"), objref.IDOf(observer), purego.NSString(aName), objref.IDOf(anObject))
 }
-
-// NotificationCenterable is the interface implemented by [NotificationCenter], for mocking and DI.
-type NotificationCenterable interface {
-	obj.Object
-	RemoveObserverNameObject(observer obj.Object, aName string, anObject obj.Object)
-}
-
-var _ NotificationCenterable = (*NotificationCenter)(nil)

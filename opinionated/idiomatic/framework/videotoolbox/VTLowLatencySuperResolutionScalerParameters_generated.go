@@ -46,24 +46,24 @@ func lowLatencySuperResolutionScalerParametersAdopt(id objc.ID) *LowLatencySuper
 }
 
 // Description returns the object's -description text.
-func (x *LowLatencySuperResolutionScalerParameters) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (llsrsp *LowLatencySuperResolutionScalerParameters) Description() string {
+	return rt.Description(objref.IDOf(llsrsp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *LowLatencySuperResolutionScalerParameters) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (llsrsp *LowLatencySuperResolutionScalerParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(llsrsp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *LowLatencySuperResolutionScalerParameters) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (llsrsp *LowLatencySuperResolutionScalerParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(llsrsp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *LowLatencySuperResolutionScalerParameters) String() string {
-	return rt.Description(objref.IDOf(x))
+func (llsrsp *LowLatencySuperResolutionScalerParameters) String() string {
+	return rt.Description(objref.IDOf(llsrsp))
 }
 
 // NewLowLatencySuperResolutionScalerParametersWithSourceFrameDestinationFrame creates a new low-latency, super-resolution scaler parameters object.
@@ -73,23 +73,14 @@ func NewLowLatencySuperResolutionScalerParametersWithSourceFrameDestinationFrame
 	return lowLatencySuperResolutionScalerParametersAdopt(_id)
 }
 
-// SourceFrame current source frame, which must be non `nil`.
-func (x *LowLatencySuperResolutionScalerParameters) SourceFrame() *FrameProcessorFrame {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
+// SourceFrame returns current source frame, which must be non `nil`.
+func (llsrsp *LowLatencySuperResolutionScalerParameters) SourceFrame() *FrameProcessorFrame {
+	_r := objc.Send[objc.ID](objref.IDOf(llsrsp), objc.RegisterName("sourceFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
 
-// DestinationFrame destination frame that contains user-allocated pixel buffer that receives the scaled processor output.
-func (x *LowLatencySuperResolutionScalerParameters) DestinationFrame() *FrameProcessorFrame {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationFrame"))
+// DestinationFrame returns destination frame that contains user-allocated pixel buffer that receives the scaled processor output.
+func (llsrsp *LowLatencySuperResolutionScalerParameters) DestinationFrame() *FrameProcessorFrame {
+	_r := objc.Send[objc.ID](objref.IDOf(llsrsp), objc.RegisterName("destinationFrame"))
 	return FrameProcessorFrameFromID(_r)
 }
-
-// LowLatencySuperResolutionScalerParametersable is the interface implemented by [LowLatencySuperResolutionScalerParameters], for mocking and DI.
-type LowLatencySuperResolutionScalerParametersable interface {
-	obj.Object
-	SourceFrame() *FrameProcessorFrame
-	DestinationFrame() *FrameProcessorFrame
-}
-
-var _ LowLatencySuperResolutionScalerParametersable = (*LowLatencySuperResolutionScalerParameters)(nil)

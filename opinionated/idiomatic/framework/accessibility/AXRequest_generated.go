@@ -44,24 +44,24 @@ func requestAdopt(id objc.ID) *Request {
 }
 
 // Description returns the object's -description text.
-func (x *Request) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Request) Description() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Request) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (r *Request) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(r), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Request) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (r *Request) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(r), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Request) String() string {
-	return rt.Description(objref.IDOf(x))
+func (r *Request) String() string {
+	return rt.Description(objref.IDOf(r))
 }
 
 // NewRequest creates a new Request.
@@ -71,18 +71,10 @@ func NewRequest() *Request {
 }
 
 // Technology wraps the corresponding Objective-C method.
-func (x *Request) Technology() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("technology"))
+func (r *Request) Technology() string {
+	_r := objc.Send[objc.ID](objref.IDOf(r), objc.RegisterName("technology"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Requestable is the interface implemented by [Request], for mocking and DI.
-type Requestable interface {
-	obj.Object
-	Technology() string
-}
-
-var _ Requestable = (*Request)(nil)

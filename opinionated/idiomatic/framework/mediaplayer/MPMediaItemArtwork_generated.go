@@ -47,24 +47,24 @@ func mediaItemArtworkAdopt(id objc.ID) *MediaItemArtwork {
 }
 
 // Description returns the object's -description text.
-func (x *MediaItemArtwork) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mia *MediaItemArtwork) Description() string {
+	return rt.Description(objref.IDOf(mia))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MediaItemArtwork) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mia *MediaItemArtwork) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mia), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MediaItemArtwork) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mia *MediaItemArtwork) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mia), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MediaItemArtwork) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mia *MediaItemArtwork) String() string {
+	return rt.Description(objref.IDOf(mia))
 }
 
 // NewMediaItemArtwork creates a new MediaItemArtwork.
@@ -74,29 +74,19 @@ func NewMediaItemArtwork() *MediaItemArtwork {
 }
 
 // ImageWithSize returns the artwork image for an item at the given size.
-func (x *MediaItemArtwork) ImageWithSize(size corefoundation.CGSize) obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageWithSize:"), size)
+func (mia *MediaItemArtwork) ImageWithSize(size corefoundation.CGSize) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(mia), objc.RegisterName("imageWithSize:"), size)
 	return obj.Wrap(_r)
 }
 
 // Bounds wraps the corresponding Objective-C method.
-func (x *MediaItemArtwork) Bounds() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("bounds"))
+func (mia *MediaItemArtwork) Bounds() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(mia), objc.RegisterName("bounds"))
 	return _r
 }
 
 // ImageCropRect wraps the corresponding Objective-C method.
-func (x *MediaItemArtwork) ImageCropRect() corefoundation.CGRect {
-	_r := objc.Send[corefoundation.CGRect](objref.IDOf(x), objc.RegisterName("imageCropRect"))
+func (mia *MediaItemArtwork) ImageCropRect() corefoundation.CGRect {
+	_r := objc.Send[corefoundation.CGRect](objref.IDOf(mia), objc.RegisterName("imageCropRect"))
 	return _r
 }
-
-// MediaItemArtworkable is the interface implemented by [MediaItemArtwork], for mocking and DI.
-type MediaItemArtworkable interface {
-	obj.Object
-	ImageWithSize(size corefoundation.CGSize) obj.Object
-	Bounds() corefoundation.CGRect
-	ImageCropRect() corefoundation.CGRect
-}
-
-var _ MediaItemArtworkable = (*MediaItemArtwork)(nil)

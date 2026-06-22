@@ -46,24 +46,24 @@ func networkDeviceAdopt(id objc.ID) *NetworkDevice {
 }
 
 // Description returns the object's -description text.
-func (x *NetworkDevice) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (nd *NetworkDevice) Description() string {
+	return rt.Description(objref.IDOf(nd))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *NetworkDevice) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (nd *NetworkDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(nd), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *NetworkDevice) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (nd *NetworkDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(nd), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *NetworkDevice) String() string {
-	return rt.Description(objref.IDOf(x))
+func (nd *NetworkDevice) String() string {
+	return rt.Description(objref.IDOf(nd))
 }
 
 // NewNetworkDevice creates a new NetworkDevice.
@@ -72,29 +72,14 @@ func NewNetworkDevice() *NetworkDevice {
 	return networkDeviceAdopt(_id)
 }
 
-// WithAttachment the network attachment that’s connected to this network device.
-func (x *NetworkDevice) WithAttachment(attachment NetworkDeviceAttachmentProvider) *NetworkDevice {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
-	return x
+// WithAttachment sets the network attachment that’s connected to this network device.
+func (nd *NetworkDevice) WithAttachment(attachment NetworkDeviceAttachmentProvider) *NetworkDevice {
+	objc.Send[objc.ID](objref.IDOf(nd), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
+	return nd
 }
 
 // Attachment wraps the corresponding Objective-C method.
-func (x *NetworkDevice) Attachment() *NetworkDeviceAttachment {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attachment"))
+func (nd *NetworkDevice) Attachment() *NetworkDeviceAttachment {
+	_r := objc.Send[objc.ID](objref.IDOf(nd), objc.RegisterName("attachment"))
 	return NetworkDeviceAttachmentFromID(_r)
 }
-
-// SetAttachment wraps the corresponding Objective-C method.
-func (x *NetworkDevice) SetAttachment(attachment *NetworkDeviceAttachment) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttachment:"), objref.IDOf(attachment))
-}
-
-// NetworkDeviceable is the interface implemented by [NetworkDevice], for mocking and DI.
-type NetworkDeviceable interface {
-	obj.Object
-	WithAttachment(attachment NetworkDeviceAttachmentProvider) *NetworkDevice
-	Attachment() *NetworkDeviceAttachment
-	SetAttachment(attachment *NetworkDeviceAttachment)
-}
-
-var _ NetworkDeviceable = (*NetworkDevice)(nil)

@@ -46,24 +46,24 @@ func routeStepAdopt(id objc.ID) *RouteStep {
 }
 
 // Description returns the object's -description text.
-func (x *RouteStep) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (rs *RouteStep) Description() string {
+	return rt.Description(objref.IDOf(rs))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *RouteStep) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (rs *RouteStep) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(rs), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *RouteStep) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (rs *RouteStep) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(rs), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *RouteStep) String() string {
-	return rt.Description(objref.IDOf(x))
+func (rs *RouteStep) String() string {
+	return rt.Description(objref.IDOf(rs))
 }
 
 // NewRouteStep creates a new RouteStep.
@@ -73,8 +73,8 @@ func NewRouteStep() *RouteStep {
 }
 
 // Instructions wraps the corresponding Objective-C method.
-func (x *RouteStep) Instructions() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instructions"))
+func (rs *RouteStep) Instructions() string {
+	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("instructions"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,8 +82,8 @@ func (x *RouteStep) Instructions() string {
 }
 
 // Notice wraps the corresponding Objective-C method.
-func (x *RouteStep) Notice() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notice"))
+func (rs *RouteStep) Notice() string {
+	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("notice"))
 	if _r == 0 {
 		return ""
 	}
@@ -91,24 +91,13 @@ func (x *RouteStep) Notice() string {
 }
 
 // Polyline wraps the corresponding Objective-C method.
-func (x *RouteStep) Polyline() *Polyline {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("polyline"))
+func (rs *RouteStep) Polyline() *Polyline {
+	_r := objc.Send[objc.ID](objref.IDOf(rs), objc.RegisterName("polyline"))
 	return PolylineFromID(_r)
 }
 
 // TransportType wraps the corresponding Objective-C method.
-func (x *RouteStep) TransportType() DirectionsTransportType {
-	_r := objc.Send[DirectionsTransportType](objref.IDOf(x), objc.RegisterName("transportType"))
+func (rs *RouteStep) TransportType() DirectionsTransportType {
+	_r := objc.Send[DirectionsTransportType](objref.IDOf(rs), objc.RegisterName("transportType"))
 	return _r
 }
-
-// RouteStepable is the interface implemented by [RouteStep], for mocking and DI.
-type RouteStepable interface {
-	obj.Object
-	Instructions() string
-	Notice() string
-	Polyline() *Polyline
-	TransportType() DirectionsTransportType
-}
-
-var _ RouteStepable = (*RouteStep)(nil)

@@ -46,24 +46,24 @@ func paymentMethodAdopt(id objc.ID) *PaymentMethod {
 }
 
 // Description returns the object's -description text.
-func (x *PaymentMethod) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (pm *PaymentMethod) Description() string {
+	return rt.Description(objref.IDOf(pm))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PaymentMethod) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (pm *PaymentMethod) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(pm), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PaymentMethod) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (pm *PaymentMethod) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(pm), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PaymentMethod) String() string {
-	return rt.Description(objref.IDOf(x))
+func (pm *PaymentMethod) String() string {
+	return rt.Description(objref.IDOf(pm))
 }
 
 // NewPaymentMethod creates a new PaymentMethod.
@@ -73,8 +73,8 @@ func NewPaymentMethod() *PaymentMethod {
 }
 
 // DisplayName wraps the corresponding Objective-C method.
-func (x *PaymentMethod) DisplayName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayName"))
+func (pm *PaymentMethod) DisplayName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("displayName"))
 	if _r == 0 {
 		return ""
 	}
@@ -82,44 +82,31 @@ func (x *PaymentMethod) DisplayName() string {
 }
 
 // Network wraps the corresponding Objective-C method.
-func (x *PaymentMethod) Network() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("network"))
+func (pm *PaymentMethod) Network() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("network"))
 	return obj.Wrap(_r)
 }
 
 // Type wraps the corresponding Objective-C method.
-func (x *PaymentMethod) Type() PaymentMethodType {
-	_r := objc.Send[PaymentMethodType](objref.IDOf(x), objc.RegisterName("type"))
+func (pm *PaymentMethod) Type() PaymentMethodType {
+	_r := objc.Send[PaymentMethodType](objref.IDOf(pm), objc.RegisterName("type"))
 	return _r
 }
 
 // PaymentPass wraps the corresponding Objective-C method.
-func (x *PaymentMethod) PaymentPass() *PaymentPass {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paymentPass"))
+func (pm *PaymentMethod) PaymentPass() *PaymentPass {
+	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("paymentPass"))
 	return PaymentPassFromID(_r)
 }
 
 // SecureElementPass wraps the corresponding Objective-C method.
-func (x *PaymentMethod) SecureElementPass() *SecureElementPass {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("secureElementPass"))
+func (pm *PaymentMethod) SecureElementPass() *SecureElementPass {
+	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("secureElementPass"))
 	return SecureElementPassFromID(_r)
 }
 
 // BillingAddress wraps the corresponding Objective-C method.
-func (x *PaymentMethod) BillingAddress() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("billingAddress"))
+func (pm *PaymentMethod) BillingAddress() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(pm), objc.RegisterName("billingAddress"))
 	return obj.Wrap(_r)
 }
-
-// PaymentMethodable is the interface implemented by [PaymentMethod], for mocking and DI.
-type PaymentMethodable interface {
-	obj.Object
-	DisplayName() string
-	Network() obj.Object
-	Type() PaymentMethodType
-	PaymentPass() *PaymentPass
-	SecureElementPass() *SecureElementPass
-	BillingAddress() obj.Object
-}
-
-var _ PaymentMethodable = (*PaymentMethod)(nil)

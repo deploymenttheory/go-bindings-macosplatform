@@ -5,12 +5,12 @@
 package fskit
 
 import (
+	"unsafe"
+
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // BlockDeviceResource is an idiomatic wrapper over the Objective-C class FSBlockDeviceResource.
@@ -57,9 +57,9 @@ func NewBlockDeviceResource() *BlockDeviceResource {
 // MetadataFlush synchronously flushes the resource’s buffer cache.
 //
 // MetadataFlush returns an error if the operation did not succeed.
-func (x *BlockDeviceResource) MetadataFlush() error {
+func (bdr *BlockDeviceResource) MetadataFlush() error {
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("metadataFlushWithError:"), unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(bdr), objc.RegisterName("metadataFlushWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -69,9 +69,9 @@ func (x *BlockDeviceResource) MetadataFlush() error {
 // AsynchronousMetadataFlush asynchronously flushes the resource’s buffer cache.
 //
 // AsynchronousMetadataFlush returns an error if the operation did not succeed.
-func (x *BlockDeviceResource) AsynchronousMetadataFlush() error {
+func (bdr *BlockDeviceResource) AsynchronousMetadataFlush() error {
 	var _nsErr uintptr
-	objc.Send[bool](objref.IDOf(x), objc.RegisterName("asynchronousMetadataFlushWithError:"), unsafe.Pointer(&_nsErr))
+	objc.Send[bool](objref.IDOf(bdr), objc.RegisterName("asynchronousMetadataFlushWithError:"), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -79,9 +79,9 @@ func (x *BlockDeviceResource) AsynchronousMetadataFlush() error {
 }
 
 // MetadataClearWithDelayedWrites clears the given ranges within the buffer cache.
-func (x *BlockDeviceResource) MetadataClearWithDelayedWrites(rangesToClear []*MetadataRange, withDelayedWrites bool) error {
+func (bdr *BlockDeviceResource) MetadataClearWithDelayedWrites(rangesToClear []*MetadataRange, withDelayedWrites bool) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("metadataClear:withDelayedWrites:error:"), purego.SliceToNSArray(rangesToClear, func(_v *MetadataRange) objc.ID { return objref.IDOf(_v) }), withDelayedWrites, unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(bdr), objc.RegisterName("metadataClear:withDelayedWrites:error:"), purego.SliceToNSArray(rangesToClear, func(_v *MetadataRange) objc.ID { return objref.IDOf(_v) }), withDelayedWrites, unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
@@ -89,18 +89,18 @@ func (x *BlockDeviceResource) MetadataClearWithDelayedWrites(rangesToClear []*Me
 }
 
 // MetadataPurge synchronously purges the given ranges from the buffer cache.
-func (x *BlockDeviceResource) MetadataPurge(rangesToPurge []*MetadataRange) error {
+func (bdr *BlockDeviceResource) MetadataPurge(rangesToPurge []*MetadataRange) error {
 	var _nsErr uintptr
-	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("metadataPurge:error:"), purego.SliceToNSArray(rangesToPurge, func(_v *MetadataRange) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	_ = objc.Send[bool](objref.IDOf(bdr), objc.RegisterName("metadataPurge:error:"), purego.SliceToNSArray(rangesToPurge, func(_v *MetadataRange) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
 		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
 	return nil
 }
 
-// BSDName the device name of the resource.
-func (x *BlockDeviceResource) BSDName() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("BSDName"))
+// BSDName returns the device name of the resource.
+func (bdr *BlockDeviceResource) BSDName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(bdr), objc.RegisterName("BSDName"))
 	if _r == 0 {
 		return ""
 	}
@@ -108,43 +108,27 @@ func (x *BlockDeviceResource) BSDName() string {
 }
 
 // IsWritable wraps the corresponding Objective-C method.
-func (x *BlockDeviceResource) IsWritable() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWritable"))
+func (bdr *BlockDeviceResource) IsWritable() bool {
+	_r := objc.Send[bool](objref.IDOf(bdr), objc.RegisterName("isWritable"))
 	return _r
 }
 
-// BlockSize the logical block size, the size of data blocks used by the file system. This is equivalent to the `DKIOCGETBLOCKSIZE` device parameter.
-func (x *BlockDeviceResource) BlockSize() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("blockSize"))
+// BlockSize returns the logical block size, the size of data blocks used by the file system. This is equivalent to the `DKIOCGETBLOCKSIZE` device parameter.
+func (bdr *BlockDeviceResource) BlockSize() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(bdr), objc.RegisterName("blockSize"))
 	return _r
 }
 
-// BlockCount the block count on this resource.
-func (x *BlockDeviceResource) BlockCount() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("blockCount"))
+// BlockCount returns the block count on this resource.
+func (bdr *BlockDeviceResource) BlockCount() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(bdr), objc.RegisterName("blockCount"))
 	return _r
 }
 
-// PhysicalBlockSize the sector size of the device. This is equivalent to the `DKIOCGETPHYSICALBLOCKSIZE` device parameter.
-func (x *BlockDeviceResource) PhysicalBlockSize() uint64 {
-	_r := objc.Send[uint64](objref.IDOf(x), objc.RegisterName("physicalBlockSize"))
+// PhysicalBlockSize returns the sector size of the device. This is equivalent to the `DKIOCGETPHYSICALBLOCKSIZE` device parameter.
+func (bdr *BlockDeviceResource) PhysicalBlockSize() uint64 {
+	_r := objc.Send[uint64](objref.IDOf(bdr), objc.RegisterName("physicalBlockSize"))
 	return _r
 }
-
-// BlockDeviceResourceable is the interface implemented by [BlockDeviceResource], for mocking and DI.
-type BlockDeviceResourceable interface {
-	obj.Object
-	MetadataFlush() error
-	AsynchronousMetadataFlush() error
-	MetadataClearWithDelayedWrites(rangesToClear []*MetadataRange, withDelayedWrites bool) error
-	MetadataPurge(rangesToPurge []*MetadataRange) error
-	BSDName() string
-	IsWritable() bool
-	BlockSize() uint64
-	BlockCount() uint64
-	PhysicalBlockSize() uint64
-}
-
-var _ BlockDeviceResourceable = (*BlockDeviceResource)(nil)
 
 var _ ResourceProvider = (*BlockDeviceResource)(nil)

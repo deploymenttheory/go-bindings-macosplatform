@@ -7,7 +7,6 @@ package shazamkit
 import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -52,39 +51,28 @@ func NewMatchedMediaItem() *MatchedMediaItem {
 	return matchedMediaItemAdopt(_id)
 }
 
-// FrequencySkew a multiple for the difference in frequency between the matched audio and the query audio. A value of `0.0` indicates that the query and matched audio are at the same frequency. Other values indicate that the query audio is playing at a different frequency. For example, if the original recording plays at `100` Hz, a value of `0.05` indicates that the query recording plays at `105` Hz. No match returns if the frequency skew is too large.
-func (x *MatchedMediaItem) FrequencySkew() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("frequencySkew"))
+// FrequencySkew returns a multiple for the difference in frequency between the matched audio and the query audio. A value of `0.0` indicates that the query and matched audio are at the same frequency. Other values indicate that the query audio is playing at a different frequency. For example, if the original recording plays at `100` Hz, a value of `0.05` indicates that the query recording plays at `105` Hz. No match returns if the frequency skew is too large.
+func (mmi *MatchedMediaItem) FrequencySkew() float32 {
+	_r := objc.Send[float32](objref.IDOf(mmi), objc.RegisterName("frequencySkew"))
 	return _r
 }
 
-// MatchOffset the timecode in the reference recording that matches the start of the query, in seconds. The value can be negative if the query signature contains unrecognizable data before the data that corresponds to the start of the matched reference item.
-func (x *MatchedMediaItem) MatchOffset() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("matchOffset"))
+// MatchOffset returns the timecode in the reference recording that matches the start of the query, in seconds. The value can be negative if the query signature contains unrecognizable data before the data that corresponds to the start of the matched reference item.
+func (mmi *MatchedMediaItem) MatchOffset() float64 {
+	_r := objc.Send[float64](objref.IDOf(mmi), objc.RegisterName("matchOffset"))
 	return _r
 }
 
-// PredictedCurrentMatchOffset the updated timecode in the reference recording that matches the current playback position of the query audio, in seconds.
-func (x *MatchedMediaItem) PredictedCurrentMatchOffset() float64 {
-	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("predictedCurrentMatchOffset"))
+// PredictedCurrentMatchOffset returns the updated timecode in the reference recording that matches the current playback position of the query audio, in seconds.
+func (mmi *MatchedMediaItem) PredictedCurrentMatchOffset() float64 {
+	_r := objc.Send[float64](objref.IDOf(mmi), objc.RegisterName("predictedCurrentMatchOffset"))
 	return _r
 }
 
-// Confidence the level of confidence in the match result. The value ranges from 0.0 to 1.0, where 1.0 indicates the highest level of confidence.
-func (x *MatchedMediaItem) Confidence() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("confidence"))
+// Confidence returns the level of confidence in the match result. The value ranges from 0.0 to 1.0, where 1.0 indicates the highest level of confidence.
+func (mmi *MatchedMediaItem) Confidence() float32 {
+	_r := objc.Send[float32](objref.IDOf(mmi), objc.RegisterName("confidence"))
 	return _r
 }
-
-// MatchedMediaItemable is the interface implemented by [MatchedMediaItem], for mocking and DI.
-type MatchedMediaItemable interface {
-	obj.Object
-	FrequencySkew() float32
-	MatchOffset() float64
-	PredictedCurrentMatchOffset() float64
-	Confidence() float32
-}
-
-var _ MatchedMediaItemable = (*MatchedMediaItem)(nil)
 
 var _ MediaItemProvider = (*MatchedMediaItem)(nil)

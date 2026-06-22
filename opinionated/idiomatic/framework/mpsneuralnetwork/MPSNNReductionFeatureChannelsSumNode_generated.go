@@ -8,7 +8,6 @@ import (
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/framework/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
-	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
@@ -51,46 +50,29 @@ func NewNNReductionFeatureChannelsSumNode() *NNReductionFeatureChannelsSumNode {
 	return nNReductionFeatureChannelsSumNodeAdopt(_id)
 }
 
-// WithWeight a scale factor to apply to each feature channel sum.
-func (x *NNReductionFeatureChannelsSumNode) WithWeight(weight float32) *NNReductionFeatureChannelsSumNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeight:"), weight)
-	return x
+// WithWeight sets a scale factor to apply to each feature channel sum.
+func (nrfcsn *NNReductionFeatureChannelsSumNode) WithWeight(weight float32) *NNReductionFeatureChannelsSumNode {
+	objc.Send[objc.ID](objref.IDOf(nrfcsn), objc.RegisterName("setWeight:"), weight)
+	return nrfcsn
 }
 
-// WithClipRectSource the clip rectangle to apply to the source image.
-func (x *NNReductionFeatureChannelsSumNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsSumNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipRectSource:"), clipRectSource)
-	return x
+// WithClipRectSource sets the clip rectangle to apply to the source image.
+func (nrfcsn *NNReductionFeatureChannelsSumNode) WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsSumNode {
+	objc.Send[objc.ID](objref.IDOf(nrfcsn), objc.RegisterName("setClipRectSource:"), clipRectSource)
+	return nrfcsn
 }
 
-// WithLabel a string to help identify this object.
-func (x *NNReductionFeatureChannelsSumNode) WithLabel(label string) *NNReductionFeatureChannelsSumNode {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (nrfcsn *NNReductionFeatureChannelsSumNode) WithLabel(label string) *NNReductionFeatureChannelsSumNode {
+	objc.Send[objc.ID](objref.IDOf(nrfcsn), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return nrfcsn
 }
 
-// Weight a scale factor to apply to each feature channel sum.
-func (x *NNReductionFeatureChannelsSumNode) Weight() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("weight"))
+// Weight returns a scale factor to apply to each feature channel sum.
+func (nrfcsn *NNReductionFeatureChannelsSumNode) Weight() float32 {
+	_r := objc.Send[float32](objref.IDOf(nrfcsn), objc.RegisterName("weight"))
 	return _r
 }
-
-// SetWeight wraps the corresponding Objective-C method.
-func (x *NNReductionFeatureChannelsSumNode) SetWeight(weight float32) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWeight:"), weight)
-}
-
-// NNReductionFeatureChannelsSumNodeable is the interface implemented by [NNReductionFeatureChannelsSumNode], for mocking and DI.
-type NNReductionFeatureChannelsSumNodeable interface {
-	obj.Object
-	WithWeight(weight float32) *NNReductionFeatureChannelsSumNode
-	WithClipRectSource(clipRectSource metal.MTLRegion) *NNReductionFeatureChannelsSumNode
-	WithLabel(label string) *NNReductionFeatureChannelsSumNode
-	Weight() float32
-	SetWeight(weight float32)
-}
-
-var _ NNReductionFeatureChannelsSumNodeable = (*NNReductionFeatureChannelsSumNode)(nil)
 
 var _ NNUnaryReductionNodeProvider = (*NNReductionFeatureChannelsSumNode)(nil)
 

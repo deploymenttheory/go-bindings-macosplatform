@@ -44,24 +44,24 @@ func compositionAdopt(id objc.ID) *Composition {
 }
 
 // Description returns the object's -description text.
-func (x *Composition) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Composition) Description() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *Composition) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (c *Composition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(c), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *Composition) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (c *Composition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(c), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *Composition) String() string {
-	return rt.Description(objref.IDOf(x))
+func (c *Composition) String() string {
+	return rt.Description(objref.IDOf(c))
 }
 
 // NewComposition creates a new Composition.
@@ -71,46 +71,34 @@ func NewComposition() *Composition {
 }
 
 // Protocols wraps the corresponding Objective-C method.
-func (x *Composition) Protocols() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("protocols"))
+func (c *Composition) Protocols() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("protocols"))
 	return obj.Wrap(_r)
 }
 
 // Attributes wraps the corresponding Objective-C method.
-func (x *Composition) Attributes() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+func (c *Composition) Attributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("attributes"))
 	return obj.Wrap(_r)
 }
 
 // InputKeys wraps the corresponding Objective-C method.
-func (x *Composition) InputKeys() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputKeys"))
+func (c *Composition) InputKeys() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("inputKeys"))
 	return obj.Wrap(_r)
 }
 
 // OutputKeys wraps the corresponding Objective-C method.
-func (x *Composition) OutputKeys() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputKeys"))
+func (c *Composition) OutputKeys() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("outputKeys"))
 	return obj.Wrap(_r)
 }
 
 // Identifier wraps the corresponding Objective-C method.
-func (x *Composition) Identifier() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+func (c *Composition) Identifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(c), objc.RegisterName("identifier"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// Compositionable is the interface implemented by [Composition], for mocking and DI.
-type Compositionable interface {
-	obj.Object
-	Protocols() obj.Object
-	Attributes() obj.Object
-	InputKeys() obj.Object
-	OutputKeys() obj.Object
-	Identifier() string
-}
-
-var _ Compositionable = (*Composition)(nil)

@@ -48,66 +48,50 @@ func persistentStoreRequestAdopt(id objc.ID) *PersistentStoreRequest {
 }
 
 // Description returns the object's -description text.
-func (x *PersistentStoreRequest) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (psr *PersistentStoreRequest) Description() string {
+	return rt.Description(objref.IDOf(psr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *PersistentStoreRequest) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (psr *PersistentStoreRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(psr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *PersistentStoreRequest) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (psr *PersistentStoreRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(psr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *PersistentStoreRequest) String() string {
-	return rt.Description(objref.IDOf(x))
+func (psr *PersistentStoreRequest) String() string {
+	return rt.Description(objref.IDOf(psr))
 }
 
-// WithAffectedStores the stores the request should be sent to.
-func (x *PersistentStoreRequest) WithAffectedStores(items ...PersistentStoreProvider) *PersistentStoreRequest {
+// WithAffectedStores sets the stores the request should be sent to.
+func (psr *PersistentStoreRequest) WithAffectedStores(items ...PersistentStoreProvider) *PersistentStoreRequest {
 	_arr := purego.SliceToNSArray(items, func(_v PersistentStoreProvider) objc.ID { return objref.IDOf(_v) })
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), _arr)
-	return x
+	objc.Send[objc.ID](objref.IDOf(psr), objc.RegisterName("setAffectedStores:"), _arr)
+	return psr
 }
 
 // AffectedStores wraps the corresponding Objective-C method.
 //
 // AffectedStores returns the collection as a Go slice.
-func (x *PersistentStoreRequest) AffectedStores() []*PersistentStore {
-	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("affectedStores"))
+func (psr *PersistentStoreRequest) AffectedStores() []*PersistentStore {
+	_arr := objc.Send[objc.ID](objref.IDOf(psr), objc.RegisterName("affectedStores"))
 	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PersistentStore { return PersistentStoreFromID(_id) })
 }
 
-// SetAffectedStores wraps the corresponding Objective-C method.
-func (x *PersistentStoreRequest) SetAffectedStores(affectedStores []*PersistentStore) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAffectedStores:"), purego.SliceToNSArray(affectedStores, func(_v *PersistentStore) objc.ID { return objref.IDOf(_v) }))
-}
-
 // RequestType wraps the corresponding Objective-C method.
-func (x *PersistentStoreRequest) RequestType() PersistentStoreRequestType {
-	_r := objc.Send[PersistentStoreRequestType](objref.IDOf(x), objc.RegisterName("requestType"))
+func (psr *PersistentStoreRequest) RequestType() PersistentStoreRequestType {
+	_r := objc.Send[PersistentStoreRequestType](objref.IDOf(psr), objc.RegisterName("requestType"))
 	return _r
 }
-
-// PersistentStoreRequestable is the interface implemented by [PersistentStoreRequest], for mocking and DI.
-type PersistentStoreRequestable interface {
-	obj.Object
-	WithAffectedStores(items ...PersistentStoreProvider) *PersistentStoreRequest
-	AffectedStores() []*PersistentStore
-	SetAffectedStores(affectedStores []*PersistentStore)
-	RequestType() PersistentStoreRequestType
-}
-
-var _ PersistentStoreRequestable = (*PersistentStoreRequest)(nil)
 
 // isPersistentStoreRequest marks PersistentStoreRequest — and, by embedding promotion, its
 // subclasses — as a member of the PersistentStoreRequest hierarchy, sealing its provider
 // interface so only real members satisfy it.
-func (x *PersistentStoreRequest) isPersistentStoreRequest() {}
+func (psr *PersistentStoreRequest) isPersistentStoreRequest() {}
 
 var _ PersistentStoreRequestProvider = (*PersistentStoreRequest)(nil)

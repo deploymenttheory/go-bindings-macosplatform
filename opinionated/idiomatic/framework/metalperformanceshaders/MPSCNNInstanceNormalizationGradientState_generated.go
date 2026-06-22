@@ -53,32 +53,22 @@ func NewCNNInstanceNormalizationGradientState() *CNNInstanceNormalizationGradien
 }
 
 // WithReadCount sets the property and returns the receiver so calls can be chained.
-func (x *CNNInstanceNormalizationGradientState) WithReadCount(readCount int) *CNNInstanceNormalizationGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
-	return x
+func (cings *CNNInstanceNormalizationGradientState) WithReadCount(readCount int) *CNNInstanceNormalizationGradientState {
+	objc.Send[objc.ID](objref.IDOf(cings), objc.RegisterName("setReadCount:"), readCount)
+	return cings
 }
 
-// WithLabel a string to help identify this object.
-func (x *CNNInstanceNormalizationGradientState) WithLabel(label string) *CNNInstanceNormalizationGradientState {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
-	return x
+// WithLabel sets a string to help identify this object.
+func (cings *CNNInstanceNormalizationGradientState) WithLabel(label string) *CNNInstanceNormalizationGradientState {
+	objc.Send[objc.ID](objref.IDOf(cings), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return cings
 }
 
-// InstanceNormalization the MPSCNNInstanceNormalization object that created this state object.
-func (x *CNNInstanceNormalizationGradientState) InstanceNormalization() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("instanceNormalization"))
+// InstanceNormalization returns the MPSCNNInstanceNormalization object that created this state object.
+func (cings *CNNInstanceNormalizationGradientState) InstanceNormalization() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(cings), objc.RegisterName("instanceNormalization"))
 	return obj.Wrap(_r)
 }
-
-// CNNInstanceNormalizationGradientStateable is the interface implemented by [CNNInstanceNormalizationGradientState], for mocking and DI.
-type CNNInstanceNormalizationGradientStateable interface {
-	obj.Object
-	WithReadCount(readCount int) *CNNInstanceNormalizationGradientState
-	WithLabel(label string) *CNNInstanceNormalizationGradientState
-	InstanceNormalization() obj.Object
-}
-
-var _ CNNInstanceNormalizationGradientStateable = (*CNNInstanceNormalizationGradientState)(nil)
 
 var _ NNGradientStateProvider = (*CNNInstanceNormalizationGradientState)(nil)
 

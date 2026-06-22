@@ -44,24 +44,24 @@ func mTRServiceAreaClusterMapStructAdopt(id objc.ID) *MTRServiceAreaClusterMapSt
 }
 
 // Description returns the object's -description text.
-func (x *MTRServiceAreaClusterMapStruct) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (msacms *MTRServiceAreaClusterMapStruct) Description() string {
+	return rt.Description(objref.IDOf(msacms))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *MTRServiceAreaClusterMapStruct) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (msacms *MTRServiceAreaClusterMapStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(msacms), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *MTRServiceAreaClusterMapStruct) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (msacms *MTRServiceAreaClusterMapStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(msacms), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *MTRServiceAreaClusterMapStruct) String() string {
-	return rt.Description(objref.IDOf(x))
+func (msacms *MTRServiceAreaClusterMapStruct) String() string {
+	return rt.Description(objref.IDOf(msacms))
 }
 
 // NewMTRServiceAreaClusterMapStruct creates a new MTRServiceAreaClusterMapStruct.
@@ -71,51 +71,28 @@ func NewMTRServiceAreaClusterMapStruct() *MTRServiceAreaClusterMapStruct {
 }
 
 // WithMapID sets the property and returns the receiver so calls can be chained.
-func (x *MTRServiceAreaClusterMapStruct) WithMapID(mapID obj.Object) *MTRServiceAreaClusterMapStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapID:"), objref.IDOf(mapID))
-	return x
+func (msacms *MTRServiceAreaClusterMapStruct) WithMapID(mapID obj.Object) *MTRServiceAreaClusterMapStruct {
+	objc.Send[objc.ID](objref.IDOf(msacms), objc.RegisterName("setMapID:"), objref.IDOf(mapID))
+	return msacms
 }
 
 // WithName sets the property and returns the receiver so calls can be chained.
-func (x *MTRServiceAreaClusterMapStruct) WithName(name string) *MTRServiceAreaClusterMapStruct {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-	return x
+func (msacms *MTRServiceAreaClusterMapStruct) WithName(name string) *MTRServiceAreaClusterMapStruct {
+	objc.Send[objc.ID](objref.IDOf(msacms), objc.RegisterName("setName:"), purego.NSString(name))
+	return msacms
 }
 
 // MapID wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterMapStruct) MapID() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mapID"))
+func (msacms *MTRServiceAreaClusterMapStruct) MapID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(msacms), objc.RegisterName("mapID"))
 	return obj.Wrap(_r)
 }
 
-// SetMapID wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterMapStruct) SetMapID(mapID obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMapID:"), objref.IDOf(mapID))
-}
-
 // Name wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterMapStruct) Name() string {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+func (msacms *MTRServiceAreaClusterMapStruct) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(msacms), objc.RegisterName("name"))
 	if _r == 0 {
 		return ""
 	}
 	return purego.GoString(_r)
 }
-
-// SetName wraps the corresponding Objective-C method.
-func (x *MTRServiceAreaClusterMapStruct) SetName(name string) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
-}
-
-// MTRServiceAreaClusterMapStructable is the interface implemented by [MTRServiceAreaClusterMapStruct], for mocking and DI.
-type MTRServiceAreaClusterMapStructable interface {
-	obj.Object
-	WithMapID(mapID obj.Object) *MTRServiceAreaClusterMapStruct
-	WithName(name string) *MTRServiceAreaClusterMapStruct
-	MapID() obj.Object
-	SetMapID(mapID obj.Object)
-	Name() string
-	SetName(name string)
-}
-
-var _ MTRServiceAreaClusterMapStructable = (*MTRServiceAreaClusterMapStruct)(nil)

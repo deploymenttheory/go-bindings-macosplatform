@@ -46,24 +46,24 @@ func exposureBiasRangeAdopt(id objc.ID) *ExposureBiasRange {
 }
 
 // Description returns the object's -description text.
-func (x *ExposureBiasRange) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ebr *ExposureBiasRange) Description() string {
+	return rt.Description(objref.IDOf(ebr))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ExposureBiasRange) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ebr *ExposureBiasRange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ebr), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ExposureBiasRange) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ebr *ExposureBiasRange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ebr), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ExposureBiasRange) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ebr *ExposureBiasRange) String() string {
+	return rt.Description(objref.IDOf(ebr))
 }
 
 // NewExposureBiasRange creates a new ExposureBiasRange.
@@ -73,29 +73,19 @@ func NewExposureBiasRange() *ExposureBiasRange {
 }
 
 // ContainsExposureBias determines whether the range contains the specified exposure bias.
-func (x *ExposureBiasRange) ContainsExposureBias(exposureBias float32) bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsExposureBias:"), exposureBias)
+func (ebr *ExposureBiasRange) ContainsExposureBias(exposureBias float32) bool {
+	_r := objc.Send[bool](objref.IDOf(ebr), objc.RegisterName("containsExposureBias:"), exposureBias)
 	return _r
 }
 
-// MinExposureBias a float indicating the minimum exposure bias in EV units supported by this range.
-func (x *ExposureBiasRange) MinExposureBias() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minExposureBias"))
+// MinExposureBias returns a float indicating the minimum exposure bias in EV units supported by this range.
+func (ebr *ExposureBiasRange) MinExposureBias() float32 {
+	_r := objc.Send[float32](objref.IDOf(ebr), objc.RegisterName("minExposureBias"))
 	return _r
 }
 
-// MaxExposureBias a float indicating the maximum exposure bias in EV units supported by this range.
-func (x *ExposureBiasRange) MaxExposureBias() float32 {
-	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maxExposureBias"))
+// MaxExposureBias returns a float indicating the maximum exposure bias in EV units supported by this range.
+func (ebr *ExposureBiasRange) MaxExposureBias() float32 {
+	_r := objc.Send[float32](objref.IDOf(ebr), objc.RegisterName("maxExposureBias"))
 	return _r
 }
-
-// ExposureBiasRangeable is the interface implemented by [ExposureBiasRange], for mocking and DI.
-type ExposureBiasRangeable interface {
-	obj.Object
-	ContainsExposureBias(exposureBias float32) bool
-	MinExposureBias() float32
-	MaxExposureBias() float32
-}
-
-var _ ExposureBiasRangeable = (*ExposureBiasRange)(nil)

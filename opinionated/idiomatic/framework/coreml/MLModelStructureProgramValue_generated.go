@@ -46,24 +46,24 @@ func modelStructureProgramValueAdopt(id objc.ID) *ModelStructureProgramValue {
 }
 
 // Description returns the object's -description text.
-func (x *ModelStructureProgramValue) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (mspv *ModelStructureProgramValue) Description() string {
+	return rt.Description(objref.IDOf(mspv))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *ModelStructureProgramValue) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (mspv *ModelStructureProgramValue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(mspv), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *ModelStructureProgramValue) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (mspv *ModelStructureProgramValue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(mspv), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *ModelStructureProgramValue) String() string {
-	return rt.Description(objref.IDOf(x))
+func (mspv *ModelStructureProgramValue) String() string {
+	return rt.Description(objref.IDOf(mspv))
 }
 
 // NewModelStructureProgramValue creates a new ModelStructureProgramValue.
@@ -71,10 +71,3 @@ func NewModelStructureProgramValue() *ModelStructureProgramValue {
 	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructureProgramValue")), objc.RegisterName("new"))
 	return modelStructureProgramValueAdopt(_id)
 }
-
-// ModelStructureProgramValueable is the interface implemented by [ModelStructureProgramValue], for mocking and DI.
-type ModelStructureProgramValueable interface {
-	obj.Object
-}
-
-var _ ModelStructureProgramValueable = (*ModelStructureProgramValue)(nil)

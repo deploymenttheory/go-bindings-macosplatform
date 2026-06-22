@@ -46,24 +46,24 @@ func keychainSettingsPanelAdopt(id objc.ID) *KeychainSettingsPanel {
 }
 
 // Description returns the object's -description text.
-func (x *KeychainSettingsPanel) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ksp *KeychainSettingsPanel) Description() string {
+	return rt.Description(objref.IDOf(ksp))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *KeychainSettingsPanel) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ksp *KeychainSettingsPanel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ksp), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *KeychainSettingsPanel) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ksp *KeychainSettingsPanel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ksp), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *KeychainSettingsPanel) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ksp *KeychainSettingsPanel) String() string {
+	return rt.Description(objref.IDOf(ksp))
 }
 
 // NewKeychainSettingsPanel creates a new KeychainSettingsPanel.
@@ -71,10 +71,3 @@ func NewKeychainSettingsPanel() *KeychainSettingsPanel {
 	_id := objc.Send[objc.ID](objc.ID(_class("SFKeychainSettingsPanel")), objc.RegisterName("new"))
 	return keychainSettingsPanelAdopt(_id)
 }
-
-// KeychainSettingsPanelable is the interface implemented by [KeychainSettingsPanel], for mocking and DI.
-type KeychainSettingsPanelable interface {
-	obj.Object
-}
-
-var _ KeychainSettingsPanelable = (*KeychainSettingsPanel)(nil)

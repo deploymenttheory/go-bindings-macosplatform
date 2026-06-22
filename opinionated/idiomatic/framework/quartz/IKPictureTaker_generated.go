@@ -46,24 +46,24 @@ func iKPictureTakerAdopt(id objc.ID) *IKPictureTaker {
 }
 
 // Description returns the object's -description text.
-func (x *IKPictureTaker) Description() string {
-	return rt.Description(objref.IDOf(x))
+func (ipt *IKPictureTaker) Description() string {
+	return rt.Description(objref.IDOf(ipt))
 }
 
 // IsEqual reports Objective-C equality (isEqual:) with another object.
-func (x *IKPictureTaker) IsEqual(other obj.Object) bool {
-	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+func (ipt *IKPictureTaker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(ipt), objref.IDOf(other))
 }
 
 // IsKind reports whether the object is an instance of the named class or a subclass.
-func (x *IKPictureTaker) IsKind(className string) bool {
-	return rt.IsKind(objref.IDOf(x), className)
+func (ipt *IKPictureTaker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(ipt), className)
 }
 
 // String returns the object's -description text, so a wrapper prints usefully
 // under fmt.
-func (x *IKPictureTaker) String() string {
-	return rt.Description(objref.IDOf(x))
+func (ipt *IKPictureTaker) String() string {
+	return rt.Description(objref.IDOf(ipt))
 }
 
 // NewIKPictureTaker creates a new IKPictureTaker.
@@ -72,49 +72,36 @@ func NewIKPictureTaker() *IKPictureTaker {
 	return iKPictureTakerAdopt(_id)
 }
 
-// RunModal opens a modal picture taker dialog.
-func (x *IKPictureTaker) RunModal() int {
-	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("runModal"))
+// RunModal returns opens a modal picture taker dialog.
+func (ipt *IKPictureTaker) RunModal() int {
+	_r := objc.Send[int](objref.IDOf(ipt), objc.RegisterName("runModal"))
 	return _r
 }
 
 // SetInputImage set the image input for the picture taker.
-func (x *IKPictureTaker) SetInputImage(image obj.Object) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputImage:"), objref.IDOf(image))
+func (ipt *IKPictureTaker) SetInputImage(image obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(ipt), objc.RegisterName("setInputImage:"), objref.IDOf(image))
 }
 
 // InputImage returns the input image associated with the picture taker.
-func (x *IKPictureTaker) InputImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputImage"))
+func (ipt *IKPictureTaker) InputImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ipt), objc.RegisterName("inputImage"))
 	return obj.Wrap(_r)
 }
 
 // OutputImage returns the edited image.
-func (x *IKPictureTaker) OutputImage() obj.Object {
-	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputImage"))
+func (ipt *IKPictureTaker) OutputImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(ipt), objc.RegisterName("outputImage"))
 	return obj.Wrap(_r)
 }
 
 // SetMirroring controls whether the receiver enables video mirroring during snapshots.
-func (x *IKPictureTaker) SetMirroring(b bool) {
-	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMirroring:"), b)
+func (ipt *IKPictureTaker) SetMirroring(b bool) {
+	objc.Send[objc.ID](objref.IDOf(ipt), objc.RegisterName("setMirroring:"), b)
 }
 
-// Mirroring returns whether video mirroring is enabled during snapshots.
-func (x *IKPictureTaker) Mirroring() bool {
-	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("mirroring"))
+// Mirroring reports whether video mirroring is enabled during snapshots.
+func (ipt *IKPictureTaker) Mirroring() bool {
+	_r := objc.Send[bool](objref.IDOf(ipt), objc.RegisterName("mirroring"))
 	return _r
 }
-
-// IKPictureTakerable is the interface implemented by [IKPictureTaker], for mocking and DI.
-type IKPictureTakerable interface {
-	obj.Object
-	RunModal() int
-	SetInputImage(image obj.Object)
-	InputImage() obj.Object
-	OutputImage() obj.Object
-	SetMirroring(b bool)
-	Mirroring() bool
-}
-
-var _ IKPictureTakerable = (*IKPictureTaker)(nil)
